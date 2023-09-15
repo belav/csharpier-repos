@@ -1,7 +1,7 @@
 // Bugs #77466 and #77460.
 using System;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Reflection;
 
 public class Foo<T>
 {

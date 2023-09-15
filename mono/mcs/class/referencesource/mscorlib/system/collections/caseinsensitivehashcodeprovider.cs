@@ -22,8 +22,8 @@ namespace System.Collections
     //This class does not contain members and does not need to be serializable
     using System;
     using System.Collections;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
 
     [Serializable]
     [Obsolete("Please use StringComparer instead.")]

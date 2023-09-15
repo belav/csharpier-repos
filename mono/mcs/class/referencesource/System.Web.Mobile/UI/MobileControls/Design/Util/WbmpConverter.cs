@@ -7,8 +7,8 @@
 namespace System.Web.UI.Design.MobileControls.Util
 {
     using System;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

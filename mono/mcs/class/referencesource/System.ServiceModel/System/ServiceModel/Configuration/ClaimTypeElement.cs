@@ -6,9 +6,9 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Globalization;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.Globalization;
 
     public sealed partial class ClaimTypeElement : ConfigurationElement
     {

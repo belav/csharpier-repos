@@ -28,15 +28,15 @@
 
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
+using NUnit.Framework;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
 using System.Reflection.Emit;
 #endif
-using System.IO;
 
-using NUnit.Framework;
 
 namespace MonoTests.System.Reflection
 {

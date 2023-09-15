@@ -8,10 +8,10 @@
 
 using System;
 using System.Collections;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using NUnit.Framework;
-using System.Text;
-using System.Runtime.InteropServices;
 
 namespace MonoTests.Remoting
 {

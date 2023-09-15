@@ -7,10 +7,10 @@ namespace System.Activities.DurableInstancing
     using System.Data;
     using System.Data.SqlClient;
     using System.Globalization;
+    using System.Runtime;
     using System.Runtime.DurableInstancing;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.Runtime;
 
     class DetectActivatableWorkflowsAsyncResult : SqlWorkflowInstanceStoreAsyncResult
     {

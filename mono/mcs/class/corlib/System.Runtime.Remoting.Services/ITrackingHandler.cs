@@ -29,8 +29,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Runtime.Remoting;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting;
 
 namespace System.Runtime.Remoting.Services
 {

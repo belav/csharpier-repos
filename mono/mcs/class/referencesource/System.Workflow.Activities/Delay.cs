@@ -1,22 +1,22 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Drawing;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Text;
+    using System.Workflow.Activities.Common;
     using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
     using System.Workflow.Runtime;
     using System.Workflow.Runtime.Hosting;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Workflow.Activities.Common;
 
     [SRDescription(SR.DelayActivityDescription)]
     [ToolboxItem(typeof(ActivityToolboxItem))]

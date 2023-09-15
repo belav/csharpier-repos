@@ -18,10 +18,10 @@
 ===========================================================*/
 
 using System;
+using System.Diagnostics.Contracts;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Diagnostics.Contracts;
 #if FEATURE_ASYNC_IO
 using System.Threading;
 using System.Threading.Tasks;

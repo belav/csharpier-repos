@@ -4,8 +4,8 @@
 
 namespace System.IdentityModel.Tokens
 {
-    using System.Xml;
     using System.IdentityModel.Selectors;
+    using System.Xml;
 
     public class SamlDoNotCacheCondition : SamlCondition
     {

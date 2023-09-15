@@ -8,11 +8,11 @@
 
 namespace System.CodeDom
 {
-    using System.Diagnostics;
     using System;
     using System.Collections;
-    using System.Runtime.InteropServices;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime.InteropServices;
 
     /// <devdoc>
     ///    <para>

@@ -20,12 +20,12 @@ Author: vitkaras
 
 namespace System.Collections.Specialized
 {
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
     using System;
     using System.Collections;
     using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime.InteropServices;
     using System.Security.Permissions;
 
     // This subclass of StringDictionary ensures that we do the lookups in a case-sensitive manner,

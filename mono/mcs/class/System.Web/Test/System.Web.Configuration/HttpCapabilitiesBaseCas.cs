@@ -27,10 +27,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Web.Configuration;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Web.Configuration
 {

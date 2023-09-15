@@ -29,12 +29,12 @@
 //
 
 using System;
+using System.Collections;
+using System.Globalization;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Text;
-using System.Collections;
-using System.Globalization;
 
 namespace System.Web.Services.Protocols
 {

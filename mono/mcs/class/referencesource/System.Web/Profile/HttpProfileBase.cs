@@ -12,22 +12,22 @@
 
 namespace System.Web.Profile
 {
-    using System.Security.Principal;
-    using System.Security.Permissions;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Web.Configuration;
-    using System.Web.Util;
-    using System.Web.Security;
-    using System.Web.Compilation;
     using System.Configuration;
     using System.Configuration.Provider;
     using System.Reflection;
-    using System.CodeDom;
-    using System.Web.Hosting;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web.Compilation;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Security;
+    using System.Web.Util;
 
     public class ProfileBase : SettingsBase
     {

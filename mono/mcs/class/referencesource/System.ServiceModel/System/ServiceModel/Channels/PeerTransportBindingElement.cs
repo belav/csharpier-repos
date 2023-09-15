@@ -7,8 +7,8 @@ namespace System.ServiceModel.Channels
     using System.Collections.ObjectModel;
     using System.Net;
     using System.Net.Security;
-    using System.ServiceModel.Description;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.PeerResolvers;
     using System.Xml;
 

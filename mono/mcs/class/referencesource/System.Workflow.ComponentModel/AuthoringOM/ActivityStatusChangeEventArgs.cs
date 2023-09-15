@@ -1,8 +1,8 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Globalization;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Text;
 
     [Serializable]

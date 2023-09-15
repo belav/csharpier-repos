@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Entity.Design;
+using System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel.Emitters
 {

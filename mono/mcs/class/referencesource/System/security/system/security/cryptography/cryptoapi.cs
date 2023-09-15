@@ -10,20 +10,19 @@
 
 namespace System.Security.Cryptography
 {
-    using Microsoft.Win32.SafeHandles;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Runtime.InteropServices.ComTypes;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.InteropServices.ComTypes;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
     using System.Text;
-
+    using Microsoft.Win32.SafeHandles;
     using _FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
     internal abstract class CAPIBase
@@ -4628,8 +4627,8 @@ namespace System.Security.Cryptography
 namespace Microsoft.Win32.SafeHandles
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Cryptography;

@@ -29,12 +29,10 @@
 
 
 using System;
-using System.IO;
 using System.Configuration;
-
-using NUnit.Framework;
-
+using System.IO;
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Configuration
 {

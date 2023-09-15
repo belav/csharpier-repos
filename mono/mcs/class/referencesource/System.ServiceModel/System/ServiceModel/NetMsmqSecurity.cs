@@ -3,8 +3,8 @@
 //----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
-    using System.Runtime;
     using System.ComponentModel;
+    using System.Runtime;
     using System.ServiceModel.Channels;
     using Config = System.ServiceModel.Configuration;
 

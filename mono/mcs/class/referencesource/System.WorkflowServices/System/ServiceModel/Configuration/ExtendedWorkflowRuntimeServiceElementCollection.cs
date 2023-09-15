@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.Workflow.Runtime.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Workflow.Runtime.Configuration;
 
     // Legacy WF V1 configuration extension
     [SuppressMessage("Configuration", "Configuration100")]

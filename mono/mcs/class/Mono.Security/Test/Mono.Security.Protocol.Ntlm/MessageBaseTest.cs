@@ -8,7 +8,6 @@
 //
 
 using System;
-
 using Mono.Security.Protocol.Ntlm;
 using NUnit.Framework;
 

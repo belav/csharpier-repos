@@ -7,11 +7,11 @@ namespace System.IdentityModel.Tokens
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
-    using System.IO;
     using System.IdentityModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
+    using System.IO;
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Security;

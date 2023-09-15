@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq.Expressions;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Diagnostics;
 using System.Runtime.Serialization;
-using System.Diagnostics.CodeAnalysis;
+using System.Text;
 
 namespace System.Data.Linq
 {

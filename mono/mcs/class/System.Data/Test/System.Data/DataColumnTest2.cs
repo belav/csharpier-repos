@@ -31,9 +31,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Threading;
-
 using MonoTests.System.Data.Utils;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data

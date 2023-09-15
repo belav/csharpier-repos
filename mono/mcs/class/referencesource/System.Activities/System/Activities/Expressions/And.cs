@@ -6,12 +6,12 @@ namespace System.Activities.Expressions
 {
     using System.Activities;
     using System.Activities.Statements;
-    using System.Linq.Expressions;
     using System.Activities.Validation;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq.Expressions;
+    using System.Runtime;
 
     [SuppressMessage(
         FxCop.Category.Naming,

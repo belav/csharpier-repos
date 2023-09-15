@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Net.Security;
 using System.Collections.Generic;
+using System.Net.Security;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Xml;

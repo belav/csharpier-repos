@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Channels
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.ServiceModel;
-    using System.Collections.Generic;
-    using System.Collections;
 
     internal class CommunicationObjectManager<ItemType> : LifetimeManager
         where ItemType : class, ICommunicationObject

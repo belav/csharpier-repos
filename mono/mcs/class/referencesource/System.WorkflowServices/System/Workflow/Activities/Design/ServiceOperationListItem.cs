@@ -5,10 +5,10 @@ namespace System.Workflow.Activities.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.Activities;
     using System.ComponentModel;
+    using System.Text;
+    using System.Workflow.Activities;
+    using System.Workflow.ComponentModel;
 
     [ListItemView(typeof(ServiceOperationViewControl))]
     [ListItemDetailView(typeof(ListItemViewControl))]

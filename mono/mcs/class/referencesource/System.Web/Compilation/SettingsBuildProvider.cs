@@ -10,17 +10,18 @@
 namespace System.Web.Compilation
 {
     using System;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using System.Xml;
 #if !FEATURE_PAL
     using System.Configuration.Design;
 #endif
-    using System.Xml;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using System.Web.Hosting;
-    using System.Web.Util;
+
     using Util = System.Web.UI.Util;
 
     internal class SettingsBuildProvider : BuildProvider

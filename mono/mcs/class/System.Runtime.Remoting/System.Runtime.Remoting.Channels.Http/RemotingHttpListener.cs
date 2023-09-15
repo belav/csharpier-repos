@@ -28,11 +28,11 @@
 
 using System;
 using System.Collections;
-using System.Text;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
-using System.IO;
+using System.Text;
 
 namespace System.Runtime.Remoting.Channels.Http
 {

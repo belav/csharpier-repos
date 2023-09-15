@@ -13,12 +13,12 @@ namespace System.ServiceModel.Web
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Syndication;
     using System.Text;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Serialization;
-    using System.ServiceModel.Dispatcher;
 
     public class WebOperationContext : IExtension<OperationContext>
     {

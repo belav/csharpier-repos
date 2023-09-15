@@ -18,15 +18,15 @@
 namespace System.Reflection.Emit
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Security.Permissions;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Globalization;
     using System.Security;
-    using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
+    using System.Threading;
 
     // MethodRental class provides the ability to insert a new method body of an
     // existing method on a class defined in a DynamicModule.

@@ -8,8 +8,8 @@ namespace System.ServiceModel.Discovery.Configuration
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Configuration;
-    using System.Xml.Linq;
     using System.Xml;
+    using System.Xml.Linq;
 
     public sealed class EndpointDiscoveryElement : BehaviorExtensionElement
     {

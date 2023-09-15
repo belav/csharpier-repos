@@ -7,10 +7,10 @@
 // (C) 2003 Ville Palo
 //
 
-using NUnit.Framework;
+using System;
 using System.IO;
 using System.Text;
-using System;
+using NUnit.Framework;
 
 namespace MonoTests.System.IO
 {

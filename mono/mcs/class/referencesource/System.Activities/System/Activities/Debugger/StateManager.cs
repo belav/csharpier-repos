@@ -4,6 +4,7 @@
 namespace System.Activities.Debugger
 {
     using System;
+    using System.Activities.Debugger.Symbol;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -14,7 +15,6 @@ namespace System.Activities.Debugger
     using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
-    using System.Activities.Debugger.Symbol;
 
     // Manager for supporting debugging a state machine.
     // The general usage is to call:

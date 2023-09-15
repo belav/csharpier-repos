@@ -7,9 +7,9 @@ namespace System.ServiceModel.Diagnostics
     using System.Diagnostics;
     using System.Diagnostics.PerformanceData;
     using System.Globalization;
+    using System.Linq;
     using System.Runtime;
     using System.Threading;
-    using System.Linq;
 
     abstract class PerformanceCountersBase : IDisposable
     {

@@ -28,11 +28,11 @@ We decided to enforce the rule 1 just if Xml being persisted
 namespace System.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data.Common;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Data.Common;
-    using System.Collections.Generic;
 
     /// <devdoc>
     ///    <para>

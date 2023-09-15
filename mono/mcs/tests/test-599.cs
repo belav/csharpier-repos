@@ -2,8 +2,8 @@ using System;
 
 namespace Test
 {
-    using Text = System.Text;
     using Str = System.String;
+    using Text = System.Text;
 
     public class String
     {

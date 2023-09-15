@@ -8,9 +8,9 @@
 namespace System.Xml
 {
     using System;
+    using System.Diagnostics;
     using System.Xml.Schema;
     using System.Xml.XPath;
-    using System.Diagnostics;
 
     // Represents an attribute of the XMLElement object. Valid and default
     // values for the attribute are defined in a DTD or schema.

@@ -28,9 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Linq.Mapping;
 using System.Reflection;
-
 using DbLinq.Data.Linq.Sugar.Expressions;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

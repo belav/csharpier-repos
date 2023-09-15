@@ -8,15 +8,15 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 using System.Web;
-using System.Web.Hosting;
 using System.Web.Compilation;
+using System.Web.Hosting;
 
 namespace System.Data.Entity.Design.AspNet
 {

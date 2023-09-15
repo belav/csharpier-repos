@@ -33,9 +33,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Security.Permissions;
 using System.Text;
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Imaging
 {

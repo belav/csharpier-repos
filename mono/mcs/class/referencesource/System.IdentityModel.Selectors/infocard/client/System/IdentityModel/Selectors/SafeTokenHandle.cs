@@ -5,8 +5,8 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Security;
 
     //

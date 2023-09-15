@@ -5,18 +5,18 @@ namespace System.ServiceModel.Activities.Presentation
 {
     using System.Activities;
     using System.Activities.Presentation;
+    using System.Activities.Presentation.Hosting;
     using System.Activities.Presentation.Model;
-    using System.Collections.Generic;
-    using System.Windows;
     using System.Activities.Presentation.View;
-    using System.Windows.Input;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
-    using System.Runtime;
-    using System.Activities.Presentation.Hosting;
-    using System.Windows.Controls;
     using System.Globalization;
     using System.Linq;
+    using System.Runtime;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
 
     internal partial class CorrelationDataDesigner
     {

@@ -31,7 +31,6 @@
 using System;
 using System.Runtime.Versioning;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.Versioning

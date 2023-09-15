@@ -3,11 +3,11 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
+    using System.Collections.Generic;
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.Collections.Generic;
 
     static class TransactionPolicyStrings
     {

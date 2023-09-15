@@ -11,7 +11,6 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
-
 using Mono.Security.Authenticode;
 
 [assembly: AssemblyTitle("Mono CheckTrust")]

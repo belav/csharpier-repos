@@ -32,7 +32,6 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Policy;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.Common

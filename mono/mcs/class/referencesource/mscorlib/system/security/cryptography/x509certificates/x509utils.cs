@@ -10,11 +10,11 @@
 
 namespace System.Security.Cryptography.X509Certificates
 {
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using Microsoft.Win32;
 
     internal static class X509Constants
     {

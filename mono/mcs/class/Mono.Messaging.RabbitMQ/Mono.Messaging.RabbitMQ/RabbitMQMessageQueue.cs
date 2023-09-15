@@ -33,7 +33,6 @@ using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Content;
 using RabbitMQ.Client.Events;

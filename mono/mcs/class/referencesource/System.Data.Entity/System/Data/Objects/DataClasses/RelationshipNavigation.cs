@@ -10,9 +10,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Metadata.Edm;
 using System.Globalization;
 using System.Text;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Objects.DataClasses
 {

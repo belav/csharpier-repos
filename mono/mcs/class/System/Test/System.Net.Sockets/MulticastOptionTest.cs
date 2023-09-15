@@ -9,7 +9,6 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Net.Sockets

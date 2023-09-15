@@ -8,8 +8,6 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 // Copyright 2011 Xamarin Inc (http://www.xamarin.com).
 //
-using NUnit.Framework;
-
 using System;
 using System.Globalization;
 using System.IO;
@@ -17,6 +15,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {

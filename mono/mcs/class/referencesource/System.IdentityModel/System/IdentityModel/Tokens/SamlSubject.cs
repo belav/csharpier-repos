@@ -10,10 +10,10 @@ namespace System.IdentityModel.Tokens
     using System.IdentityModel.Claims;
     using System.IdentityModel.Selectors;
     using System.Runtime.Serialization;
+    using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
     using System.Security.Principal;
-    using System.Security;
     using System.Xml;
     using System.Xml.Serialization;
 

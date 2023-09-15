@@ -32,8 +32,8 @@ using System.Reflection;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
-using System.Threading;
 using System.ServiceModel.MonoInternal;
+using System.Threading;
 
 namespace System.ServiceModel
 {

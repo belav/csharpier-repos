@@ -9,9 +9,9 @@
 // Copyright (C) Dave Bettin, 2003
 //
 
-using NUnit.Framework;
 using System;
 using System.Web.Services;
+using NUnit.Framework;
 #if !MOBILE
 using System.EnterpriseServices;
 #endif

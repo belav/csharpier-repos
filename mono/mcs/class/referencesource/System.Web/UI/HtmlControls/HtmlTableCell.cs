@@ -16,9 +16,9 @@ namespace System.Web.UI.HtmlControls
     using System.Collections;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
     /// <devdoc>
     ///    <para>

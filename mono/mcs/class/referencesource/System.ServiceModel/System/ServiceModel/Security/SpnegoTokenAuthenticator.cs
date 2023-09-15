@@ -16,7 +16,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-
     using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 

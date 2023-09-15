@@ -15,11 +15,11 @@ using System.Diagnostics.Contracts;
 namespace System.Security.Policy
 {
     using System;
-    using SecurityManager = System.Security.SecurityManager;
-    using PermissionSet = System.Security.PermissionSet;
-    using SecurityElement = System.Security.SecurityElement;
     using System.Collections;
     using System.Globalization;
+    using PermissionSet = System.Security.PermissionSet;
+    using SecurityElement = System.Security.SecurityElement;
+    using SecurityManager = System.Security.SecurityManager;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

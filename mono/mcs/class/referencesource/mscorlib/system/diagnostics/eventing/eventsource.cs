@@ -168,10 +168,6 @@
 
 
 using System;
-using System.Runtime.CompilerServices;
-#if FEATURE_ACTIVITYSAMPLING
-using System.Collections.Concurrent;
-#endif
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -179,11 +175,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading;
+using Microsoft.Reflection;
 using Microsoft.Win32;
+#if FEATURE_ACTIVITYSAMPLING
+using System.Collections.Concurrent;
+#endif
 
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
@@ -191,8 +192,6 @@ using EventDescriptor = Microsoft.Diagnostics.Tracing.EventDescriptor;
 #else
 using EventDescriptor = System.Diagnostics.Tracing.EventDescriptor;
 #endif
-
-using Microsoft.Reflection;
 
 #if !ES_BUILD_AGAINST_DOTNET_V35
 using Contract = System.Diagnostics.Contracts.Contract;

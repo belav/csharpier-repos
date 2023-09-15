@@ -6,9 +6,9 @@ namespace System.Xaml.Hosting.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Web.Configuration;
     using System.Runtime;
     using System.Security;
+    using System.Web.Configuration;
 
     static class XamlHostingConfiguration
     {

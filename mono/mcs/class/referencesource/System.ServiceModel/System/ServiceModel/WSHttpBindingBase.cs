@@ -4,9 +4,9 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
@@ -16,7 +16,7 @@ namespace System.ServiceModel
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
+    using System.Text;
     using System.Xml;
 
     public abstract class WSHttpBindingBase : Binding, IBindingRuntimePreferences

@@ -29,10 +29,10 @@
 //
 
 
-using NUnit.Framework;
 using System;
 using System.Data;
 using System.Data.Common;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data.Common
 {

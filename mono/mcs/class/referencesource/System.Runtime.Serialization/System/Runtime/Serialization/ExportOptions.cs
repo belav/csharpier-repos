@@ -4,9 +4,9 @@
 
 namespace System.Runtime.Serialization
 {
+    using System.Collections.ObjectModel;
     using System.Security;
     using System.Security.Permissions;
-    using System.Collections.ObjectModel;
 
     public class ExportOptions
     {

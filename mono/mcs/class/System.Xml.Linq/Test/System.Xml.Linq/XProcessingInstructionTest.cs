@@ -28,9 +28,7 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
-
 using NUnit.Framework;
-
 using XPI = System.Xml.Linq.XProcessingInstruction;
 
 namespace MonoTests.System.Xml.Linq

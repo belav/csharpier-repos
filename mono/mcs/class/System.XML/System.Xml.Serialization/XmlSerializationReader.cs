@@ -34,9 +34,9 @@
 using System;
 using System.Collections;
 using System.Globalization;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
-using System.Reflection;
 
 namespace System.Xml.Serialization
 {

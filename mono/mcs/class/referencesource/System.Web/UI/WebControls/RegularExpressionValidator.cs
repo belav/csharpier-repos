@@ -11,8 +11,8 @@ namespace System.Web.UI.WebControls
 {
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Text.RegularExpressions;
     using System.Drawing.Design;
+    using System.Text.RegularExpressions;
     using System.Web;
     using System.Web.Util;
 

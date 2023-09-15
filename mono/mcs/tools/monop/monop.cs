@@ -39,8 +39,8 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Diagnostics;
 using System.IO;
-using IKVM.Reflection;
 using System.Text;
+using IKVM.Reflection;
 using Mono.CSharp;
 using Type = IKVM.Reflection.Type;
 

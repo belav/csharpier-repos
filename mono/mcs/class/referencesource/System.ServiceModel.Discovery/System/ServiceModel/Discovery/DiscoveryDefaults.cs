@@ -3,10 +3,10 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Discovery
 {
-    using System.ServiceModel.Channels;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Runtime;
+    using System.ServiceModel.Channels;
 
     static class DiscoveryDefaults
     {

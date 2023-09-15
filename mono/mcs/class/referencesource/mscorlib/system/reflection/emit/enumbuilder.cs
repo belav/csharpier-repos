@@ -21,8 +21,8 @@ namespace System.Reflection.Emit
     using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using CultureInfo = System.Globalization.CultureInfo;
     using System.Security.Permissions;
+    using CultureInfo = System.Globalization.CultureInfo;
 
     [HostProtection(MayLeakOnAbort = true)]
     [ClassInterface(ClassInterfaceType.None)]

@@ -41,10 +41,8 @@ using System.Xml;
 using System.Xml.Schema;
 using Microsoft.CSharp;
 using NUnit.Framework;
-
 using WSServiceDescription = System.Web.Services.Description.ServiceDescription;
 using SMBinding = System.ServiceModel.Channels.Binding;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Description

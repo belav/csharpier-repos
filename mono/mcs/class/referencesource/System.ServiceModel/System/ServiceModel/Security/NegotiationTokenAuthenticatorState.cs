@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel;
     using System.Collections;
     using System.Collections.Generic;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
 
     class NegotiationTokenAuthenticatorState : IDisposable

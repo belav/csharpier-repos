@@ -9,8 +9,8 @@ namespace System.Web.UI.WebControls
     using System;
     using System.Collections;
     using System.ComponentModel;
-    using System.Web.Util;
     using System.Web.UI.WebControls.Adapters;
+    using System.Web.Util;
 
     /// <summary>
     /// A DataBoundControl is bound to a data source and generates its

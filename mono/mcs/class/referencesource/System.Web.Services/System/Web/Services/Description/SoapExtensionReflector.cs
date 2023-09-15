@@ -6,14 +6,14 @@
 
 namespace System.Web.Services.Description
 {
-    using System.Web.Services;
-    using System.Web.Services.Protocols;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
-    using System.Collections;
     using System;
+    using System.Collections;
     using System.Reflection;
     using System.Security.Permissions;
+    using System.Web.Services;
+    using System.Web.Services.Protocols;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\SoapExtensionReflector.uex' path='docs/doc[@for="SoapExtensionReflector"]/*' />
     /// <devdoc>

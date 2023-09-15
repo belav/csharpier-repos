@@ -34,7 +34,6 @@ using System.Data;
 using System.Data.Odbc;
 #endif
 using System.Data.OleDb;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb

@@ -3,9 +3,9 @@ namespace System.Net.Mail
     using System;
     using System.Collections;
     using System.Globalization;
-    using System.Text;
     using System.IO;
     using System.Net.Mime;
+    using System.Text;
 
     static class CheckCommand
     {

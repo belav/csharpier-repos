@@ -10,8 +10,8 @@ namespace System.Net.Mail
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Text;
     using System.Net.Mime;
+    using System.Text;
 
     public class MailAddressCollection : Collection<MailAddress>
     {

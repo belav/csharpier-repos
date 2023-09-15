@@ -5,8 +5,8 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Xml;
     using System.Collections.Generic;
+    using System.Xml;
 
     struct ObjectReferenceStack
     {

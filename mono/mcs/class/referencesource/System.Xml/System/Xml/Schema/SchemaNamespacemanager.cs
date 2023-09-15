@@ -8,8 +8,8 @@
 namespace System.Xml.Schema
 {
     using System;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Diagnostics;
 
     internal class SchemaNamespaceManager : XmlNamespaceManager
     {

@@ -4,13 +4,13 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.Collections;
+    using System.IO;
     using System.ServiceModel.Channels;
+    using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Collections;
-    using System.Text;
-    using System.IO;
 
     [XmlSchemaProvider("GetSchema")]
     [XmlRoot(AddressingStrings.EndpointReference, Namespace = Addressing10Strings.Namespace)]

@@ -5,9 +5,9 @@
 
 namespace System.Activities.Core.Presentation
 {
-    using System.Windows.Data;
-    using System.Windows;
     using System.Globalization;
+    using System.Windows;
+    using System.Windows.Data;
 
     class CaseKeyBoxIsEnabledConverter : IMultiValueConverter
     {

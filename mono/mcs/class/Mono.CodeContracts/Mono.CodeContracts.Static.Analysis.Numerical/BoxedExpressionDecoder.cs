@@ -27,9 +27,8 @@
 //
 
 using System;
-
-using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Analysis.ExpressionAnalysis.Decoding;
+using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Proving;
 

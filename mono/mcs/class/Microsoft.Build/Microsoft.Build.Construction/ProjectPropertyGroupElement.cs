@@ -29,8 +29,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Build.Internal;
 using System.Xml;
+using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction
 {

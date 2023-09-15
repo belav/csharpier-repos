@@ -6,20 +6,20 @@ namespace System.ServiceModel.Activities.Dispatcher
 {
     using System.Activities;
     using System.Activities.DurableInstancing;
+    using System.Activities.DynamicUpdate;
+    using System.Activities.Hosting;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Runtime;
-    using System.Runtime.Interop;
     using System.Runtime.DurableInstancing;
+    using System.Runtime.Interop;
+    using System.Security;
+    using System.Security.Permissions;
     using System.ServiceModel.Activities.Description;
     using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    using System.Activities.Hosting;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Activities.DynamicUpdate;
 
     sealed class PersistenceProviderDirectory
     {

@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Discovery.Version11
 {
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
+    using System.ServiceModel;
 
     [MessageContract(IsWrapped = false)]
     class ProbeMatchesMessage11

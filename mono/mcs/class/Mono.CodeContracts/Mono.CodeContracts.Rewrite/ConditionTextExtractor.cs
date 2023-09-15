@@ -28,10 +28,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Mono.CodeContracts.Rewrite.AstVisitors;
-using System.IO;
 
 namespace Mono.CodeContracts.Rewrite
 {

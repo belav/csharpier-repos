@@ -32,8 +32,8 @@
 //
 
 using System;
-using System.Text;
 using System.Globalization;
+using System.Text;
 
 namespace System.Runtime.Remoting.Metadata.W3cXsd2001
 {

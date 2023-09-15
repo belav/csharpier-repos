@@ -6,12 +6,12 @@
 // Copyright 2015 Xamarin Inc
 //
 
-using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using System.Collections.Generic;
+using NUnit.Framework;
 
 #pragma warning disable CS1718
 

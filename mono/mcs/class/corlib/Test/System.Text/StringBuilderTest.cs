@@ -20,9 +20,9 @@
 // (and some double checking) then feel free :)
 //
 
-using NUnit.Framework;
-using System.Text;
 using System;
+using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System.Text
 {

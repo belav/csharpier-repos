@@ -10,13 +10,13 @@
 
 namespace System.Security.Permissions
 {
-    using System.Security;
     using System;
-    using SecurityElement = System.Security.SecurityElement;
-    using System.Security.Util;
-    using System.IO;
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Security;
+    using System.Security.Util;
+    using SecurityElement = System.Security.SecurityElement;
 
     [Serializable]
     [Flags]

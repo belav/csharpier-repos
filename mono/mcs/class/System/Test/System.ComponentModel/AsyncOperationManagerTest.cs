@@ -9,10 +9,9 @@
 
 
 using System;
-using System.Threading;
 using System.ComponentModel;
 using System.Globalization;
-
+using System.Threading;
 using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel

@@ -12,18 +12,18 @@ namespace System.Data
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data.Common;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Text;
     using System.Threading;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Data.Common;
-    using System.Runtime.Versioning;
-    using System.Runtime.CompilerServices;
 
     /// <devdoc>
     ///    <para>Represents one table of in-memory data.</para>

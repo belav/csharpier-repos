@@ -8,8 +8,8 @@
  */
 namespace Microsoft.Win32
 {
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para> Identifies areas of user preferences that

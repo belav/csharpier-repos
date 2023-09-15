@@ -1,7 +1,7 @@
 using System;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 class C
 {

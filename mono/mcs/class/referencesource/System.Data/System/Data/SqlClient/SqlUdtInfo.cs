@@ -16,15 +16,14 @@ namespace System.Data.SqlClient
     using System.Data.Sql;
     using System.Data.SqlTypes;
     using System.Diagnostics;
-    using System.Text;
     using System.IO;
     using System.Reflection;
+    using System.Reflection.Emit;
     using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
-    using System.Reflection.Emit;
     using System.Security.Permissions;
-
+    using System.Text;
     using Microsoft.SqlServer.Server;
 
     internal class SqlUdtInfo

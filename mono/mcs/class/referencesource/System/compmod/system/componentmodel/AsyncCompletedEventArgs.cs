@@ -7,8 +7,8 @@
 namespace System.ComponentModel
 {
     using System.Diagnostics.CodeAnalysis;
-    using System.Security.Permissions;
     using System.Reflection;
+    using System.Security.Permissions;
 
     [HostProtection(SharedState = true)]
     public class AsyncCompletedEventArgs : System.EventArgs

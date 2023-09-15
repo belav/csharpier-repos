@@ -24,10 +24,10 @@
 // 	Carlos Alberto Cortez <calberto.cortez@gmail.com>
 //
 
-using NUnit.Framework;
 using System;
 using System.Drawing;
 using System.Drawing.Printing;
+using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Printing
 {

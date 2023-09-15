@@ -6,9 +6,9 @@
 // @owner  Microsoft, Microsoft
 //---------------------------------------------------------------------
 
-using System.Linq.Expressions;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace System.Data.Objects.ELinq

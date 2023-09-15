@@ -28,9 +28,9 @@
 
 
 using System;
-using System.IO;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.MemoryMappedFiles

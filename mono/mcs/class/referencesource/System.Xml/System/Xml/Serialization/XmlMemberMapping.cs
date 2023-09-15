@@ -7,10 +7,10 @@
 
 namespace System.Xml.Serialization
 {
-    using System.Reflection;
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Reflection;
 
     /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping"]/*' />
     /// <internalonly/>

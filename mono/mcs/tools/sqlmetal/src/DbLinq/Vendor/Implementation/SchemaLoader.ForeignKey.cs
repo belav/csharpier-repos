@@ -24,12 +24,12 @@
 //
 #endregion
 
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using DbLinq.Schema;
 using DbLinq.Schema.Dbml;
-using System.Text;
-using System.Collections.Generic;
 
 namespace DbLinq.Vendor.Implementation
 {

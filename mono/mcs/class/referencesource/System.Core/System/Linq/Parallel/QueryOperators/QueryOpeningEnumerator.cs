@@ -13,8 +13,8 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
 #if SILVERLIGHT
 using System.Core; // for System.Core.SR
 #endif

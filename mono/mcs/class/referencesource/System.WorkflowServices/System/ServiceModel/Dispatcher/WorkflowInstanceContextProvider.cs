@@ -3,14 +3,14 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
     using System.Workflow.Runtime;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics;
 
     class WorkflowInstanceContextProvider : DurableInstanceContextProvider
     {

@@ -11,21 +11,23 @@
 namespace System.Reflection.Emit
 {
     using System;
-    using IList = System.Collections.IList;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.Security;
     using System.Diagnostics;
-    using CultureInfo = System.Globalization.CultureInfo;
+    using System.Diagnostics.Contracts;
+    using System.Diagnostics.SymbolStore;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Versioning;
+    using System.Security;
 #if !FEATURE_CORECLR
     using ResourceWriter = System.Resources.ResourceWriter;
 #else // FEATURE_CORECLR
     using IResourceWriter = System.Resources.IResourceWriter;
 #endif // !FEATURE_CORECLR
-    using System.IO;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.SymbolStore;
-    using System.Diagnostics.Contracts;
+
+
+    using CultureInfo = System.Globalization.CultureInfo;
+    using IList = System.Collections.IList;
 
     // This is a package private class. This class hold all of the managed
     // data member for AssemblyBuilder. Note that what ever data members added to

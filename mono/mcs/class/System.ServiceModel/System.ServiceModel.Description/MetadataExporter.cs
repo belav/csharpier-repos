@@ -32,7 +32,6 @@ using System.ServiceModel;
 using System.Web.Services.Description;
 using System.Xml;
 using System.Xml.Schema;
-
 using WSBinding = System.Web.Services.Description.Binding;
 
 namespace System.ServiceModel.Description

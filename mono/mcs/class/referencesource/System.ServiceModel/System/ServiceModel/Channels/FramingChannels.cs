@@ -7,15 +7,15 @@ namespace System.ServiceModel.Channels
     using System.Diagnostics;
     using System.IO;
     using System.Runtime;
-    using System.ServiceModel;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Security;
-    using System.Threading;
-    using System.ServiceModel.Diagnostics.Application;
+    using System.Runtime.Diagnostics;
     using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Principal;
-    using System.Runtime.Diagnostics;
+    using System.ServiceModel;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
+    using System.ServiceModel.Security;
+    using System.Threading;
 
     abstract class FramingDuplexSessionChannel : TransportDuplexSessionChannel
     {

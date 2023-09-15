@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Description
 {
     using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     public class SynchronousReceiveBehavior : IEndpointBehavior
     {

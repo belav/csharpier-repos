@@ -9,6 +9,7 @@ namespace System.ServiceModel.Dispatcher
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Net;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
@@ -16,7 +17,6 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Web;
-    using System.Net;
 
     public class WebHttpDispatchOperationSelector : IDispatchOperationSelector
     {

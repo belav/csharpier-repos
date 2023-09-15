@@ -9,13 +9,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Data.Metadata.Edm;
-using System.Data.Common.Utils;
 using System.Xml;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace System.Data.Mapping
 {

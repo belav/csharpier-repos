@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Syndication
 {
     using System;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
+    using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
     [TypeForwardedFrom(

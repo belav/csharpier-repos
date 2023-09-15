@@ -6,10 +6,10 @@ using System;
 using System.Globalization;
 using System.Net;
 using System.Runtime;
-using System.Web;
-using System.ServiceModel.Syndication;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
+using System.ServiceModel.Syndication;
+using System.Web;
 
 namespace System.ServiceModel.Web
 {

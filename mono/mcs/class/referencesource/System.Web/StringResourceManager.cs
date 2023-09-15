@@ -8,12 +8,12 @@ namespace System.Web
 {
     using System;
     using System.Collections;
-    using System.Text;
+    using System.Globalization;
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
     using Debug = System.Web.Util.Debug;
 
     internal class StringResourceManager

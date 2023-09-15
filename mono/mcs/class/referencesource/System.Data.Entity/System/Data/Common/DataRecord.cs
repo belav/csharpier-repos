@@ -9,12 +9,12 @@
 namespace System.Data.Objects
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
     using System.Data.Metadata.Edm;
     using System.Data.Objects;
     using System.Diagnostics;
-    using System.ComponentModel;
 
     /// <summary>
     /// Instances of this class would be returned to user via Query&lt;T&gt;

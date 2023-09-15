@@ -21,14 +21,13 @@
 
 #region Used namespaces
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Collections;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Globalization;
-using System.Collections.Generic;
-
 #if WINFORMS_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.DataVisualization.Charting.Data;

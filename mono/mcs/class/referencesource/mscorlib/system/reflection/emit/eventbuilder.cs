@@ -17,10 +17,10 @@
 namespace System.Reflection.Emit
 {
     using System;
-    using System.Reflection;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
 
     //
     // A EventBuilder is always associated with a TypeBuilder.  The TypeBuilder.DefineEvent

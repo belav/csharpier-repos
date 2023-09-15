@@ -14,9 +14,9 @@ namespace System.IdentityModel.Selectors
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Security.Cryptography.X509Certificates;
     using System.Security;
     using System.Security.AccessControl;
+    using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Text;

@@ -34,19 +34,18 @@
 //
 
 
-using NUnit.Framework;
 using System;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using System.IO;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Globalization;
-using System.Threading;
+using System.IO;
 using System.Text;
-
+using System.Threading;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {

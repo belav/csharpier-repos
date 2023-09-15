@@ -27,13 +27,12 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
-using System.IO;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
+using System.IO;
+using NUnit.Framework;
 
 namespace MonoTests.System
 {

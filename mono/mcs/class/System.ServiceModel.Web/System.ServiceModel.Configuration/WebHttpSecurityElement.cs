@@ -35,12 +35,12 @@ using System.Configuration;
 using System.Net;
 using System.Net.Security;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Diagnostics;
 using System.ServiceModel.Dispatcher;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 

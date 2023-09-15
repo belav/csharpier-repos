@@ -30,8 +30,8 @@
 
 using System;
 using System.DirectoryServices;
-using System.Xml;
 using System.Security.Permissions;
+using System.Xml;
 
 namespace System.DirectoryServices.Protocols
 {

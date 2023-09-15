@@ -5,8 +5,8 @@
 namespace System.IdentityModel.Policy
 {
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IdentityModel.Claims;
 
     public abstract class AuthorizationContext : IAuthorizationComponent

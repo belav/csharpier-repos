@@ -24,8 +24,8 @@
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-using System.IO;
 using System.Diagnostics.Contracts;
+using System.IO;
 
 namespace System.Threading.Tasks
 {

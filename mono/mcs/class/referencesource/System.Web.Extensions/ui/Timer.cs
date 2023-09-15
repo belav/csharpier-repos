@@ -14,8 +14,8 @@ namespace System.Web.UI
     using System.Globalization;
     using System.Reflection;
     using System.Web;
-    using System.Web.Util;
     using System.Web.Resources;
+    using System.Web.Util;
 
     [
         DefaultEvent("Tick"),

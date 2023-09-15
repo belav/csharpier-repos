@@ -5,11 +5,10 @@
 namespace System.ServiceModel.Security
 {
     using System.Globalization;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Xml;
-
     using DictionaryManager = System.IdentityModel.DictionaryManager;
     using ISecurityElement = System.IdentityModel.ISecurityElement;
 

@@ -9,13 +9,12 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography
 {

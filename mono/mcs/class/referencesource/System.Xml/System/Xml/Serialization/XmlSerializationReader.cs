@@ -7,20 +7,20 @@
 
 namespace System.Xml.Serialization
 {
-    using System.IO;
     using System;
-    using System.Security;
+    using System.CodeDom.Compiler;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
+    using System.Security;
     using System.Text;
+    using System.Threading;
     using System.Xml;
     using System.Xml.Schema;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.CodeDom.Compiler;
-    using System.Diagnostics;
-    using System.Threading;
-    using System.Configuration;
     using System.Xml.Serialization.Configuration;
 
     /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader"]/*' />

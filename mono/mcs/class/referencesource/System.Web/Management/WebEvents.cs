@@ -26,7 +26,6 @@ namespace System.Web.Management
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.Util;
-
     using Debug = System.Web.Util.Debug;
 
     // This enum matches the native one enum WebEventType (in webevent.h).

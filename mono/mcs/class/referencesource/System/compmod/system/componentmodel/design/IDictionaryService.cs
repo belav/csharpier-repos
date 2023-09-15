@@ -8,11 +8,9 @@
  */
 namespace System.ComponentModel.Design
 {
-    using System.ComponentModel;
-
-    using System.Diagnostics;
-
     using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Provides a generic dictionary service that a designer can use

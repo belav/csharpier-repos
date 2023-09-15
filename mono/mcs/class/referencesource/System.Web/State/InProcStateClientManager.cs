@@ -6,19 +6,18 @@
 
 namespace System.Web.SessionState
 {
-    using System.Threading;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Runtime.Serialization;
-
-    using System.Text;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration.Provider;
     using System.IO;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Text;
+    using System.Threading;
     using System.Web;
     using System.Web.Caching;
     using System.Web.Util;
     using System.Xml;
-    using System.Collections.Specialized;
-    using System.Configuration.Provider;
 
     internal sealed class InProcSessionStateStore : SessionStateStoreProviderBase
     {

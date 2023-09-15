@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System.Diagnostics;
+    using System.Diagnostics.PerformanceData;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Administration;
-    using System.Diagnostics.PerformanceData;
 
     abstract class EndpointPerformanceCountersBase : PerformanceCountersBase
     {

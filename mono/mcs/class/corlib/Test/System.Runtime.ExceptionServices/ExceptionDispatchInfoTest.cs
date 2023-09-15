@@ -27,11 +27,11 @@
 //
 
 using System;
-using NUnit.Framework;
-using System.Runtime.ExceptionServices;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.ExceptionServices
 {

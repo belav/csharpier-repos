@@ -6,11 +6,11 @@
 
 namespace Microsoft.Win32
 {
-    using System.Runtime.InteropServices;
-    using System.Runtime.Versioning;
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
 #if !SILVERLIGHT
     using System.Threading;
     using System.Security.Permissions;

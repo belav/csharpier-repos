@@ -8,12 +8,12 @@
 
 namespace System.Reflection.Emit
 {
-    using System.Runtime.InteropServices;
     using System;
-    using CultureInfo = System.Globalization.CultureInfo;
-    using System.Reflection;
-    using System.Security.Permissions;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using CultureInfo = System.Globalization.CultureInfo;
 
     [HostProtection(MayLeakOnAbort = true)]
     [ClassInterface(ClassInterfaceType.None)]

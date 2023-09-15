@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Collections;
-    using System.Reflection;
 
     class OperationSelectorBehavior : IContractBehavior
     {

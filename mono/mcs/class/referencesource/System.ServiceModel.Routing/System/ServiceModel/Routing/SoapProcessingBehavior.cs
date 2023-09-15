@@ -10,12 +10,12 @@ namespace System.ServiceModel.Routing
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime;
-    using System.ServiceModel.Description;
     using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
     using System.Xml;
     using SR2 = System.ServiceModel.Routing.SR;

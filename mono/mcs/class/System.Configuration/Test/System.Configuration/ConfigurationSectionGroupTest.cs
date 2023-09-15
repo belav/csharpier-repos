@@ -30,7 +30,6 @@
 using System;
 using System.Configuration;
 using NUnit.Framework;
-
 using Config = System.Configuration.Configuration;
 
 namespace MonoTests.System.Configuration

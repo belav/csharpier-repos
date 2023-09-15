@@ -14,16 +14,17 @@
 
 namespace System.Security.Principal
 {
+    using System.Diagnostics.Contracts;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
-    using System.Runtime.InteropServices;
 #if FEATURE_CORRUPTING_EXCEPTIONS
     using System.Runtime.ExceptionServices;
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-    using System.Security.Permissions;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public class WindowsImpersonationContext : IDisposable

@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.MsmqIntegration
 {
+    using System.Collections.Generic;
     using System.Net.Security;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
-    using System.Collections.Generic;
 
     public sealed class MsmqIntegrationBindingElement : MsmqBindingElementBase
     {

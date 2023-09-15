@@ -13,8 +13,8 @@
 namespace System.Data.Services.Common
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Data.Services.Client;
+    using System.Diagnostics;
     using System.Xml;
 
     internal sealed class EpmCustomContentSerializer : EpmContentSerializerBase, IDisposable

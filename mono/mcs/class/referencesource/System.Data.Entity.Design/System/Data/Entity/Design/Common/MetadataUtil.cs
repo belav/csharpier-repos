@@ -8,18 +8,18 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
-using System.Data.Metadata.Edm;
-using System.Xml;
-using System.Data.Common;
-using System.Reflection;
-using System.IO;
-using System.Diagnostics;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Metadata.Edm;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Xml;
 
 namespace System.Data.Entity.Design.Common
 {

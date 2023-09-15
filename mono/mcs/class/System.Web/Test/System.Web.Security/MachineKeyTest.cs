@@ -25,12 +25,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System.Security.Cryptography;
-
 using System;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web.Security;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Security

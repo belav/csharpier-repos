@@ -9,15 +9,15 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Reflection;
     using System.Configuration;
-    using System.Web.Hosting;
-    using System.Web.Util;
+    using System.IO;
+    using System.Reflection;
     using System.Web.Caching;
-    using System.Web.UI;
     using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.UI;
+    using System.Web.Util;
 
     /*
     * This class makes sure that every file in a directory is compiled individually (i.e. it

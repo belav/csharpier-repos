@@ -24,10 +24,10 @@
 
 #region Used Namespace
 using System;
-using System.Drawing;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections.Generic;
+using System.Drawing;
 #endregion
 
 #if Microsoft_CONTROL

@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-
 using NUnit.Framework;
 
 namespace Mono.Unix.Android

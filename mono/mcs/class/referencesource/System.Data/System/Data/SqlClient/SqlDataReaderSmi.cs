@@ -10,18 +10,18 @@ namespace System.Data.SqlClient
 {
     using System;
     using System.Data;
+    using System.Data.Common;
+    using System.Data.ProviderBase;
     using System.Data.Sql;
     using System.Data.SqlTypes;
+    using System.Diagnostics; // for Conditional compilation
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using System.Diagnostics; // for Conditional compilation
-    using System.Diagnostics.CodeAnalysis;
+    using System.Threading.Tasks;
     using System.Xml;
     using Microsoft.SqlServer.Server;
-    using System.Data.ProviderBase;
-    using System.Data.Common;
-    using System.Threading.Tasks;
 
     // SqlServer provider's implementation of ISqlReader.
     //    Supports ISqlReader and ISqlResultSet objects.

@@ -30,8 +30,8 @@
 //
 
 using System;
-using System.Threading;
 using System.Collections;
+using System.Threading;
 
 namespace System.Runtime.Remoting.Lifetime
 {

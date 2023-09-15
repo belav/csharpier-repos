@@ -2,24 +2,24 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-using System.ServiceModel.Diagnostics;
-using System.ServiceModel.Dispatcher;
-using System.ServiceModel.Description;
-using System.ServiceModel.Security;
-using System.ServiceModel.Configuration;
 using System.Collections.ObjectModel;
 using System.Net.Security;
+using System.ServiceModel.Configuration;
+using System.ServiceModel.Description;
+using System.ServiceModel.Diagnostics;
+using System.ServiceModel.Dispatcher;
+using System.ServiceModel.Security;
 
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel.Security.Tokens;
-    using System.ServiceModel.Security;
-    using System.ServiceModel;
-    using System.IO;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
     using System.Runtime.InteropServices;
+    using System.ServiceModel;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
 
     public class SecurityBindingElementImporter : IPolicyImportExtension
     {

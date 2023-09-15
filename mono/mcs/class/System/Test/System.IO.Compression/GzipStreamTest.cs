@@ -8,11 +8,11 @@
 // (C) 2004 Novell, Inc. <http://www.novell.com>
 //
 
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System.IO.Compression
 {

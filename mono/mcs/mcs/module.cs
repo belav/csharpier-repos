@@ -13,13 +13,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Mono.CompilerServices.SymbolWriter;
-using System.Linq;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using Mono.CompilerServices.SymbolWriter;
 using Mono.Security.Cryptography;
-
 #if STATIC
 using IKVM.Reflection;
 using IKVM.Reflection.Emit;

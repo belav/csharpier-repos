@@ -5,15 +5,15 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Json;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.Runtime.Serialization.Json;
-    using System.Collections;
-    using System.Linq;
 
     class SingleBodyParameterDataContractMessageFormatter : SingleBodyParameterMessageFormatter
     {

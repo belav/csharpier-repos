@@ -27,9 +27,9 @@
 //
 
 using System.Collections.Generic;
+using Mono.CodeContracts.Static.Analysis;
 using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.AST.Visitors;
-using Mono.CodeContracts.Static.Analysis;
 using Mono.CodeContracts.Static.ControlFlow.Subroutines;
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Providers;

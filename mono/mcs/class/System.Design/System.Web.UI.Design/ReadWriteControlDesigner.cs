@@ -19,9 +19,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Collections;
 using System.ComponentModel.Design;
 using System.Web.UI.WebControls;
-using System.Collections;
 
 namespace System.Web.UI.Design
 {

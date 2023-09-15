@@ -7,12 +7,12 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Text;
-using System.Diagnostics;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.Utils;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {

@@ -8,15 +8,15 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
+    using System.Runtime;
     using System.Text;
     using System.Xaml;
     using System.Xaml.Schema;
-    using System.Reflection;
-    using System.Runtime;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
 
     internal class XamlValidatingReader : XamlWrappingReader
     {

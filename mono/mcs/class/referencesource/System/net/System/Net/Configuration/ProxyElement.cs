@@ -7,11 +7,11 @@
 namespace System.Net.Configuration
 {
     using System;
-    using System.Xml;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Reflection;
-    using System.ComponentModel;
     using System.Security.Permissions;
+    using System.Xml;
 
     public sealed class ProxyElement : ConfigurationElement
     {

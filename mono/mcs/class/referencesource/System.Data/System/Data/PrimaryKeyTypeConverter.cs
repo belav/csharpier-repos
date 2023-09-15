@@ -10,8 +10,8 @@
 namespace System.Data
 {
     using System.ComponentModel;
-    using System.Globalization;
     using System.Data;
+    using System.Globalization;
 
     internal sealed class PrimaryKeyTypeConverter : ReferenceConverter
     {

@@ -6,13 +6,13 @@
 
 namespace System.Web.UI.HtmlControls
 {
-    using System.Runtime.Serialization.Formatters;
     using System;
     using System.Collections;
     using System.ComponentModel;
     using System.IO;
-    using System.Web.UI;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using System.Web.UI;
 
     /*
      *  A control representing an intrinsic Html tag.

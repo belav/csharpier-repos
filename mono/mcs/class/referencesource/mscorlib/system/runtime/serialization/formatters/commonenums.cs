@@ -15,10 +15,10 @@
 
 namespace System.Runtime.Serialization.Formatters
 {
-    using System.Threading;
+    using System;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
-    using System;
+    using System.Threading;
 
     // Enums which specify options to the XML and Binary formatters
     // These will be public so that applications can use them

@@ -19,22 +19,18 @@ namespace Mono.Data.SqlSharp.Gui.GtkSharp
     using System.Data.Odbc;
     using System.Data.OleDb;
     using System.Data.SqlClient;
+    using System.Diagnostics;
     using System.Drawing;
-    using System.Text;
     using System.IO;
     using System.Reflection;
-    using System.Runtime.Remoting;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
-
+    using System.Runtime.Remoting;
+    using System.Text;
     using Gdk;
     using Gtk;
-    using GtkSharp;
-
-    using Mono.GtkSharp.Goodies;
-
     using Gtk.Controls;
-
+    using GtkSharp;
+    using Mono.GtkSharp.Goodies;
     using SqlEditorSharp;
 
     public enum OutputResults

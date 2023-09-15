@@ -9,12 +9,12 @@
 namespace System.Diagnostics
 {
     using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.IO;
     using System.Text;
-    using System.Globalization;
-    using System.Runtime.InteropServices;
 
     /// <devdoc>
     ///    <para>Provides a simple listener for directing tracing or

@@ -39,10 +39,10 @@
 //
 //
 using System;
-using System.Text;
 using System.IO;
-using System.Threading;
 using System.Reflection;
+using System.Text;
+using System.Threading;
 
 namespace Mono.Terminal
 {

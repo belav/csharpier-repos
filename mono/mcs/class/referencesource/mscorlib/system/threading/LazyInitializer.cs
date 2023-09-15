@@ -14,8 +14,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
-using System.Security.Permissions;
 using System.Diagnostics.Contracts;
+using System.Security.Permissions;
 
 namespace System.Threading
 {

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Transactions;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Configuration;
+using System.Diagnostics;
+using System.Transactions;
 
 namespace System.Workflow.Runtime.Hosting
 {

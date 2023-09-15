@@ -12,7 +12,6 @@
 
 #if !MOBILE && !XAMMAC_4_5
 using NUnit.Framework;
-
 using System;
 using System.Globalization;
 using System.IO;

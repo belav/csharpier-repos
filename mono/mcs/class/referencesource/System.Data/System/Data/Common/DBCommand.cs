@@ -11,8 +11,8 @@ namespace System.Data.Common
     using System;
     using System.ComponentModel;
     using System.Data;
-    using System.Threading.Tasks;
     using System.Threading;
+    using System.Threading.Tasks;
 
     public abstract class DbCommand : Component, IDbCommand
     { // V1.2.3300

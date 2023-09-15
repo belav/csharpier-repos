@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.MsmqIntegration
 {
-    using System.Runtime.Serialization;
-    using System.ServiceModel;
-    using System.Runtime.Serialization.Formatters.Binary; // for BinaryFormatter
-    using System.Xml.Serialization; // for XmlSerializer
-    using System.IO; // for Stream
     using System.Collections.Specialized; //For HybridDictionary
+    using System.IO; // for Stream
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary; // for BinaryFormatter
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.Xml.Serialization; // for XmlSerializer
 
     sealed class MsmqIntegrationChannelFactory : MsmqChannelFactoryBase<IOutputChannel>
     {

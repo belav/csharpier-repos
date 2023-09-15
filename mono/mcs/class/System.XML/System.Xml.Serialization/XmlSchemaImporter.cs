@@ -29,13 +29,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Schema;
 #if !MOBILE
 using System.CodeDom.Compiler;
 #endif
-using System.Xml.Schema;
-using System.Collections;
-using System.Collections.Generic;
+
 #if CONFIGURATION_DEP
 using System.Configuration;
 using System.Xml.Serialization.Configuration;

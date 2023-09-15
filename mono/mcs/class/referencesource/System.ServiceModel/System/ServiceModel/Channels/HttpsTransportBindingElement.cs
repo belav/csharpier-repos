@@ -5,16 +5,16 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
+    using System.ComponentModel;
     using System.Net;
     using System.Net.Security;
     using System.Runtime.Serialization;
     using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.ComponentModel;
 
     public class HttpsTransportBindingElement
         : HttpTransportBindingElement,

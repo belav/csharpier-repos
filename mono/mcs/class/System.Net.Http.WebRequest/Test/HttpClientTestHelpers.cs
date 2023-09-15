@@ -1,7 +1,7 @@
 using System;
-using System.Threading;
-using System.Reflection;
 using System.Net.Http;
+using System.Reflection;
+using System.Threading;
 
 namespace MonoTests.System.Net.Http
 {

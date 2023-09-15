@@ -14,8 +14,8 @@ namespace System.Security.AccessControl
 {
     using System;
     using System.Collections;
-    using System.Security.Principal;
     using System.Diagnostics.Contracts;
+    using System.Security.Principal;
 
     public sealed class AceEnumerator : IEnumerator
     {

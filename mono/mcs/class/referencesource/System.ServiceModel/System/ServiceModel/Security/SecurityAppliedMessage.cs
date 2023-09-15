@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel.Security
 {
+    using System.Collections.Generic;
+    using System.IdentityModel.Tokens;
     using System.IO;
     using System.Runtime;
     using System.Security.Cryptography;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.IdentityModel.Tokens;
-    using System.Collections.Generic;
     using IPrefixGenerator = System.IdentityModel.IPrefixGenerator;
     using ISecurityElement = System.IdentityModel.ISecurityElement;
     using XmlAttributeHolder = System.IdentityModel.XmlAttributeHolder;

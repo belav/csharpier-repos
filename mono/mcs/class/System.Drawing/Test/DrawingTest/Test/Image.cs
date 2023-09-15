@@ -1,10 +1,10 @@
 using System;
-using NUnit.Framework;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using DrawingTestHelper;
+using System.Drawing.Imaging;
 using System.IO;
+using DrawingTestHelper;
+using NUnit.Framework;
 
 namespace Test.Sys.Drawing
 {

@@ -7,10 +7,10 @@
 namespace System.Web.Services.Discovery
 {
     using System;
+    using System.Globalization;
     using System.IO;
     using System.Text.RegularExpressions;
     using System.Web.Services.Protocols;
-    using System.Globalization;
 
     internal class LinkGrep
     {

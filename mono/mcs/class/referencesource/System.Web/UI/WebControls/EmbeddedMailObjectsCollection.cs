@@ -6,12 +6,12 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.Web.Mail;
     using System.Collections;
     using System.ComponentModel;
-    using System.IO;
     using System.Drawing.Design;
+    using System.IO;
     using System.Web;
+    using System.Web.Mail;
 
     [Editor(
         "System.Web.UI.Design.WebControls.EmbeddedMailObjectCollectionEditor, "

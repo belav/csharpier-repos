@@ -16,10 +16,10 @@
 namespace System.Collections
 {
     using System;
-    using System.Security.Permissions;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Security.Permissions;
 
     // A simple Queue of objects.  Internally it is implemented as a circular
     // buffer, so Enqueue can be O(n).  Dequeue is O(1).

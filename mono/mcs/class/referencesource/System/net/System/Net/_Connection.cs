@@ -10,12 +10,12 @@ namespace System.Net
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Net.Sockets;
-    using System.Threading;
-    using System.Security;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Net.Configuration;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Net.Sockets;
+    using System.Security;
+    using System.Threading;
 
 #if !MONO
     internal enum ReadState

@@ -8,15 +8,14 @@
 
 
 using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Diagnostics;
 using System.Runtime.ExceptionServices;
-using System.Linq;
-
+using System.Runtime.InteropServices;
+using System.Text;
 using NUnit.Framework;
 
 namespace MonoTests.System.Reflection.Emit

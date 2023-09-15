@@ -34,7 +34,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using NUnit.Framework;
-
 // resolve the ambiguity between System.ComponentModel and NUnit.Framework
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 

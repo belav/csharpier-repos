@@ -8,9 +8,9 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.ComponentModel;
+    using System.Reflection;
 
     /// <include file='doc\XmlElementAttributes.uex' path='docs/doc[@for="XmlElementAttributes"]/*' />
     /// <devdoc>

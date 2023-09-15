@@ -5,18 +5,18 @@
 namespace System.ServiceModel.Syndication
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.ServiceModel.Channels;
     using System.Text;
     using System.Xml;
-    using System.Xml.Serialization;
-    using System.Diagnostics.CodeAnalysis;
     using System.Xml.Schema;
-    using System.Collections;
+    using System.Xml.Serialization;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.ServiceModel.Channels;
-    using System.Runtime.CompilerServices;
 
     [TypeForwardedFrom(
         "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"

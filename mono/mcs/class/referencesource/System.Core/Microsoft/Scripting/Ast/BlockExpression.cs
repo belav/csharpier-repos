@@ -19,7 +19,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Threading;
-
 #if SILVERLIGHT
 using System.Core;
 #endif

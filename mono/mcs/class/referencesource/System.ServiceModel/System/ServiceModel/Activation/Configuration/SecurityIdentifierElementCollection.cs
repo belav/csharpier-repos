@@ -8,11 +8,11 @@ namespace System.ServiceModel.Activation.Configuration
     using System.Collections;
     using System.Configuration;
     using System.Globalization;
+    using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
-    using System.ServiceModel.Configuration;
     using System.ServiceModel.Channels;
-    using System.Security.Principal;
+    using System.ServiceModel.Configuration;
 
     [ConfigurationCollection(typeof(SecurityIdentifierElement))]
     public sealed class SecurityIdentifierElementCollection

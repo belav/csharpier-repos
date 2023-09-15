@@ -9,13 +9,13 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System;
     using System.Collections;
     using System.ComponentModel.Design;
     using System.Diagnostics;
     using System.Reflection;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <internalonly/>
     /// <devdoc>

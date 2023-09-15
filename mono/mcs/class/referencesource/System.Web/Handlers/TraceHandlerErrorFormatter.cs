@@ -1,10 +1,10 @@
 namespace System.Web.Handlers
 {
-    using System.IO;
-    using System.Web.Util;
-    using System.Web;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.IO;
+    using System.Web;
+    using System.Web.Util;
 
     internal class TraceHandlerErrorFormatter : ErrorFormatter
     {

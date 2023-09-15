@@ -2,8 +2,8 @@ using System;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Description;
+using System.ServiceModel.PeerResolvers;
 
 namespace System.ServiceModel.PeerResolvers
 {

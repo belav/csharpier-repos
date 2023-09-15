@@ -10,9 +10,9 @@
 namespace System.Text
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     /*=================================CodePageEncoding==================================
     ** This class is here only to deserialize the Code Page classes from Everett (V1.1) into

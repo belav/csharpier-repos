@@ -27,11 +27,11 @@
 
 using System;
 using System.Collections.Generic;
-using Microsoft.Build.Framework;
-using System.Reflection;
 using System.Globalization;
-using Microsoft.Build.Utilities;
+using System.Reflection;
 using System.Text;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
 namespace Microsoft.Build.Tasks
 {

@@ -10,16 +10,16 @@ namespace System.Activities.Tracking
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Runtime;
     using System.Runtime.Diagnostics;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Text;
     using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Text;
     using System.Xml;
 
     public sealed class EtwTrackingParticipant : TrackingParticipant

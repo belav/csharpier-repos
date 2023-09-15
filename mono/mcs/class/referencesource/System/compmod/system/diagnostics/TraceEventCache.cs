@@ -5,12 +5,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Threading;
-using System.Security.Permissions;
-using System.Text;
 using System.Collections;
 using System.Globalization;
 using System.Runtime.Versioning;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
 
 namespace System.Diagnostics
 {

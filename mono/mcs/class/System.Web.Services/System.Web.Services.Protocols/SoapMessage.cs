@@ -29,11 +29,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using HeaderInfo = System.Web.Services.Protocols.SoapHeaderMapping;
-
 using System.ComponentModel;
 using System.IO;
 using System.Web.Services;
+using HeaderInfo = System.Web.Services.Protocols.SoapHeaderMapping;
 
 namespace System.Web.Services.Protocols
 {

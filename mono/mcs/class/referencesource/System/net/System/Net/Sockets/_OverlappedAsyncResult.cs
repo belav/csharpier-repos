@@ -7,11 +7,11 @@
 namespace System.Net.Sockets
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Runtime.InteropServices;
     using System.Threading;
     using Microsoft.Win32;
-    using System.Collections.Generic;
 
     //
     //  OverlappedAsyncResult - used to take care of storage for async Socket operation

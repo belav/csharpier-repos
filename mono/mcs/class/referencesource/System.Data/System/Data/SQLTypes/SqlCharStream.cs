@@ -26,9 +26,9 @@
 namespace System.Data.SqlTypes
 {
     using System;
+    using System.Data.SqlTypes;
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Data.SqlTypes;
 
     internal abstract class SqlStreamChars : System.Data.SqlTypes.INullable, IDisposable
     {

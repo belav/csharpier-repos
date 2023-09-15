@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Activation.Diagnostics
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Runtime.Diagnostics;
-    using System.Collections.Generic;
 
     static class TraceCode
     {

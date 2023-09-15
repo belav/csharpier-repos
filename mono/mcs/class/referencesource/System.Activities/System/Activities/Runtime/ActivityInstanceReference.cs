@@ -6,9 +6,9 @@ namespace System.Activities.Runtime
 {
     using System;
     using System.Activities.DynamicUpdate;
+    using System.Collections.ObjectModel;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
 
     [DataContract]
     class ActivityInstanceReference : ActivityInstanceMap.IActivityReference

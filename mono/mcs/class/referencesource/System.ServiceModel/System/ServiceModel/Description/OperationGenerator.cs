@@ -6,13 +6,13 @@ namespace System.ServiceModel.Description
 {
     using System.CodeDom;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Net.Security;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
     using System.Threading.Tasks;
 
     enum MessageContractType

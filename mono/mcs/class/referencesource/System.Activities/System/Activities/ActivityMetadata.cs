@@ -5,9 +5,9 @@
 namespace System.Activities
 {
     using System;
-    using System.Runtime;
-    using System.Collections.ObjectModel;
     using System.Activities.Validation;
+    using System.Collections.ObjectModel;
+    using System.Runtime;
 
     public struct ActivityMetadata
     {

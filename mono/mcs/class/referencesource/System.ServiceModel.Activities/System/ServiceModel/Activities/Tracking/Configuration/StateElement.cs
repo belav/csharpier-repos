@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
     using System.Configuration;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
     public class StateElement : TrackingConfigurationElement

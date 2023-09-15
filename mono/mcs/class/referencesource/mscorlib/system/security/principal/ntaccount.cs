@@ -6,13 +6,13 @@
 // <OWNER>Microsoft</OWNER>
 //
 
+using System;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System;
-using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Security.Permissions;
-using System.Diagnostics.Contracts;
 
 namespace System.Security.Principal
 {

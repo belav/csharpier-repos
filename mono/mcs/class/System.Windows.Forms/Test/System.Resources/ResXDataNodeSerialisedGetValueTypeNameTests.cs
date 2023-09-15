@@ -26,14 +26,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Collections;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.Serialization;
-using System.Collections;
-using NUnit.Framework;
-using System.ComponentModel.Design;
 using System.Runtime.Serialization.Formatters.Binary;
+using NUnit.Framework;
 
 namespace MonoTests.System.Resources
 {

@@ -6,8 +6,8 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Xml;
-using WebServiceMoonlightTest.ServiceReference1;
 using NUnit.Framework;
+using WebServiceMoonlightTest.ServiceReference1;
 
 namespace MonoTests.System.Runtime.Serialization
 {

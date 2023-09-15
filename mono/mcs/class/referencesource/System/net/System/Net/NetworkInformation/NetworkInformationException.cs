@@ -9,8 +9,8 @@ namespace System.Net.NetworkInformation
     using System;
     using System.ComponentModel;
     using System.Net.Sockets;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
 
     /// <devdoc>
     ///    <para>

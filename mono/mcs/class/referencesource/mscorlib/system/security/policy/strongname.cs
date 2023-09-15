@@ -14,11 +14,11 @@
 
 namespace System.Security.Policy
 {
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Reflection;
-    using System.Security.Util;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
+    using System.Security.Util;
     using CultureInfo = System.Globalization.CultureInfo;
 
     [Serializable]

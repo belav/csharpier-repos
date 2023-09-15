@@ -30,10 +30,9 @@
 
 using System;
 using System.Drawing;
-using System.Security.Permissions;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Threading;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing

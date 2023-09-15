@@ -30,11 +30,11 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Configuration.Internal;
 using System.ComponentModel;
+using System.Configuration.Internal;
+using System.IO;
 using System.Reflection;
 using System.Xml;
-using System.IO;
 
 namespace System.Configuration
 {

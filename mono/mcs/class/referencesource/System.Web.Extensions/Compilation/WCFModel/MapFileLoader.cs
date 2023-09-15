@@ -14,7 +14,6 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 #else

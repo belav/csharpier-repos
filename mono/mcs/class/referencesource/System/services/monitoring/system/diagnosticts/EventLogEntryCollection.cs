@@ -6,9 +6,9 @@
 
 namespace System.Diagnostics
 {
-    using System.Text;
     using System;
     using System.Collections;
+    using System.Text;
 
     //Consider, V2, Microsoft: Is there a way to implement Contains
     //and IndexOf, can we live withouth this part of the ReadOnly

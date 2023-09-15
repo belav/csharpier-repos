@@ -4,11 +4,11 @@
 
 namespace System.Workflow.Activities
 {
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel;
-    using System.ServiceModel;
-    using System.Reflection;
     using System.Collections.Generic;
+    using System.Reflection;
+    using System.ServiceModel;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
 
     class SendActivityValidator : ActivityValidator
     {

@@ -10,8 +10,8 @@ namespace System.Activities.Statements
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Windows.Markup;
     using System.Runtime.Collections;
+    using System.Windows.Markup;
 
     [ContentProperty("Branches")]
     public sealed class Parallel : NativeActivity

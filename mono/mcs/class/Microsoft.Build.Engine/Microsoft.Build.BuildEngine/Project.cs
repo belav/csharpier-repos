@@ -39,8 +39,8 @@ using System.Xml;
 using System.Xml.Schema;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Mono.XBuild.Framework;
 using Mono.XBuild.CommandLine;
+using Mono.XBuild.Framework;
 
 namespace Microsoft.Build.BuildEngine
 {

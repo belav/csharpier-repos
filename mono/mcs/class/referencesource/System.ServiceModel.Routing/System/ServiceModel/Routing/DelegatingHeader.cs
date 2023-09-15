@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Routing
 {
     using System;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.Xml;
-    using System.Runtime;
 
     class DelegatingHeader : MessageHeader
     {

@@ -5,14 +5,14 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
     using System.ServiceModel.Web;
+    using System.Xml;
+    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
 
     abstract class SingleBodyParameterMessageFormatter
         : IDispatchMessageFormatter,

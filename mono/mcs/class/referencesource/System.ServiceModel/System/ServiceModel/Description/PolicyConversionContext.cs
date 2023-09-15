@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Description
 {
-    using System.Xml;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
 
     public abstract class PolicyConversionContext
     {

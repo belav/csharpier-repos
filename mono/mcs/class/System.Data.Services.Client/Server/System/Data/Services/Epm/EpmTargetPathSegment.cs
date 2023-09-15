@@ -12,8 +12,8 @@
 
 namespace System.Data.Services.Common
 {
-    using System.Diagnostics;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     [DebuggerDisplay("EpmTargetPathSegment {SegmentName} HasContent={HasContent}")]
     internal class EpmTargetPathSegment

@@ -15,8 +15,8 @@
 namespace System.Collections.Generic
 {
     using System;
-    using System.Security.Permissions;
     using System.Diagnostics;
+    using System.Security.Permissions;
 
     // The SortedDictionary class implements a generic sorted list of keys
     // and values. Entries in a sorted list are sorted by their keys and

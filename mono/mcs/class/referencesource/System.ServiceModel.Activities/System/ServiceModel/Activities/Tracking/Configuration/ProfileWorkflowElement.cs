@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Configuration;
-    using System.Collections.ObjectModel;
-    using System.Runtime;
     using System.Activities.Tracking;
+    using System.Collections.ObjectModel;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
     public class ProfileWorkflowElement : TrackingConfigurationElement

@@ -29,11 +29,11 @@
 
 
 using System;
-using System.Text;
-using System.Configuration;
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration;
+using System.Text;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration

@@ -25,8 +25,8 @@
 #endregion
 
 using System;
-using System.Linq;
 using System.Data.Linq.Mapping;
+using System.Linq;
 using System.Reflection;
 
 namespace DbLinq.Util

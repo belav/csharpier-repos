@@ -7,11 +7,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Text.RegularExpressions;
-using System.Text;
 using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Utils;
 using System.Data.Metadata.Edm;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 {

@@ -26,11 +26,11 @@
 
 // NOT COMPLETE - work in progress
 
+using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text.RegularExpressions;
-using System;
-using System.Collections;
 
 namespace System.Windows.Forms
 {

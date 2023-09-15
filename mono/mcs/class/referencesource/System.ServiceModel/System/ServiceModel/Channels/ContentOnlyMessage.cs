@@ -4,8 +4,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel;
     using System.IO;
+    using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
 

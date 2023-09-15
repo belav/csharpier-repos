@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Administration;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     [AttributeUsage(AttributeTargets.Method)]
     [Obsolete(

@@ -32,12 +32,10 @@ using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
-using System.Text;
 using System.Security.Cryptography;
-
+using System.Text;
 using Mono.Security.Cryptography;
 using Mono.Security.X509.Extensions;
-
 using SSCX = System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Security.X509

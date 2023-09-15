@@ -28,10 +28,10 @@ using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery.Version11;
 using System.ServiceModel.Discovery.VersionApril2005;
 using System.ServiceModel.Discovery.VersionCD1;
+using System.ServiceModel.Dispatcher;
 using System.Threading;
 
 namespace System.ServiceModel.Discovery

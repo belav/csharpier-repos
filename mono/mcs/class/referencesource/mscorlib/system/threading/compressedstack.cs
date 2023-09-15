@@ -16,20 +16,21 @@
 
 namespace System.Threading
 {
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
+    using System.Threading;
 #if FEATURE_CORRUPTING_EXCEPTIONS
     using System.Runtime.ExceptionServices;
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using System.Reflection;
-    using System.Collections;
-    using System.Threading;
-    using System.Runtime.Serialization;
-    using System.Diagnostics.Contracts;
+
 
     internal struct CompressedStackSwitcher : IDisposable
     {

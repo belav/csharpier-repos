@@ -4,10 +4,10 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Globalization;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Text;
     using System.Xml;
 
     public static class XPathQueryGenerator

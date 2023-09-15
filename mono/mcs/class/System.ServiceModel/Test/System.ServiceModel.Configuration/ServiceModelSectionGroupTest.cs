@@ -35,11 +35,8 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Configuration;
 using System.Text;
 using System.Xml;
-
 using NUnit.Framework;
-
 using ConfigurationType = System.Configuration.Configuration;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Configuration

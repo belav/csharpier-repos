@@ -12,7 +12,6 @@ namespace System.ServiceModel.Channels
     using System.Security.Cryptography;
     using System.Text;
     using System.Xml.Linq;
-
     using ReadOnlyStringDictionary = System.Runtime.ReadOnlyDictionaryInternal<string, string>;
 
     public sealed class CorrelationKey : InstanceKey

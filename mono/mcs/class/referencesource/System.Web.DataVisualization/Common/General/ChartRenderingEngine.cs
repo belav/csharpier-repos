@@ -33,16 +33,15 @@
 #region Used namespaces
 
 using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Drawing.Imaging;
-using System.ComponentModel;
-using System.Collections;
-using System.Xml;
+using System.Drawing.Text;
 using System.IO;
-using System.Diagnostics.CodeAnalysis;
-
+using System.Xml;
 #if Microsoft_CONTROL
 
 using System.Windows.Forms.DataVisualization.Charting.Utilities;

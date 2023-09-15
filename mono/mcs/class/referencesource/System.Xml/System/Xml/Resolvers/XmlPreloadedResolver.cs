@@ -5,17 +5,18 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Runtime.Versioning;
+using System.Text;
 using System.Xml;
+using System.Xml.Utils;
 #if !SILVERLIGHT
 using System.Net;
 #endif
-using System.Text;
-using System.Xml.Utils;
-using System.Reflection;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Runtime.Versioning;
+
 
 namespace System.Xml.Resolvers
 {

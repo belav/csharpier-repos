@@ -33,7 +33,6 @@ namespace Mono.Cecil.Metadata
 {
     using System;
     using System.Collections;
-
     using Mono.Cecil.Binary;
 
     sealed class MetadataRowWriter : BaseMetadataRowVisitor

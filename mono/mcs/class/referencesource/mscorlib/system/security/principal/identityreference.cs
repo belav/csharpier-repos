@@ -7,9 +7,9 @@
 //
 
 using System;
-using System.Security.Policy; // defines Url class
-using System.Globalization;
 using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Security.Policy; // defines Url class
 
 namespace System.Security.Principal
 {

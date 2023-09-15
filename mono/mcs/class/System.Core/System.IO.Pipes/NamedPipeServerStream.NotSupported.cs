@@ -1,12 +1,12 @@
-using Microsoft.Win32.SafeHandles;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Security.Permissions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Security.Permissions;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Pipes
 {

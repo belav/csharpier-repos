@@ -13,8 +13,8 @@
 
 namespace System.Web.Util
 {
-    using System.Runtime.Serialization.Formatters;
     using System.Collections;
+    using System.Runtime.Serialization.Formatters;
 
     internal class DoubleLinkListEnumerator : IEnumerator
     {

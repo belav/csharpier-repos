@@ -25,12 +25,12 @@
 #endregion
 
 using System;
-using System.Linq.Expressions;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using nwind;
+using System.Linq.Expressions;
+using System.Text;
 using Npgsql;
+using nwind;
 
 namespace ClientCode2
 {

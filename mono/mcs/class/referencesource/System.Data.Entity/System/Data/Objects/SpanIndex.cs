@@ -9,11 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Common;
+using System.Data.Common.CommandTrees;
 using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
-using System.Data.Common.CommandTrees;
+using System.Diagnostics;
 
 namespace System.Data.Objects.Internal
 {

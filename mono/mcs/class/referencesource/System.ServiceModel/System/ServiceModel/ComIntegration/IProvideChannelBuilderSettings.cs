@@ -4,11 +4,11 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Description;
+    using System.Collections.Generic;
     using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Collections.Generic;
+    using System.ServiceModel.Description;
 
     interface IProvideChannelBuilderSettings
     {

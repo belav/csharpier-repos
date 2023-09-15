@@ -5,8 +5,8 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Xml
 {

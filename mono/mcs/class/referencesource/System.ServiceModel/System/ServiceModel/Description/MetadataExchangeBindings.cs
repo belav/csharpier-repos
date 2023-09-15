@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Description
 {
-    using System.Globalization;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Collections.Generic;
+    using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     public static class MetadataExchangeBindings
     {

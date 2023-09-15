@@ -6,18 +6,18 @@
 
 namespace System.Web.Services.Description
 {
-    using System.Web.Services;
-    using System.Web.Services.Protocols;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
-    using System.Collections;
     using System;
-    using System.Xml;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
     using System.Reflection;
     using System.Security.Permissions;
+    using System.Web.Services;
     using System.Web.Services.Configuration;
-    using System.IO;
-    using System.Collections.Generic;
+    using System.Web.Services.Protocols;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\ServiceDescriptionReflector.uex' path='docs/doc[@for="ServiceDescriptionReflector"]/*' />
     /// <devdoc>

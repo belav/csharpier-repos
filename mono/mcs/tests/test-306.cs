@@ -1,5 +1,4 @@
 using System;
-
 using C = A.D;
 
 class A

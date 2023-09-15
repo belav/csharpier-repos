@@ -8,9 +8,9 @@ namespace System.Activities.Validation
     using System.Activities;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Runtime;
-    using System.Globalization;
 
     static class ValidationHelper
     {

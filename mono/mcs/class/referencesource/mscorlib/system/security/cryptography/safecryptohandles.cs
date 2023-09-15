@@ -12,9 +12,9 @@
 
 namespace System.Security.Cryptography
 {
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using Microsoft.Win32.SafeHandles;
 

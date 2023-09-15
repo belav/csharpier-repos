@@ -5,12 +5,12 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.ServiceModel.Description;
-    using System.Transactions;
-    using System.ServiceModel.Channels;
-    using System.Runtime.CompilerServices;
     using System.Net.Security;
+    using System.Runtime.CompilerServices;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
+    using System.Transactions;
 
     [AttributeUsage(
         ServiceModelAttributeTargets.ServiceContract,

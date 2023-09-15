@@ -11,10 +11,10 @@ namespace System.Web.UI
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web.UI.HtmlControls;
     using System.Web.Util;
     using System.Xml;
-    using System.Security.Permissions;
 
     internal class FileLevelPageThemeBuilder : RootBuilder
     {

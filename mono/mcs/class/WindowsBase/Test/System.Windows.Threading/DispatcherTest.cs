@@ -28,12 +28,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
 using System.Globalization;
-using System.Windows.Threading;
+using System.IO;
 using System.Threading;
+using System.Windows.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Threading
 {

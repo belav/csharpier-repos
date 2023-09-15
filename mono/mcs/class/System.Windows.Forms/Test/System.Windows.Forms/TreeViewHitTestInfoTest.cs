@@ -6,12 +6,11 @@
 //
 
 using System;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Threading;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.Remoting;
-
+using System.Threading;
+using System.Windows.Forms;
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms

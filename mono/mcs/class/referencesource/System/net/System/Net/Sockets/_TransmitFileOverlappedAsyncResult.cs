@@ -7,8 +7,8 @@
 namespace System.Net.Sockets
 {
     using System;
-    using System.Net;
     using System.IO;
+    using System.Net;
     using System.Runtime.InteropServices;
     using System.Threading;
     using Microsoft.Win32;

@@ -10,16 +10,16 @@ namespace System.CodeDom.Compiler
 {
     using System;
     using System.CodeDom;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Security;
-    using System.Security.Permissions;
-    using System.Security.Policy;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Runtime.Versioning;
-    using System.IO;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
 
     /// <devdoc>
     ///    <para>

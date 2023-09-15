@@ -28,7 +28,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.InteropServices

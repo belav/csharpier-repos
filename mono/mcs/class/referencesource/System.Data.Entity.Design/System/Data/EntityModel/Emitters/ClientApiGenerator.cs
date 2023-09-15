@@ -13,17 +13,17 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.EntityModel.Emitters;
-using SOM = System.Data.EntityModel.SchemaObjectModel;
-using System.Diagnostics;
-using System.Data.Metadata.Edm;
 using System.Data.Entity.Design;
-using System.IO;
-using System.Data.EntityModel.SchemaObjectModel;
-using System.Data.Entity.Design.SsdlGenerator;
-using System.Linq;
 using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityModel.Emitters;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Runtime.Versioning;
+using SOM = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel
 {

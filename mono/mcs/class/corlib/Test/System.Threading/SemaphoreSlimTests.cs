@@ -25,9 +25,7 @@
 using System;
 using System.Linq;
 using System.Threading;
-
 using MonoTests.System.Threading.Tasks;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Threading

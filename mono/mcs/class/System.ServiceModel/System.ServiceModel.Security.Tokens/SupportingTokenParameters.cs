@@ -32,7 +32,6 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.Text;
-
 using ParamList = System.Collections.ObjectModel.Collection<System.ServiceModel.Security.Tokens.SecurityTokenParameters>;
 
 namespace System.ServiceModel.Security.Tokens

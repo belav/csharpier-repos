@@ -27,12 +27,11 @@
 //
 
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Linq

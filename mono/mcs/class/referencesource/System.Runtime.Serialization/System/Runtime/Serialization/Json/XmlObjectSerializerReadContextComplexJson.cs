@@ -8,11 +8,11 @@ namespace System.Runtime.Serialization.Json
     using System.Collections.Generic;
     using System.Runtime;
     using System.Security;
+    using System.Text;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Text;
-    using System.Xml;
 
 #if USE_REFEMIT
     public class XmlObjectSerializerReadContextComplexJson : XmlObjectSerializerReadContextComplex

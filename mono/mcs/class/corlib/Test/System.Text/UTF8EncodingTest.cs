@@ -9,17 +9,14 @@
 // (C) 2004 Novell (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
 using System.Text;
-
-using DecoderException = System.Text.DecoderFallbackException;
-
-using AssertType = NUnit.Framework.Assert;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
+using AssertType = NUnit.Framework.Assert;
+using DecoderException = System.Text.DecoderFallbackException;
 
 namespace MonoTests.System.Text
 {

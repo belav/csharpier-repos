@@ -11,8 +11,8 @@
 namespace Xamarin
 {
     using System;
-    using System.IO;
     using System.Collections.Generic;
+    using System.IO;
     using NUnit.Framework.Api;
     using NUnit.Framework.Internal;
     using NUnit.Framework.Internal.Filters;

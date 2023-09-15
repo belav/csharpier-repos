@@ -26,11 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Net;
 using System.Web.Services;
 using System.Web.Services.Protocols;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Services.Protocols
 {

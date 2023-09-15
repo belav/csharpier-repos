@@ -31,10 +31,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
-
 using Mono.Security.Cryptography;
 
 namespace System.Security.Cryptography

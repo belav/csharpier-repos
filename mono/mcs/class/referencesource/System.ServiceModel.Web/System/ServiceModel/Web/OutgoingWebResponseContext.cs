@@ -6,6 +6,7 @@
 namespace System.ServiceModel.Web
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Net;
     using System.Runtime;
@@ -13,7 +14,6 @@ namespace System.ServiceModel.Web
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Text;
-    using System.Collections.Generic;
 
     public class OutgoingWebResponseContext
     {

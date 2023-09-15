@@ -11,9 +11,9 @@ namespace System.Data.Common.QueryCache
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Data.Common;
     using System.Diagnostics;
+    using System.Text;
 
     /// <summary>
     /// Represents the abstract base class for all cache entry values in the query cache

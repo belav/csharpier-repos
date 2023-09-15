@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
-
+using System.Text;
 #if ENABLE_CECIL
 using C = Mono.Cecil;
 #endif

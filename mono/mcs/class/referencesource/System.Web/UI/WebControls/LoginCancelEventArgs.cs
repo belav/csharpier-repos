@@ -6,8 +6,8 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.Diagnostics;
     using System;
+    using System.Diagnostics;
 
     public class LoginCancelEventArgs : EventArgs
     {

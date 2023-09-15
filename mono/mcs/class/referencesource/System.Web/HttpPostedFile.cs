@@ -12,9 +12,9 @@
 
 namespace System.Web
 {
+    using System.Configuration;
     using System.IO;
     using System.Security.Permissions;
-    using System.Configuration;
     using System.Web.Configuration;
     using System.Web.Management;
 

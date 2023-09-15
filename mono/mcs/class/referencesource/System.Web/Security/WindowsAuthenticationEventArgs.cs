@@ -11,8 +11,8 @@
  */
 namespace System.Web.Security
 {
-    using System.Security.Principal;
     using System.Security.Permissions;
+    using System.Security.Principal;
 
     /// <devdoc>
     ///    <para>The Windows authentication module raises this event. This

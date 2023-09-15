@@ -4,15 +4,15 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
 
     [DataContract]
     public class MessageFilterTable<TFilterData> : IMessageFilterTable<TFilterData>

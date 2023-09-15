@@ -8,11 +8,11 @@ namespace System.Text
 {
     using System;
     using System.Diagnostics.Contracts;
-    using System.Text;
-    using System.Threading;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     // DBCSCodePageEncoding
     //

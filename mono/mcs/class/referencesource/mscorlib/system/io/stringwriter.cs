@@ -15,12 +15,12 @@
 ===========================================================*/
 
 using System;
-using System.Runtime;
-using System.Text;
-using System.Globalization;
 using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Text;
 #if FEATURE_ASYNC_IO
 using System.Threading.Tasks;
 #endif

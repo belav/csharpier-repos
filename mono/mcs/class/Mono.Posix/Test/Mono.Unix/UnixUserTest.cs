@@ -8,14 +8,12 @@
 // (C) 2004 Jonathan Pryor
 //
 
-using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Configuration;
 using System.Diagnostics;
-using System.Collections;
-
 using Mono.Unix;
-
+using NUnit.Framework;
 using Passwd = Mono.Unix.Native.Passwd;
 using Syscall = Mono.Unix.Native.Syscall;
 

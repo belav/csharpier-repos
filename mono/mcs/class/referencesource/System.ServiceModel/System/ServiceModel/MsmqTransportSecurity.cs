@@ -5,10 +5,10 @@ namespace System.ServiceModel
 {
     using System;
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
     using System.Net;
     using System.Net.Security;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
 
     public sealed class MsmqTransportSecurity
     {

@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Globalization;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Configuration;
-    using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Xml;
-    using System.Globalization;
 
     public partial class ServiceMetadataEndpointElement : StandardEndpointElement
     {

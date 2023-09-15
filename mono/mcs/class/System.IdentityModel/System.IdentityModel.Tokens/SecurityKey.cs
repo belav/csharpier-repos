@@ -27,9 +27,9 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Policy;
 using System.Security.Cryptography.Xml;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {

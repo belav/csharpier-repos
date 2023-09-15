@@ -9,12 +9,11 @@
 
 using System;
 using System.IO;
-using System.Text;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization

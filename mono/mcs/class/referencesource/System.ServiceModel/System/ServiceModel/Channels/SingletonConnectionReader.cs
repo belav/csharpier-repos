@@ -15,11 +15,11 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Activation;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
     using System.Threading;
     using System.Xml;
-    using System.ServiceModel.Diagnostics.Application;
 
     delegate void ServerSingletonPreambleCallback(
         ServerSingletonPreambleConnectionReader serverSingletonPreambleReader

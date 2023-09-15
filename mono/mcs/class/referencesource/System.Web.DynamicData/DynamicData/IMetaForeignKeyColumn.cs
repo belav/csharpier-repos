@@ -1,9 +1,9 @@
 ﻿namespace System.Web.DynamicData
 {
     using System;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     internal interface IMetaForeignKeyColumn : IMetaColumn
     {

@@ -4,6 +4,7 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel;
@@ -11,7 +12,6 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Persistence;
     using System.Transactions;
-    using System.Diagnostics;
 
     class ServiceDurableInstance : DurableInstance
     {

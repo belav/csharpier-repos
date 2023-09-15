@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-
+using NUnit.Framework;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-
-using NUnit.Framework;
 
 namespace DbLinqTest
 {

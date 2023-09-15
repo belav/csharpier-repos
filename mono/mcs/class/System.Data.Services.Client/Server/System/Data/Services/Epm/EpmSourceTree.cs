@@ -13,9 +13,9 @@
 namespace System.Data.Services.Common
 {
     using System.Collections.Generic;
+    using System.Data.Services.Client;
     using System.Diagnostics;
     using System.Linq;
-    using System.Data.Services.Client;
 
     internal sealed class EpmSourceTree
     {

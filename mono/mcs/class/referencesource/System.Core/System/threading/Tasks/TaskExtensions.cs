@@ -15,9 +15,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 #if !SILVERLIGHT || FEATURE_NETCORE // Desktop and CoreSys but not CoreCLR
 using System.Runtime.ExceptionServices;
 #endif

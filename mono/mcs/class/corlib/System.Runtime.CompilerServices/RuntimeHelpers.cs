@@ -28,10 +28,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.Serialization;
 using System.Runtime.Versioning;
-using System.Runtime.ConstrainedExecution;
-using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {

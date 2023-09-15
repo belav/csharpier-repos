@@ -10,7 +10,6 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel

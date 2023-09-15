@@ -29,16 +29,16 @@
 //
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Collections;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {

@@ -6,12 +6,12 @@ namespace System.ServiceModel.Channels
     using System;
     using System.IO;
     using System.Net.Mime;
-    using System.Runtime.Serialization;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime;
-    using System.Threading;
+    using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     public abstract class MessageEncoder
     {

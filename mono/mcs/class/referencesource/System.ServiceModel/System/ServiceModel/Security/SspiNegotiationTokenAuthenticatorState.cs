@@ -3,17 +3,17 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Security
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
-    using System.Security.Principal;
+    using System.Net;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-    using System.Collections.Generic;
+    using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Runtime.Serialization;
-    using System.Net;
-    using System.Diagnostics;
 
     class SspiNegotiationTokenAuthenticatorState : NegotiationTokenAuthenticatorState
     {

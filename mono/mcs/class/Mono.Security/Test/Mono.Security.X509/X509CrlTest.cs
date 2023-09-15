@@ -9,7 +9,6 @@
 
 using System;
 using Mono.Security.X509;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.X509

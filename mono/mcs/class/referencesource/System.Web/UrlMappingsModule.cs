@@ -2,8 +2,8 @@ namespace System.Web
 {
     using System;
     using System.Web;
-    using System.Web.Util;
     using System.Web.Configuration;
+    using System.Web.Util;
 
     //
     // Module that implements the UrlMappings functionality

@@ -7,14 +7,14 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
     using System.Xml;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Diagnostics.CodeAnalysis;
 
     class ChannelDemuxer
     {

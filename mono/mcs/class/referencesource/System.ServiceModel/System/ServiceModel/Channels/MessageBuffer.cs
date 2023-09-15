@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.Xml.XPath;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Collections.Generic;
+    using System.ServiceModel;
+    using System.ServiceModel.Dispatcher;
+    using System.Xml;
+    using System.Xml.XPath;
 
     public abstract class MessageBuffer : IXPathNavigable, IDisposable
     {

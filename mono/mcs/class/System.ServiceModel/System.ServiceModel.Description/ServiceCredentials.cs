@@ -29,10 +29,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.IdentityModel.Selectors;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Security;
-using System.ServiceModel.Security.Tokens;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
+using System.ServiceModel.Security;
+using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Description
 {

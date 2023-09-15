@@ -6,17 +6,17 @@ namespace System.Runtime.Serialization
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Text;
-    using System.Xml;
-    using System.Collections.Generic;
-    using System.Security;
-    using System.Security.Permissions;
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization.Diagnostics.Application;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Xml;
 
 #if USE_REFEMIT
     public class XmlObjectSerializerWriteContextComplex : XmlObjectSerializerWriteContext

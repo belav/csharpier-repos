@@ -26,16 +26,14 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-
-using System.Threading;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-
+using MonoTests.Mono.Threading.Tasks;
 using NUnit;
 using NUnit.Framework;
-using MonoTests.Mono.Threading.Tasks;
 
 namespace MonoTests.Mono.Collections.Concurrent
 {

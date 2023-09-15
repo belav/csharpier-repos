@@ -4,12 +4,13 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-#if !NO_CONFIGURATION
-    using System.Configuration;
-#endif
     using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
+#if !NO_CONFIGURATION
+    using System.Configuration;
+#endif
+
 #if !NO_CONFIGURATION
     using System.ServiceModel.Configuration;
 #endif

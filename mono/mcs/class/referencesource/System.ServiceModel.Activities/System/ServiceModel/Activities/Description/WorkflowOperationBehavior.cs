@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Activities.Description
 {
+    using System.Activities;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Activities;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Runtime.DurableInstancing;

@@ -41,9 +41,7 @@ using System.IdentityModel.Tokens;
 using System.Text;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.System.ServiceModel.Channels;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Security.Tokens

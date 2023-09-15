@@ -19,19 +19,19 @@ namespace System
     //This class only static members and doesn't require the serializable keyword.
 
     using System;
-#if !MONO
-    using System.Security.Permissions;
-#endif
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
-    using System.Security;
-    using System.Threading;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
-    using System.Globalization;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security;
+    using System.Threading;
+#if !MONO
+    using System.Security.Permissions;
+#endif
 
     [Serializable]
     public enum GCCollectionMode

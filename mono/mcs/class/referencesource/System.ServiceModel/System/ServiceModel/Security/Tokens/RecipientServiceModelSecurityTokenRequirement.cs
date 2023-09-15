@@ -3,16 +3,13 @@
 //-----------------------------------------------------------------------------
 
 using System;
-
-using System.ServiceModel.Channels;
-
+using System.Collections.Generic;
+using System.Globalization;
+using System.IdentityModel.Selectors;
 using System.ServiceModel;
-
+using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Xml;
-using System.Collections.Generic;
-using System.IdentityModel.Selectors;
-using System.Globalization;
 
 namespace System.ServiceModel.Security.Tokens
 {

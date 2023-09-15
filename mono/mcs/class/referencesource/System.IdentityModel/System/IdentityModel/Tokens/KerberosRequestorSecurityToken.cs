@@ -4,15 +4,15 @@
 
 namespace System.IdentityModel.Tokens
 {
-    using System.ComponentModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.IdentityModel.Diagnostics;
     using System.Net;
     using System.Runtime.InteropServices;
+    using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography;
     using System.Security.Principal;
-    using System.Security.Authentication.ExtendedProtection;
-    using System.IdentityModel.Diagnostics;
 
     public class KerberosRequestorSecurityToken : SecurityToken
     {

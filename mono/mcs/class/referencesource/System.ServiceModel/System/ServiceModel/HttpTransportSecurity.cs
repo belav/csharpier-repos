@@ -5,11 +5,11 @@ namespace System.ServiceModel
 {
     using System;
     using System.ComponentModel;
+    using System.Net;
+    using System.Net.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.Net;
-    using System.Net.Security;
 
     public sealed class HttpTransportSecurity
     {

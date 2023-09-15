@@ -19,16 +19,16 @@
 namespace System.Runtime.InteropServices
 {
     using System;
+    using System.IO;
     using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.Versioning;
     using System.Threading;
 #if !MONO
     using System.Security.Permissions;
 #endif
-    using System.Runtime;
-    using System.Runtime.CompilerServices;
-    using System.IO;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
 
     /*
       Problems addressed by the SafeHandle class:

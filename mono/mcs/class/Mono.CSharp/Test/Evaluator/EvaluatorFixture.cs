@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using Mono.CSharp;
+using NUnit.Framework;
 
 namespace MonoTests.EvaluatorTest
 {

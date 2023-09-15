@@ -7,11 +7,11 @@
 // Copyright (C) 2005, 2009 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Globalization;
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.InteropServices
 {

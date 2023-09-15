@@ -30,7 +30,6 @@ using System.ComponentModel.Design.Serialization;
 using System.Drawing;
 using System.Globalization;
 using System.Security.Permissions;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing

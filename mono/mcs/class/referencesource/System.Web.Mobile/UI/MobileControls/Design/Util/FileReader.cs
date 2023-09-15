@@ -8,8 +8,8 @@ namespace System.Web.UI.Design.MobileControls.Util
 {
     using System;
     using System.Diagnostics;
-    using System.Net;
     using System.IO;
+    using System.Net;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

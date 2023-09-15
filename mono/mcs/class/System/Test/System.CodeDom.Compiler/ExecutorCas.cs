@@ -27,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom.Compiler;
 using System.IO;
@@ -36,8 +34,8 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
-
 using MonoTests.System.CodeDom.Compiler;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.CodeDom.Compiler
 {

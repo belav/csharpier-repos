@@ -7,11 +7,11 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.Text;
-    using System.Net.Mime;
-    using System.Globalization;
     using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Net.Mime;
+    using System.Text;
 
     // FWS, CFWS, and Comments are defined in RFC 2822 section 3.2.3.
     //

@@ -8,9 +8,9 @@ namespace System.Web.Services.Protocols
 {
     using System;
     using System.Reflection;
-    using System.Xml.Serialization;
-    using System.Web.Services.Description;
     using System.Runtime.InteropServices;
+    using System.Web.Services.Description;
+    using System.Xml.Serialization;
 
     /// <include file='doc\SoapRpcServiceAttribute.uex' path='docs/doc[@for="SoapRpcServiceAttribute"]/*' />
     /// <devdoc>

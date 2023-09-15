@@ -6,13 +6,13 @@
 // (c) 2005 Jonathan Pryor
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using Mono.Unix;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Unix
 {

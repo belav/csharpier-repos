@@ -23,10 +23,9 @@
 //
 
 using System;
-using System.Threading;
 using System.Collections.Concurrent;
+using System.Threading;
 using Mono.Collections.Concurrent;
-
 using NUnit;
 using NUnit.Framework;
 

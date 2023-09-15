@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Activities.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel.Configuration;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Configuration;
 
     public sealed class WorkflowUnhandledExceptionElement : BehaviorExtensionElement
     {

@@ -41,7 +41,6 @@ using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Channels

@@ -18,7 +18,6 @@ namespace System.Web.UI.WebControls
     using System.Web.Compilation;
     using System.Web.UI;
     using System.Web.Util;
-
     using ConflictOptions = System.Web.UI.ConflictOptions;
 
     /// <devdoc>

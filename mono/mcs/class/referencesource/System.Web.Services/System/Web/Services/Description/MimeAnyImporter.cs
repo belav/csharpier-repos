@@ -6,9 +6,9 @@
 
 namespace System.Web.Services.Description
 {
+    using System.IO;
     using System.Web.Services;
     using System.Web.Services.Protocols;
-    using System.IO;
 
     internal class MimeAnyImporter : MimeImporter
     {

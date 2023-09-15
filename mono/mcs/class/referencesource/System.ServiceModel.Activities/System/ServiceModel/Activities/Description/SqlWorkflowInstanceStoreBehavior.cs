@@ -4,15 +4,15 @@
 namespace System.ServiceModel.Activities.Description
 {
     using System.Activities.DurableInstancing;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
     using System.Linq;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Xml.Linq;
-    using System.Globalization;
 
     [Fx.Tag.XamlVisible(false)]
     public class SqlWorkflowInstanceStoreBehavior : IServiceBehavior

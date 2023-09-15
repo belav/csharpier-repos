@@ -9,10 +9,9 @@
 // Copyright (C) 2004 Novell (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Text;
-
+using NUnit.Framework;
 using AssertType = NUnit.Framework.Assert;
 
 namespace MonoTests.System.Text

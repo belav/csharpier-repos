@@ -31,16 +31,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml;
 using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using NUnit.Framework;
-using System.Text;
-
-using MBT = MonoTests.Microsoft.Build.Tasks;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
+using MBT = MonoTests.Microsoft.Build.Tasks;
 
 namespace MonoTests.Microsoft.Build.BuildEngine
 {

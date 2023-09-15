@@ -7,13 +7,13 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
-    using System.Diagnostics;
-    using System.Xml;
-    using System.Text;
     using System.Collections;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Text;
+    using System.Xml;
+    using Res = System.Xml.Utils.Res;
 
     internal abstract class SequentialOutput : RecordOutput
     {

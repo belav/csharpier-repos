@@ -26,8 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Text;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace System.Net.Http
 {

@@ -10,7 +10,6 @@
 //
 
 using System.Threading;
-
 using DTCOption = System.Transactions.EnterpriseServicesInteropOption;
 
 namespace System.Transactions

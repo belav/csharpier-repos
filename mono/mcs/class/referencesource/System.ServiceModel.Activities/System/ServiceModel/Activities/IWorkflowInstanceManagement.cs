@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Activities
 {
+    using System.Activities;
     using System.Collections.Generic;
     using System.Runtime;
-    using System.Activities;
     using System.ServiceModel;
     using System.ServiceModel.Activities.Description;
 

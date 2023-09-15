@@ -32,12 +32,10 @@
 //
 
 using System;
-using System.Xml;
 using System.Data.SqlTypes;
-
-using System.Xml.Serialization;
 using System.IO;
-
+using System.Xml;
+using System.Xml.Serialization;
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.SqlTypes

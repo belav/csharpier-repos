@@ -6,9 +6,9 @@ namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
     using System.ServiceModel.Description;
+    using System.Web.Services.Description;
     using System.Xml;
     using System.Xml.Schema;
-    using System.Web.Services.Description;
 
     public class MessageEncodingBindingElementImporter
         : IWsdlImportExtension,

@@ -12,13 +12,12 @@
 
 namespace System.Web.UI.HtmlControls
 {
-    using System.Runtime.InteropServices;
-
     using System;
     using System.Collections;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
     /// <devdoc>
     ///    <para>

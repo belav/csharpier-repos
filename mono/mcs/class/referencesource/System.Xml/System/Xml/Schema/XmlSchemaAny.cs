@@ -8,8 +8,8 @@
 namespace System.Xml.Schema
 {
     using System.ComponentModel;
-    using System.Xml.Serialization;
     using System.Text;
+    using System.Xml.Serialization;
 
     /// <include file='doc\XmlSchemaAny.uex' path='docs/doc[@for="XmlSchemaAny"]/*' />
     /// <devdoc>

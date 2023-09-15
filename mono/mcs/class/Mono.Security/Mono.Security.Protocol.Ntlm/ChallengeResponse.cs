@@ -40,7 +40,6 @@ using System;
 using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
-
 using Mono.Security.Cryptography;
 
 namespace Mono.Security.Protocol.Ntlm

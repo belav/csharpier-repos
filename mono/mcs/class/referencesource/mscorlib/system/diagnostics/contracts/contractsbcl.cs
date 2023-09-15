@@ -32,7 +32,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Reflection;
-
 #if FEATURE_RELIABILITY_CONTRACTS
 using System.Runtime.ConstrainedExecution;
 #endif

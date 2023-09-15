@@ -5,27 +5,26 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Xml;
-    using System.Security.Cryptography;
-    using System.Security.Cryptography.Xml;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
-    using System.Security.Principal;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
     using System.IdentityModel.Selectors;
-    using System.ServiceModel.Security.Tokens;
+    using System.IdentityModel.Tokens;
     using System.IO;
-    using System.ServiceModel.Security;
-
-    using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
+    using System.Runtime.Serialization;
+    using System.Security.Cryptography;
+    using System.Security.Cryptography.Xml;
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
+    using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
 
     class RequestSecurityTokenResponse : BodyWriter
     {

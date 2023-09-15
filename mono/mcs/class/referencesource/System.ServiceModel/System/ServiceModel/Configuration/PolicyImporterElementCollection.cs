@@ -9,8 +9,8 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
     using System.ServiceModel;
-    using System.ServiceModel.Configuration;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
 
     [ConfigurationCollection(
         typeof(PolicyImporterElement),

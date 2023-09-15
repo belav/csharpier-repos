@@ -5,22 +5,22 @@
 namespace System.Xaml.Hosting
 {
     using System;
-    using System.Web;
-    using System.Web.Hosting;
-    using System.Web.Compilation;
     using System.CodeDom.Compiler;
+    using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
-    using System.Xaml.Hosting.Configuration;
     using System.Configuration;
     using System.Diagnostics;
-    using System.Threading;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using System.Net;
+    using System.Reflection;
     using System.Runtime;
     using System.Security;
-    using System.Collections;
+    using System.Threading;
+    using System.Web;
+    using System.Web.Compilation;
+    using System.Web.Hosting;
+    using System.Xaml.Hosting.Configuration;
 
     [SuppressMessage(
         FxCop.Category.Performance,

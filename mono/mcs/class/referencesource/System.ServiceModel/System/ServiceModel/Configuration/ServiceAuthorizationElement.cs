@@ -5,15 +5,15 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Security;
     using System.ComponentModel;
     using System.Configuration;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
 
     public sealed partial class ServiceAuthorizationElement : BehaviorExtensionElement
     {

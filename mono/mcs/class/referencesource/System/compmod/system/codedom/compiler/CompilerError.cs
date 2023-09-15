@@ -10,8 +10,8 @@ namespace System.CodeDom.Compiler
 {
     using System;
     using System.CodeDom;
-    using System.Security.Permissions;
     using System.Globalization;
+    using System.Security.Permissions;
 
     /// <devdoc>
     ///    <para>

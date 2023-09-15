@@ -4,15 +4,15 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
+    using System.Activities.Core.Presentation;
+    using System.Activities.Presentation.Model;
+    using System.Collections;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-    using System.Windows.Data;
-    using System.Activities.Presentation.Model;
-    using System.Collections;
-    using System.Activities.Core.Presentation;
-    using System.Xml;
     using System.Runtime.Serialization;
+    using System.Windows.Data;
+    using System.Xml;
     using System.Xml.Serialization;
 
     sealed class TypeToTreeConverter : IValueConverter

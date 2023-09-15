@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace System.Management.Instrumentation
 {

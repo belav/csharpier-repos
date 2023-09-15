@@ -6,10 +6,10 @@ namespace System.ServiceModel.Channels
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Security;
     using System.ServiceModel;
     using System.ServiceModel.Security;
     using System.Xml;
-    using System.Net.Security;
 
     class CallbackContextMessageHeader : MessageHeader
     {

@@ -4,8 +4,8 @@
 namespace Microsoft.InfoCards.Diagnostics
 {
     using System;
-    using System.Xml;
     using System.Diagnostics;
+    using System.Xml;
 
     //
     // Summary

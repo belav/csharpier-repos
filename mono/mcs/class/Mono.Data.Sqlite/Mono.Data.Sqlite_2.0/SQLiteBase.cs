@@ -8,9 +8,9 @@
 namespace Mono.Data.Sqlite
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     /// <summary>
     /// This internal class provides the foundation of SQLite support.  It defines all the abstract members needed to implement

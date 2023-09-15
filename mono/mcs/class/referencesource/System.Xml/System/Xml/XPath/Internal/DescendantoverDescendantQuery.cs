@@ -8,9 +8,9 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
+    using System.Diagnostics;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics;
 
     // DescendantOverDescendantQuery: for each input it looks for the topmost descendents that matches to ns:name
     // This is posible when query which has this query as its input (child query) is descendent as well.

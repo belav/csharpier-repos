@@ -28,11 +28,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using Mono.Cecil.Cil;
 using Mono.Cecil;
-using System.IO;
+using Mono.Cecil.Cil;
 
 namespace Mono.CodeContracts.Rewrite
 {

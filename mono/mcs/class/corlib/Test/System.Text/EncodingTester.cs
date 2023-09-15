@@ -7,10 +7,10 @@
 // (C) 2014 Xamarin, Inc.
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System.Text
 {

@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     public sealed partial class DispatcherSynchronizationElement : BehaviorExtensionElement
     {

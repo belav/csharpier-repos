@@ -67,14 +67,13 @@
 #region Used namespaces
 
 using System;
-using System.Resources;
-using System.Reflection;
 using System.Collections;
+using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel.Design;
 using System.Globalization;
-
+using System.Reflection;
+using System.Resources;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.DataVisualization.Charting.Data;
@@ -83,7 +82,6 @@ using System.Windows.Forms.DataVisualization.Charting.Utilities;
 using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 #else
 using System.Web.UI.DataVisualization.Charting;
-
 using System.Web.UI.DataVisualization.Charting.ChartTypes;
 using System.Web.UI.DataVisualization.Charting.Data;
 using System.Web.UI.DataVisualization.Charting.Utilities;

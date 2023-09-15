@@ -12,8 +12,8 @@
 
 namespace System.Security.Cryptography
 {
-    using System.Globalization;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class RC2CryptoServiceProvider : RC2

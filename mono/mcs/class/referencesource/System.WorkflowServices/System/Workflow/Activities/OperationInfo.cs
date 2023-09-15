@@ -6,8 +6,8 @@ namespace System.Workflow.Activities
 {
     using System;
     using System.ComponentModel;
-    using System.Drawing.Design;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing.Design;
     using System.Net.Security;
     using System.Reflection;
     using System.ServiceModel;

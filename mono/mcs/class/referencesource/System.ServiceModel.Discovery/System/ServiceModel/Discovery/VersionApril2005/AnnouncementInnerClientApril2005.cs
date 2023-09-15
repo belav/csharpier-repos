@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
     using System.Runtime;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Threading;
 

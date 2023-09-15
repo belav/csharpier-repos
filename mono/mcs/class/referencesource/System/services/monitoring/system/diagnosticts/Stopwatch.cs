@@ -15,8 +15,8 @@
 
 namespace System.Diagnostics
 {
-    using Microsoft.Win32;
     using System;
+    using Microsoft.Win32;
 #if FEATURE_NETCORE
     using System.Security;
 #endif

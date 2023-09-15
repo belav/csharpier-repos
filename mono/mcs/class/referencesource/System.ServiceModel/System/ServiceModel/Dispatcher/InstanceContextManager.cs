@@ -8,8 +8,8 @@ namespace System.ServiceModel.Dispatcher
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     interface IInstanceContextManager
     {

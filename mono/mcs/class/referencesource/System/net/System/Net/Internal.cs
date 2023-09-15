@@ -6,26 +6,26 @@
 
 namespace System.Net
 {
-    using System.IO;
-    using System.Reflection;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
+    using System.Net.NetworkInformation;
+    using System.Net.Security;
     using System.Net.Sockets;
     using System.Net.WebSockets;
+    using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Runtime.Versioning;
+    using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
-    using System.Diagnostics;
     using System.Threading;
-    using System.Security;
-    using System.Net.Security;
-    using System.Net.NetworkInformation;
-    using System.Runtime.Serialization;
     using Microsoft.Win32;
-    using System.Collections.Generic;
 
     internal static class IntPtrHelper
     {

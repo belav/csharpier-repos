@@ -6,10 +6,10 @@
 
 namespace System.Net.Sockets
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.Security.Permissions;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <devdoc>
     ///    <para>

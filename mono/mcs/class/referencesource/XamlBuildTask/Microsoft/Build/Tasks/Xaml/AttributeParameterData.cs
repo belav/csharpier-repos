@@ -4,8 +4,8 @@
 
 namespace Microsoft.Build.Tasks.Xaml
 {
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime;
     using System.Xaml;

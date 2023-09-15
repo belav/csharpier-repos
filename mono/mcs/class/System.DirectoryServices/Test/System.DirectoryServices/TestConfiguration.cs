@@ -1,7 +1,7 @@
 using System;
-using System.DirectoryServices;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.DirectoryServices;
 
 namespace MonoTests.System.DirectoryServices
 {

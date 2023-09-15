@@ -18,9 +18,9 @@
 
 namespace System
 {
+    using System;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
-    using System;
     using System.Runtime.Serialization;
 
     [System.Runtime.InteropServices.ComVisible(true)]

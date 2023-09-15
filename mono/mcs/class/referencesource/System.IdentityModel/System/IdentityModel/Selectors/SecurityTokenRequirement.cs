@@ -4,11 +4,11 @@
 
 namespace System.IdentityModel.Selectors
 {
-    using System.Globalization;
-    using System.Text;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IdentityModel.Tokens;
+    using System.Text;
 
     public class SecurityTokenRequirement
     {

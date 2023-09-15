@@ -1,8 +1,8 @@
 // HtmlAgilityPack V1.0 - Simon Mourier <simonm@microsoft.com>
 using System;
+using System.Collections;
 using System.IO;
 using System.Text;
-using System.Collections;
 
 namespace HtmlAgilityPack
 {

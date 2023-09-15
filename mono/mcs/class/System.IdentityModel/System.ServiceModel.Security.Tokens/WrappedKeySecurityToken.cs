@@ -27,11 +27,11 @@
 //
 using System;
 using System.Collections.ObjectModel;
+using System.IdentityModel.Policy;
+using System.IdentityModel.Tokens;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Xml;
-using System.IdentityModel.Policy;
-using System.IdentityModel.Tokens;
 
 namespace System.ServiceModel.Security.Tokens
 {

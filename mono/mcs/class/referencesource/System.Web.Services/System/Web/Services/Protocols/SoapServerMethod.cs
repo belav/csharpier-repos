@@ -9,14 +9,14 @@ namespace System.Web.Services.Protocols
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Web.Services;
-    using System.Web.Services.Description;
-    using System.Xml;
-    using System.Xml.Serialization;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Policy;
+    using System.Web.Services;
+    using System.Web.Services.Description;
     using System.Web.Services.Diagnostics;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
     public sealed class SoapServerMethod

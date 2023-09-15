@@ -6,19 +6,19 @@ namespace System.Activities.Core.Presentation
 {
     using System;
     using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
+    using System.Activities.Statements;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Linq;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Threading;
-    using System.Activities.Presentation.FreeFormEditing;
-    using System.Activities.Statements;
-    using System.Runtime;
-    using System.Linq;
 
     partial class StateContainerEditor
     {

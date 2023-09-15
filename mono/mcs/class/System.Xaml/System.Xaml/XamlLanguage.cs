@@ -26,8 +26,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Xaml.Schema;
 using System.Windows.Markup;
+using System.Xaml.Schema;
 
 [assembly: XmlnsDefinition(System.Xaml.XamlLanguage.Xaml2006Namespace, "System.Windows.Markup")] // FIXME: verify.
 

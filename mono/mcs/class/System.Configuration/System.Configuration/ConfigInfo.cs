@@ -29,10 +29,10 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Xml;
+using System.Configuration.Internal;
 using System.IO;
 using System.Text;
-using System.Configuration.Internal;
+using System.Xml;
 
 namespace System.Configuration
 {

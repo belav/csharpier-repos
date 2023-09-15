@@ -14,8 +14,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.InteropServices;
-    using System.Web.UI.Design;
     using System.Security.Permissions;
+    using System.Web.UI.Design;
 
     /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter"]/*' />
     /// <devdoc>

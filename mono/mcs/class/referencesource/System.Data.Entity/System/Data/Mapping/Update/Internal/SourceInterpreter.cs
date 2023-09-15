@@ -9,9 +9,9 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Data.Objects;
 using System.Data.Metadata.Edm;
+using System.Data.Objects;
+using System.Diagnostics;
 
 namespace System.Data.Mapping.Update.Internal
 {

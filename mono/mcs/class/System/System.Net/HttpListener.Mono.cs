@@ -27,6 +27,15 @@
 #if SECURITY_DEP
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
+using System.Collections;
+#endif
+
+using System.IO;using System.Net.Security;
+using System.Security.Authentication.ExtendedProtection;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
+using System.Threading.Tasks;
 using MonoSecurity::Mono.Security.Authenticode;
 using MonoSecurity::Mono.Security.Interface;
 #else
@@ -34,16 +43,6 @@ using Mono.Security.Authenticode;
 using Mono.Security.Interface;
 #endif
 using MNS = Mono.Net.Security;
-#endif
-
-using System.IO;
-using System.Collections;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Net.Security;
-using System.Security.Authentication.ExtendedProtection;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
 namespace System.Net
 {

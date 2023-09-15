@@ -4,10 +4,10 @@
 
 namespace System.Runtime.Serialization.Json
 {
-    using System.Xml;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
+    using System.Xml;
 
     class JsonXmlDataContract : JsonDataContract
     {

@@ -6,15 +6,15 @@
 
 namespace System.Web.Services.Description
 {
-    using System.Xml.Schema;
-    using System.Xml.Serialization;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System;
     using System.IO;
-    using System.Xml;
     using System.Text;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <include file='doc\WebServicesInteroperability.uex' path='docs/doc[@for="WebServicesInteroperability"]/*' />
     /// <devdoc>

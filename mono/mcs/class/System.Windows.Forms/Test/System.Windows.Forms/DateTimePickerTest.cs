@@ -23,18 +23,17 @@
 //	Rolf Bjarne Kvinge	RKvinge@novell.com
 
 using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Reflection;
-using System.Windows.Forms;
-using System.Globalization;
 using System.Collections;
-using System.Threading;
-using System.Text;
-using System.IO;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
-
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms

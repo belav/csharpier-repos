@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Configuration;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Routing;
 
     [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.TypesMustHaveXamlCallableConstructors)]

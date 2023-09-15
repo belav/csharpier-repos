@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using MonoTests.SystemWeb.Framework;
 using MonoTests.Common;
+using MonoTests.SystemWeb.Framework;
 
 [assembly: WebTestResourcesSetup(typeof(TestsSetup), "CopyResources")]
 

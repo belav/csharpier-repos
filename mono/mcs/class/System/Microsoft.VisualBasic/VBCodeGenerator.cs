@@ -32,13 +32,13 @@
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.ComponentModel;
-using System.IO;
-using System.Text;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Microsoft.VisualBasic

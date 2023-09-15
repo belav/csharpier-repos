@@ -6,12 +6,12 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------using System;
+using System.CodeDom;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.CodeDom;
 using System.Reflection;
+using System.Text;
 
 namespace System.Data.EntityModel.Emitters
 {

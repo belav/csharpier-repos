@@ -9,11 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Common.Utils.Boolean
 {

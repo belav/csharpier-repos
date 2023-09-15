@@ -26,9 +26,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
+using System.Xml;
 
 namespace System.Configuration
 {

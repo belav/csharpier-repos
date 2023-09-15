@@ -28,16 +28,16 @@
 //
 
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Net.Cache;
+using System.Net.Http.Headers;
+using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Specialized;
-using System.Net.Http.Headers;
-using System.Net.Cache;
-using System.Net.Security;
-using System.Linq;
 
 namespace System.Net.Http
 {

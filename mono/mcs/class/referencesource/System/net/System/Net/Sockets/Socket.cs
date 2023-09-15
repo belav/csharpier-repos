@@ -12,17 +12,17 @@ namespace System.Net.Sockets
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Net;
     using System.Net.Configuration;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using System.ComponentModel;
 
     /// <devdoc>
     /// <para>The <see cref='Sockets.Socket'/> class implements the Berkeley sockets

@@ -26,9 +26,9 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
-using io = System.IO;
 using Mono.WebBrowser;
 using Mono.WebBrowser.DOM;
+using io = System.IO;
 
 namespace Mono.Mozilla.DOM
 {

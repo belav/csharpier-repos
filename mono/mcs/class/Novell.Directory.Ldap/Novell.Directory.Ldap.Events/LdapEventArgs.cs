@@ -32,7 +32,6 @@
 
 using System;
 using System.Text;
-
 using Novell.Directory.Ldap.Controls;
 
 namespace Novell.Directory.Ldap.Events

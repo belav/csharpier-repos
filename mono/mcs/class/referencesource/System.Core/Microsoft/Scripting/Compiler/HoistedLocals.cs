@@ -15,8 +15,8 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 using System.Dynamic.Utils;
+using System.Runtime.CompilerServices;
 
 #if CLR2
 namespace Microsoft.Scripting.Ast.Compiler

@@ -8,8 +8,8 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
     using System.Net.Security;
-    using System.Text;
     using System.ServiceModel.Channels;
+    using System.Text;
 
     public sealed partial class WindowsStreamSecurityElement : BindingElementExtensionElement
     {

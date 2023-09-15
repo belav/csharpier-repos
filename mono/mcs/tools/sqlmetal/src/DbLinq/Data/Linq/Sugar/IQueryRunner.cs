@@ -29,9 +29,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
-
 using DbLinq.Data.Linq.Sugar;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

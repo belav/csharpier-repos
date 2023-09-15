@@ -9,17 +9,17 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Runtime.Versioning;
 using System.Xml.XPath;
 using System.Xml.Xsl.Qil;
 using System.Xml.Xsl.XPath;
-using System.Runtime.Versioning;
 
 namespace System.Xml.Xsl.Xslt
 {
-    using Res = System.Xml.Utils.Res;
-    using TypeFactory = XmlQueryTypeFactory;
 #if DEBUG
     using XmlILTrace = System.Xml.Xsl.IlGen.XmlILTrace;
+    using Res = System.Xml.Utils.Res;
+    using TypeFactory = XmlQueryTypeFactory;
 #endif
 
     internal enum XslVersion

@@ -37,9 +37,8 @@
 
 using System;
 using System.IO;
-
-using ICSharpCode.SharpZipLib.Zip.Compression;
 using ICSharpCode.SharpZipLib.Checksums;
+using ICSharpCode.SharpZipLib.Zip.Compression;
 
 namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 {

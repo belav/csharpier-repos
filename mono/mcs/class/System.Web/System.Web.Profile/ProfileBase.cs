@@ -30,9 +30,9 @@
 using System;
 using System.Configuration;
 using System.Configuration.Provider;
-using System.Web.Security;
-using System.Web.Configuration;
 using System.Reflection;
+using System.Web.Configuration;
+using System.Web.Security;
 
 namespace System.Web.Profile
 {

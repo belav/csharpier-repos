@@ -8,9 +8,9 @@
 namespace Mono.Data.Sqlite
 {
     using System;
+    using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
-    using System.ComponentModel;
 
     /// <summary>
     /// SQLite implementation of DbParameter.

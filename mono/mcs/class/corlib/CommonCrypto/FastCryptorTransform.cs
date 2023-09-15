@@ -7,7 +7,6 @@
 
 using System;
 using System.Security.Cryptography;
-
 using Mono.Security.Cryptography;
 
 namespace Crimson.CommonCrypto

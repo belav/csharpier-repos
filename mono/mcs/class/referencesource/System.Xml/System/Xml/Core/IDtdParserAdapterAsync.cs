@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Threading.Tasks;
 #if !SILVERLIGHT
 using System.Xml.Schema;
 #endif
@@ -9,8 +10,6 @@ using BufferBuilder = System.Xml.BufferBuilder;
 #else
 using BufferBuilder = System.Text.StringBuilder;
 #endif
-
-using System.Threading.Tasks;
 
 namespace System.Xml
 {

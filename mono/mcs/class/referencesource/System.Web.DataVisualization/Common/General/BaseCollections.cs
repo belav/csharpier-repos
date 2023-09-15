@@ -6,12 +6,12 @@
 // @owner=alexgor, deliant, victark
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Globalization;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections;
+using System.Globalization;
+using System.Text;
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting

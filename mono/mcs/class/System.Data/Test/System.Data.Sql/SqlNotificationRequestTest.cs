@@ -30,7 +30,6 @@
 
 using System;
 using System.Data.Sql;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Sql

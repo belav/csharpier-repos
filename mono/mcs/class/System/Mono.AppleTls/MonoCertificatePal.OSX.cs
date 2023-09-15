@@ -31,21 +31,19 @@
 #if !MONO_FEATURE_BTLS
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MonoSecurity::Mono.Security.Cryptography;
 #else
 using Mono.Security.Cryptography;
 #endif
 #endif
 
-using System;
-using System.Threading;
-using System.Runtime.InteropServices;
+using System;using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Apple;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using Microsoft.Win32.SafeHandles;
 using Mono.Net;
-
+using MonoSecurity::Mono.Security.Cryptography;
 #if MONO_FEATURE_BTLS
 using Mono.Btls;
 #endif

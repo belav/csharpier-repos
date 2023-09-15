@@ -27,7 +27,6 @@
 //
 
 using System;
-
 using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 

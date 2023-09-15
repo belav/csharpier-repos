@@ -36,7 +36,6 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Text;
-
 using NUnit.Framework;
 using MonoTests.Helpers;
 

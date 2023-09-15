@@ -7,8 +7,8 @@ namespace System.ServiceModel.Security
     using System.Collections.Generic;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.ServiceModel;
     using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
 
     public class IssuedTokenServiceCredential
     {

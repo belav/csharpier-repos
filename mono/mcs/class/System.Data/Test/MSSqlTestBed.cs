@@ -38,10 +38,10 @@
 //
 
 using System;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using System.Collections.Specialized;
 
 namespace MonoTests.System.Data
 {

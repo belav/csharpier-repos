@@ -7,12 +7,12 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Text;
 using System.Xml;
-using System.Security.Permissions;
 
 namespace System.Data.Metadata.Edm
 {

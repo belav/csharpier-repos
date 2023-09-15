@@ -12,12 +12,12 @@
 
 namespace System.Security.Cryptography
 {
-    using Microsoft.Win32;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Security;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
+    using System.Security;
+    using Microsoft.Win32;
 
 #if !FEATURE_CORECLR
     [System.Runtime.InteropServices.ComVisible(true)]

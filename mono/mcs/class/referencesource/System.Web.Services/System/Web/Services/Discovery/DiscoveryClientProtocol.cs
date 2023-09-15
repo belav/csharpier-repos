@@ -6,21 +6,21 @@
 
 namespace System.Web.Services.Discovery
 {
-    using System.Xml.Serialization;
-    using System.IO;
     using System;
-    using System.Web.Services;
-    using System.Web.Services.Protocols;
-    using System.Net;
     using System.Collections;
     using System.Diagnostics;
-    using System.Web.Services.Configuration;
-    using System.Text;
-    using System.Security.Permissions;
     using System.Globalization;
-    using System.Threading;
+    using System.IO;
+    using System.Net;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services;
+    using System.Web.Services.Configuration;
     using System.Web.Services.Diagnostics;
+    using System.Web.Services.Protocols;
+    using System.Xml.Serialization;
 
     /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol"]/*' />
     /// <devdoc>

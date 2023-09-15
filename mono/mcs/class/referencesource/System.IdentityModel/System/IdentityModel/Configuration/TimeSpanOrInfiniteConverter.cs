@@ -5,10 +5,10 @@
 namespace System.IdentityModel.Configuration
 {
     using System;
-    using System.Runtime;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using System.ComponentModel;
+    using System.Runtime;
 
     class TimeSpanOrInfiniteConverter : TimeSpanConverter
     {

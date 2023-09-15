@@ -1,14 +1,14 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.IO;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Xml;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Permissions;
+    using System.Xml;
 
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"

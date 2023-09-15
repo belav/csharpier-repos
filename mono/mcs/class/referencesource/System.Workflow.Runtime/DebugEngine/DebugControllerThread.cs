@@ -1,11 +1,11 @@
 ﻿#region Using directives
 
 using System;
-using System.Threading;
-using System.Reflection;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
 using Microsoft.Win32;
 #endregion
 

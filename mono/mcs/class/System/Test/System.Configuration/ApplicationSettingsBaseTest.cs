@@ -30,19 +30,18 @@
 //#define SPEW
 
 using System;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Xml.Schema;
-using System.Text;
-using System.Configuration;
-using System.ComponentModel;
 using System.Collections;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Configuration;
+using System.IO;
+using System.Text;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+using MonoTests.Helpers;
 using NUnit.Framework;
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Configuration
 {

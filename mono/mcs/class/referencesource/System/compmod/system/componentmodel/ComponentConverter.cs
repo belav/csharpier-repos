@@ -8,15 +8,15 @@
  */
 namespace System.ComponentModel
 {
-    using Microsoft.Win32;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Diagnostics;
-    using System.Runtime.Serialization.Formatters;
-    using System.Runtime.Remoting;
     using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides a type converter to convert component objects to and

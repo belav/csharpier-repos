@@ -17,7 +17,9 @@
 namespace System.Runtime.Remoting
 {
     using System;
-    using System.Threading;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Channels;
@@ -25,11 +27,9 @@ namespace System.Runtime.Remoting
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Metadata;
     using System.Runtime.Serialization;
-    using System.Reflection;
     using System.Security.Permissions;
+    using System.Threading;
     using Win32Native = Microsoft.Win32.Win32Native;
-    using System.Runtime.ConstrainedExecution;
-    using System.Globalization;
 
     //** Purpose: Interface for providing type information. Users can use this
     //**          interface to provide custom type information which is carried

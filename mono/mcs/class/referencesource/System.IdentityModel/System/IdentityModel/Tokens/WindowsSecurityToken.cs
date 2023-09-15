@@ -6,10 +6,10 @@ namespace System.IdentityModel.Tokens
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Security.Principal;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
+    using System.Security.Principal;
 
     public class WindowsSecurityToken : SecurityToken, IDisposable
     {

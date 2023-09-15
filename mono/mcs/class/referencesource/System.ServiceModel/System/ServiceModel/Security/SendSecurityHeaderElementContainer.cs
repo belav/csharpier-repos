@@ -4,14 +4,13 @@
 
 namespace System.ServiceModel.Security
 {
+    using System.Collections.Generic;
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.Collections.Generic;
-
     using ISecurityElement = System.IdentityModel.ISecurityElement;
 
     class SendSecurityHeaderElementContainer

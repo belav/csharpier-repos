@@ -20,8 +20,8 @@ Revision History:
 
 namespace System
 {
-    using System.Globalization;
     using System.Collections;
+    using System.Globalization;
     using System.Security.Permissions;
 
     //

@@ -9,8 +9,8 @@
 namespace System.Data.SqlClient
 {
     using System;
-    using System.Diagnostics;
     using System.Collections.Concurrent;
+    using System.Diagnostics;
     using System.Text;
 
     /// <summary>

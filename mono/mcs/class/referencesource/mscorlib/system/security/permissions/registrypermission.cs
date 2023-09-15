@@ -11,12 +11,12 @@
 namespace System.Security.Permissions
 {
     using System;
-    using SecurityElement = System.Security.SecurityElement;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.Serialization;
     using System.Security.AccessControl;
     using System.Security.Util;
-    using System.IO;
-    using System.Globalization;
-    using System.Runtime.Serialization;
+    using SecurityElement = System.Security.SecurityElement;
 
 #if !FEATURE_PAL
 

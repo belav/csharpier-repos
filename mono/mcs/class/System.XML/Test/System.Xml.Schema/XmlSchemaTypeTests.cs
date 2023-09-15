@@ -13,11 +13,10 @@ using System.IO;
 using System.Xml;
 using System.Xml.Schema;
 using NUnit.Framework;
-
-using QName = System.Xml.XmlQualifiedName;
-using SimpleType = System.Xml.Schema.XmlSchemaSimpleType;
-using SimpleRest = System.Xml.Schema.XmlSchemaSimpleTypeRestriction;
 using AssertType = NUnit.Framework.Assert;
+using QName = System.Xml.XmlQualifiedName;
+using SimpleRest = System.Xml.Schema.XmlSchemaSimpleTypeRestriction;
+using SimpleType = System.Xml.Schema.XmlSchemaSimpleType;
 
 namespace MonoTests.System.Xml
 {

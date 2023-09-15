@@ -4,10 +4,10 @@
 namespace System.Xml
 {
     using System;
-    using System.Xml;
-    using System.Text;
     using System.Diagnostics;
     using System.Runtime.Serialization;
+    using System.Text;
+    using System.Xml;
 
     public class XmlDictionaryString
     {

@@ -5,9 +5,9 @@
 namespace System.Activities.Hosting
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
     using System.Xml.Linq;
 
     [DataContract]

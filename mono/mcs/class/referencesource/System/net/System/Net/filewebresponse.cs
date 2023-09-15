@@ -6,11 +6,11 @@
 
 namespace System.Net
 {
-    using System.Runtime.Serialization;
-    using System.IO;
-    using System.Globalization;
-    using System.Security.Permissions;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
     [Serializable]
     public class FileWebResponse : WebResponse, ISerializable, ICloseEx

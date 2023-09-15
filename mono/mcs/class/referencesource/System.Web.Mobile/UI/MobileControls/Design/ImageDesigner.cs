@@ -16,12 +16,11 @@ namespace System.Web.UI.Design.MobileControls
     using System.Text;
     using System.Web.UI;
     using System.Web.UI.Design;
-    using System.Web.UI.MobileControls;
-    using System.Web.UI.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Converters;
     using System.Web.UI.Design.MobileControls.Util;
-
+    using System.Web.UI.MobileControls;
+    using System.Web.UI.MobileControls.Adapters;
     using Image = System.Web.UI.MobileControls.Image;
 
     [System.Security.Permissions.SecurityPermission(

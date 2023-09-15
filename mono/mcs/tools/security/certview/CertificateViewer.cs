@@ -8,14 +8,13 @@
 //
 
 using System;
-using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-
 using Mono.Security.X509;
 
 [assembly: AssemblyTitle("Mono Certificate Viewer")]

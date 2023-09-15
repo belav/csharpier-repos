@@ -9,19 +9,18 @@
 **
 ===========================================================*/
 using System;
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.CompilerServices;
-using System.Globalization;
-using System.Runtime.Versioning;
-
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.IO
 {

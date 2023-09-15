@@ -4,16 +4,16 @@
 
 namespace System.ServiceModel.Web
 {
-    using System.IO;
     using System.Collections.Generic;
+    using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Configuration;
-    using System.Net;
-    using System.Globalization;
 
     public class WebChannelFactory<TChannel> : ChannelFactory<TChannel>
         where TChannel : class

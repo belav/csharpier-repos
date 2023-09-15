@@ -10,25 +10,25 @@
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.IO;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Data.SqlClient;
-using System.Data.Metadata.Edm;
-using System.Data.Mapping;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.Utils;
+using System.Data.Entity.Design.Common;
 using System.Data.EntityClient;
 using System.Data.EntityModel;
-using System.Data.Common.CommandTrees;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Data.Entity.Design.Common;
+using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
-using System.Data.Common.Utils;
-using Microsoft.Build.Utilities;
-using System.Runtime.Versioning;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Versioning;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Build.Utilities;
 
 namespace System.Data.Entity.Design
 {

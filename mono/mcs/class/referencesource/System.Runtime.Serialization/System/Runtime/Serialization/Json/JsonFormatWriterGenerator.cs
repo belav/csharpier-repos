@@ -3,13 +3,13 @@ namespace System.Runtime.Serialization.Json
     using System;
     using System.Collections;
     using System.Reflection;
-#if !NO_DYNAMIC_CODEGEN
-    using System.Reflection.Emit;
-#endif
     using System.Runtime.Serialization.Diagnostics.Application;
     using System.Security;
     using System.Security.Permissions;
     using System.Xml;
+#if !NO_DYNAMIC_CODEGEN
+    using System.Reflection.Emit;
+#endif
 
     delegate void JsonFormatClassWriterDelegate(
         XmlWriterDelegator xmlWriter,

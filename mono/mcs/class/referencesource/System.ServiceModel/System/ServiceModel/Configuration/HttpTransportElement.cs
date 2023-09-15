@@ -4,17 +4,17 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
-    using System.ServiceModel;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.Runtime;
     using System.Security.Authentication.ExtendedProtection.Configuration;
     using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ComponentModel;
 
     [SuppressMessage(
         FxCop.Category.Configuration,

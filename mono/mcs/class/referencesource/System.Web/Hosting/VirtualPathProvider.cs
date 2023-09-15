@@ -7,14 +7,14 @@
 namespace System.Web.Hosting
 {
     using System;
-    using System.IO;
     using System.Collections;
-    using System.Globalization;
     using System.Configuration;
+    using System.Globalization;
+    using System.IO;
+    using System.Security.Permissions;
     using System.Web.Caching;
     using System.Web.Util;
     using Util = System.Web.UI.Util;
-    using System.Security.Permissions;
 
     /*
      * Base class for virtual path providers

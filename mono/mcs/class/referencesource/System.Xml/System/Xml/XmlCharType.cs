@@ -13,11 +13,11 @@
 //#define XMLCHARTYPE_GEN_RESOURCE    // generate the character properties into XmlCharType.bin
 
 #if XMLCHARTYPE_GEN_RESOURCE || XMLCHARTYPE_USE_RESOURCE
+using System.Diagnostics;
+using System.Threading;
 using System.IO;
 using System.Reflection;
 #endif
-using System.Threading;
-using System.Diagnostics;
 
 namespace System.Xml
 {

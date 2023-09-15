@@ -25,7 +25,6 @@ using System;
 using System.Data;
 using System.Data.OracleClient;
 using MonoTests.System.Data.Utils;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OracleClient

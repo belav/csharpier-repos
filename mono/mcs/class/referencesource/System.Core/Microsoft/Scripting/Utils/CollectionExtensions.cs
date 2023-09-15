@@ -13,6 +13,10 @@
  *
  * ***************************************************************************/
 
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 #if CLR2
 using Microsoft.Scripting.Utils;
 using Microsoft.Scripting.Ast;
@@ -20,11 +24,6 @@ using Microsoft.Scripting.Ast;
 using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 #endif
-
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace System.Dynamic.Utils
 {

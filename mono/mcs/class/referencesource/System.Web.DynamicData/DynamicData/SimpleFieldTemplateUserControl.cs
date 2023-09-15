@@ -1,13 +1,13 @@
 ﻿namespace System.Web.DynamicData
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
-    using System.Web.UI.WebControls;
     using System.Web.UI;
-    using System.Collections;
-    using System.Collections.Specialized;
+    using System.Web.UI.WebControls;
 
     // Dynamically creates a field template for text or boolean fields
     internal class SimpleFieldTemplateUserControl : FieldTemplateUserControl

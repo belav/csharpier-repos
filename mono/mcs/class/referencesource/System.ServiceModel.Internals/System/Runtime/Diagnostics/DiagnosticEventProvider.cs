@@ -5,16 +5,16 @@
 namespace System.Runtime.Diagnostics
 {
     using System;
-    using Microsoft.Win32;
-    using System.Globalization;
-    using System.Runtime.Interop;
-    using System.Threading;
-    using System.Security;
     using System.Collections.Generic;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Interop;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
+    using Microsoft.Win32;
 
     // This is a class defined based on CLR's internal implementation of ETW provider
     // This class should be replaced with CLR's version (whenever avaialble) that exposes callback functionality

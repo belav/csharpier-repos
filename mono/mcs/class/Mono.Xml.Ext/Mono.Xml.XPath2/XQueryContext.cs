@@ -31,9 +31,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
+using System.Xml.Query;
 using System.Xml.Schema;
 using System.Xml.XPath;
-using System.Xml.Query;
 using Mono.Xml;
 
 namespace Mono.Xml.XPath2

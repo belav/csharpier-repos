@@ -28,9 +28,8 @@
 //
 
 using System.Runtime.InteropServices;
-using SSCX = System.Security.Cryptography.X509Certificates;
-
 using Mono.Security.Cryptography;
+using SSCX = System.Security.Cryptography.X509Certificates;
 
 namespace System.Security.Permissions
 {

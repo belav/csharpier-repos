@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Discovery.Version11
 {
+    using System.Globalization;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
-    using System.Runtime;
     using System.ServiceModel.Description;
-    using System.Globalization;
 
     class DiscoveryVersion11Implementation : IDiscoveryVersionImplementation
     {

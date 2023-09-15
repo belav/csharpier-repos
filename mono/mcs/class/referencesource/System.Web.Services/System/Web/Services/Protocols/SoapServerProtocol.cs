@@ -7,21 +7,21 @@
 namespace System.Web.Services.Protocols
 {
     using System;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Diagnostics;
     using System.IO;
+    using System.Net;
     using System.Reflection;
-    using System.Xml.Serialization;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Services.Configuration;
+    using System.Web.Services.Description;
+    using System.Web.Services.Diagnostics;
     using System.Xml;
     using System.Xml.Schema;
-    using System.Web.Services.Description;
-    using System.Text;
-    using System.Net;
-    using System.Web.Services.Configuration;
-    using System.Threading;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
     public sealed class SoapServerType : ServerType

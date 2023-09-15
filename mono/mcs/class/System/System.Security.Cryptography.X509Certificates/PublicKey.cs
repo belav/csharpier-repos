@@ -37,9 +37,7 @@ using MonoSecurity::Mono.Security;
 using MonoSecurity::Mono.Security.Cryptography;
 using MSX = MonoSecurity::Mono.Security.X509;
 #else
-using Mono.Security;
-using Mono.Security.Cryptography;
-using MSX = Mono.Security.X509;
+using Mono.Security;using Mono.Security.Cryptography;using MSX = Mono.Security.X509;
 #endif
 
 #endif

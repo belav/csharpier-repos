@@ -6,7 +6,6 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Activation

@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
 
     class EndpointFilterProvider
     {

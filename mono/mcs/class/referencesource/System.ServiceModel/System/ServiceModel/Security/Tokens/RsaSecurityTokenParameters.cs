@@ -10,10 +10,10 @@
 
 namespace System.ServiceModel.Security.Tokens
 {
-    using System.ServiceModel.Security;
-    using System.ServiceModel;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.ServiceModel;
+    using System.ServiceModel.Security;
 
     public class RsaSecurityTokenParameters : SecurityTokenParameters
     {

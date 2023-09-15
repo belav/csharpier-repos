@@ -21,11 +21,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Security.Principal;
 using System.Security.Permissions;
-using Microsoft.Win32.SafeHandles;
+using System.Security.Principal;
+using System.Text;
 using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.Diagnostics.Eventing.Reader
 {

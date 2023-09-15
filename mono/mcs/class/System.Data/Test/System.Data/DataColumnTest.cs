@@ -40,7 +40,6 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlTypes;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data

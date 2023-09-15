@@ -12,7 +12,6 @@ namespace System.Web.UI.Design.MobileControls
     using System.Diagnostics;
     using System.Drawing.Design;
     using System.Windows.Forms.Design;
-
     using DialogResult = System.Windows.Forms.DialogResult;
 
     [System.Security.Permissions.SecurityPermission(

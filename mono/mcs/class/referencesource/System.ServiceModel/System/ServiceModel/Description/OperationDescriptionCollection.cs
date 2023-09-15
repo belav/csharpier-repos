@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.Xml;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
+    using System.Xml;
 
     public class OperationDescriptionCollection : Collection<OperationDescription>
     {

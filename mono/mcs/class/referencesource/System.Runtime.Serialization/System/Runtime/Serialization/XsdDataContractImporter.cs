@@ -8,12 +8,12 @@ namespace System.Runtime.Serialization
     using System.CodeDom;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Runtime.Serialization.Diagnostics;
     using System.Security;
+    using System.Security.Permissions;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
     using System.Xml.Schema;
-    using System.Runtime.Serialization.Diagnostics;
-    using System.Security.Permissions;
 
     public class XsdDataContractImporter
     {

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.DynamicData;
 using System.Web.DynamicData.ModelProviders;
-
 using MonoTests.DataSource;
 
 namespace MonoTests.ModelProviders

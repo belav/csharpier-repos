@@ -16,9 +16,9 @@ namespace System.Data.Services.Client
 
     using System.Collections;
     using System.Diagnostics;
-    using System.Xml;
-    using System.Reflection;
     using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Xml;
 
     #endregion Namespaces.
 

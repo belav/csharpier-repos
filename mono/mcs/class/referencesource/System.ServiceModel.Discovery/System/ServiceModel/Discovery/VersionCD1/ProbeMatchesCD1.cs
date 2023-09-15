@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
-    using System.Runtime.Serialization;
     using System.Collections.ObjectModel;
+    using System.Runtime.Serialization;
 
     [CollectionDataContract(
         ItemName = ProtocolStrings.SchemaNames.ProbeMatchElement,

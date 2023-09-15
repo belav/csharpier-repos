@@ -29,8 +29,8 @@
 //
 
 using System;
-using System.Xml.Schema;
 using System.Collections;
+using System.Xml.Schema;
 
 namespace System.Xml.Serialization
 {

@@ -30,7 +30,6 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
-
 using Mono.Unix.Native;
 
 namespace Mono.Unix

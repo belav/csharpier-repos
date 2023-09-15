@@ -7,12 +7,12 @@
 
 namespace System.Xml.Serialization
 {
-    using System.Reflection;
-    using System.Collections;
-    using System.IO;
-    using System.Xml.Schema;
     using System;
+    using System.Collections;
     using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
+    using System.Xml.Schema;
 
     /// <include file='doc\SoapAttributeOverrides.uex' path='docs/doc[@for="SoapAttributeOverrides"]/*' />
     /// <devdoc>

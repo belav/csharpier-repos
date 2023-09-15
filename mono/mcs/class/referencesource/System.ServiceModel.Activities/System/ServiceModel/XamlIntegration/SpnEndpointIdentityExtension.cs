@@ -7,8 +7,8 @@ namespace System.ServiceModel.XamlIntegration
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
-    using System.Windows.Markup;
     using System.ServiceModel.Activities;
+    using System.Windows.Markup;
 
     [SuppressMessage(
         FxCop.Category.Naming,

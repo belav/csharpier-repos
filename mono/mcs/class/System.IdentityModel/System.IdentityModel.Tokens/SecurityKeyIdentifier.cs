@@ -28,9 +28,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IdentityModel.Policy;
 using System.Text;
 using System.Xml;
-using System.IdentityModel.Policy;
 
 namespace System.IdentityModel.Tokens
 {

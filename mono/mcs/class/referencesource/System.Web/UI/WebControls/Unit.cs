@@ -7,9 +7,9 @@
 namespace System.Web.UI.WebControls
 {
     using System;
-    using System.Globalization;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Globalization;
     using System.Security.Permissions;
     using System.Web.Util;
 

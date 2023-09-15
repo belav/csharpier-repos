@@ -1,12 +1,12 @@
 using System;
-using System.Threading;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Remoting.Proxies;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.CORBA;
-using System.IO;
+using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Proxies;
+using System.Threading;
 
 // compile with:
 // csc -r:../../lib/System.Runtime.Remoting.dll corba-example.cs

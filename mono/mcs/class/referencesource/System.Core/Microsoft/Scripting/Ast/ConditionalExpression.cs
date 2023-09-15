@@ -14,9 +14,8 @@
  * ***************************************************************************/
 
 using System;
-using System.Dynamic.Utils;
 using System.Diagnostics;
-
+using System.Dynamic.Utils;
 #if SILVERLIGHT
 using System.Core;
 #endif

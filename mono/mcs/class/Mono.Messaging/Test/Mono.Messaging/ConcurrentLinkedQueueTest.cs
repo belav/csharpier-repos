@@ -29,7 +29,6 @@
 //
 
 using System;
-
 using Mono.Messaging;
 using NUnit.Framework;
 

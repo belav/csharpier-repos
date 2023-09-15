@@ -8,16 +8,15 @@
 //
 //
 using System;
+using System.Collections;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Collections;
-using System.ComponentModel;
-using NUnit.Framework;
-using System.Linq;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {

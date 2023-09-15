@@ -34,10 +34,8 @@ using System.Data;
 using System.IO;
 using System.Text;
 using Mono.Data.Sqlite;
-
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.Mono.Data.Sqlite
 {

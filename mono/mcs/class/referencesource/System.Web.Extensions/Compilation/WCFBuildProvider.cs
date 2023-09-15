@@ -7,29 +7,29 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Globalization;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Collections.Specialized;
     using System.Collections;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Net;
-    using System.Xml.Serialization;
-    using System.Web.Hosting;
-    using System.Web.UI;
-    using System.Diagnostics;
-    using System.Threading;
-    using System.Text;
-    using System.Web.Compilation.WCFModel;
     using System.Collections.Generic;
-    using System.Web.Configuration;
-    using System.Web.Resources;
+    using System.Collections.Specialized;
+    using System.Data.Services.Design;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Reflection;
     using System.Security;
     using System.Security.Permissions;
-    using System.Data.Services.Design;
-    using System.IO;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Compilation.WCFModel;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Resources;
+    using System.Web.UI;
     using System.Xml;
-    using System.Reflection;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// A build provider for WCF service references in ASP.NET projects.

@@ -6,13 +6,13 @@ namespace System.Runtime.Serialization
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-#if !NO_DYNAMIC_CODEGEN
-    using System.Reflection.Emit;
-#endif
     using System.Runtime.Serialization.Diagnostics.Application;
     using System.Security;
     using System.Security.Permissions;
     using System.Xml;
+#if !NO_DYNAMIC_CODEGEN
+    using System.Reflection.Emit;
+#endif
 
 #if USE_REFEMIT
     public delegate object XmlFormatClassReaderDelegate(

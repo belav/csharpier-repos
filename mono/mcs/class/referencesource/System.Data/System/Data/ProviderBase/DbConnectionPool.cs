@@ -10,23 +10,23 @@ namespace System.Data.ProviderBase
 {
     using System;
     using System.Collections;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Data.Common;
     using System.Data.SqlClient;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Threading;
     using System.Threading.Tasks;
     using SysTx = System.Transactions;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Collections.Concurrent;
 
     internal sealed class DbConnectionPool
     {

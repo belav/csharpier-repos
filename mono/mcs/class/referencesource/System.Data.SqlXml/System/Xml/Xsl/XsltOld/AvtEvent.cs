@@ -7,12 +7,12 @@
 
 namespace System.Xml.Xsl.XsltOld
 {
-    using Res = System.Xml.Utils.Res;
     using System;
     using System.Diagnostics;
+    using System.Text;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Text;
+    using Res = System.Xml.Utils.Res;
 
     internal sealed class AvtEvent : TextEvent
     {

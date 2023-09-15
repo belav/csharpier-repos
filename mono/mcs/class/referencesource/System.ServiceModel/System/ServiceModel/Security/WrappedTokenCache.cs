@@ -9,9 +9,8 @@ using System.IdentityModel;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.ServiceModel.Security.Tokens;
-
-using SystemUniqueId = System.Xml.UniqueId;
 using SR = System.ServiceModel.SR;
+using SystemUniqueId = System.Xml.UniqueId;
 
 namespace System.ServiceModel.Security
 {

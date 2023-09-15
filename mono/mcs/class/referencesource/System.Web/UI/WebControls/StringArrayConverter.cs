@@ -6,10 +6,10 @@
 
 namespace System.Web.UI.WebControls
 {
-    using System.ComponentModel.Design;
     using System;
-    using System.ComponentModel;
     using System.Collections;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.Globalization;
 
     //

@@ -31,23 +31,23 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Web;
-using System.Xml;
-using System.Text;
 using System.Reflection;
-using System.Web.Services;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading;
+using System.Web;
+using System.Web.Services;
 using System.Web.Services.Description;
 using System.Web.Services.Discovery;
-using System.Xml.Serialization;
+using System.Xml;
 using System.Xml.Schema;
-using System.Collections;
-using System.Threading;
+using System.Xml.Serialization;
 
 namespace System.Web.Services.Protocols
 {

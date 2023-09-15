@@ -4,8 +4,8 @@
 ///
 namespace System.Net.NetworkInformation
 {
-    using System.Net;
     using System;
+    using System.Net;
     using System.Runtime.InteropServices;
 
     internal class SystemIPv4InterfaceProperties : IPv4InterfaceProperties

@@ -8,14 +8,14 @@
 //---------------------------------------------------------------------
 
 
-using System.Data.Common.Utils;
-using System.Data.Mapping.ViewGeneration.Structures;
 using System.Collections.Generic;
-using System.Data.Mapping.ViewGeneration.Validation;
-using System.Text;
-using System.Data.Mapping.Update.Internal;
 using System.Collections.ObjectModel;
+using System.Data.Common.Utils;
+using System.Data.Mapping.Update.Internal;
+using System.Data.Mapping.ViewGeneration.Structures;
+using System.Data.Mapping.ViewGeneration.Validation;
 using System.Data.Metadata.Edm;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration
 {

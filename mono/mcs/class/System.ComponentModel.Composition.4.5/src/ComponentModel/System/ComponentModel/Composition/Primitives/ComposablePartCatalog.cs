@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -10,7 +11,6 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.ComponentModel.Composition.Hosting;
 
 namespace System.ComponentModel.Composition.Primitives
 {

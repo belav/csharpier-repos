@@ -10,9 +10,9 @@
 namespace System.Data
 {
     using System;
-    using System.Diagnostics;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     /// <para>Represents a collection of constraints for a <see cref='System.Data.DataTable'/>

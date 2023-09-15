@@ -33,7 +33,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Net;
 using System.Threading;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Connected.SqlClient

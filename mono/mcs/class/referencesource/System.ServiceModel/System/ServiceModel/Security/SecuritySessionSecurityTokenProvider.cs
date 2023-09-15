@@ -7,17 +7,17 @@ namespace System.ServiceModel.Security
     using System.Diagnostics;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Tokens;
+    using System.Net;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
-    using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
-    using System.Net;
     using System.Xml;
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 

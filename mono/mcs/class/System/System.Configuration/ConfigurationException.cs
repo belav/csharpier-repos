@@ -31,7 +31,6 @@
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;
-
 #if (XML_DEP)
 using System.Xml;
 #endif

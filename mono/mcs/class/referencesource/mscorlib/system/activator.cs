@@ -15,22 +15,23 @@
 namespace System
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Activation;
     //    using Message = System.Runtime.Remoting.Messaging.Message;
 #endif
-    using System.Security;
+
+    using AssemblyHashAlgorithm = System.Configuration.Assemblies.AssemblyHashAlgorithm;
     using CultureInfo = System.Globalization.CultureInfo;
     using Evidence = System.Security.Policy.Evidence;
     using StackCrawlMark = System.Threading.StackCrawlMark;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Security.Permissions;
-    using AssemblyHashAlgorithm = System.Configuration.Assemblies.AssemblyHashAlgorithm;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     // Only statics, does not need to be marked with the serializable attribute
     [ClassInterface(ClassInterfaceType.None)]

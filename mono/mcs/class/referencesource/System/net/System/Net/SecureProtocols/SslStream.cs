@@ -22,13 +22,13 @@ namespace System.Net.Security
 {
     using System;
     using System.IO;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using System.Net.Configuration;
     using System.Security.Authentication;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Net.Configuration;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     [Flags]
     public enum SslPolicyErrors

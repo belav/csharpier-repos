@@ -7,12 +7,12 @@
 
 namespace System.Xml.Schema
 {
-    using System.IO;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Runtime.Versioning;
 
     /*

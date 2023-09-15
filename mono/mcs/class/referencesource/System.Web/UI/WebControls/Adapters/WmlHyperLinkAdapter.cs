@@ -9,8 +9,8 @@
 namespace System.Web.UI.WebControls.Adapters
 {
     using System.Web;
-    using System.Web.UI.WebControls;
     using System.Web.Security;
+    using System.Web.UI.WebControls;
     using System.Web.Util;
 
     public class WmlHyperLinkAdapter : HyperLinkAdapter

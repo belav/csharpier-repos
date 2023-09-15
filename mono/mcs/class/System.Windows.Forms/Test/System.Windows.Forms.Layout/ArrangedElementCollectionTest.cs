@@ -28,10 +28,9 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
-using System.Reflection;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.Layout

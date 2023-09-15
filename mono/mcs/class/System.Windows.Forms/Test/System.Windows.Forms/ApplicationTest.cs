@@ -9,10 +9,10 @@
 
 using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Reflection;
 using System.Threading;
+using System.Windows.Forms;
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms

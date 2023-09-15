@@ -1,5 +1,4 @@
 using System;
-
 using C = A.D;
 
 public class A

@@ -26,11 +26,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Xml;
-using System.IO;
 using System.Collections.Specialized;
+using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
+using System.Xml;
 
 namespace System.Configuration
 {

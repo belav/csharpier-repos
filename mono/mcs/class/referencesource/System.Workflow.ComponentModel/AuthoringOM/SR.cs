@@ -1,11 +1,11 @@
 using System;
-using System.Reflection;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Reflection;
 using System.Resources;
 using System.Text;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 [AttributeUsage(AttributeTargets.All)]
 internal sealed class SRDescriptionAttribute : DescriptionAttribute

@@ -7,8 +7,6 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Text;
-using System.Diagnostics;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
@@ -16,6 +14,8 @@ using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
 using System.Data.Mapping.ViewGeneration.Utils;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {

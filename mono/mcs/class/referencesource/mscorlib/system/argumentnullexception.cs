@@ -16,8 +16,8 @@
 namespace System
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
     using System.Security.Permissions;
 
     // The ArgumentException is thrown when an argument

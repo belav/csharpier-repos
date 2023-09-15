@@ -26,12 +26,10 @@
 
 using System;
 using System.Collections.Generic;
-using DbLinq.Data.Linq.Database;
 using System.Data;
-
+using DbLinq.Data.Linq.Database;
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Util;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else

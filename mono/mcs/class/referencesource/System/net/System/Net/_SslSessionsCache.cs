@@ -20,9 +20,9 @@ Revision History:
 #if MONO_FEATURE_NEW_TLS && SECURITY_DEP
 namespace System.Net.Security
 {
+    using System.Collections;
     using System.Net;
     using System.Security.Cryptography.X509Certificates;
-    using System.Collections;
 
     internal static class SslSessionsCache
     {

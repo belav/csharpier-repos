@@ -4,22 +4,21 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
+    using System.Net.Sockets;
     using System.Runtime.Serialization;
     using System.Security.Principal;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
-
+    using System.Text;
     using System.Xml;
-    using System.Net.Sockets;
-    using System.ComponentModel;
 
     public class NetNamedPipeBinding : Binding, IBindingRuntimePreferences
     {

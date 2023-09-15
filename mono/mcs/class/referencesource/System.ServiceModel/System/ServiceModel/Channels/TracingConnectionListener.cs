@@ -6,8 +6,8 @@ namespace System.ServiceModel.Channels
 {
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     class TracingConnectionListener : IConnectionListener
     {

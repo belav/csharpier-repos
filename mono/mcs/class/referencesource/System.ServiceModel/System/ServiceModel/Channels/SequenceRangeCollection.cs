@@ -6,8 +6,8 @@ namespace System.ServiceModel.Channels
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
-    using System.Text;
     using System.ServiceModel;
+    using System.Text;
 
     abstract class SequenceRangeCollection
     {

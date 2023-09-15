@@ -38,7 +38,6 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Xml;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher

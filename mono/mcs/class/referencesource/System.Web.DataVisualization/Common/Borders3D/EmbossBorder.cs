@@ -20,13 +20,12 @@
 #region Used namespaces
 
 using System;
-using System.Resources;
-using System.Reflection;
 using System.Collections;
+using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel.Design;
-
+using System.Reflection;
+using System.Resources;
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.DataVisualization.Charting.Data;

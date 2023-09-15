@@ -39,7 +39,6 @@ using NUnit.Framework;
 using System.Collections.ObjectModel;
 using SMMessage = System.ServiceModel.Channels.Message;
 using System.Threading;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher

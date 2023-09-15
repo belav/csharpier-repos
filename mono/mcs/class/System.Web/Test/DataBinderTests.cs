@@ -9,18 +9,17 @@
 
 //#define NUNIT // Comment out this one if you wanna play with the test without using NUnit
 
+using System;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Web;
+using System.Web.UI;
 #if NUNIT
 using NUnit.Framework;
 #else
 using System.Reflection;
 #endif
-
-using System.IO;
-using System;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Runtime.CompilerServices;
 
 namespace MonoTests.System.Web.UI
 {

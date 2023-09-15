@@ -17,9 +17,9 @@ using System.Diagnostics.Contracts;
 ===========================================================*/
 namespace System.Runtime.Serialization
 {
-    using System.Runtime.Remoting;
     using System;
     using System.Collections;
+    using System.Runtime.Remoting;
     using System.Security.Permissions;
 
     [System.Runtime.InteropServices.ComVisible(true)]

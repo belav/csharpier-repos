@@ -24,11 +24,8 @@
 using System;
 using System.Data;
 using System.Data.OleDb;
-
 using MonoTests.System.Data.Utils;
-
 using MonoTests.System.Data.Utils.Data;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb

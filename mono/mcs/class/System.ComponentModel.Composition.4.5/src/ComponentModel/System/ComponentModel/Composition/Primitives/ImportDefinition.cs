@@ -2,13 +2,13 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq.Expressions;
 using Microsoft.Internal;
-using System.Diagnostics.Contracts;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace System.ComponentModel.Composition.Primitives
 {

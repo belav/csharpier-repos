@@ -67,8 +67,8 @@ namespace System.Runtime.CompilerServices
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Versioning;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
 
     #region ConditionalWeakTable
     [System.Runtime.InteropServices.ComVisible(false)]

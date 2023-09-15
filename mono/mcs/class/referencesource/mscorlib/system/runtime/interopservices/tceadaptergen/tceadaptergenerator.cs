@@ -5,11 +5,11 @@
 // ==--==
 namespace System.Runtime.InteropServices.TCEAdapterGen
 {
-    using System.Runtime.InteropServices;
     using System;
+    using System.Collections;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Collections;
+    using System.Runtime.InteropServices;
     using System.Threading;
 
     internal class TCEAdapterGenerator

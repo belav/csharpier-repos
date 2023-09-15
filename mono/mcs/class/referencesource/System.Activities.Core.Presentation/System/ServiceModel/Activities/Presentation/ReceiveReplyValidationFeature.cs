@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel.Activities.Presentation
 {
-    using System.Runtime;
+    using System.Activities;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Validation;
+    using System.Activities.Statements;
     using System.Activities.Validation;
     using System.Collections.Generic;
-    using System.Activities;
-    using System.Activities.Statements;
     using System.Globalization;
+    using System.Runtime;
 
     class ReceiveReplyValidationFeature : DesignTimeValidationFeature
     {

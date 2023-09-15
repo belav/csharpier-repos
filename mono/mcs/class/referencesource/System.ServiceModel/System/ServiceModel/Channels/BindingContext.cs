@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
+    using System.ServiceModel.Description;
     using System.Text;
 
     public class BindingContext

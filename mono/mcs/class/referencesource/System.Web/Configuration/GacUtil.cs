@@ -6,9 +6,9 @@
 
 namespace System.Web.Configuration
 {
-    using System.Web.Configuration;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
+    using System.Web.Configuration;
 
     /*
     class for installing ASP.BrowserCapabilitiesFactory into gac

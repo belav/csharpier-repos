@@ -17,17 +17,17 @@ namespace System.Data.SqlClient
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ExceptionServices;
     using System.Runtime.Serialization.Formatters;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
-    using System.Threading;
     using System.Text;
-    using SysTx = System.Transactions;
-    using System.Runtime.Versioning;
+    using System.Threading;
     using System.Threading.Tasks;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ExceptionServices;
+    using SysTx = System.Transactions;
 
     internal static class AsyncHelper
     {

@@ -27,8 +27,8 @@
 //
 using System;
 using System.Collections.ObjectModel;
-using System.Net.Security;
 using System.IdentityModel.Tokens;
+using System.Net.Security;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.ServiceModel.Security.Tokens;

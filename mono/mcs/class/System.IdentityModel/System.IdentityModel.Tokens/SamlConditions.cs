@@ -28,10 +28,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Xml;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
 using System.Security.Cryptography;
+using System.Xml;
 
 namespace System.IdentityModel.Tokens
 {

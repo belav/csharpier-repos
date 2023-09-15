@@ -7,12 +7,12 @@
 namespace System.Web.UI.WebControls
 {
     using System;
+    using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Design;
     using System.Globalization;
     using System.Web;
     using System.Web.UI;
-    using System.ComponentModel;
 
     /// <devdoc>
     ///    Constructs a panel with automatic scrolling

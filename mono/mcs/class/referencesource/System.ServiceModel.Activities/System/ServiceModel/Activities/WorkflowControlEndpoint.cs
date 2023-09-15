@@ -5,14 +5,14 @@ namespace System.ServiceModel.Activities
 {
     using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime;
+    using System.Security;
+    using System.Security.Permissions;
     using System.ServiceModel;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Runtime;
     using System.Threading;
-    using System.Security;
-    using System.Security.Permissions;
 
     [Fx.Tag.XamlVisible(false)]
     public class WorkflowControlEndpoint : ServiceEndpoint

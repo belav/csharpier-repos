@@ -17,13 +17,13 @@
 namespace System.Resources
 {
     using System;
-    using System.IO;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     // A RuntimeResourceSet stores all the resources defined in one
     // particular CultureInfo, with some loading optimizations.

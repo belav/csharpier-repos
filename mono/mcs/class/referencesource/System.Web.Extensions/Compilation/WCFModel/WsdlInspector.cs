@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Web.Services.Description;
 using System.Xml;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 #else

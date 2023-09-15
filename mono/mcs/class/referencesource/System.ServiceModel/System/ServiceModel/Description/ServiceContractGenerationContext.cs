@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     public class ServiceContractGenerationContext
     {

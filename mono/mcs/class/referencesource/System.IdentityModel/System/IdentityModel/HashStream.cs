@@ -4,9 +4,9 @@
 
 namespace System.IdentityModel
 {
+    using System.IdentityModel.Diagnostics;
     using System.IO;
     using System.Security.Cryptography;
-    using System.IdentityModel.Diagnostics;
 
     sealed class HashStream : Stream
     {

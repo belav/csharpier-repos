@@ -6,9 +6,9 @@
 
 namespace System.Net.PeerToPeer.Collaboration
 {
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
 
     /// <remarks>
     /// PeerCollaborationPermissionAttribute atrribute

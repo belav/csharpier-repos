@@ -8,8 +8,8 @@ namespace System.Web.Services.Discovery
 {
     using System.Collections;
     using System.Diagnostics;
-    using System.Security.Permissions;
     using System.Globalization;
+    using System.Security.Permissions;
 
     /// <include file='doc\DiscoveryClientDocuments.uex' path='docs/doc[@for="DiscoveryClientDocumentCollection"]/*' />
     /// <devdoc>

@@ -2,12 +2,12 @@
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
 
 namespace System.Runtime.Caching
 {

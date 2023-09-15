@@ -10,8 +10,8 @@
 namespace System.Data
 {
     using System;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
 
     internal enum ValueType

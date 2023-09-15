@@ -13,11 +13,11 @@
 namespace System.Security.Policy
 {
     using System;
-    using System.Security;
-    using System.Security.Util;
-    using System.Security.Permissions;
     using System.Collections;
     using System.Diagnostics.Contracts;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Util;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]

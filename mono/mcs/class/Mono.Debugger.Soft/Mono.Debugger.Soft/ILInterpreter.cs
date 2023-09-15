@@ -1,5 +1,4 @@
 using System;
-
 #if ENABLE_CECIL
 using Mono.Cecil.Cil;
 #else

@@ -5,15 +5,14 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
+    using System.IdentityModel.Tokens;
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
-    using System.IdentityModel.Tokens;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:

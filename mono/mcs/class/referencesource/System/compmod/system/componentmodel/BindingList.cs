@@ -13,12 +13,12 @@
 namespace System.ComponentModel
 {
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Reflection;
     using System.Security.Permissions;
     using CodeAccessPermission = System.Security.CodeAccessPermission;
 

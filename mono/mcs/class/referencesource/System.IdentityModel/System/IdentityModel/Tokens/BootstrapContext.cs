@@ -2,9 +2,9 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------------------------
 
+using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
-using System.IO;
 
 namespace System.IdentityModel.Tokens
 {

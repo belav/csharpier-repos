@@ -13,15 +13,15 @@ namespace Mono.Data.SqlSharp.Gui.GtkSharp
     using System;
     using System.Collections;
     using System.Data;
+    using System.Diagnostics;
     using System.Drawing;
-    using System.Text;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Remoting;
+    using System.Text;
     using Gtk;
     using GtkSharp;
     using SqlEditorSharp;
-    using System.Reflection;
-    using System.Runtime.Remoting;
-    using System.Diagnostics;
 
     public class LoginDialog
     {

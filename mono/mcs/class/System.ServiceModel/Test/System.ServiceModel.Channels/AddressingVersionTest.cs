@@ -32,7 +32,6 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.Text;
 using NUnit.Framework;
-
 using Element = System.ServiceModel.Channels.TextMessageEncodingBindingElement;
 
 namespace MonoTests.System.ServiceModel.Channels

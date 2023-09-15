@@ -38,12 +38,11 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel.Design;
 using System.Globalization;
-using System.Collections.Generic;
-
 #if Microsoft_CONTROL
 using System.Windows.Forms.DataVisualization.Charting.Utilities;
 #else

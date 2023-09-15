@@ -1,7 +1,7 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Diagnostics;
 
 /// <summary>
 /// Summary description for Class1

@@ -8,18 +8,17 @@
 //
 
 using System;
-using System.IO;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
+using System.Text;
+using MonoTests.Helpers;
+using NUnit.Framework;
 #if !MONOTOUCH
 using System.Reflection.Emit;
 #endif
-using System.Text;
 
-using NUnit.Framework;
-
-using MonoTests.Helpers;
 
 namespace MonoTests.System.Diagnostics
 {

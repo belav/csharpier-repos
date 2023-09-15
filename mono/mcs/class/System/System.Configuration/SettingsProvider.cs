@@ -27,7 +27,6 @@
 //
 
 using System;
-
 #if (CONFIGURATION_DEP)
 using System.Configuration.Provider;
 #endif

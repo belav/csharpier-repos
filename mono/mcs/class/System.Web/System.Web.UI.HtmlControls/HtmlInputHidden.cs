@@ -26,8 +26,8 @@
 //
 // (C) 2005-2010 Novell, Inc.
 
-using System.ComponentModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls

@@ -29,22 +29,20 @@
 
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MonoSecurity::Mono.Security;
-using MonoSecurity::Mono.Security.Cryptography;
-using MX = MonoSecurity::Mono.Security.X509;
+using System.Collections;
 #else
-using Mono.Security;
-using Mono.Security.Cryptography;
-using MX = Mono.Security.X509;
+using Mono.Security;using Mono.Security.Cryptography;using MX = Mono.Security.X509;
 #endif
 
 using System.IO;
-using System.Text;
-using System.Collections;
 using System.Runtime.Serialization;
-using Microsoft.Win32.SafeHandles;
+using System.Text;
 using Internal.Cryptography;
+using Microsoft.Win32.SafeHandles;
 using Mono;
+using MonoSecurity::Mono.Security;
+using MonoSecurity::Mono.Security.Cryptography;
+using MX = MonoSecurity::Mono.Security.X509;
 
 namespace System.Security.Cryptography.X509Certificates
 {

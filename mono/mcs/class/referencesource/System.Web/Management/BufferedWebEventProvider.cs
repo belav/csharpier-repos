@@ -7,17 +7,17 @@
 namespace System.Web.Management
 {
     using System;
-    using System.Web;
-    using System.Diagnostics;
-    using System.Web.Util;
-    using System.Web.Configuration;
-    using System.Configuration.Provider;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Configuration.Provider;
+    using System.Diagnostics;
     using System.Security;
-    using Debug = System.Web.Util.Debug;
     using System.Security.Permissions;
+    using System.Web;
+    using System.Web.Configuration;
+    using System.Web.Util;
+    using Debug = System.Web.Util.Debug;
 
     // Interface for buffered event provider
     public abstract class BufferedWebEventProvider : WebEventProvider

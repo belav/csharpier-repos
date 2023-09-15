@@ -7,12 +7,12 @@
 
 namespace System.Xml.Schema
 {
-    using System.IO;
-    using System.Text;
     using System.Collections;
     using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Runtime.Versioning;
+    using System.Text;
 
 #pragma warning disable 618
     internal sealed class XdrValidator : BaseValidator

@@ -25,10 +25,10 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
 using System.Text;
 using DbLinq.Util;
 using DbMetal.Utility;

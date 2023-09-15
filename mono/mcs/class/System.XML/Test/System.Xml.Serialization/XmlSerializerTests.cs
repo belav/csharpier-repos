@@ -27,19 +27,17 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Xml;
-using System.Data;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-using System.Reflection;
-using System.Collections.Generic;
-
-using NUnit.Framework;
-
 using MonoTests.System.Xml.TestClasses;
+using NUnit.Framework;
 
 namespace MonoTests.System.XmlSerialization
 {

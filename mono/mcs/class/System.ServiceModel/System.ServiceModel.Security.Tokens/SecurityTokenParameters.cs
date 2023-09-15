@@ -26,13 +26,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.ServiceModel.Channels;
+using System.ServiceModel.Security;
+using System.Text;
 #if !MOBILE && !XAMMAC_4_5
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 #endif
-using System.ServiceModel.Channels;
-using System.ServiceModel.Security;
-using System.Text;
+
 
 namespace System.ServiceModel.Security.Tokens
 {

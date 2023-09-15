@@ -27,12 +27,12 @@
 //
 using System;
 using System.Collections.Generic;
-#if !MOBILE && !XAMMAC_4_5
-using System.IdentityModel.Claims;
-#endif
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
+#if !MOBILE && !XAMMAC_4_5
+using System.IdentityModel.Claims;
+#endif
 
 namespace System.ServiceModel
 {

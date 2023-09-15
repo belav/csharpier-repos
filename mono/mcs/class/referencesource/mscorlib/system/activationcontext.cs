@@ -3,13 +3,13 @@ using System.Collections;
 using System.Deployment.Internal;
 using System.Deployment.Internal.Isolation;
 using System.Deployment.Internal.Isolation.Manifest;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
 using System.Security;
+using System.Security.Permissions;
 
 namespace System
 {

@@ -17,9 +17,9 @@ namespace System
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
 
     // This class is an encapsulation of a slot so that it is managed in a secure fashion.
     // It is constructed by the LocalDataStoreManager, holds the slot and the manager

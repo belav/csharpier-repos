@@ -12,9 +12,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Security;
-
-using NUnit.Framework;
 using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Security
 {

@@ -8,13 +8,13 @@
 // (C) 2003 Martin Willemoes Hansen
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

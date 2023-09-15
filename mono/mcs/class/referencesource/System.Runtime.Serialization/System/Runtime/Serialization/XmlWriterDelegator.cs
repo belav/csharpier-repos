@@ -5,12 +5,12 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Text;
     using System.Diagnostics;
-    using System.Reflection;
     using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
+    using System.Xml;
 
 #if USE_REFEMIT
     public class XmlWriterDelegator

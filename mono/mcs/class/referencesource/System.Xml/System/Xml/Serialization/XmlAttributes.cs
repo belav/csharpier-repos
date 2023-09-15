@@ -8,9 +8,9 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.ComponentModel;
+    using System.Reflection;
 
     internal enum XmlAttributeFlags
     {

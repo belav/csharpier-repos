@@ -8,10 +8,10 @@
 namespace Mono.Data.Sqlite
 {
     using System;
-    using System.Data;
-    using System.Data.Common;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data;
+    using System.Data.Common;
 
     /// <summary>
     /// SQLite implementation of DbCommand.

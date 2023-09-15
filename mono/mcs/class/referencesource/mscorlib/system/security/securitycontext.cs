@@ -15,22 +15,22 @@
 ===========================================================*/
 namespace System.Security
 {
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Threading;
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
-    using System.Threading;
-    using System.Runtime.Remoting;
-    using System.Security.Principal;
-    using System.Collections;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
 #if FEATURE_CORRUPTING_EXCEPTIONS
     using System.Runtime.ExceptionServices;
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     // This enum must be kept in sync with the SecurityContextSource enum in the VM
     public enum SecurityContextSource

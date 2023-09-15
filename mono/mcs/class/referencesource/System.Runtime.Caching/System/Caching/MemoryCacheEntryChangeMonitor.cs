@@ -2,11 +2,11 @@
 //   Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 // </copyright>
 using System;
-using System.Runtime.Caching.Resources;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.Caching.Resources;
 using System.Text;
 
 namespace System.Runtime.Caching

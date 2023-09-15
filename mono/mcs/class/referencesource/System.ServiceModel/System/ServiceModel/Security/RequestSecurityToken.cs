@@ -5,27 +5,27 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
-    using System.ServiceModel;
-    using System.Security.Cryptography.Xml;
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
-    using System.IdentityModel.Selectors;
-    using System.ServiceModel.Security.Tokens;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
-    using System.Xml.Schema;
-    using System.Xml;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.IO;
-    using System.ServiceModel.Security;
     using System.Globalization;
-    using System.ServiceModel.Dispatcher;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
+    using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Runtime.Serialization;
     using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Cryptography.Xml;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     class RequestSecurityToken : BodyWriter
     {

@@ -34,7 +34,6 @@ namespace Mono.Cecil.Metadata
     using System;
     using System.Collections;
     using System.IO;
-
     using Mono.Cecil.Binary;
 
     sealed class MetadataRowReader : BaseMetadataRowVisitor

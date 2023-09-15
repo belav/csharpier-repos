@@ -8,8 +8,8 @@ namespace System.Web.UI.WebControls
 {
     using System.Collections;
     using System.ComponentModel;
-    using System.Web.Util;
     using System.Web.UI.WebControls.Adapters;
+    using System.Web.Util;
 
     [Designer(
         "System.Web.UI.Design.WebControls.HierarchicalDataBoundControlDesigner, "

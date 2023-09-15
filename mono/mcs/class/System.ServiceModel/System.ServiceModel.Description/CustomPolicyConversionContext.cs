@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using System.Xml;
 using System.ServiceModel.Channels;
+using System.Xml;
 using WS = System.Web.Services.Description;
 
 namespace System.ServiceModel.Description

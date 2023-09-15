@@ -18,9 +18,9 @@ namespace System.Collections.Generic
 {
     using System;
     using System.Collections;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     // Implement this interface if you need to support foreach semantics.
 

@@ -5,10 +5,10 @@
 // ==--==
 
 using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
-using System.Diagnostics.Contracts;
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography

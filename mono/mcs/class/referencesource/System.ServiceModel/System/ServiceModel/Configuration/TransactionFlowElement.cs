@@ -6,11 +6,11 @@ namespace System.ServiceModel.Configuration
 {
     using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
 
     public partial class TransactionFlowElement : BindingElementExtensionElement

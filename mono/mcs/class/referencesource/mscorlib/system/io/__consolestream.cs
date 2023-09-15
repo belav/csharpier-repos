@@ -18,15 +18,15 @@
 ===========================================================*/
 
 using System;
-using System.Text;
+using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Security;
+using System.Text;
+using System.Threading;
 using Microsoft.Win32;
 using Microsoft.Win32.SafeHandles;
-using System.Runtime.CompilerServices;
-using System.Runtime.Versioning;
-using System.Threading;
-using System.Diagnostics.Contracts;
 
 namespace System.IO
 {

@@ -31,16 +31,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.Hosting;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.Permissions;
-using System.Runtime.Serialization.Formatters.Binary;
-
-using System.Runtime.Hosting;
 using System.Security.Policy;
 
 namespace System

@@ -27,48 +27,6 @@
 //	George Giolfan (georgegiolfan@yahoo.com)
 //
 
-using gpointer = System.IntPtr;
-using gboolean = System.Boolean;
-using gint = System.Int32;
-using guint = System.UInt32;
-using guint8 = System.Byte;
-using guint16 = System.UInt16;
-using guint32 = System.UInt32;
-using gfloat = System.Single;
-using gdouble = System.Double;
-
-using PangoFontDescriptionPointer = System.IntPtr;
-
-using GDataPointer = System.IntPtr;
-using GObjectPointer = System.IntPtr;
-using GSListPointer = System.IntPtr;
-using GType = System.IntPtr;
-using GTypeClassPointer = System.IntPtr;
-using GTypeInstancePointer = System.IntPtr;
-
-using GdkColormapPointer = System.IntPtr;
-using GdkDrawablePointer = System.IntPtr;
-using GdkGCPointer = System.IntPtr;
-using GdkNativeWindowPointer = System.IntPtr;
-using GdkPixbufPointer = System.IntPtr;
-using GdkPixmapPointer = System.IntPtr;
-using GdkWindowPointer = System.IntPtr;
-
-using GtkAdjustmentPointer = System.IntPtr;
-using GtkBinPointer = System.IntPtr;
-using GtkContainerPointer = System.IntPtr;
-using GtkObjectPointer = System.IntPtr;
-using GtkStylePointer = System.IntPtr;
-using GtkToolbarPointer = System.IntPtr;
-using GtkToolItemPointer = System.IntPtr;
-using GtkTreeViewPointer = System.IntPtr;
-using GtkTreeViewColumnPointer = System.IntPtr;
-using GtkWidgetPointer = System.IntPtr;
-using GtkWindowPointer = System.IntPtr;
-
-using GtkAllocation = System.Windows.Forms.VisualStyles.GtkPlus.GdkRectangle;
-using GInitiallyUnowned = System.Windows.Forms.VisualStyles.GtkPlus.GObject;
-
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -76,6 +34,42 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using gboolean = System.Boolean;
+using GDataPointer = System.IntPtr;
+using GdkColormapPointer = System.IntPtr;
+using GdkDrawablePointer = System.IntPtr;
+using GdkGCPointer = System.IntPtr;
+using GdkNativeWindowPointer = System.IntPtr;
+using GdkPixbufPointer = System.IntPtr;
+using GdkPixmapPointer = System.IntPtr;
+using GdkWindowPointer = System.IntPtr;
+using gdouble = System.Double;
+using gfloat = System.Single;
+using GInitiallyUnowned = System.Windows.Forms.VisualStyles.GtkPlus.GObject;
+using gint = System.Int32;
+using GObjectPointer = System.IntPtr;
+using gpointer = System.IntPtr;
+using GSListPointer = System.IntPtr;
+using GtkAdjustmentPointer = System.IntPtr;
+using GtkAllocation = System.Windows.Forms.VisualStyles.GtkPlus.GdkRectangle;
+using GtkBinPointer = System.IntPtr;
+using GtkContainerPointer = System.IntPtr;
+using GtkObjectPointer = System.IntPtr;
+using GtkStylePointer = System.IntPtr;
+using GtkToolbarPointer = System.IntPtr;
+using GtkToolItemPointer = System.IntPtr;
+using GtkTreeViewColumnPointer = System.IntPtr;
+using GtkTreeViewPointer = System.IntPtr;
+using GtkWidgetPointer = System.IntPtr;
+using GtkWindowPointer = System.IntPtr;
+using GType = System.IntPtr;
+using GTypeClassPointer = System.IntPtr;
+using GTypeInstancePointer = System.IntPtr;
+using guint = System.UInt32;
+using guint16 = System.UInt16;
+using guint32 = System.UInt32;
+using guint8 = System.Byte;
+using PangoFontDescriptionPointer = System.IntPtr;
 
 namespace System.Windows.Forms.VisualStyles
 {

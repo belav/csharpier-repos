@@ -15,8 +15,8 @@
 ============================================================*/
 namespace System.Runtime.Serialization
 {
-    using System.Reflection;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
 
     internal class ValueTypeFixupInfo
     {

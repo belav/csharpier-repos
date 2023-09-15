@@ -3,16 +3,16 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
-    using System.Xml;
+    using System.Collections.ObjectModel;
+    using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.MsmqIntegration;
-    using System.Runtime;
+    using System.Xml;
 
     class PartialTrustValidationBehavior : IServiceBehavior, IEndpointBehavior
     {

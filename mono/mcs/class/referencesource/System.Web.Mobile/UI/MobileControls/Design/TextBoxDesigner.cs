@@ -12,9 +12,8 @@ namespace System.Web.UI.Design.MobileControls
     using System.IO;
     using System.Web.UI;
     using System.Web.UI.Design;
-
-    using System.Web.UI.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Adapters;
+    using System.Web.UI.MobileControls.Adapters;
 
     /// <summary>
     ///    <para>

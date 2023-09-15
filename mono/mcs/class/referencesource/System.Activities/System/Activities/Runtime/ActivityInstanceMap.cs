@@ -5,14 +5,14 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
-    using System.Runtime.Serialization;
     using System.Activities.DynamicUpdate;
     using System.Activities.Statements;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract(Name = XD.Runtime.ActivityInstanceMap, Namespace = XD.Runtime.Namespace)]
     class ActivityInstanceMap

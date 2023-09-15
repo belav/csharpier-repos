@@ -37,9 +37,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-#if !MOBILE
-using System.Data;
-#endif
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -49,6 +46,10 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using NUnit.Framework;
+#if !MOBILE
+using System.Data;
+#endif
+
 
 [assembly: ContractNamespace(
     "http://www.u2u.be/samples/wcf/2009",

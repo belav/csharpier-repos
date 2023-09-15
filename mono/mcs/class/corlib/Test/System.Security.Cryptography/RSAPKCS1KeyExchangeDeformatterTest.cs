@@ -8,9 +8,9 @@
 // Copyright (C) 2004-2006 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Security.Cryptography;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography
 {

@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Configuration;
-    using System.ServiceModel;
     using System.Security;
-    using System.Collections.Generic;
+    using System.ServiceModel;
     using System.ServiceModel.Description;
 
     public partial class StandardEndpointCollectionElement<

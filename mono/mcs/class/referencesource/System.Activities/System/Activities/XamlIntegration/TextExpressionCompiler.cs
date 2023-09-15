@@ -5,30 +5,30 @@
 namespace System.Activities.XamlIntegration
 {
     using System;
-    using System.Text;
     using System.Activities;
+    using System.Activities.Debugger;
+    using System.Activities.Debugger.Symbol;
+    using System.Activities.Expressions;
     using System.Activities.Statements;
     using System.Activities.Validation;
-    using System.Reflection;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.ComponentModel;
     using System.Collections.Generic;
-    using Microsoft.VisualBasic.Activities;
-    using Microsoft.VisualBasic;
-    using System.Windows.Markup;
-    using System.Xaml;
-    using System.Activities.Debugger;
-    using System.IO;
-    using System.Activities.Expressions;
-    using System.Runtime;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
-    using System.Activities.Debugger.Symbol;
-    using System.Linq.Expressions;
-    using System.Diagnostics;
+    using System.Text;
+    using System.Windows.Markup;
+    using System.Xaml;
+    using Microsoft.VisualBasic;
+    using Microsoft.VisualBasic.Activities;
 
     public class TextExpressionCompiler
     {

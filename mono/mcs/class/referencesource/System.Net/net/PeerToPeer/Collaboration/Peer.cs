@@ -10,17 +10,17 @@ namespace System.Net.PeerToPeer.Collaboration
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Net.Sockets;
-    using System.Net.Mail;
     using System.ComponentModel;
-    using System.Threading;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Net.Mail;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.IO;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// This is the object changed event args class we give back when

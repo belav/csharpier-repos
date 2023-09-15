@@ -4,11 +4,11 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32;
-    using System.Reflection;
     using System.Collections.Generic;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Threading;
+    using Microsoft.Win32;
 
     [
         System.Security.SuppressUnmanagedCodeSecurity,

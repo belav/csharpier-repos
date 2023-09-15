@@ -13,13 +13,12 @@
 #endif
 
 #if ES_BUILD_STANDALONE
-using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
-#endif
-
 using System;
+using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Collections.ObjectModel;
+using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
+#endif
 
 #if !ES_BUILD_AGAINST_DOTNET_V35
 using Contract = System.Diagnostics.Contracts.Contract;

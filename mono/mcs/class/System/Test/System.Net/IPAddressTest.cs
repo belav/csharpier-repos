@@ -10,11 +10,11 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-using NUnit.Framework;
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net
 {

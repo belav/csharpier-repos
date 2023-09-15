@@ -15,10 +15,10 @@
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    using System.Runtime.Serialization.Formatters;
+    using System;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
-    using System;
+    using System.Runtime.Serialization.Formatters;
 
     // BinaryHeaderEnum is the first byte on binary records
     // (except for primitive types which do not have a header)

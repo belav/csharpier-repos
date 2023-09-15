@@ -3,14 +3,14 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.Diagnostics;
-    using System.ServiceModel.Channels;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Runtime.Serialization;
-    using System.Xml.XPath;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.Xml.XPath;
 
     /// <summary>
     /// Multi-reader, single writer

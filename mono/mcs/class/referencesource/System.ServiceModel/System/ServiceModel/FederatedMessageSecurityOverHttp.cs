@@ -4,6 +4,7 @@
 namespace System.ServiceModel
 {
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.Runtime.CompilerServices;
@@ -11,7 +12,6 @@ namespace System.ServiceModel
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.ComponentModel;
 
     public sealed class FederatedMessageSecurityOverHttp
     {

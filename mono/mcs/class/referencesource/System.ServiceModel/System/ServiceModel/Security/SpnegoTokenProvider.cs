@@ -14,11 +14,10 @@ namespace System.ServiceModel.Security
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
-    using System.ServiceModel.Description;
 
     class SpnegoTokenProvider : SspiNegotiationTokenProvider
     {

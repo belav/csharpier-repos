@@ -38,7 +38,6 @@
 
 using System;
 using System.Security.Cryptography;
-
 using Mono.Math;
 
 namespace Mono.Security.Cryptography

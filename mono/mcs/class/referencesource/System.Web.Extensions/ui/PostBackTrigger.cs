@@ -11,8 +11,8 @@ namespace System.Web.UI
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Web;
-    using System.Web.UI;
     using System.Web.Resources;
+    using System.Web.UI;
     using System.Web.Util;
 
     public class PostBackTrigger : UpdatePanelControlTrigger

@@ -3,7 +3,6 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Schema;
-
 using BF = System.Reflection.BindingFlags;
 
 class Dtd2XsdDriver

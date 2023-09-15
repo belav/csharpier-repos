@@ -4,8 +4,8 @@
 
 namespace System.Workflow.Activities
 {
-    using System.IdentityModel.Claims;
     using System.Collections.ObjectModel;
+    using System.IdentityModel.Claims;
 
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"

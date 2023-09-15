@@ -26,10 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-using Microsoft.Build.Construction;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using Microsoft.Build.Construction;
+using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Internal
 {

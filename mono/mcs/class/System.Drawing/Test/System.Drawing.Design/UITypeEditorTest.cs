@@ -26,11 +26,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Drawing;
 using System.Drawing.Design;
+using NUnit.Framework;
 
 namespace MonoTests.System.Drawing.Design
 {

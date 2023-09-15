@@ -6,8 +6,8 @@ namespace System.ServiceModel.Activation
 {
     using System;
     using System.IO;
-    using System.Runtime.Serialization;
     using System.Net.Sockets;
+    using System.Runtime.Serialization;
 
     [DataContract]
     [KnownType(typeof(TcpDuplicateContext))]

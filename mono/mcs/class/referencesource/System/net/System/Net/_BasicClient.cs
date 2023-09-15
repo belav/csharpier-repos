@@ -6,9 +6,9 @@
 
 namespace System.Net
 {
-    using System.Text;
     using System.Globalization;
     using System.Security.Permissions;
+    using System.Text;
 
     internal class BasicClient : IAuthenticationModule
     {

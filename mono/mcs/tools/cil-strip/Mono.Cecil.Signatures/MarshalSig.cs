@@ -29,7 +29,6 @@
 namespace Mono.Cecil.Signatures
 {
     using System;
-
     using Mono.Cecil;
 
     internal sealed class MarshalSig

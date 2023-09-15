@@ -7,9 +7,9 @@ namespace System.ServiceModel.Activities
     using System.Activities;
     using System.Activities.Debugger;
     using System.Activities.DynamicUpdate;
-    using System.Activities.XamlIntegration;
     using System.Activities.Statements;
     using System.Activities.Validation;
+    using System.Activities.XamlIntegration;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;

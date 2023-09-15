@@ -7,9 +7,9 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Xml;
-    using System.ServiceModel.Description;
     using System.Net.Security;
+    using System.ServiceModel.Description;
+    using System.Xml;
 
     static class ContextBindingElementPolicy
     {

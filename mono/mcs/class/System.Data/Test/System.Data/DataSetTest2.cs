@@ -28,18 +28,17 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.Text;
-using System.IO;
 using System.Data;
-using MonoTests.System.Data.Utils;
-using System.Xml;
+using System.Globalization;
+using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Globalization;
-
+using System.Text;
+using System.Xml;
 using MonoTests.Helpers;
+using MonoTests.System.Data.Utils;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {

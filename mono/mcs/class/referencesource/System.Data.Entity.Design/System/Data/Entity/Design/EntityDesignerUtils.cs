@@ -7,11 +7,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Data.Mapping;
+using System.Data.Metadata.Edm;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
-using System.Data.Mapping;
 
 namespace System.Data.Entity.Design
 {

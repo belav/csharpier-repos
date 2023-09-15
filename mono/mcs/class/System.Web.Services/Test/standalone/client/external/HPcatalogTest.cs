@@ -2,8 +2,8 @@
 // http://www.lixusnet.com/lixusnet/HPcatalog.jws?wsdl
 
 using System;
-using NUnit.Framework;
 using HPcatalogTests.Soap;
+using NUnit.Framework;
 
 namespace External.HPcatalogTests
 {

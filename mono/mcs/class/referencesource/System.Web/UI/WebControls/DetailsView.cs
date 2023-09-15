@@ -11,17 +11,17 @@ namespace System.Web.UI.WebControls
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing.Design;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Security.Permissions;
     using System.Text;
-    using System.Web.UI.Adapters;
-    using System.Web.Util;
-    using System.Web.UI.WebControls.Adapters;
-    using System.Diagnostics.CodeAnalysis;
     using System.Web.Security.Cryptography;
+    using System.Web.UI.Adapters;
+    using System.Web.UI.WebControls.Adapters;
+    using System.Web.Util;
 
     /// <devdoc>
     ///    <para>

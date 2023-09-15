@@ -6,13 +6,13 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
-    using System.Runtime;
-    using System.ComponentModel;
+    using System.Activities.Hosting;
     using System.Activities.Persistence;
     using System.Collections.Generic;
-    using System.Xml.Linq;
-    using System.Activities.Hosting;
+    using System.ComponentModel;
+    using System.Runtime;
     using System.Threading;
+    using System.Xml.Linq;
 
     [Fx.Tag.XamlVisible(false)]
     public class DurableTimerExtension

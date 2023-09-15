@@ -8,10 +8,10 @@ namespace System.Web.UI.WebControls
     using System;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Web;
     using System.Web.UI;
     using System.Web.UI.WebControls;
     using System.Web.Util;
-    using System.Web;
 
     /// <devdoc>
     /// <para>ImageMap class.  Provides support for multiple

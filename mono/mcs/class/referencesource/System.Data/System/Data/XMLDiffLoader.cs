@@ -10,17 +10,17 @@
 namespace System.Data
 {
     using System;
-    using System.Runtime.Serialization.Formatters;
-    using System.Configuration.Assemblies;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
-    using System.IO;
     using System.Collections;
-    using System.Globalization;
-    using Microsoft.Win32;
     using System.ComponentModel;
+    using System.Configuration.Assemblies;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters;
     using System.Xml;
     using System.Xml.Serialization;
+    using Microsoft.Win32;
 
     internal sealed class XMLDiffLoader
     {

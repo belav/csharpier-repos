@@ -8,17 +8,17 @@
 namespace System.Net
 {
     using System.Collections;
+    using System.Diagnostics.Tracing;
+    using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.Net.Sockets;
     using System.Net.Cache;
-    using System.Threading;
+    using System.Net.Sockets;
     using System.Security;
+    using System.Security.Authentication;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
-    using System.Security.Authentication;
-    using System.Globalization;
-    using System.Diagnostics.Tracing;
+    using System.Text;
+    using System.Threading;
 
     /// <summary>
     /// <para>Allows us to control what the request is used for (based on the type of behavior,

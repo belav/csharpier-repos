@@ -28,9 +28,9 @@
 
 using System;
 using System.Collections.Generic;
-using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths;
 using Mono.CodeContracts.Static.Analysis.Numerical;
+using Mono.CodeContracts.Static.AST;
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;
 using Mono.CodeContracts.Static.Providers;

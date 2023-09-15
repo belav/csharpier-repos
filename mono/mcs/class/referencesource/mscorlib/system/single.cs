@@ -14,15 +14,15 @@
 ===========================================================*/
 namespace System
 {
-    using System.Globalization;
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     ///#if GENERICS_WORK
     ///    using System.Numerics;
     ///#endif
     using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.StructLayout(LayoutKind.Sequential)]

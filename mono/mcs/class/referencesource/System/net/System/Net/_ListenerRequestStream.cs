@@ -6,12 +6,12 @@
 
 namespace System.Net
 {
+    using System.Collections;
+    using System.ComponentModel;
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.ComponentModel;
-    using System.Threading;
-    using System.Collections;
     using System.Security.Permissions;
+    using System.Threading;
     using System.Threading.Tasks;
 
     unsafe class HttpRequestStream : Stream

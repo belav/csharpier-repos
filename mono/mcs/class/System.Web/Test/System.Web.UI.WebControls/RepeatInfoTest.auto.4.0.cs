@@ -35,9 +35,8 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using NUnit.Framework;
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {

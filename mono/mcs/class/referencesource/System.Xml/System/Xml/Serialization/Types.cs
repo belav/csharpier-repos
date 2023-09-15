@@ -8,20 +8,20 @@
 namespace System.Xml.Serialization
 {
     using System;
-    using System.IO;
-    using System.Reflection;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Xml.Schema;
-    using System.Xml;
-    using System.Text;
-    using System.ComponentModel;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Xml.Serialization.Advanced;
-    using System.Globalization;
-    using System.Security.Cryptography;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization.Advanced;
 
     // These classes provide a higher level view on reflection specific to
     // Xml serialization, for example:

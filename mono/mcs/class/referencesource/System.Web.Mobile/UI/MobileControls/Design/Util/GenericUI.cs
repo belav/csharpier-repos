@@ -9,11 +9,11 @@ namespace System.Web.UI.Design.MobileControls.Util
     using System;
     using System.Collections;
     using System.ComponentModel;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Text;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-    using System.Text;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

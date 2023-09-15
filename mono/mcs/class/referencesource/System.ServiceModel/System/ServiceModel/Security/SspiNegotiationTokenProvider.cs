@@ -18,7 +18,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-
     using CanonicalizationDriver = System.IdentityModel.CanonicalizationDriver;
     using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;

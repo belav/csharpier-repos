@@ -4,17 +4,16 @@
 
 namespace System.IdentityModel
 {
-    using Microsoft.Win32.SafeHandles;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-
+    using Microsoft.Win32.SafeHandles;
     using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
     [SuppressUnmanagedCodeSecurity]

@@ -30,9 +30,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-
 using NUnit.Framework;
-
 using XPI = System.Xml.Linq.XProcessingInstruction;
 
 namespace MonoTests.System.Xml.Linq

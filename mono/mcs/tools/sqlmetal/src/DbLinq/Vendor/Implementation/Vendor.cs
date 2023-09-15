@@ -25,21 +25,20 @@
 #endregion
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-
+using System.Reflection;
+using System.Text;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
 
-using Data = DbLinq.Data;
 
+using Data = DbLinq.Data;
 using IExecuteResult = System.Data.Linq.IExecuteResult;
-using System.Text;
 
 namespace DbLinq.Vendor.Implementation
 {

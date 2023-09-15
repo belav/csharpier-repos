@@ -30,9 +30,9 @@
 
 using System.Collections;
 using System.ComponentModel;
+using System.Web.Services.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Web.Services.Configuration;
 
 namespace System.Web.Services.Description
 {

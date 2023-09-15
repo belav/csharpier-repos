@@ -12,7 +12,6 @@ using System.Text;
 using Mono.Security;
 using Mono.Security.Cryptography;
 using Mono.Security.X509;
-
 using NUnit.Framework;
 
 namespace MonoTests.Mono.Security

@@ -22,9 +22,8 @@
 //
 
 using System;
-using System.IO;
 using System.Collections;
-
+using System.IO;
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.Utils

@@ -28,16 +28,16 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 using System.Threading;
 using System.Transactions;
-using System.ServiceModel;
-using System.ServiceModel.Description;
-using System.Net.Sockets;
 using System.Xml;
-using System.IO;
 
 namespace System.ServiceModel.Dispatcher
 {

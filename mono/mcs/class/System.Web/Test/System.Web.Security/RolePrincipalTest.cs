@@ -32,7 +32,6 @@ using System;
 using System.Configuration.Provider;
 using System.Security.Principal;
 using System.Web.Security;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.Security

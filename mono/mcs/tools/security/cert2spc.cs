@@ -11,7 +11,6 @@
 using System;
 using System.IO;
 using System.Reflection;
-
 using Mono.Security.Authenticode;
 using Mono.Security.X509;
 

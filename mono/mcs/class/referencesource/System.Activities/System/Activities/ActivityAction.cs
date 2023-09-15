@@ -4,8 +4,8 @@
 
 namespace System.Activities
 {
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
 
     public sealed class ActivityAction : ActivityDelegate
     {

@@ -26,7 +26,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel.DataAnnotations

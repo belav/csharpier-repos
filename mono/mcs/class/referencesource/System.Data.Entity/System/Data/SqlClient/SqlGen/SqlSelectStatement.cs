@@ -9,8 +9,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Common.CommandTrees;
+using System.Diagnostics;
 
 namespace System.Data.SqlClient.SqlGen
 {

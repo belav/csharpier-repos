@@ -27,18 +27,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-using System.Reflection;
-
 using Mono.Messaging;
-
-using SystemMessageEnumerator = System.Messaging.MessageEnumerator;
-using SystemMessageQueueException = System.Messaging.MessageQueueException;
-using SystemIMessageFormatter = System.Messaging.IMessageFormatter;
-
 using NUnit.Framework;
 using NUnit.Mocks;
+using SystemIMessageFormatter = System.Messaging.IMessageFormatter;
+using SystemMessageEnumerator = System.Messaging.MessageEnumerator;
+using SystemMessageQueueException = System.Messaging.MessageQueueException;
 
 namespace MonoTests.Mono.Messaging
 {

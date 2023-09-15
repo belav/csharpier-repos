@@ -29,17 +29,16 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Reflection;
 using System.Web.Services;
 using System.Web.Services.Configuration;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
-
-using System.Collections.Generic;
 
 namespace System.Web.Services.Description
 {

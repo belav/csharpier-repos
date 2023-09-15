@@ -26,18 +26,14 @@
 
 using System;
 using System.Linq;
-
 using Mono.Data.Sqlite;
-
+using NUnit.Framework;
 using nwind;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-
-using NUnit.Framework;
 
 namespace Test_NUnit_Sqlite
 {

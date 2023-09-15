@@ -9,7 +9,6 @@
 
 using System;
 using System.Reflection;
-
 using Mono.Security.X509;
 
 [assembly: AssemblyTitle("Mono Set Registry")]

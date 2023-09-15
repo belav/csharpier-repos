@@ -13,11 +13,10 @@
  *
  * ***************************************************************************/
 using System;
-using Microsoft;
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft;
 #if CODEPLEX_40
 using System.Linq.Expressions;
 #else

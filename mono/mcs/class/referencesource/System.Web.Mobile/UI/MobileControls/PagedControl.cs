@@ -7,11 +7,11 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Diagnostics;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {

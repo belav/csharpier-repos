@@ -6,19 +6,19 @@
 
 namespace System.Diagnostics
 {
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Serialization;
+    using System;
     using System.ComponentModel;
     using System.Diagnostics;
-    using Microsoft.Win32;
-    using Microsoft.Win32.SafeHandles;
-    using System;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.IO;
-    using System.Globalization;
-    using System.Runtime.Versioning;
+    using System.Text;
+    using Microsoft.Win32;
+    using Microsoft.Win32.SafeHandles;
 
     /// <devdoc>
     ///    <para>

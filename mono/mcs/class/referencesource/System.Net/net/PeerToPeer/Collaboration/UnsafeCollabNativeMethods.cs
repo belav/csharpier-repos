@@ -7,15 +7,15 @@
 namespace System.Net.PeerToPeer.Collaboration
 {
     using System;
-    using System.Security.Permissions;
-    using System.Security.Cryptography.X509Certificates;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.InteropServices;
-    using Microsoft.Win32.SafeHandles;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Security;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Permissions;
+    using System.Text;
+    using Microsoft.Win32.SafeHandles;
 
     //
     // To manage any collaboration memory handle

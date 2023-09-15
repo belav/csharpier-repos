@@ -6,13 +6,13 @@
 namespace System.Diagnostics
 {
     using System;
-    using System.Security.Permissions;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Security.Permissions;
 
     // Class which handles code asserts.  Asserts are used to explicitly protect
     // assumptions made in the code.  In general if an assert fails, it indicates

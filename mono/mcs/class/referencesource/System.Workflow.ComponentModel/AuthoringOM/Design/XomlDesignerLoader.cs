@@ -3,17 +3,17 @@ namespace System.Workflow.ComponentModel.Design
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Serialization;
     using System.ComponentModel.Design.Serialization;
-    using System.IO;
-    using System.Windows.Forms;
     using System.Drawing.Design;
+    using System.IO;
     using System.Security.Permissions;
-    using System.Xml;
+    using System.Windows.Forms;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Collections.ObjectModel;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
 
     #region Class WorkflowDesignerLoader
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]

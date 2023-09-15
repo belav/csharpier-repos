@@ -31,10 +31,10 @@
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections;
-using System.ComponentModel.Design;
-using System.Reflection;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
+using System.Reflection;
 using System.Resources;
 
 namespace System.Resources.Tools

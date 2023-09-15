@@ -5,7 +5,9 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System.Activities.Presentation;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.Windows;
@@ -13,8 +15,6 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Windows.Input;
     using System.Windows.Threading;
     using System.Xml;
-    using System.Linq;
-    using System.Collections;
     using System.Xml.Linq;
 
     partial class ContentCorrelationTypeExpander

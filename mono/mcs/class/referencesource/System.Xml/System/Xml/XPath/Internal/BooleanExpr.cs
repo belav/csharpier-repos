@@ -8,11 +8,11 @@
 namespace MS.Internal.Xml.XPath
 {
     using System;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Xml;
     using System.Xml.XPath;
     using System.Xml.Xsl;
-    using System.Diagnostics;
-    using System.Globalization;
 
     internal sealed class BooleanExpr : ValueQuery
     {

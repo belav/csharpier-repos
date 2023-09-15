@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Activation
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.ObjectModel;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
 
     class HostedBindingBehavior : IServiceBehavior
     {

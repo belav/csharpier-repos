@@ -6,18 +6,18 @@
 
 namespace System.Web.Management
 {
-    using System.Configuration;
-    using System.Web.Configuration;
-    using System.Configuration.Provider;
-    using System.Collections.Specialized;
     using System.Collections;
-    using System.Web.Util;
-    using System.Web.Mail;
+    using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Configuration.Provider;
     using System.Globalization;
-    using System.Xml;
-    using System.Threading;
-    using System.Web.Hosting;
     using System.Security.Permissions;
+    using System.Threading;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Mail;
+    using System.Web.Util;
+    using System.Xml;
 
     public enum EventNotificationType
     {

@@ -5,14 +5,14 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System;
-    using System.ServiceModel;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.IdentityModel.Policy;
-    using System.IdentityModel.Claims;
     using System.Security.Principal;
+    using System.ServiceModel;
 
     class KerberosRequestorSecurityTokenAuthenticator : SecurityTokenAuthenticator
     {

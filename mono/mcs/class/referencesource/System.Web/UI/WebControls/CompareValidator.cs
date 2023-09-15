@@ -7,8 +7,8 @@
 namespace System.Web.UI.WebControls
 {
     using System.ComponentModel;
-    using System.Web;
     using System.Globalization;
+    using System.Web;
     using System.Web.Util;
 
     /// <devdoc>

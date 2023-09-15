@@ -11,11 +11,11 @@ namespace System.Diagnostics
 {
     using System;
     using System.Collections;
-    using System.Diagnostics;
-    using System.Xml;
     using System.Configuration;
-    using System.Reflection;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Reflection;
+    using System.Xml;
 
     /// <devdoc>
     ///    The configuration section handler for the diagnostics section of the configuration

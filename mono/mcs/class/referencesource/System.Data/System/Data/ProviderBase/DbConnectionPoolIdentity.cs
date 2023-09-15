@@ -14,11 +14,11 @@ namespace System.Data.ProviderBase
     using System.Globalization;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
     using System.Threading;
-    using System.Runtime.Versioning;
 
     [Serializable] // Serializable so SqlDependencyProcessDispatcher can marshall cross domain to SqlDependency.
     internal sealed class DbConnectionPoolIdentity

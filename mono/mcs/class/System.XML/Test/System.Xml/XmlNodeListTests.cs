@@ -10,9 +10,8 @@
 //
 
 using System;
-using System.Xml;
 using System.Collections;
-
+using System.Xml;
 using NUnit.Framework;
 
 namespace MonoTests.System.Xml

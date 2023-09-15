@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
     using System.Workflow.Runtime;
     using System.Workflow.Runtime.Hosting;
-    using System.Diagnostics;
 
     class WorkflowInstanceLifetimeManagerExtension : IExtension<ServiceHostBase>
     {

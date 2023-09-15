@@ -6,14 +6,14 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
+    using System.Activities.Expressions;
     using System.Activities.Validation;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Runtime;
     using System.Transactions;
     using System.Windows.Markup;
-    using System.Activities.Expressions;
-    using System.Collections.ObjectModel;
 
     [ContentProperty("Body")]
     public sealed class TransactionScope : NativeActivity

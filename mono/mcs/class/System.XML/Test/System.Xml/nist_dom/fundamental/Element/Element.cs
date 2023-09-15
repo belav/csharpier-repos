@@ -14,7 +14,6 @@
 //**************************************************************************
 using System;
 using System.Xml;
-
 using nist_dom;
 using NUnit.Framework;
 

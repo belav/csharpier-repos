@@ -7,8 +7,8 @@
 #if CONFIGURATION_DEP
 namespace System.Xml.Serialization.Configuration
 {
-    using System.Configuration;
     using System.Collections;
+    using System.Configuration;
     using System.Globalization;
     using System.Reflection;
     using System.Threading;

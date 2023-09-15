@@ -7,13 +7,13 @@
 
 namespace System.Xml
 {
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Text;
-    using System.Globalization;
-    using System.Xml.Schema;
-    using System.Diagnostics;
-    using System.Collections;
     using System.Text.RegularExpressions;
+    using System.Xml.Schema;
 
     // ExceptionType enum is used inside XmlConvert to specify which type of exception should be thrown at some of the verification and exception creating methods
     internal enum ExceptionType

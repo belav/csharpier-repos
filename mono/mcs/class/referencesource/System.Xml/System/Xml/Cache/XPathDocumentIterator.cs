@@ -5,9 +5,9 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.XPath;
-using System.Diagnostics;
 
 namespace MS.Internal.Xml.Cache
 {

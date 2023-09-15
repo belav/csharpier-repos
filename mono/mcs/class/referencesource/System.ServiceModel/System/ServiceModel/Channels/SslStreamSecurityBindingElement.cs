@@ -3,12 +3,12 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Security.Authentication;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Net.Security;
-    using System.ServiceModel.Description;
+    using System.Security.Authentication;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;

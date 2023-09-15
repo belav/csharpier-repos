@@ -28,15 +28,13 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Microsoft.Win32;
-
 using MonoTests.Microsoft.Win32;
+using NUnit.Framework;
 
 namespace MonoCasTests.Microsoft.Win32
 {

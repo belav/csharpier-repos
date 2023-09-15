@@ -4,13 +4,13 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Configuration;
-    using System.ServiceModel;
-    using System.Globalization;
-    using System.ServiceModel.Security;
     using System.ComponentModel;
-    using System.Text;
+    using System.Configuration;
+    using System.Globalization;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
+    using System.Text;
 
     public partial class WS2007HttpBindingElement : WSHttpBindingElement
     {

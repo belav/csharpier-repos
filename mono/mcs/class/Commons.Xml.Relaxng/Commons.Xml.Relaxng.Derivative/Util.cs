@@ -34,7 +34,6 @@
 using System;
 using System.Collections;
 using System.Xml;
-
 using QName = System.Xml.XmlQualifiedName;
 
 namespace Commons.Xml.Relaxng.Derivative

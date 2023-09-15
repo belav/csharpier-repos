@@ -1,8 +1,8 @@
 // Make sure that the field and accessor methods of an automatic property have the CompilerGenerated attribute
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
 
 public class Test
 {

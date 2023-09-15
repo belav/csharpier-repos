@@ -4,14 +4,14 @@
 
 namespace System.Activities.Statements
 {
+    using System.Activities;
+    using System.Activities.Validation;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.Windows.Markup;
-    using System.Activities;
-    using System.Activities.Validation;
     using SA = System.Activities;
 
     [ContentProperty("Body")]

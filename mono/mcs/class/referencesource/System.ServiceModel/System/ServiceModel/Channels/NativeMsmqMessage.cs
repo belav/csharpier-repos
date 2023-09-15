@@ -5,12 +5,12 @@ namespace System.ServiceModel.Channels
 {
     using System;
     using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.ServiceModel.Diagnostics;
     using System.Text;
     using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Security;
-    using System.Runtime.Serialization;
-    using System.ServiceModel.Diagnostics;
     using Microsoft.Win32.SafeHandles;
 
     abstract class NativeMsmqMessage : IDisposable

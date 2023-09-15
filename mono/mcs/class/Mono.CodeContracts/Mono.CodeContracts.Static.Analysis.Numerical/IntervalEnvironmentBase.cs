@@ -29,7 +29,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
 using Mono.CodeContracts.Static.DataStructures;
 using Mono.CodeContracts.Static.Lattices;
 

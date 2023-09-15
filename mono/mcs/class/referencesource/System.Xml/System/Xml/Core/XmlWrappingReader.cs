@@ -6,10 +6,10 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Diagnostics;
 using System.Xml;
 using System.Xml.Schema;
-using System.Diagnostics;
-using System.Collections;
 
 namespace System.Xml
 {

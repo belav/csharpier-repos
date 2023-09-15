@@ -10,7 +10,6 @@ namespace System.ServiceModel.Channels
     using System.Security;
     using System.Security.Principal;
     using System.Text;
-
     using SafeCloseHandle = System.ServiceModel.Activation.SafeCloseHandle;
 
     /// <summary>

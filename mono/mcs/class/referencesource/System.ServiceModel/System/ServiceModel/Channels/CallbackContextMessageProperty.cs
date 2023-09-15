@@ -11,10 +11,10 @@ namespace System.ServiceModel.Channels
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Net;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.Threading;
     using System.Xml;
-    using System.Runtime;
 
     [Serializable]
     public class CallbackContextMessageProperty : IMessageProperty

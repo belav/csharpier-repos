@@ -5,10 +5,10 @@
 namespace System.Activities.DurableInstancing
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
     using System.Xml.Linq;
-    using System.Diagnostics.CodeAnalysis;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class QueryActivatableWorkflowsCommand : InstancePersistenceCommand

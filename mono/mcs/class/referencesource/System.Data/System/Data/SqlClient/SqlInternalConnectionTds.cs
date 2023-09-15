@@ -14,6 +14,7 @@ namespace System.Data.SqlClient
     using System.Data.Common;
     using System.Data.ProviderBase;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
     using System.Runtime.CompilerServices;
@@ -23,9 +24,8 @@ namespace System.Data.SqlClient
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using SysTx = System.Transactions;
-    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
+    using SysTx = System.Transactions;
 
     internal class SessionStateRecord
     {

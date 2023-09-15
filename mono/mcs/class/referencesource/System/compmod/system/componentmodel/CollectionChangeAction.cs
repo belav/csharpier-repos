@@ -6,11 +6,9 @@
 
 namespace System.ComponentModel
 {
-    using System.ComponentModel;
-
-    using System.Diagnostics;
-
     using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Specifies how the collection is changed.</para>

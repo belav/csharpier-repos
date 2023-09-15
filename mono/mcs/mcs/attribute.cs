@@ -13,13 +13,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Text;
-using System.IO;
-
 #if STATIC
 using SecurityType = System.Collections.Generic.List<IKVM.Reflection.Emit.CustomAttributeBuilder>;
 using BadImageFormat = IKVM.Reflection.BadImageFormatException;

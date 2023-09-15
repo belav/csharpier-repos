@@ -76,8 +76,8 @@
 // Some notes:
 // The code only supports "natural" equality of vertices.
 
-using C5;
 using System;
+using C5;
 using SCG = System.Collections.Generic;
 
 namespace Graph

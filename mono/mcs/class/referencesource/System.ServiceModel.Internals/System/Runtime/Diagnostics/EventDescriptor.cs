@@ -1,8 +1,8 @@
 namespace System.Runtime.Diagnostics
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Explicit, Size = 16)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]

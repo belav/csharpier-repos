@@ -2,12 +2,12 @@ namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Collections.Generic;
 
     // This serializer will serialize any ICollection<String> object into code statements that constructs the collection.
     // The default serializer serializes the collection as resource because ICollection<String> is serializable.

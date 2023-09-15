@@ -12,8 +12,8 @@
 namespace Mono.Data.SqlSharp.Gui.GtkSharp
 {
     using System;
-    using System.Data;
     using System.Collections;
+    using System.Data;
 
     public class DbProviderCollection : MarshalByRefObject, IList, ICollection, IEnumerable
     {

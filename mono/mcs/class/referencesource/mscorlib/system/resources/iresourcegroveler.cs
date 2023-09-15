@@ -17,10 +17,10 @@
 namespace System.Resources
 {
     using System;
-    using System.Globalization;
-    using System.Threading;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Runtime.Versioning;
+    using System.Threading;
 
     internal interface IResourceGroveler
     {

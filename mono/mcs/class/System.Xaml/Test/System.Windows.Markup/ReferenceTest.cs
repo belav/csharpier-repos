@@ -30,7 +30,6 @@ using System.Windows.Markup;
 using System.Xaml;
 using System.Xaml.Schema;
 using NUnit.Framework;
-
 using Category = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.Windows.Markup

@@ -5,21 +5,21 @@
 namespace System.Activities.XamlIntegration
 {
     using System;
+    using System.Activities.Expressions;
+    using System.Activities.Validation;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Xaml;
-    using System.Xml;
+    using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
-    using System.Xaml.Permissions;
-    using System.Activities.Expressions;
-    using System.Activities.Validation;
-    using System.Runtime;
-    using System.Diagnostics.CodeAnalysis;
     using System.Text;
+    using System.Xaml;
+    using System.Xaml.Permissions;
+    using System.Xml;
 
     public static class ActivityXamlServices
     {

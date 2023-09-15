@@ -9,7 +9,6 @@ namespace System.ServiceModel.Transactions
     using System.ServiceModel.Channels;
     using System.Transactions;
     using System.Xml;
-
     using Microsoft.Transactions.Wsat.Messaging;
 
     class OleTxTransactionHeader : MessageHeader

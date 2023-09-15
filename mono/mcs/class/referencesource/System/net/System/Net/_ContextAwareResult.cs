@@ -6,10 +6,10 @@
 
 namespace System.Net
 {
-    using System.Threading;
     using System.Security;
-    using System.Security.Principal;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Threading;
 
     //
     // This is used by ContextAwareResult to cache callback closures between similar calls.  Create one of these and

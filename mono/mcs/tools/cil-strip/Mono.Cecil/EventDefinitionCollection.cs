@@ -33,7 +33,6 @@ namespace Mono.Cecil
 {
     using System;
     using System.Collections;
-
     using Mono.Cecil.Cil;
 
     internal sealed class EventDefinitionCollection : CollectionBase, IReflectionVisitable

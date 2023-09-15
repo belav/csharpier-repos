@@ -5,7 +5,6 @@
 namespace System.Activities.Hosting
 {
     using System;
-    using System.Text;
     using System.Activities.DynamicUpdate;
     using System.Activities.Runtime;
     using System.Activities.Tracking;
@@ -17,6 +16,7 @@ namespace System.Activities.Hosting
     using System.Globalization;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
+    using System.Text;
     using System.Threading;
     using System.Xml.Linq;
 

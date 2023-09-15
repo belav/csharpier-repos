@@ -7,8 +7,8 @@ namespace System.ServiceModel.Channels
     using System.Diagnostics;
     using System.Runtime;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     abstract class IdlingCommunicationPool<TKey, TItem> : CommunicationPool<TKey, TItem>
         where TKey : class

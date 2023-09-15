@@ -8,11 +8,11 @@
  */
 namespace System.ComponentModel.Design
 {
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
 
     /// <devdoc>
     ///    <para>

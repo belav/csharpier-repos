@@ -11,15 +11,16 @@
 namespace System.Security.Permissions
 {
     using System;
-#if FEATURE_CAS_POLICY
-    using SecurityElement = System.Security.SecurityElement;
-#endif // FEATURE_CAS_POLICY
-    using SiteString = System.Security.Util.SiteString;
-    using System.Text;
     using System.Collections;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Runtime.Serialization;
+    using System.Text;
+#if FEATURE_CAS_POLICY
+    using SecurityElement = System.Security.SecurityElement;
+#endif // FEATURE_CAS_POLICY
+
+    using SiteString = System.Security.Util.SiteString;
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]

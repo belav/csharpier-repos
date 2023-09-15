@@ -29,11 +29,11 @@
 
 namespace MonoTests.Mono.Data.Tds
 {
-    using NUnit.Framework;
-    using global::Mono.Data.Tds.Protocol;
     using System;
     using System.Net;
     using System.Net.Sockets;
+    using global::Mono.Data.Tds.Protocol;
+    using NUnit.Framework;
 
     [TestFixture]
     public class TdsConnectionPoolTest

@@ -5,12 +5,12 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Channels;
-    using System.Xml;
     using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
+    using System.Xml;
 
     public sealed partial class WindowsServiceElement : ConfigurationElement
     {

@@ -9,8 +9,8 @@ namespace System.Activities.DurableInstancing
     using System.Globalization;
     using System.Linq;
     using System.Runtime;
-    using System.Transactions;
     using System.Runtime.Diagnostics;
+    using System.Transactions;
 
     sealed class SqlCommandAsyncResult : TransactedAsyncResult
     {

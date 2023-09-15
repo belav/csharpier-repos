@@ -31,10 +31,8 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Web.Caching;
-
-using NUnit.Framework;
-
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.Caching
 {

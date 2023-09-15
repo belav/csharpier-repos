@@ -5,9 +5,9 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Xml;
-using System.Diagnostics;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Xml;
 
 namespace System.Xml.Xsl.Runtime
 {

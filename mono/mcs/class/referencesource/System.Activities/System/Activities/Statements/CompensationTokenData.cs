@@ -6,10 +6,10 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Runtime;
-    using System.Diagnostics.CodeAnalysis;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]

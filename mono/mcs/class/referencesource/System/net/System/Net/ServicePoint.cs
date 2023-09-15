@@ -6,16 +6,16 @@
 
 namespace System.Net
 {
-    using System.Net.Sockets;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
-    using System.Threading;
+    using System.Net.Security;
+    using System.Net.Sockets;
+    using System.Runtime.CompilerServices;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography.X509Certificates;
-    using System.Net.Security;
-    using System.Globalization;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
+    using System.Threading;
 
     public delegate IPEndPoint BindIPEndPoint(
         ServicePoint servicePoint,

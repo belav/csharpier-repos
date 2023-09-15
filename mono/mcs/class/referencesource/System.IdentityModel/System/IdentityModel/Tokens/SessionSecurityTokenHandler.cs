@@ -12,13 +12,13 @@ namespace System.IdentityModel.Tokens
     using System.IdentityModel.Selectors;
     using System.IO;
     using System.Runtime;
+    using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Claims;
+    using System.Security.Cryptography.X509Certificates;
     using System.ServiceModel.Security;
     using System.Xml;
     using SessionDictionary = System.IdentityModel.Claims.SessionDictionary;
     using SysUniqueId = System.Xml.UniqueId;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Runtime.Serialization.Formatters.Binary;
 
     /// <summary>
     /// A <see cref="SecurityTokenHandler"/> that processes <see cref="SessionSecurityToken"/>.

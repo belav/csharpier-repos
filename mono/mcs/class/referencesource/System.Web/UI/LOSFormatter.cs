@@ -142,20 +142,20 @@ namespace System.Web.UI
 
 namespace System.Web.UI
 {
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Runtime.Serialization;
     using System;
-    using System.IO;
-    using System.Security.Principal;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Threading;
-    using System.Text;
-    using System.Web.Configuration;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
     using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Configuration;
 
     /// <devdoc>
     ///    <para>Serializes Web Froms view state. The limited object serialization (LOS)

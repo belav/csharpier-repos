@@ -11,18 +11,16 @@
 extern alias MonoSecurity;
 #endif
 
-using System;
-using System.Collections;
-using System.Reflection;
+using System;using System.Collections;
 using System.Net.Security;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
-
-using MNS = Mono.Net.Security;
 #if MONO_SECURITY_ALIAS
 using MonoSecurity::Mono.Security.Interface;
 #else
 using Mono.Security.Interface;
+using MNS = Mono.Net.Security;
 #endif
 
 namespace Mono.AppleTls

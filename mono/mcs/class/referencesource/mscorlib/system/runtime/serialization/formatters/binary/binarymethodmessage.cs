@@ -8,8 +8,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
     using System.Collections;
-    using System.Runtime.Remoting.Messaging;
     using System.Reflection;
+    using System.Runtime.Remoting.Messaging;
 
     [Serializable]
     internal sealed class BinaryMethodCallMessage

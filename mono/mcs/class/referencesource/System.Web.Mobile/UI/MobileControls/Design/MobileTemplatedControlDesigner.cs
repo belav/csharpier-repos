@@ -23,9 +23,8 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Web.UI.MobileControls.Adapters;
-
-    using WebCtrlStyle = System.Web.UI.WebControls.Style;
     using DialogResult = System.Windows.Forms.DialogResult;
+    using WebCtrlStyle = System.Web.UI.WebControls.Style;
 
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,

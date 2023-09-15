@@ -1,6 +1,6 @@
-using System.Reflection;
-using System.Diagnostics;
 using System;
+using System.Diagnostics;
+using System.Reflection;
 
 [assembly: AssemblyVersion("2011.04.0.0")]
 [assembly: AssemblyFileVersion("2011.02.0.0")]

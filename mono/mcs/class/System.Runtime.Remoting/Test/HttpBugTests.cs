@@ -1,12 +1,11 @@
 using System;
-using System.Xml;
 using System.Collections;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Http;
-using NUnit.Framework;
-
+using System.Xml;
 using MonoTests.Helpers;
+using NUnit.Framework;
 
 namespace MonoTests.Remoting.Http
 {

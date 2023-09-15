@@ -6,17 +6,17 @@
 
 namespace System.Web.Services.Protocols
 {
-    using System.Diagnostics;
     using System;
-    using Microsoft.Win32;
-    //using System.Reflection;
-    using System.Web.UI;
     using System.ComponentModel; // for CompModSwitches
+    using System.Diagnostics;
     using System.IO;
-    using System.Web.Services.Configuration;
     using System.Security.Permissions;
     using System.Threading;
+    using System.Web.Services.Configuration;
     using System.Web.Services.Diagnostics;
+    //using System.Reflection;
+    using System.Web.UI;
+    using Microsoft.Win32;
 
     /// <include file='doc\WebServiceHandlerFactory.uex' path='docs/doc[@for="WebServiceHandlerFactory"]/*' />
     /// <devdoc>

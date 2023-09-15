@@ -10,16 +10,16 @@
 
 namespace System.Security.Util
 {
-    using System.Text;
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Globalization;
     using System.Runtime.Versioning;
-    using System.IO;
-    using System.Diagnostics.Contracts;
+    using System.Text;
 
     [Serializable]
     internal class StringExpressionSet

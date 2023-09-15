@@ -28,9 +28,9 @@
 //
 
 using System;
+using System.Configuration;
 using System.Web;
 using System.Web.Configuration;
-using System.Configuration;
 
 namespace System.Web.Profile
 {

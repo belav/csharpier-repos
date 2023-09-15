@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using System.Text;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace Mono.Security.Interface
 {

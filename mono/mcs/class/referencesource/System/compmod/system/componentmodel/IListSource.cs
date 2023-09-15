@@ -7,8 +7,8 @@
 namespace System.ComponentModel
 {
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

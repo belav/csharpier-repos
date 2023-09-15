@@ -27,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Globalization;
 using System.IO;
@@ -37,6 +35,7 @@ using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 using System.Threading;
+using NUnit.Framework;
 
 namespace MonoCasTests.System.Security.Cryptography.X509Certificates
 {

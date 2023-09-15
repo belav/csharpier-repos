@@ -30,14 +30,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-
+using System.Xml;
 using Microsoft.Build.Construction;
 using Microsoft.Build.Evaluation;
+using Microsoft.Build.Exceptions;
 using Microsoft.Build.Framework;
-using Microsoft.Build.Internal.Expressions;
-using Microsoft.Build.Logging;
-
 //
 // It is not always consistent to reuse Project and its evaluation stuff mostly because
 // both BuildParameters.ctor() and Project.ctor() takes arbitrary ProjectCollection, which are not very likely eqivalent
@@ -51,9 +50,8 @@ using Microsoft.Build.Logging;
 // ProjectCollection.GetLoadedProject() does not return any Project instnace for corresponding ProjectInstance
 // (or I should say, ProjectRootElement for both).
 using Microsoft.Build.Internal;
-using System.Xml;
-using Microsoft.Build.Exceptions;
-using System.IO;
+using Microsoft.Build.Internal.Expressions;
+using Microsoft.Build.Logging;
 
 namespace Microsoft.Build.Execution
 {

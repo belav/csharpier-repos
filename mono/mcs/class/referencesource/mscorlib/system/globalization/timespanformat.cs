@@ -7,10 +7,10 @@
 //
 namespace System.Globalization
 {
-    using System.Text;
     using System;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Text;
 
     internal static class TimeSpanFormat
     {

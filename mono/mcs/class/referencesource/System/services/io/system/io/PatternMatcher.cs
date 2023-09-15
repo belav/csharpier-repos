@@ -8,13 +8,11 @@
  */
 namespace System.IO
 {
-    using System.Text;
-
-    using System.Diagnostics;
-
     using System;
-    using Microsoft.Win32;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Text;
+    using Microsoft.Win32;
 
     internal static class PatternMatcher
     {

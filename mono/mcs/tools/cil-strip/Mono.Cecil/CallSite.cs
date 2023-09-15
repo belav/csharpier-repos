@@ -30,7 +30,6 @@ namespace Mono.Cecil
 {
     using System.Collections;
     using System.Text;
-
     using Mono.Cecil.Metadata;
 
     internal sealed class CallSite : IMethodSignature, IAnnotationProvider, IMetadataTokenProvider

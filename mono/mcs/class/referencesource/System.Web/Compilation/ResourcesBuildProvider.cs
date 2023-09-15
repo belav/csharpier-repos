@@ -7,8 +7,8 @@
 namespace System.Web.Compilation
 {
     using System;
-    using System.Resources;
     using System.IO;
+    using System.Resources;
 
     /// BuildProvider for .resources files
     internal class ResourcesBuildProvider : BaseResourcesBuildProvider

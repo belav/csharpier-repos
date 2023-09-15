@@ -23,8 +23,8 @@
 //	Andreia Gaita	avidigal@novell.com
 //
 
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace System.Windows.Forms
 {

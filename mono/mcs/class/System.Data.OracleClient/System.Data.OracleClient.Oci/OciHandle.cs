@@ -18,10 +18,10 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Security.Cryptography;
 using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace System.Data.OracleClient.Oci
 {

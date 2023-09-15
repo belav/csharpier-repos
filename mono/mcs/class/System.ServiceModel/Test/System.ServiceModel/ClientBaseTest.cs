@@ -40,7 +40,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using NUnit.Framework;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel

@@ -27,11 +27,11 @@
 //
 
 using System;
-using SC = System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
 using NUnit.Framework;
+using SC = System.ComponentModel;
 
 namespace MonoTests.System.Drawing.Drawing2D
 {
