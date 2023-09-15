@@ -12,21 +12,9 @@ namespace System.ServiceModel.ComIntegration
 
     interface IProvideChannelBuilderSettings
     {
-        ServiceChannelFactory ServiceChannelFactoryReadWrite
-        {
-            get;
-        }
-        ServiceChannelFactory ServiceChannelFactoryReadOnly
-        {
-            get;
-        }
-        KeyedByTypeCollection<IEndpointBehavior> Behaviors
-        {
-            get;
-        }
-        ServiceChannel ServiceChannel
-        {
-            get;
-        }
+        ServiceChannelFactory ServiceChannelFactoryReadWrite { get; }
+        ServiceChannelFactory ServiceChannelFactoryReadOnly { get; }
+        KeyedByTypeCollection<IEndpointBehavior> Behaviors { get; }
+        ServiceChannel ServiceChannel { get; }
     }
 }

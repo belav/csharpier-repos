@@ -37,4 +37,3 @@ namespace System.Runtime.Serialization
         }
     }
 }
-

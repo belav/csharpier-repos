@@ -10,12 +10,12 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    public sealed class StandardEndpointElementCollection<TEndpointConfiguration> : ServiceModelEnhancedConfigurationElementCollection<TEndpointConfiguration>
+    public sealed class StandardEndpointElementCollection<TEndpointConfiguration>
+        : ServiceModelEnhancedConfigurationElementCollection<TEndpointConfiguration>
         where TEndpointConfiguration : StandardEndpointElement, new()
     {
         public StandardEndpointElementCollection()
-            : base(ConfigurationStrings.StandardEndpoint)
-        { }
+            : base(ConfigurationStrings.StandardEndpoint) { }
 
         protected override Object GetElementKey(ConfigurationElement element)
         {
@@ -28,7 +28,4 @@ namespace System.ServiceModel.Configuration
             return configElementKey.Name;
         }
     }
-
 }
-
-

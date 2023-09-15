@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -19,12 +19,13 @@ namespace System.Linq.Parallel
     /// <summary>
     /// The base class from which all binary query operators derive, that is, those that
     /// have two child operators. This introduces some convenience methods for those
-    /// classes, as well as any state common to all subclasses. 
+    /// classes, as well as any state common to all subclasses.
     /// </summary>
     /// <typeparam name="TLeftInput"></typeparam>
     /// <typeparam name="TRightInput"></typeparam>
     /// <typeparam name="TOutput"></typeparam>
-    internal abstract class BinaryQueryOperator<TLeftInput, TRightInput, TOutput> : QueryOperator<TOutput>
+    internal abstract class BinaryQueryOperator<TLeftInput, TRightInput, TOutput>
+        : QueryOperator<TOutput>
     {
         // A set of child operators for the current node.
         private readonly QueryOperator<TLeftInput> m_leftChild;
@@ -35,12 +36,19 @@ namespace System.Linq.Parallel
         // Stores a set of child operators on this query node.
         //
 
-        internal BinaryQueryOperator(ParallelQuery<TLeftInput> leftChild, ParallelQuery<TRightInput> rightChild)
-            :this(QueryOperator<TLeftInput>.AsQueryOperator(leftChild), QueryOperator<TRightInput>.AsQueryOperator(rightChild))
-        {
-        }
+        internal BinaryQueryOperator(
+            ParallelQuery<TLeftInput> leftChild,
+            ParallelQuery<TRightInput> rightChild
+        )
+            : this(
+                QueryOperator<TLeftInput>.AsQueryOperator(leftChild),
+                QueryOperator<TRightInput>.AsQueryOperator(rightChild)
+            ) { }
 
-        internal BinaryQueryOperator(QueryOperator<TLeftInput> leftChild, QueryOperator<TRightInput> rightChild)
+        internal BinaryQueryOperator(
+            QueryOperator<TLeftInput> leftChild,
+            QueryOperator<TRightInput> rightChild
+        )
             : base(false, leftChild.SpecifiedQuerySettings.Merge(rightChild.SpecifiedQuerySettings))
         {
             Contract.Assert(leftChild != null && rightChild != null);
@@ -58,7 +66,7 @@ namespace System.Linq.Parallel
             get { return m_rightChild; }
         }
 
-        internal override sealed OrdinalIndexState OrdinalIndexState
+        internal sealed override OrdinalIndexState OrdinalIndexState
         {
             get { return m_indexState; }
         }
@@ -68,7 +76,6 @@ namespace System.Linq.Parallel
             m_indexState = indexState;
         }
 
-
         //---------------------------------------------------------------------------------------
         // This method wraps accepts two child partitioned streams, and constructs an output
         // partitioned stream. However, instead of returning the transformed partitioned
@@ -76,12 +83,16 @@ namespace System.Linq.Parallel
         // way, we can "return" a partitioned stream that uses an order key selected by the operator.
         //
         public abstract void WrapPartitionedStream<TLeftKey, TRightKey>(
-            PartitionedStream<TLeftInput, TLeftKey> leftPartitionedStream, PartitionedStream<TRightInput, TRightKey> rightPartitionedStream,
-            IPartitionedStreamRecipient<TOutput> outputRecipient, bool preferStriping, QuerySettings settings);
+            PartitionedStream<TLeftInput, TLeftKey> leftPartitionedStream,
+            PartitionedStream<TRightInput, TRightKey> rightPartitionedStream,
+            IPartitionedStreamRecipient<TOutput> outputRecipient,
+            bool preferStriping,
+            QuerySettings settings
+        );
 
         //---------------------------------------------------------------------------------------
         // Implementation of QueryResults for a binary operator. The results will not be indexible
-        // unless a derived class provides that functionality.        
+        // unless a derived class provides that functionality.
         //
 
         internal class BinaryQueryOperatorResults : QueryResults<TOutput>
@@ -93,9 +104,12 @@ namespace System.Linq.Parallel
             private bool m_preferStriping; // If the results are indexible, should we use striping when partitioning them
 
             internal BinaryQueryOperatorResults(
-                QueryResults<TLeftInput> leftChildQueryResults, QueryResults<TRightInput> rightChildQueryResults,
-                BinaryQueryOperator<TLeftInput, TRightInput, TOutput> op, QuerySettings settings,
-                bool preferStriping)
+                QueryResults<TLeftInput> leftChildQueryResults,
+                QueryResults<TRightInput> rightChildQueryResults,
+                BinaryQueryOperator<TLeftInput, TRightInput, TOutput> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
             {
                 m_leftChildQueryResults = leftChildQueryResults;
                 m_rightChildQueryResults = rightChildQueryResults;
@@ -104,28 +118,46 @@ namespace System.Linq.Parallel
                 m_preferStriping = preferStriping;
             }
 
-            internal override void GivePartitionedStream(IPartitionedStreamRecipient<TOutput> recipient)
+            internal override void GivePartitionedStream(
+                IPartitionedStreamRecipient<TOutput> recipient
+            )
             {
-                Contract.Assert(IsIndexible == (m_op.OrdinalIndexState == OrdinalIndexState.Indexible));
+                Contract.Assert(
+                    IsIndexible == (m_op.OrdinalIndexState == OrdinalIndexState.Indexible)
+                );
 
-                if (m_settings.ExecutionMode.Value == ParallelExecutionMode.Default && m_op.LimitsParallelism)
+                if (
+                    m_settings.ExecutionMode.Value == ParallelExecutionMode.Default
+                    && m_op.LimitsParallelism
+                )
                 {
                     // We need to run the query sequentially up to and including this operator
-                    IEnumerable<TOutput> opSequential = m_op.AsSequentialQuery(m_settings.CancellationState.ExternalCancellationToken);
+                    IEnumerable<TOutput> opSequential = m_op.AsSequentialQuery(
+                        m_settings.CancellationState.ExternalCancellationToken
+                    );
                     PartitionedStream<TOutput, int> result = ExchangeUtilities.PartitionDataSource(
-                        opSequential, m_settings.DegreeOfParallelism.Value, m_preferStriping);
+                        opSequential,
+                        m_settings.DegreeOfParallelism.Value,
+                        m_preferStriping
+                    );
                     recipient.Receive<int>(result);
                 }
                 else if (IsIndexible)
                 {
                     // The output of this operator is indexible. Pass the partitioned output into the IPartitionedStreamRecipient.
-                    PartitionedStream<TOutput, int> result = ExchangeUtilities.PartitionDataSource(this, m_settings.DegreeOfParallelism.Value, m_preferStriping);
+                    PartitionedStream<TOutput, int> result = ExchangeUtilities.PartitionDataSource(
+                        this,
+                        m_settings.DegreeOfParallelism.Value,
+                        m_preferStriping
+                    );
                     recipient.Receive<int>(result);
                 }
                 else
                 {
                     // The common case: get partitions from the child and wrap each partition.
-                    m_leftChildQueryResults.GivePartitionedStream(new LeftChildResultsRecipient(recipient, this, m_preferStriping, m_settings));
+                    m_leftChildQueryResults.GivePartitionedStream(
+                        new LeftChildResultsRecipient(recipient, this, m_preferStriping, m_settings)
+                    );
                 }
             }
 
@@ -142,8 +174,12 @@ namespace System.Linq.Parallel
                 bool m_preferStriping;
                 QuerySettings m_settings;
 
-                internal LeftChildResultsRecipient(IPartitionedStreamRecipient<TOutput> outputRecipient, BinaryQueryOperatorResults results, 
-                                                   bool preferStriping, QuerySettings settings)
+                internal LeftChildResultsRecipient(
+                    IPartitionedStreamRecipient<TOutput> outputRecipient,
+                    BinaryQueryOperatorResults results,
+                    bool preferStriping,
+                    QuerySettings settings
+                )
                 {
                     m_outputRecipient = outputRecipient;
                     m_results = results;
@@ -153,8 +189,14 @@ namespace System.Linq.Parallel
 
                 public void Receive<TLeftKey>(PartitionedStream<TLeftInput, TLeftKey> source)
                 {
-                    RightChildResultsRecipient<TLeftKey> rightChildRecipient = 
-                        new RightChildResultsRecipient<TLeftKey>(m_outputRecipient, m_results.m_op, source, m_preferStriping, m_settings);
+                    RightChildResultsRecipient<TLeftKey> rightChildRecipient =
+                        new RightChildResultsRecipient<TLeftKey>(
+                            m_outputRecipient,
+                            m_results.m_op,
+                            source,
+                            m_preferStriping,
+                            m_settings
+                        );
                     m_results.m_rightChildQueryResults.GivePartitionedStream(rightChildRecipient);
                 }
             }
@@ -168,7 +210,8 @@ namespace System.Linq.Parallel
             // WrapPartitionedStream method.
             //
 
-            private class RightChildResultsRecipient<TLeftKey> : IPartitionedStreamRecipient<TRightInput>
+            private class RightChildResultsRecipient<TLeftKey>
+                : IPartitionedStreamRecipient<TRightInput>
             {
                 IPartitionedStreamRecipient<TOutput> m_outputRecipient;
                 PartitionedStream<TLeftInput, TLeftKey> m_leftPartitionedStream;
@@ -177,8 +220,12 @@ namespace System.Linq.Parallel
                 QuerySettings m_settings;
 
                 internal RightChildResultsRecipient(
-                    IPartitionedStreamRecipient<TOutput> outputRecipient, BinaryQueryOperator<TLeftInput, TRightInput, TOutput> op,
-                    PartitionedStream<TLeftInput, TLeftKey> leftPartitionedStream, bool preferStriping, QuerySettings settings)
+                    IPartitionedStreamRecipient<TOutput> outputRecipient,
+                    BinaryQueryOperator<TLeftInput, TRightInput, TOutput> op,
+                    PartitionedStream<TLeftInput, TLeftKey> leftPartitionedStream,
+                    bool preferStriping,
+                    QuerySettings settings
+                )
                 {
                     m_outputRecipient = outputRecipient;
                     m_op = op;
@@ -187,12 +234,19 @@ namespace System.Linq.Parallel
                     m_settings = settings;
                 }
 
-                public void Receive<TRightKey>(PartitionedStream<TRightInput, TRightKey> rightPartitionedStream)
+                public void Receive<TRightKey>(
+                    PartitionedStream<TRightInput, TRightKey> rightPartitionedStream
+                )
                 {
-                    m_op.WrapPartitionedStream(m_leftPartitionedStream, rightPartitionedStream, m_outputRecipient, m_preferStriping, m_settings);
+                    m_op.WrapPartitionedStream(
+                        m_leftPartitionedStream,
+                        rightPartitionedStream,
+                        m_outputRecipient,
+                        m_preferStriping,
+                        m_settings
+                    );
                 }
             }
-
         }
     }
 }

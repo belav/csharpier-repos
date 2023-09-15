@@ -26,46 +26,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    using System.Collections;
 
-	using System.Collections;
+    using Mono.Cecil;
+    using Mono.Cecil.Metadata;
 
-	using Mono.Cecil;
-	using Mono.Cecil.Metadata;
+    internal class ModuleReference
+        : IMetadataScope,
+            IAnnotationProvider,
+            IReflectionStructureVisitable
+    {
+        string m_name;
+        MetadataToken m_token;
+        IDictionary m_annotations;
 
-	internal class ModuleReference : IMetadataScope, IAnnotationProvider, IReflectionStructureVisitable {
+        public string Name
+        {
+            get { return m_name; }
+            set { m_name = value; }
+        }
 
-		string m_name;
-		MetadataToken m_token;
-		IDictionary m_annotations;
+        public MetadataToken MetadataToken
+        {
+            get { return m_token; }
+            set { m_token = value; }
+        }
 
-		public string Name {
-			get { return m_name; }
-			set { m_name = value; }
-		}
+        IDictionary IAnnotationProvider.Annotations
+        {
+            get
+            {
+                if (m_annotations == null)
+                    m_annotations = new Hashtable();
+                return m_annotations;
+            }
+        }
 
-		public MetadataToken MetadataToken {
-			get { return m_token; }
-			set { m_token = value; }
-		}
+        public ModuleReference(string name)
+        {
+            m_name = name;
+        }
 
-		IDictionary IAnnotationProvider.Annotations {
-			get {
-				if (m_annotations == null)
-					m_annotations = new Hashtable ();
-				return m_annotations;
-			}
-		}
-
-		public ModuleReference (string name)
-		{
-			m_name = name;
-		}
-
-		public virtual void Accept (IReflectionStructureVisitor visitor)
-		{
-			visitor.VisitModuleReference (this);
-		}
-	}
+        public virtual void Accept(IReflectionStructureVisitor visitor)
+        {
+            visitor.VisitModuleReference(this);
+        }
+    }
 }
-

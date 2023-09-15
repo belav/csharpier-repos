@@ -19,9 +19,16 @@ namespace System.Activities.Core.Presentation
         public static void RegisterMetadata(AttributeTableBuilder builder)
         {
             Type type = typeof(CancellationScope);
-            builder.AddCustomAttributes(type, new DesignerAttribute(typeof(CancellationScopeDesigner)));
+            builder.AddCustomAttributes(
+                type,
+                new DesignerAttribute(typeof(CancellationScopeDesigner))
+            );
             builder.AddCustomAttributes(type, type.GetProperty("Body"), BrowsableAttribute.No);
-            builder.AddCustomAttributes(type, type.GetProperty("CancellationHandler"), BrowsableAttribute.No);
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("CancellationHandler"),
+                BrowsableAttribute.No
+            );
             builder.AddCustomAttributes(type, type.GetProperty("Variables"), BrowsableAttribute.No);
         }
     }

@@ -15,7 +15,6 @@ namespace System.Workflow.Activities
     using System.ServiceModel;
     using System.Workflow.ComponentModel.Compiler;
 
-
     internal class SendActivityDesignerTheme : ActivityDesignerTheme
     {
         public SendActivityDesignerTheme(WorkflowTheme theme)
@@ -27,7 +26,5 @@ namespace System.Workflow.Activities
             base.ForeColor = Color.FromArgb(80, 80, 80);
             base.BackgroundStyle = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
         }
-
     }
-
 }

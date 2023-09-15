@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,30 +38,38 @@ using Commons.Xml.Relaxng.Derivative;
 
 namespace Commons.Xml.Relaxng
 {
-	public class RelaxngException : Exception
-	{
-//		string debugXml;
+    public class RelaxngException : Exception
+    {
+        //		string debugXml;
 
-		public RelaxngException () : base () {}
-		public RelaxngException (string message) : base (message) {}
-		public RelaxngException (string message, Exception innerException)
-			: base (message, innerException) {}
-		internal RelaxngException (string message, RdpPattern invalidatedPattern)
-			: base (message)
-		{
-//			debugXml = RdpUtil.DebugRdpPattern (invalidatedPattern, new Hashtable ());
-		}
+        public RelaxngException()
+            : base() { }
 
-		public RelaxngException (RelaxngElementBase source, string message)
-			: this (source, message, null)
-		{
-		}
+        public RelaxngException(string message)
+            : base(message) { }
 
-		public RelaxngException (RelaxngElementBase source, string message, Exception innerException)
-			: base (message + String.Format (" {0} ({1}, {2})", source.BaseUri, source.LineNumber, source.LinePosition), innerException)
-		{
-		}
-	}
+        public RelaxngException(string message, Exception innerException)
+            : base(message, innerException) { }
 
+        internal RelaxngException(string message, RdpPattern invalidatedPattern)
+            : base(message)
+        {
+            //			debugXml = RdpUtil.DebugRdpPattern (invalidatedPattern, new Hashtable ());
+        }
+
+        public RelaxngException(RelaxngElementBase source, string message)
+            : this(source, message, null) { }
+
+        public RelaxngException(RelaxngElementBase source, string message, Exception innerException)
+            : base(
+                message
+                    + String.Format(
+                        " {0} ({1}, {2})",
+                        source.BaseUri,
+                        source.LineNumber,
+                        source.LinePosition
+                    ),
+                innerException
+            ) { }
+    }
 }
-

@@ -12,8 +12,7 @@ namespace System.ServiceModel
     {
         internal MsmqBindingElementBase transport;
 
-        protected MsmqBindingBase()
-        { }
+        protected MsmqBindingBase() { }
 
         [DefaultValue(typeof(System.TimeSpan), MsmqDefaults.ValidityDurationString)]
         public TimeSpan ValidityDuration
@@ -92,7 +91,10 @@ namespace System.ServiceModel
             set { transport.RetryCycleDelay = value; }
         }
 
-        public override string Scheme { get { return transport.Scheme; } }
+        public override string Scheme
+        {
+            get { return transport.Scheme; }
+        }
 
         [DefaultValue(typeof(System.TimeSpan), MsmqDefaults.TimeToLiveString)]
         public TimeSpan TimeToLive

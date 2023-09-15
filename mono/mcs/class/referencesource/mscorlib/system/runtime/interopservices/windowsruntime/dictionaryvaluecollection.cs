@@ -1,7 +1,7 @@
 ﻿///----------- ----------- ----------- ----------- ----------- -----------
 /// <copyright file="DictionaryValueCollection.cs" company="Microsoft">
 ///     Copyright (c) Microsoft Corporation.  All rights reserved.
-/// </copyright>                               
+/// </copyright>
 ///
 /// <owner>gpaperin</owner>
 ///----------- ----------- ----------- ----------- ----------- -----------
@@ -14,8 +14,8 @@ using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 
-
-namespace System.Runtime.InteropServices.WindowsRuntime {
+namespace System.Runtime.InteropServices.WindowsRuntime
+{
     [Serializable]
     [DebuggerDisplay("Count = {Count}")]
     internal sealed class DictionaryValueCollection<TKey, TValue> : ICollection<TValue>
@@ -37,9 +37,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime {
             if (index < 0)
                 throw new ArgumentOutOfRangeException("index");
             if (array.Length <= index && this.Count > 0)
-                throw new ArgumentException(Environment.GetResourceString("Arg_IndexOutOfRangeException"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_IndexOutOfRangeException")
+                );
             if (array.Length - index < dictionary.Count)
-                throw new ArgumentException(Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection")
+                );
 
             int i = index;
             foreach (KeyValuePair<TKey, TValue> mapping in dictionary)
@@ -48,22 +52,28 @@ namespace System.Runtime.InteropServices.WindowsRuntime {
             }
         }
 
-        public int Count {
+        public int Count
+        {
             get { return dictionary.Count; }
         }
 
-        bool ICollection<TValue>.IsReadOnly {
+        bool ICollection<TValue>.IsReadOnly
+        {
             get { return true; }
         }
 
         void ICollection<TValue>.Add(TValue item)
         {
-            throw new NotSupportedException(Environment.GetResourceString("NotSupported_ValueCollectionSet"));
+            throw new NotSupportedException(
+                Environment.GetResourceString("NotSupported_ValueCollectionSet")
+            );
         }
 
         void ICollection<TValue>.Clear()
         {
-            throw new NotSupportedException(Environment.GetResourceString("NotSupported_ValueCollectionSet"));
+            throw new NotSupportedException(
+                Environment.GetResourceString("NotSupported_ValueCollectionSet")
+            );
         }
 
         public bool Contains(TValue item)
@@ -77,7 +87,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime {
 
         bool ICollection<TValue>.Remove(TValue item)
         {
-            throw new NotSupportedException(Environment.GetResourceString("NotSupported_ValueCollectionSet"));
+            throw new NotSupportedException(
+                Environment.GetResourceString("NotSupported_ValueCollectionSet")
+            );
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -89,8 +101,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime {
         {
             return new DictionaryValueEnumerator<TKey, TValue>(dictionary);
         }
-    }  // public class DictionaryValueCollection<TKey, TValue>
-
+    } // public class DictionaryValueCollection<TKey, TValue>
 
     [Serializable]
     internal sealed class DictionaryValueEnumerator<TKey, TValue> : IEnumerator<TValue>
@@ -117,11 +128,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime {
             return enumeration.MoveNext();
         }
 
-        Object IEnumerator.Current {
+        Object IEnumerator.Current
+        {
             get { return ((IEnumerator<TValue>)this).Current; }
         }
 
-        public TValue Current {
+        public TValue Current
+        {
             get { return enumeration.Current.Value; }
         }
 
@@ -129,7 +142,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime {
         {
             enumeration = dictionary.GetEnumerator();
         }
-    }  // class DictionaryValueEnumerator<TKey, TValue>
+    } // class DictionaryValueEnumerator<TKey, TValue>
 }
 
 // DictionaryValueCollection.cs

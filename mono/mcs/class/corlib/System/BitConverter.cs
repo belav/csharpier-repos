@@ -6,18 +6,19 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-	public static partial class BitConverter
-	{
-		[Intrinsic]
-		public static readonly bool IsLittleEndian;
+    public static partial class BitConverter
+    {
+        [Intrinsic]
+        public static readonly bool IsLittleEndian;
 
-		static BitConverter ()
-		{
-			unsafe {
-				ushort i = 0x1234;
-				byte *b = (byte*)&i;
-				IsLittleEndian = (*b == 0x34);
-			}
-		}
-	}
+        static BitConverter()
+        {
+            unsafe
+            {
+                ushort i = 0x1234;
+                byte* b = (byte*)&i;
+                IsLittleEndian = (*b == 0x34);
+            }
+        }
+    }
 }

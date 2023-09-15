@@ -62,7 +62,7 @@ using RabbitMQ.Client.Exceptions;
 
 namespace RabbitMQ.Client.Impl
 {
-    public abstract class SessionBase: ISession
+    public abstract class SessionBase : ISession
     {
         private CommandHandler m_commandReceived;
 
@@ -78,8 +78,9 @@ namespace RabbitMQ.Client.Impl
             m_connection = connection;
             m_channelNumber = channelNumber;
             if (channelNumber != 0)
-                connection.ConnectionShutdown +=
-                    new ConnectionShutdownEventHandler(this.OnConnectionShutdown);
+                connection.ConnectionShutdown += new ConnectionShutdownEventHandler(
+                    this.OnConnectionShutdown
+                );
         }
 
         public virtual void OnCommandReceived(Command cmd)
@@ -99,8 +100,9 @@ namespace RabbitMQ.Client.Impl
         public virtual void OnSessionShutdown(ShutdownEventArgs reason)
         {
             //Console.WriteLine("Session shutdown "+ChannelNumber+": "+reason);
-            m_connection.ConnectionShutdown -=
-                new ConnectionShutdownEventHandler(this.OnConnectionShutdown);
+            m_connection.ConnectionShutdown -= new ConnectionShutdownEventHandler(
+                this.OnConnectionShutdown
+            );
             SessionShutdownEventHandler handler;
             lock (m_shutdownLock)
             {
@@ -115,7 +117,7 @@ namespace RabbitMQ.Client.Impl
 
         public override string ToString()
         {
-            return this.GetType().Name+"#" + m_channelNumber + ":" + m_connection;
+            return this.GetType().Name + "#" + m_channelNumber + ":" + m_connection;
         }
 
         //---------------------------------------------------------------------------
@@ -154,14 +156,29 @@ namespace RabbitMQ.Client.Impl
             }
         }
 
-        public int ChannelNumber { get { return m_channelNumber; } }
+        public int ChannelNumber
+        {
+            get { return m_channelNumber; }
+        }
 
-        IConnection ISession.Connection { get { return m_connection; } }
-        public ConnectionBase Connection { get { return m_connection; } }
+        IConnection ISession.Connection
+        {
+            get { return m_connection; }
+        }
+        public ConnectionBase Connection
+        {
+            get { return m_connection; }
+        }
 
-        public ShutdownEventArgs CloseReason { get { return m_closeReason; } }
+        public ShutdownEventArgs CloseReason
+        {
+            get { return m_closeReason; }
+        }
 
-        public bool IsOpen { get { return m_closeReason == null; } }
+        public bool IsOpen
+        {
+            get { return m_closeReason == null; }
+        }
 
         public abstract void HandleFrame(Frame frame);
 
@@ -172,7 +189,7 @@ namespace RabbitMQ.Client.Impl
                 if (m_closeReason != null)
                 {
                     if (!m_connection.Protocol.CanSendWhileClosed(cmd))
-                  	    throw new AlreadyClosedException(m_closeReason);
+                        throw new AlreadyClosedException(m_closeReason);
                 }
                 // We transmit *inside* the lock to avoid interleaving
                 // of frames within a channel.
@@ -184,7 +201,7 @@ namespace RabbitMQ.Client.Impl
         {
             Close(reason, true);
         }
-        
+
         public void Close(ShutdownEventArgs reason, bool notify)
         {
             lock (m_shutdownLock)
@@ -197,15 +214,15 @@ namespace RabbitMQ.Client.Impl
             if (notify)
                 OnSessionShutdown(m_closeReason);
         }
-        
+
         public void Notify()
         {
             // Ensure that we notify only when session is already closed
             // If not, throw exception, since this is a serious bug in the library
             lock (m_shutdownLock)
             {
-        	    if (m_closeReason == null)
-                    throw new Exception("Internal Error in Session.Close");   	
+                if (m_closeReason == null)
+                    throw new Exception("Internal Error in Session.Close");
             }
             OnSessionShutdown(m_closeReason);
         }

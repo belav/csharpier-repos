@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,113 +32,112 @@ using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class TimeSpanSecondsConverterTest
-	{
-		[Test]
-		public void CanConvertFrom ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class TimeSpanSecondsConverterTest
+    {
+        [Test]
+        public void CanConvertFrom()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
 
-			Assert.IsTrue (cv.CanConvertFrom (null, typeof (string)), "A1");
-			Assert.IsFalse (cv.CanConvertFrom (null, typeof (TimeSpan)), "A2");
-			Assert.IsFalse (cv.CanConvertFrom (null, typeof (int)), "A3");
-			Assert.IsFalse (cv.CanConvertFrom (null, typeof (object)), "A4");
-		}
+            Assert.IsTrue(cv.CanConvertFrom(null, typeof(string)), "A1");
+            Assert.IsFalse(cv.CanConvertFrom(null, typeof(TimeSpan)), "A2");
+            Assert.IsFalse(cv.CanConvertFrom(null, typeof(int)), "A3");
+            Assert.IsFalse(cv.CanConvertFrom(null, typeof(object)), "A4");
+        }
 
-		[Test]
-		public void CanConvertTo ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
+        [Test]
+        public void CanConvertTo()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
 
-			Assert.IsTrue (cv.CanConvertTo (null, typeof (string)), "A1");
-			Assert.IsFalse (cv.CanConvertTo (null, typeof (TimeSpan)), "A2");
-			Assert.IsFalse (cv.CanConvertTo (null, typeof (int)), "A3");
-			Assert.IsFalse (cv.CanConvertTo (null, typeof (object)), "A4");
-		}
+            Assert.IsTrue(cv.CanConvertTo(null, typeof(string)), "A1");
+            Assert.IsFalse(cv.CanConvertTo(null, typeof(TimeSpan)), "A2");
+            Assert.IsFalse(cv.CanConvertTo(null, typeof(int)), "A3");
+            Assert.IsFalse(cv.CanConvertTo(null, typeof(object)), "A4");
+        }
 
-		[Test]
-		public void ConvertFrom ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
-			object o;
+        [Test]
+        public void ConvertFrom()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
+            object o;
 
-			o = cv.ConvertFrom (null, null, "59");
-			Assert.AreEqual (typeof (TimeSpan), o.GetType(), "A1");
-			Assert.AreEqual ("00:00:59", o.ToString(), "A2");
-			o = cv.ConvertFrom (null, null, "104");
-			Assert.AreEqual ("00:01:44", o.ToString(), "A3");
-		}
+            o = cv.ConvertFrom(null, null, "59");
+            Assert.AreEqual(typeof(TimeSpan), o.GetType(), "A1");
+            Assert.AreEqual("00:00:59", o.ToString(), "A2");
+            o = cv.ConvertFrom(null, null, "104");
+            Assert.AreEqual("00:01:44", o.ToString(), "A3");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void ConvertFrom_FormatError ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
-			object o;
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConvertFrom_FormatError()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
+            object o;
 
-			o = cv.ConvertFrom (null, null, "100.5");
-			Assert.IsNull (o, "A1");
-		}
+            o = cv.ConvertFrom(null, null, "100.5");
+            Assert.IsNull(o, "A1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void ConvertFrom_TypeError ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
-			object o;
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConvertFrom_TypeError()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
+            object o;
 
-			o = cv.ConvertFrom (null, null, 59);
-			Assert.IsNull (o, "A1");
-		}
+            o = cv.ConvertFrom(null, null, 59);
+            Assert.IsNull(o, "A1");
+        }
 
-		[Test]
-		public void ConvertTo ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
-			TimeSpan ts;
+        [Test]
+        public void ConvertTo()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
+            TimeSpan ts;
 
-			ts = TimeSpan.FromSeconds (59);
-			Assert.AreEqual ("59", cv.ConvertTo (null, null, ts, typeof (string)), "A1");
+            ts = TimeSpan.FromSeconds(59);
+            Assert.AreEqual("59", cv.ConvertTo(null, null, ts, typeof(string)), "A1");
 
-			ts = TimeSpan.FromSeconds (144);
-			Assert.AreEqual ("144", cv.ConvertTo (null, null, ts, typeof (string)), "A2");
+            ts = TimeSpan.FromSeconds(144);
+            Assert.AreEqual("144", cv.ConvertTo(null, null, ts, typeof(string)), "A2");
 
-			ts = TimeSpan.FromMilliseconds (3900);
-			Assert.AreEqual ("3", cv.ConvertTo (null, null, ts, typeof (string)), "A2");
-		}
+            ts = TimeSpan.FromMilliseconds(3900);
+            Assert.AreEqual("3", cv.ConvertTo(null, null, ts, typeof(string)), "A2");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void ConvertTo_NullError ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void ConvertTo_NullError()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
 
-			Assert.AreEqual ("", cv.ConvertTo (null, null, null, typeof (string)), "A1");
-		}
+            Assert.AreEqual("", cv.ConvertTo(null, null, null, typeof(string)), "A1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void ConvertTo_TypeError1 ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConvertTo_TypeError1()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
 
-			Assert.AreEqual ("59", cv.ConvertTo (null, null, 59, typeof (string)), "A1");
-		}
+            Assert.AreEqual("59", cv.ConvertTo(null, null, 59, typeof(string)), "A1");
+        }
 
-		[Test]
-		public void ConvertTo_TypeError2 ()
-		{
-			TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter ();
-			TimeSpan ts;
+        [Test]
+        public void ConvertTo_TypeError2()
+        {
+            TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
+            TimeSpan ts;
 
-			ts = TimeSpan.FromSeconds (59);
+            ts = TimeSpan.FromSeconds(59);
 
-			Assert.AreEqual ("59", cv.ConvertTo (null, null, ts, typeof (int)), "A1");
-			Assert.AreEqual ("59", cv.ConvertTo (null, null, ts, null), "A2");
-		}
-
-	}
+            Assert.AreEqual("59", cv.ConvertTo(null, null, ts, typeof(int)), "A1");
+            Assert.AreEqual("59", cv.ConvertTo(null, null, ts, null), "A2");
+        }
+    }
 }
-

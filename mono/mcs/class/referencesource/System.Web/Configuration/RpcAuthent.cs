@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
     using System.Configuration;
     using System.Configuration.Internal;
@@ -22,7 +23,7 @@ namespace System.Web.Configuration {
     using System.Globalization;
 
     internal enum RpcAuthent
-    {                                    // RPC_C_AUTHN_xxx
+    { // RPC_C_AUTHN_xxx
         None = 0,
         DcePrivate = 1,
         DcePublic = 2,

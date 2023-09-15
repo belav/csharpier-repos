@@ -115,19 +115,13 @@ namespace RabbitMQ.Client.Content
         ///<summary>Retrieve the IBasicProperties associated with this instance.</summary>
         public IBasicProperties Properties
         {
-            get
-            {
-                return m_properties;
-            }
+            get { return m_properties; }
         }
 
         ///<summary>Implement IMessageReader.BodyBytes</summary>
         public byte[] BodyBytes
         {
-            get
-            {
-                return m_body;
-            }
+            get { return m_body; }
         }
 
         ///<summary>Implement IMessageReader.BodyStream</summary>

@@ -13,15 +13,19 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Security;
     using System.ComponentModel;
 
-    public sealed partial class NonDualMessageSecurityOverHttpElement : MessageSecurityOverHttpElement
+    public sealed partial class NonDualMessageSecurityOverHttpElement
+        : MessageSecurityOverHttpElement
     {
-        [ConfigurationProperty(ConfigurationStrings.EstablishSecurityContext, DefaultValue = NonDualMessageSecurityOverHttp.DefaultEstablishSecurityContext)]
+        [ConfigurationProperty(
+            ConfigurationStrings.EstablishSecurityContext,
+            DefaultValue = NonDualMessageSecurityOverHttp.DefaultEstablishSecurityContext
+        )]
         public bool EstablishSecurityContext
         {
             get { return (bool)base[ConfigurationStrings.EstablishSecurityContext]; }
             set { base[ConfigurationStrings.EstablishSecurityContext] = value; }
         }
-        
+
         internal void ApplyConfiguration(NonDualMessageSecurityOverHttp security)
         {
             base.ApplyConfiguration(security);
@@ -31,7 +35,10 @@ namespace System.ServiceModel.Configuration
         internal void InitializeFrom(NonDualMessageSecurityOverHttp security)
         {
             base.InitializeFrom(security);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.EstablishSecurityContext, security.EstablishSecurityContext);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.EstablishSecurityContext,
+                security.EstablishSecurityContext
+            );
         }
     }
 }

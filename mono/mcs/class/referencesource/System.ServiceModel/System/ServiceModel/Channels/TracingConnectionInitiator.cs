@@ -41,7 +41,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IAsyncResult BeginConnect(Uri uri, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginConnect(
+            Uri uri,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             using (ServiceModelActivity.BoundOperation(this.activity))
             {
@@ -54,7 +59,10 @@ namespace System.ServiceModel.Channels
         {
             using (ServiceModelActivity.BoundOperation(this.activity))
             {
-                TracingConnection connection = new TracingConnection(this.connectionInitiator.EndConnect(result), false);
+                TracingConnection connection = new TracingConnection(
+                    this.connectionInitiator.EndConnect(result),
+                    false
+                );
                 connection.ActivityStart(this.connectedUri);
                 return connection;
             }

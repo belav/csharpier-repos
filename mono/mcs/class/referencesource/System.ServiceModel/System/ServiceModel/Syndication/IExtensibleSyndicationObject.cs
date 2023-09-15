@@ -12,9 +12,7 @@ namespace System.ServiceModel.Syndication
 
     interface IExtensibleSyndicationObject
     {
-        Dictionary<XmlQualifiedName, string> AttributeExtensions 
-        { get; }
-        SyndicationElementExtensionCollection ElementExtensions 
-        { get; }
+        Dictionary<XmlQualifiedName, string> AttributeExtensions { get; }
+        SyndicationElementExtensionCollection ElementExtensions { get; }
     }
 }

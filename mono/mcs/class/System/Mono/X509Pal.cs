@@ -31,8 +31,8 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Mono
 {
-	static class X509Pal
-	{
-		public static X509PalImpl Instance => SystemDependencyProvider.Instance.X509Pal;
-	}
+    static class X509Pal
+    {
+        public static X509PalImpl Instance => SystemDependencyProvider.Instance.X509Pal;
+    }
 }

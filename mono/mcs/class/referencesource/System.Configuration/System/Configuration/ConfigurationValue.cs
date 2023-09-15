@@ -18,15 +18,20 @@ using System.ComponentModel;
 using System.Security;
 using System.Text;
 
-namespace System.Configuration {
-
-    internal class ConfigurationValue {
-
+namespace System.Configuration
+{
+    internal class ConfigurationValue
+    {
         internal ConfigurationValueFlags ValueFlags;
         internal object Value;
         internal PropertySourceInfo SourceInfo;
 
-        internal ConfigurationValue(object value, ConfigurationValueFlags valueFlags, PropertySourceInfo sourceInfo) {
+        internal ConfigurationValue(
+            object value,
+            ConfigurationValueFlags valueFlags,
+            PropertySourceInfo sourceInfo
+        )
+        {
             Value = value;
             ValueFlags = valueFlags;
             SourceInfo = sourceInfo;

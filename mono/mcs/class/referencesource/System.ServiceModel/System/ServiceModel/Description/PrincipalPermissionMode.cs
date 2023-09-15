@@ -19,7 +19,7 @@ namespace System.ServiceModel.Description
     {
         public static bool IsDefined(PrincipalPermissionMode principalPermissionMode)
         {
-            return Enum.IsDefined( typeof( PrincipalPermissionMode ), principalPermissionMode );
+            return Enum.IsDefined(typeof(PrincipalPermissionMode), principalPermissionMode);
         }
     }
 }

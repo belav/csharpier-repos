@@ -20,6 +20,4 @@ namespace System.Workflow.Activities
     using System.Transactions;
     using System.Collections.Specialized;
     using System.Workflow.ComponentModel.Compiler;
-
 }
-

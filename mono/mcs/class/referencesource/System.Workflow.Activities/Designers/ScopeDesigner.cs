@@ -18,5 +18,4 @@ namespace System.Workflow.Activities
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-
 }

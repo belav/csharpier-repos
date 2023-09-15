@@ -17,18 +17,12 @@ namespace System.ServiceModel.Security
     sealed class NonceToken : BinarySecretSecurityToken
     {
         public NonceToken(byte[] key)
-            : this(SecurityUniqueId.Create().Value, key)
-        {
-        }
+            : this(SecurityUniqueId.Create().Value, key) { }
 
         public NonceToken(string id, byte[] key)
-            : base(id, key, false)
-        {
-        }
+            : base(id, key, false) { }
 
         public NonceToken(int keySizeInBits)
-            : base(SecurityUniqueId.Create().Value, keySizeInBits, false)
-        {
-        }
+            : base(SecurityUniqueId.Create().Value, keySizeInBits, false) { }
     }
 }

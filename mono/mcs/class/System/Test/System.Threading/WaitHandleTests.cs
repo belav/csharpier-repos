@@ -4,14 +4,16 @@ using System;
 using System.Security.AccessControl;
 using System.Threading;
 
-namespace MonoTests.System.Threading {
+namespace MonoTests.System.Threading
+{
     [TestFixture]
-    public class WaitHandleTests {
+    public class WaitHandleTests
+    {
         SynchronizationContext OriginalContext;
         TestSynchronizationContext TestContext;
 
         [SetUp]
-        public void SetUp ()
+        public void SetUp()
         {
             OriginalContext = SynchronizationContext.Current;
             TestContext = new TestSynchronizationContext();
@@ -20,7 +22,7 @@ namespace MonoTests.System.Threading {
         }
 
         [TearDown]
-        public void TearDown ()
+        public void TearDown()
         {
             SynchronizationContext.SetSynchronizationContext(OriginalContext);
         }
@@ -29,7 +31,7 @@ namespace MonoTests.System.Threading {
 #if MONODROID
         [Ignore("https://github.com/mono/mono/issues/8349")]
 #endif
-        public void WaitHandle_WaitOne_SynchronizationContext ()
+        public void WaitHandle_WaitOne_SynchronizationContext()
         {
             var e = new ManualResetEvent(false);
             TestContext.WaitAction = () => e.Set();
@@ -37,11 +39,12 @@ namespace MonoTests.System.Threading {
         }
 
         [Test]
-        public void WaitHandle_WaitAll_SynchronizationContext ()
+        public void WaitHandle_WaitAll_SynchronizationContext()
         {
             var e1 = new ManualResetEvent(false);
             var e2 = new ManualResetEvent(false);
-            TestContext.WaitAction = () => {
+            TestContext.WaitAction = () =>
+            {
                 e1.Set();
                 e2.Set();
             };
@@ -53,16 +56,15 @@ namespace MonoTests.System.Threading {
     {
         public Action WaitAction { get; set; }
 
-        public new void SetWaitNotificationRequired ()
+        public new void SetWaitNotificationRequired()
         {
             base.SetWaitNotificationRequired();
         }
 
-        public override int Wait (IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
+        public override int Wait(IntPtr[] waitHandles, bool waitAll, int millisecondsTimeout)
         {
             WaitAction?.Invoke();
             return base.Wait(waitHandles, waitAll, millisecondsTimeout);
         }
     }
 }
-

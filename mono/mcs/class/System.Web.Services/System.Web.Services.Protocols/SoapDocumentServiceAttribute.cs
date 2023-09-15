@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.SoapDocumentServiceAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,59 +30,63 @@
 
 using System.Web.Services.Description;
 
-namespace System.Web.Services.Protocols {
-	[AttributeUsage (AttributeTargets.Class, Inherited = true)]
-	public sealed class SoapDocumentServiceAttribute : Attribute {
+namespace System.Web.Services.Protocols
+{
+    [AttributeUsage(AttributeTargets.Class, Inherited = true)]
+    public sealed class SoapDocumentServiceAttribute : Attribute
+    {
+        #region Fields
 
-		#region Fields
+        SoapParameterStyle paramStyle;
+        SoapServiceRoutingStyle routingStyle;
+        SoapBindingUse use;
 
-		SoapParameterStyle paramStyle;
-		SoapServiceRoutingStyle routingStyle;
-		SoapBindingUse use;
+        #endregion
 
-		#endregion
+        #region Constructors
 
-		#region Constructors
+        public SoapDocumentServiceAttribute()
+        {
+            paramStyle = SoapParameterStyle.Wrapped;
+            routingStyle = SoapServiceRoutingStyle.SoapAction;
+            use = SoapBindingUse.Literal;
+        }
 
-		public SoapDocumentServiceAttribute () 
-		{
-			paramStyle = SoapParameterStyle.Wrapped;
-			routingStyle = SoapServiceRoutingStyle.SoapAction;
-			use = SoapBindingUse.Literal;
-		}
+        public SoapDocumentServiceAttribute(SoapBindingUse use)
+            : this()
+        {
+            this.use = use;
+        }
 
-		public SoapDocumentServiceAttribute (SoapBindingUse use) 
-			: this ()
-		{
-			this.use = use;
-		}
+        public SoapDocumentServiceAttribute(SoapBindingUse use, SoapParameterStyle paramStyle)
+            : this()
+        {
+            this.use = use;
+            this.paramStyle = paramStyle;
+        }
 
-		public SoapDocumentServiceAttribute (SoapBindingUse use, SoapParameterStyle paramStyle) 
-			: this ()
-		{
-			this.use = use;
-			this.paramStyle = paramStyle;
-		}
-		
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public SoapParameterStyle ParameterStyle {
-			get { return paramStyle; }
-			set { paramStyle = value; }
-		}
+        public SoapParameterStyle ParameterStyle
+        {
+            get { return paramStyle; }
+            set { paramStyle = value; }
+        }
 
-		public SoapServiceRoutingStyle RoutingStyle {
-			get { return routingStyle; }
-			set { routingStyle = value; }
-		}
+        public SoapServiceRoutingStyle RoutingStyle
+        {
+            get { return routingStyle; }
+            set { routingStyle = value; }
+        }
 
-		public SoapBindingUse Use {
-			get { return use; }
-			set { use = value; }
-		}
+        public SoapBindingUse Use
+        {
+            get { return use; }
+            set { use = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

@@ -42,7 +42,10 @@ namespace System.ServiceModel.Channels
             ackTimer = new IOThreadTimer(new Action<object>(AcknowledgeLoop), null, false);
             pendingSends = 0;
             pruneTimer = new IOThreadTimer(new Action<object>(VerifyCheckPoint), null, false);
-            pruneInterval = TimeSpan.FromMilliseconds(PruneIntervalMilliseconds + new Random(Process.GetCurrentProcess().Id).Next(PruneIntervalMilliseconds));
+            pruneInterval = TimeSpan.FromMilliseconds(
+                PruneIntervalMilliseconds
+                    + new Random(Process.GetCurrentProcess().Id).Next(PruneIntervalMilliseconds)
+            );
         }
 
         public bool IsAccurate
@@ -52,10 +55,7 @@ namespace System.ServiceModel.Channels
 
         public uint LinkUtility
         {
-            get
-            {
-                return linkUtility;
-            }
+            get { return linkUtility; }
         }
 
         internal TypedMessageConverter MessageConverter
@@ -64,7 +64,10 @@ namespace System.ServiceModel.Channels
             {
                 if (messageConverter == null)
                 {
-                    messageConverter = TypedMessageConverter.Create(typeof(UtilityInfo), PeerStrings.LinkUtilityAction);
+                    messageConverter = TypedMessageConverter.Create(
+                        typeof(UtilityInfo),
+                        PeerStrings.LinkUtilityAction
+                    );
                 }
                 return messageConverter;
             }
@@ -76,17 +79,18 @@ namespace System.ServiceModel.Channels
             ackTimer.Set(PeerTransportConstants.AckTimeout);
         }
 
-        static public void OnNeighborConnected(IPeerNeighbor neighbor)
+        public static void OnNeighborConnected(IPeerNeighbor neighbor)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
             neighbor.Extensions.Add(new UtilityExtension());
         }
 
-        static public void OnNeighborClosed(IPeerNeighbor neighbor)
+        public static void OnNeighborClosed(IPeerNeighbor neighbor)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
             UtilityExtension ext = neighbor.Extensions.Find<UtilityExtension>();
-            if (ext != null) neighbor.Extensions.Remove(ext);
+            if (ext != null)
+                neighbor.Extensions.Remove(ext);
         }
 
         public void Detach(IPeerNeighbor host)
@@ -102,16 +106,14 @@ namespace System.ServiceModel.Channels
 
         public object ThisLock
         {
-            get
-            {
-                return thisLock;
-            }
+            get { return thisLock; }
         }
 
         public static void OnMessageSent(IPeerNeighbor neighbor)
         {
             UtilityExtension ext = neighbor.Extensions.Find<UtilityExtension>();
-            if (ext != null) ext.OnMessageSent();
+            if (ext != null)
+                ext.OnMessageSent();
         }
 
         void OnMessageSent()
@@ -148,7 +150,7 @@ namespace System.ServiceModel.Channels
                 ackTimer.Set(PeerTransportConstants.AckTimeout);
         }
 
-        static public void ProcessLinkUtility(IPeerNeighbor neighbor, UtilityInfo umessage)
+        public static void ProcessLinkUtility(IPeerNeighbor neighbor, UtilityInfo umessage)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
             UtilityExtension ext = neighbor.Extensions.Find<UtilityExtension>();
@@ -164,15 +166,20 @@ namespace System.ServiceModel.Channels
             uint i = 0;
             lock (ThisLock)
             {
-                if (total > PeerTransportConstants.AckWindow
+                if (
+                    total > PeerTransportConstants.AckWindow
                     || useful > total
                     || (uint)outTotal < total
-                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerLinkUtilityInvalidValues, useful, total)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.PeerLinkUtilityInvalidValues, useful, total)
+                        )
+                    );
                 }
 
-                //VERIFY with in this range, we are hoping that the order of useful/useless messages doesnt matter much. 
+                //VERIFY with in this range, we are hoping that the order of useful/useless messages doesnt matter much.
                 for (i = 0; i < useful; i++)
                 {
                     this.linkUtility = Calculate(this.linkUtility, true);
@@ -187,7 +194,6 @@ namespace System.ServiceModel.Channels
             {
                 UtilityInfoReceived(this, EventArgs.Empty);
             }
-
         }
 
         uint Calculate(uint current, bool increase)
@@ -240,7 +246,8 @@ namespace System.ServiceModel.Channels
         {
             if (inTotal == 0)
                 return;
-            uint tempUseful = 0, tempTotal = 0;
+            uint tempUseful = 0,
+                tempTotal = 0;
             lock (ThisLock)
             {
                 tempUseful = inUseful;
@@ -255,6 +262,7 @@ namespace System.ServiceModel.Channels
         {
             public Message message;
             public UtilityInfo info;
+
             public AsyncUtilityState(Message message, UtilityInfo info)
             {
                 this.message = message;
@@ -269,11 +277,18 @@ namespace System.ServiceModel.Channels
                 return;
             UtilityInfo umessage = new UtilityInfo(useful, total);
             IAsyncResult result = null;
-            Message message = MessageConverter.ToMessage(umessage, MessageVersion.Soap12WSAddressing10);
+            Message message = MessageConverter.ToMessage(
+                umessage,
+                MessageVersion.Soap12WSAddressing10
+            );
             bool fatal = false;
             try
             {
-                result = host.BeginSend(message, Fx.ThunkCallback(new AsyncCallback(UtilityMessageSent)), new AsyncUtilityState(message, umessage));
+                result = host.BeginSend(
+                    message,
+                    Fx.ThunkCallback(new AsyncCallback(UtilityMessageSent)),
+                    new AsyncUtilityState(message, umessage)
+                );
                 if (result.CompletedSynchronously)
                 {
                     host.EndSend(result);
@@ -350,9 +365,11 @@ namespace System.ServiceModel.Channels
 
         Exception HandleSendException(IPeerNeighbor host, Exception e, UtilityInfo umessage)
         {
-            if ((e is ObjectDisposedException) ||
-                (e is TimeoutException) ||
-                (e is CommunicationException))
+            if (
+                (e is ObjectDisposedException)
+                || (e is TimeoutException)
+                || (e is CommunicationException)
+            )
             {
                 if (!(!(e.InnerException is QuotaExceededException)))
                 {
@@ -369,10 +386,9 @@ namespace System.ServiceModel.Channels
             {
                 return e;
             }
-
         }
 
-        static internal void ReportCacheMiss(IPeerNeighbor neighbor, int missedBy)
+        internal static void ReportCacheMiss(IPeerNeighbor neighbor, int missedBy)
         {
             Fx.Assert(missedBy > AcceptableMissDistance, "Call this method for cache misses ONLY!");
             Fx.Assert(neighbor != null, "Neighbor must have a value");
@@ -399,10 +415,7 @@ namespace System.ServiceModel.Channels
 
         public int PendingMessages
         {
-            get
-            {
-                return this.pendingSends;
-            }
+            get { return this.pendingSends; }
         }
 
         public void BeginCheckPoint(PruneNeighborCallback pruneCallback)
@@ -422,7 +435,6 @@ namespace System.ServiceModel.Channels
                     return;
                 pruneTimer.Set(pruneInterval);
             }
-
         }
 
         void VerifyCheckPoint(object state)
@@ -460,7 +472,6 @@ namespace System.ServiceModel.Channels
                     this.expectedClearance = this.expectedClearance / 2;
                     pruneTimer.Set(pruneInterval);
                 }
-
             }
         }
     }

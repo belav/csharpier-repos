@@ -35,15 +35,10 @@ namespace System.Workflow.ComponentModel.Serialization
 
         public XmlReader XmlReader
         {
-            get
-            {
-                return this.reader;
-            }
+            get { return this.reader; }
         }
     }
     #endregion
 
     #endregion
-
 }
-

@@ -22,7 +22,10 @@ namespace System.ServiceModel.Administration
                 {
                     IWmiInstance instance = instances.NewInstance(null);
 
-                    string endpointRef = EndpointInstanceProvider.EndpointReference(endpointInfo.ListenUri, endpointInfo.Contract.Name);
+                    string endpointRef = EndpointInstanceProvider.EndpointReference(
+                        endpointInfo.ListenUri,
+                        endpointInfo.Contract.Name
+                    );
                     instance.SetProperty(AdministrationStrings.Endpoint, endpointRef);
                     instance.SetProperty(AdministrationStrings.Service, serviceRef);
 

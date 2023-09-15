@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,48 +27,46 @@ using System;
 using System.Collections.Generic;
 using System.Security.RightsManagement;
 
-namespace System.IO.Packaging {
+namespace System.IO.Packaging
+{
+    public class RightsManagementInformation
+    {
+        internal RightsManagementInformation() { }
 
-	public class RightsManagementInformation
-	{
-		internal RightsManagementInformation ()
-		{
-		}
+        public CryptoProvider CryptoProvider
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public CryptoProvider CryptoProvider {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public void DeleteUseLicense(ContentUser userKey)
+        {
+            throw new NotImplementedException();
+        }
 
-		public void DeleteUseLicense (ContentUser userKey)
-		{
-			throw new NotImplementedException ();
-		}
+        public IDictionary<ContentUser, UseLicense> GetEmbeddedUseLicenses()
+        {
+            throw new NotImplementedException();
+        }
 
-		public IDictionary<ContentUser, UseLicense> GetEmbeddedUseLicenses()
-		{
-			throw new NotImplementedException ();
-		}
+        public PublishLicense LoadPublishLicense()
+        {
+            throw new NotImplementedException();
+        }
 
-		public PublishLicense LoadPublishLicense ()
-		{
-			throw new NotImplementedException ();
-		}
+        public UseLicense LoadUseLicense(ContentUser userKey)
+        {
+            throw new NotImplementedException();
+        }
 
-		public UseLicense LoadUseLicense (ContentUser userKey)
-		{
-			throw new NotImplementedException ();
-		}
+        public void SavePublishLicense(PublishLicense publishLicense)
+        {
+            throw new NotImplementedException();
+        }
 
-		public void SavePublishLicense (PublishLicense publishLicense)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public void SaveUseLicense (ContentUser userKey, UseLicense useLicense)
-		{
-			throw new NotImplementedException ();
-		}
-	}
-
+        public void SaveUseLicense(ContentUser userKey, UseLicense useLicense)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

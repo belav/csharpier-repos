@@ -13,12 +13,10 @@ namespace System.IdentityModel.Selectors
     using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
     using DiagnosticUtility = Microsoft.InfoCards.Diagnostics.DiagnosticUtility;
 
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
-
 
     //
     // Summary:
@@ -86,12 +84,16 @@ namespace System.IdentityModel.Selectors
             using (HGlobalSafeHandle pInData = HGlobalSafeHandle.Construct(inData.Length))
             {
                 Marshal.Copy(inData, 0, pInData.DangerousGetHandle(), inData.Length);
-                int status = CardSpaceSelector.GetShim().m_csShimDecrypt(m_cryptoHandle.InternalHandle,
-                                                    fAOEP,
-                                                    inData.Length,
-                                                    pInData,
-                                                    out cbOutData,
-                                                    out pOutData);
+                int status = CardSpaceSelector
+                    .GetShim()
+                    .m_csShimDecrypt(
+                        m_cryptoHandle.InternalHandle,
+                        fAOEP,
+                        inData.Length,
+                        pInData,
+                        out cbOutData,
+                        out pOutData
+                    );
 
                 if (0 != status)
                 {
@@ -118,12 +120,16 @@ namespace System.IdentityModel.Selectors
             using (HGlobalSafeHandle pInData = HGlobalSafeHandle.Construct(inData.Length))
             {
                 Marshal.Copy(inData, 0, pInData.DangerousGetHandle(), inData.Length);
-                int status = CardSpaceSelector.GetShim().m_csShimEncrypt(m_cryptoHandle.InternalHandle,
-                                                    fAOEP,
-                                                    inData.Length,
-                                                    pInData,
-                                                    out cbOutData,
-                                                    out pOutData);
+                int status = CardSpaceSelector
+                    .GetShim()
+                    .m_csShimEncrypt(
+                        m_cryptoHandle.InternalHandle,
+                        fAOEP,
+                        inData.Length,
+                        pInData,
+                        out cbOutData,
+                        out pOutData
+                    );
 
                 if (0 != status)
                 {
@@ -150,16 +156,19 @@ namespace System.IdentityModel.Selectors
             {
                 using (HGlobalSafeHandle pHashAlgOid = HGlobalSafeHandle.Construct(hashAlgOid))
                 {
-
                     Marshal.Copy(hash, 0, pHash.DangerousGetHandle(), hash.Length);
 
                     RuntimeHelpers.PrepareConstrainedRegions();
-                    int status = CardSpaceSelector.GetShim().m_csShimSignHash(m_cryptoHandle.InternalHandle,
-                                                         hash.Length,
-                                                         pHash,
-                                                         pHashAlgOid,
-                                                         out cbSig,
-                                                         out pSig);
+                    int status = CardSpaceSelector
+                        .GetShim()
+                        .m_csShimSignHash(
+                            m_cryptoHandle.InternalHandle,
+                            hash.Length,
+                            pHash,
+                            pHashAlgOid,
+                            out cbSig,
+                            out pSig
+                        );
 
                     if (0 != status)
                     {
@@ -172,7 +181,6 @@ namespace System.IdentityModel.Selectors
                     {
                         Marshal.Copy(pSig.DangerousGetHandle(), sig, 0, pSig.Length);
                     }
-
                 }
             }
 
@@ -189,28 +197,29 @@ namespace System.IdentityModel.Selectors
             {
                 using (HGlobalSafeHandle pHashAlgOid = HGlobalSafeHandle.Construct(hashAlgOid))
                 {
-
-
                     Marshal.Copy(hash, 0, pHash.DangerousGetHandle(), hash.Length);
                     int status = 0;
                     using (HGlobalSafeHandle pSig = HGlobalSafeHandle.Construct(sig.Length))
                     {
                         Marshal.Copy(sig, 0, pSig.DangerousGetHandle(), sig.Length);
 
-                        status = CardSpaceSelector.GetShim().m_csShimVerifyHash(m_cryptoHandle.InternalHandle,
-                                                               hash.Length,
-                                                               pHash,
-                                                               pHashAlgOid,
-                                                               sig.Length,
-                                                               pSig,
-                                                               out verified);
+                        status = CardSpaceSelector
+                            .GetShim()
+                            .m_csShimVerifyHash(
+                                m_cryptoHandle.InternalHandle,
+                                hash.Length,
+                                pHash,
+                                pHashAlgOid,
+                                sig.Length,
+                                pSig,
+                                out verified
+                            );
                     }
                     if (0 != status)
                     {
                         ExceptionHelper.ThrowIfCardSpaceException(status);
                         throw IDT.ThrowHelperError(new Win32Exception(status));
                     }
-
                 }
             }
 

@@ -19,7 +19,10 @@ namespace System.Activities.Core.Presentation
         public static void RegisterMetadata(AttributeTableBuilder builder)
         {
             Type type = typeof(TransactionScope);
-            builder.AddCustomAttributes(type, new DesignerAttribute(typeof(TransactionScopeDesigner)));
+            builder.AddCustomAttributes(
+                type,
+                new DesignerAttribute(typeof(TransactionScopeDesigner))
+            );
             builder.AddCustomAttributes(type, type.GetProperty("Body"), BrowsableAttribute.No);
         }
     }

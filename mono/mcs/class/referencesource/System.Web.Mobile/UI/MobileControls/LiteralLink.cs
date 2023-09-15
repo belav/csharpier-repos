@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="LiteralLink.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -17,7 +17,6 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Literal Link class. Although public, this is an internal link class used for
      * literal hyperlinks.
@@ -26,21 +25,23 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\LiteralLink.uex' path='docs/doc[@for="LiteralLink"]/*' />
-    [
-        ToolboxItem(false)
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [ToolboxItem(false)]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class LiteralLink : Link
     {
         internal override bool TrimInnerText
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
-
 }

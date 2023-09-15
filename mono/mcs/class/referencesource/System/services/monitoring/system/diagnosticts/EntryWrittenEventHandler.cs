@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="EntryWrittenEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
-
+namespace System.Diagnostics
+{
     using System.Diagnostics;
 
     using System;

@@ -13,7 +13,7 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
@@ -34,38 +34,42 @@ using System.Linq;
 
 namespace Microsoft.Build.Execution
 {
-	public class ProjectItemDefinitionInstance
-	{
-		internal ProjectItemDefinitionInstance (ProjectItemDefinitionElement xml)
-		{
-			ItemType = xml.ItemType;
-			AddItems (xml);
-		}
-		
-		List<ProjectMetadataInstance> metadata = new List<ProjectMetadataInstance> ();
-		
-		public string ItemType { get; private set; }
-		
-		public ICollection<ProjectMetadataInstance> Metadata {
-			get { return metadata; }
-		}
-		
-		public int MetadataCount {
-			get { return metadata.Count; }
-		}
-		
-		public IEnumerable<string> MetadataNames {
-			get { return metadata.Select (m => m.Name).ToArray (); }
-		}
-		
-		internal void AddItems (ProjectItemDefinitionElement xml)
-		{
-			foreach (var item in xml.Metadata) {
-				var existing = metadata.FirstOrDefault (i => i.Name == item.Name);
-				if (existing != null)
-					metadata.Remove (existing);
-				metadata.Add (new ProjectMetadataInstance (item.Name, item.Value));
-			}
-		}
-	}
+    public class ProjectItemDefinitionInstance
+    {
+        internal ProjectItemDefinitionInstance(ProjectItemDefinitionElement xml)
+        {
+            ItemType = xml.ItemType;
+            AddItems(xml);
+        }
+
+        List<ProjectMetadataInstance> metadata = new List<ProjectMetadataInstance>();
+
+        public string ItemType { get; private set; }
+
+        public ICollection<ProjectMetadataInstance> Metadata
+        {
+            get { return metadata; }
+        }
+
+        public int MetadataCount
+        {
+            get { return metadata.Count; }
+        }
+
+        public IEnumerable<string> MetadataNames
+        {
+            get { return metadata.Select(m => m.Name).ToArray(); }
+        }
+
+        internal void AddItems(ProjectItemDefinitionElement xml)
+        {
+            foreach (var item in xml.Metadata)
+            {
+                var existing = metadata.FirstOrDefault(i => i.Name == item.Name);
+                if (existing != null)
+                    metadata.Remove(existing);
+                metadata.Add(new ProjectMetadataInstance(item.Name, item.Value));
+            }
+        }
+    }
 }

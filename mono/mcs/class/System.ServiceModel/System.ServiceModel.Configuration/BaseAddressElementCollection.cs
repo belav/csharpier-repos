@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,26 +54,31 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (BaseAddressElement),
-		 AddItemName = "add",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.BasicMap)]
-	public sealed class BaseAddressElementCollection
-		 : ServiceModelConfigurationElementCollection<BaseAddressElement>,  ICollection,  IEnumerable
-	{
-		protected override object GetElementKey (ConfigurationElement element) {
-			return ((BaseAddressElement) element).BaseAddress;
-		}
+    [ConfigurationCollection(
+        typeof(BaseAddressElement),
+        AddItemName = "add",
+        RemoveItemName = "remove",
+        ClearItemsName = "clear",
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed class BaseAddressElementCollection
+        : ServiceModelConfigurationElementCollection<BaseAddressElement>,
+            ICollection,
+            IEnumerable
+    {
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((BaseAddressElement)element).BaseAddress;
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new BaseAddressElement ();
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new BaseAddressElement();
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
-	}
-
+        protected override bool ThrowOnDuplicate
+        {
+            get { return false; }
+        }
+    }
 }

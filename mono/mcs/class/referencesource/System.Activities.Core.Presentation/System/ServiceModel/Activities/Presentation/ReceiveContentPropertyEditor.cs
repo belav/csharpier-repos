@@ -13,14 +13,24 @@ namespace System.ServiceModel.Activities.Presentation
     {
         public ReceiveContentPropertyEditor()
         {
-            this.InlineEditorTemplate = (DataTemplate)MessagingContentPropertyEditorResources.GetResources()["ReceiveContentPresenter_InlineEditorTemplate"];
+            this.InlineEditorTemplate = (DataTemplate)
+                MessagingContentPropertyEditorResources.GetResources()[
+                    "ReceiveContentPresenter_InlineEditorTemplate"
+                ];
         }
 
         public override void ShowDialog(PropertyValue propertyValue, IInputElement commandSource)
         {
-            ModelPropertyEntryToModelItemConverter converter = new ModelPropertyEntryToModelItemConverter();
-            ModelPropertyEntryToModelItemConverter.Container container = (ModelPropertyEntryToModelItemConverter.Container)converter.Convert(propertyValue, null, null, null);
-            ReceiveContentDialog.ShowDialog(container.ModelItem, container.Context, container.WorkflowViewElement);
+            ModelPropertyEntryToModelItemConverter converter =
+                new ModelPropertyEntryToModelItemConverter();
+            ModelPropertyEntryToModelItemConverter.Container container =
+                (ModelPropertyEntryToModelItemConverter.Container)
+                    converter.Convert(propertyValue, null, null, null);
+            ReceiveContentDialog.ShowDialog(
+                container.ModelItem,
+                container.Context,
+                container.WorkflowViewElement
+            );
         }
     }
 }

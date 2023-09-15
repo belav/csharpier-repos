@@ -1,5 +1,5 @@
 //
-// HtmlInputCheckBoxCas.cs 
+// HtmlInputCheckBoxCas.cs
 //	- CAS unit tests for System.Web.UI.HtmlControls.HtmlInputCheckBox
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,25 +35,26 @@ using System.Web.UI.HtmlControls;
 
 using MonoTests.System.Web.UI.HtmlControls;
 
-namespace MonoCasTests.System.Web.UI.HtmlControls {
+namespace MonoCasTests.System.Web.UI.HtmlControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HtmlInputCheckBoxCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            HtmlInputCheckBoxTest unit = new HtmlInputCheckBoxTest();
+            unit.DefaultProperties();
+            unit.NullProperties();
+            unit.CleanProperties();
+            unit.Render();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HtmlInputCheckBoxCas : AspNetHostingMinimal {
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			HtmlInputCheckBoxTest unit = new HtmlInputCheckBoxTest ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.CleanProperties ();
-			unit.Render ();
-		}
-
-		public override Type Type {
-			get { return typeof (HtmlInputCheckBox); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HtmlInputCheckBox); }
+        }
+    }
 }

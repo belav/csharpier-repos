@@ -57,7 +57,8 @@ namespace System.ServiceModel.Administration
         internal const string DetectReplays = "DetectReplays";
         internal const string DistinguishedName = "DistinguishedName";
         internal const string Durable = "Durable";
-        internal const string GenerateRequestSignatureConfirmation = "GenerateRequestSignatureConfirmation";
+        internal const string GenerateRequestSignatureConfirmation =
+            "GenerateRequestSignatureConfirmation";
         internal const string EnableKeyDerivation = "EnableKeyDerivation";
         internal const string EnableUnsecuredResponse = "EnableUnsecuredResponse";
         internal const string Endpoint = "Endpoint";
@@ -87,7 +88,8 @@ namespace System.ServiceModel.Administration
         internal const string Identity = "AddressIdentity";
         internal const string IdleTimeout = "IdleTimeout";
         internal const string IgnoreExtensionDataObject = "IgnoreExtensionDataObject";
-        internal const string ImpersonateCallerForAllOperations = "ImpersonateCallerForAllOperations";
+        internal const string ImpersonateCallerForAllOperations =
+            "ImpersonateCallerForAllOperations";
         internal const string ImpersonateOnSerializingReply = "ImpersonateOnSerializingReply";
         internal const string Impersonation = "Impersonation";
         internal const string InactivityTimeout = "InactivityTimeout";
@@ -139,7 +141,8 @@ namespace System.ServiceModel.Administration
         internal const string MaxReceivedMessageSize = "MaxReceivedMessageSize";
         internal const string MaxNameTableCharCount = "MaxNameTableCharCount";
         internal const string MaxOutboundChannelsPerEndpoint = "MaxOutboundChannelsPerEndpoint";
-        internal const string MaxOutboundConnectionsPerEndpoint = "MaxOutboundConnectionsPerEndpoint";
+        internal const string MaxOutboundConnectionsPerEndpoint =
+            "MaxOutboundConnectionsPerEndpoint";
         internal const string MaxOutputDelay = "MaxOutputDelay";
         internal const string MaxPendingAccepts = "MaxPendingAccepts";
         internal const string MaxPendingChannels = "MaxPendingChannels";
@@ -203,7 +206,8 @@ namespace System.ServiceModel.Administration
         internal const string ReconnectTransportOnFailure = "ReconnectTransportOnFailure";
         internal const string ReferralPolicy = "ReferralPolicy";
         internal const string ReleaseInstanceMode = "ReleaseInstanceMode";
-        internal const string ReleaseServiceInstanceOnTransactionComplete = "ReleaseServiceInstanceOnTransactionComplete";
+        internal const string ReleaseServiceInstanceOnTransactionComplete =
+            "ReleaseServiceInstanceOnTransactionComplete";
         internal const string ReliableMessagingVersion = "ReliableMessagingVersion";
         internal const string RemoteAddress = "RemoteAddress";
         internal const string RemoteEndpoint = "RemoteEndpoint";
@@ -254,7 +258,8 @@ namespace System.ServiceModel.Administration
         internal const string TraceListenerArguments = "TraceListenerArguments";
         internal const string Transport = "Transport";
         internal const string TransactionAutoComplete = "TransactionAutoComplete";
-        internal const string TransactionAutoCompleteOnSessionClose = "TransactionAutoCompleteOnSessionClose";
+        internal const string TransactionAutoCompleteOnSessionClose =
+            "TransactionAutoCompleteOnSessionClose";
         internal const string TransactionFlowOption = "TransactionFlowOption";
         internal const string TransactionIsolationLevel = "TransactionIsolationLevel";
         internal const string TransactionProtocol = "TransactionProtocol";
@@ -264,7 +269,8 @@ namespace System.ServiceModel.Administration
         internal const string TransactionTimeout = "TransactionTimeout";
         internal const string TransferMode = "TransferMode";
         internal const string Type = "Type";
-        internal const string UnsafeConnectionNtlmAuthentication = "UnsafeConnectionNtlmAuthentication";
+        internal const string UnsafeConnectionNtlmAuthentication =
+            "UnsafeConnectionNtlmAuthentication";
         internal const string Url = "Url";
         internal const string Uri = "Uri";
         internal const string Use = "Use";

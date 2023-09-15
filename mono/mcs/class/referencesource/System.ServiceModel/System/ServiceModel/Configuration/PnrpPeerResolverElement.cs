@@ -9,9 +9,7 @@ namespace System.ServiceModel.Configuration
 
     public class PnrpPeerResolverElement : BindingElementExtensionElement
     {
-        public PnrpPeerResolverElement()
-        {
-        }
+        public PnrpPeerResolverElement() { }
 
         public override Type BindingElementType
         {
@@ -24,6 +22,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

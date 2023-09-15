@@ -30,34 +30,35 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    public class BuildMessage : IBuildMessage
+    {
+        int help_id;
+        string help_keyword;
+        string message;
+        BuildMessageSeverity severity;
 
-	public class BuildMessage : IBuildMessage {
-	
-		int			help_id;
-		string			help_keyword;
-		string			message;
-		BuildMessageSeverity	severity;
+        BuildMessage() { }
 
-		BuildMessage ()
-		{
-		}
-		
-		public int HelpId {
-			get { return help_id;}
-		}
-		
-		public string HelpKeyword {
-			get { return help_keyword; }
-		}
-		
-		public string Message {
-			get { return message; }
-		}
-		
-		public BuildMessageSeverity Severity {
-			get { return severity; }
-		}
-	}
+        public int HelpId
+        {
+            get { return help_id; }
+        }
+
+        public string HelpKeyword
+        {
+            get { return help_keyword; }
+        }
+
+        public string Message
+        {
+            get { return message; }
+        }
+
+        public BuildMessageSeverity Severity
+        {
+            get { return severity; }
+        }
+    }
 }
-

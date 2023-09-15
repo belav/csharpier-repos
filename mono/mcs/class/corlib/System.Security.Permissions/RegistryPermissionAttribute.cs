@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,89 +31,105 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public sealed class RegistryPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        // Fields
+        private string create;
+        private string read;
+        private string write;
+        private string changeAccessControl;
+        private string viewAccessControl;
 
-	[ComVisible (true)]
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class |
-			 AttributeTargets.Struct | AttributeTargets.Constructor |
-			 AttributeTargets.Method, AllowMultiple=true, Inherited=false)]
-	[Serializable]
-	public sealed class RegistryPermissionAttribute : CodeAccessSecurityAttribute {
+        //		private string viewAndModify;
 
-		// Fields
-		private string create;
-		private string read;
-		private string write;
-		private string changeAccessControl;
-		private string viewAccessControl;
-//		private string viewAndModify;
+        // Constructor
+        public RegistryPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
-		// Constructor
-		public RegistryPermissionAttribute (SecurityAction action) : base (action)
-		{
-		}
-		
-		// Properties
-		[Obsolete ("use newer properties")]
-		public string All {
-			get { throw new NotSupportedException ("All"); }
-			set { 
-				create = value; 
-				read = value;
-				write = value;
-			}
-		}
-		
-		public string Create {
-			get { return create; }
-			set { create = value; }
-		}
+        // Properties
+        [Obsolete("use newer properties")]
+        public string All
+        {
+            get { throw new NotSupportedException("All"); }
+            set
+            {
+                create = value;
+                read = value;
+                write = value;
+            }
+        }
 
-		public string Read { 
-			get { return read; }
-			set { read = value; }
-		}
+        public string Create
+        {
+            get { return create; }
+            set { create = value; }
+        }
 
-		public string Write {
-			get { return write; }
-			set { write = value; }
-		}
+        public string Read
+        {
+            get { return read; }
+            set { read = value; }
+        }
 
-		public string ChangeAccessControl {
-			get { return changeAccessControl; }
-			set { changeAccessControl = value; }
-		}
+        public string Write
+        {
+            get { return write; }
+            set { write = value; }
+        }
 
-		public string ViewAccessControl {
-			get { return viewAccessControl; }
-			set { viewAccessControl = value; }
-		}
+        public string ChangeAccessControl
+        {
+            get { return changeAccessControl; }
+            set { changeAccessControl = value; }
+        }
 
-		public string ViewAndModify {
-			get { throw new NotSupportedException (); }	// as documented
-			set {
-				create = value;
-				read = value;
-				write = value;
-			}
-		}
+        public string ViewAccessControl
+        {
+            get { return viewAccessControl; }
+            set { viewAccessControl = value; }
+        }
 
-		// Methods
-		public override IPermission CreatePermission ()
-		{
-			RegistryPermission perm = null;
-			if (this.Unrestricted)
-				perm = new RegistryPermission (PermissionState.Unrestricted);
-			else {
-				perm = new RegistryPermission (PermissionState.None);
-				if (create != null)
-					perm.AddPathList (RegistryPermissionAccess.Create, create);
-				if (read != null)
-					perm.AddPathList (RegistryPermissionAccess.Read, read);
-				if (write != null)
-					perm.AddPathList (RegistryPermissionAccess.Write, write);
-			}
-			return perm;
-		}
-	}
+        public string ViewAndModify
+        {
+            get { throw new NotSupportedException(); } // as documented
+            set
+            {
+                create = value;
+                read = value;
+                write = value;
+            }
+        }
+
+        // Methods
+        public override IPermission CreatePermission()
+        {
+            RegistryPermission perm = null;
+            if (this.Unrestricted)
+                perm = new RegistryPermission(PermissionState.Unrestricted);
+            else
+            {
+                perm = new RegistryPermission(PermissionState.None);
+                if (create != null)
+                    perm.AddPathList(RegistryPermissionAccess.Create, create);
+                if (read != null)
+                    perm.AddPathList(RegistryPermissionAccess.Read, read);
+                if (write != null)
+                    perm.AddPathList(RegistryPermissionAccess.Write, write);
+            }
+            return perm;
+        }
+    }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,92 +33,101 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    public class EventLogEntryCollection : ICollection, IEnumerable
+    {
+        readonly EventLogImpl _impl;
 
-	public class EventLogEntryCollection : ICollection, IEnumerable {
+        internal EventLogEntryCollection(EventLogImpl impl)
+        {
+            _impl = impl;
+        }
 
-		readonly EventLogImpl _impl;
+        public int Count
+        {
+            get { return _impl.EntryCount; }
+        }
 
-		internal EventLogEntryCollection(EventLogImpl impl)
-		{
-			_impl = impl;
-		}
+        public virtual EventLogEntry this[int index]
+        {
+            get { return _impl[index]; }
+        }
 
-		public int Count {
-			get { return _impl.EntryCount; }
-		}
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
+        }
 
-		public virtual EventLogEntry this [int index] {
-			get { return _impl[index]; }
-		}
+        object ICollection.SyncRoot
+        {
+            get { return this; }
+        }
 
-		bool ICollection.IsSynchronized {
-			get { return false; }
-		}
+        public void CopyTo(EventLogEntry[] entries, int index)
+        {
+            EventLogEntry[] evLogEntries = _impl.GetEntries();
+            Array.Copy(evLogEntries, 0, entries, index, evLogEntries.Length);
+        }
 
-		object ICollection.SyncRoot {
-			get { return this; }
-		}
+        public IEnumerator GetEnumerator()
+        {
+            return new EventLogEntryEnumerator(_impl);
+        }
 
-		public void CopyTo (EventLogEntry[] entries, int index)
-		{
-			EventLogEntry[] evLogEntries = _impl.GetEntries ();
-			Array.Copy (evLogEntries, 0, entries, index, evLogEntries.Length);
-		}
+        void ICollection.CopyTo(Array array, int index)
+        {
+            EventLogEntry[] entries = _impl.GetEntries();
+            Array.Copy(entries, 0, array, index, entries.Length);
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return new EventLogEntryEnumerator (_impl);
-		}
+        private class EventLogEntryEnumerator : IEnumerator
+        {
+            internal EventLogEntryEnumerator(EventLogImpl impl)
+            {
+                _impl = impl;
+            }
 
-		void ICollection.CopyTo (Array array, int index)
-		{
-			EventLogEntry[] entries = _impl.GetEntries ();
-			Array.Copy (entries, 0, array, index, entries.Length);
-		}
+            object IEnumerator.Current
+            {
+                get { return Current; }
+            }
 
-		private class EventLogEntryEnumerator : IEnumerator
-		{
-			internal EventLogEntryEnumerator (EventLogImpl impl)
-			{
-				_impl = impl;
-			}
+            public EventLogEntry Current
+            {
+                get
+                {
+                    if (_currentEntry != null)
+                        return _currentEntry;
 
-			object IEnumerator.Current {
-				get { return Current; }
-			}
+                    throw new InvalidOperationException(
+                        "No current EventLog"
+                            + " entry available, cursor is located before the first"
+                            + " or after the last element of the enumeration."
+                    );
+                }
+            }
 
-			public EventLogEntry Current {
-				get {
-					if (_currentEntry != null)
-						return _currentEntry;
+            public bool MoveNext()
+            {
+                _currentIndex++;
+                if (_currentIndex >= _impl.EntryCount)
+                {
+                    _currentEntry = null;
+                    return false;
+                }
+                _currentEntry = _impl[_currentIndex];
+                return true;
+            }
 
-					throw new InvalidOperationException ("No current EventLog"
-						+ " entry available, cursor is located before the first"
-						+ " or after the last element of the enumeration.");
-				}
-			}
+            public void Reset()
+            {
+                _currentIndex = -1;
+            }
 
-			public bool MoveNext ()
-			{
-				_currentIndex++;
-				if (_currentIndex >= _impl.EntryCount) {
-					_currentEntry = null;
-					return false;
-				}
-				_currentEntry = _impl [_currentIndex];
-				return true;
-			}
-
-			public void Reset ()
-			{
-				_currentIndex = - 1;
-			}
-
-			readonly EventLogImpl _impl;
-			int _currentIndex = -1;
-			EventLogEntry _currentEntry;
-		}
+            readonly EventLogImpl _impl;
+            int _currentIndex = -1;
+            EventLogEntry _currentEntry;
+        }
+    }
 }
-}
-

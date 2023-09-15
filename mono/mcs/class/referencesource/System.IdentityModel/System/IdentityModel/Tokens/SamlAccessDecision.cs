@@ -11,8 +11,10 @@ namespace System.IdentityModel.Tokens
     {
         [EnumMember]
         Permit,
+
         [EnumMember]
         Deny,
+
         [EnumMember]
         Indeterminate
     }

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,111 +34,95 @@ using System;
 using System.Collections;
 using System.Reflection;
 
-namespace System.Runtime.Remoting.Messaging {
-
+namespace System.Runtime.Remoting.Messaging
+{
     // simple message to avoid serialization of crap data
     [Serializable]
     internal class ErrorMessage : IMethodCallMessage
     {
-		string _uri = "Exception";
-		
-		public ErrorMessage()
-		{
-		}
-		
-		public int ArgCount {
-			get {
-				return 0;
-			}
-		}
-		
-		public object [] Args {
-			get {
-				return null;
-			}
-		}
-		
-		public bool HasVarArgs {
-			get {
-				return false;
-			}
-		}
+        string _uri = "Exception";
 
-		public MethodBase MethodBase {
-			get {
-				return null;
-			}
-		}
+        public ErrorMessage() { }
 
-		public string MethodName {
-			get {
-				return "unknown";
-			}
-		}
+        public int ArgCount
+        {
+            get { return 0; }
+        }
 
-		public object MethodSignature {
-			get {
-				return null;
-			}
-		}
+        public object[] Args
+        {
+            get { return null; }
+        }
 
-		public virtual IDictionary Properties {
-			get {
-				return null;
-			}
-		}
+        public bool HasVarArgs
+        {
+            get { return false; }
+        }
 
-		public string TypeName {
-			get {
-				return "unknown";
-			}
-		}
+        public MethodBase MethodBase
+        {
+            get { return null; }
+        }
 
-		public string Uri {
-			get {
-				return _uri;
-			}
+        public string MethodName
+        {
+            get { return "unknown"; }
+        }
 
-			set {
-				_uri = value;
-			}
-		}
+        public object MethodSignature
+        {
+            get { return null; }
+        }
 
-		public object GetArg (int arg_num)
-		{
-			return null;
-		}
-		
-		public string GetArgName (int arg_num)
-		{
-			return "unknown";
-		}
+        public virtual IDictionary Properties
+        {
+            get { return null; }
+        }
 
-		public int InArgCount                  
-		{ 
-			get { 
-				return 0;
-			} 
-		}
+        public string TypeName
+        {
+            get { return "unknown"; }
+        }
 
-		public String GetInArgName(int index)   
-		{ 
-			return null; 
-		}
+        public string Uri
+        {
+            get { return _uri; }
+            set { _uri = value; }
+        }
 
-		public Object GetInArg(int argNum)      
-		{ 
-			return null;
-		}
+        public object GetArg(int arg_num)
+        {
+            return null;
+        }
 
-		public Object[] InArgs             
-		{ 
-			get { return null; }
-		}
+        public string GetArgName(int arg_num)
+        {
+            return "unknown";
+        }
 
-		public LogicalCallContext LogicalCallContext 
-		{ 
-			get { return null; } 
-		}
+        public int InArgCount
+        {
+            get { return 0; }
+        }
+
+        public String GetInArgName(int index)
+        {
+            return null;
+        }
+
+        public Object GetInArg(int argNum)
+        {
+            return null;
+        }
+
+        public Object[] InArgs
+        {
+            get { return null; }
+        }
+
+        public LogicalCallContext LogicalCallContext
+        {
+            get { return null; }
+        }
     }
 }

@@ -8,10 +8,13 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     using System.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(WorkflowInstanceQueryElement),
+    [ConfigurationCollection(
+        typeof(WorkflowInstanceQueryElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.WorkflowInstanceQuery)]
-    public sealed class WorkflowInstanceQueryElementCollection : TrackingConfigurationCollection<WorkflowInstanceQueryElement>
+        AddItemName = TrackingConfigurationStrings.WorkflowInstanceQuery
+    )]
+    public sealed class WorkflowInstanceQueryElementCollection
+        : TrackingConfigurationCollection<WorkflowInstanceQueryElement>
     {
         protected override string ElementName
         {

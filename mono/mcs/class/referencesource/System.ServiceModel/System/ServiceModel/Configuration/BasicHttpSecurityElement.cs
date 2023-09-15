@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class BasicHttpSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = BasicHttpSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = BasicHttpSecurity.DefaultMode
+        )]
         [ServiceModelEnumValidator(typeof(BasicHttpSecurityModeHelper))]
         public BasicHttpSecurityMode Mode
         {

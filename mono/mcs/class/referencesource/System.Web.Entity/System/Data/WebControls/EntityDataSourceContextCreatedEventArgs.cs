@@ -17,10 +17,12 @@ namespace System.Web.UI.WebControls
     public class EntityDataSourceContextCreatedEventArgs : EventArgs
     {
         private readonly ObjectContext _context;
+
         internal EntityDataSourceContextCreatedEventArgs(ObjectContext context)
         {
             _context = context;
         }
+
         public ObjectContext Context
         {
             get { return _context; }

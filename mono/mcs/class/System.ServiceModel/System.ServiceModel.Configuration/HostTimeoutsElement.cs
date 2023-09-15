@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,34 +54,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class HostTimeoutsElement
-		 : ConfigurationElement
-	{
-		// Properties
+    public sealed class HostTimeoutsElement : ConfigurationElement
+    {
+        // Properties
 
-		[ConfigurationProperty ("closeTimeout",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "00:00:10")]
-		[TypeConverter (typeof (TimeSpanConverter))]
-		public TimeSpan CloseTimeout {
-			get { return (TimeSpan) base ["closeTimeout"]; }
-			set { base ["closeTimeout"] = value; }
-		}
+        [ConfigurationProperty(
+            "closeTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:00:10"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan CloseTimeout
+        {
+            get { return (TimeSpan)base["closeTimeout"]; }
+            set { base["closeTimeout"] = value; }
+        }
 
-		[ConfigurationProperty ("openTimeout",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "00:01:00")]
-		[TypeConverter (typeof (TimeSpanConverter))]
-		public TimeSpan OpenTimeout {
-			get { return (TimeSpan) base ["openTimeout"]; }
-			set { base ["openTimeout"] = value; }
-		}
+        [ConfigurationProperty(
+            "openTimeout",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "00:01:00"
+        )]
+        [TypeConverter(typeof(TimeSpanConverter))]
+        public TimeSpan OpenTimeout
+        {
+            get { return (TimeSpan)base["openTimeout"]; }
+            set { base["openTimeout"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
+    }
 }

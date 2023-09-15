@@ -24,7 +24,9 @@ namespace System.ServiceModel.Web
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 else
                 {
@@ -33,26 +35,26 @@ namespace System.ServiceModel.Web
             }
         }
 
-        public JavascriptCallbackBehaviorAttribute()
-        {
-        }
+        public JavascriptCallbackBehaviorAttribute() { }
 
-        public void AddBindingParameters(ContractDescription contractDescription, ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            ContractDescription contractDescription,
+            ServiceEndpoint endpoint,
+            System.ServiceModel.Channels.BindingParameterCollection bindingParameters
+        ) { }
 
-        public void ApplyClientBehavior(ContractDescription contractDescription, ServiceEndpoint endpoint, System.ServiceModel.Dispatcher.ClientRuntime clientRuntime)
-        {
-        }
+        public void ApplyClientBehavior(
+            ContractDescription contractDescription,
+            ServiceEndpoint endpoint,
+            System.ServiceModel.Dispatcher.ClientRuntime clientRuntime
+        ) { }
 
-        public void ApplyDispatchBehavior(ContractDescription contractDescription, ServiceEndpoint endpoint, System.ServiceModel.Dispatcher.DispatchRuntime dispatchRuntime)
-        {
-        }
+        public void ApplyDispatchBehavior(
+            ContractDescription contractDescription,
+            ServiceEndpoint endpoint,
+            System.ServiceModel.Dispatcher.DispatchRuntime dispatchRuntime
+        ) { }
 
-        public void Validate(ContractDescription contractDescription, ServiceEndpoint endpoint)
-        {
-
-        }
+        public void Validate(ContractDescription contractDescription, ServiceEndpoint endpoint) { }
     }
 }
-

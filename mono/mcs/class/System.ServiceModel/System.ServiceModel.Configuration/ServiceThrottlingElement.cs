@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,63 +54,66 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class ServiceThrottlingElement
-		 : BehaviorExtensionElement
-	{
-		public ServiceThrottlingElement () {
-		}
+    public sealed class ServiceThrottlingElement : BehaviorExtensionElement
+    {
+        public ServiceThrottlingElement() { }
 
-		// Properties
+        // Properties
 
-		public override Type BehaviorType {
-			get { return typeof (ServiceThrottlingBehavior); }
-		}
+        public override Type BehaviorType
+        {
+            get { return typeof(ServiceThrottlingBehavior); }
+        }
 
-		[IntegerValidator (MinValue = 1,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxConcurrentCalls",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "16")]
-		public int MaxConcurrentCalls {
-			get { return (int) base ["maxConcurrentCalls"]; }
-			set { base ["maxConcurrentCalls"] = value; }
-		}
+        [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxConcurrentCalls",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "16"
+        )]
+        public int MaxConcurrentCalls
+        {
+            get { return (int)base["maxConcurrentCalls"]; }
+            set { base["maxConcurrentCalls"] = value; }
+        }
 
-		[ConfigurationProperty ("maxConcurrentInstances",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = 26)]
-		[IntegerValidator (MinValue = 1,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		public int MaxConcurrentInstances {
-			get { return (int) base ["maxConcurrentInstances"]; }
-			set { base ["maxConcurrentInstances"] = value; }
-		}
+        [ConfigurationProperty(
+            "maxConcurrentInstances",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = 26
+        )]
+        [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
+        public int MaxConcurrentInstances
+        {
+            get { return (int)base["maxConcurrentInstances"]; }
+            set { base["maxConcurrentInstances"] = value; }
+        }
 
-		[IntegerValidator (MinValue = 1,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxConcurrentSessions",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "10")]
-		public int MaxConcurrentSessions {
-			get { return (int) base ["maxConcurrentSessions"]; }
-			set { base ["maxConcurrentSessions"] = value; }
-		}
+        [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxConcurrentSessions",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "10"
+        )]
+        public int MaxConcurrentSessions
+        {
+            get { return (int)base["maxConcurrentSessions"]; }
+            set { base["maxConcurrentSessions"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		protected internal override object CreateBehavior ()
-		{
-			return new ServiceThrottlingBehavior () {
-				MaxConcurrentCalls = this.MaxConcurrentCalls,
-				MaxConcurrentSessions = this.MaxConcurrentSessions,
-				MaxConcurrentInstances = this.MaxConcurrentInstances,
-				};
-		}
-	}
-
+        protected internal override object CreateBehavior()
+        {
+            return new ServiceThrottlingBehavior()
+            {
+                MaxConcurrentCalls = this.MaxConcurrentCalls,
+                MaxConcurrentSessions = this.MaxConcurrentSessions,
+                MaxConcurrentInstances = this.MaxConcurrentInstances,
+            };
+        }
+    }
 }

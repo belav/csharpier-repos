@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeEntryPointMethod.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
+namespace System.CodeDom
+{
     using System.Diagnostics;
     using System;
     using Microsoft.Win32;
@@ -19,17 +19,12 @@ namespace System.CodeDom {
     ///       Represents a class method that is the entry point
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeEntryPointMethod : CodeMemberMethod {
-
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    public class CodeEntryPointMethod : CodeMemberMethod
+    {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeEntryPointMethod() {
-        }
+        public CodeEntryPointMethod() { }
     }
 }

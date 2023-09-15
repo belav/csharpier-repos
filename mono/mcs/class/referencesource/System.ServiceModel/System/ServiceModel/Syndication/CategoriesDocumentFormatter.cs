@@ -11,15 +11,16 @@ namespace System.ServiceModel.Syndication
     using System.Xml;
     using System.Runtime.CompilerServices;
 
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     [DataContract]
     public abstract class CategoriesDocumentFormatter
     {
         CategoriesDocument document;
 
-        protected CategoriesDocumentFormatter()
-        {
-        }
+        protected CategoriesDocumentFormatter() { }
+
         protected CategoriesDocumentFormatter(CategoriesDocument documentToWrite)
         {
             if (documentToWrite == null)
@@ -34,8 +35,7 @@ namespace System.ServiceModel.Syndication
             get { return this.document; }
         }
 
-        public abstract string Version
-        { get; }
+        public abstract string Version { get; }
 
         public abstract bool CanRead(XmlReader reader);
         public abstract void ReadFrom(XmlReader reader);
