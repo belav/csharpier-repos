@@ -10,14 +10,20 @@ internal partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorSqrtTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorSqrtTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorSqrt(T square, T root, T allowableError)
         {
             Vector<T> A = new Vector<T>(square);
             Vector<T> B = Vector.SquareRoot(A);
 
-            if (Vector.LessThanOrEqualAll<T>((Vector.Abs(B) - new Vector<T>(root)), new Vector<T>(allowableError)))
+            if (
+                Vector.LessThanOrEqualAll<T>(
+                    (Vector.Abs(B) - new Vector<T>(root)),
+                    new Vector<T>(allowableError)
+                )
+            )
             {
                 return Pass;
             }
@@ -30,7 +36,6 @@ internal partial class VectorTest
             }
         }
     }
-
 
     private static int Main()
     {

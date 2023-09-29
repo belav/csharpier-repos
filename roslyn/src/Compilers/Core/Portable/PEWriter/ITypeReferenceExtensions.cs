@@ -12,27 +12,39 @@ namespace Microsoft.Cci
 {
     internal static class ITypeReferenceExtensions
     {
-        internal static void GetConsolidatedTypeArguments(this ITypeReference typeReference, ArrayBuilder<ITypeReference> consolidatedTypeArguments, EmitContext context)
+        internal static void GetConsolidatedTypeArguments(
+            this ITypeReference typeReference,
+            ArrayBuilder<ITypeReference> consolidatedTypeArguments,
+            EmitContext context
+        )
         {
             INestedTypeReference? nestedTypeReference = typeReference.AsNestedTypeReference;
-            nestedTypeReference?.GetContainingType(context).GetConsolidatedTypeArguments(consolidatedTypeArguments, context);
+            nestedTypeReference
+                ?.GetContainingType(context)
+                .GetConsolidatedTypeArguments(consolidatedTypeArguments, context);
 
-            IGenericTypeInstanceReference? genTypeInstance = typeReference.AsGenericTypeInstanceReference;
+            IGenericTypeInstanceReference? genTypeInstance =
+                typeReference.AsGenericTypeInstanceReference;
             if (genTypeInstance != null)
             {
                 consolidatedTypeArguments.AddRange(genTypeInstance.GetGenericArguments(context));
             }
         }
 
-        internal static ITypeReference GetUninstantiatedGenericType(this ITypeReference typeReference, EmitContext context)
+        internal static ITypeReference GetUninstantiatedGenericType(
+            this ITypeReference typeReference,
+            EmitContext context
+        )
         {
-            IGenericTypeInstanceReference? genericTypeInstanceReference = typeReference.AsGenericTypeInstanceReference;
+            IGenericTypeInstanceReference? genericTypeInstanceReference =
+                typeReference.AsGenericTypeInstanceReference;
             if (genericTypeInstanceReference != null)
             {
                 return genericTypeInstanceReference.GetGenericType(context);
             }
 
-            ISpecializedNestedTypeReference? specializedNestedType = typeReference.AsSpecializedNestedTypeReference;
+            ISpecializedNestedTypeReference? specializedNestedType =
+                typeReference.AsSpecializedNestedTypeReference;
             if (specializedNestedType != null)
             {
                 return specializedNestedType.GetUnspecializedVersion(context);
@@ -46,8 +58,8 @@ namespace Microsoft.Cci
             INestedTypeReference? nestedTypeReference = typeReference.AsNestedTypeReference;
             if (nestedTypeReference != null)
             {
-                return nestedTypeReference.AsSpecializedNestedTypeReference != null ||
-                    nestedTypeReference.AsGenericTypeInstanceReference != null;
+                return nestedTypeReference.AsSpecializedNestedTypeReference != null
+                    || nestedTypeReference.AsGenericTypeInstanceReference != null;
             }
 
             return typeReference.AsNamespaceTypeReference == null;

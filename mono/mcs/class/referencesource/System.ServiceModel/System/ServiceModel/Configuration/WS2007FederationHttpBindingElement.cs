@@ -14,18 +14,15 @@ namespace System.ServiceModel.Configuration
 
     public partial class WS2007FederationHttpBindingElement : WSFederationHttpBindingElement
     {
-        public WS2007FederationHttpBindingElement(string name) : base(name)
-        {
-        }
+        public WS2007FederationHttpBindingElement(string name)
+            : base(name) { }
 
-        public WS2007FederationHttpBindingElement() : this(null)
-        {
-        }
+        public WS2007FederationHttpBindingElement()
+            : this(null) { }
 
         protected override Type BindingElementType
         {
             get { return typeof(WS2007FederationHttpBinding); }
         }
-
     }
 }

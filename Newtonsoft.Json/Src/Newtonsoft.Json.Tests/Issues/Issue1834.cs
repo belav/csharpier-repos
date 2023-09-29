@@ -54,7 +54,9 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test()
         {
             string json = "{'foo':'test!'}";
-            ItemWithJsonConstructor c = JsonConvert.DeserializeObject<ItemWithJsonConstructor>(json);
+            ItemWithJsonConstructor c = JsonConvert.DeserializeObject<ItemWithJsonConstructor>(
+                json
+            );
 
             Assert.IsNull(c.ExtensionData);
         }
@@ -63,7 +65,8 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test_UnsetRequired()
         {
             string json = "{'foo':'test!'}";
-            ItemWithJsonConstructorAndDefaultValue c = JsonConvert.DeserializeObject<ItemWithJsonConstructorAndDefaultValue>(json);
+            ItemWithJsonConstructorAndDefaultValue c =
+                JsonConvert.DeserializeObject<ItemWithJsonConstructorAndDefaultValue>(json);
 
             Assert.IsNull(c.ExtensionData);
         }
@@ -97,7 +100,11 @@ namespace Newtonsoft.Json.Tests.Issues
             [JsonProperty("foo")]
             public string Foo { get; set; }
 
-            [JsonProperty(PropertyName = "bar", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+            [JsonProperty(
+                PropertyName = "bar",
+                Required = Required.Default,
+                DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+            )]
             [System.ComponentModel.DefaultValue("default")]
             public string Bar { get; set; }
         }

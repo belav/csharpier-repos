@@ -6,7 +6,9 @@ namespace Microsoft.AspNetCore;
 internal static class HostingPathResolver
 {
     public static string ResolvePath(string? contentRootPath) =>
-        PathWithDirectorySeperatorAtEnd(ResolvePathNonCononical(contentRootPath, AppContext.BaseDirectory));
+        PathWithDirectorySeperatorAtEnd(
+            ResolvePathNonCononical(contentRootPath, AppContext.BaseDirectory)
+        );
 
     public static string ResolvePath(string? contentRootPath, string basePath) =>
         PathWithDirectorySeperatorAtEnd(ResolvePathNonCononical(contentRootPath, basePath));

@@ -79,7 +79,12 @@ namespace Microsoft.Web.Management.PInvoke.User32
     internal static class NativeMethods
     {
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, WindowMessage msg, int wParam, int lParam);
+        public static extern IntPtr SendMessage(
+            IntPtr hWnd,
+            WindowMessage msg,
+            int wParam,
+            int lParam
+        );
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         [return: MarshalAs(UnmanagedType.Bool)]

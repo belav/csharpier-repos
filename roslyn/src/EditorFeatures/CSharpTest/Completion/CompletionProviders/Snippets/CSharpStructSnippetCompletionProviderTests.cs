@@ -14,7 +14,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpStructSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpStructSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "struct";
 
@@ -22,156 +23,179 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InsertStructSnippetInNamespaceTest()
         {
             var markupBeforeCommit =
-@"namespace Namespace
+                @"namespace Namespace
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"namespace Namespace
+                @"namespace Namespace
 {
     struct MyStruct
     {
         $$
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInFileScopedNamespaceTest()
         {
             var markupBeforeCommit =
-@"namespace Namespace;
+                @"namespace Namespace;
 
 $$";
 
             var expectedCodeAfterCommit =
-@"namespace Namespace;
+                @"namespace Namespace;
 
 struct MyStruct
 {
     $$
-}"
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+}";
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetTest()
         {
-            var markupBeforeCommit =
-@"$$";
+            var markupBeforeCommit = @"$$";
 
             var expectedCodeAfterCommit =
-@"struct MyStruct
+                @"struct MyStruct
 {
     $$
-}"
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+}";
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructTopLevelSnippetTest()
         {
             var markupBeforeCommit =
-@"System.Console.WriteLine();
+                @"System.Console.WriteLine();
 $$";
 
             var expectedCodeAfterCommit =
-@"System.Console.WriteLine();
+                @"System.Console.WriteLine();
 struct MyStruct
 {
     $$
-}"
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+}";
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInClassTest()
         {
             var markupBeforeCommit =
-@"struct MyClass
+                @"struct MyClass
 {
     $$
-}"
-;
+}";
 
             var expectedCodeAfterCommit =
-@"struct MyClass
+                @"struct MyClass
 {
     struct MyStruct
     {
         $$
     }
-}"
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+}";
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInRecordTest()
         {
             var markupBeforeCommit =
-@"record MyRecord
+                @"record MyRecord
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"record MyRecord
+                @"record MyRecord
 {
     struct MyStruct
     {
         $$
     }
-}"
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+}";
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInStructTest()
         {
             var markupBeforeCommit =
-@"struct MyStruct
+                @"struct MyStruct
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"struct MyStruct
+                @"struct MyStruct
 {
     struct MyStruct1
     {
         $$
     }
-}"
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+}";
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertStructSnippetInInterfaceTest()
         {
             var markupBeforeCommit =
-@"interface MyInterface
+                @"interface MyInterface
 {
     $$
 }";
 
             var expectedCodeAfterCommit =
-@"interface MyInterface
+                @"interface MyInterface
 {
     struct MyStruct
     {
         $$
     }
-}"
-;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+}";
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -201,14 +225,18 @@ public struct MyStruct
 }}
 ";
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoStructSnippetInEnumTest()
         {
             var markupBeforeCommit =
-@"enum MyEnum
+                @"enum MyEnum
 {
     $$
 }";
@@ -220,14 +248,13 @@ public struct MyStruct
         public async Task NoStructSnippetInMethodTest()
         {
             var markupBeforeCommit =
-@"struct Program
+                @"struct Program
 {
     public void Method()
     {
         $$
     }
-}"
-;
+}";
             await VerifyItemIsAbsentAsync(markupBeforeCommit, ItemToCommit);
         }
 
@@ -235,14 +262,13 @@ public struct MyStruct
         public async Task NoStructSnippetInConstructorTest()
         {
             var markupBeforeCommit =
-@"struct Program
+                @"struct Program
 {
     public Program()
     {
         $$
     }
-}"
-;
+}";
             await VerifyItemIsAbsentAsync(markupBeforeCommit, ItemToCommit);
         }
     }

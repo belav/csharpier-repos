@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["ZipHigh.Vector64.Byte"] = ZipHigh_Vector64_Byte,
                 ["ZipHigh.Vector64.Int16"] = ZipHigh_Vector64_Int16,
                 ["ZipHigh.Vector64.Int32"] = ZipHigh_Vector64_Int32,

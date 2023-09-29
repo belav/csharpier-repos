@@ -25,13 +25,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ProjectId projectId,
             StandardGlyphGroup glyphGroup,
             StandardGlyphItem glyphItem = StandardGlyphItem.GlyphItemPublic,
-            bool isHidden = false)
+            bool isHidden = false
+        )
         {
             _projectId = projectId;
 
-            _glyphIndex = glyphGroup < StandardGlyphGroup.GlyphGroupError
-                ? (ushort)((int)glyphGroup + (int)glyphItem)
-                : (ushort)glyphGroup;
+            _glyphIndex =
+                glyphGroup < StandardGlyphGroup.GlyphGroupError
+                    ? (ushort)((int)glyphGroup + (int)glyphItem)
+                    : (ushort)glyphGroup;
 
             _isHidden = isHidden;
         }
@@ -58,8 +60,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
         public abstract string SearchText { get; }
 
-        public override string ToString()
-            => DisplayText;
+        public override string ToString() => DisplayText;
 
         public ObjectList ParentList
         {
@@ -68,20 +69,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
         public ObjectListKind ParentListKind
         {
-            get
-            {
-                return _parentList != null
-                    ? _parentList.Kind
-                    : ObjectListKind.None;
-            }
+            get { return _parentList != null ? _parentList.Kind : ObjectListKind.None; }
         }
 
         public ProjectId ProjectId
         {
-            get
-            {
-                return _projectId;
-            }
+            get { return _projectId; }
         }
 
         public Compilation GetCompilation(Workspace workspace)

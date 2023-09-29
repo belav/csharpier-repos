@@ -21,7 +21,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task EditAndContinueInterfacesAreImplemented()
         {
             using var environment = new TestEnvironment();
-            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test", binOutputPath: null);
+            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                environment,
+                "Test",
+                binOutputPath: null
+            );
             Assert.IsAssignableFrom<IVsENCRebuildableProjectCfg2>(project);
             Assert.IsAssignableFrom<IVsENCRebuildableProjectCfg4>(project);
         }

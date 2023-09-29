@@ -14,17 +14,20 @@ internal static partial class Interop
             SafeBCryptAlgorithmHandle hAlgorithm,
             out SafeBCryptKeyHandle phKey,
             int dwLength,
-            uint dwFlags);
+            uint dwFlags
+        );
 
         internal static SafeBCryptKeyHandle BCryptGenerateKeyPair(
             SafeBCryptAlgorithmHandle hAlgorithm,
-            int keyLength)
+            int keyLength
+        )
         {
             NTSTATUS status = BCryptGenerateKeyPair(
                 hAlgorithm,
                 out SafeBCryptKeyHandle hKey,
                 keyLength,
-                0);
+                0
+            );
 
             if (status != NTSTATUS.STATUS_SUCCESS)
             {

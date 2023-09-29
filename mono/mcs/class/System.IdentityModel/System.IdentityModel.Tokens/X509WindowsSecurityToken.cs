@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,25 +34,33 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace System.IdentityModel.Tokens
 {
-	public class X509WindowsSecurityToken : X509SecurityToken
-	{
-		[MonoTODO]
-		public X509WindowsSecurityToken (X509Certificate2 certificate, WindowsIdentity windowsIdentity)
-			: base (certificate)
-		{
-			throw new NotImplementedException ();
-		}
+    public class X509WindowsSecurityToken : X509SecurityToken
+    {
+        [MonoTODO]
+        public X509WindowsSecurityToken(
+            X509Certificate2 certificate,
+            WindowsIdentity windowsIdentity
+        )
+            : base(certificate)
+        {
+            throw new NotImplementedException();
+        }
 
-		public X509WindowsSecurityToken (X509Certificate2 certificate, WindowsIdentity windowsIdentity, string id)
-			: base (certificate, id)
-		{
-			this.identity = windowsIdentity;
-		}
+        public X509WindowsSecurityToken(
+            X509Certificate2 certificate,
+            WindowsIdentity windowsIdentity,
+            string id
+        )
+            : base(certificate, id)
+        {
+            this.identity = windowsIdentity;
+        }
 
-		WindowsIdentity identity;
+        WindowsIdentity identity;
 
-		public WindowsIdentity WindowsIdentity {
-			get { return identity; }
-		}
-	}
+        public WindowsIdentity WindowsIdentity
+        {
+            get { return identity; }
+        }
+    }
 }

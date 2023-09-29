@@ -6,6 +6,7 @@ public class test
 {
     static sbyte si8;
     static char sc;
+
     public static int Main()
     {
         sbyte i8 = -1;

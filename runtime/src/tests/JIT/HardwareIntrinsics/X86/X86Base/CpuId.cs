@@ -17,7 +17,7 @@ namespace IntelHardwareIntrinsicTest._CpuId
         const int Fail = 0;
 
         [Fact]
-        public unsafe static void CpuId()
+        public static unsafe void CpuId()
         {
             int testResult = Pass;
 
@@ -44,13 +44,18 @@ namespace IntelHardwareIntrinsicTest._CpuId
                 // POPCNT and didn't actually implement LZCNT and begin using the LZCNT bit until 2013. So
                 // while everything happens to line up today, it doesn't always and may not always do so.
 
-                Console.WriteLine($"Unrecognized CPU vendor: EBX: {ebx:X8}, ECX: {ecx:X8}, EDX: {edx:X8}");
+                Console.WriteLine(
+                    $"Unrecognized CPU vendor: EBX: {ebx:X8}, ECX: {ecx:X8}, EDX: {edx:X8}"
+                );
                 testResult = Fail;
             }
 
             int maxFunctionId = eax;
 
-            if ((maxFunctionId < 0x00000001) || (Environment.GetEnvironmentVariable("DOTNET_EnableHWIntrinsic") is null))
+            if (
+                (maxFunctionId < 0x00000001)
+                || (Environment.GetEnvironmentVariable("DOTNET_EnableHWIntrinsic") is null)
+            )
             {
                 Assert.Equal(Pass, testResult);
                 return;
@@ -152,15 +157,25 @@ namespace IntelHardwareIntrinsicTest._CpuId
 
             (eax, ebx, ecx, edx) = X86Base.CpuId(unchecked((int)0x80000000), 0x00000000);
 
-            if (isAuthenticAmd && ((ebx != 0x68747541) || (ecx != 0x444D4163) || (edx != 0x69746E65)))
+            if (
+                isAuthenticAmd
+                && ((ebx != 0x68747541) || (ecx != 0x444D4163) || (edx != 0x69746E65))
+            )
             {
-                Console.WriteLine("CPUID Fn8000_0000 reported different vendor info from Fn0000_0000");
+                Console.WriteLine(
+                    "CPUID Fn8000_0000 reported different vendor info from Fn0000_0000"
+                );
                 testResult = Fail;
             }
 
-            if (isGenuineIntel && ((ebx != 0x756E6547) && (ecx != 0x6C65746E) && (edx != 0x6C656E69)))
+            if (
+                isGenuineIntel
+                && ((ebx != 0x756E6547) && (ecx != 0x6C65746E) && (edx != 0x6C656E69))
+            )
             {
-                Console.WriteLine("CPUID Fn8000_0000 reported different vendor info from Fn0000_0000");
+                Console.WriteLine(
+                    "CPUID Fn8000_0000 reported different vendor info from Fn0000_0000"
+                );
                 testResult = Fail;
             }
 

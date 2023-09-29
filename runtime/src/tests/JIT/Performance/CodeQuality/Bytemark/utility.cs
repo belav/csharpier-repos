@@ -7,7 +7,7 @@ using System.IO;
 
 public class Utility
 {
-    static public int sscanf(String stream, String format, Object[] results)
+    public static int sscanf(String stream, String format, Object[] results)
     {
         int fieldsRead = 0;
         int resultsIndex = 0;
@@ -35,7 +35,7 @@ public class Utility
                 }
                 srStream.Read();
             }
-            if ('%' == format[formatIndex])  //If we found a scan field type
+            if ('%' == format[formatIndex]) //If we found a scan field type
             {
                 StringBuilder sb = new StringBuilder();
                 ++formatIndex;
@@ -92,7 +92,7 @@ public class Utility
         return fieldsRead;
     }
 
-    static public int fscanf(TextReader stream, String format, Object[] results)
+    public static int fscanf(TextReader stream, String format, Object[] results)
     {
         String s = stream.ReadLine();
         if (null == s)

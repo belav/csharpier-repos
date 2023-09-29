@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<UInt32>>() / sizeof(UInt32);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<UInt32>>() / sizeof(UInt32);
 
         public bool Succeeded { get; set; } = true;
 
@@ -58,20 +59,28 @@ namespace JIT.HardwareIntrinsics.General
 
             UInt32 value = TestLibrary.Generator.GetUInt32();
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.CreateScalarUnsafe), new Type[] { typeof(UInt32) })
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.CreateScalarUnsafe), new Type[] { typeof(UInt32) })
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector128<UInt32>)(result), value);
         }
 
-        private void ValidateResult(Vector128<UInt32> result, UInt32 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<UInt32> result,
+            UInt32 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt32[] resultElements = new UInt32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(UInt32[] resultElements, UInt32 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt32[] resultElements,
+            UInt32 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -83,7 +92,9 @@ namespace JIT.HardwareIntrinsics.General
             {
                 for (var i = 1; i < ElementCount; i++)
                 {
-                    if (false /* value is uninitialized */)
+                    if (
+                        false /* value is uninitialized */
+                    )
                     {
                         succeeded = false;
                         break;
@@ -93,9 +104,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.CreateScalarUnsafe(UInt32): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.CreateScalarUnsafe(UInt32): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

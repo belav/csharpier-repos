@@ -27,7 +27,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public override event PropertyChangedEventHandler? PropertyChanged;
 
-        public DiagnosticItem(ProjectId projectId, AnalyzerReference analyzerReference, DiagnosticDescriptor descriptor, ReportDiagnostic effectiveSeverity, IAnalyzersCommandHandler commandHandler)
+        public DiagnosticItem(
+            ProjectId projectId,
+            AnalyzerReference analyzerReference,
+            DiagnosticDescriptor descriptor,
+            ReportDiagnostic effectiveSeverity,
+            IAnalyzersCommandHandler commandHandler
+        )
             : base(descriptor.Id + ": " + descriptor.Title)
         {
             ProjectId = projectId;
@@ -37,10 +43,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             _commandHandler = commandHandler;
         }
 
-        public override ImageMoniker IconMoniker
-            => MapEffectiveSeverityToIconMoniker(EffectiveSeverity);
+        public override ImageMoniker IconMoniker =>
+            MapEffectiveSeverityToIconMoniker(EffectiveSeverity);
 
-        public override IContextMenuController ContextMenuController => _commandHandler.DiagnosticContextMenuController;
+        public override IContextMenuController ContextMenuController =>
+            _commandHandler.DiagnosticContextMenuController;
 
         public override object GetBrowseObject()
         {
@@ -58,8 +65,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
         }
 
-        private static ImageMoniker MapEffectiveSeverityToIconMoniker(ReportDiagnostic effectiveSeverity)
-            => effectiveSeverity switch
+        private static ImageMoniker MapEffectiveSeverityToIconMoniker(
+            ReportDiagnostic effectiveSeverity
+        ) =>
+            effectiveSeverity switch
             {
                 ReportDiagnostic.Error => KnownMonikers.CodeErrorRule,
                 ReportDiagnostic.Warn => KnownMonikers.CodeWarningRule,
@@ -83,11 +92,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             ruleSetDocument.Save(pathToRuleSet);
         }
 
-        internal Task<Solution> GetSolutionWithUpdatedAnalyzerConfigSeverityAsync(ReportDiagnostic value, Project project, CancellationToken cancellationToken)
+        internal Task<Solution> GetSolutionWithUpdatedAnalyzerConfigSeverityAsync(
+            ReportDiagnostic value,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             var effectiveSeverity = value.ToDiagnosticSeverity() ?? Descriptor.DefaultSeverity;
-            var diagnostic = Diagnostic.Create(Descriptor, Location.None, effectiveSeverity, additionalLocations: null, properties: null);
-            return ConfigurationUpdater.ConfigureSeverityAsync(value, diagnostic, project, cancellationToken);
+            var diagnostic = Diagnostic.Create(
+                Descriptor,
+                Location.None,
+                effectiveSeverity,
+                additionalLocations: null,
+                properties: null
+            );
+            return ConfigurationUpdater.ConfigureSeverityAsync(
+                value,
+                diagnostic,
+                project,
+                cancellationToken
+            );
         }
     }
 }

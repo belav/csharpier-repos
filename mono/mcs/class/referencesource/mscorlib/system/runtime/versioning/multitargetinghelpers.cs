@@ -1,20 +1,20 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  MultitargetingHelpers
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
-** Purpose: Central repository for helpers supporting 
+** Purpose: Central repository for helpers supporting
 ** multitargeting, such as emitting the correct version numbers
 ** and assembly names.
 **
-** 
+**
 ===========================================================*/
 namespace System.Runtime.Versioning
 {
@@ -25,7 +25,6 @@ namespace System.Runtime.Versioning
 
     internal static class MultitargetingHelpers
     {
-
         // default type converter
         private static Func<Type, String> defaultConverter = (t) => t.AssemblyQualifiedName;
 
@@ -42,7 +41,7 @@ namespace System.Runtime.Versioning
                     try
                     {
                         assemblyFullName = converter(type);
-                        // 
+                        //
                     }
                     catch (Exception e)
                     {
@@ -65,17 +64,16 @@ namespace System.Runtime.Versioning
         private static bool IsCriticalException(Exception ex)
         {
             return ex is NullReferenceException
-                    || ex is StackOverflowException
-                    || ex is OutOfMemoryException
-                    || ex is System.Threading.ThreadAbortException
-                    || ex is IndexOutOfRangeException
-                    || ex is AccessViolationException;
+                || ex is StackOverflowException
+                || ex is OutOfMemoryException
+                || ex is System.Threading.ThreadAbortException
+                || ex is IndexOutOfRangeException
+                || ex is AccessViolationException;
         }
 
         private static bool IsSecurityOrCriticalException(Exception ex)
         {
             return (ex is System.Security.SecurityException) || IsCriticalException(ex);
         }
-
     }
 }

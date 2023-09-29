@@ -31,7 +31,8 @@ namespace Microsoft.TestCommon
             TestMethodDisplay defaultMethodDisplay,
             String skipReason,
             ITestMethod testMethod,
-            object[] testMethodArguments = null)
+            object[] testMethodArguments = null
+        )
             : base(diagnosticMessageSink, defaultMethodDisplay, testMethod, testMethodArguments)
         {
             _skipReason = skipReason;

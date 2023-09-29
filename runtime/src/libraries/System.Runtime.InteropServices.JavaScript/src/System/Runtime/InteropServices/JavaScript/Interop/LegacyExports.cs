@@ -13,11 +13,20 @@ namespace System.Runtime.InteropServices.JavaScript
     // the public methods are protected from trimming by DynamicDependency on JSFunctionBinding.BindJSFunction
     internal static unsafe partial class LegacyExports
     {
-        public static void GetCSOwnedObjectByJSHandleRef(nint jsHandle, int shouldAddInflight, out JSObject? result)
+        public static void GetCSOwnedObjectByJSHandleRef(
+            nint jsHandle,
+            int shouldAddInflight,
+            out JSObject? result
+        )
         {
             lock (JSHostImplementation.s_csOwnedObjects)
             {
-                if (JSHostImplementation.s_csOwnedObjects.TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference))
+                if (
+                    JSHostImplementation.s_csOwnedObjects.TryGetValue(
+                        (int)jsHandle,
+                        out WeakReference<JSObject>? reference
+                    )
+                )
                 {
                     reference.TryGetTarget(out JSObject? jsObject);
                     if (shouldAddInflight != 0)
@@ -31,7 +40,10 @@ namespace System.Runtime.InteropServices.JavaScript
             result = null;
         }
 
-        public static IntPtr GetCSOwnedObjectJSHandleRef(in JSObject jsObject, int shouldAddInflight)
+        public static IntPtr GetCSOwnedObjectJSHandleRef(
+            in JSObject jsObject,
+            int shouldAddInflight
+        )
         {
             jsObject.AssertNotDisposed();
 
@@ -52,29 +64,41 @@ namespace System.Runtime.InteropServices.JavaScript
             return jsObject?.JSHandle ?? IntPtr.Zero;
         }
 
-        public static void CreateCSOwnedProxyRef(nint jsHandle, LegacyHostImplementation.MappedType mappedType, int shouldAddInflight, out JSObject jsObject)
+        public static void CreateCSOwnedProxyRef(
+            nint jsHandle,
+            LegacyHostImplementation.MappedType mappedType,
+            int shouldAddInflight,
+            out JSObject jsObject
+        )
         {
             JSObject? res = null;
 
             lock (JSHostImplementation.s_csOwnedObjects)
             {
-                if (!JSHostImplementation.s_csOwnedObjects.TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference) ||
-                    !reference.TryGetTarget(out res) ||
-                    res.IsDisposed)
+                if (
+                    !JSHostImplementation.s_csOwnedObjects.TryGetValue(
+                        (int)jsHandle,
+                        out WeakReference<JSObject>? reference
+                    )
+                    || !reference.TryGetTarget(out res)
+                    || res.IsDisposed
+                )
                 {
 #pragma warning disable CS0612 // Type or member is obsolete
                     res = mappedType switch
                     {
                         LegacyHostImplementation.MappedType.JSObject => new JSObject(jsHandle),
                         LegacyHostImplementation.MappedType.Array => new Array(jsHandle),
-                        LegacyHostImplementation.MappedType.ArrayBuffer => new ArrayBuffer(jsHandle),
+                        LegacyHostImplementation.MappedType.ArrayBuffer
+                            => new ArrayBuffer(jsHandle),
                         LegacyHostImplementation.MappedType.DataView => new DataView(jsHandle),
                         LegacyHostImplementation.MappedType.Function => new Function(jsHandle),
                         LegacyHostImplementation.MappedType.Uint8Array => new Uint8Array(jsHandle),
                         _ => throw new ArgumentOutOfRangeException(nameof(mappedType))
                     };
 #pragma warning restore CS0612 // Type or member is obsolete
-                    JSHostImplementation.s_csOwnedObjects[(int)jsHandle] = new WeakReference<JSObject>(res, trackResurrection: true);
+                    JSHostImplementation.s_csOwnedObjects[(int)jsHandle] =
+                        new WeakReference<JSObject>(res, trackResurrection: true);
                 }
             }
             if (shouldAddInflight != 0)
@@ -150,7 +174,9 @@ namespace System.Runtime.InteropServices.JavaScript
                         }
                         else
                         {
-                            result = JSHostImplementation.GetTaskResultMethodInfo(task_type)?.Invoke(task, null);
+                            result = JSHostImplementation
+                                .GetTaskResultMethodInfo(task_type)
+                                ?.Invoke(task, null);
                         }
 
                         continuationObj.Invoke("resolve", result);
@@ -181,7 +207,9 @@ namespace System.Runtime.InteropServices.JavaScript
             ArgumentNullException.ThrowIfNull(dtv);
 
             if (!(dtv is DateTime dt))
-                throw new InvalidCastException(SR.Format(SR.UnableCastObjectToType, dtv.GetType(), typeof(DateTime)));
+                throw new InvalidCastException(
+                    SR.Format(SR.UnableCastObjectToType, dtv.GetType(), typeof(DateTime))
+                );
             if (dt.Kind == DateTimeKind.Local)
                 dt = dt.ToUniversalTime();
             else if (dt.Kind == DateTimeKind.Unspecified)
@@ -204,8 +232,16 @@ namespace System.Runtime.InteropServices.JavaScript
         // System.Private.Uri is ~80KB large assembly so it's worth trimming
         private static Type? uriType;
 
-        [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("Trimming", "IL2077", Justification = "Done on purpose, see comment above.")]
-        [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("Trimming", "IL2057", Justification = "Done on purpose, see comment above.")]
+        [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2077",
+            Justification = "Done on purpose, see comment above."
+        )]
+        [Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2057",
+            Justification = "Done on purpose, see comment above."
+        )]
         public static void CreateUriRef(string uri, out object? result)
         {
             if (uriType == null)
@@ -215,7 +251,8 @@ namespace System.Runtime.InteropServices.JavaScript
                 uriType = Type.GetType(sb.ToString());
             }
             // See: https://devblogs.microsoft.com/dotnet/customizing-trimming-in-net-core-5/
-            if (uriType == null) throw new InvalidOperationException(SR.UriTypeMissing);
+            if (uriType == null)
+                throw new InvalidOperationException(SR.UriTypeMissing);
             try
             {
                 result = Activator.CreateInstance(uriType, uri);
@@ -235,7 +272,12 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             var methodHandle = JSHostImplementation.GetMethodHandleFromIntPtr(_methodHandle);
 
-            MethodBase? mb = objForRuntimeType is null ? MethodBase.GetMethodFromHandle(methodHandle) : MethodBase.GetMethodFromHandle(methodHandle, Type.GetTypeHandle(objForRuntimeType));
+            MethodBase? mb = objForRuntimeType is null
+                ? MethodBase.GetMethodFromHandle(methodHandle)
+                : MethodBase.GetMethodFromHandle(
+                    methodHandle,
+                    Type.GetTypeHandle(objForRuntimeType)
+                );
             if (mb is null)
                 return string.Empty;
 
@@ -249,7 +291,10 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 Type t = parms[i].ParameterType;
                 var mt = LegacyHostImplementation.GetMarshalTypeFromType(t);
-                result[i] = LegacyHostImplementation.GetCallSignatureCharacterForMarshalType(mt, null);
+                result[i] = LegacyHostImplementation.GetCallSignatureCharacterForMarshalType(
+                    mt,
+                    null
+                );
             }
 
             return new string(result);

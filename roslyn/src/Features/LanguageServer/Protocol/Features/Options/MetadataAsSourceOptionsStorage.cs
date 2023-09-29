@@ -10,15 +10,23 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource;
 
 internal static class MetadataAsSourceOptionsStorage
 {
-    public static MetadataAsSourceOptions GetMetadataAsSourceOptions(this IGlobalOptionService globalOptions, LanguageServices languageServices)
-        => new(GenerationOptions: globalOptions.GetCleanCodeGenerationOptions(languageServices))
+    public static MetadataAsSourceOptions GetMetadataAsSourceOptions(
+        this IGlobalOptionService globalOptions,
+        LanguageServices languageServices
+    ) =>
+        new(GenerationOptions: globalOptions.GetCleanCodeGenerationOptions(languageServices))
         {
             NavigateToDecompiledSources = globalOptions.GetOption(NavigateToDecompiledSources),
             AlwaysUseDefaultSymbolServers = globalOptions.GetOption(AlwaysUseDefaultSymbolServers),
-            NavigateToSourceLinkAndEmbeddedSources = globalOptions.GetOption(NavigateToSourceLinkAndEmbeddedSources),
+            NavigateToSourceLinkAndEmbeddedSources = globalOptions.GetOption(
+                NavigateToSourceLinkAndEmbeddedSources
+            ),
         };
 
-    public static Option2<bool> NavigateToDecompiledSources = new("FeatureOnOffOptions_NavigateToDecompiledSources", defaultValue: true);
-    public static Option2<bool> AlwaysUseDefaultSymbolServers = new("FeatureOnOffOptions_AlwaysUseDefaultSymbolServers", defaultValue: true);
-    public static Option2<bool> NavigateToSourceLinkAndEmbeddedSources = new("FeatureOnOffOptions_NavigateToSourceLinkAndEmbeddedSources", defaultValue: true);
+    public static Option2<bool> NavigateToDecompiledSources =
+        new("FeatureOnOffOptions_NavigateToDecompiledSources", defaultValue: true);
+    public static Option2<bool> AlwaysUseDefaultSymbolServers =
+        new("FeatureOnOffOptions_AlwaysUseDefaultSymbolServers", defaultValue: true);
+    public static Option2<bool> NavigateToSourceLinkAndEmbeddedSources =
+        new("FeatureOnOffOptions_NavigateToSourceLinkAndEmbeddedSources", defaultValue: true);
 }

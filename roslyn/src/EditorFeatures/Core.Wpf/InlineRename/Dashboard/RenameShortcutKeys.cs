@@ -37,10 +37,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             if (underscoreIndex >= 0 && underscoreIndex < localizedLabel.Length - 1)
             {
-                return new string(new char[] { char.ToUpperInvariant(localizedLabel[underscoreIndex + 1]) });
+                return new string(
+                    new char[] { char.ToUpperInvariant(localizedLabel[underscoreIndex + 1]) }
+                );
             }
 
-            Debug.Fail("Could not locate accelerator for " + localizedLabel + " for the rename dashboard");
+            Debug.Fail(
+                "Could not locate accelerator for " + localizedLabel + " for the rename dashboard"
+            );
             return defaultValue;
         }
     }

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyPropertyPattern
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpSimplifyPropertyPatternDiagnosticAnalyzer,
-        CSharpSimplifyPropertyPatternCodeFixProvider>;
+        CSharpSimplifyPropertyPatternCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyPropertyPattern)]
     public class SimplifyPropertyPatternTests
@@ -24,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyPropertyPattern
         [Fact]
         public async Task NotInCSharp9()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 using System.Reflection;
 
@@ -52,7 +54,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -66,7 +69,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -87,7 +91,8 @@ class C
         [Fact]
         public async Task TestNotWithoutPropertyPattern1()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 using System.Reflection;
 
@@ -113,7 +118,8 @@ class C
         [Fact]
         public async Task TestNotWithoutPropertyPattern2()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 using System.Reflection;
 
@@ -138,7 +144,8 @@ class C
         [Fact]
         public async Task TestNotWithTypePatterm()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 using System.Reflection;
 
@@ -163,7 +170,8 @@ class C
         [Fact]
         public async Task TestNotWithOuterDesignation()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 using System.Reflection;
 
@@ -188,7 +196,8 @@ class C
         [Fact]
         public async Task TestNotWithoutInnerSubpatterns()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 using System.Reflection;
 
@@ -213,7 +222,8 @@ class C
         [Fact]
         public async Task TestNotWithMultipleInnerSubpatterns()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System;
 using System.Reflection;
 
@@ -240,7 +250,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -254,7 +265,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -277,7 +289,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -290,7 +303,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -312,7 +326,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -325,7 +340,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -347,7 +363,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -360,7 +377,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -382,7 +400,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -395,7 +414,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -417,7 +437,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -430,7 +451,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -452,7 +474,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -465,7 +488,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -487,7 +511,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 
 class C
@@ -500,7 +525,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 
 class C
@@ -522,7 +548,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -543,7 +570,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -570,7 +598,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -589,7 +618,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -617,7 +647,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -631,7 +662,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -656,7 +688,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 using System.Reflection;
 
@@ -674,7 +707,7 @@ class C
                 {
                     Sources =
                     {
-@"
+                        @"
 using System;
 using System.Reflection;
 
@@ -692,11 +725,16 @@ class C
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(9,20): info IDE0170: Simplify property pattern
-                        VerifyCS.Diagnostic().WithSpan(9, 20, 9, 29).WithSpan(9, 20, 9, 86).WithSeverity(DiagnosticSeverity.Info),
+                        VerifyCS
+                            .Diagnostic()
+                            .WithSpan(9, 20, 9, 29)
+                            .WithSpan(9, 20, 9, 86)
+                            .WithSeverity(DiagnosticSeverity.Info),
                     }
                 },
                 LanguageVersion = LanguageVersion.CSharp10,
-                CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck,
+                CodeFixTestBehaviors =
+                    CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck,
                 DiagnosticSelector = ds => ds[1],
             }.RunAsync();
         }
@@ -704,7 +742,8 @@ class C
         [Fact, WorkItem(57674, "https://github.com/dotnet/roslyn/issues/57674")]
         public async Task TestTuplePattern()
         {
-            var testCode = @"
+            var testCode =
+                @"
 record R(int Prop);
 
 class C
@@ -726,7 +765,8 @@ class C
         [Fact, WorkItem(57674, "https://github.com/dotnet/roslyn/issues/57674")]
         public async Task TestPositionalPattern()
         {
-            var testCode = @"
+            var testCode =
+                @"
 record R(R Child, int Value);
 
 class C

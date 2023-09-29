@@ -9,9 +9,14 @@ namespace System.ServiceModel.ComIntegration
     using System.Reflection;
     using System.Collections.Generic;
     using System.Threading;
+
     internal static class ProxyBuilder
     {
-        internal static void Build(Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable, ref Guid riid, IntPtr ppv)
+        internal static void Build(
+            Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable,
+            ref Guid riid,
+            IntPtr ppv
+        )
         {
             if (IntPtr.Zero == ppv)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("ppv");
@@ -34,8 +39,10 @@ namespace System.ServiceModel.ComIntegration
             }
             IProxyManager proxyManager = new ProxyManager(proxyCreator);
 
-            Marshal.WriteIntPtr(ppv, OuterProxyWrapper.CreateOuterProxyInstance(proxyManager, ref riid));
-
+            Marshal.WriteIntPtr(
+                ppv,
+                OuterProxyWrapper.CreateOuterProxyInstance(proxyManager, ref riid)
+            );
         }
     }
 }

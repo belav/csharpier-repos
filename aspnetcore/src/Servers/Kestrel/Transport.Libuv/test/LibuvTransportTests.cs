@@ -25,13 +25,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 {
     public class LibuvTransportTests
     {
-        public static IEnumerable<object[]> OneToTen => Enumerable.Range(1, 10).Select(i => new object[] { i });
+        public static IEnumerable<object[]> OneToTen =>
+            Enumerable.Range(1, 10).Select(i => new object[] { i });
 
         [Fact]
         public async Task TransportCanBindAndStop()
         {
             var transportContext = new TestLibuvTransportContext();
-            var transport = new LibuvConnectionListener(transportContext, new IPEndPoint(IPAddress.Loopback, 0));
+            var transport = new LibuvConnectionListener(
+                transportContext,
+                new IPEndPoint(IPAddress.Loopback, 0)
+            );
 
             // The transport can no longer start threads without binding to an endpoint.
             await transport.BindAsync();
@@ -42,7 +46,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         public async Task TransportCanBindUnbindAndStop()
         {
             var transportContext = new TestLibuvTransportContext();
-            var transport = new LibuvConnectionListener(transportContext, new IPEndPoint(IPAddress.Loopback, 0));
+            var transport = new LibuvConnectionListener(
+                transportContext,
+                new IPEndPoint(IPAddress.Loopback, 0)
+            );
 
             await transport.BindAsync();
             await transport.UnbindAsync();
@@ -53,7 +60,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         public async Task ConnectionCanReadAndWrite()
         {
             var transportContext = new TestLibuvTransportContext();
-            await using var transport = new LibuvConnectionListener(transportContext, new IPEndPoint(IPAddress.Loopback, 0));
+            await using var transport = new LibuvConnectionListener(
+                transportContext,
+                new IPEndPoint(IPAddress.Loopback, 0)
+            );
 
             await transport.BindAsync();
             var endpoint = (IPEndPoint)transport.EndPoint;
@@ -95,7 +105,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 var read = 0;
                 while (read < data.Length)
                 {
-                    read += await socket.ReceiveAsync(buffer.AsMemory(read, buffer.Length - read), SocketFlags.None);
+                    read += await socket.ReceiveAsync(
+                        buffer.AsMemory(read, buffer.Length - read),
+                        SocketFlags.None
+                    );
                 }
 
                 Assert.Equal(data, buffer);
@@ -110,7 +123,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         public async Task UnacceptedConnectionsAreAborted()
         {
             var transportContext = new TestLibuvTransportContext();
-            var transport = new LibuvConnectionListener(transportContext, new IPEndPoint(IPAddress.Loopback, 0));
+            var transport = new LibuvConnectionListener(
+                transportContext,
+                new IPEndPoint(IPAddress.Loopback, 0)
+            );
 
             await transport.BindAsync();
             var endpoint = (IPEndPoint)transport.EndPoint;
@@ -147,7 +163,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         public async Task CallingAcceptAfterDisposeAsyncThrows()
         {
             var transportContext = new TestLibuvTransportContext();
-            var transport = new LibuvConnectionListener(transportContext, new IPEndPoint(IPAddress.Loopback, 0));
+            var transport = new LibuvConnectionListener(
+                transportContext,
+                new IPEndPoint(IPAddress.Loopback, 0)
+            );
 
             await transport.BindAsync();
             var endpoint = (IPEndPoint)transport.EndPoint;
@@ -155,14 +174,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
             await transport.UnbindAsync();
             await transport.DisposeAsync();
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => transport.AcceptAsync().AsTask());
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => transport.AcceptAsync().AsTask()
+            );
         }
 
         [Fact]
         public async Task CallingDisposeAsyncWillYieldPendingAccepts()
         {
             var transportContext = new TestLibuvTransportContext();
-            await using var transport = new LibuvConnectionListener(transportContext, new IPEndPoint(IPAddress.Loopback, 0));
+            await using var transport = new LibuvConnectionListener(
+                transportContext,
+                new IPEndPoint(IPAddress.Loopback, 0)
+            );
 
             await transport.BindAsync();
 
@@ -177,7 +201,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 
         [ConditionalTheory]
         [MemberData(nameof(OneToTen))]
-        [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Tests fail on OS X due to low file descriptor limit.")]
+        [OSSkipCondition(
+            OperatingSystems.MacOSX,
+            SkipReason = "Tests fail on OS X due to low file descriptor limit."
+        )]
         public async Task OneToTenThreads(int threadCount)
         {
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
@@ -196,13 +223,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 #pragma warning restore CS0618
             };
 
-            await using var transport = new LibuvConnectionListener(transportContext, listenOptions.EndPoint);
+            await using var transport = new LibuvConnectionListener(
+                transportContext,
+                listenOptions.EndPoint
+            );
             await transport.BindAsync();
             listenOptions.EndPoint = transport.EndPoint;
 
-            var transportConnectionManager = new TransportConnectionManager(serviceContext.ConnectionManager);
-            var dispatcher = new ConnectionDispatcher<ConnectionContext>(serviceContext, c => listenOptions.Build()(c), transportConnectionManager);
-            var acceptTask = dispatcher.StartAcceptingConnections(new GenericConnectionListener(transport));
+            var transportConnectionManager = new TransportConnectionManager(
+                serviceContext.ConnectionManager
+            );
+            var dispatcher = new ConnectionDispatcher<ConnectionContext>(
+                serviceContext,
+                c => listenOptions.Build()(c),
+                transportConnectionManager
+            );
+            var acceptTask = dispatcher.StartAcceptingConnections(
+                new GenericConnectionListener(transport)
+            );
 
             using (var client = new HttpClient())
             {
@@ -210,7 +248,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 var requestTasks = new List<Task<string>>();
                 for (int i = 0; i < 20; i++)
                 {
-                    var requestTask = client.GetStringAsync($"http://127.0.0.1:{listenOptions.IPEndPoint.Port}/");
+                    var requestTask = client.GetStringAsync(
+                        $"http://127.0.0.1:{listenOptions.IPEndPoint.Port}/"
+                    );
                     requestTasks.Add(requestTask);
                 }
 
@@ -241,14 +281,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 
             public EndPoint EndPoint => _connectionListener.EndPoint;
 
-            public ValueTask<ConnectionContext> AcceptAsync(CancellationToken cancellationToken = default)
-                 => _connectionListener.AcceptAsync(cancellationToken);
+            public ValueTask<ConnectionContext> AcceptAsync(
+                CancellationToken cancellationToken = default
+            ) => _connectionListener.AcceptAsync(cancellationToken);
 
-            public ValueTask UnbindAsync(CancellationToken cancellationToken = default)
-                => _connectionListener.UnbindAsync();
+            public ValueTask UnbindAsync(CancellationToken cancellationToken = default) =>
+                _connectionListener.UnbindAsync();
 
-            public ValueTask DisposeAsync()
-                => _connectionListener.DisposeAsync();
+            public ValueTask DisposeAsync() => _connectionListener.DisposeAsync();
         }
     }
 }

@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -24,7 +24,6 @@ namespace System.Data.Services.Parsing
 
         private const string XmlHexEncodePrefix = "0x";
 
-
         internal static string ConvertByteArrayToKeyString(byte[] byteArray)
         {
             StringBuilder hexBuilder = new StringBuilder(3 + byteArray.Length * 2);
@@ -39,7 +38,6 @@ namespace System.Data.Services.Parsing
             hexBuilder.Append("'");
             return hexBuilder.ToString();
         }
-
 
         internal static bool IsKeyTypeQuoted(Type type)
         {
@@ -117,7 +115,10 @@ namespace System.Data.Services.Parsing
             }
             else if (typeof(DateTime) == valueType)
             {
-                result = XmlConvert.ToString((DateTime)value, XmlDateTimeSerializationMode.RoundtripKind);
+                result = XmlConvert.ToString(
+                    (DateTime)value,
+                    XmlDateTimeSerializationMode.RoundtripKind
+                );
             }
             else if (typeof(Decimal) == valueType)
             {
@@ -156,15 +157,17 @@ namespace System.Data.Services.Parsing
                 byte[] byteArray = (byte[])value;
                 result = Convert.ToBase64String(byteArray);
             }
-            #if !ASTORIA_LIGHT
+#if !ASTORIA_LIGHT
             else if (ClientConvert.IsBinaryValue(value))
             {
                 return ClientConvert.TryKeyBinaryToString(value, out result);
             }
-            #endif
+#endif
             else if (typeof(System.Xml.Linq.XElement) == valueType)
             {
-                result = ((System.Xml.Linq.XElement)value).ToString(System.Xml.Linq.SaveOptions.None);
+                result = ((System.Xml.Linq.XElement)value).ToString(
+                    System.Xml.Linq.SaveOptions.None
+                );
             }
             else
             {

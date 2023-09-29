@@ -13,13 +13,12 @@ namespace System.ServiceModel.Activation.Configuration
     public sealed partial class DiagnosticSection : ConfigurationSection
     {
         public DiagnosticSection()
-            : base()
-        {
-        }
+            : base() { }
 
-        static internal DiagnosticSection GetSection()
+        internal static DiagnosticSection GetSection()
         {
-            DiagnosticSection retval = (DiagnosticSection)ConfigurationManager.GetSection(ConfigurationStrings.DiagnosticSectionPath);
+            DiagnosticSection retval = (DiagnosticSection)
+                ConfigurationManager.GetSection(ConfigurationStrings.DiagnosticSectionPath);
             if (retval == null)
             {
                 retval = new DiagnosticSection();
@@ -27,7 +26,10 @@ namespace System.ServiceModel.Activation.Configuration
             return retval;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.PerformanceCountersEnabled, DefaultValue = ListenerConstants.DefaultPerformanceCountersEnabled)]
+        [ConfigurationProperty(
+            ConfigurationStrings.PerformanceCountersEnabled,
+            DefaultValue = ListenerConstants.DefaultPerformanceCountersEnabled
+        )]
         public bool PerformanceCountersEnabled
         {
             get { return (bool)base[ConfigurationStrings.PerformanceCountersEnabled]; }

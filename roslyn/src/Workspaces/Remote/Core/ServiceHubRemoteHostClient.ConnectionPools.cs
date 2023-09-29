@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal partial class ServiceHubRemoteHostClient
     {
-        public delegate Task<RemoteServiceConnection> ConnectionFactory(RemoteServiceName serviceName, IPooledConnectionReclamation poolReclamation, CancellationToken cancellationToken);
+        public delegate Task<RemoteServiceConnection> ConnectionFactory(
+            RemoteServiceName serviceName,
+            IPooledConnectionReclamation poolReclamation,
+            CancellationToken cancellationToken
+        );
 
         internal sealed class ConnectionPools : IDisposable
         {
@@ -28,8 +32,7 @@ namespace Microsoft.CodeAnalysis.Remote
                     _owner = connectionPools;
                 }
 
-                public void Return(JsonRpcConnection connection)
-                    => _owner.Free(_queue, connection);
+                public void Return(JsonRpcConnection connection) => _owner.Free(_queue, connection);
 
                 public bool TryAcquire([NotNullWhen(true)] out JsonRpcConnection? connection)
                 {
@@ -69,12 +72,18 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 // initial value 4 is chosen to stop concurrent dictionary creating too many locks.
                 // and big enough for all our services such as codeanalysis, remotehost, snapshot and etc services
-                _pools = new ConcurrentDictionary<RemoteServiceName, Pool>(concurrencyLevel: 4, capacity: 4);
+                _pools = new ConcurrentDictionary<RemoteServiceName, Pool>(
+                    concurrencyLevel: 4,
+                    capacity: 4
+                );
 
                 _shutdownLock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
             }
 
-            public async Task<RemoteServiceConnection> GetOrCreateConnectionAsync(RemoteServiceName serviceName, CancellationToken cancellationToken)
+            public async Task<RemoteServiceConnection> GetOrCreateConnectionAsync(
+                RemoteServiceName serviceName,
+                CancellationToken cancellationToken
+            )
             {
                 var pool = _pools.GetOrAdd(serviceName, _ => new Pool(this));
                 if (pool.TryAcquire(out var connection))
@@ -82,14 +91,18 @@ namespace Microsoft.CodeAnalysis.Remote
                     return connection;
                 }
 
-                return await _connectionFactory(serviceName, pool, cancellationToken).ConfigureAwait(false);
+                return await _connectionFactory(serviceName, pool, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            internal void Free(ConcurrentQueue<JsonRpcConnection> pool, JsonRpcConnection connection)
+            internal void Free(
+                ConcurrentQueue<JsonRpcConnection> pool,
+                JsonRpcConnection connection
+            )
             {
                 using (_shutdownLock.DisposableRead())
                 {
-                    // There is a race between checking the current pool capacity i nthe condition and 
+                    // There is a race between checking the current pool capacity i nthe condition and
                     // and queueing connections to the pool in the else branch.
                     // The amount of pooled connections may thus exceed the capacity at times,
                     // or some connections might not end up returned into the pool and reused.

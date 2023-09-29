@@ -43,6 +43,5 @@ namespace Microsoft.Extensions.Configuration.Test
             Assert.Equal(":", ConfigurationPath.GetParentPath("::key"));
             Assert.Equal("parent", ConfigurationPath.GetParentPath("parent:key"));
         }
-
     }
 }

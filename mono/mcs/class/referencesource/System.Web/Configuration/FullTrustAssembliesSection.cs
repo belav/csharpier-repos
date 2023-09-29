@@ -20,31 +20,35 @@ namespace System.Web.Configuration
         private static ConfigurationPropertyCollection _properties;
 
         private static readonly ConfigurationProperty _propFullTrustAssemblies =
-            new ConfigurationProperty(null, typeof(FullTrustAssemblyCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                null,
+                typeof(FullTrustAssemblyCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-        static FullTrustAssembliesSection() {
+        static FullTrustAssembliesSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propFullTrustAssemblies);
         }
 
-        public FullTrustAssembliesSection() {
+        public FullTrustAssembliesSection() { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        [ConfigurationProperty("", IsDefaultCollection = true)]
+        public FullTrustAssemblyCollection FullTrustAssemblies
+        {
+            get { return GetFullTrustAssembliesCollection(); }
         }
 
-        [ConfigurationProperty("", IsDefaultCollection=true)]
-        public FullTrustAssemblyCollection FullTrustAssemblies {
-            get {
-                return GetFullTrustAssembliesCollection();
-            }
-        }
-
-        private FullTrustAssemblyCollection GetFullTrustAssembliesCollection() {
+        private FullTrustAssemblyCollection GetFullTrustAssembliesCollection()
+        {
             return (FullTrustAssemblyCollection)base[_propFullTrustAssemblies];
         }
     }

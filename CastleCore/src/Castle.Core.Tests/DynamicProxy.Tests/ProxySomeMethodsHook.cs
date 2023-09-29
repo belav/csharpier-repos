@@ -36,6 +36,9 @@ namespace Castle.DynamicProxy.Tests
 
         void IProxyGenerationHook.MethodsInspected() { }
 
-        void IProxyGenerationHook.NonProxyableMemberNotification(Type type, MemberInfo memberInfo) { }
+        void IProxyGenerationHook.NonProxyableMemberNotification(
+            Type type,
+            MemberInfo memberInfo
+        ) { }
     }
 }

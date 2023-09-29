@@ -22,9 +22,7 @@ namespace System.Workflow.ComponentModel.Serialization
     internal class CompositeActivityTypeDescriptorProvider : TypeDescriptionProvider
     {
         public CompositeActivityTypeDescriptorProvider()
-            : base(TypeDescriptor.GetProvider(typeof(CompositeActivity)))
-        {
-        }
+            : base(TypeDescriptor.GetProvider(typeof(CompositeActivity))) { }
 
         public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
         {
@@ -33,7 +31,5 @@ namespace System.Workflow.ComponentModel.Serialization
         }
     }
 
-
     #endregion
-
 }

@@ -25,14 +25,26 @@ namespace Castle.DynamicProxy.Internal
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class InterfaceMethodWithoutTargetInvocation : AbstractInvocation
     {
-        public InterfaceMethodWithoutTargetInvocation(object target, object proxy, IInterceptor[] interceptors, MethodInfo proxiedMethod, object[] arguments)
+        public InterfaceMethodWithoutTargetInvocation(
+            object target,
+            object proxy,
+            IInterceptor[] interceptors,
+            MethodInfo proxiedMethod,
+            object[] arguments
+        )
             : base(proxy, interceptors, proxiedMethod, arguments)
         {
             // This invocation type is suitable for interface method invocations that cannot proceed
             // to a target, i.e. where `InvokeMethodOnTarget` will always throw:
 
-            Debug.Assert(target == null, $"{nameof(InterfaceMethodWithoutTargetInvocation)} does not support targets.");
-            Debug.Assert(proxiedMethod.IsAbstract, $"{nameof(InterfaceMethodWithoutTargetInvocation)} does not support non-abstract methods.");
+            Debug.Assert(
+                target == null,
+                $"{nameof(InterfaceMethodWithoutTargetInvocation)} does not support targets."
+            );
+            Debug.Assert(
+                proxiedMethod.IsAbstract,
+                $"{nameof(InterfaceMethodWithoutTargetInvocation)} does not support non-abstract methods."
+            );
 
             // Why this restriction? Because it greatly benefits proxy type generation performance.
             //

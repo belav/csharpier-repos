@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -25,15 +25,22 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         [Test]
         public void Constructor_RequiresNode()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new XPathNode(null, typeof(T), NamespaceSource.Instance));
+            Assert.Throws<ArgumentNullException>(
+                () => new XPathNode(null, typeof(T), NamespaceSource.Instance)
+            );
         }
 
         [Test]
         public void Constructor_RequiresType()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new XPathNode(new XmlDocument().CreateNavigator(), null, NamespaceSource.Instance));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    new XPathNode(
+                        new XmlDocument().CreateNavigator(),
+                        null,
+                        NamespaceSource.Instance
+                    )
+            );
         }
 
         protected override IXmlNode NodeForElement(params string[] xml)
@@ -43,12 +50,20 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         protected override IXmlNode NodeForAttribute(params string[] xml)
         {
-            return new XPathNode(Xml(xml).Attributes[0].CreateNavigator(), typeof(T), NamespaceSource.Instance);
+            return new XPathNode(
+                Xml(xml).Attributes[0].CreateNavigator(),
+                typeof(T),
+                NamespaceSource.Instance
+            );
         }
 
         protected override IXmlNode NodeForRoot()
         {
-            return new XPathNode(new XmlDocument().CreateNavigator(), typeof(T), NamespaceSource.Instance);
+            return new XPathNode(
+                new XmlDocument().CreateNavigator(),
+                typeof(T),
+                NamespaceSource.Instance
+            );
         }
 
         private static XmlElement Xml(params string[] xml)

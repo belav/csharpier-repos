@@ -14,10 +14,11 @@ internal static class SyntaxNodeExtensions
     /// <summary>
     /// Look inside a trivia list for a skipped token that contains the given position.
     /// </summary>
-    private static readonly Func<SyntaxTriviaList, int, SyntaxToken> FindSkippedTokenBackwardFunc = FindSkippedTokenBackward;
+    private static readonly Func<SyntaxTriviaList, int, SyntaxToken> FindSkippedTokenBackwardFunc =
+        FindSkippedTokenBackward;
 
-    public static SyntaxNode GetRequiredParent(this SyntaxNode node)
-        => node.Parent ?? throw new InvalidOperationException("Node's parent was null");
+    public static SyntaxNode GetRequiredParent(this SyntaxNode node) =>
+        node.Parent ?? throw new InvalidOperationException("Node's parent was null");
 
     public static SyntaxNode? GetParent(this SyntaxNode node, bool ascendOutOfTrivia)
     {
@@ -44,12 +45,19 @@ internal static class SyntaxNodeExtensions
         return node;
     }
 
-    public static bool IsAnyInitializerExpression([NotNullWhen(true)] this SyntaxNode? node, [NotNullWhen(true)] out SyntaxNode? creationExpression)
+    public static bool IsAnyInitializerExpression(
+        [NotNullWhen(true)] this SyntaxNode? node,
+        [NotNullWhen(true)] out SyntaxNode? creationExpression
+    )
     {
-        if (node is InitializerExpressionSyntax
+        if (
+            node is InitializerExpressionSyntax
             {
-                Parent: BaseObjectCreationExpressionSyntax or ArrayCreationExpressionSyntax or ImplicitArrayCreationExpressionSyntax
-            })
+                Parent: BaseObjectCreationExpressionSyntax
+                    or ArrayCreationExpressionSyntax
+                    or ImplicitArrayCreationExpressionSyntax
+            }
+        )
         {
             creationExpression = node.Parent;
             return true;
@@ -59,9 +67,11 @@ internal static class SyntaxNodeExtensions
         return false;
     }
 
-    public static bool IsSimpleAssignmentStatement([NotNullWhen(true)] this SyntaxNode? statement)
-        => statement is ExpressionStatementSyntax exprStatement &&
-           exprStatement.Expression.IsKind(SyntaxKind.SimpleAssignmentExpression);
+    public static bool IsSimpleAssignmentStatement(
+        [NotNullWhen(true)] this SyntaxNode? statement
+    ) =>
+        statement is ExpressionStatementSyntax exprStatement
+        && exprStatement.Expression.IsKind(SyntaxKind.SimpleAssignmentExpression);
 
     /// <summary>
     /// If the position is inside of token, return that token; otherwise, return the token to the left.
@@ -71,22 +81,34 @@ internal static class SyntaxNodeExtensions
         int position,
         bool includeSkipped = false,
         bool includeDirectives = false,
-        bool includeDocumentationComments = false)
+        bool includeDocumentationComments = false
+    )
     {
         var findSkippedToken = includeSkipped ? FindSkippedTokenBackwardFunc : ((l, p) => default);
 
-        var token = GetInitialToken(root, position, includeSkipped, includeDirectives, includeDocumentationComments);
+        var token = GetInitialToken(
+            root,
+            position,
+            includeSkipped,
+            includeDirectives,
+            includeDocumentationComments
+        );
 
         if (position <= token.SpanStart)
         {
             do
             {
                 var skippedToken = findSkippedToken(token.LeadingTrivia, position);
-                token = skippedToken.RawKind != 0
-                    ? skippedToken
-                    : token.GetPreviousToken(includeZeroWidth: false, includeSkipped: includeSkipped, includeDirectives: includeDirectives, includeDocumentationComments: includeDocumentationComments);
-            }
-            while (position <= token.SpanStart && root.FullSpan.Start < token.SpanStart);
+                token =
+                    skippedToken.RawKind != 0
+                        ? skippedToken
+                        : token.GetPreviousToken(
+                            includeZeroWidth: false,
+                            includeSkipped: includeSkipped,
+                            includeDirectives: includeDirectives,
+                            includeDocumentationComments: includeDocumentationComments
+                        );
+            } while (position <= token.SpanStart && root.FullSpan.Start < token.SpanStart);
         }
         else if (token.Span.End < position)
         {
@@ -107,12 +129,26 @@ internal static class SyntaxNodeExtensions
         int position,
         bool includeSkipped = false,
         bool includeDirectives = false,
-        bool includeDocumentationComments = false)
+        bool includeDocumentationComments = false
+    )
     {
         return position < root.FullSpan.End || !(root is ICompilationUnitSyntax)
-            ? root.FindToken(position, includeSkipped || includeDirectives || includeDocumentationComments)
-            : root.GetLastToken(includeZeroWidth: true, includeSkipped: true, includeDirectives: true, includeDocumentationComments: true)
-                  .GetPreviousToken(includeZeroWidth: false, includeSkipped: includeSkipped, includeDirectives: includeDirectives, includeDocumentationComments: includeDocumentationComments);
+            ? root.FindToken(
+                position,
+                includeSkipped || includeDirectives || includeDocumentationComments
+            )
+            : root.GetLastToken(
+                    includeZeroWidth: true,
+                    includeSkipped: true,
+                    includeDirectives: true,
+                    includeDocumentationComments: true
+                )
+                .GetPreviousToken(
+                    includeZeroWidth: false,
+                    includeSkipped: includeSkipped,
+                    includeDirectives: includeDirectives,
+                    includeDocumentationComments: includeDocumentationComments
+                );
     }
 
     /// <summary>

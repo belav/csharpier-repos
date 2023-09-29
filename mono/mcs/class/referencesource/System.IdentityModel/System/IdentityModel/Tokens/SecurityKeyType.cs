@@ -18,20 +18,21 @@ namespace System.IdentityModel.Tokens
     {
         internal static bool IsDefined(SecurityKeyType value)
         {
-            return (value == SecurityKeyType.SymmetricKey
+            return (
+                value == SecurityKeyType.SymmetricKey
                 || value == SecurityKeyType.AsymmetricKey
-                || value == SecurityKeyType.BearerKey);
+                || value == SecurityKeyType.BearerKey
+            );
         }
 
         internal static void Validate(SecurityKeyType value)
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(SecurityKeyType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException("value", (int)value, typeof(SecurityKeyType))
+                );
             }
         }
-
-
     }
 }

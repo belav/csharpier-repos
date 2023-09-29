@@ -15,6 +15,7 @@ public struct S0
     public short F5;
     public long F6;
     public static int s_result;
+
     public void M4(int arg0, sbyte[] arg1)
     {
         ForwardSubCallArgInterference3.s_rt.WriteLine(arg0);
@@ -24,11 +25,17 @@ public struct S0
     public sbyte[] M6(ref int arg0, bool arg1, ref S0 arg2, ref byte arg3)
     {
         var vr0 = ForwardSubCallArgInterference3.s_5;
-        ForwardSubCallArgInterference3.M7(arg2, vr0, ref ForwardSubCallArgInterference3.s_6, ref ForwardSubCallArgInterference3.s_10, arg0);
+        ForwardSubCallArgInterference3.M7(
+            arg2,
+            vr0,
+            ref ForwardSubCallArgInterference3.s_6,
+            ref ForwardSubCallArgInterference3.s_10,
+            arg0
+        );
         var vr1 = arg2.F6;
         ForwardSubCallArgInterference3.M8(arg2, vr1);
         arg0 = this.F2--;
-        return new sbyte[]{1};
+        return new sbyte[] { 1 };
     }
 }
 
@@ -40,7 +47,11 @@ public class ForwardSubCallArgInterference3
     public static uint[] s_5;
     public static byte s_6;
     public static S0[] s_10;
-    public static S0[, ] s_20 = new S0[, ]{{new S0()}};
+    public static S0[,] s_20 = new S0[,]
+    {
+        { new S0() }
+    };
+
     public static int Main()
     {
         s_rt = new C();
@@ -49,13 +60,9 @@ public class ForwardSubCallArgInterference3
         return S0.s_result;
     }
 
-    public static void M8(S0 arg0, long arg1)
-    {
-    }
+    public static void M8(S0 arg0, long arg1) { }
 
-    public static void M7(S0 argThis, uint[] arg0, ref byte arg1, ref S0[] arg2, int arg3)
-    {
-    }
+    public static void M7(S0 argThis, uint[] arg0, ref byte arg1, ref S0[] arg2, int arg3) { }
 }
 
 public interface IRT

@@ -28,12 +28,18 @@ public class Http1ConnectionBenchmark
     public void Setup()
     {
         var memoryPool = PinnedBlockMemoryPoolFactory.Create();
-        var options = new PipeOptions(memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
-            httpParser: new HttpParser<Http1ParsingHandler>());
+            httpParser: new HttpParser<Http1ParsingHandler>()
+        );
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: serviceContext,
@@ -41,7 +47,8 @@ public class Http1ConnectionBenchmark
             transport: pair.Transport,
             timeoutControl: new TimeoutControl(timeoutHandler: null),
             memoryPool: memoryPool,
-            connectionFeatures: new FeatureCollection());
+            connectionFeatures: new FeatureCollection()
+        );
 
         var http1Connection = new Http1Connection(connectionContext);
 
@@ -102,14 +109,17 @@ public class Http1ConnectionBenchmark
             RequestHandler = requestHandler;
         }
 
-        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-            => RequestHandler.Connection.OnHeader(name, value, checkForNewlineChars: false);
+        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) =>
+            RequestHandler.Connection.OnHeader(name, value, checkForNewlineChars: false);
 
-        public void OnHeadersComplete(bool endStream)
-            => RequestHandler.Connection.OnHeadersComplete();
+        public void OnHeadersComplete(bool endStream) =>
+            RequestHandler.Connection.OnHeadersComplete();
 
-        public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
-            => RequestHandler.Connection.OnStartLine(versionAndMethod, targetPath, startLine);
+        public void OnStartLine(
+            HttpVersionAndMethod versionAndMethod,
+            TargetOffsetPathLength targetPath,
+            Span<byte> startLine
+        ) => RequestHandler.Connection.OnStartLine(versionAndMethod, targetPath, startLine);
 
         public void OnStaticIndexedHeader(int index)
         {

@@ -17,6 +17,7 @@ namespace POS_Server.Controllers
     public class ResidentialSectorsUsersController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("GetAll")]
         public string GetAll(string token)
@@ -32,30 +33,27 @@ namespace POS_Server.Controllers
             {
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var List1 = entity.residentialSectorsUsers.ToList();
-                        var List = List1.Select(S => new residentialSectorsUsers
-                        {
-
-                            id = S.id,
-                            residentSecId = S.residentSecId,
-                            userId = S.userId,
-                            notes = S.notes,
-                            createDate = S.createDate,
-                            updateDate = S.updateDate,
-                            createUserId = S.createUserId,
-                            updateUserId = S.updateUserId,
-
-
-
-                        })
-                        .ToList();
+                        var List = List1
+                            .Select(
+                                S =>
+                                    new residentialSectorsUsers
+                                    {
+                                        id = S.id,
+                                        residentSecId = S.residentSecId,
+                                        userId = S.userId,
+                                        notes = S.notes,
+                                        createDate = S.createDate,
+                                        updateDate = S.updateDate,
+                                        createUserId = S.createUserId,
+                                        updateUserId = S.updateUserId,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(List);
-
                     }
                 }
                 catch (Exception ex)
@@ -64,6 +62,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         /*
     public long id { get; set; }
         public Nullable<long> residentSecId { get; set; }
@@ -98,25 +97,23 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var bank = entity.residentialSectorsUsers
-                   .Where(S => S.id == id)
-                   .Select(S => new
-                   {
-                       S.id,
-                       S.residentSecId,
-                       S.userId,
-                       S.notes,
-                       S.createDate,
-                       S.updateDate,
-                       S.createUserId,
-                       S.updateUserId,
-
-
-
-
-                   })
-                   .FirstOrDefault();
+                        .Where(S => S.id == id)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.id,
+                                    S.residentSecId,
+                                    S.userId,
+                                    S.notes,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(bank);
-
                 }
             }
         }
@@ -143,7 +140,10 @@ namespace POS_Server.Controllers
                     {
                         strObject = c.Value.Replace("\\", string.Empty);
                         strObject = strObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<residentialSectorsUsers>(strObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<residentialSectorsUsers>(
+                            strObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -175,40 +175,36 @@ namespace POS_Server.Controllers
                         var bankEntity = entity.Set<residentialSectorsUsers>();
                         if (newObject.id == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
                             tmpObject = bankEntity.Add(newObject);
                             entity.SaveChanges();
-                            message = tmpObject.id.ToString(); ;
+                            message = tmpObject.id.ToString();
+                            ;
                         }
                         else
                         {
-                            tmpObject = entity.residentialSectorsUsers.Where(p => p.id == newObject.id).FirstOrDefault();
+                            tmpObject = entity.residentialSectorsUsers
+                                .Where(p => p.id == newObject.id)
+                                .FirstOrDefault();
 
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpObject.id = newObject.id;
                             tmpObject.residentSecId = newObject.residentSecId;
                             tmpObject.userId = newObject.userId;
                             tmpObject.notes = newObject.notes;
                             tmpObject.createDate = newObject.createDate;
-                       
+
                             tmpObject.createUserId = newObject.createUserId;
                             tmpObject.updateUserId = newObject.updateUserId;
 
-
-
-
-
-
                             entity.SaveChanges();
                             message = tmpObject.id.ToString();
-
                         }
                         return TokenManager.GenerateToken(message);
                     }
                 }
-
                 catch
                 {
                     message = "0";
@@ -255,8 +251,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
-                            residentialSectorsUsers objDelete = entity.residentialSectorsUsers.Find(id);
+                            residentialSectorsUsers objDelete = entity.residentialSectorsUsers.Find(
+                                id
+                            );
                             entity.residentialSectorsUsers.Remove(objDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -273,11 +270,12 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
-                            residentialSectorsUsers objDelete = entity.residentialSectorsUsers.Find(id);
+                            residentialSectorsUsers objDelete = entity.residentialSectorsUsers.Find(
+                                id
+                            );
 
                             objDelete.updateUserId = userId;
-                            objDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
@@ -314,15 +312,16 @@ namespace POS_Server.Controllers
                     {
                         strObject = c.Value.Replace("\\", string.Empty);
                         strObject = strObject.Trim('"');
-                        newListObj = JsonConvert.DeserializeObject<List<residentialSectorsUsers>>(strObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newListObj = JsonConvert.DeserializeObject<List<residentialSectorsUsers>>(
+                            strObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "userId")
                     {
                         userId = long.Parse(c.Value);
                     }
-                    else
-                  if (c.Type == "updateUserId")
+                    else if (c.Type == "updateUserId")
                     {
                         updateUserId = long.Parse(c.Value);
                     }
@@ -337,15 +336,15 @@ namespace POS_Server.Controllers
                     {
                         entity.residentialSectorsUsers.RemoveRange(items);
                         try
-                        { entity.SaveChanges(); }
+                        {
+                            entity.SaveChanges();
+                        }
                         catch (Exception ex)
                         {
                             message = "-2";
                             return TokenManager.GenerateToken(message);
                         }
                     }
-
-
                 }
                 try
                 {
@@ -353,17 +352,26 @@ namespace POS_Server.Controllers
                     {
                         for (int i = 0; i < newListObj.Count; i++)
                         {
-                            if (newListObj[i].updateUserId == 0 || newListObj[i].updateUserId == null)
+                            if (
+                                newListObj[i].updateUserId == 0
+                                || newListObj[i].updateUserId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].updateUserId = id;
                             }
-                            if (newListObj[i].createUserId == 0 || newListObj[i].createUserId == null)
+                            if (
+                                newListObj[i].createUserId == 0
+                                || newListObj[i].createUserId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].createUserId = id;
                             }
-                            if (newListObj[i].residentSecId == 0 || newListObj[i].residentSecId == null)
+                            if (
+                                newListObj[i].residentSecId == 0
+                                || newListObj[i].residentSecId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].residentSecId = id;
@@ -375,7 +383,7 @@ namespace POS_Server.Controllers
                             }
                             var branchEntity = entity.Set<residentialSectorsUsers>();
 
-                            newListObj[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newListObj[i].createDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newListObj[i].updateDate = newListObj[i].createDate;
                             newListObj[i].updateUserId = updateUserId;
                             newListObj[i].userId = userId;
@@ -384,11 +392,7 @@ namespace POS_Server.Controllers
                         }
 
                         entity.SaveChanges();
-
-
                     }
-
-
 
                     message = "1";
                     return TokenManager.GenerateToken(message);
@@ -398,12 +402,7 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
             }
-
         }
-
-
-     
     }
 }

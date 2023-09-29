@@ -19,38 +19,61 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ForEachCast
 {
-    internal abstract class AbstractForEachCastCodeFixProvider<TForEachStatementSyntax> : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractForEachCastCodeFixProvider<TForEachStatementSyntax>
+        : SyntaxEditorBasedCodeFixProvider
         where TForEachStatementSyntax : SyntaxNode
     {
-        protected abstract ITypeSymbol GetForEachElementType(SemanticModel semanticModel, TForEachStatementSyntax forEachStatement);
+        protected abstract ITypeSymbol GetForEachElementType(
+            SemanticModel semanticModel,
+            TForEachStatementSyntax forEachStatement
+        );
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.ForEachCastDiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.ForEachCastDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             if (context.Diagnostics.First().Properties.ContainsKey(ForEachCastHelpers.IsFixable))
             {
-                RegisterCodeFix(context, AnalyzersResources.Add_explicit_cast, nameof(AbstractForEachCastCodeFixProvider<SyntaxNode>));
+                RegisterCodeFix(
+                    context,
+                    AnalyzersResources.Add_explicit_cast,
+                    nameof(AbstractForEachCastCodeFixProvider<SyntaxNode>)
+                );
             }
 
             return Task.CompletedTask;
         }
 
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => diagnostic.Properties.ContainsKey(ForEachCastHelpers.IsFixable);
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            diagnostic.Properties.ContainsKey(ForEachCastHelpers.IsFixable);
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
             {
-                var node = editor.OriginalRoot.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+                var node = editor.OriginalRoot.FindNode(
+                    diagnostic.Location.SourceSpan,
+                    getInnermostNodeForTie: true
+                );
                 if (node is TForEachStatementSyntax foreachStatement)
-                    AddCast(syntaxFacts, semanticModel, editor, foreachStatement, cancellationToken);
+                    AddCast(
+                        syntaxFacts,
+                        semanticModel,
+                        editor,
+                        foreachStatement,
+                        cancellationToken
+                    );
             }
         }
 
@@ -59,25 +82,41 @@ namespace Microsoft.CodeAnalysis.ForEachCast
             SemanticModel semanticModel,
             SyntaxEditor editor,
             TForEachStatementSyntax forEachStatement,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var expression = syntaxFacts.GetExpressionOfForeachStatement(forEachStatement);
-            var loopOperation = (IForEachLoopOperation)semanticModel.GetRequiredOperation(forEachStatement, cancellationToken);
-            var variableDeclarator = (IVariableDeclaratorOperation)loopOperation.LoopControlVariable;
-            var enumerableType = semanticModel.Compilation.GetBestTypeByMetadataName(typeof(Enumerable).FullName!);
+            var loopOperation = (IForEachLoopOperation)
+                semanticModel.GetRequiredOperation(forEachStatement, cancellationToken);
+            var variableDeclarator = (IVariableDeclaratorOperation)
+                loopOperation.LoopControlVariable;
+            var enumerableType = semanticModel.Compilation.GetBestTypeByMetadataName(
+                typeof(Enumerable).FullName!
+            );
 
             // These were already verified to be non-null in the analyzer.
             Contract.ThrowIfNull(variableDeclarator.Symbol.Type);
             Contract.ThrowIfNull(enumerableType);
 
             var elementType = GetForEachElementType(semanticModel, forEachStatement);
-            var conversion = semanticModel.Compilation.ClassifyCommonConversion(elementType, variableDeclarator.Symbol.Type);
+            var conversion = semanticModel.Compilation.ClassifyCommonConversion(
+                elementType,
+                variableDeclarator.Symbol.Type
+            );
 
-            var rewritten = GetRewrittenCollection(editor.Generator, expression, variableDeclarator.Symbol.Type, conversion);
+            var rewritten = GetRewrittenCollection(
+                editor.Generator,
+                expression,
+                variableDeclarator.Symbol.Type,
+                conversion
+            );
 
             // Add an annotation for System.Linq.Enumerable so that we add a `using System.Linq;` if not present.
             rewritten = rewritten.WithAdditionalAnnotations(
-                Simplifier.Annotation, Simplifier.AddImportsAnnotation, SymbolAnnotation.Create(enumerableType));
+                Simplifier.Annotation,
+                Simplifier.AddImportsAnnotation,
+                SymbolAnnotation.Create(enumerableType)
+            );
 
             editor.ReplaceNode(expression, rewritten);
         }
@@ -86,7 +125,8 @@ namespace Microsoft.CodeAnalysis.ForEachCast
             SyntaxGenerator generator,
             SyntaxNode collection,
             ITypeSymbol iterationVariableType,
-            CommonConversion conversion)
+            CommonConversion conversion
+        )
         {
             if (conversion.Exists && conversion.IsReference)
             {
@@ -96,7 +136,10 @@ namespace Microsoft.CodeAnalysis.ForEachCast
                         collection,
                         generator.GenericName(
                             nameof(Enumerable.Cast),
-                            new[] { iterationVariableType })));
+                            new[] { iterationVariableType }
+                        )
+                    )
+                );
             }
             else
             {
@@ -105,10 +148,16 @@ namespace Microsoft.CodeAnalysis.ForEachCast
                 return generator.InvocationExpression(
                     generator.MemberAccessExpression(
                         collection,
-                        generator.IdentifierName(nameof(Enumerable.Select))),
+                        generator.IdentifierName(nameof(Enumerable.Select))
+                    ),
                     generator.ValueReturningLambdaExpression(
                         "v",
-                        generator.ConvertExpression(iterationVariableType, generator.IdentifierName("v"))));
+                        generator.ConvertExpression(
+                            iterationVariableType,
+                            generator.IdentifierName("v")
+                        )
+                    )
+                );
             }
         }
     }

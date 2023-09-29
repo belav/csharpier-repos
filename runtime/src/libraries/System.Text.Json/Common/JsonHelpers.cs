@@ -11,7 +11,12 @@ namespace System.Text.Json
         /// <summary>
         /// Emulates Dictionary.TryAdd on netstandard.
         /// </summary>
-        public static bool TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, in TKey key, in TValue value) where TKey : notnull
+        public static bool TryAdd<TKey, TValue>(
+            this Dictionary<TKey, TValue> dictionary,
+            in TKey key,
+            in TValue value
+        )
+            where TKey : notnull
         {
 #if NETSTANDARD2_0 || NETFRAMEWORK
             if (!dictionary.ContainsKey(key))
@@ -38,9 +43,10 @@ namespace System.Text.Json
             // Tuples implement lexical ordering OOTB which can be used to encode stable sorting
             // using the actual key as the first element and index as the second element.
             const int StackallocThreshold = 32;
-            Span<(TKey, int)> keys = span.Length <= StackallocThreshold
-                ? (stackalloc (TKey, int)[StackallocThreshold]).Slice(0, span.Length)
-                : new (TKey, int)[span.Length];
+            Span<(TKey, int)> keys =
+                span.Length <= StackallocThreshold
+                    ? (stackalloc (TKey, int)[StackallocThreshold]).Slice(0, span.Length)
+                    : new (TKey, int)[span.Length];
 
             for (int i = 0; i < keys.Length; i++)
             {

@@ -22,7 +22,10 @@ namespace System.Workflow.Activities
 
     internal sealed class ReplicatorDesigner : System.Workflow.Activities.SequenceDesigner
     {
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             CompositeActivity compositeActivity = Activity as CompositeActivity;
             if (compositeActivity != null && compositeActivity.EnabledActivities.Count > 0)

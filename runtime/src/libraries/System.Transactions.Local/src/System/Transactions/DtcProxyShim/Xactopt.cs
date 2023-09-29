@@ -10,8 +10,8 @@ namespace System.Transactions.DtcProxyShim;
 [StructLayout(LayoutKind.Sequential)]
 internal struct Xactopt
 {
-    internal Xactopt(uint ulTimeout, string szDescription)
-        => (UlTimeout, SzDescription) = (ulTimeout, szDescription);
+    internal Xactopt(uint ulTimeout, string szDescription) =>
+        (UlTimeout, SzDescription) = (ulTimeout, szDescription);
 
     public uint UlTimeout;
 

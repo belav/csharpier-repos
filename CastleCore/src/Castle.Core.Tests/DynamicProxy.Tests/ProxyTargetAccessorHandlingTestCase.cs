@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,24 +34,36 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ClassProxy_AdditionalInterfaces()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateClassProxy(typeof(object), new[] { typeof(IProxyTargetAccessor) }));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateClassProxy(
+                        typeof(object),
+                        new[] { typeof(IProxyTargetAccessor) }
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void ClassProxy_base()
         {
-            var ex = Assert.Throws(typeof(ArgumentException), () =>
-                generator.CreateClassProxy<ImplementsProxyTargetAccessor>());
+            var ex = Assert.Throws(
+                typeof(ArgumentException),
+                () => generator.CreateClassProxy<ImplementsProxyTargetAccessor>()
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void ClassProxy_Mixin()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateClassProxy(typeof(object), MixIn(new ImplementsProxyTargetAccessor())));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateClassProxy(
+                        typeof(object),
+                        MixIn(new ImplementsProxyTargetAccessor())
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
@@ -60,66 +72,101 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void InterfaceProxyWithoutTarget_AdditionalInterfaces()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(typeof(IOne), new[] { typeof(IProxyTargetAccessor) }));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithoutTarget(
+                        typeof(IOne),
+                        new[] { typeof(IProxyTargetAccessor) }
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithoutTarget_Mixin()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(typeof(IOne), new[] { typeof(IProxyTargetAccessor) },
-                    MixIn(new ImplementsProxyTargetAccessor())));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithoutTarget(
+                        typeof(IOne),
+                        new[] { typeof(IProxyTargetAccessor) },
+                        MixIn(new ImplementsProxyTargetAccessor())
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithoutTarget_TargetInterface()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(typeof(IProxyTargetAccessor)));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => generator.CreateInterfaceProxyWithoutTarget(typeof(IProxyTargetAccessor))
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithoutTarget_TargetInterface_derived()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithoutTarget(typeof(IProxyTargetAccessorDerived)));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithoutTarget(typeof(IProxyTargetAccessorDerived))
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithTarget_AdditionalInterfaces()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithTarget(typeof(IOne), new[] { typeof(IProxyTargetAccessor) }, new One()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithTarget(
+                        typeof(IOne),
+                        new[] { typeof(IProxyTargetAccessor) },
+                        new One()
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithTarget_Mixin()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithTarget(typeof(IOne), new[] { typeof(IProxyTargetAccessor) }, new One(),
-                    MixIn(new ImplementsProxyTargetAccessor())));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithTarget(
+                        typeof(IOne),
+                        new[] { typeof(IProxyTargetAccessor) },
+                        new One(),
+                        MixIn(new ImplementsProxyTargetAccessor())
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithTarget_Target()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithTarget(typeof(IProxyTargetAccessor), new ImplementsProxyTargetAccessor()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithTarget(
+                        typeof(IProxyTargetAccessor),
+                        new ImplementsProxyTargetAccessor()
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithTarget_Target_derived()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithTarget(typeof(IProxyTargetAccessorDerived), new ImplementsProxyTargetAccessorDerived()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithTarget(
+                        typeof(IProxyTargetAccessorDerived),
+                        new ImplementsProxyTargetAccessorDerived()
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
@@ -128,34 +175,55 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void InterfaceProxyWithTargetInterface_AdditionalInterfaces()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithTargetInterface(typeof(IOne), new[] { typeof(IProxyTargetAccessor) }, new One()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithTargetInterface(
+                        typeof(IOne),
+                        new[] { typeof(IProxyTargetAccessor) },
+                        new One()
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithTargetInterface_Mixin()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithTargetInterface(typeof(IOne), new[] { typeof(IProxyTargetAccessor) }, new One(),
-                    MixIn(new ImplementsProxyTargetAccessor())));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithTargetInterface(
+                        typeof(IOne),
+                        new[] { typeof(IProxyTargetAccessor) },
+                        new One(),
+                        MixIn(new ImplementsProxyTargetAccessor())
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithTargetInterface_Target()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithTargetInterface(typeof(IProxyTargetAccessor), new ImplementsProxyTargetAccessor()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithTargetInterface(
+                        typeof(IProxyTargetAccessor),
+                        new ImplementsProxyTargetAccessor()
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
 
         [Test]
         public void InterfaceProxyWithTargetInterface_Target_derived()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                generator.CreateInterfaceProxyWithTargetInterface(typeof(IProxyTargetAccessorDerived),
-                    new ImplementsProxyTargetAccessorDerived()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    generator.CreateInterfaceProxyWithTargetInterface(
+                        typeof(IProxyTargetAccessorDerived),
+                        new ImplementsProxyTargetAccessorDerived()
+                    )
+            );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }
     }
@@ -182,9 +250,7 @@ namespace Castle.DynamicProxy.Tests
         #endregion
     }
 
-    public interface IProxyTargetAccessorDerived : IProxyTargetAccessor
-    {
-    }
+    public interface IProxyTargetAccessorDerived : IProxyTargetAccessor { }
 
     public class ImplementsProxyTargetAccessorDerived : IProxyTargetAccessorDerived
     {

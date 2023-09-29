@@ -11,10 +11,18 @@ namespace System.Drawing
     {
         private static unsafe bool GetNonClientMetrics(out Interop.User32.NONCLIENTMETRICS metrics)
         {
-            metrics = new Interop.User32.NONCLIENTMETRICS { cbSize = (uint)sizeof(Interop.User32.NONCLIENTMETRICS) };
+            metrics = new Interop.User32.NONCLIENTMETRICS
+            {
+                cbSize = (uint)sizeof(Interop.User32.NONCLIENTMETRICS)
+            };
             fixed (void* m = &metrics)
             {
-                return Interop.User32.SystemParametersInfoW(Interop.User32.SystemParametersAction.SPI_GETNONCLIENTMETRICS, metrics.cbSize, m, 0);
+                return Interop.User32.SystemParametersInfoW(
+                    Interop.User32.SystemParametersAction.SPI_GETNONCLIENTMETRICS,
+                    metrics.cbSize,
+                    m,
+                    0
+                );
             }
         }
 
@@ -102,12 +110,14 @@ namespace System.Drawing
         {
             return !(
                 // In any of these cases we'll handle the exception.
-                ex is ExternalException ||
-                ex is ArgumentException ||
-                ex is OutOfMemoryException || // GDI+ throws this one for many reasons other than actual OOM.
-                ex is InvalidOperationException ||
-                ex is NotImplementedException ||
-                ex is FileNotFoundException);
+                ex is ExternalException
+                || ex is ArgumentException
+                || ex is OutOfMemoryException
+                || // GDI+ throws this one for many reasons other than actual OOM.
+                ex is InvalidOperationException
+                || ex is NotImplementedException
+                || ex is FileNotFoundException
+            );
         }
 
         public static unsafe Font? IconTitleFont
@@ -117,7 +127,14 @@ namespace System.Drawing
                 Font? iconTitleFont = null;
 
                 Interop.User32.LOGFONT itfont = default;
-                if (Interop.User32.SystemParametersInfoW(Interop.User32.SystemParametersAction.SPI_GETICONTITLELOGFONT, (uint)sizeof(Interop.User32.LOGFONT), &itfont, 0))
+                if (
+                    Interop.User32.SystemParametersInfoW(
+                        Interop.User32.SystemParametersAction.SPI_GETICONTITLELOGFONT,
+                        (uint)sizeof(Interop.User32.LOGFONT),
+                        &itfont,
+                        0
+                    )
+                )
                 {
                     iconTitleFont = GetFontFromData(itfont);
                     iconTitleFont.SetSystemFontName(nameof(IconTitleFont));
@@ -146,7 +163,9 @@ namespace System.Drawing
                 // First try DEFAULT_GUI.
                 if (defaultFont == null)
                 {
-                    IntPtr handle = Interop.Gdi32.GetStockObject(Interop.Gdi32.StockObject.DEFAULT_GUI_FONT);
+                    IntPtr handle = Interop.Gdi32.GetStockObject(
+                        Interop.Gdi32.StockObject.DEFAULT_GUI_FONT
+                    );
                     try
                     {
                         using (Font fontInWorldUnits = Font.FromHfont(handle))
@@ -167,9 +186,7 @@ namespace System.Drawing
                     {
                         defaultFont = new Font("Tahoma", 8);
                     }
-                    catch (ArgumentException)
-                    {
-                    }
+                    catch (ArgumentException) { }
                 }
 
                 // Use GenericSansSerif as a last resort - this will always work.
@@ -232,7 +249,14 @@ namespace System.Drawing
 
         private static Font FontInPoints(Font font)
         {
-            return new Font(font.FontFamily, font.SizeInPoints, font.Style, GraphicsUnit.Point, font.GdiCharSet, font.GdiVerticalFont);
+            return new Font(
+                font.FontFamily,
+                font.SizeInPoints,
+                font.Style,
+                GraphicsUnit.Point,
+                font.GdiCharSet,
+                font.GdiVerticalFont
+            );
         }
 
         private static Font GetFontFromData(Interop.User32.LOGFONT logFont)
@@ -244,10 +268,11 @@ namespace System.Drawing
             }
             catch (Exception ex) when (!IsCriticalFontException(ex)) { }
 
-            return
-                font == null ? DefaultFont :
-                font.Unit != GraphicsUnit.Point ? FontInPoints(font) :
-                font;
+            return font == null
+                ? DefaultFont
+                : font.Unit != GraphicsUnit.Point
+                    ? FontInPoints(font)
+                    : font;
         }
     }
 }

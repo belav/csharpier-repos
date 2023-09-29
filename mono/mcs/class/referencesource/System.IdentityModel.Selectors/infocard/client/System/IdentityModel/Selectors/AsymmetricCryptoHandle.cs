@@ -19,13 +19,15 @@ namespace System.IdentityModel.Selectors
     //
     internal class AsymmetricCryptoHandle : ProofTokenCryptoHandle
     {
-        public AsymmetricCryptoHandle(InternalRefCountedHandle nativeHandle, DateTime expiration, IntPtr parameters)
-            : base(nativeHandle, expiration, parameters, typeof(RpcAsymmetricCryptoParameters))
-        {
-        }
+        public AsymmetricCryptoHandle(
+            InternalRefCountedHandle nativeHandle,
+            DateTime expiration,
+            IntPtr parameters
+        )
+            : base(nativeHandle, expiration, parameters, typeof(RpcAsymmetricCryptoParameters)) { }
 
-        private AsymmetricCryptoHandle(InternalRefCountedHandle internalHandle) : base(internalHandle) { }
-
+        private AsymmetricCryptoHandle(InternalRefCountedHandle internalHandle)
+            : base(internalHandle) { }
 
         protected override CryptoHandle OnDuplicate()
         {
@@ -38,4 +40,3 @@ namespace System.IdentityModel.Selectors
         }
     }
 }
-

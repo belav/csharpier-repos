@@ -25,12 +25,14 @@ public static class SqliteExpression
         string format,
         SqlExpression timestring,
         IEnumerable<SqlExpression>? modifiers = null,
-        RelationalTypeMapping? typeMapping = null)
+        RelationalTypeMapping? typeMapping = null
+    )
     {
         modifiers ??= Enumerable.Empty<SqlExpression>();
 
         // If the inner call is another strftime then shortcut a double call
-        if (timestring is SqlFunctionExpression rtrimFunction
+        if (
+            timestring is SqlFunctionExpression rtrimFunction
             && rtrimFunction.Name == "rtrim"
             && rtrimFunction.Arguments!.Count == 2
             && rtrimFunction.Arguments[0] is SqlFunctionExpression rtrimFunction2
@@ -38,7 +40,8 @@ public static class SqliteExpression
             && rtrimFunction2.Arguments!.Count == 2
             && rtrimFunction2.Arguments[0] is SqlFunctionExpression strftimeFunction
             && strftimeFunction.Name == "strftime"
-            && strftimeFunction.Arguments!.Count > 1)
+            && strftimeFunction.Arguments!.Count > 1
+        )
         {
             // Use its timestring parameter directly in place of ours
             timestring = strftimeFunction.Arguments[1];
@@ -47,7 +50,9 @@ public static class SqliteExpression
             modifiers = strftimeFunction.Arguments.Skip(2).Concat(modifiers);
         }
 
-        var finalArguments = new[] { sqlExpressionFactory.Constant(format), timestring }.Concat(modifiers);
+        var finalArguments = new[] { sqlExpressionFactory.Constant(format), timestring }.Concat(
+            modifiers
+        );
 
         return sqlExpressionFactory.Function(
             "strftime",
@@ -55,6 +60,7 @@ public static class SqliteExpression
             nullable: true,
             argumentsPropagateNullability: finalArguments.Select(_ => true),
             returnType,
-            typeMapping);
+            typeMapping
+        );
     }
 }

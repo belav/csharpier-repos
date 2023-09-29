@@ -10,12 +10,18 @@ namespace System.IdentityModel.Tokens
 
     public abstract class SamlCondition
     {
-        public abstract bool IsReadOnly
-        {
-            get;
-        }
+        public abstract bool IsReadOnly { get; }
         public abstract void MakeReadOnly();
-        public abstract void ReadXml(System.Xml.XmlDictionaryReader reader, SamlSerializer samlSerializer, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver);
-        public abstract void WriteXml(System.Xml.XmlDictionaryWriter writer, SamlSerializer samlSerializer, SecurityTokenSerializer keyInfoSerializer);
+        public abstract void ReadXml(
+            System.Xml.XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        );
+        public abstract void WriteXml(
+            System.Xml.XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer
+        );
     }
 }

@@ -1,19 +1,19 @@
 #region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -55,15 +55,15 @@ namespace DbLinq.Data.Linq
     /// T may be eg. class Employee or string - the output
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    public sealed partial class Table<TEntity> :
-            ITable,
+    public sealed partial class Table<TEntity>
+        : ITable,
             IQueryProvider,
             IListSource,
             IEnumerable<TEntity>,
             IEnumerable,
             IQueryable<TEntity>,
             IQueryable
-            where TEntity : class
+        where TEntity : class
     {
         /// <summary>
         /// the parent DataContext holds our connection etc
@@ -181,7 +181,8 @@ namespace DbLinq.Data.Linq
                 Context.RegisterInsert(entity);
         }
 
-        public void InsertAllOnSubmit<TSubEntity>(IEnumerable<TSubEntity> entities) where TSubEntity : TEntity
+        public void InsertAllOnSubmit<TSubEntity>(IEnumerable<TSubEntity> entities)
+            where TSubEntity : TEntity
         {
             if (entities == null)
                 throw new ArgumentNullException("entities");
@@ -214,7 +215,8 @@ namespace DbLinq.Data.Linq
             Context.RegisterDelete(entity);
         }
 
-        public void DeleteAllOnSubmit<TSubEntity>(IEnumerable<TSubEntity> entities) where TSubEntity : TEntity
+        public void DeleteAllOnSubmit<TSubEntity>(IEnumerable<TSubEntity> entities)
+            where TSubEntity : TEntity
         {
             if (entities == null)
                 throw new ArgumentNullException("entities");
@@ -251,10 +253,11 @@ namespace DbLinq.Data.Linq
             foreach (var entity in entities)
                 Context.RegisterUpdate(entity);
         }
+
         void ITable.AttachAll(IEnumerable entities, bool asModified)
         {
             foreach (var entity in entities)
-				Context.RegisterUpdate(entity, asModified ? null : entity);
+                Context.RegisterUpdate(entity, asModified ? null : entity);
         }
 
         /// <summary>
@@ -273,7 +276,8 @@ namespace DbLinq.Data.Linq
             throw new NotImplementedException();
         }
 
-        public void AttachAll<TSubEntity>(IEnumerable<TSubEntity> entities) where TSubEntity : TEntity
+        public void AttachAll<TSubEntity>(IEnumerable<TSubEntity> entities)
+            where TSubEntity : TEntity
         {
             if (entities == null)
                 throw new ArgumentNullException("entities");
@@ -283,7 +287,8 @@ namespace DbLinq.Data.Linq
         }
 
         [DbLinqToDo]
-        public void AttachAll<TSubEntity>(IEnumerable<TSubEntity> entities, bool asModified) where TSubEntity : TEntity
+        public void AttachAll<TSubEntity>(IEnumerable<TSubEntity> entities, bool asModified)
+            where TSubEntity : TEntity
         {
             throw new NotImplementedException();
         }
@@ -306,7 +311,10 @@ namespace DbLinq.Data.Linq
         /// <value>
         /// 	<c>true</c> if this instance is read only; otherwise, <c>false</c>.
         /// </value>
-        public bool IsReadOnly { get { return false; } }
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
         // PC: this will probably required to recreate a new object instance with all original values
         //     (that we currently do not always store, so we may need to make a differential copy

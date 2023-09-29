@@ -15,8 +15,11 @@ class Runtime_61040_3
     static int z = 100;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void JitUse(int arg) { z++; }
-    
+    static void JitUse(int arg)
+    {
+        z++;
+    }
+
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization)]
     static int Problem(StructWithIndex a, int[] d)
     {
@@ -37,9 +40,9 @@ class Runtime_61040_3
 
         return -1;
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static StructWithIndex GetStructWithIndex() => new() { Index = 100_000_000 };
-    
+
     public static int Main() => Problem(new() { Index = 0, Value = 33 }, new int[10]);
 }

@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
     using System.Configuration;
     using System.Configuration.Internal;
@@ -22,7 +23,7 @@ namespace System.Web.Configuration {
     using System.Globalization;
 
     internal enum RpcAuthor
-    {                                    // RPC_C_AUTHZ_xxx
+    { // RPC_C_AUTHZ_xxx
         None = 0,
         Name = 1,
         DCE = 2,

@@ -26,28 +26,31 @@ internal static class CSharpIdentifier
         return SanitizeClassName(path);
     }
 
-    // CSharp Spec §2.4.2
+    // CSharp Spec ï¿½2.4.2
     private static bool IsIdentifierStart(char character)
     {
-        return char.IsLetter(character) ||
-            character == '_' ||
-            CharUnicodeInfo.GetUnicodeCategory(character) == UnicodeCategory.LetterNumber;
+        return char.IsLetter(character)
+            || character == '_'
+            || CharUnicodeInfo.GetUnicodeCategory(character) == UnicodeCategory.LetterNumber;
     }
 
     public static bool IsIdentifierPart(char character)
     {
-        return char.IsDigit(character) ||
-               IsIdentifierStart(character) ||
-               IsIdentifierPartByUnicodeCategory(character);
+        return char.IsDigit(character)
+            || IsIdentifierStart(character)
+            || IsIdentifierPartByUnicodeCategory(character);
     }
 
     private static bool IsIdentifierPartByUnicodeCategory(char character)
     {
         var category = CharUnicodeInfo.GetUnicodeCategory(character);
 
-        return category == UnicodeCategory.NonSpacingMark || // Mn
-            category == UnicodeCategory.SpacingCombiningMark || // Mc
-            category == UnicodeCategory.ConnectorPunctuation || // Pc
+        return category == UnicodeCategory.NonSpacingMark
+            || // Mn
+            category == UnicodeCategory.SpacingCombiningMark
+            || // Mc
+            category == UnicodeCategory.ConnectorPunctuation
+            || // Pc
             category == UnicodeCategory.Format; // Cf
     }
 

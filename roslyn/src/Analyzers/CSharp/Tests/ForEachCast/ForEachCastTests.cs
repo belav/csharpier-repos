@@ -12,33 +12,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ForEachCast
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpForEachCastDiagnosticAnalyzer,
-        CSharpForEachCastCodeFixProvider>;
+        CSharpForEachCastCodeFixProvider
+    >;
 
     public class ForEachCastTests
     {
         private static async Task TestWorkerAsync(
-            string testCode, string fixedCode, string optionValue)
+            string testCode,
+            string fixedCode,
+            string optionValue
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = testCode,
                 FixedCode = fixedCode,
-                EditorConfig = @"
+                EditorConfig =
+                    @"
 [*]
 dotnet_style_prefer_foreach_explicit_cast_in_source=" + optionValue,
             }.RunAsync();
         }
 
-        private static Task TestAlwaysAsync(string markup, string alwaysMarkup)
-            => TestWorkerAsync(markup, alwaysMarkup, "always");
+        private static Task TestAlwaysAsync(string markup, string alwaysMarkup) =>
+            TestWorkerAsync(markup, alwaysMarkup, "always");
 
-        private static Task TestWhenStronglyTypedAsync(string markup, string nonLegacyMarkup)
-            => TestWorkerAsync(markup, nonLegacyMarkup, "when_strongly_typed");
+        private static Task TestWhenStronglyTypedAsync(string markup, string nonLegacyMarkup) =>
+            TestWorkerAsync(markup, nonLegacyMarkup, "when_strongly_typed");
 
         [Fact]
         public async Task NonGenericIComparableCollection()
         {
-            var test = @"
+            var test =
+                @"
 namespace ConsoleApplication1
 {
     class Program
@@ -68,7 +74,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task GenericObjectCollection()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -83,7 +90,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -108,7 +116,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task ObjectArray()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -122,7 +131,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -146,7 +156,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task IComparableArrayCollection()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Collections.Generic;
 namespace ConsoleApplication1
@@ -161,7 +172,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -186,7 +198,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task IEnumerableOfObjectCollection()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -200,7 +213,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -224,7 +238,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task IListOfObjectCollection()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -238,7 +253,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -262,7 +278,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task NonGenericObjectCollection_Always()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections;
 namespace ConsoleApplication1
 {
@@ -277,7 +294,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections;
 using System.Linq;
 
@@ -301,7 +319,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task NonGenericObjectCollection_NonLegacy()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections;
 namespace ConsoleApplication1
 {
@@ -323,7 +342,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task SameType()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -346,7 +366,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task CastBaseToChild()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -363,7 +384,8 @@ namespace ConsoleApplication1
     class A { }
     class B : A { }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -390,7 +412,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task ImplicitConversion()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -413,7 +436,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task UserDefinedImplicitConversion()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -441,7 +465,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task ExplicitConversion()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -456,7 +481,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -480,7 +506,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task UserDefinedExplicitConversion()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -500,7 +527,8 @@ namespace ConsoleApplication1
         public static explicit operator B(A a) => new B();
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -530,7 +558,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task CastChildToBase()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -555,7 +584,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task InterfaceToClass()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Collections.Generic;
 namespace ConsoleApplication1
@@ -572,7 +602,8 @@ namespace ConsoleApplication1
     }
 }";
 
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -597,7 +628,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task ClassToImplementedInterfase()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Collections.Generic;
 namespace ConsoleApplication1
@@ -621,7 +653,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task GenericTypes_Unrelated()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -644,7 +677,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task GenericTypes_Valid_Relationship()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -667,7 +701,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task GenericTypes_Invalid_Relationship()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -683,7 +718,8 @@ namespace ConsoleApplication1
     }
 }";
 
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -708,7 +744,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task GenericTypes_Invalid_Relationship_ClassConstraint()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -725,7 +762,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -752,7 +790,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task CollectionFromMethodResult_Invalid()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Collections.Generic;
 namespace ConsoleApplication1
@@ -771,7 +810,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -800,7 +840,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task CollectionFromMethodResult_Valid()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Collections.Generic;
 namespace ConsoleApplication1
@@ -827,7 +868,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task DynamicSameType()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -850,7 +892,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task DynamicToObject()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -873,7 +916,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task DynamicToString()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -888,7 +932,8 @@ namespace ConsoleApplication1
         }
     }
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -913,7 +958,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task DynamicToVar()
         {
-            var test = @"
+            var test =
+                @"
 using System.Collections.Generic;
 namespace ConsoleApplication1
 {
@@ -936,7 +982,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TupleToVarTuple()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Collections.Generic;
 namespace ConsoleApplication1
@@ -960,7 +1007,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TupleToSameTuple()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Collections.Generic;
 namespace ConsoleApplication1
@@ -984,7 +1032,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TupleToChildTuple()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Collections.Generic;
 namespace ConsoleApplication1
@@ -1008,7 +1057,8 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TupleToChildTuple2()
         {
-            var test = @"
+            var test =
+                @"
 using System;
 using System.Linq;
 
@@ -1024,7 +1074,8 @@ public static class Program
     }
 }";
 
-            var code = @"
+            var code =
+                @"
 using System;
 using System.Linq;
 

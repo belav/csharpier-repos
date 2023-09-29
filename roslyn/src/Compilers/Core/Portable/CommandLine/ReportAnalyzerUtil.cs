@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             AnalyzerDriver? analyzerDriver,
             GeneratorDriverTimingInfo? driverTimingInfo,
             CultureInfo culture,
-            bool isConcurrentBuild)
+            bool isConcurrentBuild
+        )
         {
             if (isConcurrentBuild && (analyzerDriver is { } || driverTimingInfo is { }))
             {
@@ -39,26 +40,42 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static string GetFormattedTime(double d, CultureInfo culture) => d < 0.001 ?
-                string.Format(culture, "{0,8:<0.000}", 0.001) :
-                string.Format(culture, "{0,8:##0.000}", d);
+        private static string GetFormattedTime(double d, CultureInfo culture) =>
+            d < 0.001
+                ? string.Format(culture, "{0,8:<0.000}", 0.001)
+                : string.Format(culture, "{0,8:##0.000}", d);
 
         private static string GetColumnHeader(string kind)
         {
-            var time = string.Format("{0,8}", CodeAnalysisResources.AnalyzerExecutionTimeColumnHeader);
+            var time = string.Format(
+                "{0,8}",
+                CodeAnalysisResources.AnalyzerExecutionTimeColumnHeader
+            );
             var percent = string.Format("{0,5}", "%");
             return time + percent + "   " + kind;
         }
 
-        private static string GetColumnEntry(double totalSeconds, int percentage, string? name, CultureInfo culture)
+        private static string GetColumnEntry(
+            double totalSeconds,
+            int percentage,
+            string? name,
+            CultureInfo culture
+        )
         {
             var time = GetFormattedTime(totalSeconds, culture);
-            var percent = string.Format("{0,5}", percentage < 1 ? "<1" : percentage.ToString(culture));
+            var percent = string.Format(
+                "{0,5}",
+                percentage < 1 ? "<1" : percentage.ToString(culture)
+            );
 
             return time + percent + "   " + name;
         }
 
-        private static void ReportAnalyzerExecutionTime(TextWriter consoleOutput, AnalyzerDriver analyzerDriver, CultureInfo culture)
+        private static void ReportAnalyzerExecutionTime(
+            TextWriter consoleOutput,
+            AnalyzerDriver analyzerDriver,
+            CultureInfo culture
+        )
         {
             Debug.Assert(analyzerDriver.AnalyzerExecutionTimes != null);
             if (analyzerDriver.AnalyzerExecutionTimes.IsEmpty)
@@ -66,12 +83,21 @@ namespace Microsoft.CodeAnalysis
                 return;
             }
 
-            var totalAnalyzerExecutionTime = analyzerDriver.AnalyzerExecutionTimes.Sum(kvp => kvp.Value.TotalSeconds);
-            consoleOutput.WriteLine(string.Format(CodeAnalysisResources.AnalyzerTotalExecutionTime, totalAnalyzerExecutionTime.ToString("##0.000", culture)));
+            var totalAnalyzerExecutionTime = analyzerDriver.AnalyzerExecutionTimes.Sum(
+                kvp => kvp.Value.TotalSeconds
+            );
+            consoleOutput.WriteLine(
+                string.Format(
+                    CodeAnalysisResources.AnalyzerTotalExecutionTime,
+                    totalAnalyzerExecutionTime.ToString("##0.000", culture)
+                )
+            );
             consoleOutput.WriteLine();
 
             // Table header
-            consoleOutput.WriteLine(GetColumnHeader(CodeAnalysisResources.AnalyzerNameColumnHeader));
+            consoleOutput.WriteLine(
+                GetColumnHeader(CodeAnalysisResources.AnalyzerNameColumnHeader)
+            );
 
             // Table rows grouped by assembly.
             var analyzersByAssembly = analyzerDriver.AnalyzerExecutionTimes
@@ -81,7 +107,9 @@ namespace Microsoft.CodeAnalysis
             {
                 var executionTime = analyzerGroup.Sum(kvp => kvp.Value.TotalSeconds);
                 var percentage = (int)(executionTime * 100 / totalAnalyzerExecutionTime);
-                consoleOutput.WriteLine(GetColumnEntry(executionTime, percentage, analyzerGroup.Key.FullName, culture));
+                consoleOutput.WriteLine(
+                    GetColumnEntry(executionTime, percentage, analyzerGroup.Key.FullName, culture)
+                );
 
                 // Rows for each diagnostic analyzer in the assembly.
                 foreach (var kvp in analyzerGroup.OrderByDescending(kvp => kvp.Value))
@@ -89,16 +117,25 @@ namespace Microsoft.CodeAnalysis
                     executionTime = kvp.Value.TotalSeconds;
                     percentage = (int)(executionTime * 100 / totalAnalyzerExecutionTime);
 
-                    var analyzerIds = string.Join(", ", kvp.Key.SupportedDiagnostics.Select(d => d.Id).Distinct().OrderBy(id => id));
+                    var analyzerIds = string.Join(
+                        ", ",
+                        kvp.Key.SupportedDiagnostics.Select(d => d.Id).Distinct().OrderBy(id => id)
+                    );
                     var analyzerNameColumn = $"   {kvp.Key} ({analyzerIds})";
-                    consoleOutput.WriteLine(GetColumnEntry(executionTime, percentage, analyzerNameColumn, culture));
+                    consoleOutput.WriteLine(
+                        GetColumnEntry(executionTime, percentage, analyzerNameColumn, culture)
+                    );
                 }
 
                 consoleOutput.WriteLine();
             }
         }
 
-        private static void ReportGeneratorExecutionTime(TextWriter consoleOutput, GeneratorDriverTimingInfo driverTimingInfo, CultureInfo culture)
+        private static void ReportGeneratorExecutionTime(
+            TextWriter consoleOutput,
+            GeneratorDriverTimingInfo driverTimingInfo,
+            CultureInfo culture
+        )
         {
             if (driverTimingInfo.GeneratorTimes.IsEmpty)
             {
@@ -106,11 +143,18 @@ namespace Microsoft.CodeAnalysis
             }
 
             var totalTime = driverTimingInfo.ElapsedTime.TotalSeconds;
-            consoleOutput.WriteLine(string.Format(CodeAnalysisResources.GeneratorTotalExecutionTime, totalTime.ToString("##0.000", culture)));
+            consoleOutput.WriteLine(
+                string.Format(
+                    CodeAnalysisResources.GeneratorTotalExecutionTime,
+                    totalTime.ToString("##0.000", culture)
+                )
+            );
             consoleOutput.WriteLine();
 
             // Table header
-            consoleOutput.WriteLine(GetColumnHeader(CodeAnalysisResources.GeneratorNameColumnHeader));
+            consoleOutput.WriteLine(
+                GetColumnHeader(CodeAnalysisResources.GeneratorNameColumnHeader)
+            );
 
             // Table rows grouped by assembly.
             var generatorsByAssembly = driverTimingInfo.GeneratorTimes
@@ -121,13 +165,22 @@ namespace Microsoft.CodeAnalysis
             {
                 var executionTime = generatorGroup.Sum(x => x.ElapsedTime.TotalSeconds);
                 var percentage = (int)(executionTime * 100 / totalTime);
-                consoleOutput.WriteLine(GetColumnEntry(executionTime, percentage, generatorGroup.Key.FullName, culture));
+                consoleOutput.WriteLine(
+                    GetColumnEntry(executionTime, percentage, generatorGroup.Key.FullName, culture)
+                );
 
                 foreach (var timingInfo in generatorGroup.OrderByDescending(x => x.ElapsedTime))
                 {
                     executionTime = timingInfo.ElapsedTime.TotalSeconds;
                     percentage = (int)(executionTime * 100 / totalTime);
-                    consoleOutput.WriteLine(GetColumnEntry(executionTime, percentage, "   " + timingInfo.Generator.GetGeneratorType().FullName, culture));
+                    consoleOutput.WriteLine(
+                        GetColumnEntry(
+                            executionTime,
+                            percentage,
+                            "   " + timingInfo.Generator.GetGeneratorType().FullName,
+                            culture
+                        )
+                    );
                 }
             }
         }

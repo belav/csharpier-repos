@@ -17,8 +17,9 @@ using System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime
 {
-
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowEventArgs : EventArgs
     {
         private WorkflowInstance _instance;
@@ -30,14 +31,13 @@ namespace System.Workflow.Runtime
 
         public WorkflowInstance WorkflowInstance
         {
-            get
-            {
-                return _instance;
-            }
+            get { return _instance; }
         }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowCompletedEventArgs : WorkflowEventArgs
     {
         private Dictionary<String, Object> _outputParameters;
@@ -54,10 +54,7 @@ namespace System.Workflow.Runtime
 
         public Dictionary<String, Object> OutputParameters
         {
-            get
-            {
-                return this._outputParameters;
-            }
+            get { return this._outputParameters; }
         }
 
         public Activity WorkflowDefinition
@@ -86,7 +83,9 @@ namespace System.Workflow.Runtime
         }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowSuspendedEventArgs : WorkflowEventArgs
     {
         private String _error;
@@ -99,14 +98,13 @@ namespace System.Workflow.Runtime
 
         public String Error
         {
-            get
-            {
-                return this._error;
-            }
+            get { return this._error; }
         }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowTerminatedEventArgs : WorkflowEventArgs
     {
         private Exception exception;
@@ -116,6 +114,7 @@ namespace System.Workflow.Runtime
         {
             this.exception = new WorkflowTerminatedException(error);
         }
+
         internal WorkflowTerminatedEventArgs(WorkflowInstance instance, Exception e)
             : base(instance)
         {
@@ -124,10 +123,7 @@ namespace System.Workflow.Runtime
 
         public Exception Exception
         {
-            get
-            {
-                return this.exception;
-            }
+            get { return this.exception; }
         }
     }
 
@@ -148,18 +144,12 @@ namespace System.Workflow.Runtime
 
         public Type WorkflowType
         {
-            get
-            {
-                return _workflowType;
-            }
+            get { return _workflowType; }
         }
 
         public byte[] WorkflowDefinitionHashCode
         {
-            get
-            {
-                return _xomlHashCode;
-            }
+            get { return _xomlHashCode; }
         }
     }
 }

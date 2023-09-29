@@ -15,16 +15,34 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
     internal class AbstractFindDefinitionService : IFindDefinitionService
     {
         public async Task<ImmutableArray<INavigableItem>> FindDefinitionsAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
-            var (symbol, project, _) = await symbolService.GetSymbolProjectAndBoundSpanAsync(document, position, includeType: true, cancellationToken).ConfigureAwait(false);
+            var (symbol, project, _) = await symbolService
+                .GetSymbolProjectAndBoundSpanAsync(
+                    document,
+                    position,
+                    includeType: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            symbol = await SymbolFinder.FindSourceDefinitionAsync(symbol, project.Solution, cancellationToken).ConfigureAwait(false) ?? symbol;
+            symbol =
+                await SymbolFinder
+                    .FindSourceDefinitionAsync(symbol, project.Solution, cancellationToken)
+                    .ConfigureAwait(false) ?? symbol;
 
             // Try to compute source definitions from symbol.
             return symbol != null
-                ? NavigableItemFactory.GetItemsFromPreferredSourceLocations(project.Solution, symbol, displayTaggedParts: FindUsagesHelpers.GetDisplayParts(symbol), cancellationToken: cancellationToken)
+                ? NavigableItemFactory.GetItemsFromPreferredSourceLocations(
+                    project.Solution,
+                    symbol,
+                    displayTaggedParts: FindUsagesHelpers.GetDisplayParts(symbol),
+                    cancellationToken: cancellationToken
+                )
                 : ImmutableArray<INavigableItem>.Empty;
         }
     }

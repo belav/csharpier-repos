@@ -40,7 +40,10 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_IntPtrZero_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(IntPtr.Zero, false));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(IntPtr.Zero, false)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -48,7 +51,9 @@ namespace System.Drawing.Imaging.Tests
         {
             using (var metafile = new Metafile(GetPath(WmfFile)))
             {
-                Assert.Throws<ExternalException>(() => new Metafile(metafile.GetHenhmetafile(), false));
+                Assert.Throws<ExternalException>(
+                    () => new Metafile(metafile.GetHenhmetafile(), false)
+                );
             }
         }
 
@@ -70,7 +75,10 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("path", () => new Metafile((string)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => new Metafile((string)null)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -95,7 +103,12 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Ctor_Stream_Success()
         {
             using (FileStream stream = File.OpenRead(GetPath(WmfFile)))
@@ -108,11 +121,20 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullStream_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Metafile((Stream)null));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>(
+                "stream",
+                null,
+                () => new Metafile((Stream)null)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Ctor_EmptyStream_ThrowsExternalException()
         {
             using (var stream = new MemoryStream())
@@ -156,20 +178,29 @@ namespace System.Drawing.Imaging.Tests
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(g.GetHdc(), emfType));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(g.GetHdc(), emfType)
+                );
             }
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullEmfType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile((IntPtr)null, EmfType.EmfOnly));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile((IntPtr)null, EmfType.EmfOnly)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_ZeroPointerEmfType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(IntPtr.Zero, EmfType.EmfOnly));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(IntPtr.Zero, EmfType.EmfOnly)
+            );
         }
 
         public static IEnumerable<object[]> Description_TestData()
@@ -194,7 +225,10 @@ namespace System.Drawing.Imaging.Tests
         [MemberData(nameof(InvalidPath_TestData))]
         public void Ctor_ZeroPointerEmfTypeInvalidString_ThrowsArgumentException(string description)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(IntPtr.Zero, EmfType.EmfOnly, description));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(IntPtr.Zero, EmfType.EmfOnly, description)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -236,7 +270,14 @@ namespace System.Drawing.Imaging.Tests
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(g.GetHdc(), _rectangleF, MetafileFrameUnit.Pixel, emfType))
+            using (
+                var metafile = new Metafile(
+                    g.GetHdc(),
+                    _rectangleF,
+                    MetafileFrameUnit.Pixel,
+                    emfType
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
@@ -249,7 +290,15 @@ namespace System.Drawing.Imaging.Tests
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(g.GetHdc(), _rectangleF, MetafileFrameUnit.Pixel, EmfType.EmfOnly, description))
+            using (
+                var metafile = new Metafile(
+                    g.GetHdc(),
+                    _rectangleF,
+                    MetafileFrameUnit.Pixel,
+                    EmfType.EmfOnly,
+                    description
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
             }
@@ -284,7 +333,14 @@ namespace System.Drawing.Imaging.Tests
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(g.GetHdc(), _rectangle, MetafileFrameUnit.Pixel, emfType))
+            using (
+                var metafile = new Metafile(
+                    g.GetHdc(),
+                    _rectangle,
+                    MetafileFrameUnit.Pixel,
+                    emfType
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
@@ -297,7 +353,15 @@ namespace System.Drawing.Imaging.Tests
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(g.GetHdc(), _rectangle, MetafileFrameUnit.Pixel, EmfType.EmfOnly, description))
+            using (
+                var metafile = new Metafile(
+                    g.GetHdc(),
+                    _rectangle,
+                    MetafileFrameUnit.Pixel,
+                    EmfType.EmfOnly,
+                    description
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
             }
@@ -306,19 +370,55 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_IntPtrZeroI_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(IntPtr.Zero, _rectangleF));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(IntPtr.Zero, _rectangleF, MetafileFrameUnit.Pixel));
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                new Metafile(IntPtr.Zero, _rectangleF, MetafileFrameUnit.Pixel, EmfType.EmfOnly));
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                new Metafile(IntPtr.Zero, _rectangleF, MetafileFrameUnit.Pixel, EmfType.EmfOnly, "description"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(IntPtr.Zero, _rectangleF)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(IntPtr.Zero, _rectangleF, MetafileFrameUnit.Pixel)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(IntPtr.Zero, _rectangleF, MetafileFrameUnit.Pixel, EmfType.EmfOnly)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(
+                        IntPtr.Zero,
+                        _rectangleF,
+                        MetafileFrameUnit.Pixel,
+                        EmfType.EmfOnly,
+                        "description"
+                    )
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(IntPtr.Zero, _rectangle));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(IntPtr.Zero, _rectangle, MetafileFrameUnit.Pixel));
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                new Metafile(IntPtr.Zero, _rectangle, MetafileFrameUnit.Pixel, EmfType.EmfOnly));
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                new Metafile(IntPtr.Zero, _rectangle, MetafileFrameUnit.Pixel, EmfType.EmfOnly, "description"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(IntPtr.Zero, _rectangle)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(IntPtr.Zero, _rectangle, MetafileFrameUnit.Pixel)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(IntPtr.Zero, _rectangle, MetafileFrameUnit.Pixel, EmfType.EmfOnly)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(
+                        IntPtr.Zero,
+                        _rectangle,
+                        MetafileFrameUnit.Pixel,
+                        EmfType.EmfOnly,
+                        "description"
+                    )
+            );
         }
 
         public static IEnumerable<object[]> MetafileFrameUnit_Invalid_TestData()
@@ -331,21 +431,53 @@ namespace System.Drawing.Imaging.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(MetafileFrameUnit_Invalid_TestData))]
-        public void Ctor_InvalidMetafileFrameUnit_ThrowsArgumentException(MetafileFrameUnit farameUnit)
+        public void Ctor_InvalidMetafileFrameUnit_ThrowsArgumentException(
+            MetafileFrameUnit farameUnit
+        )
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(referenceHdc, _rectangleF, farameUnit));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(referenceHdc, _rectangleF, farameUnit, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(referenceHdc, _rectangleF, farameUnit, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(referenceHdc, _rectangleF, farameUnit)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(referenceHdc, _rectangleF, farameUnit, EmfType.EmfOnly)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            referenceHdc,
+                            _rectangleF,
+                            farameUnit,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
 
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(referenceHdc, _rectangle, farameUnit));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(referenceHdc, _rectangle, farameUnit, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(referenceHdc, _rectangle, farameUnit, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(referenceHdc, _rectangle, farameUnit)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(referenceHdc, _rectangle, farameUnit, EmfType.EmfOnly)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            referenceHdc,
+                            _rectangle,
+                            farameUnit,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
             }
         }
 
@@ -357,15 +489,49 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, emfType));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, emfType, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType,
+                            "description"
+                        )
+                );
 
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(referenceHdc, _rectangle, MetafileFrameUnit.GdiCompatible, emfType));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(referenceHdc, _rectangle, MetafileFrameUnit.GdiCompatible, emfType, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            referenceHdc,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            referenceHdc,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType,
+                            "description"
+                        )
+                );
             }
         }
 
@@ -408,7 +574,9 @@ namespace System.Drawing.Imaging.Tests
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(fileName, g.GetHdc(), EmfType.EmfPlusDual, description))
+            using (
+                var metafile = new Metafile(fileName, g.GetHdc(), EmfType.EmfPlusDual, description)
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfPlusDual);
@@ -422,9 +590,18 @@ namespace System.Drawing.Imaging.Tests
         public void Ctor_IntPtrZeroII_ThrowsArgumentException()
         {
             string fileName = GetPath("newTestImage.wmf");
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, IntPtr.Zero));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, IntPtr.Zero, EmfType.EmfOnly));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, IntPtr.Zero, EmfType.EmfOnly, "description"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(fileName, IntPtr.Zero)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(fileName, IntPtr.Zero, EmfType.EmfOnly)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(fileName, IntPtr.Zero, EmfType.EmfOnly, "description")
+            );
             DeleteFile(fileName);
         }
 
@@ -437,8 +614,14 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, referenceHdc, emfType));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, referenceHdc, emfType, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(fileName, referenceHdc, emfType)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(fileName, referenceHdc, emfType, "description")
+                );
                 DeleteFile(fileName);
             }
         }
@@ -450,9 +633,18 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentNullException>("path", () => new Metafile((string)null, referenceHdc));
-                AssertExtensions.Throws<ArgumentNullException>("path", () => new Metafile((string)null, referenceHdc, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentNullException>("path", () => new Metafile((string)null, referenceHdc, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "path",
+                    () => new Metafile((string)null, referenceHdc)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "path",
+                    () => new Metafile((string)null, referenceHdc, EmfType.EmfOnly)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "path",
+                    () => new Metafile((string)null, referenceHdc, EmfType.EmfOnly, "description")
+                );
             }
         }
 
@@ -465,9 +657,21 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException>("path", null, () => new Metafile(fileName, referenceHdc));
-                AssertExtensions.Throws<ArgumentException>("path", null, () => new Metafile(fileName, referenceHdc, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentException>("path", null, () => new Metafile(fileName, referenceHdc, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    "path",
+                    null,
+                    () => new Metafile(fileName, referenceHdc)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "path",
+                    null,
+                    () => new Metafile(fileName, referenceHdc, EmfType.EmfOnly)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "path",
+                    null,
+                    () => new Metafile(fileName, referenceHdc, EmfType.EmfOnly, "description")
+                );
             }
         }
 
@@ -480,8 +684,12 @@ namespace System.Drawing.Imaging.Tests
             {
                 IntPtr referenceHdc = g.GetHdc();
                 Assert.Throws<PathTooLongException>(() => new Metafile(fileName, referenceHdc));
-                Assert.Throws<PathTooLongException>(() => new Metafile(fileName, referenceHdc, EmfType.EmfOnly));
-                Assert.Throws<PathTooLongException>(() => new Metafile(fileName, referenceHdc, EmfType.EmfOnly, "description"));
+                Assert.Throws<PathTooLongException>(
+                    () => new Metafile(fileName, referenceHdc, EmfType.EmfOnly)
+                );
+                Assert.Throws<PathTooLongException>(
+                    () => new Metafile(fileName, referenceHdc, EmfType.EmfOnly, "description")
+                );
                 DeleteFile(fileName);
             }
         }
@@ -503,7 +711,9 @@ namespace System.Drawing.Imaging.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(MetafileFrameUnit_TestData))]
-        public void Ctor_StringIntPtrRectangleFMetafileFrameUnit_Success(MetafileFrameUnit frameUnit)
+        public void Ctor_StringIntPtrRectangleFMetafileFrameUnit_Success(
+            MetafileFrameUnit frameUnit
+        )
         {
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
@@ -524,7 +734,15 @@ namespace System.Drawing.Imaging.Tests
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(fileName, g.GetHdc(), _rectangleF, MetafileFrameUnit.GdiCompatible, emfType))
+            using (
+                var metafile = new Metafile(
+                    fileName,
+                    g.GetHdc(),
+                    _rectangleF,
+                    MetafileFrameUnit.GdiCompatible,
+                    emfType
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
@@ -536,13 +754,23 @@ namespace System.Drawing.Imaging.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Description_TestData))]
-        public void Ctor_StringIntPtrRectangleFMetafileFrameUnitEmfTypeString_Success(string description)
+        public void Ctor_StringIntPtrRectangleFMetafileFrameUnitEmfTypeString_Success(
+            string description
+        )
         {
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(
-                fileName, g.GetHdc(), _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, description))
+            using (
+                var metafile = new Metafile(
+                    fileName,
+                    g.GetHdc(),
+                    _rectangleF,
+                    MetafileFrameUnit.GdiCompatible,
+                    EmfType.EmfOnly,
+                    description
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
@@ -559,8 +787,16 @@ namespace System.Drawing.Imaging.Tests
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(
-                fileName, g.GetHdc(), new RectangleF(), MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, description))
+            using (
+                var metafile = new Metafile(
+                    fileName,
+                    g.GetHdc(),
+                    new RectangleF(),
+                    MetafileFrameUnit.GdiCompatible,
+                    EmfType.EmfOnly,
+                    description
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
@@ -608,7 +844,15 @@ namespace System.Drawing.Imaging.Tests
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(fileName, g.GetHdc(), _rectangle, MetafileFrameUnit.GdiCompatible, emfType))
+            using (
+                var metafile = new Metafile(
+                    fileName,
+                    g.GetHdc(),
+                    _rectangle,
+                    MetafileFrameUnit.GdiCompatible,
+                    emfType
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
@@ -620,13 +864,23 @@ namespace System.Drawing.Imaging.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Description_TestData))]
-        public void Ctor_StringIntPtrRectangleMetafileFrameUnitEmfTypeString_Success(string description)
+        public void Ctor_StringIntPtrRectangleMetafileFrameUnitEmfTypeString_Success(
+            string description
+        )
         {
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(
-                fileName, g.GetHdc(), _rectangle, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, description))
+            using (
+                var metafile = new Metafile(
+                    fileName,
+                    g.GetHdc(),
+                    _rectangle,
+                    MetafileFrameUnit.GdiCompatible,
+                    EmfType.EmfOnly,
+                    description
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
@@ -643,8 +897,16 @@ namespace System.Drawing.Imaging.Tests
             string fileName = GetPath("newTestImage.wmf");
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
-            using (var metafile = new Metafile(
-                fileName, g.GetHdc(), new Rectangle(), MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, description))
+            using (
+                var metafile = new Metafile(
+                    fileName,
+                    g.GetHdc(),
+                    new Rectangle(),
+                    MetafileFrameUnit.GdiCompatible,
+                    EmfType.EmfOnly,
+                    description
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
@@ -658,19 +920,76 @@ namespace System.Drawing.Imaging.Tests
         public void Ctor_IntPtrZeroIII_ThrowsArgumentException()
         {
             string fileName = GetPath("newTestImage.wmf");
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, IntPtr.Zero, _rectangleF));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, IntPtr.Zero, _rectangleF, MetafileFrameUnit.GdiCompatible));
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                new Metafile(fileName, IntPtr.Zero, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly));
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                new Metafile(fileName, IntPtr.Zero, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, "description"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(fileName, IntPtr.Zero, _rectangleF)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(
+                        fileName,
+                        IntPtr.Zero,
+                        _rectangleF,
+                        MetafileFrameUnit.GdiCompatible
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(
+                        fileName,
+                        IntPtr.Zero,
+                        _rectangleF,
+                        MetafileFrameUnit.GdiCompatible,
+                        EmfType.EmfOnly
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(
+                        fileName,
+                        IntPtr.Zero,
+                        _rectangleF,
+                        MetafileFrameUnit.GdiCompatible,
+                        EmfType.EmfOnly,
+                        "description"
+                    )
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, IntPtr.Zero, _rectangle));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, IntPtr.Zero, _rectangle, MetafileFrameUnit.GdiCompatible));
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                new Metafile(fileName, IntPtr.Zero, _rectangle, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly));
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                new Metafile(fileName, IntPtr.Zero, _rectangle, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, "description"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Metafile(fileName, IntPtr.Zero, _rectangle)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(fileName, IntPtr.Zero, _rectangle, MetafileFrameUnit.GdiCompatible)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(
+                        fileName,
+                        IntPtr.Zero,
+                        _rectangle,
+                        MetafileFrameUnit.GdiCompatible,
+                        EmfType.EmfOnly
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Metafile(
+                        fileName,
+                        IntPtr.Zero,
+                        _rectangle,
+                        MetafileFrameUnit.GdiCompatible,
+                        EmfType.EmfOnly,
+                        "description"
+                    )
+            );
             DeleteFile(fileName);
         }
 
@@ -683,17 +1002,55 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, referenceHdc, _rectangleF, frameUnit));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, frameUnit, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, frameUnit, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(fileName, referenceHdc, _rectangleF, frameUnit)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            frameUnit,
+                            EmfType.EmfOnly
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            frameUnit,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
 
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(fileName, referenceHdc, _rectangle, frameUnit));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangle, frameUnit, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangle, frameUnit, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(fileName, referenceHdc, _rectangle, frameUnit)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(fileName, referenceHdc, _rectangle, frameUnit, EmfType.EmfOnly)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangle,
+                            frameUnit,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
                 DeleteFile(fileName);
             }
         }
@@ -707,15 +1064,53 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, emfType));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, emfType, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType,
+                            "description"
+                        )
+                );
 
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                   new Metafile(fileName, referenceHdc, _rectangle, MetafileFrameUnit.GdiCompatible, emfType));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangle, MetafileFrameUnit.GdiCompatible, emfType, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType,
+                            "description"
+                        )
+                );
                 DeleteFile(fileName);
             }
         }
@@ -727,13 +1122,43 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentNullException>("path", () => new Metafile((string)null, referenceHdc, _rectangleF));
-                AssertExtensions.Throws<ArgumentNullException>("path", () =>
-                    new Metafile((string)null, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible));
-                AssertExtensions.Throws<ArgumentNullException>("path", () =>
-                    new Metafile((string)null, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentNullException>("path", () =>
-                    new Metafile((string)null, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "path",
+                    () => new Metafile((string)null, referenceHdc, _rectangleF)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "path",
+                    () =>
+                        new Metafile(
+                            (string)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible
+                        )
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "path",
+                    () =>
+                        new Metafile(
+                            (string)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly
+                        )
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "path",
+                    () =>
+                        new Metafile(
+                            (string)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
             }
         }
 
@@ -746,13 +1171,47 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException, ArgumentException>("path", null, () => new Metafile(fileName, referenceHdc, _rectangleF));
-                AssertExtensions.Throws<ArgumentException, ArgumentException>("path", null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible));
-                AssertExtensions.Throws<ArgumentException, ArgumentException>("path", null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentException, ArgumentException>("path", null, () =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentException, ArgumentException>(
+                    "path",
+                    null,
+                    () => new Metafile(fileName, referenceHdc, _rectangleF)
+                );
+                AssertExtensions.Throws<ArgumentException, ArgumentException>(
+                    "path",
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException, ArgumentException>(
+                    "path",
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException, ArgumentException>(
+                    "path",
+                    null,
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
             }
         }
 
@@ -764,19 +1223,50 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                Assert.Throws<PathTooLongException>(() => new Metafile(fileName, referenceHdc, _rectangleF));
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible));
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly));
-                Assert.Throws<PathTooLongException>(() =>
-                    new Metafile(fileName, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, "description"));
+                Assert.Throws<PathTooLongException>(
+                    () => new Metafile(fileName, referenceHdc, _rectangleF)
+                );
+                Assert.Throws<PathTooLongException>(
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible
+                        )
+                );
+                Assert.Throws<PathTooLongException>(
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly
+                        )
+                );
+                Assert.Throws<PathTooLongException>(
+                    () =>
+                        new Metafile(
+                            fileName,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
                 DeleteFile(fileName);
             }
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Ctor_StreamIntPtrRectangle_Success()
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
@@ -789,7 +1279,12 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(MetafileFrameUnit_TestData))]
         public void Ctor_StreamIntPtrRectangleMetafileFrameUnit_Success(MetafileFrameUnit frameUnit)
         {
@@ -803,14 +1298,27 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(EmfType_TestData))]
         public void Ctor_StreamIntPtrRectangleMetafileFrameUnitEmfType_Success(EmfType emfType)
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
             using (var stream = new MemoryStream())
-            using (var metafile = new Metafile(stream, g.GetHdc(), _rectangle, MetafileFrameUnit.GdiCompatible, emfType))
+            using (
+                var metafile = new Metafile(
+                    stream,
+                    g.GetHdc(),
+                    _rectangle,
+                    MetafileFrameUnit.GdiCompatible,
+                    emfType
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), emfType);
@@ -818,15 +1326,30 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(Description_TestData))]
-        public void Ctor_StreamIntPtrRectangleMetafileFrameUnitEmfTypeString_Success(string description)
+        public void Ctor_StreamIntPtrRectangleMetafileFrameUnitEmfTypeString_Success(
+            string description
+        )
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
             using (var stream = new MemoryStream())
-            using (var metafile = new Metafile(
-                stream, g.GetHdc(), _rectangle, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, description))
+            using (
+                var metafile = new Metafile(
+                    stream,
+                    g.GetHdc(),
+                    _rectangle,
+                    MetafileFrameUnit.GdiCompatible,
+                    EmfType.EmfOnly,
+                    description
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
@@ -834,37 +1357,91 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(Description_TestData))]
         public void Ctor_RectangleEmptyI_Success(string description)
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format32bppArgb))
             using (Graphics g = Graphics.FromImage(bmp))
             using (var stream = new MemoryStream())
-            using (var metafile = new Metafile(
-                stream, g.GetHdc(), new Rectangle(), MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, description))
+            using (
+                var metafile = new Metafile(
+                    stream,
+                    g.GetHdc(),
+                    new Rectangle(),
+                    MetafileFrameUnit.GdiCompatible,
+                    EmfType.EmfOnly,
+                    description
+                )
+            )
             {
                 AssertMetafileIsBlank(metafile);
                 AssertEmfType(metafile.GetMetafileHeader(), EmfType.EmfOnly);
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55655", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55655",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_IntPtrZeroIV_ThrowsArgumentException()
         {
             using (var stream = new MemoryStream())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(stream, IntPtr.Zero, _rectangle));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(stream, IntPtr.Zero, _rectangle, MetafileFrameUnit.GdiCompatible));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(stream, IntPtr.Zero, _rectangle, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(stream, IntPtr.Zero, _rectangle, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(stream, IntPtr.Zero, _rectangle)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            stream,
+                            IntPtr.Zero,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            stream,
+                            IntPtr.Zero,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            stream,
+                            IntPtr.Zero,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55655", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55655",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(MetafileFrameUnit_Invalid_TestData))]
         public void Ctor_InvalidFrameUnitIII_ThrowsArgumentException(MetafileFrameUnit frameUnit)
@@ -874,15 +1451,35 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException>(null, () => new Metafile(stream, referenceHdc, _rectangle, frameUnit));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(stream, referenceHdc, _rectangle, frameUnit, EmfType.EmfOnly));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(stream, referenceHdc, _rectangle, frameUnit, EmfType.EmfOnly, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(stream, referenceHdc, _rectangle, frameUnit)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Metafile(stream, referenceHdc, _rectangle, frameUnit, EmfType.EmfOnly)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            stream,
+                            referenceHdc,
+                            _rectangle,
+                            frameUnit,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55655", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55655",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(EmfType_Invalid_TestData))]
         public void Ctor_InvalidEmfTypeIII_ThrowsArgumentException(EmfType emfType)
@@ -892,10 +1489,29 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                   new Metafile(stream, referenceHdc, _rectangle, MetafileFrameUnit.GdiCompatible, emfType));
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                    new Metafile(stream, referenceHdc, _rectangle, MetafileFrameUnit.GdiCompatible, emfType, "description"));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            stream,
+                            referenceHdc,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Metafile(
+                            stream,
+                            referenceHdc,
+                            _rectangle,
+                            MetafileFrameUnit.GdiCompatible,
+                            emfType,
+                            "description"
+                        )
+                );
             }
         }
 
@@ -906,12 +1522,39 @@ namespace System.Drawing.Imaging.Tests
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr referenceHdc = g.GetHdc();
-                Assert.Throws<NullReferenceException>(() => new Metafile((Stream)null, referenceHdc, _rectangleF));
-                Assert.Throws<NullReferenceException>(() => new Metafile((Stream)null, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible));
-                Assert.Throws<NullReferenceException>(() =>
-                    new Metafile((Stream)null, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly));
-                Assert.Throws<NullReferenceException>(() =>
-                    new Metafile((Stream)null, referenceHdc, _rectangleF, MetafileFrameUnit.GdiCompatible, EmfType.EmfOnly, "description"));
+                Assert.Throws<NullReferenceException>(
+                    () => new Metafile((Stream)null, referenceHdc, _rectangleF)
+                );
+                Assert.Throws<NullReferenceException>(
+                    () =>
+                        new Metafile(
+                            (Stream)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible
+                        )
+                );
+                Assert.Throws<NullReferenceException>(
+                    () =>
+                        new Metafile(
+                            (Stream)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly
+                        )
+                );
+                Assert.Throws<NullReferenceException>(
+                    () =>
+                        new Metafile(
+                            (Stream)null,
+                            referenceHdc,
+                            _rectangleF,
+                            MetafileFrameUnit.GdiCompatible,
+                            EmfType.EmfOnly,
+                            "description"
+                        )
+                );
             }
         }
 
@@ -925,10 +1568,16 @@ namespace System.Drawing.Imaging.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Static_GetMetafileHeader_IntPtr_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Metafile.GetMetafileHeader(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Metafile.GetMetafileHeader(IntPtr.Zero)
+            );
             using (var metafile = new Metafile(GetPath(WmfFile)))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => Metafile.GetMetafileHeader(metafile.GetHenhmetafile()));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => Metafile.GetMetafileHeader(metafile.GetHenhmetafile())
+                );
             }
         }
 
@@ -937,17 +1586,29 @@ namespace System.Drawing.Imaging.Tests
         [InlineData("")]
         public void Static_GetMetafileHeader_InvalidPath_ThrowsArgumentException(string fileName)
         {
-            AssertExtensions.Throws<ArgumentException>("path", null, () => Metafile.GetMetafileHeader(fileName));
+            AssertExtensions.Throws<ArgumentException>(
+                "path",
+                null,
+                () => Metafile.GetMetafileHeader(fileName)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Static_GetMetafileHeader_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("path", () => Metafile.GetMetafileHeader((string)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => Metafile.GetMetafileHeader((string)null)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Static_GetMetafileHeader_Stream_ReturnsExpected()
         {
             using (FileStream stream = File.OpenRead(GetPath(WmfFile)))
@@ -964,12 +1625,20 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34591",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Static_GetMetafileHeader_EmptyStream_ArgumentException()
         {
             using (var stream = new MemoryStream())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => Metafile.GetMetafileHeader(stream));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => Metafile.GetMetafileHeader(stream)
+                );
             }
         }
 
@@ -1018,8 +1687,10 @@ namespace System.Drawing.Imaging.Tests
             var metafile = new Metafile(GetPath(WmfFile));
             metafile.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-                metafile.PlayRecord(EmfPlusRecordType.BeginContainer, 0, 1, new byte[1]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => metafile.PlayRecord(EmfPlusRecordType.BeginContainer, 0, 1, new byte[1])
+            );
         }
 
         private void DeleteFile(string path)

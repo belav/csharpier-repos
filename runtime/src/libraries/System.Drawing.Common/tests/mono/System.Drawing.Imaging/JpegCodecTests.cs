@@ -112,13 +112,22 @@ namespace MonoTests.System.Drawing.Imaging
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotWindows7), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotWindows7),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void Bitmap8bbpIndexedGreyscaleData()
         {
             string sInFile = Helpers.GetTestBitmapPath("nature-greyscale.jpg");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -233,13 +242,21 @@ namespace MonoTests.System.Drawing.Imaging
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void Bitmap24bitData()
         {
             string sInFile = Helpers.GetTestBitmapPath("almogaver24bits.bmp");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -394,9 +411,7 @@ namespace MonoTests.System.Drawing.Imaging
                 {
                     File.Delete(sOutFile);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 

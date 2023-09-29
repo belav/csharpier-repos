@@ -20,17 +20,9 @@ namespace System.Activities
             thisLock = new object();
         }
 
-        SynchronizationContext SyncContext
-        {
-            get;
-            set;
-        }
+        SynchronizationContext SyncContext { get; set; }
 
-        bool Completed
-        {
-            get;
-            set;
-        }
+        bool Completed { get; set; }
 
         public void OperationStarted()
         {
@@ -41,7 +33,10 @@ namespace System.Activities
         {
             lock (thisLock)
             {
-                Fx.AssertAndThrowFatal(!this.Completed, "Async operation has already been completed");
+                Fx.AssertAndThrowFatal(
+                    !this.Completed,
+                    "Async operation has already been completed"
+                );
                 this.Completed = true;
             }
             this.SyncContext.OperationCompleted();
@@ -51,7 +46,10 @@ namespace System.Activities
         {
             lock (thisLock)
             {
-                Fx.AssertAndThrowFatal(!this.Completed, "Async operation has already been completed");
+                Fx.AssertAndThrowFatal(
+                    !this.Completed,
+                    "Async operation has already been completed"
+                );
                 this.Completed = true;
             }
             Fx.Assert(callback != null, "callback cannot be null");

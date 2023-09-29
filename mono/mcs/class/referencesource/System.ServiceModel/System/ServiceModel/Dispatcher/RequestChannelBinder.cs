@@ -11,7 +11,7 @@ namespace System.ServiceModel.Dispatcher
 
     class RequestChannelBinder : IChannelBinder
     {
-        IRequestChannel channel;        
+        IRequestChannel channel;
 
         internal RequestChannelBinder(IRequestChannel channel)
         {
@@ -20,7 +20,7 @@ namespace System.ServiceModel.Dispatcher
                 Fx.Assert("RequestChannelBinder.RequestChannelBinder: (channel != null)");
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("channel");
             }
-            this.channel = channel;            
+            this.channel = channel;
         }
 
         public IChannel Channel
@@ -60,20 +60,31 @@ namespace System.ServiceModel.Dispatcher
 
         public IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public bool EndTryReceive(IAsyncResult result, out RequestContext requestContext)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public RequestContext CreateRequestContext(Message message)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channel.BeginRequest(message, timeout, callback, state);
         }
@@ -88,7 +99,12 @@ namespace System.ServiceModel.Dispatcher
             ValidateNullReply(this.channel.Request(message, timeout));
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channel.BeginRequest(message, timeout, callback, state);
         }
@@ -100,7 +116,9 @@ namespace System.ServiceModel.Dispatcher
 
         public bool TryReceive(TimeSpan timeout, out RequestContext requestContext)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public Message Request(Message message, TimeSpan timeout)
@@ -119,17 +137,27 @@ namespace System.ServiceModel.Dispatcher
 
         public bool WaitForMessage(TimeSpan timeout)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public bool EndWaitForMessage(IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
     }
 }

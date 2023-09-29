@@ -20,9 +20,7 @@ public class SqliteAnnotationProvider : RelationalAnnotationProvider
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,8 +30,11 @@ public class SqliteAnnotationProvider : RelationalAnnotationProvider
     /// </summary>
     public override IEnumerable<IAnnotation> For(IRelationalModel model, bool designTime)
     {
-        if (model.Tables.SelectMany(t => t.Columns).Any(
-                c => SqliteTypeMappingSource.IsSpatialiteType(c.StoreType)))
+        if (
+            model.Tables
+                .SelectMany(t => t.Columns)
+                .Any(c => SqliteTypeMappingSource.IsSpatialiteType(c.StoreType))
+        )
         {
             yield return new Annotation(SqliteAnnotationNames.InitSpatialMetaData, true);
         }
@@ -51,12 +52,14 @@ public class SqliteAnnotationProvider : RelationalAnnotationProvider
         var property = column.PropertyMappings.First().Property;
         // Only return auto increment for integer single column primary key
         var primaryKey = property.DeclaringEntityType.FindPrimaryKey();
-        if (primaryKey != null
+        if (
+            primaryKey != null
             && primaryKey.Properties.Count == 1
             && primaryKey.Properties[0] == property
             && property.ValueGenerated == ValueGenerated.OnAdd
             && property.ClrType.UnwrapNullableType().IsInteger()
-            && !HasConverter(property))
+            && !HasConverter(property)
+        )
         {
             yield return new Annotation(SqliteAnnotationNames.Autoincrement, true);
         }
@@ -68,6 +71,6 @@ public class SqliteAnnotationProvider : RelationalAnnotationProvider
         }
     }
 
-    private static bool HasConverter(IProperty property)
-        => property.FindTypeMapping()?.Converter != null;
+    private static bool HasConverter(IProperty property) =>
+        property.FindTypeMapping()?.Converter != null;
 }

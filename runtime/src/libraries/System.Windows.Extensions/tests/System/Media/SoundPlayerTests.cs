@@ -69,7 +69,11 @@ namespace System.Media.Test
         [InlineData("")]
         public void Ctor_NullOrEmptyString_ThrowsArgumentException(string soundLocation)
         {
-            AssertExtensions.Throws<ArgumentException>("path", null, () => new SoundPlayer(soundLocation));
+            AssertExtensions.Throws<ArgumentException>(
+                "path",
+                null,
+                () => new SoundPlayer(soundLocation)
+            );
         }
 
         public static IEnumerable<object[]> Play_String_TestData()
@@ -84,7 +88,10 @@ namespace System.Media.Test
             yield return new object[] { "ima.wav" };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSoundPlaySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSoundPlaySupported)
+        )]
         [MemberData(nameof(Play_String_TestData))]
         [OuterLoop]
         public void Load_SourceLocation_Success(string sourceLocation)
@@ -99,14 +106,23 @@ namespace System.Media.Test
             soundPlayer.Play();
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSoundPlaySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSoundPlaySupported)
+        )]
         [MemberData(nameof(Play_String_TestData))]
         [OuterLoop]
         public async Task LoadAsync_SourceLocationFromNetwork_Success(string sourceLocation)
         {
             var player = new SoundPlayer();
 
-            using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
@@ -117,11 +133,18 @@ namespace System.Media.Test
                     using (Socket server = await listener.AcceptAsync())
                     using (var serverStream = new NetworkStream(server))
                     using (var reader = new StreamReader(new NetworkStream(server)))
-                    using (FileStream sourceStream = File.OpenRead(sourceLocation.Replace("file://", "")))
+                    using (
+                        FileStream sourceStream = File.OpenRead(
+                            sourceLocation.Replace("file://", "")
+                        )
+                    )
                     {
                         string line;
-                        while (!string.IsNullOrEmpty(line = await reader.ReadLineAsync()));
-                        byte[] header = Encoding.UTF8.GetBytes($"HTTP/1.1 200 OK\r\nContent-Length: {sourceStream.Length}\r\n\r\n");
+                        while (!string.IsNullOrEmpty(line = await reader.ReadLineAsync()))
+                            ;
+                        byte[] header = Encoding.UTF8.GetBytes(
+                            $"HTTP/1.1 200 OK\r\nContent-Length: {sourceStream.Length}\r\n\r\n"
+                        );
                         serverStream.Write(header, 0, header.Length);
                         await sourceStream.CopyToAsync(serverStream);
                         server.Shutdown(SocketShutdown.Both);
@@ -146,7 +169,13 @@ namespace System.Media.Test
         [OuterLoop]
         public void Play_InvalidFile_ShortTimeout_ThrowsWebException()
         {
-            using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
@@ -158,7 +187,10 @@ namespace System.Media.Test
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSoundPlaySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSoundPlaySupported)
+        )]
         [MemberData(nameof(Play_String_TestData))]
         [OuterLoop]
         public void Load_Stream_Success(string sourceLocation)
@@ -212,7 +244,10 @@ namespace System.Media.Test
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSoundPlaySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSoundPlaySupported)
+        )]
         [MemberData(nameof(Play_String_TestData))]
         [OuterLoop]
         public void Play_SourceLocation_Success(string sourceLocation)
@@ -234,7 +269,10 @@ namespace System.Media.Test
             Assert.Throws<FileNotFoundException>(() => soundPlayer.Play());
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSoundPlaySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSoundPlaySupported)
+        )]
         [MemberData(nameof(Play_String_TestData))]
         [OuterLoop]
         public void Play_Stream_Success(string sourceLocation)
@@ -263,7 +301,10 @@ namespace System.Media.Test
             player.Play();
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSoundPlaySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSoundPlaySupported)
+        )]
         [MemberData(nameof(Play_InvalidString_TestData))]
         public void Play_InvalidFile_ThrowsInvalidOperationException(string sourceLocation)
         {
@@ -271,7 +312,10 @@ namespace System.Media.Test
             Assert.Throws<InvalidOperationException>(() => soundPlayer.Play());
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSoundPlaySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSoundPlaySupported)
+        )]
         [MemberData(nameof(Play_InvalidString_TestData))]
         public void Play_InvalidStream_ThrowsInvalidOperationException(string sourceLocation)
         {
@@ -317,7 +361,10 @@ namespace System.Media.Test
         public void LoadTimeout_SetNegative_ThrowsArgumentOutOfRangeException()
         {
             var player = new SoundPlayer();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("LoadTimeout", () => player.LoadTimeout = -1);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "LoadTimeout",
+                () => player.LoadTimeout = -1
+            );
         }
 
         [Theory]
@@ -362,7 +409,11 @@ namespace System.Media.Test
             Assert.Equal("", player.SoundLocation);
 
             player = new SoundPlayer("location");
-            AssertExtensions.Throws<ArgumentException>("path", null, () => player.SoundLocation = soundLocation);
+            AssertExtensions.Throws<ArgumentException>(
+                "path",
+                null,
+                () => player.SoundLocation = soundLocation
+            );
 
             using (var stream = new MemoryStream())
             {
@@ -457,7 +508,10 @@ namespace System.Media.Test
             }
         }
 
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "netfx aborts a worker thread and never signals operation completion")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "netfx aborts a worker thread and never signals operation completion"
+        )]
         [Theory]
         [InlineData(0)]
         [InlineData(1)]
@@ -495,7 +549,10 @@ namespace System.Media.Test
         }
 
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "netfx hangs")]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsSoundPlaySupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsSoundPlaySupported)
+        )]
         [MemberData(nameof(Play_String_TestData))]
         [OuterLoop]
         public async Task CancelDuringLoad_ThenPlay_Success(string sourceLocation)
@@ -520,22 +577,39 @@ namespace System.Media.Test
 
         private sealed class ReadAsyncBlocksUntilCanceledStream : Stream
         {
-            public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override async Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 await Task.Delay(-1, cancellationToken);
                 return 0;
             }
 
-            public override int Read(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+            public override int Read(byte[] buffer, int offset, int count) =>
+                throw new NotSupportedException();
+
             public override void Flush() { }
+
             public override bool CanRead => true;
             public override bool CanSeek => false;
             public override bool CanWrite => false;
             public override long Length => throw new NotSupportedException();
-            public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
-            public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+            public override long Position
+            {
+                get => throw new NotSupportedException();
+                set => throw new NotSupportedException();
+            }
+
+            public override long Seek(long offset, SeekOrigin origin) =>
+                throw new NotSupportedException();
+
             public override void SetLength(long value) => throw new NotSupportedException();
-            public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+
+            public override void Write(byte[] buffer, int offset, int count) =>
+                throw new NotSupportedException();
         }
     }
 }

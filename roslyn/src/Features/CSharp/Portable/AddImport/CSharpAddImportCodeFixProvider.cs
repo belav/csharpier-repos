@@ -148,58 +148,72 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         /// </summary>
         public const string CS8415 = nameof(CS8415);
 
-        public static ImmutableArray<string> FixableTypeIds =
-            ImmutableArray.Create(
-                CS0103,
-                CS0246,
-                CS0305,
-                CS0308,
-                CS0122,
-                CS0307,
-                CS0616,
-                CS1580,
-                CS1581,
-                CS8129,
-                IDEDiagnosticIds.UnboundIdentifierId);
+        public static ImmutableArray<string> FixableTypeIds = ImmutableArray.Create(
+            CS0103,
+            CS0246,
+            CS0305,
+            CS0308,
+            CS0122,
+            CS0307,
+            CS0616,
+            CS1580,
+            CS1581,
+            CS8129,
+            IDEDiagnosticIds.UnboundIdentifierId
+        );
 
-        public static ImmutableArray<string> FixableDiagnosticIds =
-            FixableTypeIds.Concat(ImmutableArray.Create(
-                    CS1061,
-                    CS1935,
-                    CS1501,
-                    CS1503,
-                    CS1574,
-                    CS1584,
-                    CS1929,
-                    CS1955,
-                    CS0428,
-                    CS7036,
-                    CS0281,
-                    CS4036,
-                    CS1579,
-                    CS8414,
-                    CS8411,
-                    CS8415));
+        public static ImmutableArray<string> FixableDiagnosticIds = FixableTypeIds.Concat(
+            ImmutableArray.Create(
+                CS1061,
+                CS1935,
+                CS1501,
+                CS1503,
+                CS1574,
+                CS1584,
+                CS1929,
+                CS1955,
+                CS0428,
+                CS7036,
+                CS0281,
+                CS4036,
+                CS1579,
+                CS8414,
+                CS8411,
+                CS8415
+            )
+        );
     }
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AddImport), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AddImport
+        ),
+        Shared
+    ]
     internal class CSharpAddImportCodeFixProvider : AbstractAddImportCodeFixProvider
     {
-        public override ImmutableArray<string> FixableDiagnosticIds => AddImportDiagnosticIds.FixableDiagnosticIds;
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            AddImportDiagnosticIds.FixableDiagnosticIds;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpAddImportCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpAddImportCodeFixProvider() { }
 
-        /// <summary>For testing purposes only (so that tests can pass in mock values)</summary> 
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should have [ImportingConstructor]", Justification = "Used incorrectly by tests")]
+        /// <summary>For testing purposes only (so that tests can pass in mock values)</summary>
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should have [ImportingConstructor]",
+            Justification = "Used incorrectly by tests"
+        )]
         internal CSharpAddImportCodeFixProvider(
             IPackageInstallerService installerService,
-            ISymbolSearchService symbolSearchService)
-            : base(installerService, symbolSearchService)
-        {
-        }
+            ISymbolSearchService symbolSearchService
+        )
+            : base(installerService, symbolSearchService) { }
     }
 }

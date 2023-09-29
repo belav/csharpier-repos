@@ -32,7 +32,8 @@ public class DeveloperExceptionPageMiddleware
         ILoggerFactory loggerFactory,
         IWebHostEnvironment hostingEnvironment,
         DiagnosticSource diagnosticSource,
-        IEnumerable<IDeveloperPageExceptionFilter> filters)
+        IEnumerable<IDeveloperPageExceptionFilter> filters
+    )
     {
         _innerMiddlewareImpl = new(
             next,
@@ -41,7 +42,8 @@ public class DeveloperExceptionPageMiddleware
             hostingEnvironment,
             diagnosticSource,
             filters,
-            problemDetailsService: null);
+            problemDetailsService: null
+        );
     }
 
     /// <summary>
@@ -49,6 +51,5 @@ public class DeveloperExceptionPageMiddleware
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public Task Invoke(HttpContext context)
-        => _innerMiddlewareImpl.Invoke(context);
+    public Task Invoke(HttpContext context) => _innerMiddlewareImpl.Invoke(context);
 }

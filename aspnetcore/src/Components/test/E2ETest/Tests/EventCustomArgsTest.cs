@@ -16,10 +16,9 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
     public EventCustomArgsTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -35,7 +34,10 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
         // registered with the Razor compiler but no way to register them with the runtime, so
         // you could only receive empty eventargs.
         Browser.Exists(By.Id("trigger-testevent-directly")).Click();
-        Browser.Equal("Received testevent with args '{ MyProp=null }'", () => GetLogLines().Single());
+        Browser.Equal(
+            "Received testevent with args '{ MyProp=null }'",
+            () => GetLogLines().Single()
+        );
     }
 
     [Fact]
@@ -43,7 +45,10 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
     {
         Browser.Exists(By.Id("register-testevent-with-no-createventargs")).Click();
         Browser.FindElement(By.Id("trigger-testevent-directly")).Click();
-        Browser.Equal("Received testevent with args '{ MyProp=null }'", () => GetLogLines().Single());
+        Browser.Equal(
+            "Received testevent with args '{ MyProp=null }'",
+            () => GetLogLines().Single()
+        );
     }
 
     [Fact]
@@ -59,7 +64,10 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
     {
         Browser.Exists(By.Id("register-testevent-with-createventargs-that-supplies-args")).Click();
         Browser.FindElement(By.Id("trigger-testevent-directly")).Click();
-        Browser.Equal("Received testevent with args '{ MyProp=Native event target ID=test-event-target-child }'", () => GetLogLines().Single());
+        Browser.Equal(
+            "Received testevent with args '{ MyProp=Native event target ID=test-event-target-child }'",
+            () => GetLogLines().Single()
+        );
     }
 
     [Fact]
@@ -69,13 +77,16 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
         Browser.FindElement(By.Id("register-custom-keydown")).Click();
         SendKeysSequentially(input, "ab");
 
-        Browser.Equal(new[]
-        {
+        Browser.Equal(
+            new[]
+            {
                 "Received native keydown event",
                 "You pressed: a",
                 "Received native keydown event",
                 "You pressed: b",
-            }, GetLogLines);
+            },
+            GetLogLines
+        );
 
         Assert.Equal("ab", input.GetAttribute("value"));
     }
@@ -88,13 +99,16 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
         Browser.FindElement(By.Id("custom-keydown-prevent-default")).Click();
         SendKeysSequentially(input, "ab");
 
-        Browser.Equal(new[]
-        {
+        Browser.Equal(
+            new[]
+            {
                 "Received native keydown event",
                 "You pressed: a",
                 "Received native keydown event",
                 "You pressed: b",
-            }, GetLogLines);
+            },
+            GetLogLines
+        );
 
         // Check it was actually preventDefault-ed
         Assert.Equal("", input.GetAttribute("value"));
@@ -109,8 +123,9 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
         Browser.FindElement(By.Id("custom-keydown-stop-propagation")).Click();
         SendKeysSequentially(input, "ab");
 
-        Browser.Equal(new[]
-        {
+        Browser.Equal(
+            new[]
+            {
                 // The native event still bubbles up to its listener on an ancestor, and
                 // other aliased events still receive it, but the stopPropagation-ed
                 // variant does not
@@ -118,7 +133,9 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
                 "Yet another aliased event received: a",
                 "Received native keydown event",
                 "Yet another aliased event received: b",
-            }, GetLogLines);
+            },
+            GetLogLines
+        );
 
         Assert.Equal("ab", input.GetAttribute("value"));
     }
@@ -131,15 +148,18 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
         Browser.FindElement(By.Id("register-yet-another-keydown")).Click();
         SendKeysSequentially(input, "ab");
 
-        Browser.Equal(new[]
-        {
+        Browser.Equal(
+            new[]
+            {
                 "Received native keydown event",
                 "You pressed: a",
                 "Yet another aliased event received: a",
                 "Received native keydown event",
                 "You pressed: b",
                 "Yet another aliased event received: b",
-            }, GetLogLines);
+            },
+            GetLogLines
+        );
 
         Assert.Equal("ab", input.GetAttribute("value"));
     }
@@ -164,10 +184,12 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
     {
         Browser.Exists(By.Id("register-sendjsobject")).Click();
         Browser.FindElement(By.Id("trigger-sendjsobject-event-directly")).Click();
-        Browser.Collection(() => GetLogLines(),
+        Browser.Collection(
+            () => GetLogLines(),
             line => Assert.Equal("Received DotNetObject with property: This is correct", line),
             line => Assert.Equal("Received byte array of length 7 and first entry 1", line),
-            line => Assert.Equal("Event with IJSObjectReference received: Hello!", line));
+            line => Assert.Equal("Event with IJSObjectReference received: Hello!", line)
+        );
     }
 
     void SendKeysSequentially(IWebElement target, string text)
@@ -178,9 +200,10 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
         }
     }
 
-    private string[] GetLogLines()
-        => Browser.Exists(By.Id("test-log"))
-        .GetAttribute("value")
-        .Replace("\r\n", "\n")
-        .Split('\n', StringSplitOptions.RemoveEmptyEntries);
+    private string[] GetLogLines() =>
+        Browser
+            .Exists(By.Id("test-log"))
+            .GetAttribute("value")
+            .Replace("\r\n", "\n")
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries);
 }

@@ -24,14 +24,18 @@ namespace System.Text.Json.Node
         ///   Initializes a new instance of the <see cref="JsonObject"/> class that is empty.
         /// </summary>
         /// <param name="options">Options to control the behavior.</param>
-        public JsonObject(JsonNodeOptions? options = null) : base(options) { }
+        public JsonObject(JsonNodeOptions? options = null)
+            : base(options) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonObject"/> class that contains the specified <paramref name="properties"/>.
         /// </summary>
         /// <param name="properties">The properties to be added.</param>
         /// <param name="options">Options to control the behavior.</param>
-        public JsonObject(IEnumerable<KeyValuePair<string, JsonNode?>> properties, JsonNodeOptions? options = null)
+        public JsonObject(
+            IEnumerable<KeyValuePair<string, JsonNode?>> properties,
+            JsonNodeOptions? options = null
+        )
         {
             foreach (KeyValuePair<string, JsonNode?> node in properties)
             {
@@ -60,7 +64,9 @@ namespace System.Text.Json.Node
                 return new JsonObject(element, options);
             }
 
-            throw new InvalidOperationException(SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Object)));
+            throw new InvalidOperationException(
+                SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Object))
+            );
         }
 
         /// <summary>
@@ -116,7 +122,8 @@ namespace System.Text.Json.Node
             }
         }
 
-        internal JsonObject(JsonElement element, JsonNodeOptions? options = null) : base(options)
+        internal JsonObject(JsonElement element, JsonNodeOptions? options = null)
+            : base(options)
         {
             Debug.Assert(element.ValueKind == JsonValueKind.Object);
             _jsonElement = element;
@@ -196,7 +203,8 @@ namespace System.Text.Json.Node
                 bool caseInsensitive = Options?.PropertyNameCaseInsensitive == true;
 
                 var dictionary = new Dictionary<string, JsonNode?>(
-                    caseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal);
+                    caseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal
+                );
 
                 if (_jsonElement != null)
                 {
@@ -286,7 +294,6 @@ namespace System.Text.Json.Node
                         return $"{PropertyName} = JsonArray[{jsonArray.List.Count}]";
                     }
                 }
-
             }
         }
     }

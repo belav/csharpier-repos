@@ -14,28 +14,48 @@ namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal sealed class HubMethodDescriptor
 {
-    private static readonly MethodInfo MakeCancelableAsyncEnumeratorMethod = typeof(AsyncEnumerableAdapters)
-        .GetRuntimeMethods()
-        .Single(m => m.Name.Equals(nameof(AsyncEnumerableAdapters.MakeCancelableAsyncEnumerator)) && m.IsGenericMethod);
+    private static readonly MethodInfo MakeCancelableAsyncEnumeratorMethod =
+        typeof(AsyncEnumerableAdapters)
+            .GetRuntimeMethods()
+            .Single(
+                m =>
+                    m.Name.Equals(nameof(AsyncEnumerableAdapters.MakeCancelableAsyncEnumerator))
+                    && m.IsGenericMethod
+            );
 
-    private static readonly MethodInfo MakeAsyncEnumeratorFromChannelMethod = typeof(AsyncEnumerableAdapters)
-        .GetRuntimeMethods()
-        .Single(m => m.Name.Equals(nameof(AsyncEnumerableAdapters.MakeAsyncEnumeratorFromChannel)) && m.IsGenericMethod);
+    private static readonly MethodInfo MakeAsyncEnumeratorFromChannelMethod =
+        typeof(AsyncEnumerableAdapters)
+            .GetRuntimeMethods()
+            .Single(
+                m =>
+                    m.Name.Equals(nameof(AsyncEnumerableAdapters.MakeAsyncEnumeratorFromChannel))
+                    && m.IsGenericMethod
+            );
 
     private readonly MethodInfo? _makeCancelableEnumeratorMethodInfo;
     private Func<object, CancellationToken, IAsyncEnumerator<object>>? _makeCancelableEnumerator;
+
     // bitset to store which parameters come from DI up to 64 arguments
     private ulong _isServiceArgument;
 
-    public HubMethodDescriptor(ObjectMethodExecutor methodExecutor, IServiceProviderIsService? serviceProviderIsService, IEnumerable<IAuthorizeData> policies)
+    public HubMethodDescriptor(
+        ObjectMethodExecutor methodExecutor,
+        IServiceProviderIsService? serviceProviderIsService,
+        IEnumerable<IAuthorizeData> policies
+    )
     {
         MethodExecutor = methodExecutor;
 
-        NonAsyncReturnType = (MethodExecutor.IsMethodAsync)
-            ? MethodExecutor.AsyncResultType!
-            : MethodExecutor.MethodReturnType;
+        NonAsyncReturnType =
+            (MethodExecutor.IsMethodAsync)
+                ? MethodExecutor.AsyncResultType!
+                : MethodExecutor.MethodReturnType;
 
-        foreach (var returnType in NonAsyncReturnType.GetInterfaces().Concat(NonAsyncReturnType.AllBaseTypes()))
+        foreach (
+            var returnType in NonAsyncReturnType
+                .GetInterfaces()
+                .Concat(NonAsyncReturnType.AllBaseTypes())
+        )
         {
             if (!returnType.IsGenericType)
             {
@@ -60,43 +80,58 @@ internal sealed class HubMethodDescriptor
         }
 
         // Take out synthetic arguments that will be provided by the server, this list will be given to the protocol parsers
-        ParameterTypes = methodExecutor.MethodParameters.Where((p, index) =>
-        {
-            // Only streams can take CancellationTokens currently
-            if (IsStreamResponse && p.ParameterType == typeof(CancellationToken))
-            {
-                HasSyntheticArguments = true;
-                return false;
-            }
-            else if (ReflectionHelper.IsStreamingType(p.ParameterType, mustBeDirectType: true))
-            {
-                if (StreamingParameters == null)
+        ParameterTypes = methodExecutor.MethodParameters
+            .Where(
+                (p, index) =>
                 {
-                    StreamingParameters = new List<Type>();
-                }
+                    // Only streams can take CancellationTokens currently
+                    if (IsStreamResponse && p.ParameterType == typeof(CancellationToken))
+                    {
+                        HasSyntheticArguments = true;
+                        return false;
+                    }
+                    else if (
+                        ReflectionHelper.IsStreamingType(p.ParameterType, mustBeDirectType: true)
+                    )
+                    {
+                        if (StreamingParameters == null)
+                        {
+                            StreamingParameters = new List<Type>();
+                        }
 
-                StreamingParameters.Add(p.ParameterType.GetGenericArguments()[0]);
-                HasSyntheticArguments = true;
-                return false;
-            }
-            else if (p.CustomAttributes.Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)) ||
-                serviceProviderIsService?.IsService(GetServiceType(p.ParameterType)) == true)
-            {
-                if (index >= 64)
-                {
-                    throw new InvalidOperationException(
-                        "Hub methods can't use services from DI in the parameters after the 64th parameter.");
+                        StreamingParameters.Add(p.ParameterType.GetGenericArguments()[0]);
+                        HasSyntheticArguments = true;
+                        return false;
+                    }
+                    else if (
+                        p.CustomAttributes.Any(
+                            a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
+                        )
+                        || serviceProviderIsService?.IsService(GetServiceType(p.ParameterType))
+                            == true
+                    )
+                    {
+                        if (index >= 64)
+                        {
+                            throw new InvalidOperationException(
+                                "Hub methods can't use services from DI in the parameters after the 64th parameter."
+                            );
+                        }
+                        _isServiceArgument |= (1UL << index);
+                        HasSyntheticArguments = true;
+                        return false;
+                    }
+                    return true;
                 }
-                _isServiceArgument |= (1UL << index);
-                HasSyntheticArguments = true;
-                return false;
-            }
-            return true;
-        }).Select(p => p.ParameterType).ToArray();
+            )
+            .Select(p => p.ParameterType)
+            .ToArray();
 
         if (HasSyntheticArguments)
         {
-            OriginalParameterTypes = methodExecutor.MethodParameters.Select(p => p.ParameterType).ToArray();
+            OriginalParameterTypes = methodExecutor.MethodParameters
+                .Select(p => p.ParameterType)
+                .ToArray();
         }
 
         Policies = policies.ToArray();
@@ -125,18 +160,28 @@ internal sealed class HubMethodDescriptor
         return (_isServiceArgument & (1UL << argumentIndex)) != 0;
     }
 
-    public IAsyncEnumerator<object> FromReturnedStream(object stream, CancellationToken cancellationToken)
+    public IAsyncEnumerator<object> FromReturnedStream(
+        object stream,
+        CancellationToken cancellationToken
+    )
     {
         // there is the potential for compile to be called times but this has no harmful effect other than perf
         if (_makeCancelableEnumerator == null)
         {
-            _makeCancelableEnumerator = CompileConvertToEnumerator(_makeCancelableEnumeratorMethodInfo!, StreamReturnType!);
+            _makeCancelableEnumerator = CompileConvertToEnumerator(
+                _makeCancelableEnumeratorMethodInfo!,
+                StreamReturnType!
+            );
         }
 
         return _makeCancelableEnumerator.Invoke(stream, cancellationToken);
     }
 
-    private static Func<object, CancellationToken, IAsyncEnumerator<object>> CompileConvertToEnumerator(MethodInfo adapterMethodInfo, Type streamReturnType)
+    private static Func<
+        object,
+        CancellationToken,
+        IAsyncEnumerator<object>
+    > CompileConvertToEnumerator(MethodInfo adapterMethodInfo, Type streamReturnType)
     {
         // This will call one of two adapter methods to wrap the passed in streamable value into an IAsyncEnumerable<object>:
         // - AsyncEnumerableAdapters.MakeCancelableAsyncEnumerator<T>(asyncEnumerable, cancellationToken);
@@ -144,20 +189,23 @@ internal sealed class HubMethodDescriptor
 
         var parameters = new[]
         {
-                Expression.Parameter(typeof(object)),
-                Expression.Parameter(typeof(CancellationToken)),
-            };
+            Expression.Parameter(typeof(object)),
+            Expression.Parameter(typeof(CancellationToken)),
+        };
 
         var genericMethodInfo = adapterMethodInfo.MakeGenericMethod(streamReturnType);
         var methodParameters = genericMethodInfo.GetParameters();
         var methodArguments = new Expression[]
         {
-                Expression.Convert(parameters[0], methodParameters[0].ParameterType),
-                parameters[1],
+            Expression.Convert(parameters[0], methodParameters[0].ParameterType),
+            parameters[1],
         };
 
         var methodCall = Expression.Call(null, genericMethodInfo, methodArguments);
-        var lambda = Expression.Lambda<Func<object, CancellationToken, IAsyncEnumerator<object>>>(methodCall, parameters);
+        var lambda = Expression.Lambda<Func<object, CancellationToken, IAsyncEnumerator<object>>>(
+            methodCall,
+            parameters
+        );
         return lambda.Compile();
     }
 
@@ -165,9 +213,11 @@ internal sealed class HubMethodDescriptor
     {
         // IServiceProviderIsService will special case IEnumerable<> and always return true
         // so, in this case checking the element type instead
-        if (type.IsConstructedGenericType &&
-            type.GetGenericTypeDefinition() is Type genericDefinition &&
-            genericDefinition == typeof(IEnumerable<>))
+        if (
+            type.IsConstructedGenericType
+            && type.GetGenericTypeDefinition() is Type genericDefinition
+            && genericDefinition == typeof(IEnumerable<>)
+        )
         {
             return type.GenericTypeArguments[0];
         }

@@ -22,7 +22,9 @@ namespace Microsoft.Web.Mvc.Test
             };
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(o => o.HttpContext.Request.ServerVariables).Returns(serverVars);
+            mockControllerContext
+                .Setup(o => o.HttpContext.Request.ServerVariables)
+                .Returns(serverVars);
 
             ServerVariablesValueProviderFactory factory = new ServerVariablesValueProviderFactory();
 

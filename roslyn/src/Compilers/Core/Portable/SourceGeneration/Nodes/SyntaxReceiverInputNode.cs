@@ -11,23 +11,34 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal sealed class SyntaxReceiverInputNode : ISyntaxInputNode, IIncrementalGeneratorNode<ISyntaxContextReceiver?>
+    internal sealed class SyntaxReceiverInputNode
+        : ISyntaxInputNode,
+            IIncrementalGeneratorNode<ISyntaxContextReceiver?>
     {
         private readonly SyntaxContextReceiverCreator _receiverCreator;
         private readonly Action<IIncrementalGeneratorOutputNode> _registerOutput;
 
-        public SyntaxReceiverInputNode(SyntaxContextReceiverCreator receiverCreator, Action<IIncrementalGeneratorOutputNode> registerOutput)
+        public SyntaxReceiverInputNode(
+            SyntaxContextReceiverCreator receiverCreator,
+            Action<IIncrementalGeneratorOutputNode> registerOutput
+        )
         {
             _receiverCreator = receiverCreator;
             _registerOutput = registerOutput;
         }
 
-        public NodeStateTable<ISyntaxContextReceiver?> UpdateStateTable(DriverStateTable.Builder graphState, NodeStateTable<ISyntaxContextReceiver?> previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<ISyntaxContextReceiver?> UpdateStateTable(
+            DriverStateTable.Builder graphState,
+            NodeStateTable<ISyntaxContextReceiver?> previousTable,
+            CancellationToken cancellationToken
+        )
         {
             return (NodeStateTable<ISyntaxContextReceiver?>)graphState.GetSyntaxInputTable(this);
         }
 
-        public IIncrementalGeneratorNode<ISyntaxContextReceiver?> WithComparer(IEqualityComparer<ISyntaxContextReceiver?> comparer)
+        public IIncrementalGeneratorNode<ISyntaxContextReceiver?> WithComparer(
+            IEqualityComparer<ISyntaxContextReceiver?> comparer
+        )
         {
             // we don't expose this node to end users
             throw ExceptionUtilities.Unreachable;
@@ -35,7 +46,8 @@ namespace Microsoft.CodeAnalysis
 
         public ISyntaxInputBuilder GetBuilder(DriverStateTable table) => new Builder(this, table);
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _registerOutput(output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _registerOutput(output);
 
         private sealed class Builder : ISyntaxInputBuilder
         {
@@ -47,7 +59,9 @@ namespace Microsoft.CodeAnalysis
             public Builder(SyntaxReceiverInputNode owner, DriverStateTable driverStateTable)
             {
                 _owner = owner;
-                _nodeStateTable = driverStateTable.GetStateTableOrEmpty<ISyntaxContextReceiver?>(_owner).ToBuilder();
+                _nodeStateTable = driverStateTable
+                    .GetStateTableOrEmpty<ISyntaxContextReceiver?>(_owner)
+                    .ToBuilder();
                 try
                 {
                     _receiver = owner._receiverCreator();
@@ -63,15 +77,25 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            public ISyntaxInputNode SyntaxInputNode { get => _owner; }
+            public ISyntaxInputNode SyntaxInputNode
+            {
+                get => _owner;
+            }
 
-            public void SaveStateAndFree(ImmutableSegmentedDictionary<object, IStateTable>.Builder tables)
+            public void SaveStateAndFree(
+                ImmutableSegmentedDictionary<object, IStateTable>.Builder tables
+            )
             {
                 _nodeStateTable.AddEntry(_receiver, EntryState.Modified);
                 tables[_owner] = _nodeStateTable.ToImmutableAndFree();
             }
 
-            public void VisitTree(Lazy<SyntaxNode> root, EntryState state, SemanticModel? model, CancellationToken cancellationToken)
+            public void VisitTree(
+                Lazy<SyntaxNode> root,
+                EntryState state,
+                SemanticModel? model,
+                CancellationToken cancellationToken
+            )
             {
                 if (_walker is object && state != EntryState.Removed)
                 {

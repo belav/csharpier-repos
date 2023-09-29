@@ -25,7 +25,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     [ExportWorkspaceServiceFactory(typeof(IWorkspaceStatusService), ServiceLayer.Host), Shared]
     internal sealed class VisualStudioWorkspaceStatusServiceFactory : IWorkspaceServiceFactory
     {
-        private static readonly Option2<bool> s_partialLoadModeFeatureFlag = new("VisualStudioWorkspaceStatusService_PartialLoadModeFeatureFlag", defaultValue: false);
+        private static readonly Option2<bool> s_partialLoadModeFeatureFlag =
+            new(
+                "VisualStudioWorkspaceStatusService_PartialLoadModeFeatureFlag",
+                defaultValue: false
+            );
 
         private readonly IAsyncServiceProvider2 _serviceProvider;
         private readonly IThreadingContext _threadingContext;
@@ -38,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             SVsServiceProvider serviceProvider,
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _serviceProvider = (IAsyncServiceProvider2)serviceProvider;
             _threadingContext = threadingContext;
@@ -68,7 +73,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         }
 
         /// <summary>
-        /// for prototype, we won't care about what solution is actually fully loaded. 
+        /// for prototype, we won't care about what solution is actually fully loaded.
         /// we will just see whatever solution VS has at this point of time has actually fully loaded
         /// </summary>
         private class Service : IWorkspaceStatusService
@@ -92,7 +97,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             public event EventHandler? StatusChanged;
 
-            public Service(IAsyncServiceProvider2 serviceProvider, IThreadingContext threadingContext, IAsynchronousOperationListener listener)
+            public Service(
+                IAsyncServiceProvider2 serviceProvider,
+                IThreadingContext threadingContext,
+                IAsynchronousOperationListener listener
+            )
             {
                 _serviceProvider = serviceProvider;
                 _threadingContext = threadingContext;
@@ -101,10 +110,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     // Use the disposal token, since the caller's cancellation token will apply instead to the
                     // JoinAsync operation in GetProgressStageStatusAsync.
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, _threadingContext.DisposalToken);
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true,
+                        _threadingContext.DisposalToken
+                    );
 
                     // Make sure the HubClient package is loaded, since we rely on it for proffered OOP services
-                    var shell = await _serviceProvider.GetServiceAsync<SVsShell, IVsShell7>(_threadingContext.JoinableTaskFactory).ConfigureAwait(true);
+                    var shell = await _serviceProvider
+                        .GetServiceAsync<SVsShell, IVsShell7>(_threadingContext.JoinableTaskFactory)
+                        .ConfigureAwait(true);
                     Assumes.Present(shell);
 
                     await shell.LoadPackageAsync(Guids.GlobalHubClientPackageGuid);
@@ -114,15 +128,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     // pre-emptively make sure event is subscribed. if APIs are called before it is done, calls will be blocked
                     // until event subscription is done
-                    using var asyncToken = listener.BeginAsyncOperation("StatusChanged_EventSubscription");
+                    using var asyncToken = listener.BeginAsyncOperation(
+                        "StatusChanged_EventSubscription"
+                    );
 
-                    await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, _threadingContext.DisposalToken);
-                    var service = await serviceProvider.GetServiceAsync<SVsOperationProgress, IVsOperationProgressStatusService>(_threadingContext.JoinableTaskFactory, throwOnFailure: false).ConfigureAwait(true);
+                    await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true,
+                        _threadingContext.DisposalToken
+                    );
+                    var service = await serviceProvider
+                        .GetServiceAsync<SVsOperationProgress, IVsOperationProgressStatusService>(
+                            _threadingContext.JoinableTaskFactory,
+                            throwOnFailure: false
+                        )
+                        .ConfigureAwait(true);
                     if (service is null)
                         return null;
 
-                    var status = service.GetStageStatusForSolutionLoad(CommonOperationProgressStageIds.Intellisense);
-                    status.PropertyChanged += (_, _) => StatusChanged?.Invoke(this, EventArgs.Empty);
+                    var status = service.GetStageStatusForSolutionLoad(
+                        CommonOperationProgressStageIds.Intellisense
+                    );
+                    status.PropertyChanged += (_, _) =>
+                        StatusChanged?.Invoke(this, EventArgs.Empty);
 
                     return status;
                 });
@@ -136,16 +163,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // Studio require this package to provide proxy interfaces for invoking out-of-process services.
             public async Task WaitUntilFullyLoadedAsync(CancellationToken cancellationToken)
             {
-                using (Logger.LogBlock(FunctionId.PartialLoad_FullyLoaded, KeyValueLogMessage.NoProperty, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.PartialLoad_FullyLoaded,
+                        KeyValueLogMessage.NoProperty,
+                        cancellationToken
+                    )
+                )
                 {
-                    var status = await GetProgressStageStatusAsync(cancellationToken).ConfigureAwait(false);
+                    var status = await GetProgressStageStatusAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     if (status == null)
                     {
                         return;
                     }
 
                     var completionTask = status.WaitForCompletionAsync();
-                    Logger.Log(FunctionId.PartialLoad_FullyLoaded, KeyValueLogMessage.Create(LogType.Trace, m => m["AlreadyFullyLoaded"] = completionTask.IsCompleted));
+                    Logger.Log(
+                        FunctionId.PartialLoad_FullyLoaded,
+                        KeyValueLogMessage.Create(
+                            LogType.Trace,
+                            m => m["AlreadyFullyLoaded"] = completionTask.IsCompleted
+                        )
+                    );
 
                     // TODO: WaitForCompletionAsync should accept cancellation directly.
                     //       for now, use WithCancellation to indirectly add cancellation
@@ -160,7 +200,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // deadlock
             public async Task<bool> IsFullyLoadedAsync(CancellationToken cancellationToken)
             {
-                var status = await GetProgressStageStatusAsync(cancellationToken).ConfigureAwait(false);
+                var status = await GetProgressStageStatusAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (status == null)
                 {
                     return false;
@@ -169,7 +210,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 return !status.IsInProgress;
             }
 
-            private async ValueTask<IVsOperationProgressStageStatusForSolutionLoad?> GetProgressStageStatusAsync(CancellationToken cancellationToken)
+            private async ValueTask<IVsOperationProgressStageStatusForSolutionLoad?> GetProgressStageStatusAsync(
+                CancellationToken cancellationToken
+            )
             {
                 // Workaround for lack of fast path in JoinAsync; avoid calling when already completed
                 // https://github.com/microsoft/vs-threading/pull/696
@@ -178,7 +221,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     return await _progressStageStatus.Task.ConfigureAwait(false);
                 }
 
-                return await _progressStageStatus.JoinAsync(cancellationToken).ConfigureAwait(false);
+                return await _progressStageStatus
+                    .JoinAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

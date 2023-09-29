@@ -31,13 +31,16 @@ public static class ProblemDetailsServiceCollectionExtensions
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddProblemDetails(
         this IServiceCollection services,
-        Action<ProblemDetailsOptions>? configure)
+        Action<ProblemDetailsOptions>? configure
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
 
         // Adding default services;
         services.TryAddSingleton<IProblemDetailsService, ProblemDetailsService>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IProblemDetailsWriter, DefaultProblemDetailsWriter>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IProblemDetailsWriter, DefaultProblemDetailsWriter>()
+        );
 
         if (configure != null)
         {

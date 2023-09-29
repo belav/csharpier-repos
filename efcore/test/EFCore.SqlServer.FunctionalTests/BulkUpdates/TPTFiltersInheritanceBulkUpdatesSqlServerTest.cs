@@ -3,18 +3,20 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPTFiltersInheritanceBulkUpdatesSqlServerTest : TPTFiltersInheritanceBulkUpdatesTestBase<
-    TPTFiltersInheritanceBulkUpdatesSqlServerFixture>
+public class TPTFiltersInheritanceBulkUpdatesSqlServerTest
+    : TPTFiltersInheritanceBulkUpdatesTestBase<TPTFiltersInheritanceBulkUpdatesSqlServerFixture>
 {
-    public TPTFiltersInheritanceBulkUpdatesSqlServerTest(TPTFiltersInheritanceBulkUpdatesSqlServerFixture fixture)
+    public TPTFiltersInheritanceBulkUpdatesSqlServerTest(
+        TPTFiltersInheritanceBulkUpdatesSqlServerFixture fixture
+    )
         : base(fixture)
     {
         ClearLog();
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -35,7 +37,7 @@ public class TPTFiltersInheritanceBulkUpdatesSqlServerTest : TPTFiltersInheritan
         await base.Delete_where_using_hierarchy(async);
 
         AssertSql(
-"""
+            """
 DELETE FROM [c]
 FROM [Countries] AS [c]
 WHERE (
@@ -45,7 +47,8 @@ WHERE (
     LEFT JOIN [Eagle] AS [e] ON [a].[Id] = [e].[Id]
     LEFT JOIN [Kiwi] AS [k] ON [a].[Id] = [k].[Id]
     WHERE [a].[CountryId] = 1 AND [c].[Id] = [a].[CountryId] AND [a].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -53,7 +56,7 @@ WHERE (
         await base.Delete_where_using_hierarchy_derived(async);
 
         AssertSql(
-"""
+            """
 DELETE FROM [c]
 FROM [Countries] AS [c]
 WHERE (
@@ -63,7 +66,8 @@ WHERE (
     LEFT JOIN [Eagle] AS [e] ON [a].[Id] = [e].[Id]
     LEFT JOIN [Kiwi] AS [k] ON [a].[Id] = [k].[Id]
     WHERE [a].[CountryId] = 1 AND [c].[Id] = [a].[CountryId] AND ([k].[Id] IS NOT NULL) AND [a].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -127,7 +131,7 @@ WHERE (
         await base.Update_where_using_hierarchy(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [c]
 SET [c].[Name] = N'Monovia'
 FROM [Countries] AS [c]
@@ -138,7 +142,8 @@ WHERE (
     LEFT JOIN [Eagle] AS [e] ON [a].[Id] = [e].[Id]
     LEFT JOIN [Kiwi] AS [k] ON [a].[Id] = [k].[Id]
     WHERE [a].[CountryId] = 1 AND [c].[Id] = [a].[CountryId] AND [a].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -146,7 +151,7 @@ WHERE (
         await base.Update_where_using_hierarchy_derived(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [c]
 SET [c].[Name] = N'Monovia'
 FROM [Countries] AS [c]
@@ -157,7 +162,8 @@ WHERE (
     LEFT JOIN [Eagle] AS [e] ON [a].[Id] = [e].[Id]
     LEFT JOIN [Kiwi] AS [k] ON [a].[Id] = [k].[Id]
     WHERE [a].[CountryId] = 1 AND [c].[Id] = [a].[CountryId] AND ([k].[Id] IS NOT NULL) AND [a].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -167,12 +173,11 @@ WHERE (
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

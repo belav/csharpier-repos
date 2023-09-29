@@ -17,5 +17,4 @@ namespace DefaultNamespace
             return 100;
         }
     }
-
 }

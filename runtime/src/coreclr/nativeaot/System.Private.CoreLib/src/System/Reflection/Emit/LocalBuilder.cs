@@ -12,26 +12,17 @@ namespace System.Reflection.Emit
 
         public override bool IsPinned
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override int LocalIndex
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type LocalType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
     }
 }

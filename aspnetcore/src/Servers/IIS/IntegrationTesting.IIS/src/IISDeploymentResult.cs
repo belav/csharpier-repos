@@ -12,17 +12,21 @@ public class IISDeploymentResult : DeploymentResult
     public ILogger Logger { get; set; }
     public Process HostProcess { get; }
 
-    public IISDeploymentResult(ILoggerFactory loggerFactory,
+    public IISDeploymentResult(
+        ILoggerFactory loggerFactory,
         IISDeploymentParameters deploymentParameters,
         string applicationBaseUri,
         string contentRoot,
         CancellationToken hostShutdownToken,
-        Process hostProcess)
-        : base(loggerFactory,
-              deploymentParameters,
-              applicationBaseUri,
-              contentRoot,
-              hostShutdownToken)
+        Process hostProcess
+    )
+        : base(
+            loggerFactory,
+            deploymentParameters,
+            applicationBaseUri,
+            contentRoot,
+            hostShutdownToken
+        )
     {
         HostProcess = hostProcess;
         Logger = loggerFactory.CreateLogger(deploymentParameters.SiteName);

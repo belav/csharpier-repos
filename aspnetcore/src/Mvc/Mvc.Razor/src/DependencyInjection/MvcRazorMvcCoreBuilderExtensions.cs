@@ -49,7 +49,8 @@ public static class MvcRazorMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddRazorViewEngine(
         this IMvcCoreBuilder builder,
-        Action<RazorViewEngineOptions> setupAction)
+        Action<RazorViewEngineOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -114,7 +115,8 @@ public static class MvcRazorMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/> instance this method extends.</returns>
     public static IMvcCoreBuilder InitializeTagHelper<TTagHelper>(
         this IMvcCoreBuilder builder,
-        Action<TTagHelper, ViewContext> initialize)
+        Action<TTagHelper, ViewContext> initialize
+    )
         where TTagHelper : ITagHelper
     {
         if (builder == null)
@@ -143,10 +145,18 @@ public static class MvcRazorMvcCoreBuilderExtensions
         }
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcViewOptions>, MvcRazorMvcViewOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<MvcViewOptions>,
+                MvcRazorMvcViewOptionsSetup
+            >()
+        );
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<RazorViewEngineOptions>, RazorViewEngineOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<RazorViewEngineOptions>,
+                RazorViewEngineOptionsSetup
+            >()
+        );
 
         services.TryAddSingleton<IRazorViewEngine, RazorViewEngine>();
         services.TryAddSingleton<IViewCompilerProvider, DefaultViewCompilerProvider>();
@@ -160,7 +170,10 @@ public static class MvcRazorMvcCoreBuilderExtensions
 
         // Only want one ITagHelperActivator and ITagHelperComponentPropertyActivator so it can cache Type activation information. Types won't conflict.
         services.TryAddSingleton<ITagHelperActivator, DefaultTagHelperActivator>();
-        services.TryAddSingleton<ITagHelperComponentPropertyActivator, TagHelperComponentPropertyActivator>();
+        services.TryAddSingleton<
+            ITagHelperComponentPropertyActivator,
+            TagHelperComponentPropertyActivator
+        >();
 
         services.TryAddSingleton<ITagHelperFactory, DefaultTagHelperFactory>();
 

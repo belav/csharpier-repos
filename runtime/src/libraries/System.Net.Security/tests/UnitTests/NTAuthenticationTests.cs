@@ -16,8 +16,14 @@ namespace System.Net.Security.Tests
     {
         private static bool IsNtlmInstalled => Capability.IsNtlmInstalled();
 
-        private static NetworkCredential s_testCredentialRight = new NetworkCredential("rightusername", "rightpassword");
-        private static NetworkCredential s_testCredentialWrong = new NetworkCredential("rightusername", "wrongpassword");
+        private static NetworkCredential s_testCredentialRight = new NetworkCredential(
+            "rightusername",
+            "rightpassword"
+        );
+        private static NetworkCredential s_testCredentialWrong = new NetworkCredential(
+            "rightusername",
+            "wrongpassword"
+        );
         private static byte[] s_Hello => "Hello"u8;
 
         [Fact]
@@ -48,27 +54,31 @@ namespace System.Net.Security.Tests
             // Domain: (empty) (should be "Domain" but the fake server doesn't check)
             // Workstation: (empty) (should be "COMPUTER" but the fake server doesn't check)
             // Version: 6.1.7600 / 15
-            byte[] negotiateBlob = Convert.FromHexString("4e544c4d535350000100000033828ae2000000000000000000000000000000000601b01d0000000f");
+            byte[] negotiateBlob = Convert.FromHexString(
+                "4e544c4d535350000100000033828ae2000000000000000000000000000000000601b01d0000000f"
+            );
             byte[]? challengeBlob = fakeNtlmServer.GetOutgoingBlob(negotiateBlob);
 
             // CHALLENGE_MESSAGE from 4.2.4.3 Messages
             byte[] expectedChallengeBlob = Convert.FromHexString(
-                "4e544c4d53535000020000000c000c003800000033828ae20123456789abcdef" +
-                "00000000000000002400240044000000060070170000000f5300650072007600" +
-                "6500720002000c0044006f006d00610069006e0001000c005300650072007600" +
-                "6500720000000000");
+                "4e544c4d53535000020000000c000c003800000033828ae20123456789abcdef"
+                    + "00000000000000002400240044000000060070170000000f5300650072007600"
+                    + "6500720002000c0044006f006d00610069006e0001000c005300650072007600"
+                    + "6500720000000000"
+            );
             Assert.Equal(expectedChallengeBlob, challengeBlob);
 
             // AUTHENTICATE_MESSAGE from 4.2.4.3 Messages
             byte[] authenticateBlob = Convert.FromHexString(
-                "4e544c4d5353500003000000180018006c00000054005400840000000c000c00" +
-                "480000000800080054000000100010005c00000010001000d8000000358288e2" +
-                "0501280a0000000f44006f006d00610069006e00550073006500720043004f00" +
-                "4d005000550054004500520086c35097ac9cec102554764a57cccc19aaaaaaaa" +
-                "aaaaaaaa68cd0ab851e51c96aabc927bebef6a1c010100000000000000000000" +
-                "00000000aaaaaaaaaaaaaaaa0000000002000c0044006f006d00610069006e00" +
-                "01000c005300650072007600650072000000000000000000c5dad2544fc97990" +
-                "94ce1ce90bc9d03e");
+                "4e544c4d5353500003000000180018006c00000054005400840000000c000c00"
+                    + "480000000800080054000000100010005c00000010001000d8000000358288e2"
+                    + "0501280a0000000f44006f006d00610069006e00550073006500720043004f00"
+                    + "4d005000550054004500520086c35097ac9cec102554764a57cccc19aaaaaaaa"
+                    + "aaaaaaaa68cd0ab851e51c96aabc927bebef6a1c010100000000000000000000"
+                    + "00000000aaaaaaaaaaaaaaaa0000000002000c0044006f006d00610069006e00"
+                    + "01000c005300650072007600650072000000000000000000c5dad2544fc97990"
+                    + "94ce1ce90bc9d03e"
+            );
             byte[]? empty = fakeNtlmServer.GetOutgoingBlob(authenticateBlob);
             Assert.Null(empty);
             Assert.True(fakeNtlmServer.IsAuthenticated);
@@ -80,8 +90,13 @@ namespace System.Net.Security.Tests
         {
             FakeNtlmServer fakeNtlmServer = new FakeNtlmServer(s_testCredentialRight);
             NTAuthentication ntAuth = new NTAuthentication(
-                isServer: false, "NTLM", s_testCredentialRight, "HTTP/foo",
-                ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity, null);
+                isServer: false,
+                "NTLM",
+                s_testCredentialRight,
+                "HTTP/foo",
+                ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity,
+                null
+            );
 
             DoNtlmExchange(fakeNtlmServer, ntAuth);
 
@@ -99,8 +114,13 @@ namespace System.Net.Security.Tests
         {
             FakeNtlmServer fakeNtlmServer = new FakeNtlmServer(s_testCredentialRight);
             NTAuthentication ntAuth = new NTAuthentication(
-                isServer: false, "NTLM", s_testCredentialWrong, "HTTP/foo",
-                ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity, null);
+                isServer: false,
+                "NTLM",
+                s_testCredentialWrong,
+                "HTTP/foo",
+                ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity,
+                null
+            );
 
             DoNtlmExchange(fakeNtlmServer, ntAuth);
 
@@ -108,13 +128,23 @@ namespace System.Net.Security.Tests
         }
 
         [ConditionalFact(nameof(IsNtlmInstalled))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/65678", TestPlatforms.OSX | TestPlatforms.iOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/65678",
+            TestPlatforms.OSX | TestPlatforms.iOS | TestPlatforms.MacCatalyst
+        )]
         public void NtlmSignatureTest()
         {
             FakeNtlmServer fakeNtlmServer = new FakeNtlmServer(s_testCredentialRight);
             NTAuthentication ntAuth = new NTAuthentication(
-                isServer: false, "NTLM", s_testCredentialRight, "HTTP/foo",
-                ContextFlagsPal.Connection | ContextFlagsPal.InitIntegrity | ContextFlagsPal.Confidentiality, null);
+                isServer: false,
+                "NTLM",
+                s_testCredentialRight,
+                "HTTP/foo",
+                ContextFlagsPal.Connection
+                    | ContextFlagsPal.InitIntegrity
+                    | ContextFlagsPal.Confidentiality,
+                null
+            );
 
             DoNtlmExchange(fakeNtlmServer, ntAuth);
 
@@ -132,7 +162,7 @@ namespace System.Net.Security.Tests
             // Check the signature
             fakeNtlmServer.VerifyMIC(temp, output.AsSpan(0, 16), sequenceNumber: 0);
 
-            // Test creating signature on server side and decoding it with VerifySignature on client side 
+            // Test creating signature on server side and decoding it with VerifySignature on client side
             byte[] serverSignedMessage = new byte[16 + s_Hello.Length];
             fakeNtlmServer.Seal(s_Hello, serverSignedMessage.AsSpan(16, s_Hello.Length));
             fakeNtlmServer.GetMIC(s_Hello, serverSignedMessage.AsSpan(0, 16), sequenceNumber: 0);

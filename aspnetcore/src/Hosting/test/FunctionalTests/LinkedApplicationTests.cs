@@ -18,15 +18,20 @@ public class LinkedApplicationTests : LoggedTest
 
             // https://github.com/dotnet/aspnetcore/issues/8247
 #pragma warning disable 0618
-            var applicationPath = Path.Combine(TestPathUtilities.GetSolutionRootDirectory("Hosting"), "test", "testassets",
-                "BasicLinkedApp");
+            var applicationPath = Path.Combine(
+                TestPathUtilities.GetSolutionRootDirectory("Hosting"),
+                "test",
+                "testassets",
+                "BasicLinkedApp"
+            );
 #pragma warning restore 0618
 
             var deploymentParameters = new DeploymentParameters(
                 applicationPath,
                 ServerType.Kestrel,
                 RuntimeFlavor.CoreClr,
-                RuntimeArchitectures.Current)
+                RuntimeArchitectures.Current
+            )
             {
                 TargetFramework = Tfm.Default,
                 ApplicationType = ApplicationType.Standalone,
@@ -43,7 +48,11 @@ public class LinkedApplicationTests : LoggedTest
             // The app should have started up
             Assert.False(deployer.HostProcess.HasExited);
 
-            var response = await RetryHelper.RetryRequest(() => result.HttpClient.GetAsync("/"), logger, retryCount: 10);
+            var response = await RetryHelper.RetryRequest(
+                () => result.HttpClient.GetAsync("/"),
+                logger,
+                retryCount: 10
+            );
             var body = await response.Content.ReadAsStringAsync();
 
             Assert.Equal("Hello World", body);

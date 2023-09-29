@@ -11,8 +11,11 @@ namespace System.Activities.Expressions
     using System.Linq.Expressions;
     using System.Runtime;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotMatchKeywords,
-        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [Not])")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotMatchKeywords,
+        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [Not])"
+    )]
     public sealed class Not<TOperand, TResult> : CodeActivity<TResult>
     {
         //Lock is not needed for operationFunction here. The reason is that delegates for a given Not<TLeft, TRight, TResult> are the same.
@@ -21,12 +24,7 @@ namespace System.Activities.Expressions
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TOperand> Operand
-        {
-            get;
-            set;
-        }
-
+        public InArgument<TOperand> Operand { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -35,12 +33,19 @@ namespace System.Activities.Expressions
             if (operationFunction == null)
             {
                 ValidationError validationError;
-                if (!UnaryExpressionHelper.TryGenerateLinqDelegate(ExpressionType.Not, out operationFunction, out validationError))
+                if (
+                    !UnaryExpressionHelper.TryGenerateLinqDelegate(
+                        ExpressionType.Not,
+                        out operationFunction,
+                        out validationError
+                    )
+                )
                 {
                     metadata.AddValidationError(validationError);
                 }
             }
         }
+
         protected override TResult Execute(CodeActivityContext context)
         {
             Fx.Assert(operationFunction != null, "OperationFunction must exist.");

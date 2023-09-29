@@ -47,7 +47,8 @@ public sealed record UpdateSqlGeneratorDependencies
     [EntityFrameworkInternal]
     public UpdateSqlGeneratorDependencies(
         ISqlGenerationHelper sqlGenerationHelper,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         SqlGenerationHelper = sqlGenerationHelper;
         TypeMappingSource = typeMappingSource;

@@ -12,14 +12,16 @@ namespace System.ServiceModel.Configuration
     {
         ConfigurationPropertyCollection properties;
 
-        [ConfigurationProperty(ConfigurationStrings.Mode, DefaultValue = WebHttpSecurity.DefaultMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Mode,
+            DefaultValue = WebHttpSecurity.DefaultMode
+        )]
         [InternalEnumValidator(typeof(WebHttpSecurityModeHelper))]
         public WebHttpSecurityMode Mode
         {
             get { return (WebHttpSecurityMode)base[ConfigurationStrings.Mode]; }
             set { base[ConfigurationStrings.Mode] = value; }
         }
-
 
         [ConfigurationProperty(ConfigurationStrings.Transport)]
         public HttpTransportSecurityElement Transport
@@ -33,9 +35,28 @@ namespace System.ServiceModel.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty("mode", typeof(WebHttpSecurityMode), System.ServiceModel.WebHttpSecurityMode.None, null, new InternalEnumValidator(typeof(WebHttpSecurityModeHelper)), System.Configuration.ConfigurationPropertyOptions.None));
-                    properties.Add(new ConfigurationProperty("transport", typeof(HttpTransportSecurityElement), null, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            "mode",
+                            typeof(WebHttpSecurityMode),
+                            System.ServiceModel.WebHttpSecurityMode.None,
+                            null,
+                            new InternalEnumValidator(typeof(WebHttpSecurityModeHelper)),
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            "transport",
+                            typeof(HttpTransportSecurityElement),
+                            null,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
@@ -53,7 +74,6 @@ namespace System.ServiceModel.Configuration
                 security.Mode = this.Mode;
                 this.Transport.ApplyConfiguration(security.Transport);
             }
-
         }
 
         internal void InitializeFrom(WebHttpSecurity security)
@@ -85,11 +105,23 @@ namespace System.ServiceModel.Configuration
             }
             // Can't call this.Transport.SetPropertyValueIfNotDefaultValue directly because it's protected, so we check
             // the defaults here instead.
-            if (IsNonDefaultValue(this.Transport, ConfigurationStrings.ClientCredentialType, security.ClientCredentialType))
+            if (
+                IsNonDefaultValue(
+                    this.Transport,
+                    ConfigurationStrings.ClientCredentialType,
+                    security.ClientCredentialType
+                )
+            )
             {
                 this.Transport.ClientCredentialType = security.ClientCredentialType;
             }
-            if (IsNonDefaultValue(this.Transport, ConfigurationStrings.ProxyCredentialType, security.ProxyCredentialType))
+            if (
+                IsNonDefaultValue(
+                    this.Transport,
+                    ConfigurationStrings.ProxyCredentialType,
+                    security.ProxyCredentialType
+                )
+            )
             {
                 this.Transport.ProxyCredentialType = security.ProxyCredentialType;
             }
@@ -99,10 +131,17 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        static bool IsNonDefaultValue<T>(ServiceModelConfigurationElement element, string propertyName, T value)
+        static bool IsNonDefaultValue<T>(
+            ServiceModelConfigurationElement element,
+            string propertyName,
+            T value
+        )
         {
-            PropertyInformation configurationPropertyInfo = element.ElementInformation.Properties[propertyName];
-            return configurationPropertyInfo != null && !object.Equals(configurationPropertyInfo.DefaultValue, value);
+            PropertyInformation configurationPropertyInfo = element.ElementInformation.Properties[
+                propertyName
+            ];
+            return configurationPropertyInfo != null
+                && !object.Equals(configurationPropertyInfo.DefaultValue, value);
         }
     }
 }

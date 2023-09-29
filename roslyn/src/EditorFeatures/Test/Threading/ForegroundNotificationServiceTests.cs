@@ -28,7 +28,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
             {
                 if (_service is null)
                 {
-                    var threadingContext = EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider().GetExportedValue<IThreadingContext>();
+                    var threadingContext =
+                        EditorTestCompositions.EditorFeatures.ExportProviderFactory
+                            .CreateExportProvider()
+                            .GetExportedValue<IThreadingContext>();
                     _service = new ForegroundNotificationService(threadingContext);
                 }
 
@@ -42,13 +45,29 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
             var asyncToken = EmptyAsyncToken.Instance;
             var ran = false;
 
-            Service.RegisterNotification(() => { Thread.Sleep(100); }, asyncToken, CancellationToken.None);
-            Service.RegisterNotification(() => { /* do nothing */ }, asyncToken, CancellationToken.None);
-            Service.RegisterNotification(() =>
-            {
-                ran = true;
-                _done = true;
-            }, asyncToken, CancellationToken.None);
+            Service.RegisterNotification(
+                () =>
+                {
+                    Thread.Sleep(100);
+                },
+                asyncToken,
+                CancellationToken.None
+            );
+            Service.RegisterNotification(
+                () => { /* do nothing */
+                },
+                asyncToken,
+                CancellationToken.None
+            );
+            Service.RegisterNotification(
+                () =>
+                {
+                    ran = true;
+                    _done = true;
+                },
+                asyncToken,
+                CancellationToken.None
+            );
 
             await PumpWait();
 
@@ -67,9 +86,30 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
             var source = new CancellationTokenSource();
             source.Cancel();
 
-            Service.RegisterNotification(() => { waitEvent.WaitOne(); }, asyncToken, CancellationToken.None);
-            Service.RegisterNotification(() => { ran = true; }, asyncToken, source.Token);
-            Service.RegisterNotification(() => { _done = true; }, asyncToken, CancellationToken.None);
+            Service.RegisterNotification(
+                () =>
+                {
+                    waitEvent.WaitOne();
+                },
+                asyncToken,
+                CancellationToken.None
+            );
+            Service.RegisterNotification(
+                () =>
+                {
+                    ran = true;
+                },
+                asyncToken,
+                source.Token
+            );
+            Service.RegisterNotification(
+                () =>
+                {
+                    _done = true;
+                },
+                asyncToken,
+                CancellationToken.None
+            );
 
             waitEvent.Set();
             await PumpWait();
@@ -90,16 +130,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
             var startMilliseconds = Environment.TickCount;
             int? elapsedMilliseconds = null;
 
-            Service.RegisterNotification(() =>
-            {
-                elapsedMilliseconds = Environment.TickCount - startMilliseconds;
+            Service.RegisterNotification(
+                () =>
+                {
+                    elapsedMilliseconds = Environment.TickCount - startMilliseconds;
 
-                _done = true;
-            }, 50, asyncToken, CancellationToken.None);
+                    _done = true;
+                },
+                50,
+                asyncToken,
+                CancellationToken.None
+            );
 
             await PumpWait();
 
-            Assert.True(elapsedMilliseconds >= 50, $"Notification fired after {elapsedMilliseconds}, instead of 50.");
+            Assert.True(
+                elapsedMilliseconds >= 50,
+                $"Notification fired after {elapsedMilliseconds}, instead of 50."
+            );
             Assert.True(Service.IsEmpty_TestOnly);
         }
 
@@ -116,38 +164,53 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Threading
                 var index = i;
                 var retry = false;
 
-                Service.RegisterNotification(() =>
-                {
-                    if (retry)
+                Service.RegisterNotification(
+                    () =>
                     {
-                        return false;
-                    }
-
-                    var source = new CancellationTokenSource();
-
-                    Service.RegisterNotification(() =>
-                    {
-                        for (var j = 0; j < 100; j++)
+                        if (retry)
                         {
-                            count++;
+                            return false;
                         }
-                    }, asyncToken, source.Token);
 
-                    if ((index % 10) == 0)
-                    {
-                        source.Cancel();
+                        var source = new CancellationTokenSource();
 
-                        retry = true;
-                        return retry;
-                    }
+                        Service.RegisterNotification(
+                            () =>
+                            {
+                                for (var j = 0; j < 100; j++)
+                                {
+                                    count++;
+                                }
+                            },
+                            asyncToken,
+                            source.Token
+                        );
 
-                    if (index == loopCount - 1)
-                    {
-                        Service.RegisterNotification(() => { _done = true; }, asyncToken, CancellationToken.None);
-                    }
+                        if ((index % 10) == 0)
+                        {
+                            source.Cancel();
 
-                    return false;
-                }, asyncToken, CancellationToken.None);
+                            retry = true;
+                            return retry;
+                        }
+
+                        if (index == loopCount - 1)
+                        {
+                            Service.RegisterNotification(
+                                () =>
+                                {
+                                    _done = true;
+                                },
+                                asyncToken,
+                                CancellationToken.None
+                            );
+                        }
+
+                        return false;
+                    },
+                    asyncToken,
+                    CancellationToken.None
+                );
             }
 
             await PumpWait().ConfigureAwait(false);

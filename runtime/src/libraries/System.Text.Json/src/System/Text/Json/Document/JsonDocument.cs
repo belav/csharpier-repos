@@ -39,13 +39,16 @@ namespace System.Text.Json
             MetadataDb parsedData,
             byte[]? extraRentedArrayPoolBytes = null,
             PooledByteBufferWriter? extraPooledByteBufferWriter = null,
-            bool isDisposable = true)
+            bool isDisposable = true
+        )
         {
             Debug.Assert(!utf8Json.IsEmpty);
 
             // Both rented values better be null if we're not disposable.
-            Debug.Assert(isDisposable ||
-                (extraRentedArrayPoolBytes == null && extraPooledByteBufferWriter == null));
+            Debug.Assert(
+                isDisposable
+                    || (extraRentedArrayPoolBytes == null && extraPooledByteBufferWriter == null)
+            );
 
             // Both rented values can't be specified.
             Debug.Assert(extraRentedArrayPoolBytes == null || extraPooledByteBufferWriter == null);
@@ -71,7 +74,10 @@ namespace System.Text.Json
 
             if (_extraRentedArrayPoolBytes != null)
             {
-                byte[]? extraRentedBytes = Interlocked.Exchange<byte[]?>(ref _extraRentedArrayPoolBytes, null);
+                byte[]? extraRentedBytes = Interlocked.Exchange<byte[]?>(
+                    ref _extraRentedArrayPoolBytes,
+                    null
+                );
 
                 if (extraRentedBytes != null)
                 {
@@ -83,7 +89,11 @@ namespace System.Text.Json
             }
             else if (_extraPooledByteBufferWriter != null)
             {
-                PooledByteBufferWriter? extraBufferWriter = Interlocked.Exchange<PooledByteBufferWriter?>(ref _extraPooledByteBufferWriter, null);
+                PooledByteBufferWriter? extraBufferWriter =
+                    Interlocked.Exchange<PooledByteBufferWriter?>(
+                        ref _extraPooledByteBufferWriter,
+                        null
+                    );
                 extraBufferWriter?.Dispose();
             }
         }
@@ -173,7 +183,8 @@ namespace System.Text.Json
             }
 
             Debug.Fail(
-                $"Ran out of database searching for array index {arrayIndex} from {currentIndex} when length was {arrayLength}");
+                $"Ran out of database searching for array index {arrayIndex} from {currentIndex} when length was {arrayLength}"
+            );
             throw new IndexOutOfRangeException();
         }
 
@@ -200,7 +211,7 @@ namespace System.Text.Json
 
         internal ReadOnlyMemory<byte> GetRootRawValue()
         {
-            return GetRawValue(0, includeQuotes : true);
+            return GetRawValue(0, includeQuotes: true);
         }
 
         internal ReadOnlyMemory<byte> GetRawValue(int index, bool includeQuotes)
@@ -291,12 +302,19 @@ namespace System.Text.Json
 
             byte[]? otherUtf8TextArray = null;
 
-            int length = checked(otherText.Length * JsonConstants.MaxExpansionFactorWhileTranscoding);
-            Span<byte> otherUtf8Text = length <= JsonConstants.StackallocByteThreshold ?
-                stackalloc byte[JsonConstants.StackallocByteThreshold] :
-                (otherUtf8TextArray = ArrayPool<byte>.Shared.Rent(length));
+            int length = checked(
+                otherText.Length * JsonConstants.MaxExpansionFactorWhileTranscoding
+            );
+            Span<byte> otherUtf8Text =
+                length <= JsonConstants.StackallocByteThreshold
+                    ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                    : (otherUtf8TextArray = ArrayPool<byte>.Shared.Rent(length));
 
-            OperationStatus status = JsonWriterHelper.ToUtf8(otherText, otherUtf8Text, out int written);
+            OperationStatus status = JsonWriterHelper.ToUtf8(
+                otherText,
+                otherUtf8Text,
+                out int written
+            );
             Debug.Assert(status != OperationStatus.DestinationTooSmall);
             bool result;
             if (status == OperationStatus.InvalidData)
@@ -306,7 +324,12 @@ namespace System.Text.Json
             else
             {
                 Debug.Assert(status == OperationStatus.Done);
-                result = TextEquals(index, otherUtf8Text.Slice(0, written), isPropertyName, shouldUnescape: true);
+                result = TextEquals(
+                    index,
+                    otherUtf8Text.Slice(0, written),
+                    isPropertyName,
+                    shouldUnescape: true
+                );
             }
 
             if (otherUtf8TextArray != null)
@@ -318,7 +341,12 @@ namespace System.Text.Json
             return result;
         }
 
-        internal bool TextEquals(int index, ReadOnlySpan<byte> otherUtf8Text, bool isPropertyName, bool shouldUnescape)
+        internal bool TextEquals(
+            int index,
+            ReadOnlySpan<byte> otherUtf8Text,
+            bool isPropertyName,
+            bool shouldUnescape
+        )
         {
             CheckNotDisposed();
 
@@ -328,19 +356,26 @@ namespace System.Text.Json
 
             CheckExpectedType(
                 isPropertyName ? JsonTokenType.PropertyName : JsonTokenType.String,
-                row.TokenType);
+                row.TokenType
+            );
 
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (otherUtf8Text.Length > segment.Length || (!shouldUnescape && otherUtf8Text.Length != segment.Length))
+            if (
+                otherUtf8Text.Length > segment.Length
+                || (!shouldUnescape && otherUtf8Text.Length != segment.Length)
+            )
             {
                 return false;
             }
 
             if (row.HasComplexChildren && shouldUnescape)
             {
-                if (otherUtf8Text.Length < segment.Length / JsonConstants.MaxExpansionFactorWhileEscaping)
+                if (
+                    otherUtf8Text.Length
+                    < segment.Length / JsonConstants.MaxExpansionFactorWhileEscaping
+                )
                 {
                     return false;
                 }
@@ -353,7 +388,10 @@ namespace System.Text.Json
                     return false;
                 }
 
-                return JsonReaderHelper.UnescapeAndCompare(segment.Slice(idx), otherUtf8Text.Slice(idx));
+                return JsonReaderHelper.UnescapeAndCompare(
+                    segment.Slice(idx),
+                    otherUtf8Text.Slice(idx)
+                );
             }
 
             return segment.SequenceEqual(otherUtf8Text);
@@ -397,8 +435,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out sbyte tmp, out int consumed) &&
-                consumed == segment.Length)
+            if (
+                Utf8Parser.TryParse(segment, out sbyte tmp, out int consumed)
+                && consumed == segment.Length
+            )
             {
                 value = tmp;
                 return true;
@@ -419,8 +459,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out byte tmp, out int consumed) &&
-                consumed == segment.Length)
+            if (
+                Utf8Parser.TryParse(segment, out byte tmp, out int consumed)
+                && consumed == segment.Length
+            )
             {
                 value = tmp;
                 return true;
@@ -441,8 +483,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out short tmp, out int consumed) &&
-                consumed == segment.Length)
+            if (
+                Utf8Parser.TryParse(segment, out short tmp, out int consumed)
+                && consumed == segment.Length
+            )
             {
                 value = tmp;
                 return true;
@@ -463,8 +507,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out ushort tmp, out int consumed) &&
-                consumed == segment.Length)
+            if (
+                Utf8Parser.TryParse(segment, out ushort tmp, out int consumed)
+                && consumed == segment.Length
+            )
             {
                 value = tmp;
                 return true;
@@ -485,8 +531,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out int tmp, out int consumed) &&
-                consumed == segment.Length)
+            if (
+                Utf8Parser.TryParse(segment, out int tmp, out int consumed)
+                && consumed == segment.Length
+            )
             {
                 value = tmp;
                 return true;
@@ -507,8 +555,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out uint tmp, out int consumed) &&
-                consumed == segment.Length)
+            if (
+                Utf8Parser.TryParse(segment, out uint tmp, out int consumed)
+                && consumed == segment.Length
+            )
             {
                 value = tmp;
                 return true;
@@ -529,8 +579,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out long tmp, out int consumed) &&
-                consumed == segment.Length)
+            if (
+                Utf8Parser.TryParse(segment, out long tmp, out int consumed)
+                && consumed == segment.Length
+            )
             {
                 value = tmp;
                 return true;
@@ -551,8 +603,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out ulong tmp, out int consumed) &&
-                consumed == segment.Length)
+            if (
+                Utf8Parser.TryParse(segment, out ulong tmp, out int consumed)
+                && consumed == segment.Length
+            )
             {
                 value = tmp;
                 return true;
@@ -573,8 +627,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out double tmp, out int bytesConsumed) &&
-                segment.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(segment, out double tmp, out int bytesConsumed)
+                && segment.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -595,8 +651,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out float tmp, out int bytesConsumed) &&
-                segment.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(segment, out float tmp, out int bytesConsumed)
+                && segment.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -617,8 +675,10 @@ namespace System.Text.Json
             ReadOnlySpan<byte> data = _utf8Json.Span;
             ReadOnlySpan<byte> segment = data.Slice(row.Location, row.SizeOrLength);
 
-            if (Utf8Parser.TryParse(segment, out decimal tmp, out int bytesConsumed) &&
-                segment.Length == bytesConsumed)
+            if (
+                Utf8Parser.TryParse(segment, out decimal tmp, out int bytesConsumed)
+                && segment.Length == bytesConsumed
+            )
             {
                 value = tmp;
                 return true;
@@ -723,8 +783,10 @@ namespace System.Text.Json
 
             Debug.Assert(segment.IndexOf(JsonConstants.BackSlash) == -1);
 
-            if (segment.Length == JsonConstants.MaximumFormatGuidLength
-                && Utf8Parser.TryParse(segment, out Guid tmp, out _, 'D'))
+            if (
+                segment.Length == JsonConstants.MaximumFormatGuidLength
+                && Utf8Parser.TryParse(segment, out Guid tmp, out _, 'D')
+            )
             {
                 value = tmp;
                 return true;
@@ -752,20 +814,18 @@ namespace System.Text.Json
             MetadataDb newDb = _parsedData.CopySegment(index, endIndex);
             ReadOnlyMemory<byte> segmentCopy = GetRawValue(index, includeQuotes: true).ToArray();
 
-            JsonDocument newDocument =
-                new JsonDocument(
-                    segmentCopy,
-                    newDb,
-                    extraRentedArrayPoolBytes: null,
-                    extraPooledByteBufferWriter: null,
-                    isDisposable: false);
+            JsonDocument newDocument = new JsonDocument(
+                segmentCopy,
+                newDb,
+                extraRentedArrayPoolBytes: null,
+                extraPooledByteBufferWriter: null,
+                isDisposable: false
+            );
 
             return newDocument.RootElement;
         }
 
-        internal void WriteElementTo(
-            int index,
-            Utf8JsonWriter writer)
+        internal void WriteElementTo(int index, Utf8JsonWriter writer)
         {
             CheckNotDisposed();
 
@@ -816,7 +876,9 @@ namespace System.Text.Json
                         WriteString(row, writer);
                         continue;
                     case JsonTokenType.Number:
-                        writer.WriteNumberValue(_utf8Json.Slice(row.Location, row.SizeOrLength).Span);
+                        writer.WriteNumberValue(
+                            _utf8Json.Slice(row.Location, row.SizeOrLength).Span
+                        );
                         continue;
                     case JsonTokenType.True:
                         writer.WriteBooleanValue(value: true);
@@ -850,7 +912,9 @@ namespace System.Text.Json
 
         private ReadOnlySpan<byte> UnescapeString(in DbRow row, out ArraySegment<byte> rented)
         {
-            Debug.Assert(row.TokenType == JsonTokenType.String || row.TokenType == JsonTokenType.PropertyName);
+            Debug.Assert(
+                row.TokenType == JsonTokenType.String || row.TokenType == JsonTokenType.PropertyName
+            );
             int loc = row.Location;
             int length = row.SizeOrLength;
             ReadOnlySpan<byte> text = _utf8Json.Slice(loc, length).Span;
@@ -908,7 +972,8 @@ namespace System.Text.Json
             ReadOnlySpan<byte> utf8JsonSpan,
             JsonReaderOptions readerOptions,
             ref MetadataDb database,
-            ref StackRowStack stack)
+            ref StackRowStack stack
+        )
         {
             bool inArray = false;
             int arrayItemsCount = 0;
@@ -918,7 +983,8 @@ namespace System.Text.Json
             Utf8JsonReader reader = new Utf8JsonReader(
                 utf8JsonSpan,
                 isFinalBlock: true,
-                new JsonReaderState(options: readerOptions));
+                new JsonReaderState(options: readerOptions)
+            );
 
             while (reader.Read())
             {
@@ -944,7 +1010,9 @@ namespace System.Text.Json
                 }
                 else if (tokenType == JsonTokenType.EndObject)
                 {
-                    int rowIndex = database.FindIndexOfFirstUnsetSizeOrLength(JsonTokenType.StartObject);
+                    int rowIndex = database.FindIndexOfFirstUnsetSizeOrLength(
+                        JsonTokenType.StartObject
+                    );
 
                     numberOfRowsForValues++;
                     numberOfRowsForMembers++;
@@ -974,7 +1042,9 @@ namespace System.Text.Json
                 }
                 else if (tokenType == JsonTokenType.EndArray)
                 {
-                    int rowIndex = database.FindIndexOfFirstUnsetSizeOrLength(JsonTokenType.StartArray);
+                    int rowIndex = database.FindIndexOfFirstUnsetSizeOrLength(
+                        JsonTokenType.StartArray
+                    );
 
                     numberOfRowsForValues++;
                     numberOfRowsForMembers++;
@@ -1023,7 +1093,9 @@ namespace System.Text.Json
                 }
                 else
                 {
-                    Debug.Assert(tokenType >= JsonTokenType.String && tokenType <= JsonTokenType.Null);
+                    Debug.Assert(
+                        tokenType >= JsonTokenType.String && tokenType <= JsonTokenType.Null
+                    );
                     numberOfRowsForValues++;
                     numberOfRowsForMembers++;
 
@@ -1073,12 +1145,13 @@ namespace System.Text.Json
             }
         }
 
-        private static void CheckSupportedOptions(
-            JsonReaderOptions readerOptions,
-            string paramName)
+        private static void CheckSupportedOptions(JsonReaderOptions readerOptions, string paramName)
         {
             // Since these are coming from a valid instance of Utf8JsonReader, the JsonReaderOptions must already be valid
-            Debug.Assert(readerOptions.CommentHandling >= 0 && readerOptions.CommentHandling <= JsonCommentHandling.Allow);
+            Debug.Assert(
+                readerOptions.CommentHandling >= 0
+                    && readerOptions.CommentHandling <= JsonCommentHandling.Allow
+            );
 
             if (readerOptions.CommentHandling == JsonCommentHandling.Allow)
             {

@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     {
         public readonly StackFrameTree Tree;
 
-        public ParsedStackFrame(
-            StackFrameTree tree)
+        public ParsedStackFrame(StackFrameTree tree)
         {
             Tree = tree;
         }

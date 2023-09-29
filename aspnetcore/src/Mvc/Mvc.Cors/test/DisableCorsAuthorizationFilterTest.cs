@@ -22,7 +22,8 @@ public class DisableCorsAuthorizationFilterTest
         httpContext.Request.Headers.Add(CorsConstants.AccessControlRequestMethod, "PUT");
         var authorizationFilterContext = new AuthorizationFilterContext(
             new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-            new List<IFilterMetadata>());
+            new List<IFilterMetadata>()
+        );
 
         // Act
         await filter.OnAuthorizationAsync(authorizationFilterContext);
@@ -41,7 +42,8 @@ public class DisableCorsAuthorizationFilterTest
         httpContext.Request.Headers.Add(CorsConstants.Origin, "http://localhost:5000/");
         var authorizationFilterContext = new AuthorizationFilterContext(
             new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-            new List<IFilterMetadata>());
+            new List<IFilterMetadata>()
+        );
 
         // Act
         await filter.OnAuthorizationAsync(authorizationFilterContext);
@@ -53,7 +55,9 @@ public class DisableCorsAuthorizationFilterTest
     [Theory]
     [InlineData("OpTions")]
     [InlineData("OPTIONS")]
-    public async Task DisableCors_CaseInsensitivePreflightMethod_ShortCircuitsRequest(string preflightMethod)
+    public async Task DisableCors_CaseInsensitivePreflightMethod_ShortCircuitsRequest(
+        string preflightMethod
+    )
     {
         // Arrange
         var filter = new DisableCorsAuthorizationFilter();
@@ -63,7 +67,8 @@ public class DisableCorsAuthorizationFilterTest
         httpContext.Request.Headers.Add(CorsConstants.AccessControlRequestMethod, "PUT");
         var authorizationFilterContext = new AuthorizationFilterContext(
             new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-            new List<IFilterMetadata>());
+            new List<IFilterMetadata>()
+        );
 
         // Act
         await filter.OnAuthorizationAsync(authorizationFilterContext);

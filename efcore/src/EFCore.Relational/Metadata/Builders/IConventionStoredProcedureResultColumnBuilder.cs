@@ -28,7 +28,10 @@ public interface IConventionStoredProcedureResultColumnBuilder : IConventionAnno
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureResultColumnBuilder? HasName(string name, bool fromDataAnnotation = false);
+    IConventionStoredProcedureResultColumnBuilder? HasName(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given result column name can be set.

@@ -78,7 +78,13 @@ public unsafe class Program
 
         int n = 12345;
         // Method should have thrown and caught an exception.
-        Assert.Equal(-1, UnmanagedCallersOnlyDll.CallManagedProcCatchException((IntPtr)(delegate* unmanaged<int, int>)&CallbackThrows, n));
+        Assert.Equal(
+            -1,
+            UnmanagedCallersOnlyDll.CallManagedProcCatchException(
+                (IntPtr)(delegate* unmanaged<int, int>)&CallbackThrows,
+                n
+            )
+        );
     }
 
     public static void NegativeTest_ViaDelegate()
@@ -86,7 +92,10 @@ public unsafe class Program
         Console.WriteLine($"Running {nameof(NegativeTest_ViaDelegate)}...");
 
         // Try invoking method directly
-        Assert.Throws<NotSupportedException>(() => { CallAsDelegate(); });
+        Assert.Throws<NotSupportedException>(() =>
+        {
+            CallAsDelegate();
+        });
 
         // Local function to delay exception thrown during JIT
         void CallAsDelegate()
@@ -101,13 +110,22 @@ public unsafe class Program
         Console.WriteLine($"Running {nameof(NegativeTest_NonStaticMethod)}...");
 
         int n = 12345;
-        Assert.Throws<InvalidProgramException>(() => { UnmanagedCallersOnlyDll.CallManagedProc(Callbacks.GetNonStaticCallbackFunctionPointer(), n); });
+        Assert.Throws<InvalidProgramException>(() =>
+        {
+            UnmanagedCallersOnlyDll.CallManagedProc(
+                Callbacks.GetNonStaticCallbackFunctionPointer(),
+                n
+            );
+        });
     }
 
     [UnmanagedCallersOnly]
     public static int CallbackMethodNonBlittable(bool x1)
     {
-        Assert.True(false, $"Functions with attribute {nameof(UnmanagedCallersOnlyAttribute)} cannot have non-blittable arguments");
+        Assert.True(
+            false,
+            $"Functions with attribute {nameof(UnmanagedCallersOnlyAttribute)} cannot have non-blittable arguments"
+        );
         return -1;
     }
 
@@ -117,10 +135,34 @@ public unsafe class Program
 
         int n = 12345;
         // Try invoking method
-        Assert.Throws<InvalidProgramException>(() => { UnmanagedCallersOnlyDll.CallManagedProc((IntPtr)(delegate* unmanaged<bool, int>)&CallbackMethodNonBlittable, n); });
-        Assert.Throws<InvalidProgramException>(() => { UnmanagedCallersOnlyDll.CallManagedProc(UnmanagedCallersOnlyWithByRefs.GetWithByRefFunctionPointer(), n); });
-        Assert.Throws<InvalidProgramException>(() => { UnmanagedCallersOnlyDll.CallManagedProc(UnmanagedCallersOnlyWithByRefs.GetWithByRefInFunctionPointer(), n); });
-        Assert.Throws<InvalidProgramException>(() => { UnmanagedCallersOnlyDll.CallManagedProc(UnmanagedCallersOnlyWithByRefs.GetWithByRefOutFunctionPointer(), n); });
+        Assert.Throws<InvalidProgramException>(() =>
+        {
+            UnmanagedCallersOnlyDll.CallManagedProc(
+                (IntPtr)(delegate* unmanaged<bool, int>)&CallbackMethodNonBlittable,
+                n
+            );
+        });
+        Assert.Throws<InvalidProgramException>(() =>
+        {
+            UnmanagedCallersOnlyDll.CallManagedProc(
+                UnmanagedCallersOnlyWithByRefs.GetWithByRefFunctionPointer(),
+                n
+            );
+        });
+        Assert.Throws<InvalidProgramException>(() =>
+        {
+            UnmanagedCallersOnlyDll.CallManagedProc(
+                UnmanagedCallersOnlyWithByRefs.GetWithByRefInFunctionPointer(),
+                n
+            );
+        });
+        Assert.Throws<InvalidProgramException>(() =>
+        {
+            UnmanagedCallersOnlyDll.CallManagedProc(
+                UnmanagedCallersOnlyWithByRefs.GetWithByRefOutFunctionPointer(),
+                n
+            );
+        });
     }
 
     public static void NegativeTest_InstantiatedGenericArguments()
@@ -129,7 +171,13 @@ public unsafe class Program
 
         int n = 12345;
         // Try invoking method
-        Assert.Throws<InvalidProgramException>(() => { UnmanagedCallersOnlyDll.CallManagedProc((IntPtr)(delegate* unmanaged<int, int>)&Callbacks.CallbackMethodGeneric<int>, n); });
+        Assert.Throws<InvalidProgramException>(() =>
+        {
+            UnmanagedCallersOnlyDll.CallManagedProc(
+                (IntPtr)(delegate* unmanaged<int, int>)&Callbacks.CallbackMethodGeneric<int>,
+                n
+            );
+        });
     }
 
     public static void NegativeTest_FromInstantiatedGenericClass()
@@ -138,18 +186,29 @@ public unsafe class Program
 
         int n = 12345;
         // Try invoking method
-        Assert.Throws<InvalidProgramException>(() => { UnmanagedCallersOnlyDll.CallManagedProc((IntPtr)(delegate* unmanaged<int, int>)&GenericClass<int>.CallbackMethod, n); });
+        Assert.Throws<InvalidProgramException>(() =>
+        {
+            UnmanagedCallersOnlyDll.CallManagedProc(
+                (IntPtr)(delegate* unmanaged<int, int>)&GenericClass<int>.CallbackMethod,
+                n
+            );
+        });
     }
 
     [UnmanagedCallersOnly]
     public static void CallbackViaCalli(int val)
     {
-        Assert.True(false, $"Functions with attribute {nameof(UnmanagedCallersOnlyAttribute)} cannot be called via calli");
+        Assert.True(
+            false,
+            $"Functions with attribute {nameof(UnmanagedCallersOnlyAttribute)} cannot be called via calli"
+        );
     }
 
     public static void NegativeTest_ViaCalli()
     {
-        Console.WriteLine($"{nameof(NegativeTest_ViaCalli)} function via calli instruction. The CLR _will_ crash.");
+        Console.WriteLine(
+            $"{nameof(NegativeTest_ViaCalli)} function via calli instruction. The CLR _will_ crash."
+        );
 
         // It is not possible to catch the resulting ExecutionEngineException exception.
         // To observe the crashing behavior set a breakpoint in the ReversePInvokeBadTransition() function
@@ -158,7 +217,7 @@ public unsafe class Program
 
         static void TestNativeMethod()
         {
-            ((delegate*<int, void>)(delegate* unmanaged<int, void>)&CallbackViaCalli)(1234);
+            ((delegate* <int, void>)(delegate* unmanaged<int, void>)&CallbackViaCalli)(1234);
         }
     }
 
@@ -186,7 +245,9 @@ public unsafe class Program
 
     public static void TestUnmanagedCallersOnlyViaUnmanagedCalli_ThrowException()
     {
-        Console.WriteLine($"Running {nameof(TestUnmanagedCallersOnlyViaUnmanagedCalli_ThrowException)}...");
+        Console.WriteLine(
+            $"Running {nameof(TestUnmanagedCallersOnlyViaUnmanagedCalli_ThrowException)}..."
+        );
 
         delegate* unmanaged[Stdcall]<int, int> testNativeMethod = &CallbackViaUnmanagedCalliThrows;
 
@@ -207,14 +268,33 @@ public unsafe class Program
         Console.WriteLine($"Running {nameof(TestPInvokeMarkedWithUnmanagedCallersOnly)}...");
 
         // Call P/Invoke directly
-        Assert.Throws<NotSupportedException>(() => CallingUnmanagedCallersOnlyDirectly.CallPInvokeMarkedWithUnmanagedCallersOnly(0));
+        Assert.Throws<NotSupportedException>(
+            () => CallingUnmanagedCallersOnlyDirectly.CallPInvokeMarkedWithUnmanagedCallersOnly(0)
+        );
 
         // Call P/Invoke via reflection
-        var method = typeof(CallingUnmanagedCallersOnlyDirectly).GetMethod(nameof(CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly));
-        Assert.Throws<NotSupportedException>(() => method.Invoke(null, BindingFlags.DoNotWrapExceptions, null, new[] { (object)0 }, null));
+        var method = typeof(CallingUnmanagedCallersOnlyDirectly).GetMethod(
+            nameof(CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly)
+        );
+        Assert.Throws<NotSupportedException>(
+            () =>
+                method.Invoke(
+                    null,
+                    BindingFlags.DoNotWrapExceptions,
+                    null,
+                    new[] { (object)0 },
+                    null
+                )
+        );
 
         // Call P/Invoke as a function pointer
         int n = 1234;
-        Assert.Throws<NotSupportedException>(() => ((delegate* unmanaged<int, int>)&CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly)(n));
+        Assert.Throws<NotSupportedException>(
+            () =>
+                (
+                    (delegate* unmanaged<int, int>)
+                        &CallingUnmanagedCallersOnlyDirectly.PInvokeMarkedWithUnmanagedCallersOnly
+                )(n)
+        );
     }
 }

@@ -10,26 +10,25 @@ namespace ExchangeAdd
         static int Main(string[] args)
         {
             // Check number of args
-            if(args.Length != 2)
+            if (args.Length != 2)
             {
-                Console.WriteLine("USAGE:  InterlockedAddInt " +
-                    "/loops:<int> /addVal:<int>");
+                Console.WriteLine("USAGE:  InterlockedAddInt " + "/loops:<int> /addVal:<int>");
                 return -1;
             }
 
             // Get the args
-            int loops=100;
+            int loops = 100;
             int valueToAdd = 0;
-        
-            for(int i=0;i<args.Length;i++)
+
+            for (int i = 0; i < args.Length; i++)
             {
-                if(args[i].ToLower().StartsWith("/loops:"))
+                if (args[i].ToLower().StartsWith("/loops:"))
                 {
                     loops = Convert.ToInt32(args[i].Substring(7));
                     continue;
                 }
 
-                if(args[i].ToLower().StartsWith("/addval:"))
+                if (args[i].ToLower().StartsWith("/addval:"))
                 {
                     valueToAdd = Convert.ToInt32(args[i].Substring(8));
                     continue;
@@ -65,7 +64,10 @@ namespace ExchangeAdd
         private int totalValue = 0;
         private int numberOfIterations;
         private int valueToAdd;
-        public ThreadSafe(): this(100,100) { }
+
+        public ThreadSafe()
+            : this(100, 100) { }
+
         public ThreadSafe(int loops, int iAdd)
         {
             signal = new ManualResetEvent(false);
@@ -83,14 +85,11 @@ namespace ExchangeAdd
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Add(ref totalValue, valueToAdd);
-
         }
+
         public int Expected
         {
-            get
-            {
-                return (numberOfIterations * valueToAdd);
-            }
+            get { return (numberOfIterations * valueToAdd); }
         }
         public int Total
         {

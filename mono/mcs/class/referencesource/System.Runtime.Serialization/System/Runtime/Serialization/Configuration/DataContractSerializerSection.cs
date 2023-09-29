@@ -13,21 +13,27 @@ namespace System.Runtime.Serialization.Configuration
     public sealed partial class DataContractSerializerSection : ConfigurationSection
     {
         public DataContractSerializerSection()
-            : base()
-        {
-        }
+            : base() { }
 
-        [Fx.Tag.SecurityNote(Critical = "Elevates in order to get the DataContractSerializerSection config section."
-            + " Caller should not leak config section instance to untrusted code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Elevates in order to get the DataContractSerializerSection config section."
+                + " Caller should not leak config section instance to untrusted code."
+        )]
         [SecurityCritical]
         [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
         internal static DataContractSerializerSection UnsafeGetSection()
         {
-            DataContractSerializerSection section =
-                (DataContractSerializerSection)ConfigurationManager.GetSection(ConfigurationStrings.DataContractSerializerSectionPath);
+            DataContractSerializerSection section = (DataContractSerializerSection)
+                ConfigurationManager.GetSection(
+                    ConfigurationStrings.DataContractSerializerSectionPath
+                );
             if (section == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigDataContractSerializerSectionLoadError)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigDataContractSerializerSectionLoadError)
+                    )
+                );
             }
             return section;
         }
@@ -38,8 +44,4 @@ namespace System.Runtime.Serialization.Configuration
             get { return (DeclaredTypeElementCollection)base[ConfigurationStrings.DeclaredTypes]; }
         }
     }
-
 }
-
-
-

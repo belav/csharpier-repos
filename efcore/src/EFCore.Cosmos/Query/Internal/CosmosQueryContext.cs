@@ -21,7 +21,8 @@ public class CosmosQueryContext : QueryContext
     /// </summary>
     public CosmosQueryContext(
         QueryContextDependencies dependencies,
-        ICosmosClientWrapper cosmosClient)
+        ICosmosClientWrapper cosmosClient
+    )
         : base(dependencies)
     {
         CosmosClient = cosmosClient;

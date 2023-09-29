@@ -22,9 +22,7 @@ public class ControllerContext : ActionContext
     /// <remarks>
     /// The default constructor is provided for unit test purposes only.
     /// </remarks>
-    public ControllerContext()
-    {
-    }
+    public ControllerContext() { }
 
     /// <summary>
     /// Creates a new <see cref="ControllerContext"/>.
@@ -35,9 +33,12 @@ public class ControllerContext : ActionContext
     {
         if (!(context.ActionDescriptor is ControllerActionDescriptor))
         {
-            throw new ArgumentException(Resources.FormatActionDescriptorMustBeBasedOnControllerAction(
-                typeof(ControllerActionDescriptor)),
-                nameof(context));
+            throw new ArgumentException(
+                Resources.FormatActionDescriptorMustBeBasedOnControllerAction(
+                    typeof(ControllerActionDescriptor)
+                ),
+                nameof(context)
+            );
         }
     }
 
@@ -50,10 +51,9 @@ public class ControllerContext : ActionContext
     internal ControllerContext(
         HttpContext httpContext,
         RouteData routeData,
-        ControllerActionDescriptor actionDescriptor)
-        : base(httpContext, routeData, actionDescriptor)
-    {
-    }
+        ControllerActionDescriptor actionDescriptor
+    )
+        : base(httpContext, routeData, actionDescriptor) { }
 
     /// <summary>
     /// Gets or sets the <see cref="ControllerActionDescriptor"/> associated with the current request.

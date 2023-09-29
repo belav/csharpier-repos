@@ -15,13 +15,18 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambdaExpression
 {
     using VerifyCS = CSharpCodeFixVerifier<
-       CSharpRemoveUnnecessaryLambdaExpressionDiagnosticAnalyzer,
-       CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider>;
+        CSharpRemoveUnnecessaryLambdaExpressionDiagnosticAnalyzer,
+        CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryLambdaExpression)]
     public class RemoveUnnecessaryLambdaExpressionTests
     {
-        private static async Task TestInRegularAndScriptAsync(string testCode, string fixedCode, LanguageVersion version = LanguageVersion.Preview)
+        private static async Task TestInRegularAndScriptAsync(
+            string testCode,
+            string fixedCode,
+            LanguageVersion version = LanguageVersion.Preview
+        )
         {
             await new VerifyCS.Test
             {
@@ -31,14 +36,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
             }.RunAsync();
         }
 
-        private static Task TestMissingInRegularAndScriptAsync(string testCode, LanguageVersion version = LanguageVersion.Preview)
-            => TestInRegularAndScriptAsync(testCode, testCode, version);
+        private static Task TestMissingInRegularAndScriptAsync(
+            string testCode,
+            LanguageVersion version = LanguageVersion.Preview
+        ) => TestInRegularAndScriptAsync(testCode, testCode, version);
 
         [Fact]
         public async Task TestMissingInCSharp10()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -49,14 +56,16 @@ class C
 
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
-}", LanguageVersion.CSharp10);
+}",
+                LanguageVersion.CSharp10
+            );
         }
 
         [Fact]
         public async Task TestBasicCase()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -68,7 +77,7 @@ class C
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -79,13 +88,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithOptionOff()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class C
 {
@@ -102,7 +113,13 @@ class C
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.Preview,
-                Options = { { CSharpCodeStyleOptions.PreferMethodGroupConversion, new CodeStyleOption2<bool>(false, NotificationOption2.None) } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferMethodGroupConversion,
+                        new CodeStyleOption2<bool>(false, NotificationOption2.None)
+                    }
+                }
             }.RunAsync();
         }
 
@@ -110,7 +127,7 @@ class C
         public async Task TestNotOnStaticLambda()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -121,14 +138,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     static string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithOptionalParameter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -139,14 +157,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     static string Quux(int i, int j = 0) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithParams1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -157,14 +176,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     static string Quux(int i, params int[] j) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithParams2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -175,14 +195,15 @@ class C
 
     void Bar(Func<object, string> f) { }
     static string Quux(params object[] j) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithParams1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -194,7 +215,7 @@ class C
     void Bar(Func<object[], string> f) { }
     string Quux(params object[] o) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -205,14 +226,15 @@ class C
 
     void Bar(Func<object[], string> f) { }
     string Quux(params object[] o) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithRefChange1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -223,14 +245,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     static string Quux(ref int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithRefChange2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 delegate string X(ref int i);
 
@@ -243,14 +266,15 @@ class C
 
     void Bar(X x) { }
     static string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithSameRef()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 delegate string X(ref int i);
 
@@ -264,8 +288,7 @@ class C
     void Bar(X x) { }
     static string Quux(ref int i) => default;
 }",
-
-@"using System;
+                @"using System;
 
 delegate string X(ref int i);
 
@@ -278,14 +301,15 @@ class C
 
     void Bar(X x) { }
     static string Quux(ref int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnConversionToObject()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -296,14 +320,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     static string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithParenthesizedLambda()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -315,7 +340,7 @@ class C
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -326,14 +351,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithAnonymousMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -345,7 +371,7 @@ class C
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -356,14 +382,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithAnonymousMethodNoParameterList()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -375,7 +402,7 @@ class C
     void Bar(Func<string> f) { }
     string Quux() => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -386,14 +413,15 @@ class C
 
     void Bar(Func<string> f) { }
     string Quux() => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixCoContravariance1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -405,7 +433,7 @@ class C
     void Bar(Func<object, string> f) { }
     string Quux(object o) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -416,14 +444,15 @@ class C
 
     void Bar(Func<object, string> f) { }
     string Quux(object o) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixCoContravariance2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -435,7 +464,7 @@ class C
     void Bar(Func<string, object> f) { }
     string Quux(object o) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -446,14 +475,15 @@ class C
 
     void Bar(Func<string, object> f) { }
     string Quux(object o) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixCoContravariance3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -464,14 +494,15 @@ class C
 
     void Bar(Func<string, string> f) { }
     object Quux(object o) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixCoContravariance4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -482,14 +513,15 @@ class C
 
     void Bar(Func<object, object> f) { }
     string Quux(string o) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixCoContravariance5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -500,14 +532,15 @@ class C
 
     void Bar(Func<object, string> f) { }
     object Quux(string o) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTwoArgs()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -519,7 +552,7 @@ class C
     void Bar(Func<int, bool, string> f) { }
     string Quux(int i, bool b) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -530,14 +563,15 @@ class C
 
     void Bar(Func<int, bool, string> f) { }
     string Quux(int i, bool b) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultipleArgIncorrectPassing1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -548,14 +582,15 @@ class C
 
     void Bar(Func<int, int, string> f) { }
     string Quux(int i, int b) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultipleArgIncorrectPassing2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -566,14 +601,15 @@ class C
 
     void Bar(Func<int, int, string> f) { }
     string Quux(int i, int b) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultipleArgIncorrectPassing3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -584,14 +620,15 @@ class C
 
     void Bar(Func<int, bool, string> f) { }
     string Quux(int i, bool b) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestReturnStatement()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -605,7 +642,7 @@ class C
     void Bar(Func<int, bool, string> f) { }
     string Quux(int i, bool b) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -616,14 +653,15 @@ class C
 
     void Bar(Func<int, bool, string> f) { }
     string Quux(int i, bool b) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestReturnStatement2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -637,7 +675,7 @@ class C
     void Bar(Func<int, bool, string> f) { }
     string Quux(int i, bool b) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -648,14 +686,15 @@ class C
 
     void Bar(Func<int, bool, string> f) { }
     string Quux(int i, bool b) => default;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(542562, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542562")]
         public async Task TestMissingOnAmbiguity1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class A
 {
@@ -675,13 +714,15 @@ class A
     {
         {|CS0121:Bar|}(x => Goo(x));
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(542562, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542562")]
         public async Task TestWithConstraint1()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class A
 {
@@ -703,7 +744,8 @@ class A
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class A
 {
@@ -730,7 +772,8 @@ class A
         [Fact, WorkItem(542562, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542562")]
         public async Task TestWithConstraint2()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class A
 {
@@ -758,7 +801,7 @@ class A
         public async Task TestMissingOnLambdaWithDynamic_1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -785,14 +828,15 @@ class C<T>
     {
         Console.WriteLine(""Goo(object x, T y)"");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(627092, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627092")]
         public async Task TestWithLambdaWithDynamic()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -825,7 +869,7 @@ class C<T>
         Console.WriteLine(""Goo(object x, T y)"");
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -857,13 +901,15 @@ class C<T>
     {
         Console.WriteLine(""Goo(object x, T y)"");
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(544625, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544625")]
         public async Task ParenthesizeIfParseChanges()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
@@ -879,7 +925,8 @@ class C
     public static bool operator >(Func<string> y, C x) { return true; }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -902,7 +949,7 @@ class C
         public async Task TestNotWithSideEffects()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -910,14 +957,15 @@ class C
     {
         Func<string> a = () => new C().ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545994, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545994")]
         public async Task TestExpressionStatement()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -928,7 +976,7 @@ class Program
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -936,14 +984,15 @@ class Program
     {
         Action a = Console.WriteLine;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTaskOfT1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -956,7 +1005,7 @@ class C
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -968,14 +1017,15 @@ class C
 
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncTaskOfT1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -988,7 +1038,7 @@ class C
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1000,14 +1050,15 @@ class C
 
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncTaskOfT2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1020,7 +1071,7 @@ class C
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1032,14 +1083,15 @@ class C
 
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncNoAwait1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1051,14 +1103,15 @@ class C
 
     void Bar(Func<int, Task<string>> f) { }
     string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTaskOfT1_Return()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1071,7 +1124,7 @@ class C
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1083,14 +1136,15 @@ class C
 
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncTaskOfT1_Return()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1103,7 +1157,7 @@ class C
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1115,14 +1169,15 @@ class C
 
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncTaskOfT2_Return()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1135,7 +1190,7 @@ class C
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1147,14 +1202,15 @@ class C
 
     void Bar(Func<int, Task<string>> f) { }
     Task<string> Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncNoAwait1_Return()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1166,14 +1222,15 @@ class C
 
     void Bar(Func<int, Task<string>> f) { }
     string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTask1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1186,7 +1243,7 @@ class C
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1198,14 +1255,15 @@ class C
 
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncTask1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1218,7 +1276,7 @@ class C
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1230,14 +1288,15 @@ class C
 
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncTask2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1250,7 +1309,7 @@ class C
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1262,14 +1321,15 @@ class C
 
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTask1_ExpressionStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1281,14 +1341,15 @@ class C
 
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncTask1_ExpressionStatement()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1301,7 +1362,7 @@ class C
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1313,14 +1374,15 @@ class C
 
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncTask2_ExpressionStatement()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1333,7 +1395,7 @@ class C
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1345,14 +1407,15 @@ class C
 
     void Bar(Func<int, Task> f) { }
     Task Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAsyncNoAwait1_ExpressionStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -1364,14 +1427,15 @@ class C
 
     void Bar(Func<int, Task> f) { }
     void Quux(int i) { }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExplicitGenericCall()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1382,7 +1446,7 @@ class C
 
     void Quux<T>() { }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1392,14 +1456,15 @@ class C
     }
 
     void Quux<T>() { }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestImplicitGenericCall()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1409,14 +1474,15 @@ class C
     }
 
     void Quux<T>(T t) { }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNullabilityChanges()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 #nullable enable
 
 using System;
@@ -1451,14 +1517,15 @@ namespace System.Diagnostics.CodeAnalysis
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task TestTrivia1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1470,7 +1537,7 @@ class C
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1481,14 +1548,15 @@ class C
 
     void Bar(Func<int, string> f) { }
     string Quux(int i) => default;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(63465, "https://github.com/dotnet/roslyn/issues/63465")]
         public async Task TestNotWithPartialDefinition()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Diagnostics;
 
 public partial class C
@@ -1501,14 +1569,15 @@ public partial class C
     partial void M3(string s);
 
     private static void M2(Action<string> a) { }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(63465, "https://github.com/dotnet/roslyn/issues/63465")]
         public async Task TestWithPartialDefinitionAndImplementation()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Diagnostics;
 
 public partial class C
@@ -1523,7 +1592,7 @@ public partial class C
 
     private static void M2(Action<string> a) { }
 }",
-@"using System;
+                @"using System;
 using System.Diagnostics;
 
 public partial class C
@@ -1537,7 +1606,8 @@ public partial class C
     partial void M3(string s) { }
 
     private static void M2(Action<string> a) { }
-}");
+}"
+            );
         }
     }
 }

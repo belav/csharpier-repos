@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CommandLine;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Roslyn.Utilities;
+
 namespace Microsoft.CodeAnalysis.CompilerServer
 {
     internal sealed class NamedPipeClientConnectionHost : IClientConnectionHost
@@ -22,7 +23,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             internal NamedPipeClientConnection? NamedPipeClientConnection { get; }
             internal Exception? Exception { get; }
 
-            internal ListenResult(NamedPipeClientConnection? connection = null, Exception? exception = null)
+            internal ListenResult(
+                NamedPipeClientConnection? connection = null,
+                Exception? exception = null
+            )
             {
                 Debug.Assert(connection is null || exception is null);
                 NamedPipeClientConnection = connection;
@@ -59,18 +63,20 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             _cancellationTokenSource = new CancellationTokenSource();
             _queue = new AsyncQueue<ListenResult>();
 
-            // The choice of 4 here is a bit arbitrary. The compiler server needs to scale to the number of clients that 
-            // msbuild is going to attempt to connect here and be able to establish each connection in one second. In the 
+            // The choice of 4 here is a bit arbitrary. The compiler server needs to scale to the number of clients that
+            // msbuild is going to attempt to connect here and be able to establish each connection in one second. In the
             // majority of cases even one is enough to accomplish this. Four though gives us enough wiggle room to handle
             // severe load scenarios.
-            // 
+            //
             // Should you ever want to change this number in the future make sure to test the new values on sufficiently
             // large builds such as dotnet/roslyn or dotnet/runtime
             var listenCount = Math.Min(4, Environment.ProcessorCount);
             _listenTasks = new Task[listenCount];
             for (int i = 0; i < listenCount; i++)
             {
-                var task = Task.Run(() => ListenCoreAsync(PipeName, Logger, _queue, _cancellationTokenSource.Token));
+                var task = Task.Run(
+                    () => ListenCoreAsync(PipeName, Logger, _queue, _cancellationTokenSource.Token)
+                );
                 _listenTasks[i] = task;
             }
         }
@@ -88,10 +94,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
             try
             {
-                // Even though the Tasks created to run the compilation servers can never throw, 
-                // the CancellationToken from this source ends up getting passed throughout the 
-                // named pipe infrastructure. Parts of that infrastructure hook into 
-                // CancellationToken.Register and those will throw during a Cancel operation. 
+                // Even though the Tasks created to run the compilation servers can never throw,
+                // the CancellationToken from this source ends up getting passed throughout the
+                // named pipe infrastructure. Parts of that infrastructure hook into
+                // CancellationToken.Register and those will throw during a Cancel operation.
                 //
                 // Most notably of these is IOCancellationHelper.Cancel. This has a race where it
                 // will try to cancel IO on a disposed SafeHandle. That causes an ObjectDisposedException
@@ -112,7 +118,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex, $"Listen tasks threw exception during {nameof(EndListening)}");
+                Logger.LogException(
+                    ex,
+                    $"Listen tasks threw exception during {nameof(EndListening)}"
+                );
             }
 
             _queue.Complete();
@@ -142,15 +151,20 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             Debug.Assert(_cancellationTokenSource is object);
             Debug.Assert(_queue is object);
 
-            var listenResult = await _queue.DequeueAsync(_cancellationTokenSource.Token).ConfigureAwait(false);
+            var listenResult = await _queue
+                .DequeueAsync(_cancellationTokenSource.Token)
+                .ConfigureAwait(false);
             if (listenResult.Exception is object)
             {
-                throw new Exception("Error occurred listening for connections", listenResult.Exception);
+                throw new Exception(
+                    "Error occurred listening for connections",
+                    listenResult.Exception
+                );
             }
 
             if (listenResult.NamedPipeClientConnection is null)
             {
-                // The AsyncQueue<> implementation will resolve all out-standing waiters as default 
+                // The AsyncQueue<> implementation will resolve all out-standing waiters as default
                 // when Complete is called. Treat that as cancellation from the perspective of our
                 // callers
                 throw new OperationCanceledException();
@@ -160,7 +174,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         }
 
         /// <summary>
-        /// Creates a Task that waits for a client connection to occur and returns the connected 
+        /// Creates a Task that waits for a client connection to occur and returns the connected
         /// <see cref="NamedPipeServerStream"/> object.  Throws on any connection error.
         /// </summary>
         /// <param name="cancellationToken">Used to cancel the connection sequence.</param>
@@ -168,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             string pipeName,
             ICompilerServerLogger logger,
             AsyncQueue<ListenResult> queue,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             while (!cancellationToken.IsCancellationRequested)
             {
@@ -176,10 +191,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
                 try
                 {
-                    // Create the pipe and begin waiting for a connection. This 
+                    // Create the pipe and begin waiting for a connection. This
                     // doesn't block, but could fail in certain circumstances, such
-                    // as Windows refusing to create the pipe for some reason 
-                    // (out of handles?), or the pipe was disconnected before we 
+                    // as Windows refusing to create the pipe for some reason
+                    // (out of handles?), or the pipe was disconnected before we
                     // starting listening
                     logger.Log($"Constructing pipe and waiting for connections '{pipeName}'");
                     pipeStream = NamedPipeUtil.CreateServer(pipeName);
@@ -195,8 +210,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     var connectTask = pipeStream.WaitForConnectionAsync(cancellationToken);
                     if (!PlatformInformation.IsWindows)
                     {
-                        var cancelTask = Task.Delay(TimeSpan.FromMilliseconds(-1), cancellationToken);
-                        var completedTask = await Task.WhenAny(new[] { connectTask, cancelTask }).ConfigureAwait(false);
+                        var cancelTask = Task.Delay(
+                            TimeSpan.FromMilliseconds(-1),
+                            cancellationToken
+                        );
+                        var completedTask = await Task.WhenAny(new[] { connectTask, cancelTask })
+                            .ConfigureAwait(false);
                         if (completedTask == cancelTask)
                         {
                             throw new OperationCanceledException();

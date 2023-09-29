@@ -24,11 +24,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpIfSnippetProvider()
-        {
-        }
+        public CSharpIfSnippetProvider() { }
 
-        protected override int GetTargetCaretPosition(ISyntaxFactsService syntaxFacts, SyntaxNode caretTarget, SourceText sourceText)
+        protected override int GetTargetCaretPosition(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode caretTarget,
+            SourceText sourceText
+        )
         {
             var ifStatement = (IfStatementSyntax)caretTarget;
             var blockStatement = (BlockSyntax)ifStatement.Statement;
@@ -45,35 +47,76 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             return ifStatement.Condition;
         }
 
-        private static string GetIndentation(Document document, SyntaxNode node, SyntaxFormattingOptions syntaxFormattingOptions, CancellationToken cancellationToken)
+        private static string GetIndentation(
+            Document document,
+            SyntaxNode node,
+            SyntaxFormattingOptions syntaxFormattingOptions,
+            CancellationToken cancellationToken
+        )
         {
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
             var ifStatementSyntax = (IfStatementSyntax)node;
-            var openBraceLine = parsedDocument.Text.Lines.GetLineFromPosition(ifStatementSyntax.Statement.SpanStart).LineNumber;
+            var openBraceLine = parsedDocument.Text.Lines
+                .GetLineFromPosition(ifStatementSyntax.Statement.SpanStart)
+                .LineNumber;
 
             var indentationOptions = new IndentationOptions(syntaxFormattingOptions);
             var newLine = indentationOptions.FormattingOptions.NewLine;
 
-            var indentationService = parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
-            var indentation = indentationService.GetIndentation(parsedDocument, openBraceLine + 1, indentationOptions, cancellationToken);
+            var indentationService =
+                parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
+            var indentation = indentationService.GetIndentation(
+                parsedDocument,
+                openBraceLine + 1,
+                indentationOptions,
+                cancellationToken
+            );
 
             // Adding the offset calculated with one tab so that it is indented once past the line containing the opening brace
-            var newIndentation = new IndentationResult(indentation.BasePosition, indentation.Offset + syntaxFormattingOptions.TabSize);
-            return newIndentation.GetIndentationString(parsedDocument.Text, syntaxFormattingOptions.UseTabs, syntaxFormattingOptions.TabSize) + newLine;
+            var newIndentation = new IndentationResult(
+                indentation.BasePosition,
+                indentation.Offset + syntaxFormattingOptions.TabSize
+            );
+            return newIndentation.GetIndentationString(
+                    parsedDocument.Text,
+                    syntaxFormattingOptions.UseTabs,
+                    syntaxFormattingOptions.TabSize
+                ) + newLine;
         }
 
-        protected override async Task<Document> AddIndentationToDocumentAsync(Document document, int position, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
+        protected override async Task<Document> AddIndentationToDocumentAsync(
+            Document document,
+            int position,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var snippet = root.GetAnnotatedNodes(_findSnippetAnnotation).FirstOrDefault();
 
-            var syntaxFormattingOptions = await document.GetSyntaxFormattingOptionsAsync(fallbackOptions: null, cancellationToken).ConfigureAwait(false);
-            var indentationString = GetIndentation(document, snippet, syntaxFormattingOptions, cancellationToken);
+            var syntaxFormattingOptions = await document
+                .GetSyntaxFormattingOptionsAsync(fallbackOptions: null, cancellationToken)
+                .ConfigureAwait(false);
+            var indentationString = GetIndentation(
+                document,
+                snippet,
+                syntaxFormattingOptions,
+                cancellationToken
+            );
 
             var ifStatementSyntax = (IfStatementSyntax)snippet;
             var blockStatement = (BlockSyntax)ifStatementSyntax.Statement;
-            blockStatement = blockStatement.WithCloseBraceToken(blockStatement.CloseBraceToken.WithPrependedLeadingTrivia(SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)));
-            var newIfStatementSyntax = ifStatementSyntax.ReplaceNode(ifStatementSyntax.Statement, blockStatement);
+            blockStatement = blockStatement.WithCloseBraceToken(
+                blockStatement.CloseBraceToken.WithPrependedLeadingTrivia(
+                    SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
+                )
+            );
+            var newIfStatementSyntax = ifStatementSyntax.ReplaceNode(
+                ifStatementSyntax.Statement,
+                blockStatement
+            );
 
             var newRoot = root.ReplaceNode(ifStatementSyntax, newIfStatementSyntax);
             return document.WithSyntaxRoot(newRoot);

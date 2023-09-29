@@ -22,7 +22,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         /// <summary>
         /// Starts a new task to compute the model based on the current text.
         /// </summary>
-        private async ValueTask<NavigationBarModel?> ComputeModelAndSelectItemAsync(ImmutableSegmentedList<bool> unused, CancellationToken cancellationToken)
+        private async ValueTask<NavigationBarModel?> ComputeModelAndSelectItemAsync(
+            ImmutableSegmentedList<bool> unused,
+            CancellationToken cancellationToken
+        )
         {
             // Jump back to the UI thread to determine what snapshot the user is processing.
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -54,7 +57,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 if (workspace is null)
                     return null;
 
-                var document = textSnapshot.AsText().GetDocumentWithFrozenPartialSemantics(cancellationToken);
+                var document = textSnapshot
+                    .AsText()
+                    .GetDocumentWithFrozenPartialSemantics(cancellationToken);
                 if (document == null)
                     return null;
 
@@ -65,17 +70,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 // If these are navbars for a file that isn't even visible, then avoid doing any unnecessary computation
                 // work until far in the future (or if visibility changes).  This ensures our non-visible docs do settle
                 // once enough time has passed, while greatly reducing their impact on the system.
-                await _visibilityTracker.DelayWhileNonVisibleAsync(
-                    _threadingContext, _subjectBuffer, DelayTimeSpan.NonFocus, cancellationToken).ConfigureAwait(false);
+                await _visibilityTracker
+                    .DelayWhileNonVisibleAsync(
+                        _threadingContext,
+                        _subjectBuffer,
+                        DelayTimeSpan.NonFocus,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                using (Logger.LogBlock(FunctionId.NavigationBar_ComputeModelAsync, cancellationToken))
+                using (
+                    Logger.LogBlock(FunctionId.NavigationBar_ComputeModelAsync, cancellationToken)
+                )
                 {
-                    var items = await itemService.GetItemsAsync(
-                        document,
-                        workspace.CanApplyChange(ApplyChangesKind.ChangeDocument),
-                        forceFrozenPartialSemanticsForCrossProcessOperations,
-                        textSnapshot.Version,
-                        cancellationToken).ConfigureAwait(false);
+                    var items = await itemService
+                        .GetItemsAsync(
+                            document,
+                            workspace.CanApplyChange(ApplyChangesKind.ChangeDocument),
+                            forceFrozenPartialSemanticsForCrossProcessOperations,
+                            textSnapshot.Version,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     return new NavigationBarModel(itemService, items);
                 }
             }
@@ -119,15 +135,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             await TaskScheduler.Default;
 
             // Ensure the latest model is computed.
-            var model = await _computeModelQueue.WaitUntilCurrentBatchCompletesAsync().ConfigureAwait(true);
+            var model = await _computeModelQueue
+                .WaitUntilCurrentBatchCompletesAsync()
+                .ConfigureAwait(true);
 
-            var currentSelectedItem = ComputeSelectedTypeAndMember(model, position, cancellationToken);
+            var currentSelectedItem = ComputeSelectedTypeAndMember(
+                model,
+                position,
+                cancellationToken
+            );
 
             GetProjectItems(out var projectItems, out var selectedProjectItem);
-            if (Equals(model, lastPresentedInfo.model) &&
-                Equals(currentSelectedItem, lastPresentedInfo.selectedInfo) &&
-                Equals(selectedProjectItem, lastPresentedInfo.selectedProjectItem) &&
-                projectItems.SequenceEqual(lastPresentedInfo.projectItems))
+            if (
+                Equals(model, lastPresentedInfo.model)
+                && Equals(currentSelectedItem, lastPresentedInfo.selectedInfo)
+                && Equals(selectedProjectItem, lastPresentedInfo.selectedProjectItem)
+                && projectItems.SequenceEqual(lastPresentedInfo.projectItems)
+            )
             {
                 // Nothing changed, so we can skip presenting these items.
                 return;
@@ -141,21 +165,40 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 selectedProjectItem,
                 model?.Types ?? ImmutableArray<NavigationBarItem>.Empty,
                 currentSelectedItem.TypeItem,
-                currentSelectedItem.MemberItem);
+                currentSelectedItem.MemberItem
+            );
 
             _lastPresentedInfo = (projectItems, selectedProjectItem, model, currentSelectedItem);
         }
 
         internal static NavigationBarSelectedTypeAndMember ComputeSelectedTypeAndMember(
-            NavigationBarModel? model, int caretPosition, CancellationToken cancellationToken)
+            NavigationBarModel? model,
+            int caretPosition,
+            CancellationToken cancellationToken
+        )
         {
             if (model != null)
             {
-                var (item, gray) = GetMatchingItem(model.Types, caretPosition, model.ItemService, cancellationToken);
+                var (item, gray) = GetMatchingItem(
+                    model.Types,
+                    caretPosition,
+                    model.ItemService,
+                    cancellationToken
+                );
                 if (item != null)
                 {
-                    var rightItem = GetMatchingItem(item.ChildItems, caretPosition, model.ItemService, cancellationToken);
-                    return new NavigationBarSelectedTypeAndMember(item, gray, rightItem.item, rightItem.gray);
+                    var rightItem = GetMatchingItem(
+                        item.ChildItems,
+                        caretPosition,
+                        model.ItemService,
+                        cancellationToken
+                    );
+                    return new NavigationBarSelectedTypeAndMember(
+                        item,
+                        gray,
+                        rightItem.item,
+                        rightItem.gray
+                    );
                 }
             }
 
@@ -168,7 +211,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         /// </summary>
         /// <returns>A tuple of the matching item, and if it should be shown grayed.</returns>
         private static (NavigationBarItem? item, bool gray) GetMatchingItem(
-            ImmutableArray<NavigationBarItem> items, int point, INavigationBarItemService itemsService, CancellationToken cancellationToken)
+            ImmutableArray<NavigationBarItem> items,
+            int point,
+            INavigationBarItemService itemsService,
+            CancellationToken cancellationToken
+        )
         {
             NavigationBarItem? exactItem = null;
             var exactItemStart = 0;

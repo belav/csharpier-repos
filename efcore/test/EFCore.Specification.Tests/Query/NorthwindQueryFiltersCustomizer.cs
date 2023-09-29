@@ -7,6 +7,6 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class NorthwindQueryFiltersCustomizer : IModelCustomizer
 {
-    public void Customize(ModelBuilder modelBuilder, DbContext context)
-        => ((NorthwindContext)context).ConfigureFilters(modelBuilder);
+    public void Customize(ModelBuilder modelBuilder, DbContext context) =>
+        ((NorthwindContext)context).ConfigureFilters(modelBuilder);
 }

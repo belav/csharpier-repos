@@ -7,23 +7,20 @@ using System.Security;
 using System.Runtime.InteropServices;
 using TestLibrary;
 
-
 public class Test
 {
-    const int iNative = 11;//the value passed from Native side to Managed side
-    const int iManaged = 10;//The value passed from Managed side to Native side
-
+    const int iNative = 11; //the value passed from Native side to Managed side
+    const int iManaged = 10; //The value passed from Managed side to Native side
     #region "TestMethod"
     #region "TestMethod1: PInvoke,cdecl"
     //TestMethod1:Pinvoke,Cdecl
     [DllImport("RefIntNative", CallingConvention = CallingConvention.Cdecl)]
-    public static extern bool MarshalRefInt_Cdcel( [In, Out]ref int ri );
+    public static extern bool MarshalRefInt_Cdcel([In, Out] ref int ri);
 
-    
     private static bool TestMethod_PInvke_Cdecl()
     {
         TestFramework.BeginScenario("PInvoke,Cdecl");
-        
+
         bool breturn = true;
         try
         {
@@ -31,13 +28,19 @@ public class Test
             if (!MarshalRefInt_Cdcel(ref i))
             {
                 breturn = false;
-                TestFramework.LogError("001", "MarshalRefInt_Cdcel:The Input(From Managed To Native) is wrong");
+                TestFramework.LogError(
+                    "001",
+                    "MarshalRefInt_Cdcel:The Input(From Managed To Native) is wrong"
+                );
             }
 
             if (iNative != i)
             {
                 breturn = false;
-                TestFramework.LogError("002", "MarshalRefInt_Stdcall:The value(i) hasnt changed by Native");
+                TestFramework.LogError(
+                    "002",
+                    "MarshalRefInt_Stdcall:The value(i) hasnt changed by Native"
+                );
             }
         }
         catch (Exception e)
@@ -52,9 +55,8 @@ public class Test
     #region "TestMethod2 Pinvoke,stdcall"
     //TestMethod2:Pinvoke,stdcall
     [DllImport("RefIntNative", CallingConvention = CallingConvention.StdCall)]
-    public static extern bool MarshalRefInt_Stdcall( [In, Out]ref int ri );
+    public static extern bool MarshalRefInt_Stdcall([In, Out] ref int ri);
 
-    
     private static bool TestMethod_PInvke_Stdcall()
     {
         TestFramework.BeginScenario("PInvoke,Stdcall");
@@ -66,13 +68,19 @@ public class Test
             if (!MarshalRefInt_Stdcall(ref i))
             {
                 breturn = false;
-                TestFramework.LogError("003", "MarshalRefInt_Stdcall:The Input(From Managed To Native) is wrong");
+                TestFramework.LogError(
+                    "003",
+                    "MarshalRefInt_Stdcall:The Input(From Managed To Native) is wrong"
+                );
             }
 
             if (iNative != i)
             {
                 breturn = false;
-                TestFramework.LogError("004", "MarshalRefInt_Stdcall:The value(i) hasnt changed by Native");
+                TestFramework.LogError(
+                    "004",
+                    "MarshalRefInt_Stdcall:The value(i) hasnt changed by Native"
+                );
             }
         }
         catch (Exception e)
@@ -87,14 +95,12 @@ public class Test
     #region "TestMethod3,Reverse PInvoke,Cdecl"
     //TestMethod3,Reverse PInvoke,Cdecl
     [DllImport("RefIntNative", CallingConvention = CallingConvention.Cdecl)]
-    public static extern bool DoCallBack_MarshalRefInt_Cdecl( Cdeclcaller caller );
+    public static extern bool DoCallBack_MarshalRefInt_Cdecl(Cdeclcaller caller);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate bool Cdeclcaller( [In, Out]ref int ri );
+    public delegate bool Cdeclcaller([In, Out] ref int ri);
 
-    
-    
-    private static bool TestMethod_Cdecl( ref int ri )
+    private static bool TestMethod_Cdecl(ref int ri)
     {
         TestFramework.BeginScenario("Reverse PInvoke,cdecl");
         bool breturn = true;
@@ -105,7 +111,10 @@ public class Test
             if (ri != iNative)
             {
                 breturn = false;
-                TestFramework.LogError("005", "TestMethod_Cdcel:The reference paramter value is wrong!");
+                TestFramework.LogError(
+                    "005",
+                    "TestMethod_Cdcel:The reference paramter value is wrong!"
+                );
             }
             //Change the Value
             ri = iManaged;
@@ -121,14 +130,12 @@ public class Test
 
     #region "TestMethod4,Reverse PInvoke,StdCall"
     [DllImport("RefIntNative", CallingConvention = CallingConvention.StdCall)]
-    public static extern bool DoCallBack_MarshalRefInt_Stdcall( Stdcallcaller caller );
+    public static extern bool DoCallBack_MarshalRefInt_Stdcall(Stdcallcaller caller);
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public delegate bool Stdcallcaller( [In, Out]ref int ri );
+    public delegate bool Stdcallcaller([In, Out] ref int ri);
 
-    
-    
-    private static bool TestMethod_Stdcall( ref int ri )
+    private static bool TestMethod_Stdcall(ref int ri)
     {
         TestFramework.BeginScenario("Reverse PInvoke,Stdcall");
         bool breturn = true;
@@ -138,7 +145,10 @@ public class Test
             if (ri != iNative)
             {
                 breturn = false;
-                TestFramework.LogError("006", "TestMethod_Stdcall:The reference paramter value is wrong!");
+                TestFramework.LogError(
+                    "006",
+                    "TestMethod_Stdcall:The reference paramter value is wrong!"
+                );
             }
             //Change the Value
             ri = iManaged;
@@ -154,12 +164,11 @@ public class Test
 
     #region "TestMethod5,cdecl,delegate pinvoke"
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate bool DelegatePInvokeCdecl( [In, Out]ref int ri );
+    public delegate bool DelegatePInvokeCdecl([In, Out] ref int ri);
 
     [DllImport("RefIntNative", CallingConvention = CallingConvention.Cdecl)]
     public static extern DelegatePInvokeCdecl MarshalRefInt_DelegatePInvoke_Cdecl();
 
-    
     private static bool TestMethod_DelegatePInvokeCdecl()
     {
         TestFramework.BeginScenario("Delegate Pinvoke Cdecl");
@@ -172,13 +181,19 @@ public class Test
             if (!caller(ref i))
             {
                 breturn = false;
-                TestFramework.LogError("007", "TestMethod_DelegatePInvokeCdecl:The return value is wrong(Managed Side)");
+                TestFramework.LogError(
+                    "007",
+                    "TestMethod_DelegatePInvokeCdecl:The return value is wrong(Managed Side)"
+                );
             }
 
             if (iNative != i)
             {
                 breturn = false;
-                TestFramework.LogError("008", "TestMethod_DelegatePInvokeCdecl:The value(i) hasnt changed by Native");
+                TestFramework.LogError(
+                    "008",
+                    "TestMethod_DelegatePInvokeCdecl:The value(i) hasnt changed by Native"
+                );
             }
         }
         catch (Exception e)
@@ -192,12 +207,11 @@ public class Test
 
     #region "TestMethod6: StdCall,delegate pinvoke"
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public delegate bool DelegatePInvokeStdcall( [In, Out]ref int ri );
+    public delegate bool DelegatePInvokeStdcall([In, Out] ref int ri);
 
     [DllImport("RefIntNative", CallingConvention = CallingConvention.StdCall)]
     public static extern DelegatePInvokeStdcall MarshalRefInt_DelegatePInvoke_StdCall();
 
-    
     private static bool TestMethod_DelegatePInvokeStdcall()
     {
         TestFramework.BeginScenario("Delegate Pinvoke stdcall");
@@ -210,13 +224,19 @@ public class Test
             if (!caller(ref i))
             {
                 breturn = false;
-                TestFramework.LogError("009", "TestMethod_DelegatePInvokeStdcall:The return value is wrong(Managed Side)");
+                TestFramework.LogError(
+                    "009",
+                    "TestMethod_DelegatePInvokeStdcall:The return value is wrong(Managed Side)"
+                );
             }
 
             if (iNative != i)
             {
                 breturn = false;
-                TestFramework.LogError("010", "TestMethod_DelegatePInvokeStdcall:The value(i) hasnt changed by Native");
+                TestFramework.LogError(
+                    "010",
+                    "TestMethod_DelegatePInvokeStdcall:The value(i) hasnt changed by Native"
+                );
             }
         }
         catch (Exception e)
@@ -229,7 +249,7 @@ public class Test
     #endregion
     #endregion
 
-    
+
     static int Main()
     {
         bool bReturn = true;
@@ -244,7 +264,8 @@ public class Test
         bReturn = bReturn && DoCallBack_MarshalRefInt_Cdecl(new Cdeclcaller(TestMethod_Cdecl));
 
         //TestMethod4: Reverse Pinvoke,Stdcall
-        bReturn = bReturn && DoCallBack_MarshalRefInt_Stdcall(new Stdcallcaller(TestMethod_Stdcall));
+        bReturn =
+            bReturn && DoCallBack_MarshalRefInt_Stdcall(new Stdcallcaller(TestMethod_Stdcall));
 
         //TestMethod5:Delegate Pinvoke Cdecl
         bReturn = bReturn && TestMethod_DelegatePInvokeCdecl();
@@ -252,7 +273,7 @@ public class Test
         //TestMethod6:Delegate Pinvoke stdcall
         bReturn = bReturn && TestMethod_DelegatePInvokeStdcall();
 
-        if(bReturn)
+        if (bReturn)
         {
             Console.WriteLine("Succeed!");
         }

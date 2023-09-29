@@ -15,9 +15,11 @@ namespace SerializerTrimmingTest
     {
         static int Main(string[] args)
         {
-            int[] arr = new [] { 1 };
+            int[] arr = new[] { 1 };
             string expected = "[1]";
-            string actual = Encoding.UTF8.GetString(JsonSerializer.SerializeToUtf8Bytes(arr, typeof(int[])));
+            string actual = Encoding.UTF8.GetString(
+                JsonSerializer.SerializeToUtf8Bytes(arr, typeof(int[]))
+            );
             if (actual != expected)
             {
                 return -1;
@@ -25,7 +27,9 @@ namespace SerializerTrimmingTest
 
             MyStruct obj = default;
             expected = @"{""X"":0,""Y"":0}";
-            actual = Encoding.UTF8.GetString(JsonSerializer.SerializeToUtf8Bytes(obj, typeof(MyStruct)));
+            actual = Encoding.UTF8.GetString(
+                JsonSerializer.SerializeToUtf8Bytes(obj, typeof(MyStruct))
+            );
             if (!TestHelper.JsonEqual(expected, actual))
             {
                 return -1;

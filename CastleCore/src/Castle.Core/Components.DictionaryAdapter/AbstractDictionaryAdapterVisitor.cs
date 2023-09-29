@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,7 +31,9 @@ namespace Castle.Components.DictionaryAdapter
 
         protected AbstractDictionaryAdapterVisitor()
         {
-            scopes = new Dictionary<IDictionaryAdapter, int>(ReferenceEqualityComparer<IDictionaryAdapter>.Instance);
+            scopes = new Dictionary<IDictionaryAdapter, int>(
+                ReferenceEqualityComparer<IDictionaryAdapter>.Instance
+            );
         }
 
         protected AbstractDictionaryAdapterVisitor(AbstractDictionaryAdapterVisitor parent)
@@ -41,12 +43,19 @@ namespace Castle.Components.DictionaryAdapter
 
         protected bool Cancelled { get; set; }
 
-        public virtual bool VisitDictionaryAdapter(IDictionaryAdapter dictionaryAdapter, object state)
+        public virtual bool VisitDictionaryAdapter(
+            IDictionaryAdapter dictionaryAdapter,
+            object state
+        )
         {
             return VisitDictionaryAdapter(dictionaryAdapter, null, null);
         }
 
-        public virtual bool VisitDictionaryAdapter(IDictionaryAdapter dictionaryAdapter, Func<PropertyDescriptor, bool> selector, object state)
+        public virtual bool VisitDictionaryAdapter(
+            IDictionaryAdapter dictionaryAdapter,
+            Func<PropertyDescriptor, bool> selector,
+            object state
+        )
         {
             if (PushScope(dictionaryAdapter) == false)
             {
@@ -57,7 +66,8 @@ namespace Castle.Components.DictionaryAdapter
             {
                 foreach (var property in dictionaryAdapter.This.Properties.Values)
                 {
-                    if (Cancelled) break;
+                    if (Cancelled)
+                        break;
 
                     if (selector != null && selector(property) == false)
                     {
@@ -87,32 +97,55 @@ namespace Castle.Components.DictionaryAdapter
             return true;
         }
 
-        void IDictionaryAdapterVisitor.VisitProperty(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, object state)
+        void IDictionaryAdapterVisitor.VisitProperty(
+            IDictionaryAdapter dictionaryAdapter,
+            PropertyDescriptor property,
+            object state
+        )
         {
             VisitProperty(dictionaryAdapter, property, state);
         }
 
-        protected virtual void VisitProperty(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, object state)
-        {
-        }
+        protected virtual void VisitProperty(
+            IDictionaryAdapter dictionaryAdapter,
+            PropertyDescriptor property,
+            object state
+        ) { }
 
-        void IDictionaryAdapterVisitor.VisitInterface(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, object state)
+        void IDictionaryAdapterVisitor.VisitInterface(
+            IDictionaryAdapter dictionaryAdapter,
+            PropertyDescriptor property,
+            object state
+        )
         {
-
             VisitInterface(dictionaryAdapter, property, state);
         }
 
-        protected virtual void VisitInterface(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, object state)
+        protected virtual void VisitInterface(
+            IDictionaryAdapter dictionaryAdapter,
+            PropertyDescriptor property,
+            object state
+        )
         {
             VisitProperty(dictionaryAdapter, property, state);
         }
 
-        void IDictionaryAdapterVisitor.VisitCollection(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, Type collectionItemType, object state)
+        void IDictionaryAdapterVisitor.VisitCollection(
+            IDictionaryAdapter dictionaryAdapter,
+            PropertyDescriptor property,
+            Type collectionItemType,
+            object state
+        )
         {
             VisitCollection(dictionaryAdapter, property, collectionItemType, state);
         }
 
-        protected virtual void VisitCollection(IDictionaryAdapter dictionaryAdapter, PropertyDescriptor property, Type collectionItemType, object state)
+        protected virtual void VisitCollection(
+            IDictionaryAdapter dictionaryAdapter,
+            PropertyDescriptor property,
+            Type collectionItemType,
+            object state
+        )
         {
             VisitProperty(dictionaryAdapter, property, state);
         }
@@ -136,7 +169,10 @@ namespace Castle.Components.DictionaryAdapter
         {
             collectionItemType = null;
             var propertyType = property.PropertyType;
-            if (propertyType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(propertyType))
+            if (
+                propertyType != typeof(string)
+                && typeof(IEnumerable).IsAssignableFrom(propertyType)
+            )
             {
                 if (propertyType.IsArray)
                 {

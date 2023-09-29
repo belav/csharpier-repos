@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
     /// <completionlist cref="NotificationOption2"/>
     [DataContract]
     internal readonly partial record struct NotificationOption2(
-        [property: DataMember(Order = 0)] ReportDiagnostic Severity)
+        [property: DataMember(Order = 0)] ReportDiagnostic Severity
+    )
     {
         /// <summary>
         /// Notification option to disable or suppress an option with <see cref="ReportDiagnostic.Suppress"/>.

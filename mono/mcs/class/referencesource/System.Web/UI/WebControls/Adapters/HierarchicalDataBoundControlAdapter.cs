@@ -4,17 +4,17 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.Adapters {
-
-    public class HierarchicalDataBoundControlAdapter : WebControlAdapter {
-
-        protected new HierarchicalDataBoundControl Control {
-            get {
-                return (HierarchicalDataBoundControl)base.Control;
-            }
+namespace System.Web.UI.WebControls.Adapters
+{
+    public class HierarchicalDataBoundControlAdapter : WebControlAdapter
+    {
+        protected new HierarchicalDataBoundControl Control
+        {
+            get { return (HierarchicalDataBoundControl)base.Control; }
         }
 
-        protected internal virtual void PerformDataBinding() {
+        protected internal virtual void PerformDataBinding()
+        {
             Control.PerformDataBinding();
         }
     }

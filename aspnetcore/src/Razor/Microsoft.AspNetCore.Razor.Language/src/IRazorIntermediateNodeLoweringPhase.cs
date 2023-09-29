@@ -13,6 +13,4 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// to give the document structure and semantics according to a document kind. The default
 /// <see cref="IRazorIntermediateNodeLoweringPhase"/> is also responsible for merging nodes from imported documents.
 /// </remarks>
-public interface IRazorIntermediateNodeLoweringPhase : IRazorEnginePhase
-{
-}
+public interface IRazorIntermediateNodeLoweringPhase : IRazorEnginePhase { }

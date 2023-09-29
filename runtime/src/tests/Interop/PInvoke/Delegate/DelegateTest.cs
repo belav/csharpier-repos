@@ -19,7 +19,9 @@ class DelegateTest
 
         {
             TestDelegate localDelegate = TestFunction;
-            Assert.True(ReplaceDelegate(expectedValue, ref localDelegate, out int newExpectedValue));
+            Assert.True(
+                ReplaceDelegate(expectedValue, ref localDelegate, out int newExpectedValue)
+            );
             Assert.Equal(newExpectedValue, localDelegate());
         }
 
@@ -69,7 +71,9 @@ class DelegateTest
 
         {
             TestDelegate localDelegate = TestFunction;
-            Assert.True(ValidateDelegateValueMatchesExpectedAndClear(expectedValue, ref localDelegate));
+            Assert.True(
+                ValidateDelegateValueMatchesExpectedAndClear(expectedValue, ref localDelegate)
+            );
             Assert.Equal(null, localDelegate);
         }
 

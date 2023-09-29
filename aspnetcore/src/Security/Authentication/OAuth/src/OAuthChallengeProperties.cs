@@ -16,24 +16,24 @@ public class OAuthChallengeProperties : AuthenticationProperties
     /// <summary>
     /// Initializes a new instance of <see cref="OAuthChallengeProperties"/>.
     /// </summary>
-    public OAuthChallengeProperties()
-    { }
+    public OAuthChallengeProperties() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OAuthChallengeProperties" />.
     /// </summary>
     /// <inheritdoc />
     public OAuthChallengeProperties(IDictionary<string, string?> items)
-        : base(items)
-    { }
+        : base(items) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OAuthChallengeProperties" />.
     /// </summary>
     /// <inheritdoc />
-    public OAuthChallengeProperties(IDictionary<string, string?>? items, IDictionary<string, object?>? parameters)
-        : base(items, parameters)
-    { }
+    public OAuthChallengeProperties(
+        IDictionary<string, string?>? items,
+        IDictionary<string, object?>? parameters
+    )
+        : base(items, parameters) { }
 
     /// <summary>
     /// The "scope" parameter value being used for a challenge request.

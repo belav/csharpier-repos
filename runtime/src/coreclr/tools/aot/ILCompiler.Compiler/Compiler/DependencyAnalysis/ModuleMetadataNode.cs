@@ -36,9 +36,16 @@ namespace ILCompiler.DependencyAnalysis
 
             // Global module type always generates metadata because it's really convenient to
             // have something in an assembly that always generates metadata.
-            dependencies.Add(factory.TypeMetadata(_module.GetGlobalModuleType()), "Global module type");
+            dependencies.Add(
+                factory.TypeMetadata(_module.GetGlobalModuleType()),
+                "Global module type"
+            );
 
-            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(ref dependencies, factory, (EcmaAssembly)_module);
+            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                (EcmaAssembly)_module
+            );
 
             return dependencies;
         }
@@ -52,7 +59,15 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

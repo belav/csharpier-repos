@@ -24,7 +24,11 @@ namespace System.Workflow.ComponentModel
             Activity parentActivity = parentActivityDesigner.Activity;
             while (parentActivity != null)
             {
-                if (parentActivity is CancellationHandlerActivity || parentActivity is CompensationHandlerActivity || parentActivity is FaultHandlerActivity)
+                if (
+                    parentActivity is CancellationHandlerActivity
+                    || parentActivity is CompensationHandlerActivity
+                    || parentActivity is FaultHandlerActivity
+                )
                     return true;
 
                 parentActivity = parentActivity.Parent;
@@ -51,5 +55,4 @@ namespace System.Workflow.ComponentModel
         }
     }
     #endregion
-
 }

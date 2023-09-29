@@ -32,15 +32,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// This method does not wait for async operations before
         /// querying the editor
         /// </remarks>
-        public string[] GetCompletionItems()
-            => ExecuteOnActiveView(view =>
+        public string[] GetCompletionItems() =>
+            ExecuteOnActiveView(view =>
             {
                 var broker = GetComponentModelService<ICompletionBroker>();
 
                 var sessions = broker.GetSessions(view);
                 if (sessions.Count != 1)
                 {
-                    throw new InvalidOperationException($"Expected exactly one session in the completion list, but found {sessions.Count}");
+                    throw new InvalidOperationException(
+                        $"Expected exactly one session in the completion list, but found {sessions.Count}"
+                    );
                 }
 
                 var selectedCompletionSet = sessions[0].SelectedCompletionSet;
@@ -52,15 +54,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// This method does not wait for async operations before
         /// querying the editor
         /// </remarks>
-        public string GetCurrentCompletionItem()
-            => ExecuteOnActiveView(view =>
+        public string GetCurrentCompletionItem() =>
+            ExecuteOnActiveView(view =>
             {
                 var broker = GetComponentModelService<ICompletionBroker>();
 
                 var sessions = broker.GetSessions(view);
                 if (sessions.Count != 1)
                 {
-                    throw new InvalidOperationException($"Expected exactly one session in the completion list, but found {sessions.Count}");
+                    throw new InvalidOperationException(
+                        $"Expected exactly one session in the completion list, but found {sessions.Count}"
+                    );
                 }
 
                 var selectedCompletionSet = sessions[0].SelectedCompletionSet;
@@ -113,8 +117,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected abstract ITextBuffer GetBufferContainingCaret(IWpfTextView view);
 
-        public string[] GetCurrentClassifications()
-            => InvokeOnUIThread(cancellationToken =>
+        public string[] GetCurrentClassifications() =>
+            InvokeOnUIThread(cancellationToken =>
             {
                 IClassifier? classifier = null;
                 try
@@ -123,16 +127,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     var selectionSpan = textView.Selection.StreamSelectionSpan.SnapshotSpan;
                     if (selectionSpan.Length == 0)
                     {
-                        var textStructureNavigatorSelectorService = GetComponentModelService<ITextStructureNavigatorSelectorService>();
+                        var textStructureNavigatorSelectorService =
+                            GetComponentModelService<ITextStructureNavigatorSelectorService>();
                         selectionSpan = textStructureNavigatorSelectorService
                             .GetTextStructureNavigator(textView.TextBuffer)
-                            .GetExtentOfWord(selectionSpan.Start).Span;
+                            .GetExtentOfWord(selectionSpan.Start)
+                            .Span;
                     }
 
-                    var classifierAggregatorService = GetComponentModelService<IViewClassifierAggregatorService>();
+                    var classifierAggregatorService =
+                        GetComponentModelService<IViewClassifierAggregatorService>();
                     classifier = classifierAggregatorService.GetClassifier(textView);
                     var classifiedSpans = classifier.GetClassificationSpans(selectionSpan);
-                    return classifiedSpans.Select(x => x.ClassificationType.Classification).ToArray();
+                    return classifiedSpans
+                        .Select(x => x.ClassificationType.Classification)
+                        .ToArray();
                 }
                 finally
                 {
@@ -147,7 +156,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             return ExecuteOnActiveView(view =>
             {
-                return (int)Math.Ceiling(view.ViewportWidth / Math.Max(view.FormattedLineSource.ColumnWidth, 1));
+                return (int)
+                    Math.Ceiling(
+                        view.ViewportWidth / Math.Max(view.FormattedLineSource.ColumnWidth, 1)
+                    );
             });
         }
 
@@ -156,8 +168,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             int charsOffset,
             int occurrence,
             bool extendSelection,
-            bool selectBlock)
-            => ExecuteOnActiveView(view =>
+            bool selectBlock
+        ) =>
+            ExecuteOnActiveView(view =>
             {
                 var dte = GetDTE();
                 dte.Find.FindWhat = marker;
@@ -167,7 +180,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 dte.Find.Action = EnvDTE.vsFindAction.vsFindActionFind;
 
                 var originalPosition = GetCaretPosition();
-                view.Caret.MoveTo(new SnapshotPoint(GetBufferContainingCaret(view).CurrentSnapshot, 0));
+                view.Caret.MoveTo(
+                    new SnapshotPoint(GetBufferContainingCaret(view).CurrentSnapshot, 0)
+                );
 
                 if (occurrence > 0)
                 {
@@ -179,7 +194,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                     if (result != EnvDTE.vsFindResult.vsFindResultFound)
                     {
-                        throw new Exception("Occurrence " + occurrence + " of marker '" + marker + "' not found in text: " + view.TextSnapshot.GetText());
+                        throw new Exception(
+                            "Occurrence "
+                                + occurrence
+                                + " of marker '"
+                                + marker
+                                + "' not found in text: "
+                                + view.TextSnapshot.GetText()
+                        );
                     }
                 }
                 else
@@ -187,7 +209,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     var result = dte.Find.Execute();
                     if (result != EnvDTE.vsFindResult.vsFindResultFound)
                     {
-                        throw new Exception("Marker '" + marker + "' not found in text: " + view.TextSnapshot.GetText());
+                        throw new Exception(
+                            "Marker '"
+                                + marker
+                                + "' not found in text: "
+                                + view.TextSnapshot.GetText()
+                        );
                     }
                 }
 
@@ -204,7 +231,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 if (charsOffset < 0)
                 {
                     // On the first negative charsOffset, move to anchor-point position, as if the user hit the LEFT key
-                    view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, view.Selection.AnchorPoint.Position.Position));
+                    view.Caret.MoveTo(
+                        new SnapshotPoint(
+                            view.TextSnapshot,
+                            view.Selection.AnchorPoint.Position.Position
+                        )
+                    );
 
                     for (var i = 0; i < -charsOffset - 1; i++)
                     {
@@ -217,13 +249,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 if (extendSelection)
                 {
                     var newPosition = view.Selection.ActivePoint.Position.Position;
-                    view.Selection.Select(new VirtualSnapshotPoint(view.TextSnapshot, originalPosition), new VirtualSnapshotPoint(view.TextSnapshot, newPosition));
-                    view.Selection.Mode = selectBlock ? TextSelectionMode.Box : TextSelectionMode.Stream;
+                    view.Selection.Select(
+                        new VirtualSnapshotPoint(view.TextSnapshot, originalPosition),
+                        new VirtualSnapshotPoint(view.TextSnapshot, newPosition)
+                    );
+                    view.Selection.Mode = selectBlock
+                        ? TextSelectionMode.Box
+                        : TextSelectionMode.Stream;
                 }
             });
 
-        public int GetCaretPosition()
-            => ExecuteOnActiveView(view =>
+        public int GetCaretPosition() =>
+            ExecuteOnActiveView(view =>
             {
                 var subjectBuffer = GetBufferContainingCaret(view);
                 var bufferPosition = view.Caret.Position.BufferPosition;
@@ -236,22 +273,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 var startOfLine = view.Caret.ContainingTextViewLine.Start.Position;
                 var caretVirtualPosition = view.Caret.Position.VirtualBufferPosition;
-                return caretVirtualPosition.Position - startOfLine + caretVirtualPosition.VirtualSpaces;
+                return caretVirtualPosition.Position
+                    - startOfLine
+                    + caretVirtualPosition.VirtualSpaces;
             });
         }
 
-        protected T ExecuteOnActiveView<T>(Func<IWpfTextView, T> action)
-            => InvokeOnUIThread(cancellationToken =>
+        protected T ExecuteOnActiveView<T>(Func<IWpfTextView, T> action) =>
+            InvokeOnUIThread(cancellationToken =>
             {
                 var view = GetActiveTextView();
                 return action(view);
             });
 
-        protected void ExecuteOnActiveView(Action<IWpfTextView> action)
-            => InvokeOnUIThread(GetExecuteOnActionViewCallback(action));
+        protected void ExecuteOnActiveView(Action<IWpfTextView> action) =>
+            InvokeOnUIThread(GetExecuteOnActionViewCallback(action));
 
-        protected Action<CancellationToken> GetExecuteOnActionViewCallback(Action<IWpfTextView> action)
-            => cancellationToken =>
+        protected Action<CancellationToken> GetExecuteOnActionViewCallback(
+            Action<IWpfTextView> action
+        ) =>
+            cancellationToken =>
             {
                 var view = GetActiveTextView();
                 action(view);
@@ -294,46 +335,53 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             });
         }
 
-        public void VerifyTags(string tagTypeName, int expectedCount)
-            => ExecuteOnActiveView(view =>
-        {
-            var type = WellKnownTagNames.GetTagTypeByName(tagTypeName);
-            bool filterTag(IMappingTagSpan<ITag> tag)
+        public void VerifyTags(string tagTypeName, int expectedCount) =>
+            ExecuteOnActiveView(view =>
             {
-                return tag.Tag.GetType().Equals(type);
-            }
+                var type = WellKnownTagNames.GetTagTypeByName(tagTypeName);
+                bool filterTag(IMappingTagSpan<ITag> tag)
+                {
+                    return tag.Tag.GetType().Equals(type);
+                }
 
-            var service = GetComponentModelService<IViewTagAggregatorFactoryService>();
-            var aggregator = service.CreateTagAggregator<ITag>(view);
-            var allTags = aggregator.GetTags(new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length));
-            var tags = allTags.Where(filterTag).Cast<IMappingTagSpan<ITag>>();
-            var actualCount = tags.Count();
+                var service = GetComponentModelService<IViewTagAggregatorFactoryService>();
+                var aggregator = service.CreateTagAggregator<ITag>(view);
+                var allTags = aggregator.GetTags(
+                    new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length)
+                );
+                var tags = allTags.Where(filterTag).Cast<IMappingTagSpan<ITag>>();
+                var actualCount = tags.Count();
 
-            if (expectedCount != actualCount)
+                if (expectedCount != actualCount)
+                {
+                    var tagsTypesString = string.Join(
+                        ",",
+                        allTags.Select(tag => tag.Tag.ToString())
+                    );
+                    throw new Exception(
+                        $"Failed to verify {tagTypeName} tags. Expected count: {expectedCount}, Actual count: {actualCount}. All tags: {tagsTypesString}"
+                    );
+                }
+            });
+
+        public bool IsLightBulbSessionExpanded() =>
+            ExecuteOnActiveView(view =>
             {
-                var tagsTypesString = string.Join(",", allTags.Select(tag => tag.Tag.ToString()));
-                throw new Exception($"Failed to verify {tagTypeName} tags. Expected count: {expectedCount}, Actual count: {actualCount}. All tags: {tagsTypesString}");
-            }
-        });
+                var broker = GetComponentModel().GetService<ILightBulbBroker>();
 
-        public bool IsLightBulbSessionExpanded()
-       => ExecuteOnActiveView(view =>
-       {
-           var broker = GetComponentModel().GetService<ILightBulbBroker>();
+                if (!broker.IsLightBulbSessionActive(view))
+                {
+                    return false;
+                }
 
-           if (!broker.IsLightBulbSessionActive(view))
-           {
-               return false;
-           }
+                var session = broker.GetSession(view);
+                if (session == null || !session.IsExpanded)
+                {
+                    return false;
+                }
 
-           var session = broker.GetSession(view);
-           if (session == null || !session.IsExpanded)
-           {
-               return false;
-           }
-
-           return true;
-       });
+                return true;
+            });
 
         public string[] GetLightBulbActions()
         {
@@ -343,34 +391,57 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                 var view = GetActiveTextView();
                 var broker = GetComponentModel().GetService<ILightBulbBroker>();
-                return (await GetLightBulbActionsAsync(broker, view)).Select(a => a.DisplayText).ToArray();
+                return (await GetLightBulbActionsAsync(broker, view))
+                    .Select(a => a.DisplayText)
+                    .ToArray();
             });
         }
 
-        private async Task<IEnumerable<ISuggestedAction>> GetLightBulbActionsAsync(ILightBulbBroker broker, IWpfTextView view)
+        private async Task<IEnumerable<ISuggestedAction>> GetLightBulbActionsAsync(
+            ILightBulbBroker broker,
+            IWpfTextView view
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync();
 
             if (!broker.IsLightBulbSessionActive(view))
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new Exception(string.Format("No light bulb session in View!  Buffer content type={0}", bufferType));
+                throw new Exception(
+                    string.Format(
+                        "No light bulb session in View!  Buffer content type={0}",
+                        bufferType
+                    )
+                );
             }
 
             var activeSession = broker.GetSession(view);
             if (activeSession == null)
             {
                 var bufferType = view.TextBuffer.ContentType.DisplayName;
-                throw new InvalidOperationException(string.Format("No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={0}", bufferType));
+                throw new InvalidOperationException(
+                    string.Format(
+                        "No expanded light bulb session found after View.ShowSmartTag.  Buffer content type={0}",
+                        bufferType
+                    )
+                );
             }
 
             var actionSets = await LightBulbHelper.WaitForItemsAsync(broker, view);
             return await SelectActionsAsync(actionSets);
         }
 
-        public bool ApplyLightBulbAction(string actionName, FixAllScope? fixAllScope, bool blockUntilComplete)
+        public bool ApplyLightBulbAction(
+            string actionName,
+            FixAllScope? fixAllScope,
+            bool blockUntilComplete
+        )
         {
-            var lightBulbAction = GetLightBulbApplicationAction(actionName, fixAllScope, blockUntilComplete);
+            var lightBulbAction = GetLightBulbApplicationAction(
+                actionName,
+                fixAllScope,
+                blockUntilComplete
+            );
             var task = JoinableTaskFactory.RunAsync(async () =>
             {
                 await JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -389,7 +460,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return true;
         }
 
-        private Func<IWpfTextView, Task<bool>> GetLightBulbApplicationAction(string actionName, FixAllScope? fixAllScope, bool willBlockUntilComplete)
+        private Func<IWpfTextView, Task<bool>> GetLightBulbApplicationAction(
+            string actionName,
+            FixAllScope? fixAllScope,
+            bool willBlockUntilComplete
+        )
         {
             return async view =>
             {
@@ -410,28 +485,47 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                     var bufferType = view.TextBuffer.ContentType.DisplayName;
                     throw new InvalidOperationException(
-                        string.Format("ISuggestedAction {0} not found.  Buffer content type={1}\r\nActions: {2}", actionName, bufferType, sb.ToString()));
+                        string.Format(
+                            "ISuggestedAction {0} not found.  Buffer content type={1}\r\nActions: {2}",
+                            actionName,
+                            bufferType,
+                            sb.ToString()
+                        )
+                    );
                 }
 
                 if (fixAllScope != null)
                 {
                     if (!action.HasActionSets)
                     {
-                        throw new InvalidOperationException($"Suggested action '{action.DisplayText}' does not support FixAllOccurrences.");
+                        throw new InvalidOperationException(
+                            $"Suggested action '{action.DisplayText}' does not support FixAllOccurrences."
+                        );
                     }
 
-                    var actionSetsForAction = await action.GetActionSetsAsync(CancellationToken.None);
-                    var fixAllAction = await GetFixAllSuggestedActionAsync(JoinableTaskFactory, actionSetsForAction!, fixAllScope.Value);
+                    var actionSetsForAction = await action.GetActionSetsAsync(
+                        CancellationToken.None
+                    );
+                    var fixAllAction = await GetFixAllSuggestedActionAsync(
+                        JoinableTaskFactory,
+                        actionSetsForAction!,
+                        fixAllScope.Value
+                    );
                     if (fixAllAction == null)
                     {
-                        throw new InvalidOperationException($"Unable to find FixAll in {fixAllScope.ToString()} code fix for suggested action '{action.DisplayText}'.");
+                        throw new InvalidOperationException(
+                            $"Unable to find FixAll in {fixAllScope.ToString()} code fix for suggested action '{action.DisplayText}'."
+                        );
                     }
 
                     action = fixAllAction;
 
-                    if (willBlockUntilComplete
+                    if (
+                        willBlockUntilComplete
                         && action is AbstractFixAllSuggestedAction fixAllSuggestedAction
-                        && fixAllSuggestedAction.CodeAction is AbstractFixAllCodeAction fixAllCodeAction)
+                        && fixAllSuggestedAction.CodeAction
+                            is AbstractFixAllCodeAction fixAllCodeAction
+                    )
                     {
                         // Ensure the preview changes dialog will not be shown. Since the operation 'willBlockUntilComplete',
                         // the caller would not be able to interact with the preview changes dialog, and the tests would
@@ -452,7 +546,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     return true;
 
                 broker.DismissSession(view);
-                var threadOperationExecutor = GetComponentModelService<IUIThreadOperationExecutor>();
+                var threadOperationExecutor =
+                    GetComponentModelService<IUIThreadOperationExecutor>();
                 var guardedOperations = GetComponentModelService<IGuardedOperations2>();
                 threadOperationExecutor.Execute(
                     title: "Execute Suggested Action",
@@ -464,14 +559,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         guardedOperations.CallExtensionPoint(
                             errorSource: suggestedAction,
                             call: () => suggestedAction.Invoke(context),
-                            exceptionGuardFilter: e => e is not OperationCanceledException);
-                    });
+                            exceptionGuardFilter: e => e is not OperationCanceledException
+                        );
+                    }
+                );
 
                 return true;
             };
         }
 
-        private async Task<IEnumerable<ISuggestedAction>> SelectActionsAsync(IEnumerable<SuggestedActionSet> actionSets)
+        private async Task<IEnumerable<ISuggestedAction>> SelectActionsAsync(
+            IEnumerable<SuggestedActionSet> actionSets
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync();
 
@@ -488,7 +587,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                             actions.Add(action);
                             if (action.HasActionSets)
                             {
-                                var nestedActionSets = await action.GetActionSetsAsync(CancellationToken.None);
+                                var nestedActionSets = await action.GetActionSetsAsync(
+                                    CancellationToken.None
+                                );
                                 var nestedActions = await SelectActionsAsync(nestedActionSets!);
                                 actions.AddRange(nestedActions);
                             }
@@ -500,7 +601,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return actions;
         }
 
-        private static async Task<AbstractFixAllSuggestedAction?> GetFixAllSuggestedActionAsync(JoinableTaskFactory joinableTaskFactory, IEnumerable<SuggestedActionSet> actionSets, FixAllScope fixAllScope)
+        private static async Task<AbstractFixAllSuggestedAction?> GetFixAllSuggestedActionAsync(
+            JoinableTaskFactory joinableTaskFactory,
+            IEnumerable<SuggestedActionSet> actionSets,
+            FixAllScope fixAllScope
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync();
 
@@ -510,7 +615,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 {
                     if (action is AbstractFixAllSuggestedAction fixAllSuggestedAction)
                     {
-                        var fixAllCodeAction = fixAllSuggestedAction.CodeAction as AbstractFixAllCodeAction;
+                        var fixAllCodeAction =
+                            fixAllSuggestedAction.CodeAction as AbstractFixAllCodeAction;
                         if (fixAllCodeAction?.FixAllState?.Scope == fixAllScope)
                         {
                             return fixAllSuggestedAction;
@@ -519,8 +625,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                     if (action.HasActionSets)
                     {
-                        var nestedActionSets = await action.GetActionSetsAsync(CancellationToken.None);
-                        var fixAllCodeAction = await GetFixAllSuggestedActionAsync(joinableTaskFactory, nestedActionSets!, fixAllScope);
+                        var nestedActionSets = await action.GetActionSetsAsync(
+                            CancellationToken.None
+                        );
+                        var fixAllCodeAction = await GetFixAllSuggestedActionAsync(
+                            joinableTaskFactory,
+                            nestedActionSets!,
+                            fixAllScope
+                        );
                         if (fixAllCodeAction != null)
                         {
                             return fixAllCodeAction;
@@ -532,15 +644,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return null;
         }
 
-        public void DismissLightBulbSession()
-            => ExecuteOnActiveView(view =>
+        public void DismissLightBulbSession() =>
+            ExecuteOnActiveView(view =>
             {
                 var broker = GetComponentModel().GetService<ILightBulbBroker>();
                 broker.DismissSession(view);
             });
 
-        public void DismissCompletionSessions()
-            => ExecuteOnActiveView(view =>
+        public void DismissCompletionSessions() =>
+            ExecuteOnActiveView(view =>
             {
                 var broker = GetComponentModel().GetService<ICompletionBroker>();
                 broker.DismissAllSessions(view);

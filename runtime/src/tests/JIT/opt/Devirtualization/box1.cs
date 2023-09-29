@@ -3,15 +3,23 @@
 
 using System;
 
-interface IPrint 
+interface IPrint
 {
     void Print();
 }
 
 struct X<T> : IPrint
 {
-    public X(T t) { _t = t; }
-    public void Print() { Console.WriteLine(_t); }
+    public X(T t)
+    {
+        _t = t;
+    }
+
+    public void Print()
+    {
+        Console.WriteLine(_t);
+    }
+
     T _t;
 }
 

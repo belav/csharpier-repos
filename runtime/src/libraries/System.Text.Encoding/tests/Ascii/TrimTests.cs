@@ -102,14 +102,24 @@ namespace System.Text.Tests
         [InlineData("\nd\n", 1, 1)]
         [InlineData(" \t\r\ne \t\r\n", 4, 4)]
         [InlineData(" \t\r\n\n\r\t f \t\r\n\n\r\t ", 8, 8)]
-        public static void StartingAndEndingWithWhitespace(string text, int leadingWhitespaceCount, int trailingWhitespaceCount)
+        public static void StartingAndEndingWithWhitespace(
+            string text,
+            int leadingWhitespaceCount,
+            int trailingWhitespaceCount
+        )
         {
             ReadOnlySpan<byte> bytes = Encoding.ASCII.GetBytes(text);
 
             Assert.Equal(leadingWhitespaceCount..text.Length, Ascii.TrimStart(bytes));
             Assert.Equal(leadingWhitespaceCount..text.Length, Ascii.TrimStart(text));
-            Assert.Equal(leadingWhitespaceCount..(text.Length - trailingWhitespaceCount), Ascii.Trim(bytes));
-            Assert.Equal(leadingWhitespaceCount..(text.Length - trailingWhitespaceCount), Ascii.Trim(text));
+            Assert.Equal(
+                leadingWhitespaceCount..(text.Length - trailingWhitespaceCount),
+                Ascii.Trim(bytes)
+            );
+            Assert.Equal(
+                leadingWhitespaceCount..(text.Length - trailingWhitespaceCount),
+                Ascii.Trim(text)
+            );
             Assert.Equal(0..(text.Length - trailingWhitespaceCount), Ascii.TrimEnd(bytes));
             Assert.Equal(0..(text.Length - trailingWhitespaceCount), Ascii.TrimEnd(text));
         }

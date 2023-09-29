@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Navigation
                 Solution solution,
                 ISymbol symbol,
                 Location location,
-                ImmutableArray<TaggedText>? displayTaggedParts)
+                ImmutableArray<TaggedText>? displayTaggedParts
+            )
             {
                 _solution = solution;
                 _symbol = symbol;
@@ -38,14 +39,15 @@ namespace Microsoft.CodeAnalysis.Navigation
 
             public bool IsImplicitlyDeclared => _symbol.IsImplicitlyDeclared;
 
-            public Document Document
-                => _location.IsInSource ? _solution.GetDocument(_location.SourceTree) : null;
+            public Document Document =>
+                _location.IsInSource ? _solution.GetDocument(_location.SourceTree) : null;
 
             public TextSpan SourceSpan => _location.SourceSpan;
 
             public bool IsStale => false;
 
-            public ImmutableArray<INavigableItem> ChildItems => ImmutableArray<INavigableItem>.Empty;
+            public ImmutableArray<INavigableItem> ChildItems =>
+                ImmutableArray<INavigableItem>.Empty;
         }
     }
 }

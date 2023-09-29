@@ -19,11 +19,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 _getElement = getElement;
             }
 
-            public IEnumerator<ValueBuffer> GetEnumerator()
-                => new ResultEnumerator(_getElement());
+            public IEnumerator<ValueBuffer> GetEnumerator() => new ResultEnumerator(_getElement());
 
-            IEnumerator IEnumerable.GetEnumerator()
-                => GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
             private sealed class ResultEnumerator : IEnumerator<ValueBuffer>
             {
@@ -53,15 +51,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     _moved = false;
                 }
 
-                object IEnumerator.Current
-                    => Current;
+                object IEnumerator.Current => Current;
 
-                public ValueBuffer Current
-                    => !_moved ? ValueBuffer.Empty : _value;
+                public ValueBuffer Current => !_moved ? ValueBuffer.Empty : _value;
 
-                void IDisposable.Dispose()
-                {
-                }
+                void IDisposable.Dispose() { }
             }
         }
     }

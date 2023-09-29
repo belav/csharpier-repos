@@ -24,7 +24,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
 
         internal static string GetFilePath(ITextBuffer textBuffer)
         {
-            if (textBuffer.Properties.TryGetProperty<ITextDocument>(typeof(ITextDocument), out var textDocument))
+            if (
+                textBuffer.Properties.TryGetProperty<ITextDocument>(
+                    typeof(ITextDocument),
+                    out var textDocument
+                )
+            )
             {
                 return textDocument.FilePath;
             }
@@ -40,13 +45,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
         /// <returns></returns>
         public static IWpfTextView GetActiveTextView()
         {
-            var monitorSelection = (IVsMonitorSelection)Package.GetGlobalService(typeof(SVsShellMonitorSelection));
+            var monitorSelection = (IVsMonitorSelection)
+                Package.GetGlobalService(typeof(SVsShellMonitorSelection));
             if (monitorSelection == null)
             {
                 return null;
             }
 
-            if (ErrorHandler.Failed(monitorSelection.GetCurrentElementValue((uint)VSConstants.VSSELELEMID.SEID_DocumentFrame, out var curDocument)))
+            if (
+                ErrorHandler.Failed(
+                    monitorSelection.GetCurrentElementValue(
+                        (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame,
+                        out var curDocument
+                    )
+                )
+            )
             {
                 // TODO: Report error
                 return null;
@@ -58,7 +71,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                 return null;
             }
 
-            if (ErrorHandler.Failed(frame.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out var docView)))
+            if (
+                ErrorHandler.Failed(
+                    frame.GetProperty((int)__VSFPROPID.VSFPROPID_DocView, out var docView)
+                )
+            )
             {
                 // TODO: Report error
                 return null;

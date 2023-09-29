@@ -28,21 +28,34 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.Json
         }
 
         public async Task<BraceMatchingResult?> FindBracesAsync(
-            Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        )
         {
             if (!options.HighlightingOptions.HighlightRelatedJsonComponentsUnderCursor)
                 return null;
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = root.FindToken(position);
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var detector = JsonLanguageDetector.GetOrCreate(semanticModel.Compilation, _info);
 
             // We do support brace matching in strings that look very likely to be json, even if we aren't 100% certain
             // if it truly is json.
-            var tree = detector.TryParseString(token, semanticModel, includeProbableStrings: true, cancellationToken);
+            var tree = detector.TryParseString(
+                token,
+                semanticModel,
+                includeProbableStrings: true,
+                cancellationToken
+            );
             if (tree == null)
                 return null;
 
@@ -61,8 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.Json
                 : null;
         }
 
-        private static BraceMatchingResult? FindBraceHighlights(JsonTree tree, VirtualChar ch)
-            => FindBraceMatchingResult(tree.Root, ch);
+        private static BraceMatchingResult? FindBraceHighlights(JsonTree tree, VirtualChar ch) =>
+            FindBraceMatchingResult(tree.Root, ch);
 
         private static BraceMatchingResult? FindBraceMatchingResult(JsonNode node, VirtualChar ch)
         {
@@ -75,13 +88,15 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.Json
 
             switch (node)
             {
-                case JsonArrayNode array when Matches(array.OpenBracketToken, array.CloseBracketToken, ch):
+                case JsonArrayNode array
+                    when Matches(array.OpenBracketToken, array.CloseBracketToken, ch):
                     return Create(array.OpenBracketToken, array.CloseBracketToken);
 
                 case JsonObjectNode obj when Matches(obj.OpenBraceToken, obj.CloseBraceToken, ch):
                     return Create(obj.OpenBraceToken, obj.CloseBraceToken);
 
-                case JsonConstructorNode cons when Matches(cons.OpenParenToken, cons.CloseParenToken, ch):
+                case JsonConstructorNode cons
+                    when Matches(cons.OpenParenToken, cons.CloseParenToken, ch):
                     return Create(cons.OpenParenToken, cons.CloseParenToken);
             }
 
@@ -98,12 +113,12 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.Json
             return null;
         }
 
-        private static BraceMatchingResult? Create(JsonToken open, JsonToken close)
-           => open.IsMissing || close.IsMissing
-               ? null
-               : new BraceMatchingResult(open.GetSpan(), close.GetSpan());
+        private static BraceMatchingResult? Create(JsonToken open, JsonToken close) =>
+            open.IsMissing || close.IsMissing
+                ? null
+                : new BraceMatchingResult(open.GetSpan(), close.GetSpan());
 
-        private static bool Matches(JsonToken openToken, JsonToken closeToken, VirtualChar ch)
-            => openToken.VirtualChars.Contains(ch) || closeToken.VirtualChars.Contains(ch);
+        private static bool Matches(JsonToken openToken, JsonToken closeToken, VirtualChar ch) =>
+            openToken.VirtualChars.Contains(ch) || closeToken.VirtualChars.Contains(ch);
     }
 }

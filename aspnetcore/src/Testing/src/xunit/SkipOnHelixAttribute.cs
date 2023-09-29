@@ -37,10 +37,7 @@ public class SkipOnHelixAttribute : Attribute, ITestCondition
 
     public string SkipReason
     {
-        get
-        {
-            return "This test is skipped on helix";
-        }
+        get { return "This test is skipped on helix"; }
     }
 
     private bool ShouldSkip()
@@ -52,12 +49,18 @@ public class SkipOnHelixAttribute : Attribute, ITestCondition
 
         var targetQueue = GetTargetHelixQueue().ToLowerInvariant();
 
-        if (Queues.Contains("All.OSX") && targetQueue.StartsWith("osx", StringComparison.OrdinalIgnoreCase))
+        if (
+            Queues.Contains("All.OSX")
+            && targetQueue.StartsWith("osx", StringComparison.OrdinalIgnoreCase)
+        )
         {
             return true;
         }
 
-        if (Queues.Contains("All.Ubuntu") && targetQueue.StartsWith("ubuntu", StringComparison.OrdinalIgnoreCase))
+        if (
+            Queues.Contains("All.Ubuntu")
+            && targetQueue.StartsWith("ubuntu", StringComparison.OrdinalIgnoreCase)
+        )
         {
             return true;
         }

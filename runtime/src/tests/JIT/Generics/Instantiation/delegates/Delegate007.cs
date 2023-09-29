@@ -8,7 +8,7 @@ internal delegate T GenDelegate<T>(T p1, out T p2);
 
 internal class Foo
 {
-    virtual public T Function<T>(T i, out T j)
+    public virtual T Function<T>(T i, out T j)
     {
         j = i;
         return i;
@@ -19,7 +19,8 @@ internal class Test_Delegate007
 {
     public static int Main()
     {
-        int i, j;
+        int i,
+            j;
         Foo inst = new Foo();
         GenDelegate<int> MyDelegate = new GenDelegate<int>(inst.Function<int>);
         i = MyDelegate(10, out j);
@@ -34,4 +35,3 @@ internal class Test_Delegate007
         return 100;
     }
 }
-

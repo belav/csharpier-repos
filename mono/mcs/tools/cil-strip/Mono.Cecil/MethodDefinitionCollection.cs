@@ -29,157 +29,160 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    using System;
+    using System.Collections;
 
-	using System;
-	using System.Collections;
+    using Mono.Cecil.Cil;
 
-	using Mono.Cecil.Cil;
+    internal sealed class MethodDefinitionCollection : CollectionBase, IReflectionVisitable
+    {
+        TypeDefinition m_container;
 
-	internal sealed class MethodDefinitionCollection : CollectionBase, IReflectionVisitable {
+        public MethodDefinition this[int index]
+        {
+            get { return List[index] as MethodDefinition; }
+            set { List[index] = value; }
+        }
 
-		TypeDefinition m_container;
+        public TypeDefinition Container
+        {
+            get { return m_container; }
+        }
 
-		public MethodDefinition this [int index] {
-			get { return List [index] as MethodDefinition; }
-			set { List [index] = value; }
-		}
+        public MethodDefinitionCollection(TypeDefinition container)
+        {
+            m_container = container;
+        }
 
-		public TypeDefinition Container {
-			get { return m_container; }
-		}
+        public void Add(MethodDefinition value)
+        {
+            Attach(value);
 
-		public MethodDefinitionCollection (TypeDefinition container)
-		{
-			m_container = container;
-		}
+            List.Add(value);
+        }
 
-		public void Add (MethodDefinition value)
-		{
-			Attach (value);
+        public new void Clear()
+        {
+            foreach (MethodDefinition item in this)
+                Detach(item);
 
-			List.Add (value);
-		}
+            base.Clear();
+        }
 
+        public bool Contains(MethodDefinition value)
+        {
+            return List.Contains(value);
+        }
 
-		public new void Clear ()
-		{
-			foreach (MethodDefinition item in this)
-				Detach (item);
+        public int IndexOf(MethodDefinition value)
+        {
+            return List.IndexOf(value);
+        }
 
-			base.Clear ();
-		}
+        public void Insert(int index, MethodDefinition value)
+        {
+            Attach(value);
 
-		public bool Contains (MethodDefinition value)
-		{
-			return List.Contains (value);
-		}
+            List.Insert(index, value);
+        }
 
-		public int IndexOf (MethodDefinition value)
-		{
-			return List.IndexOf (value);
-		}
+        public void Remove(MethodDefinition value)
+        {
+            List.Remove(value);
 
-		public void Insert (int index, MethodDefinition value)
-		{
-			Attach (value);
+            Detach(value);
+        }
 
-			List.Insert (index, value);
-		}
+        public new void RemoveAt(int index)
+        {
+            MethodDefinition item = this[index];
+            Remove(item);
+        }
 
-		public void Remove (MethodDefinition value)
-		{
-			List.Remove (value);
+        protected override void OnValidate(object o)
+        {
+            if (!(o is MethodDefinition))
+                throw new ArgumentException("Must be of type " + typeof(MethodDefinition).FullName);
+        }
 
-			Detach (value);
-		}
+        public MethodDefinition[] GetMethod(string name)
+        {
+            ArrayList ret = new ArrayList();
+            foreach (MethodDefinition meth in this)
+                if (meth.Name == name)
+                    ret.Add(meth);
 
+            return ret.ToArray(typeof(MethodDefinition)) as MethodDefinition[];
+        }
 
-		public new void RemoveAt (int index)
-		{
-			MethodDefinition item = this [index];
-			Remove (item);
-		}
+        internal MethodDefinition GetMethodInternal(string name, IList parameters)
+        {
+            foreach (MethodDefinition meth in this)
+            {
+                if (meth.Name != name || meth.Parameters.Count != parameters.Count)
+                    continue;
 
-		protected override void OnValidate (object o)
-		{
-			if (! (o is MethodDefinition))
-				throw new ArgumentException ("Must be of type " + typeof (MethodDefinition).FullName);
-		}
+                bool match = true;
+                for (int i = 0; i < parameters.Count; i++)
+                {
+                    string pname;
+                    object param = parameters[i];
+                    if (param is Type)
+                        pname = ReflectionHelper.GetTypeSignature(param as Type);
+                    else if (param is TypeReference)
+                        pname = (param as TypeReference).FullName;
+                    else if (param is ParameterDefinition)
+                        pname = (param as ParameterDefinition).ParameterType.FullName;
+                    else
+                        throw new NotSupportedException();
 
-		public MethodDefinition [] GetMethod (string name)
-		{
-			ArrayList ret = new ArrayList ();
-			foreach (MethodDefinition meth in this)
-				if (meth.Name == name)
-					ret.Add (meth);
+                    if (meth.Parameters[i].ParameterType.FullName != pname)
+                    {
+                        match = false;
+                        break;
+                    }
+                }
 
-			return ret.ToArray (typeof (MethodDefinition)) as MethodDefinition [];
-		}
+                if (match)
+                    return meth;
+            }
 
-		internal MethodDefinition GetMethodInternal (string name, IList parameters)
-		{
-			foreach (MethodDefinition meth in this) {
-				if (meth.Name != name || meth.Parameters.Count != parameters.Count)
-					continue;
+            return null;
+        }
 
-				bool match = true;
-				for (int i = 0; i < parameters.Count; i++) {
-					string pname;
-					object param = parameters [i];
-					if (param is Type)
-						pname = ReflectionHelper.GetTypeSignature (param as Type);
-					else if (param is TypeReference)
-						pname = (param as TypeReference).FullName;
-					else if (param is ParameterDefinition)
-						pname = (param as ParameterDefinition).ParameterType.FullName;
-					else
-						throw new NotSupportedException ();
+        public MethodDefinition GetMethod(string name, Type[] parameters)
+        {
+            return GetMethodInternal(name, parameters);
+        }
 
-					if (meth.Parameters [i].ParameterType.FullName != pname) {
-						match = false;
-						break;
-					}
-				}
+        public MethodDefinition GetMethod(string name, TypeReference[] parameters)
+        {
+            return GetMethodInternal(name, parameters);
+        }
 
-				if (match)
-					return meth;
-			}
+        public MethodDefinition GetMethod(string name, ParameterDefinitionCollection parameters)
+        {
+            return GetMethodInternal(name, parameters);
+        }
 
-			return null;
-		}
+        void Attach(MemberReference member)
+        {
+            if (member.DeclaringType != null)
+                throw new ReflectionException("Member already attached, clone it instead");
 
-		public MethodDefinition GetMethod (string name, Type [] parameters)
-		{
-			return GetMethodInternal (name, parameters);
-		}
+            member.DeclaringType = m_container;
+        }
 
-		public MethodDefinition GetMethod (string name, TypeReference [] parameters)
-		{
-			return GetMethodInternal (name, parameters);
-		}
+        void Detach(MemberReference member)
+        {
+            member.DeclaringType = null;
+        }
 
-		public MethodDefinition GetMethod (string name, ParameterDefinitionCollection parameters)
-		{
-			return GetMethodInternal (name, parameters);
-		}
-
-		void Attach (MemberReference member)
-		{
-			if (member.DeclaringType != null)
-				throw new ReflectionException ("Member already attached, clone it instead");
-
-			member.DeclaringType = m_container;
-		}
-
-		void Detach (MemberReference member)
-		{
-			member.DeclaringType = null;
-		}
-
-		public void Accept (IReflectionVisitor visitor)
-		{
-			visitor.VisitMethodDefinitionCollection (this);
-		}
-	}
+        public void Accept(IReflectionVisitor visitor)
+        {
+            visitor.VisitMethodDefinitionCollection(this);
+        }
+    }
 }

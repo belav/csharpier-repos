@@ -21,9 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeCleanup
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpCodeCleanUpFixerProvider(
-            [ImportMany] IEnumerable<Lazy<AbstractCodeCleanUpFixer, ContentTypeMetadata>> codeCleanUpFixers)
-            : base(codeCleanUpFixers)
-        {
-        }
+            [ImportMany]
+                IEnumerable<Lazy<AbstractCodeCleanUpFixer, ContentTypeMetadata>> codeCleanUpFixers
+        )
+            : base(codeCleanUpFixers) { }
     }
 }

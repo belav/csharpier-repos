@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,25 +44,34 @@ using MonoTests.Helpers;
 
 namespace MonoTests.System.Runtime.Serialization
 {
-	public class DataContractSerializerTest_FrameworkTypes
-	{
-		protected void Test<T> () where T : new () {
-			T o = new T ();
-			Type t = o.GetType ();
-			string fileName = TestResourceHelper.GetFullPathOfResource ("Test/Resources/FrameworkTypes/" + t.FullName + ".xml");
+    public class DataContractSerializerTest_FrameworkTypes
+    {
+        protected void Test<T>()
+            where T : new()
+        {
+            T o = new T();
+            Type t = o.GetType();
+            string fileName = TestResourceHelper.GetFullPathOfResource(
+                "Test/Resources/FrameworkTypes/" + t.FullName + ".xml"
+            );
 
-			DataContractSerializer serializer = new DataContractSerializer (t);
-			StringBuilder stringBuilder = new StringBuilder ();
-			using (XmlWriter xmlWriter = XmlWriter.Create (new StringWriter (stringBuilder)))
-				serializer.WriteObject (xmlWriter, o);
-			string actualXml = stringBuilder.ToString ();
-			string expectedXml = File.ReadAllText (fileName);
+            DataContractSerializer serializer = new DataContractSerializer(t);
+            StringBuilder stringBuilder = new StringBuilder();
+            using (XmlWriter xmlWriter = XmlWriter.Create(new StringWriter(stringBuilder)))
+                serializer.WriteObject(xmlWriter, o);
+            string actualXml = stringBuilder.ToString();
+            string expectedXml = File.ReadAllText(fileName);
 
-			XmlComparer.AssertAreEqual (expectedXml, actualXml, "Serialization of " + t.FullName + " failed.");
+            XmlComparer.AssertAreEqual(
+                expectedXml,
+                actualXml,
+                "Serialization of " + t.FullName + " failed."
+            );
 
-			using (FileStream fs = File.OpenRead (fileName)) {
-				o = (T) serializer.ReadObject (fs);
-			}
-		}
-	}
+            using (FileStream fs = File.OpenRead(fileName))
+            {
+                o = (T)serializer.ReadObject(fs);
+            }
+        }
+    }
 }

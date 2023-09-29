@@ -12,24 +12,23 @@ namespace System.Collections.Frozen
     {
         private readonly FrozenHashTable _hashTable;
 
-        internal Int32FrozenSet(HashSet<int> source) : base(EqualityComparer<int>.Default)
+        internal Int32FrozenSet(HashSet<int> source)
+            : base(EqualityComparer<int>.Default)
         {
             Debug.Assert(source.Count != 0);
 
             int[] entries = new int[source.Count];
             source.CopyTo(entries);
 
-            _hashTable = FrozenHashTable.Create(
-                entries,
-                item => item,
-                (_, _) => { });
+            _hashTable = FrozenHashTable.Create(entries, item => item, (_, _) => { });
         }
 
         /// <inheritdoc />
         private protected override int[] ItemsCore => _hashTable.HashCodes;
 
         /// <inheritdoc />
-        private protected override Enumerator GetEnumeratorCore() => new Enumerator(_hashTable.HashCodes);
+        private protected override Enumerator GetEnumeratorCore() =>
+            new Enumerator(_hashTable.HashCodes);
 
         /// <inheritdoc />
         private protected override int CountCore => _hashTable.Count;
@@ -55,11 +54,14 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private Int32FrozenSet _set;
+
             public void Store(FrozenSet<int> set) => _set = (Int32FrozenSet)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<int> Comparer => _set.Comparer;
+
             public int FindItemIndex(int item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

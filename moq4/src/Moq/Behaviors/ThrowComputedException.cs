@@ -6,20 +6,20 @@ using System.Diagnostics;
 
 namespace Moq.Behaviors
 {
-	internal sealed class ThrowComputedException : Behavior
-	{
-		private readonly Func<IInvocation, Exception> exceptionFactory;
+    internal sealed class ThrowComputedException : Behavior
+    {
+        private readonly Func<IInvocation, Exception> exceptionFactory;
 
-		public ThrowComputedException(Func<IInvocation, Exception> exceptionFactory)
-		{
-			Debug.Assert(exceptionFactory != null);
+        public ThrowComputedException(Func<IInvocation, Exception> exceptionFactory)
+        {
+            Debug.Assert(exceptionFactory != null);
 
-			this.exceptionFactory = exceptionFactory;
-		}
+            this.exceptionFactory = exceptionFactory;
+        }
 
-		public override void Execute(Invocation invocation)
-		{
-			throw this.exceptionFactory.Invoke(invocation);
-		}
-	}
+        public override void Execute(Invocation invocation)
+        {
+            throw this.exceptionFactory.Invoke(invocation);
+        }
+    }
 }

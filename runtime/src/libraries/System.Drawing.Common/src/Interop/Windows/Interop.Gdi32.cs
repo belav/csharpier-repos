@@ -20,7 +20,10 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int width, int height);
+            HandleRef hDC,
+            int width,
+            int height
+        );
 
         [LibraryImport(Libraries.Gdi32)]
         internal static partial int GetDIBits(
@@ -31,59 +34,82 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hbm, int arg1, int arg2, IntPtr arg3, ref BITMAPINFO_FLAT bmi, int arg5);
+            HandleRef hbm,
+            int arg1,
+            int arg2,
+            IntPtr arg3,
+            ref BITMAPINFO_FLAT bmi,
+            int arg5
+        );
 
         [LibraryImport(Libraries.Gdi32)]
         internal static partial uint GetPaletteEntries(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hpal, int iStartIndex, int nEntries, byte[] lppe);
+            HandleRef hpal,
+            int iStartIndex,
+            int nEntries,
+            byte[] lppe
+        );
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
         internal static partial IntPtr CreateDIBSection(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hdc, ref BITMAPINFO_FLAT bmi, int iUsage, ref IntPtr ppvBits, IntPtr hSection, int dwOffset);
+            HandleRef hdc,
+            ref BITMAPINFO_FLAT bmi,
+            int iUsage,
+            ref IntPtr ppvBits,
+            IntPtr hSection,
+            int dwOffset
+        );
 
         [LibraryImport(Libraries.Gdi32, EntryPoint = "StartDocW", SetLastError = true)]
         internal static partial int StartDoc(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, DOCINFO lpDocInfo);
+            HandleRef hDC,
+            DOCINFO lpDocInfo
+        );
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
         internal static partial int StartPage(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC);
+            HandleRef hDC
+        );
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
         internal static partial int EndPage(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC);
+            HandleRef hDC
+        );
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
         internal static partial int AbortDoc(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC);
+            HandleRef hDC
+        );
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
         internal static partial int EndDoc(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC);
+            HandleRef hDC
+        );
 
         [LibraryImport(Libraries.Gdi32, EntryPoint = "ResetDCW", SetLastError = true)]
-        internal static partial IntPtr /*HDC*/ ResetDC(
+        internal static partial IntPtr /*HDC*/
+        ResetDC(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
@@ -91,14 +117,25 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef /*DEVMODE*/ lpDevMode);
+            HandleRef /*DEVMODE*/
+            lpDevMode
+        );
 
-        [LibraryImport(Libraries.Gdi32, EntryPoint = "AddFontResourceExW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Gdi32,
+            EntryPoint = "AddFontResourceExW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int AddFontResourceEx(string lpszFilename, int fl, IntPtr pdv);
 
         internal static int AddFontFile(string fileName)
         {
-            return AddFontResourceEx(fileName, /*FR_PRIVATE*/ 0x10, IntPtr.Zero);
+            return AddFontResourceEx(
+                fileName, /*FR_PRIVATE*/
+                0x10,
+                IntPtr.Zero
+            );
         }
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
@@ -106,42 +143,71 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int nEscape, int cbInput, ref int inData, int cbOutput, out int outData);
+            HandleRef hDC,
+            int nEscape,
+            int cbInput,
+            ref int inData,
+            int cbOutput,
+            out int outData
+        );
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
         internal static partial int ExtEscape(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int nEscape, int cbInput, byte[] inData, int cbOutput, out int outData);
+            HandleRef hDC,
+            int nEscape,
+            int cbInput,
+            byte[] inData,
+            int cbOutput,
+            out int outData
+        );
 
         [LibraryImport(Libraries.Gdi32, SetLastError = true)]
         internal static partial int IntersectClipRect(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int x1, int y1, int x2, int y2);
+            HandleRef hDC,
+            int x1,
+            int y1,
+            int x2,
+            int y2
+        );
 
         [LibraryImport(Libraries.Gdi32, EntryPoint = "GetObjectW", SetLastError = true)]
         internal static partial int GetObject(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hObject, int nSize, ref BITMAP bm);
+            HandleRef hObject,
+            int nSize,
+            ref BITMAP bm
+        );
 
-        [LibraryImport(Libraries.Gdi32, EntryPoint = "GetObjectW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Gdi32,
+            EntryPoint = "GetObjectW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int GetObject(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hObject, int nSize, ref Interop.User32.LOGFONT lf);
+            HandleRef hObject,
+            int nSize,
+            ref Interop.User32.LOGFONT lf
+        );
 
         internal static unsafe int GetObject(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hObject, ref Interop.User32.LOGFONT lp)
-            => GetObject(hObject, sizeof(Interop.User32.LOGFONT), ref lp);
+            HandleRef hObject,
+            ref Interop.User32.LOGFONT lp
+        ) => GetObject(hObject, sizeof(Interop.User32.LOGFONT), ref lp);
 
         [StructLayout(LayoutKind.Sequential)]
         public struct BITMAP
@@ -188,10 +254,15 @@ internal static partial class Interop
             internal int fwType;
 
 #if NET7_0_OR_GREATER
-            [CustomMarshaller(typeof(DOCINFO), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
+            [CustomMarshaller(
+                typeof(DOCINFO),
+                MarshalMode.ManagedToUnmanagedIn,
+                typeof(Marshaller)
+            )]
             public static class Marshaller
             {
                 public static Native ConvertToUnmanaged(DOCINFO managed) => new(managed);
+
                 public static void Free(Native native) => native.FreeNative();
 
                 internal struct Native
@@ -245,6 +316,7 @@ internal static partial class Interop
             public short dmYResolution;
             public short dmTTOption;
             public short dmCollate;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             public string? dmFormName;
             public short dmLogPixels;
@@ -262,45 +334,78 @@ internal static partial class Interop
             public int dmPanningWidth;
             public int dmPanningHeight;
 
-
             public override string ToString()
             {
                 return "[DEVMODE: "
-                + "dmDeviceName=" + dmDeviceName
-                + ", dmSpecVersion=" + dmSpecVersion
-                + ", dmDriverVersion=" + dmDriverVersion
-                + ", dmSize=" + dmSize
-                + ", dmDriverExtra=" + dmDriverExtra
-                + ", dmFields=" + dmFields
-                + ", dmOrientation=" + dmOrientation
-                + ", dmPaperSize=" + dmPaperSize
-                + ", dmPaperLength=" + dmPaperLength
-                + ", dmPaperWidth=" + dmPaperWidth
-                + ", dmScale=" + dmScale
-                + ", dmCopies=" + dmCopies
-                + ", dmDefaultSource=" + dmDefaultSource
-                + ", dmPrintQuality=" + dmPrintQuality
-                + ", dmColor=" + dmColor
-                + ", dmDuplex=" + dmDuplex
-                + ", dmYResolution=" + dmYResolution
-                + ", dmTTOption=" + dmTTOption
-                + ", dmCollate=" + dmCollate
-                + ", dmFormName=" + dmFormName
-                + ", dmLogPixels=" + dmLogPixels
-                + ", dmBitsPerPel=" + dmBitsPerPel
-                + ", dmPelsWidth=" + dmPelsWidth
-                + ", dmPelsHeight=" + dmPelsHeight
-                + ", dmDisplayFlags=" + dmDisplayFlags
-                + ", dmDisplayFrequency=" + dmDisplayFrequency
-                + ", dmICMMethod=" + dmICMMethod
-                + ", dmICMIntent=" + dmICMIntent
-                + ", dmMediaType=" + dmMediaType
-                + ", dmDitherType=" + dmDitherType
-                + ", dmICCManufacturer=" + dmICCManufacturer
-                + ", dmICCModel=" + dmICCModel
-                + ", dmPanningWidth=" + dmPanningWidth
-                + ", dmPanningHeight=" + dmPanningHeight
-                + "]";
+                    + "dmDeviceName="
+                    + dmDeviceName
+                    + ", dmSpecVersion="
+                    + dmSpecVersion
+                    + ", dmDriverVersion="
+                    + dmDriverVersion
+                    + ", dmSize="
+                    + dmSize
+                    + ", dmDriverExtra="
+                    + dmDriverExtra
+                    + ", dmFields="
+                    + dmFields
+                    + ", dmOrientation="
+                    + dmOrientation
+                    + ", dmPaperSize="
+                    + dmPaperSize
+                    + ", dmPaperLength="
+                    + dmPaperLength
+                    + ", dmPaperWidth="
+                    + dmPaperWidth
+                    + ", dmScale="
+                    + dmScale
+                    + ", dmCopies="
+                    + dmCopies
+                    + ", dmDefaultSource="
+                    + dmDefaultSource
+                    + ", dmPrintQuality="
+                    + dmPrintQuality
+                    + ", dmColor="
+                    + dmColor
+                    + ", dmDuplex="
+                    + dmDuplex
+                    + ", dmYResolution="
+                    + dmYResolution
+                    + ", dmTTOption="
+                    + dmTTOption
+                    + ", dmCollate="
+                    + dmCollate
+                    + ", dmFormName="
+                    + dmFormName
+                    + ", dmLogPixels="
+                    + dmLogPixels
+                    + ", dmBitsPerPel="
+                    + dmBitsPerPel
+                    + ", dmPelsWidth="
+                    + dmPelsWidth
+                    + ", dmPelsHeight="
+                    + dmPelsHeight
+                    + ", dmDisplayFlags="
+                    + dmDisplayFlags
+                    + ", dmDisplayFrequency="
+                    + dmDisplayFrequency
+                    + ", dmICMMethod="
+                    + dmICMMethod
+                    + ", dmICMIntent="
+                    + dmICMIntent
+                    + ", dmMediaType="
+                    + dmMediaType
+                    + ", dmDitherType="
+                    + dmDitherType
+                    + ", dmICCManufacturer="
+                    + dmICCManufacturer
+                    + ", dmICCModel="
+                    + dmICCModel
+                    + ", dmPanningWidth="
+                    + dmPanningWidth
+                    + ", dmPanningHeight="
+                    + dmPanningHeight
+                    + "]";
             }
         }
     }

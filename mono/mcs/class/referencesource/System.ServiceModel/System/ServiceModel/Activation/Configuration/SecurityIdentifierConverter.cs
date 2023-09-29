@@ -32,7 +32,11 @@ namespace System.ServiceModel.Activation.Configuration
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             Fx.Assert(this.CanConvertFrom(context, value.GetType()), "");
             if (value is string)
@@ -43,7 +47,12 @@ namespace System.ServiceModel.Activation.Configuration
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             Fx.Assert(this.CanConvertTo(context, destinationType), "");
             if (destinationType == typeof(string) && value is SecurityIdentifier)

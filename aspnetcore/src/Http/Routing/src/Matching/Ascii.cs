@@ -47,10 +47,13 @@ internal static class Ascii
         const uint AsciiToLower = 0x20;
         return
             // Equal when chars are exactly equal
-            charA == charB ||
-
+            charA == charB
+            ||
             // Equal when converted to-lower AND they are letters
-            ((charA | AsciiToLower) == (charB | AsciiToLower) && (uint)((charA | AsciiToLower) - 'a') <= (uint)('z' - 'a'));
+            (
+                (charA | AsciiToLower) == (charB | AsciiToLower)
+                && (uint)((charA | AsciiToLower) - 'a') <= (uint)('z' - 'a')
+            );
     }
 
     public static bool IsAscii(string text)

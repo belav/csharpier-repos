@@ -38,7 +38,13 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         [DataMember(Order = 4)]
         public readonly TextSpan ComplexifiedTargetSpan;
 
-        public RelatedLocation(TextSpan conflictCheckSpan, DocumentId documentId, RelatedLocationType type, bool isReference = false, TextSpan complexifiedTargetSpan = default)
+        public RelatedLocation(
+            TextSpan conflictCheckSpan,
+            DocumentId documentId,
+            RelatedLocationType type,
+            bool isReference = false,
+            TextSpan complexifiedTargetSpan = default
+        )
         {
             ConflictCheckSpan = conflictCheckSpan;
             Type = type;
@@ -47,19 +53,19 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             ComplexifiedTargetSpan = complexifiedTargetSpan;
         }
 
-        public RelatedLocation WithType(RelatedLocationType type)
-            => new(ConflictCheckSpan, DocumentId, type, IsReference, ComplexifiedTargetSpan);
+        public RelatedLocation WithType(RelatedLocationType type) =>
+            new(ConflictCheckSpan, DocumentId, type, IsReference, ComplexifiedTargetSpan);
 
-        public override bool Equals(object? obj)
-            => obj is RelatedLocation location && Equals(location);
+        public override bool Equals(object? obj) =>
+            obj is RelatedLocation location && Equals(location);
 
         public bool Equals(RelatedLocation other)
         {
-            return ConflictCheckSpan.Equals(other.ConflictCheckSpan) &&
-                   Type == other.Type &&
-                   IsReference == other.IsReference &&
-                   EqualityComparer<DocumentId>.Default.Equals(DocumentId, other.DocumentId) &&
-                   ComplexifiedTargetSpan.Equals(other.ComplexifiedTargetSpan);
+            return ConflictCheckSpan.Equals(other.ConflictCheckSpan)
+                && Type == other.Type
+                && IsReference == other.IsReference
+                && EqualityComparer<DocumentId>.Default.Equals(DocumentId, other.DocumentId)
+                && ComplexifiedTargetSpan.Equals(other.ComplexifiedTargetSpan);
         }
 
         public override int GetHashCode()
@@ -68,15 +74,17 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             hashCode = hashCode * -1521134295 + ConflictCheckSpan.GetHashCode();
             hashCode = hashCode * -1521134295 + ((int)Type).GetHashCode();
             hashCode = hashCode * -1521134295 + IsReference.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<DocumentId>.Default.GetHashCode(DocumentId);
+            hashCode =
+                hashCode * -1521134295
+                + EqualityComparer<DocumentId>.Default.GetHashCode(DocumentId);
             hashCode = hashCode * -1521134295 + ComplexifiedTargetSpan.GetHashCode();
             return hashCode;
         }
 
-        public static bool operator ==(RelatedLocation left, RelatedLocation right)
-            => left.Equals(right);
+        public static bool operator ==(RelatedLocation left, RelatedLocation right) =>
+            left.Equals(right);
 
-        public static bool operator !=(RelatedLocation left, RelatedLocation right)
-            => !(left == right);
+        public static bool operator !=(RelatedLocation left, RelatedLocation right) =>
+            !(left == right);
     }
 }

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,42 +27,48 @@
 //
 
 using System.Xml;
+
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("ExecuteTargets={ExecuteTargets}")]
-        public class ProjectOnErrorElement : ProjectElement
+    [System.Diagnostics.DebuggerDisplayAttribute("ExecuteTargets={ExecuteTargets}")]
+    public class ProjectOnErrorElement : ProjectElement
+    {
+        internal ProjectOnErrorElement(string executeTargets, ProjectRootElement containingProject)
+            : this(containingProject)
         {
-                internal ProjectOnErrorElement (string executeTargets, ProjectRootElement containingProject)
-                        : this(containingProject)
-                {
-                        ExecuteTargetsAttribute = executeTargets;
-                }
-                internal ProjectOnErrorElement (ProjectRootElement containingProject)
-                {
-                        ContainingProject = containingProject;
-                }
-                public string ExecuteTargetsAttribute { get; set; }
-                internal override string XmlName {
-                        get { return "OnError"; }
-                }
-                internal override void SaveValue (XmlWriter writer)
-                {
-                        base.SaveValue (writer);
-                        SaveAttribute (writer, "ExecuteTargets", ExecuteTargetsAttribute);
-                }
-                internal override void LoadAttribute (string name, string value)
-                {
-                        switch (name) {
-                        case "ExecuteTargets":
-                                ExecuteTargetsAttribute = value;
-                                break;
-                        default:
-                                base.LoadAttribute (name, value);
-                                break;
-                        }
-                }
-                
-                public 
-                ElementLocation ExecuteTargetsAttributeLocation { get; set; }
+            ExecuteTargetsAttribute = executeTargets;
         }
+
+        internal ProjectOnErrorElement(ProjectRootElement containingProject)
+        {
+            ContainingProject = containingProject;
+        }
+
+        public string ExecuteTargetsAttribute { get; set; }
+        internal override string XmlName
+        {
+            get { return "OnError"; }
+        }
+
+        internal override void SaveValue(XmlWriter writer)
+        {
+            base.SaveValue(writer);
+            SaveAttribute(writer, "ExecuteTargets", ExecuteTargetsAttribute);
+        }
+
+        internal override void LoadAttribute(string name, string value)
+        {
+            switch (name)
+            {
+                case "ExecuteTargets":
+                    ExecuteTargetsAttribute = value;
+                    break;
+                default:
+                    base.LoadAttribute(name, value);
+                    break;
+            }
+        }
+
+        public ElementLocation ExecuteTargetsAttributeLocation { get; set; }
+    }
 }

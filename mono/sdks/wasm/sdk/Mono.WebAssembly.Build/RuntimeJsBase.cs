@@ -24,59 +24,73 @@ using System.Text;
 
 namespace Mono.WebAssembly.Build
 {
-	// custom base for template to strip out CodeDom dependency
-	public abstract class TemplateBase
-	{
-		public abstract string TransformText ();
-		public virtual void Initialize () { }
+    // custom base for template to strip out CodeDom dependency
+    public abstract class TemplateBase
+    {
+        public abstract string TransformText();
 
-		StringBuilder builder = new StringBuilder ();
+        public virtual void Initialize() { }
 
-		public StringBuilder GenerationEnvironment {
-			get => builder;
-			set {
-				if (value == null) {
-					builder.Length = 0;
-				} else {
-					builder = value;
-				}
-			}
-		}
+        StringBuilder builder = new StringBuilder();
 
-		public ToStringInstanceHelper ToStringHelper { get; } = new ToStringInstanceHelper ();
+        public StringBuilder GenerationEnvironment
+        {
+            get => builder;
+            set
+            {
+                if (value == null)
+                {
+                    builder.Length = 0;
+                }
+                else
+                {
+                    builder = value;
+                }
+            }
+        }
 
-		public void Write (string textToAppend) => this.GenerationEnvironment.Append (textToAppend);
+        public ToStringInstanceHelper ToStringHelper { get; } = new ToStringInstanceHelper();
 
-		public void Write (string format, params object[] args) => GenerationEnvironment.AppendFormat (format, args);
+        public void Write(string textToAppend) => this.GenerationEnvironment.Append(textToAppend);
 
-		public void WriteLine (string textToAppend) => GenerationEnvironment.AppendLine (textToAppend);
+        public void Write(string format, params object[] args) =>
+            GenerationEnvironment.AppendFormat(format, args);
 
-		public void WriteLine (string format, params object[] args)
-		{
-			GenerationEnvironment.AppendFormat (format, args);
-			GenerationEnvironment.AppendLine ();
-		}
+        public void WriteLine(string textToAppend) =>
+            GenerationEnvironment.AppendLine(textToAppend);
 
-		public class ToStringInstanceHelper
-		{
-			public IFormatProvider FormatProvider { get; } = System.Globalization.CultureInfo.InvariantCulture;
+        public void WriteLine(string format, params object[] args)
+        {
+            GenerationEnvironment.AppendFormat(format, args);
+            GenerationEnvironment.AppendLine();
+        }
 
-			public string ToStringWithCulture (object objectToConvert)
-			{
-				if (objectToConvert == null) {
-					throw new ArgumentNullException (nameof (objectToConvert));
-				}
-				var type = objectToConvert.GetType ();
-				var iConvertibleType = typeof (IConvertible);
-				if (iConvertibleType.IsAssignableFrom (type)) {
-					return ((IConvertible)objectToConvert).ToString (FormatProvider);
-				}
-				var methInfo = type.GetMethod ("ToString", new Type[] { iConvertibleType });
-				if ((methInfo != null)) {
-					return (string)(methInfo.Invoke (objectToConvert, new object[] { FormatProvider}));
-				}
-				return objectToConvert.ToString ();
-			}
-		}
-	}
+        public class ToStringInstanceHelper
+        {
+            public IFormatProvider FormatProvider { get; } =
+                System.Globalization.CultureInfo.InvariantCulture;
+
+            public string ToStringWithCulture(object objectToConvert)
+            {
+                if (objectToConvert == null)
+                {
+                    throw new ArgumentNullException(nameof(objectToConvert));
+                }
+                var type = objectToConvert.GetType();
+                var iConvertibleType = typeof(IConvertible);
+                if (iConvertibleType.IsAssignableFrom(type))
+                {
+                    return ((IConvertible)objectToConvert).ToString(FormatProvider);
+                }
+                var methInfo = type.GetMethod("ToString", new Type[] { iConvertibleType });
+                if ((methInfo != null))
+                {
+                    return (string)(
+                        methInfo.Invoke(objectToConvert, new object[] { FormatProvider })
+                    );
+                }
+                return objectToConvert.ToString();
+            }
+        }
+    }
 }

@@ -7,7 +7,6 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
-
 namespace XSLTest
 {
     public class Program
@@ -50,4 +49,3 @@ namespace XSLTest
         }
     }
 }
-

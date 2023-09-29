@@ -28,18 +28,24 @@ namespace System.Collections.Frozen
         ///
         /// Warning: This code may reorganize (e.g. sort) the entries in the input array. It will not delete or add anything though.
         /// </remarks>
-        public static StringComparerBase Pick(ReadOnlySpan<string> uniqueStrings, bool ignoreCase, out int minimumLength, out int maximumLengthDiff)
+        public static StringComparerBase Pick(
+            ReadOnlySpan<string> uniqueStrings,
+            bool ignoreCase,
+            out int minimumLength,
+            out int maximumLengthDiff
+        )
         {
             Debug.Assert(uniqueStrings.Length != 0);
 
             // First, try to pick a substring comparer.
             // if we couldn't find a good substring comparer, fallback to a full string comparer.
             StringComparerBase? c =
-                PickSubstringComparer(uniqueStrings, ignoreCase) ??
-                PickFullStringComparer(uniqueStrings, ignoreCase);
+                PickSubstringComparer(uniqueStrings, ignoreCase)
+                ?? PickFullStringComparer(uniqueStrings, ignoreCase);
 
             // Calculate the trivial rejection boundaries.
-            int min = int.MaxValue, max = 0;
+            int min = int.MaxValue,
+                max = 0;
             foreach (string s in uniqueStrings)
             {
                 if (s.Length < min)
@@ -58,7 +64,10 @@ namespace System.Collections.Frozen
             return c;
         }
 
-        private static StringComparerBase? PickSubstringComparer(ReadOnlySpan<string> uniqueStrings, bool ignoreCase)
+        private static StringComparerBase? PickSubstringComparer(
+            ReadOnlySpan<string> uniqueStrings,
+            bool ignoreCase
+        )
         {
             const double SufficientUniquenessFactor = 0.95; // 95% is good enough
 
@@ -72,8 +81,12 @@ namespace System.Collections.Frozen
                 }
             }
 
-            SubstringComparerBase leftComparer = ignoreCase ? new LeftJustifiedCaseInsensitiveSubstringComparer() : new LeftJustifiedSubstringComparer();
-            SubstringComparerBase rightComparer = ignoreCase ? new RightJustifiedCaseInsensitiveSubstringComparer() : new RightJustifiedSubstringComparer();
+            SubstringComparerBase leftComparer = ignoreCase
+                ? new LeftJustifiedCaseInsensitiveSubstringComparer()
+                : new LeftJustifiedSubstringComparer();
+            SubstringComparerBase rightComparer = ignoreCase
+                ? new RightJustifiedCaseInsensitiveSubstringComparer()
+                : new RightJustifiedSubstringComparer();
 
             // try to find the minimal unique substring to use for comparisons
             var leftSet = new HashSet<string>(new ComparerWrapper(leftComparer));
@@ -130,7 +143,14 @@ namespace System.Collections.Frozen
                         {
                             foreach (string ss in uniqueStrings)
                             {
-                                if (!IsAllAscii(ss.AsSpan(ss.Length + rightComparer.Index, rightComparer.Count)))
+                                if (
+                                    !IsAllAscii(
+                                        ss.AsSpan(
+                                            ss.Length + rightComparer.Index,
+                                            rightComparer.Count
+                                        )
+                                    )
+                                )
                                 {
                                     // keep the slower non-ascii comparer since we have some non-ascii text
                                     return rightComparer;
@@ -163,7 +183,10 @@ namespace System.Collections.Frozen
             return null;
         }
 
-        private static StringComparerBase PickFullStringComparer(ReadOnlySpan<string> uniqueStrings, bool ignoreCase)
+        private static StringComparerBase PickFullStringComparer(
+            ReadOnlySpan<string> uniqueStrings,
+            bool ignoreCase
+        )
         {
             if (!ignoreCase)
             {
@@ -188,6 +211,7 @@ namespace System.Collections.Frozen
             public ComparerWrapper(SubstringComparerBase comp) => _comp = comp;
 
             public bool Equals(string? x, string? y) => _comp.EqualsPartial(x, y);
+
             public int GetHashCode([DisallowNull] string obj) => _comp.GetHashCode(obj);
         }
 
@@ -228,7 +252,10 @@ namespace System.Collections.Frozen
             static bool AllCharsInUInt32AreAscii(uint value) => (value & ~0x007F_007Fu) == 0;
         }
 
-        private static double GetUniquenessFactor(HashSet<string> set, ReadOnlySpan<string> uniqueStrings)
+        private static double GetUniquenessFactor(
+            HashSet<string> set,
+            ReadOnlySpan<string> uniqueStrings
+        )
         {
             set.Clear();
             foreach (string s in uniqueStrings)

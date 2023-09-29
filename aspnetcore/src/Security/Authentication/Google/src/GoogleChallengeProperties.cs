@@ -38,24 +38,24 @@ public class GoogleChallengeProperties : OAuthChallengeProperties
     /// <summary>
     /// Initializes a new instance of <see cref="GoogleChallengeProperties"/>.
     /// </summary>
-    public GoogleChallengeProperties()
-    { }
+    public GoogleChallengeProperties() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="GoogleChallengeProperties"/>.
     /// </summary>
     /// <inheritdoc />
     public GoogleChallengeProperties(IDictionary<string, string?> items)
-        : base(items)
-    { }
+        : base(items) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="GoogleChallengeProperties"/>.
     /// </summary>
     /// <inheritdoc />
-    public GoogleChallengeProperties(IDictionary<string, string?> items, IDictionary<string, object?> parameters)
-        : base(items, parameters)
-    { }
+    public GoogleChallengeProperties(
+        IDictionary<string, string?> items,
+        IDictionary<string, object?> parameters
+    )
+        : base(items, parameters) { }
 
     /// <summary>
     /// The "access_type" parameter value being used for a challenge request.

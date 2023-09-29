@@ -8,7 +8,11 @@ namespace System.Runtime.DurableInstancing
     using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.FlagsEnumsShouldHavePluralNames, Justification = "Consistency is an adjective.")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.FlagsEnumsShouldHavePluralNames,
+        Justification = "Consistency is an adjective."
+    )]
     [Flags]
     public enum InstanceValueConsistency
     {

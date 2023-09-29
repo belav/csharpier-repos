@@ -58,7 +58,10 @@ namespace System
 
         private MethodBase? GetExceptionMethodFromStackTrace()
         {
-            Debug.Assert(_stackTrace != null, "_stackTrace shouldn't be null when this method is called");
+            Debug.Assert(
+                _stackTrace != null,
+                "_stackTrace shouldn't be null when this method is called"
+            );
             IRuntimeMethodInfo method = GetMethodFromStackTrace(_stackTrace!);
 
             // Under certain race conditions when exceptions are re-used, this can be null
@@ -126,10 +129,18 @@ namespace System
         private static extern void PrepareForForeignExceptionRaise();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void GetStackTracesDeepCopy(Exception exception, out byte[]? currentStackTrace, out object[]? dynamicMethodArray);
+        private static extern void GetStackTracesDeepCopy(
+            Exception exception,
+            out byte[]? currentStackTrace,
+            out object[]? dynamicMethodArray
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void SaveStackTracesFromDeepCopy(Exception exception, byte[]? currentStackTrace, object[]? dynamicMethodArray);
+        internal static extern void SaveStackTracesFromDeepCopy(
+            Exception exception,
+            byte[]? currentStackTrace,
+            object[]? dynamicMethodArray
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern uint GetExceptionCount();
@@ -165,7 +176,7 @@ namespace System
             }
         }
 
-        private MethodBase? _exceptionMethod;  // Needed for serialization.
+        private MethodBase? _exceptionMethod; // Needed for serialization.
         internal string? _message;
         private IDictionary? _data;
         private readonly Exception? _innerException;
@@ -180,17 +191,17 @@ namespace System
         // the _stackTrace field holds MethodDescs, and a DynamicMethodDesc can be destroyed
         // unless a System.Resolver object roots it.
         private readonly object[]? _dynamicMethods;
-        private string? _source;         // Mainly used by VB.
+        private string? _source; // Mainly used by VB.
         private UIntPtr _ipForWatsonBuckets; // Used to persist the IP for Watson Bucketing
-        private readonly IntPtr _xptrs;             // Internal EE stuff
-        private readonly int _xcode = _COMPlusExceptionCode;             // Internal EE stuff
+        private readonly IntPtr _xptrs; // Internal EE stuff
+        private readonly int _xcode = _COMPlusExceptionCode; // Internal EE stuff
 #pragma warning restore CA1823, 414
 
         // @MANAGED: HResult is used from within the EE!  Rename with care - check VM directory
-        private int _HResult;       // HResult
+        private int _HResult; // HResult
 
         // See src\inc\corexcep.h's EXCEPTION_COMPLUS definition:
-        private const int _COMPlusExceptionCode = unchecked((int)0xe0434352);   // Win32 exception code for COM+ exceptions
+        private const int _COMPlusExceptionCode = unchecked((int)0xe0434352); // Win32 exception code for COM+ exceptions
 
         private bool HasBeenThrown => _stackTrace != null;
 
@@ -220,8 +231,14 @@ namespace System
             return retMesg!;
         }
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ExceptionNative_GetMessageFromNativeResources")]
-        private static partial void GetMessageFromNativeResources(ExceptionMessageKind kind, StringHandleOnStack retMesg);
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ExceptionNative_GetMessageFromNativeResources"
+        )]
+        private static partial void GetMessageFromNativeResources(
+            ExceptionMessageKind kind,
+            StringHandleOnStack retMesg
+        );
 
         internal readonly struct DispatchState
         {
@@ -236,7 +253,8 @@ namespace System
                 object[]? dynamicMethods,
                 string? remoteStackTrace,
                 UIntPtr ipForWatsonBuckets,
-                byte[]? watsonBuckets)
+                byte[]? watsonBuckets
+            )
             {
                 StackTrace = stackTrace;
                 DynamicMethods = dynamicMethods;
@@ -250,8 +268,13 @@ namespace System
         {
             GetStackTracesDeepCopy(this, out byte[]? stackTrace, out object[]? dynamicMethods);
 
-            return new DispatchState(stackTrace, dynamicMethods,
-                _remoteStackTraceString, _ipForWatsonBuckets, _watsonBuckets);
+            return new DispatchState(
+                stackTrace,
+                dynamicMethods,
+                _remoteStackTraceString,
+                _ipForWatsonBuckets,
+                _watsonBuckets
+            );
         }
 
         // Returns true if setting the _remoteStackTraceString field is legal, false if not (immutable exception).
@@ -281,7 +304,8 @@ namespace System
             helpContext = 0;
             string? helpFile = HelpLink;
 
-            int poundPos, digitEnd;
+            int poundPos,
+                digitEnd;
 
             if (helpFile is null || (poundPos = helpFile.LastIndexOf('#')) == -1)
             {
@@ -294,7 +318,12 @@ namespace System
                     break;
             }
 
-            if (uint.TryParse(helpFile.AsSpan(poundPos + 1, digitEnd - poundPos - 1), out helpContext))
+            if (
+                uint.TryParse(
+                    helpFile.AsSpan(poundPos + 1, digitEnd - poundPos - 1),
+                    out helpContext
+                )
+            )
             {
                 helpFile = helpFile.Substring(0, poundPos);
             }

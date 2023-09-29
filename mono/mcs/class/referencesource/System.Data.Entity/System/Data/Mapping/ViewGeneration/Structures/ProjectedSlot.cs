@@ -84,7 +84,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// </summary>
         /// <param name="outputMember">outputMember is non-null if this slot is not a constant slot</param>
         /// <param name="indentLevel">indicates the appropriate indentation level (method can ignore it)</param>
-        internal abstract StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias, int indentLevel);
+        internal abstract StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias,
+            int indentLevel
+        );
 
         /// <summary>
         /// Given the slot and the input <paramref name="row"/>, generates CQT corresponding to the slot.
@@ -96,7 +101,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Given fields in <paramref name="slots1"/> and <paramref name="slots2"/>, remap and merge them.
         /// </summary>
-        internal static bool TryMergeRemapSlots(ProjectedSlot[] slots1, ProjectedSlot[] slots2, out ProjectedSlot[] result)
+        internal static bool TryMergeRemapSlots(
+            ProjectedSlot[] slots1,
+            ProjectedSlot[] slots2,
+            out ProjectedSlot[] result
+        )
         {
             // First merge them and then remap them
             ProjectedSlot[] mergedSlots;
@@ -111,12 +120,19 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Given two lists <paramref name="slots1"/> and <paramref name="slots2"/>, merge them and returnthe resulting slots, 
+        /// Given two lists <paramref name="slots1"/> and <paramref name="slots2"/>, merge them and returnthe resulting slots,
         /// i.e., empty slots from one are overridden by the slots from the other.
         /// </summary>
-        private static bool TryMergeSlots(ProjectedSlot[] slots1, ProjectedSlot[] slots2, out ProjectedSlot[] slots)
+        private static bool TryMergeSlots(
+            ProjectedSlot[] slots1,
+            ProjectedSlot[] slots2,
+            out ProjectedSlot[] slots
+        )
         {
-            Debug.Assert(slots1.Length == slots2.Length, "Merged slots of two cells must be same size");
+            Debug.Assert(
+                slots1.Length == slots2.Length,
+                "Merged slots of two cells must be same size"
+            );
             slots = new ProjectedSlot[slots1.Length];
 
             for (int i = 0; i < slots.Length; i++)
@@ -140,8 +156,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     MemberProjectedSlot memberSlot1 = slot1 as MemberProjectedSlot;
                     MemberProjectedSlot memberSlot2 = slot2 as MemberProjectedSlot;
 
-                    if (memberSlot1 != null && memberSlot2 != null &&
-                       false == EqualityComparer.Equals(memberSlot1, memberSlot2))
+                    if (
+                        memberSlot1 != null
+                        && memberSlot2 != null
+                        && false == EqualityComparer.Equals(memberSlot1, memberSlot2)
+                    )
                     {
                         // Illegal combination of slots; non-constant fields disagree
                         return false;

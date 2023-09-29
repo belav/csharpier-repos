@@ -13,7 +13,8 @@ namespace System.Numerics.Tensors
     {
         private readonly Memory<T> memory;
 
-        internal DenseTensor(Array fromArray, bool reverseStride = false) : base(fromArray, reverseStride)
+        internal DenseTensor(Array fromArray, bool reverseStride = false)
+            : base(fromArray, reverseStride)
         {
             // copy initial array
             var backingArray = new T[fromArray.Length];
@@ -26,7 +27,12 @@ namespace System.Numerics.Tensors
 
                 foreach (var item in fromArray)
                 {
-                    var destIndex = ArrayUtilities.TransformIndexByStrides(index++, sourceStrides, false, strides);
+                    var destIndex = ArrayUtilities.TransformIndexByStrides(
+                        index++,
+                        sourceStrides,
+                        false,
+                        strides
+                    );
                     backingArray[destIndex] = (T)item!;
                 }
             }
@@ -44,7 +50,8 @@ namespace System.Numerics.Tensors
         /// Initializes a rank-1 Tensor using the specified <paramref name="length"/>.
         /// </summary>
         /// <param name="length">Size of the 1-dimensional tensor</param>
-        public DenseTensor(int length) : base(length)
+        public DenseTensor(int length)
+            : base(length)
         {
             memory = new T[length];
         }
@@ -54,7 +61,8 @@ namespace System.Numerics.Tensors
         /// </summary>
         /// <param name="dimensions">An span of integers that represent the size of each dimension of the DenseTensor to create.</param>
         /// <param name="reverseStride">False (default) to indicate that the first dimension is most major (farthest apart) and the last dimension is most minor (closest together): akin to row-major in a rank-2 tensor.  True to indicate that the last dimension is most major (farthest apart) and the first dimension is most minor (closest together): akin to column-major in a rank-2 tensor.</param>
-        public DenseTensor(ReadOnlySpan<int> dimensions, bool reverseStride = false) : base(dimensions, reverseStride)
+        public DenseTensor(ReadOnlySpan<int> dimensions, bool reverseStride = false)
+            : base(dimensions, reverseStride)
         {
             memory = new T[Length];
         }
@@ -65,13 +73,26 @@ namespace System.Numerics.Tensors
         /// <param name="memory"></param>
         /// <param name="dimensions">An span of integers that represent the size of each dimension of the DenseTensor to create.</param>
         /// <param name="reverseStride">False (default) to indicate that the first dimension is most major (farthest apart) and the last dimension is most minor (closest together): akin to row-major in a rank-2 tensor.  True to indicate that the last dimension is most major (farthest apart) and the first dimension is most minor (closest together): akin to column-major in a rank-2 tensor.</param>
-        public DenseTensor(Memory<T> memory, ReadOnlySpan<int> dimensions, bool reverseStride = false) : base(dimensions, reverseStride)
+        public DenseTensor(
+            Memory<T> memory,
+            ReadOnlySpan<int> dimensions,
+            bool reverseStride = false
+        )
+            : base(dimensions, reverseStride)
         {
             this.memory = memory;
 
             if (Length != memory.Length)
             {
-                throw new ArgumentException(SR.Format(SR.LengthMustMatch, nameof(memory), memory.Length, nameof(dimensions), Length));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.LengthMustMatch,
+                        nameof(memory),
+                        memory.Length,
+                        nameof(dimensions),
+                        Length
+                    )
+                );
             }
         }
 
@@ -120,7 +141,12 @@ namespace System.Numerics.Tensors
             // TODO: use Span.IndexOf when/if it removes the IEquatable type constraint
             if (MemoryMarshal.TryGetArray<T>(Buffer, out var arraySegment))
             {
-                var result = Array.IndexOf(arraySegment.Array!, item, arraySegment.Offset, arraySegment.Count);
+                var result = Array.IndexOf(
+                    arraySegment.Array!,
+                    item,
+                    arraySegment.Offset,
+                    arraySegment.Count
+                );
                 if (result != -1)
                 {
                     result -= arraySegment.Offset;
@@ -169,7 +195,10 @@ namespace System.Numerics.Tensors
 
             if (newSize != Length)
             {
-                throw new ArgumentException(SR.Format(SR.CannotReshapeArrayDueToMismatchInLengths, Length, newSize), nameof(dimensions));
+                throw new ArgumentException(
+                    SR.Format(SR.CannotReshapeArrayDueToMismatchInLengths, Length, newSize),
+                    nameof(dimensions)
+                );
             }
 
             return new DenseTensor<T>(Buffer, dimensions, IsReversedStride);

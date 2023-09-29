@@ -15,7 +15,9 @@ internal static partial class Interop
         internal static partial ulong ErrClearError();
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ErrGetExceptionError")]
-        private static partial ulong ErrGetExceptionError([MarshalAs(UnmanagedType.Bool)] out bool isAllocFailure);
+        private static partial ulong ErrGetExceptionError(
+            [MarshalAs(UnmanagedType.Bool)] out bool isAllocFailure
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_ErrPeekError")]
         internal static partial ulong ErrPeekError();
@@ -80,7 +82,10 @@ internal static partial class Interop
             // Even though ErrGetError returns ulong (C++ unsigned long), we
             // really only expect error codes in the UInt32 range, since that
             // type is only 32 bits on x86 Linux.
-            Debug.Assert(error <= uint.MaxValue, "ErrGetError should only return error codes in the UInt32 range.");
+            Debug.Assert(
+                error <= uint.MaxValue,
+                "ErrGetError should only return error codes in the UInt32 range."
+            );
 
             // If there was an error code, and it wasn't something handled specially,
             // use the OpenSSL error string as the message to a CryptographicException.

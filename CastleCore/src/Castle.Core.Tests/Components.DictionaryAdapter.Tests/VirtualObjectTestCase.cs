@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -25,7 +25,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void Virtual_Realize()
         {
             var target = new MockVirtualTarget();
-            var obj    = MockVirtual.CreateVirtual(NodeA, target, MemberA);
+            var obj = MockVirtual.CreateVirtual(NodeA, target, MemberA);
 
             var realizedNode = obj.Realize();
 
@@ -38,8 +38,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void Virtual_Realize_Event()
         {
             var target = new MockVirtualTarget();
-            var obj    = MockVirtual.CreateVirtual(NodeA, target, MemberA);
-            var fired  = false;
+            var obj = MockVirtual.CreateVirtual(NodeA, target, MemberA);
+            var fired = false;
 
             obj.Realized += (sender, args) =>
             {
@@ -59,7 +59,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
         {
             var target1 = new MockVirtualTarget();
             var target2 = new MockVirtualTarget();
-            var obj     = MockVirtual.CreateVirtual(NodeA, target1, MemberA);
+            var obj = MockVirtual.CreateVirtual(NodeA, target1, MemberA);
 
             obj.AddSite(new VirtualSite<Node, Member>(target2, MemberB));
             var realizedNode = obj.Realize();
@@ -76,9 +76,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
         {
             var target1 = new MockVirtualTarget();
             var target2 = new MockVirtualTarget();
-            var obj   = MockVirtual.CreateVirtual(NodeA, target1, MemberA);
+            var obj = MockVirtual.CreateVirtual(NodeA, target1, MemberA);
 
-            obj.AddSite   (new VirtualSite<Node, Member>(target2, MemberB));
+            obj.AddSite(new VirtualSite<Node, Member>(target2, MemberB));
             obj.RemoveSite(new VirtualSite<Node, Member>(target1, MemberA));
             var realizedNode = obj.Realize();
 
@@ -102,7 +102,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void Real_Realize_Event()
         {
-            var obj   = MockVirtual.CreateReal(NodeA);
+            var obj = MockVirtual.CreateReal(NodeA);
             var fired = false;
 
             obj.Realized += (sender, args) =>
@@ -119,7 +119,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void Real_AddSite()
         {
             var target = new MockVirtualTarget();
-            var obj    = MockVirtual.CreateReal(NodeA);
+            var obj = MockVirtual.CreateReal(NodeA);
 
             obj.AddSite(new VirtualSite<Node, Member>(target, MemberA));
             var realizedNode = obj.Realize();
@@ -133,7 +133,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void Real_RemoveSite()
         {
             var target = new MockVirtualTarget();
-            var obj    = MockVirtual.CreateReal(NodeA);
+            var obj = MockVirtual.CreateReal(NodeA);
 
             obj.RemoveSite(new VirtualSite<Node, Member>(target, MemberA));
             var realizedNode = obj.Realize();
@@ -143,14 +143,13 @@ namespace Castle.Components.DictionaryAdapter.Tests
             Assert.IsNull(target.RealizedMember);
         }
 
-        private static readonly Node
-            NodeA = new Node();
+        private static readonly Node NodeA = new Node();
 
-        private static readonly Member
-            MemberA = new Member(),
+        private static readonly Member MemberA = new Member(),
             MemberB = new Member();
 
-        private sealed class Node   { }
+        private sealed class Node { }
+
         private sealed class Member { }
 
         private sealed class MockVirtual : VirtualObject<Node>
@@ -160,7 +159,11 @@ namespace Castle.Components.DictionaryAdapter.Tests
                 return new MockVirtual() { RealNode = node };
             }
 
-            public static IVirtual<Node> CreateVirtual(Node node, IVirtualTarget<Node, Member> target, Member member)
+            public static IVirtual<Node> CreateVirtual(
+                Node node,
+                IVirtualTarget<Node, Member> target,
+                Member member
+            )
             {
                 var site = new VirtualSite<Node, Member>(target, member);
 
@@ -200,11 +203,11 @@ namespace Castle.Components.DictionaryAdapter.Tests
         {
             public void OnRealizing(Node node, Member member)
             {
-                RealizedNode   = node;
+                RealizedNode = node;
                 RealizedMember = member;
             }
 
-            public Node   RealizedNode   { get; private set; }
+            public Node RealizedNode { get; private set; }
             public Member RealizedMember { get; private set; }
         }
     }

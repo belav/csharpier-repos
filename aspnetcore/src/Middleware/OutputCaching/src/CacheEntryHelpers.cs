@@ -13,7 +13,6 @@ internal static class CacheEntryHelpers
         {
             return 0L;
         }
-
         checked
         {
             // StatusCode

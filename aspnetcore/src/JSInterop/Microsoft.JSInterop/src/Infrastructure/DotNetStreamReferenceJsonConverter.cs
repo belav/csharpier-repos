@@ -8,7 +8,9 @@ namespace Microsoft.JSInterop.Infrastructure;
 
 internal sealed class DotNetStreamReferenceJsonConverter : JsonConverter<DotNetStreamReference>
 {
-    private static readonly JsonEncodedText DotNetStreamRefKey = JsonEncodedText.Encode("__dotNetStream");
+    private static readonly JsonEncodedText DotNetStreamRefKey = JsonEncodedText.Encode(
+        "__dotNetStream"
+    );
 
     public DotNetStreamReferenceJsonConverter(JSRuntime jsRuntime)
     {
@@ -17,10 +19,20 @@ internal sealed class DotNetStreamReferenceJsonConverter : JsonConverter<DotNetS
 
     public JSRuntime JSRuntime { get; }
 
-    public override DotNetStreamReference Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        => throw new NotSupportedException($"{nameof(DotNetStreamReference)} cannot be supplied from JavaScript to .NET because the stream contents have already been transferred.");
+    public override DotNetStreamReference Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    ) =>
+        throw new NotSupportedException(
+            $"{nameof(DotNetStreamReference)} cannot be supplied from JavaScript to .NET because the stream contents have already been transferred."
+        );
 
-    public override void Write(Utf8JsonWriter writer, DotNetStreamReference value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DotNetStreamReference value,
+        JsonSerializerOptions options
+    )
     {
         // We only serialize a DotNetStreamReference using this converter when we're supplying that info
         // to JS. We want to transmit the stream immediately as part of this process, so that the .NET side

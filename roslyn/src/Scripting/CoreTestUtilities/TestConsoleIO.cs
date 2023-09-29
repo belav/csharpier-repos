@@ -16,21 +16,16 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         private const ConsoleColor InitialColor = ConsoleColor.Gray;
 
         public TestConsoleIO(string input)
-            : this(new Reader(input))
-        {
-        }
+            : this(new Reader(input)) { }
 
         private TestConsoleIO(Reader reader)
-            : this(reader, new Writer(reader))
-        {
-        }
+            : this(reader, new Writer(reader)) { }
 
         private TestConsoleIO(Reader reader, TextWriter output)
-            : base(output: output, error: new TeeWriter(output), input: reader)
-        {
-        }
+            : base(output: output, error: new TeeWriter(output), input: reader) { }
 
-        public override void SetForegroundColor(ConsoleColor consoleColor) => ((Writer)Out).CurrentColor = consoleColor;
+        public override void SetForegroundColor(ConsoleColor consoleColor) =>
+            ((Writer)Out).CurrentColor = consoleColor;
 
         public override void ResetColor() => SetForegroundColor(InitialColor);
 
@@ -39,9 +34,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             public readonly StringBuilder ContentRead = new StringBuilder();
 
             public Reader(string input)
-                : base(input)
-            {
-            }
+                : base(input) { }
 
             public override string ReadLine()
             {

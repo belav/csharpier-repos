@@ -12,32 +12,63 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Constructor_InvalidEntryName()
         {
-            Assert.Throws<ArgumentNullException>(() => new UstarTarEntry(TarEntryType.RegularFile, entryName: null));
-            Assert.Throws<ArgumentException>(() => new UstarTarEntry(TarEntryType.RegularFile, entryName: string.Empty));
+            Assert.Throws<ArgumentNullException>(
+                () => new UstarTarEntry(TarEntryType.RegularFile, entryName: null)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new UstarTarEntry(TarEntryType.RegularFile, entryName: string.Empty)
+            );
         }
 
         [Fact]
         public void Constructor_UnsupportedEntryTypes()
         {
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry((TarEntryType)byte.MaxValue, InitialEntryName));
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry((TarEntryType)byte.MaxValue, InitialEntryName)
+            );
 
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.ContiguousFile, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.DirectoryList, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.ExtendedAttributes, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.LongLink, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.LongPath, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.MultiVolume, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.V7RegularFile, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.SparseFile, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new UstarTarEntry(TarEntryType.TapeVolume, InitialEntryName));
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.ContiguousFile, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.DirectoryList, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.ExtendedAttributes, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.LongLink, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.LongPath, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.MultiVolume, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.V7RegularFile, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.SparseFile, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new UstarTarEntry(TarEntryType.TapeVolume, InitialEntryName)
+            );
         }
 
         [Fact]
         public void SupportedEntryType_RegularFile()
         {
-            UstarTarEntry regularFile = new UstarTarEntry(TarEntryType.RegularFile, InitialEntryName);
+            UstarTarEntry regularFile = new UstarTarEntry(
+                TarEntryType.RegularFile,
+                InitialEntryName
+            );
             SetRegularFile(regularFile);
             VerifyRegularFile(regularFile, isWritable: true);
         }
@@ -61,7 +92,10 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void SupportedEntryType_SymbolicLink()
         {
-            UstarTarEntry symbolicLink = new UstarTarEntry(TarEntryType.SymbolicLink, InitialEntryName);
+            UstarTarEntry symbolicLink = new UstarTarEntry(
+                TarEntryType.SymbolicLink,
+                InitialEntryName
+            );
             SetSymbolicLink(symbolicLink);
             VerifySymbolicLink(symbolicLink);
         }
@@ -69,7 +103,10 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void SupportedEntryType_BlockDevice()
         {
-            UstarTarEntry blockDevice = new UstarTarEntry(TarEntryType.BlockDevice, InitialEntryName);
+            UstarTarEntry blockDevice = new UstarTarEntry(
+                TarEntryType.BlockDevice,
+                InitialEntryName
+            );
             SetBlockDevice(blockDevice);
             VerifyBlockDevice(blockDevice);
         }
@@ -77,7 +114,10 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void SupportedEntryType_CharacterDevice()
         {
-            UstarTarEntry characterDevice = new UstarTarEntry(TarEntryType.CharacterDevice, InitialEntryName);
+            UstarTarEntry characterDevice = new UstarTarEntry(
+                TarEntryType.CharacterDevice,
+                InitialEntryName
+            );
             SetCharacterDevice(characterDevice);
             VerifyCharacterDevice(characterDevice);
         }
@@ -153,12 +193,16 @@ namespace System.Formats.Tar.Tests
             string fileName = "mylink";
             string fullPath = Path.Join(root.Path, fileName);
 
-            string linkTarget = PlatformDetection.IsWindows ? @"C:\Windows\system32\notepad.exe" : "/usr/bin/nano";
+            string linkTarget = PlatformDetection.IsWindows
+                ? @"C:\Windows\system32\notepad.exe"
+                : "/usr/bin/nano";
 
             UstarTarEntry entry = new UstarTarEntry(entryType, fileName);
             entry.LinkName = linkTarget;
 
-            Assert.Throws<InvalidOperationException>(() => entry.ExtractToFile(fileName, overwrite: false));
+            Assert.Throws<InvalidOperationException>(
+                () => entry.ExtractToFile(fileName, overwrite: false)
+            );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }

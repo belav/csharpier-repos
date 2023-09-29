@@ -23,9 +23,7 @@ namespace System.Threading
         private bool _isScheduled;
         private long _scheduledDueTimeMs;
 
-        private TimerQueue(int _)
-        {
-        }
+        private TimerQueue(int _) { }
 
         [DynamicDependency("TimeoutCallback")]
         // This replaces the current pending setTimeout with shorter one

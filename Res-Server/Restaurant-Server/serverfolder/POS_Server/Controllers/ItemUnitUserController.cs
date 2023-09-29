@@ -18,6 +18,7 @@ namespace POS_Server.Controllers
     public class ItemUnitUserController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         //        [HttpPost]
         //        [Route("GetAll")]
@@ -159,7 +160,6 @@ namespace POS_Server.Controllers
             {
                 long userId = 0;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -167,8 +167,6 @@ namespace POS_Server.Controllers
                     {
                         userId = long.Parse(c.Value);
                     }
-
-
                 }
 
                 try
@@ -176,23 +174,23 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var row = entity.itemUnitUser
-                       .Where(u => u.userId == userId)
-                       .Select(S => new
-                       {
-                           S.id,
-                           S.itemUnitId,
-                           S.userId,
-                           S.notes,
-                           S.createDate,
-                           S.updateDate,
-                           S.createUserId,
-                           S.updateUserId,
-                           S.isActive,
-
-
-                       })
-                                   .ToList();
-
+                            .Where(u => u.userId == userId)
+                            .Select(
+                                S =>
+                                    new
+                                    {
+                                        S.id,
+                                        S.itemUnitId,
+                                        S.userId,
+                                        S.notes,
+                                        S.createDate,
+                                        S.updateDate,
+                                        S.createUserId,
+                                        S.updateUserId,
+                                        S.isActive,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(row);
                     }
@@ -350,7 +348,6 @@ namespace POS_Server.Controllers
 
             string message = "0";
 
-
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
@@ -365,8 +362,6 @@ namespace POS_Server.Controllers
                 List<itemUnitUser> newObject = new List<itemUnitUser>();
                 string Object = "";
 
-
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -374,17 +369,16 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<List<itemUnitUser>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newObject = JsonConvert.DeserializeObject<List<itemUnitUser>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "userId")
                     {
                         userId = long.Parse(c.Value);
                     }
-
-
                 }
-
 
                 try
                 {
@@ -399,10 +393,7 @@ namespace POS_Server.Controllers
                             entityd.itemUnitUser.RemoveRange(objectDelete);
                             message = entityd.SaveChanges().ToString();
                         }
-
-
                     }
-
 
                     foreach (itemUnitUser newrow in newObject)
                     {
@@ -411,7 +402,6 @@ namespace POS_Server.Controllers
                         {
                             count++;
                         }
-
                     }
 
                     // return count.ToString();
@@ -476,7 +466,6 @@ namespace POS_Server.Controllers
             //return count.ToString();
         }
 
-
         public string saveRow(itemUnitUser newObject, long userId)
         {
             string message = "";
@@ -502,7 +491,6 @@ namespace POS_Server.Controllers
                 newObject.userId = id;
             }
 
-
             try
             {
                 using (incposdbEntities entity = new incposdbEntities())
@@ -510,8 +498,8 @@ namespace POS_Server.Controllers
                     var locationEntity = entity.Set<itemUnitUser>();
                     if (newObject.id == 0)
                     {
-                        newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                        newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                        newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         newObject.updateUserId = userId;
                         newObject.userId = userId;
 
@@ -521,10 +509,11 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var tmpObject = entity.itemUnitUser.Where(p => p.id == newObject.id).FirstOrDefault();
+                        var tmpObject = entity.itemUnitUser
+                            .Where(p => p.id == newObject.id)
+                            .FirstOrDefault();
 
-                        tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-
+                        tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                         tmpObject.id = newObject.id;
                         tmpObject.itemUnitId = newObject.itemUnitId;
@@ -535,7 +524,6 @@ namespace POS_Server.Controllers
                         // tmpObject.createUserId = newObject.createUserId;
                         tmpObject.updateUserId = newObject.updateUserId;
                         tmpObject.isActive = newObject.isActive;
-
 
                         entity.SaveChanges();
 

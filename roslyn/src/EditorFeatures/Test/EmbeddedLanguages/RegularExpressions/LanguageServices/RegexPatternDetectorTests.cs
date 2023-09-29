@@ -22,12 +22,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.EmbeddedLanguages.RegularExpressions.
 
             static void MatchWorker(string value, RegexOptions? expectedOptions)
             {
-                var detector = new EmbeddedLanguageCommentDetector(RegexLanguageDetector.LanguageIdentifiers);
+                var detector = new EmbeddedLanguageCommentDetector(
+                    RegexLanguageDetector.LanguageIdentifiers
+                );
                 Assert.True(detector.TryMatch(value, out _, out var captures));
 
                 if (expectedOptions != null)
                 {
-                    Assert.True(EmbeddedLanguageCommentOptions<RegexOptions>.TryGetOptions(captures!, out var actualOptions));
+                    Assert.True(
+                        EmbeddedLanguageCommentOptions<RegexOptions>.TryGetOptions(
+                            captures!,
+                            out var actualOptions
+                        )
+                    );
                     Assert.Equal(expectedOptions.Value, actualOptions);
                 }
             }
@@ -44,106 +51,99 @@ namespace Microsoft.CodeAnalysis.UnitTests.EmbeddedLanguages.RegularExpressions.
 
             static void NoMatchWorker(string value)
             {
-                var detector = new EmbeddedLanguageCommentDetector(RegexLanguageDetector.LanguageIdentifiers);
-                Assert.False(detector.TryMatch(value, out _, out var stringOptions) &&
-                    EmbeddedLanguageCommentOptions<RegexOptions>.TryGetOptions(stringOptions, out _));
+                var detector = new EmbeddedLanguageCommentDetector(
+                    RegexLanguageDetector.LanguageIdentifiers
+                );
+                Assert.False(
+                    detector.TryMatch(value, out _, out var stringOptions)
+                        && EmbeddedLanguageCommentOptions<RegexOptions>.TryGetOptions(
+                            stringOptions,
+                            out _
+                        )
+                );
             }
         }
 
         [Fact]
-        public void TestSimpleForm()
-            => Match("lang=regex");
+        public void TestSimpleForm() => Match("lang=regex");
 
         [Fact]
-        public void TestIncompleteForm1()
-            => NoMatch("lan=regex");
+        public void TestIncompleteForm1() => NoMatch("lan=regex");
 
         [Fact]
-        public void TestIncompleteForm2()
-            => NoMatch("lang=rege");
+        public void TestIncompleteForm2() => NoMatch("lang=rege");
 
         [Fact]
-        public void TestMissingEquals()
-            => NoMatch("lang regex");
+        public void TestMissingEquals() => NoMatch("lang regex");
 
         [Fact]
-        public void TestEndingInP()
-            => Match("lang=regexp");
+        public void TestEndingInP() => Match("lang=regexp");
 
         [Fact]
-        public void TestLanguageForm()
-            => Match("language=regex");
+        public void TestLanguageForm() => Match("language=regex");
 
         [Fact]
-        public void TestLanguageFormWithP()
-            => Match("language=regexp");
+        public void TestLanguageFormWithP() => Match("language=regexp");
 
         [Fact]
-        public void TestLanguageFullySpelled()
-            => NoMatch("languag=regexp");
+        public void TestLanguageFullySpelled() => NoMatch("languag=regexp");
 
         [Fact]
-        public void TestSpacesAroundEquals()
-            => Match("lang = regex");
+        public void TestSpacesAroundEquals() => Match("lang = regex");
 
         [Fact]
-        public void TestSpacesAroundPieces()
-            => Match(" lang=regex ");
+        public void TestSpacesAroundPieces() => Match(" lang=regex ");
 
         [Fact]
-        public void TestSpacesAroundPiecesAndEquals()
-            => Match(" lang = regex ");
+        public void TestSpacesAroundPiecesAndEquals() => Match(" lang = regex ");
 
         [Fact]
-        public void TestSpaceBetweenRegexAndP()
-            => Match("lang=regex p");
+        public void TestSpaceBetweenRegexAndP() => Match("lang=regex p");
 
         [Fact]
-        public void TestPeriodAtEnd()
-            => Match("lang=regex.");
+        public void TestPeriodAtEnd() => Match("lang=regex.");
 
         [Fact]
-        public void TestNotWithWordCharAtEnd()
-            => NoMatch("lang=regexc");
+        public void TestNotWithWordCharAtEnd() => NoMatch("lang=regexc");
 
         [Fact]
-        public void TestWithNoNWordBeforeStart1()
-            => NoMatch(":lang=regex");
+        public void TestWithNoNWordBeforeStart1() => NoMatch(":lang=regex");
 
         [Fact]
-        public void TestWithNoNWordBeforeStart2()
-            => NoMatch(": lang=regex");
+        public void TestWithNoNWordBeforeStart2() => NoMatch(": lang=regex");
 
         [Fact]
-        public void TestNotWithWordCharAtStart()
-            => NoMatch("clang=regex");
+        public void TestNotWithWordCharAtStart() => NoMatch("clang=regex");
 
         [Fact]
-        public void TestOption()
-            => Match("lang=regex,ecmascript", RegexOptions.ECMAScript);
+        public void TestOption() => Match("lang=regex,ecmascript", RegexOptions.ECMAScript);
 
         [Fact]
-        public void TestOptionWithSpaces()
-            => Match("lang=regex , ecmascript", RegexOptions.ECMAScript);
+        public void TestOptionWithSpaces() =>
+            Match("lang=regex , ecmascript", RegexOptions.ECMAScript);
 
         [Fact]
-        public void TestOptionFollowedByPeriod()
-            => Match("lang=regex,ecmascript. Explanation", RegexOptions.ECMAScript);
+        public void TestOptionFollowedByPeriod() =>
+            Match("lang=regex,ecmascript. Explanation", RegexOptions.ECMAScript);
 
         [Fact]
-        public void TestMultiOptionFollowedByPeriod()
-            => Match("lang=regex,ecmascript,ignorecase. Explanation", RegexOptions.ECMAScript | RegexOptions.IgnoreCase);
+        public void TestMultiOptionFollowedByPeriod() =>
+            Match(
+                "lang=regex,ecmascript,ignorecase. Explanation",
+                RegexOptions.ECMAScript | RegexOptions.IgnoreCase
+            );
 
         [Fact]
-        public void TestMultiOptionFollowedByPeriod_CaseInsensitive()
-            => Match("Language=Regexp,ECMAScript,IgnoreCase. Explanation", RegexOptions.ECMAScript | RegexOptions.IgnoreCase);
+        public void TestMultiOptionFollowedByPeriod_CaseInsensitive() =>
+            Match(
+                "Language=Regexp,ECMAScript,IgnoreCase. Explanation",
+                RegexOptions.ECMAScript | RegexOptions.IgnoreCase
+            );
 
         [Fact]
-        public void TestInvalidOption1()
-            => NoMatch("lang=regex,ignore");
+        public void TestInvalidOption1() => NoMatch("lang=regex,ignore");
 
         [Fact]
-        public void TestInvalidOption2()
-            => NoMatch("lang=regex,ecmascript,ignore");
+        public void TestInvalidOption2() => NoMatch("lang=regex,ecmascript,ignore");
     }
 }

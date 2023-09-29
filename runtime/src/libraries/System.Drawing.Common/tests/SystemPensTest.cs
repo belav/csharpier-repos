@@ -26,15 +26,24 @@ namespace System.Drawing.Tests
             yield return Pen(() => SystemPens.ControlLightLight, SystemColors.ControlLightLight);
             yield return Pen(() => SystemPens.ControlText, SystemColors.ControlText);
             yield return Pen(() => SystemPens.Desktop, SystemColors.Desktop);
-            yield return Pen(() => SystemPens.GradientActiveCaption, SystemColors.GradientActiveCaption);
-            yield return Pen(() => SystemPens.GradientInactiveCaption, SystemColors.GradientInactiveCaption);
+            yield return Pen(
+                () => SystemPens.GradientActiveCaption,
+                SystemColors.GradientActiveCaption
+            );
+            yield return Pen(
+                () => SystemPens.GradientInactiveCaption,
+                SystemColors.GradientInactiveCaption
+            );
             yield return Pen(() => SystemPens.GrayText, SystemColors.GrayText);
             yield return Pen(() => SystemPens.Highlight, SystemColors.Highlight);
             yield return Pen(() => SystemPens.HighlightText, SystemColors.HighlightText);
             yield return Pen(() => SystemPens.HotTrack, SystemColors.HotTrack);
             yield return Pen(() => SystemPens.InactiveBorder, SystemColors.InactiveBorder);
             yield return Pen(() => SystemPens.InactiveCaption, SystemColors.InactiveCaption);
-            yield return Pen(() => SystemPens.InactiveCaptionText, SystemColors.InactiveCaptionText);
+            yield return Pen(
+                () => SystemPens.InactiveCaptionText,
+                SystemColors.InactiveCaptionText
+            );
             yield return Pen(() => SystemPens.Info, SystemColors.Info);
             yield return Pen(() => SystemPens.InfoText, SystemColors.InfoText);
             yield return Pen(() => SystemPens.Menu, SystemColors.Menu);
@@ -47,7 +56,8 @@ namespace System.Drawing.Tests
             yield return Pen(() => SystemPens.WindowText, SystemColors.WindowText);
         }
 
-        public static object[] Pen(Func<Pen> getPen, Color expectedColor) => new object[] { getPen, expectedColor };
+        public static object[] Pen(Func<Pen> getPen, Color expectedColor) =>
+            new object[] { getPen, expectedColor };
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(SystemPens_TestData))]
@@ -59,22 +69,40 @@ namespace System.Drawing.Tests
             Assert.Same(pen, getPen());
 
             AssertExtensions.Throws<ArgumentException>(null, () => pen.Dispose());
-            AssertExtensions.Throws<ArgumentException>(null, () => pen.SetLineCap(LineCap.ArrowAnchor, LineCap.Custom, DashCap.Round));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => pen.SetLineCap(LineCap.ArrowAnchor, LineCap.Custom, DashCap.Round)
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => pen.Alignment = PenAlignment.Center);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => pen.Alignment = PenAlignment.Center
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => pen.Brush = null);
             AssertExtensions.Throws<ArgumentException>(null, () => pen.Color = Color.AliceBlue);
             AssertExtensions.Throws<ArgumentException>(null, () => pen.CompoundArray = null);
             AssertExtensions.Throws<ArgumentException>(null, () => pen.CustomEndCap = null);
             AssertExtensions.Throws<ArgumentException>(null, () => pen.CustomStartCap = null);
             AssertExtensions.Throws<ArgumentException>(null, () => pen.DashCap = DashCap.Flat);
-            AssertExtensions.Throws<ArgumentException>(null, () => pen.DashStyle = DashStyle.Custom);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => pen.DashStyle = DashStyle.Custom
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => pen.DashOffset = 10);
             AssertExtensions.Throws<ArgumentException>(null, () => pen.DashPattern = null);
-            AssertExtensions.Throws<ArgumentException>(null, () => pen.EndCap = LineCap.RoundAnchor);
-            AssertExtensions.Throws<ArgumentException>(null, () => pen.LineJoin = LineJoin.MiterClipped);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => pen.EndCap = LineCap.RoundAnchor
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => pen.LineJoin = LineJoin.MiterClipped
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => pen.MiterLimit = 10);
-            AssertExtensions.Throws<ArgumentException>(null, () => pen.StartCap = LineCap.RoundAnchor);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => pen.StartCap = LineCap.RoundAnchor
+            );
             using (var matrix = new Matrix())
             {
                 AssertExtensions.Throws<ArgumentException>(null, () => pen.Transform = matrix);
@@ -85,7 +113,10 @@ namespace System.Drawing.Tests
         [Fact]
         public void FromSystemColor_NotSystemColor_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => SystemPens.FromSystemColor(Color.Blue));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => SystemPens.FromSystemColor(Color.Blue)
+            );
         }
     }
 }

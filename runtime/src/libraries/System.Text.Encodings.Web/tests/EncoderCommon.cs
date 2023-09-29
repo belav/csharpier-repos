@@ -9,7 +9,10 @@ namespace System.Text.Encodings.Web.Tests
     {
         // Gets the optimal capacity of the StringBuilder that will be used to build the output
         // given a specified number of input characters and the worst-case growth.
-        public static int GetCapacityOfOutputStringBuilder(int numCharsToEncode, int worstCaseOutputCharsPerInputChar)
+        public static int GetCapacityOfOutputStringBuilder(
+            int numCharsToEncode,
+            int worstCaseOutputCharsPerInputChar
+        )
         {
             // We treat 32KB byte size (16k chars) as a soft upper boundary for the length of any StringBuilder
             // that we allocate. We'll try to avoid going above this boundary if we can avoid it so that we
@@ -29,7 +32,8 @@ namespace System.Text.Encodings.Web.Tests
             else
             {
                 // Allocate the worst-case if we can, but don't exceed the soft upper boundary.
-                long worstCaseTotalChars = (long)numCharsToEncode * worstCaseOutputCharsPerInputChar;
+                long worstCaseTotalChars =
+                    (long)numCharsToEncode * worstCaseOutputCharsPerInputChar;
                 return (int)Math.Min(upperBound, worstCaseTotalChars);
             }
         }

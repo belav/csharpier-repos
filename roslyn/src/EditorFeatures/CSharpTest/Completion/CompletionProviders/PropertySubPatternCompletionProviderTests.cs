@@ -16,14 +16,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class PropertySubpatternCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(PropertySubpatternCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(PropertySubpatternCompletionProvider);
 
         [Fact]
         public async Task PropertiesInRecursivePattern()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -44,7 +44,7 @@ class Program
         public async Task PropertiesInRecursivePattern_WithPositional()
         {
             var markup =
-@"
+                @"
 public class Program
 {
     public int P1 { get; set; }
@@ -65,7 +65,7 @@ public class Program
         public async Task PropertiesInRecursivePattern_WithPositional_UsingStaticType()
         {
             var markup =
-@"
+                @"
 public class Program
 {
     public int P1 { get; set; }
@@ -86,7 +86,7 @@ public class Program
         public async Task PropertiesInRecursivePattern_WithEscapedKeyword()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int @new { get; set; }
@@ -106,7 +106,7 @@ class Program
         public async Task PropertiesInRecursivePattern_WriteOnlyProperties()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { set => throw null; }
@@ -124,7 +124,7 @@ class Program
         public async Task PropertiesInRecursivePattern_WithDerivedType()
         {
             var markup =
-@"
+                @"
 class Program
 {
     void M()
@@ -146,7 +146,7 @@ class Derived
         public async Task PropertiesInRecursivePattern_WithOtherType()
         {
             var markup =
-@"
+                @"
 class Program
 {
     void M(Other other)
@@ -168,7 +168,7 @@ class Other
         public async Task PropertiesInRecursivePattern_WithDerivedType_WithInaccessibleMembers()
         {
             var markup =
-@"
+                @"
 class Program
 {
     void M()
@@ -189,7 +189,7 @@ class Derived : Program
         public async Task PropertiesInRecursivePattern_WithDerivedType_WithPrivateMember()
         {
             var markup =
-@"
+                @"
 class Program
 {
     private int P1 { get; set; }
@@ -210,7 +210,7 @@ class Derived : Program
         public async Task PropertiesInRecursivePattern_UseStaticTypeFromIs()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -231,7 +231,7 @@ class Program
         public async Task PropertiesInRecursivePattern_InSwitchStatement()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -255,7 +255,7 @@ class Program
         public async Task PropertiesInRecursivePattern_UseStaticTypeFromSwitchStatement()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -279,7 +279,7 @@ class Program
         public async Task PropertiesInRecursivePattern_InSwitchExpression()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -299,7 +299,7 @@ class Program
         public async Task PropertiesInRecursivePattern_NestedInProperty()
         {
             var markup =
-@"
+                @"
 public class Nested
 {
     public int P3 { get; set; }
@@ -326,7 +326,7 @@ class Program
         public async Task PropertiesInRecursivePattern_NestedInField()
         {
             var markup =
-@"
+                @"
 public class Nested
 {
     public int P3 { get; set; }
@@ -353,7 +353,7 @@ class Program
         public async Task PropertiesInRecursivePattern_Nested_WithFields()
         {
             var markup =
-@"
+                @"
 public class Nested
 {
     public int F3;
@@ -380,7 +380,7 @@ class Program
         public async Task PropertiesInRecursivePattern_Nested_WithMissingProperty()
         {
             var markup =
-@"
+                @"
 public class Nested
 {
     public int P3 { get; set; }
@@ -404,7 +404,7 @@ class Program
         public async Task PropertiesInRecursivePattern_NoType()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -423,7 +423,7 @@ class Program
         public async Task PropertiesInRecursivePattern_MissingAfterColon()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -442,7 +442,7 @@ class Program
         public async Task PropertiesInRecursivePattern_SecondProperty()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -463,7 +463,7 @@ class Program
         public async Task PropertiesInRecursivePattern_PositionalInFirstProperty()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public D P1 { get; set; }
@@ -485,7 +485,7 @@ class D
         public async Task PropertiesInRecursivePattern_PositionalInFirstProperty_AfterComma()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public D P1 { get; set; }
@@ -507,7 +507,7 @@ class D
         public async Task PropertiesInRecursivePattern_PositionalInFirstProperty_AfterCommaAndBeforeParen()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public D P1 { get; set; }
@@ -529,7 +529,7 @@ class D
         public async Task PropertiesInRecursivePattern_InPositional_Incomplete()
         {
             var markup =
-@"
+                @"
 public class Program
 {
     public int P1 { get; set; }
@@ -549,7 +549,7 @@ public class Program
         public async Task PropertiesInRecursivePattern_InPositional_Incomplete_WithoutClosingBrace()
         {
             var markup =
-@"
+                @"
 public class Program
 {
     public int P1 { get; set; }
@@ -569,7 +569,7 @@ public class Program
         public async Task PropertiesInRecursivePattern_InPositional_Incomplete_WithTwoTypes()
         {
             var markup =
-@"
+                @"
 public class Program
 {
     void M()
@@ -591,7 +591,7 @@ public class D
         public async Task PropertiesInRecursivePattern_InPositional_Complete_BeforeComma()
         {
             var markup =
-@"
+                @"
 public class Program
 {
     public int P1 { get; set; }
@@ -611,7 +611,7 @@ public class Program
         public async Task PropertiesInRecursivePattern_InPositional_Complete_AfterComma()
         {
             var markup =
-@"
+                @"
 public class Program
 {
     public int P1 { get; set; }
@@ -631,7 +631,7 @@ public class Program
         public async Task PropertiesInRecursivePattern_NoPropertyLeft()
         {
             var markup =
-@"
+                @"
 class Program
 {
     public int P1 { get; set; }
@@ -650,7 +650,7 @@ class Program
         public async Task PropertiesInRecursivePattern_NotForEditorUnbrowsable()
         {
             var markup =
-@"
+                @"
 class Program
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -673,7 +673,7 @@ class Program
         public async Task StaticProperties_NotSuggested()
         {
             var markup =
-@"
+                @"
 class Program
 {
     void M()
@@ -689,7 +689,7 @@ class Program
         public async Task StaticFields_NotSuggested()
         {
             var markup =
-@"
+                @"
 class Program
 {
     static int x = 42;
@@ -707,7 +707,7 @@ class Program
         public async Task ConstFields_NotSuggested()
         {
             var markup =
-@"
+                @"
 class Program
 {
     void M()

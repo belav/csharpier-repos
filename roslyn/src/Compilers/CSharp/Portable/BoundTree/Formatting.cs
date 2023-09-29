@@ -36,7 +36,12 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override object Display
         {
-            get { return ConstantValueOpt?.IsNull == true ? MessageID.IDS_NULL.Localize() : base.Display; }
+            get
+            {
+                return ConstantValueOpt?.IsNull == true
+                    ? MessageID.IDS_NULL.Localize()
+                    : base.Display;
+            }
         }
     }
 
@@ -151,20 +156,26 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal partial class BoundStackAllocArrayCreation
     {
-        public override object Display
-            => (Type is null) ? FormattableStringFactory.Create("stackalloc {0}[{1}]", ElementType, Count.WasCompilerGenerated ? null : Count.Syntax.ToString()) : base.Display;
+        public override object Display =>
+            (Type is null)
+                ? FormattableStringFactory.Create(
+                    "stackalloc {0}[{1}]",
+                    ElementType,
+                    Count.WasCompilerGenerated ? null : Count.Syntax.ToString()
+                )
+                : base.Display;
     }
 
     internal partial class BoundUnconvertedSwitchExpression
     {
-        public override object Display
-            => (Type is null) ? MessageID.IDS_FeatureSwitchExpression.Localize() : base.Display;
+        public override object Display =>
+            (Type is null) ? MessageID.IDS_FeatureSwitchExpression.Localize() : base.Display;
     }
 
     internal partial class BoundUnconvertedConditionalOperator
     {
-        public override object Display
-            => (Type is null) ? MessageID.IDS_FeatureTargetTypedConditional.Localize() : base.Display;
+        public override object Display =>
+            (Type is null) ? MessageID.IDS_FeatureTargetTypedConditional.Localize() : base.Display;
     }
 
     internal partial class BoundPassByCopy

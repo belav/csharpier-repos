@@ -15,9 +15,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     internal interface IVsEnumDebugName
     {
         [PreserveSig]
-        int Next(uint celt,
-            [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.Interface)] IVsDebugName[] rgelt,
-            [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U4)] uint[] pceltFetched);
+        int Next(
+            uint celt,
+            [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.Interface)]
+                IVsDebugName[] rgelt,
+            [Out, MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U4)]
+                uint[] pceltFetched
+        );
 
         [PreserveSig]
         int Skip(uint celt);

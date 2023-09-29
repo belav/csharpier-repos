@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -52,98 +52,102 @@ using System.Text;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public abstract class HtmlContainerControl : HtmlControl
-	{
-		protected HtmlContainerControl () : this ("span")
-		{}
-		
-		public HtmlContainerControl (string tag) : base(tag)
-		{}
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public abstract class HtmlContainerControl : HtmlControl
+    {
+        protected HtmlContainerControl()
+            : this("span") { }
 
-		[HtmlControlPersistable (false)]
-		[BrowsableAttribute(false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual string InnerHtml
-		{
-			get {
-				if (Controls.Count == 0)
-					return String.Empty;
-				
-				if (Controls.Count == 1) {
-					Control ctrl = Controls [0];
-					LiteralControl lc = ctrl as LiteralControl;
-					if (lc != null)
-						return lc.Text;
+        public HtmlContainerControl(string tag)
+            : base(tag) { }
 
-					DataBoundLiteralControl dblc = ctrl as DataBoundLiteralControl;
-					if (dblc != null)
-						return dblc.Text;
-				}
-				
-				throw new HttpException ("There is no literal content!");
-			}
+        [HtmlControlPersistable(false)]
+        [BrowsableAttribute(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string InnerHtml
+        {
+            get
+            {
+                if (Controls.Count == 0)
+                    return String.Empty;
 
-			set {
-				Controls.Clear ();
-				Controls.Add (new LiteralControl (value));
-				if (value == null)
-					ViewState.Remove ("innerhtml");
-				else
-					ViewState ["innerhtml"] = value;
-			}
-		}
+                if (Controls.Count == 1)
+                {
+                    Control ctrl = Controls[0];
+                    LiteralControl lc = ctrl as LiteralControl;
+                    if (lc != null)
+                        return lc.Text;
 
-		[HtmlControlPersistable (false)]
-		[BrowsableAttribute(false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual string InnerText
-		{
-			get {
-				return HttpUtility.HtmlDecode (InnerHtml);
-			}
+                    DataBoundLiteralControl dblc = ctrl as DataBoundLiteralControl;
+                    if (dblc != null)
+                        return dblc.Text;
+                }
 
-			set {
-				InnerHtml = HttpUtility.HtmlEncode (value);
-			}
-		}
-		
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			RenderBeginTag (writer);
-			RenderChildren (writer);
-			RenderEndTag (writer);
-		}
+                throw new HttpException("There is no literal content!");
+            }
+            set
+            {
+                Controls.Clear();
+                Controls.Add(new LiteralControl(value));
+                if (value == null)
+                    ViewState.Remove("innerhtml");
+                else
+                    ViewState["innerhtml"] = value;
+            }
+        }
 
-		protected virtual void RenderEndTag (HtmlTextWriter writer)
-		{
-			writer.WriteEndTag (TagName);
-		}
+        [HtmlControlPersistable(false)]
+        [BrowsableAttribute(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string InnerText
+        {
+            get { return HttpUtility.HtmlDecode(InnerHtml); }
+            set { InnerHtml = HttpUtility.HtmlEncode(value); }
+        }
 
-		protected override void RenderAttributes (HtmlTextWriter writer)
-		{
-			ViewState.Remove ("innerhtml");
-			base.RenderAttributes (writer);
-		}
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            RenderBeginTag(writer);
+            RenderChildren(writer);
+            RenderEndTag(writer);
+        }
 
-		/* we need to override this because our base class
-		 * (HtmlControl) returns an instance of
-		 * EmptyControlCollection. */
-		protected override ControlCollection CreateControlCollection ()
-		{
-			return new ControlCollection (this);
-		}
+        protected virtual void RenderEndTag(HtmlTextWriter writer)
+        {
+            writer.WriteEndTag(TagName);
+        }
 
-		protected override void LoadViewState (object savedState)
-		{
-			if (savedState != null) {
-				base.LoadViewState (savedState);
-				string inner = ViewState ["innerhtml"] as string;
-				if (inner != null)
-					InnerHtml = inner;
-			}
-		}
-	}
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            ViewState.Remove("innerhtml");
+            base.RenderAttributes(writer);
+        }
+
+        /* we need to override this because our base class
+         * (HtmlControl) returns an instance of
+         * EmptyControlCollection. */
+        protected override ControlCollection CreateControlCollection()
+        {
+            return new ControlCollection(this);
+        }
+
+        protected override void LoadViewState(object savedState)
+        {
+            if (savedState != null)
+            {
+                base.LoadViewState(savedState);
+                string inner = ViewState["innerhtml"] as string;
+                if (inner != null)
+                    InnerHtml = inner;
+            }
+        }
+    }
 }

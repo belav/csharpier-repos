@@ -20,7 +20,6 @@ namespace POS_Server.Controllers
     {
         CountriesController coctrlr = new CountriesController();
 
-
         public string ServerID()
         {
             string deviceCode = "";
@@ -28,12 +27,19 @@ namespace POS_Server.Controllers
             deviceCode = GetHDDSerialNo();
             return deviceCode;
         }
+
         public static string GetMotherBoardID()
         {
             string mbInfo = String.Empty;
-            ManagementScope scope = new ManagementScope("\\\\" + Environment.MachineName + "\\root\\cimv2");
+            ManagementScope scope = new ManagementScope(
+                "\\\\" + Environment.MachineName + "\\root\\cimv2"
+            );
             scope.Connect();
-            ManagementObject wmiClass = new ManagementObject(scope, new ManagementPath("Win32_BaseBoard.Tag=\"Base Board\""), new ObjectGetOptions());
+            ManagementObject wmiClass = new ManagementObject(
+                scope,
+                new ManagementPath("Win32_BaseBoard.Tag=\"Base Board\""),
+                new ObjectGetOptions()
+            );
 
             foreach (PropertyData propData in wmiClass.Properties)
             {
@@ -43,21 +49,33 @@ namespace POS_Server.Controllers
 
             return mbInfo;
         }
+
         public static String GetHDDSerialNo()
         {
-            string systemLogicalDiskDeviceId = Environment.GetFolderPath(Environment.SpecialFolder.System).Substring(0, 2);
+            string systemLogicalDiskDeviceId = Environment
+                .GetFolderPath(Environment.SpecialFolder.System)
+                .Substring(0, 2);
 
             // Start by enumerating the logical disks
-            using (var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDisk WHERE DeviceID='" + systemLogicalDiskDeviceId + "'"))
+            using (
+                var searcher = new ManagementObjectSearcher(
+                    "SELECT * FROM Win32_LogicalDisk WHERE DeviceID='"
+                        + systemLogicalDiskDeviceId
+                        + "'"
+                )
+            )
             {
                 foreach (ManagementObject logicalDisk in searcher.Get())
-                    foreach (ManagementObject partition in logicalDisk.GetRelated("Win32_DiskPartition"))
-                        foreach (ManagementObject diskDrive in partition.GetRelated("Win32_DiskDrive"))
-                            return diskDrive["SerialNumber"].ToString();
+                foreach (
+                    ManagementObject partition in logicalDisk.GetRelated("Win32_DiskPartition")
+                )
+                foreach (ManagementObject diskDrive in partition.GetRelated("Win32_DiskDrive"))
+                    return diskDrive["SerialNumber"].ToString();
             }
 
             return null;
         }
+
         //public async Task<SendDetail> GetSerialsAndDetails(string packageSaleCode, string customerServerCode, string packState)
         //{
         //    SendDetail item = new SendDetail();
@@ -82,7 +100,11 @@ namespace POS_Server.Controllers
 
         //}
 
-        public async Task<SendDetail> GetSerialsAndDetails(string packageSaleCode, string customerServerCode, packagesSend packState)
+        public async Task<SendDetail> GetSerialsAndDetails(
+            string packageSaleCode,
+            string customerServerCode,
+            packagesSend packState
+        )
         {
             SendDetail item = new SendDetail();
             Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -92,23 +114,29 @@ namespace POS_Server.Controllers
             parameters.Add("customerServerCode", customerServerCode);
 
             //#################
-            IEnumerable<Claim> claims = await APIResult.getList("packageUser/ActivateServerState", parameters);
+            IEnumerable<Claim> claims = await APIResult.getList(
+                "packageUser/ActivateServerState",
+                parameters
+            );
 
             foreach (Claim c in claims)
             {
                 if (c.Type == "scopes")
                 {
-
-                    item = JsonConvert.DeserializeObject<SendDetail>(c.Value, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
-
+                    item = JsonConvert.DeserializeObject<SendDetail>(
+                        c.Value,
+                        new JsonSerializerSettings { DateParseHandling = DateParseHandling.None }
+                    );
                 }
             }
             return item;
-
         }
 
-
-        public async Task<string> GetSerialsAndDetails2(string packageSaleCode, string customerServerCode, packagesSend packState)
+        public async Task<string> GetSerialsAndDetails2(
+            string packageSaleCode,
+            string customerServerCode,
+            packagesSend packState
+        )
         {
             string item = "0";
             Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -118,18 +146,19 @@ namespace POS_Server.Controllers
             parameters.Add("customerServerCode", customerServerCode);
 
             //#################
-            IEnumerable<Claim> claims = await APIResult.getList("packageUser/ActivateServerState", parameters);
+            IEnumerable<Claim> claims = await APIResult.getList(
+                "packageUser/ActivateServerState",
+                parameters
+            );
 
             foreach (Claim c in claims)
             {
                 if (c.Type == "scopes")
                 {
-
                     item = c.Value;
                 }
             }
             return item;
-
         }
 
         public List<PosSerialSend> getserialsinfo()
@@ -140,95 +169,84 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                serialsendList = (from PS in entity.posSetting
-                                  join S in entity.posSerials on PS.posSerialId equals S.id
-                                  //  join p in entity.posSetting on S.id equals p.posSerialId
-                                  where PS.posSerialId != null
-                                  select new PosSerialSend
-                                  {
-                                      serial = S.posSerial,
-                                      isActive = (S.isActive == true) ? 1 : 0,
-
-                                      posName = PS.pos.name,
-                                      branchName = PS.pos.branches.name,
-                                      posId = PS.posId,
-                                      posSettingId = PS.posSettingId,
-                                      //  isBooked = S.posSetting.Where(x => x.posSerialId == S.id).ToList().Count > 0 ? true : false,
-                                      isBooked = (PS.posSerialId == 0 || PS.posSerialId == null) ? false : true,
-
-                                      posDeviceCode = PS.posDeviceCode,
-                                  }).ToList();
-
-
+                serialsendList = (
+                    from PS in entity.posSetting
+                    join S in entity.posSerials on PS.posSerialId equals S.id
+                    //  join p in entity.posSetting on S.id equals p.posSerialId
+                    where PS.posSerialId != null
+                    select new PosSerialSend
+                    {
+                        serial = S.posSerial,
+                        isActive = (S.isActive == true) ? 1 : 0,
+                        posName = PS.pos.name,
+                        branchName = PS.pos.branches.name,
+                        posId = PS.posId,
+                        posSettingId = PS.posSettingId,
+                        //  isBooked = S.posSetting.Where(x => x.posSerialId == S.id).ToList().Count > 0 ? true : false,
+                        isBooked = (PS.posSerialId == 0 || PS.posSerialId == null) ? false : true,
+                        posDeviceCode = PS.posDeviceCode,
+                    }
+                ).ToList();
             }
-
-
 
             return serialsendList;
         }
 
         public packagesSend getpackinfo()
         {
-
             packagesSend packs = new packagesSend();
-
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-
-                packs = (from p in entity.ProgramDetails
-                             //  join p in entity.posSetting on S.id equals p.posSerialId
-                         select new packagesSend
-                         {
-                             programName = p.programName,
-                             branchCount = p.branchCount,
-                             posCount = p.posCount,
-                             userCount = p.userCount,
-                             vendorCount = p.vendorCount,
-                             customerCount = p.customerCount,
-                             itemCount = p.itemCount,
-                             salesInvCount = p.saleinvCount,
-                             storeCount = p.storeCount,
-                             packageSaleCode = p.packageSaleCode,
-                             customerServerCode = p.customerServerCode,
-                             expireDate = p.expireDate,
-                             isOnlineServer = p.isOnlineServer,
-
-                             // updateDate = p.updateDate,
-                             islimitDate = (p.isLimitDate == true) ? true : false,
-
-                             //  isLimitCount = (bool)p.isLimitCount,
-                             isActive = (p.isActive == true) ? 1 : 0,
-
-                             canRenew = false,
-                             isPayed = true,
-                             isServerActivated = p.isServerActivated,
-                             activatedate = p.activatedate,
-                             pId = p.pId,
-                             pcdId = p.pcdId,
-                             bookDate = p.bookDate,
-
-                             customerName = p.customerName,
-                             customerLastName = p.customerLastName,
-                             agentName = p.agentName,
-                             agentLastName = p.agentLastName,
-                             agentAccountName = p.agentAccountName,
-
-                             pocrDate = p.pocrDate,
-                             poId = p.poId,
-                             upnum = p.upnum,
-                             notes = p.notes,
-                             verName = p.versionName,
-                             packageNumber = p.packageNumber,
-                             packageName = p.packageName,
-                             isDemo = p.isDemo,
-
-                         }).FirstOrDefault();
+                packs = (
+                    from p in entity.ProgramDetails
+                    //  join p in entity.posSetting on S.id equals p.posSerialId
+                    select new packagesSend
+                    {
+                        programName = p.programName,
+                        branchCount = p.branchCount,
+                        posCount = p.posCount,
+                        userCount = p.userCount,
+                        vendorCount = p.vendorCount,
+                        customerCount = p.customerCount,
+                        itemCount = p.itemCount,
+                        salesInvCount = p.saleinvCount,
+                        storeCount = p.storeCount,
+                        packageSaleCode = p.packageSaleCode,
+                        customerServerCode = p.customerServerCode,
+                        expireDate = p.expireDate,
+                        isOnlineServer = p.isOnlineServer,
+                        // updateDate = p.updateDate,
+                        islimitDate = (p.isLimitDate == true) ? true : false,
+                        //  isLimitCount = (bool)p.isLimitCount,
+                        isActive = (p.isActive == true) ? 1 : 0,
+                        canRenew = false,
+                        isPayed = true,
+                        isServerActivated = p.isServerActivated,
+                        activatedate = p.activatedate,
+                        pId = p.pId,
+                        pcdId = p.pcdId,
+                        bookDate = p.bookDate,
+                        customerName = p.customerName,
+                        customerLastName = p.customerLastName,
+                        agentName = p.agentName,
+                        agentLastName = p.agentLastName,
+                        agentAccountName = p.agentAccountName,
+                        pocrDate = p.pocrDate,
+                        poId = p.poId,
+                        upnum = p.upnum,
+                        notes = p.notes,
+                        verName = p.versionName,
+                        packageNumber = p.packageNumber,
+                        packageName = p.packageName,
+                        isDemo = p.isDemo,
+                    }
+                ).FirstOrDefault();
             }
-
 
             return packs;
         }
+
         public SendDetail getinfo()
         {
             SendDetail sd = new SendDetail();
@@ -250,53 +268,53 @@ namespace POS_Server.Controllers
                 //                      posDeviceCode = S.posSetting.Where(x => x.posSerialId == S.id).FirstOrDefault().posDeviceCode,
                 //                  }).ToList();
                 serialsendList = getserialsinfo();
-                packs = (from p in entity.ProgramDetails
-                             //  join p in entity.posSetting on S.id equals p.posSerialId
-                         select new packagesSend
-                         {
-                             programName = p.programName,
-                             branchCount = p.branchCount,
-                             posCount = p.posCount,
-                             userCount = p.userCount,
-                             vendorCount = p.vendorCount,
-                             customerCount = p.customerCount,
-                             itemCount = p.itemCount,
-                             salesInvCount = p.saleinvCount,
-                             storeCount = p.storeCount,
-                             packageSaleCode = p.packageSaleCode,
-                             customerServerCode = p.customerServerCode,
-                             expireDate = p.expireDate,
-                             isOnlineServer = p.isOnlineServer,
-
-                             //  updateDate = p.updateDate,
-                             islimitDate = (p.isLimitDate == true) ? true : false,
-
-                             //  isLimitCount = (bool)p.isLimitCount,
-                             isActive = (p.isActive == true) ? 1 : 0,
-
-                             canRenew = false,
-                             isPayed = true,
-                             isServerActivated = p.isServerActivated,
-                             activatedate = p.activatedate,
-                             pId = p.pId,
-                             pcdId = p.pcdId,
-                             bookDate = p.bookDate,
-                             pocrDate = p.pocrDate,
-                             poId = p.poId,
-                             customerName = p.customerName,
-                             customerLastName = p.customerLastName,
-                             agentName = p.agentName,
-                             agentLastName = p.agentLastName,
-                             agentAccountName = p.agentAccountName,
-                             packageName = p.packageName,
-                             isDemo = p.isDemo,
-                         }).FirstOrDefault();
+                packs = (
+                    from p in entity.ProgramDetails
+                    //  join p in entity.posSetting on S.id equals p.posSerialId
+                    select new packagesSend
+                    {
+                        programName = p.programName,
+                        branchCount = p.branchCount,
+                        posCount = p.posCount,
+                        userCount = p.userCount,
+                        vendorCount = p.vendorCount,
+                        customerCount = p.customerCount,
+                        itemCount = p.itemCount,
+                        salesInvCount = p.saleinvCount,
+                        storeCount = p.storeCount,
+                        packageSaleCode = p.packageSaleCode,
+                        customerServerCode = p.customerServerCode,
+                        expireDate = p.expireDate,
+                        isOnlineServer = p.isOnlineServer,
+                        //  updateDate = p.updateDate,
+                        islimitDate = (p.isLimitDate == true) ? true : false,
+                        //  isLimitCount = (bool)p.isLimitCount,
+                        isActive = (p.isActive == true) ? 1 : 0,
+                        canRenew = false,
+                        isPayed = true,
+                        isServerActivated = p.isServerActivated,
+                        activatedate = p.activatedate,
+                        pId = p.pId,
+                        pcdId = p.pcdId,
+                        bookDate = p.bookDate,
+                        pocrDate = p.pocrDate,
+                        poId = p.poId,
+                        customerName = p.customerName,
+                        customerLastName = p.customerLastName,
+                        agentName = p.agentName,
+                        agentLastName = p.agentLastName,
+                        agentAccountName = p.agentAccountName,
+                        packageName = p.packageName,
+                        isDemo = p.isDemo,
+                    }
+                ).FirstOrDefault();
             }
             sd.packageSend = packs;
 
             sd.PosSerialSendList = serialsendList;
             return sd;
         }
+
         public async Task<string> SendCustDetail(SendDetail sdd)
         {
             string message = "";
@@ -309,7 +327,10 @@ namespace POS_Server.Controllers
             parameters.Add("object", myContent3);
 
             //#################
-            IEnumerable<Claim> claims = await APIResult.getList("packageUser/SendCustDetail", parameters);
+            IEnumerable<Claim> claims = await APIResult.getList(
+                "packageUser/SendCustDetail",
+                parameters
+            );
             foreach (Claim c in claims)
             {
                 if (c.Type == "scopes")
@@ -322,12 +343,12 @@ namespace POS_Server.Controllers
             }
             return message;
         }
+
         private int SaveProgDetails(packagesSend newObject)
         {
             int message = 0;
             if (newObject != null)
             {
-
                 ProgramDetails tmpObject;
 
                 try
@@ -341,8 +362,7 @@ namespace POS_Server.Controllers
 
                         if (tmpObject != null)
                         {
-
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpObject.programName = newObject.programName;
                             tmpObject.branchCount = newObject.branchCount;
                             tmpObject.posCount = newObject.posCount;
@@ -382,9 +402,7 @@ namespace POS_Server.Controllers
 
                             tmpObject.packageSaleCode = newObject.packageSaleCode;
 
-                            tmpObject.customerServerCode = newObject.customerServerCode;// from function
-
-
+                            tmpObject.customerServerCode = newObject.customerServerCode; // from function
 
                             tmpObject.expireDate = newObject.expireDate;
                             tmpObject.isOnlineServer = newObject.isOnlineServer;
@@ -410,9 +428,6 @@ namespace POS_Server.Controllers
                             tmpObject.isServerActivated = newObject.isServerActivated;
                             tmpObject.activatedate = newObject.activatedate;
                             tmpObject.isDemo = newObject.isDemo;
-                         
-
-
                         }
                         else
                         {
@@ -423,13 +438,10 @@ namespace POS_Server.Controllers
 
                         message = entity.SaveChanges();
 
-
-
                         //  entity.SaveChanges();
                         //   return (message);
                     }
                     return (message);
-
                 }
                 catch
                 {
@@ -437,14 +449,13 @@ namespace POS_Server.Controllers
                     return (message);
                     //  return (ex.ToString());
                 }
-
             }
             else
             {
                 return (-1);
             }
-
         }
+
         private int updateActiveKey(packagesSend newObject)
         {
             int message = 0;
@@ -462,25 +473,18 @@ namespace POS_Server.Controllers
 
                         if (tmpObject != null)
                         {
-
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                             tmpObject.packageSaleCode = newObject.packageSaleCode;
-
-
                         }
                         else
                         {
                             message = -1;
                         }
 
-
                         message = entity.SaveChanges();
-
-
                     }
                     return (message);
-
                 }
                 catch
                 {
@@ -488,13 +492,11 @@ namespace POS_Server.Controllers
                     return (message);
                     //  return (ex.ToString());
                 }
-
             }
             else
             {
                 return (-1);
             }
-
         }
 
         //private int SaveposSerials(List<PosSerialSend> newObjectlist)
@@ -525,7 +527,7 @@ namespace POS_Server.Controllers
 
         //                oldserial = alllist.Select(s => s.posSerial).ToList();
         //                List<string> finallist = new List<string>();
-        //                // for no duplicate 
+        //                // for no duplicate
         //                finallist = newserial.Except(oldserial).ToList();
         //                foreach (string sendrow in finallist)
         //                {
@@ -598,7 +600,6 @@ namespace POS_Server.Controllers
                                 newsr.isActive = true;
                                 newsr.posSerial = snewrow.serial;
                                 entity.posSerials.Add(newsr);
-
                             }
                             message += entity.SaveChanges();
                         }
@@ -606,20 +607,17 @@ namespace POS_Server.Controllers
                         //   message += entity.SaveChanges();
                     }
                     return (message);
-
                 }
                 catch
                 {
                     message = -1;
                     return (message);
                 }
-
             }
             else
             {
                 return (-1);
             }
-
         }
 
         private int SaveunlimitedSerials(List<PosSerialSend> newObjectlist)
@@ -653,17 +651,18 @@ namespace POS_Server.Controllers
                             //add unlimited serial
                             foreach (PosSerialSend snewrow in newObjectlist)
                             {
-
                                 bool exist = false;
                                 foreach (posSerials oldrow in alllist)
                                 {
-                                    if (oldrow.posSerial == snewrow.serial && snewrow.unLimited == true)
+                                    if (
+                                        oldrow.posSerial == snewrow.serial
+                                        && snewrow.unLimited == true
+                                    )
                                     {
                                         exist = true;
                                         oldrow.isActive = true;
                                         oldrow.notes = "1";
                                         unlimitedserialId = oldrow.id;
-
                                     }
                                 }
                                 if (exist == false)
@@ -674,7 +673,6 @@ namespace POS_Server.Controllers
                                     newsr.notes = "1";
                                     entity.posSerials.Add(newsr);
                                     unlimitedserialId = newsr.id;
-
                                 }
                                 message += entity.SaveChanges();
                             }
@@ -683,36 +681,31 @@ namespace POS_Server.Controllers
                             foreach (PosSerialSend newrow in linkdpos)
                             {
                                 long? posId = newrow.posId == null ? 0 : newrow.posId;
-                                var posdb = entity.posSetting.Where(x => x.posId == posId).FirstOrDefault();
+                                var posdb = entity.posSetting
+                                    .Where(x => x.posId == posId)
+                                    .FirstOrDefault();
                                 posdb.posSerialId = unlimitedserialId;
                                 entity.SaveChanges();
-
                             }
                             //
-
-
                         }
-
-
 
                         //   message += entity.SaveChanges();
                     }
                     return (message);
-
                 }
                 catch
                 {
                     message = -1;
                     return (message);
                 }
-
             }
             else
             {
                 return (-1);
             }
-
         }
+
         //[HttpPost]
         //[Route("saveserials")]
         //public async Task<string> saveserials(string token)
@@ -756,7 +749,8 @@ namespace POS_Server.Controllers
         [Route("checkconn")]
         public string checkconn(string token)
         {
-            token = TokenManager.readToken(HttpContext.Current.Request); var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -781,7 +775,6 @@ namespace POS_Server.Controllers
                     {
                         return TokenManager.GenerateToken(0.ToString());
                     }
-
                 }
             }
         }
@@ -841,10 +834,10 @@ namespace POS_Server.Controllers
         //                {
 
         //                    /*
-        //                     *   // -2 : package not active 
+        //                     *   // -2 : package not active
 
-        //                         // -3 :serverID not match 
-        //                         // -4 :not payed 
+        //                         // -3 :serverID not match
+        //                         // -4 :not payed
         //                         // -5 :serial not found
         //                         //"0" :  catch error
 
@@ -858,7 +851,7 @@ namespace POS_Server.Controllers
         //                    sendDetailItem.packageSend.packageSaleCode = skey;
         //                    tempres = SaveProgDetails(sendDetailItem.packageSend);
         //                    //    return TokenManager.GenerateToken(res1);
-        //                    //update serials 
+        //                    //update serials
         //                    if (tempres >= 0)
         //                    {
         //                        res += 1;
@@ -921,7 +914,10 @@ namespace POS_Server.Controllers
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("id", id.ToString());
             //#################
-            IEnumerable<Claim> claims = await APIResult.getList("packageUser/checkconn", parameters);
+            IEnumerable<Claim> claims = await APIResult.getList(
+                "packageUser/checkconn",
+                parameters
+            );
 
             foreach (Claim c in claims)
             {
@@ -932,12 +928,10 @@ namespace POS_Server.Controllers
                 }
             }
             return item;
-
-
-
         }
 
         int count = 0;
+
         void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
@@ -949,12 +943,11 @@ namespace POS_Server.Controllers
                 {
                     var locationEntity = entity.Set<ProgramDetails>();
 
-
                     tmpObject = entity.ProgramDetails.FirstOrDefault();
 
                     if (tmpObject != null)
                     {
-                        tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         count++;
                         tmpObject.itemCount = count;
                     }
@@ -964,18 +957,13 @@ namespace POS_Server.Controllers
                     }
 
                     message = entity.SaveChanges();
-
                 }
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         public int periodTimer()
         {
-
             try
             {
                 System.Timers.Timer t = new System.Timers.Timer(10000);
@@ -993,7 +981,6 @@ namespace POS_Server.Controllers
           //s=  us.periodTimer();
                  * */
             }
-
             catch
             {
                 return 0;
@@ -1014,7 +1001,6 @@ namespace POS_Server.Controllers
             {
                 int res = CheckPeriod();
                 return TokenManager.GenerateToken(res.ToString());
-
             }
         }
 
@@ -1022,7 +1008,7 @@ namespace POS_Server.Controllers
         {
             ProgramDetails tmpObject;
             // 1 :  time not end-
-            //  0 : time is end 
+            //  0 : time is end
 
             try
             {
@@ -1037,7 +1023,7 @@ namespace POS_Server.Controllers
                             return 1;
                         }
                         else
-                        {// limited
+                        { // limited
                             DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
                             if (tmpObject.expireDate <= datenow || tmpObject.expireDate == null)
                             {
@@ -1054,15 +1040,11 @@ namespace POS_Server.Controllers
                         return -1;
                     }
                 }
-
             }
             catch
             {
-
                 return -1;
-
             }
-
         }
 
         [HttpPost]
@@ -1091,8 +1073,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken(ex.ToString());
                 }
-
-
             }
         }
 
@@ -1143,7 +1123,6 @@ namespace POS_Server.Controllers
         [Route("StatSendserverkey")]
         public async Task<string> StatSendserverkey(string token)
         {
-
             getIncSite();
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
@@ -1175,7 +1154,6 @@ namespace POS_Server.Controllers
                     {
                         activeState = c.Value;
                     }
-
                 }
 
                 try
@@ -1202,8 +1180,8 @@ namespace POS_Server.Controllers
                         //packState=up:upgrade - rn:renew
 
 
-                        sendDetailItem = await GetSerialsAndDetails(skey, serverId, packState);//no coment
-                                                                                               //  string mm =await GetSerialsAndDetails2(skey, serverId, packState);
+                        sendDetailItem = await GetSerialsAndDetails(skey, serverId, packState); //no coment
+                        //  string mm =await GetSerialsAndDetails2(skey, serverId, packState);
 
                         //   return TokenManager.GenerateToken(sendDetailItem.packageSend.result.ToString());
                         //update server detail
@@ -1212,24 +1190,22 @@ namespace POS_Server.Controllers
                         //   return TokenManager.GenerateToken(sendDetailItem.packageSend.result);
                         if (sendDetailItem.packageSend.result <= 0)
                         {
-
                             //   return TokenManager.GenerateToken(sendDetailItem.packageSend.result.ToString());
                             /*
-                             *   // -2 : package not active 
+                             *   // -2 : package not active
 
-                                 // -3 :serverID not match 
-                                 // -4 :not payed 
+                                 // -3 :serverID not match
+                                 // -4 :not payed
                                  // -5 :serial not found
                              // -6 : package changed but not payed ==noch
                                  //"0" :  catch error
                                  // -7  method not match // online or offline
 //-8->18 the current updat is newr than the offline update
-//-9 the client command is different from activate file 
+//-9 the client command is different from activate file
 
 
                              * */
                             res = sendDetailItem.packageSend.result;
-
                         }
                         else
                         {
@@ -1241,7 +1217,7 @@ namespace POS_Server.Controllers
                                 tempres = SaveProgDetails(sendDetailItem.packageSend);
 
                                 //    return TokenManager.GenerateToken(res1);
-                                //update serials 
+                                //update serials
                                 if (tempres >= 0)
                                 {
                                     res = 1;
@@ -1254,8 +1230,6 @@ namespace POS_Server.Controllers
                                     //}
 
                                     tempres = SaveposSerials(sendDetailItem.PosSerialSendList);
-
-
                                 }
                                 if (tempres >= 0)
                                 {
@@ -1278,8 +1252,6 @@ namespace POS_Server.Controllers
                             {
                                 // no change // dont save any thing
                             }
-
-
                         }
                     }
                     else
@@ -1290,18 +1262,26 @@ namespace POS_Server.Controllers
 
                     //   return TokenManager.GenerateToken("44");
                     //
-                    if ((sendDetailItem.packageSend.activeres == "noch" && res > 0) || sendDetailItem.packageSend.result == -6)
+                    if (
+                        (sendDetailItem.packageSend.activeres == "noch" && res > 0)
+                        || sendDetailItem.packageSend.result == -6
+                    )
                     {
                         //nochange
                         res = 2;
-
                     }
-                    else if (sendDetailItem.packageSend.activeres == "ch" && sendDetailItem.packageSend.result > 0)
+                    else if (
+                        sendDetailItem.packageSend.activeres == "ch"
+                        && sendDetailItem.packageSend.result > 0
+                    )
                     {
                         //change
                         res = 3;
                     }
-                    if (sendDetailItem.packageSend.activeState == "all" && sendDetailItem.packageSend.result > 0)
+                    if (
+                        sendDetailItem.packageSend.activeState == "all"
+                        && sendDetailItem.packageSend.result > 0
+                    )
                     {
                         //change
                         res = 3;
@@ -1376,8 +1356,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
         }
 
@@ -1401,14 +1379,11 @@ namespace POS_Server.Controllers
                     {
                         skey = c.Value;
                     }
-
-
                 }
                 packagesSend ps = new packagesSend();
                 int res = 0;
                 try
                 {
-
                     ps.packageSaleCode = skey;
                     res = updateActiveKey(ps);
 
@@ -1418,13 +1393,8 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
         }
-
-
-
 
         [HttpPost]
         [Route("OfflineActivate")]
@@ -1439,9 +1409,6 @@ namespace POS_Server.Controllers
             }
             else
             {
-
-
-
                 string activeState = "";
 
                 SendDetail sendDetailItem = new SendDetail();
@@ -1449,17 +1416,19 @@ namespace POS_Server.Controllers
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
-
-
                     if (c.Type == "object")
                     {
-                        sendDetailItem = JsonConvert.DeserializeObject<SendDetail>(c.Value, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
-
+                        sendDetailItem = JsonConvert.DeserializeObject<SendDetail>(
+                            c.Value,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "activeState")
                     {
                         activeState = c.Value;
-
                     }
                 }
                 try
@@ -1482,11 +1451,9 @@ namespace POS_Server.Controllers
             }
         }
 
-
         // same as inc server but run in customer server
         public SendDetail ActivateOfflineState(SendDetail SendDetailFile, string activeState)
         {
-
             string message = "";
             int res = 0;
 
@@ -1509,8 +1476,6 @@ namespace POS_Server.Controllers
             // SaveProgDetails(packuserfile);
             try
             {
-
-
                 //  payOpModel lastpayrow = new payOpModel();
                 List<PosSerialSend> serialList = new List<PosSerialSend>();
                 serialList = SendDetailFile.PosSerialSendList;
@@ -1525,37 +1490,58 @@ namespace POS_Server.Controllers
                     //  packuserrow = getPUbycode(packageSaleCode);
                     if (packuserfile.packageUserId > 0)
                     {
-
                         // get last payed row
 
                         if (packuserfile.poId > 0)
                         {
-                            // check if same method metho is 
-                            if (packuserfile.isOnlineServer == packState.isOnlineServer || (packState.isServerActivated == false && packState.activatedate == null))
+                            // check if same method metho is
+                            if (
+                                packuserfile.isOnlineServer == packState.isOnlineServer
+                                || (
+                                    packState.isServerActivated == false
+                                    && packState.activatedate == null
+                                )
+                            )
                             {
                                 // same method or first time
 
                                 // check if current activate(upgrade or extend) is newr than the exist or first time
-                                if (((packuserfile.pocrDate > packState.pocrDate && packuserfile.poId != packState.poId)
-                                    || (packState.isServerActivated == false && packState.activatedate == null))
-                                    ||
+                                if (
                                     (
-                                    packuserfile.pocrDate == packState.pocrDate && packuserfile.poId == packState.poId
-                                    && packState.isServerActivated == false && packuserfile.isServerActivated == true
-                                    && packState.expireDate == packuserfile.bookDate)
+                                        (
+                                            packuserfile.pocrDate > packState.pocrDate
+                                            && packuserfile.poId != packState.poId
+                                        )
+                                        || (
+                                            packState.isServerActivated == false
+                                            && packState.activatedate == null
+                                        )
                                     )
+                                    || (
+                                        packuserfile.pocrDate == packState.pocrDate
+                                        && packuserfile.poId == packState.poId
+                                        && packState.isServerActivated == false
+                                        && packuserfile.isServerActivated == true
+                                        && packState.expireDate == packuserfile.bookDate
+                                    )
+                                )
                                 {
-
-                                    if (packuserfile.activeState == activeState || (packState.isServerActivated == false && packState.activatedate == null)
-                                        ||
-                                         (
-                                    packuserfile.pocrDate == packState.pocrDate && packuserfile.poId == packState.poId
-                                    && packState.isServerActivated == false && packuserfile.isServerActivated == true
-                                    && packState.expireDate == packuserfile.bookDate)
+                                    if (
+                                        packuserfile.activeState == activeState
+                                        || (
+                                            packState.isServerActivated == false
+                                            && packState.activatedate == null
+                                        )
+                                        || (
+                                            packuserfile.pocrDate == packState.pocrDate
+                                            && packuserfile.poId == packState.poId
+                                            && packState.isServerActivated == false
+                                            && packuserfile.isServerActivated == true
+                                            && packState.expireDate == packuserfile.bookDate
+                                        )
                                     )
                                     {
-
-                                        // check if the command is same as the activate file or first time 
+                                        // check if the command is same as the activate file or first time
 
                                         //ssss
                                         // check if there are changes
@@ -1563,7 +1549,13 @@ namespace POS_Server.Controllers
                                         package.activeres = "noch";
                                         if (packuserfile.activeState == "up")
                                         {
-                                            if (packState.pId != packuserfile.pId || (packState.pId == packuserfile.pId && packState.pcdId != packuserfile.pcdId))
+                                            if (
+                                                packState.pId != packuserfile.pId
+                                                || (
+                                                    packState.pId == packuserfile.pId
+                                                    && packState.pcdId != packuserfile.pcdId
+                                                )
+                                            )
                                             {
                                                 // changed
                                                 package.activeres = "ch";
@@ -1574,31 +1566,33 @@ namespace POS_Server.Controllers
                                                 //no  changed
                                                 package.activeres = "noch";
                                                 activeres = "noch";
-
                                             }
                                         }
                                         else if (packuserfile.activeState == "rn")
                                         {
-                                            if (packuserfile.type == "rn" && packuserfile.expireDate > packState.expireDate)
+                                            if (
+                                                packuserfile.type == "rn"
+                                                && packuserfile.expireDate > packState.expireDate
+                                            )
                                             {
                                                 package.activeres = "ch";
                                                 activeres = "ch";
-
                                             }
                                             else
                                             {
                                                 package.activeres = "noch";
                                                 activeres = "noch";
                                             }
-
-
                                         }
                                         // end check
 
 
-                                        if (packuserfile.packuserType == "chpk" && packuserfile.isPayed == false && packuserfile.canRenew == false)
+                                        if (
+                                            packuserfile.packuserType == "chpk"
+                                            && packuserfile.isPayed == false
+                                            && packuserfile.canRenew == false
+                                        )
                                         {
-
                                             // chpk not payed yet
                                             // dont activate until pay
                                             // return TokenManager.GenerateToken("0");
@@ -1611,17 +1605,24 @@ namespace POS_Server.Controllers
                                             senditem.packageSend = package;
 
                                             return senditem;
-
                                         }
-                                        else if (packState.isServerActivated == false || (packuserfile.isServerActivated == true && packuserfile.customerServerCode == customerServerCode)
+                                        else if (
+                                            packState.isServerActivated == false
                                             || (
-                                    packuserfile.pocrDate == packState.pocrDate && packuserfile.poId == packState.poId
-                                    && packState.isServerActivated == false && packuserfile.isServerActivated == true
-                                    && packState.expireDate == packuserfile.bookDate)
-                                            ) //&&  row.expireDate==null 
+                                                packuserfile.isServerActivated == true
+                                                && packuserfile.customerServerCode
+                                                    == customerServerCode
+                                            )
+                                            || (
+                                                packuserfile.pocrDate == packState.pocrDate
+                                                && packuserfile.poId == packState.poId
+                                                && packState.isServerActivated == false
+                                                && packuserfile.isServerActivated == true
+                                                && packState.expireDate == packuserfile.bookDate
+                                            )
+                                        ) //&&  row.expireDate==null
                                         {
-
-                                            //get poserials 
+                                            //get poserials
 
 
                                             List<string> serialposlist = new List<string>();
@@ -1633,11 +1634,16 @@ namespace POS_Server.Controllers
                                             //start
                                             // check if there are changes
                                             package.activeres = activeres;
-                                            if (activeres == "ch" || (packuserfile.activeApp == "all")
+                                            if (
+                                                activeres == "ch"
+                                                || (packuserfile.activeApp == "all")
                                                 || (
-                                    packuserfile.pocrDate == packState.pocrDate && packuserfile.poId == packState.poId
-                                    && packState.isServerActivated == false && packuserfile.isServerActivated == true
-                                    && packState.expireDate == packuserfile.bookDate)
+                                                    packuserfile.pocrDate == packState.pocrDate
+                                                    && packuserfile.poId == packState.poId
+                                                    && packState.isServerActivated == false
+                                                    && packuserfile.isServerActivated == true
+                                                    && packState.expireDate == packuserfile.bookDate
+                                                )
                                             )
                                             {
                                                 //make changes
@@ -1679,8 +1685,9 @@ namespace POS_Server.Controllers
                                                 if (packState.isServerActivated == false)
                                                 {
                                                     package.customerServerCode = serverId;
-                                                    package.activatedate =  coctrlr.AddOffsetTodate(DateTime.Now);// save on client if null 
-
+                                                    package.activatedate = coctrlr.AddOffsetTodate(
+                                                        DateTime.Now
+                                                    ); // save on client if null
                                                 }
 
                                                 // senditem.packageSend = package;
@@ -1701,8 +1708,6 @@ namespace POS_Server.Controllers
                                                     //}
 
                                                     tempres = SaveposSerials(serialList);
-
-
                                                 }
                                                 if (tempres >= 0)
                                                 {
@@ -1734,22 +1739,17 @@ namespace POS_Server.Controllers
                                                 senditem.packageSend = package;
                                                 senditem.PosSerialSendList = serialList;
                                                 return senditem;
-
-
-
-
                                             }
                                             else
                                             {
-
-                                                //nochange 
+                                                //nochange
 
 
 
                                                 package = packState;
                                                 package.activeres = activeres;
 
-                                                package.result = 2;// no change
+                                                package.result = 2; // no change
                                                 package.pocrDate = packuserfile.pocrDate;
                                                 package.poId = packuserfile.poId;
                                                 package.upnum = "";
@@ -1757,7 +1757,6 @@ namespace POS_Server.Controllers
                                                 senditem.packageSend = package;
                                                 senditem.PosSerialSendList = serialList;
                                                 return senditem;
-
                                             }
 
                                             //end
@@ -1781,16 +1780,24 @@ namespace POS_Server.Controllers
                                                 //package not active
                                                 package.result = -2;
                                             }
-                                            else if (!(packuserfile.isServerActivated == false || (packuserfile.isServerActivated == true && packuserfile.customerServerCode == customerServerCode)))
+                                            else if (
+                                                !(
+                                                    packuserfile.isServerActivated == false
+                                                    || (
+                                                        packuserfile.isServerActivated == true
+                                                        && packuserfile.customerServerCode
+                                                            == customerServerCode
+                                                    )
+                                                )
+                                            )
                                             {
-                                                // serverID not match 
+                                                // serverID not match
                                                 package.result = -3;
                                             }
 
                                             senditem.packageSend = package;
 
                                             return senditem;
-
 
                                             //if (packuserrow.canRenew == true)
                                             //{
@@ -1807,11 +1814,7 @@ namespace POS_Server.Controllers
                                             //    //  return TokenManager.GenerateToken(senditem);
 
                                             //}
-
-
-
                                         }
-
 
                                         //   return TokenManager.GenerateToken(senditem);
 
@@ -1820,7 +1823,7 @@ namespace POS_Server.Controllers
                                     }
                                     else
                                     {
-                                        // the client command is different from activate file 
+                                        // the client command is different from activate file
                                         package.result = -9;
                                         senditem.packageSend = package;
                                         return senditem;
@@ -1845,7 +1848,7 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            // not payed 
+                            // not payed
 
                             serialList = new List<PosSerialSend>();
                             package = new packagesSend();
@@ -1864,7 +1867,6 @@ namespace POS_Server.Controllers
                             senditem.packageSend = package;
 
                             return senditem;
-
                         }
                     }
                     else
@@ -1884,7 +1886,6 @@ namespace POS_Server.Controllers
 
                         return senditem;
 
-
                         //senditem = new SendDetail();
                         //packagesSend ps = new packagesSend();
                         //ps.posCount = -3;
@@ -1893,10 +1894,7 @@ namespace POS_Server.Controllers
                         //// senditem.packageSend.posCount = -3;
                         //return TokenManager.GenerateToken(senditem);
                     }
-
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -1907,17 +1905,10 @@ namespace POS_Server.Controllers
                 ps.result = 0;
                 senditem.packageSend = ps;
 
-
                 return senditem;
             }
             //   return TokenManager.GenerateToken("00");
-
-
-
-
         }
-
-
 
         //[HttpPost]
         //[Route("offserialstest")]
@@ -1965,6 +1956,5 @@ namespace POS_Server.Controllers
         //        }
         //    }
         //}
-
     }
 }

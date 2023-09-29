@@ -7,10 +7,12 @@ namespace Internal.Cryptography.Pal
 {
     internal sealed class OpenSslCertificateFinder : ManagedCertificateFinder
     {
-        internal OpenSslCertificateFinder(X509Certificate2Collection findFrom, X509Certificate2Collection copyTo, bool validOnly)
-            : base(findFrom, copyTo, validOnly)
-        {
-        }
+        internal OpenSslCertificateFinder(
+            X509Certificate2Collection findFrom,
+            X509Certificate2Collection copyTo,
+            bool validOnly
+        )
+            : base(findFrom, copyTo, validOnly) { }
 
         protected override byte[] GetSubjectPublicKeyInfo(X509Certificate2 cert)
         {
@@ -19,7 +21,8 @@ namespace Internal.Cryptography.Pal
             byte[] publicKeyInfoBytes = Interop.Crypto.OpenSslEncode(
                 Interop.Crypto.GetX509SubjectPublicKeyInfoDerSize,
                 Interop.Crypto.EncodeX509SubjectPublicKeyInfo,
-                certPal.SafeHandle);
+                certPal.SafeHandle
+            );
 
             return publicKeyInfoBytes;
         }

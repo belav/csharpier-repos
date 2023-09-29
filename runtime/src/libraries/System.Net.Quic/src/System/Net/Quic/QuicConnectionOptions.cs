@@ -14,8 +14,7 @@ public abstract class QuicConnectionOptions
     /// <summary>
     /// Prevent sub-classing by code outside of this assembly.
     /// </summary>
-    internal QuicConnectionOptions()
-    { }
+    internal QuicConnectionOptions() { }
 
     /// <summary>
     /// The maximum number of concurrent bidirectional streams that the remote peer connection can create on an open connection.
@@ -62,23 +61,57 @@ public abstract class QuicConnectionOptions
     {
         if (MaxInboundBidirectionalStreams < 0 || MaxInboundBidirectionalStreams > ushort.MaxValue)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_in_range, nameof(QuicConnectionOptions.MaxInboundBidirectionalStreams), ushort.MaxValue), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_in_range,
+                    nameof(QuicConnectionOptions.MaxInboundBidirectionalStreams),
+                    ushort.MaxValue
+                ),
+                argumentName
+            );
         }
-        if (MaxInboundUnidirectionalStreams < 0 || MaxInboundUnidirectionalStreams > ushort.MaxValue)
+        if (
+            MaxInboundUnidirectionalStreams < 0
+            || MaxInboundUnidirectionalStreams > ushort.MaxValue
+        )
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_in_range, nameof(QuicConnectionOptions.MaxInboundUnidirectionalStreams), ushort.MaxValue), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_in_range,
+                    nameof(QuicConnectionOptions.MaxInboundUnidirectionalStreams),
+                    ushort.MaxValue
+                ),
+                argumentName
+            );
         }
         if (IdleTimeout < TimeSpan.Zero && IdleTimeout != Timeout.InfiniteTimeSpan)
         {
-            throw new ArgumentOutOfRangeException(nameof(QuicConnectionOptions.IdleTimeout), SR.net_quic_timeout_use_gt_zero);
+            throw new ArgumentOutOfRangeException(
+                nameof(QuicConnectionOptions.IdleTimeout),
+                SR.net_quic_timeout_use_gt_zero
+            );
         }
         if (DefaultStreamErrorCode < 0 || DefaultStreamErrorCode > QuicDefaults.MaxErrorCodeValue)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_in_range, nameof(QuicConnectionOptions.DefaultStreamErrorCode), QuicDefaults.MaxErrorCodeValue), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_in_range,
+                    nameof(QuicConnectionOptions.DefaultStreamErrorCode),
+                    QuicDefaults.MaxErrorCodeValue
+                ),
+                argumentName
+            );
         }
         if (DefaultCloseErrorCode < 0 || DefaultCloseErrorCode > QuicDefaults.MaxErrorCodeValue)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_in_range, nameof(QuicConnectionOptions.DefaultCloseErrorCode), QuicDefaults.MaxErrorCodeValue), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_in_range,
+                    nameof(QuicConnectionOptions.DefaultCloseErrorCode),
+                    QuicDefaults.MaxErrorCodeValue
+                ),
+                argumentName
+            );
         }
     }
 }
@@ -125,11 +158,23 @@ public sealed class QuicClientConnectionOptions : QuicConnectionOptions
         // The content of ClientAuthenticationOptions gets validate in MsQuicConfiguration.Create.
         if (ClientAuthenticationOptions is null)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_not_null_open_connection, nameof(QuicClientConnectionOptions.ClientAuthenticationOptions)), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_not_null_open_connection,
+                    nameof(QuicClientConnectionOptions.ClientAuthenticationOptions)
+                ),
+                argumentName
+            );
         }
         if (RemoteEndPoint is null)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_not_null_open_connection, nameof(QuicClientConnectionOptions.RemoteEndPoint)), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_not_null_open_connection,
+                    nameof(QuicClientConnectionOptions.RemoteEndPoint)
+                ),
+                argumentName
+            );
         }
     }
 }
@@ -165,7 +210,13 @@ public sealed class QuicServerConnectionOptions : QuicConnectionOptions
         // The content of ServerAuthenticationOptions gets validate in MsQuicConfiguration.Create.
         if (ServerAuthenticationOptions is null)
         {
-            throw new ArgumentNullException(SR.Format(SR.net_quic_not_null_accept_connection, nameof(QuicServerConnectionOptions.ServerAuthenticationOptions)), argumentName);
+            throw new ArgumentNullException(
+                SR.Format(
+                    SR.net_quic_not_null_accept_connection,
+                    nameof(QuicServerConnectionOptions.ServerAuthenticationOptions)
+                ),
+                argumentName
+            );
         }
     }
 }

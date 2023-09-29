@@ -22,7 +22,13 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class FormattingCodeFixHelper
     {
-        internal static async Task<SyntaxTree> FixOneAsync(SyntaxTree syntaxTree, FormatterState formatterState, OptionSet options, Diagnostic diagnostic, CancellationToken cancellationToken)
+        internal static async Task<SyntaxTree> FixOneAsync(
+            SyntaxTree syntaxTree,
+            FormatterState formatterState,
+            OptionSet options,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             // The span to format is the full line(s) containing the diagnostic
             var text = await syntaxTree.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -30,13 +36,27 @@ namespace Microsoft.CodeAnalysis
             var diagnosticLinePositionSpan = text.Lines.GetLinePositionSpan(diagnosticSpan);
             var spanToFormat = TextSpan.FromBounds(
                 text.Lines[diagnosticLinePositionSpan.Start.Line].Start,
-                text.Lines[diagnosticLinePositionSpan.End.Line].End);
+                text.Lines[diagnosticLinePositionSpan.End.Line].End
+            );
 
             var root = await syntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
 #if CODE_STYLE
-            var formattedRoot = Formatter.Format(root, formatterState, new[] { spanToFormat }, options, Formatter.GetDefaultFormattingRules(formatterState), cancellationToken);
+            var formattedRoot = Formatter.Format(
+                root,
+                formatterState,
+                new[] { spanToFormat },
+                options,
+                Formatter.GetDefaultFormattingRules(formatterState),
+                cancellationToken
+            );
 #else
-            var formattedRoot = Formatter.Format(root, spanToFormat, formatterState, options, cancellationToken);
+            var formattedRoot = Formatter.Format(
+                root,
+                spanToFormat,
+                formatterState,
+                options,
+                cancellationToken
+            );
 #endif
 
             return syntaxTree.WithRootAndOptions(formattedRoot, syntaxTree.Options);

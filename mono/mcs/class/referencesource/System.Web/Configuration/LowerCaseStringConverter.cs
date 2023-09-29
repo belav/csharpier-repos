@@ -76,7 +76,8 @@
 
     ******************************************************************************/
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Xml;
     using System.Configuration;
@@ -89,21 +90,35 @@ namespace System.Web.Configuration {
     using System.ComponentModel;
     using System.Security.Permissions;
 
-    public sealed class LowerCaseStringConverter : TypeConverter {
-        public override bool CanConvertTo(ITypeDescriptorContext ctx, Type type) {
+    public sealed class LowerCaseStringConverter : TypeConverter
+    {
+        public override bool CanConvertTo(ITypeDescriptorContext ctx, Type type)
+        {
             return (type == typeof(string));
         }
-        public override bool CanConvertFrom(ITypeDescriptorContext ctx, Type type) {
+
+        public override bool CanConvertFrom(ITypeDescriptorContext ctx, Type type)
+        {
             return (type == typeof(string));
         }
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type) {
-            if (value == null) {
+
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
+            if (value == null)
+            {
                 return String.Empty;
             }
 
             return ((string)value).ToLower(CultureInfo.InvariantCulture);
         }
-        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data) {
+
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
             Debug.Assert(data != null);
             Debug.Assert(data is string);
 

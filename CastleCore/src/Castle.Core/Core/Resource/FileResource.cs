@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,7 @@ namespace Castle.Core.Resource
     using System.IO;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class FileResource : AbstractStreamResource
     {
@@ -60,7 +60,12 @@ namespace Castle.Core.Resource
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "FileResource: [{0}] [{1}]", filePath, basePath);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "FileResource: [{0}] [{1}]",
+                filePath,
+                basePath
+            );
         }
 
         public override string FileBasePath
@@ -75,11 +80,16 @@ namespace Castle.Core.Resource
 
         private Stream CreateStreamFromUri(CustomUri resource, string rootPath)
         {
-            if (resource == null) throw new ArgumentNullException(nameof(resource));
-            if (rootPath == null) throw new ArgumentNullException(nameof(rootPath));
+            if (resource == null)
+                throw new ArgumentNullException(nameof(resource));
+            if (rootPath == null)
+                throw new ArgumentNullException(nameof(rootPath));
 
             if (!resource.IsFile)
-                throw new ArgumentException("The specified resource is not a file", nameof(resource));
+                throw new ArgumentException(
+                    "The specified resource is not a file",
+                    nameof(resource)
+                );
 
             return CreateStreamFromPath(resource.Path, rootPath);
         }
@@ -111,7 +121,11 @@ namespace Castle.Core.Resource
         {
             if (!File.Exists(path))
             {
-                string message = string.Format(CultureInfo.InvariantCulture, "File {0} could not be found", new FileInfo(path).FullName);
+                string message = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "File {0} could not be found",
+                    new FileInfo(path).FullName
+                );
                 throw new ResourceException(message);
             }
         }

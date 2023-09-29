@@ -19,8 +19,7 @@ public class SignOutResultTest
     {
         // Arrange
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(It.IsAny<HttpContext>(), null, null))
+        auth.Setup(c => c.SignOutAsync(It.IsAny<HttpContext>(), null, null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         var httpContext = GetHttpContext(auth.Object);
@@ -38,8 +37,7 @@ public class SignOutResultTest
     {
         // Arrange
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(It.IsAny<HttpContext>(), "", null))
+        auth.Setup(c => c.SignOutAsync(It.IsAny<HttpContext>(), "", null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         var httpContext = GetHttpContext(auth.Object);
@@ -58,12 +56,10 @@ public class SignOutResultTest
         // Arrange
         var authProperties = new AuthenticationProperties();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.SignOutAsync(It.IsAny<HttpContext>(), "Scheme1", authProperties))
+        auth.Setup(c => c.SignOutAsync(It.IsAny<HttpContext>(), "Scheme1", authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
-        auth
-            .Setup(c => c.SignOutAsync(It.IsAny<HttpContext>(), "Scheme2", authProperties))
+        auth.Setup(c => c.SignOutAsync(It.IsAny<HttpContext>(), "Scheme2", authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
         var httpContext = GetHttpContext(auth.Object);
@@ -79,9 +75,7 @@ public class SignOutResultTest
     private static DefaultHttpContext GetHttpContext(IAuthenticationService auth)
     {
         var httpContext = new DefaultHttpContext();
-        httpContext.RequestServices = CreateServices()
-            .AddSingleton(auth)
-            .BuildServiceProvider();
+        httpContext.RequestServices = CreateServices().AddSingleton(auth).BuildServiceProvider();
         return httpContext;
     }
 

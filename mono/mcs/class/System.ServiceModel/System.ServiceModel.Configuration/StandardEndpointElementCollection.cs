@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,22 +54,24 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	// LAMESPEC: there should be ConfigurationPropertyAttribute whose AddElementName is "standardEndpoint" (see ServiceBehaviorElementCollection for reference).
-	public sealed class StandardEndpointElementCollection<TEndpointConfiguration> : ServiceModelEnhancedConfigurationElementCollection<TEndpointConfiguration>
-		where TEndpointConfiguration : StandardEndpointElement, new()
-	{
-		public StandardEndpointElementCollection ()
-		{
-			AddElementName = "standardEndpoint";
-		}
+    // LAMESPEC: there should be ConfigurationPropertyAttribute whose AddElementName is "standardEndpoint" (see ServiceBehaviorElementCollection for reference).
+    public sealed class StandardEndpointElementCollection<TEndpointConfiguration>
+        : ServiceModelEnhancedConfigurationElementCollection<TEndpointConfiguration>
+        where TEndpointConfiguration : StandardEndpointElement, new()
+    {
+        public StandardEndpointElementCollection()
+        {
+            AddElementName = "standardEndpoint";
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
+        protected override bool ThrowOnDuplicate
+        {
+            get { return false; }
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((StandardEndpointElement) element).Name;
-		}
-	}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((StandardEndpointElement)element).Name;
+        }
+    }
 }

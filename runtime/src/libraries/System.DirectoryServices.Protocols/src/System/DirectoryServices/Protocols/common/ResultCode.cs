@@ -54,7 +54,10 @@ namespace System.DirectoryServices.Protocols
 
     internal static class OperationErrorMappings
     {
-        private static readonly Dictionary<ResultCode, string> s_resultCodeMapping = new Dictionary<ResultCode, string>(capacity: 43)
+        private static readonly Dictionary<ResultCode, string> s_resultCodeMapping = new Dictionary<
+            ResultCode,
+            string
+        >(capacity: 43)
         {
             { ResultCode.Success, SR.LDAP_SUCCESS },
             { ResultCode.OperationsError, SR.LDAP_OPERATIONS_ERROR },

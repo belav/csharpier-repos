@@ -9,17 +9,30 @@ namespace System.Net.NetworkInformation
         private IPEndPoint _remoteEndPoint;
         private TcpState _state;
 
-        public SimpleTcpConnectionInformation(IPEndPoint localEndPoint, IPEndPoint remoteEndPoint, TcpState state)
+        public SimpleTcpConnectionInformation(
+            IPEndPoint localEndPoint,
+            IPEndPoint remoteEndPoint,
+            TcpState state
+        )
         {
             _localEndPoint = localEndPoint;
             _remoteEndPoint = remoteEndPoint;
             _state = state;
         }
 
-        public override IPEndPoint LocalEndPoint { get { return _localEndPoint; } }
+        public override IPEndPoint LocalEndPoint
+        {
+            get { return _localEndPoint; }
+        }
 
-        public override IPEndPoint RemoteEndPoint { get { return _remoteEndPoint; } }
+        public override IPEndPoint RemoteEndPoint
+        {
+            get { return _remoteEndPoint; }
+        }
 
-        public override TcpState State { get { return _state; } }
+        public override TcpState State
+        {
+            get { return _state; }
+        }
     }
 }

@@ -110,7 +110,8 @@ public class JwtBearerOptions : AuthenticationSchemeOptions
     /// </summary>
     /// <remarks>Contains the types and definitions required for validating a token.</remarks>
     /// <exception cref="ArgumentNullException">if 'value' is null.</exception>
-    public TokenValidationParameters TokenValidationParameters { get; set; } = new TokenValidationParameters();
+    public TokenValidationParameters TokenValidationParameters { get; set; } =
+        new TokenValidationParameters();
 
     /// <summary>
     /// Defines whether the bearer token should be stored in the
@@ -143,7 +144,8 @@ public class JwtBearerOptions : AuthenticationSchemeOptions
     /// <value>
     /// Defaults to <see cref="ConfigurationManager{OpenIdConnectConfiguration}.DefaultAutomaticRefreshInterval" />.
     /// </value>
-    public TimeSpan AutomaticRefreshInterval { get; set; } = ConfigurationManager<OpenIdConnectConfiguration>.DefaultAutomaticRefreshInterval;
+    public TimeSpan AutomaticRefreshInterval { get; set; } =
+        ConfigurationManager<OpenIdConnectConfiguration>.DefaultAutomaticRefreshInterval;
 
     /// <summary>
     /// Gets or sets the minimum time between retrievals, in the event that a retrieval failed, or that a refresh was explicitly requested.
@@ -151,5 +153,6 @@ public class JwtBearerOptions : AuthenticationSchemeOptions
     /// <value>
     /// Defaults to <see cref="ConfigurationManager{OpenIdConnectConfiguration}.DefaultRefreshInterval" />.
     /// </value>
-    public TimeSpan RefreshInterval { get; set; } = ConfigurationManager<OpenIdConnectConfiguration>.DefaultRefreshInterval;
+    public TimeSpan RefreshInterval { get; set; } =
+        ConfigurationManager<OpenIdConnectConfiguration>.DefaultRefreshInterval;
 }

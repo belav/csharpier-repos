@@ -14,7 +14,8 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
 {
-    public partial class SimplifyTypeNamesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyTypeNamesTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         #region "Fix all occurrences tests"
 
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyTypeNames
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -73,7 +75,8 @@ class Program2
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -123,7 +126,11 @@ class Program2
     </Project>
 </Workspace>";
 
-            await TestInRegularAndScriptAsync(input, expected, options: PreferIntrinsicTypeEverywhere);
+            await TestInRegularAndScriptAsync(
+                input,
+                expected,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact]
@@ -131,7 +138,8 @@ class Program2
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInProject()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -181,7 +189,8 @@ class Program2
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -231,7 +240,11 @@ class Program2
     </Project>
 </Workspace>";
 
-            await TestInRegularAndScriptAsync(input, expected, options: PreferIntrinsicTypeEverywhere);
+            await TestInRegularAndScriptAsync(
+                input,
+                expected,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact]
@@ -239,7 +252,8 @@ class Program2
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -289,7 +303,8 @@ class Program2
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -339,7 +354,11 @@ class Program2
     </Project>
 </Workspace>";
 
-            await TestInRegularAndScriptAsync(input, expected, options: PreferIntrinsicTypeEverywhere);
+            await TestInRegularAndScriptAsync(
+                input,
+                expected,
+                options: PreferIntrinsicTypeEverywhere
+            );
         }
 
         [Fact]
@@ -347,7 +366,8 @@ class Program2
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution_SimplifyMemberAccess()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -469,7 +489,8 @@ class ProgramB3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>

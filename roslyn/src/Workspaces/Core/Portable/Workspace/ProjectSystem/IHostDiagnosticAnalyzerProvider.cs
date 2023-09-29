@@ -13,6 +13,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
     /// </summary>
     internal interface IHostDiagnosticAnalyzerProvider
     {
-        ImmutableArray<(AnalyzerFileReference reference, string extensionId)> GetAnalyzerReferencesInExtensions();
+        ImmutableArray<(
+            AnalyzerFileReference reference,
+            string extensionId
+        )> GetAnalyzerReferencesInExtensions();
     }
 }

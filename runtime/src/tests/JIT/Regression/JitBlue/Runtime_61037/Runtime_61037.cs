@@ -7,12 +7,10 @@
 // Reduced from 152.5 KiB to 0.3 KiB in 00:01:22
 // Hits JIT assert in Release:
 // Assertion failed 'ins == INS_add' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Generate code' (IL size 28)
-// 
+//
 //     File: D:\a\_work\3\s\src\coreclr\jit\emitarm64.cpp Line: 13602
-// 
-public class C0
-{
-}
+//
+public class C0 { }
 
 public class Runtime_61037
 {
@@ -28,7 +26,10 @@ public class Runtime_61037
 
     public static long M1()
     {
-        var vr1 = new C0[,] { { new C0() } };
+        var vr1 = new C0[,]
+        {
+            { new C0() }
+        };
         return 0;
     }
 }

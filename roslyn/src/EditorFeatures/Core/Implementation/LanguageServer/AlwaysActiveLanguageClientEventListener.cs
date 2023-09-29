@@ -35,11 +35,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         public AlwaysActiveLanguageClientEventListener(
             AlwaysActivateInProcLanguageClient languageClient,
             Lazy<ILanguageClientBroker> languageClientBroker,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _languageClient = languageClient;
             _languageClientBroker = languageClientBroker;
-            _asynchronousOperationListener = listenerProvider.GetListener(FeatureAttribute.LanguageServer);
+            _asynchronousOperationListener = listenerProvider.GetListener(
+                FeatureAttribute.LanguageServer
+            );
         }
 
         /// <summary>
@@ -57,26 +60,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         {
             try
             {
-                using var token = _asynchronousOperationListener.BeginAsyncOperation(nameof(LoadAsync));
+                using var token = _asynchronousOperationListener.BeginAsyncOperation(
+                    nameof(LoadAsync)
+                );
 
-                // Explicitly switch to the bg so that if this causes any expensive work (like mef loads) it 
+                // Explicitly switch to the bg so that if this causes any expensive work (like mef loads) it
                 // doesn't block the UI thread.
                 await TaskScheduler.Default;
 
-                await _languageClientBroker.Value.LoadAsync(new LanguageClientMetadata(new[]
-                {
-                        ContentTypeNames.CSharpContentType,
-                        ContentTypeNames.VisualBasicContentType,
-                        ContentTypeNames.FSharpContentType
-                }), _languageClient).ConfigureAwait(false);
+                await _languageClientBroker.Value
+                    .LoadAsync(
+                        new LanguageClientMetadata(
+                            new[]
+                            {
+                                ContentTypeNames.CSharpContentType,
+                                ContentTypeNames.VisualBasicContentType,
+                                ContentTypeNames.FSharpContentType
+                            }
+                        ),
+                        _languageClient
+                    )
+                    .ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
 
         /// <summary>
-        /// The <see cref="ILanguageClientBroker.LoadAsync(ILanguageClientMetadata, ILanguageClient)"/> 
+        /// The <see cref="ILanguageClientBroker.LoadAsync(ILanguageClientMetadata, ILanguageClient)"/>
         /// requires that we pass the <see cref="ILanguageClientMetadata"/> along with the language client instance.
         /// The implementation of <see cref="ILanguageClientMetadata"/> is not public, so have to re-implement.
         /// https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1043922 tracking to remove this.

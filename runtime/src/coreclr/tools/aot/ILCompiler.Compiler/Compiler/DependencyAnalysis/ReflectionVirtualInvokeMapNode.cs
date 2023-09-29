@@ -36,9 +36,14 @@ namespace ILCompiler.DependencyAnalysis
         public ISymbolNode EndSymbol => _endSymbol;
         public int Offset => 0;
         public override bool IsShareable => false;
-        public override ObjectNodeSection GetSection(NodeFactory factory) => _externalReferences.GetSection(factory);
+
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            _externalReferences.GetSection(factory);
+
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public static bool NeedsVirtualInvokeInfo(MethodDesc method)
         {
@@ -54,12 +59,19 @@ namespace ILCompiler.DependencyAnalysis
             return true;
         }
 
-        public static MethodDesc GetDeclaringVirtualMethodAndHierarchyDistance(MethodDesc method, out int parentHierarchyDistance)
+        public static MethodDesc GetDeclaringVirtualMethodAndHierarchyDistance(
+            MethodDesc method,
+            out int parentHierarchyDistance
+        )
         {
             parentHierarchyDistance = 0;
 
-            MethodDesc declaringMethodForSlot = MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(method.GetTypicalMethodDefinition());
-            TypeDesc typeOfDeclaringMethodForSlot = declaringMethodForSlot.OwningType.GetTypeDefinition();
+            MethodDesc declaringMethodForSlot =
+                MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(
+                    method.GetTypicalMethodDefinition()
+                );
+            TypeDesc typeOfDeclaringMethodForSlot =
+                declaringMethodForSlot.OwningType.GetTypeDefinition();
             TypeDesc currentType = method.OwningType.GetTypeDefinition();
             TypeDesc containingTypeOfDeclaringMethodForSlot = method.OwningType;
 
@@ -67,14 +79,16 @@ namespace ILCompiler.DependencyAnalysis
             {
                 parentHierarchyDistance++;
                 currentType = currentType.BaseType.GetTypeDefinition();
-                containingTypeOfDeclaringMethodForSlot = containingTypeOfDeclaringMethodForSlot.BaseType;
+                containingTypeOfDeclaringMethodForSlot =
+                    containingTypeOfDeclaringMethodForSlot.BaseType;
             }
 
             if (containingTypeOfDeclaringMethodForSlot.HasInstantiation)
             {
                 declaringMethodForSlot = method.Context.GetMethodForInstantiatedType(
                     declaringMethodForSlot.GetTypicalMethodDefinition(),
-                    (InstantiatedType)containingTypeOfDeclaringMethodForSlot);
+                    (InstantiatedType)containingTypeOfDeclaringMethodForSlot
+                );
             }
 
             Debug.Assert(declaringMethodForSlot != null);
@@ -82,26 +96,43 @@ namespace ILCompiler.DependencyAnalysis
             return declaringMethodForSlot;
         }
 
-        public static void GetVirtualInvokeMapDependencies(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
+        public static void GetVirtualInvokeMapDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        )
         {
             if (NeedsVirtualInvokeInfo(method))
             {
                 dependencies ??= new DependencyList();
 
                 dependencies.Add(
-                    factory.NecessaryTypeSymbol(method.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific)),
-                    "Reflection virtual invoke owning type");
+                    factory.NecessaryTypeSymbol(
+                        method.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    ),
+                    "Reflection virtual invoke owning type"
+                );
 
-                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig = factory.NativeLayout.MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition());
-                NativeLayoutPlacedSignatureVertexNode placedNameAndSig = factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
+                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig =
+                    factory.NativeLayout.MethodNameAndSignatureVertex(
+                        method.GetTypicalMethodDefinition()
+                    );
+                NativeLayoutPlacedSignatureVertexNode placedNameAndSig =
+                    factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
                 dependencies.Add(placedNameAndSig, "Reflection virtual invoke method signature");
 
                 if (!method.HasInstantiation)
                 {
-                    MethodDesc slotDefiningMethod = MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(method);
+                    MethodDesc slotDefiningMethod =
+                        MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(
+                            method
+                        );
                     if (!factory.VTable(slotDefiningMethod.OwningType).HasFixedSlots)
                     {
-                        dependencies.Add(factory.VirtualMethodUse(slotDefiningMethod), "Reflection virtual invoke method");
+                        dependencies.Add(
+                            factory.VirtualMethodUse(slotDefiningMethod),
+                            "Reflection virtual invoke method"
+                        );
                     }
                 }
             }
@@ -111,7 +142,12 @@ namespace ILCompiler.DependencyAnalysis
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             // Ensure the native layout blob has been saved
             factory.MetadataManager.NativeLayoutInfo.SaveNativeLayoutInfoWriter(factory);
@@ -122,7 +158,8 @@ namespace ILCompiler.DependencyAnalysis
             Section hashTableSection = writer.NewSection();
             hashTableSection.Place(typeMapHashTable);
 
-            Dictionary<int, HashSet<TypeDesc>> methodsEmitted = new Dictionary<int, HashSet<TypeDesc>>();
+            Dictionary<int, HashSet<TypeDesc>> methodsEmitted =
+                new Dictionary<int, HashSet<TypeDesc>>();
 
             // Get a list of all methods that have a method body and metadata from the metadata manager.
             foreach (var mappingEntry in factory.MetadataManager.GetMethodMapping(factory))
@@ -154,7 +191,9 @@ namespace ILCompiler.DependencyAnalysis
                 // of the method's containing type instead of the open type definition.
                 //
 
-                TypeDesc containingTypeKey = method.OwningType.ConvertToCanonForm(CanonicalFormKind.Specific);
+                TypeDesc containingTypeKey = method.OwningType.ConvertToCanonForm(
+                    CanonicalFormKind.Specific
+                );
 
                 HashSet<TypeDesc> cache;
                 if (!methodsEmitted.TryGetValue(mappingEntry.MetadataHandle, out cache))
@@ -172,33 +211,55 @@ namespace ILCompiler.DependencyAnalysis
                 // TypeKey + NameAndSig metadata offset into the native layout metadata + (NumberOfStepsUpParentHierarchyToType << 1 + 1)
 
                 int parentHierarchyDistance;
-                MethodDesc declaringMethodForSlot = GetDeclaringVirtualMethodAndHierarchyDistance(method, out parentHierarchyDistance);
+                MethodDesc declaringMethodForSlot = GetDeclaringVirtualMethodAndHierarchyDistance(
+                    method,
+                    out parentHierarchyDistance
+                );
                 ISymbolNode containingTypeKeyNode = factory.NecessaryTypeSymbol(containingTypeKey);
-                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig = factory.NativeLayout.MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition());
-                NativeLayoutPlacedSignatureVertexNode placedNameAndSig = factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
-
+                NativeLayoutMethodNameAndSignatureVertexNode nameAndSig =
+                    factory.NativeLayout.MethodNameAndSignatureVertex(
+                        method.GetTypicalMethodDefinition()
+                    );
+                NativeLayoutPlacedSignatureVertexNode placedNameAndSig =
+                    factory.NativeLayout.PlacedSignatureVertex(nameAndSig);
 
                 Vertex vertex;
                 if (method.HasInstantiation)
                 {
                     vertex = writer.GetTuple(
-                        writer.GetUnsignedConstant(_externalReferences.GetIndex(containingTypeKeyNode)),
+                        writer.GetUnsignedConstant(
+                            _externalReferences.GetIndex(containingTypeKeyNode)
+                        ),
                         writer.GetUnsignedConstant((uint)placedNameAndSig.SavedVertex.VertexOffset),
-                        writer.GetUnsignedConstant(((uint)parentHierarchyDistance << 1) + VirtualInvokeTableEntry.GenericVirtualMethod));
+                        writer.GetUnsignedConstant(
+                            ((uint)parentHierarchyDistance << 1)
+                                + VirtualInvokeTableEntry.GenericVirtualMethod
+                        )
+                    );
                 }
                 else
                 {
                     // Get the declaring method for slot on the instantiated declaring type
-                    int slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, declaringMethodForSlot, declaringMethodForSlot.OwningType, true);
+                    int slot = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                        factory,
+                        declaringMethodForSlot,
+                        declaringMethodForSlot.OwningType,
+                        true
+                    );
                     Debug.Assert(slot != -1);
 
                     vertex = writer.GetTuple(
-                        writer.GetUnsignedConstant(_externalReferences.GetIndex(containingTypeKeyNode)),
-                        writer.GetUnsignedConstant((uint)placedNameAndSig.SavedVertex.VertexOffset));
+                        writer.GetUnsignedConstant(
+                            _externalReferences.GetIndex(containingTypeKeyNode)
+                        ),
+                        writer.GetUnsignedConstant((uint)placedNameAndSig.SavedVertex.VertexOffset)
+                    );
 
-                    vertex = writer.GetTuple(vertex,
+                    vertex = writer.GetTuple(
+                        vertex,
                         writer.GetUnsignedConstant((uint)parentHierarchyDistance << 1),
-                        writer.GetUnsignedConstant((uint)slot));
+                        writer.GetUnsignedConstant((uint)slot)
+                    );
                 }
 
                 int hashCode = containingTypeKey.GetHashCode();
@@ -209,7 +270,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _endSymbol.SetSymbolOffset(hashTableBytes.Length);
 
-            return new ObjectData(hashTableBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                hashTableBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

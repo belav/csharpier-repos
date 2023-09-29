@@ -15,12 +15,12 @@ namespace Microsoft.CodeAnalysis.Editor
     /// <summary>
     /// An indentation result represents where the indent should be placed.  It conveys this through
     /// a pair of values.  A position in the existing document where the indent should be relative,
-    /// and the number of columns after that the indent should be placed at.  
-    /// 
+    /// and the number of columns after that the indent should be placed at.
+    ///
     /// This pairing provides flexibility to the implementor to compute the indentation results in
-    /// a variety of ways.  For example, one implementation may wish to express indentation of a 
+    /// a variety of ways.  For example, one implementation may wish to express indentation of a
     /// newline as being four columns past the start of the first token on a previous line.  Another
-    /// may wish to simply express the indentation as an absolute amount from the start of the 
+    /// may wish to simply express the indentation as an absolute amount from the start of the
     /// current line.  With this tuple, both forms can be expressed, and the implementor does not
     /// have to convert from one to the other.
     /// </summary>
@@ -38,22 +38,31 @@ namespace Microsoft.CodeAnalysis.Editor
         /// </summary>
         public int Offset { get; }
 
-        public IndentationResult(int basePosition, int offset) : this()
+        public IndentationResult(int basePosition, int offset)
+            : this()
         {
             this.BasePosition = basePosition;
             this.Offset = offset;
         }
 
-        public static implicit operator Indentation.IndentationResult(IndentationResult result)
-            => new(result.BasePosition, result.Offset);
+        public static implicit operator Indentation.IndentationResult(IndentationResult result) =>
+            new(result.BasePosition, result.Offset);
     }
 
     // Removal of this interface tracked with https://github.com/dotnet/roslyn/issues/35872
     [Obsolete("Use Microsoft.CodeAnalysis.Indentation.IIndentationService instead.")]
     internal interface IIndentationService : ILanguageService
     {
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This service is obsolete.")]
-        Task<IndentationResult?> GetDesiredIndentation(Document document, int lineNumber, CancellationToken cancellationToken);
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This service is obsolete."
+        )]
+        Task<IndentationResult?> GetDesiredIndentation(
+            Document document,
+            int lineNumber,
+            CancellationToken cancellationToken
+        );
     }
 
     // Removal of this interface tracked with https://github.com/dotnet/roslyn/issues/35872
@@ -66,6 +75,10 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <see langword="null"/> if the line in question is not blank and thus indentation should
         /// be deferred to the formatting command handler to handle.
         /// </summary>
-        IndentationResult? GetDesiredIndentation(Document document, int lineNumber, CancellationToken cancellationToken);
+        IndentationResult? GetDesiredIndentation(
+            Document document,
+            int lineNumber,
+            CancellationToken cancellationToken
+        );
     }
 }

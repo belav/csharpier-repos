@@ -5,21 +5,20 @@ using System.Reflection;
 
 public class Repro
 {
-
     public static int Main()
     {
         try
         {
             AssemblyName an = new AssemblyName("system, processorArchitecture=somebadvalue");
         }
-        catch(System.IO.FileLoadException e)
+        catch (System.IO.FileLoadException e)
         {
-            if(e.ToString().ToUpper().IndexOf("UNKNOWN ERROR") == -1)
+            if (e.ToString().ToUpper().IndexOf("UNKNOWN ERROR") == -1)
             {
                 //we didn't get "Unknown error" in the exception text
                 Console.WriteLine("Pass");
                 return 100;
-            } 
+            }
             else
             {
                 Console.WriteLine("Wrong exception text: " + e.ToString());
@@ -31,4 +30,3 @@ public class Repro
         return 99;
     }
 }
-    

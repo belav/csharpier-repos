@@ -16,22 +16,22 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(CascadeTiming.Never)]
     [InlineData(null)]
     public virtual void Optional_one_to_one_relationships_are_one_to_one(
-        CascadeTiming? deleteOrphansTiming)
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+        CascadeTiming? deleteOrphansTiming
+    ) =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
 
-                var root = context.Set<Root>().Single(IsTheRoot);
+            var root = context.Set<Root>().Single(IsTheRoot);
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            Assert.False(context.ChangeTracker.HasChanges());
 
-                root.OptionalSingle = new OptionalSingle1();
+            root.OptionalSingle = new OptionalSingle1();
 
-                Assert.True(context.ChangeTracker.HasChanges());
+            Assert.True(context.ChangeTracker.HasChanges());
 
-                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-            });
+            Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+        });
 
     [ConditionalTheory]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.OnSaveChanges)]
@@ -40,44 +40,122 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, null)]
     [InlineData((int)ChangeMechanism.Principal, true, null)]
     [InlineData((int)ChangeMechanism.Dependent, false, null)]
@@ -90,12 +168,21 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, null)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        null
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        null
+    )]
     public virtual void Save_changed_optional_one_to_one(
         ChangeMechanism changeMechanism,
         bool useExistingEntities,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var new2 = new OptionalSingle2();
         var new2d = new OptionalSingle2Derived();
@@ -123,7 +210,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 root = LoadOptionalGraph(context);
 
@@ -137,11 +225,15 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 if (useExistingEntities)
                 {
                     new1 = context.Set<OptionalSingle1>().Single(e => e.Id == new1.Id);
-                    new1d = (OptionalSingle1Derived)context.Set<OptionalSingle1>().Single(e => e.Id == new1d.Id);
-                    new1dd = (OptionalSingle1MoreDerived)context.Set<OptionalSingle1>().Single(e => e.Id == new1dd.Id);
+                    new1d = (OptionalSingle1Derived)
+                        context.Set<OptionalSingle1>().Single(e => e.Id == new1d.Id);
+                    new1dd = (OptionalSingle1MoreDerived)
+                        context.Set<OptionalSingle1>().Single(e => e.Id == new1dd.Id);
                     new2 = context.Set<OptionalSingle2>().Single(e => e.Id == new2.Id);
-                    new2d = (OptionalSingle2Derived)context.Set<OptionalSingle2>().Single(e => e.Id == new2d.Id);
-                    new2dd = (OptionalSingle2MoreDerived)context.Set<OptionalSingle2>().Single(e => e.Id == new2dd.Id);
+                    new2d = (OptionalSingle2Derived)
+                        context.Set<OptionalSingle2>().Single(e => e.Id == new2d.Id);
+                    new2dd = (OptionalSingle2MoreDerived)
+                        context.Set<OptionalSingle2>().Single(e => e.Id == new2dd.Id);
                 }
                 else
                 {
@@ -231,41 +323,61 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Equal(loaded1.Id, loaded2.BackId);
                 Assert.Equal(loaded1d.Id, loaded2d.BackId);
                 Assert.Equal(loaded1dd.Id, loaded2dd.BackId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.OnSaveChanges)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.OnSaveChanges)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.Immediate)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        CascadeTiming.Never
+    )]
     [InlineData((int)ChangeMechanism.Principal, null)]
     [InlineData((int)ChangeMechanism.Dependent, null)]
     [InlineData((int)ChangeMechanism.Fk, null)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), null)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), null)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        null
+    )]
     public virtual void Sever_optional_one_to_one(
         ChangeMechanism changeMechanism,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         Root root = null;
         OptionalSingle1 old1 = null;
@@ -273,7 +385,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 root = LoadOptionalGraph(context);
 
@@ -325,7 +438,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Null(loaded1.RootId);
                     Assert.Equal(loaded1.Id, loaded2.BackId);
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -335,44 +449,122 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, null)]
     [InlineData((int)ChangeMechanism.Principal, true, null)]
     [InlineData((int)ChangeMechanism.Dependent, false, null)]
@@ -385,12 +577,21 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, null)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        null
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        null
+    )]
     public virtual void Reparent_optional_one_to_one(
         ChangeMechanism changeMechanism,
         bool useExistingRoot,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var newRoot = new Root();
         Root root = null;
@@ -408,11 +609,14 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 root = LoadOptionalGraph(context);
 
-                context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                context.Entry(newRoot).State = useExistingRoot
+                    ? EntityState.Unchanged
+                    : EntityState.Added;
 
                 old1 = root.OptionalSingle;
                 old2 = root.OptionalSingle.Single;
@@ -460,7 +664,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Same(loaded1, loaded2.Back);
                 Assert.Equal(newRoot.Id, loaded1.RootId);
                 Assert.Equal(loaded1.Id, loaded2.BackId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -476,7 +681,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Optional_one_to_one_are_orphaned(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -484,8 +690,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadOptionalGraph(context);
 
@@ -506,7 +714,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
 
                     Assert.Equal(
-                        Fixture.ForceClientNoAction ? EntityState.Unchanged : EntityState.Modified, context.Entry(orphaned).State);
+                        Fixture.ForceClientNoAction ? EntityState.Unchanged : EntityState.Modified,
+                        context.Entry(orphaned).State
+                    );
                 }
 
                 if (Fixture.ForceClientNoAction)
@@ -542,7 +752,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Empty(context.Set<OptionalSingle1>().Where(e => e.Id == removedId));
                     Assert.Equal(1, context.Set<OptionalSingle2>().Count(e => e.Id == orphanedId));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -558,15 +769,18 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Optional_one_to_one_leaf_can_be_deleted(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
 
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadOptionalGraph(context);
                 var parent = root.OptionalSingle;
@@ -601,7 +815,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                 Assert.Null(parent.Single);
                 Assert.Empty(context.Set<OptionalSingle2>().Where(e => e.Id == removedId));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -617,7 +832,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Optional_one_to_one_are_orphaned_in_store(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -632,8 +848,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = context.Set<Root>().Include(e => e.OptionalSingle).Single(IsTheRoot);
 
@@ -664,7 +882,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Null(root.OptionalSingle);
 
                     Assert.Empty(context.Set<OptionalSingle1>().Where(e => e.Id == removedId));
-                    Assert.Null(context.Set<OptionalSingle2>().Single(e => e.Id == orphanedId).BackId);
+                    Assert.Null(
+                        context.Set<OptionalSingle2>().Single(e => e.Id == orphanedId).BackId
+                    );
 
                     Assert.Same(root, removed.Root);
                     Assert.Same(orphaned, removed.Single);
@@ -679,9 +899,12 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Null(root.OptionalSingle);
 
                     Assert.Empty(context.Set<OptionalSingle1>().Where(e => e.Id == removedId));
-                    Assert.Null(context.Set<OptionalSingle2>().Single(e => e.Id == orphanedId).BackId);
+                    Assert.Null(
+                        context.Set<OptionalSingle2>().Single(e => e.Id == orphanedId).BackId
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -697,7 +920,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Optional_one_to_one_are_orphaned_starting_detached(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -707,8 +931,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             context => root = LoadOptionalGraph(context),
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var removed = root.OptionalSingle;
 
@@ -727,8 +953,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
                 }
 
-                var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate
-                        || cascadeDeleteTiming == null)
+                var expectedState =
+                    (cascadeDeleteTiming == CascadeTiming.Immediate || cascadeDeleteTiming == null)
                     && !Fixture.ForceClientNoAction
                         ? EntityState.Modified
                         : EntityState.Unchanged;
@@ -765,7 +991,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Empty(context.Set<OptionalSingle1>().Where(e => e.Id == removedId));
                     Assert.Equal(1, context.Set<OptionalSingle2>().Count(e => e.Id == orphanedId));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -774,55 +1001,74 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(CascadeTiming.Never)]
     [InlineData(null)]
     public virtual void Required_one_to_one_relationships_are_one_to_one(
-        CascadeTiming? deleteOrphansTiming)
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+        CascadeTiming? deleteOrphansTiming
+    ) =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
 
-                var root = context.Set<Root>().Single(IsTheRoot);
+            var root = context.Set<Root>().Single(IsTheRoot);
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            Assert.False(context.ChangeTracker.HasChanges());
 
-                root.RequiredSingle = new RequiredSingle1();
+            root.RequiredSingle = new RequiredSingle1();
 
-                Assert.True(context.ChangeTracker.HasChanges());
+            Assert.True(context.ChangeTracker.HasChanges());
 
-                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-            });
+            Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+        });
 
     [ConditionalTheory]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.OnSaveChanges)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.OnSaveChanges)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.Immediate)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        CascadeTiming.Never
+    )]
     [InlineData((int)ChangeMechanism.Principal, null)]
     [InlineData((int)ChangeMechanism.Dependent, null)]
     [InlineData((int)ChangeMechanism.Fk, null)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), null)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), null)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        null
+    )]
     public virtual void Save_required_one_to_one_changed_by_reference(
         ChangeMechanism changeMechanism,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         // This test is a bit strange because the relationships are PK<->PK, which means
         // that an existing entity has to be deleted and then a new entity created that has
@@ -834,14 +1080,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         IReadOnlyList<EntityEntry> entries = null;
         RequiredSingle1 old1 = null;
         RequiredSingle2 old2 = null;
-        ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                oldRoot = LoadRequiredGraph(context);
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            oldRoot = LoadRequiredGraph(context);
 
-                old1 = oldRoot.RequiredSingle;
-                old2 = oldRoot.RequiredSingle.Single;
-            });
+            old1 = oldRoot.RequiredSingle;
+            old2 = oldRoot.RequiredSingle.Single;
+        });
 
         var new2 = new RequiredSingle2();
         var new1 = new RequiredSingle1 { Single = new2 };
@@ -849,7 +1094,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadRequiredGraph(context);
 
@@ -866,8 +1112,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && !Fixture.NoStoreCascades)
+                if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                 {
                     var root = LoadRequiredGraph(context);
 
@@ -908,8 +1153,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && !Fixture.NoStoreCascades)
+                if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                 {
                     var loadedRoot = LoadRequiredGraph(context);
 
@@ -917,7 +1161,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     AssertKeys(oldRoot, loadedRoot);
                     AssertNavigations(loadedRoot);
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -927,44 +1172,122 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, null)]
     [InlineData((int)ChangeMechanism.Principal, true, null)]
     [InlineData((int)ChangeMechanism.Dependent, false, null)]
@@ -977,12 +1300,21 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, null)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        null
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        null
+    )]
     public virtual void Save_required_non_PK_one_to_one_changed_by_reference(
         ChangeMechanism changeMechanism,
         bool useExistingEntities,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var new2 = new RequiredNonPkSingle2();
         var new2d = new RequiredNonPkSingle2Derived();
@@ -1021,7 +1353,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 root = LoadRequiredNonPkGraph(context);
 
@@ -1030,7 +1363,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 old1dd = root.RequiredNonPkSingleMoreDerived;
                 old2 = root.RequiredNonPkSingle.Single;
                 old2d = (RequiredNonPkSingle2Derived)root.RequiredNonPkSingleDerived.Single;
-                old2dd = (RequiredNonPkSingle2MoreDerived)root.RequiredNonPkSingleMoreDerived.Single;
+                old2dd = (RequiredNonPkSingle2MoreDerived)
+                    root.RequiredNonPkSingleMoreDerived.Single;
 
                 context.Set<RequiredNonPkSingle1>().Remove(old1d);
                 context.Set<RequiredNonPkSingle1>().Remove(old1dd);
@@ -1038,11 +1372,15 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 if (useExistingEntities)
                 {
                     new1 = context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1.Id);
-                    new1d = (RequiredNonPkSingle1Derived)context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1d.Id);
-                    new1dd = (RequiredNonPkSingle1MoreDerived)context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1dd.Id);
+                    new1d = (RequiredNonPkSingle1Derived)
+                        context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1d.Id);
+                    new1dd = (RequiredNonPkSingle1MoreDerived)
+                        context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1dd.Id);
                     new2 = context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2.Id);
-                    new2d = (RequiredNonPkSingle2Derived)context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2d.Id);
-                    new2dd = (RequiredNonPkSingle2MoreDerived)context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2dd.Id);
+                    new2d = (RequiredNonPkSingle2Derived)
+                        context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2d.Id);
+                    new2dd = (RequiredNonPkSingle2MoreDerived)
+                        context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2dd.Id);
 
                     new1d.RootId = old1d.RootId;
                     new1dd.RootId = old1dd.RootId;
@@ -1077,21 +1415,25 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     new1dd.MoreDerivedRootId = root.Id;
                 }
 
-                if (Fixture.ForceClientNoAction
-                    || deleteOrphansTiming == CascadeTiming.Never)
+                if (Fixture.ForceClientNoAction || deleteOrphansTiming == CascadeTiming.Never)
                 {
-                    var testCode = deleteOrphansTiming == CascadeTiming.Immediate
-                        ? () => context.ChangeTracker.DetectChanges()
-                        : deleteOrphansTiming == null
-                            ? () => context.ChangeTracker.CascadeChanges()
-                            : (Action)(() => context.SaveChanges());
+                    var testCode =
+                        deleteOrphansTiming == CascadeTiming.Immediate
+                            ? () => context.ChangeTracker.DetectChanges()
+                            : deleteOrphansTiming == null
+                                ? () => context.ChangeTracker.CascadeChanges()
+                                : (Action)(() => context.SaveChanges());
 
                     var message = Assert.Throws<InvalidOperationException>(testCode).Message;
 
                     Assert.Equal(
                         message,
                         CoreStrings.RelationshipConceptualNullSensitive(
-                            nameof(Root), nameof(RequiredNonPkSingle1), "{RootId: " + old1.RootId + "}"));
+                            nameof(Root),
+                            nameof(RequiredNonPkSingle1),
+                            "{RootId: " + old1.RootId + "}"
+                        )
+                    );
                 }
                 else
                 {
@@ -1134,9 +1476,11 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
+                if (
+                    !Fixture.ForceClientNoAction
                     && !Fixture.NoStoreCascades
-                    && deleteOrphansTiming != CascadeTiming.Never)
+                    && deleteOrphansTiming != CascadeTiming.Never
+                )
                 {
                     var loadedRoot = LoadRequiredNonPkGraph(context);
 
@@ -1151,16 +1495,23 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.False(context.Set<RequiredNonPkSingle2>().Any(e => e.Id == old2d.Id));
                     Assert.False(context.Set<RequiredNonPkSingle2>().Any(e => e.Id == old2dd.Id));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Never)]
@@ -1169,7 +1520,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), null)]
     public virtual void Sever_required_one_to_one(
         ChangeMechanism changeMechanism,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         Root root = null;
         RequiredSingle1 old1 = null;
@@ -1177,7 +1529,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 root = LoadRequiredGraph(context);
 
@@ -1225,35 +1578,49 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && !Fixture.NoStoreCascades)
+                if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                 {
                     var loadedRoot = LoadRequiredGraph(context);
 
                     AssertKeys(root, loadedRoot);
                     AssertPossiblyNullNavigations(loadedRoot);
 
-                    var removedCount = context.Set<Root>().Select(r => r.RequiredSingle).Count(e => e.Id == old1.Id);
+                    var removedCount = context
+                        .Set<Root>()
+                        .Select(r => r.RequiredSingle)
+                        .Count(e => e.Id == old1.Id);
                     Assert.Equal(0, removedCount);
 
                     Assert.False(context.Set<Root>().Any(r => r.RequiredSingle != null));
 
-                    var orphanedCount = context.Set<Root>().Select(r => r.RequiredSingle).Select(r => r.Single)
+                    var orphanedCount = context
+                        .Set<Root>()
+                        .Select(r => r.RequiredSingle)
+                        .Select(r => r.Single)
                         .Count(e => e.Id == old2.Id);
                     Assert.Equal(0, orphanedCount);
 
-                    Assert.False(context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null));
+                    Assert.False(
+                        context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Never)]
@@ -1262,7 +1629,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), null)]
     public virtual void Sever_required_non_PK_one_to_one(
         ChangeMechanism changeMechanism,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         Root root = null;
         RequiredNonPkSingle1 old1 = null;
@@ -1270,7 +1638,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 root = LoadRequiredNonPkGraph(context);
 
@@ -1292,25 +1661,31 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     throw new ArgumentOutOfRangeException(nameof(changeMechanism));
                 }
 
-                if (Fixture.ForceClientNoAction
-                    || deleteOrphansTiming == CascadeTiming.Never)
+                if (Fixture.ForceClientNoAction || deleteOrphansTiming == CascadeTiming.Never)
                 {
-                    var testCode = deleteOrphansTiming == CascadeTiming.Immediate
-                        ? () => context.ChangeTracker.DetectChanges()
-                        : deleteOrphansTiming == null
-                            ? () => context.ChangeTracker.CascadeChanges()
-                            : (Action)(() => context.SaveChanges());
+                    var testCode =
+                        deleteOrphansTiming == CascadeTiming.Immediate
+                            ? () => context.ChangeTracker.DetectChanges()
+                            : deleteOrphansTiming == null
+                                ? () => context.ChangeTracker.CascadeChanges()
+                                : (Action)(() => context.SaveChanges());
 
                     var message = Assert.Throws<InvalidOperationException>(testCode).Message;
 
                     Assert.Equal(
                         message,
                         CoreStrings.RelationshipConceptualNullSensitive(
-                            nameof(Root), nameof(RequiredNonPkSingle1), "{RootId: " + old1.RootId + "}"));
+                            nameof(Root),
+                            nameof(RequiredNonPkSingle1),
+                            "{RootId: " + old1.RootId + "}"
+                        )
+                    );
                 }
                 else
                 {
-                    Assert.False(context.Entry(root).Reference(e => e.RequiredNonPkSingle).IsLoaded);
+                    Assert.False(
+                        context.Entry(root).Reference(e => e.RequiredNonPkSingle).IsLoaded
+                    );
                     Assert.False(context.Entry(old1).Reference(e => e.Root).IsLoaded);
                     Assert.True(context.ChangeTracker.HasChanges());
 
@@ -1330,9 +1705,11 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
+                if (
+                    !Fixture.ForceClientNoAction
                     && !Fixture.NoStoreCascades
-                    && deleteOrphansTiming != CascadeTiming.Never)
+                    && deleteOrphansTiming != CascadeTiming.Never
+                )
                 {
                     var loadedRoot = LoadRequiredNonPkGraph(context);
 
@@ -1342,7 +1719,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.False(context.Set<RequiredNonPkSingle1>().Any(e => e.Id == old1.Id));
                     Assert.False(context.Set<RequiredNonPkSingle2>().Any(e => e.Id == old2.Id));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1352,44 +1730,122 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, null)]
     [InlineData((int)ChangeMechanism.Principal, true, null)]
     [InlineData((int)ChangeMechanism.Dependent, false, null)]
@@ -1402,12 +1858,21 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, null)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        null
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        null
+    )]
     public virtual void Reparent_required_one_to_one(
         ChangeMechanism changeMechanism,
         bool useExistingRoot,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var newRoot = new Root();
 
@@ -1422,18 +1887,21 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadRequiredGraph(context);
 
                 Assert.False(context.ChangeTracker.HasChanges());
 
-                context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                context.Entry(newRoot).State = useExistingRoot
+                    ? EntityState.Unchanged
+                    : EntityState.Added;
 
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("Id", typeof(RequiredSingle1).Name),
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
+                    Assert
+                        .Throws<InvalidOperationException>(() =>
                         {
                             if ((changeMechanism & ChangeMechanism.Principal) != 0)
                             {
@@ -1453,8 +1921,11 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                             newRoot.RequiredSingle = root.RequiredSingle;
 
                             context.SaveChanges();
-                        }).Message);
-            });
+                        })
+                        .Message
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1464,44 +1935,122 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.OnSaveChanges)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData(
-        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.OnSaveChanges
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.OnSaveChanges
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Immediate)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Immediate
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Immediate
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Never)]
     [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Never)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        CascadeTiming.Never
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        CascadeTiming.Never
+    )]
     [InlineData((int)ChangeMechanism.Principal, false, null)]
     [InlineData((int)ChangeMechanism.Principal, true, null)]
     [InlineData((int)ChangeMechanism.Dependent, false, null)]
@@ -1514,12 +2063,21 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, null)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, null)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, null)]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false,
+        null
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true,
+        null
+    )]
     public virtual void Reparent_required_non_PK_one_to_one(
         ChangeMechanism changeMechanism,
         bool useExistingRoot,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var newRoot = new Root();
         Root root = null;
@@ -1537,11 +2095,14 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 root = LoadRequiredNonPkGraph(context);
 
-                context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                context.Entry(newRoot).State = useExistingRoot
+                    ? EntityState.Unchanged
+                    : EntityState.Added;
 
                 old1 = root.RequiredNonPkSingle;
                 old2 = root.RequiredNonPkSingle.Single;
@@ -1589,7 +2150,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Same(loaded1, loaded2.Back);
                 Assert.Equal(newRoot.Id, loaded1.RootId);
                 Assert.Equal(loaded1.Id, loaded2.BackId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1605,7 +2167,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_one_to_one_are_cascade_deleted(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1613,8 +2176,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadRequiredGraph(context);
 
@@ -1635,7 +2200,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
 
                     Assert.Equal(
-                        Fixture.ForceClientNoAction ? EntityState.Unchanged : EntityState.Deleted, context.Entry(orphaned).State);
+                        Fixture.ForceClientNoAction ? EntityState.Unchanged : EntityState.Deleted,
+                        context.Entry(orphaned).State
+                    );
                 }
 
                 if (Fixture.ForceClientNoAction)
@@ -1663,25 +2230,33 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && cascadeDeleteTiming != CascadeTiming.Never)
+                if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                 {
                     var root = LoadRequiredGraph(context);
 
                     Assert.Null(root.RequiredSingle);
 
-                    var removedCount = context.Set<Root>().Select(r => r.RequiredSingle).Count(e => e.Id == removedId);
+                    var removedCount = context
+                        .Set<Root>()
+                        .Select(r => r.RequiredSingle)
+                        .Count(e => e.Id == removedId);
                     Assert.Equal(0, removedCount);
 
                     Assert.False(context.Set<Root>().Any(r => r.RequiredSingle != null));
 
-                    var orphanedCount = context.Set<Root>().Select(r => r.RequiredSingle).Select(r => r.Single)
+                    var orphanedCount = context
+                        .Set<Root>()
+                        .Select(r => r.RequiredSingle)
+                        .Select(r => r.Single)
                         .Count(e => e.Id == orphanedId);
                     Assert.Equal(0, orphanedCount);
 
-                    Assert.False(context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null));
+                    Assert.False(
+                        context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1697,15 +2272,18 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_one_to_one_leaf_can_be_deleted(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
 
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadRequiredGraph(context);
                 var parent = root.RequiredSingle;
@@ -1739,12 +2317,18 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                 Assert.Null(parent.Single);
 
-                var removedCount = context.Set<Root>().Select(r => r.RequiredSingle).Select(r => r.Single)
+                var removedCount = context
+                    .Set<Root>()
+                    .Select(r => r.RequiredSingle)
+                    .Select(r => r.Single)
                     .Count(e => e.Id == removedId);
                 Assert.Equal(0, removedCount);
 
-                Assert.False(context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null));
-            });
+                Assert.False(
+                    context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null)
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1760,7 +2344,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_non_PK_one_to_one_are_cascade_deleted(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1768,8 +2353,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadRequiredNonPkGraph(context);
 
@@ -1790,7 +2377,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
 
                     Assert.Equal(
-                        Fixture.ForceClientNoAction ? EntityState.Unchanged : EntityState.Deleted, context.Entry(orphaned).State);
+                        Fixture.ForceClientNoAction ? EntityState.Unchanged : EntityState.Deleted,
+                        context.Entry(orphaned).State
+                    );
                 }
 
                 if (Fixture.ForceClientNoAction)
@@ -1813,7 +2402,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
 
                     Assert.Same(root, removed.Root);
                     Assert.Same(orphaned, removed.Single);
@@ -1821,17 +2412,19 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && cascadeDeleteTiming != CascadeTiming.Never)
+                if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                 {
                     var root = LoadRequiredNonPkGraph(context);
 
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1847,15 +2440,18 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_non_PK_one_to_one_leaf_can_be_deleted(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
 
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadRequiredNonPkGraph(context);
                 var parent = root.RequiredNonPkSingle;
@@ -1889,7 +2485,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                 Assert.Null(parent.Single);
                 Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == removedId));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1905,7 +2502,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_one_to_one_are_cascade_deleted_in_store(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1920,8 +2518,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = context.Set<Root>().Include(e => e.RequiredSingle).Single(IsTheRoot);
 
@@ -1937,8 +2537,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
                 }
 
-                if (Fixture.ForceClientNoAction
-                    || Fixture.NoStoreCascades)
+                if (Fixture.ForceClientNoAction || Fixture.NoStoreCascades)
                 {
                     Assert.Throws<DbUpdateException>(() => context.SaveChanges());
                 }
@@ -1958,8 +2557,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && !Fixture.NoStoreCascades)
+                if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                 {
                     var root = LoadRequiredGraph(context);
 
@@ -1968,7 +2566,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Empty(context.Set<RequiredSingle1>().Where(e => e.Id == removedId));
                     Assert.Empty(context.Set<RequiredSingle2>().Where(e => e.Id == orphanedId));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1984,7 +2583,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_non_PK_one_to_one_are_cascade_deleted_in_store(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1999,10 +2599,15 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
-                var root = context.Set<Root>().Include(e => e.RequiredNonPkSingle).Single(IsTheRoot);
+                var root = context
+                    .Set<Root>()
+                    .Include(e => e.RequiredNonPkSingle)
+                    .Single(IsTheRoot);
 
                 var removed = root.RequiredNonPkSingle;
                 var orphaned = removed.Single;
@@ -2016,8 +2621,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
                 }
 
-                if (Fixture.ForceClientNoAction
-                    || Fixture.NoStoreCascades)
+                if (Fixture.ForceClientNoAction || Fixture.NoStoreCascades)
                 {
                     Assert.Throws<DbUpdateException>(() => context.SaveChanges());
                 }
@@ -2032,7 +2636,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
 
                     Assert.Same(root, removed.Root);
                     Assert.Same(orphaned, removed.Single);
@@ -2040,17 +2646,19 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && !Fixture.NoStoreCascades)
+                if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                 {
                     var root = LoadRequiredNonPkGraph(context);
 
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -2066,7 +2674,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_one_to_one_are_cascade_deleted_starting_detached(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -2076,8 +2685,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             context => root = LoadRequiredGraph(context),
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var removed = root.RequiredSingle;
 
@@ -2096,8 +2707,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
                 }
 
-                var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate
-                        || cascadeDeleteTiming == null)
+                var expectedState =
+                    (cascadeDeleteTiming == CascadeTiming.Immediate || cascadeDeleteTiming == null)
                     && !Fixture.ForceClientNoAction
                         ? EntityState.Deleted
                         : EntityState.Unchanged;
@@ -2130,23 +2741,31 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             context => root = LoadRequiredGraph(context),
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && cascadeDeleteTiming != CascadeTiming.Never)
+                if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                 {
                     Assert.Null(root.RequiredSingle);
 
-                    var removedCount = context.Set<Root>().Select(r => r.RequiredSingle).Count(e => e.Id == removedId);
+                    var removedCount = context
+                        .Set<Root>()
+                        .Select(r => r.RequiredSingle)
+                        .Count(e => e.Id == removedId);
                     Assert.Equal(0, removedCount);
 
                     Assert.False(context.Set<Root>().Any(r => r.RequiredSingle != null));
 
-                    var orphanedCount = context.Set<Root>().Select(r => r.RequiredSingle).Select(r => r.Single)
+                    var orphanedCount = context
+                        .Set<Root>()
+                        .Select(r => r.RequiredSingle)
+                        .Select(r => r.Single)
                         .Count(e => e.Id == orphanedId);
                     Assert.Equal(0, orphanedCount);
 
-                    Assert.False(context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null));
+                    Assert.False(
+                        context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -2162,7 +2781,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_non_PK_one_to_one_are_cascade_deleted_starting_detached(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -2172,8 +2792,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             context => root = LoadRequiredNonPkGraph(context),
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var removed = root.RequiredNonPkSingle;
 
@@ -2192,8 +2814,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
                 }
 
-                var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate
-                        || cascadeDeleteTiming == null)
+                var expectedState =
+                    (cascadeDeleteTiming == CascadeTiming.Immediate || cascadeDeleteTiming == null)
                     && !Fixture.ForceClientNoAction
                         ? EntityState.Deleted
                         : EntityState.Unchanged;
@@ -2225,17 +2847,19 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && cascadeDeleteTiming != CascadeTiming.Never)
+                if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                 {
                     root = LoadRequiredNonPkGraph(context);
 
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -2251,7 +2875,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_one_to_one_are_cascade_detached_when_Added(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -2259,8 +2884,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadRequiredGraph(context);
 
@@ -2293,8 +2920,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
                 }
 
-                var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate
-                        || cascadeDeleteTiming == null)
+                var expectedState =
+                    (cascadeDeleteTiming == CascadeTiming.Immediate || cascadeDeleteTiming == null)
                     && !Fixture.ForceClientNoAction
                         ? EntityState.Detached
                         : EntityState.Added;
@@ -2326,25 +2953,33 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && cascadeDeleteTiming != CascadeTiming.Never)
+                if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                 {
                     var root = LoadRequiredGraph(context);
 
                     Assert.Null(root.RequiredSingle);
 
-                    var removedCount = context.Set<Root>().Select(r => r.RequiredSingle).Count(e => e.Id == removedId);
+                    var removedCount = context
+                        .Set<Root>()
+                        .Select(r => r.RequiredSingle)
+                        .Count(e => e.Id == removedId);
                     Assert.Equal(0, removedCount);
 
                     Assert.False(context.Set<Root>().Any(r => r.RequiredSingle != null));
 
-                    var orphanedCount = context.Set<Root>().Select(r => r.RequiredSingle).Select(r => r.Single)
+                    var orphanedCount = context
+                        .Set<Root>()
+                        .Select(r => r.RequiredSingle)
+                        .Select(r => r.Single)
                         .Count(e => e.Id == orphanedId);
                     Assert.Equal(0, orphanedCount);
 
-                    Assert.False(context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null));
+                    Assert.False(
+                        context.Set<Root>().Select(r => r.RequiredSingle).Any(r => r.Single != null)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -2360,7 +2995,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Required_non_PK_one_to_one_are_cascade_detached_when_Added(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -2368,8 +3004,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var root = LoadRequiredNonPkGraph(context);
 
@@ -2403,8 +3041,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     context.ChangeTracker.CascadeChanges();
                 }
 
-                var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate
-                        || cascadeDeleteTiming == null)
+                var expectedState =
+                    (cascadeDeleteTiming == CascadeTiming.Immediate || cascadeDeleteTiming == null)
                     && !Fixture.ForceClientNoAction
                         ? EntityState.Detached
                         : EntityState.Added;
@@ -2436,16 +3074,18 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && cascadeDeleteTiming != CascadeTiming.Never)
+                if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                 {
                     var root = LoadRequiredNonPkGraph(context);
 
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
                 }
-            });
+            }
+        );
     }
 }

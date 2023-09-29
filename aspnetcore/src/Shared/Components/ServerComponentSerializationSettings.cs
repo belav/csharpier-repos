@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Components;
 
 internal static class ServerComponentSerializationSettings
 {
-    public const string DataProtectionProviderPurpose = "Microsoft.AspNetCore.Components.ComponentDescriptorSerializer,V1";
+    public const string DataProtectionProviderPurpose =
+        "Microsoft.AspNetCore.Components.ComponentDescriptorSerializer,V1";
 
     public static readonly JsonSerializerOptions JsonSerializationOptions =
         new JsonSerializerOptions

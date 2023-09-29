@@ -28,13 +28,15 @@ namespace Roslyn.Test.Utilities.Syntax
 
         public override int Length
         {
-            get
-            {
-                return 40 * 1000 * 1000;
-            }
+            get { return 40 * 1000 * 1000; }
         }
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             for (var i = 0; i < count; i++)
             {

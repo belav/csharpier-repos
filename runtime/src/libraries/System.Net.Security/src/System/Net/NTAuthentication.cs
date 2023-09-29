@@ -11,15 +11,24 @@ namespace System.Net
 {
     internal sealed partial class NTAuthentication
     {
-        internal bool IsConfidentialityFlag => (_contextFlags & ContextFlagsPal.Confidentiality) != 0;
+        internal bool IsConfidentialityFlag =>
+            (_contextFlags & ContextFlagsPal.Confidentiality) != 0;
 
-        internal bool IsIntegrityFlag => (_contextFlags & (IsServer ? ContextFlagsPal.AcceptIntegrity : ContextFlagsPal.InitIntegrity)) != 0;
+        internal bool IsIntegrityFlag =>
+            (
+                _contextFlags
+                & (IsServer ? ContextFlagsPal.AcceptIntegrity : ContextFlagsPal.InitIntegrity)
+            ) != 0;
 
         internal bool IsMutualAuthFlag => (_contextFlags & ContextFlagsPal.MutualAuth) != 0;
 
         internal bool IsDelegationFlag => (_contextFlags & ContextFlagsPal.Delegate) != 0;
 
-        internal bool IsIdentifyFlag => (_contextFlags & (IsServer ? ContextFlagsPal.AcceptIdentify : ContextFlagsPal.InitIdentify)) != 0;
+        internal bool IsIdentifyFlag =>
+            (
+                _contextFlags
+                & (IsServer ? ContextFlagsPal.AcceptIdentify : ContextFlagsPal.InitIdentify)
+            ) != 0;
 
         internal string? Spn => _spn;
     }

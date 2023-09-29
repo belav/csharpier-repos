@@ -102,8 +102,7 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int? GetMaxLength()
-        => (int?)this[CoreAnnotationNames.MaxLength];
+    public virtual int? GetMaxLength() => (int?)this[CoreAnnotationNames.MaxLength];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -113,8 +112,7 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
     /// </summary>
     public virtual void SetMaxLength(int? maxLength)
     {
-        if (maxLength != null
-            && maxLength < 0)
+        if (maxLength != null && maxLength < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(maxLength));
         }
@@ -128,8 +126,7 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool? IsUnicode()
-        => (bool?)this[CoreAnnotationNames.Unicode];
+    public virtual bool? IsUnicode() => (bool?)this[CoreAnnotationNames.Unicode];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -137,8 +134,7 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetIsUnicode(bool? unicode)
-        => this[CoreAnnotationNames.Unicode] = unicode;
+    public virtual void SetIsUnicode(bool? unicode) => this[CoreAnnotationNames.Unicode] = unicode;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -146,8 +142,7 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int? GetPrecision()
-        => (int?)this[CoreAnnotationNames.Precision];
+    public virtual int? GetPrecision() => (int?)this[CoreAnnotationNames.Precision];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -171,8 +166,7 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int? GetScale()
-        => (int?)this[CoreAnnotationNames.Scale];
+    public virtual int? GetScale() => (int?)this[CoreAnnotationNames.Scale];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -196,8 +190,7 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Type? GetProviderClrType()
-        => (Type?)this[CoreAnnotationNames.ProviderClrType];
+    public virtual Type? GetProviderClrType() => (Type?)this[CoreAnnotationNames.ProviderClrType];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -205,8 +198,8 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetProviderClrType(Type? providerClrType)
-        => this[CoreAnnotationNames.ProviderClrType] = providerClrType;
+    public virtual void SetProviderClrType(Type? providerClrType) =>
+        this[CoreAnnotationNames.ProviderClrType] = providerClrType;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -240,7 +233,11 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
             if (!typeof(ValueConverter).IsAssignableFrom(converterType))
             {
                 throw new InvalidOperationException(
-                    CoreStrings.BadValueConverterType(converterType.ShortDisplayName(), typeof(ValueConverter).ShortDisplayName()));
+                    CoreStrings.BadValueConverterType(
+                        converterType.ShortDisplayName(),
+                        typeof(ValueConverter).ShortDisplayName()
+                    )
+                );
             }
         }
 
@@ -260,7 +257,11 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
             if (!typeof(ValueComparer).IsAssignableFrom(comparerType))
             {
                 throw new InvalidOperationException(
-                    CoreStrings.BadValueComparerType(comparerType.ShortDisplayName(), typeof(ValueComparer).ShortDisplayName()));
+                    CoreStrings.BadValueComparerType(
+                        comparerType.ShortDisplayName(),
+                        typeof(ValueComparer).ShortDisplayName()
+                    )
+                );
             }
         }
 
@@ -280,7 +281,11 @@ public class PropertyConfiguration : AnnotatableBase, ITypeMappingConfiguration
             if (!typeof(ValueComparer).IsAssignableFrom(comparerType))
             {
                 throw new InvalidOperationException(
-                    CoreStrings.BadValueComparerType(comparerType.ShortDisplayName(), typeof(ValueComparer).ShortDisplayName()));
+                    CoreStrings.BadValueComparerType(
+                        comparerType.ShortDisplayName(),
+                        typeof(ValueComparer).ShortDisplayName()
+                    )
+                );
             }
         }
 

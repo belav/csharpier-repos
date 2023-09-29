@@ -21,10 +21,14 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
     private readonly TlsConnectionCallbackOptions _tlsConnectionCallbackOptions;
     private readonly QuicTransportContext _context;
     private readonly QuicListenerOptions _quicListenerOptions;
+
     // Use a CWT to associate QuicConnectionContext with QuicConnection in the callback because there are some situations
     // where the QuicConnection won't be returned and we can't manually remove the item. e.g. invalid connection options.
     // Internal for unit testing.
-    internal readonly ConditionalWeakTable<QuicConnection, QuicConnectionContext> _pendingConnections;
+    internal readonly ConditionalWeakTable<
+        QuicConnection,
+        QuicConnectionContext
+    > _pendingConnections;
     private bool _disposed;
     private QuicListener? _listener;
 
@@ -32,16 +36,21 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
         QuicTransportOptions options,
         ILogger log,
         EndPoint endpoint,
-        TlsConnectionCallbackOptions tlsConnectionCallbackOptions)
+        TlsConnectionCallbackOptions tlsConnectionCallbackOptions
+    )
     {
         if (!QuicListener.IsSupported)
         {
-            throw new NotSupportedException("QUIC is not supported or enabled on this platform. See https://aka.ms/aspnet/kestrel/http3reqs for details.");
+            throw new NotSupportedException(
+                "QUIC is not supported or enabled on this platform. See https://aka.ms/aspnet/kestrel/http3reqs for details."
+            );
         }
 
         if (endpoint is not IPEndPoint listenEndPoint)
         {
-            throw new InvalidOperationException($"QUIC doesn't support listening on the configured endpoint type. Expected {nameof(IPEndPoint)} but got {endpoint.GetType().Name}.");
+            throw new InvalidOperationException(
+                $"QUIC doesn't support listening on the configured endpoint type. Expected {nameof(IPEndPoint)} but got {endpoint.GetType().Name}."
+            );
         }
 
         if (tlsConnectionCallbackOptions.ApplicationProtocols.Count == 0)
@@ -72,10 +81,14 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
                     State = _tlsConnectionCallbackOptions.OnConnectionState,
                     Connection = currentAcceptingConnection,
                 };
-                var serverAuthenticationOptions = await _tlsConnectionCallbackOptions.OnConnection(context, cancellationToken);
+                var serverAuthenticationOptions = await _tlsConnectionCallbackOptions.OnConnection(
+                    context,
+                    cancellationToken
+                );
 
                 // If the callback didn't set protocols then use the listener's list of protocols.
-                serverAuthenticationOptions.ApplicationProtocols ??= _tlsConnectionCallbackOptions.ApplicationProtocols;
+                serverAuthenticationOptions.ApplicationProtocols ??=
+                    _tlsConnectionCallbackOptions.ApplicationProtocols;
 
                 // If the SslServerAuthenticationOptions doesn't have a cert or protocols then the
                 // QUIC connection will fail and the client receives an unhelpful message.
@@ -100,15 +113,22 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
         EndPoint = listenEndPoint;
     }
 
-    private void ValidateServerAuthenticationOptions(SslServerAuthenticationOptions serverAuthenticationOptions)
+    private void ValidateServerAuthenticationOptions(
+        SslServerAuthenticationOptions serverAuthenticationOptions
+    )
     {
-        if (serverAuthenticationOptions.ServerCertificate == null &&
-            serverAuthenticationOptions.ServerCertificateContext == null &&
-            serverAuthenticationOptions.ServerCertificateSelectionCallback == null)
+        if (
+            serverAuthenticationOptions.ServerCertificate == null
+            && serverAuthenticationOptions.ServerCertificateContext == null
+            && serverAuthenticationOptions.ServerCertificateSelectionCallback == null
+        )
         {
             QuicLog.ConnectionListenerCertificateNotSpecified(_log);
         }
-        if (serverAuthenticationOptions.ApplicationProtocols == null || serverAuthenticationOptions.ApplicationProtocols.Count == 0)
+        if (
+            serverAuthenticationOptions.ApplicationProtocols == null
+            || serverAuthenticationOptions.ApplicationProtocols.Count == 0
+        )
         {
             QuicLog.ConnectionListenerApplicationProtocolsNotSpecified(_log);
         }
@@ -124,7 +144,8 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
         {
             _listener = await QuicListener.ListenAsync(_quicListenerOptions);
         }
-        catch (QuicException ex) when (ex.QuicError == QuicError.AddressInUse || ex.QuicError == QuicError.AlpnInUse)
+        catch (QuicException ex)
+            when (ex.QuicError == QuicError.AddressInUse || ex.QuicError == QuicError.AlpnInUse)
         {
             // System.Net.Quic has a different error status depending upon the address in use scenario.
             // It has a status of AddressInUse when another process is using the UDP port.
@@ -138,11 +159,16 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
         EndPoint = _listener.LocalEndPoint;
     }
 
-    public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+    public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         if (_listener == null)
         {
-            throw new InvalidOperationException($"The listener needs to be initialized by calling {nameof(CreateListenerAsync)}.");
+            throw new InvalidOperationException(
+                $"The listener needs to be initialized by calling {nameof(CreateListenerAsync)}."
+            );
         }
 
         while (!cancellationToken.IsCancellationRequested)
@@ -153,7 +179,9 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
 
                 if (!_pendingConnections.TryGetValue(quicConnection, out var connectionContext))
                 {
-                    throw new InvalidOperationException("Couldn't find ConnectionContext for QuicConnection.");
+                    throw new InvalidOperationException(
+                        "Couldn't find ConnectionContext for QuicConnection."
+                    );
                 }
                 else
                 {

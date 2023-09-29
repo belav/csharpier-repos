@@ -12,7 +12,8 @@ public class PocoUserClaim : PocoUserClaim<string> { }
 ///     EntityType that represents one specific user claim
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public class PocoUserClaim<TKey> where TKey : IEquatable<TKey>
+public class PocoUserClaim<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     Primary key

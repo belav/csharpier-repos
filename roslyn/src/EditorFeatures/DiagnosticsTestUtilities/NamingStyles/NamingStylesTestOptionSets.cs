@@ -34,79 +34,188 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
         {
             var firstPreferences = (NamingStylePreferences)first.First().Value;
             var secondPreferences = (NamingStylePreferences)second.First().Value;
-            return new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, new NamingStylePreferences(
-                firstPreferences.SymbolSpecifications.AddRange(secondPreferences.SymbolSpecifications),
-                firstPreferences.NamingStyles.AddRange(secondPreferences.NamingStyles),
-                firstPreferences.NamingRules.AddRange(secondPreferences.NamingRules)) } };
+            return new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    new NamingStylePreferences(
+                        firstPreferences.SymbolSpecifications.AddRange(
+                            secondPreferences.SymbolSpecifications
+                        ),
+                        firstPreferences.NamingStyles.AddRange(secondPreferences.NamingStyles),
+                        firstPreferences.NamingRules.AddRange(secondPreferences.NamingRules)
+                    )
+                }
+            };
         }
 
-        internal OptionsCollection ClassNamesArePascalCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, ClassNamesArePascalCaseOption() } };
+        internal OptionsCollection ClassNamesArePascalCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, ClassNamesArePascalCaseOption() }
+            };
 
-        internal OptionsCollection FieldNamesAreCamelCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, FieldNamesAreCamelCaseOption() } };
+        internal OptionsCollection FieldNamesAreCamelCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, FieldNamesAreCamelCaseOption() }
+            };
 
-        internal OptionsCollection FieldNamesAreCamelCaseWithUnderscorePrefix
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, FieldNamesAreCamelCaseWithUnderscorePrefixOption() } };
+        internal OptionsCollection FieldNamesAreCamelCaseWithUnderscorePrefix =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    FieldNamesAreCamelCaseWithUnderscorePrefixOption()
+                }
+            };
 
-        internal OptionsCollection FieldNamesAreCamelCaseWithFieldUnderscorePrefix
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, FieldNamesAreCamelCaseWithFieldUnderscorePrefixOption() } };
+        internal OptionsCollection FieldNamesAreCamelCaseWithFieldUnderscorePrefix =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    FieldNamesAreCamelCaseWithFieldUnderscorePrefixOption()
+                }
+            };
 
-        internal OptionsCollection FieldNamesAreCamelCaseWithFieldUnderscorePrefixAndUnderscoreEndSuffix
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, FieldNamesAreCamelCaseWithFieldUnderscorePrefixAndUnderscoreEndSuffixOption() } };
+        internal OptionsCollection FieldNamesAreCamelCaseWithFieldUnderscorePrefixAndUnderscoreEndSuffix =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    FieldNamesAreCamelCaseWithFieldUnderscorePrefixAndUnderscoreEndSuffixOption()
+                }
+            };
 
-        internal OptionsCollection MethodNamesArePascalCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, MethodNamesArePascalCaseOption() } };
+        internal OptionsCollection MethodNamesArePascalCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, MethodNamesArePascalCaseOption() }
+            };
 
-        internal OptionsCollection MethodNamesAreCamelCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, MethodNamesAreCamelCaseOption() } };
+        internal OptionsCollection MethodNamesAreCamelCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, MethodNamesAreCamelCaseOption() }
+            };
 
-        internal OptionsCollection ParameterNamesAreCamelCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, ParameterNamesAreCamelCaseOption() } };
+        internal OptionsCollection ParameterNamesAreCamelCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, ParameterNamesAreCamelCaseOption() }
+            };
 
-        internal OptionsCollection ParameterNamesAreCamelCaseWithPUnderscorePrefix
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, ParameterNamesAreCamelCaseWithPUnderscorePrefixOption() } };
+        internal OptionsCollection ParameterNamesAreCamelCaseWithPUnderscorePrefix =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    ParameterNamesAreCamelCaseWithPUnderscorePrefixOption()
+                }
+            };
 
-        internal OptionsCollection ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffixOption() } };
+        internal OptionsCollection ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffixOption()
+                }
+            };
 
-        internal OptionsCollection LocalNamesAreCamelCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, LocalNamesAreCamelCaseOption() } };
+        internal OptionsCollection LocalNamesAreCamelCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, LocalNamesAreCamelCaseOption() }
+            };
 
-        internal OptionsCollection LocalFunctionNamesAreCamelCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, LocalFunctionNamesAreCamelCaseOption() } };
+        internal OptionsCollection LocalFunctionNamesAreCamelCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, LocalFunctionNamesAreCamelCaseOption() }
+            };
 
-        internal OptionsCollection PropertyNamesArePascalCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, PropertyNamesArePascalCaseOption() } };
+        internal OptionsCollection PropertyNamesArePascalCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, PropertyNamesArePascalCaseOption() }
+            };
 
-        internal OptionsCollection InterfaceNamesStartWithI
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, InterfaceNamesStartWithIOption() } };
+        internal OptionsCollection InterfaceNamesStartWithI =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, InterfaceNamesStartWithIOption() }
+            };
 
-        internal OptionsCollection TypeParameterNamesStartWithT
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, TypeParameterNamesStartWithTOption() } };
+        internal OptionsCollection TypeParameterNamesStartWithT =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, TypeParameterNamesStartWithTOption() }
+            };
 
-        internal OptionsCollection ConstantsAreUpperCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, ConstantsAreUpperCaseOption() } };
+        internal OptionsCollection ConstantsAreUpperCase =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, ConstantsAreUpperCaseOption() }
+            };
 
-        internal OptionsCollection LocalsAreCamelCaseConstantsAreUpperCase
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, LocalsAreCamelCaseConstantsAreUpperCaseOption() } };
+        internal OptionsCollection LocalsAreCamelCaseConstantsAreUpperCase =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    LocalsAreCamelCaseConstantsAreUpperCaseOption()
+                }
+            };
 
-        internal OptionsCollection AsyncFunctionNamesEndWithAsync
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, AsyncFunctionNamesEndWithAsyncOption() } };
+        internal OptionsCollection AsyncFunctionNamesEndWithAsync =>
+            new OptionsCollection(_languageName)
+            {
+                { NamingStyleOptions.NamingPreferences, AsyncFunctionNamesEndWithAsyncOption() }
+            };
 
-        internal OptionsCollection MethodNamesWithAccessibilityArePascalCase(ImmutableArray<Accessibility> accessibilities)
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, MethodNamesArePascalCaseOption(accessibilities) } };
+        internal OptionsCollection MethodNamesWithAccessibilityArePascalCase(
+            ImmutableArray<Accessibility> accessibilities
+        ) =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    MethodNamesArePascalCaseOption(accessibilities)
+                }
+            };
 
-        internal OptionsCollection SymbolKindsArePascalCase(ImmutableArray<SymbolSpecification.SymbolKindOrTypeKind> symbolKinds)
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, SymbolKindsArePascalCaseOption(symbolKinds) } };
+        internal OptionsCollection SymbolKindsArePascalCase(
+            ImmutableArray<SymbolSpecification.SymbolKindOrTypeKind> symbolKinds
+        ) =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    SymbolKindsArePascalCaseOption(symbolKinds)
+                }
+            };
 
-        internal OptionsCollection SymbolKindsArePascalCaseEmpty()
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, SymbolKindsArePascalCaseOption(ImmutableArray<SymbolSpecification.SymbolKindOrTypeKind>.Empty) } };
+        internal OptionsCollection SymbolKindsArePascalCaseEmpty() =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    SymbolKindsArePascalCaseOption(
+                        ImmutableArray<SymbolSpecification.SymbolKindOrTypeKind>.Empty
+                    )
+                }
+            };
 
-        internal OptionsCollection SymbolKindsArePascalCase(object symbolOrTypeKind)
-            => SymbolKindsArePascalCase(ImmutableArray.Create(ToSymbolKindOrTypeKind(symbolOrTypeKind)));
+        internal OptionsCollection SymbolKindsArePascalCase(object symbolOrTypeKind) =>
+            SymbolKindsArePascalCase(
+                ImmutableArray.Create(ToSymbolKindOrTypeKind(symbolOrTypeKind))
+            );
 
-        internal static SymbolSpecification.SymbolKindOrTypeKind ToSymbolKindOrTypeKind(object symbolOrTypeKind)
+        internal static SymbolSpecification.SymbolKindOrTypeKind ToSymbolKindOrTypeKind(
+            object symbolOrTypeKind
+        )
         {
             switch (symbolOrTypeKind)
             {
@@ -124,8 +233,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             }
         }
 
-        internal OptionsCollection AccessibilitiesArePascalCase(ImmutableArray<Accessibility> accessibilities)
-            => new OptionsCollection(_languageName) { { NamingStyleOptions.NamingPreferences, AccessibilitiesArePascalCaseOption(accessibilities) } };
+        internal OptionsCollection AccessibilitiesArePascalCase(
+            ImmutableArray<Accessibility> accessibilities
+        ) =>
+            new OptionsCollection(_languageName)
+            {
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    AccessibilitiesArePascalCaseOption(accessibilities)
+                }
+            };
 
         private static NamingStylePreferences ClassNamesArePascalCaseOption()
         {
@@ -134,7 +251,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 "Name",
                 ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(TypeKind.Class)),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -142,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
             var namingRule = new SerializableNamingRule()
             {
                 SymbolSpecificationID = symbolSpecification.ID,
@@ -152,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -162,9 +282,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -172,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -184,7 +308,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -194,9 +319,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -204,7 +332,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "_",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -216,7 +345,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -226,9 +356,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -236,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "field_",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -248,7 +382,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -258,9 +393,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -268,7 +406,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "field_",
                 suffix: "_End",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -280,25 +419,31 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
 
-        private static NamingStylePreferences MethodNamesArePascalCaseOption()
-            => MethodNamesAreCasedOption(Capitalization.PascalCase);
+        private static NamingStylePreferences MethodNamesArePascalCaseOption() =>
+            MethodNamesAreCasedOption(Capitalization.PascalCase);
 
-        internal static NamingStylePreferences MethodNamesAreCamelCaseOption()
-            => MethodNamesAreCasedOption(Capitalization.CamelCase);
+        internal static NamingStylePreferences MethodNamesAreCamelCaseOption() =>
+            MethodNamesAreCasedOption(Capitalization.CamelCase);
 
-        private static NamingStylePreferences MethodNamesAreCasedOption(Capitalization capitalization)
+        private static NamingStylePreferences MethodNamesAreCasedOption(
+            Capitalization capitalization
+        )
         {
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.Ordinary)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.Ordinary)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -306,7 +451,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -317,19 +463,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
 
-        private static NamingStylePreferences MethodNamesArePascalCaseOption(ImmutableArray<Accessibility> accessibilities)
+        private static NamingStylePreferences MethodNamesArePascalCaseOption(
+            ImmutableArray<Accessibility> accessibilities
+        )
         {
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.Ordinary)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.Ordinary)
+                ),
                 accessibilities,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -337,7 +489,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -348,19 +501,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
 
-        private static NamingStylePreferences SymbolKindsArePascalCaseOption(ImmutableArray<SymbolSpecification.SymbolKindOrTypeKind> symbolKinds)
+        private static NamingStylePreferences SymbolKindsArePascalCaseOption(
+            ImmutableArray<SymbolSpecification.SymbolKindOrTypeKind> symbolKinds
+        )
         {
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
                 symbolKinds,
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -368,7 +525,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -379,19 +537,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
 
-        private static NamingStylePreferences AccessibilitiesArePascalCaseOption(ImmutableArray<Accessibility> accessibilities)
+        private static NamingStylePreferences AccessibilitiesArePascalCaseOption(
+            ImmutableArray<Accessibility> accessibilities
+        )
         {
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
                 symbolKindList: default,
                 accessibilityList: accessibilities,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -399,7 +561,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -410,7 +573,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -420,9 +584,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -430,7 +597,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -442,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -452,9 +621,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name2",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -462,7 +634,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name2",
                 prefix: "p_",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -474,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -484,9 +658,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name2",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -494,7 +671,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name2",
                 prefix: "p_",
                 suffix: "_End",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -506,7 +684,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -516,9 +695,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Local)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Local)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -526,7 +708,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -538,7 +721,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -548,9 +732,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.LocalFunction)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.LocalFunction)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -558,7 +745,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -570,7 +758,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -580,9 +769,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Property)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Property)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -590,7 +782,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -602,7 +795,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -612,9 +806,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(TypeKind.Interface)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(TypeKind.Interface)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -622,7 +819,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "I",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -634,7 +832,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -644,9 +843,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.TypeParameter)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.TypeParameter)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -654,7 +856,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "T",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -666,7 +869,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -678,9 +882,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 "Name",
                 ImmutableArray.Create(
                     new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field),
-                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Local)),
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Local)
+                ),
                 accessibilityList: default,
-                ImmutableArray.Create(new SymbolSpecification.ModifierKind(SymbolSpecification.ModifierKindEnum.IsConst)));
+                ImmutableArray.Create(
+                    new SymbolSpecification.ModifierKind(
+                        SymbolSpecification.ModifierKindEnum.IsConst
+                    )
+                )
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -688,7 +898,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -700,7 +911,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -710,16 +922,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var localsSymbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Locals",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Local)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Local)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var constLocalsSymbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Const Locals",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Local)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Local)
+                ),
                 accessibilityList: default,
-                ImmutableArray.Create(new SymbolSpecification.ModifierKind(SymbolSpecification.ModifierKindEnum.IsConst)));
+                ImmutableArray.Create(
+                    new SymbolSpecification.ModifierKind(
+                        SymbolSpecification.ModifierKindEnum.IsConst
+                    )
+                )
+            );
 
             var camelCaseNamingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -727,7 +949,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Camel Case",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var allUpperNamingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -735,7 +958,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "All Upper",
                 prefix: "",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var localsCamelCaseNamingRule = new SerializableNamingRule()
             {
@@ -754,7 +978,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(localsSymbolSpecification, constLocalsSymbolSpecification),
                 ImmutableArray.Create(camelCaseNamingStyle, allUpperNamingStyle),
-                ImmutableArray.Create(constLocalsUpperCaseNamingRule, localsCamelCaseNamingRule));
+                ImmutableArray.Create(constLocalsUpperCaseNamingRule, localsCamelCaseNamingRule)
+            );
 
             return info;
         }
@@ -766,9 +991,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 "Name",
                 ImmutableArray.Create(
                     new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.Ordinary),
-                    new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.LocalFunction)),
+                    new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.LocalFunction)
+                ),
                 accessibilityList: default,
-                ImmutableArray.Create(new SymbolSpecification.ModifierKind(SymbolSpecification.ModifierKindEnum.IsAsync)));
+                ImmutableArray.Create(
+                    new SymbolSpecification.ModifierKind(
+                        SymbolSpecification.ModifierKindEnum.IsAsync
+                    )
+                )
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -776,7 +1007,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 name: "Name",
                 prefix: "",
                 suffix: "Async",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -788,7 +1020,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }

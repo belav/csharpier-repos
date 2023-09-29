@@ -18,9 +18,7 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 public class UnaryTests : IntegrationTestBase
 {
     public UnaryTests(GrpcTestFixture<Startup> fixture, ITestOutputHelper outputHelper)
-        : base(fixture, outputHelper)
-    {
-    }
+        : base(fixture, outputHelper) { }
 
     [Fact]
     public async Task GetWithRouteParameter_MatchUrl_SuccessResult()
@@ -32,7 +30,8 @@ public class UnaryTests : IntegrationTestBase
         }
         var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
             UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello"));
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -53,10 +52,9 @@ public class UnaryTests : IntegrationTestBase
 
         async Task<HelloReply> UnaryMethod(HelloRequest request, ServerCallContext context)
         {
-            await context.WriteResponseHeadersAsync(new Metadata
-            {
-                new Metadata.Entry("test", "value!")
-            });
+            await context.WriteResponseHeadersAsync(
+                new Metadata { new Metadata.Entry("test", "value!") }
+            );
 
             await tcs.Task;
 
@@ -64,12 +62,15 @@ public class UnaryTests : IntegrationTestBase
         }
         var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
             UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello"));
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
         // Act
-        var response = await client.GetAsync("/v1/greeter/test", HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .GetAsync("/v1/greeter/test", HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
         var responseStream = await response.Content.ReadAsStreamAsync();
         var resultTask = JsonDocument.ParseAsync(responseStream);
 
@@ -91,28 +92,29 @@ public class UnaryTests : IntegrationTestBase
 
         async Task<HelloReply> UnaryMethod(HelloRequest request, ServerCallContext context)
         {
-            await context.WriteResponseHeadersAsync(new Metadata
-            {
-                new Metadata.Entry("test", "value!")
-            });
+            await context.WriteResponseHeadersAsync(
+                new Metadata { new Metadata.Entry("test", "value!") }
+            );
 
             await tcs.Task;
 
-            await context.WriteResponseHeadersAsync(new Metadata
-            {
-                new Metadata.Entry("test", "value 2!")
-            });
+            await context.WriteResponseHeadersAsync(
+                new Metadata { new Metadata.Entry("test", "value 2!") }
+            );
 
             return new HelloReply { Message = $"Hello {request.Name}!" };
         }
         var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
             UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello"));
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
         // Act
-        var response = await client.GetAsync("/v1/greeter/test", HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .GetAsync("/v1/greeter/test", HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
         var responseStream = await response.Content.ReadAsStreamAsync();
         var resultTask = JsonDocument.ParseAsync(responseStream);
 
@@ -123,7 +125,10 @@ public class UnaryTests : IntegrationTestBase
         tcs.SetResult();
         using var result = await resultTask.DefaultTimeout();
 
-        Assert.Equal("Exception was thrown by handler. InvalidOperationException: Response headers can only be sent once per call.", result.RootElement.GetProperty("message").GetString());
+        Assert.Equal(
+            "Exception was thrown by handler. InvalidOperationException: Response headers can only be sent once per call.",
+            result.RootElement.GetProperty("message").GetString()
+        );
     }
 
     [Fact]
@@ -138,7 +143,8 @@ public class UnaryTests : IntegrationTestBase
         }
         var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
             UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHello"));
+            Greeter.Descriptor.FindMethodByName("SayHello")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -166,17 +172,19 @@ public class UnaryTests : IntegrationTestBase
         }
         var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
             UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHelloPost"));
+            Greeter.Descriptor.FindMethodByName("SayHelloPost")
+        );
 
         var encoding = JsonRequestHelpers.GetEncodingFromCharset(charset);
-        var contentType = charset != null
-            ? "application/json; charset=" + charset
-            : "application/json";
+        var contentType =
+            charset != null ? "application/json; charset=" + charset : "application/json";
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
         var requestMessage = new HelloRequest { Name = "test" };
-        var content = new ByteArrayContent((encoding ?? Encoding.UTF8).GetBytes(requestMessage.ToString()));
+        var content = new ByteArrayContent(
+            (encoding ?? Encoding.UTF8).GetBytes(requestMessage.ToString())
+        );
         content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentType);
 
         // Act
@@ -191,8 +199,14 @@ public class UnaryTests : IntegrationTestBase
     }
 
     [Theory]
-    [InlineData("FAKE", "InvalidOperationException: Unable to read the request as JSON because the request content type charset 'FAKE' is not a known encoding.")]
-    [InlineData("UTF-7", "InvalidOperationException: Unable to read the request as JSON because the request content type charset 'UTF-7' is not a known encoding.")]
+    [InlineData(
+        "FAKE",
+        "InvalidOperationException: Unable to read the request as JSON because the request content type charset 'FAKE' is not a known encoding."
+    )]
+    [InlineData(
+        "UTF-7",
+        "InvalidOperationException: Unable to read the request as JSON because the request content type charset 'UTF-7' is not a known encoding."
+    )]
     public async Task Request_UnsupportedCharset_Error(string? charset, string errorMessage)
     {
         // Arrange
@@ -202,7 +216,8 @@ public class UnaryTests : IntegrationTestBase
         }
         var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
             UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHelloPost"));
+            Greeter.Descriptor.FindMethodByName("SayHelloPost")
+        );
 
         var contentType = "application/json; charset=" + charset;
 
@@ -233,7 +248,8 @@ public class UnaryTests : IntegrationTestBase
         }
         var method = Fixture.DynamicGrpc.AddUnaryMethod<EnumHelloRequest, HelloReply>(
             UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHelloPostEnum"));
+            Greeter.Descriptor.FindMethodByName("SayHelloPostEnum")
+        );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 

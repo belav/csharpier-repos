@@ -29,65 +29,67 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    using System;
+    using System.Collections;
 
-	using System;
-	using System.Collections;
+    using Mono.Cecil.Cil;
 
-	using Mono.Cecil.Cil;
+    internal sealed class ModuleReferenceCollection : CollectionBase, IReflectionStructureVisitable
+    {
+        ModuleDefinition m_container;
 
-	internal sealed class ModuleReferenceCollection : CollectionBase, IReflectionStructureVisitable {
+        public ModuleReference this[int index]
+        {
+            get { return List[index] as ModuleReference; }
+            set { List[index] = value; }
+        }
 
-		ModuleDefinition m_container;
+        public ModuleDefinition Container
+        {
+            get { return m_container; }
+        }
 
-		public ModuleReference this [int index] {
-			get { return List [index] as ModuleReference; }
-			set { List [index] = value; }
-		}
+        public ModuleReferenceCollection(ModuleDefinition container)
+        {
+            m_container = container;
+        }
 
-		public ModuleDefinition Container {
-			get { return m_container; }
-		}
+        public void Add(ModuleReference value)
+        {
+            List.Add(value);
+        }
 
-		public ModuleReferenceCollection (ModuleDefinition container)
-		{
-			m_container = container;
-		}
+        public bool Contains(ModuleReference value)
+        {
+            return List.Contains(value);
+        }
 
-		public void Add (ModuleReference value)
-		{
-			List.Add (value);
-		}
+        public int IndexOf(ModuleReference value)
+        {
+            return List.IndexOf(value);
+        }
 
-		public bool Contains (ModuleReference value)
-		{
-			return List.Contains (value);
-		}
+        public void Insert(int index, ModuleReference value)
+        {
+            List.Insert(index, value);
+        }
 
-		public int IndexOf (ModuleReference value)
-		{
-			return List.IndexOf (value);
-		}
+        public void Remove(ModuleReference value)
+        {
+            List.Remove(value);
+        }
 
-		public void Insert (int index, ModuleReference value)
-		{
-			List.Insert (index, value);
-		}
+        protected override void OnValidate(object o)
+        {
+            if (!(o is ModuleReference))
+                throw new ArgumentException("Must be of type " + typeof(ModuleReference).FullName);
+        }
 
-		public void Remove (ModuleReference value)
-		{
-			List.Remove (value);
-		}
-
-		protected override void OnValidate (object o)
-		{
-			if (! (o is ModuleReference))
-				throw new ArgumentException ("Must be of type " + typeof (ModuleReference).FullName);
-		}
-
-		public void Accept (IReflectionStructureVisitor visitor)
-		{
-			visitor.VisitModuleReferenceCollection (this);
-		}
-	}
+        public void Accept(IReflectionStructureVisitor visitor)
+        {
+            visitor.VisitModuleReferenceCollection(this);
+        }
+    }
 }

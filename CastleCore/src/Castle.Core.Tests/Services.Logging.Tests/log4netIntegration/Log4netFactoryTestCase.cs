@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,21 +29,29 @@ namespace Castle.Services.Logging.Log4netIntegration.Tests
     public class Log4netFactoryTestCase
     {
         private string log4netXml = null;
-        private const string log4netXmlPath = "./Services.Logging.Tests/log4netIntegration/log4net.xml";
-        private const string logMessage = "testing log4net configuration using a stream for configuration";
+        private const string log4netXmlPath =
+            "./Services.Logging.Tests/log4netIntegration/log4net.xml";
+        private const string logMessage =
+            "testing log4net configuration using a stream for configuration";
         private const string loggerName = "Log4netFactoryTestCase";
 
         [SetUp]
         public void Init()
         {
-            var log4netXmlFullPath = Path.Combine(TestContext.CurrentContext.TestDirectory, log4netXmlPath);
+            var log4netXmlFullPath = Path.Combine(
+                TestContext.CurrentContext.TestDirectory,
+                log4netXmlPath
+            );
             log4netXml = File.ReadAllText(log4netXmlFullPath);
         }
 
         private string GetLogContent()
         {
             var repository = (Hierarchy)LogManager.GetRepository(Assembly.GetCallingAssembly());
-            var memoryAppender = (from appender in repository.GetAppenders().OfType<MemoryAppender>() select appender).Single();
+            var memoryAppender = (
+                from appender in repository.GetAppenders().OfType<MemoryAppender>()
+                select appender
+            ).Single();
 
             return memoryAppender.GetEvents()[0].RenderedMessage;
         }

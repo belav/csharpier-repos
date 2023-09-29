@@ -13,11 +13,15 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
 
-    public partial class MexTcpBindingCollectionElement : MexBindingBindingCollectionElement<CustomBinding, MexTcpBindingElement>
+    public partial class MexTcpBindingCollectionElement
+        : MexBindingBindingCollectionElement<CustomBinding, MexTcpBindingElement>
     {
         internal static MexTcpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (MexTcpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.MexTcpBindingCollectionElementName);
+            return (MexTcpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.MexTcpBindingCollectionElementName
+                );
         }
 
         protected internal override Binding GetDefault()

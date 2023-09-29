@@ -106,9 +106,9 @@ internal sealed class PagedBufferedTextWriter : TextWriter
     {
         var flushTask = FlushAsyncCore();
 
-        return flushTask.IsCompletedSuccessfully ?
-            _inner.WriteAsync(value) :
-            WriteAsyncAwaited(flushTask, value);
+        return flushTask.IsCompletedSuccessfully
+            ? _inner.WriteAsync(value)
+            : WriteAsyncAwaited(flushTask, value);
     }
 
     private async Task WriteAsyncAwaited(Task flushTask, char value)
@@ -121,9 +121,9 @@ internal sealed class PagedBufferedTextWriter : TextWriter
     {
         var flushTask = FlushAsyncCore();
 
-        return flushTask.IsCompletedSuccessfully ?
-            _inner.WriteAsync(buffer, index, count) :
-            WriteAsyncAwaited(flushTask, buffer, index, count);
+        return flushTask.IsCompletedSuccessfully
+            ? _inner.WriteAsync(buffer, index, count)
+            : WriteAsyncAwaited(flushTask, buffer, index, count);
     }
 
     private async Task WriteAsyncAwaited(Task flushTask, char[] buffer, int index, int count)
@@ -136,9 +136,9 @@ internal sealed class PagedBufferedTextWriter : TextWriter
     {
         var flushTask = FlushAsyncCore();
 
-        return flushTask.IsCompletedSuccessfully ?
-            _inner.WriteAsync(value) :
-            WriteAsyncAwaited(flushTask, value);
+        return flushTask.IsCompletedSuccessfully
+            ? _inner.WriteAsync(value)
+            : WriteAsyncAwaited(flushTask, value);
     }
 
     private async Task WriteAsyncAwaited(Task flushTask, string value)

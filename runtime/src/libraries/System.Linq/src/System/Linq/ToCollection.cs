@@ -26,13 +26,23 @@ namespace System.Linq
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return source is IIListProvider<TSource> listProvider ? listProvider.ToList() : new List<TSource>(source);
+            return source is IIListProvider<TSource> listProvider
+                ? listProvider.ToList()
+                : new List<TSource>(source);
         }
 
-        public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) where TKey : notnull =>
-            ToDictionary(source, keySelector, null);
+        public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector
+        )
+            where TKey : notnull => ToDictionary(source, keySelector, null);
 
-        public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer) where TKey : notnull
+        public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
+            where TKey : notnull
         {
             if (source == null)
             {
@@ -73,7 +83,12 @@ namespace System.Linq
             return d;
         }
 
-        private static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(TSource[] source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer) where TKey : notnull
+        private static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
+            TSource[] source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
+            where TKey : notnull
         {
             Dictionary<TKey, TSource> d = new Dictionary<TKey, TSource>(source.Length, comparer);
             for (int i = 0; i < source.Length; i++)
@@ -84,7 +99,12 @@ namespace System.Linq
             return d;
         }
 
-        private static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(List<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer) where TKey : notnull
+        private static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
+            List<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
+            where TKey : notnull
         {
             Dictionary<TKey, TSource> d = new Dictionary<TKey, TSource>(source.Count, comparer);
             foreach (TSource element in source)
@@ -95,10 +115,20 @@ namespace System.Linq
             return d;
         }
 
-        public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector) where TKey : notnull =>
-            ToDictionary(source, keySelector, elementSelector, null);
+        public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector
+        )
+            where TKey : notnull => ToDictionary(source, keySelector, elementSelector, null);
 
-        public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey>? comparer) where TKey : notnull
+        public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey>? comparer
+        )
+            where TKey : notnull
         {
             if (source == null)
             {
@@ -144,7 +174,13 @@ namespace System.Linq
             return d;
         }
 
-        private static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(TSource[] source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey>? comparer) where TKey : notnull
+        private static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
+            TSource[] source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey>? comparer
+        )
+            where TKey : notnull
         {
             Dictionary<TKey, TElement> d = new Dictionary<TKey, TElement>(source.Length, comparer);
             for (int i = 0; i < source.Length; i++)
@@ -155,7 +191,13 @@ namespace System.Linq
             return d;
         }
 
-        private static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(List<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey>? comparer) where TKey : notnull
+        private static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
+            List<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey>? comparer
+        )
+            where TKey : notnull
         {
             Dictionary<TKey, TElement> d = new Dictionary<TKey, TElement>(source.Count, comparer);
             foreach (TSource element in source)
@@ -166,9 +208,13 @@ namespace System.Linq
             return d;
         }
 
-        public static HashSet<TSource> ToHashSet<TSource>(this IEnumerable<TSource> source) => source.ToHashSet(comparer: null);
+        public static HashSet<TSource> ToHashSet<TSource>(this IEnumerable<TSource> source) =>
+            source.ToHashSet(comparer: null);
 
-        public static HashSet<TSource> ToHashSet<TSource>(this IEnumerable<TSource> source, IEqualityComparer<TSource>? comparer)
+        public static HashSet<TSource> ToHashSet<TSource>(
+            this IEnumerable<TSource> source,
+            IEqualityComparer<TSource>? comparer
+        )
         {
             if (source == null)
             {

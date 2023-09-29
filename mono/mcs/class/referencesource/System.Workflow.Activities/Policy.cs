@@ -26,25 +26,32 @@ namespace System.Workflow.Activities
     [ToolboxItem(typeof(ActivityToolboxItem))]
     [Designer(typeof(PolicyDesigner), typeof(IDesigner))]
     [SRCategory(SR.Standard)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class PolicyActivity : Activity
     {
         #region Public Dependency Properties
 
-        public static readonly DependencyProperty RuleSetReferenceProperty = DependencyProperty.Register("RuleSetReference", typeof(RuleSetReference), typeof(PolicyActivity), new PropertyMetadata(DependencyPropertyOptions.Metadata, new Attribute[] { new ValidationOptionAttribute(ValidationOption.Required) }));
+        public static readonly DependencyProperty RuleSetReferenceProperty =
+            DependencyProperty.Register(
+                "RuleSetReference",
+                typeof(RuleSetReference),
+                typeof(PolicyActivity),
+                new PropertyMetadata(
+                    DependencyPropertyOptions.Metadata,
+                    new Attribute[] { new ValidationOptionAttribute(ValidationOption.Required) }
+                )
+            );
 
         #endregion
 
         #region Constructors
 
-        public PolicyActivity()
-        {
-        }
+        public PolicyActivity() { }
 
         public PolicyActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
@@ -58,7 +65,9 @@ namespace System.Workflow.Activities
             base.Initialize(provider);
         }
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -67,7 +76,8 @@ namespace System.Workflow.Activities
             if (declaringActivity == null)
                 declaringActivity = Helpers.GetRootActivity(this);
 
-            RuleDefinitions ruleDefinitions = (RuleDefinitions)declaringActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty);
+            RuleDefinitions ruleDefinitions = (RuleDefinitions)
+                declaringActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty);
             if (ruleDefinitions != null)
             {
                 RuleSet ruleSet = ruleDefinitions.RuleSets[this.RuleSetReference.RuleSetName];
@@ -83,14 +93,8 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public RuleSetReference RuleSetReference
         {
-            get
-            {
-                return (RuleSetReference)base.GetValue(RuleSetReferenceProperty);
-            }
-            set
-            {
-                base.SetValue(RuleSetReferenceProperty, value);
-            }
+            get { return (RuleSetReference)base.GetValue(RuleSetReferenceProperty); }
+            set { base.SetValue(RuleSetReferenceProperty, value); }
         }
     }
     #endregion

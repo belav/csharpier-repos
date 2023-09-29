@@ -13,7 +13,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
 {
     internal static class VsTextSpanExtensions
     {
-        public static bool TryMapSpanFromSecondaryBufferToPrimaryBuffer(this VsTextSpan spanInSecondaryBuffer, Microsoft.CodeAnalysis.Workspace workspace, DocumentId documentId, out VsTextSpan spanInPrimaryBuffer)
+        public static bool TryMapSpanFromSecondaryBufferToPrimaryBuffer(
+            this VsTextSpan spanInSecondaryBuffer,
+            Microsoft.CodeAnalysis.Workspace workspace,
+            DocumentId documentId,
+            out VsTextSpan spanInPrimaryBuffer
+        )
         {
             spanInPrimaryBuffer = default;
 
@@ -31,7 +36,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             var bufferCoordinator = containedDocument.BufferCoordinator;
 
             var primary = new VsTextSpan[1];
-            var hresult = bufferCoordinator.MapSecondaryToPrimarySpan(spanInSecondaryBuffer, primary);
+            var hresult = bufferCoordinator.MapSecondaryToPrimarySpan(
+                spanInSecondaryBuffer,
+                primary
+            );
 
             spanInPrimaryBuffer = primary[0];
 

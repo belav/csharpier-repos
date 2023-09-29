@@ -45,7 +45,7 @@ namespace System.Web.Http
 
             HttpActionContext ctx = new HttpActionContext();
 
-            // Act            
+            // Act
             binding.SetValue(ctx, null);
 
             var resultFinal = binding.GetValue(ctx);
@@ -57,8 +57,8 @@ namespace System.Web.Http
         [Fact]
         public void Call_Set_Multiple_Times()
         {
-            // Make sure a binding can set the argument multiple times and that we get the latest. 
-            // This is interesting with composite bindings that chain to an inner binding. 
+            // Make sure a binding can set the argument multiple times and that we get the latest.
+            // This is interesting with composite bindings that chain to an inner binding.
             CustomBinding binding = new CustomBinding("p1");
 
             HttpActionContext ctx = new HttpActionContext();
@@ -95,7 +95,7 @@ namespace System.Web.Http
 
         [Fact]
         public void Reuse_Binding_With_Different_Contexts()
-        { 
+        {
             // The same binding can be used across multiple action contexts.
 
             string name = "p1";
@@ -108,7 +108,7 @@ namespace System.Web.Http
             object result1 = "abc";
             binding.SetValue(ctx1, result1);
 
-            object result2 = 123;            
+            object result2 = 123;
             binding.SetValue(ctx2, result2);
 
             // Assert
@@ -116,13 +116,12 @@ namespace System.Web.Http
             Assert.Same(result2, binding.GetValue(ctx2));
         }
 
-        // Helper for testing. 
-        // Easily construct, mock out the the right things, and expose protected members to the tests. 
+        // Helper for testing.
+        // Easily construct, mock out the the right things, and expose protected members to the tests.
         public class CustomBinding : HttpParameterBinding
         {
-            public CustomBinding(string paramName) : base(Build(paramName))
-            {
-            }
+            public CustomBinding(string paramName)
+                : base(Build(paramName)) { }
 
             static HttpParameterDescriptor Build(string paramName)
             {
@@ -131,7 +130,11 @@ namespace System.Web.Http
                 return mock.Object;
             }
 
-            public override Threading.Tasks.Task ExecuteBindingAsync(Metadata.ModelMetadataProvider metadataProvider, HttpActionContext actionContext, Threading.CancellationToken cancellationToken)
+            public override Threading.Tasks.Task ExecuteBindingAsync(
+                Metadata.ModelMetadataProvider metadataProvider,
+                HttpActionContext actionContext,
+                Threading.CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }
@@ -148,6 +151,4 @@ namespace System.Web.Http
             }
         }
     }
-
-
 }

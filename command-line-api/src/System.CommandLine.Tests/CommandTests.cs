@@ -15,13 +15,8 @@ namespace System.CommandLine.Tests
         public CommandTests()
         {
             _parser = new Parser(
-                new Command("outer")
-                {
-                    new Command("inner")
-                    {
-                        new Option<string>("--option")
-                    }
-                });
+                new Command("outer") { new Command("inner") { new Option<string>("--option") } }
+            );
         }
 
         [Fact]
@@ -29,12 +24,7 @@ namespace System.CommandLine.Tests
         {
             var result = _parser.Parse("outer inner --option argument1");
 
-            result
-                .RootCommandResult
-                .Symbol
-                .Name
-                .Should()
-                .Be("outer");
+            result.RootCommandResult.Symbol.Name.Should().Be("outer");
         }
 
         [Fact]
@@ -42,13 +32,7 @@ namespace System.CommandLine.Tests
         {
             var result = _parser.Parse("outer inner --option argument1");
 
-            result
-                .CommandResult
-                .Parent
-                .Symbol
-                .Name
-                .Should()
-                .Be("outer");
+            result.CommandResult.Parent.Symbol.Name.Should().Be("outer");
         }
 
         [Fact]
@@ -56,11 +40,7 @@ namespace System.CommandLine.Tests
         {
             var result = _parser.Parse("outer inner --option argument1");
 
-            result.CommandResult
-                  .Symbol
-                  .Name
-                  .Should()
-                  .Be("inner");
+            result.CommandResult.Symbol.Name.Should().Be("inner");
         }
 
         [Fact]
@@ -68,13 +48,7 @@ namespace System.CommandLine.Tests
         {
             var result = _parser.Parse("outer inner --option argument1");
 
-            result.CommandResult
-                  .Children
-                  .ElementAt(0)
-                  .Symbol
-                  .Name
-                  .Should()
-                  .Be("option");
+            result.CommandResult.Children.ElementAt(0).Symbol.Name.Should().Be("option");
         }
 
         [Fact]
@@ -82,44 +56,29 @@ namespace System.CommandLine.Tests
         {
             var result = _parser.Parse("outer inner --option argument1");
 
-            result.CommandResult
-                  .Children
-                  .ElementAt(0)
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("argument1");
+            result.CommandResult.Children
+                .ElementAt(0)
+                .Tokens.Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("argument1");
         }
 
         [Fact]
         public void Commands_at_multiple_levels_can_have_their_own_arguments()
         {
-            var outer = new Command("outer")
-            {
-                new Argument<string>()
-            };
-            outer.Subcommands.Add(
-                new Command("inner")
-                {
-                    new Argument<string[]>()
-                });
+            var outer = new Command("outer") { new Argument<string>() };
+            outer.Subcommands.Add(new Command("inner") { new Argument<string[]>() });
 
             var parser = new Parser(outer);
 
             var result = parser.Parse("outer arg1 inner arg2 arg3");
 
-            result.CommandResult
-                  .Parent
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("arg1");
+            result.CommandResult.Parent.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg1");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("arg2", "arg3");
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("arg2", "arg3");
         }
 
         [Fact]
@@ -133,22 +92,21 @@ namespace System.CommandLine.Tests
             command.HasAlias("added").Should().BeTrue();
         }
 
-
         [Theory]
         [InlineData("aa ")]
         [InlineData(" aa")]
         [InlineData("aa aa")]
         public void When_a_command_is_created_with_an_alias_that_contains_whitespace_then_an_informative_error_is_returned(
-            string alias)
+            string alias
+        )
         {
             Action create = () => new Command(alias);
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Contain($"Alias cannot contain whitespace: \"{alias}\"");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain($"Alias cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
@@ -156,7 +114,8 @@ namespace System.CommandLine.Tests
         [InlineData(" aa")]
         [InlineData("aa aa")]
         public void When_a_command_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(
-            string alias)
+            string alias
+        )
         {
             var command = new Command("-x");
 
@@ -165,9 +124,7 @@ namespace System.CommandLine.Tests
             addAlias
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Contain($"Alias cannot contain whitespace: \"{alias}\"");
         }
 
@@ -182,14 +139,14 @@ namespace System.CommandLine.Tests
         [InlineData("outer inner arg inner-er", "inner-er")]
         [InlineData("outer inner arg inner-er arg", "inner-er")]
         [InlineData("outer arg inner arg inner-er arg", "inner-er")]
-        public void ParseResult_Command_identifies_innermost_command(string input, string expectedCommand)
+        public void ParseResult_Command_identifies_innermost_command(
+            string input,
+            string expectedCommand
+        )
         {
             var outer = new Command("outer")
             {
-                new Command("inner")
-                {
-                    new Command("inner-er")
-                },
+                new Command("inner") { new Command("inner-er") },
                 new Command("sibling")
             };
 
@@ -232,10 +189,7 @@ namespace System.CommandLine.Tests
             var subcommand = new Command("this");
             subcommand.AddAlias("that");
 
-            var rootCommand = new RootCommand
-            {
-                subcommand
-            };
+            var rootCommand = new RootCommand { subcommand };
 
             var result = rootCommand.Parse("that");
 
@@ -246,13 +200,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void It_retains_argument_name_when_it_is_provided()
         {
-            var command = new Command("-alias")
-            {
-                new Argument<bool>
-                {
-                    Name = "arg"
-                }
-            };
+            var command = new Command("-alias") { new Argument<bool> { Name = "arg" } };
 
             command.Arguments.Single().Name.Should().Be("arg");
         }
@@ -276,9 +224,7 @@ namespace System.CommandLine.Tests
             var command = new Command("mycommand");
             command.AddGlobalOption(option);
 
-            command.Options
-                   .Should()
-                   .Contain(option);
+            command.Options.Should().Contain(option);
         }
 
         // https://github.com/dotnet/command-line-api/issues/1437
@@ -290,15 +236,11 @@ namespace System.CommandLine.Tests
 
             // referencing command.Options here would reproduce the above bug before the fix
             // keeping it ensures the fix works and doesn't regress
-            command.Options
-                .Should()
-                .BeEmpty();
+            command.Options.Should().BeEmpty();
 
             command.AddGlobalOption(option);
 
-            command.Options
-                .Should()
-                .Contain(option);
+            command.Options.Should().Contain(option);
         }
 
         protected override Symbol CreateSymbol(string name) => new Command(name);

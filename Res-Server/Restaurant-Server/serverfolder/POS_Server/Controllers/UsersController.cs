@@ -21,6 +21,7 @@ namespace POS_Server.Controllers
     public class UsersController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         //get active users
         [HttpPost]
         [Route("GetActive")]
@@ -38,41 +39,47 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var usersList = entity.users.Where(u => u.isActive == 1 && u.userId != 1)
-                    .Select(u => new UserModel
-                    {
-                        userId = u.userId,
-                        username = u.username,
-                        password = u.password,
-                        name = u.name,
-                        lastname = u.lastname,
-                        fullName = u.name + " " + u.lastname,
-                        job = u.job,
-                        workHours = u.workHours,
-                        createDate = u.createDate,
-                        updateDate = u.updateDate,
-                        createUserId = u.createUserId,
-                        updateUserId = u.updateUserId,
-                        phone = u.phone,
-                        mobile = u.mobile,
-                        email = u.email,
-                        notes = u.notes,
-                        address = u.address,
-                        isActive = u.isActive,
-                        isOnline = u.isOnline,
-                        image = u.image,
-                        balance = u.balance,
-                        balanceType = u.balanceType,
-                        isAdmin = u.isAdmin,
-                        groupId = u.groupId,
-                        driverIsAvailable=u.driverIsAvailable,
-                      
-                        groupName = entity.groups.Where(g => g.groupId == u.groupId).FirstOrDefault().name,
-                        hasCommission = u.hasCommission,
-                        commissionValue = u.commissionValue,
-                        commissionRatio = u.commissionRatio,
-                    })
-                    .ToList();
+                    var usersList = entity.users
+                        .Where(u => u.isActive == 1 && u.userId != 1)
+                        .Select(
+                            u =>
+                                new UserModel
+                                {
+                                    userId = u.userId,
+                                    username = u.username,
+                                    password = u.password,
+                                    name = u.name,
+                                    lastname = u.lastname,
+                                    fullName = u.name + " " + u.lastname,
+                                    job = u.job,
+                                    workHours = u.workHours,
+                                    createDate = u.createDate,
+                                    updateDate = u.updateDate,
+                                    createUserId = u.createUserId,
+                                    updateUserId = u.updateUserId,
+                                    phone = u.phone,
+                                    mobile = u.mobile,
+                                    email = u.email,
+                                    notes = u.notes,
+                                    address = u.address,
+                                    isActive = u.isActive,
+                                    isOnline = u.isOnline,
+                                    image = u.image,
+                                    balance = u.balance,
+                                    balanceType = u.balanceType,
+                                    isAdmin = u.isAdmin,
+                                    groupId = u.groupId,
+                                    driverIsAvailable = u.driverIsAvailable,
+                                    groupName = entity.groups
+                                        .Where(g => g.groupId == u.groupId)
+                                        .FirstOrDefault()
+                                        .name,
+                                    hasCommission = u.hasCommission,
+                                    commissionValue = u.commissionValue,
+                                    commissionRatio = u.commissionRatio,
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(usersList);
                 }
@@ -103,42 +110,55 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var usersList = entity.users.Where(u => u.userId != 1 && (u.isActive == 1 ||
-                                                 (u.isActive == 0 && payType == "p" && u.balanceType == 0) ||
-                                                 (u.isActive == 0 && payType == "d" && u.balanceType == 1)))
-                    .Select(u => new UserModel
-                    {
-                        userId = u.userId,
-                        username = u.username,
-                        password = u.password,
-                        name = u.name,
-                        lastname = u.lastname,
-                        fullName = u.name + " " + u.lastname,
-                        job = u.job,
-                        workHours = u.workHours,
-                        createDate = u.createDate,
-                        updateDate = u.updateDate,
-                        createUserId = u.createUserId,
-                        updateUserId = u.updateUserId,
-                        phone = u.phone,
-                        mobile = u.mobile,
-                        email = u.email,
-                        notes = u.notes,
-                        address = u.address,
-                        isActive = u.isActive,
-                        isOnline = u.isOnline,
-                        image = u.image,
-                        balance = u.balance,
-                        balanceType = u.balanceType,
-                        isAdmin = u.isAdmin,
-                        groupId = u.groupId,
-                        driverIsAvailable = u.driverIsAvailable,
-                        groupName = entity.groups.Where(g => g.groupId == u.groupId).FirstOrDefault().name,
-                        hasCommission = u.hasCommission,
-                        commissionValue = u.commissionValue,
-                        commissionRatio = u.commissionRatio,
-                    })
-                    .ToList();
+                    var usersList = entity.users
+                        .Where(
+                            u =>
+                                u.userId != 1
+                                && (
+                                    u.isActive == 1
+                                    || (u.isActive == 0 && payType == "p" && u.balanceType == 0)
+                                    || (u.isActive == 0 && payType == "d" && u.balanceType == 1)
+                                )
+                        )
+                        .Select(
+                            u =>
+                                new UserModel
+                                {
+                                    userId = u.userId,
+                                    username = u.username,
+                                    password = u.password,
+                                    name = u.name,
+                                    lastname = u.lastname,
+                                    fullName = u.name + " " + u.lastname,
+                                    job = u.job,
+                                    workHours = u.workHours,
+                                    createDate = u.createDate,
+                                    updateDate = u.updateDate,
+                                    createUserId = u.createUserId,
+                                    updateUserId = u.updateUserId,
+                                    phone = u.phone,
+                                    mobile = u.mobile,
+                                    email = u.email,
+                                    notes = u.notes,
+                                    address = u.address,
+                                    isActive = u.isActive,
+                                    isOnline = u.isOnline,
+                                    image = u.image,
+                                    balance = u.balance,
+                                    balanceType = u.balanceType,
+                                    isAdmin = u.isAdmin,
+                                    groupId = u.groupId,
+                                    driverIsAvailable = u.driverIsAvailable,
+                                    groupName = entity.groups
+                                        .Where(g => g.groupId == u.groupId)
+                                        .FirstOrDefault()
+                                        .name,
+                                    hasCommission = u.hasCommission,
+                                    commissionValue = u.commissionValue,
+                                    commissionRatio = u.commissionRatio,
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(usersList);
                 }
@@ -195,43 +215,49 @@ namespace POS_Server.Controllers
                 emptyuser.balanceType = 0;
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        usersList = entity.users.Where(u => u.isActive == 1 && u.username == userName)
-                        .Select(u => new UserModel
-                        {
-                            userId = u.userId,
-                            username = u.username,
-                            password = u.password,
-                            name = u.name,
-                            lastname = u.lastname,
-                            fullName = u.name + " " + u.lastname,
-                            job = u.job,
-                            workHours = u.workHours,
-                            createDate = u.createDate,
-                            updateDate = u.updateDate,
-                            createUserId = u.createUserId,
-                            updateUserId = u.updateUserId,
-                            phone = u.phone,
-                            mobile = u.mobile,
-                            email = u.email,
-                            notes = u.notes,
-                            address = u.address,
-                            isActive = u.isActive,
-                            isOnline = u.isOnline,
-                            image = u.image,
-                            balance = u.balance,
-                            balanceType = u.balanceType,
-                            isAdmin = u.isAdmin,
-                        groupId = u.groupId,
-                            driverIsAvailable = u.driverIsAvailable,
-                            groupName = entity.groups.Where(g => g.groupId == u.groupId).FirstOrDefault().name,
-                            hasCommission = u.hasCommission,
-                            commissionValue = u.commissionValue,
-                            commissionRatio = u.commissionRatio,
-                        })
-                        .ToList();
+                        usersList = entity.users
+                            .Where(u => u.isActive == 1 && u.username == userName)
+                            .Select(
+                                u =>
+                                    new UserModel
+                                    {
+                                        userId = u.userId,
+                                        username = u.username,
+                                        password = u.password,
+                                        name = u.name,
+                                        lastname = u.lastname,
+                                        fullName = u.name + " " + u.lastname,
+                                        job = u.job,
+                                        workHours = u.workHours,
+                                        createDate = u.createDate,
+                                        updateDate = u.updateDate,
+                                        createUserId = u.createUserId,
+                                        updateUserId = u.updateUserId,
+                                        phone = u.phone,
+                                        mobile = u.mobile,
+                                        email = u.email,
+                                        notes = u.notes,
+                                        address = u.address,
+                                        isActive = u.isActive,
+                                        isOnline = u.isOnline,
+                                        image = u.image,
+                                        balance = u.balance,
+                                        balanceType = u.balanceType,
+                                        isAdmin = u.isAdmin,
+                                        groupId = u.groupId,
+                                        driverIsAvailable = u.driverIsAvailable,
+                                        groupName = entity.groups
+                                            .Where(g => g.groupId == u.groupId)
+                                            .FirstOrDefault()
+                                            .name,
+                                        hasCommission = u.hasCommission,
+                                        commissionValue = u.commissionValue,
+                                        commissionRatio = u.commissionRatio,
+                                    }
+                            )
+                            .ToList();
 
                         if (usersList == null || usersList.Count <= 0)
                         {
@@ -255,7 +281,6 @@ namespace POS_Server.Controllers
                                     posId = posId,
                                     userId = user.userId,
                                     sInDate = coctrlr.AddOffsetTodate(DateTime.Now),
-
                                 };
                                 entity.usersLogs.Add(usersLogs);
 
@@ -270,11 +295,9 @@ namespace POS_Server.Controllers
                                 user = emptyuser;
                                 user.username = userName;
                                 return TokenManager.GenerateToken(user);
-
                             }
                         }
                     }
-
                 }
                 catch
                 {
@@ -282,7 +305,6 @@ namespace POS_Server.Controllers
                 }
             }
         }
-
 
         // return all users active and inactive
         [HttpPost]
@@ -301,38 +323,44 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var usersList = entity.users
-                    .Select(u => new UserModel()
-                    {
-                        userId = u.userId,
-                        username = u.username,
-                        password = u.password,
-                        name = u.name,
-                        lastname = u.lastname,
-                        job = u.job,
-                        workHours = u.workHours,
-                        createDate = u.createDate,
-                        updateDate = u.updateDate,
-                        createUserId = u.createUserId,
-                        updateUserId = u.updateUserId,
-                        phone = u.phone,
-                        mobile = u.mobile,
-                        email = u.email,
-                        notes = u.notes,
-                        address = u.address,
-                        isActive = u.isActive,
-                        isOnline = u.isOnline,
-                        image = u.image,
-                        balance = u.balance,
-                        balanceType = u.balanceType,
-                        isAdmin = u.isAdmin,
-                        groupId = u.groupId,
-                        driverIsAvailable = u.driverIsAvailable,
-                        groupName = entity.groups.Where(g => g.groupId == u.groupId).FirstOrDefault().name,
-                        hasCommission = u.hasCommission,
-                        commissionValue = u.commissionValue,
-                        commissionRatio = u.commissionRatio,
-                    })
-                    .ToList();
+                        .Select(
+                            u =>
+                                new UserModel()
+                                {
+                                    userId = u.userId,
+                                    username = u.username,
+                                    password = u.password,
+                                    name = u.name,
+                                    lastname = u.lastname,
+                                    job = u.job,
+                                    workHours = u.workHours,
+                                    createDate = u.createDate,
+                                    updateDate = u.updateDate,
+                                    createUserId = u.createUserId,
+                                    updateUserId = u.updateUserId,
+                                    phone = u.phone,
+                                    mobile = u.mobile,
+                                    email = u.email,
+                                    notes = u.notes,
+                                    address = u.address,
+                                    isActive = u.isActive,
+                                    isOnline = u.isOnline,
+                                    image = u.image,
+                                    balance = u.balance,
+                                    balanceType = u.balanceType,
+                                    isAdmin = u.isAdmin,
+                                    groupId = u.groupId,
+                                    driverIsAvailable = u.driverIsAvailable,
+                                    groupName = entity.groups
+                                        .Where(g => g.groupId == u.groupId)
+                                        .FirstOrDefault()
+                                        .name,
+                                    hasCommission = u.hasCommission,
+                                    commissionValue = u.commissionValue,
+                                    commissionRatio = u.commissionRatio,
+                                }
+                        )
+                        .ToList();
 
                     if (usersList.Count > 0)
                     {
@@ -342,7 +370,10 @@ namespace POS_Server.Controllers
                             if (usersList[i].isActive == 1)
                             {
                                 long userId = (long)usersList[i].userId;
-                                var usersPos = entity.posUsers.Where(x => x.userId == userId).Select(b => new { b.posUserId }).FirstOrDefault();
+                                var usersPos = entity.posUsers
+                                    .Where(x => x.userId == userId)
+                                    .Select(b => new { b.posUserId })
+                                    .FirstOrDefault();
                                 if (usersPos is null)
                                     canDelete = true;
                             }
@@ -354,6 +385,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetUserByID")]
@@ -379,43 +411,50 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var user = entity.users
-                   .Where(u => u.userId == userId)
-                   .Select(u => new
-                   {
-                       u.userId,
-                       u.username,
-                       u.password,
-                       u.name,
-                       u.lastname,
-                       u.job,
-                       u.workHours,
-                       u.createDate,
-                       u.updateDate,
-                       u.createUserId,
-                       u.updateUserId,
-                       u.phone,
-                       u.mobile,
-                       u.email,
-                       u.notes,
-                       u.address,
-                       u.isOnline,
-                       u.image,
-                       u.isActive,
-                       u.balance,
-                       u.balanceType,
-                       u.isAdmin,
-                       u.driverIsAvailable,
-                       u.groupId,
-                       groupName = entity.groups.Where(g => g.groupId == u.groupId).FirstOrDefault().name,
-                        u.hasCommission,
-                         u.commissionValue,
-                      u.commissionRatio,
-                   })
-                   .FirstOrDefault();
+                        .Where(u => u.userId == userId)
+                        .Select(
+                            u =>
+                                new
+                                {
+                                    u.userId,
+                                    u.username,
+                                    u.password,
+                                    u.name,
+                                    u.lastname,
+                                    u.job,
+                                    u.workHours,
+                                    u.createDate,
+                                    u.updateDate,
+                                    u.createUserId,
+                                    u.updateUserId,
+                                    u.phone,
+                                    u.mobile,
+                                    u.email,
+                                    u.notes,
+                                    u.address,
+                                    u.isOnline,
+                                    u.image,
+                                    u.isActive,
+                                    u.balance,
+                                    u.balanceType,
+                                    u.isAdmin,
+                                    u.driverIsAvailable,
+                                    u.groupId,
+                                    groupName = entity.groups
+                                        .Where(g => g.groupId == u.groupId)
+                                        .FirstOrDefault()
+                                        .name,
+                                    u.hasCommission,
+                                    u.commissionValue,
+                                    u.commissionRatio,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(user);
                 }
             }
         }
+
         /*
         [HttpPost]
         [Route("Search")]
@@ -503,38 +542,45 @@ namespace POS_Server.Controllers
                 List<UserModel> users = new List<UserModel>();
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var usersList = (from u in entity.users.Where(us => us.isActive == 1 && us.userId != 1)
-                                     join bu in entity.branchesUsers on u.userId equals bu.userId
-                                     where bu.branchId == branchId
-                                     select new UserModel
-                                     {
-                                         userId = u.userId,
-                                         username = u.username,
-                                         name = u.name,
-                                         lastname = u.lastname,
-                                         fullName = u.name + " " + u.lastname,
-                                         balance = u.balance,
-                                         balanceType = u.balanceType,
-                                         isAdmin = u.isAdmin,
-                                         groupId = u.groupId,
-                                         groupName = entity.groups.Where(g => g.groupId == u.groupId).FirstOrDefault().name,
-                                         hasCommission = u.hasCommission,
-                                         commissionValue = u.commissionValue,
-                                         commissionRatio = u.commissionRatio,
-                                     }).ToList();
+                    var usersList = (
+                        from u in entity.users.Where(us => us.isActive == 1 && us.userId != 1)
+                        join bu in entity.branchesUsers on u.userId equals bu.userId
+                        where bu.branchId == branchId
+                        select new UserModel
+                        {
+                            userId = u.userId,
+                            username = u.username,
+                            name = u.name,
+                            lastname = u.lastname,
+                            fullName = u.name + " " + u.lastname,
+                            balance = u.balance,
+                            balanceType = u.balanceType,
+                            isAdmin = u.isAdmin,
+                            groupId = u.groupId,
+                            groupName = entity.groups
+                                .Where(g => g.groupId == u.groupId)
+                                .FirstOrDefault()
+                                .name,
+                            hasCommission = u.hasCommission,
+                            commissionValue = u.commissionValue,
+                            commissionRatio = u.commissionRatio,
+                        }
+                    ).ToList();
 
                     foreach (UserModel user in usersList)
                     {
-                        var groupObjects = (from GO in entity.groupObject
-                                            where GO.showOb == 1 && GO.objects.name.Contains(deliveryPermission)
-                                            join U in entity.users on GO.groupId equals U.groupId
-                                            where U.userId == user.userId
-                                            select new
-                                            {
-                                                //group object
-                                                GO.id,
-                                                GO.showOb,
-                                            }).FirstOrDefault();
+                        var groupObjects = (
+                            from GO in entity.groupObject
+                            where GO.showOb == 1 && GO.objects.name.Contains(deliveryPermission)
+                            join U in entity.users on GO.groupId equals U.groupId
+                            where U.userId == user.userId
+                            select new
+                            {
+                                //group object
+                                GO.id,
+                                GO.showOb,
+                            }
+                        ).FirstOrDefault();
 
                         if (groupObjects != null)
                             users.Add(user);
@@ -543,6 +589,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("getUsersForDelivery")]
         public string getUsersForDelivery(string token)
@@ -572,82 +619,107 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var residentSecId = entity.agents.Where(x => x.agentId == customerId).Select(x => x.residentSecId).SingleOrDefault();
-                    
+                    var residentSecId = entity.agents
+                        .Where(x => x.agentId == customerId)
+                        .Select(x => x.residentSecId)
+                        .SingleOrDefault();
+
                     List<UserModel> usersList = new List<UserModel>();
 
                     if (residentSecId != null)
                     {
-                        usersList = (from u in entity.users.Where(u => u.userId != 1 && u.isActive == 1 && u.driverIsAvailable == 1)
-                                     join su in entity.residentialSectorsUsers.Where(x => x.residentSecId == residentSecId) on u.userId equals su.userId
-                                     select new UserModel
-                                     {
-                                         userId = u.userId,
-                                         username = u.username,
-                                         password = u.password,
-                                         name = u.name,
-                                         lastname = u.lastname,
-                                         fullName = u.name + " " + u.lastname,
-                                         job = u.job,
-                                         workHours = u.workHours,
-                                         createDate = u.createDate,
-                                         updateDate = u.updateDate,
-                                         createUserId = u.createUserId,
-                                         updateUserId = u.updateUserId,
-                                         phone = u.phone,
-                                         mobile = u.mobile,
-                                         email = u.email,
-                                         isActive = u.isActive,
-                                         isOnline = u.isOnline,
-                                         balance = u.balance,
-                                         balanceType = u.balanceType,
-                                         isAdmin = u.isAdmin,
-                                         driverIsAvailable = u.driverIsAvailable,
-                                         groupId = u.groupId,
-                                         groupName = entity.groups.Where(g => g.groupId == u.groupId).FirstOrDefault().name,
-                                         hasCommission = u.hasCommission,
-                                         commissionValue = u.commissionValue,
-                                         commissionRatio = u.commissionRatio,
-                                     })
-                        .Distinct().ToList();
+                        usersList = (
+                            from u in entity.users.Where(
+                                u => u.userId != 1 && u.isActive == 1 && u.driverIsAvailable == 1
+                            )
+                            join su in entity.residentialSectorsUsers.Where(
+                                x => x.residentSecId == residentSecId
+                            )
+                                on u.userId equals su.userId
+                            select new UserModel
+                            {
+                                userId = u.userId,
+                                username = u.username,
+                                password = u.password,
+                                name = u.name,
+                                lastname = u.lastname,
+                                fullName = u.name + " " + u.lastname,
+                                job = u.job,
+                                workHours = u.workHours,
+                                createDate = u.createDate,
+                                updateDate = u.updateDate,
+                                createUserId = u.createUserId,
+                                updateUserId = u.updateUserId,
+                                phone = u.phone,
+                                mobile = u.mobile,
+                                email = u.email,
+                                isActive = u.isActive,
+                                isOnline = u.isOnline,
+                                balance = u.balance,
+                                balanceType = u.balanceType,
+                                isAdmin = u.isAdmin,
+                                driverIsAvailable = u.driverIsAvailable,
+                                groupId = u.groupId,
+                                groupName = entity.groups
+                                    .Where(g => g.groupId == u.groupId)
+                                    .FirstOrDefault()
+                                    .name,
+                                hasCommission = u.hasCommission,
+                                commissionValue = u.commissionValue,
+                                commissionRatio = u.commissionRatio,
+                            }
+                        ).Distinct().ToList();
                     }
-               
+
                     if (usersList.Count == 0)
                     {
-                        usersList = entity.users.Where(u => u.userId != 1 && u.isActive == 1 && u.job == job && u.driverIsAvailable == 1)
-                        .Select(u => new UserModel
-                        {
-                            userId = u.userId,
-                            username = u.username,
-                            password = u.password,
-                            name = u.name,
-                            lastname = u.lastname,
-                            fullName = u.name + " " + u.lastname,
-                            job = u.job,
-                            workHours = u.workHours,
-                            createDate = u.createDate,
-                            updateDate = u.updateDate,
-                            createUserId = u.createUserId,
-                            updateUserId = u.updateUserId,
-                            phone = u.phone,
-                            mobile = u.mobile,
-                            email = u.email,
-                            notes = u.notes,
-                            address = u.address,
-                            isActive = u.isActive,
-                            isOnline = u.isOnline,
-                            image = u.image,
-                            balance = u.balance,
-                            balanceType = u.balanceType,
-                            isAdmin = u.isAdmin,
-                            driverIsAvailable = u.driverIsAvailable,
-                            groupId = u.groupId,
-                            groupName = entity.groups.Where(g => g.groupId == u.groupId).FirstOrDefault().name,
-                            hasCommission = u.hasCommission,
-                            commissionValue = u.commissionValue,
-                            commissionRatio = u.commissionRatio,
-                        })
-                        .ToList();
+                        usersList = entity.users
+                            .Where(
+                                u =>
+                                    u.userId != 1
+                                    && u.isActive == 1
+                                    && u.job == job
+                                    && u.driverIsAvailable == 1
+                            )
+                            .Select(
+                                u =>
+                                    new UserModel
+                                    {
+                                        userId = u.userId,
+                                        username = u.username,
+                                        password = u.password,
+                                        name = u.name,
+                                        lastname = u.lastname,
+                                        fullName = u.name + " " + u.lastname,
+                                        job = u.job,
+                                        workHours = u.workHours,
+                                        createDate = u.createDate,
+                                        updateDate = u.updateDate,
+                                        createUserId = u.createUserId,
+                                        updateUserId = u.updateUserId,
+                                        phone = u.phone,
+                                        mobile = u.mobile,
+                                        email = u.email,
+                                        notes = u.notes,
+                                        address = u.address,
+                                        isActive = u.isActive,
+                                        isOnline = u.isOnline,
+                                        image = u.image,
+                                        balance = u.balance,
+                                        balanceType = u.balanceType,
+                                        isAdmin = u.isAdmin,
+                                        driverIsAvailable = u.driverIsAvailable,
+                                        groupId = u.groupId,
+                                        groupName = entity.groups
+                                            .Where(g => g.groupId == u.groupId)
+                                            .FirstOrDefault()
+                                            .name,
+                                        hasCommission = u.hasCommission,
+                                        commissionValue = u.commissionValue,
+                                        commissionRatio = u.commissionRatio,
+                                    }
+                            )
+                            .ToList();
                     }
                     return TokenManager.GenerateToken(usersList);
                 }
@@ -678,7 +750,13 @@ namespace POS_Server.Controllers
                     {
                         userObject = c.Value.Replace("\\", string.Empty);
                         userObject = userObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<users>(userObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<users>(
+                            userObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                         break;
                     }
                 }
@@ -697,7 +775,7 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var userEntity = entity.Set<users>();
-                     //   var catEntity = entity.Set<categoryuser>();
+                        //   var catEntity = entity.Set<categoryuser>();
                         if (newObject.userId == 0)
                         {
                             newObject.isAdmin = false;
@@ -712,7 +790,7 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateDate = newObject.createDate;
                                 newObject.updateUserId = newObject.createUserId;
                                 newObject.balance = 0;
@@ -740,12 +818,13 @@ namespace POS_Server.Controllers
                                 entity.SaveChanges().ToString();
                                 message = userObj.userId.ToString();
                                 return TokenManager.GenerateToken(message);
-
                             }
                         }
                         else
                         {
-                            userObj = entity.users.Where(p => p.userId == newObject.userId).FirstOrDefault();
+                            userObj = entity.users
+                                .Where(p => p.userId == newObject.userId)
+                                .FirstOrDefault();
                             userObj.name = newObject.name;
                             userObj.username = newObject.username;
                             userObj.password = newObject.password;
@@ -753,7 +832,7 @@ namespace POS_Server.Controllers
                             userObj.lastname = newObject.lastname;
                             userObj.job = newObject.job;
                             userObj.workHours = newObject.workHours;
-                            userObj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            userObj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             userObj.updateUserId = newObject.updateUserId;
                             userObj.phone = newObject.phone;
                             userObj.mobile = newObject.mobile;
@@ -765,16 +844,14 @@ namespace POS_Server.Controllers
                             userObj.balanceType = newObject.balanceType;
                             userObj.isOnline = newObject.isOnline;
                             userObj.driverIsAvailable = newObject.driverIsAvailable;
-                         userObj.groupId = newObject.groupId;
+                            userObj.groupId = newObject.groupId;
                             userObj.hasCommission = newObject.hasCommission;
-                        userObj.commissionValue = newObject.commissionValue;
-                        userObj.commissionRatio = newObject.commissionRatio;
+                            userObj.commissionValue = newObject.commissionValue;
+                            userObj.commissionRatio = newObject.commissionRatio;
 
-                                 
                             entity.SaveChanges().ToString();
                             message = userObj.userId.ToString();
                             return TokenManager.GenerateToken(message);
-
                         }
                     }
                 }
@@ -782,14 +859,15 @@ namespace POS_Server.Controllers
                 {
                     //message = "0";
                     //return TokenManager.GenerateToken(message);
-                     return TokenManager.GenerateToken(ex.ToString());
+                    return TokenManager.GenerateToken(ex.ToString());
                 }
             }
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
-        { 
+        {
             token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
             var strP = TokenManager.GetPrincipal(token);
@@ -824,13 +902,12 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                           // entity.categoryuser.RemoveRange(entity.categoryuser.Where(x => x.userId == delUserId));
+                            // entity.categoryuser.RemoveRange(entity.categoryuser.Where(x => x.userId == delUserId));
 
                             users usersDelete = entity.users.Find(delUserId);
                             entity.users.Remove(usersDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
-
                         }
                     }
                     catch
@@ -847,11 +924,10 @@ namespace POS_Server.Controllers
                             users userDelete = entity.users.Find(delUserId);
 
                             userDelete.isActive = 0;
-                            userDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            userDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             userDelete.updateUserId = userId;
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
-
                         }
                     }
                     catch
@@ -859,21 +935,18 @@ namespace POS_Server.Controllers
                         return TokenManager.GenerateToken("0");
                     }
                 }
-
             }
-
         }
+
         [Route("PostUserImage")]
         public IHttpActionResult PostUserImage()
         {
-
             try
             {
                 var httpRequest = HttpContext.Current.Request;
 
                 foreach (string file in httpRequest.Files)
                 {
-
                     HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
 
                     var postedFile = httpRequest.Files[file];
@@ -882,22 +955,32 @@ namespace POS_Server.Controllers
 
                     if (postedFile != null && postedFile.ContentLength > 0)
                     {
-
                         int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB
 
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".bmp", ".jpeg", ".tiff", ".jfif" };
-                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        IList<string> AllowedFileExtensions = new List<string>
+                        {
+                            ".jpg",
+                            ".gif",
+                            ".png",
+                            ".bmp",
+                            ".jpeg",
+                            ".tiff",
+                            ".jfif"
+                        };
+                        var ext = postedFile.FileName.Substring(
+                            postedFile.FileName.LastIndexOf('.')
+                        );
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
                         {
-
-                            var message = string.Format("Please Upload image of type .jpg,.gif,.png, .jfif, .bmp , .jpeg ,.tiff");
+                            var message = string.Format(
+                                "Please Upload image of type .jpg,.gif,.png, .jfif, .bmp , .jpeg ,.tiff"
+                            );
                             return Ok(message);
                         }
                         else if (postedFile.ContentLength > MaxContentLength)
                         {
-
                             var message = string.Format("Please Upload a file upto 1 mb.");
 
                             return Ok(message);
@@ -905,17 +988,25 @@ namespace POS_Server.Controllers
                         else
                         {
                             //  check if image exist
-                            var pathCheck = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\user"), imageWithNoExt);
-                            var files = Directory.GetFiles(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\user"), imageWithNoExt + ".*");
+                            var pathCheck = Path.Combine(
+                                System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\user"),
+                                imageWithNoExt
+                            );
+                            var files = Directory.GetFiles(
+                                System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\user"),
+                                imageWithNoExt + ".*"
+                            );
                             if (files.Length > 0)
                             {
                                 File.Delete(files[0]);
                             }
 
                             //Userimage myfolder name where i want to save my image
-                            var filePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\user"), imageName);
+                            var filePath = Path.Combine(
+                                System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\user"),
+                                imageName
+                            );
                             postedFile.SaveAs(filePath);
-
                         }
                     }
 
@@ -933,7 +1024,6 @@ namespace POS_Server.Controllers
                 return Ok(res);
             }
         }
-      
 
         [HttpPost]
         [Route("GetImage")]
@@ -961,8 +1051,12 @@ namespace POS_Server.Controllers
 
                 string localFilePath;
 
-                try { 
-                    localFilePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\user"), imageName);
+                try
+                {
+                    localFilePath = Path.Combine(
+                        System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\user"),
+                        imageName
+                    );
 
                     byte[] b = System.IO.File.ReadAllBytes(localFilePath);
                     return TokenManager.GenerateToken(Convert.ToBase64String(b));
@@ -970,10 +1064,10 @@ namespace POS_Server.Controllers
                 catch
                 {
                     return TokenManager.GenerateToken(null);
-
                 }
             }
         }
+
         [HttpPost]
         [Route("UpdateImage")]
         public string UpdateImage(string token)
@@ -998,7 +1092,10 @@ namespace POS_Server.Controllers
                     {
                         userObject = c.Value.Replace("\\", string.Empty);
                         userObject = userObject.Trim('"');
-                        userObj = JsonConvert.DeserializeObject<users>(userObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        userObj = JsonConvert.DeserializeObject<users>(
+                            userObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -1015,7 +1112,6 @@ namespace POS_Server.Controllers
                     message = user.userId.ToString();
                     return TokenManager.GenerateToken(message);
                 }
-
                 catch
                 {
                     message = "0";
@@ -1023,7 +1119,6 @@ namespace POS_Server.Controllers
                 }
             }
         }
-
 
         [HttpPost]
         [Route("CanLogIn")]
@@ -1056,20 +1151,22 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var usersList = (from bu in entity.branchesUsers
-                                         join B in entity.branches on bu.branchId equals B.branchId
-                                         join P in entity.pos on B.branchId equals P.branchId
-                                         // from u in entity.users.Where(us => us.isActive == 1 || us.userId == 1)
+                        var usersList = (
+                            from bu in entity.branchesUsers
+                            join B in entity.branches on bu.branchId equals B.branchId
+                            join P in entity.pos on B.branchId equals P.branchId
+                            // from u in entity.users.Where(us => us.isActive == 1 || us.userId == 1)
 
-                                         where P.posId == posId && bu.userId == userId
-                                         select new
-                                         {
-                                             bu.branchsUsersId,
-                                             bu.branchId,
-                                             bu.userId,
-                                         }).ToList();
+                            where P.posId == posId && bu.userId == userId
+                            select new
+                            {
+                                bu.branchsUsersId,
+                                bu.branchId,
+                                bu.userId,
+                            }
+                        ).ToList();
                         int can = 0;
-                        if(usersList==null|| usersList.Count == 0)
+                        if (usersList == null || usersList.Count == 0)
                         {
                             can = 0;
                         }
@@ -1081,13 +1178,13 @@ namespace POS_Server.Controllers
                         return TokenManager.GenerateToken(can.ToString());
                     }
                 }
-
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
             }
         }
+
         [HttpPost]
         [Route("checkLoginAvalability")]
         public string checkLoginAvalability(string token)
@@ -1124,18 +1221,23 @@ namespace POS_Server.Controllers
                         password = c.Value;
                     }
                 }
-                int res = checkLoginAvalability(posId,deviceCode,userName,password);
-            return TokenManager.GenerateToken(res.ToString());
-
+                int res = checkLoginAvalability(posId, deviceCode, userName, password);
+                return TokenManager.GenerateToken(res.ToString());
+            }
         }
-    }
-        public int checkLoginAvalability(long posId, string deviceCode,string userName, string password)
+
+        public int checkLoginAvalability(
+            long posId,
+            string deviceCode,
+            string userName,
+            string password
+        )
         {
             // 1 :  can login-
-            //  0 : error 
-            // -1 : package is expired 
-            // -2 : device code is not correct 
-            // -3 : serial is not active 
+            //  0 : error
+            // -1 : package is expired
+            // -2 : device code is not correct
+            // -3 : serial is not active
             // -4 : customer server code is wrong
             // -5 : login date is before last login date
 
@@ -1143,19 +1245,34 @@ namespace POS_Server.Controllers
             {
                 DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
                 using (incposdbEntities entity = new incposdbEntities())
-                {                    
+                {
                     //check support user
                     if (userName == "Support@Increase")
                     {
-                        var suppUser = entity.users.Where(u => u.isActive == 1 && u.username == userName && u.password == password && u.isAdmin == true).FirstOrDefault();
+                        var suppUser = entity.users
+                            .Where(
+                                u =>
+                                    u.isActive == 1
+                                    && u.username == userName
+                                    && u.password == password
+                                    && u.isAdmin == true
+                            )
+                            .FirstOrDefault();
                         if (suppUser != null)
                             return 1;
                     }
                     //compair login date with last login date for this user
-                    var user = entity.users.Where(x => x.username == userName && x.password == password && x.isActive == 1).FirstOrDefault();
-                    if(user != null)
+                    var user = entity.users
+                        .Where(
+                            x => x.username == userName && x.password == password && x.isActive == 1
+                        )
+                        .FirstOrDefault();
+                    if (user != null)
                     {
-                        var logs = entity.usersLogs.Where(x => x.userId == user.userId).OrderByDescending(x => x.sInDate).FirstOrDefault();
+                        var logs = entity.usersLogs
+                            .Where(x => x.userId == user.userId)
+                            .OrderByDescending(x => x.sInDate)
+                            .FirstOrDefault();
                         if (logs != null && logs.sInDate > datenow)
                             return -5;
                     }
@@ -1165,9 +1282,11 @@ namespace POS_Server.Controllers
                         return -1;
                     else
                     {
-                        var tmpObject = entity.posSetting.Where(x => x.posId == posId).FirstOrDefault();
+                        var tmpObject = entity.posSetting
+                            .Where(x => x.posId == posId)
+                            .FirstOrDefault();
                         if (tmpObject != null)
-                        {      
+                        {
                             // check customer code
                             if (tmpObject.posDeviceCode != deviceCode)
                             {
@@ -1182,23 +1301,25 @@ namespace POS_Server.Controllers
                             }
                         }
                         // check serial && package avalilability
-                        var serial = entity.posSetting.Where(x => x.posId == posId && x.posSerials.isActive == true).FirstOrDefault();
-                        var programDetails = entity.ProgramDetails.Where(x => x.isActive == true).FirstOrDefault();
+                        var serial = entity.posSetting
+                            .Where(x => x.posId == posId && x.posSerials.isActive == true)
+                            .FirstOrDefault();
+                        var programDetails = entity.ProgramDetails
+                            .Where(x => x.isActive == true)
+                            .FirstOrDefault();
                         if (serial == null || programDetails == null)
                             return -3;
-                }
+                    }
 
                     return 1;
                 }
             }
             catch
             {
-
                 return 0;
-
             }
-
         }
+
         [HttpPost]
         [Route("editUserBalance")]
         public string editUserBalance(string token)
@@ -1250,7 +1371,6 @@ namespace POS_Server.Controllers
                         entity.SaveChanges();
                     }
                     return TokenManager.GenerateToken("1");
-
                 }
                 catch
                 {
@@ -1258,7 +1378,6 @@ namespace POS_Server.Controllers
                 }
             }
         }
-
 
         [HttpPost]
         [Route("GetUserSettings")]
@@ -1299,18 +1418,20 @@ namespace POS_Server.Controllers
                     #region get user language - user path- default invoice type
                     var set = settingsCls.Where(l => l.name == "language").FirstOrDefault();
 
-                    var lang = (from c in entity.setValues.Where(x => x.settingId == set.settingId)
-                                join us in entity.userSetValues.Where(x => x.userId == userId) on c.valId equals us.valId
-                                select new
-                                {
-                                    c.valId,
-                                    c.value,
-                                    c.isDefault,
-                                    c.isSystem,
-                                    c.notes,
-                                    c.settingId,
-
-                                }).FirstOrDefault();
+                    var lang = (
+                        from c in entity.setValues.Where(x => x.settingId == set.settingId)
+                        join us in entity.userSetValues.Where(x => x.userId == userId)
+                            on c.valId equals us.valId
+                        select new
+                        {
+                            c.valId,
+                            c.value,
+                            c.isDefault,
+                            c.isSystem,
+                            c.notes,
+                            c.settingId,
+                        }
+                    ).FirstOrDefault();
 
                     string langVal = "";
                     if (lang == null)
@@ -1320,20 +1441,22 @@ namespace POS_Server.Controllers
 
                     result += "userLang:'" + langVal + "'";
 
-                   set = settingsCls.Where(l => l.name == "invType").FirstOrDefault();
+                    set = settingsCls.Where(l => l.name == "invType").FirstOrDefault();
 
-                    var invType = (from c in entity.setValues.Where(x => x.settingId == set.settingId)
-                                join us in entity.userSetValues.Where(x => x.userId == userId) on c.valId equals us.valId
-                                select new
-                                {
-                                    c.valId,
-                                    c.value,
-                                    c.isDefault,
-                                    c.isSystem,
-                                    c.notes,
-                                    c.settingId,
-
-                                }).FirstOrDefault();
+                    var invType = (
+                        from c in entity.setValues.Where(x => x.settingId == set.settingId)
+                        join us in entity.userSetValues.Where(x => x.userId == userId)
+                            on c.valId equals us.valId
+                        select new
+                        {
+                            c.valId,
+                            c.value,
+                            c.isDefault,
+                            c.isSystem,
+                            c.notes,
+                            c.settingId,
+                        }
+                    ).FirstOrDefault();
 
                     string type = "diningHall";
                     if (invType != null)
@@ -1343,18 +1466,22 @@ namespace POS_Server.Controllers
 
                     set = settingsCls.Where(l => l.name == "user_path").FirstOrDefault();
 
-                    var userPath = (from c in entity.setValues.Where(x => x.settingId == set.settingId && x.value.Contains("first"))
-                                join us in entity.userSetValues.Where(x => x.userId == userId) on c.valId equals us.valId
-                                select new
-                                {
-                                    c.valId,
-                                    c.value,
-                                    c.isDefault,
-                                    c.isSystem,
-                                    us.notes,
-                                    c.settingId,
-
-                                }).FirstOrDefault();
+                    var userPath = (
+                        from c in entity.setValues.Where(
+                            x => x.settingId == set.settingId && x.value.Contains("first")
+                        )
+                        join us in entity.userSetValues.Where(x => x.userId == userId)
+                            on c.valId equals us.valId
+                        select new
+                        {
+                            c.valId,
+                            c.value,
+                            c.isDefault,
+                            c.isSystem,
+                            us.notes,
+                            c.settingId,
+                        }
+                    ).FirstOrDefault();
 
                     string path = "";
                     long? firstId = null;
@@ -1365,13 +1492,15 @@ namespace POS_Server.Controllers
                         firstId = userPath.valId;
                     }
 
-                    result += ",defaultPath:'" + path + "',defaultPathId:" +firstId;
+                    result += ",defaultPath:'" + path + "',defaultPathId:" + firstId;
                     #endregion
 
                     #region accuracy - date form - currency
                     var oneSet = settingsCls.Where(s => s.name == "accuracy").FirstOrDefault();
                     long settingId = oneSet.settingId;
-                    var setVal = settingsValues.Where(i => i.settingId == settingId && i.isDefault == 1).FirstOrDefault();
+                    var setVal = settingsValues
+                        .Where(i => i.settingId == settingId && i.isDefault == 1)
+                        .FirstOrDefault();
                     string val = "0";
                     if (setVal != null)
                     {
@@ -1382,27 +1511,41 @@ namespace POS_Server.Controllers
                     result += ",accuracy:'" + val + "'";
 
                     //date form
-                     oneSet = settingsCls.Where(s => s.name == "dateForm").FirstOrDefault();
-                     settingId = oneSet.settingId;
-                    setVal = settingsValues.Where(i => i.settingId == settingId && i.isDefault == 1).FirstOrDefault();
-                     val = "";
+                    oneSet = settingsCls.Where(s => s.name == "dateForm").FirstOrDefault();
+                    settingId = oneSet.settingId;
+                    setVal = settingsValues
+                        .Where(i => i.settingId == settingId && i.isDefault == 1)
+                        .FirstOrDefault();
+                    val = "";
                     if (setVal != null)
                         val = setVal.value;
                     result += ",dateFormat:'" + val + "'";
 
                     //currency info
-                    var regions = entity.countriesCodes.Where(x => x.isDefault == 1).FirstOrDefault();
+                    var regions = entity.countriesCodes
+                        .Where(x => x.isDefault == 1)
+                        .FirstOrDefault();
                     if (regions == null)
                         result += ",Currency:''" + ",CurrencyId:,countryId:";
                     else
-                        result += ",Currency:'" + regions.currency + "'" + ",CurrencyId:" + regions.currencyId + ",countryId:" + regions.countryId;
+                        result +=
+                            ",Currency:'"
+                            + regions.currency
+                            + "'"
+                            + ",CurrencyId:"
+                            + regions.currencyId
+                            + ",countryId:"
+                            + regions.countryId;
 
                     #endregion
 
                     #region storage cost
                     oneSet = settingsCls.Where(s => s.name == "storage_cost").FirstOrDefault();
                     settingId = oneSet.settingId;
-                    val = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault().value;
+                    val = settingsValues
+                        .Where(i => i.settingId == settingId)
+                        .FirstOrDefault()
+                        .value;
 
                     if (val == "" || val == null)
                         val = "0";
@@ -1413,9 +1556,9 @@ namespace POS_Server.Controllers
                     List<char> charsToRemove = new List<char>() { '@', '_', ',', '.', '-' };
                     //company name
                     set = settingsCls.Where(s => s.name == "com_name").FirstOrDefault();
-                     settingId = set.settingId;
-                     setVal = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault();
-                     val = "";
+                    settingId = set.settingId;
+                    setVal = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault();
+                    val = "";
 
                     if (setVal != null)
                         val = setVal.value;
@@ -1449,7 +1592,9 @@ namespace POS_Server.Controllers
 
                     if (setVal != null)
                     {
-                        charsToRemove.ForEach(x => setVal.value = setVal.value.Replace(x.ToString(), String.Empty));
+                        charsToRemove.ForEach(
+                            x => setVal.value = setVal.value.Replace(x.ToString(), String.Empty)
+                        );
                         val = setVal.value;
                     }
                     result += ",Mobile:'" + val + "'";
@@ -1462,7 +1607,9 @@ namespace POS_Server.Controllers
 
                     if (setVal != null)
                     {
-                        charsToRemove.ForEach(x => setVal.value = setVal.value.Replace(x.ToString(), String.Empty));
+                        charsToRemove.ForEach(
+                            x => setVal.value = setVal.value.Replace(x.ToString(), String.Empty)
+                        );
                         val = setVal.value;
                     }
                     result += ",Phone:'" + val + "'";
@@ -1475,7 +1622,9 @@ namespace POS_Server.Controllers
 
                     if (setVal != null)
                     {
-                        charsToRemove.ForEach(x => setVal.value = setVal.value.Replace(x.ToString(), String.Empty));
+                        charsToRemove.ForEach(
+                            x => setVal.value = setVal.value.Replace(x.ToString(), String.Empty)
+                        );
                         val = setVal.value;
                     }
                     result += ",Fax:'" + val + "'";
@@ -1500,7 +1649,9 @@ namespace POS_Server.Controllers
                         val = setVal.value;
                     result += ",invoiceTax_bool:'" + val + "'";
 
-                    oneSet = settingsCls.Where(s => s.name == "invoiceTax_decimal").FirstOrDefault();
+                    oneSet = settingsCls
+                        .Where(s => s.name == "invoiceTax_decimal")
+                        .FirstOrDefault();
                     settingId = oneSet.settingId;
                     setVal = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault();
                     val = "0";
@@ -1516,26 +1667,34 @@ namespace POS_Server.Controllers
                         val = setVal.value;
                     result += ",itemsTax_bool:'" + val + "'";
 
-
                     #endregion
 
                     #region get print settings
-                    var printList = entity.setValues.ToList().Where(x => x.notes == "print")
-                            .Select(X => new
-                            {
-                                X.valId,
-                                X.value,
-                                X.isDefault,
-                                X.isSystem,
-                                X.settingId,
-                                X.notes,
-                                name = entity.setting.ToList().Where(s => s.settingId == X.settingId).FirstOrDefault().name,
+                    var printList = entity.setValues
+                        .ToList()
+                        .Where(x => x.notes == "print")
+                        .Select(
+                            X =>
+                                new
+                                {
+                                    X.valId,
+                                    X.value,
+                                    X.isDefault,
+                                    X.isSystem,
+                                    X.settingId,
+                                    X.notes,
+                                    name = entity.setting
+                                        .ToList()
+                                        .Where(s => s.settingId == X.settingId)
+                                        .FirstOrDefault()
+                                        .name,
+                                }
+                        )
+                        .ToList();
 
-                            })
-                            .ToList();
-
-
-                    var psetVal = printList.Where(X => X.name == "sale_copy_count").FirstOrDefault();
+                    var psetVal = printList
+                        .Where(X => X.name == "sale_copy_count")
+                        .FirstOrDefault();
                     val = "0";
                     if (psetVal != null)
                         val = psetVal.value;
@@ -1577,16 +1736,22 @@ namespace POS_Server.Controllers
                         val = psetVal.value;
                     result += ",rep_print_count:'" + val + "'";
 
-                    psetVal = printList.Where(X => X.name == "Allow_print_inv_count").FirstOrDefault();
+                    psetVal = printList
+                        .Where(X => X.name == "Allow_print_inv_count")
+                        .FirstOrDefault();
                     val = "0";
                     if (psetVal != null)
                         val = psetVal.value;
                     result += ",Allow_print_inv_count:'" + val + "'";
 
-                    psetVal = printList.Where(X => X.name == "print_kitchen_on_sale").FirstOrDefault();
+                    psetVal = printList
+                        .Where(X => X.name == "print_kitchen_on_sale")
+                        .FirstOrDefault();
                     result += ",print_kitchen_on_sale:'" + psetVal.value + "'";
 
-                    psetVal = printList.Where(X => X.name == "print_kitchen_on_preparing").FirstOrDefault();
+                    psetVal = printList
+                        .Where(X => X.name == "print_kitchen_on_preparing")
+                        .FirstOrDefault();
                     result += ",print_kitchen_on_preparing:'" + psetVal.value + "'";
 
                     psetVal = printList.Where(X => X.name == "show_header").FirstOrDefault();
@@ -1613,13 +1778,17 @@ namespace POS_Server.Controllers
                         val = psetVal.value;
                     result += ",sales_invoice_note:'" + val + "'";
 
-                    psetVal = printList.Where(X => X.name == "print_on_save_directentry").FirstOrDefault();
+                    psetVal = printList
+                        .Where(X => X.name == "print_on_save_directentry")
+                        .FirstOrDefault();
                     val = "";
                     if (psetVal != null)
                         val = psetVal.value;
                     result += ",print_on_save_directentry:'" + val + "'";
 
-                    psetVal = printList.Where(X => X.name == "directentry_copy_count").FirstOrDefault();
+                    psetVal = printList
+                        .Where(X => X.name == "directentry_copy_count")
+                        .FirstOrDefault();
                     val = "0";
                     if (psetVal != null)
                         val = psetVal.value;
@@ -1631,11 +1800,13 @@ namespace POS_Server.Controllers
                         val = psetVal.value;
                     result += ",kitchen_copy_count:'" + val + "'";
 
-
                     //report language
                     oneSet = settingsCls.Where(s => s.name == "report_lang").FirstOrDefault();
                     settingId = oneSet.settingId;
-                    val = settingsValues.Where(i => i.settingId == settingId && i.isDefault == 1).FirstOrDefault().value;
+                    val = settingsValues
+                        .Where(i => i.settingId == settingId && i.isDefault == 1)
+                        .FirstOrDefault()
+                        .value;
 
                     if (val.Equals(""))
                         val = "en";
@@ -1644,30 +1815,40 @@ namespace POS_Server.Controllers
                     #region invoice_lang
                     oneSet = settingsCls.Where(s => s.name == "invoice_lang").FirstOrDefault();
                     settingId = oneSet.settingId;
-                    val = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault().value;
+                    val = settingsValues
+                        .Where(i => i.settingId == settingId)
+                        .FirstOrDefault()
+                        .value;
                     result += ",invoice_lang:'" + val + "'";
                     #endregion
                     #region com_name_ar
                     oneSet = settingsCls.Where(s => s.name == "com_name_ar").FirstOrDefault();
                     settingId = oneSet.settingId;
-                    val = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault().value;
+                    val = settingsValues
+                        .Where(i => i.settingId == settingId)
+                        .FirstOrDefault()
+                        .value;
                     result += ",com_name_ar:'" + val + "'";
                     #endregion
                     #region com_address_ar
                     oneSet = settingsCls.Where(s => s.name == "com_address_ar").FirstOrDefault();
                     settingId = oneSet.settingId;
-                    val = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault().value;
+                    val = settingsValues
+                        .Where(i => i.settingId == settingId)
+                        .FirstOrDefault()
+                        .value;
                     result += ",com_address_ar:'" + val + "'";
                     #endregion
 
                     #region discount
                     oneSet = settingsCls.Where(X => X.name == "maxDiscount").FirstOrDefault();
                     settingId = oneSet.settingId;
-                    setVal = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault(); val = "0";
+                    setVal = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault();
+                    val = "0";
                     val = "0";
                     if (setVal != null)
                         val = setVal.value;
-                    result += ",maxDiscount:" + val ;
+                    result += ",maxDiscount:" + val;
 
                     #endregion
 
@@ -1678,24 +1859,28 @@ namespace POS_Server.Controllers
                     val = "0";
                     if (setVal != null)
                         val = setVal.value;
-                    result += ",time_staying:" + val ;
+                    result += ",time_staying:" + val;
 
-                    oneSet = settingsCls.Where(X => X.name == "warningTimeForLateReservation").FirstOrDefault();
+                    oneSet = settingsCls
+                        .Where(X => X.name == "warningTimeForLateReservation")
+                        .FirstOrDefault();
                     settingId = oneSet.settingId;
                     setVal = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault();
                     val = "0";
                     if (setVal != null)
                         val = setVal.value;
-                    result += ",warningTimeForLateReservation:" + val ;
+                    result += ",warningTimeForLateReservation:" + val;
 
-                    oneSet = settingsCls.Where(X => X.name == "maximumTimeToKeepReservation").FirstOrDefault();
+                    oneSet = settingsCls
+                        .Where(X => X.name == "maximumTimeToKeepReservation")
+                        .FirstOrDefault();
                     settingId = oneSet.settingId;
                     setVal = settingsValues.Where(i => i.settingId == settingId).FirstOrDefault();
                     val = "0";
                     if (setVal != null)
                         val = setVal.value;
-                    result += ",maximumTimeToKeepReservation:" + val ;
-                    
+                    result += ",maximumTimeToKeepReservation:" + val;
+
                     #endregion
                     result += "}";
                     return TokenManager.GenerateToken(result);
@@ -1704,4 +1889,3 @@ namespace POS_Server.Controllers
         }
     }
 }
-

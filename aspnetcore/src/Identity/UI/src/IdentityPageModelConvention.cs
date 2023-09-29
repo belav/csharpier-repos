@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Microsoft.AspNetCore.Identity.UI;
 
-internal sealed class IdentityPageModelConvention<TUser> : IPageApplicationModelConvention where TUser : class
+internal sealed class IdentityPageModelConvention<TUser> : IPageApplicationModelConvention
+    where TUser : class
 {
     public void Apply(PageApplicationModel model)
     {
@@ -25,12 +26,16 @@ internal sealed class IdentityPageModelConvention<TUser> : IPageApplicationModel
     {
         if (template.IsAbstract || !template.IsGenericTypeDefinition)
         {
-            throw new InvalidOperationException("Implementation type can't be abstract or non generic.");
+            throw new InvalidOperationException(
+                "Implementation type can't be abstract or non generic."
+            );
         }
         var genericArguments = template.GetGenericArguments();
         if (genericArguments.Length != 1)
         {
-            throw new InvalidOperationException("Implementation type contains wrong generic arity.");
+            throw new InvalidOperationException(
+                "Implementation type contains wrong generic arity."
+            );
         }
     }
 }

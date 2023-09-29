@@ -20,7 +20,7 @@ namespace System.Xml.Schema
         private int _hours;
         private int _minutes;
         private int _seconds;
-        private uint _nanoseconds;       // High bit is used to indicate whether duration is negative
+        private uint _nanoseconds; // High bit is used to indicate whether duration is negative
 
         private const uint NegativeBit = 0x80000000;
 
@@ -45,7 +45,16 @@ namespace System.Xml.Schema
         /// <summary>
         /// Construct an XsdDuration from component parts.
         /// </summary>
-        public XsdDuration(bool isNegative, int years, int months, int days, int hours, int minutes, int seconds, int nanoseconds)
+        public XsdDuration(
+            bool isNegative,
+            int years,
+            int months,
+            int days,
+            int hours,
+            int minutes,
+            int seconds,
+            int nanoseconds
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(years);
             ArgumentOutOfRangeException.ThrowIfNegative(months);
@@ -53,7 +62,8 @@ namespace System.Xml.Schema
             ArgumentOutOfRangeException.ThrowIfNegative(hours);
             ArgumentOutOfRangeException.ThrowIfNegative(minutes);
             ArgumentOutOfRangeException.ThrowIfNegative(seconds);
-            if (nanoseconds < 0 || nanoseconds > 999999999) throw new ArgumentOutOfRangeException(nameof(nanoseconds));
+            if (nanoseconds < 0 || nanoseconds > 999999999)
+                throw new ArgumentOutOfRangeException(nameof(nanoseconds));
 
             _years = years;
             _months = months;
@@ -70,9 +80,8 @@ namespace System.Xml.Schema
         /// <summary>
         /// Construct an XsdDuration from a TimeSpan value.
         /// </summary>
-        public XsdDuration(TimeSpan timeSpan) : this(timeSpan, DurationType.Duration)
-        {
-        }
+        public XsdDuration(TimeSpan timeSpan)
+            : this(timeSpan, DurationType.Duration) { }
 
         /// <summary>
         /// Construct an XsdDuration from a TimeSpan value that represents an xsd:duration, an xdt:dayTimeDuration, or
@@ -99,7 +108,10 @@ namespace System.Xml.Schema
             if (durationType == DurationType.YearMonthDuration)
             {
                 int years = (int)(ticksPos / ((ulong)TimeSpan.TicksPerDay * 365));
-                int months = (int)((ticksPos % ((ulong)TimeSpan.TicksPerDay * 365)) / ((ulong)TimeSpan.TicksPerDay * 30));
+                int months = (int)(
+                    (ticksPos % ((ulong)TimeSpan.TicksPerDay * 365))
+                    / ((ulong)TimeSpan.TicksPerDay * 30)
+                );
 
                 if (months == 12)
                 {
@@ -112,7 +124,10 @@ namespace System.Xml.Schema
             }
             else
             {
-                Debug.Assert(durationType == DurationType.Duration || durationType == DurationType.DayTimeDuration);
+                Debug.Assert(
+                    durationType == DurationType.Duration
+                        || durationType == DurationType.DayTimeDuration
+                );
 
                 // Tick count is expressed in 100 nanosecond intervals
                 _nanoseconds = (uint)(ticksPos % 10000000) * 100;
@@ -132,9 +147,8 @@ namespace System.Xml.Schema
         /// Constructs an XsdDuration from a string in the xsd:duration format.  Components are stored with loss
         /// of fidelity (except in the case of overflow).
         /// </summary>
-        public XsdDuration(string s) : this(s, DurationType.Duration)
-        {
-        }
+        public XsdDuration(string s)
+            : this(s, DurationType.Duration) { }
 
         /// <summary>
         /// Constructs an XsdDuration from a string in the xsd:duration format.  Components are stored without loss
@@ -321,7 +335,9 @@ namespace System.Xml.Schema
             catch (OverflowException)
             {
                 result = TimeSpan.MinValue;
-                exception = new OverflowException(SR.Format(SR.XmlConvert_Overflow, durationType, "TimeSpan"));
+                exception = new OverflowException(
+                    SR.Format(SR.XmlConvert_Overflow, durationType, "TimeSpan")
+                );
             }
             return exception;
         }
@@ -341,7 +357,10 @@ namespace System.Xml.Schema
         internal string ToString(DurationType durationType)
         {
             var vsb = new ValueStringBuilder(stackalloc char[20]);
-            int nanoseconds, digit, zeroIdx, len;
+            int nanoseconds,
+                digit,
+                zeroIdx,
+                len;
 
             if (IsNegative)
                 vsb.Append('-');
@@ -435,11 +454,17 @@ namespace System.Xml.Schema
             return TryParse(s, DurationType.Duration, out result);
         }
 
-        internal static Exception? TryParse(string s, DurationType durationType, out XsdDuration result)
+        internal static Exception? TryParse(
+            string s,
+            DurationType durationType,
+            out XsdDuration result
+        )
         {
             string? errorCode;
             int length;
-            int value, pos, numDigits;
+            int value,
+                pos,
+                numDigits;
             Parts parts = Parts.HasNone;
 
             result = default;
@@ -449,7 +474,8 @@ namespace System.Xml.Schema
 
             pos = 0;
 
-            if (pos >= length) goto InvalidFormat;
+            if (pos >= length)
+                goto InvalidFormat;
 
             if (s[pos] == '-')
             {
@@ -461,93 +487,120 @@ namespace System.Xml.Schema
                 result._nanoseconds = 0;
             }
 
-            if (pos >= length) goto InvalidFormat;
+            if (pos >= length)
+                goto InvalidFormat;
 
-            if (s[pos++] != 'P') goto InvalidFormat;
+            if (s[pos++] != 'P')
+                goto InvalidFormat;
 
             errorCode = TryParseDigits(s, ref pos, false, out value, out numDigits);
-            if (errorCode != null) goto Error;
+            if (errorCode != null)
+                goto Error;
 
-            if (pos >= length) goto InvalidFormat;
+            if (pos >= length)
+                goto InvalidFormat;
 
             if (s[pos] == 'Y')
             {
-                if (numDigits == 0) goto InvalidFormat;
+                if (numDigits == 0)
+                    goto InvalidFormat;
 
                 parts |= Parts.HasYears;
                 result._years = value;
-                if (++pos == length) goto Done;
+                if (++pos == length)
+                    goto Done;
 
                 errorCode = TryParseDigits(s, ref pos, false, out value, out numDigits);
-                if (errorCode != null) goto Error;
+                if (errorCode != null)
+                    goto Error;
 
-                if (pos >= length) goto InvalidFormat;
+                if (pos >= length)
+                    goto InvalidFormat;
             }
 
             if (s[pos] == 'M')
             {
-                if (numDigits == 0) goto InvalidFormat;
+                if (numDigits == 0)
+                    goto InvalidFormat;
 
                 parts |= Parts.HasMonths;
                 result._months = value;
-                if (++pos == length) goto Done;
+                if (++pos == length)
+                    goto Done;
 
                 errorCode = TryParseDigits(s, ref pos, false, out value, out numDigits);
-                if (errorCode != null) goto Error;
+                if (errorCode != null)
+                    goto Error;
 
-                if (pos >= length) goto InvalidFormat;
+                if (pos >= length)
+                    goto InvalidFormat;
             }
 
             if (s[pos] == 'D')
             {
-                if (numDigits == 0) goto InvalidFormat;
+                if (numDigits == 0)
+                    goto InvalidFormat;
 
                 parts |= Parts.HasDays;
                 result._days = value;
-                if (++pos == length) goto Done;
+                if (++pos == length)
+                    goto Done;
 
                 errorCode = TryParseDigits(s, ref pos, false, out _, out numDigits);
-                if (errorCode != null) goto Error;
+                if (errorCode != null)
+                    goto Error;
 
-                if (pos >= length) goto InvalidFormat;
+                if (pos >= length)
+                    goto InvalidFormat;
             }
 
             if (s[pos] == 'T')
             {
-                if (numDigits != 0) goto InvalidFormat;
+                if (numDigits != 0)
+                    goto InvalidFormat;
 
                 pos++;
                 errorCode = TryParseDigits(s, ref pos, false, out value, out numDigits);
-                if (errorCode != null) goto Error;
+                if (errorCode != null)
+                    goto Error;
 
-                if (pos >= length) goto InvalidFormat;
+                if (pos >= length)
+                    goto InvalidFormat;
 
                 if (s[pos] == 'H')
                 {
-                    if (numDigits == 0) goto InvalidFormat;
+                    if (numDigits == 0)
+                        goto InvalidFormat;
 
                     parts |= Parts.HasHours;
                     result._hours = value;
-                    if (++pos == length) goto Done;
+                    if (++pos == length)
+                        goto Done;
 
                     errorCode = TryParseDigits(s, ref pos, false, out value, out numDigits);
-                    if (errorCode != null) goto Error;
+                    if (errorCode != null)
+                        goto Error;
 
-                    if (pos >= length) goto InvalidFormat;
+                    if (pos >= length)
+                        goto InvalidFormat;
                 }
 
                 if (s[pos] == 'M')
                 {
-                    if (numDigits == 0) goto InvalidFormat;
+                    if (numDigits == 0)
+                        goto InvalidFormat;
 
                     parts |= Parts.HasMinutes;
                     result._minutes = value;
-                    if (++pos == length) goto Done;
+                    if (++pos == length)
+                        goto Done;
 
                     errorCode = TryParseDigits(s, ref pos, false, out value, out numDigits);
-                    if (errorCode != null) goto Error;
+                    if (errorCode != null)
+                        goto Error;
 
-                    if (pos >= length) goto InvalidFormat;
+                    if (pos >= length)
+                        goto InvalidFormat;
                 }
 
                 if (s[pos] == '.')
@@ -558,7 +611,8 @@ namespace System.Xml.Schema
                     result._seconds = value;
 
                     errorCode = TryParseDigits(s, ref pos, true, out value, out numDigits);
-                    if (errorCode != null) goto Error;
+                    if (errorCode != null)
+                        goto Error;
 
                     if (numDigits == 0)
                     { //If there are no digits after the decimal point, assume 0
@@ -573,30 +627,38 @@ namespace System.Xml.Schema
 
                     result._nanoseconds |= (uint)value;
 
-                    if (pos >= length) goto InvalidFormat;
+                    if (pos >= length)
+                        goto InvalidFormat;
 
-                    if (s[pos] != 'S') goto InvalidFormat;
-                    if (++pos == length) goto Done;
+                    if (s[pos] != 'S')
+                        goto InvalidFormat;
+                    if (++pos == length)
+                        goto Done;
                 }
                 else if (s[pos] == 'S')
                 {
-                    if (numDigits == 0) goto InvalidFormat;
+                    if (numDigits == 0)
+                        goto InvalidFormat;
 
                     parts |= Parts.HasSeconds;
                     result._seconds = value;
-                    if (++pos == length) goto Done;
+                    if (++pos == length)
+                        goto Done;
                 }
             }
 
             // Duration cannot end with digits
-            if (numDigits != 0) goto InvalidFormat;
+            if (numDigits != 0)
+                goto InvalidFormat;
 
             // No further characters are allowed
-            if (pos != length) goto InvalidFormat;
+            if (pos != length)
+                goto InvalidFormat;
 
             Done:
             // At least one part must be defined
-            if (parts == Parts.HasNone) goto InvalidFormat;
+            if (parts == Parts.HasNone)
+                goto InvalidFormat;
 
             if (durationType == DurationType.DayTimeDuration)
             {
@@ -611,10 +673,10 @@ namespace System.Xml.Schema
 
             return null;
 
-        InvalidFormat:
+            InvalidFormat:
             return new FormatException(SR.Format(SR.XmlConvert_BadFormat, s, durationType));
 
-        Error:
+            Error:
             return new OverflowException(SR.Format(SR.XmlConvert_Overflow, s, durationType));
         }
 
@@ -623,7 +685,13 @@ namespace System.Xml.Schema
         /// cntDigits.  The integer is returned (0 if no digits).  If the digits cannot fit into an Int32:
         ///   1. If eatDigits is true, then additional digits will be silently discarded (don't count towards numDigits)
         ///   2. If eatDigits is false, an overflow exception is thrown
-        private static string? TryParseDigits(string s, ref int offset, bool eatDigits, out int result, out int numDigits)
+        private static string? TryParseDigits(
+            string s,
+            ref int offset,
+            bool eatDigits,
+            out int result,
+            out int numDigits
+        )
         {
             int offsetStart = offset;
             int offsetEnd = s.Length;

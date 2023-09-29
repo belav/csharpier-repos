@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,25 +21,29 @@ namespace Castle.Components.DictionaryAdapter.Xml
     using System.Xml;
     using System.Xml.Serialization;
 
-    public class XmlMetadata : IXmlKnownType, IXmlKnownTypeMap, IXmlIncludedType, IXmlIncludedTypeMap
+    public class XmlMetadata
+        : IXmlKnownType,
+            IXmlKnownTypeMap,
+            IXmlIncludedType,
+            IXmlIncludedTypeMap
     {
-        private readonly Type   clrType;
-        private readonly bool?  qualified;
-        private readonly bool?  isNullable;
-        private readonly bool?  isReference;
+        private readonly Type clrType;
+        private readonly bool? qualified;
+        private readonly bool? isNullable;
+        private readonly bool? isReference;
         private readonly string rootLocalName;
         private readonly string rootNamespaceUri;
         private readonly string childNamespaceUri;
         private readonly string typeLocalName;
         private readonly string typeNamespaceUri;
 
-        private readonly HashSet<string>       reservedNamespaceUris;
-        private          List<Type>            pendingIncludes;
-        private readonly XmlIncludedTypeSet    includedTypes;
-        private readonly XmlContext            context;
+        private readonly HashSet<string> reservedNamespaceUris;
+        private List<Type> pendingIncludes;
+        private readonly XmlIncludedTypeSet includedTypes;
+        private readonly XmlContext context;
         private readonly DictionaryAdapterMeta source;
         private readonly CompiledXPath path;
-        
+
         public XmlMetadata(DictionaryAdapterMeta meta, IEnumerable<string> reservedNamespaceUris)
         {
             if (meta == null)
@@ -47,41 +51,53 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (reservedNamespaceUris == null)
                 throw Error.ArgumentNull(nameof(reservedNamespaceUris));
 
-            source        = meta;
-            clrType       = meta.Type;
-            context       = new XmlContext(this);
+            source = meta;
+            clrType = meta.Type;
+            context = new XmlContext(this);
             includedTypes = new XmlIncludedTypeSet();
 
-            this.reservedNamespaceUris
-                =  reservedNamespaceUris as HashSet<string>
+            this.reservedNamespaceUris =
+                reservedNamespaceUris as HashSet<string>
                 ?? new HashSet<string>(reservedNamespaceUris);
 
-            var xmlRoot       = null as XmlRootAttribute;
-            var xmlType       = null as XmlTypeAttribute;
-            var xmlDefaults   = null as XmlDefaultsAttribute;
-            var xmlInclude    = null as XmlIncludeAttribute;
-            var xmlNamespace  = null as XmlNamespaceAttribute;
-            var reference     = null as ReferenceAttribute;
-            var xPath         = null as XPathAttribute;
+            var xmlRoot = null as XmlRootAttribute;
+            var xmlType = null as XmlTypeAttribute;
+            var xmlDefaults = null as XmlDefaultsAttribute;
+            var xmlInclude = null as XmlIncludeAttribute;
+            var xmlNamespace = null as XmlNamespaceAttribute;
+            var reference = null as ReferenceAttribute;
+            var xPath = null as XPathAttribute;
             var xPathVariable = null as XPathVariableAttribute;
             var xPathFunction = null as XPathFunctionAttribute;
 
             foreach (var behavior in meta.Behaviors)
             {
-                if      (TryCast(behavior, ref xmlRoot      )) { }
-                else if (TryCast(behavior, ref xmlType      )) { }
-                else if (TryCast(behavior, ref xmlDefaults  )) { }
-                else if (TryCast(behavior, ref xmlInclude   )) { AddPendingInclude(xmlInclude); }
-                else if (TryCast(behavior, ref xmlNamespace )) { context.AddNamespace(xmlNamespace ); }
-                else if (TryCast(behavior, ref reference    )) { }
-                else if (TryCast(behavior, ref xPath        )) { }
-                else if (TryCast(behavior, ref xPathVariable)) { context.AddVariable (xPathVariable); }
-                else if (TryCast(behavior, ref xPathFunction)) { context.AddFunction (xPathFunction); }
+                if (TryCast(behavior, ref xmlRoot)) { }
+                else if (TryCast(behavior, ref xmlType)) { }
+                else if (TryCast(behavior, ref xmlDefaults)) { }
+                else if (TryCast(behavior, ref xmlInclude))
+                {
+                    AddPendingInclude(xmlInclude);
+                }
+                else if (TryCast(behavior, ref xmlNamespace))
+                {
+                    context.AddNamespace(xmlNamespace);
+                }
+                else if (TryCast(behavior, ref reference)) { }
+                else if (TryCast(behavior, ref xPath)) { }
+                else if (TryCast(behavior, ref xPathVariable))
+                {
+                    context.AddVariable(xPathVariable);
+                }
+                else if (TryCast(behavior, ref xPathFunction))
+                {
+                    context.AddFunction(xPathFunction);
+                }
             }
 
             if (xmlDefaults != null)
             {
-                qualified  = xmlDefaults.Qualified;
+                qualified = xmlDefaults.Qualified;
                 isNullable = xmlDefaults.IsNullable;
             }
 
@@ -90,34 +106,21 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 isReference = true;
             }
 
-            typeLocalName = XmlConvert.EncodeLocalName
-            (
-                (!meta.HasXmlType() ? null : meta.GetXmlType().NonEmpty()) ??
-                (xmlType == null    ? null : xmlType.TypeName .NonEmpty()) ??
-                GetDefaultTypeLocalName(clrType)
+            typeLocalName = XmlConvert.EncodeLocalName(
+                (!meta.HasXmlType() ? null : meta.GetXmlType().NonEmpty())
+                    ?? (xmlType == null ? null : xmlType.TypeName.NonEmpty())
+                    ?? GetDefaultTypeLocalName(clrType)
             );
 
-            rootLocalName = XmlConvert.EncodeLocalName
-            (
-                (xmlRoot == null ? null : xmlRoot.ElementName.NonEmpty()) ??
-                typeLocalName
+            rootLocalName = XmlConvert.EncodeLocalName(
+                (xmlRoot == null ? null : xmlRoot.ElementName.NonEmpty()) ?? typeLocalName
             );
 
-            typeNamespaceUri =
-            (
-                (xmlType == null ? null : xmlType.Namespace)
-            );
+            typeNamespaceUri = ((xmlType == null ? null : xmlType.Namespace));
 
-            rootNamespaceUri =
-            (
-                (xmlRoot == null ? null : xmlRoot.Namespace)
-            );
+            rootNamespaceUri = ((xmlRoot == null ? null : xmlRoot.Namespace));
 
-            childNamespaceUri =
-            (
-                typeNamespaceUri ??
-                rootNamespaceUri
-            );
+            childNamespaceUri = (typeNamespaceUri ?? rootNamespaceUri);
 
             if (xPath != null)
             {
@@ -144,7 +147,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public bool? IsReference
         {
             get { return isReference; }
-        } 
+        }
 
         public XmlName Name
         {
@@ -173,7 +176,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public XmlIncludedTypeSet IncludedTypes
         {
-            get { ProcessPendingIncludes(); return includedTypes; }
+            get
+            {
+                ProcessPendingIncludes();
+                return includedTypes;
+            }
         }
 
         public IXmlContext Context
@@ -214,7 +221,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var name = xmlIdentity.Name;
 
             return NameComparer.Equals(rootLocalName, name.LocalName)
-                && (rootNamespaceUri == null || NameComparer.Equals(rootNamespaceUri, name.NamespaceUri));
+                && (
+                    rootNamespaceUri == null
+                    || NameComparer.Equals(rootNamespaceUri, name.NamespaceUri)
+                );
         }
 
         private bool IsMatch(Type clrType)
@@ -231,9 +241,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public bool TryGet(Type clrType, out IXmlKnownType knownType)
         {
-            return IsMatch(clrType)
-                ? Try.Success(out knownType, this)
-                : Try.Failure(out knownType);
+            return IsMatch(clrType) ? Try.Success(out knownType, this) : Try.Failure(out knownType);
         }
 
         public bool TryGet(XmlName xsiType, out IXmlIncludedType includedType)
@@ -261,11 +269,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var clrTypes = pendingIncludes;
             pendingIncludes = null;
-            if (clrTypes == null) return;
+            if (clrTypes == null)
+                return;
 
             foreach (var clrType in clrTypes)
             {
-                var xsiType      = GetDefaultXsiType(clrType);
+                var xsiType = GetDefaultXsiType(clrType);
                 var includedType = new XmlIncludedType(xsiType, clrType);
                 includedTypes.Add(includedType);
             }
@@ -284,7 +293,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             switch (kind)
             {
                 case XmlTypeKind.Complex:
-                    if (!clrType.IsInterface) goto default;
+                    if (!clrType.IsInterface)
+                        goto default;
                     return GetXmlMetadata(clrType).XsiType;
 
                 case XmlTypeKind.Collection:
@@ -299,7 +309,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public IEnumerable<IXmlIncludedType> GetIncludedTypes(Type baseType)
         {
-            var queue   = new Queue<XmlMetadata>();
+            var queue = new Queue<XmlMetadata>();
             var visited = new HashSet<Type>();
             XmlMetadata metadata;
 
@@ -308,13 +318,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 queue.Enqueue(metadata);
             metadata = this;
 
-            for (;;)
+            for (; ; )
             {
                 foreach (var includedType in metadata.IncludedTypes)
                 {
                     var clrType = includedType.ClrType;
-                    var relevant
-                        =  baseType != clrType
+                    var relevant =
+                        baseType != clrType
                         && baseType.IsAssignableFrom(clrType)
                         && visited.Add(clrType);
 
@@ -345,41 +355,33 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private XmlMetadata GetXmlMetadata(Type clrType)
         {
-            return source
-                .GetAdapterMeta(clrType)
-                .GetXmlMeta();
+            return source.GetAdapterMeta(clrType).GetXmlMeta();
         }
 
         private string GetDefaultTypeLocalName(Type clrType)
         {
             var name = clrType.Name;
-            return IsInterfaceName(name)
-                ? name.Substring(1)
-                : name;
+            return IsInterfaceName(name) ? name.Substring(1) : name;
         }
 
         private static bool IsInterfaceName(string name)
         {
-            return name.Length > 1
-                && name[0] == 'I'
-                && char.IsUpper(name, 1);
+            return name.Length > 1 && name[0] == 'I' && char.IsUpper(name, 1);
         }
 
         private static bool TryCast<T>(object obj, ref T result)
             where T : class
         {
             var value = obj as T;
-            if (null == value) return false;
+            if (null == value)
+                return false;
 
             result = value;
             return true;
         }
 
-        protected static readonly StringComparer
-            NameComparer = StringComparer.OrdinalIgnoreCase;
+        protected static readonly StringComparer NameComparer = StringComparer.OrdinalIgnoreCase;
 
-        private const CursorFlags RootFlags
-            = CursorFlags.Elements
-            | CursorFlags.Mutable;
+        private const CursorFlags RootFlags = CursorFlags.Elements | CursorFlags.Mutable;
     }
 }

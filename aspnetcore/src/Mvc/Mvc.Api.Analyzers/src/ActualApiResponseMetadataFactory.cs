@@ -21,7 +21,8 @@ public static class ActualApiResponseMetadataFactory
     internal static bool TryGetActualResponseMetadata(
         in ApiControllerSymbolCache symbolCache,
         IMethodBodyBaseOperation methodBody,
-        out IList<ActualApiResponseMetadata> actualResponseMetadata)
+        out IList<ActualApiResponseMetadata> actualResponseMetadata
+    )
     {
         var localActualResponseMetadata = new List<ActualApiResponseMetadata>();
 
@@ -30,9 +31,7 @@ public static class ActualApiResponseMetadataFactory
 
         void AnalyzeResponseExpression(IReturnOperation returnOperation)
         {
-            var responseMetadata = InspectReturnOperation(
-                localSymbolCache,
-                returnOperation);
+            var responseMetadata = InspectReturnOperation(localSymbolCache, returnOperation);
 
             if (responseMetadata is { } value)
             {
@@ -55,7 +54,8 @@ public static class ActualApiResponseMetadataFactory
 
     internal static ActualApiResponseMetadata? InspectReturnOperation(
         in ApiControllerSymbolCache symbolCache,
-        IReturnOperation returnOperation)
+        IReturnOperation returnOperation
+    )
     {
         var returnedValue = returnOperation.ReturnedValue;
         var defaultStatusCodeAttributeSymbol = symbolCache.DefaultStatusCodeAttribute;
@@ -86,7 +86,10 @@ public static class ActualApiResponseMetadataFactory
 
         // If the type is not annotated with a default status code, then examine
         // the attributes on any invoked method returning the type.
-        if (defaultStatusCodeAttribute is null && returnedValue is IInvocationOperation invocationOperation)
+        if (
+            defaultStatusCodeAttribute is null
+            && returnedValue is IInvocationOperation invocationOperation
+        )
         {
             defaultStatusCodeAttribute = invocationOperation.TargetMethod
                 .GetAttributes(defaultStatusCodeAttributeSymbol)
@@ -99,31 +102,31 @@ public static class ActualApiResponseMetadataFactory
         switch (returnedValue)
         {
             case IInvocationOperation invocation:
-                {
-                    // Covers the 'return StatusCode(200)' case.
-                    var result = InspectMethodArguments(invocation.Arguments);
-                    statusCode = result.statusCode ?? statusCode;
-                    returnType = result.returnType;
-                    break;
-                }
+            {
+                // Covers the 'return StatusCode(200)' case.
+                var result = InspectMethodArguments(invocation.Arguments);
+                statusCode = result.statusCode ?? statusCode;
+                returnType = result.returnType;
+                break;
+            }
 
             case IObjectCreationOperation creation:
-                {
-                    // Read values from 'return new StatusCodeResult(200) case.
-                    var result = InspectMethodArguments(creation.Arguments);
-                    statusCode = result.statusCode ?? statusCode;
-                    returnType = result.returnType;
+            {
+                // Read values from 'return new StatusCodeResult(200) case.
+                var result = InspectMethodArguments(creation.Arguments);
+                statusCode = result.statusCode ?? statusCode;
+                returnType = result.returnType;
 
-                    // Read values from property assignments e.g. 'return new ObjectResult(...) { StatusCode = 200 }'.
-                    // Property assignments override constructor assigned values and defaults.
-                    if (creation.Initializer is not null)
-                    {
-                        result = InspectInitializers(symbolCache, creation.Initializer);
-                        statusCode = result.statusCode ?? statusCode;
-                        returnType = result.returnType ?? returnType;
-                    }
-                    break;
+                // Read values from property assignments e.g. 'return new ObjectResult(...) { StatusCode = 200 }'.
+                // Property assignments override constructor assigned values and defaults.
+                if (creation.Initializer is not null)
+                {
+                    result = InspectInitializers(symbolCache, creation.Initializer);
+                    statusCode = result.statusCode ?? statusCode;
+                    returnType = result.returnType ?? returnType;
                 }
+                break;
+            }
         }
 
         if (statusCode == null)
@@ -136,22 +139,30 @@ public static class ActualApiResponseMetadataFactory
 
     private static (int? statusCode, ITypeSymbol? returnType) InspectInitializers(
         in ApiControllerSymbolCache symbolCache,
-        IObjectOrCollectionInitializerOperation initializer)
+        IObjectOrCollectionInitializerOperation initializer
+    )
     {
         int? statusCode = null;
         ITypeSymbol? typeSymbol = null;
 
         foreach (var child in initializer.Initializers)
         {
-            if (child is not IAssignmentOperation assignmentOperation ||
-                assignmentOperation.Target is not IPropertyReferenceOperation propertyReference)
+            if (
+                child is not IAssignmentOperation assignmentOperation
+                || assignmentOperation.Target is not IPropertyReferenceOperation propertyReference
+            )
             {
                 continue;
             }
 
             var property = propertyReference.Property;
 
-            if (IsInterfaceImplementation(property, symbolCache.StatusCodeActionResultStatusProperty))
+            if (
+                IsInterfaceImplementation(
+                    property,
+                    symbolCache.StatusCodeActionResultStatusProperty
+                )
+            )
             {
                 // Look for assignments to IStatusCodeActionResult.StatusCode
                 if (TryGetStatusCode(assignmentOperation.Value, out var statusCodeValue))
@@ -170,7 +181,9 @@ public static class ActualApiResponseMetadataFactory
         return (statusCode, typeSymbol);
     }
 
-    private static (int? statusCode, ITypeSymbol? returnType) InspectMethodArguments(ImmutableArray<IArgumentOperation> arguments)
+    private static (int? statusCode, ITypeSymbol? returnType) InspectMethodArguments(
+        ImmutableArray<IArgumentOperation> arguments
+    )
     {
         int? statusCode = null;
         ITypeSymbol? typeSymbol = null;
@@ -203,9 +216,7 @@ public static class ActualApiResponseMetadataFactory
         return (statusCode, typeSymbol);
     }
 
-    private static bool TryGetStatusCode(
-        IOperation operation,
-        out int statusCode)
+    private static bool TryGetStatusCode(IOperation operation, out int statusCode)
     {
         while (operation is IConversionOperation conversion)
         {
@@ -227,10 +238,12 @@ public static class ActualApiResponseMetadataFactory
 
     internal static int? GetDefaultStatusCode(AttributeData attribute)
     {
-        if (attribute != null &&
-            attribute.ConstructorArguments.Length == 1 &&
-            attribute.ConstructorArguments[0].Kind == TypedConstantKind.Primitive &&
-            attribute.ConstructorArguments[0].Value is int statusCode)
+        if (
+            attribute != null
+            && attribute.ConstructorArguments.Length == 1
+            && attribute.ConstructorArguments[0].Kind == TypedConstantKind.Primitive
+            && attribute.ConstructorArguments[0].Value is int statusCode
+        )
         {
             return statusCode;
         }
@@ -238,7 +251,10 @@ public static class ActualApiResponseMetadataFactory
         return null;
     }
 
-    private static bool IsInterfaceImplementation(IPropertySymbol property, IPropertySymbol statusCodeActionResultStatusProperty)
+    private static bool IsInterfaceImplementation(
+        IPropertySymbol property,
+        IPropertySymbol statusCodeActionResultStatusProperty
+    )
     {
         if (property.Name != statusCodeActionResultStatusProperty.Name)
         {
@@ -247,13 +263,20 @@ public static class ActualApiResponseMetadataFactory
 
         for (var i = 0; i < property.ExplicitInterfaceImplementations.Length; i++)
         {
-            if (SymbolEqualityComparer.Default.Equals(property.ExplicitInterfaceImplementations[i], statusCodeActionResultStatusProperty))
+            if (
+                SymbolEqualityComparer.Default.Equals(
+                    property.ExplicitInterfaceImplementations[i],
+                    statusCodeActionResultStatusProperty
+                )
+            )
             {
                 return true;
             }
         }
 
-        var implementedProperty = property.ContainingType.FindImplementationForInterfaceMember(statusCodeActionResultStatusProperty);
+        var implementedProperty = property.ContainingType.FindImplementationForInterfaceMember(
+            statusCodeActionResultStatusProperty
+        );
         return SymbolEqualityComparer.Default.Equals(implementedProperty, property);
     }
 
@@ -272,7 +295,9 @@ public static class ActualApiResponseMetadataFactory
         return false;
     }
 
-    private static IEnumerable<IReturnOperation> GetReturnStatements(IMethodBodyBaseOperation method)
+    private static IEnumerable<IReturnOperation> GetReturnStatements(
+        IMethodBodyBaseOperation method
+    )
     {
         foreach (var returnOperation in method.Descendants().OfType<IReturnOperation>())
         {

@@ -20,7 +20,6 @@ namespace POS_Server.Controllers
     {
         CountriesController coctrlr = new CountriesController();
 
-
         [HttpPost]
         [Route("getCurrentInfo")]
         public async Task<string> getCurrentInfo(string token)
@@ -44,8 +43,6 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
         }
 
@@ -64,7 +61,6 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 bool isOnlineServer = false;
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -72,16 +68,13 @@ namespace POS_Server.Controllers
                     if (c.Type == "isOnlineServer")
                     {
                         isOnlineServer = bool.Parse(c.Value);
-
                     }
                 }
 
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         var locationEntity = entity.Set<ProgramDetails>();
 
                         var packsl = entity.ProgramDetails.ToList();
@@ -91,71 +84,57 @@ namespace POS_Server.Controllers
                         entity.SaveChanges();
                         message = packs.id.ToString();
 
-
                         //  entity.SaveChanges();
                     }
                     return TokenManager.GenerateToken(message);
-
                 }
                 catch
                 {
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
-
             }
-
-
-
-
-
         }
 
         public ProgramDetailsModel getCurrentInfo()
         {
-
             ProgramDetailsModel packs = new ProgramDetailsModel();
-
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-
-
-                packs = (from p in entity.ProgramDetails
-                             //  join p in entity.posSetting on S.id equals p.posSerialId
-                         select new ProgramDetailsModel
-                         {
-                             programName = p.programName,
-
-                             branchCount = p.branchCount,
-                             posCount = p.posCount,
-                             userCount = p.userCount,
-                             vendorCount = p.vendorCount,
-                             customerCount = p.customerCount,
-                             itemCount = p.itemCount,
-                             saleinvCount = p.saleinvCount,
-                             storeCount = p.storeCount,
-                             packageSaleCode = p.packageSaleCode,
-                             customerServerCode = p.customerServerCode,
-                             expireDate = p.expireDate,
-                             isOnlineServer = p.isOnlineServer,
-
-                             updateDate = p.updateDate,
-                             isLimitDate = (p.isLimitDate == true) ? true : false,
-
-
-                             isActive = p.isActive,
-                             packageName = p.packageName,
-                             versionName = p.versionName,
-                             packageNumber = p.packageNumber,
-                             customerName = p.customerName,
-                             customerLastName = p.customerLastName,
-                             agentName = p.agentName,
-                             agentLastName = p.agentLastName,
-                             agentAccountName = p.agentAccountName,
-                             isDemo = p.isDemo == "" || p.isDemo == null || p.isDemo == "1" ? "1" : p.isDemo,
-                         }).FirstOrDefault();
+                packs = (
+                    from p in entity.ProgramDetails
+                    //  join p in entity.posSetting on S.id equals p.posSerialId
+                    select new ProgramDetailsModel
+                    {
+                        programName = p.programName,
+                        branchCount = p.branchCount,
+                        posCount = p.posCount,
+                        userCount = p.userCount,
+                        vendorCount = p.vendorCount,
+                        customerCount = p.customerCount,
+                        itemCount = p.itemCount,
+                        saleinvCount = p.saleinvCount,
+                        storeCount = p.storeCount,
+                        packageSaleCode = p.packageSaleCode,
+                        customerServerCode = p.customerServerCode,
+                        expireDate = p.expireDate,
+                        isOnlineServer = p.isOnlineServer,
+                        updateDate = p.updateDate,
+                        isLimitDate = (p.isLimitDate == true) ? true : false,
+                        isActive = p.isActive,
+                        packageName = p.packageName,
+                        versionName = p.versionName,
+                        packageNumber = p.packageNumber,
+                        customerName = p.customerName,
+                        customerLastName = p.customerLastName,
+                        agentName = p.agentName,
+                        agentLastName = p.agentLastName,
+                        agentAccountName = p.agentAccountName,
+                        isDemo =
+                            p.isDemo == "" || p.isDemo == null || p.isDemo == "1" ? "1" : p.isDemo,
+                    }
+                ).FirstOrDefault();
 
                 packs.posCountNow = entity.pos.Count();
 
@@ -168,55 +147,39 @@ namespace POS_Server.Controllers
                 packs.itemCountNow = entity.items.Count();
 
                 packs.saleinvCountNow = getSalesInvCountInMonth();
-                packs.serverDateNow =  coctrlr.AddOffsetTodate(DateTime.Now);
-
+                packs.serverDateNow = coctrlr.AddOffsetTodate(DateTime.Now);
             }
-
-
 
             return packs;
         }
-
 
         public ProgramDetails getCurrentProgDetail()
         {
-
             ProgramDetails packs = new ProgramDetails();
-
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-
-
                 packs = entity.ProgramDetails.ToList().FirstOrDefault();
                 //  join p in entity.posSetting on S.id equals p.posSerialId
-
-
-
-
             }
-
-
 
             return packs;
         }
-
-
 
         public ProgramDetailsModel getCustomerServerCode()
         {
             ProgramDetailsModel packs = new ProgramDetailsModel();
             using (incposdbEntities entity = new incposdbEntities())
             {
-                packs = (from p in entity.ProgramDetails
-                             //  join p in entity.posSetting on S.id equals p.posSerialId
-                         select new ProgramDetailsModel
-                         {
-                             customerServerCode = p.customerServerCode,
-                         }).FirstOrDefault();
+                packs = (
+                    from p in entity.ProgramDetails
+                    //  join p in entity.posSetting on S.id equals p.posSerialId
+                    select new ProgramDetailsModel { customerServerCode = p.customerServerCode, }
+                ).FirstOrDefault();
             }
             return packs;
         }
+
         public int getSalesInvCountInMonth()
         {
             int invCount = 0;
@@ -235,12 +198,17 @@ namespace POS_Server.Controllers
                 DateTime compairDate1 = compaireDate2.AddMonths(-1);
 
                 // get sales imvoice count between compaireDate1 and compairDate2
-                invCount = entity.invoices.Where(x => (x.invType == "s"|| x.invType == "ts" || x.invType == "ss" )&& x.invDate >= compairDate1 && x.invDate < compaireDate2).Count();
-
+                invCount = entity.invoices
+                    .Where(
+                        x =>
+                            (x.invType == "s" || x.invType == "ts" || x.invType == "ss")
+                            && x.invDate >= compairDate1
+                            && x.invDate < compaireDate2
+                    )
+                    .Count();
             }
             return invCount;
         }
-
 
         [HttpPost]
         [Route("getRemainDayes")]
@@ -265,22 +233,20 @@ namespace POS_Server.Controllers
                     {
                         daysModel.expirestate = "n";
                         daysModel.days = 0;
-                        return TokenManager.GenerateToken(daysModel);//not regester  =>no alert
+                        return TokenManager.GenerateToken(daysModel); //not regester  =>no alert
                     }
                     DateTime expiredate = (DateTime)packrow.expireDate;
-                    DateTime nowdate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                    DateTime nowdate = coctrlr.AddOffsetTodate(DateTime.Now);
                     TimeSpan diffdate = expiredate - nowdate;
 
                     days = diffdate.Days;
-
 
                     // diffdate.Hours;
                     if (packrow.isLimitDate == false)
                     {
                         daysModel.expirestate = "u";
                         daysModel.days = 0;
-                        return TokenManager.GenerateToken(daysModel);//unlimited=> no alert
-
+                        return TokenManager.GenerateToken(daysModel); //unlimited=> no alert
                     }
                     else
                     {
@@ -293,11 +259,9 @@ namespace POS_Server.Controllers
                             if (daysModel.hours == 0)
                             {
                                 daysModel.minute = diffdate.Minutes;
-
                             }
                             //  daysModel.hours = diffdate.Hours;
                         }
-
 
                         //if (days > 10 )
                         // {
@@ -307,20 +271,16 @@ namespace POS_Server.Controllers
                         // else
                         // {
 
-                        return TokenManager.GenerateToken(daysModel);//show alert with days
+                        return TokenManager.GenerateToken(daysModel); //show alert with days
                         //}
                     }
-
                 }
                 catch (Exception ex)
                 {
                     //  return TokenManager.GenerateToken("0");
                     return TokenManager.GenerateToken(ex.ToString());
                 }
-
-
             }
         }
-
     }
 }

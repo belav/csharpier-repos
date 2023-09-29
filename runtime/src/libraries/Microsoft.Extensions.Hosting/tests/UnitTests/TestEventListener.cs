@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Hosting.Tests
     {
         private volatile bool _disposed;
 
-        private ConcurrentQueue<EventWrittenEventArgs> _events = new ConcurrentQueue<EventWrittenEventArgs>();
+        private ConcurrentQueue<EventWrittenEventArgs> _events =
+            new ConcurrentQueue<EventWrittenEventArgs>();
 
         public IEnumerable<EventWrittenEventArgs> EventData => _events;
 

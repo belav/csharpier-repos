@@ -35,7 +35,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         private readonly IThreadingContext _threadingContext;
         private readonly VisualStudioWorkspaceImpl _visualStudioWorkspaceImpl;
-        private readonly ImmutableArray<Lazy<IDynamicFileInfoProvider, FileExtensionsMetadata>> _dynamicFileInfoProviders;
+        private readonly ImmutableArray<
+            Lazy<IDynamicFileInfoProvider, FileExtensionsMetadata>
+        > _dynamicFileInfoProviders;
         private readonly HostDiagnosticUpdateSource _hostDiagnosticUpdateSource;
         private readonly IVisualStudioDiagnosticAnalyzerProviderFactory _vsixAnalyzerProviderFactory;
         private readonly Shell.IAsyncServiceProvider _serviceProvider;
@@ -45,10 +47,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public VisualStudioProjectFactory(
             IThreadingContext threadingContext,
             VisualStudioWorkspaceImpl visualStudioWorkspaceImpl,
-            [ImportMany] IEnumerable<Lazy<IDynamicFileInfoProvider, FileExtensionsMetadata>> fileInfoProviders,
+            [ImportMany]
+                IEnumerable<
+                Lazy<IDynamicFileInfoProvider, FileExtensionsMetadata>
+            > fileInfoProviders,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource,
             IVisualStudioDiagnosticAnalyzerProviderFactory vsixAnalyzerProviderFactory,
-            SVsServiceProvider serviceProvider)
+            SVsServiceProvider serviceProvider
+        )
         {
             _threadingContext = threadingContext;
             _visualStudioWorkspaceImpl = visualStudioWorkspaceImpl;
@@ -58,11 +64,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             _serviceProvider = (Shell.IAsyncServiceProvider)serviceProvider;
         }
 
-        public Task<ProjectSystemProject> CreateAndAddToWorkspaceAsync(string projectSystemName, string language, CancellationToken cancellationToken)
-            => CreateAndAddToWorkspaceAsync(projectSystemName, language, new VisualStudioProjectCreationInfo(), cancellationToken);
+        public Task<ProjectSystemProject> CreateAndAddToWorkspaceAsync(
+            string projectSystemName,
+            string language,
+            CancellationToken cancellationToken
+        ) =>
+            CreateAndAddToWorkspaceAsync(
+                projectSystemName,
+                language,
+                new VisualStudioProjectCreationInfo(),
+                cancellationToken
+            );
 
         public async Task<ProjectSystemProject> CreateAndAddToWorkspaceAsync(
-            string projectSystemName, string language, VisualStudioProjectCreationInfo creationInfo, CancellationToken cancellationToken)
+            string projectSystemName,
+            string language,
+            VisualStudioProjectCreationInfo creationInfo,
+            CancellationToken cancellationToken
+        )
         {
             // HACK: Fetch this service to ensure it's still created on the UI thread; once this is
             // moved off we'll need to fix up it's constructor to be free-threaded.
@@ -76,12 +95,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // IVsSolution object and solution file path.
             //
             // ConfigureAwait(true) as we have to come back to the UI thread to do the cast to IVsSolution2.
-            var solution = (IVsSolution2?)await _serviceProvider.GetServiceAsync(typeof(SVsSolution)).ConfigureAwait(true);
-            var solutionFilePath = solution != null && ErrorHandler.Succeeded(solution.GetSolutionInfo(out _, out var filePath, out _))
-                ? filePath
-                : null;
+            var solution = (IVsSolution2?)
+                await _serviceProvider.GetServiceAsync(typeof(SVsSolution)).ConfigureAwait(true);
+            var solutionFilePath =
+                solution != null
+                && ErrorHandler.Succeeded(solution.GetSolutionInfo(out _, out var filePath, out _))
+                    ? filePath
+                    : null;
 
-            var vsixAnalyzerProvider = await _vsixAnalyzerProviderFactory.GetOrCreateProviderAsync(cancellationToken).ConfigureAwait(false);
+            var vsixAnalyzerProvider = await _vsixAnalyzerProviderFactory
+                .GetOrCreateProviderAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // The rest of this method can be ran off the UI thread. We'll only switch though if the UI thread isn't already blocked -- the legacy project
             // system creates project synchronously, and during solution load we've seen traces where the thread pool is sufficiently saturated that this
@@ -99,16 +123,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
 
             _visualStudioWorkspaceImpl.ProjectSystemProjectFactory.SolutionPath = solutionFilePath;
-            _visualStudioWorkspaceImpl.ProjectSystemProjectFactory.SolutionTelemetryId = GetSolutionSessionId();
+            _visualStudioWorkspaceImpl.ProjectSystemProjectFactory.SolutionTelemetryId =
+                GetSolutionSessionId();
 
-            var hostInfo = new ProjectSystemHostInfo(_dynamicFileInfoProviders, _hostDiagnosticUpdateSource, vsixAnalyzerProvider);
-            var project = await _visualStudioWorkspaceImpl.ProjectSystemProjectFactory.CreateAndAddToWorkspaceAsync(projectSystemName, language, creationInfo, hostInfo);
+            var hostInfo = new ProjectSystemHostInfo(
+                _dynamicFileInfoProviders,
+                _hostDiagnosticUpdateSource,
+                vsixAnalyzerProvider
+            );
+            var project =
+                await _visualStudioWorkspaceImpl.ProjectSystemProjectFactory.CreateAndAddToWorkspaceAsync(
+                    projectSystemName,
+                    language,
+                    creationInfo,
+                    hostInfo
+                );
 
-            _visualStudioWorkspaceImpl.AddProjectToInternalMaps(project, creationInfo.Hierarchy, creationInfo.ProjectGuid, projectSystemName);
+            _visualStudioWorkspaceImpl.AddProjectToInternalMaps(
+                project,
+                creationInfo.Hierarchy,
+                creationInfo.ProjectGuid,
+                projectSystemName
+            );
 
             // Ensure that other VS contexts get accurate information that the UIContext for this language is now active.
             // This is not cancellable as we have already mutated the solution.
-            await _visualStudioWorkspaceImpl.RefreshProjectExistsUIContextForLanguageAsync(language, CancellationToken.None);
+            await _visualStudioWorkspaceImpl.RefreshProjectExistsUIContextForLanguageAsync(
+                language,
+                CancellationToken.None
+            );
 
             return project;
 
@@ -118,22 +161,46 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 var dataModelTelemetrySession = TelemetryService.DefaultSession;
                 var solutionContext = dataModelTelemetrySession.GetContext(SolutionContextName);
-                var sessionIdProperty = solutionContext is object
-                    ? (string)solutionContext.SharedProperties[SolutionSessionIdPropertyName]
-                    : "";
+                var sessionIdProperty =
+                    solutionContext is object
+                        ? (string)solutionContext.SharedProperties[SolutionSessionIdPropertyName]
+                        : "";
                 _ = Guid.TryParse(sessionIdProperty, out var solutionSessionId);
                 return solutionSessionId;
             }
         }
 
-        VSTypeScriptVisualStudioProjectWrapper IVsTypeScriptVisualStudioProjectFactory.CreateAndAddToWorkspace(string projectSystemName, string language, string projectFilePath, IVsHierarchy hierarchy, Guid projectGuid)
+        VSTypeScriptVisualStudioProjectWrapper IVsTypeScriptVisualStudioProjectFactory.CreateAndAddToWorkspace(
+            string projectSystemName,
+            string language,
+            string projectFilePath,
+            IVsHierarchy hierarchy,
+            Guid projectGuid
+        )
         {
-            return _threadingContext.JoinableTaskFactory.Run(async () =>
-                await ((IVsTypeScriptVisualStudioProjectFactory)this).CreateAndAddToWorkspaceAsync(projectSystemName, language, projectFilePath, hierarchy, projectGuid, CancellationToken.None).ConfigureAwait(false));
+            return _threadingContext.JoinableTaskFactory.Run(
+                async () =>
+                    await ((IVsTypeScriptVisualStudioProjectFactory)this)
+                        .CreateAndAddToWorkspaceAsync(
+                            projectSystemName,
+                            language,
+                            projectFilePath,
+                            hierarchy,
+                            projectGuid,
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false)
+            );
         }
 
         async ValueTask<VSTypeScriptVisualStudioProjectWrapper> IVsTypeScriptVisualStudioProjectFactory.CreateAndAddToWorkspaceAsync(
-            string projectSystemName, string language, string projectFilePath, IVsHierarchy hierarchy, Guid projectGuid, CancellationToken cancellationToken)
+            string projectSystemName,
+            string language,
+            string projectFilePath,
+            IVsHierarchy hierarchy,
+            Guid projectGuid,
+            CancellationToken cancellationToken
+        )
         {
             var projectInfo = new VisualStudioProjectCreationInfo
             {
@@ -141,7 +208,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 Hierarchy = hierarchy,
                 ProjectGuid = projectGuid,
             };
-            var visualStudioProject = await this.CreateAndAddToWorkspaceAsync(projectSystemName, language, projectInfo, cancellationToken).ConfigureAwait(false);
+            var visualStudioProject = await this.CreateAndAddToWorkspaceAsync(
+                    projectSystemName,
+                    language,
+                    projectInfo,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return new VSTypeScriptVisualStudioProjectWrapper(visualStudioProject);
         }
     }

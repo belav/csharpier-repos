@@ -17,7 +17,6 @@ namespace POS_Server.Models
         public Nullable<long> updateUserId { get; set; }
         public int isActive { get; set; }
 
-       
         public Boolean canDelete { get; set; }
 
         // branch

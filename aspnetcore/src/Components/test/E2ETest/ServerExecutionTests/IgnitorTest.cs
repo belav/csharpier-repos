@@ -17,12 +17,19 @@ using Xunit.Abstractions;
 namespace Microsoft.AspNetCore.Components;
 
 // Base class for Ignitor-based tests.
-public abstract class IgnitorTest<TStartup> : IClassFixture<BasicTestAppServerSiteFixture<TStartup>>, IAsyncLifetime
+public abstract class IgnitorTest<TStartup>
+    : IClassFixture<BasicTestAppServerSiteFixture<TStartup>>,
+        IAsyncLifetime
     where TStartup : class
 {
-    private static readonly TimeSpan DefaultTimeout = Debugger.IsAttached ? TimeSpan.MaxValue : TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan DefaultTimeout = Debugger.IsAttached
+        ? TimeSpan.MaxValue
+        : TimeSpan.FromSeconds(30);
 
-    protected IgnitorTest(BasicTestAppServerSiteFixture<TStartup> serverFixture, ITestOutputHelper output)
+    protected IgnitorTest(
+        BasicTestAppServerSiteFixture<TStartup> serverFixture,
+        ITestOutputHelper output
+    )
     {
         ServerFixture = serverFixture;
         Output = output;
@@ -42,11 +49,13 @@ public abstract class IgnitorTest<TStartup> : IClassFixture<BasicTestAppServerSi
 
     protected IReadOnlyCollection<CapturedRenderBatch> Batches => Client?.Operations?.Batches;
 
-    protected IReadOnlyCollection<string> DotNetCompletions => Client?.Operations?.DotNetCompletions;
+    protected IReadOnlyCollection<string> DotNetCompletions =>
+        Client?.Operations?.DotNetCompletions;
 
     protected IReadOnlyCollection<string> Errors => Client?.Operations?.Errors;
 
-    protected IReadOnlyCollection<CapturedJSInteropCall> JSInteropCalls => Client?.Operations?.JSInteropCalls;
+    protected IReadOnlyCollection<CapturedJSInteropCall> JSInteropCalls =>
+        Client?.Operations?.JSInteropCalls;
 
     async Task IAsyncLifetime.InitializeAsync()
     {
@@ -95,7 +104,12 @@ public abstract class IgnitorTest<TStartup> : IClassFixture<BasicTestAppServerSi
 
     private void TestSink_MessageLogged(WriteContext context)
     {
-        var log = new LogMessage(context.LogLevel, context.EventId, context.Message, context.Exception);
+        var log = new LogMessage(
+            context.LogLevel,
+            context.EventId,
+            context.Message,
+            context.Exception
+        );
         Logs.Enqueue(log);
         try
         {
@@ -106,9 +120,7 @@ public abstract class IgnitorTest<TStartup> : IClassFixture<BasicTestAppServerSi
             // variable anyway.
             Output.WriteLine(log.ToString());
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
     }
 
     protected async Task ConnectAutomaticallyAndWait(Uri baseUri)
@@ -118,7 +130,9 @@ public abstract class IgnitorTest<TStartup> : IClassFixture<BasicTestAppServerSi
         await Task.Delay(500);
     }
 
-    [DebuggerDisplay("{LogLevel.ToString(),nq} - {Message ?? \"null\",nq} - {Exception?.Message,nq}")]
+    [DebuggerDisplay(
+        "{LogLevel.ToString(),nq} - {Message ?? \"null\",nq} - {Exception?.Message,nq}"
+    )]
     protected sealed class LogMessage
     {
         public LogMessage(LogLevel logLevel, EventId eventId, string message, Exception exception)

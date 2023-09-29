@@ -49,8 +49,7 @@ public class AnalysisBuilder : IApplicationBuilder
     public RequestDelegate Build()
     {
         // Add one maker at the end before the default 404 middleware (or any fancy Join middleware).
-        return InnerBuilder.UseMiddleware<AnalysisMiddleware>("EndOfPipeline")
-            .Build();
+        return InnerBuilder.UseMiddleware<AnalysisMiddleware>("EndOfPipeline").Build();
     }
 
     /// <inheritdoc />
@@ -63,13 +62,15 @@ public class AnalysisBuilder : IApplicationBuilder
     public IApplicationBuilder Use(Func<RequestDelegate, RequestDelegate> middleware)
     {
         var middlewareName = string.Empty; // UseMiddleware doesn't work with null params.
-        if (Properties.TryGetValue(NextMiddlewareName, out var middlewareNameObj) && middlewareNameObj != null)
+        if (
+            Properties.TryGetValue(NextMiddlewareName, out var middlewareNameObj)
+            && middlewareNameObj != null
+        )
         {
             middlewareName = middlewareNameObj.ToString();
             Properties.Remove(NextMiddlewareName);
         }
 
-        return InnerBuilder.UseMiddleware<AnalysisMiddleware>(middlewareName)
-            .Use(middleware);
+        return InnerBuilder.UseMiddleware<AnalysisMiddleware>(middlewareName).Use(middleware);
     }
 }

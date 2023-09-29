@@ -11,9 +11,10 @@ namespace System.Text.Json.Serialization.Tests
 {
     public static partial class CustomConverterTests
     {
-        private const string ExpectedDomJson = "{\"MyString\":\"Hello!\",\"MyNull\":null,\"MyBoolean\":false,\"MyArray\":[2,3,42]," +
-            "\"MyInt\":43,\"MyDateTime\":\"2020-07-08T00:00:00\",\"MyGuid\":\"ed957609-cdfe-412f-88c1-02daca1b4f51\"," +
-            "\"MyObject\":{\"MyString\":\"Hello!!\"},\"Child\":{\"ChildProp\":1}}";
+        private const string ExpectedDomJson =
+            "{\"MyString\":\"Hello!\",\"MyNull\":null,\"MyBoolean\":false,\"MyArray\":[2,3,42],"
+            + "\"MyInt\":43,\"MyDateTime\":\"2020-07-08T00:00:00\",\"MyGuid\":\"ed957609-cdfe-412f-88c1-02daca1b4f51\","
+            + "\"MyObject\":{\"MyString\":\"Hello!!\"},\"Child\":{\"ChildProp\":1}}";
 
         private enum MyCustomEnum
         {
@@ -175,7 +176,9 @@ namespace System.Text.Json.Serialization.Tests
             Assert.IsType<JsonDynamicNumber>(JsonSerializer.Deserialize<object>("0", options));
             Assert.IsType<JsonDynamicNumber>(JsonSerializer.Deserialize<object>("1.2", options));
             Assert.IsType<JsonDynamicObject>(JsonSerializer.Deserialize<object>("{}", options));
-            Assert.IsType<JsonDynamicString>(JsonSerializer.Deserialize<object>("\"str\"", options));
+            Assert.IsType<JsonDynamicString>(
+                JsonSerializer.Deserialize<object>("\"str\"", options)
+            );
         }
 
         /// <summary>
@@ -227,7 +230,8 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.EnableDynamicTypes();
 
-            JsonDynamicObject obj = (JsonDynamicObject)JsonSerializer.Deserialize<object>(DynamicTests.Json, options);
+            JsonDynamicObject obj = (JsonDynamicObject)
+                JsonSerializer.Deserialize<object>(DynamicTests.Json, options);
 
             // Change some primitives.
             obj["MyString"] = "Hello!";
@@ -235,15 +239,9 @@ namespace System.Text.Json.Serialization.Tests
             obj["MyInt"] = 43;
 
             // Add nested objects.
-            obj["MyObject"] = new JsonDynamicObject(options)
-            {
-                ["MyString"] = "Hello!!"
-            };
+            obj["MyObject"] = new JsonDynamicObject(options) { ["MyString"] = "Hello!!" };
 
-            obj["Child"] = new JsonDynamicObject(options)
-            {
-                ["ChildProp"] = 1
-            };
+            obj["Child"] = new JsonDynamicObject(options) { ["ChildProp"] = 1 };
 
             // Modify number elements.
             var arr = (JsonDynamicArray)obj["MyArray"];
@@ -269,7 +267,8 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.EnableDynamicTypes();
 
-            JsonDynamicObject obj = (JsonDynamicObject)JsonSerializer.Deserialize<object>(DynamicTests.Json, options);
+            JsonDynamicObject obj = (JsonDynamicObject)
+                JsonSerializer.Deserialize<object>(DynamicTests.Json, options);
             Verify();
 
             // Verify the values are round-trippable.
@@ -368,8 +367,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions();
             options.EnableDynamicTypes();
-            options.NumberHandling = JsonNumberHandling.AllowReadingFromString |
-                JsonNumberHandling.AllowNamedFloatingPointLiterals;
+            options.NumberHandling =
+                JsonNumberHandling.AllowReadingFromString
+                | JsonNumberHandling.AllowNamedFloatingPointLiterals;
 
             dynamic obj = JsonSerializer.Deserialize<dynamic>("\"42\"", options);
             Assert.IsType<JsonDynamicString>(obj);

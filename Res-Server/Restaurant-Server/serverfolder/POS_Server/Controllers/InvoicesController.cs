@@ -27,7 +27,6 @@ namespace POS_Server.Controllers
         List<string> purchaseType = new List<string>() { "pd", "p", "pbd", "pb" };
         List<string> spendingOrderType = new List<string>() { "sr", "srd" };
 
-
         [HttpPost]
         [Route("GetPurNot")]
         public string GetPurNot(string token)
@@ -100,8 +99,8 @@ namespace POS_Server.Controllers
                 result += "}";
                 return TokenManager.GenerateToken(result);
             }
-
         }
+
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
@@ -116,44 +115,49 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.invoices.Select(b => new
-                    {
-                        b.invoiceId,
-                        b.invNumber,
-                        b.agentId,
-                        b.invType,
-                        b.discountType,
-                        b.discountValue,
-                        b.total,
-                        b.totalNet,
-                        b.paid,
-                        b.deserved,
-                        b.deservedDate,
-                        b.invDate,
-                        b.invoiceMainId,
-                        b.invCase,
-                        b.invTime,
-                        b.notes,
-                        b.vendorInvNum,
-                        b.vendorInvDate,
-                        b.createUserId,
-                        b.updateDate,
-                        b.updateUserId,
-                        b.branchId,
-                        b.tax,
-                        b.taxtype,
-                        b.name,
-                        b.isApproved,
-                        b.branchCreatorId,
-                        b.shippingCompanyId,
-                        b.shipUserId,
-                        b.userId,
-                    })
-                    .ToList();
+                    var banksList = entity.invoices
+                        .Select(
+                            b =>
+                                new
+                                {
+                                    b.invoiceId,
+                                    b.invNumber,
+                                    b.agentId,
+                                    b.invType,
+                                    b.discountType,
+                                    b.discountValue,
+                                    b.total,
+                                    b.totalNet,
+                                    b.paid,
+                                    b.deserved,
+                                    b.deservedDate,
+                                    b.invDate,
+                                    b.invoiceMainId,
+                                    b.invCase,
+                                    b.invTime,
+                                    b.notes,
+                                    b.vendorInvNum,
+                                    b.vendorInvDate,
+                                    b.createUserId,
+                                    b.updateDate,
+                                    b.updateUserId,
+                                    b.branchId,
+                                    b.tax,
+                                    b.taxtype,
+                                    b.name,
+                                    b.isApproved,
+                                    b.branchCreatorId,
+                                    b.shippingCompanyId,
+                                    b.shipUserId,
+                                    b.userId,
+                                }
+                        )
+                        .ToList();
                     return TokenManager.GenerateToken(banksList);
                 }
             }
         }
+
         [HttpPost]
         [Route("GetAvgItemPrice")]
         public string GetAvgItemPrice(string token)
@@ -185,7 +189,11 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var itemUnits = (from i in entity.itemsUnits where (i.itemId == itemId) select (i.itemUnitId)).ToList();
+                    var itemUnits = (
+                        from i in entity.itemsUnits
+                        where (i.itemId == itemId)
+                        select (i.itemUnitId)
+                    ).ToList();
 
                     price += getItemUnitSumPrice(itemUnits);
 
@@ -194,27 +202,37 @@ namespace POS_Server.Controllers
                     if (totalNum != 0)
                         smallUnitPrice = price / totalNum;
 
-                    var smallestUnitId = (from iu in entity.itemsUnits
-                                          where (itemUnits.Contains((long)iu.itemUnitId) && iu.unitId == iu.subUnitId)
-                                          select iu.itemUnitId).FirstOrDefault();
+                    var smallestUnitId = (
+                        from iu in entity.itemsUnits
+                        where (itemUnits.Contains((long)iu.itemUnitId) && iu.unitId == iu.subUnitId)
+                        select iu.itemUnitId
+                    ).FirstOrDefault();
 
                     if (smallestUnitId == null || smallestUnitId == 0)
                     {
-                        smallestUnitId = (from u in entity.itemsUnits
-                                          where !entity.itemsUnits.Any(y => u.subUnitId == y.unitId)
-                                          where (itemUnits.Contains((long)u.itemUnitId))
-                                          select u.itemUnitId).FirstOrDefault();
+                        smallestUnitId = (
+                            from u in entity.itemsUnits
+                            where !entity.itemsUnits.Any(y => u.subUnitId == y.unitId)
+                            where (itemUnits.Contains((long)u.itemUnitId))
+                            select u.itemUnitId
+                        ).FirstOrDefault();
                     }
-                    if (itemUnitId == smallestUnitId || smallestUnitId == null || smallestUnitId == 0)
+                    if (
+                        itemUnitId == smallestUnitId
+                        || smallestUnitId == null
+                        || smallestUnitId == 0
+                    )
                         return TokenManager.GenerateToken(smallUnitPrice);
                     else
                     {
-                        smallUnitPrice = smallUnitPrice * getUpperUnitValue(smallestUnitId, itemUnitId);
+                        smallUnitPrice =
+                            smallUnitPrice * getUpperUnitValue(smallestUnitId, itemUnitId);
                         return TokenManager.GenerateToken(smallUnitPrice);
                     }
                 }
             }
         }
+
         [HttpPost]
         [Route("GetByInvoiceId")]
         public string GetByInvoiceId(string token)
@@ -238,75 +256,102 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.invoices.Where(b => b.invoiceId == invoiceId)
-                        .Select(b => new InvoiceModel
-                    {
-                        invoiceId = b.invoiceId,
-                        invNumber = b.invNumber,
-                        agentId = b.agentId,
-                        invType = b.invType,
-                        total = b.total,
-                        totalNet = b.totalNet,
-                        paid = b.paid,
-                        deserved = b.deserved,
-                        deservedDate = b.deservedDate,
-                        invDate = b.invDate,
-                        invoiceMainId = b.invoiceMainId,
-                        invCase = b.invCase,
-                        invTime = b.invTime,
-                        notes = b.notes,
-                        vendorInvNum = b.vendorInvNum,
-                        vendorInvDate = b.vendorInvDate,
-                        createUserId = b.createUserId,
-                        updateDate = b.updateDate,
-                        updateUserId = b.updateUserId,
-                        branchId = b.branchId,
-                        discountType = b.discountType,
-                        discountValue = b.discountValue,
-                        tax = b.tax,
-                        taxtype = b.taxtype,
-                        name = b.name,
-                        isApproved = b.isApproved,
-                        branchCreatorId = b.branchCreatorId,
-                        shippingCompanyId = b.shippingCompanyId,
-                        shipUserId = b.shipUserId,
-                        userId = b.userId,
-                        printedcount = b.printedcount,
-                        isOrginal = b.isOrginal,
-                        waiterId = b.waiterId,
-                        shippingCost = b.shippingCost,
-                        realShippingCost = b.realShippingCost,
-                        reservationId = b.reservationId,
-                        orderTime = b.orderTime,
-                        shippingCostDiscount = b.shippingCostDiscount,
-                        membershipId = b.membershipId,
-                        invBarcode = b.invBarcode,
-                        itemsCount = entity.itemsTransfer.Where(x => x.invoiceId == invoiceId).Select(x => x.itemsTransId).ToList().Count,
-
-
-                        performed = (entity.invoices.Where(y => y.invoiceMainId == b.invoiceId).FirstOrDefault() == null) ? false : true,
-                    })
-                    .FirstOrDefault();
-                    var dis = entity.couponsInvoices.Where(C => C.InvoiceId == invoiceId).Select(C => new
-                    {
-                        C.id,
-                        C.couponId,
-                        C.InvoiceId,
-                        C.discountValue,
-                        C.discountType,
-                        C.forAgents,
-
-                    }
-                       ).ToList();
-                    banksList.discountValue = (banksList.discountType == "2" ? banksList.discountValue * banksList.total / 100 : banksList.discountValue)
-                        + dis.Sum(C => C.discountType == 2 ? (C.discountValue * banksList.total / 100) : C.discountValue);
+                    var banksList = entity.invoices
+                        .Where(b => b.invoiceId == invoiceId)
+                        .Select(
+                            b =>
+                                new InvoiceModel
+                                {
+                                    invoiceId = b.invoiceId,
+                                    invNumber = b.invNumber,
+                                    agentId = b.agentId,
+                                    invType = b.invType,
+                                    total = b.total,
+                                    totalNet = b.totalNet,
+                                    paid = b.paid,
+                                    deserved = b.deserved,
+                                    deservedDate = b.deservedDate,
+                                    invDate = b.invDate,
+                                    invoiceMainId = b.invoiceMainId,
+                                    invCase = b.invCase,
+                                    invTime = b.invTime,
+                                    notes = b.notes,
+                                    vendorInvNum = b.vendorInvNum,
+                                    vendorInvDate = b.vendorInvDate,
+                                    createUserId = b.createUserId,
+                                    updateDate = b.updateDate,
+                                    updateUserId = b.updateUserId,
+                                    branchId = b.branchId,
+                                    discountType = b.discountType,
+                                    discountValue = b.discountValue,
+                                    tax = b.tax,
+                                    taxtype = b.taxtype,
+                                    name = b.name,
+                                    isApproved = b.isApproved,
+                                    branchCreatorId = b.branchCreatorId,
+                                    shippingCompanyId = b.shippingCompanyId,
+                                    shipUserId = b.shipUserId,
+                                    userId = b.userId,
+                                    printedcount = b.printedcount,
+                                    isOrginal = b.isOrginal,
+                                    waiterId = b.waiterId,
+                                    shippingCost = b.shippingCost,
+                                    realShippingCost = b.realShippingCost,
+                                    reservationId = b.reservationId,
+                                    orderTime = b.orderTime,
+                                    shippingCostDiscount = b.shippingCostDiscount,
+                                    membershipId = b.membershipId,
+                                    invBarcode = b.invBarcode,
+                                    itemsCount = entity.itemsTransfer
+                                        .Where(x => x.invoiceId == invoiceId)
+                                        .Select(x => x.itemsTransId)
+                                        .ToList()
+                                        .Count,
+                                    performed =
+                                        (
+                                            entity.invoices
+                                                .Where(y => y.invoiceMainId == b.invoiceId)
+                                                .FirstOrDefault() == null
+                                        )
+                                            ? false
+                                            : true,
+                                }
+                        )
+                        .FirstOrDefault();
+                    var dis = entity.couponsInvoices
+                        .Where(C => C.InvoiceId == invoiceId)
+                        .Select(
+                            C =>
+                                new
+                                {
+                                    C.id,
+                                    C.couponId,
+                                    C.InvoiceId,
+                                    C.discountValue,
+                                    C.discountType,
+                                    C.forAgents,
+                                }
+                        )
+                        .ToList();
+                    banksList.discountValue =
+                        (
+                            banksList.discountType == "2"
+                                ? banksList.discountValue * banksList.total / 100
+                                : banksList.discountValue
+                        )
+                        + dis.Sum(
+                            C =>
+                                C.discountType == 2
+                                    ? (C.discountValue * banksList.total / 100)
+                                    : C.discountValue
+                        );
                     banksList.discountType = "1";
-
 
                     return TokenManager.GenerateToken(banksList);
                 }
             }
         }
+
         [HttpPost]
         [Route("getgeneratedInvoice")]
         public string getgeneratedInvoice(string token)
@@ -330,46 +375,52 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.invoices.Where(b => b.invoiceMainId == mainInvoiceId).Select(b => new
-                    {
-                        b.invoiceId,
-                        b.invNumber,
-                        b.agentId,
-                        b.invType,
-                        b.total,
-                        b.totalNet,
-                        b.paid,
-                        b.deserved,
-                        b.deservedDate,
-                        b.invDate,
-                        b.invoiceMainId,
-                        b.invCase,
-                        b.invTime,
-                        b.notes,
-                        b.vendorInvNum,
-                        b.vendorInvDate,
-                        b.createUserId,
-                        b.updateDate,
-                        b.updateUserId,
-                        b.branchId,
-                        b.discountType,
-                        b.discountValue,
-                        b.tax,
-                        b.taxtype,
-                        b.name,
-                        b.isApproved,
-                        b.branchCreatorId,
-                        b.shippingCompanyId,
-                        b.shipUserId,
-                        b.userId,
-                        b.invBarcode
-                    })
-                    .FirstOrDefault();
+                    var banksList = entity.invoices
+                        .Where(b => b.invoiceMainId == mainInvoiceId)
+                        .Select(
+                            b =>
+                                new
+                                {
+                                    b.invoiceId,
+                                    b.invNumber,
+                                    b.agentId,
+                                    b.invType,
+                                    b.total,
+                                    b.totalNet,
+                                    b.paid,
+                                    b.deserved,
+                                    b.deservedDate,
+                                    b.invDate,
+                                    b.invoiceMainId,
+                                    b.invCase,
+                                    b.invTime,
+                                    b.notes,
+                                    b.vendorInvNum,
+                                    b.vendorInvDate,
+                                    b.createUserId,
+                                    b.updateDate,
+                                    b.updateUserId,
+                                    b.branchId,
+                                    b.discountType,
+                                    b.discountValue,
+                                    b.tax,
+                                    b.taxtype,
+                                    b.name,
+                                    b.isApproved,
+                                    b.branchCreatorId,
+                                    b.shippingCompanyId,
+                                    b.shipUserId,
+                                    b.userId,
+                                    b.invBarcode
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(banksList);
                 }
             }
         }
+
         [HttpPost]
         [Route("getById")]
         public string GetById(string token)
@@ -392,47 +443,53 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.invoices.Where(b => b.invoiceId == invoiceId).Select(b => new
-                    {
-                        b.invoiceId,
-                        b.invNumber,
-                        b.agentId,
-                        b.invType,
-                        b.total,
-                        b.totalNet,
-                        b.paid,
-                        b.deserved,
-                        b.deservedDate,
-                        b.invDate,
-                        b.invoiceMainId,
-                        b.invCase,
-                        b.invTime,
-                        b.notes,
-                        b.vendorInvNum,
-                        b.vendorInvDate,
-                        b.createUserId,
-                        b.updateDate,
-                        b.updateUserId,
-                        b.branchId,
-                        b.discountType,
-                        b.discountValue,
-                        b.tax,
-                        b.taxtype,
-                        b.name,
-                        b.isApproved,
-                        b.branchCreatorId,
-                        b.shippingCompanyId,
-                        b.shipUserId,
-                        b.userId,
-                        b.cashReturn,
-                        b.invBarcode
-                    })
-                    .FirstOrDefault();
+                    var banksList = entity.invoices
+                        .Where(b => b.invoiceId == invoiceId)
+                        .Select(
+                            b =>
+                                new
+                                {
+                                    b.invoiceId,
+                                    b.invNumber,
+                                    b.agentId,
+                                    b.invType,
+                                    b.total,
+                                    b.totalNet,
+                                    b.paid,
+                                    b.deserved,
+                                    b.deservedDate,
+                                    b.invDate,
+                                    b.invoiceMainId,
+                                    b.invCase,
+                                    b.invTime,
+                                    b.notes,
+                                    b.vendorInvNum,
+                                    b.vendorInvDate,
+                                    b.createUserId,
+                                    b.updateDate,
+                                    b.updateUserId,
+                                    b.branchId,
+                                    b.discountType,
+                                    b.discountValue,
+                                    b.tax,
+                                    b.taxtype,
+                                    b.name,
+                                    b.isApproved,
+                                    b.branchCreatorId,
+                                    b.shippingCompanyId,
+                                    b.shipUserId,
+                                    b.userId,
+                                    b.cashReturn,
+                                    b.invBarcode
+                                }
+                        )
+                        .FirstOrDefault();
 
                     return TokenManager.GenerateToken(banksList);
                 }
             }
         }
+
         [HttpPost]
         [Route("GetByInvNum")]
         public string GetByInvNum(string token)
@@ -463,99 +520,102 @@ namespace POS_Server.Controllers
                 {
                     if (branchId == 0)
                     {
-                        var banksList = (from b in entity.invoices.Where(b => b.invNumber == invNum)
-                                         join l in entity.branches on b.branchId equals l.branchId into lj
-                                         from x in lj.DefaultIfEmpty()
-                                         select new InvoiceModel()
-                                         {
-                                             invoiceId = b.invoiceId,
-                                             invNumber = b.invNumber,
-                                             agentId = b.agentId,
-                                             invType = b.invType,
-                                             total = b.total,
-                                             totalNet = b.totalNet,
-                                             paid = b.paid,
-                                             deserved = b.deserved,
-                                             deservedDate = b.deservedDate,
-                                             invDate = b.invDate,
-                                             invoiceMainId = b.invoiceMainId,
-                                             invCase = b.invCase,
-                                             invTime = b.invTime,
-                                             notes = b.notes,
-                                             vendorInvNum = b.vendorInvNum,
-                                             vendorInvDate = b.vendorInvDate,
-                                             createUserId = b.createUserId,
-                                             updateDate = b.updateDate,
-                                             updateUserId = b.updateUserId,
-                                             branchId = b.branchId,
-                                             discountValue = b.discountValue,
-                                             discountType = b.discountType,
-                                             tax = b.tax,
-                                             taxtype = b.taxtype,
-                                             name = b.name,
-                                             isApproved = b.isApproved,
-                                             branchName = x.name,
-                                             branchCreatorId = b.branchCreatorId,
-                                             shippingCompanyId = b.shippingCompanyId,
-                                             shipUserId = b.shipUserId,
-                                             userId = b.userId,
-                                             manualDiscountType = b.manualDiscountType,
-                                             manualDiscountValue = b.manualDiscountValue,
-                                             invBarcode = b.invBarcode,
-                                         })
-
-                               .FirstOrDefault();
+                        var banksList = (
+                            from b in entity.invoices.Where(b => b.invNumber == invNum)
+                            join l in entity.branches on b.branchId equals l.branchId into lj
+                            from x in lj.DefaultIfEmpty()
+                            select new InvoiceModel()
+                            {
+                                invoiceId = b.invoiceId,
+                                invNumber = b.invNumber,
+                                agentId = b.agentId,
+                                invType = b.invType,
+                                total = b.total,
+                                totalNet = b.totalNet,
+                                paid = b.paid,
+                                deserved = b.deserved,
+                                deservedDate = b.deservedDate,
+                                invDate = b.invDate,
+                                invoiceMainId = b.invoiceMainId,
+                                invCase = b.invCase,
+                                invTime = b.invTime,
+                                notes = b.notes,
+                                vendorInvNum = b.vendorInvNum,
+                                vendorInvDate = b.vendorInvDate,
+                                createUserId = b.createUserId,
+                                updateDate = b.updateDate,
+                                updateUserId = b.updateUserId,
+                                branchId = b.branchId,
+                                discountValue = b.discountValue,
+                                discountType = b.discountType,
+                                tax = b.tax,
+                                taxtype = b.taxtype,
+                                name = b.name,
+                                isApproved = b.isApproved,
+                                branchName = x.name,
+                                branchCreatorId = b.branchCreatorId,
+                                shippingCompanyId = b.shippingCompanyId,
+                                shipUserId = b.shipUserId,
+                                userId = b.userId,
+                                manualDiscountType = b.manualDiscountType,
+                                manualDiscountValue = b.manualDiscountValue,
+                                invBarcode = b.invBarcode,
+                            }
+                        ).FirstOrDefault();
                         return TokenManager.GenerateToken(banksList);
                     }
                     else
                     {
-                        var banksList = (from b in entity.invoices.Where(b => b.invNumber == invNum && b.branchId == branchId)
-                                         join l in entity.branches on b.branchId equals l.branchId into lj
-                                         from x in lj.DefaultIfEmpty()
-                                         select new InvoiceModel()
-                                         {
-                                             invoiceId = b.invoiceId,
-                                             invNumber = b.invNumber,
-                                             agentId = b.agentId,
-                                             invType = b.invType,
-                                             total = b.total,
-                                             totalNet = b.totalNet,
-                                             paid = b.paid,
-                                             deserved = b.deserved,
-                                             deservedDate = b.deservedDate,
-                                             invDate = b.invDate,
-                                             invoiceMainId = b.invoiceMainId,
-                                             invCase = b.invCase,
-                                             invTime = b.invTime,
-                                             notes = b.notes,
-                                             vendorInvNum = b.vendorInvNum,
-                                             vendorInvDate = b.vendorInvDate,
-                                             createUserId = b.createUserId,
-                                             updateDate = b.updateDate,
-                                             updateUserId = b.updateUserId,
-                                             branchId = b.branchId,
-                                             discountValue = b.discountValue,
-                                             discountType = b.discountType,
-                                             tax = b.tax,
-                                             taxtype = b.taxtype,
-                                             name = b.name,
-                                             isApproved = b.isApproved,
-                                             branchName = x.name,
-                                             branchCreatorId = b.branchCreatorId,
-                                             shippingCompanyId = b.shippingCompanyId,
-                                             shipUserId = b.shipUserId,
-                                             userId = b.userId,
-                                             manualDiscountType = b.manualDiscountType,
-                                             manualDiscountValue = b.manualDiscountValue,
-                                             invBarcode = b.invBarcode,
-                                         })
-
-                               .FirstOrDefault();
+                        var banksList = (
+                            from b in entity.invoices.Where(
+                                b => b.invNumber == invNum && b.branchId == branchId
+                            )
+                            join l in entity.branches on b.branchId equals l.branchId into lj
+                            from x in lj.DefaultIfEmpty()
+                            select new InvoiceModel()
+                            {
+                                invoiceId = b.invoiceId,
+                                invNumber = b.invNumber,
+                                agentId = b.agentId,
+                                invType = b.invType,
+                                total = b.total,
+                                totalNet = b.totalNet,
+                                paid = b.paid,
+                                deserved = b.deserved,
+                                deservedDate = b.deservedDate,
+                                invDate = b.invDate,
+                                invoiceMainId = b.invoiceMainId,
+                                invCase = b.invCase,
+                                invTime = b.invTime,
+                                notes = b.notes,
+                                vendorInvNum = b.vendorInvNum,
+                                vendorInvDate = b.vendorInvDate,
+                                createUserId = b.createUserId,
+                                updateDate = b.updateDate,
+                                updateUserId = b.updateUserId,
+                                branchId = b.branchId,
+                                discountValue = b.discountValue,
+                                discountType = b.discountType,
+                                tax = b.tax,
+                                taxtype = b.taxtype,
+                                name = b.name,
+                                isApproved = b.isApproved,
+                                branchName = x.name,
+                                branchCreatorId = b.branchCreatorId,
+                                shippingCompanyId = b.shippingCompanyId,
+                                shipUserId = b.shipUserId,
+                                userId = b.userId,
+                                manualDiscountType = b.manualDiscountType,
+                                manualDiscountValue = b.manualDiscountValue,
+                                invBarcode = b.invBarcode,
+                            }
+                        ).FirstOrDefault();
                         return TokenManager.GenerateToken(banksList);
                     }
                 }
             }
         }
+
         [HttpPost]
         [Route("GetByInvoiceType")]
         public string GetByInvoiceType(string token)
@@ -588,54 +648,53 @@ namespace POS_Server.Controllers
                     }
                 }
 
-
-
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     if (branchId == 0)
                     {
-                        var invoicesList = (from b in entity.invoices.Where(x => invTypeL.Contains(x.invType))
-                                            join l in entity.branches on b.branchId equals l.branchId into lj
-                                            from x in lj.DefaultIfEmpty()
-                                            select new InvoiceModel()
-                                            {
-                                                invoiceId = b.invoiceId,
-                                                invNumber = b.invNumber,
-                                                agentId = b.agentId,
-                                                invType = b.invType,
-                                                total = b.total,
-                                                totalNet = b.totalNet,
-                                                paid = b.paid,
-                                                deserved = b.deserved,
-                                                deservedDate = b.deservedDate,
-                                                invDate = b.invDate,
-                                                invoiceMainId = b.invoiceMainId,
-                                                invCase = b.invCase,
-                                                invTime = b.invTime,
-                                                notes = b.notes,
-                                                vendorInvNum = b.vendorInvNum,
-                                                vendorInvDate = b.vendorInvDate,
-                                                createUserId = b.createUserId,
-                                                updateDate = b.updateDate,
-                                                updateUserId = b.updateUserId,
-                                                branchId = b.branchId,
-                                                discountValue = b.discountValue,
-                                                discountType = b.discountType,
-                                                tax = b.tax,
-                                                taxtype = b.taxtype,
-                                                name = b.name,
-                                                isApproved = b.isApproved,
-                                                branchName = x.name,
-                                                branchCreatorId = b.branchCreatorId,
-                                                shippingCompanyId = b.shippingCompanyId,
-                                                shipUserId = b.shipUserId,
-                                                userId = b.userId,
-                                                manualDiscountType = b.manualDiscountType,
-                                                manualDiscountValue = b.manualDiscountValue,
-                                                cashReturn = b.cashReturn,
-                                                invBarcode = b.invBarcode,
-                                            })
-                        .ToList();
+                        var invoicesList = (
+                            from b in entity.invoices.Where(x => invTypeL.Contains(x.invType))
+                            join l in entity.branches on b.branchId equals l.branchId into lj
+                            from x in lj.DefaultIfEmpty()
+                            select new InvoiceModel()
+                            {
+                                invoiceId = b.invoiceId,
+                                invNumber = b.invNumber,
+                                agentId = b.agentId,
+                                invType = b.invType,
+                                total = b.total,
+                                totalNet = b.totalNet,
+                                paid = b.paid,
+                                deserved = b.deserved,
+                                deservedDate = b.deservedDate,
+                                invDate = b.invDate,
+                                invoiceMainId = b.invoiceMainId,
+                                invCase = b.invCase,
+                                invTime = b.invTime,
+                                notes = b.notes,
+                                vendorInvNum = b.vendorInvNum,
+                                vendorInvDate = b.vendorInvDate,
+                                createUserId = b.createUserId,
+                                updateDate = b.updateDate,
+                                updateUserId = b.updateUserId,
+                                branchId = b.branchId,
+                                discountValue = b.discountValue,
+                                discountType = b.discountType,
+                                tax = b.tax,
+                                taxtype = b.taxtype,
+                                name = b.name,
+                                isApproved = b.isApproved,
+                                branchName = x.name,
+                                branchCreatorId = b.branchCreatorId,
+                                shippingCompanyId = b.shippingCompanyId,
+                                shipUserId = b.shipUserId,
+                                userId = b.userId,
+                                manualDiscountType = b.manualDiscountType,
+                                manualDiscountValue = b.manualDiscountValue,
+                                cashReturn = b.cashReturn,
+                                invBarcode = b.invBarcode,
+                            }
+                        ).ToList();
                         if (invoicesList != null)
                         {
                             for (int i = 0; i < invoicesList.Count; i++)
@@ -650,47 +709,50 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var invoicesList = (from b in entity.invoices.Where(x => invTypeL.Contains(x.invType) && x.branchId == branchId)
-                                            join l in entity.branches on b.branchId equals l.branchId into lj
-                                            from x in lj.DefaultIfEmpty()
-                                            select new InvoiceModel()
-                                            {
-                                                invoiceId = b.invoiceId,
-                                                invNumber = b.invNumber,
-                                                agentId = b.agentId,
-                                                invType = b.invType,
-                                                total = b.total,
-                                                totalNet = b.totalNet,
-                                                paid = b.paid,
-                                                deserved = b.deserved,
-                                                deservedDate = b.deservedDate,
-                                                invDate = b.invDate,
-                                                invoiceMainId = b.invoiceMainId,
-                                                invCase = b.invCase,
-                                                invTime = b.invTime,
-                                                notes = b.notes,
-                                                vendorInvNum = b.vendorInvNum,
-                                                vendorInvDate = b.vendorInvDate,
-                                                createUserId = b.createUserId,
-                                                updateDate = b.updateDate,
-                                                updateUserId = b.updateUserId,
-                                                branchId = b.branchId,
-                                                discountValue = b.discountValue,
-                                                discountType = b.discountType,
-                                                tax = b.tax,
-                                                taxtype = b.taxtype,
-                                                name = b.name,
-                                                isApproved = b.isApproved,
-                                                branchName = x.name,
-                                                branchCreatorId = b.branchCreatorId,
-                                                shippingCompanyId = b.shippingCompanyId,
-                                                shipUserId = b.shipUserId,
-                                                userId = b.userId,
-                                                manualDiscountType = b.manualDiscountType,
-                                                manualDiscountValue = b.manualDiscountValue,
-                                                invBarcode = b.invBarcode,
-                                            })
-                        .ToList();
+                        var invoicesList = (
+                            from b in entity.invoices.Where(
+                                x => invTypeL.Contains(x.invType) && x.branchId == branchId
+                            )
+                            join l in entity.branches on b.branchId equals l.branchId into lj
+                            from x in lj.DefaultIfEmpty()
+                            select new InvoiceModel()
+                            {
+                                invoiceId = b.invoiceId,
+                                invNumber = b.invNumber,
+                                agentId = b.agentId,
+                                invType = b.invType,
+                                total = b.total,
+                                totalNet = b.totalNet,
+                                paid = b.paid,
+                                deserved = b.deserved,
+                                deservedDate = b.deservedDate,
+                                invDate = b.invDate,
+                                invoiceMainId = b.invoiceMainId,
+                                invCase = b.invCase,
+                                invTime = b.invTime,
+                                notes = b.notes,
+                                vendorInvNum = b.vendorInvNum,
+                                vendorInvDate = b.vendorInvDate,
+                                createUserId = b.createUserId,
+                                updateDate = b.updateDate,
+                                updateUserId = b.updateUserId,
+                                branchId = b.branchId,
+                                discountValue = b.discountValue,
+                                discountType = b.discountType,
+                                tax = b.tax,
+                                taxtype = b.taxtype,
+                                name = b.name,
+                                isApproved = b.isApproved,
+                                branchName = x.name,
+                                branchCreatorId = b.branchCreatorId,
+                                shippingCompanyId = b.shippingCompanyId,
+                                shipUserId = b.shipUserId,
+                                userId = b.userId,
+                                manualDiscountType = b.manualDiscountType,
+                                manualDiscountValue = b.manualDiscountValue,
+                                invBarcode = b.invBarcode,
+                            }
+                        ).ToList();
                         if (invoicesList != null)
                         {
                             for (int i = 0; i < invoicesList.Count; i++)
@@ -706,6 +768,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("getExportInvoices")]
         public string getExportInvoices(string token)
@@ -742,51 +805,61 @@ namespace POS_Server.Controllers
                 {
                     var searchPredicate = PredicateBuilder.New<invoices>();
                     if (branchId != 0)
-                        searchPredicate = searchPredicate.Or(inv => inv.branchId == branchId && inv.isActive == true && invTypeL.Contains(inv.invType));
+                        searchPredicate = searchPredicate.Or(
+                            inv =>
+                                inv.branchId == branchId
+                                && inv.isActive == true
+                                && invTypeL.Contains(inv.invType)
+                        );
 
-                    var invoicesList = (from b in entity.invoices.Where(searchPredicate)
-                                        join l in entity.branches on b.branchId equals l.branchId into lj
-                                        from x in lj.DefaultIfEmpty()
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchCreatorName = entity.invoices.Where(m => m.invoiceId == b.invoiceMainId).Select(m => m.branches.name).FirstOrDefault(),
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            userId = b.userId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            cashReturn = b.cashReturn,
-                                            shippingCost = b.shippingCost,
-                                            realShippingCost = b.realShippingCost,
-                                            invBarcode = b.invBarcode,
-                                        }).ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(searchPredicate)
+                        join l in entity.branches on b.branchId equals l.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchCreatorName = entity.invoices
+                                .Where(m => m.invoiceId == b.invoiceMainId)
+                                .Select(m => m.branches.name)
+                                .FirstOrDefault(),
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            cashReturn = b.cashReturn,
+                            shippingCost = b.shippingCost,
+                            realShippingCost = b.realShippingCost,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
                     if (invoicesList != null)
                     {
                         for (int i = 0; i < invoicesList.Count; i++)
@@ -801,6 +874,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("getExportImportInvoices")]
         public string getExportImportInvoices(string token)
@@ -838,57 +912,73 @@ namespace POS_Server.Controllers
                     var searchPredicate = PredicateBuilder.New<invoices>();
 
                     if (branchId != 0)
-                        searchPredicate = searchPredicate.Or(inv => inv.branchId == branchId && inv.isActive == true && invTypeL.Contains(inv.invType));
+                        searchPredicate = searchPredicate.Or(
+                            inv =>
+                                inv.branchId == branchId
+                                && inv.isActive == true
+                                && invTypeL.Contains(inv.invType)
+                        );
 
-                    var invoicesList = (from b in entity.invoices.Where(searchPredicate)
-                                        join l in entity.branches on b.branchId equals l.branchId into lj
-                                        from x in lj.DefaultIfEmpty()
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchCreatorName = b.invoiceMainId != null ? (from i in entity.invoices.Where(m => m.invoiceId == b.invoiceMainId)
-                                                                                           join b in entity.branches on i.branchId equals b.branchId
-                                                                                           select b.name).FirstOrDefault()
-                                                                                 : (from i in entity.invoices.Where(m => m.invoiceMainId == b.invoiceId)
-                                                                                    join b in entity.branches on i.branchId equals b.branchId
-                                                                                    select b.name).FirstOrDefault(),
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            userId = b.userId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            cashReturn = b.cashReturn,
-                                            shippingCost = b.shippingCost,
-                                            realShippingCost = b.realShippingCost,
-                                            invBarcode = b.invBarcode,
-                                        })
-                    .ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(searchPredicate)
+                        join l in entity.branches on b.branchId equals l.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchCreatorName =
+                                b.invoiceMainId != null
+                                    ? (
+                                        from i in entity.invoices.Where(
+                                            m => m.invoiceId == b.invoiceMainId
+                                        )
+                                        join b in entity.branches on i.branchId equals b.branchId
+                                        select b.name
+                                    ).FirstOrDefault()
+                                    : (
+                                        from i in entity.invoices.Where(
+                                            m => m.invoiceMainId == b.invoiceId
+                                        )
+                                        join b in entity.branches on i.branchId equals b.branchId
+                                        select b.name
+                                    ).FirstOrDefault(),
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            cashReturn = b.cashReturn,
+                            shippingCost = b.shippingCost,
+                            realShippingCost = b.realShippingCost,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
                     if (invoicesList != null)
                     {
                         for (int i = 0; i < invoicesList.Count; i++)
@@ -903,7 +993,6 @@ namespace POS_Server.Controllers
                 }
             }
         }
-
 
         [HttpPost]
         [Route("GetInvoicesByCreator")]
@@ -959,7 +1048,9 @@ namespace POS_Server.Controllers
 
                     if (duration > 0)
                     {
-                        DateTime dt = Convert.ToDateTime(DateTime.Today.AddDays(-duration).ToShortDateString());
+                        DateTime dt = Convert.ToDateTime(
+                            DateTime.Today.AddDays(-duration).ToShortDateString()
+                        );
                         searchPredicate = searchPredicate.And(inv => inv.updateDate >= dt);
                     }
                     if (hours > 0)
@@ -968,67 +1059,70 @@ namespace POS_Server.Controllers
                         searchPredicate = searchPredicate.And(x => x.invDate >= dt);
                     }
 
-
-                    var invoicesList = (from b in entity.invoices.Where(searchPredicate)
-                                        join l in entity.branches on b.branchId equals l.branchId into lj
-                                        from x in lj.DefaultIfEmpty()
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            agentName = b.agents.name,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchName = x.name,
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            userId = b.userId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            cashReturn = b.cashReturn,
-                                            shippingCost = b.shippingCost,
-                                            shippingCostDiscount = b.shippingCostDiscount,
-                                            realShippingCost = b.realShippingCost,
-                                            orderTime = b.orderTime,
-                                            membershipId = b.membershipId,
-                                            invBarcode = b.invBarcode,
-                                            tables = (from it in entity.invoiceTables.Where(y => y.invoiceId == b.invoiceId && y.isActive == 1)
-                                                      join ts in entity.tables on it.tableId equals ts.tableId
-                                                      select new TableModel()
-                                                      {
-                                                          tableId = it.tableId,
-                                                          name = ts.name,
-                                                          canDelete = false,
-                                                          isActive = it.isActive,
-                                                          createUserId = ts.createUserId,
-                                                          updateUserId = ts.updateUserId,
-                                                      }).ToList(),
-
-                                        })
-                    .ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(searchPredicate)
+                        join l in entity.branches on b.branchId equals l.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            agentName = b.agents.name,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchName = x.name,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            cashReturn = b.cashReturn,
+                            shippingCost = b.shippingCost,
+                            shippingCostDiscount = b.shippingCostDiscount,
+                            realShippingCost = b.realShippingCost,
+                            orderTime = b.orderTime,
+                            membershipId = b.membershipId,
+                            invBarcode = b.invBarcode,
+                            tables = (
+                                from it in entity.invoiceTables.Where(
+                                    y => y.invoiceId == b.invoiceId && y.isActive == 1
+                                )
+                                join ts in entity.tables on it.tableId equals ts.tableId
+                                select new TableModel()
+                                {
+                                    tableId = it.tableId,
+                                    name = ts.name,
+                                    canDelete = false,
+                                    isActive = it.isActive,
+                                    createUserId = ts.createUserId,
+                                    updateUserId = ts.updateUserId,
+                                }
+                            ).ToList(),
+                        }
+                    ).ToList();
 
                     if (invoicesList != null)
                     {
@@ -1039,7 +1133,6 @@ namespace POS_Server.Controllers
                             long invoiceId = invoicesList[i].invoiceId;
                             invoicesList[i].invoiceItems = itc.Get(invoiceId);
                             invoicesList[i].itemsCount = invoicesList[i].invoiceItems.Count;
- 
                         }
                     }
 
@@ -1047,6 +1140,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("GetInvoicesForAdmin")]
         public string GetInvoicesForAdmin(string token)
@@ -1085,54 +1179,57 @@ namespace POS_Server.Controllers
 
                     if (duration > 0)
                     {
-                        DateTime dt = Convert.ToDateTime(DateTime.Today.AddDays(-duration).ToShortDateString());
+                        DateTime dt = Convert.ToDateTime(
+                            DateTime.Today.AddDays(-duration).ToShortDateString()
+                        );
                         searchPredicate = searchPredicate.And(inv => inv.updateDate >= dt);
                     }
                     searchPredicate = searchPredicate.And(inv => invTypeL.Contains(inv.invType));
                     searchPredicate = searchPredicate.And(inv => inv.isActive == true);
 
-                    var invoicesList = (from b in entity.invoices.Where(searchPredicate)
-                                        join l in entity.branches on b.branchId equals l.branchId into lj
-                                        from x in lj.DefaultIfEmpty()
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchName = x.name,
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            userId = b.userId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            cashReturn = b.cashReturn,
-                                            invBarcode = b.invBarcode,
-                                        })
-                    .ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(searchPredicate)
+                        join l in entity.branches on b.branchId equals l.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchName = x.name,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            cashReturn = b.cashReturn,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
 
                     if (invoicesList != null)
                     {
@@ -1187,24 +1284,27 @@ namespace POS_Server.Controllers
 
                     if (duration > 0)
                     {
-                        DateTime dt = Convert.ToDateTime(DateTime.Today.AddDays(-duration).ToShortDateString());
+                        DateTime dt = Convert.ToDateTime(
+                            DateTime.Today.AddDays(-duration).ToShortDateString()
+                        );
                         searchPredicate = searchPredicate.And(inv => inv.updateDate >= dt);
                     }
                     searchPredicate = searchPredicate.And(inv => invTypeL.Contains(inv.invType));
                     searchPredicate = searchPredicate.And(inv => inv.isActive == true);
 
-                    var invoicesCount = (from b in entity.invoices.Where(searchPredicate)
-                                         join l in entity.branches on b.branchId equals l.branchId into lj
-                                         from x in lj.DefaultIfEmpty()
-                                         select new InvoiceModel()
-                                         {
-                                             invoiceId = b.invoiceId,
-                                         })
-                    .ToList().Count;
+                    var invoicesCount = (
+                        from b in entity.invoices.Where(searchPredicate)
+                        join l in entity.branches on b.branchId equals l.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new InvoiceModel() { invoiceId = b.invoiceId, }
+                    )
+                        .ToList()
+                        .Count;
                     return TokenManager.GenerateToken(invoicesCount);
                 }
             }
         }
+
         [HttpPost]
         [Route("GetCountByCreator")]
         public string GetCountByCreator(string token)
@@ -1325,7 +1425,9 @@ namespace POS_Server.Controllers
 
                 if (duration > 0)
                 {
-                    DateTime dt = Convert.ToDateTime(DateTime.Today.AddDays(-duration).ToShortDateString());
+                    DateTime dt = Convert.ToDateTime(
+                        DateTime.Today.AddDays(-duration).ToShortDateString()
+                    );
                     searchPredicate = searchPredicate.And(inv => inv.updateDate >= dt);
                 }
                 if (hours > 0)
@@ -1338,47 +1440,49 @@ namespace POS_Server.Controllers
                 searchPredicate = searchPredicate.And(inv => inv.isActive == true);
                 #endregion
 
-                var invoicesCount = (from b in entity.invoices.Where(searchPredicate)
-                                     join l in entity.branches on b.branchId equals l.branchId into lj
-                                     from x in lj.DefaultIfEmpty()
-                                     select new InvoiceModel()
-                                     {
-                                         invoiceId = b.invoiceId,
-                                         invNumber = b.invNumber,
-                                         agentId = b.agentId,
-                                         invType = b.invType,
-                                         total = b.total,
-                                         totalNet = b.totalNet,
-                                         paid = b.paid,
-                                         deserved = b.deserved,
-                                         deservedDate = b.deservedDate,
-                                         invDate = b.invDate,
-                                         invoiceMainId = b.invoiceMainId,
-                                         invCase = b.invCase,
-                                         invTime = b.invTime,
-                                         notes = b.notes,
-                                         vendorInvNum = b.vendorInvNum,
-                                         vendorInvDate = b.vendorInvDate,
-                                         createUserId = b.createUserId,
-                                         updateDate = b.updateDate,
-                                         updateUserId = b.updateUserId,
-                                         branchId = b.branchId,
-                                         discountValue = b.discountValue,
-                                         discountType = b.discountType,
-                                         tax = b.tax,
-                                         taxtype = b.taxtype,
-                                         name = b.name,
-                                         isApproved = b.isApproved,
-                                         branchName = x.name,
-                                         branchCreatorId = b.branchCreatorId,
-                                         shippingCompanyId = b.shippingCompanyId,
-                                         shipUserId = b.shipUserId,
-                                         userId = b.userId,
-                                     })
-                .ToList().Count;
+                var invoicesCount = (
+                    from b in entity.invoices.Where(searchPredicate)
+                    join l in entity.branches on b.branchId equals l.branchId into lj
+                    from x in lj.DefaultIfEmpty()
+                    select new InvoiceModel()
+                    {
+                        invoiceId = b.invoiceId,
+                        invNumber = b.invNumber,
+                        agentId = b.agentId,
+                        invType = b.invType,
+                        total = b.total,
+                        totalNet = b.totalNet,
+                        paid = b.paid,
+                        deserved = b.deserved,
+                        deservedDate = b.deservedDate,
+                        invDate = b.invDate,
+                        invoiceMainId = b.invoiceMainId,
+                        invCase = b.invCase,
+                        invTime = b.invTime,
+                        notes = b.notes,
+                        vendorInvNum = b.vendorInvNum,
+                        vendorInvDate = b.vendorInvDate,
+                        createUserId = b.createUserId,
+                        updateDate = b.updateDate,
+                        updateUserId = b.updateUserId,
+                        branchId = b.branchId,
+                        discountValue = b.discountValue,
+                        discountType = b.discountType,
+                        tax = b.tax,
+                        taxtype = b.taxtype,
+                        name = b.name,
+                        isApproved = b.isApproved,
+                        branchName = x.name,
+                        branchCreatorId = b.branchCreatorId,
+                        shippingCompanyId = b.shippingCompanyId,
+                        shipUserId = b.shipUserId,
+                        userId = b.userId,
+                    }
+                ).ToList().Count;
                 return invoicesCount;
             }
         }
+
         [HttpPost]
         [Route("getBranchInvoices")]
         public string getBranchInvoices(string token)
@@ -1426,59 +1530,72 @@ namespace POS_Server.Controllers
                 {
                     var searchPredicate = PredicateBuilder.New<invoices>();
                     if (branchCreatorId != 0)
-                        searchPredicate = searchPredicate.And(inv => inv.branchCreatorId == branchCreatorId && inv.isActive == true && invTypeL.Contains(inv.invType));
+                        searchPredicate = searchPredicate.And(
+                            inv =>
+                                inv.branchCreatorId == branchCreatorId
+                                && inv.isActive == true
+                                && invTypeL.Contains(inv.invType)
+                        );
 
                     if (branchId != 0)
-                        searchPredicate = searchPredicate.Or(inv => inv.branchId == branchId && inv.isActive == true && invTypeL.Contains(inv.invType));
+                        searchPredicate = searchPredicate.Or(
+                            inv =>
+                                inv.branchId == branchId
+                                && inv.isActive == true
+                                && invTypeL.Contains(inv.invType)
+                        );
 
                     if (duration > 0)
                     {
-                        DateTime dt = Convert.ToDateTime(DateTime.Today.AddDays(-duration).ToShortDateString());
+                        DateTime dt = Convert.ToDateTime(
+                            DateTime.Today.AddDays(-duration).ToShortDateString()
+                        );
                         searchPredicate = searchPredicate.And(inv => inv.updateDate >= dt);
                     }
 
-                    var invoicesList = (from b in entity.invoices.Where(searchPredicate)
-                                        join l in entity.branches on b.branchId equals l.branchId into lj
-                                        from x in lj.DefaultIfEmpty()
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchName = x.name,
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            userId = b.userId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            cashReturn = b.cashReturn,
-                                            invBarcode = b.invBarcode,
-                                        })
-                    .ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(searchPredicate)
+                        join l in entity.branches on b.branchId equals l.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchName = x.name,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            cashReturn = b.cashReturn,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
                     if (invoicesList != null)
                     {
                         for (int i = 0; i < invoicesList.Count; i++)
@@ -1534,55 +1651,56 @@ namespace POS_Server.Controllers
                     for (int i = 0; i < branches.Count; i++)
                         branchesIds.Add(branches[i].branchId);
 
-                    var invoice = (from b in entity.invoices.Where(b => b.invNumber == invNum && branchesIds.Contains((int)b.branchId))
-                                   join l in entity.branches on b.branchId equals l.branchId into lj
-                                   from x in lj.DefaultIfEmpty()
-                                   select new InvoiceModel()
-                                   {
-                                       invoiceId = b.invoiceId,
-                                       invNumber = b.invNumber,
-                                       agentId = b.agentId,
-                                       invType = b.invType,
-                                       total = b.total,
-                                       totalNet = b.totalNet,
-                                       paid = b.paid,
-                                       deserved = b.deserved,
-                                       deservedDate = b.deservedDate,
-                                       invDate = b.invDate,
-                                       invoiceMainId = b.invoiceMainId,
-                                       invCase = b.invCase,
-                                       invTime = b.invTime,
-                                       notes = b.notes,
-                                       vendorInvNum = b.vendorInvNum,
-                                       vendorInvDate = b.vendorInvDate,
-                                       createUserId = b.createUserId,
-                                       updateDate = b.updateDate,
-                                       updateUserId = b.updateUserId,
-                                       branchId = b.branchId,
-                                       discountValue = b.discountValue,
-                                       discountType = b.discountType,
-                                       tax = b.tax,
-                                       taxtype = b.taxtype,
-                                       name = b.name,
-                                       isApproved = b.isApproved,
-                                       branchName = x.name,
-                                       branchCreatorId = b.branchCreatorId,
-                                       shippingCompanyId = b.shippingCompanyId,
-                                       shipUserId = b.shipUserId,
-                                       userId = b.userId,
-                                       manualDiscountType = b.manualDiscountType,
-                                       manualDiscountValue = b.manualDiscountValue,
-                                       realShippingCost = b.realShippingCost,
-                                       shippingCost = b.shippingCost,
-                                       invBarcode = b.invBarcode,
-                                   })
-
-                           .FirstOrDefault();
+                    var invoice = (
+                        from b in entity.invoices.Where(
+                            b => b.invNumber == invNum && branchesIds.Contains((int)b.branchId)
+                        )
+                        join l in entity.branches on b.branchId equals l.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchName = x.name,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            realShippingCost = b.realShippingCost,
+                            shippingCost = b.shippingCost,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).FirstOrDefault();
                     return TokenManager.GenerateToken(invoice);
                 }
             }
         }
-     
 
         [HttpPost]
         [Route("getUnHandeldOrders")]
@@ -1621,41 +1739,54 @@ namespace POS_Server.Controllers
             }
         }
 
-
         [NonAction]
-        public int GetCountUnHandeledOrders(List<string> invTypeL,int duration,long userId=0,long branchCreatorId=0,long branchId=0)
+        public int GetCountUnHandeledOrders(
+            List<string> invTypeL,
+            int duration,
+            long userId = 0,
+            long branchCreatorId = 0,
+            long branchId = 0
+        )
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
                 var searchPredicate = PredicateBuilder.New<invoices>();
-                searchPredicate = searchPredicate.And(inv => inv.isActive == true && invTypeL.Contains(inv.invType));
+                searchPredicate = searchPredicate.And(
+                    inv => inv.isActive == true && invTypeL.Contains(inv.invType)
+                );
                 if (branchCreatorId != 0)
-                    searchPredicate = searchPredicate.And(inv => inv.branchCreatorId == branchCreatorId && inv.isActive == true && invTypeL.Contains(inv.invType));
+                    searchPredicate = searchPredicate.And(
+                        inv =>
+                            inv.branchCreatorId == branchCreatorId
+                            && inv.isActive == true
+                            && invTypeL.Contains(inv.invType)
+                    );
 
                 if (branchId != 0)
                     searchPredicate = searchPredicate.And(inv => inv.branchId == branchId);
                 if (duration > 0)
                 {
-                    DateTime dt = Convert.ToDateTime(DateTime.Today.AddDays(-duration).ToShortDateString());
+                    DateTime dt = Convert.ToDateTime(
+                        DateTime.Today.AddDays(-duration).ToShortDateString()
+                    );
                     searchPredicate = searchPredicate.And(inv => inv.updateDate >= dt);
                 }
                 if (userId != 0)
                     searchPredicate = searchPredicate.And(inv => inv.createUserId == userId);
 
-                var invoicesCount = (from b in entity.invoices.Where(searchPredicate)
-                                     join l in entity.branches on b.branchId equals l.branchId into lj
-                                     from x in lj.DefaultIfEmpty()
-                                     where !entity.invoices.Any(y => y.invoiceMainId == b.invoiceId)
-                                     select new InvoiceModel()
-                                     {
-                                         invoiceId = b.invoiceId,
-                                         invNumber = b.invNumber,
-                                     })
-                .ToList().Count;
-               return invoicesCount;
+                var invoicesCount = (
+                    from b in entity.invoices.Where(searchPredicate)
+                    join l in entity.branches on b.branchId equals l.branchId into lj
+                    from x in lj.DefaultIfEmpty()
+                    where !entity.invoices.Any(y => y.invoiceMainId == b.invoiceId)
+                    select new InvoiceModel() { invoiceId = b.invoiceId, invNumber = b.invNumber, }
+                )
+                    .ToList()
+                    .Count;
+                return invoicesCount;
             }
         }
-       
+
         [HttpPost]
         [Route("GetCountBranchInvoices")]
         public string GetCountBranchInvoices(string token)
@@ -1704,23 +1835,39 @@ namespace POS_Server.Controllers
                     var searchPredicate = PredicateBuilder.New<invoices>();
 
                     if (branchCreatorId != 0)
-                        searchPredicate = searchPredicate.And(inv => inv.branchCreatorId == branchCreatorId && inv.isActive == true && invTypeL.Contains(inv.invType));
+                        searchPredicate = searchPredicate.And(
+                            inv =>
+                                inv.branchCreatorId == branchCreatorId
+                                && inv.isActive == true
+                                && invTypeL.Contains(inv.invType)
+                        );
 
                     if (branchId != 0)
-                        searchPredicate = searchPredicate.Or(inv => inv.branchId == branchId && inv.isActive == true && invTypeL.Contains(inv.invType));
+                        searchPredicate = searchPredicate.Or(
+                            inv =>
+                                inv.branchId == branchId
+                                && inv.isActive == true
+                                && invTypeL.Contains(inv.invType)
+                        );
 
                     if (duration > 0)
                     {
-                        DateTime dt = Convert.ToDateTime(DateTime.Today.AddDays(-duration).ToShortDateString());
+                        DateTime dt = Convert.ToDateTime(
+                            DateTime.Today.AddDays(-duration).ToShortDateString()
+                        );
                         searchPredicate = searchPredicate.And(inv => inv.updateDate >= dt);
                     }
 
-                    var invoicesCount = (from b in entity.invoices.Where(searchPredicate)
-                                         select new InvoiceModel()
-                                         {
-                                             invoiceId = b.invoiceId,
-                                             invNumber = b.invNumber,
-                                         }).ToList().Count;
+                    var invoicesCount = (
+                        from b in entity.invoices.Where(searchPredicate)
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                        }
+                    )
+                        .ToList()
+                        .Count;
 
                     return TokenManager.GenerateToken(invoicesCount);
                 }
@@ -1755,63 +1902,73 @@ namespace POS_Server.Controllers
                 {
                     var searchPredicate = PredicateBuilder.New<invoices>();
 
-                    searchPredicate = searchPredicate.And(x => x.invType == "ts" || x.invType == "ss");
+                    searchPredicate = searchPredicate.And(
+                        x => x.invType == "ts" || x.invType == "ss"
+                    );
                     searchPredicate = searchPredicate.And(x => x.shipUserId == shipUserId);
 
-
-                    var invoices = (from b in entity.invoices.Where(searchPredicate)
-                                    join u in entity.users on b.shipUserId equals u.userId into lj
-                                    from y in lj.DefaultIfEmpty()
-                                    select new InvoiceModel()
-                                    {
-                                        invoiceId = b.invoiceId,
-                                        invNumber = b.invNumber,
-                                        agentId = b.agentId,
-                                        agentName = b.agents.name,
-                                        invType = b.invType,
-                                        total = b.total,
-                                        totalNet = b.totalNet,
-                                        paid = b.paid,
-                                        deserved = b.deserved,
-                                        deservedDate = b.deservedDate,
-                                        invDate = b.invDate,
-                                        invoiceMainId = b.invoiceMainId,
-                                        invCase = b.invCase,
-                                        invTime = b.invTime,
-                                        notes = b.notes,
-                                        vendorInvNum = b.vendorInvNum,
-                                        vendorInvDate = b.vendorInvDate,
-                                        createUserId = b.createUserId,
-                                        updateDate = b.updateDate,
-                                        updateUserId = b.updateUserId,
-                                        branchId = b.branchId,
-                                        discountValue = b.discountValue,
-                                        discountType = b.discountType,
-                                        tax = b.tax,
-                                        taxtype = b.taxtype,
-                                        name = b.name,
-                                        isApproved = b.isApproved,
-                                        branchCreatorId = b.branchCreatorId,
-                                        shippingCompanyId = b.shippingCompanyId,
-                                        shipUserId = b.shipUserId,
-                                        userId = b.userId,
-                                        manualDiscountType = b.manualDiscountType,
-                                        manualDiscountValue = b.manualDiscountValue,
-                                        invBarcode = b.invBarcode,
-                                    }).ToList();
-
+                    var invoices = (
+                        from b in entity.invoices.Where(searchPredicate)
+                        join u in entity.users on b.shipUserId equals u.userId into lj
+                        from y in lj.DefaultIfEmpty()
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            agentName = b.agents.name,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
 
                     foreach (InvoiceModel inv in invoices)
                     {
-                        var prepOrders = (from o in entity.orderPreparing.Where(x => x.invoiceId == inv.invoiceId)
-                                          join s in entity.orderPreparingStatus on o.orderPreparingId equals s.orderPreparingId
-                                          where (s.orderStatusId == entity.orderPreparingStatus.Where(x => x.orderPreparingId == o.orderPreparingId).Max(x => x.orderStatusId))
-                                          select new OrderPreparingModel()
-                                          {
-                                              orderPreparingId = o.orderPreparingId,
-                                              status = s.status,
-                                          }).ToList();
-
+                        var prepOrders = (
+                            from o in entity.orderPreparing.Where(x => x.invoiceId == inv.invoiceId)
+                            join s in entity.orderPreparingStatus
+                                on o.orderPreparingId equals s.orderPreparingId
+                            where
+                                (
+                                    s.orderStatusId
+                                    == entity.orderPreparingStatus
+                                        .Where(x => x.orderPreparingId == o.orderPreparingId)
+                                        .Max(x => x.orderStatusId)
+                                )
+                            select new OrderPreparingModel()
+                            {
+                                orderPreparingId = o.orderPreparingId,
+                                status = s.status,
+                            }
+                        ).ToList();
 
                         foreach (OrderPreparingModel o in prepOrders)
                         {
@@ -1839,9 +1996,8 @@ namespace POS_Server.Controllers
                             else
                                 inv.status = "Ready";
                             #endregion
-
                         }
-                        var itemList = itc.Get( inv.invoiceId);
+                        var itemList = itc.Get(inv.invoiceId);
                         inv.itemsCount = itemList.Count;
                     }
 
@@ -1895,34 +2051,42 @@ namespace POS_Server.Controllers
                 searchPredicate = searchPredicate.And(x => x.invType == "ts" || x.invType == "ss");
                 searchPredicate = searchPredicate.And(x => x.shipUserId == shipUserId);
 
-
-                var invoices = (from x in entity.invoices.Where(searchPredicate)
-                                join u in entity.users on x.shipUserId equals u.userId into lj
-                                from y in lj.DefaultIfEmpty()
-                                select new InvoiceModel()
-                                {
-                                    invNumber = x.invNumber,
-                                    invoiceId = x.invoiceId,
-                                    shipUserId = x.shipUserId,
-                                    shipUserName = y.name,
-                                    shipUserLastName = y.lastname,
-                                    shippingCompanyId = x.shippingCompanyId,
-                                    shippingCompanyName = x.shippingCompanies.name,
-                                    orderTime = x.orderTime,
-                                }).ToList();
-
+                var invoices = (
+                    from x in entity.invoices.Where(searchPredicate)
+                    join u in entity.users on x.shipUserId equals u.userId into lj
+                    from y in lj.DefaultIfEmpty()
+                    select new InvoiceModel()
+                    {
+                        invNumber = x.invNumber,
+                        invoiceId = x.invoiceId,
+                        shipUserId = x.shipUserId,
+                        shipUserName = y.name,
+                        shipUserLastName = y.lastname,
+                        shippingCompanyId = x.shippingCompanyId,
+                        shippingCompanyName = x.shippingCompanies.name,
+                        orderTime = x.orderTime,
+                    }
+                ).ToList();
 
                 foreach (InvoiceModel inv in invoices)
                 {
-                    var prepOrders = (from o in entity.orderPreparing.Where(x => x.invoiceId == inv.invoiceId)
-                                      join s in entity.orderPreparingStatus on o.orderPreparingId equals s.orderPreparingId
-                                      where (s.orderStatusId == entity.orderPreparingStatus.Where(x => x.orderPreparingId == o.orderPreparingId).Max(x => x.orderStatusId))
-                                      select new OrderPreparingModel()
-                                      {
-                                          orderPreparingId = o.orderPreparingId,
-                                          status = s.status,
-                                      }).ToList();
-
+                    var prepOrders = (
+                        from o in entity.orderPreparing.Where(x => x.invoiceId == inv.invoiceId)
+                        join s in entity.orderPreparingStatus
+                            on o.orderPreparingId equals s.orderPreparingId
+                        where
+                            (
+                                s.orderStatusId
+                                == entity.orderPreparingStatus
+                                    .Where(x => x.orderPreparingId == o.orderPreparingId)
+                                    .Max(x => x.orderStatusId)
+                            )
+                        select new OrderPreparingModel()
+                        {
+                            orderPreparingId = o.orderPreparingId,
+                            status = s.status,
+                        }
+                    ).ToList();
 
                     foreach (OrderPreparingModel o in prepOrders)
                     {
@@ -1950,15 +2114,14 @@ namespace POS_Server.Controllers
                         else
                             inv.status = "Ready";
                         #endregion
-
                     }
-
                 }
 
                 var invoicesCount = invoices.Where(x => x.status == "Ready").Count();
                 return invoicesCount;
             }
         }
+
         [HttpPost]
         [Route("getOrdersForPay")]
         public string getOrdersForPay(string token)
@@ -1986,57 +2149,78 @@ namespace POS_Server.Controllers
                 statusL.Add("Done");
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var invoicesList = (from b in entity.invoices.Where(x => (x.invType == "s" || x.invType == "ts" || x.invType == "ss") && x.branchCreatorId == branchId && x.shipUserId != null && x.isActive == true)
-                                        join op in entity.orderPreparing on b.invoiceId equals op.invoiceId
-                                        join s in entity.orderPreparingStatus on op.orderPreparingId equals s.orderPreparingId
-                                        join u in entity.users on b.shipUserId equals u.userId into lj
-                                        from y in lj.DefaultIfEmpty()
-                                        where (statusL.Contains(s.status) && s.orderStatusId == entity.orderPreparingStatus.Where(x => x.orderPreparing.invoiceId == b.invoiceId).Max(x => x.orderStatusId))
-                                        select new InvoiceModel()
-                                        {
-                                            invStatusId = s.orderStatusId,
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            agentName = b.agents.name,
-                                            shipUserName = y.name+" "+y.lastname,
-                                            status = s.status,
-                                            userId = b.userId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            shippingCost = b.shippingCost,
-                                            realShippingCost = b.realShippingCost,
-                                            payStatus = b.deserved == 0 ? "payed" : (b.deserved == b.totalNet ? "unpayed" : "partpayed"),
-                                            branchCreatorName = entity.branches.Where(X => X.branchId == b.branchCreatorId).FirstOrDefault().name,
-                                            invBarcode = b.invBarcode,
-                                        })
-                    .ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(
+                            x =>
+                                (x.invType == "s" || x.invType == "ts" || x.invType == "ss")
+                                && x.branchCreatorId == branchId
+                                && x.shipUserId != null
+                                && x.isActive == true
+                        )
+                        join op in entity.orderPreparing on b.invoiceId equals op.invoiceId
+                        join s in entity.orderPreparingStatus
+                            on op.orderPreparingId equals s.orderPreparingId
+                        join u in entity.users on b.shipUserId equals u.userId into lj
+                        from y in lj.DefaultIfEmpty()
+                        where
+                            (
+                                statusL.Contains(s.status)
+                                && s.orderStatusId
+                                    == entity.orderPreparingStatus
+                                        .Where(x => x.orderPreparing.invoiceId == b.invoiceId)
+                                        .Max(x => x.orderStatusId)
+                            )
+                        select new InvoiceModel()
+                        {
+                            invStatusId = s.orderStatusId,
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            agentName = b.agents.name,
+                            shipUserName = y.name + " " + y.lastname,
+                            status = s.status,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            shippingCost = b.shippingCost,
+                            realShippingCost = b.realShippingCost,
+                            payStatus =
+                                b.deserved == 0
+                                    ? "payed"
+                                    : (b.deserved == b.totalNet ? "unpayed" : "partpayed"),
+                            branchCreatorName = entity.branches
+                                .Where(X => X.branchId == b.branchCreatorId)
+                                .FirstOrDefault()
+                                .name,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
                     if (invoicesList != null)
                     {
                         for (int i = 0; i < invoicesList.Count; i++)
@@ -2100,53 +2284,79 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var invoicesList = (from b in entity.invoices.Where(x => x.agentId == agentId && typesList.Contains(x.invType)
-                                                 && x.deserved > 0 && x.branchCreatorId == branchId &&
-                                           ((x.shippingCompanyId == null && x.shipUserId == null ) ||
-                                            (x.shippingCompanyId != null && x.shipUserId == null && x.isPrePaid == 1) || 
-                                            (x.shippingCompanyId != null && x.shipUserId != null )))
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            realShippingCost = b.realShippingCost,
-                                            shippingCost = b.shippingCost,
-                                            invBarcode = b.invBarcode,
-                                        }).ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(
+                            x =>
+                                x.agentId == agentId
+                                && typesList.Contains(x.invType)
+                                && x.deserved > 0
+                                && x.branchCreatorId == branchId
+                                && (
+                                    (x.shippingCompanyId == null && x.shipUserId == null)
+                                    || (
+                                        x.shippingCompanyId != null
+                                        && x.shipUserId == null
+                                        && x.isPrePaid == 1
+                                    )
+                                    || (x.shippingCompanyId != null && x.shipUserId != null)
+                                )
+                        )
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            realShippingCost = b.realShippingCost,
+                            shippingCost = b.shippingCost,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
 
-                    invoicesList = invoicesList.Where(inv => inv.invoiceMainId == null
-                                || (inv.invoiceMainId != null
-                                         && entity.invoices.Where(x => x.invoiceId == inv.invoiceMainId && x.invType != "s" && x.invType != "p").FirstOrDefault() != null))
-                       .ToList();
+                    invoicesList = invoicesList
+                        .Where(
+                            inv =>
+                                inv.invoiceMainId == null
+                                || (
+                                    inv.invoiceMainId != null
+                                    && entity.invoices
+                                        .Where(
+                                            x =>
+                                                x.invoiceId == inv.invoiceMainId
+                                                && x.invType != "s"
+                                                && x.invType != "p"
+                                        )
+                                        .FirstOrDefault() != null
+                                )
+                        )
+                        .ToList();
                     //get only with rc status
                     if (type == "feed")
                     {
@@ -2155,12 +2365,18 @@ namespace POS_Server.Controllers
                         {
                             long invoiceId = inv.invoiceId;
 
-                            var statusObj = entity.orderPreparingStatus.Where(x => x.orderPreparing.invoiceId == invoiceId && x.status == "Done").FirstOrDefault();
+                            var statusObj = entity.orderPreparingStatus
+                                .Where(
+                                    x =>
+                                        x.orderPreparing.invoiceId == invoiceId
+                                        && x.status == "Done"
+                                )
+                                .FirstOrDefault();
 
                             if (statusObj != null)
                             {
                                 inv.invoiceItems = itc.Get(invoiceId);
-                               inv.itemsCount = inv.invoiceItems.Count;
+                                inv.itemsCount = inv.invoiceItems.Count;
                                 res.Add(inv);
                             }
                         }
@@ -2176,11 +2392,9 @@ namespace POS_Server.Controllers
                         }
                         return TokenManager.GenerateToken(invoicesList);
                     }
-
                 }
             }
         }
-
 
         [HttpPost]
         [Route("getNotPaidAgentInvoices")]
@@ -2206,42 +2420,44 @@ namespace POS_Server.Controllers
 
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var invoicesList = (from b in entity.invoices.Where(x => x.agentId == agentId && x.deserved > 0)
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            invBarcode = b.invBarcode,
-                                        }).ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(x => x.agentId == agentId && x.deserved > 0)
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
 
                     return TokenManager.GenerateToken(invoicesList);
                 }
@@ -2290,47 +2506,66 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var invoicesList = (from b in entity.invoices.Where(x => x.shippingCompanyId == shippingCompanyId && typesList.Contains(x.invType)
-                                      && x.deserved > 0 &&
-                                         x.shippingCompanyId != null && x.shipUserId == null && x.agentId != null && x.isPrePaid == 0)
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            vendorInvNum = b.vendorInvNum,
-                                            vendorInvDate = b.vendorInvDate,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchCreatorId = b.branchCreatorId,
-                                            shippingCompanyId = b.shippingCompanyId,
-                                            shipUserId = b.shipUserId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            invBarcode = b.invBarcode,
-                                        }).ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(
+                            x =>
+                                x.shippingCompanyId == shippingCompanyId
+                                && typesList.Contains(x.invType)
+                                && x.deserved > 0
+                                && x.shippingCompanyId != null
+                                && x.shipUserId == null
+                                && x.agentId != null
+                                && x.isPrePaid == 0
+                        )
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            vendorInvNum = b.vendorInvNum,
+                            vendorInvDate = b.vendorInvDate,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchCreatorId = b.branchCreatorId,
+                            shippingCompanyId = b.shippingCompanyId,
+                            shipUserId = b.shipUserId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
 
-                    invoicesList = invoicesList.Where(inv => inv.invoiceId == invoicesList.Where(i => i.invNumber == inv.invNumber).ToList().OrderBy(i => i.invoiceId).FirstOrDefault().invoiceId).ToList();
-
+                    invoicesList = invoicesList
+                        .Where(
+                            inv =>
+                                inv.invoiceId
+                                == invoicesList
+                                    .Where(i => i.invNumber == inv.invNumber)
+                                    .ToList()
+                                    .OrderBy(i => i.invoiceId)
+                                    .FirstOrDefault()
+                                    .invoiceId
+                        )
+                        .ToList();
 
                     //get only with rc status
                     if (type == "feed")
@@ -2340,7 +2575,13 @@ namespace POS_Server.Controllers
                         {
                             long invoiceId = inv.invoiceId;
 
-                            var statusObj = entity.orderPreparingStatus.Where(x => x.orderPreparing.invoiceId == invoiceId && x.status == "Done").FirstOrDefault();
+                            var statusObj = entity.orderPreparingStatus
+                                .Where(
+                                    x =>
+                                        x.orderPreparing.invoiceId == invoiceId
+                                        && x.status == "Done"
+                                )
+                                .FirstOrDefault();
 
                             if (statusObj != null)
                             {
@@ -2353,7 +2594,6 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-
                         if (invoicesList != null)
                         {
                             for (int i = 0; i < invoicesList.Count; i++)
@@ -2369,6 +2609,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("getUserInvoices")]
         public string getUserInvoices(string token)
@@ -2416,40 +2657,47 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var invoicesList = (from b in entity.invoices.Where(x => x.userId == userId && typesList.Contains(x.invType) &&
-                                                                              x.deserved > 0 && x.branchCreatorId == branchId)
-                                        select new InvoiceModel()
-                                        {
-                                            invoiceId = b.invoiceId,
-                                            invNumber = b.invNumber,
-                                            agentId = b.agentId,
-                                            invType = b.invType,
-                                            total = b.total,
-                                            totalNet = b.totalNet,
-                                            paid = b.paid,
-                                            deserved = b.deserved,
-                                            deservedDate = b.deservedDate,
-                                            invDate = b.invDate,
-                                            invoiceMainId = b.invoiceMainId,
-                                            invCase = b.invCase,
-                                            invTime = b.invTime,
-                                            notes = b.notes,
-                                            createUserId = b.createUserId,
-                                            updateDate = b.updateDate,
-                                            updateUserId = b.updateUserId,
-                                            branchId = b.branchId,
-                                            discountValue = b.discountValue,
-                                            discountType = b.discountType,
-                                            tax = b.tax,
-                                            taxtype = b.taxtype,
-                                            name = b.name,
-                                            isApproved = b.isApproved,
-                                            branchCreatorId = b.branchCreatorId,
-                                            userId = b.userId,
-                                            manualDiscountType = b.manualDiscountType,
-                                            manualDiscountValue = b.manualDiscountValue,
-                                            invBarcode = b.invBarcode,
-                                        }).ToList();
+                    var invoicesList = (
+                        from b in entity.invoices.Where(
+                            x =>
+                                x.userId == userId
+                                && typesList.Contains(x.invType)
+                                && x.deserved > 0
+                                && x.branchCreatorId == branchId
+                        )
+                        select new InvoiceModel()
+                        {
+                            invoiceId = b.invoiceId,
+                            invNumber = b.invNumber,
+                            agentId = b.agentId,
+                            invType = b.invType,
+                            total = b.total,
+                            totalNet = b.totalNet,
+                            paid = b.paid,
+                            deserved = b.deserved,
+                            deservedDate = b.deservedDate,
+                            invDate = b.invDate,
+                            invoiceMainId = b.invoiceMainId,
+                            invCase = b.invCase,
+                            invTime = b.invTime,
+                            notes = b.notes,
+                            createUserId = b.createUserId,
+                            updateDate = b.updateDate,
+                            updateUserId = b.updateUserId,
+                            branchId = b.branchId,
+                            discountValue = b.discountValue,
+                            discountType = b.discountType,
+                            tax = b.tax,
+                            taxtype = b.taxtype,
+                            name = b.name,
+                            isApproved = b.isApproved,
+                            branchCreatorId = b.branchCreatorId,
+                            userId = b.userId,
+                            manualDiscountType = b.manualDiscountType,
+                            manualDiscountValue = b.manualDiscountValue,
+                            invBarcode = b.invBarcode,
+                        }
+                    ).ToList();
 
                     //get only with rc status
                     if (type == "feed")
@@ -2459,7 +2707,13 @@ namespace POS_Server.Controllers
                         {
                             long invoiceId = inv.invoiceId;
 
-                            var statusObj = entity.orderPreparingStatus.Where(x => x.orderPreparing.invoiceId == invoiceId && x.status == "Done").FirstOrDefault();
+                            var statusObj = entity.orderPreparingStatus
+                                .Where(
+                                    x =>
+                                        x.orderPreparing.invoiceId == invoiceId
+                                        && x.status == "Done"
+                                )
+                                .FirstOrDefault();
 
                             if (statusObj != null)
                             {
@@ -2472,7 +2726,6 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-
                         if (invoicesList != null)
                         {
                             for (int i = 0; i < invoicesList.Count; i++)
@@ -2488,6 +2741,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("GetOrderByType")]
         public string GetOrderByType(string token)
@@ -2524,48 +2778,51 @@ namespace POS_Server.Controllers
                 {
                     if (branchId == 0)
                     {
-                        var invoicesList = (from b in entity.invoices.Where(x => invTypeL.Contains(x.invType) && x.invoiceMainId == null)
-                                            join l in entity.branches on b.branchId equals l.branchId into lj
-                                            from x in lj.DefaultIfEmpty()
-                                            select new InvoiceModel()
-                                            {
-                                                invoiceId = b.invoiceId,
-                                                invNumber = b.invNumber,
-                                                agentId = b.agentId,
-                                                invType = b.invType,
-                                                total = b.total,
-                                                totalNet = b.totalNet,
-                                                paid = b.paid,
-                                                deserved = b.deserved,
-                                                deservedDate = b.deservedDate,
-                                                invDate = b.invDate,
-                                                invoiceMainId = b.invoiceMainId,
-                                                invCase = b.invCase,
-                                                invTime = b.invTime,
-                                                notes = b.notes,
-                                                vendorInvNum = b.vendorInvNum,
-                                                vendorInvDate = b.vendorInvDate,
-                                                createUserId = b.createUserId,
-                                                updateDate = b.updateDate,
-                                                updateUserId = b.updateUserId,
-                                                branchId = b.branchId,
-                                                discountValue = b.discountValue,
-                                                discountType = b.discountType,
-                                                tax = b.tax,
-                                                taxtype = b.taxtype,
-                                                name = b.name,
-                                                isApproved = b.isApproved,
-                                                branchName = x.name,
-                                                branchCreatorId = b.branchCreatorId,
-                                                shippingCompanyId = b.shippingCompanyId,
-                                                shipUserId = b.shipUserId,
-                                                userId = b.userId,
-                                                manualDiscountType = b.manualDiscountType,
-                                                manualDiscountValue = b.manualDiscountValue,
-                                                cashReturn = b.cashReturn,
-                                                invBarcode = b.invBarcode,
-                                            }).ToList();
-
+                        var invoicesList = (
+                            from b in entity.invoices.Where(
+                                x => invTypeL.Contains(x.invType) && x.invoiceMainId == null
+                            )
+                            join l in entity.branches on b.branchId equals l.branchId into lj
+                            from x in lj.DefaultIfEmpty()
+                            select new InvoiceModel()
+                            {
+                                invoiceId = b.invoiceId,
+                                invNumber = b.invNumber,
+                                agentId = b.agentId,
+                                invType = b.invType,
+                                total = b.total,
+                                totalNet = b.totalNet,
+                                paid = b.paid,
+                                deserved = b.deserved,
+                                deservedDate = b.deservedDate,
+                                invDate = b.invDate,
+                                invoiceMainId = b.invoiceMainId,
+                                invCase = b.invCase,
+                                invTime = b.invTime,
+                                notes = b.notes,
+                                vendorInvNum = b.vendorInvNum,
+                                vendorInvDate = b.vendorInvDate,
+                                createUserId = b.createUserId,
+                                updateDate = b.updateDate,
+                                updateUserId = b.updateUserId,
+                                branchId = b.branchId,
+                                discountValue = b.discountValue,
+                                discountType = b.discountType,
+                                tax = b.tax,
+                                taxtype = b.taxtype,
+                                name = b.name,
+                                isApproved = b.isApproved,
+                                branchName = x.name,
+                                branchCreatorId = b.branchCreatorId,
+                                shippingCompanyId = b.shippingCompanyId,
+                                shipUserId = b.shipUserId,
+                                userId = b.userId,
+                                manualDiscountType = b.manualDiscountType,
+                                manualDiscountValue = b.manualDiscountValue,
+                                cashReturn = b.cashReturn,
+                                invBarcode = b.invBarcode,
+                            }
+                        ).ToList();
 
                         if (invoicesList != null)
                         {
@@ -2581,47 +2838,53 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var invoicesList = (from b in entity.invoices.Where(x => invTypeL.Contains(x.invType) && x.branchId == branchId && x.invoiceMainId == null)
-                                            join l in entity.branches on b.branchId equals l.branchId into lj
-                                            from x in lj.DefaultIfEmpty()
-                                            select new InvoiceModel()
-                                            {
-                                                invoiceId = b.invoiceId,
-                                                invNumber = b.invNumber,
-                                                agentId = b.agentId,
-                                                invType = b.invType,
-                                                total = b.total,
-                                                totalNet = b.totalNet,
-                                                paid = b.paid,
-                                                deserved = b.deserved,
-                                                deservedDate = b.deservedDate,
-                                                invDate = b.invDate,
-                                                invoiceMainId = b.invoiceMainId,
-                                                invCase = b.invCase,
-                                                invTime = b.invTime,
-                                                notes = b.notes,
-                                                vendorInvNum = b.vendorInvNum,
-                                                vendorInvDate = b.vendorInvDate,
-                                                createUserId = b.createUserId,
-                                                updateDate = b.updateDate,
-                                                updateUserId = b.updateUserId,
-                                                branchId = b.branchId,
-                                                discountValue = b.discountValue,
-                                                discountType = b.discountType,
-                                                tax = b.tax,
-                                                taxtype = b.taxtype,
-                                                name = b.name,
-                                                isApproved = b.isApproved,
-                                                branchName = x.name,
-                                                branchCreatorId = b.branchCreatorId,
-                                                shippingCompanyId = b.shippingCompanyId,
-                                                shipUserId = b.shipUserId,
-                                                userId = b.userId,
-                                                manualDiscountType = b.manualDiscountType,
-                                                manualDiscountValue = b.manualDiscountValue,
-                                                invBarcode = b.invBarcode,
-                                            }).ToList();
-
+                        var invoicesList = (
+                            from b in entity.invoices.Where(
+                                x =>
+                                    invTypeL.Contains(x.invType)
+                                    && x.branchId == branchId
+                                    && x.invoiceMainId == null
+                            )
+                            join l in entity.branches on b.branchId equals l.branchId into lj
+                            from x in lj.DefaultIfEmpty()
+                            select new InvoiceModel()
+                            {
+                                invoiceId = b.invoiceId,
+                                invNumber = b.invNumber,
+                                agentId = b.agentId,
+                                invType = b.invType,
+                                total = b.total,
+                                totalNet = b.totalNet,
+                                paid = b.paid,
+                                deserved = b.deserved,
+                                deservedDate = b.deservedDate,
+                                invDate = b.invDate,
+                                invoiceMainId = b.invoiceMainId,
+                                invCase = b.invCase,
+                                invTime = b.invTime,
+                                notes = b.notes,
+                                vendorInvNum = b.vendorInvNum,
+                                vendorInvDate = b.vendorInvDate,
+                                createUserId = b.createUserId,
+                                updateDate = b.updateDate,
+                                updateUserId = b.updateUserId,
+                                branchId = b.branchId,
+                                discountValue = b.discountValue,
+                                discountType = b.discountType,
+                                tax = b.tax,
+                                taxtype = b.taxtype,
+                                name = b.name,
+                                isApproved = b.isApproved,
+                                branchName = x.name,
+                                branchCreatorId = b.branchCreatorId,
+                                shippingCompanyId = b.shippingCompanyId,
+                                shipUserId = b.shipUserId,
+                                userId = b.userId,
+                                manualDiscountType = b.manualDiscountType,
+                                manualDiscountValue = b.manualDiscountValue,
+                                invBarcode = b.invBarcode,
+                            }
+                        ).ToList();
 
                         if (invoicesList != null)
                         {
@@ -2638,6 +2901,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("GetLastNumOfInv")]
         public string GetLastNumOfInv(string token)
@@ -2668,7 +2932,10 @@ namespace POS_Server.Controllers
                 int lastNum = 0;
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    numberList = entity.invoices.Where(b => b.invNumber.Contains(invCode + "-") && b.branchId == branchId).Select(b => b.invNumber).ToList();
+                    numberList = entity.invoices
+                        .Where(b => b.invNumber.Contains(invCode + "-") && b.branchId == branchId)
+                        .Select(b => b.invNumber)
+                        .ToList();
 
                     for (int i = 0; i < numberList.Count; i++)
                     {
@@ -2723,11 +2990,15 @@ namespace POS_Server.Controllers
                 {
                     DateTime dateSearch = DateTime.Parse(DateTime.Now.ToString().Split(' ')[0]);
 
-                    lastNum = entity.invoices.Where(b => invTypeL.Contains(b.invType)
-                                                        && b.branchId == branchId
-                                                        && b.invDate >= dateSearch).Select(b => b.invNumber).Count();
-
- 
+                    lastNum = entity.invoices
+                        .Where(
+                            b =>
+                                invTypeL.Contains(b.invType)
+                                && b.branchId == branchId
+                                && b.invDate >= dateSearch
+                        )
+                        .Select(b => b.invNumber)
+                        .Count();
                 }
                 return TokenManager.GenerateToken(lastNum);
             }
@@ -2735,26 +3006,29 @@ namespace POS_Server.Controllers
 
         public async Task<string> GetLastDialyNumOfInv(long branchId)
         {
-
             int lastNum = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-
                 DateTime dateSearch = DateTime.Parse(DateTime.Now.ToString().Split(' ')[0]);
 
-                lastNum = entity.invoices.Where(b => salesType.Contains(b.invType)
-                                                    && b.branchId == branchId
-                                                    && b.invDate >= dateSearch).Select(b => b.invNumber).Count();
-
-
+                lastNum = entity.invoices
+                    .Where(
+                        b =>
+                            salesType.Contains(b.invType)
+                            && b.branchId == branchId
+                            && b.invDate >= dateSearch
+                    )
+                    .Select(b => b.invNumber)
+                    .Count();
             }
             lastNum++;
             string strSeq = lastNum.ToString();
             if (lastNum <= 9999)
                 strSeq = lastNum.ToString().PadLeft(4, '0');
-            string invoiceNum =  strSeq;
+            string invoiceNum = strSeq;
             return invoiceNum;
         }
+
         [HttpPost]
         [Route("clearInvoiceCouponsAndClasses")]
         public string clearInvoiceCouponsAndClasses(string token)
@@ -2788,12 +3062,13 @@ namespace POS_Server.Controllers
                     }
 
                     // remove inv class
-                    var invClass = entity.invoiceClassDiscount.Where(x => x.invoiceId == invoiceId).FirstOrDefault();
+                    var invClass = entity.invoiceClassDiscount
+                        .Where(x => x.invoiceId == invoiceId)
+                        .FirstOrDefault();
                     if (invClass != null)
                         entity.invoiceClassDiscount.Remove(invClass);
 
                     entity.SaveChanges();
-
                 }
                 message = "1";
                 return TokenManager.GenerateToken(message);
@@ -2824,22 +3099,28 @@ namespace POS_Server.Controllers
                     {
                         classObject = c.Value.Replace("\\", string.Empty);
                         classObject = classObject.Trim('"');
-                        Object = JsonConvert.DeserializeObject<invoicesClass>(classObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        Object = JsonConvert.DeserializeObject<invoicesClass>(
+                            classObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                         //break;
                     }
                     else if (c.Type == "invoiceId")
                     {
                         invoiceId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-                        var oldList = entity.invoiceClassDiscount.Where(p => p.invoiceId == invoiceId);
+                        var oldList = entity.invoiceClassDiscount.Where(
+                            p => p.invoiceId == invoiceId
+                        );
                         if (oldList.Count() > 0)
                         {
                             entity.invoiceClassDiscount.RemoveRange(oldList);
@@ -2859,11 +3140,15 @@ namespace POS_Server.Controllers
                         message = inCls.invClassDiscountId.ToString();
                     }
                 }
-                catch { message = "0"; }
+                catch
+                {
+                    message = "0";
+                }
 
                 return TokenManager.GenerateToken(message);
             }
         }
+
         // for report
         [HttpPost]
         [Route("GetinvCountBydate")]
@@ -2879,8 +3164,8 @@ namespace POS_Server.Controllers
             {
                 string invType = "";
                 string branchType = "";
-                DateTime startDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                DateTime endDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                DateTime startDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                DateTime endDate = coctrlr.AddOffsetTodate(DateTime.Now);
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -2903,41 +3188,47 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var invListm = (from I in entity.invoices
-                                    join B in entity.branches on I.branchId equals B.branchId into JB
-                                    from JBB in JB.DefaultIfEmpty()
-                                    where //(invtype == "all" ? true : I.invType == invtype)  &&
-                                      (branchType == "all" ? true : JBB.type == branchType)
-                                    && System.DateTime.Compare((DateTime)startDate, (DateTime)I.invDate) <= 0
-                                    && System.DateTime.Compare((DateTime)endDate, (DateTime)I.invDate) >= 0
-                                    // I.invType == invtype
-                                    //     && branchType == "all" ? true : JBB.type == branchType
+                    var invListm = (
+                        from I in entity.invoices
+                        join B in entity.branches on I.branchId equals B.branchId into JB
+                        from JBB in JB.DefaultIfEmpty()
+                        where //(invtype == "all" ? true : I.invType == invtype)  &&
+                            (branchType == "all" ? true : JBB.type == branchType)
+                            && System.DateTime.Compare((DateTime)startDate, (DateTime)I.invDate)
+                                <= 0
+                            && System.DateTime.Compare((DateTime)endDate, (DateTime)I.invDate) >= 0
+                        // I.invType == invtype
+                        //     && branchType == "all" ? true : JBB.type == branchType
 
-                                    //  && startDate <= I.invDate && endDate >= I.invDate
-                                    // &&  System.DateTime.Compare((DateTime)startDate,  I.invDate) <= 0 && System.DateTime.Compare((DateTime)endDate, I.invDate) >= 0
-                                    group new { I, JBB } by (I.branchId) into g
-                                    select new
-                                    {
-                                        branchId = g.Key,
-                                        name = g.Select(t => t.JBB.name).FirstOrDefault(),
-
-
-                                        countP = g.Where(t => t.I.invType == "p").Count(),
-                                        countS = g.Where(t => t.I.invType == "s").Count(),
-                                        totalS = g.Where(t => t.I.invType == "s").Sum(S => S.I.total),
-                                        totalNetS = g.Where(t => t.I.invType == "s").Sum(S => S.I.totalNet),
-                                        totalP = g.Where(t => t.I.invType == "p").Sum(S => S.I.total),
-                                        totalNetP = g.Where(t => t.I.invType == "p").Sum(S => S.I.totalNet),
-                                        paid = g.Sum(S => S.I.paid),
-                                        deserved = g.Sum(S => S.I.deserved),
-                                        discountValue = g.Sum(S => S.I.discountType == "1" ? S.I.discountValue : (S.I.discountType == "2" ? (S.I.discountValue / 100) : 0)),
-                                    }).ToList();
+                        //  && startDate <= I.invDate && endDate >= I.invDate
+                        // &&  System.DateTime.Compare((DateTime)startDate,  I.invDate) <= 0 && System.DateTime.Compare((DateTime)endDate, I.invDate) >= 0
+                        group new { I, JBB } by (I.branchId) into g
+                        select new
+                        {
+                            branchId = g.Key,
+                            name = g.Select(t => t.JBB.name).FirstOrDefault(),
+                            countP = g.Where(t => t.I.invType == "p").Count(),
+                            countS = g.Where(t => t.I.invType == "s").Count(),
+                            totalS = g.Where(t => t.I.invType == "s").Sum(S => S.I.total),
+                            totalNetS = g.Where(t => t.I.invType == "s").Sum(S => S.I.totalNet),
+                            totalP = g.Where(t => t.I.invType == "p").Sum(S => S.I.total),
+                            totalNetP = g.Where(t => t.I.invType == "p").Sum(S => S.I.totalNet),
+                            paid = g.Sum(S => S.I.paid),
+                            deserved = g.Sum(S => S.I.deserved),
+                            discountValue = g.Sum(
+                                S =>
+                                    S.I.discountType == "1"
+                                        ? S.I.discountValue
+                                        : (S.I.discountType == "2" ? (S.I.discountValue / 100) : 0)
+                            ),
+                        }
+                    ).ToList();
 
                     return TokenManager.GenerateToken(invListm);
                 }
-
             }
         }
+
         // add or update bank
         [HttpPost]
         [Route("Save")]
@@ -2961,7 +3252,13 @@ namespace POS_Server.Controllers
                     {
                         invoiceObject = c.Value.Replace("\\", string.Empty);
                         invoiceObject = invoiceObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(invoiceObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            invoiceObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                         break;
                     }
                 }
@@ -2970,7 +3267,6 @@ namespace POS_Server.Controllers
                     long res = await saveInvoice(newObject);
                     message = res.ToString();
                 }
-
                 catch
                 {
                     message = "0";
@@ -2979,10 +3275,17 @@ namespace POS_Server.Controllers
                 return TokenManager.GenerateToken(message);
             }
         }
+
         public string generateSaleInvBarcode(string branchCode, string invNumber)
         {
-            return "si-" + branchCode + "-" + DateTime.Now.ToString().Split(' ')[0] + "-" + invNumber;
+            return "si-"
+                + branchCode
+                + "-"
+                + DateTime.Now.ToString().Split(' ')[0]
+                + "-"
+                + invNumber;
         }
+
         [NonAction]
         public async Task<long> saveSalesInvoice(invoices newObject)
         {
@@ -2990,7 +3293,7 @@ namespace POS_Server.Controllers
             invoices tmpInvoice;
 
             #region generate InvNumber - invoice barcode
-            long branchId= (long)newObject.branchCreatorId;
+            long branchId = (long)newObject.branchCreatorId;
             string branchCode = "";
             using (incposdbEntities entity = new incposdbEntities())
             {
@@ -2998,7 +3301,7 @@ namespace POS_Server.Controllers
                 branchCode = branch.code;
             }
             if (newObject.invoiceId == 0 || newObject.invNumber == "")
-            {                
+            {
                 string invNumber = await GetLastDialyNumOfInv(branchId);
                 newObject.invNumber = invNumber;
             }
@@ -3012,7 +3315,11 @@ namespace POS_Server.Controllers
                 var invoiceEntity = entity.Set<invoices>();
                 if (newObject.invoiceId == 0)
                 {
-                    if (newObject.invType == "s" || newObject.invType == "ss" || newObject.invType == "ts")
+                    if (
+                        newObject.invType == "s"
+                        || newObject.invType == "ss"
+                        || newObject.invType == "ts"
+                    )
                     {
                         ProgramInfo programInfo = new ProgramInfo();
                         int invMaxCount = programInfo.getSaleinvCount();
@@ -3050,7 +3357,9 @@ namespace POS_Server.Controllers
                 }
                 else
                 {
-                    tmpInvoice = entity.invoices.Where(p => p.invoiceId == newObject.invoiceId).FirstOrDefault();
+                    tmpInvoice = entity.invoices
+                        .Where(p => p.invoiceId == newObject.invoiceId)
+                        .FirstOrDefault();
                     tmpInvoice.invNumber = newObject.invNumber;
                     tmpInvoice.agentId = newObject.agentId;
                     tmpInvoice.invType = newObject.invType;
@@ -3089,7 +3398,7 @@ namespace POS_Server.Controllers
                     tmpInvoice.membershipId = newObject.membershipId;
                     tmpInvoice.invBarcode = newObject.invBarcode;
 
-                    if(newObject.invDate != null)
+                    if (newObject.invDate != null)
                         tmpInvoice.invDate = newObject.invDate;
 
                     entity.SaveChanges();
@@ -3098,6 +3407,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [NonAction]
         public async Task<long> saveInvoice(invoices newObject)
         {
@@ -3116,7 +3426,6 @@ namespace POS_Server.Controllers
 
                 if (newObject.invoiceId == 0)
                 {
-                    
                     if (newObject.cashReturn == null)
                         newObject.cashReturn = 0;
                     newObject.invDate = datenow;
@@ -3133,7 +3442,9 @@ namespace POS_Server.Controllers
                 }
                 else
                 {
-                    tmpInvoice = entity.invoices.Where(p => p.invoiceId == newObject.invoiceId).FirstOrDefault();
+                    tmpInvoice = entity.invoices
+                        .Where(p => p.invoiceId == newObject.invoiceId)
+                        .FirstOrDefault();
                     tmpInvoice.invNumber = newObject.invNumber;
                     tmpInvoice.agentId = newObject.agentId;
                     tmpInvoice.invType = newObject.invType;
@@ -3172,7 +3483,7 @@ namespace POS_Server.Controllers
                     tmpInvoice.membershipId = newObject.membershipId;
                     tmpInvoice.invBarcode = newObject.invBarcode;
 
-                    if(newObject.invDate != null)
+                    if (newObject.invDate != null)
                         tmpInvoice.invDate = newObject.invDate;
 
                     entity.SaveChanges();
@@ -3209,13 +3520,25 @@ namespace POS_Server.Controllers
                     {
                         ObjectStr = c.Value.Replace("\\", string.Empty);
                         ObjectStr = ObjectStr.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(ObjectStr, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            ObjectStr,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemsObject")
                     {
                         ObjectStr = c.Value.Replace("\\", string.Empty);
                         ObjectStr = ObjectStr.Trim('"');
-                        items = JsonConvert.DeserializeObject<List<itemsTransfer>>(ObjectStr, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        items = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            ObjectStr,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "posId")
                     {
@@ -3225,7 +3548,6 @@ namespace POS_Server.Controllers
                 #endregion
                 try
                 {
-
                     long invoiceId = await saveInvoice(newObject);
                     if (invoiceId > 0)
                     {
@@ -3236,25 +3558,28 @@ namespace POS_Server.Controllers
                     }
                     else
                         message = "0";
-
                 }
                 catch
                 {
                     message = "0";
-
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
                 result += ",InvTime:'" + newObject.invTime + "'";
-                result += ",UpdateDate:'" + DateTime.Parse(newObject.updateDate.ToString()).ToShortDateString() + "'";
+                result +=
+                    ",UpdateDate:'"
+                    + DateTime.Parse(newObject.updateDate.ToString()).ToShortDateString()
+                    + "'";
                 int draftCount = 0;
 
                 #region get purchase draft count
 
                 List<string> invoiceType = new List<string>() { "pd ", "pbd" };
-                if(invoiceType.Contains(newObject.invType))
-                draftCount = getDraftCount((int)newObject.updateUserId, invoiceType,1);
+                if (invoiceType.Contains(newObject.invType))
+                    draftCount = getDraftCount((int)newObject.updateUserId, invoiceType, 1);
 
                 result += ",PurchaseDraftCount:" + draftCount;
                 #endregion
@@ -3263,9 +3588,13 @@ namespace POS_Server.Controllers
 
                 #region get spending order draft count
                 if (spendingOrderType.Contains(newObject.invType))
-                    draftCount = getDraftCount((int)newObject.updateUserId, new List<string>() { "srd"},1);
+                    draftCount = getDraftCount(
+                        (int)newObject.updateUserId,
+                        new List<string>() { "srd" },
+                        1
+                    );
 
-                result += ",SpendingOrderDraftCount:"+draftCount;
+                result += ",SpendingOrderDraftCount:" + draftCount;
                 #endregion
                 using (incposdbEntities entity = new incposdbEntities())
                 {
@@ -3316,44 +3645,67 @@ namespace POS_Server.Controllers
                     {
                         invoiceObject = c.Value.Replace("\\", string.Empty);
                         invoiceObject = invoiceObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(invoiceObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            invoiceObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "amountNot")
                     {
                         amountNotStr = c.Value.Replace("\\", string.Empty);
                         amountNotStr = amountNotStr.Trim('"');
-                        amountNot = JsonConvert.DeserializeObject<NotificationUserModel>(amountNotStr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        amountNot = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            amountNotStr,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "waitNot")
                     {
                         waitNotStr = c.Value.Replace("\\", string.Empty);
                         waitNotStr = waitNotStr.Trim('"');
-                        waitNotUser = JsonConvert.DeserializeObject<NotificationUserModel>(waitNotStr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        waitNot = JsonConvert.DeserializeObject<notification>(waitNotStr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        waitNotUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            waitNotStr,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        waitNot = JsonConvert.DeserializeObject<notification>(
+                            waitNotStr,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "PosCashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        PosCashTransfer = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        PosCashTransfer = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "listPayments")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        listPayments = JsonConvert.DeserializeObject<List<cashTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        listPayments = JsonConvert.DeserializeObject<List<cashTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "posId")
                     {
                         posId = int.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -3361,7 +3713,6 @@ namespace POS_Server.Controllers
                     ProgramDetailsController pc = new ProgramDetailsController();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         #region check pos balance
                         var pos = entity.pos.Find(posId);
                         foreach (var c in listPayments)
@@ -3372,7 +3723,6 @@ namespace POS_Server.Controllers
                                 result += "Result:" + message;
                                 result += "}";
                                 return TokenManager.GenerateToken(result);
-
                             }
                         }
                         #endregion
@@ -3380,10 +3730,9 @@ namespace POS_Server.Controllers
                         if (newObject.invoiceMainId == 0)
                             newObject.invoiceMainId = null;
 
-
-                        long invoiceId  = await saveInvoice(newObject);
+                        long invoiceId = await saveInvoice(newObject);
                         message = newObject.invoiceId.ToString();
-                         newObject.invoiceId = invoiceId;
+                        newObject.invoiceId = invoiceId;
                         if (!invoiceId.Equals(0))
                         {
                             //save items transfer
@@ -3395,13 +3744,24 @@ namespace POS_Server.Controllers
                             if (newObject.branchCreatorId.Equals(newObject.branchId))
                             {
                                 ItemsLocationsController ilc = new ItemsLocationsController();
-                                await ilc.receiptInvoice((long)newObject.branchId, transferObject, (long)newObject.updateUserId, amountNot.objectName, amountNotStr);
+                                await ilc.receiptInvoice(
+                                    (long)newObject.branchId,
+                                    transferObject,
+                                    (long)newObject.updateUserId,
+                                    amountNot.objectName,
+                                    amountNotStr
+                                );
                                 saveAvgPrice(transferObject);
                             }
                             else
                             {
                                 NotificationController nc = new NotificationController();
-                                nc.save(waitNot, waitNotUser.objectName, waitNotUser.prefix, (long)waitNotUser.branchId);
+                                nc.save(
+                                    waitNot,
+                                    waitNotUser.objectName,
+                                    waitNotUser.prefix,
+                                    (long)waitNotUser.branchId
+                                );
                             }
                             #endregion
 
@@ -3425,23 +3785,25 @@ namespace POS_Server.Controllers
 
                             #endregion
                         }
-
-
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
                 result += ",InvTime:'" + newObject.invTime + "'";
-                result += ",UpdateDate:'" + DateTime.Parse(newObject.updateDate.ToString()).ToShortDateString() + "'";
+                result +=
+                    ",UpdateDate:'"
+                    + DateTime.Parse(newObject.updateDate.ToString()).ToShortDateString()
+                    + "'";
                 #region get purchase draft count
                 List<string> invoiceType = new List<string>() { "pd ", "pbd" };
-                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType,1);
+                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType, 1);
 
                 result += ",PurchaseDraftCount:" + draftCount;
                 #endregion
@@ -3455,7 +3817,6 @@ namespace POS_Server.Controllers
                 #endregion
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
 
@@ -3469,7 +3830,7 @@ namespace POS_Server.Controllers
                 var invoice = entity.invoices.Find(inv.invoiceId);
                 switch (cashTransfer.processType)
                 {
-                    case "cash":// cash: update pos balance  
+                    case "cash": // cash: update pos balance
                         var pos = entity.pos.Find(posId);
                         if (pos.balance > 0)
                         {
@@ -3487,15 +3848,15 @@ namespace POS_Server.Controllers
                                 pos.balance = 0;
                             }
                             entity.SaveChanges();
-                            await cc.addCashTransfer(cashTransfer); //add cash transfer  
+                            await cc.addCashTransfer(cashTransfer); //add cash transfer
                         }
                         break;
-                    case "balance":// balance: update customer balance
+                    case "balance": // balance: update customer balance
                         await recordConfiguredAgentCash(invoice, "pi", cashTransfer, posId);
 
                         break;
-                    case "card": // card  
-                       await cc.addCashTransfer(cashTransfer); //add cash transfer 
+                    case "card": // card
+                        await cc.addCashTransfer(cashTransfer); //add cash transfer
                         invoice.paid += cashTransfer.cash;
                         invoice.deserved -= cashTransfer.cash;
                         entity.SaveChanges();
@@ -3503,6 +3864,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("savePurchaseBounce")]
         public async Task<string> savePurchaseBounce(string token)
@@ -3534,27 +3896,40 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "notification")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        notificationUser = JsonConvert.DeserializeObject<NotificationUserModel>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        notification = JsonConvert.DeserializeObject<notification>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        notificationUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        notification = JsonConvert.DeserializeObject<notification>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "posId")
                     {
                         posId = int.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -3562,13 +3937,10 @@ namespace POS_Server.Controllers
                     ProgramDetailsController pc = new ProgramDetailsController();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         if (newObject.invoiceMainId == 0)
                             newObject.invoiceMainId = null;
 
-
-
-                        long  invoiceId = await saveInvoice(newObject);
+                        long invoiceId = await saveInvoice(newObject);
                         newObject.invoiceId = invoiceId;
                         message = invoiceId.ToString();
                         //int invoiceId = newObject.invoiceId;
@@ -3582,23 +3954,29 @@ namespace POS_Server.Controllers
                             NotificationController nc = new NotificationController();
                             notification.updateUserId = notification.createUserId;
 
-                            nc.save(notification, notificationUser.objectName, notificationUser.prefix, (int)notificationUser.branchId);
+                            nc.save(
+                                notification,
+                                notificationUser.objectName,
+                                notificationUser.prefix,
+                                (int)notificationUser.branchId
+                            );
                             #endregion
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
 
                 #region get sales draft count
                 List<string> invoiceType = new List<string>() { "pd ", "pbd" };
-                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType,1);
+                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType, 1);
 
                 result += ",PurchaseDraftCount:" + draftCount;
                 #endregion
@@ -3613,7 +3991,6 @@ namespace POS_Server.Controllers
 
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
 
@@ -3649,30 +4026,50 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "exportInvoice")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        sentExportInvoice = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        sentExportInvoice = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "not")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        notUser = JsonConvert.DeserializeObject<NotificationUserModel>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        not = JsonConvert.DeserializeObject<notification>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        notUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        not = JsonConvert.DeserializeObject<notification>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "final")
                         final = bool.Parse(c.Value);
-
                 }
                 #endregion
                 try
@@ -3680,37 +4077,50 @@ namespace POS_Server.Controllers
                     ProgramDetailsController pc = new ProgramDetailsController();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         //save import invoice
-                        newObject = await AddImportInvoice(newObject, sentExportInvoice, transferObject, notUser, not, final);
+                        newObject = await AddImportInvoice(
+                            newObject,
+                            sentExportInvoice,
+                            transferObject,
+                            notUser,
+                            not,
+                            final
+                        );
 
                         message = newObject.invoiceId.ToString();
                         long invoiceId = newObject.invoiceId;
-
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
 
                 #region get sales draft count
                 List<string> invoiceType = new List<string>() { "imd ", "exd" };
-                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType,2);
+                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType, 2);
                 result += ",ImExpDraftCount:" + draftCount;
                 #endregion
 
 
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
-        private async Task<invoices> AddImportInvoice(invoices newObject, invoices sentExportInvoice, List<itemsTransfer> transferObject, NotificationUserModel notUser = null, notification not = null, bool final = true)
+
+        private async Task<invoices> AddImportInvoice(
+            invoices newObject,
+            invoices sentExportInvoice,
+            List<itemsTransfer> transferObject,
+            NotificationUserModel notUser = null,
+            notification not = null,
+            bool final = true
+        )
         {
             string message = "";
             invoices tmpInvoice;
@@ -3731,7 +4141,9 @@ namespace POS_Server.Controllers
 
                 if (newObject.invoiceId != 0)
                 {
-                    exportInvoice = entity.invoices.Where(x => x.invoiceMainId == newObject.invoiceId).FirstOrDefault();
+                    exportInvoice = entity.invoices
+                        .Where(x => x.invoiceMainId == newObject.invoiceId)
+                        .FirstOrDefault();
                     exportInvoice.branchId = sentExportInvoice.branchId;
                     exportInvoice.updateUserId = sentExportInvoice.updateUserId;
                     exportInvoice.invType = sentExportInvoice.invType;
@@ -3748,7 +4160,6 @@ namespace POS_Server.Controllers
                     newObject.invoiceMainId = null;
                 if (newObject.invoiceId == 0)
                 {
-
                     if (newObject.cashReturn == null)
                         newObject.cashReturn = 0;
                     newObject.invDate = datenow;
@@ -3766,7 +4177,9 @@ namespace POS_Server.Controllers
                 }
                 else
                 {
-                    tmpInvoice = entity.invoices.Where(p => p.invoiceId == newObject.invoiceId).FirstOrDefault();
+                    tmpInvoice = entity.invoices
+                        .Where(p => p.invoiceId == newObject.invoiceId)
+                        .FirstOrDefault();
                     tmpInvoice.invNumber = invNumber;
                     tmpInvoice.agentId = newObject.agentId;
                     tmpInvoice.invType = newObject.invType;
@@ -3802,11 +4215,9 @@ namespace POS_Server.Controllers
                     message = tmpInvoice.invoiceId.ToString();
                 }
                 #endregion
-
             }
             if (!tmpInvoice.Equals(0))
             {
-
                 using (incposdbEntities entity1 = new incposdbEntities())
                 {
                     exportInvoice.invoiceMainId = tmpInvoice.invoiceId;
@@ -3814,7 +4225,6 @@ namespace POS_Server.Controllers
                     #region save export invoice
                     if (exportInvoice.invoiceId == 0)
                     {
-
                         if (exportInvoice.cashReturn == null)
                             exportInvoice.cashReturn = 0;
                         exportInvoice.invDate = datenow;
@@ -3827,11 +4237,12 @@ namespace POS_Server.Controllers
 
                         exportInvoice = entity1.invoices.Add(exportInvoice);
                         entity1.SaveChanges();
-
                     }
                     else
                     {
-                        var exportInvoiceTmp = entity1.invoices.Where(p => p.invoiceId == exportInvoice.invoiceId).FirstOrDefault();
+                        var exportInvoiceTmp = entity1.invoices
+                            .Where(p => p.invoiceId == exportInvoice.invoiceId)
+                            .FirstOrDefault();
                         // exportInvoice.invNumber = invNumber;
                         exportInvoiceTmp.agentId = exportInvoice.agentId;
                         exportInvoiceTmp.invType = exportInvoice.invType;
@@ -3845,7 +4256,7 @@ namespace POS_Server.Controllers
                         exportInvoiceTmp.notes = exportInvoice.notes;
                         exportInvoiceTmp.vendorInvNum = exportInvoice.vendorInvNum;
                         exportInvoiceTmp.vendorInvDate = exportInvoice.vendorInvDate;
-                        exportInvoiceTmp.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        exportInvoiceTmp.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         exportInvoiceTmp.updateUserId = exportInvoice.updateUserId;
                         exportInvoiceTmp.branchId = exportInvoice.branchId;
                         exportInvoiceTmp.discountType = exportInvoice.discountType;
@@ -3881,6 +4292,7 @@ namespace POS_Server.Controllers
 
             return tmpInvoice;
         }
+
         [HttpPost]
         [Route("GenerateExport")]
         public async Task<string> GenerateExport(string token)
@@ -3919,34 +4331,60 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "exportInvoice")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        sentExportInvoice = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        sentExportInvoice = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "not")
                     {
                         notObject = c.Value.Replace("\\", string.Empty);
                         notObject = notObject.Trim('"');
-                        notUser = JsonConvert.DeserializeObject<NotificationUserModel>(notObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        not = JsonConvert.DeserializeObject<notification>(notObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        notUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            notObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        not = JsonConvert.DeserializeObject<notification>(
+                            notObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "ItemsLoc")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        itemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        itemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "userId")
                     {
@@ -3960,7 +4398,6 @@ namespace POS_Server.Controllers
                     {
                         final = bool.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -3971,14 +4408,16 @@ namespace POS_Server.Controllers
                         ItemsLocationsController itc = new ItemsLocationsController();
                         toBranch = (long)notUser.branchId;
 
-                        string res = itc.checkItemsAmounts(billDetails, branchId,0);
+                        string res = itc.checkItemsAmounts(billDetails, branchId, 0);
 
                         if (!res.Equals(""))
                         {
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json.Encode(res).Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
+                            res = System.Web.Helpers.Json
+                                .Encode(res)
+                                .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
                             result += "}";
 
@@ -3990,9 +4429,12 @@ namespace POS_Server.Controllers
                     ProgramDetailsController pc = new ProgramDetailsController();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         //save import invoice
-                        newObject = await AddImportInvoice(newObject, sentExportInvoice, transferObject);
+                        newObject = await AddImportInvoice(
+                            newObject,
+                            sentExportInvoice,
+                            transferObject
+                        );
 
                         message = newObject.invoiceId.ToString();
                         long invoiceId = newObject.invoiceId;
@@ -4001,31 +4443,39 @@ namespace POS_Server.Controllers
                         if (final == true)
                         {
                             ItemsLocationsController ilc = new ItemsLocationsController();
-                            ilc.receiptOrder(itemsLoc, transferObject, toBranch, userId, notUser.objectName, notObject);
+                            ilc.receiptOrder(
+                                itemsLoc,
+                                transferObject,
+                                toBranch,
+                                userId,
+                                notUser.objectName,
+                                notObject
+                            );
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
 
                 #region get sales draft count
                 List<string> invoiceType = new List<string>() { "imd ", "exd" };
-                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType,2);
+                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType, 2);
                 result += ",ImExpDraftCount:" + draftCount;
                 #endregion
 
 
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
+
         [HttpPost]
         [Route("AcceptWaitingImport")]
         public async Task<string> AcceptWaitingImport(string token)
@@ -4062,27 +4512,44 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
-
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "ItemsLoc")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        itemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        itemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "not")
                     {
                         notObject = c.Value.Replace("\\", string.Empty);
                         notObject = notObject.Trim('"');
-                        notUser = JsonConvert.DeserializeObject<NotificationUserModel>(notObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        notUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            notObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "userId")
                     {
@@ -4092,7 +4559,6 @@ namespace POS_Server.Controllers
                     {
                         branchId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -4104,14 +4570,16 @@ namespace POS_Server.Controllers
                         ItemsLocationsController itc = new ItemsLocationsController();
                         toBranch = (long)notUser.branchId;
 
-                        string res = itc.checkItemsAmounts(billDetails, branchId,0);
+                        string res = itc.checkItemsAmounts(billDetails, branchId, 0);
 
                         if (!res.Equals(""))
                         {
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json.Encode(res).Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
+                            res = System.Web.Helpers.Json
+                                .Encode(res)
+                                .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
                             result += "}";
 
@@ -4129,28 +4597,37 @@ namespace POS_Server.Controllers
                         if (!invoiceId.Equals(0))
                         {
                             ItemsTransferController it = new ItemsTransferController();
-                            it.saveImExItems(transferObject, newObject.invoiceId, (int)newObject.invoiceMainId);
+                            it.saveImExItems(
+                                transferObject,
+                                newObject.invoiceId,
+                                (int)newObject.invoiceMainId
+                            );
 
                             //reciept invoice
                             ItemsLocationsController ilc = new ItemsLocationsController();
-                            ilc.receiptOrder(itemsLoc, transferObject, toBranch, userId, notUser.objectName, notObject);
-
+                            ilc.receiptOrder(
+                                itemsLoc,
+                                transferObject,
+                                toBranch,
+                                userId,
+                                notUser.objectName,
+                                notObject
+                            );
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
-
 
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
 
@@ -4190,28 +4667,48 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
-
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "ItemsLoc")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        itemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        itemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "not")
                     {
                         notObject = c.Value.Replace("\\", string.Empty);
                         notObject = notObject.Trim('"');
-                        notUser = JsonConvert.DeserializeObject<NotificationUserModel>(notObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        not = JsonConvert.DeserializeObject<notification>(notObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        notUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            notObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        not = JsonConvert.DeserializeObject<notification>(
+                            notObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "userId")
                     {
@@ -4221,7 +4718,6 @@ namespace POS_Server.Controllers
                     {
                         branchId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -4233,14 +4729,16 @@ namespace POS_Server.Controllers
                         ItemsLocationsController itc = new ItemsLocationsController();
                         toBranch = (long)notUser.branchId;
 
-                        string res = itc.checkItemsAmounts(billDetails, branchId,0);
-                
+                        string res = itc.checkItemsAmounts(billDetails, branchId, 0);
+
                         if (!res.Equals(""))
                         {
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json.Encode(res).Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
+                            res = System.Web.Helpers.Json
+                                .Encode(res)
+                                .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
                             result += "}";
 
@@ -4265,28 +4763,32 @@ namespace POS_Server.Controllers
 
                             //send notification to reciept branch
                             NotificationController nc = new NotificationController();
-                            nc.save(not,notUser.objectName,notUser.prefix,(long)notUser.branchId);
-
+                            nc.save(
+                                not,
+                                notUser.objectName,
+                                notUser.prefix,
+                                (long)notUser.branchId
+                            );
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
 
                 #region get spending orders draft count
                 List<string> invoiceType = new List<string> { "srd" };
-                int count = getDraftCount(userId, invoiceType,2);
+                int count = getDraftCount(userId, invoiceType, 2);
                 result += ",SpendingOrderDraftCount:" + count;
                 #endregion
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
 
@@ -4323,18 +4825,28 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                         userId = (long)newObject.updateUserId;
                     }
-
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                 }
                 #endregion
                 try
@@ -4347,14 +4859,16 @@ namespace POS_Server.Controllers
                         #region check items quantity in store
                         ItemsLocationsController itc = new ItemsLocationsController();
 
-                        string res = itc.checkItemsAmounts(billDetails, branchId,1);
-                
+                        string res = itc.checkItemsAmounts(billDetails, branchId, 1);
+
                         if (!res.Equals(""))
                         {
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json.Encode(res).Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
+                            res = System.Web.Helpers.Json
+                                .Encode(res)
+                                .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
                             result += "}";
 
@@ -4374,35 +4888,33 @@ namespace POS_Server.Controllers
                             it.saveInvoiceItems(transferObject, newObject.invoiceId);
 
                             //transfer items to kitchen
-                          
+
                             ItemsLocationsController ilc = new ItemsLocationsController();
                             ilc.decreaseAmountsInKitchen(transferObject, branchId, userId);
-
-
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
-
 
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
-        private int getDraftCount(long createUserId, List<string> invoiceType,int duration)
-        {
 
+        private int getDraftCount(long createUserId, List<string> invoiceType, int duration)
+        {
             int draftCount = GetCountByCreator(invoiceType, createUserId, duration);
             return draftCount;
         }
+
         public async Task<string> generateInvNumber(string invoiceCode, int branchId)
         {
             #region check if last of code is num
@@ -4421,7 +4933,13 @@ namespace POS_Server.Controllers
 
                 branchCode = branch.code;
 
-                var numberList = entity.invoices.Where(b => b.invNumber.Contains(invoiceCode + "-") && b.branchCreatorId == branchId).Select(b => b.invNumber).ToList();
+                var numberList = entity.invoices
+                    .Where(
+                        b =>
+                            b.invNumber.Contains(invoiceCode + "-") && b.branchCreatorId == branchId
+                    )
+                    .Select(b => b.invNumber)
+                    .ToList();
                 for (int i = 0; i < numberList.Count; i++)
                 {
                     string code = numberList[i];
@@ -4437,7 +4955,9 @@ namespace POS_Server.Controllers
                         sequence = int.Parse(numberList[numberList.Count - 1]);
                     }
                     catch
-                    { sequence = 0; }
+                    {
+                        sequence = 0;
+                    }
                 }
             }
             sequence++;
@@ -4480,26 +5000,50 @@ namespace POS_Server.Controllers
                     {
                         invoiceObject = c.Value.Replace("\\", string.Empty);
                         invoiceObject = invoiceObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(invoiceObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            invoiceObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemsObject")
                     {
                         itemsObject = c.Value.Replace("\\", string.Empty);
                         itemsObject = itemsObject.Trim('"');
-                        items = JsonConvert.DeserializeObject<List<itemsTransfer>>(itemsObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
-                        itemsModel = JsonConvert.DeserializeObject<List<ItemTransferModel>>(itemsObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        items = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            itemsObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
+                        itemsModel = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            itemsObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "PosCashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        PosCashTransfer = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        PosCashTransfer = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "listPayments")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        listPayments = JsonConvert.DeserializeObject<List<cashTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        listPayments = JsonConvert.DeserializeObject<List<cashTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "posId")
                         posId = long.Parse(c.Value);
@@ -4521,14 +5065,20 @@ namespace POS_Server.Controllers
                             PosCashTransfer.invId = invoiceId;
                             //PosCashTransfer.transNum = await cc.generateCashNumber(PosCashTransfer.transNum);
 
-                           await cc.addCashTransfer(PosCashTransfer);
+                            await cc.addCashTransfer(PosCashTransfer);
                         }
                         #endregion
 
                         #region save payments
                         if (listPayments != null)
                         {
-                            if (newObject.shippingCompanyId == null || (newObject.shippingCompanyId != null && newObject.shipUserId == null))
+                            if (
+                                newObject.shippingCompanyId == null
+                                || (
+                                    newObject.shippingCompanyId != null
+                                    && newObject.shipUserId == null
+                                )
+                            )
                                 await savePayments(invoiceId, listPayments, posId);
                         }
                         #endregion
@@ -4548,7 +5098,7 @@ namespace POS_Server.Controllers
             }
         }
 
-        private async Task savePayments(long invoiceId,List<cashTransfer> listPayments,long posId)
+        private async Task savePayments(long invoiceId, List<cashTransfer> listPayments, long posId)
         {
             using (var entity = new incposdbEntities())
             {
@@ -4565,16 +5115,20 @@ namespace POS_Server.Controllers
                     }
                 }
                 entity.SaveChanges();
-
             }
         }
-        private async Task<cashTransfer> ConfiguredCashTrans(invoices invoice, cashTransfer cashTransfer, long posId)
+
+        private async Task<cashTransfer> ConfiguredCashTrans(
+            invoices invoice,
+            cashTransfer cashTransfer,
+            long posId
+        )
         {
             CashTransferController cc = new CashTransferController();
             cashTransfer.createUserId = invoice.updateUserId;
             switch (cashTransfer.processType)
             {
-                case "cash":// cash: update pos balance  
+                case "cash": // cash: update pos balance
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var pos = entity.pos.Find(posId);
@@ -4587,11 +5141,12 @@ namespace POS_Server.Controllers
                     cashTransfer.agentId = invoice.agentId;
                     cashTransfer.invId = invoice.invoiceId;
                     cashTransfer.transNum = "dc";
-                    cashTransfer.side = "c"; // customer                    
+                    cashTransfer.side = "c"; // customer
                     cashTransfer.createUserId = invoice.updateUserId;
                     await cc.addCashTransfer(cashTransfer);
                     break;
-                case "balance":// balance: update customer balance
+                case "balance": // balance: update customer balance
+
                     //if (invoice.shippingCompanyId != null)
                     //{
                     //    cashTransfer = await recordComSpecificPaidCash(invoice, cashTransfer, posId);
@@ -4624,13 +5179,19 @@ namespace POS_Server.Controllers
                     cashTransfer.transNum = "dc";
                     cashTransfer.side = "c"; // customer
                     cashTransfer.createUserId = invoice.updateUserId;
-                    await cc.addCashTransfer(cashTransfer); //add cash transfer 
+                    await cc.addCashTransfer(cashTransfer); //add cash transfer
                     break;
             }
 
             return cashTransfer;
         }
-        public async Task<invoices> recordConfiguredAgentCash(invoices invoice, string invType, cashTransfer cashTransfer, long posId)
+
+        public async Task<invoices> recordConfiguredAgentCash(
+            invoices invoice,
+            string invType,
+            cashTransfer cashTransfer,
+            long posId
+        )
         {
             CashTransferController cc = new CashTransferController();
             decimal newBalance = 0;
@@ -4648,26 +5209,23 @@ namespace POS_Server.Controllers
                 switch (invType)
                 {
                     #region purchase
-                    case "pi"://purchase invoice
-                    case "sb"://sale bounce
+                    case "pi": //purchase invoice
+                    case "sb": //sale bounce
                         cashTransfer.transType = "p";
                         if (invType.Equals("pi"))
                         {
                             cashTransfer.side = "v"; // vendor
                             cashTransfer.transNum = "pv";
-
                         }
                         else
                         {
-                            cashTransfer.side = "c"; // customer     
+                            cashTransfer.side = "c"; // customer
                             cashTransfer.transNum = "pc";
-
                         }
                         if (agent.balanceType == 1)
                         {
                             if (cashTransfer.cash <= (decimal)agent.balance)
                             {
-
                                 newBalance = (decimal)agent.balance - (decimal)cashTransfer.cash;
                                 agent.balance = newBalance;
 
@@ -4689,13 +5247,11 @@ namespace POS_Server.Controllers
                                 agent.balance = newBalance;
                                 agent.balanceType = 0;
                                 entity.SaveChanges();
-
                             }
                             cashTransfer.transType = "p"; //pull
 
                             if (cashTransfer.processType != "balance")
                                 await cc.addCashTransfer(cashTransfer); //add agent cash transfer
-
                         }
                         else if (agent.balanceType == 0)
                         {
@@ -4707,8 +5263,8 @@ namespace POS_Server.Controllers
                         break;
                     #endregion
                     #region purchase bounce
-                    case "pb"://purchase bounce invoice
-                    case "si"://sale invoice
+                    case "pb": //purchase bounce invoice
+                    case "si": //sale invoice
                         cashTransfer.transType = "d";
 
                         if (invType.Equals("pb"))
@@ -4720,7 +5276,6 @@ namespace POS_Server.Controllers
                         {
                             cashTransfer.side = "c"; // customer
                             cashTransfer.transNum = "dc";
-
                         }
                         if (agent.balanceType == 0)
                         {
@@ -4732,28 +5287,25 @@ namespace POS_Server.Controllers
 
                                 newBalance = (decimal)agent.balance - (decimal)cashTransfer.cash;
                                 agent.balance = newBalance;
-                    
+
                                 entity.SaveChanges();
                             }
                             else
                             {
-
                                 inv.paid += (decimal)agent.balance;
                                 inv.deserved -= (decimal)agent.balance;
-
 
                                 //////
                                 newBalance = (decimal)cashTransfer.cash - (decimal)agent.balance;
                                 agent.balance = newBalance;
                                 agent.balanceType = 1;
                                 entity.SaveChanges();
-
                             }
                             cashTransfer.transType = "d"; //deposit
 
                             if (cashTransfer.cash > 0 && cashTransfer.processType != "balance")
                             {
-                               await cc.addCashTransfer(cashTransfer); //add cash transfer     
+                                await cc.addCashTransfer(cashTransfer); //add cash transfer
                             }
                         }
                         else if (agent.balanceType == 1)
@@ -4763,9 +5315,8 @@ namespace POS_Server.Controllers
                             entity.SaveChanges();
                         }
 
-
                         break;
-                        #endregion
+                    #endregion
                 }
             }
 
@@ -4802,7 +5353,6 @@ namespace POS_Server.Controllers
                 List<itemsLocations> readyItemsLoc = new List<itemsLocations>();
                 cashTransfer PosCashTransfer = null;
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
 
                 foreach (Claim c in claims)
@@ -4811,40 +5361,63 @@ namespace POS_Server.Controllers
                     {
                         invoiceObject = c.Value.Replace("\\", string.Empty);
                         invoiceObject = invoiceObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(invoiceObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            invoiceObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "invoiceStatus")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        invoiceStatus = JsonConvert.DeserializeObject<invoiceStatus>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        invoiceStatus = JsonConvert.DeserializeObject<invoiceStatus>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "amountNot")
                     {
                         amountNotStr = c.Value.Replace("\\", string.Empty);
                         amountNotStr = amountNotStr.Trim('"');
-                        amountNot = JsonConvert.DeserializeObject<NotificationUserModel>(amountNotStr, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        amountNot = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            amountNotStr,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "PosCashTransfer")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        PosCashTransfer = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        PosCashTransfer = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "readyItemsLoc")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        readyItemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        readyItemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "branchId")
                     {
                         branchId = long.Parse(c.Value);
@@ -4853,7 +5426,6 @@ namespace POS_Server.Controllers
                     {
                         posId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -4861,21 +5433,21 @@ namespace POS_Server.Controllers
                     ProgramDetailsController pc = new ProgramDetailsController();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         if (newObject.invoiceMainId == 0)
                             newObject.invoiceMainId = null;
 
-
                         #region check items quantity in store
                         ItemsLocationsController itc = new ItemsLocationsController();
-                        string res = itc.checkItemsAmounts(billDetails, branchId,0);
+                        string res = itc.checkItemsAmounts(billDetails, branchId, 0);
 
                         if (!res.Equals(""))
                         {
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json.Encode(res).Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
+                            res = System.Web.Helpers.Json
+                                .Encode(res)
+                                .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
                             result += "}";
 
@@ -4892,12 +5464,18 @@ namespace POS_Server.Controllers
                             ItemsTransferController it = new ItemsTransferController();
                             it.saveInvoiceItems(transferObject, invoiceId);
 
-                            #region decrease amount 
+                            #region decrease amount
                             foreach (var itemLoc in readyItemsLoc)
                             {
                                 long itemLocId = itemLoc.itemsLocId;
                                 int quantity = (int)itemLoc.quantity;
-                                itc.decreaseItemLocationQuantity(itemLocId, quantity, (int)newObject.updateUserId, amountNot.objectName, amountNotStr);
+                                itc.decreaseItemLocationQuantity(
+                                    itemLocId,
+                                    quantity,
+                                    (int)newObject.updateUserId,
+                                    amountNot.objectName,
+                                    amountNotStr
+                                );
                             }
                             #endregion
 
@@ -4916,40 +5494,47 @@ namespace POS_Server.Controllers
                                 cashTransfer cashTrasnfer = new cashTransfer();
                                 cashTrasnfer.cash = newObject.totalNet;
                                 cashTrasnfer.processType = "balance";
-                                await recordConfiguredAgentCash(newObject, "pb", cashTrasnfer, posId);
+                                await recordConfiguredAgentCash(
+                                    newObject,
+                                    "pb",
+                                    cashTrasnfer,
+                                    posId
+                                );
                             }
                             #endregion
                         }
-
-
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
                 result += ",InvTime:'" + newObject.invTime + "'";
-                result += ",UpdateDate:'" + DateTime.Parse(newObject.updateDate.ToString()).ToShortDateString() + "'";
+                result +=
+                    ",UpdateDate:'"
+                    + DateTime.Parse(newObject.updateDate.ToString()).ToShortDateString()
+                    + "'";
                 #region get sales draft count
                 result += ",PurchaseDraftCount:";
 
                 List<string> invoiceType = new List<string>() { "isd" };
-                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType,2);
+                int draftCount = getDraftCount((int)newObject.updateUserId, invoiceType, 2);
 
                 result += draftCount;
                 #endregion
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
+
         [HttpPost]
         [Route("saveInvoiceWithItemsAndTables")]
-        public async Task< string> saveInvoiceWithItemsAndTables(string token)
+        public async Task<string> saveInvoiceWithItemsAndTables(string token)
         {
             ItemsTransferController tc = new ItemsTransferController();
             token = TokenManager.readToken(HttpContext.Current.Request);
@@ -4974,28 +5559,46 @@ namespace POS_Server.Controllers
                     {
                         invoiceObject = c.Value.Replace("\\", string.Empty);
                         invoiceObject = invoiceObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(invoiceObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            invoiceObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemsObject")
                     {
                         itemsObject = c.Value.Replace("\\", string.Empty);
                         itemsObject = itemsObject.Trim('"');
-                        items = JsonConvert.DeserializeObject<List<itemsTransfer>>(itemsObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        items = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            itemsObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "tablesObject")
                     {
                         tablesObject = c.Value.Replace("\\", string.Empty);
                         tablesObject = tablesObject.Trim('"');
-                        tables = JsonConvert.DeserializeObject<List<tables>>(tablesObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        tables = JsonConvert.DeserializeObject<List<tables>>(
+                            tablesObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                 }
 
                 try
                 {
-                    long invoiceId =await saveInvoice(newObject);
+                    long invoiceId = await saveInvoice(newObject);
                     if (invoiceId > 0)
                     {
-                        string res = tc.saveInvoiceItems(items,invoiceId);
+                        string res = tc.saveInvoiceItems(items, invoiceId);
                         if (res == "0")
                             message = "0";
                         else
@@ -5013,9 +5616,10 @@ namespace POS_Server.Controllers
                 return TokenManager.GenerateToken(message);
             }
         }
+
         [HttpPost]
         [Route("saveInvoiceWithTables")]
-        public async Task< string> saveInvoiceWithTables(string token)
+        public async Task<string> saveInvoiceWithTables(string token)
         {
             ItemsTransferController tc = new ItemsTransferController();
             token = TokenManager.readToken(HttpContext.Current.Request);
@@ -5038,13 +5642,25 @@ namespace POS_Server.Controllers
                     {
                         invoiceObject = c.Value.Replace("\\", string.Empty);
                         invoiceObject = invoiceObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(invoiceObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            invoiceObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "tablesObject")
                     {
                         tablesObject = c.Value.Replace("\\", string.Empty);
                         tablesObject = tablesObject.Trim('"');
-                        tables = JsonConvert.DeserializeObject<List<tables>>(tablesObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        tables = JsonConvert.DeserializeObject<List<tables>>(
+                            tablesObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                 }
 
@@ -5056,12 +5672,16 @@ namespace POS_Server.Controllers
                     {
                         newObject.invNumber = await GetLastDialyNumOfInv(branchId);
                     }
-          
-                    long invoiceId =  await saveInvoice(newObject);
+
+                    long invoiceId = await saveInvoice(newObject);
                     message = invoiceId.ToString();
                     if (invoiceId > 0)
                     {
-                        string res = saveInvoiceTables(tables, invoiceId, (int)newObject.updateUserId);
+                        string res = saveInvoiceTables(
+                            tables,
+                            invoiceId,
+                            (int)newObject.updateUserId
+                        );
                         if (res == "0")
                             message = "0";
                     }
@@ -5073,6 +5693,7 @@ namespace POS_Server.Controllers
                 return TokenManager.GenerateToken(message);
             }
         }
+
         [HttpPost]
         [Route("updateInvoiceTables")]
         public string updateInvoiceTables(string token)
@@ -5118,7 +5739,13 @@ namespace POS_Server.Controllers
                     {
                         tablesObject = c.Value.Replace("\\", string.Empty);
                         tablesObject = tablesObject.Trim('"');
-                        tables = JsonConvert.DeserializeObject<List<tables>>(tablesObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        tables = JsonConvert.DeserializeObject<List<tables>>(
+                            tablesObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                 }
 
@@ -5127,17 +5754,20 @@ namespace POS_Server.Controllers
                     reservations reservation = new reservations();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var invTables = entity.invoiceTables.Where(x => x.invoiceId == invoiceId).ToList();
+                        var invTables = entity.invoiceTables
+                            .Where(x => x.invoiceId == invoiceId)
+                            .ToList();
                         entity.invoiceTables.RemoveRange(invTables);
                         entity.SaveChanges();
 
                         if (reservationId != null)
                         {
                             reservation = entity.reservations.Find(reservationId);
-                            var resTables = entity.tablesReservations.Where(x => x.reservationId == reservationId).ToList();
+                            var resTables = entity.tablesReservations
+                                .Where(x => x.reservationId == reservationId)
+                                .ToList();
                             entity.tablesReservations.RemoveRange(resTables);
                             entity.SaveChanges();
-
                         }
                     }
 
@@ -5153,7 +5783,9 @@ namespace POS_Server.Controllers
                                 tableR.reservationId = (long)reservationId;
                                 tableR.createUserId = userId;
                                 tableR.updateUserId = userId;
-                                tableR.createDate = tableR.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                tableR.createDate = tableR.updateDate = coctrlr.AddOffsetTodate(
+                                    DateTime.Now
+                                );
                                 tableR.isActive = 1;
 
                                 entity.tablesReservations.Add(tableR);
@@ -5169,6 +5801,7 @@ namespace POS_Server.Controllers
                 return TokenManager.GenerateToken(message);
             }
         }
+
         public string saveInvoiceTables(List<tables> newObject, long invoiceId, long userId)
         {
             string message = "";
@@ -5176,7 +5809,9 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    List<invoiceTables> iol = entity.invoiceTables.Where(x => x.invoiceId == invoiceId).ToList();
+                    List<invoiceTables> iol = entity.invoiceTables
+                        .Where(x => x.invoiceId == invoiceId)
+                        .ToList();
                     entity.invoiceTables.RemoveRange(iol);
                     entity.SaveChanges();
 
@@ -5194,21 +5829,23 @@ namespace POS_Server.Controllers
 
                         tr.invoiceId = invoiceId;
                         tr.tableId = newObject[i].tableId;
-                        tr.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                        tr.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        tr.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                        tr.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         tr.isActive = 1;
                         tr.updateUserId = userId;
                         tr.createUserId = userId;
 
                         tr = entity.invoiceTables.Add(tr);
                         entity.SaveChanges();
-
                     }
                     entity.SaveChanges();
                     message = "1";
                 }
             }
-            catch { message = "0"; }
+            catch
+            {
+                message = "0";
+            }
             return message;
         }
 
@@ -5255,21 +5892,19 @@ namespace POS_Server.Controllers
 
                 try
                 {
-
                     invoices tmpInvoice;
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         // var invoiceEntity = entity.Set<invoices>();
                         if (id == 0)
                         {
-
                             return TokenManager.GenerateToken("0");
-
                         }
                         else
                         {
-
-                            tmpInvoice = entity.invoices.Where(p => p.invoiceId == id).FirstOrDefault();
+                            tmpInvoice = entity.invoices
+                                .Where(p => p.invoiceId == id)
+                                .FirstOrDefault();
                             int res = tmpInvoice.printedcount + countstep;
                             if (res < 0)
                             {
@@ -5281,14 +5916,12 @@ namespace POS_Server.Controllers
                                 tmpInvoice.isOrginal = isOrginal;
                             }
 
-
                             entity.SaveChanges();
                             message = tmpInvoice.invoiceId.ToString();
                             return TokenManager.GenerateToken(message);
                         }
                     }
                 }
-
                 catch (Exception ex)
                 {
                     message = "0";
@@ -5297,7 +5930,6 @@ namespace POS_Server.Controllers
                 }
             }
         }
-
 
         [HttpPost]
         [Route("delete")]
@@ -5324,7 +5956,6 @@ namespace POS_Server.Controllers
                         }
                     }
 
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var inv = entity.invoices.Find(invoiceId);
@@ -5340,6 +5971,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("deleteOrder")]
         public string deleteOrder(string token)
@@ -5374,16 +6006,21 @@ namespace POS_Server.Controllers
                         entity.SaveChanges();
 
                         // unlockItems
-                        var itemsLocations = entity.itemsLocations.Where(x => x.invoiceId == invoiceId).ToList();
+                        var itemsLocations = entity.itemsLocations
+                            .Where(x => x.invoiceId == invoiceId)
+                            .ToList();
                         foreach (itemsLocations il in itemsLocations)
                         {
-                            var itemLoc = (from b in entity.itemsLocations
-                                           where b.invoiceId == null && b.itemUnitId == il.itemUnitId && b.locationId == il.locationId
-                                           && b.startDate == il.startDate && b.endDate == il.endDate
-                                           select new ItemLocationModel
-                                           {
-                                               itemsLocId = b.itemsLocId,
-                                           }).FirstOrDefault();
+                            var itemLoc = (
+                                from b in entity.itemsLocations
+                                where
+                                    b.invoiceId == null
+                                    && b.itemUnitId == il.itemUnitId
+                                    && b.locationId == il.locationId
+                                    && b.startDate == il.startDate
+                                    && b.endDate == il.endDate
+                                select new ItemLocationModel { itemsLocId = b.itemsLocId, }
+                            ).FirstOrDefault();
                             var orderItem = entity.itemsLocations.Find(il.itemsLocId);
                             if (orderItem.quantity == il.quantity)
                                 entity.itemsLocations.Remove(orderItem);
@@ -5411,9 +6048,8 @@ namespace POS_Server.Controllers
                             {
                                 var loc = entity.itemsLocations.Find(itemLoc.itemsLocId);
                                 loc.quantity += il.quantity;
-                                loc.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                loc.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 loc.updateUserId = il.updateUserId;
-
                             }
                             entity.SaveChanges();
                         }
@@ -5458,19 +6094,27 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "posId")
                     {
                         posId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -5478,7 +6122,6 @@ namespace POS_Server.Controllers
                     ProgramDetailsController pc = new ProgramDetailsController();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         if (newObject.invoiceMainId == 0)
                             newObject.invoiceMainId = null;
 
@@ -5490,21 +6133,24 @@ namespace POS_Server.Controllers
                         {
                             //save items transfer
                             ItemsTransferController it = new ItemsTransferController();
-                            it.saveInvoiceItems(transferObject,invoiceId);
+                            it.saveInvoiceItems(transferObject, invoiceId);
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
                 result += ",InvTime:'" + newObject.invTime + "'";
-                result += ",UpdateDate:'" + DateTime.Parse(newObject.updateDate.ToString()).ToString() + "'";
-
+                result +=
+                    ",UpdateDate:'"
+                    + DateTime.Parse(newObject.updateDate.ToString()).ToString()
+                    + "'";
 
                 #region return pos Balance
                 using (incposdbEntities entity = new incposdbEntities())
@@ -5516,9 +6162,9 @@ namespace POS_Server.Controllers
 
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
+
         [HttpPost]
         [Route("saveOrderPayments")]
         public async Task<string> saveOrderPayments(string token)
@@ -5553,19 +6199,31 @@ namespace POS_Server.Controllers
                     {
                         invoiceObject = c.Value.Replace("\\", string.Empty);
                         invoiceObject = invoiceObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(invoiceObject, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            invoiceObject,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "invoiceStatus")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        invoiceStatus = JsonConvert.DeserializeObject<orderPreparingStatus>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        invoiceStatus = JsonConvert.DeserializeObject<orderPreparingStatus>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "listPayments")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        listPayments = JsonConvert.DeserializeObject<List<cashTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        listPayments = JsonConvert.DeserializeObject<List<cashTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "branchId")
                     {
@@ -5575,7 +6233,6 @@ namespace POS_Server.Controllers
                     {
                         posId = int.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -5583,12 +6240,13 @@ namespace POS_Server.Controllers
                     ProgramDetailsController pc = new ProgramDetailsController();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         long invoiceId = newObject.invoiceId;
                         message = invoiceId.ToString();
 
-                        #region update order prepairing status 
-                        var orderPpList = entity.orderPreparing.Where(x => x.invoiceId == invoiceId).ToList();
+                        #region update order prepairing status
+                        var orderPpList = entity.orderPreparing
+                            .Where(x => x.invoiceId == invoiceId)
+                            .ToList();
                         foreach (var order in orderPpList)
                         {
                             long orderPreparingId = order.orderPreparingId;
@@ -5598,7 +6256,7 @@ namespace POS_Server.Controllers
                         #endregion
 
                         #region save payments
-                        
+
                         decimal paid = 0;
                         decimal deserved = 0;
                         foreach (var item in listPayments)
@@ -5617,20 +6275,22 @@ namespace POS_Server.Controllers
                         entity.SaveChanges();
 
                         #endregion
-
-
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json.Encode(newObject.invNumber).Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
+                string temp = System.Web.Helpers.Json
+                    .Encode(newObject.invNumber)
+                    .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
                 result += ",InvTime:'" + newObject.invTime + "'";
-                result += ",UpdateDate:'" + DateTime.Parse(newObject.updateDate.ToString()).ToShortDateString() + "'";
+                result +=
+                    ",UpdateDate:'"
+                    + DateTime.Parse(newObject.updateDate.ToString()).ToShortDateString()
+                    + "'";
 
                 #region return pos Balance
                 using (incposdbEntities entity = new incposdbEntities())
@@ -5641,7 +6301,6 @@ namespace POS_Server.Controllers
                 #endregion
                 result += "}";
                 return TokenManager.GenerateToken(result);
-
             }
         }
 
@@ -5673,13 +6332,15 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTransfer = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        cashTransfer = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "invoiceId")
                     {
                         invoiceId = long.Parse(c.Value);
                     }
-
                 }
                 #endregion
                 try
@@ -5725,19 +6386,17 @@ namespace POS_Server.Controllers
                             company.balance = newBalance;
                         }
                         entity.SaveChanges();
-
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
 
                 return TokenManager.GenerateToken(message);
-
             }
         }
+
         [HttpPost]
         [Route("recordConfiguredAgentCash")]
         public async Task<string> recordConfiguredAgentCash(string token)
@@ -5768,7 +6427,10 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        cashTransfer = JsonConvert.DeserializeObject<cashTransfer>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        cashTransfer = JsonConvert.DeserializeObject<cashTransfer>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "invoiceId")
                     {
@@ -5782,42 +6444,41 @@ namespace POS_Server.Controllers
                     {
                         invType = c.Value;
                     }
-
                 }
                 #endregion
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
                         var invoice = entity.invoices.Find(invoiceId);
                         recordConfiguredAgentCash(invoice, invType, cashTransfer, posId);
-
-
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
 
                 return TokenManager.GenerateToken(message);
-
             }
         }
-        private async Task<cashTransfer> OrderPaymentCashTrans(invoices invoice, cashTransfer cashTransfer, long posId)
+
+        private async Task<cashTransfer> OrderPaymentCashTrans(
+            invoices invoice,
+            cashTransfer cashTransfer,
+            long posId
+        )
         {
             CashTransferController cc = new CashTransferController();
             cashTransfer.createUserId = invoice.updateUserId;
             switch (cashTransfer.processType)
             {
-                case "cash":// cash: update pos balance  
+                case "cash": // cash: update pos balance
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var pos = entity.pos.Find(posId);
                         //if (pos.balance == null)
-                          //  pos.balance = 0;
+                        //  pos.balance = 0;
                         pos.balance += invoice.totalNet;
                         entity.SaveChanges();
                     }
@@ -5827,11 +6488,11 @@ namespace POS_Server.Controllers
                     cashTransfer.agentId = invoice.agentId;
                     cashTransfer.invId = invoice.invoiceId;
                     cashTransfer.transNum = "dc";
-                    cashTransfer.side = "c"; // customer                    
+                    cashTransfer.side = "c"; // customer
                     cashTransfer.createUserId = invoice.updateUserId;
                     await cc.addCashTransfer(cashTransfer);
                     break;
-                case "balance":// balance: update customer balance
+                case "balance": // balance: update customer balance
 
                     await recordConfiguredAgentCash(invoice, "si", cashTransfer, posId);
 
@@ -5876,7 +6537,10 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                 }
                 #endregion
@@ -5910,9 +6574,9 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
             }
         }
+
         [NonAction]
         public void saveAvgPrice(List<itemsTransfer> newObject)
         {
@@ -5921,19 +6585,29 @@ namespace POS_Server.Controllers
                 var set = entity.setting.Where(x => x.name == "item_cost").FirstOrDefault();
                 string invoiceNum = "0";
                 if (set != null)
-                    invoiceNum = entity.setValues.Where(x => x.settingId == (int)set.settingId).Select(x => x.value).Single();
+                    invoiceNum = entity.setValues
+                        .Where(x => x.settingId == (int)set.settingId)
+                        .Select(x => x.value)
+                        .Single();
                 foreach (itemsTransfer item in newObject)
                 {
-                    var itemId = entity.itemsUnits.Where(x => x.itemUnitId == (int)item.itemUnitId).Select(x => x.itemId).Single();
+                    var itemId = entity.itemsUnits
+                        .Where(x => x.itemUnitId == (int)item.itemUnitId)
+                        .Select(x => x.itemId)
+                        .Single();
 
-                    decimal price = GetAvgPrice((int)item.itemUnitId, (int)itemId, int.Parse(invoiceNum));
+                    decimal price = GetAvgPrice(
+                        (int)item.itemUnitId,
+                        (int)itemId,
+                        int.Parse(invoiceNum)
+                    );
                     var itemO = entity.items.Find(itemId);
                     itemO.avgPurchasePrice = price;
-
                 }
                 entity.SaveChanges();
             }
         }
+
         private decimal GetAvgPrice(long itemUnitId, long itemId, int numInvoice)
         {
             decimal price = 0;
@@ -5942,40 +6616,58 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var itemUnits = (from i in entity.itemsUnits where (i.itemId == itemId) select (i.itemUnitId)).ToList();
+                var itemUnits = (
+                    from i in entity.itemsUnits
+                    where (i.itemId == itemId)
+                    select (i.itemUnitId)
+                ).ToList();
                 List<long> invoicesIds = new List<long>();
                 if (numInvoice == 0)
                 {
-                    invoicesIds = (from p in entity.invoices
-                                   where p.isActive == true && (p.invType == "p" || p.invType == "is")
-                                   select p).Select(x => x.invoiceId).ToList();
+                    invoicesIds = (
+                        from p in entity.invoices
+                        where p.isActive == true && (p.invType == "p" || p.invType == "is")
+                        select p
+                    )
+                        .Select(x => x.invoiceId)
+                        .ToList();
                 }
                 else
                 {
-                    var invoices = (from p in entity.invoices
-                                    where p.isActive == true && p.invType == "p"
-                                    orderby p.invDate descending
-                                    select p).Take(numInvoice);
+                    var invoices = (
+                        from p in entity.invoices
+                        where p.isActive == true && p.invType == "p"
+                        orderby p.invDate descending
+                        select p
+                    ).Take(numInvoice);
                     invoicesIds = invoices.Select(x => x.invoiceId).ToList();
-
-
                 }
                 price += getLastPrice(itemUnits, invoicesIds);
                 totalNum = getItemUnitLastNum(itemUnits, invoicesIds);
                 if (totalNum != 0)
                     smallUnitPrice = price / totalNum;
                 return smallUnitPrice;
-
             }
         }
+
         private int getUpperUnitValue(long itemUnitId, long basicItemUnitId)
         {
             int unitValue = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-
-                var unit = entity.itemsUnits.Where(x => x.itemUnitId == itemUnitId).Select(x => new { x.unitId, x.itemId }).FirstOrDefault();
-                var upperUnit = entity.itemsUnits.Where(x => x.subUnitId == unit.unitId && x.itemId == unit.itemId && x.subUnitId != x.unitId).Select(x => new { x.unitValue, x.itemUnitId }).FirstOrDefault();
+                var unit = entity.itemsUnits
+                    .Where(x => x.itemUnitId == itemUnitId)
+                    .Select(x => new { x.unitId, x.itemId })
+                    .FirstOrDefault();
+                var upperUnit = entity.itemsUnits
+                    .Where(
+                        x =>
+                            x.subUnitId == unit.unitId
+                            && x.itemId == unit.itemId
+                            && x.subUnitId != x.unitId
+                    )
+                    .Select(x => new { x.unitValue, x.itemUnitId })
+                    .FirstOrDefault();
 
                 if (upperUnit == null)
                     return 1;
@@ -5986,14 +6678,18 @@ namespace POS_Server.Controllers
                 return unitValue;
             }
         }
+
         private decimal getItemUnitSumPrice(List<long> itemUnits)
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var sumPrice = (from b in entity.invoices
-                                where b.invType == "p"
-                                join s in entity.itemsTransfer.Where(x => itemUnits.Contains((int)x.itemUnitId)) on b.invoiceId equals s.invoiceId
-                                select s.quantity * s.price).Sum();
+                var sumPrice = (
+                    from b in entity.invoices
+                    where b.invType == "p"
+                    join s in entity.itemsTransfer.Where(x => itemUnits.Contains((int)x.itemUnitId))
+                        on b.invoiceId equals s.invoiceId
+                    select s.quantity * s.price
+                ).Sum();
 
                 if (sumPrice != null)
                     return (decimal)sumPrice;
@@ -6001,12 +6697,19 @@ namespace POS_Server.Controllers
                     return 0;
             }
         }
+
         private decimal getLastPrice(List<long> itemUnits, List<long> invoiceIds)
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var sumPrice = (from s in entity.itemsTransfer.Where(x => itemUnits.Contains((int)x.itemUnitId) && invoiceIds.Contains((int)x.invoiceId))
-                                select s.quantity * s.price).Sum();
+                var sumPrice = (
+                    from s in entity.itemsTransfer.Where(
+                        x =>
+                            itemUnits.Contains((int)x.itemUnitId)
+                            && invoiceIds.Contains((int)x.invoiceId)
+                    )
+                    select s.quantity * s.price
+                ).Sum();
 
                 if (sumPrice != null)
                     return (decimal)sumPrice;
@@ -6014,40 +6717,56 @@ namespace POS_Server.Controllers
                     return 0;
             }
         }
+
         private int getItemUnitLastNum(List<long> itemUnits, List<long> invoiceIds)
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-
-                var smallestUnitId = (from iu in entity.itemsUnits
-                                      where (itemUnits.Contains((int)iu.itemUnitId) && iu.unitId == iu.subUnitId)
-                                      select iu.itemUnitId).FirstOrDefault();
+                var smallestUnitId = (
+                    from iu in entity.itemsUnits
+                    where (itemUnits.Contains((int)iu.itemUnitId) && iu.unitId == iu.subUnitId)
+                    select iu.itemUnitId
+                ).FirstOrDefault();
 
                 if (smallestUnitId == null || smallestUnitId == 0)
                 {
-                    smallestUnitId = (from u in entity.itemsUnits
-                                      where !entity.itemsUnits.Any(y => u.subUnitId == y.unitId)
-                                      where (itemUnits.Contains((int)u.itemUnitId))
-                                      select u.itemUnitId).FirstOrDefault();
+                    smallestUnitId = (
+                        from u in entity.itemsUnits
+                        where !entity.itemsUnits.Any(y => u.subUnitId == y.unitId)
+                        where (itemUnits.Contains((int)u.itemUnitId))
+                        select u.itemUnitId
+                    ).FirstOrDefault();
                 }
-                var lst = entity.itemsTransfer.Where(x => x.itemUnitId == smallestUnitId && invoiceIds.Contains((int)x.invoiceId))
-                           .Select(t => new ItemLocationModel
-                           {
-                               quantity = t.quantity,
-                           }).ToList();
+                var lst = entity.itemsTransfer
+                    .Where(
+                        x => x.itemUnitId == smallestUnitId && invoiceIds.Contains((int)x.invoiceId)
+                    )
+                    .Select(t => new ItemLocationModel { quantity = t.quantity, })
+                    .ToList();
                 long sumNum = 0;
                 if (lst.Count > 0)
                     sumNum = lst.Sum(x => x.quantity);
 
-
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits.Where(x => x.itemUnitId == smallestUnitId).Select(x => new { x.unitId, x.itemId }).FirstOrDefault();
-                var upperUnit = entity.itemsUnits.Where(x => x.subUnitId == unit.unitId && x.itemId == unit.itemId && x.subUnitId != x.unitId).Select(x => new { x.unitValue, x.itemUnitId }).FirstOrDefault();
+                var unit = entity.itemsUnits
+                    .Where(x => x.itemUnitId == smallestUnitId)
+                    .Select(x => new { x.unitId, x.itemId })
+                    .FirstOrDefault();
+                var upperUnit = entity.itemsUnits
+                    .Where(
+                        x =>
+                            x.subUnitId == unit.unitId
+                            && x.itemId == unit.itemId
+                            && x.subUnitId != x.unitId
+                    )
+                    .Select(x => new { x.unitValue, x.itemUnitId })
+                    .FirstOrDefault();
 
                 if (upperUnit != null && upperUnit.itemUnitId != smallestUnitId)
-                    sumNum += (int)upperUnit.unitValue * getLastNum(upperUnit.itemUnitId, invoiceIds);
+                    sumNum +=
+                        (int)upperUnit.unitValue * getLastNum(upperUnit.itemUnitId, invoiceIds);
 
                 try
                 {
@@ -6059,106 +6778,169 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         private long getLastNum(long itemUnitId, List<long> invoiceIds)
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
                 //var sumNum = (from s in entity.itemsTransfer.Where(x => x.itemUnitId == itemUnitId && invoiceIds.Contains((int)x.invoiceId))
                 //              select s.quantity).Sum();
-                var lst = entity.itemsTransfer.Where(x => x.itemUnitId == itemUnitId && invoiceIds.Contains((int)x.invoiceId))
-                           .Select(t => new ItemLocationModel
-                           {
-                               quantity = t.quantity,
-                           }).ToList();
+                var lst = entity.itemsTransfer
+                    .Where(x => x.itemUnitId == itemUnitId && invoiceIds.Contains((int)x.invoiceId))
+                    .Select(t => new ItemLocationModel { quantity = t.quantity, })
+                    .ToList();
                 long sumNum = 0;
                 if (lst.Count > 0)
                     sumNum = lst.Sum(x => x.quantity);
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits.Where(x => x.itemUnitId == itemUnitId).Select(x => new { x.unitId, x.itemId }).FirstOrDefault();
-                var upperUnit = entity.itemsUnits.Where(x => x.subUnitId == unit.unitId && x.itemId == unit.itemId && x.subUnitId != x.unitId).Select(x => new { x.unitValue, x.itemUnitId }).FirstOrDefault();
+                var unit = entity.itemsUnits
+                    .Where(x => x.itemUnitId == itemUnitId)
+                    .Select(x => new { x.unitId, x.itemId })
+                    .FirstOrDefault();
+                var upperUnit = entity.itemsUnits
+                    .Where(
+                        x =>
+                            x.subUnitId == unit.unitId
+                            && x.itemId == unit.itemId
+                            && x.subUnitId != x.unitId
+                    )
+                    .Select(x => new { x.unitValue, x.itemUnitId })
+                    .FirstOrDefault();
 
                 if (upperUnit != null)
-                    sumNum += (int)upperUnit.unitValue * getLastNum(upperUnit.itemUnitId, invoiceIds);
+                    sumNum +=
+                        (int)upperUnit.unitValue * getLastNum(upperUnit.itemUnitId, invoiceIds);
 
-                if (sumNum != null) return (long)sumNum;
+                if (sumNum != null)
+                    return (long)sumNum;
                 else
                     return 0;
             }
         }
+
         private long getItemUnitNum(long itemUnitId)
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var sumNum = (from b in entity.invoices
-                              where b.invType.Contains("p")
-                              join s in entity.itemsTransfer.Where(x => x.itemUnitId == itemUnitId) on b.invoiceId equals s.invoiceId
-                              select s.quantity).Sum();
+                var sumNum = (
+                    from b in entity.invoices
+                    where b.invType.Contains("p")
+                    join s in entity.itemsTransfer.Where(x => x.itemUnitId == itemUnitId)
+                        on b.invoiceId equals s.invoiceId
+                    select s.quantity
+                ).Sum();
 
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits.Where(x => x.itemUnitId == itemUnitId).Select(x => new { x.unitId, x.itemId }).FirstOrDefault();
-                var upperUnit = entity.itemsUnits.Where(x => x.subUnitId == unit.unitId && x.itemId == unit.itemId && x.subUnitId != x.unitId).Select(x => new { x.unitValue, x.itemUnitId }).FirstOrDefault();
+                var unit = entity.itemsUnits
+                    .Where(x => x.itemUnitId == itemUnitId)
+                    .Select(x => new { x.unitId, x.itemId })
+                    .FirstOrDefault();
+                var upperUnit = entity.itemsUnits
+                    .Where(
+                        x =>
+                            x.subUnitId == unit.unitId
+                            && x.itemId == unit.itemId
+                            && x.subUnitId != x.unitId
+                    )
+                    .Select(x => new { x.unitValue, x.itemUnitId })
+                    .FirstOrDefault();
 
                 if (upperUnit != null)
                     sumNum += (int)upperUnit.unitValue * getItemUnitNum(upperUnit.itemUnitId);
 
-                if (sumNum != null) return (long)sumNum;
+                if (sumNum != null)
+                    return (long)sumNum;
                 else
                     return 0;
             }
         }
+
         private long getItemUnitNum(long itemUnitId, int invoiceNum)
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var sumNum = (from b in entity.invoices
-                              where b.invType.Contains("p")
-                              join s in entity.itemsTransfer.Where(x => x.itemUnitId == itemUnitId) on b.invoiceId equals s.invoiceId
-                              select s.quantity).Sum();
+                var sumNum = (
+                    from b in entity.invoices
+                    where b.invType.Contains("p")
+                    join s in entity.itemsTransfer.Where(x => x.itemUnitId == itemUnitId)
+                        on b.invoiceId equals s.invoiceId
+                    select s.quantity
+                ).Sum();
 
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits.Where(x => x.itemUnitId == itemUnitId).Select(x => new { x.unitId, x.itemId }).FirstOrDefault();
-                var upperUnit = entity.itemsUnits.Where(x => x.subUnitId == unit.unitId && x.itemId == unit.itemId && x.subUnitId != x.unitId).Select(x => new { x.unitValue, x.itemUnitId }).FirstOrDefault();
+                var unit = entity.itemsUnits
+                    .Where(x => x.itemUnitId == itemUnitId)
+                    .Select(x => new { x.unitId, x.itemId })
+                    .FirstOrDefault();
+                var upperUnit = entity.itemsUnits
+                    .Where(
+                        x =>
+                            x.subUnitId == unit.unitId
+                            && x.itemId == unit.itemId
+                            && x.subUnitId != x.unitId
+                    )
+                    .Select(x => new { x.unitValue, x.itemUnitId })
+                    .FirstOrDefault();
 
                 if (upperUnit != null)
                     sumNum += (int)upperUnit.unitValue * getItemUnitNum(upperUnit.itemUnitId);
 
-                if (sumNum != null) return (long)sumNum;
+                if (sumNum != null)
+                    return (long)sumNum;
                 else
                     return 0;
             }
         }
+
         private int getItemUnitTotalNum(List<long> itemUnits)
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-
-                var smallestUnitId = (from iu in entity.itemsUnits
-                                      where (itemUnits.Contains((int)iu.itemUnitId) && iu.unitId == iu.subUnitId)
-                                      select iu.itemUnitId).FirstOrDefault();
+                var smallestUnitId = (
+                    from iu in entity.itemsUnits
+                    where (itemUnits.Contains((int)iu.itemUnitId) && iu.unitId == iu.subUnitId)
+                    select iu.itemUnitId
+                ).FirstOrDefault();
 
                 if (smallestUnitId == null || smallestUnitId == 0)
                 {
-                    smallestUnitId = (from u in entity.itemsUnits
-                                      where !entity.itemsUnits.Any(y => u.subUnitId == y.unitId)
-                                      where (itemUnits.Contains((int)u.itemUnitId))
-                                      select u.itemUnitId).FirstOrDefault();
+                    smallestUnitId = (
+                        from u in entity.itemsUnits
+                        where !entity.itemsUnits.Any(y => u.subUnitId == y.unitId)
+                        where (itemUnits.Contains((int)u.itemUnitId))
+                        select u.itemUnitId
+                    ).FirstOrDefault();
                 }
-                var sumNum = (from b in entity.invoices
-                              where b.invType == "p"
-                              join s in entity.itemsTransfer.Where(x => x.itemUnitId == smallestUnitId) on b.invoiceId equals s.invoiceId
-                              select s.quantity).Sum();
+                var sumNum = (
+                    from b in entity.invoices
+                    where b.invType == "p"
+                    join s in entity.itemsTransfer.Where(x => x.itemUnitId == smallestUnitId)
+                        on b.invoiceId equals s.invoiceId
+                    select s.quantity
+                ).Sum();
 
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits.Where(x => x.itemUnitId == smallestUnitId).Select(x => new { x.unitId, x.itemId }).FirstOrDefault();
-                var upperUnit = entity.itemsUnits.Where(x => x.subUnitId == unit.unitId && x.itemId == unit.itemId && x.subUnitId != x.unitId).Select(x => new { x.unitValue, x.itemUnitId }).FirstOrDefault();
+                var unit = entity.itemsUnits
+                    .Where(x => x.itemUnitId == smallestUnitId)
+                    .Select(x => new { x.unitId, x.itemId })
+                    .FirstOrDefault();
+                var upperUnit = entity.itemsUnits
+                    .Where(
+                        x =>
+                            x.subUnitId == unit.unitId
+                            && x.itemId == unit.itemId
+                            && x.subUnitId != x.unitId
+                    )
+                    .Select(x => new { x.unitValue, x.itemUnitId })
+                    .FirstOrDefault();
 
                 if (upperUnit != null && upperUnit.itemUnitId != smallestUnitId)
                     sumNum += (int)upperUnit.unitValue * getItemUnitNum(upperUnit.itemUnitId);
@@ -6169,7 +6951,14 @@ namespace POS_Server.Controllers
                     return 0;
             }
         }
-        public List<InvoiceModel> getUnhandeledOrdersList(string invType, long branchCreatorId, long branchId, int duration = 0, long userId = 0)
+
+        public List<InvoiceModel> getUnhandeledOrdersList(
+            string invType,
+            long branchCreatorId,
+            long branchId,
+            int duration = 0,
+            long userId = 0
+        )
         {
             string[] invTypeArray = invType.Split(',');
             List<string> invTypeL = new List<string>();
@@ -6179,56 +6968,66 @@ namespace POS_Server.Controllers
             using (incposdbEntities entity = new incposdbEntities())
             {
                 var searchPredicate = PredicateBuilder.New<invoices>();
-                searchPredicate = searchPredicate.And(inv => inv.isActive == true && invTypeL.Contains(inv.invType));
+                searchPredicate = searchPredicate.And(
+                    inv => inv.isActive == true && invTypeL.Contains(inv.invType)
+                );
                 if (duration > 0)
                 {
-                    DateTime dt = Convert.ToDateTime(DateTime.Today.AddDays(-duration).ToShortDateString());
+                    DateTime dt = Convert.ToDateTime(
+                        DateTime.Today.AddDays(-duration).ToShortDateString()
+                    );
                     searchPredicate = searchPredicate.And(inv => inv.updateDate >= dt);
                 }
                 if (branchCreatorId != 0)
-                    searchPredicate = searchPredicate.And(inv => inv.branchCreatorId == branchCreatorId && inv.isActive == true && invTypeL.Contains(inv.invType));
+                    searchPredicate = searchPredicate.And(
+                        inv =>
+                            inv.branchCreatorId == branchCreatorId
+                            && inv.isActive == true
+                            && invTypeL.Contains(inv.invType)
+                    );
 
                 if (branchId != 0)
                     searchPredicate = searchPredicate.And(inv => inv.branchId == branchId);
                 if (userId != 0)
                     searchPredicate = searchPredicate.And(inv => inv.createUserId == userId);
-                var invoicesList = (from b in entity.invoices.Where(searchPredicate)
-                                    join u in entity.users on b.createUserId equals u.userId into uj
-                                    from us in uj.DefaultIfEmpty()
-                                    join l in entity.branches on b.branchId equals l.branchId into lj
-                                    from x in lj.DefaultIfEmpty()
-                                    join y in entity.branches on b.branchCreatorId equals y.branchId into yj
-                                    from z in yj.DefaultIfEmpty()
-                                    join a in entity.agents on b.agentId equals a.agentId into aj
-                                    from ag in aj.DefaultIfEmpty()
-                                    where !entity.invoices.Any(y => y.invoiceMainId == b.invoiceId)
-                                    select new InvoiceModel()
-                                    {
-                                        invoiceId = b.invoiceId,
-                                        invNumber = b.invNumber,
-                                        agentId = b.agentId,
-                                        agentName = ag.name,
-                                        invType = b.invType,
-                                        tax = b.tax,
-                                        taxtype = b.taxtype,
-                                        name = b.name,
-                                        branchName = x.name,
-                                        branchCreatorName = z.name,
-                                        createrUserName = us.name + " " + us.lastname,
-                                        totalNet = b.totalNet,
-                                        total = b.total,
-                                        discountType = b.discountType,
-                                        discountValue = b.discountValue,
-                                        manualDiscountType = b.manualDiscountType,
-                                        manualDiscountValue = b.manualDiscountValue,
-                                        realShippingCost = b.realShippingCost,
-                                        shippingCost = b.shippingCost,
-                                        updateUserId = b.updateUserId,
-                                        isApproved = b.isApproved,
-                                        branchId = b.branchId,
-                                        invBarcode = b.invBarcode,
-                                    })
-                .ToList();
+                var invoicesList = (
+                    from b in entity.invoices.Where(searchPredicate)
+                    join u in entity.users on b.createUserId equals u.userId into uj
+                    from us in uj.DefaultIfEmpty()
+                    join l in entity.branches on b.branchId equals l.branchId into lj
+                    from x in lj.DefaultIfEmpty()
+                    join y in entity.branches on b.branchCreatorId equals y.branchId into yj
+                    from z in yj.DefaultIfEmpty()
+                    join a in entity.agents on b.agentId equals a.agentId into aj
+                    from ag in aj.DefaultIfEmpty()
+                    where !entity.invoices.Any(y => y.invoiceMainId == b.invoiceId)
+                    select new InvoiceModel()
+                    {
+                        invoiceId = b.invoiceId,
+                        invNumber = b.invNumber,
+                        agentId = b.agentId,
+                        agentName = ag.name,
+                        invType = b.invType,
+                        tax = b.tax,
+                        taxtype = b.taxtype,
+                        name = b.name,
+                        branchName = x.name,
+                        branchCreatorName = z.name,
+                        createrUserName = us.name + " " + us.lastname,
+                        totalNet = b.totalNet,
+                        total = b.total,
+                        discountType = b.discountType,
+                        discountValue = b.discountValue,
+                        manualDiscountType = b.manualDiscountType,
+                        manualDiscountValue = b.manualDiscountValue,
+                        realShippingCost = b.realShippingCost,
+                        shippingCost = b.shippingCost,
+                        updateUserId = b.updateUserId,
+                        isApproved = b.isApproved,
+                        branchId = b.branchId,
+                        invBarcode = b.invBarcode,
+                    }
+                ).ToList();
                 if (invoicesList != null)
                 {
                     for (int i = 0; i < invoicesList.Count(); i++)
@@ -6236,22 +7035,25 @@ namespace POS_Server.Controllers
                         long invoiceId = invoicesList[i].invoiceId;
                         invoicesList[i].invoiceItems = itc.Get(invoiceId);
                         invoicesList[i].itemsCount = invoicesList[i].invoiceItems.Count;
-
                     }
                 }
                 return invoicesList;
             }
         }
+
         public decimal AvgItemPurPrice(long itemUnitId, long itemId)
         {
-
             decimal price = 0;
             int totalNum = 0;
             decimal smallUnitPrice = 0;
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var itemUnits = (from i in entity.itemsUnits where (i.itemId == itemId) select (i.itemUnitId)).ToList();
+                var itemUnits = (
+                    from i in entity.itemsUnits
+                    where (i.itemId == itemId)
+                    select (i.itemUnitId)
+                ).ToList();
 
                 price += getItemUnitSumPrice(itemUnits);
 
@@ -6260,16 +7062,20 @@ namespace POS_Server.Controllers
                 if (totalNum != 0)
                     smallUnitPrice = price / totalNum;
 
-                var smallestUnitId = (from iu in entity.itemsUnits
-                                      where (itemUnits.Contains((int)iu.itemUnitId) && iu.unitId == iu.subUnitId)
-                                      select iu.itemUnitId).FirstOrDefault();
+                var smallestUnitId = (
+                    from iu in entity.itemsUnits
+                    where (itemUnits.Contains((int)iu.itemUnitId) && iu.unitId == iu.subUnitId)
+                    select iu.itemUnitId
+                ).FirstOrDefault();
 
                 if (smallestUnitId == null || smallestUnitId == 0)
                 {
-                    smallestUnitId = (from u in entity.itemsUnits
-                                      where !entity.itemsUnits.Any(y => u.subUnitId == y.unitId)
-                                      where (itemUnits.Contains((int)u.itemUnitId))
-                                      select u.itemUnitId).FirstOrDefault();
+                    smallestUnitId = (
+                        from u in entity.itemsUnits
+                        where !entity.itemsUnits.Any(y => u.subUnitId == y.unitId)
+                        where (itemUnits.Contains((int)u.itemUnitId))
+                        select u.itemUnitId
+                    ).FirstOrDefault();
                 }
                 if (itemUnitId == smallestUnitId || smallestUnitId == null || smallestUnitId == 0)
                     return smallUnitPrice;
@@ -6279,8 +7085,6 @@ namespace POS_Server.Controllers
                     return smallUnitPrice;
                 }
             }
-
-
         }
 
         [HttpPost]
@@ -6316,52 +7120,51 @@ namespace POS_Server.Controllers
                 {
                     DateTime dt = Convert.ToDateTime(DateTime.Today.ToShortDateString());
 
-                    var invoicesList = (from I in entity.invoices.Where(x => x.branchCreatorId == branchId
-                                      && x.invType == "sh" && x.isActive == true && x.createUserId == userId
-                                      && x.invDate >= dt)
-                                        join IT in entity.itemsTransfer on I.invoiceId equals IT.invoiceId
-                                        from IU in entity.itemsUnits.Where(IU => IU.itemUnitId == IT.itemUnitId)
+                    var invoicesList = (
+                        from I in entity.invoices.Where(
+                            x =>
+                                x.branchCreatorId == branchId
+                                && x.invType == "sh"
+                                && x.isActive == true
+                                && x.createUserId == userId
+                                && x.invDate >= dt
+                        )
+                        join IT in entity.itemsTransfer on I.invoiceId equals IT.invoiceId
+                        from IU in entity.itemsUnits.Where(IU => IU.itemUnitId == IT.itemUnitId)
 
-                                        join BC in entity.branches on I.branchCreatorId equals BC.branchId into JBC
-                                        join U in entity.users on I.createUserId equals U.userId into JU
-                                        join du in entity.users on I.userId equals du.userId into Dusr
+                        join BC in entity.branches on I.branchCreatorId equals BC.branchId into JBC
+                        join U in entity.users on I.createUserId equals U.userId into JU
+                        join du in entity.users on I.userId equals du.userId into Dusr
+                        from JUU in JU.DefaultIfEmpty()
+                        from duu in Dusr.DefaultIfEmpty()
+                        from JBCC in JBC.DefaultIfEmpty()
 
-                                        from JUU in JU.DefaultIfEmpty()
-
-                                        from duu in Dusr.DefaultIfEmpty()
-                                        from JBCC in JBC.DefaultIfEmpty()
-
-                                        select new ItemTransferInvoice
-                                        {
-
-                                            causeDestroy = IT.inventoryItemLocation.fallCause != null ? IT.inventoryItemLocation.fallCause : IT.cause,
-                                            userdestroy = duu.username,
-
-                                            itemName = IU.items.name,
-                                            unitName = IU.units.name,
-                                            itemUnitId = IT.itemUnitId,
-
-                                            itemId = IU.itemId,
-                                            unitId = IU.unitId,
-                                            quantity = IT.quantity,
-
-                                            invoiceId = I.invoiceId,
-                                            invNumber = I.invNumber,
-                                            total = I.totalNet,
-
-                                            IupdateDate = I.updateDate,
-
-                                            branchName = JBCC.name,
-                                            branchId = I.branchCreatorId,
-
-                                        }).ToList();
-
+                        select new ItemTransferInvoice
+                        {
+                            causeDestroy =
+                                IT.inventoryItemLocation.fallCause != null
+                                    ? IT.inventoryItemLocation.fallCause
+                                    : IT.cause,
+                            userdestroy = duu.username,
+                            itemName = IU.items.name,
+                            unitName = IU.units.name,
+                            itemUnitId = IT.itemUnitId,
+                            itemId = IU.itemId,
+                            unitId = IU.unitId,
+                            quantity = IT.quantity,
+                            invoiceId = I.invoiceId,
+                            invNumber = I.invNumber,
+                            total = I.totalNet,
+                            IupdateDate = I.updateDate,
+                            branchName = JBCC.name,
+                            branchId = I.branchCreatorId,
+                        }
+                    ).ToList();
 
                     return TokenManager.GenerateToken(invoicesList);
                 }
             }
         }
-
 
         [HttpPost]
         [Route("shortageItem")]
@@ -6394,27 +7197,44 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "itemLocationInv")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        itemLocationInv = JsonConvert.DeserializeObject<inventoryItemLocation>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        itemLocationInv = JsonConvert.DeserializeObject<inventoryItemLocation>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "not")
                     {
                         notificationObj = c.Value.Replace("\\", string.Empty);
                         notificationObj = notificationObj.Trim('"');
-                        notificationUser = JsonConvert.DeserializeObject<NotificationUserModel>(notificationObj, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        notificationUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            notificationObj,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                 }
                 #endregion
@@ -6424,7 +7244,11 @@ namespace POS_Server.Controllers
 
                     #region check item quantity
                     ItemsLocationsController ilc = new ItemsLocationsController();
-                    string res = ilc.checkItemsAmounts(billDetails, (long)newObject.branchCreatorId, 0);
+                    string res = ilc.checkItemsAmounts(
+                        billDetails,
+                        (long)newObject.branchCreatorId,
+                        0
+                    );
 
                     if (!res.Equals(""))
                     {
@@ -6444,16 +7268,26 @@ namespace POS_Server.Controllers
                             it.saveInvoiceItems(transferObject, invoiceId);
 
                             #region shortage item
-                            InventoryItemLocationController iic = new InventoryItemLocationController();
+                            InventoryItemLocationController iic =
+                                new InventoryItemLocationController();
                             iic.fallItem(itemLocationInv);
                             #endregion
                             #region decrease item quantity
-                            ilc.decreaseItemLocationQuantity((long)itemLocationInv.itemLocationId, (int)itemLocationInv.amount, (long)newObject.createUserId, notificationUser.objectName, notificationObj);
+                            ilc.decreaseItemLocationQuantity(
+                                (long)itemLocationInv.itemLocationId,
+                                (int)itemLocationInv.amount,
+                                (long)newObject.createUserId,
+                                notificationUser.objectName,
+                                notificationObj
+                            );
                             #endregion
                             #region record cash transfer
                             if (newObject.userId != null)
                             {
-                                var paid = depositFromUserBalance((long)newObject.userId, newObject.invoiceId);
+                                var paid = depositFromUserBalance(
+                                    (long)newObject.userId,
+                                    newObject.invoiceId
+                                );
 
                                 CashTransferController cc = new CashTransferController();
 
@@ -6471,20 +7305,17 @@ namespace POS_Server.Controllers
                                 cashTrasnfer.transType = "p"; //deposit
                                 cashTrasnfer.transNum = "pu";
                                 await cc.addCashTransfer(cashTrasnfer);
-
                             }
                             #endregion
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
 
                 return TokenManager.GenerateToken(message);
-
             }
         }
 
@@ -6519,27 +7350,44 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "itemLocationInv")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        itemLocationInv = JsonConvert.DeserializeObject<inventoryItemLocation>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        itemLocationInv = JsonConvert.DeserializeObject<inventoryItemLocation>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "not")
                     {
                         notificationObj = c.Value.Replace("\\", string.Empty);
                         notificationObj = notificationObj.Trim('"');
-                        notificationUser = JsonConvert.DeserializeObject<NotificationUserModel>(notificationObj, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        notificationUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            notificationObj,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                 }
                 #endregion
@@ -6547,7 +7395,11 @@ namespace POS_Server.Controllers
                 {
                     #region check item quantity
                     ItemsLocationsController ilc = new ItemsLocationsController();
-                    string res = ilc.checkItemsAmounts(billDetails,(long) newObject.branchCreatorId, 0);
+                    string res = ilc.checkItemsAmounts(
+                        billDetails,
+                        (long)newObject.branchCreatorId,
+                        0
+                    );
 
                     if (!res.Equals(""))
                     {
@@ -6568,18 +7420,28 @@ namespace POS_Server.Controllers
                             it.saveInvoiceItems(transferObject, invoiceId);
 
                             #region destroy item
-                            InventoryItemLocationController iic = new InventoryItemLocationController();
+                            InventoryItemLocationController iic =
+                                new InventoryItemLocationController();
                             iic.destroyItem(itemLocationInv);
                             #endregion
 
                             #region decrease item quantity
-                           
-                            ilc.decreaseItemLocationQuantity((long)itemLocationInv.itemLocationId, (int)itemLocationInv.amountDestroyed, (long)newObject.createUserId, notificationUser.objectName, notificationObj);
+
+                            ilc.decreaseItemLocationQuantity(
+                                (long)itemLocationInv.itemLocationId,
+                                (int)itemLocationInv.amountDestroyed,
+                                (long)newObject.createUserId,
+                                notificationUser.objectName,
+                                notificationObj
+                            );
                             #endregion
                             #region record cash transfer
                             if (newObject.userId != null)
                             {
-                                var paid = depositFromUserBalance((long)newObject.userId, newObject.invoiceId);
+                                var paid = depositFromUserBalance(
+                                    (long)newObject.userId,
+                                    newObject.invoiceId
+                                );
 
                                 CashTransferController cc = new CashTransferController();
 
@@ -6597,20 +7459,17 @@ namespace POS_Server.Controllers
                                 cashTrasnfer.transType = "p"; //deposit
                                 cashTrasnfer.transNum = "pu";
                                 await cc.addCashTransfer(cashTrasnfer);
-
                             }
                             #endregion
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
 
                 return TokenManager.GenerateToken(message);
-
             }
         }
 
@@ -6645,27 +7504,44 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<invoices>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                        newObject = JsonConvert.DeserializeObject<invoices>(
+                            Object,
+                            new JsonSerializerSettings
+                            {
+                                DateParseHandling = DateParseHandling.None
+                            }
+                        );
                     }
                     else if (c.Type == "itemTransferObject")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        transferObject = JsonConvert.DeserializeObject<List<itemsTransfer>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
+                        billDetails = JsonConvert.DeserializeObject<List<ItemTransferModel>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
-
                     else if (c.Type == "itemsLoc")
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        itemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        itemsLoc = JsonConvert.DeserializeObject<List<itemsLocations>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "not")
                     {
                         notificationObj = c.Value.Replace("\\", string.Empty);
                         notificationObj = notificationObj.Trim('"');
-                        notificationUser = JsonConvert.DeserializeObject<NotificationUserModel>(notificationObj, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        notificationUser = JsonConvert.DeserializeObject<NotificationUserModel>(
+                            notificationObj,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                 }
                 #endregion
@@ -6687,7 +7563,6 @@ namespace POS_Server.Controllers
                             }
                         }
 
-
                         #endregion
                         newObject.invoiceId = await saveInvoice(newObject);
 
@@ -6705,13 +7580,22 @@ namespace POS_Server.Controllers
                             {
                                 long itemLocId = itemLoc.itemsLocId;
                                 int quantity = (int)itemLoc.quantity;
-                                itc.decreaseItemLocationQuantity((long)itemLocId, quantity, (long)newObject.createUserId, notificationUser.objectName, notificationObj);
+                                itc.decreaseItemLocationQuantity(
+                                    (long)itemLocId,
+                                    quantity,
+                                    (long)newObject.createUserId,
+                                    notificationUser.objectName,
+                                    notificationObj
+                                );
                             }
                             #endregion
                             #region record cash transfer
                             if (newObject.userId != null)
                             {
-                                var paid = depositFromUserBalance((long)newObject.userId, newObject.invoiceId);
+                                var paid = depositFromUserBalance(
+                                    (long)newObject.userId,
+                                    newObject.invoiceId
+                                );
 
                                 CashTransferController cc = new CashTransferController();
 
@@ -6735,16 +7619,15 @@ namespace POS_Server.Controllers
                         }
                     }
                 }
-
                 catch
                 {
                     message = "0";
                 }
 
                 return TokenManager.GenerateToken(message);
-
             }
         }
+
         public decimal depositFromUserBalance(long userId, long invoiceId)
         {
             decimal paid = 0;
@@ -6782,9 +7665,8 @@ namespace POS_Server.Controllers
                 }
                 return paid;
             }
+        }
 
-         
-    }
         [HttpPost]
         [Route("GetDailyDestructive")]
         public string GetDailyDestructive(string token)
@@ -6818,45 +7700,46 @@ namespace POS_Server.Controllers
                 {
                     DateTime dt = Convert.ToDateTime(DateTime.Today.ToShortDateString());
 
-                    var invoicesList = (from I in entity.invoices.Where(x => x.branchCreatorId == branchId
-                                      && x.invType == "d" && x.isActive == true && x.createUserId == userId
-                                      && x.invDate >= dt)
-                                        join IT in entity.itemsTransfer on I.invoiceId equals IT.invoiceId
-                                        from IU in entity.itemsUnits.Where(IU => IU.itemUnitId == IT.itemUnitId)
+                    var invoicesList = (
+                        from I in entity.invoices.Where(
+                            x =>
+                                x.branchCreatorId == branchId
+                                && x.invType == "d"
+                                && x.isActive == true
+                                && x.createUserId == userId
+                                && x.invDate >= dt
+                        )
+                        join IT in entity.itemsTransfer on I.invoiceId equals IT.invoiceId
+                        from IU in entity.itemsUnits.Where(IU => IU.itemUnitId == IT.itemUnitId)
 
-                                        join BC in entity.branches on I.branchCreatorId equals BC.branchId into JBC
-                                        join U in entity.users on I.createUserId equals U.userId into JU
-                                        join du in entity.users on I.userId equals du.userId into Dusr
+                        join BC in entity.branches on I.branchCreatorId equals BC.branchId into JBC
+                        join U in entity.users on I.createUserId equals U.userId into JU
+                        join du in entity.users on I.userId equals du.userId into Dusr
+                        from JUU in JU.DefaultIfEmpty()
+                        from duu in Dusr.DefaultIfEmpty()
+                        from JBCC in JBC.DefaultIfEmpty()
 
-                                        from JUU in JU.DefaultIfEmpty()
-
-                                        from duu in Dusr.DefaultIfEmpty()
-                                        from JBCC in JBC.DefaultIfEmpty()
-
-                                        select new ItemTransferInvoice
-                                        {
-                                            causeDestroy = IT.inventoryItemLocation.fallCause != null ? IT.inventoryItemLocation.fallCause : IT.cause,
-                                            userdestroy = duu.username,
-
-                                            itemName = IU.items.name,
-                                            unitName = IU.units.name,
-                                            itemUnitId = IT.itemUnitId,
-
-                                            itemId = IU.itemId,
-                                            unitId = IU.unitId,
-                                            quantity = IT.quantity,
-
-                                            invoiceId = I.invoiceId,
-                                            invNumber = I.invNumber,
-                                            total = I.totalNet,
-
-                                            IupdateDate = I.updateDate,
-
-                                            branchName = JBCC.name,
-                                            branchId = I.branchCreatorId,
-
-                                        }).ToList();
-
+                        select new ItemTransferInvoice
+                        {
+                            causeDestroy =
+                                IT.inventoryItemLocation.fallCause != null
+                                    ? IT.inventoryItemLocation.fallCause
+                                    : IT.cause,
+                            userdestroy = duu.username,
+                            itemName = IU.items.name,
+                            unitName = IU.units.name,
+                            itemUnitId = IT.itemUnitId,
+                            itemId = IU.itemId,
+                            unitId = IU.unitId,
+                            quantity = IT.quantity,
+                            invoiceId = I.invoiceId,
+                            invNumber = I.invNumber,
+                            total = I.totalNet,
+                            IupdateDate = I.updateDate,
+                            branchName = JBCC.name,
+                            branchId = I.branchCreatorId,
+                        }
+                    ).ToList();
 
                     return TokenManager.GenerateToken(invoicesList);
                 }

@@ -20,7 +20,12 @@ public static class TestUriHelper
         return BuildTestUri(serverType, Uri.UriSchemeHttp, hint, statusMessagesEnabled);
     }
 
-    internal static Uri BuildTestUri(ServerType serverType, string scheme, string hint, bool statusMessagesEnabled)
+    internal static Uri BuildTestUri(
+        ServerType serverType,
+        string scheme,
+        string hint,
+        bool statusMessagesEnabled
+    )
     {
         if (string.IsNullOrEmpty(hint))
         {

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             InheritanceRelationship relationToMember,
             SerializableDefinitionItem definitionItem,
             Glyph glyph,
-            string displayName)
+            string displayName
+        )
         {
             RelationToMember = relationToMember;
             DefinitionItem = definitionItem;

@@ -27,7 +27,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new AutoDualComObjectEmpty() };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetObjectForIUnknown_ComObject_TestData))]
         public void GetObjectForIUnknown_ComObject_ReturnsExpected(object o)
         {

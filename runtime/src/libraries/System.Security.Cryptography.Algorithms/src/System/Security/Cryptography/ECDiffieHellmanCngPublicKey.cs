@@ -28,7 +28,8 @@ namespace System.Security.Cryptography
                 throw new PlatformNotSupportedException();
             }
 
-            internal ECDiffieHellmanCngPublicKey(byte[] keyBlob, string? curveName) : base(keyBlob)
+            internal ECDiffieHellmanCngPublicKey(byte[] keyBlob, string? curveName)
+                : base(keyBlob)
             {
                 Debug.Assert(keyBlob != null);
 
@@ -54,7 +55,11 @@ namespace System.Security.Cryptography
                 }
 
                 ECParameters ecparams = default;
-                ECCng.ExportPrimeCurveParameters(ref ecparams, _keyBlob, includePrivateParameters: false);
+                ECCng.ExportPrimeCurveParameters(
+                    ref ecparams,
+                    _keyBlob,
+                    includePrivateParameters: false
+                );
                 return ecparams;
             }
 
@@ -81,7 +86,11 @@ namespace System.Security.Cryptography
                 else
                 {
                     ECParameters ecparams = default;
-                    ECCng.ExportNamedCurveParameters(ref ecparams, _keyBlob, includePrivateParameters: false);
+                    ECCng.ExportNamedCurveParameters(
+                        ref ecparams,
+                        _keyBlob,
+                        includePrivateParameters: false
+                    );
                     ecparams.Curve = ECCurve.CreateFromFriendlyName(_curveName);
                     return ecparams;
                 }

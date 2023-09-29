@@ -16,14 +16,13 @@ namespace Wasm.Build.Tests
     public class RebuildTests : BuildTestBase
     {
         public RebuildTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+            : base(output, buildContext) { }
 
-        public static IEnumerable<object?[]> NonNativeDebugRebuildData()
-            => ConfigWithAOTData(aot: false, config: "Debug")
-                    .WithRunHosts(RunHost.V8)
-                    .UnwrapItemsAsArrays().ToList();
+        public static IEnumerable<object?[]> NonNativeDebugRebuildData() =>
+            ConfigWithAOTData(aot: false, config: "Debug")
+                .WithRunHosts(RunHost.V8)
+                .UnwrapItemsAsArrays()
+                .ToList();
 
         [Theory]
         [MemberData(nameof(NonNativeDebugRebuildData))]
@@ -34,12 +33,19 @@ namespace Wasm.Build.Tests
             buildArgs = buildArgs with { ProjectName = projectName };
             buildArgs = ExpandBuildArgs(buildArgs);
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), s_mainReturns42),
-                                DotnetWasmFromRuntimePack: true,
-                                CreateProject: true));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        File.WriteAllText(
+                            Path.Combine(_projectDir!, "Program.cs"),
+                            s_mainReturns42
+                        ),
+                    DotnetWasmFromRuntimePack: true,
+                    CreateProject: true
+                )
+            );
 
             Run();
 
@@ -48,22 +54,32 @@ namespace Wasm.Build.Tests
 
             File.Move(product!.LogFile, Path.ChangeExtension(product.LogFile!, ".first.binlog"));
 
-            _testOutput.WriteLine($"{Environment.NewLine}Rebuilding with no changes ..{Environment.NewLine}");
+            _testOutput.WriteLine(
+                $"{Environment.NewLine}Rebuilding with no changes ..{Environment.NewLine}"
+            );
 
             // no-op Rebuild
-            BuildProject(buildArgs,
-                        id: id,
-                        new BuildProjectOptions(
-                            DotnetWasmFromRuntimePack: true,
-                            CreateProject: false,
-                            UseCache: false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    DotnetWasmFromRuntimePack: true,
+                    CreateProject: false,
+                    UseCache: false
+                )
+            );
 
             Run();
 
-            void Run() => RunAndTestWasmApp(
-                                buildArgs, buildDir: _projectDir, expectedExitCode: 42,
-                                test: output => {},
-                                host: host, id: id);
+            void Run() =>
+                RunAndTestWasmApp(
+                    buildArgs,
+                    buildDir: _projectDir,
+                    expectedExitCode: 42,
+                    test: output => { },
+                    host: host,
+                    id: id
+                );
         }
     }
 }

@@ -28,7 +28,9 @@ namespace System.Reflection.Runtime.Assemblies
     //
     // The runtime's implementation of an Assembly.
     //
-    internal abstract partial class RuntimeAssemblyInfo : RuntimeAssembly, IEquatable<RuntimeAssemblyInfo>
+    internal abstract partial class RuntimeAssemblyInfo
+        : RuntimeAssembly,
+            IEquatable<RuntimeAssemblyInfo>
     {
         public bool Equals(RuntimeAssemblyInfo other)
         {
@@ -60,10 +62,7 @@ namespace System.Reflection.Runtime.Assemblies
 
         public sealed override IEnumerable<Module> Modules
         {
-            get
-            {
-                yield return ManifestModule;
-            }
+            get { yield return ManifestModule; }
         }
 
         public sealed override Module GetModule(string name)
@@ -87,27 +86,40 @@ namespace System.Reflection.Runtime.Assemblies
             if (name.Length == 0)
                 throw new ArgumentException();
 
-            TypeName typeName = TypeParser.ParseAssemblyQualifiedTypeName(name, throwOnError: throwOnError);
+            TypeName typeName = TypeParser.ParseAssemblyQualifiedTypeName(
+                name,
+                throwOnError: throwOnError
+            );
             if (typeName == null)
                 return null;
             if (typeName is AssemblyQualifiedTypeName)
             {
                 if (throwOnError)
-                    throw new ArgumentException(SR.Argument_AssemblyGetTypeCannotSpecifyAssembly);  // Cannot specify an assembly qualifier in a typename passed to Assembly.GetType()
+                    throw new ArgumentException(SR.Argument_AssemblyGetTypeCannotSpecifyAssembly); // Cannot specify an assembly qualifier in a typename passed to Assembly.GetType()
                 else
                     return null;
             }
 
             CoreAssemblyResolver coreAssemblyResolver = GetRuntimeAssemblyIfExists;
-            CoreTypeResolver coreTypeResolver =
-                delegate (Assembly containingAssemblyIfAny, string coreTypeName)
-                {
-                    if (containingAssemblyIfAny == null)
-                        return GetTypeCore(coreTypeName, ignoreCase: ignoreCase);
-                    else
-                        return containingAssemblyIfAny.GetTypeCore(coreTypeName, ignoreCase: ignoreCase);
-                };
-            GetTypeOptions getTypeOptions = new GetTypeOptions(coreAssemblyResolver, coreTypeResolver, throwOnError: throwOnError, ignoreCase: ignoreCase);
+            CoreTypeResolver coreTypeResolver = delegate(
+                Assembly containingAssemblyIfAny,
+                string coreTypeName
+            )
+            {
+                if (containingAssemblyIfAny == null)
+                    return GetTypeCore(coreTypeName, ignoreCase: ignoreCase);
+                else
+                    return containingAssemblyIfAny.GetTypeCore(
+                        coreTypeName,
+                        ignoreCase: ignoreCase
+                    );
+            };
+            GetTypeOptions getTypeOptions = new GetTypeOptions(
+                coreAssemblyResolver,
+                coreTypeResolver,
+                throwOnError: throwOnError,
+                ignoreCase: ignoreCase
+            );
 
             return typeName.ResolveType(this, getTypeOptions);
         }
@@ -139,17 +151,26 @@ namespace System.Reflection.Runtime.Assemblies
 
             foreach (TypeForwardInfo typeForwardInfo in TypeForwardInfos)
             {
-                string fullTypeName = typeForwardInfo.NamespaceName.Length == 0 ? typeForwardInfo.TypeName : typeForwardInfo.NamespaceName + "." + typeForwardInfo.TypeName;
+                string fullTypeName =
+                    typeForwardInfo.NamespaceName.Length == 0
+                        ? typeForwardInfo.TypeName
+                        : typeForwardInfo.NamespaceName + "." + typeForwardInfo.TypeName;
                 RuntimeAssemblyName redirectedAssemblyName = typeForwardInfo.RedirectedAssemblyName;
 
                 Type type = null;
                 RuntimeAssemblyInfo redirectedAssembly;
-                Exception exception = TryGetRuntimeAssembly(redirectedAssemblyName, out redirectedAssembly);
+                Exception exception = TryGetRuntimeAssembly(
+                    redirectedAssemblyName,
+                    out redirectedAssembly
+                );
                 if (exception == null)
                 {
                     type = redirectedAssembly.GetTypeCore(fullTypeName, ignoreCase: false); // GetTypeCore() will follow any further type-forwards if needed.
                     if (type == null)
-                        exception = Helpers.CreateTypeLoadException(fullTypeName.EscapeTypeNameIdentifier(), redirectedAssembly);
+                        exception = Helpers.CreateTypeLoadException(
+                            fullTypeName.EscapeTypeNameIdentifier(),
+                            redirectedAssembly
+                        );
                 }
 
                 Debug.Assert((type != null) != (exception != null)); // Exactly one of these must be non-null.
@@ -245,7 +266,6 @@ namespace System.Reflection.Runtime.Assemblies
         /// </summary>
         internal abstract RuntimeTypeInfo UncachedGetTypeCoreCaseSensitive(string fullName);
 
-
         /// <summary>
         /// Perform a lookup for a type based on a name. Overriders may or may not
         /// have a cached implementation, as the result is not expected to be cached by
@@ -263,33 +283,35 @@ namespace System.Reflection.Runtime.Assemblies
         {
             get
             {
-                return _lazyCaseSensitiveTypeTable ?? (_lazyCaseSensitiveTypeTable = new CaseSensitiveTypeCache(this));
+                return _lazyCaseSensitiveTypeTable
+                    ?? (_lazyCaseSensitiveTypeTable = new CaseSensitiveTypeCache(this));
             }
         }
 
         public sealed override bool GlobalAssemblyCache
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override long HostContext
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
-        [RequiresUnreferencedCode("Types and members the loaded module depends on might be removed")]
-        public sealed override Module LoadModule(string moduleName, byte[] rawModule, byte[] rawSymbolStore)
+        [RequiresUnreferencedCode(
+            "Types and members the loaded module depends on might be removed"
+        )]
+        public sealed override Module LoadModule(
+            string moduleName,
+            byte[] rawModule,
+            byte[] rawSymbolStore
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        internal const string ThrowingMessageInRAF = "This member throws an exception for assemblies embedded in a single-file app";
+        internal const string ThrowingMessageInRAF =
+            "This member throws an exception for assemblies embedded in a single-file app";
 
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
         public sealed override FileStream GetFile(string name)
@@ -305,10 +327,7 @@ namespace System.Reflection.Runtime.Assemblies
 
         public sealed override SecurityRuleSet SecurityRuleSet
         {
-            get
-            {
-                return SecurityRuleSet.None;
-            }
+            get { return SecurityRuleSet.None; }
         }
 
         /// <summary>
@@ -319,7 +338,10 @@ namespace System.Reflection.Runtime.Assemblies
             // Important: The result of this method is the return value of the AppDomain.GetAssemblies() api so
             // so it must return a freshly allocated array on each call.
 
-            AssemblyBinder binder = ReflectionCoreExecution.ExecutionDomain.ReflectionDomainSetup.AssemblyBinder;
+            AssemblyBinder binder = ReflectionCoreExecution
+                .ExecutionDomain
+                .ReflectionDomainSetup
+                .AssemblyBinder;
             IList<AssemblyBindResult> bindResults = binder.GetLoadedAssemblies();
             Assembly[] results = new Assembly[bindResults.Count];
             for (int i = 0; i < bindResults.Count; i++)

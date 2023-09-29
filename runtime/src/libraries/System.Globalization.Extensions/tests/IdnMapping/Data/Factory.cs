@@ -38,11 +38,17 @@ namespace System.Globalization.Tests
                 fileName = "IdnaTest_6.txt";
 
             // test file 'IdnaTest.txt' is included as an embedded resource
-            var name = typeof(Factory).GetTypeInfo().Assembly.GetManifestResourceNames().First(n => n.EndsWith(fileName, StringComparison.Ordinal));
+            var name = typeof(Factory)
+                .GetTypeInfo()
+                .Assembly.GetManifestResourceNames()
+                .First(n => n.EndsWith(fileName, StringComparison.Ordinal));
             return typeof(Factory).GetTypeInfo().Assembly.GetManifestResourceStream(name);
         }
 
-        private static IEnumerable<IConformanceIdnaTest> ParseFile(Stream stream, Func<string, int, IConformanceIdnaTest> f)
+        private static IEnumerable<IConformanceIdnaTest> ParseFile(
+            Stream stream,
+            Func<string, int, IConformanceIdnaTest> f
+        )
         {
             using (var reader = new StreamReader(stream))
             {
@@ -88,7 +94,9 @@ namespace System.Globalization.Tests
         {
             // Nls is transitional so we filter out non transitional test cases.
             // Icu is the opposite.
-            IdnType idnFilter = PlatformDetection.IsNlsGlobalization ? IdnType.Nontransitional : IdnType.Transitional;
+            IdnType idnFilter = PlatformDetection.IsNlsGlobalization
+                ? IdnType.Nontransitional
+                : IdnType.Transitional;
             foreach (var entry in ParseFile(GetIdnaTestTxt(), GetConformanceIdnaTest))
             {
                 if (entry.Type != idnFilter && entry.Source != string.Empty)

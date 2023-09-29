@@ -26,6 +26,7 @@ public struct test
         int6 = i;
         int7 = i;
     }
+
     public static int Main()
     {
         test t = new test();

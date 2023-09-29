@@ -34,10 +34,15 @@ namespace Microsoft.CodeAnalysis.Options
         public event EventHandler<OptionChangedEventArgs>? OptionChanged;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public GlobalOptionService(
             [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService,
-            [ImportMany] IEnumerable<Lazy<IOptionPersisterProvider>> optionPersisters)
+            [ImportMany] IEnumerable<Lazy<IOptionPersisterProvider>> optionPersisters
+        )
         {
             _workspaceThreadingService = workspaceThreadingService;
             _optionPersisterProviders = optionPersisters.ToImmutableArray();
@@ -55,7 +60,12 @@ namespace Microsoft.CodeAnalysis.Options
 
                 ImmutableInterlocked.InterlockedInitialize(
                     ref _lazyOptionPersisters,
-                    GetOptionPersistersSlow(_workspaceThreadingService, _optionPersisterProviders, CancellationToken.None));
+                    GetOptionPersistersSlow(
+                        _workspaceThreadingService,
+                        _optionPersisterProviders,
+                        CancellationToken.None
+                    )
+                );
             }
 
             return _lazyOptionPersisters;
@@ -64,29 +74,41 @@ namespace Microsoft.CodeAnalysis.Options
             static ImmutableArray<IOptionPersister> GetOptionPersistersSlow(
                 IWorkspaceThreadingService? workspaceThreadingService,
                 ImmutableArray<Lazy<IOptionPersisterProvider>> persisterProviders,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (workspaceThreadingService is not null)
                 {
-                    return workspaceThreadingService.Run(() => GetOptionPersistersAsync(persisterProviders, cancellationToken));
+                    return workspaceThreadingService.Run(
+                        () => GetOptionPersistersAsync(persisterProviders, cancellationToken)
+                    );
                 }
                 else
                 {
-                    return GetOptionPersistersAsync(persisterProviders, cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+                    return GetOptionPersistersAsync(persisterProviders, cancellationToken)
+                        .WaitAndGetResult_CanCallOnBackground(cancellationToken);
                 }
             }
 
             static async Task<ImmutableArray<IOptionPersister>> GetOptionPersistersAsync(
                 ImmutableArray<Lazy<IOptionPersisterProvider>> persisterProviders,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                return await persisterProviders.SelectAsArrayAsync(
-                    static (lazyProvider, cancellationToken) => lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                return await persisterProviders
+                    .SelectAsArrayAsync(
+                        static (lazyProvider, cancellationToken) =>
+                            lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
-        private static object? LoadOptionFromPersisterOrGetDefault(OptionKey2 optionKey, ImmutableArray<IOptionPersister> persisters)
+        private static object? LoadOptionFromPersisterOrGetDefault(
+            OptionKey2 optionKey,
+            ImmutableArray<IOptionPersister> persisters
+        )
         {
             foreach (var persister in persisters)
             {
@@ -107,11 +129,10 @@ namespace Microsoft.CodeAnalysis.Options
             return true;
         }
 
-        public T GetOption<T>(Option2<T> option)
-            => GetOption<T>(new OptionKey2(option));
+        public T GetOption<T>(Option2<T> option) => GetOption<T>(new OptionKey2(option));
 
-        public T GetOption<T>(PerLanguageOption2<T> option, string language)
-            => GetOption<T>(new OptionKey2(option, language));
+        public T GetOption<T>(PerLanguageOption2<T> option, string language) =>
+            GetOption<T>(new OptionKey2(option, language));
 
         public T GetOption<T>(OptionKey2 optionKey)
         {
@@ -141,7 +162,10 @@ namespace Microsoft.CodeAnalysis.Options
             return values.ToImmutableAndClear();
         }
 
-        private object? GetOption_NoLock(OptionKey2 optionKey, ImmutableArray<IOptionPersister> persisters)
+        private object? GetOption_NoLock(
+            OptionKey2 optionKey,
+            ImmutableArray<IOptionPersister> persisters
+        )
         {
             // The option must be internally defined and it can't be a legacy option whose value is mapped to another option:
             Debug.Assert(optionKey.Option is IOption2 { Definition.StorageMapping: null });
@@ -158,17 +182,17 @@ namespace Microsoft.CodeAnalysis.Options
             return value;
         }
 
-        public void SetGlobalOption<T>(Option2<T> option, T value)
-            => SetGlobalOption(new OptionKey2(option), value);
+        public void SetGlobalOption<T>(Option2<T> option, T value) =>
+            SetGlobalOption(new OptionKey2(option), value);
 
-        public void SetGlobalOption<T>(PerLanguageOption2<T> option, string language, T value)
-            => SetGlobalOption(new OptionKey2(option, language), value);
+        public void SetGlobalOption<T>(PerLanguageOption2<T> option, string language, T value) =>
+            SetGlobalOption(new OptionKey2(option, language), value);
 
-        public void SetGlobalOption(OptionKey2 optionKey, object? value)
-            => SetGlobalOptions(OneOrMany.Create(KeyValuePairUtil.Create(optionKey, value)));
+        public void SetGlobalOption(OptionKey2 optionKey, object? value) =>
+            SetGlobalOptions(OneOrMany.Create(KeyValuePairUtil.Create(optionKey, value)));
 
-        public bool SetGlobalOptions(ImmutableArray<KeyValuePair<OptionKey2, object?>> options)
-            => SetGlobalOptions(OneOrMany.Create(options));
+        public bool SetGlobalOptions(ImmutableArray<KeyValuePair<OptionKey2, object?>> options) =>
+            SetGlobalOptions(OneOrMany.Create(options));
 
         private bool SetGlobalOptions(OneOrMany<KeyValuePair<OptionKey2, object?>> options)
         {
@@ -204,7 +228,11 @@ namespace Microsoft.CodeAnalysis.Options
             return true;
         }
 
-        private static void PersistOption(ImmutableArray<IOptionPersister> persisters, OptionKey2 optionKey, object? value)
+        private static void PersistOption(
+            ImmutableArray<IOptionPersister> persisters,
+            OptionKey2 optionKey,
+            object? value
+        )
         {
             foreach (var persister in persisters)
             {
@@ -231,7 +259,10 @@ namespace Microsoft.CodeAnalysis.Options
                 _currentValues = _currentValues.SetItem(optionKey, newValue);
             }
 
-            var changedOptions = new List<OptionChangedEventArgs> { new OptionChangedEventArgs(optionKey, newValue) };
+            var changedOptions = new List<OptionChangedEventArgs>
+            {
+                new OptionChangedEventArgs(optionKey, newValue)
+            };
             RaiseOptionChangedEvent(changedOptions);
             return true;
         }

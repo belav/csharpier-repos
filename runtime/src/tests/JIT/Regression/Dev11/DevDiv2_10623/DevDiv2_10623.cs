@@ -3,12 +3,14 @@
 //
 
 using System;
+
 public class Program
 {
     public static bool IsGuid(object item)
     {
         return item is Guid;
     }
+
     public static int Main()
     {
         if (IsGuid(Guid.NewGuid()))

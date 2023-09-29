@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,43 +31,46 @@ using System;
 
 namespace System.Windows.Forms
 {
-	public class LabelEditEventArgs : EventArgs
-	{
-		private int item;
-		private string label;
-		private bool cancelEdit = false;
+    public class LabelEditEventArgs : EventArgs
+    {
+        private int item;
+        private string label;
+        private bool cancelEdit = false;
 
-		#region Public Constructors
-		public LabelEditEventArgs (int item)
-		{
-			this.item = item;
-		}
+        #region Public Constructors
+        public LabelEditEventArgs(int item)
+        {
+            this.item = item;
+        }
 
-		public LabelEditEventArgs (int item, string label)
-		{
-			this.item = item;
-			this.label = label;
-		}
-		#endregion	// Public Constructors
+        public LabelEditEventArgs(int item, string label)
+        {
+            this.item = item;
+            this.label = label;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public bool CancelEdit {
-			get { return cancelEdit; }
-			set { cancelEdit = value; }
-		}
+        #region Public Instance Properties
+        public bool CancelEdit
+        {
+            get { return cancelEdit; }
+            set { cancelEdit = value; }
+        }
 
-		public int Item {
-			get { return item; }
-		}
+        public int Item
+        {
+            get { return item; }
+        }
 
-		public string Label {
-			get { return label; }
-		}
-		#endregion	// Public Instance Properties
+        public string Label
+        {
+            get { return label; }
+        }
+        #endregion	// Public Instance Properties
 
-		internal void SetLabel (string label)
-		{
-			this.label = label;
-		}
-	}
+        internal void SetLabel(string label)
+        {
+            this.label = label;
+        }
+    }
 }

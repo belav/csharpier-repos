@@ -16,7 +16,10 @@ namespace System.Collections.Frozen
     internal sealed class RightJustifiedSingleCharComparer : SubstringComparerBase
     {
         public override bool Equals(string? x, string? y) => string.Equals(x, y);
-        public override bool EqualsPartial(string? x, string? y) => x![x.Length + Index] == y![y.Length + Index];
+
+        public override bool EqualsPartial(string? x, string? y) =>
+            x![x.Length + Index] == y![y.Length + Index];
+
         public override int GetHashCode(string s) => s[s.Length + Index];
     }
 }

@@ -20,13 +20,28 @@ internal static partial class Interop
             Guid* activityId,
             Guid* relatedActivityId,
             int userDataCount,
-            EventProvider.EventData* userData)
+            EventProvider.EventData* userData
+        )
         {
-            int HResult = EventWriteTransfer_PInvoke(registrationHandle, in eventDescriptor, activityId, relatedActivityId, userDataCount, userData);
+            int HResult = EventWriteTransfer_PInvoke(
+                registrationHandle,
+                in eventDescriptor,
+                activityId,
+                relatedActivityId,
+                userDataCount,
+                userData
+            );
             if (HResult == Errors.ERROR_INVALID_PARAMETER && relatedActivityId == null)
             {
                 Guid emptyGuid = Guid.Empty;
-                HResult = EventWriteTransfer_PInvoke(registrationHandle, in eventDescriptor, activityId, &emptyGuid, userDataCount, userData);
+                HResult = EventWriteTransfer_PInvoke(
+                    registrationHandle,
+                    in eventDescriptor,
+                    activityId,
+                    &emptyGuid,
+                    userDataCount,
+                    userData
+                );
             }
 
             return HResult;
@@ -39,6 +54,7 @@ internal static partial class Interop
             Guid* activityId,
             Guid* relatedActivityId,
             int userDataCount,
-            EventProvider.EventData* userData);
+            EventProvider.EventData* userData
+        );
     }
 }

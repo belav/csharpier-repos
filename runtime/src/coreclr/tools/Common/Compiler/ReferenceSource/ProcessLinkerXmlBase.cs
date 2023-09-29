@@ -43,17 +43,29 @@ namespace Mono.Linker.Steps
         protected readonly (EmbeddedResource Resource, AssemblyDefinition Assembly)? _resource;
         protected readonly LinkContext _context;
 
-        protected ProcessLinkerXmlBase(LinkContext context, Stream documentStream, string xmlDocumentLocation)
+        protected ProcessLinkerXmlBase(
+            LinkContext context,
+            Stream documentStream,
+            string xmlDocumentLocation
+        )
         {
             _context = context;
             using (documentStream)
             {
-                _document = XDocument.Load(documentStream, LoadOptions.SetLineInfo).CreateNavigator();
+                _document = XDocument
+                    .Load(documentStream, LoadOptions.SetLineInfo)
+                    .CreateNavigator();
             }
             _xmlDocumentLocation = xmlDocumentLocation;
         }
 
-        protected ProcessLinkerXmlBase(LinkContext context, Stream documentStream, EmbeddedResource resource, AssemblyDefinition resourceAssembly, string xmlDocumentLocation)
+        protected ProcessLinkerXmlBase(
+            LinkContext context,
+            Stream documentStream,
+            EmbeddedResource resource,
+            AssemblyDefinition resourceAssembly,
+            string xmlDocumentLocation
+        )
             : this(context, documentStream, xmlDocumentLocation)
         {
             _resource = (
@@ -62,12 +74,18 @@ namespace Mono.Linker.Steps
             );
         }
 
-        protected virtual bool ShouldProcessElement(XPathNavigator nav) => FeatureSettings.ShouldProcessElement(nav, _context, _xmlDocumentLocation);
+        protected virtual bool ShouldProcessElement(XPathNavigator nav) =>
+            FeatureSettings.ShouldProcessElement(nav, _context, _xmlDocumentLocation);
 
         protected virtual void ProcessXml(bool stripResource, bool ignoreResource)
         {
-            if (!AllowedAssemblySelector.HasFlag(AllowedAssemblies.AnyAssembly) && _resource == null)
-                throw new InvalidOperationException("The containing assembly must be specified for XML which is restricted to modifying that assembly only.");
+            if (
+                !AllowedAssemblySelector.HasFlag(AllowedAssemblies.AnyAssembly)
+                && _resource == null
+            )
+                throw new InvalidOperationException(
+                    "The containing assembly must be specified for XML which is restricted to modifying that assembly only."
+                );
 
             try
             {
@@ -80,7 +98,10 @@ namespace Mono.Linker.Steps
                 if (_resource != null)
                 {
                     if (stripResource)
-                        _context.Annotations.AddResourceToRemove(_resource.Value.Assembly, _resource.Value.Resource);
+                        _context.Annotations.AddResourceToRemove(
+                            _resource.Value.Assembly,
+                            _resource.Value.Resource
+                        );
                     if (ignoreResource)
                         return;
                 }
@@ -93,17 +114,32 @@ namespace Mono.Linker.Steps
                 // For embedded XML, allow not specifying the assembly explicitly in XML.
                 if (_resource != null)
                     ProcessAssembly(_resource.Value.Assembly, nav, warnOnUnresolvedTypes: true);
-
             }
             catch (Exception ex) when (!(ex is LinkerFatalErrorException))
             {
-                throw new LinkerFatalErrorException(MessageContainer.CreateErrorMessage(null, DiagnosticId.ErrorProcessingXmlLocation, _xmlDocumentLocation), ex);
+                throw new LinkerFatalErrorException(
+                    MessageContainer.CreateErrorMessage(
+                        null,
+                        DiagnosticId.ErrorProcessingXmlLocation,
+                        _xmlDocumentLocation
+                    ),
+                    ex
+                );
             }
         }
 
-        protected virtual AllowedAssemblies AllowedAssemblySelector { get => _resource != null ? AllowedAssemblies.ContainingAssembly : AllowedAssemblies.AnyAssembly; }
+        protected virtual AllowedAssemblies AllowedAssemblySelector
+        {
+            get =>
+                _resource != null
+                    ? AllowedAssemblies.ContainingAssembly
+                    : AllowedAssemblies.AnyAssembly;
+        }
 
-        bool ShouldProcessAllAssemblies(XPathNavigator nav, [NotNullWhen(false)] out AssemblyNameReference? assemblyName)
+        bool ShouldProcessAllAssemblies(
+            XPathNavigator nav,
+            [NotNullWhen(false)] out AssemblyNameReference? assemblyName
+        )
         {
             assemblyName = null;
             if (GetFullName(nav) == AllAssembliesFullName)
@@ -119,8 +155,14 @@ namespace Mono.Linker.Steps
             {
                 // Errors for invalid assembly names should show up even if this element will be
                 // skipped due to feature conditions.
-                bool processAllAssemblies = ShouldProcessAllAssemblies(assemblyNav, out AssemblyNameReference? name);
-                if (processAllAssemblies && AllowedAssemblySelector != AllowedAssemblies.AllAssemblies)
+                bool processAllAssemblies = ShouldProcessAllAssemblies(
+                    assemblyNav,
+                    out AssemblyNameReference? name
+                );
+                if (
+                    processAllAssemblies
+                    && AllowedAssemblySelector != AllowedAssemblies.AllAssemblies
+                )
                 {
                     LogWarning(assemblyNav, DiagnosticId.XmlUnsuportedWildcard);
                     continue;
@@ -133,7 +175,12 @@ namespace Mono.Linker.Steps
                     Debug.Assert(_resource != null);
                     if (_resource.Value.Assembly.Name.Name != name!.Name)
                     {
-                        LogWarning(assemblyNav, DiagnosticId.AssemblyWithEmbeddedXmlApplyToAnotherAssembly, _resource.Value.Assembly.Name.Name, name.ToString());
+                        LogWarning(
+                            assemblyNav,
+                            DiagnosticId.AssemblyWithEmbeddedXmlApplyToAnotherAssembly,
+                            _resource.Value.Assembly.Name.Name,
+                            name.ToString()
+                        );
                         continue;
                     }
                     assemblyToProcess = _resource.Value.Assembly;
@@ -155,7 +202,11 @@ namespace Mono.Linker.Steps
 
                     if (assembly == null)
                     {
-                        LogWarning(assemblyNav, DiagnosticId.XmlCouldNotResolveAssembly, name!.Name);
+                        LogWarning(
+                            assemblyNav,
+                            DiagnosticId.XmlCouldNotResolveAssembly,
+                            name!.Name
+                        );
                         continue;
                     }
 
@@ -164,13 +215,20 @@ namespace Mono.Linker.Steps
             }
         }
 
-        protected abstract void ProcessAssembly(AssemblyDefinition assembly, XPathNavigator nav, bool warnOnUnresolvedTypes);
+        protected abstract void ProcessAssembly(
+            AssemblyDefinition assembly,
+            XPathNavigator nav,
+            bool warnOnUnresolvedTypes
+        );
 
-        protected virtual void ProcessTypes(AssemblyDefinition assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+        protected virtual void ProcessTypes(
+            AssemblyDefinition assembly,
+            XPathNavigator nav,
+            bool warnOnUnresolvedTypes
+        )
         {
             foreach (XPathNavigator typeNav in nav.SelectChildren(TypeElementName, XmlNamespace))
             {
-
                 if (!ShouldProcessElement(typeNav))
                     continue;
 
@@ -211,7 +269,11 @@ namespace Mono.Linker.Steps
             }
         }
 
-        protected virtual TypeDefinition? ProcessExportedType(ExportedType exported, AssemblyDefinition assembly, XPathNavigator nav) => exported.Resolve();
+        protected virtual TypeDefinition? ProcessExportedType(
+            ExportedType exported,
+            AssemblyDefinition assembly,
+            XPathNavigator nav
+        ) => exported.Resolve();
 
         void MatchType(TypeDefinition type, Regex regex, XPathNavigator nav)
         {
@@ -225,7 +287,11 @@ namespace Mono.Linker.Steps
                 MatchType(nt, regex, nav);
         }
 
-        protected virtual bool ProcessTypePattern(string fullname, AssemblyDefinition assembly, XPathNavigator nav)
+        protected virtual bool ProcessTypePattern(
+            string fullname,
+            AssemblyDefinition assembly,
+            XPathNavigator nav
+        )
         {
             Regex regex = new Regex(fullname.Replace(".", @"\.").Replace("*", "(.*)"));
 
@@ -254,7 +320,11 @@ namespace Mono.Linker.Steps
 
         protected abstract void ProcessType(TypeDefinition type, XPathNavigator nav);
 
-        protected void ProcessTypeChildren(TypeDefinition type, XPathNavigator nav, object? customData = null)
+        protected void ProcessTypeChildren(
+            TypeDefinition type,
+            XPathNavigator nav,
+            object? customData = null
+        )
         {
             if (nav.HasChildren)
             {
@@ -283,7 +353,12 @@ namespace Mono.Linker.Steps
                 FieldDefinition? field = GetField(type, signature);
                 if (field == null)
                 {
-                    LogWarning(nav, DiagnosticId.XmlCouldNotFindFieldOnType, signature, type.GetDisplayName());
+                    LogWarning(
+                        nav,
+                        DiagnosticId.XmlCouldNotFindFieldOnType,
+                        signature,
+                        type.GetDisplayName()
+                    );
                     return;
                 }
 
@@ -308,7 +383,12 @@ namespace Mono.Linker.Steps
 
                 if (!foundMatch)
                 {
-                    LogWarning(nav, DiagnosticId.XmlCouldNotFindFieldOnType, name, type.GetDisplayName());
+                    LogWarning(
+                        nav,
+                        DiagnosticId.XmlCouldNotFindFieldOnType,
+                        name,
+                        type.GetDisplayName()
+                    );
                 }
             }
         }
@@ -325,11 +405,17 @@ namespace Mono.Linker.Steps
             return null;
         }
 
-        protected virtual void ProcessField(TypeDefinition type, FieldDefinition field, XPathNavigator nav) { }
+        protected virtual void ProcessField(
+            TypeDefinition type,
+            FieldDefinition field,
+            XPathNavigator nav
+        ) { }
 
         void ProcessSelectedMethods(XPathNavigator nav, TypeDefinition type, object? customData)
         {
-            foreach (XPathNavigator methodNav in nav.SelectChildren(MethodElementName, XmlNamespace))
+            foreach (
+                XPathNavigator methodNav in nav.SelectChildren(MethodElementName, XmlNamespace)
+            )
             {
                 if (!ShouldProcessElement(methodNav))
                     continue;
@@ -337,7 +423,11 @@ namespace Mono.Linker.Steps
             }
         }
 
-        protected virtual void ProcessMethod(TypeDefinition type, XPathNavigator nav, object? customData)
+        protected virtual void ProcessMethod(
+            TypeDefinition type,
+            XPathNavigator nav,
+            object? customData
+        )
         {
             string signature = GetSignature(nav);
             if (!String.IsNullOrEmpty(signature))
@@ -345,7 +435,12 @@ namespace Mono.Linker.Steps
                 MethodDefinition? method = GetMethod(type, signature);
                 if (method == null)
                 {
-                    LogWarning(nav, DiagnosticId.XmlCouldNotFindMethodOnType, signature, type.GetDisplayName());
+                    LogWarning(
+                        nav,
+                        DiagnosticId.XmlCouldNotFindMethodOnType,
+                        signature,
+                        type.GetDisplayName()
+                    );
                     return;
                 }
 
@@ -370,14 +465,25 @@ namespace Mono.Linker.Steps
 
                 if (!foundMatch)
                 {
-                    LogWarning(nav, DiagnosticId.XmlCouldNotFindMethodOnType, name, type.GetDisplayName());
+                    LogWarning(
+                        nav,
+                        DiagnosticId.XmlCouldNotFindMethodOnType,
+                        name,
+                        type.GetDisplayName()
+                    );
                 }
             }
         }
 
-        protected virtual MethodDefinition? GetMethod(TypeDefinition type, string signature) => null;
+        protected virtual MethodDefinition? GetMethod(TypeDefinition type, string signature) =>
+            null;
 
-        protected virtual void ProcessMethod(TypeDefinition type, MethodDefinition method, XPathNavigator nav, object? customData) { }
+        protected virtual void ProcessMethod(
+            TypeDefinition type,
+            MethodDefinition method,
+            XPathNavigator nav,
+            object? customData
+        ) { }
 
         void ProcessSelectedEvents(XPathNavigator nav, TypeDefinition type, object? customData)
         {
@@ -389,7 +495,11 @@ namespace Mono.Linker.Steps
             }
         }
 
-        protected virtual void ProcessEvent(TypeDefinition type, XPathNavigator nav, object? customData)
+        protected virtual void ProcessEvent(
+            TypeDefinition type,
+            XPathNavigator nav,
+            object? customData
+        )
         {
             string signature = GetSignature(nav);
             if (!String.IsNullOrEmpty(signature))
@@ -397,7 +507,12 @@ namespace Mono.Linker.Steps
                 EventDefinition? @event = GetEvent(type, signature);
                 if (@event == null)
                 {
-                    LogWarning(nav, DiagnosticId.XmlCouldNotFindEventOnType, signature, type.GetDisplayName());
+                    LogWarning(
+                        nav,
+                        DiagnosticId.XmlCouldNotFindEventOnType,
+                        signature,
+                        type.GetDisplayName()
+                    );
                     return;
                 }
 
@@ -419,7 +534,12 @@ namespace Mono.Linker.Steps
 
                 if (!foundMatch)
                 {
-                    LogWarning(nav, DiagnosticId.XmlCouldNotFindEventOnType, name, type.GetDisplayName());
+                    LogWarning(
+                        nav,
+                        DiagnosticId.XmlCouldNotFindEventOnType,
+                        name,
+                        type.GetDisplayName()
+                    );
                 }
             }
         }
@@ -436,11 +556,18 @@ namespace Mono.Linker.Steps
             return null;
         }
 
-        protected virtual void ProcessEvent(TypeDefinition type, EventDefinition @event, XPathNavigator nav, object? customData) { }
+        protected virtual void ProcessEvent(
+            TypeDefinition type,
+            EventDefinition @event,
+            XPathNavigator nav,
+            object? customData
+        ) { }
 
         void ProcessSelectedProperties(XPathNavigator nav, TypeDefinition type, object? customData)
         {
-            foreach (XPathNavigator propertyNav in nav.SelectChildren(PropertyElementName, XmlNamespace))
+            foreach (
+                XPathNavigator propertyNav in nav.SelectChildren(PropertyElementName, XmlNamespace)
+            )
             {
                 if (!ShouldProcessElement(propertyNav))
                     continue;
@@ -448,7 +575,11 @@ namespace Mono.Linker.Steps
             }
         }
 
-        protected virtual void ProcessProperty(TypeDefinition type, XPathNavigator nav, object? customData)
+        protected virtual void ProcessProperty(
+            TypeDefinition type,
+            XPathNavigator nav,
+            object? customData
+        )
         {
             string signature = GetSignature(nav);
             if (!String.IsNullOrEmpty(signature))
@@ -456,7 +587,12 @@ namespace Mono.Linker.Steps
                 PropertyDefinition? property = GetProperty(type, signature);
                 if (property == null)
                 {
-                    LogWarning(nav, DiagnosticId.XmlCouldNotFindPropertyOnType, signature, type.GetDisplayName());
+                    LogWarning(
+                        nav,
+                        DiagnosticId.XmlCouldNotFindPropertyOnType,
+                        signature,
+                        type.GetDisplayName()
+                    );
                     return;
                 }
 
@@ -478,7 +614,12 @@ namespace Mono.Linker.Steps
 
                 if (!foundMatch)
                 {
-                    LogWarning(nav, DiagnosticId.XmlCouldNotFindPropertyOnType, name, type.GetDisplayName());
+                    LogWarning(
+                        nav,
+                        DiagnosticId.XmlCouldNotFindPropertyOnType,
+                        name,
+                        type.GetDisplayName()
+                    );
                 }
             }
         }
@@ -495,7 +636,13 @@ namespace Mono.Linker.Steps
             return null;
         }
 
-        protected virtual void ProcessProperty(TypeDefinition type, PropertyDefinition property, XPathNavigator nav, object? customData, bool fromSignature) { }
+        protected virtual void ProcessProperty(
+            TypeDefinition type,
+            PropertyDefinition property,
+            XPathNavigator nav,
+            object? customData,
+            bool fromSignature
+        ) { }
 
         protected virtual AssemblyNameReference GetAssemblyName(XPathNavigator nav)
         {
@@ -525,9 +672,15 @@ namespace Mono.Linker.Steps
         protected MessageOrigin GetMessageOriginForPosition(XPathNavigator position)
         {
             return (position is IXmlLineInfo lineInfo)
-                    ? new MessageOrigin(_xmlDocumentLocation, lineInfo.LineNumber, lineInfo.LinePosition, _resource?.Assembly)
-                    : new MessageOrigin(_xmlDocumentLocation, 0, 0, _resource?.Assembly);
+                ? new MessageOrigin(
+                    _xmlDocumentLocation,
+                    lineInfo.LineNumber,
+                    lineInfo.LinePosition,
+                    _resource?.Assembly
+                )
+                : new MessageOrigin(_xmlDocumentLocation, 0, 0, _resource?.Assembly);
         }
+
         protected void LogWarning(string message, int warningCode, XPathNavigator position)
         {
             _context.LogWarning(message, warningCode, GetMessageOriginForPosition(position));
@@ -554,70 +707,140 @@ namespace Mono.Linker.Steps
                     goto case MetadataType.Int32;
 
                 case MetadataType.Byte:
-                    if (!byte.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out byte byteresult))
+                    if (
+                        !byte.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out byte byteresult
+                        )
+                    )
                         break;
 
                     result = (int)byteresult;
                     return true;
 
                 case MetadataType.SByte:
-                    if (!sbyte.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out sbyte sbyteresult))
+                    if (
+                        !sbyte.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out sbyte sbyteresult
+                        )
+                    )
                         break;
 
                     result = (int)sbyteresult;
                     return true;
 
                 case MetadataType.Int16:
-                    if (!short.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out short shortresult))
+                    if (
+                        !short.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out short shortresult
+                        )
+                    )
                         break;
 
                     result = (int)shortresult;
                     return true;
 
                 case MetadataType.UInt16:
-                    if (!ushort.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out ushort ushortresult))
+                    if (
+                        !ushort.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out ushort ushortresult
+                        )
+                    )
                         break;
 
                     result = (int)ushortresult;
                     return true;
 
                 case MetadataType.Int32:
-                    if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int iresult))
+                    if (
+                        !int.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out int iresult
+                        )
+                    )
                         break;
 
                     result = iresult;
                     return true;
 
                 case MetadataType.UInt32:
-                    if (!uint.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out uint uresult))
+                    if (
+                        !uint.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out uint uresult
+                        )
+                    )
                         break;
 
                     result = (int)uresult;
                     return true;
 
                 case MetadataType.Double:
-                    if (!double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out double dresult))
+                    if (
+                        !double.TryParse(
+                            value,
+                            NumberStyles.Float,
+                            CultureInfo.InvariantCulture,
+                            out double dresult
+                        )
+                    )
                         break;
 
                     result = dresult;
                     return true;
 
                 case MetadataType.Single:
-                    if (!float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float fresult))
+                    if (
+                        !float.TryParse(
+                            value,
+                            NumberStyles.Float,
+                            CultureInfo.InvariantCulture,
+                            out float fresult
+                        )
+                    )
                         break;
 
                     result = fresult;
                     return true;
 
                 case MetadataType.Int64:
-                    if (!long.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out long lresult))
+                    if (
+                        !long.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out long lresult
+                        )
+                    )
                         break;
 
                     result = lresult;
                     return true;
 
                 case MetadataType.UInt64:
-                    if (!ulong.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out ulong ulresult))
+                    if (
+                        !ulong.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out ulong ulresult
+                        )
+                    )
                         break;
 
                     result = (long)ulresult;
@@ -640,11 +863,15 @@ namespace Mono.Linker.Steps
                     break;
 
                 case MetadataType.ValueType:
-                    if (value is string &&
-                        _context.TryResolve(target) is TypeDefinition typeDefinition &&
-                        typeDefinition.IsEnum)
+                    if (
+                        value is string
+                        && _context.TryResolve(target) is TypeDefinition typeDefinition
+                        && typeDefinition.IsEnum
+                    )
                     {
-                        var enumField = typeDefinition.Fields.Where(f => f.IsStatic && f.Name == value).FirstOrDefault();
+                        var enumField = typeDefinition.Fields
+                            .Where(f => f.IsStatic && f.Name == value)
+                            .FirstOrDefault();
                         if (enumField != null)
                         {
                             result = Convert.ToInt32(enumField.Constant);

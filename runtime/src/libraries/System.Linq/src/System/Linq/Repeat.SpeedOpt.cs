@@ -11,8 +11,9 @@ namespace System.Linq
     {
         private sealed partial class RepeatIterator<TResult> : IPartition<TResult>
         {
-            public override IEnumerable<TResult2> Select<TResult2>(Func<TResult, TResult2> selector) =>
-                new SelectIPartitionIterator<TResult, TResult2>(this, selector);
+            public override IEnumerable<TResult2> Select<TResult2>(
+                Func<TResult, TResult2> selector
+            ) => new SelectIPartitionIterator<TResult, TResult2>(this, selector);
 
             public TResult[] ToArray()
             {

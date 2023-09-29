@@ -19,6 +19,11 @@ namespace Microsoft.CodeAnalysis.Options
         /// <param name="storageLocation">The <see cref="IEditorConfigStorageLocation2"/> for the key.</param>
         /// <param name="optionKey">The <see cref="OptionKey"/> for the key and language.</param>
         /// <returns><see langword="true"/> if a matching option was found; otherwise, <see langword="false"/>.</returns>
-        bool TryMapEditorConfigKeyToOption(string key, string? language, [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation, out OptionKey optionKey);
+        bool TryMapEditorConfigKeyToOption(
+            string key,
+            string? language,
+            [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation,
+            out OptionKey optionKey
+        );
     }
 }

@@ -25,7 +25,7 @@ namespace System.Security.Cryptography
                 throw ErrorCode.NTE_NOT_FOUND.ToCryptographicException();
 
             if (value.Length == 0)
-                value = null;   // .NET Framework compat: For some reason, CngKey.GetProperty() morphs zero length property values to null.
+                value = null; // .NET Framework compat: For some reason, CngKey.GetProperty() morphs zero length property values to null.
 
             return new CngProperty(name, value, options);
         }
@@ -41,7 +41,14 @@ namespace System.Security.Cryptography
             unsafe
             {
                 int numBytesNeeded;
-                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(_keyHandle, name, null, 0, out numBytesNeeded, options);
+                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
+                    _keyHandle,
+                    name,
+                    null,
+                    0,
+                    out numBytesNeeded,
+                    options
+                );
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return false;
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -63,9 +70,17 @@ namespace System.Security.Cryptography
                 if (propertyValue == null)
                     throw ErrorCode.NTE_INVALID_PARAMETER.ToCryptographicException();
 
-                fixed (byte* pinnedPropertyValue = propertyValue.MapZeroLengthArrayToNonNullPointer())
+                fixed (
+                    byte* pinnedPropertyValue = propertyValue.MapZeroLengthArrayToNonNullPointer()
+                )
                 {
-                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(_keyHandle, property.Name, pinnedPropertyValue, propertyValue.Length, property.Options);
+                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                        _keyHandle,
+                        property.Name,
+                        pinnedPropertyValue,
+                        propertyValue.Length,
+                        property.Options
+                    );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                         throw errorCode.ToCryptographicException();
                 }

@@ -14,7 +14,8 @@ public partial class DisallowMvcBindArgumentsOnParametersTest
     public async Task MinimalAction_WithoutBindAttributes_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
 webApp.MapGet(""/"", (string name) => {});
@@ -30,7 +31,8 @@ webApp.MapGet(""/"", (string name) => {});
     public async Task MinimalAction_WithAllowedMvcAttributes_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 var webApp = WebApplication.Create();
@@ -47,42 +49,57 @@ webApp.MapGet(""/{id}"", ([FromBody] string name, [FromRoute] int id, [FromQuery
     public async Task MinimalAction_Lambda_WithBindAttributes_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 var webApp = WebApplication.Create();
 webApp.MapGet(""/"", (/*MM*/[Bind] string name) => {});
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseModelBindingAttributesOnRouteHandlerParameters, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseModelBindingAttributesOnRouteHandlerParameters,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("BindAttribute should not be specified for a MapGet Delegate parameter", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "BindAttribute should not be specified for a MapGet Delegate parameter",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
     public async Task MinimalAction_MethodReference_WithBindAttributes_ProducesDiagnostics()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 var webApp = WebApplication.Create();
 webApp.MapPost(""/"", PostWithBind);
 
 static void PostWithBind(/*MM*/[ModelBinder] string name) {}
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
         var diagnostic = Assert.Single(diagnostics);
-        Assert.Same(DiagnosticDescriptors.DoNotUseModelBindingAttributesOnRouteHandlerParameters, diagnostic.Descriptor);
+        Assert.Same(
+            DiagnosticDescriptors.DoNotUseModelBindingAttributesOnRouteHandlerParameters,
+            diagnostic.Descriptor
+        );
         AnalyzerAssert.DiagnosticLocation(source.DefaultMarkerLocation, diagnostic.Location);
-        Assert.Equal("ModelBinderAttribute should not be specified for a MapPost Delegate parameter", diagnostic.GetMessage(CultureInfo.InvariantCulture));
+        Assert.Equal(
+            "ModelBinderAttribute should not be specified for a MapPost Delegate parameter",
+            diagnostic.GetMessage(CultureInfo.InvariantCulture)
+        );
     }
 }
-

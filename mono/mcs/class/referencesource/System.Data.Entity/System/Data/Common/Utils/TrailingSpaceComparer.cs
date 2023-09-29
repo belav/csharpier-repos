@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
+
 namespace System.Data.Common.Utils
 {
     /// <summary>
@@ -19,8 +20,11 @@ namespace System.Data.Common.Utils
     internal class TrailingSpaceComparer : IEqualityComparer<object>
     {
         private TrailingSpaceComparer() { }
-        internal readonly static TrailingSpaceComparer Instance = new TrailingSpaceComparer();
-        private readonly static IEqualityComparer<object> s_template = EqualityComparer<object>.Default;
+
+        internal static readonly TrailingSpaceComparer Instance = new TrailingSpaceComparer();
+        private static readonly IEqualityComparer<object> s_template =
+            EqualityComparer<object>.Default;
+
         bool IEqualityComparer<object>.Equals(object x, object y)
         {
             string xAsString = x as string;
@@ -34,6 +38,7 @@ namespace System.Data.Common.Utils
             }
             return s_template.Equals(x, y);
         }
+
         int IEqualityComparer<object>.GetHashCode(object obj)
         {
             string value = obj as string;
@@ -50,20 +55,31 @@ namespace System.Data.Common.Utils
     /// </summary>
     internal class TrailingSpaceStringComparer : IEqualityComparer<string>
     {
-        internal static readonly TrailingSpaceStringComparer Instance = new TrailingSpaceStringComparer();
+        internal static readonly TrailingSpaceStringComparer Instance =
+            new TrailingSpaceStringComparer();
+
         private TrailingSpaceStringComparer() { }
+
         public bool Equals(string x, string y)
         {
             return StringComparer.OrdinalIgnoreCase.Equals(NormalizeString(x), NormalizeString(y));
         }
+
         public int GetHashCode(string obj)
         {
             return StringComparer.OrdinalIgnoreCase.GetHashCode(NormalizeString(obj));
         }
+
         internal static string NormalizeString(string value)
         {
-            if (null == value || !value.EndsWith(" ", StringComparison.Ordinal)) { return value; }
-            else { return value.TrimEnd(' '); }
+            if (null == value || !value.EndsWith(" ", StringComparison.Ordinal))
+            {
+                return value;
+            }
+            else
+            {
+                return value.TrimEnd(' ');
+            }
         }
     }
 }

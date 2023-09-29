@@ -21,11 +21,9 @@ namespace POS_Server.Models
         public decimal balanceAll { get; set; }
         public string boxState { get; set; }
 
-
         public string branchName { get; set; }
         public string branchCode { get; set; }
-      
+
         public Boolean canDelete { get; set; }
-   
     }
 }

@@ -10,17 +10,28 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [LibraryImport(Libraries.Kernel32, EntryPoint = "QueryFullProcessImageNameW", SetLastError = true)]
+        [LibraryImport(
+            Libraries.Kernel32,
+            EntryPoint = "QueryFullProcessImageNameW",
+            SetLastError = true
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static unsafe partial bool QueryFullProcessImageName(
             SafeHandle hProcess,
             uint dwFlags,
             char* lpBuffer,
-            ref uint lpdwSize);
+            ref uint lpdwSize
+        );
 
         internal static unsafe string? GetProcessName(uint processId)
         {
-            using (SafeProcessHandle handle = OpenProcess(Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION, false, (int)processId))
+            using (
+                SafeProcessHandle handle = OpenProcess(
+                    Advapi32.ProcessOptions.PROCESS_QUERY_LIMITED_INFORMATION,
+                    false,
+                    (int)processId
+                )
+            )
             {
                 if (handle.IsInvalid) // OpenProcess can fail
                 {
@@ -31,7 +42,7 @@ internal static partial class Interop
 #if DEBUG
                     1; // in debug, validate ArrayPool growth
 #else
-                    Interop.Kernel32.MAX_PATH;
+                Interop.Kernel32.MAX_PATH;
 #endif
 
                 Span<char> buffer = stackalloc char[StartLength + 1];
@@ -48,7 +59,9 @@ internal static partial class Interop
                             {
                                 return buffer.Slice(0, (int)length).ToString();
                             }
-                            else if (Marshal.GetLastPInvokeError() != Errors.ERROR_INSUFFICIENT_BUFFER)
+                            else if (
+                                Marshal.GetLastPInvokeError() != Errors.ERROR_INSUFFICIENT_BUFFER
+                            )
                             {
                                 return null;
                             }

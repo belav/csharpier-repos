@@ -50,22 +50,21 @@ public interface IView : ITableBase
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
 
         try
         {
-            builder
-                .Append(indentString)
-                .Append("View: ");
+            builder.Append(indentString).Append("View: ");
 
             if (Schema != null)
             {
-                builder
-                    .Append(Schema)
-                    .Append('.');
+                builder.Append(Schema).Append('.');
             }
 
             builder.Append(Name);
@@ -75,7 +74,11 @@ public interface IView : ITableBase
                 if (ViewDefinitionSql != null)
                 {
                     builder.AppendLine().Append(indentString).Append("  DefinitionSql: ");
-                    builder.AppendLine().Append(indentString).Append(new string(' ', 4)).Append(ViewDefinitionSql);
+                    builder
+                        .AppendLine()
+                        .Append(indentString)
+                        .Append(new string(' ', 4))
+                        .Append(ViewDefinitionSql);
                 }
 
                 var mappings = EntityTypeMappings.ToList();
