@@ -140,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                                 .GetCurrentSpanInSubjectBuffer(
                                     disconnectedBufferGraph.SubjectBufferSnapshot
                                 )
-                                .Span.Start == items.ApplicableSpan.Start
+                                .Span
+                                .Start == items.ApplicableSpan.Start
                             && currentModel.Items.IndexOf(currentModel.SelectedItem)
                                 == items.SelectedItemIndex
                             && currentModel.ArgumentIndex == items.ArgumentIndex

@@ -58,9 +58,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             Assert.Equal(
                 "P:Acme.Widget.Item(System.Int32)",
-                _acmeNamespace.GetTypeMembers("Widget").Single().GetMembers("this[]")[
-                    0
-                ].GetDocumentationCommentId()
+                _acmeNamespace
+                    .GetTypeMembers("Widget")
+                    .Single()
+                    .GetMembers("this[]")[0]
+                    .GetDocumentationCommentId()
             );
         }
 
@@ -69,9 +71,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             Assert.Equal(
                 "P:Acme.Widget.Item(System.String,System.Int32)",
-                _acmeNamespace.GetTypeMembers("Widget").Single().GetMembers("this[]")[
-                    1
-                ].GetDocumentationCommentId()
+                _acmeNamespace
+                    .GetTypeMembers("Widget")
+                    .Single()
+                    .GetMembers("this[]")[1]
+                    .GetDocumentationCommentId()
             );
         }
     }

@@ -297,7 +297,8 @@ namespace System.Net.Http
                 ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(
                     contentRanges[count]
                 );
-                ContentRangeHeaderValue contentRange = multipart.Contents[count]
+                ContentRangeHeaderValue contentRange = multipart
+                    .Contents[count]
                     .Headers
                     .ContentRange;
                 Assert.Equal(expectedContentRange, contentRange);

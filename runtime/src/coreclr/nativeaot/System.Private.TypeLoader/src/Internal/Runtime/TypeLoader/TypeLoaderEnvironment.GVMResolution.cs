@@ -299,7 +299,8 @@ namespace Internal.Runtime.TypeLoader
                     if (
                         !targetType
                             .GetTypeDefinition()
-                            .RuntimeTypeHandle.Equals(implementingTypeHandle)
+                            .RuntimeTypeHandle
+                            .Equals(implementingTypeHandle)
                         || defaultMethods != isDefaultInterfaceMethodImplementation
                     )
                     {
@@ -384,7 +385,8 @@ namespace Internal.Runtime.TypeLoader
                                     currentIfaceType.HasInstantiation
                                     && currentIfaceType
                                         .GetTypeDefinition()
-                                        .RuntimeTypeHandle.Equals(targetTypeHandle)
+                                        .RuntimeTypeHandle
+                                        .Equals(targetTypeHandle)
                                 )
                                 {
                                     // Default interface method implemented on the same type that declared the slot.
@@ -403,7 +405,8 @@ namespace Internal.Runtime.TypeLoader
                                         if (
                                             instIntf
                                                 .GetTypeDefinition()
-                                                .RuntimeTypeHandle.Equals(targetTypeHandle)
+                                                .RuntimeTypeHandle
+                                                .Equals(targetTypeHandle)
                                         )
                                         {
                                             // Got a potential interface. Check if the implementing interface is in the interface

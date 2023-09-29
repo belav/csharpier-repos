@@ -38,13 +38,15 @@ namespace System.CommandLine.Tests
 
                     result
                         .FindResultFor(animalsOption)
-                        .Tokens.Select(t => t.Value)
+                        .Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo(new[] { "cat", "dog" });
 
                     result
                         .FindResultFor(vegetablesOption)
-                        .Tokens.Select(t => t.Value)
+                        .Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("carrot");
 
@@ -66,13 +68,15 @@ namespace System.CommandLine.Tests
 
                     result
                         .FindResultFor(animalsOption)
-                        .Tokens.Select(t => t.Value)
+                        .Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("cat");
 
                     result
                         .FindResultFor(vegetablesOption)
-                        .Tokens.Select(t => t.Value)
+                        .Tokens
+                        .Select(t => t.Value)
                         .Should()
                         .BeEquivalentTo("carrot");
 

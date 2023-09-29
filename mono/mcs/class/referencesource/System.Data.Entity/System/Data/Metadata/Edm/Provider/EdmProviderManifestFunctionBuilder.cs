@@ -313,9 +313,9 @@ namespace System.Data.Metadata.Edm
             return new FunctionParameter(
                 "collection",
                 TypeUsage.Create(
-                    this.primitiveTypes[
-                        (int)collectionParameterTypeElementTypeKind
-                    ].EdmType.GetCollectionType()
+                    this.primitiveTypes[(int)collectionParameterTypeElementTypeKind]
+                        .EdmType
+                        .GetCollectionType()
                 ),
                 ParameterMode.In
             );

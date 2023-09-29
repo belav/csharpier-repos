@@ -4221,9 +4221,10 @@ namespace MonoTests.System.ComponentModel
                         args[arg_types.Length - 1] = (int)args[arg_types.Length - 1];
                         method = mtp.GetType().GetMethod(name, arg_types);
                         args[arg_types.Length - 1] = Enum.ToObject(
-                            method.GetParameters()[
-                                arg_types.Length - 1
-                            ].ParameterType.GetElementType(),
+                            method
+                                .GetParameters()[arg_types.Length - 1]
+                                .ParameterType
+                                .GetElementType(),
                             (int)args[arg_types.Length - 1]
                         );
                     }

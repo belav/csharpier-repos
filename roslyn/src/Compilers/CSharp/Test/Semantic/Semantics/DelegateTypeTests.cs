@@ -1042,7 +1042,8 @@ class Program
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer!.Value;
+                .Initializer!
+                .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -1110,7 +1111,8 @@ class Program
                         .DescendantNodes()
                         .OfType<VariableDeclaratorSyntax>()
                         .Single()
-                        .Initializer!.Value
+                        .Initializer!
+                        .Value
             ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             // https://github.com/dotnet/roslyn/issues/52874: GetTypeInfo() for method group should return inferred delegate type.
@@ -1389,7 +1391,8 @@ class Program
                         .DescendantNodes()
                         .OfType<VariableDeclaratorSyntax>()
                         .Single()
-                        .Initializer!.Value
+                        .Initializer!
+                        .Value
             ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
@@ -1521,7 +1524,8 @@ class Program
                         .DescendantNodes()
                         .OfType<VariableDeclaratorSyntax>()
                         .Single()
-                        .Initializer!.Value
+                        .Initializer!
+                        .Value
             ).Expression;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
@@ -2074,7 +2078,8 @@ partial class B : A
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer!.Value;
+                .Initializer!
+                .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -2293,7 +2298,8 @@ static class B
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer!.Value;
+                .Initializer!
+                .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -2546,7 +2552,8 @@ namespace N
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer!.Value;
+                .Initializer!
+                .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);
@@ -7286,7 +7293,8 @@ System.Action"
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer!.Value;
+                .Initializer!
+                .Value;
             var typeInfo = model.GetTypeInfo(expr);
             Assert.Null(typeInfo.Type);
             Assert.Equal(SpecialType.System_Delegate, typeInfo.ConvertedType!.SpecialType);

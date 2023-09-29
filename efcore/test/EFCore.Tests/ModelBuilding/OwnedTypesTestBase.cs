@@ -361,7 +361,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var ownee = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Equal(
                 nameof(CustomerDetails.CustomerId),
                 ownee.FindPrimaryKey().Properties.Single().Name
@@ -401,7 +402,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Null(owner.FindProperty("foo"));
             Assert.Contains("foo", owned.GetProperties().Select(p => p.Name));
             Assert.Equal(PropertyAccessMode.FieldDuringConstruction, owned.GetPropertyAccessMode());
@@ -424,7 +426,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Equal(
                 nameof(CustomerDetails.Id),
                 owned.FindPrimaryKey().Properties.Single().Name
@@ -1310,7 +1313,8 @@ public abstract partial class ModelBuilderTest
                 bookOwnership1.DeclaringEntityType
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
             Assert.Equal(
@@ -1318,7 +1322,8 @@ public abstract partial class ModelBuilderTest
                 bookOwnership1.DeclaringEntityType
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
             Assert.Equal("Bar", bookOwnership1["Foo"]);
@@ -1348,7 +1353,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Null(owned.BaseType);
             Assert.Null(owned.GetDiscriminatorPropertyName());
             Assert.NotNull(model.FindEntityType(typeof(CustomerDetails)));
@@ -1380,7 +1386,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer));
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Null(owned.BaseType);
             Assert.Null(owned.GetDiscriminatorPropertyName());
             Assert.NotNull(model.FindEntityType(typeof(CustomerDetails)));
@@ -1409,7 +1416,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(OrderCombination));
             var owned = owner
                 .FindNavigation(nameof(OrderCombination.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Empty(owned.GetDirectlyDerivedTypes());
             Assert.Null(owned.GetDiscriminatorPropertyName());
             var navToCustomerDetails = model
@@ -1452,7 +1460,8 @@ public abstract partial class ModelBuilderTest
             var owner = model.FindEntityType(typeof(OrderCombination));
             var owned = owner
                 .FindNavigation(nameof(OrderCombination.Details))
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Empty(owned.GetDirectlyDerivedTypes());
             Assert.Null(owned.GetDiscriminatorPropertyName());
             var navToCustomerDetails = model

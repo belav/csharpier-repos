@@ -223,9 +223,7 @@ namespace Microsoft.CodeAnalysis
                             !type.IsFileLocal
                             ||
                             // note: if we found 'IsFile' returned true, we can assume DeclaringSyntaxReferences is non-empty.
-                            type.DeclaringSyntaxReferences[0]
-                                .SyntaxTree
-                                .FilePath != filePath
+                            type.DeclaringSyntaxReferences[0].SyntaxTree.FilePath != filePath
                         )
                         {
                             continue;

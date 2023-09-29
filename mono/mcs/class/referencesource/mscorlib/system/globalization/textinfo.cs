@@ -185,7 +185,8 @@ namespace System.Globalization
                             // No custom culture, use the name from the LCID
                             m_cultureName = CultureInfo
                                 .GetCultureInfo(m_win32LangID)
-                                .m_cultureData.CultureName;
+                                .m_cultureData
+                                .CultureName;
                         }
                     }
 #endif
@@ -811,7 +812,8 @@ namespace System.Globalization
                     m_IsAsciiCasingSameAsInvariant =
                         CultureInfo
                             .GetCultureInfo(m_textInfoName)
-                            .CompareInfo.Compare(
+                            .CompareInfo
+                            .Compare(
                                 "abcdefghijklmnopqrstuvwxyz",
                                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                                 CompareOptions.IgnoreCase

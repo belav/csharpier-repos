@@ -104,7 +104,8 @@
             public void MapShouldThrow() =>
                 new Action(() => Mapper.Map<SubDTO>(new Sub()))
                     .ShouldThrow<AutoMapperConfigurationException>()
-                    .Message.ShouldBe("CreateProjection works with ProjectTo, not with Map.");
+                    .Message
+                    .ShouldBe("CreateProjection works with ProjectTo, not with Map.");
         }
     }
 }

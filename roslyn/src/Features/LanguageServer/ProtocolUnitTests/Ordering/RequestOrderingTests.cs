@@ -186,13 +186,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
             // Wait for the queue to finish handling the failed request and shutdown.
             await testLspServer
                 .GetQueueAccessor()!
-                .Value.WaitForProcessingToStopAsync()
+                .Value
+                .WaitForProcessingToStopAsync()
                 .ConfigureAwait(false);
 
             // remaining tasks should be canceled
             var areAllItemsCancelled = await testLspServer
                 .GetQueueAccessor()!
-                .Value.AreAllItemsCancelledUnsafeAsync();
+                .Value
+                .AreAllItemsCancelledUnsafeAsync();
             Assert.True(areAllItemsCancelled);
         }
 

@@ -375,12 +375,16 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             result.RuntimeGraph
                 .Should()
                 .Contain(g => g.Runtime == "win8-x64")
-                .Subject.Fallbacks.Should()
+                .Subject
+                .Fallbacks
+                .Should()
                 .BeEquivalentTo("win8");
             result.RuntimeGraph
                 .Should()
                 .Contain(g => g.Runtime == "win8")
-                .Subject.Fallbacks.Should()
+                .Subject
+                .Fallbacks
+                .Should()
                 .BeEquivalentTo("win7-x64", "win7-x86");
         }
 

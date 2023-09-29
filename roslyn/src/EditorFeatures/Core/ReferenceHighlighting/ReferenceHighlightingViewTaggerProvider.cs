@@ -238,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
 
             var textSnapshot = context.SpansToTag
                 .FirstOrDefault(s => s.Document == document)
-                .SnapshotSpan.Snapshot;
+                .SnapshotSpan
+                .Snapshot;
             if (textSnapshot == null)
             {
                 // There is no longer an editor snapshot for this document, so we can't care about the

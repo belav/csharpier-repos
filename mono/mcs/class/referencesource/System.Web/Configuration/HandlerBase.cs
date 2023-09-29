@@ -464,7 +464,8 @@ namespace System.Web.Configuration
         {
             ConnectionStringSettings connObj = RuntimeConfig
                 .GetConfig()
-                .ConnectionStrings.ConnectionStrings[connectionString];
+                .ConnectionStrings
+                .ConnectionStrings[connectionString];
             if (
                 connObj != null
                 && connObj.ConnectionString != null

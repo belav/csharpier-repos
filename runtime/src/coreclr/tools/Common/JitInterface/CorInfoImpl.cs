@@ -4977,9 +4977,9 @@ namespace Internal.JitInterface
                     _synthesizedPgoDependencies.Add(methodDesc);
                 }
 #else
-                PgoSchemaElem[] pgoResultsSchemas = _compilation.ProfileData[
-                    methodDesc
-                ]?.SchemaData;
+                PgoSchemaElem[] pgoResultsSchemas = _compilation
+                    .ProfileData[methodDesc]
+                    ?.SchemaData;
 #endif
                 if (pgoResultsSchemas == null)
                 {

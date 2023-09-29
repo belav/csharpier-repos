@@ -33,9 +33,11 @@ namespace POS_Server.Controllers
 
         private void setConn()
         {
-            connectionstring = System.Configuration.ConfigurationManager.ConnectionStrings[
-                "incposdbEntities"
-            ].ConnectionString;
+            connectionstring = System
+                .Configuration
+                .ConfigurationManager
+                .ConnectionStrings["incposdbEntities"]
+                .ConnectionString;
             if (connectionstring.ToLower().StartsWith("metadata="))
             {
                 System.Data.Entity.Core.EntityClient.EntityConnectionStringBuilder efBuilder =

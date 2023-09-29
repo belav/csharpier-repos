@@ -690,7 +690,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
                 var definition = referencedSymbol.Definition as IMethodSymbol;
                 if (definition?.DeclaringSyntaxReferences.Length > 0)
                 {
-                    var syntax = await definition.DeclaringSyntaxReferences[0]
+                    var syntax = await definition
+                        .DeclaringSyntaxReferences[0]
                         .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     if (syntax != null)

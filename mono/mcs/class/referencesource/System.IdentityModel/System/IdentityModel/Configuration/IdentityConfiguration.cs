@@ -665,9 +665,10 @@ namespace System.IdentityModel.Configuration
             try
             {
                 if (
-                    element.ElementInformation.Properties[
-                        ConfigurationStrings.MaximumClockSkew
-                    ].ValueOrigin != PropertyValueOrigin.Default
+                    element
+                        .ElementInformation
+                        .Properties[ConfigurationStrings.MaximumClockSkew]
+                        .ValueOrigin != PropertyValueOrigin.Default
                 )
                 {
                     handlerConfiguration.MaxClockSkew = element.MaximumClockSkew;
@@ -887,9 +888,10 @@ namespace System.IdentityModel.Configuration
             try
             {
                 if (
-                    element.ElementInformation.Properties[
-                        ConfigurationStrings.MaximumClockSkew
-                    ].ValueOrigin != PropertyValueOrigin.Default
+                    element
+                        .ElementInformation
+                        .Properties[ConfigurationStrings.MaximumClockSkew]
+                        .ValueOrigin != PropertyValueOrigin.Default
                 )
                 {
                     handlerConfiguration.MaxClockSkew = element.MaximumClockSkew;
@@ -908,9 +910,10 @@ namespace System.IdentityModel.Configuration
             // SaveBootstrapTokens
             //
             if (
-                element.ElementInformation.Properties[
-                    ConfigurationStrings.SaveBootstrapContext
-                ].ValueOrigin != PropertyValueOrigin.Default
+                element
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.SaveBootstrapContext]
+                    .ValueOrigin != PropertyValueOrigin.Default
             )
             {
                 handlerConfiguration.SaveBootstrapContext = element.SaveBootstrapContext;

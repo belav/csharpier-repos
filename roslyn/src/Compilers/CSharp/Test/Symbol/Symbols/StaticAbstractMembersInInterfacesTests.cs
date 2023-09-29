@@ -19885,7 +19885,9 @@ IEventReferenceOperation: event System.Action I1.E01 (ConstrainedToType: T) (Sta
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
                 .First()
-                .ArgumentList.Arguments[0].Expression;
+                .ArgumentList
+                .Arguments[0]
+                .Expression;
 
             Assert.Equal("T.E01", node.ToString());
             VerifyOperationTreeForNode(

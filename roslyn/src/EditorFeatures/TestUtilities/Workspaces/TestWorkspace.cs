@@ -704,7 +704,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 var span = new Span(matchingSpan.Start, matchingSpan.Length);
                 var trackingSpan = documentWithSpan
                     .GetTextBuffer()
-                    .CurrentSnapshot.CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
+                    .CurrentSnapshot
+                    .CreateTrackingSpan(span, SpanTrackingMode.EdgeExclusive);
 
                 projectionBufferSpans.Add(trackingSpan);
                 projectionBufferSpanStartingPositions.Add(currentPositionInProjectionBuffer);

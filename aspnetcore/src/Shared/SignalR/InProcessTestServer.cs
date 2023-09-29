@@ -145,8 +145,10 @@ public class InProcessTestServer<TStartup> : InProcessTestServer
         // Get the URL from the server
         _url = _host.Services
             .GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.Single();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .Single();
 
         _lifetime = _host.Services.GetRequiredService<IHostApplicationLifetime>();
         _lifetime.ApplicationStopped.Register(() =>

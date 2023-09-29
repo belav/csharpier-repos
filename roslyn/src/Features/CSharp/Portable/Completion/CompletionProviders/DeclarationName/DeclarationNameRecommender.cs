@@ -238,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
         {
             var rules = namingStyleOptions
                 .CreateRules()
-                .NamingRules.AddRange(FallbackNamingRules.CompletionFallbackRules);
+                .NamingRules
+                .AddRange(FallbackNamingRules.CompletionFallbackRules);
 
             var supplementaryRules = FallbackNamingRules.CompletionSupplementaryRules;
             var semanticFactsService = context.GetRequiredLanguageService<ISemanticFactsService>();

@@ -281,9 +281,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             }
             else
             {
-                return member.DeclaringType.GetGenericArguments()[
-                    typeParam.GenericParameterPosition
-                ].Equals(typeInst);
+                return member.DeclaringType
+                    .GetGenericArguments()[typeParam.GenericParameterPosition]
+                    .Equals(typeInst);
             }
         }
 

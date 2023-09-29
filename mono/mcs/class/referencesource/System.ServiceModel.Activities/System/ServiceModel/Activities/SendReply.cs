@@ -447,9 +447,12 @@ namespace System.ServiceModel.Activities
                     else if (
                         operation.Messages[0].Body.Parts != null
                         && operation.Messages[0].Body.Parts.Count == 1
-                        && operation.Messages[0].Body.Parts[0].Type.IsAssignableFrom(
-                            typeof(System.ServiceModel.Channels.Message)
-                        )
+                        && operation
+                            .Messages[0]
+                            .Body
+                            .Parts[0]
+                            .Type
+                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                     )
                     {
                         reply.Content = new SendMessageContent();

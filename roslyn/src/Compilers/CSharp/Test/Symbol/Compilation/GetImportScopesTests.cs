@@ -195,7 +195,8 @@ using Microsoft;
         Assert.True(
             scopes
                 .Single()
-                .Imports.Any(
+                .Imports
+                .Any(
                     i =>
                         i.NamespaceOrType
                             is INamespaceSymbol
@@ -208,7 +209,8 @@ using Microsoft;
         Assert.True(
             scopes
                 .Single()
-                .Imports.Any(
+                .Imports
+                .Any(
                     i =>
                         i.NamespaceOrType
                             is INamespaceSymbol
@@ -221,7 +223,8 @@ using Microsoft;
         Assert.True(
             scopes
                 .Single()
-                .Imports.Any(
+                .Imports
+                .Any(
                     i =>
                         i.DeclaringSyntaxReference!.GetSyntax()
                             is UsingDirectiveSyntax
@@ -233,7 +236,8 @@ using Microsoft;
         Assert.True(
             scopes
                 .Single()
-                .Imports.Any(
+                .Imports
+                .Any(
                     i =>
                         i.DeclaringSyntaxReference!.GetSyntax()
                             is UsingDirectiveSyntax
@@ -549,7 +553,8 @@ using M = Microsoft;
         Assert.True(
             scopes
                 .Single()
-                .Aliases.Any(
+                .Aliases
+                .Any(
                     a =>
                         a
                             is {
@@ -565,7 +570,8 @@ using M = Microsoft;
         Assert.True(
             scopes
                 .Single()
-                .Aliases.Any(
+                .Aliases
+                .Any(
                     a =>
                         a
                             is {
@@ -581,7 +587,8 @@ using M = Microsoft;
         Assert.True(
             scopes
                 .Single()
-                .Aliases.Any(
+                .Aliases
+                .Any(
                     a =>
                         a.DeclaringSyntaxReferences.Single().GetSyntax()
                             is UsingDirectiveSyntax
@@ -593,7 +600,8 @@ using M = Microsoft;
         Assert.True(
             scopes
                 .Single()
-                .Aliases.Any(
+                .Aliases
+                .Any(
                     a =>
                         a.DeclaringSyntaxReferences.Single().GetSyntax()
                             is UsingDirectiveSyntax
@@ -897,7 +905,8 @@ extern alias CORE2;
         Assert.True(
             scopes
                 .Single()
-                .ExternAliases.Any(
+                .ExternAliases
+                .Any(
                     a =>
                         a is { Name: "CORE1", Target: INamespaceSymbol { IsGlobalNamespace: true } }
                 )
@@ -905,7 +914,8 @@ extern alias CORE2;
         Assert.True(
             scopes
                 .Single()
-                .ExternAliases.Any(
+                .ExternAliases
+                .Any(
                     a =>
                         a is { Name: "CORE2", Target: INamespaceSymbol { IsGlobalNamespace: true } }
                 )
@@ -913,7 +923,8 @@ extern alias CORE2;
         Assert.True(
             scopes
                 .Single()
-                .ExternAliases.Any(
+                .ExternAliases
+                .Any(
                     a =>
                         a.DeclaringSyntaxReferences.Single().GetSyntax()
                             is ExternAliasDirectiveSyntax { Identifier.Text: "CORE1" }
@@ -922,7 +933,8 @@ extern alias CORE2;
         Assert.True(
             scopes
                 .Single()
-                .ExternAliases.Any(
+                .ExternAliases
+                .Any(
                     a =>
                         a.DeclaringSyntaxReferences.Single().GetSyntax()
                             is ExternAliasDirectiveSyntax { Identifier.Text: "CORE2" }
@@ -1134,7 +1146,8 @@ class C
         Assert.True(
             scopes
                 .Single()
-                .Imports.Any(
+                .Imports
+                .Any(
                     i =>
                         i.NamespaceOrType
                             is INamespaceSymbol
@@ -1147,7 +1160,8 @@ class C
         Assert.True(
             scopes
                 .Single()
-                .Imports.Any(
+                .Imports
+                .Any(
                     i =>
                         i.DeclaringSyntaxReference!.GetSyntax()
                             is UsingDirectiveSyntax
@@ -1159,7 +1173,8 @@ class C
         Assert.True(
             scopes
                 .Single()
-                .Imports.Any(
+                .Imports
+                .Any(
                     i =>
                         i.NamespaceOrType
                             is INamespaceSymbol
@@ -1172,7 +1187,8 @@ class C
         Assert.True(
             scopes
                 .Single()
-                .Imports.Any(
+                .Imports
+                .Any(
                     i =>
                         i.DeclaringSyntaxReference!.GetSyntax()
                             is UsingDirectiveSyntax
@@ -1192,7 +1208,8 @@ class C
         Assert.True(
             scopes
                 .Single()
-                .Aliases.Any(
+                .Aliases
+                .Any(
                     i =>
                         i
                             is {
@@ -1208,7 +1225,8 @@ class C
         Assert.True(
             scopes
                 .Single()
-                .Aliases.Any(
+                .Aliases
+                .Any(
                     i =>
                         i.DeclaringSyntaxReferences.Single().GetSyntax()
                             is UsingDirectiveSyntax
@@ -1220,7 +1238,8 @@ class C
         Assert.True(
             scopes
                 .Single()
-                .Aliases.Any(
+                .Aliases
+                .Any(
                     i =>
                         i
                             is {
@@ -1236,7 +1255,8 @@ class C
         Assert.True(
             scopes
                 .Single()
-                .Aliases.Any(
+                .Aliases
+                .Any(
                     i =>
                         i.DeclaringSyntaxReferences.Single().GetSyntax()
                             is UsingDirectiveSyntax

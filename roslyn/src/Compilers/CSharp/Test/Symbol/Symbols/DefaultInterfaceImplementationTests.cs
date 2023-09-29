@@ -66068,7 +66068,8 @@ class Test1 : I2, I3
                 var i1m1 = test1
                     .InterfacesNoUseSiteDiagnostics()
                     .First()
-                    .ContainingNamespace.GetTypeMember("I1")
+                    .ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMember<MethodSymbol>("M1");
                 Assert.Equal("void I1.M1()", i1m1.ToTestDisplayString());
 
@@ -68071,7 +68072,8 @@ class Test1 : I2, I3
                 var i1p1 = test1
                     .InterfacesNoUseSiteDiagnostics()
                     .First()
-                    .ContainingNamespace.GetTypeMember("I1")
+                    .ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
                     .Single();
@@ -74393,7 +74395,8 @@ class Test1 : I2, I3
                 var i1p1 = test1
                     .InterfacesNoUseSiteDiagnostics()
                     .First()
-                    .ContainingNamespace.GetTypeMember("I1")
+                    .ContainingNamespace
+                    .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
                     .Single();
@@ -85492,7 +85495,8 @@ interface I2
                 i1.GetMembers()
                     .OfType<MethodSymbol>()
                     .Single()
-                    .ExplicitInterfaceImplementations.Single()
+                    .ExplicitInterfaceImplementations
+                    .Single()
             );
         }
 

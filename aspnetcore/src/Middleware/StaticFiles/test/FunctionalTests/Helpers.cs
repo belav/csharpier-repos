@@ -14,7 +14,9 @@ public static class Helpers
     {
         return server.Services
             .GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First();
     }
 }

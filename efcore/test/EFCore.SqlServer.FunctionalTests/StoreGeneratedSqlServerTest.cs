@@ -508,7 +508,8 @@ public class StoreGeneratedSqlServerTest
                         context
                             .Entry(dependent)
                             .Property<WrappedIntHiLoKeyClass?>("PrincipalId")
-                            .CurrentValue!.Value
+                            .CurrentValue!
+                            .Value
                     );
                 }
 
@@ -537,7 +538,9 @@ public class StoreGeneratedSqlServerTest
                         context
                             .Entry(dependent)
                             .Property<WrappedIntHiLoKeyStruct?>("PrincipalId")
-                            .CurrentValue!.Value.Value
+                            .CurrentValue!
+                            .Value
+                            .Value
                     );
                 }
 
@@ -566,7 +569,8 @@ public class StoreGeneratedSqlServerTest
                         context
                             .Entry(dependent)
                             .Property<WrappedIntHiLoKeyRecord?>("PrincipalId")
-                            .CurrentValue!.Value
+                            .CurrentValue!
+                            .Value
                     );
                 }
 
@@ -602,7 +606,8 @@ public class StoreGeneratedSqlServerTest
                         context
                             .Entry(dependent)
                             .Property<WrappedIntHiLoKeyClass?>("PrincipalId")
-                            .CurrentValue!.Value
+                            .CurrentValue!
+                            .Value
                     );
                 }
 
@@ -634,7 +639,9 @@ public class StoreGeneratedSqlServerTest
                         context
                             .Entry(dependent)
                             .Property<WrappedIntHiLoKeyStruct?>("PrincipalId")
-                            .CurrentValue!.Value.Value
+                            .CurrentValue!
+                            .Value
+                            .Value
                     );
                 }
 
@@ -666,7 +673,8 @@ public class StoreGeneratedSqlServerTest
                         context
                             .Entry(dependent)
                             .Property<WrappedIntHiLoKeyRecord?>("PrincipalId")
-                            .CurrentValue!.Value
+                            .CurrentValue!
+                            .Value
                     );
                 }
 

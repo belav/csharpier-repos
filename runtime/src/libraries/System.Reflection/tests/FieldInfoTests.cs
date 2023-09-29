@@ -859,7 +859,8 @@ namespace System.Reflection.Tests
         private static FieldInfo GetField(Type type, string name)
         {
             return type.GetTypeInfo()
-                .DeclaredFields.FirstOrDefault(fieldInfo => fieldInfo.Name.Equals(name));
+                .DeclaredFields
+                .FirstOrDefault(fieldInfo => fieldInfo.Name.Equals(name));
         }
 
         public readonly int readonlyIntField = 1;

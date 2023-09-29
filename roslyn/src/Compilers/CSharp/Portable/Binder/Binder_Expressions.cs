@@ -6367,7 +6367,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Use a smaller span that excludes the parens.
                 var argSyntax = analyzedArguments.Arguments[0].Syntax;
                 var start = argSyntax.SpanStart;
-                var end = analyzedArguments.Arguments[analyzedArguments.Arguments.Count - 1]
+                var end = analyzedArguments
+                    .Arguments[analyzedArguments.Arguments.Count - 1]
                     .Syntax
                     .Span
                     .End;
@@ -10488,10 +10489,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             if (
                                 (object)
-                                    methodGroup.Methods[i].ReduceExtensionMethod(
-                                        left.Type,
-                                        this.Compilation
-                                    ) == null
+                                    methodGroup
+                                        .Methods[i]
+                                        .ReduceExtensionMethod(left.Type, this.Compilation) == null
                             )
                                 methodGroup.Methods.RemoveAt(i);
                         }

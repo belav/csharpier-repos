@@ -160,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings
             var diffView = preview as DifferenceViewerPreview;
             var text = diffView.Viewer.RightView.TextBuffer
                 .AsTextContainer()
-                .CurrentText.ToString();
+                .CurrentText
+                .ToString();
             Assert.Equal(ChangedDocumentText, text);
             diffView.Dispose();
 

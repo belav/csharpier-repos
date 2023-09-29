@@ -87,10 +87,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveConfusingSuppression
 
             foreach (var diagnostic in diagnostics)
             {
-                var node = diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                var node = diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 Debug.Assert(
                     node.IsKind(SyntaxKind.IsExpression)
                         || node.IsKind(SyntaxKind.IsPatternExpression)

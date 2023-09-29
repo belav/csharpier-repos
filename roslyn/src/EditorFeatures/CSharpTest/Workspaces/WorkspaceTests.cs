@@ -250,14 +250,16 @@ class D { }
             // Check that a parse tree for a submission has an empty file path.
             var tree1 = await workspace.CurrentSolution
                 .GetProjectState(project1.Id)
-                .DocumentStates.GetState(document1.Id)
+                .DocumentStates
+                .GetState(document1.Id)
                 .GetSyntaxTreeAsync(CancellationToken.None);
             Assert.Equal("", tree1.FilePath);
 
             // Check that a parse tree for a script does not have an empty file path.
             var tree2 = await workspace.CurrentSolution
                 .GetProjectState(project2.Id)
-                .DocumentStates.GetState(document2.Id)
+                .DocumentStates
+                .GetState(document2.Id)
                 .GetSyntaxTreeAsync(CancellationToken.None);
             Assert.Equal("a.csx", tree2.FilePath);
         }
@@ -279,7 +281,8 @@ class D { }
         {
             var tree = await currentSnapshot.Projects
                 .First()
-                .Documents.First()
+                .Documents
+                .First()
                 .GetSyntaxTreeAsync();
             var root = (CompilationUnitSyntax)tree.GetRoot();
             var type = (TypeDeclarationSyntax)root.Members[0];
@@ -1381,7 +1384,8 @@ class D { }
                 "original.config",
                 workspace.CurrentSolution
                     .GetProject(project1.Id)
-                    .AnalyzerConfigDocuments.Single()
+                    .AnalyzerConfigDocuments
+                    .Single()
                     .Name
             );
         }
@@ -1468,7 +1472,8 @@ class D { }
                 "original.config",
                 workspace.CurrentSolution
                     .GetProject(project1.Id)
-                    .AnalyzerConfigDocuments.Single()
+                    .AnalyzerConfigDocuments
+                    .Single()
                     .Name
             );
         }

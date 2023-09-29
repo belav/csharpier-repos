@@ -335,7 +335,9 @@ public class InternalNavigationBuilderTest
                 pointsToPrincipal: true,
                 ConfigurationSource.Explicit
             )
-            .Metadata.DependentToPrincipal.Builder;
+            .Metadata
+            .DependentToPrincipal
+            .Builder;
         builder.IsRequired(true, ConfigurationSource.Explicit);
 
         Assert.True(builder.Metadata.ForeignKey.IsRequired);

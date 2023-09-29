@@ -196,9 +196,9 @@ namespace System.ServiceModel.Configuration
 
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.IssuerMetadata
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.IssuerMetadata]
+                    .ValueOrigin
             )
             {
                 parameters.IssuerMetadataAddress = ConfigLoader.LoadEndpointAddress(
@@ -247,9 +247,10 @@ namespace System.ServiceModel.Configuration
             }
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.IssuerMetadata
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.IssuerMetadata]
+                    .ValueOrigin
             )
             {
                 this.IssuerMetadata.Copy(source.IssuerMetadata);

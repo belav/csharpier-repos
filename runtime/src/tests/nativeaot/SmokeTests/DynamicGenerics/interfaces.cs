@@ -147,7 +147,8 @@ public class InterfacesTests
             Type recursiveOfMy = TypeOf.IT_Recursive.MakeGenericType(TypeOf.CommonType1);
             TypeInfo intf = recursiveOfMy
                 .GetTypeInfo()
-                .ImplementedInterfaces.Single()
+                .ImplementedInterfaces
+                .Single()
                 .GetTypeInfo();
             Assert.AreEqual(recursiveOfMy, intf.GenericTypeArguments[0]);
             Assert.AreEqual(recursiveOfMy.TypeHandle, intf.GenericTypeArguments[0].TypeHandle);
@@ -157,7 +158,8 @@ public class InterfacesTests
             Type dbRecursiveOfMy = TypeOf.IT_DoublyRecursive.MakeGenericType(TypeOf.CommonType1);
             TypeInfo intf = dbRecursiveOfMy
                 .GetTypeInfo()
-                .ImplementedInterfaces.Single()
+                .ImplementedInterfaces
+                .Single()
                 .GetTypeInfo();
             Type recursiveOfMy = TypeOf.IT_Recursive.MakeGenericType(TypeOf.CommonType1);
             Assert.AreEqual(recursiveOfMy, intf.GenericTypeArguments[0]);

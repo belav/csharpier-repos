@@ -162,9 +162,9 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                 var elementSelectorLambda = elementSelector.UnwrapLambdaFromQuote();
 
                 // We do have element selector to inject which may have potentially expanded navigations
-                var oldKeySelectorLambda = methodCallExpression.Arguments[
-                    1
-                ].UnwrapLambdaFromQuote();
+                var oldKeySelectorLambda = methodCallExpression
+                    .Arguments[1]
+                    .UnwrapLambdaFromQuote();
                 var newSource = ReplacingExpressionVisitor.Replace(
                     groupingQueryable,
                     methodCallExpression.Arguments[0],

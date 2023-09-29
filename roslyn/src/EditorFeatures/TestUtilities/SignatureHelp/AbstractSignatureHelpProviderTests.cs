@@ -186,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             var signatureHelpProviderType = GetSignatureHelpProviderType();
             var signatureHelpProvider = workspaceFixture.Target
                 .GetWorkspace()
-                .ExportProvider.GetExportedValues<ISignatureHelpProvider>()
+                .ExportProvider
+                .GetExportedValues<ISignatureHelpProvider>()
                 .Single(provider => provider.GetType() == signatureHelpProviderType);
 
             foreach (var expectedTriggerCharacter in expectedTriggerCharacters)
@@ -281,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             var signatureHelpProviderType = GetSignatureHelpProviderType();
             var signatureHelpProvider = workspaceFixture.Target
                 .GetWorkspace()
-                .ExportProvider.GetExportedValues<ISignatureHelpProvider>()
+                .ExportProvider
+                .GetExportedValues<ISignatureHelpProvider>()
                 .Single(provider => provider.GetType() == signatureHelpProviderType);
             var triggerInfo = new SignatureHelpTriggerInfo(
                 SignatureHelpTriggerReason.InvokeSignatureHelpCommand
@@ -594,7 +596,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
 
             var cursorPosition = testWorkspace.Documents
                 .First(d => d.Name == "SourceDocument")
-                .CursorPosition.Value;
+                .CursorPosition
+                .Value;
             var documentId = testWorkspace.Documents.First(d => d.Name == "SourceDocument").Id;
             var document = testWorkspace.CurrentSolution.GetDocument(documentId);
 
@@ -766,7 +769,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
 
             var cursorPosition = testWorkspace.Documents
                 .Single(d => d.Name == "SourceDocument")
-                .CursorPosition.Value;
+                .CursorPosition
+                .Value;
             var documentId = testWorkspace.Documents
                 .Where(d => d.Name == "SourceDocument")
                 .Single()

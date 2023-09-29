@@ -94,9 +94,9 @@ namespace System.DirectoryServices.Tests
                         )
                     )
                     {
-                        return rootDse.Properties["supportedCapabilities"].Contains(
-                            LDAP_CAP_ACTIVE_DIRECTORY_OID
-                        );
+                        return rootDse
+                            .Properties["supportedCapabilities"]
+                            .Contains(LDAP_CAP_ACTIVE_DIRECTORY_OID);
                     }
                 }
                 catch

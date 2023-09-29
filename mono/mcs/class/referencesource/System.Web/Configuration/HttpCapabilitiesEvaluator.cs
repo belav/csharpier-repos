@@ -94,7 +94,8 @@ namespace System.Web.Configuration
             {
                 _userAgentCacheKeyLength = RuntimeConfig
                     .GetAppConfig()
-                    .BrowserCaps.UserAgentCacheKeyLength;
+                    .BrowserCaps
+                    .UserAgentCacheKeyLength;
             }
             if (_userAgentCacheKeyLength == 0)
             {

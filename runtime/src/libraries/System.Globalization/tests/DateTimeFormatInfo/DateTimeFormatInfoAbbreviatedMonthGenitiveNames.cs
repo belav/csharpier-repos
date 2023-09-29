@@ -211,12 +211,12 @@ namespace System.Globalization.Tests
                 for (int i = 0; i < 12; i++)
                 {
                     if (
-                        !ci.DateTimeFormat.MonthNames[i].Equals(
-                            ci.DateTimeFormat.MonthGenitiveNames[i]
-                        )
-                        || !ci.DateTimeFormat.AbbreviatedMonthNames[i].Equals(
-                            ci.DateTimeFormat.AbbreviatedMonthGenitiveNames[i]
-                        )
+                        !ci.DateTimeFormat
+                            .MonthNames[i]
+                            .Equals(ci.DateTimeFormat.MonthGenitiveNames[i])
+                        || !ci.DateTimeFormat
+                            .AbbreviatedMonthNames[i]
+                            .Equals(ci.DateTimeFormat.AbbreviatedMonthGenitiveNames[i])
                     )
                     {
                         // We have genitive month names, we expect parsing to work and produce the exact original result.

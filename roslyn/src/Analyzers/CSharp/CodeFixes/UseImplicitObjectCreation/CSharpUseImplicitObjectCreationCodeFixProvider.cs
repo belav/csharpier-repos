@@ -71,10 +71,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
             CancellationToken cancellationToken
         )
         {
-            var node = diagnostic.AdditionalLocations[0].FindNode(
-                getInnermostNodeForTie: true,
-                cancellationToken
-            );
+            var node = diagnostic
+                .AdditionalLocations[0]
+                .FindNode(getInnermostNodeForTie: true, cancellationToken);
             editor.ReplaceNode(
                 node,
                 (current, _) =>

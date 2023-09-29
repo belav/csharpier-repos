@@ -287,7 +287,8 @@ namespace System.ServiceModel.Description
             );
             (
                 (ServiceMetadataExtension.HttpGetImpl)
-                    channelDispatcher.Endpoints[0]
+                    channelDispatcher
+                        .Endpoints[0]
                         .DispatchRuntime
                         .SingletonInstanceContext
                         .UserObject

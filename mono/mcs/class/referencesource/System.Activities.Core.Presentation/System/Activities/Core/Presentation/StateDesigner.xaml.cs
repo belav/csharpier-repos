@@ -166,9 +166,9 @@ namespace System.Activities.Core.Presentation
                 !this.IsReadOnly
                 && stateMachineModelItem != null
                 && this.ModelItem
-                    != stateMachineModelItem.Properties[
-                        StateMachineDesigner.InitialStatePropertyName
-                    ].Value
+                    != stateMachineModelItem
+                        .Properties[StateMachineDesigner.InitialStatePropertyName]
+                        .Value
                 && !this.IsFinalState()
                 && !this.IsRootDesigner
                 && StateContainerEditor.GetEmptyConnectionPoints(this).Count > 0
@@ -188,9 +188,9 @@ namespace System.Activities.Core.Presentation
                     stateMachineModelItem,
                     StateContainerEditor.ConnectorLocationViewStateKey
                 );
-                stateMachineModelItem.Properties[
-                    StateMachineDesigner.InitialStatePropertyName
-                ].SetValue(this.ModelItem.GetCurrentValue());
+                stateMachineModelItem
+                    .Properties[StateMachineDesigner.InitialStatePropertyName]
+                    .SetValue(this.ModelItem.GetCurrentValue());
                 es.Complete();
             }
             e.Handled = true;

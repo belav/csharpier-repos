@@ -91,19 +91,19 @@ namespace System.IdentityModel.Configuration
             {
                 return (
                     (
-                        ElementInformation.Properties[
-                            ConfigurationStrings.X509CertificateValidationMode
-                        ].ValueOrigin != PropertyValueOrigin.Default
+                        ElementInformation
+                            .Properties[ConfigurationStrings.X509CertificateValidationMode]
+                            .ValueOrigin != PropertyValueOrigin.Default
                     )
                     || (
-                        ElementInformation.Properties[
-                            ConfigurationStrings.X509CertificateRevocationMode
-                        ].ValueOrigin != PropertyValueOrigin.Default
+                        ElementInformation
+                            .Properties[ConfigurationStrings.X509CertificateRevocationMode]
+                            .ValueOrigin != PropertyValueOrigin.Default
                     )
                     || (
-                        ElementInformation.Properties[
-                            ConfigurationStrings.X509TrustedStoreLocation
-                        ].ValueOrigin != PropertyValueOrigin.Default
+                        ElementInformation
+                            .Properties[ConfigurationStrings.X509TrustedStoreLocation]
+                            .ValueOrigin != PropertyValueOrigin.Default
                     )
                     || CertificateValidator.IsConfigured
                 );

@@ -29,7 +29,8 @@ namespace Mono.Linker.Tests.TestCases
 
             var firstParentRelativeToRoot = SourceFile
                 .RelativeTo(rootCasesDirectory)
-                .Elements.First();
+                .Elements
+                .First();
             TestSuiteDirectory = rootCasesDirectory.Combine(firstParentRelativeToRoot);
         }
 

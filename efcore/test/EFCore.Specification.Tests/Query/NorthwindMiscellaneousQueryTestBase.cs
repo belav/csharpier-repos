@@ -2212,7 +2212,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         select new { Foo = e2 }
                     )
                         .First()
-                        .Foo.FirstName
+                        .Foo
+                        .FirstName
                 select e1,
             entryCount: 1
         );
@@ -2247,7 +2248,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         select new { Foo = e2 }
                     )
                         .FirstOrDefault()
-                        .Foo.FirstName
+                        .Foo
+                        .FirstName
                 select e1,
             entryCount: 1
         );
@@ -2291,7 +2293,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                 select new { c3 }
                             )
                                 .First()
-                                .c3.City
+                                .c3
+                                .City
                         select c1,
                     entryCount: 1
                 )
@@ -2330,7 +2333,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                 .OrderBy(c => c.CustomerID)
                                 .Select(c => new { Foo = c })
                                 .First()
-                                .Foo.IsLondon
+                                .Foo
+                                .IsLondon
                         select c1,
                     entryCount: 85
                 ),
@@ -6911,7 +6915,9 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                     c.Orders
                                         .OrderBy(e => e.OrderDate)
                                         .FirstOrDefault()
-                                        .Customer.Orders.Any(e => e.OrderID < 11000)
+                                        .Customer
+                                        .Orders
+                                        .Any(e => e.OrderID < 11000)
                             }
                     ),
             ss =>
@@ -6927,7 +6933,9 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                     ? c.Orders
                                         .OrderBy(e => e.OrderDate)
                                         .FirstOrDefault()
-                                        .Customer.Orders.Any(e => e.OrderID < 11000)
+                                        .Customer
+                                        .Orders
+                                        .Any(e => e.OrderID < 11000)
                                     : (bool?)false
                             }
                     ),

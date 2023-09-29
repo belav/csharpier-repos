@@ -369,10 +369,9 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 // will be 'result'.  So we check if the first letters differ on case and the rest of the method
                 // matches.
                 return char.ToLower(suffix.Span[0]) == parameterName[0]
-                    && suffix.Span[1..].Equals(
-                        parameterName.AsSpan()[1..],
-                        StringComparison.Ordinal
-                    );
+                    && suffix
+                        .Span[1..]
+                        .Equals(parameterName.AsSpan()[1..], StringComparison.Ordinal);
             }
         }
 

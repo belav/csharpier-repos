@@ -57,7 +57,9 @@ public static class ScaffoldingModelExtensions
     ///     many-to-many relationship from both of its ends.
     /// </remarks>
     public static bool IsLeftNavigation(this ISkipNavigation skipNavigation) =>
-        skipNavigation.JoinEntityType.FindPrimaryKey()!.Properties[0]
+        skipNavigation.JoinEntityType
+            .FindPrimaryKey()!
+            .Properties[0]
             .GetContainingForeignKeys()
             .Single()
             .PrincipalEntityType == skipNavigation.DeclaringEntityType;

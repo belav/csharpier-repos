@@ -522,7 +522,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         );
                     }
                 })
-                .Task.ReportNonFatalErrorUnlessCancelledAsync(_threadingContext.DisposalToken);
+                .Task
+                .ReportNonFatalErrorUnlessCancelledAsync(_threadingContext.DisposalToken);
         }
 
         private async Task SetSeverityHandlerAsync(

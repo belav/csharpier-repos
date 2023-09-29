@@ -841,9 +841,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (_cachedDirectoryServers != null)
                     {
-                        _crossRefEntry!.Properties[PropertyManager.MsDSNCReplicaLocations].AddRange(
-                            _cachedDirectoryServers.GetMultiValuedProperty()
-                        );
+                        _crossRefEntry!
+                            .Properties[PropertyManager.MsDSNCReplicaLocations]
+                            .AddRange(_cachedDirectoryServers.GetMultiValuedProperty());
                     }
                     if (_securityRefDomainModified)
                     {
@@ -965,9 +965,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         )
                         {
                             return (string?)
-                                _crossRefEntry.Properties[
-                                    PropertyManager.MsDSSDReferenceDomain
-                                ].Value;
+                                _crossRefEntry
+                                    .Properties[PropertyManager.MsDSSDReferenceDomain]
+                                    .Value;
                         }
                         else
                         {
@@ -1006,9 +1006,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             )
                         )
                         {
-                            _crossRefEntry.Properties[
-                                PropertyManager.MsDSSDReferenceDomain
-                            ].Clear();
+                            _crossRefEntry
+                                .Properties[PropertyManager.MsDSSDReferenceDomain]
+                                .Clear();
                             _securityRefDomainModified = true;
                         }
                     }

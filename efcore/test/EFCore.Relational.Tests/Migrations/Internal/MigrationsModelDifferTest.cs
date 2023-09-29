@@ -6555,7 +6555,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     x =>
                     {
                         x.Property<string>("Discriminator")
-                            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                            .Metadata
+                            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
                     }
                 );
                 source.Entity(
@@ -7859,7 +7860,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     x =>
                     {
                         x.Property<string>("Discriminator")
-                            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                            .Metadata
+                            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
                     }
                 );
                 source.Entity(

@@ -254,7 +254,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         {
             return _visualStudioWorkspace.CurrentSolution
                 .GetProject(Id)
-                .Documents.SelectAsArray(
+                .Documents
+                .SelectAsArray(
                     d =>
                         (IVisualStudioHostDocument)
                             new DocumentProvider.ShimDocument(

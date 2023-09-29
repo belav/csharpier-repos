@@ -324,7 +324,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 // E.g. foreach in C# using a MoveNext in VB that is renamed to MOVENEXT (within VB)
                 var renameRewriterService = implicitReferenceLocationsPerLanguage
                     .First()
-                    .Document.Project.Services.GetRequiredService<IRenameRewriterLanguageService>();
+                    .Document
+                    .Project
+                    .Services
+                    .GetRequiredService<IRenameRewriterLanguageService>();
                 var implicitConflicts = await renameRewriterService
                     .ComputeImplicitReferenceConflictsAsync(
                         originalSymbol,

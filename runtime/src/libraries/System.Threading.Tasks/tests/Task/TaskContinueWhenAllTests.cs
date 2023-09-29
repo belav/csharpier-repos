@@ -392,9 +392,9 @@ namespace System.Threading.Tasks.Tests
                                         (
                                             (ex is AggregateException)
                                             && (
-                                                ((AggregateException)ex).InnerExceptions[
-                                                    0
-                                                ].GetType() == typeof(TaskCanceledException)
+                                                ((AggregateException)ex)
+                                                    .InnerExceptions[0]
+                                                    .GetType() == typeof(TaskCanceledException)
                                             )
                                         ),
                                         "Expected AE(TCE) on tSmall Cancellation, got "
@@ -452,9 +452,9 @@ namespace System.Threading.Tasks.Tests
                                         (
                                             (ex is AggregateException)
                                             && (
-                                                ((AggregateException)ex).InnerExceptions[
-                                                    0
-                                                ].GetType() == typeof(TaskCanceledException)
+                                                ((AggregateException)ex)
+                                                    .InnerExceptions[0]
+                                                    .GetType() == typeof(TaskCanceledException)
                                             )
                                         ),
                                         "Expected AE(TCE) on tLarge cancellation, got "
@@ -918,9 +918,9 @@ namespace System.Threading.Tasks.Tests
                                         (
                                             (ex is AggregateException)
                                             && (
-                                                ((AggregateException)ex).InnerExceptions[
-                                                    0
-                                                ].GetType() == typeof(TaskCanceledException)
+                                                ((AggregateException)ex)
+                                                    .InnerExceptions[0]
+                                                    .GetType() == typeof(TaskCanceledException)
                                             )
                                         ),
                                         "Expected AE(TCE) on tSmall Cancellation, got "
@@ -978,9 +978,9 @@ namespace System.Threading.Tasks.Tests
                                         (
                                             (ex is AggregateException)
                                             && (
-                                                ((AggregateException)ex).InnerExceptions[
-                                                    0
-                                                ].GetType() == typeof(TaskCanceledException)
+                                                ((AggregateException)ex)
+                                                    .InnerExceptions[0]
+                                                    .GetType() == typeof(TaskCanceledException)
                                             )
                                         ),
                                         "Expected AE(TCE) on tLarge cancellation, got "

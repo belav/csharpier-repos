@@ -1028,9 +1028,8 @@ a + b";
             var tree = SyntaxFactory.ParseSyntaxTree(text);
             Assert.True(
                 tree.GetCompilationUnitRoot()
-                    .EndOfFileToken.IsIncrementallyIdenticalTo(
-                        tree.GetCompilationUnitRoot().EndOfFileToken
-                    )
+                    .EndOfFileToken
+                    .IsIncrementallyIdenticalTo(tree.GetCompilationUnitRoot().EndOfFileToken)
             );
         }
 
@@ -1463,7 +1462,8 @@ using goo.bar;
 
             var list = new List<SyntaxToken>();
             var token = tree.GetCompilationUnitRoot()
-                .EndOfFileToken.GetPreviousToken(includeZeroWidth: true);
+                .EndOfFileToken
+                .GetPreviousToken(includeZeroWidth: true);
             while (token.Kind() != SyntaxKind.None)
             {
                 list.Add(token);
@@ -2311,9 +2311,10 @@ class Test
             // Verify the kind of the CSharpSyntaxNode "int IX.GOO" is MethodDeclaration and NOT FieldDeclaration
             Assert.Equal(
                 SyntaxKind.MethodDeclaration,
-                tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].ChildNodesAndTokens()[
-                    3
-                ].Kind()
+                tree.GetCompilationUnitRoot()
+                    .ChildNodesAndTokens()[0]
+                    .ChildNodesAndTokens()[3]
+                    .Kind()
             );
         }
 

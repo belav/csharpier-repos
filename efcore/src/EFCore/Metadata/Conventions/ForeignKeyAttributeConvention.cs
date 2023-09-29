@@ -479,7 +479,8 @@ public class ForeignKeyAttributeConvention
         foreach (
             var memberInfo in entityType
                 .GetRuntimeProperties()
-                .Values.Cast<MemberInfo>()
+                .Values
+                .Cast<MemberInfo>()
                 .Concat(entityType.GetRuntimeFields().Values)
         )
         {
@@ -570,13 +571,14 @@ public class ForeignKeyAttributeConvention
             );
         }
 
-        var navigationPropertyTargetType = navigation!.DeclaringEntityType.GetRuntimeProperties()[
-            navigation.Name
-        ].PropertyType;
+        var navigationPropertyTargetType = navigation!.DeclaringEntityType
+            .GetRuntimeProperties()[navigation.Name]
+            .PropertyType;
 
         var otherNavigations = navigation.DeclaringEntityType
             .GetRuntimeProperties()
-            .Values.Where(
+            .Values
+            .Where(
                 p =>
                     p.PropertyType == navigationPropertyTargetType
                     && p.GetSimpleMemberName() != navigation.Name

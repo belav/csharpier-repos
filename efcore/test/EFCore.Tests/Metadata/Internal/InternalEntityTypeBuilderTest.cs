@@ -1055,7 +1055,8 @@ public class InternalEntityTypeBuilderTest
                     {
                         entityBuilder
                             .Property(typeof(int), "Shadow2", ConfigurationSource.Convention)
-                            .Metadata.Name,
+                            .Metadata
+                            .Name,
                         property.Name
                     },
                     ConfigurationSource.Convention
@@ -2065,7 +2066,8 @@ public class InternalEntityTypeBuilderTest
                     {
                         entityBuilder
                             .Property(typeof(int), "Shadow2", ConfigurationSource.Convention)
-                            .Metadata.Name,
+                            .Metadata
+                            .Name,
                         property.Name
                     },
                     ConfigurationSource.Convention
@@ -2596,7 +2598,9 @@ public class InternalEntityTypeBuilderTest
             dependentEntityBuilder.Metadata
                 .GetForeignKeys()
                 .Single()
-                .PrincipalKey.Properties.First()
+                .PrincipalKey
+                .Properties
+                .First()
                 .Name
         );
 
@@ -3065,7 +3069,8 @@ public class InternalEntityTypeBuilderTest
 
         var newFkProperties = foreignKey.Builder
             .HasForeignKey((IReadOnlyList<Property>)null, ConfigurationSource.Convention)
-            .Metadata.Properties;
+            .Metadata
+            .Properties;
 
         Assert.Equal("CustomerId", newFkProperties[0].Name);
         Assert.Equal("CustomerAlternateId", newFkProperties[1].Name);
@@ -3119,7 +3124,8 @@ public class InternalEntityTypeBuilderTest
 
         var newFkProperties = foreignKey.Builder
             .HasForeignKey((IReadOnlyList<Property>)null, ConfigurationSource.Convention)
-            .Metadata.Properties;
+            .Metadata
+            .Properties;
 
         Assert.Equal("CustomerId", newFkProperties[0].Name);
         Assert.Equal("CustomerAlternateId", newFkProperties[1].Name);
@@ -3173,7 +3179,8 @@ public class InternalEntityTypeBuilderTest
 
         var newFkProperties = foreignKey.Builder
             .HasForeignKey((IReadOnlyList<Property>)null, ConfigurationSource.Convention)
-            .Metadata.Properties;
+            .Metadata
+            .Properties;
 
         Assert.Equal("CustomerId1", newFkProperties[0].Name);
         Assert.Equal("CustomerUnique1", newFkProperties[1].Name);

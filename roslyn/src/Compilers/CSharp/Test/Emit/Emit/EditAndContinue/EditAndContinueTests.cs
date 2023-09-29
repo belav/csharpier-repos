@@ -86,9 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                             SemanticEditKind.Delete,
                             symbolProvider: c =>
                                 c.GetMember<INamedTypeSymbol>("C")
-                                    .InstanceConstructors.FirstOrDefault(
-                                        c => c.Parameters.Length == 1
-                                    ),
+                                    .InstanceConstructors
+                                    .FirstOrDefault(c => c.Parameters.Length == 1),
                             newSymbolProvider: c => c.GetMember("C")
                         ),
                     },
@@ -7802,10 +7801,12 @@ class C : I
 
             var method0 = compilation0
                 .GetMember<NamedTypeSymbol>("C")
-                .InstanceConstructors.Single();
+                .InstanceConstructors
+                .Single();
             var method1 = compilation1
                 .GetMember<NamedTypeSymbol>("C")
-                .InstanceConstructors.Single();
+                .InstanceConstructors
+                .Single();
 
             var bytes0 = compilation0.EmitToArray();
             using var md0 = ModuleMetadata.CreateFromImage(bytes0);
@@ -9511,10 +9512,12 @@ struct S
 
             var ctor0 = compilation0
                 .GetMember<NamedTypeSymbol>("S")
-                .InstanceConstructors.Single(m => m.ParameterCount == 0);
+                .InstanceConstructors
+                .Single(m => m.ParameterCount == 0);
             var ctor1 = compilation1
                 .GetMember<NamedTypeSymbol>("S")
-                .InstanceConstructors.Single(m => m.ParameterCount == 0);
+                .InstanceConstructors
+                .Single(m => m.ParameterCount == 0);
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.Skipped);
 

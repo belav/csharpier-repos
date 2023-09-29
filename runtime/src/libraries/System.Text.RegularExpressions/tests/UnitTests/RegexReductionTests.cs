@@ -380,10 +380,12 @@ namespace System.Text.RegularExpressions.Tests
 
             string actualStr = RegexParser
                 .Parse(actual, RegexOptions.None, CultureInfo.InvariantCulture)
-                .Root.ToString();
+                .Root
+                .ToString();
             string expectedStr = RegexParser
                 .Parse(expected, RegexOptions.None, CultureInfo.InvariantCulture)
-                .Root.ToString();
+                .Root
+                .ToString();
             if (actualStr != expectedStr)
             {
                 throw new Xunit.Sdk.EqualException(expectedStr, actualStr);
@@ -517,10 +519,12 @@ namespace System.Text.RegularExpressions.Tests
 
             string actualStr = RegexParser
                 .Parse(actual, RegexOptions.None, CultureInfo.InvariantCulture)
-                .Root.ToString();
+                .Root
+                .ToString();
             string expectedStr = RegexParser
                 .Parse(expected, RegexOptions.None, CultureInfo.InvariantCulture)
-                .Root.ToString();
+                .Root
+                .ToString();
             if (actualStr == expectedStr)
             {
                 throw new Xunit.Sdk.NotEqualException(expectedStr, actualStr);

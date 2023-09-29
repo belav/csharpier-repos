@@ -141,9 +141,10 @@ namespace System.ServiceModel.Discovery.Configuration
 
             if (
                 PropertyValueOrigin.Default
-                == this.DiscoveryClientSettings.ElementInformation.Properties[
-                    ConfigurationStrings.Endpoint
-                ].ValueOrigin
+                == this.DiscoveryClientSettings
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.Endpoint]
+                    .ValueOrigin
             )
             {
                 dynamicEndpoint.DiscoveryEndpointProvider =

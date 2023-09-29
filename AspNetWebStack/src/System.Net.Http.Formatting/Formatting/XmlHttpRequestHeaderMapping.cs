@@ -50,7 +50,8 @@ namespace System.Net.Http.Formatting
                     request.Headers.Accept.Count == 1
                     && request.Headers.Accept
                         .First()
-                        .MediaType.Equals("*/*", StringComparison.Ordinal)
+                        .MediaType
+                        .Equals("*/*", StringComparison.Ordinal)
                 )
             )
             {

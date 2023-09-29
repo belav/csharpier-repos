@@ -142,12 +142,14 @@ namespace System.Web.SessionState
             SessionStateSection config = RuntimeConfig.GetAppConfig().SessionState;
 
             s_configPartitionResolverType = config.PartitionResolverType;
-            s_configSqlConnectionFileName = config.ElementInformation.Properties[
-                "sqlConnectionString"
-            ].Source;
-            s_configSqlConnectionLineNumber = config.ElementInformation.Properties[
-                "sqlConnectionString"
-            ].LineNumber;
+            s_configSqlConnectionFileName = config
+                .ElementInformation
+                .Properties["sqlConnectionString"]
+                .Source;
+            s_configSqlConnectionLineNumber = config
+                .ElementInformation
+                .Properties["sqlConnectionString"]
+                .LineNumber;
             s_configAllowCustomSqlDatabase = config.AllowCustomSqlDatabase;
             s_configCompressionEnabled = config.CompressionEnabled;
 

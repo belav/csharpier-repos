@@ -5914,7 +5914,8 @@ public class Unbound : Constructed<> { }
             var unbound = comp2
                 .GetTypeByMetadataName("Unbound")
                 .BaseType()
-                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Type;
+                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                .Type;
             Assert.IsType<UnboundArgumentErrorTypeSymbol>(unbound);
             Assert.False(((NamedTypeSymbol)unbound).IsSerializable);
 
@@ -15414,7 +15415,8 @@ class MyAttribute : System.Attribute
                                         "System.Runtime.CompilerServices",
                                         "AsyncStateMachineAttribute"
                                     )
-                                    .ConstructorArguments.Single()
+                                    .ConstructorArguments
+                                    .Single()
                                     .ValueInternal
                         ).GetMember<MethodSymbol>("MoveNext")
                     )
@@ -15430,7 +15432,8 @@ class MyAttribute : System.Attribute
                                     "System.Runtime.CompilerServices",
                                     "AsyncStateMachineAttribute"
                                 )
-                                .ConstructorArguments.Single()
+                                .ConstructorArguments
+                                .Single()
                                 .ValueInternal
                     )
                         .GetMember<MethodSymbol>("MoveNext")
@@ -15449,7 +15452,8 @@ class MyAttribute : System.Attribute
                                         "System.Runtime.CompilerServices",
                                         "IteratorStateMachineAttribute"
                                     )
-                                    .ConstructorArguments.Single()
+                                    .ConstructorArguments
+                                    .Single()
                                     .ValueInternal
                         ).GetMember<MethodSymbol>("MoveNext")
                     )
@@ -15465,7 +15469,8 @@ class MyAttribute : System.Attribute
                                     "System.Runtime.CompilerServices",
                                     "IteratorStateMachineAttribute"
                                 )
-                                .ConstructorArguments.Single()
+                                .ConstructorArguments
+                                .Single()
                                 .ValueInternal
                     )
                         .GetMember<MethodSymbol>("MoveNext")
@@ -15592,7 +15597,8 @@ class MyAttribute : System.Attribute
                                         "System.Runtime.CompilerServices",
                                         "AsyncStateMachineAttribute"
                                     )
-                                    .ConstructorArguments.Single()
+                                    .ConstructorArguments
+                                    .Single()
                                     .ValueInternal
                         )
                     )
@@ -15609,7 +15615,8 @@ class MyAttribute : System.Attribute
                                         "System.Runtime.CompilerServices",
                                         "AsyncStateMachineAttribute"
                                     )
-                                    .ConstructorArguments.Single()
+                                    .ConstructorArguments
+                                    .Single()
                                     .ValueInternal
                         )
                     )
@@ -15626,7 +15633,8 @@ class MyAttribute : System.Attribute
                                         "System.Runtime.CompilerServices",
                                         "IteratorStateMachineAttribute"
                                     )
-                                    .ConstructorArguments.Single()
+                                    .ConstructorArguments
+                                    .Single()
                                     .ValueInternal
                         )
                     )
@@ -15643,7 +15651,8 @@ class MyAttribute : System.Attribute
                                         "System.Runtime.CompilerServices",
                                         "IteratorStateMachineAttribute"
                                     )
-                                    .ConstructorArguments.Single()
+                                    .ConstructorArguments
+                                    .Single()
                                     .ValueInternal
                         )
                     )
@@ -15862,7 +15871,8 @@ second",
                     var attribute = module.ContainingAssembly
                         .GetTypeByMetadataName("Program")
                         .GetMethod("Test")
-                        .Parameters.Single()
+                        .Parameters
+                        .Single()
                         .GetAttributes()
                         .Single();
 

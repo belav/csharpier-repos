@@ -538,12 +538,12 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
                 var innerKeySelector = groupJoinMethod.Arguments[3].UnwrapLambdaFromQuote();
                 var groupJoinResultSelector = groupJoinMethod.Arguments[4].UnwrapLambdaFromQuote();
 
-                var selectManyCollectionSelector = methodCallExpression.Arguments[
-                    1
-                ].UnwrapLambdaFromQuote();
-                var selectManyResultSelector = methodCallExpression.Arguments[
-                    2
-                ].UnwrapLambdaFromQuote();
+                var selectManyCollectionSelector = methodCallExpression
+                    .Arguments[1]
+                    .UnwrapLambdaFromQuote();
+                var selectManyResultSelector = methodCallExpression
+                    .Arguments[2]
+                    .UnwrapLambdaFromQuote();
 
                 var collectionSelectorBody = selectManyCollectionSelector.Body;
                 var defaultIfEmpty = false;
@@ -671,9 +671,9 @@ public class QueryableMethodNormalizingExpressionVisitor : ExpressionVisitor
                 var innerKeySelector = groupJoinMethod.Arguments[3].UnwrapLambdaFromQuote();
                 var groupJoinResultSelector = groupJoinMethod.Arguments[4].UnwrapLambdaFromQuote();
 
-                var selectManyResultSelector = methodCallExpression.Arguments[
-                    1
-                ].UnwrapLambdaFromQuote();
+                var selectManyResultSelector = methodCallExpression
+                    .Arguments[1]
+                    .UnwrapLambdaFromQuote();
 
                 var groupJoinResultSelectorBody = groupJoinResultSelector.Body;
                 var defaultIfEmpty = false;

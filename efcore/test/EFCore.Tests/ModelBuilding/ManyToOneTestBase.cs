@@ -2201,7 +2201,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -2237,7 +2239,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Omega))
                     .FindNavigation(nameof(Omega.Kappa))
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }

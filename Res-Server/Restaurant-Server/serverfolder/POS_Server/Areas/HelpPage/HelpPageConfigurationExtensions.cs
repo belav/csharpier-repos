@@ -64,7 +64,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActionSamples.Add(
+                .ActionSamples
+                .Add(
                     new HelpPageSampleKey(
                         mediaType,
                         SampleDirection.Request,
@@ -96,7 +97,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActionSamples.Add(
+                .ActionSamples
+                .Add(
                     new HelpPageSampleKey(
                         mediaType,
                         SampleDirection.Request,
@@ -126,7 +128,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActionSamples.Add(
+                .ActionSamples
+                .Add(
                     new HelpPageSampleKey(
                         mediaType,
                         SampleDirection.Response,
@@ -158,7 +161,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActionSamples.Add(
+                .ActionSamples
+                .Add(
                     new HelpPageSampleKey(
                         mediaType,
                         SampleDirection.Response,
@@ -184,7 +188,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActionSamples.Add(new HelpPageSampleKey(mediaType), sample);
+                .ActionSamples
+                .Add(new HelpPageSampleKey(mediaType), sample);
         }
 
         /// <summary>
@@ -203,7 +208,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActionSamples.Add(new HelpPageSampleKey(mediaType, type), sample);
+                .ActionSamples
+                .Add(new HelpPageSampleKey(mediaType, type), sample);
         }
 
         /// <summary>
@@ -223,7 +229,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActualHttpMessageTypes.Add(
+                .ActualHttpMessageTypes
+                .Add(
                     new HelpPageSampleKey(
                         SampleDirection.Request,
                         controllerName,
@@ -253,7 +260,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActualHttpMessageTypes.Add(
+                .ActualHttpMessageTypes
+                .Add(
                     new HelpPageSampleKey(
                         SampleDirection.Request,
                         controllerName,
@@ -281,7 +289,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActualHttpMessageTypes.Add(
+                .ActualHttpMessageTypes
+                .Add(
                     new HelpPageSampleKey(
                         SampleDirection.Response,
                         controllerName,
@@ -311,7 +320,8 @@ namespace POS_Server.Areas.HelpPage
         {
             config
                 .GetHelpPageSampleGenerator()
-                .ActualHttpMessageTypes.Add(
+                .ActualHttpMessageTypes
+                .Add(
                     new HelpPageSampleKey(
                         SampleDirection.Response,
                         controllerName,

@@ -1379,9 +1379,9 @@ namespace System.Data
                 foreach (DataTable table in Tables)
                 foreach (DataColumn col in table.Columns)
                     if (col.Expression.Length != 0)
-                        ds.Tables[table.TableName, table.Namespace].Columns[
-                            col.ColumnName
-                        ].Expression = col.Expression;
+                        ds.Tables[table.TableName, table.Namespace]
+                            .Columns[col.ColumnName]
+                            .Expression = col.Expression;
 
                 for (int i = 0; i < tbls.Count; i++)
                 {

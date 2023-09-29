@@ -1017,7 +1017,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var existingConstructorInitializer = this.Root
                 .FindToken(position)
-                .Parent.AncestorsAndSelf()
+                .Parent
+                .AncestorsAndSelf()
                 .OfType<ConstructorInitializerSyntax>()
                 .FirstOrDefault();
 
@@ -1050,7 +1051,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var existingConstructorInitializer = this.Root
                 .FindToken(position)
-                .Parent.AncestorsAndSelf()
+                .Parent
+                .AncestorsAndSelf()
                 .OfType<PrimaryConstructorBaseTypeSyntax>()
                 .FirstOrDefault();
 

@@ -270,7 +270,8 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal(2, category.ElementExtensions.Count);
                 Assert.Equal(
                     10,
-                    category.ElementExtensions[0]
+                    category
+                        .ElementExtensions[0]
                         .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
                         .Value
                 );
@@ -458,7 +459,8 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal(2, person.ElementExtensions.Count);
                 Assert.Equal(
                     10,
-                    person.ElementExtensions[0]
+                    person
+                        .ElementExtensions[0]
                         .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
                         .Value
                 );

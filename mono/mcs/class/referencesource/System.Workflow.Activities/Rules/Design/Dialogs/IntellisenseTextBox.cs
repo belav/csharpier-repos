@@ -224,12 +224,12 @@ namespace System.Workflow.Activities.Rules.Design
                         && this.listBoxAutoComplete.SelectedIndices[0] > 0
                     )
                     {
-                        this.listBoxAutoComplete.Items[
-                            this.listBoxAutoComplete.SelectedIndices[0] - 1
-                        ].Selected = true;
-                        this.listBoxAutoComplete.Items[
-                            this.listBoxAutoComplete.SelectedIndices[0]
-                        ].Focused = true;
+                        this.listBoxAutoComplete
+                            .Items[this.listBoxAutoComplete.SelectedIndices[0] - 1]
+                            .Selected = true;
+                        this.listBoxAutoComplete
+                            .Items[this.listBoxAutoComplete.SelectedIndices[0]]
+                            .Focused = true;
                     }
 
                     e.Handled = true;
@@ -252,12 +252,12 @@ namespace System.Workflow.Activities.Rules.Design
                         < this.listBoxAutoComplete.Items.Count - 1
                     )
                     {
-                        this.listBoxAutoComplete.Items[
-                            this.listBoxAutoComplete.SelectedIndices[0] + 1
-                        ].Selected = true;
-                        this.listBoxAutoComplete.Items[
-                            this.listBoxAutoComplete.SelectedIndices[0]
-                        ].Focused = true;
+                        this.listBoxAutoComplete
+                            .Items[this.listBoxAutoComplete.SelectedIndices[0] + 1]
+                            .Selected = true;
+                        this.listBoxAutoComplete
+                            .Items[this.listBoxAutoComplete.SelectedIndices[0]]
+                            .Focused = true;
                     }
                     e.Handled = true;
                 }
@@ -556,10 +556,10 @@ namespace System.Workflow.Activities.Rules.Design
                 for (int i = 0; i < this.listBoxAutoComplete.Items.Count; i++)
                 {
                     if (
-                        this.listBoxAutoComplete.Items[i].Text.StartsWith(
-                            currentValue,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        this.listBoxAutoComplete
+                            .Items[i]
+                            .Text
+                            .StartsWith(currentValue, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         wordMatched = true;

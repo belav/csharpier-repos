@@ -1877,16 +1877,16 @@ class Program
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A?",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0]
+                    .ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
             type = comp2.GetMember<NamedTypeSymbol>("D");
             Assert.Equal(
                 "A!",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0]
+                    .ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
         }
 
@@ -1946,9 +1946,9 @@ class Program
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A<System.Object>",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0]
+                    .ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
         }
 
@@ -2052,16 +2052,16 @@ public class C<T> where T : A<object>
             var type = comp2.GetMember<NamedTypeSymbol>("B");
             Assert.Equal(
                 "A<System.Object?>!",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0]
+                    .ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
             type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "A<System.Object!>!",
-                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[0]
+                    .ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
         }
 
@@ -2148,9 +2148,9 @@ public class C<T> where T : A<object>
             var type = comp2.GetMember<NamedTypeSymbol>("C");
             Assert.Equal(
                 "T?",
-                type.TypeParameters[1].ConstraintTypesNoUseSiteDiagnostics[0].ToTestDisplayString(
-                    true
-                )
+                type.TypeParameters[1]
+                    .ConstraintTypesNoUseSiteDiagnostics[0]
+                    .ToTestDisplayString(true)
             );
         }
 
@@ -2279,7 +2279,8 @@ public class Program
                     {
                         var typeParameter = module.GlobalNamespace
                             .GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
+                            .TypeParameters
+                            .Single();
                         Assert.True(typeParameter.HasReferenceTypeConstraint);
                         Assert.Equal(
                             expectedConstraintIsNullable,
@@ -2361,7 +2362,8 @@ public class Program
                     {
                         var typeParameter = module.GlobalNamespace
                             .GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
+                            .TypeParameters
+                            .Single();
                         Assert.True(typeParameter.HasReferenceTypeConstraint);
                         Assert.Equal(
                             expectedConstraintIsNullable,
@@ -2425,7 +2427,8 @@ public class C2<T2>
                     {
                         var typeParameter = module.GlobalNamespace
                             .GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
+                            .TypeParameters
+                            .Single();
                         Assert.True(typeParameter.HasNotNullConstraint);
                     }
                 }

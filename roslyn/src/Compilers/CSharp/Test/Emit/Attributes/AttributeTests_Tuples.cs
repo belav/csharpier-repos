@@ -852,7 +852,8 @@ class C
                         "System.String[]",
                         tupleAttr.AttributeConstructor.Parameters
                             .Single()
-                            .TypeWithAnnotations.ToTestDisplayString()
+                            .TypeWithAnnotations
+                            .ToTestDisplayString()
                     );
 
                     if (expectedElementNames == null)

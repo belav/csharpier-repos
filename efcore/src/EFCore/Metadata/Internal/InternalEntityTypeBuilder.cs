@@ -6254,7 +6254,8 @@ public class InternalEntityTypeBuilder
 
         return Metadata
             .RootType()
-            .Builder.Property(
+            .Builder
+            .Property(
                 type ?? discriminatorProperty?.ClrType ?? DefaultDiscriminatorType,
                 name ?? discriminatorProperty?.Name ?? DefaultDiscriminatorName,
                 typeConfigurationSource: type != null ? configurationSource : null,
@@ -6464,7 +6465,8 @@ public class InternalEntityTypeBuilder
             discriminatorProperty != null
             || Metadata
                 .RootType()
-                .Builder.CanAddDiscriminatorProperty(
+                .Builder
+                .CanAddDiscriminatorProperty(
                     discriminatorType ?? DefaultDiscriminatorType,
                     name ?? DefaultDiscriminatorName,
                     typeConfigurationSource: discriminatorType != null ? configurationSource : null

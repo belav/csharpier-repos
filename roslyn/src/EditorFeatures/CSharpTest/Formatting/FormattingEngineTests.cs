@@ -2873,7 +2873,8 @@ interface I1
             var commandHandler = workspace.GetService<FormatCommandHandler>();
             var typedChar = subjectDocument
                 .GetTextBuffer()
-                .CurrentSnapshot.GetText(subjectDocument.CursorPosition.Value - 1, 1);
+                .CurrentSnapshot
+                .GetText(subjectDocument.CursorPosition.Value - 1, 1);
             var textView = subjectDocument.GetTextView();
 
             globalOptions?.SetGlobalOptions(workspace.GlobalOptions);

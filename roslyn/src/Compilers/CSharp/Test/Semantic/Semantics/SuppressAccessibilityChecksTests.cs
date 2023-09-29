@@ -100,7 +100,8 @@ class B
                         exp,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Type.Name
+                    .Type
+                    .Name
             );
 
             Assert.Equal(
@@ -111,7 +112,8 @@ class B
                         exp,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.Name
+                    .Symbol
+                    .Name
             );
         }
 
@@ -248,7 +250,8 @@ class B
                         speculativeInvocation,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Type.Name
+                    .Type
+                    .Name
             );
             Assert.Equal(
                 "InternalExtension",
@@ -258,7 +261,8 @@ class B
                         speculativeInvocation,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.Name
+                    .Symbol
+                    .Name
             );
         }
 

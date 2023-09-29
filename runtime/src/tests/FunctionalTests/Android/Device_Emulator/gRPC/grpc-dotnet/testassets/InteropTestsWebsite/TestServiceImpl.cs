@@ -174,7 +174,9 @@ namespace Grpc.Testing
                 // Get grpc-encoding from HttpContext instead
                 var encoding = context
                     .GetHttpContext()
-                    .Request.Headers.SingleOrDefault(
+                    .Request
+                    .Headers
+                    .SingleOrDefault(
                         h =>
                             string.Equals(
                                 h.Key,
@@ -182,7 +184,8 @@ namespace Grpc.Testing
                                 StringComparison.OrdinalIgnoreCase
                             )
                     )
-                    .Value.SingleOrDefault();
+                    .Value
+                    .SingleOrDefault();
                 if (expectCompressed.Value)
                 {
                     if (encoding == null || encoding == "identity")

@@ -2799,9 +2799,10 @@ public static class EntityFrameworkQueryableExtensions
             .Single(
                 mi =>
                     mi.GetGenericArguments().Length == 3
-                    && mi.GetParameters()[0].ParameterType.GenericTypeArguments[
-                        1
-                    ].IsGenericParameter
+                    && mi.GetParameters()[0]
+                        .ParameterType
+                        .GenericTypeArguments[1]
+                        .IsGenericParameter
             );
 
     /// <summary>

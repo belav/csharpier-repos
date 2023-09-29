@@ -1102,9 +1102,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             // Dev10 reports CS0647: "Error emitting attribute ..."
                             diagnostics.Add(
                                 ErrorCode.ERR_InvalidNamedArgument,
-                                arguments.AttributeSyntaxOpt.ArgumentList.Arguments[
-                                    position
-                                ].Location,
+                                arguments
+                                    .AttributeSyntaxOpt
+                                    .ArgumentList
+                                    .Arguments[position]
+                                    .Location,
                                 namedArg.Key
                             );
                             hasErrors = true;

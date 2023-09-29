@@ -180,12 +180,12 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
         var inner = Visit(methodCallExpression.Arguments[1]);
         var resultSelector = Visit(methodCallExpression.Arguments[4]);
 
-        var originalLeftKeySelectorLambda = methodCallExpression.Arguments[
-            2
-        ].UnwrapLambdaFromQuote();
-        var originalRightKeySelectorLambda = methodCallExpression.Arguments[
-            3
-        ].UnwrapLambdaFromQuote();
+        var originalLeftKeySelectorLambda = methodCallExpression
+            .Arguments[2]
+            .UnwrapLambdaFromQuote();
+        var originalRightKeySelectorLambda = methodCallExpression
+            .Arguments[3]
+            .UnwrapLambdaFromQuote();
         var leftKeySelectorBody = AddNullProtectionForNonNullableMemberAccess(
             originalLeftKeySelectorLambda.Body
         );

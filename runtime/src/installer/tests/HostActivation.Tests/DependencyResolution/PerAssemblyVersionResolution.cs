@@ -159,7 +159,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveResolvedAssembly(expectedTestAssemblyPath);
+                .And
+                .HaveResolvedAssembly(expectedTestAssemblyPath);
         }
     }
 
@@ -219,8 +220,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveUsedAdditionalDeps(additionalDependency.DepsJson)
-                    .And.HaveResolvedAssembly(expectedTestAssemblyPath);
+                    .And
+                    .HaveUsedAdditionalDeps(additionalDependency.DepsJson)
+                    .And
+                    .HaveResolvedAssembly(expectedTestAssemblyPath);
             }
         }
     }
@@ -266,8 +269,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 .RunComponentResolutionTest(component)
                 .Should()
                 .Pass()
-                .And.HaveSuccessfullyResolvedComponentDependencies()
-                .And.HaveResolvedComponentDependencyAssembly(
+                .And
+                .HaveSuccessfullyResolvedComponentDependencies()
+                .And
+                .HaveResolvedComponentDependencyAssembly(
                     $"{component.AppDll};{expectedTestAssemblyPath}"
                 );
         }

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             {
                 diffViewer.RightHost
                     .GetTextViewMargin(DiffOverviewMarginName)
-                    .VisualElement.Hidden = true;
+                    .VisualElement
+                    .Hidden = true;
             }
             else if (mode == DifferenceViewMode.LeftViewOnly)
             {
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 Contract.ThrowIfFalse(mode == DifferenceViewMode.Inline);
                 diffViewer.InlineHost
                     .GetTextViewMargin(DiffOverviewMarginName)
-                    .VisualElement.Hidden = true;
+                    .VisualElement
+                    .Hidden = true;
             }
 
             // We use ConfigureAwait(true) to stay on the UI thread.

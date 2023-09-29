@@ -276,9 +276,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"1: {document1.FilePath}: (4,32)-(4,37) flags=[MethodUpToDate, NonLeafFrame]",
                     $"0: {document1.FilePath}: (9,14)-(9,35) flags=[LeafFrame, MethodUpToDate]"
                 },
-                baseActiveStatementsMap.DocumentPathMap[document1.FilePath].Select(
-                    InspectActiveStatement
-                )
+                baseActiveStatementsMap
+                    .DocumentPathMap[document1.FilePath]
+                    .Select(InspectActiveStatement)
             );
 
             AssertEx.Equal(
@@ -288,9 +288,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"2: {document2.FilePath}: (21,14)-(21,24) flags=[MethodUpToDate, NonLeafFrame]", // [|Test1.M1()|] in F2
                     $"4: {document2.FilePath}: (26,20)-(26,25) flags=[MethodUpToDate, NonLeafFrame]" // [|M2();|] in Main
                 },
-                baseActiveStatementsMap.DocumentPathMap[document2.FilePath].Select(
-                    InspectActiveStatement
-                )
+                baseActiveStatementsMap
+                    .DocumentPathMap[document2.FilePath]
+                    .Select(InspectActiveStatement)
             );
 
             AssertEx.Equal(
@@ -298,9 +298,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 {
                     $"5: NonRoslynDocument.mcpp: (1,1)-(1,10) flags=[MethodUpToDate, NonLeafFrame]",
                 },
-                baseActiveStatementsMap.DocumentPathMap["NonRoslynDocument.mcpp"].Select(
-                    InspectActiveStatement
-                )
+                baseActiveStatementsMap
+                    .DocumentPathMap["NonRoslynDocument.mcpp"]
+                    .Select(InspectActiveStatement)
             );
 
             AssertEx.Equal(
@@ -312,7 +312,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var analyzer = solution
                 .GetProject(projectId)
-                .Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements1 = await baseActiveStatementsMap
                 .GetOldActiveStatementsAsync(analyzer, document1, CancellationToken.None)
                 .ConfigureAwait(false);
@@ -477,7 +478,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var analyzer = solution
                 .GetProject(project.Id)
-                .Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements = await baseActiveStatementMap
                 .GetOldActiveStatementsAsync(analyzer, document, CancellationToken.None)
                 .ConfigureAwait(false);
@@ -762,7 +764,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var analyzer = solution
                 .GetProject(project.Id)
-                .Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements = await baseActiveStatementMap
                 .GetOldActiveStatementsAsync(analyzer, document, CancellationToken.None)
                 .ConfigureAwait(false);
@@ -946,9 +949,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"1: {document.FilePath}: (6,18)-(6,22) flags=[LeafFrame, MethodUpToDate, NonLeafFrame]",
                     $"0: {document.FilePath}: (15,14)-(15,18) flags=[PartiallyExecuted, NonUserCode, MethodUpToDate, NonLeafFrame]",
                 },
-                baseActiveStatementMap.DocumentPathMap[document.FilePath].Select(
-                    InspectActiveStatement
-                )
+                baseActiveStatementMap
+                    .DocumentPathMap[document.FilePath]
+                    .Select(InspectActiveStatement)
             );
 
             Assert.Equal(2, baseActiveStatementMap.InstructionMap.Count);
@@ -971,7 +974,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var analyzer = solution
                 .GetProject(project.Id)
-                .Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements = await baseActiveStatementMap
                 .GetOldActiveStatementsAsync(analyzer, document, CancellationToken.None)
                 .ConfigureAwait(false);

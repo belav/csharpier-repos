@@ -537,12 +537,12 @@ namespace System.Web.Configuration
                                         SR.Insufficient_trust_for_attribute,
                                         assemblyPostProcessorTypeAttributeName
                                     ),
-                                    ElementInformation.Properties[
-                                        assemblyPostProcessorTypeAttributeName
-                                    ].Source,
-                                    ElementInformation.Properties[
-                                        assemblyPostProcessorTypeAttributeName
-                                    ].LineNumber
+                                    ElementInformation
+                                        .Properties[assemblyPostProcessorTypeAttributeName]
+                                        .Source,
+                                    ElementInformation
+                                        .Properties[assemblyPostProcessorTypeAttributeName]
+                                        .LineNumber
                                 );
                             }
 

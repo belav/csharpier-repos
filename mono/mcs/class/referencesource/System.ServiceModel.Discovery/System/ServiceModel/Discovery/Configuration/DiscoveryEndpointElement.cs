@@ -159,9 +159,10 @@ namespace System.ServiceModel.Discovery.Configuration
 
             if (
                 PropertyValueOrigin.Default
-                == serviceEndpointElement.ElementInformation.Properties[
-                    ConfigurationStrings.IsSystemEndpoint
-                ].ValueOrigin
+                == serviceEndpointElement
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.IsSystemEndpoint]
+                    .ValueOrigin
             )
             {
                 serviceEndpointElement.IsSystemEndpoint = true;

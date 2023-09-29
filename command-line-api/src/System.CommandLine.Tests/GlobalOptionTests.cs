@@ -38,7 +38,9 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Option '--i-must-be-set' is required.");
         }
 
@@ -57,7 +59,9 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Option '--i-must-be-set' is required.");
         }
 

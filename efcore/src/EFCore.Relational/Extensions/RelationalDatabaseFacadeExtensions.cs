@@ -1020,7 +1020,8 @@ public static class RelationalDatabaseFacadeExtensions
     public static bool IsRelational(this DatabaseFacade databaseFacade) =>
         ((IDatabaseFacadeDependenciesAccessor)databaseFacade).Context
             .GetService<IDbContextOptions>()
-            .Extensions.OfType<RelationalOptionsExtension>()
+            .Extensions
+            .OfType<RelationalOptionsExtension>()
             .Any();
 
     private static IRelationalDatabaseFacadeDependencies GetFacadeDependencies(

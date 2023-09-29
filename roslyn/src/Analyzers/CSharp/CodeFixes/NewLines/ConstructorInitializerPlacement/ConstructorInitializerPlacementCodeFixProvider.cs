@@ -67,10 +67,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             foreach (var diagnostic in diagnostics)
             {
                 var initializer = (ConstructorInitializerSyntax)
-                    diagnostic.AdditionalLocations[0].FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken
-                    );
+                    diagnostic
+                        .AdditionalLocations[0]
+                        .FindNode(getInnermostNodeForTie: true, cancellationToken);
                 var colonToken = initializer.ColonToken;
                 var thisBaseKeyword = initializer.ThisOrBaseKeyword;
                 var parenToken = colonToken.GetPreviousToken();

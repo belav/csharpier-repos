@@ -74,8 +74,10 @@ public class Program
             kvp =>
                 kvp.Value.host.Services
                     .GetRequiredService<IServer>()
-                    .Features.Get<IServerAddressesFeature>()
-                    .Addresses.FirstOrDefault()
+                    .Features
+                    .Get<IServerAddressesFeature>()
+                    .Addresses
+                    .FirstOrDefault()
                     .Replace("127.0.0.1", "localhost") + kvp.Value.basePath
         );
 

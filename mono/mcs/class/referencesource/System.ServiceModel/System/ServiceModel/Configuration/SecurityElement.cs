@@ -43,9 +43,10 @@ namespace System.ServiceModel.Configuration
 #pragma warning suppress 56506 //Microsoft; base.CopyFrom() checks for 'from' being null
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.SecureConversationBootstrap
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.SecureConversationBootstrap]
+                    .ValueOrigin
             )
                 this.SecureConversationBootstrap.CopyFrom(source.SecureConversationBootstrap);
         }

@@ -690,7 +690,8 @@ public abstract class RelationalTypeMappingTest
                 .FindEntityType(typeof(Banana))
                 .FindProperty("Id")
                 .GetTypeMapping()
-                .Converter.ProviderClrType
+                .Converter
+                .ProviderClrType
         );
         Assert.Null(
             context.Model.FindEntityType(typeof(Kiwi)).FindProperty("Id").GetTypeMapping().Converter

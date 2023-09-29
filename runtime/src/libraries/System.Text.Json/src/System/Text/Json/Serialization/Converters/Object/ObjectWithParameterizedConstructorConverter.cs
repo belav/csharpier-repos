@@ -232,9 +232,9 @@ namespace System.Text.Json.Serialization.Converters
                 {
                     for (int i = 0; i < argumentState.FoundPropertyCount; i++)
                     {
-                        JsonPropertyInfo jsonPropertyInfo = argumentState.FoundPropertiesAsync![
-                            i
-                        ].Item1;
+                        JsonPropertyInfo jsonPropertyInfo = argumentState
+                            .FoundPropertiesAsync![i]
+                            .Item1;
                         object? propValue = argumentState.FoundPropertiesAsync![i].Item2;
                         string? dataExtKey = argumentState.FoundPropertiesAsync![i].Item3;
 

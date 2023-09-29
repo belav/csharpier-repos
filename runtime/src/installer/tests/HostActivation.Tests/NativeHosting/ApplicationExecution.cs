@@ -33,8 +33,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 .Execute()
                 .Should()
                 .Pass()
-                .And.InitializeContextForApp(project.AppDll)
-                .And.ExecuteApplication(sharedState.NativeHostPath, project.AppDll);
+                .And
+                .InitializeContextForApp(project.AppDll)
+                .And
+                .ExecuteApplication(sharedState.NativeHostPath, project.AppDll);
         }
 
         [Fact]
@@ -48,8 +50,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.InitializeContextForApp(project.AppDll)
-                .And.ExecuteApplicationWithException(sharedState.NativeHostPath, project.AppDll);
+                .And
+                .InitializeContextForApp(project.AppDll)
+                .And
+                .ExecuteApplicationWithException(sharedState.NativeHostPath, project.AppDll);
         }
 
         public class SharedTestState : SharedTestStateBase
@@ -100,7 +104,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         {
             return assertion
                 .HaveStdErrContaining($"Launch host: {hostPath}, app: {appPath}")
-                .And.HaveStdOutContaining("Hello World!");
+                .And
+                .HaveStdOutContaining("Hello World!");
         }
 
         public static FluentAssertions.AndConstraint<CommandResultAssertions> ExecuteApplicationWithException(
@@ -121,9 +126,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 // Exception is unhandled by native host on non-Windows systems
                 return constraint.And
                     .ExitWith(Constants.ErrorCode.SIGABRT)
-                    .And.HaveStdErrContaining(
-                        "Unhandled exception. System.Exception: Goodbye World!"
-                    );
+                    .And
+                    .HaveStdErrContaining("Unhandled exception. System.Exception: Goodbye World!");
             }
         }
     }

@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Scripting
 
                     try
                     {
-                        await precedingExecutors[executorIndex++](_submissionStates)
+                        await precedingExecutors[executorIndex++]
+                            (_submissionStates)
                             .ConfigureAwait(continueOnCapturedContext: false);
                     }
                     finally

@@ -302,12 +302,14 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 Name = (string)
                     attributeData.NamedArguments
                         .SingleOrDefault(arg => arg.MemberName == "Name")
-                        .TypedValue.Value,
+                        .TypedValue
+                        .Value,
                 Value = (string)attributeData.ConstructorArguments.Single().Value,
                 TypeName = (string)
                     attributeData.NamedArguments
                         .SingleOrDefault(arg => arg.MemberName == "Type")
-                        .TypedValue.Value,
+                        .TypedValue
+                        .Value,
             };
         }
 

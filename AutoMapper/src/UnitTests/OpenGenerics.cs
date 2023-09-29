@@ -150,7 +150,8 @@ public class GenericMapWithUntypedMap : AutoMapperSpecBase
     public void Should_work() =>
         new Action(() => Mapper.Map(new Source<int>(), null, typeof(Destination<>)))
             .ShouldThrow<ArgumentException>()
-            .Message.ShouldStartWith(
+            .Message
+            .ShouldStartWith(
                 $"Type {typeof(Destination<>).FullName}[T] is a generic type definition"
             );
 }
@@ -516,8 +517,10 @@ public class OpenGenericsValidation : NonValidatingSpecBase
     {
         new Action(Configuration.AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Errors.Single()
-            .UnmappedPropertyNames.Single()
+            .Errors
+            .Single()
+            .UnmappedPropertyNames
+            .Single()
             .ShouldBe("A");
     }
 }
@@ -550,8 +553,10 @@ public class OpenGenericsProfileValidationNonGenericMembers : NonValidatingSpecB
     public void Should_report_unmapped_property() =>
         new Action(() => AssertConfigurationIsValid<MyProfile>())
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Errors.Single()
-            .UnmappedPropertyNames.Single()
+            .Errors
+            .Single()
+            .UnmappedPropertyNames
+            .Single()
             .ShouldBe("A");
 }
 

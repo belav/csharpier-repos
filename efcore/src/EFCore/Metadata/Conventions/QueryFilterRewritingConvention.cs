@@ -126,9 +126,9 @@ public class QueryFilterRewritingConvention : IModelFinalizingConvention
                 if (methodCallExpression.Arguments.Count == 1)
                 {
                     // STET Set method
-                    var entityTypeName = methodCallExpression.Arguments[
-                        0
-                    ].GetConstantValue<string>();
+                    var entityTypeName = methodCallExpression
+                        .Arguments[0]
+                        .GetConstantValue<string>();
                     entityType = (IEntityType?)_model.FindEntityType(entityTypeName);
                 }
                 else

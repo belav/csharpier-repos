@@ -95,9 +95,9 @@ namespace System.Activities.Core.Presentation
                 activityAction
             );
 
-            ModelItem originalActivityActionArgument = originalValue.Properties[
-                PropertyNames.ActionArgument
-            ].Value;
+            ModelItem originalActivityActionArgument = originalValue
+                .Properties[PropertyNames.ActionArgument]
+                .Value;
             if (originalActivityActionArgument != null)
             {
                 Type variableType = typeof(DelegateInArgument<>).MakeGenericType(
@@ -106,22 +106,23 @@ namespace System.Activities.Core.Presentation
                 DelegateInArgument iterationDelegateArgument = (DelegateInArgument)
                     Activator.CreateInstance(variableType);
                 iterationDelegateArgument.Name = (string)
-                    originalActivityActionArgument.Properties[
-                        PropertyNames.NameProperty
-                    ].Value.GetCurrentValue();
-                morphed.Properties[PropertyNames.ActionArgument].SetValue(
-                    iterationDelegateArgument
-                );
+                    originalActivityActionArgument
+                        .Properties[PropertyNames.NameProperty]
+                        .Value
+                        .GetCurrentValue();
+                morphed
+                    .Properties[PropertyNames.ActionArgument]
+                    .SetValue(iterationDelegateArgument);
             }
 
-            ModelItem originalActivityActionHandler = originalValue.Properties[
-                PropertyNames.ActionHandler
-            ].Value;
+            ModelItem originalActivityActionHandler = originalValue
+                .Properties[PropertyNames.ActionHandler]
+                .Value;
             if (originalActivityActionHandler != null)
             {
-                morphed.Properties[PropertyNames.ActionHandler].SetValue(
-                    originalActivityActionHandler
-                );
+                morphed
+                    .Properties[PropertyNames.ActionHandler]
+                    .SetValue(originalActivityActionHandler);
                 originalValue.Properties[PropertyNames.ActionHandler].SetValue(null);
             }
 
@@ -149,9 +150,9 @@ namespace System.Activities.Core.Presentation
                 activityFunc
             );
 
-            ModelItem originalActivityFuncArgument = originalValue.Properties[
-                PropertyNames.ActionArgument
-            ].Value;
+            ModelItem originalActivityFuncArgument = originalValue
+                .Properties[PropertyNames.ActionArgument]
+                .Value;
             if (originalActivityFuncArgument != null)
             {
                 Type argumentType = typeof(DelegateInArgument<>).MakeGenericType(
@@ -160,17 +161,18 @@ namespace System.Activities.Core.Presentation
                 DelegateInArgument newActivityActionArgument = (DelegateInArgument)
                     Activator.CreateInstance(argumentType);
                 newActivityActionArgument.Name = (string)
-                    originalActivityFuncArgument.Properties[
-                        PropertyNames.NameProperty
-                    ].Value.GetCurrentValue();
-                morphed.Properties[PropertyNames.ActionArgument].SetValue(
-                    newActivityActionArgument
-                );
+                    originalActivityFuncArgument
+                        .Properties[PropertyNames.NameProperty]
+                        .Value
+                        .GetCurrentValue();
+                morphed
+                    .Properties[PropertyNames.ActionArgument]
+                    .SetValue(newActivityActionArgument);
             }
 
-            ModelItem originalActivityFuncResult = originalValue.Properties[
-                PropertyNames.ResultProperty
-            ].Value;
+            ModelItem originalActivityFuncResult = originalValue
+                .Properties[PropertyNames.ResultProperty]
+                .Value;
             if (originalActivityFuncResult != null)
             {
                 Type resultType = typeof(DelegateOutArgument<>).MakeGenericType(
@@ -179,20 +181,21 @@ namespace System.Activities.Core.Presentation
                 DelegateOutArgument newActivityActionResult = (DelegateOutArgument)
                     Activator.CreateInstance(resultType);
                 newActivityActionResult.Name = (string)
-                    originalActivityFuncResult.Properties[
-                        PropertyNames.NameProperty
-                    ].Value.GetCurrentValue();
+                    originalActivityFuncResult
+                        .Properties[PropertyNames.NameProperty]
+                        .Value
+                        .GetCurrentValue();
                 morphed.Properties[PropertyNames.ResultProperty].SetValue(newActivityActionResult);
             }
 
-            ModelItem originalActivityActionHandler = originalValue.Properties[
-                PropertyNames.ActionHandler
-            ].Value;
+            ModelItem originalActivityActionHandler = originalValue
+                .Properties[PropertyNames.ActionHandler]
+                .Value;
             if (originalActivityActionHandler != null)
             {
-                morphed.Properties[PropertyNames.ActionHandler].SetValue(
-                    originalActivityActionHandler
-                );
+                morphed
+                    .Properties[PropertyNames.ActionHandler]
+                    .SetValue(originalActivityActionHandler);
                 originalValue.Properties[PropertyNames.ActionHandler].SetValue(null);
             }
 

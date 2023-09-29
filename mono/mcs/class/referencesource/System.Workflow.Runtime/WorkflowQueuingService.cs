@@ -677,15 +677,14 @@ namespace System.Workflow.Runtime
             for (int i = 0; i < qState.SynchronousListeners.Count; ++i)
             {
                 if (qState.SynchronousListeners[i].HandlerDelegate != null)
-                    qState.SynchronousListeners[i].HandlerDelegate(
-                        new WorkflowQueue(this, queueName),
-                        args
-                    );
+                    qState
+                        .SynchronousListeners[i]
+                        .HandlerDelegate(new WorkflowQueue(this, queueName), args);
                 else
-                    qState.SynchronousListeners[i].EventListener.OnEvent(
-                        new WorkflowQueue(this, queueName),
-                        args
-                    );
+                    qState
+                        .SynchronousListeners[i]
+                        .EventListener
+                        .OnEvent(new WorkflowQueue(this, queueName), args);
             }
         }
 

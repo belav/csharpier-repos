@@ -310,7 +310,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                 c.Teams.Include(e => e.Sponsors).Load();
                 c.Teams
                     .Single(t => t.Id == Team.McLaren)
-                    .Sponsors.Remove(c.Sponsors.Single(s => s.Name.Contains("FIA")));
+                    .Sponsors
+                    .Remove(c.Sponsors.Single(s => s.Name.Contains("FIA")));
             },
             (c, ex) =>
             {
@@ -339,7 +340,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
             c.Teams.Include(e => e.Sponsors).Load();
             c.Teams
                 .Single(t => t.Id == Team.McLaren)
-                .Sponsors.Add(c.Sponsors.Single(s => s.Name.Contains("Shell")));
+                .Sponsors
+                .Add(c.Sponsors.Single(s => s.Name.Contains("Shell")));
         }
     }
 

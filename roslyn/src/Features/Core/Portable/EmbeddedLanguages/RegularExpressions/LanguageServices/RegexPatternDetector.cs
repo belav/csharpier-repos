@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         private static readonly Dictionary<string, RegexOptions> s_nameToOption =
             typeof(RegexOptions)
                 .GetTypeInfo()
-                .DeclaredFields.Where(f => f.FieldType == typeof(RegexOptions))
+                .DeclaredFields
+                .Where(f => f.FieldType == typeof(RegexOptions))
                 .ToDictionary(
                     f => f.Name,
                     f => (RegexOptions)f.GetValue(null),

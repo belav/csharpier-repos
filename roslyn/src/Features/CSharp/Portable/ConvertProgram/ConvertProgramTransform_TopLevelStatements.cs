@@ -259,9 +259,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                     // move comments on the method to be on it's first statement.
                     if (methodDeclaration.Body.Statements.Count > 0)
                         statements.AddRange(
-                            methodDeclaration.Body.Statements[0].WithPrependedLeadingTrivia(
-                                methodDeclaration.GetLeadingTrivia()
-                            )
+                            methodDeclaration.Body
+                                .Statements[0]
+                                .WithPrependedLeadingTrivia(methodDeclaration.GetLeadingTrivia())
                         );
 
                     statements.AddRange(methodDeclaration.Body.Statements.Skip(1));

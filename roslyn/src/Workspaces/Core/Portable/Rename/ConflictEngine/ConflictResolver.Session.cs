@@ -876,9 +876,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         foreach (var symbol in newReferencedSymbols)
                         {
                             if (
-                                conflictAnnotation.RenameDeclarationLocationReferences[
-                                    symbolIndex
-                                ].SymbolLocationsCount != symbol.Locations.Length
+                                conflictAnnotation
+                                    .RenameDeclarationLocationReferences[symbolIndex]
+                                    .SymbolLocationsCount != symbol.Locations.Length
                             )
                             {
                                 hasConflict = true;
@@ -894,9 +894,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
                             if (
                                 newLocation != null
-                                && conflictAnnotation.RenameDeclarationLocationReferences[
-                                    symbolIndex
-                                ].IsSourceLocation
+                                && conflictAnnotation
+                                    .RenameDeclarationLocationReferences[symbolIndex]
+                                    .IsSourceLocation
                             )
                             {
                                 // location was in source before, but not after rename
@@ -922,9 +922,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 }
 
                                 if (
-                                    conflictAnnotation.RenameDeclarationLocationReferences[
-                                        symbolIndex
-                                    ].IsOverriddenFromMetadata
+                                    conflictAnnotation
+                                        .RenameDeclarationLocationReferences[symbolIndex]
+                                        .IsOverriddenFromMetadata
                                 )
                                 {
                                     var overridingSymbol = await SymbolFinder
@@ -967,10 +967,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 var newMetadataName = symbol.ToDisplayString(
                                     s_metadataSymbolDisplayFormat
                                 );
-                                var oldMetadataName =
-                                    conflictAnnotation.RenameDeclarationLocationReferences[
-                                        symbolIndex
-                                    ].Name;
+                                var oldMetadataName = conflictAnnotation
+                                    .RenameDeclarationLocationReferences[symbolIndex]
+                                    .Name;
                                 if (
                                     newLocation == null
                                     || newLocation.IsInSource

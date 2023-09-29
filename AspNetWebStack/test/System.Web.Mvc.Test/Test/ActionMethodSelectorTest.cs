@@ -221,7 +221,8 @@ namespace System.Web.Mvc.Test
             // Assert
             Assert.Single(selector.NonAliasedMethods);
 
-            List<MethodInfo> sortedMethods = selector.NonAliasedMethods["foo"]
+            List<MethodInfo> sortedMethods = selector
+                .NonAliasedMethods["foo"]
                 .OrderBy(methodInfo => methodInfo.GetParameters().Length)
                 .ToList();
             Assert.Equal("Foo", sortedMethods[0].Name);

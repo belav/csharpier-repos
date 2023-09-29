@@ -1657,7 +1657,8 @@ namespace System
                         {
                             MdUtf8String name = declaringType
                                 .GetRuntimeModule()
-                                .MetadataImport.GetName(tkProperty);
+                                .MetadataImport
+                                .GetName(tkProperty);
 
                             if (!filter.Match(name))
                                 continue;

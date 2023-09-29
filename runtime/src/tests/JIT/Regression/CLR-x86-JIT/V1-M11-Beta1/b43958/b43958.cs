@@ -55,9 +55,9 @@ namespace Test
                     AA.Static3(ref m_d, ref AA.Static3(ref m_d, ref m_ul)[1000]),
                     ref m_d,
                     new BB().Method2(m_o, m_l, m_ao, m_aul, m_ad, 0.0)[1000].m_anField2,
-                    new BB().Method2(m_o, m_l, m_ao, m_aul, m_ad, 0.0)[(int)m_o].Method2(
-                        new object[7]
-                    ),
+                    new BB()
+                        .Method2(m_o, m_l, m_ao, m_aul, m_ad, 0.0)[(int)m_o]
+                        .Method2(new object[7]),
                     (long)(object)m_f - (39u + (uint)m_n)
                 );
             }

@@ -1385,7 +1385,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && Compilation.IsReadOnlySpanType(namedType)
                     && namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
                         .Single()
-                        .Type.SpecialType is SpecialType.System_Byte;
+                        .Type
+                        .SpecialType is SpecialType.System_Byte;
             }
 #nullable disable
         }

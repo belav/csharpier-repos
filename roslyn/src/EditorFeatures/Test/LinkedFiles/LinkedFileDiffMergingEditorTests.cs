@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.LinkedFiles
                 var document = context.Document;
                 var linkedDocument = document.Project.Solution.Projects
                     .Single(p => p != document.Project)
-                    .Documents.Single();
+                    .Documents
+                    .Single();
 
                 var newSolution = document.Project.Solution
                     .WithDocumentText(

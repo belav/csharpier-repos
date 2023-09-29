@@ -70,21 +70,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseTupleSwap
         )
         {
             var localDeclarationStatement = (LocalDeclarationStatementSyntax)
-                diagnostic.AdditionalLocations[0].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
             // `expr_a = expr_b`;
             var firstAssignmentStatement = (ExpressionStatementSyntax)
-                diagnostic.AdditionalLocations[1].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                diagnostic
+                    .AdditionalLocations[1]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
             var secondAssignmentStatment = (ExpressionStatementSyntax)
-                diagnostic.AdditionalLocations[2].FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken
-                );
+                diagnostic
+                    .AdditionalLocations[2]
+                    .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
             editor.RemoveNode(firstAssignmentStatement);
             editor.RemoveNode(secondAssignmentStatment);

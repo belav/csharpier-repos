@@ -3529,24 +3529,23 @@ namespace System.Windows.Forms
 
                         if (is_newrow)
                         {
-                            grid.CurrentTableStyle.GridColumnStyles[column].PaintNewRow(
-                                g,
-                                rect_cell,
-                                colBackBrush,
-                                colForeBrush
-                            );
+                            grid.CurrentTableStyle
+                                .GridColumnStyles[column]
+                                .PaintNewRow(g, rect_cell, colBackBrush, colForeBrush);
                         }
                         else
                         {
-                            grid.CurrentTableStyle.GridColumnStyles[column].Paint(
-                                g,
-                                rect_cell,
-                                grid.ListManager,
-                                row,
-                                colBackBrush,
-                                colForeBrush,
-                                grid.RightToLeft == RightToLeft.Yes
-                            );
+                            grid.CurrentTableStyle
+                                .GridColumnStyles[column]
+                                .Paint(
+                                    g,
+                                    rect_cell,
+                                    grid.ListManager,
+                                    row,
+                                    colBackBrush,
+                                    colForeBrush,
+                                    grid.RightToLeft == RightToLeft.Yes
+                                );
                         }
 
                         current_clip.Dispose();

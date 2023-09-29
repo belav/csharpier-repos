@@ -130,7 +130,8 @@ namespace Internal.TypeSystem
 
             MethodSignatureFlags unmanagedCallConv = method
                 .GetPInvokeMethodMetadata()
-                .Flags.UnmanagedCallingConvention;
+                .Flags
+                .UnmanagedCallingConvention;
             if (unmanagedCallConv != MethodSignatureFlags.None)
             {
                 Debug.Assert(

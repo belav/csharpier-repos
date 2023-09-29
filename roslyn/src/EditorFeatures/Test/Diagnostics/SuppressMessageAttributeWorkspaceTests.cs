@@ -89,7 +89,8 @@ namespace System.Diagnostics.CodeAnalysis
                         workspace.Projects.Single().Id,
                         workspace.Projects
                             .Single()
-                            .MetadataReferences.Append(_unconditionalSuppressMessageRef.Value)
+                            .MetadataReferences
+                            .Append(_unconditionalSuppressMessageRef.Value)
                     )
             );
 

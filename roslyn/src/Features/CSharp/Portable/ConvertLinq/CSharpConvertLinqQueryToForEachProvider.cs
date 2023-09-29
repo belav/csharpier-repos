@@ -767,7 +767,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 var typeSyntax = generateTypeFromExpression
                     ? _semanticModel
                         .GetTypeInfo(expression, _cancellationToken)
-                        .ConvertedType.GenerateTypeSyntax()
+                        .ConvertedType
+                        .GenerateTypeSyntax()
                     : VarNameIdentifier;
                 return SyntaxFactory
                     .LocalDeclarationStatement(
@@ -1271,7 +1272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     if (
                         _semanticModel
                             .GetTypeInfo(selectClause.Expression, _cancellationToken)
-                            .Type.ContainsAnonymousType()
+                            .Type
+                            .ContainsAnonymousType()
                     )
                     {
                         return false;

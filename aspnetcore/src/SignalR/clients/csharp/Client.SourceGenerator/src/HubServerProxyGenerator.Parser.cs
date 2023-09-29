@@ -264,12 +264,12 @@ internal partial class HubServerProxyGenerator
             sourceGenerationSpec.GetterClassName = getProxyClassSymbol.Name;
             sourceGenerationSpec.GetterNamespace =
                 getProxyClassSymbol.ContainingNamespace.ToString();
-            sourceGenerationSpec.GetterTypeParameterName = getProxyMethodSymbol.TypeParameters[
-                0
-            ].Name;
-            sourceGenerationSpec.GetterHubConnectionParameterName = getProxyMethodSymbol.Parameters[
-                0
-            ].Name;
+            sourceGenerationSpec.GetterTypeParameterName = getProxyMethodSymbol
+                .TypeParameters[0]
+                .Name;
+            sourceGenerationSpec.GetterHubConnectionParameterName = getProxyMethodSymbol
+                .Parameters[0]
+                .Name;
 
             var hubSymbols = new Dictionary<string, (ITypeSymbol, MemberAccessExpressionSyntax)>();
 

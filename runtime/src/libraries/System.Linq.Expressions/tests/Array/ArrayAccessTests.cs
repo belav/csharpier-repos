@@ -23,7 +23,8 @@ namespace System.Linq.Expressions.Tests
             Type arrayType = typeof(int).MakeArrayType(1);
             ConstructorInfo arrayCtor = arrayType
                 .GetTypeInfo()
-                .DeclaredConstructors.Single(ctor => ctor.GetParameters().Length == 2);
+                .DeclaredConstructors
+                .Single(ctor => ctor.GetParameters().Length == 2);
             var arr = (System.Array)arrayCtor.Invoke(new object[] { 1, 1 });
             ConstantExpression c = Expression.Constant(arr);
             IndexExpression e = Expression.ArrayAccess(c, Expression.Constant(1));
@@ -49,7 +50,8 @@ namespace System.Linq.Expressions.Tests
             Type arrayType = typeof(int).MakeArrayType(1);
             ConstructorInfo arrayCtor = arrayType
                 .GetTypeInfo()
-                .DeclaredConstructors.Single(ctor => ctor.GetParameters().Length == 2);
+                .DeclaredConstructors
+                .Single(ctor => ctor.GetParameters().Length == 2);
             var arr = (System.Array)arrayCtor.Invoke(new object[] { 1, 1 });
             arr.SetValue(42, 1);
             ConstantExpression c = Expression.Constant(arr);

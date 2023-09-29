@@ -954,22 +954,26 @@ public partial class Entity
                 Assert.True(
                     entityType
                         .FindNavigation("RequiredNavigationWithReferenceForeignKey")!
-                        .ForeignKey.IsRequired
+                        .ForeignKey
+                        .IsRequired
                 );
                 Assert.False(
                     entityType
                         .FindNavigation("OptionalNavigationWithReferenceForeignKey")!
-                        .ForeignKey.IsRequired
+                        .ForeignKey
+                        .IsRequired
                 );
                 Assert.True(
                     entityType
                         .FindNavigation("RequiredNavigationWithValueForeignKey")!
-                        .ForeignKey.IsRequired
+                        .ForeignKey
+                        .IsRequired
                 );
                 Assert.False(
                     entityType
                         .FindNavigation("OptionalNavigationWithValueForeignKey")!
-                        .ForeignKey.IsRequired
+                        .ForeignKey
+                        .IsRequired
                 );
             }
         );
@@ -1078,22 +1082,26 @@ public partial class Entity
                 Assert.True(
                     entityType
                         .FindNavigation("RequiredNavigationWithReferenceForeignKey")!
-                        .ForeignKey.IsRequired
+                        .ForeignKey
+                        .IsRequired
                 );
                 Assert.False(
                     entityType
                         .FindNavigation("OptionalNavigationWithReferenceForeignKey")!
-                        .ForeignKey.IsRequired
+                        .ForeignKey
+                        .IsRequired
                 );
                 Assert.True(
                     entityType
                         .FindNavigation("RequiredNavigationWithValueForeignKey")!
-                        .ForeignKey.IsRequired
+                        .ForeignKey
+                        .IsRequired
                 );
                 Assert.False(
                     entityType
                         .FindNavigation("OptionalNavigationWithValueForeignKey")!
-                        .ForeignKey.IsRequired
+                        .ForeignKey
+                        .IsRequired
                 );
             }
         );

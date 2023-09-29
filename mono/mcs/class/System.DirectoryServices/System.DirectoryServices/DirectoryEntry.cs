@@ -653,9 +653,9 @@ namespace System.DirectoryServices
             PropertyCollection pcoll = new PropertyCollection();
             foreach (string propertyName in result.Properties.PropertyNames)
             {
-                System.Collections.IEnumerator enumerator = result.Properties[
-                    propertyName
-                ].GetEnumerator();
+                System.Collections.IEnumerator enumerator = result
+                    .Properties[propertyName]
+                    .GetEnumerator();
                 if (enumerator != null)
                     while (enumerator.MoveNext())
                         if (String.Compare(propertyName, "ADsPath", true) != 0)

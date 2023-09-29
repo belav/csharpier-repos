@@ -1655,9 +1655,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                 break;
                         }
 
-                        var expectedTypeName = checkAttrInAssembly.ConstructorArguments[
-                            1
-                        ].Value.ToString()!;
+                        var expectedTypeName = checkAttrInAssembly
+                            .ConstructorArguments[1]
+                            .Value
+                            .ToString()!;
                         TypeDefinition? linkedType = linkedAssembly.MainModule.GetType(
                             expectedTypeName
                         );
@@ -1982,9 +1983,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             var originalType = GetOriginalTypeFromInAssemblyAttribute(inAssemblyAttribute);
 
-            var interfaceAssemblyName = inAssemblyAttribute.ConstructorArguments[
-                2
-            ].Value.ToString()!;
+            var interfaceAssemblyName = inAssemblyAttribute
+                .ConstructorArguments[2]
+                .Value
+                .ToString()!;
             var interfaceType = inAssemblyAttribute.ConstructorArguments[3].Value;
 
             var originalInterface = GetOriginalTypeFromInAssemblyAttribute(
@@ -2020,9 +2022,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             var originalType = GetOriginalTypeFromInAssemblyAttribute(inAssemblyAttribute);
 
-            var interfaceAssemblyName = inAssemblyAttribute.ConstructorArguments[
-                2
-            ].Value.ToString()!;
+            var interfaceAssemblyName = inAssemblyAttribute
+                .ConstructorArguments[2]
+                .Value
+                .ToString()!;
             var interfaceType = inAssemblyAttribute.ConstructorArguments[3].Value;
 
             var originalInterface = GetOriginalTypeFromInAssemblyAttribute(

@@ -81,7 +81,9 @@ internal readonly struct CodeFixOptionsProvider
         =>
         _fallbackOptions
             .GetOptions(_languageServices.LanguageServices)
-            .CleanupOptions.FormattingOptions.LineFormatting;
+            .CleanupOptions
+            .FormattingOptions
+            .LineFormatting;
 #endif
 
     private SyntaxFormattingOptions? FallbackSyntaxFormattingOptions
@@ -91,7 +93,8 @@ internal readonly struct CodeFixOptionsProvider
         =>
         _fallbackOptions
             .GetOptions(_languageServices.LanguageServices)
-            .CleanupOptions.FormattingOptions;
+            .CleanupOptions
+            .FormattingOptions;
 #endif
 
     private SyntaxFormattingOptions.CommonOptions FallbackCommonSyntaxFormattingOptions
@@ -102,7 +105,9 @@ internal readonly struct CodeFixOptionsProvider
         =>
         _fallbackOptions
             .GetOptions(_languageServices.LanguageServices)
-            .CleanupOptions.FormattingOptions.Common;
+            .CleanupOptions
+            .FormattingOptions
+            .Common;
 #endif
 }
 

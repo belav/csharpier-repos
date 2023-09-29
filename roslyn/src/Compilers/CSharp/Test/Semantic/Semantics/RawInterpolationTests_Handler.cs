@@ -6532,7 +6532,8 @@ class C
         var sParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod("M")
-            .Parameters.Single();
+            .Parameters
+            .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
             sParam.GetAttributes().Single().AttributeClass.ToTestDisplayString()
@@ -6692,7 +6693,8 @@ class C
         var cParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod("M")
-            .Parameters.Single();
+            .Parameters
+            .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
             cParam.GetAttributes().Single().AttributeClass.ToTestDisplayString()
@@ -6832,7 +6834,8 @@ class C
         var cParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod("M")
-            .Parameters.Skip(1)
+            .Parameters
+            .Skip(1)
             .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -6981,7 +6984,8 @@ class C
         var cParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod("M")
-            .Parameters.Skip(1)
+            .Parameters
+            .Skip(1)
             .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -7121,7 +7125,8 @@ class C
         var cParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod("M")
-            .Parameters.Skip(1)
+            .Parameters
+            .Skip(1)
             .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -7261,7 +7266,8 @@ class C
         var cParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod("M")
-            .Parameters.Skip(1)
+            .Parameters
+            .Skip(1)
             .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -7546,7 +7552,8 @@ class C
         var cParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod("M")
-            .Parameters.Single();
+            .Parameters
+            .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
             cParam.GetAttributes().Single().AttributeClass.ToTestDisplayString()
@@ -7692,7 +7699,8 @@ class C
         var cParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod(".ctor")
-            .Parameters.Single();
+            .Parameters
+            .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
             cParam.GetAttributes().Single().AttributeClass.ToTestDisplayString()
@@ -8152,7 +8160,8 @@ public class C
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(1)
+                .Parameters
+                .Skip(1)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -8256,7 +8265,8 @@ public partial struct CustomHandler
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(1)
+                .Parameters
+                .Skip(1)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -8316,7 +8326,8 @@ public partial struct CustomHandler
         var cParam = comp.SourceModule.GlobalNamespace
             .GetTypeMember("C")
             .GetMethod("M")
-            .Parameters.Skip(1)
+            .Parameters
+            .Skip(1)
             .Single();
         AssertEx.Equal(
             "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -8699,7 +8710,8 @@ public partial struct CustomHandler
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(1)
+                .Parameters
+                .Skip(1)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -8800,7 +8812,8 @@ literal:2"
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(1)
+                .Parameters
+                .Skip(1)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -8965,7 +8978,8 @@ literal:literal
             var cParam = verifier.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -9233,7 +9247,8 @@ o in M
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(3)
+                .Parameters
+                .Skip(3)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -9393,7 +9408,8 @@ literal:literal
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -9579,7 +9595,8 @@ literal:literal
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -9725,7 +9742,8 @@ literal:literal
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -9831,7 +9849,8 @@ public struct CustomHandler
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -9934,7 +9953,8 @@ public struct CustomHandler
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -10085,7 +10105,8 @@ literal:literal
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetIndexer<PropertySymbol>("Item")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -10236,7 +10257,8 @@ literal:literal
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetIndexer<PropertySymbol>("Item")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -10397,7 +10419,8 @@ literal:literal
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(2)
+                .Parameters
+                .Skip(2)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
@@ -10768,7 +10791,8 @@ public partial struct CustomHandler
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Single();
+                .Parameters
+                .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
                 cParam.GetAttributes().Single().AttributeClass.ToTestDisplayString()
@@ -10877,7 +10901,8 @@ public partial struct CustomHandler
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Single();
+                .Parameters
+                .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",
                 cParam.GetAttributes().Single().AttributeClass.ToTestDisplayString()
@@ -11416,7 +11441,8 @@ literal:literal
             var cParam = module.GlobalNamespace
                 .GetTypeMember("C")
                 .GetMethod("M")
-                .Parameters.Skip(1)
+                .Parameters
+                .Skip(1)
                 .Single();
             AssertEx.Equal(
                 "System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute",

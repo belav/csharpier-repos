@@ -277,9 +277,11 @@ namespace System.Reflection.Metadata.Decoding.Tests
                             ) // typeof operator used for named parameter, like [Test(TypeField = typeof(string))], check if it is expected
                             {
                                 Assert.Contains(
-                                    reflectionAttribute.NamedArguments[
-                                        j
-                                    ].TypedValue.Value.ToString(),
+                                    reflectionAttribute
+                                        .NamedArguments[j]
+                                        .TypedValue
+                                        .Value
+                                        .ToString(),
                                     arguments.Value.ToString()
                                 );
                             }

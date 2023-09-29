@@ -468,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         )
         {
             return node.GetAncestorOrThis<CompilationUnitSyntax>()!
-                .Usings.Concat(
+                .Usings
+                .Concat(
                     node.GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>()
                         .Reverse()
                         .SelectMany(n => n.Usings)
@@ -480,7 +481,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         )
         {
             return node.GetAncestorOrThis<CompilationUnitSyntax>()!
-                .Externs.Concat(
+                .Externs
+                .Concat(
                     node.GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>()
                         .Reverse()
                         .SelectMany(n => n.Externs)

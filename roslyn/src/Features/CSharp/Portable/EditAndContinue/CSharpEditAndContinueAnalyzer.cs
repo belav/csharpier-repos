@@ -238,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     && (
                         model
                             .GetSymbolInfo(nameSyntax, cancellationToken)
-                            .Symbol?.Equals(localOrParameter) ?? false
+                            .Symbol
+                            ?.Equals(localOrParameter) ?? false
                     )
                 select node;
         }
@@ -2547,9 +2548,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             switch (lambda.Kind())
             {
                 case SyntaxKind.ParenthesizedLambdaExpression:
-                    return ((ParenthesizedLambdaExpressionSyntax)lambda).ParameterList.Parameters[
-                        ordinal
-                    ]
+                    return ((ParenthesizedLambdaExpressionSyntax)lambda)
+                        .ParameterList
+                        .Parameters[ordinal]
                         .Identifier
                         .Span;
 
@@ -2559,9 +2560,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 case SyntaxKind.AnonymousMethodExpression:
                     // since we are given a parameter ordinal there has to be a parameter list:
-                    return ((AnonymousMethodExpressionSyntax)lambda).ParameterList!.Parameters[
-                        ordinal
-                    ]
+                    return ((AnonymousMethodExpressionSyntax)lambda)
+                        .ParameterList!
+                        .Parameters[ordinal]
                         .Identifier
                         .Span;
 

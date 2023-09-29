@@ -308,21 +308,24 @@ public class RoutePatternFactoryTest
                             "foo",
                             Assert
                                 .IsType<RegexRouteConstraint>(c.ParameterPolicy)
-                                .Constraint.ToString()
+                                .Constraint
+                                .ToString()
                         ),
                     c =>
                         Assert.Equal(
                             "bar",
                             Assert
                                 .IsType<RegexRouteConstraint>(c.ParameterPolicy)
-                                .Constraint.ToString()
+                                .Constraint
+                                .ToString()
                         ),
                     c =>
                         Assert.Equal(
                             "^(baz)$",
                             Assert
                                 .IsType<RegexRouteConstraint>(c.ParameterPolicy)
-                                .Constraint.ToString()
+                                .Constraint
+                                .ToString()
                         )
                 );
             }
@@ -374,7 +377,8 @@ public class RoutePatternFactoryTest
                             "^(fizz)$",
                             Assert
                                 .IsType<RegexRouteConstraint>(c.ParameterPolicy)
-                                .Constraint.ToString()
+                                .Constraint
+                                .ToString()
                         )
                 );
             },
@@ -388,21 +392,24 @@ public class RoutePatternFactoryTest
                             "foo",
                             Assert
                                 .IsType<RegexRouteConstraint>(c.ParameterPolicy)
-                                .Constraint.ToString()
+                                .Constraint
+                                .ToString()
                         ),
                     c =>
                         Assert.Equal(
                             "bar",
                             Assert
                                 .IsType<RegexRouteConstraint>(c.ParameterPolicy)
-                                .Constraint.ToString()
+                                .Constraint
+                                .ToString()
                         ),
                     c =>
                         Assert.Equal(
                             "^(baz)$",
                             Assert
                                 .IsType<RegexRouteConstraint>(c.ParameterPolicy)
-                                .Constraint.ToString()
+                                .Constraint
+                                .ToString()
                         ),
                     c => Assert.Equal("int", c.Content)
                 );

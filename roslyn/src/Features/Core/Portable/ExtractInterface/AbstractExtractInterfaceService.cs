@@ -516,7 +516,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
 
                 unformattedSolution = document
                     .WithSyntaxRoot(editor.GetChangedRoot())
-                    .Project.Solution;
+                    .Project
+                    .Solution;
 
                 // Only update the first instance of the typedeclaration,
                 // since it's not needed in all declarations

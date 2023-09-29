@@ -1857,9 +1857,9 @@ namespace System.Xml.Schema
                 for (int i = 0; i < _CurState._NextStates.Length; i++)
                 {
                     if (
-                        _SchemaNames.TokenToQName[
-                            (int)S_SchemaEntries[_CurState._NextStates[i]]._Name
-                        ].Equals(qname)
+                        _SchemaNames
+                            .TokenToQName[(int)S_SchemaEntries[_CurState._NextStates[i]]._Name]
+                            .Equals(qname)
                     )
                     {
                         _NextState = S_SchemaEntries[_CurState._NextStates[i]];

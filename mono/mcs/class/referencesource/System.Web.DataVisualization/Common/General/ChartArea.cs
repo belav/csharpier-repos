@@ -2397,10 +2397,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     segmentIndex++
                 )
                 {
-                    currentAxis.ScaleSegments[segmentIndex].PaintBreakLine(
-                        graph,
-                        currentAxis.ScaleSegments[segmentIndex + 1]
-                    );
+                    currentAxis
+                        .ScaleSegments[segmentIndex]
+                        .PaintBreakLine(graph, currentAxis.ScaleSegments[segmentIndex + 1]);
                 }
             }
 
@@ -3163,9 +3162,10 @@ namespace System.Web.UI.DataVisualization.Charting
                                     {
                                         if (
                                             series.ChartTypeName
-                                            == this.Common.DataManager.Series[
-                                                curentSeriesIndex
-                                            ].ChartTypeName
+                                            == this.Common
+                                                .DataManager
+                                                .Series[curentSeriesIndex]
+                                                .ChartTypeName
                                         )
                                         {
                                             if (otherChartTypeFound)
@@ -3177,12 +3177,14 @@ namespace System.Web.UI.DataVisualization.Charting
                                         else
                                         {
                                             if (
-                                                this.Common.DataManager.Series[
-                                                    curentSeriesIndex
-                                                ].ChartType == SeriesChartType.Area
-                                                || this.Common.DataManager.Series[
-                                                    curentSeriesIndex
-                                                ].ChartType == SeriesChartType.SplineArea
+                                                this.Common
+                                                    .DataManager
+                                                    .Series[curentSeriesIndex]
+                                                    .ChartType == SeriesChartType.Area
+                                                || this.Common
+                                                    .DataManager
+                                                    .Series[curentSeriesIndex]
+                                                    .ChartType == SeriesChartType.SplineArea
                                             )
                                             {
                                                 otherChartTypeFound = true;

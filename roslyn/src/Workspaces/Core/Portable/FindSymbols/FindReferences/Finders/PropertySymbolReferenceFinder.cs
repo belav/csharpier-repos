@@ -81,9 +81,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 {
                     if (constructor.DeclaringSyntaxReferences.Length > 0)
                     {
-                        var constructorSyntax = constructor.DeclaringSyntaxReferences[0].GetSyntax(
-                            cancellationToken
-                        );
+                        var constructorSyntax = constructor
+                            .DeclaringSyntaxReferences[0]
+                            .GetSyntax(cancellationToken);
                         if (containingTypeSyntaxes.Contains(constructorSyntax))
                         {
                             // OK found the primary construct.  Try to find a parameter that corresponds to this property.

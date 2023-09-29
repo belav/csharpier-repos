@@ -537,7 +537,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // When in doubt, we'll complain on the right side if it's a literal
                 bool useRight =
                     (leftComplaint && rightComplaint) ? rightIsTupleLiteral : rightComplaint;
-                Location location = ((BoundTupleExpression)(useRight ? right : left)).Arguments[i]
+                Location location = ((BoundTupleExpression)(useRight ? right : left))
+                    .Arguments[i]
                     .Syntax
                     .Parent
                     .Location;

@@ -403,7 +403,9 @@ namespace System.Net.Security.Tests
                     // process, because there's no OCSP data.
                     Assert.Equal(SslPolicyErrors.RemoteCertificateChainErrors, sslPolicyErrors);
 
-                    X509ChainStatusFlags[] flags = chain.ChainElements[0].ChainElementStatus
+                    X509ChainStatusFlags[] flags = chain
+                        .ChainElements[0]
+                        .ChainElementStatus
                         .Select(cs => cs.Status)
                         .ToArray();
                     Assert.Contains(X509ChainStatusFlags.RevocationStatusUnknown, flags);
@@ -414,7 +416,9 @@ namespace System.Net.Security.Tests
                     // say the chain isn't happy.
                     Assert.Equal(SslPolicyErrors.RemoteCertificateChainErrors, sslPolicyErrors);
 
-                    X509ChainStatusFlags[] flags = chain.ChainElements[0].ChainElementStatus
+                    X509ChainStatusFlags[] flags = chain
+                        .ChainElements[0]
+                        .ChainElementStatus
                         .Select(cs => cs.Status)
                         .ToArray();
                     Assert.Contains(X509ChainStatusFlags.Revoked, flags);

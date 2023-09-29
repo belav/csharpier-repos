@@ -578,7 +578,8 @@ public class When_mapping_to_readonly_property_as_IEnumerable_and_existing_desti
     {
         Mapper
             .Map(new Source(), new Destination())
-            .MyCollection.SequenceEqual(new[] { "one", "two" })
+            .MyCollection
+            .SequenceEqual(new[] { "one", "two" })
             .ShouldBeTrue();
     }
 }
@@ -603,8 +604,10 @@ public class When_mapping_to_readonly_collection_without_setter : AutoMapperSpec
     public void Should_fail() =>
         new Action(() => Mapper.Map(new Source(), new Destination()))
             .ShouldThrow<AutoMapperMappingException>()
-            .InnerException.ShouldBeOfType<NotSupportedException>()
-            .Message.ShouldBe("Collection is read-only.");
+            .InnerException
+            .ShouldBeOfType<NotSupportedException>()
+            .Message
+            .ShouldBe("Collection is read-only.");
 }
 
 public class When_mapping_to_readonly_property_UseDestinationValue : AutoMapperSpecBase
@@ -640,7 +643,8 @@ public class When_mapping_to_readonly_property_UseDestinationValue : AutoMapperS
     {
         Mapper
             .Map<Destination>(new Source())
-            .MyCollection.SequenceEqual(new[] { "one", "two" })
+            .MyCollection
+            .SequenceEqual(new[] { "one", "two" })
             .ShouldBeTrue();
     }
 }
@@ -679,7 +683,8 @@ public class When_mapping_to_readonly_property_as_IEnumerable : AutoMapperSpecBa
     {
         Mapper
             .Map<Destination>(new Source())
-            .MyCollection.SequenceEqual(new[] { "one", "two" })
+            .MyCollection
+            .SequenceEqual(new[] { "one", "two" })
             .ShouldBeTrue();
     }
 }
@@ -722,7 +727,8 @@ public class When_mapping_from_struct_collection : AutoMapperSpecBase
     {
         Mapper
             .Map<DestItem>(new SourceItem { ShipsTo = new MyCollection() })
-            .ShipsTo.SequenceEqual(Enumerable.Range(1, 10))
+            .ShipsTo
+            .SequenceEqual(Enumerable.Range(1, 10))
             .ShouldBeTrue();
     }
 }
@@ -752,7 +758,8 @@ public class When_mapping_to_custom_collection_type : AutoMapperSpecBase
         var items = Enumerable.Range(1, 10).Select(i => i.ToString()).ToArray();
         Mapper
             .Map<DestItem>(new SourceItem { ShipsTo = new List<string>(items) })
-            .ShipsTo.Cast<string>()
+            .ShipsTo
+            .Cast<string>()
             .SequenceEqual(items)
             .ShouldBeTrue();
     }

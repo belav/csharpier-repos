@@ -135,7 +135,8 @@ namespace System.Reflection.Emit
             {
                 methodBuilder
                     .GetILGenerator()
-                    .m_ScopeTree.AddLocalSymInfoToCurrentScope(
+                    .m_ScopeTree
+                    .AddLocalSymInfoToCurrentScope(
                         name,
                         mungedSig,
                         m_localIndex,

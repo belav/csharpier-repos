@@ -334,7 +334,8 @@ namespace ILCompiler.DependencyAnalysis
 
                 int hashCode = method
                     .GetCanonMethodTarget(CanonicalFormKind.Specific)
-                    .OwningType.GetHashCode();
+                    .OwningType
+                    .GetHashCode();
                 typeMapHashTable.Append((uint)hashCode, hashTableSection.Place(vertex));
             }
 

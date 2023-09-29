@@ -321,8 +321,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(expectedOutput)
-                .And.HaveStdErrContaining("https://aka.ms/dotnet/app-launch-failed");
+                .And
+                .HaveStdErrContaining(expectedOutput)
+                .And
+                .HaveStdErrContaining("https://aka.ms/dotnet/app-launch-failed");
         }
 
         private CommandResult RunTest(

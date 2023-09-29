@@ -200,7 +200,9 @@ namespace System.Windows.Forms.Design
                 {
                     this.Control.SuspendLayout();
                     // set parent instead of controls.Add so that it gets serialized for Undo/Redo
-                    TypeDescriptor.GetProperties(control)["Parent"].SetValue(control, this.Control);
+                    TypeDescriptor
+                        .GetProperties(control)["Parent"]
+                        .SetValue(control, this.Control);
                     this.Control.SuspendLayout();
 
                     if (hasLocation)

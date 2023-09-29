@@ -299,7 +299,9 @@ internal sealed class GenericWebHostBuilder
     {
         var startupAssemblyName = startupFactory
             .GetMethodInfo()
-            .DeclaringType!.Assembly.GetName()
+            .DeclaringType!
+            .Assembly
+            .GetName()
             .Name;
 
         UseSetting(WebHostDefaults.ApplicationKey, startupAssemblyName);

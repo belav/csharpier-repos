@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             using var testWorkspace = CreateWithLines("");
             var options = await testWorkspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single()
+                .Documents
+                .Single()
                 .GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
 
             Assert.Equal(FormattingOptions.UseTabs.DefaultValue, options.UseTabs);
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             using var testWorkspace = CreateWithLines("class C", "{", "\tvoid M() { }", "}");
             var options = await testWorkspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single()
+                .Documents
+                .Single()
                 .GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
 
             // the indentation is only inferred by a command handler:
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formatting
             using var testWorkspace = CreateWithLines("class C", "{", "    void M() { }", "}");
             var options = await testWorkspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single()
+                .Documents
+                .Single()
                 .GetLineFormattingOptionsAsync(testWorkspace.GlobalOptions, CancellationToken.None);
 
             Assert.False(options.UseTabs);

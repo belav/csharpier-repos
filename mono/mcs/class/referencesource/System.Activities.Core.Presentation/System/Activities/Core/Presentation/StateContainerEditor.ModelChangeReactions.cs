@@ -32,9 +32,9 @@ namespace System.Activities.Core.Presentation
                     {
                         if (deleted != null)
                         {
-                            ModelItemCollection transitions = deleted.Properties[
-                                StateDesigner.TransitionsPropertyName
-                            ].Collection;
+                            ModelItemCollection transitions = deleted
+                                .Properties[StateDesigner.TransitionsPropertyName]
+                                .Collection;
                             if (this.listenedTransitionCollections.Contains(transitions))
                             {
                                 transitions.CollectionChanged -=
@@ -60,9 +60,9 @@ namespace System.Activities.Core.Presentation
                     {
                         if (added != null)
                         {
-                            ModelItemCollection transitions = added.Properties[
-                                StateDesigner.TransitionsPropertyName
-                            ].Collection;
+                            ModelItemCollection transitions = added
+                                .Properties[StateDesigner.TransitionsPropertyName]
+                                .Collection;
                             if (!this.listenedTransitionCollections.Contains(transitions))
                             {
                                 transitions.CollectionChanged +=
@@ -216,9 +216,9 @@ namespace System.Activities.Core.Presentation
                                 foreach (ModelItem transition in this.transitionModelItemsAdded)
                                 {
                                     if (
-                                        transition.Properties[
-                                            TransitionDesigner.ToPropertyName
-                                        ].Value != null
+                                        transition
+                                            .Properties[TransitionDesigner.ToPropertyName]
+                                            .Value != null
                                     )
                                     {
                                         this.AddTransitionVisual(transition);
@@ -258,9 +258,9 @@ namespace System.Activities.Core.Presentation
                     this.Remove(GetAttachedConnectors(this.initialNode)[0]);
                 }
                 // Add the new link if the new initial state is not null
-                ModelItem initialStateModelItem = this.ModelItem.Properties[
-                    StateMachineDesigner.InitialStatePropertyName
-                ].Value;
+                ModelItem initialStateModelItem = this.ModelItem
+                    .Properties[StateMachineDesigner.InitialStatePropertyName]
+                    .Value;
                 if (initialStateModelItem != null)
                 {
                     // We need to wait until after the state visuals are updated

@@ -278,7 +278,8 @@ namespace ILCompiler
                                     accessedMethod.Kind == HandleKind.MemberReference
                                     && _metadataReader
                                         .GetMemberReference((MemberReferenceHandle)accessedMethod)
-                                        .Parent.Kind == HandleKind.TypeSpecification
+                                        .Parent
+                                        .Kind == HandleKind.TypeSpecification
                                 )
                             )
                             {

@@ -520,7 +520,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 decl.Ancestors()
                     .OfType<VariableDeclaratorSyntax>()
                     .First()
-                    .ArgumentList.Contains(decl)
+                    .ArgumentList
+                    .Contains(decl)
             );
         }
 

@@ -184,9 +184,9 @@ namespace System.Workflow.Activities
                     return this.ActiveDesigner.Activity;
 
                 if (this.DesignersParser.Ordered.Count > 0)
-                    return this.DesignersParser.Ordered[
-                        this.DesignersParser.Ordered.Count - 1
-                    ].Activity;
+                    return this.DesignersParser
+                        .Ordered[this.DesignersParser.Ordered.Count - 1]
+                        .Activity;
 
                 return null;
             }

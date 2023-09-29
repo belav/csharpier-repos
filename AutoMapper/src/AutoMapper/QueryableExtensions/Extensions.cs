@@ -139,7 +139,8 @@ public static class Extensions
     ) =>
         configuration
             .Internal()
-            .ProjectionBuilder.GetProjection(
+            .ProjectionBuilder
+            .GetProjection(
                 source.ElementType,
                 destinationType,
                 parameters,

@@ -543,9 +543,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
                 // find a referenced assembly with the same source identity (modulo assembly version patterns):
                 foreach (
-                    var otherReferencedAssembly in _otherAssembly.Modules[
-                        0
-                    ].ReferencedAssemblySymbols
+                    var otherReferencedAssembly in _otherAssembly
+                        .Modules[0]
+                        .ReferencedAssemblySymbols
                 )
                 {
                     if (IdentityEqualIgnoringVersionWildcard(assembly, otherReferencedAssembly))

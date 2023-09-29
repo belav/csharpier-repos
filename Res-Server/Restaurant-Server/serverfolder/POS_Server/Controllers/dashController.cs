@@ -1034,10 +1034,12 @@ namespace POS_Server.Controllers
                                 ;
                                 newrow.itemName = entity1.itemsUnits
                                     .Find(row.itemUnitId)
-                                    .items.name;
+                                    .items
+                                    .name;
                                 newrow.unitName = entity1.itemsUnits
                                     .Find(row.itemUnitId)
-                                    .units.name;
+                                    .units
+                                    .name;
 
                                 list.Add(newrow);
                             }

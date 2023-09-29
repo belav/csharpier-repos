@@ -8867,7 +8867,8 @@ public class C
 
             CreateCompilation(source)
                 .Emit(new System.IO.MemoryStream())
-                .Diagnostics.Verify(
+                .Diagnostics
+                .Verify(
                     // (7,51): error CS4013: Instance of type 'System.RuntimeArgumentHandle' cannot be used inside an anonymous function, query expression, iterator block or async method
                     //   static IEnumerable<int> M(RuntimeArgumentHandle h1) // Error: hoisted to field
                     Diagnostic(ErrorCode.ERR_SpecialByRefInLambda, "h1")

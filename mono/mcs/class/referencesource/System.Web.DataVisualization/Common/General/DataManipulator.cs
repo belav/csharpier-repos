@@ -2538,15 +2538,15 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                         else if (functions[0].function == GroupingFunction.First)
                         {
-                            pointTempValues[0] = inputSeries[seriesIndex].Points[
-                                intervalFirstIndex
-                            ].XValue;
+                            pointTempValues[0] = inputSeries[seriesIndex]
+                                .Points[intervalFirstIndex]
+                                .XValue;
                         }
                         if (functions[0].function == GroupingFunction.Last)
                         {
-                            pointTempValues[0] = inputSeries[seriesIndex].Points[
-                                intervalLastIndex
-                            ].XValue;
+                            pointTempValues[0] = inputSeries[seriesIndex]
+                                .Points[intervalLastIndex]
+                                .XValue;
                         }
 
                         //**************************************************

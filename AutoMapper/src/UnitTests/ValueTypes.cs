@@ -82,7 +82,8 @@ public class When_value_types_are_the_source_of_map_cycles_with_PreserveReferenc
         destinationValue.Inner.ShouldBe(destinationValue);
         FindTypeMapFor<InnerSource, InnerDestination>().MemberMaps
             .Single(m => m.DestinationName == nameof(InnerDestination.Inner))
-            .Inline.ShouldBeFalse();
+            .Inline
+            .ShouldBeFalse();
     }
 }
 

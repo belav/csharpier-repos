@@ -871,7 +871,8 @@ public class A<T1>
                 .OfType<INamedTypeSymbol>()
                 .Where(n => !n.IsImplicitlyDeclared)
                 .Single()
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
 
             TestRoundTrip(typeParameter, compilation);
         }
@@ -897,7 +898,8 @@ public class A<T1>
                 .GetMembers("M")
                 .OfType<IMethodSymbol>()
                 .Single()
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
 
             TestRoundTrip(typeParameter, compilation);
         }

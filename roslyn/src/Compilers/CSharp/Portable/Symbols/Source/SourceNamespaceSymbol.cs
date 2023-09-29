@@ -482,7 +482,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return false;
                 }
 
-                var leftTree = possibleFileLocalType.MergedDeclaration.Declarations[0]
+                var leftTree = possibleFileLocalType
+                    .MergedDeclaration
+                    .Declarations[0]
                     .Location
                     .SourceTree;
                 if (

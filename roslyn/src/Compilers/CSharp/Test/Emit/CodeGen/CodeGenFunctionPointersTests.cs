@@ -7662,7 +7662,8 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                         Assert.True(
                             baseM1.Parameters
                                 .Single()
-                                .Type.Equals(
+                                .Type
+                                .Equals(
                                     derivedM1.Parameters.Single().Type,
                                     TypeCompareKind.ConsiderEverything
                                 )
@@ -7676,7 +7677,8 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                         Assert.True(
                             baseM3.Parameters
                                 .Single()
-                                .Type.Equals(
+                                .Type
+                                .Equals(
                                     derivedM3.Parameters.Single().Type,
                                     TypeCompareKind.ConsiderEverything
                                 )
@@ -13179,7 +13181,8 @@ unsafe class D
                 callConvCdecl!.Equals(
                     (NamedTypeSymbol)
                         m.GetUnmanagedCallersOnlyAttributeData(forceComplete: true)!
-                            .CallingConventionTypes.Single(),
+                            .CallingConventionTypes
+                            .Single(),
                     TypeCompareKind.ConsiderEverything
                 )
             );

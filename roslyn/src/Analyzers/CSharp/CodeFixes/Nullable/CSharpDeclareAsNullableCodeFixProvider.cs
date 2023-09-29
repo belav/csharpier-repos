@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                 .ConfigureAwait(false);
             var node = context.Diagnostics
                 .First()
-                .Location.FindNode(getInnermostNodeForTie: true, cancellationToken);
+                .Location
+                .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
             var declarationTypeToFix = TryGetDeclarationTypeToFix(model, node, cancellationToken);
             if (declarationTypeToFix == null)

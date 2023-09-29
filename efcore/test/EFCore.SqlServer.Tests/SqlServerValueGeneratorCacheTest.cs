@@ -145,7 +145,8 @@ public class SqlServerValueGeneratorCacheTest
             10,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -168,7 +169,8 @@ public class SqlServerValueGeneratorCacheTest
             10,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -187,7 +189,8 @@ public class SqlServerValueGeneratorCacheTest
             10,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -210,7 +213,8 @@ public class SqlServerValueGeneratorCacheTest
             10,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -234,7 +238,8 @@ public class SqlServerValueGeneratorCacheTest
             11,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 
@@ -261,7 +266,8 @@ public class SqlServerValueGeneratorCacheTest
                     () =>
                         cache
                             .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                            .Sequence.IncrementBy
+                            .Sequence
+                            .IncrementBy
                 )
                 .Message
         );
@@ -287,7 +293,8 @@ public class SqlServerValueGeneratorCacheTest
             11,
             cache
                 .GetOrAddSequenceState((IProperty)property, CreateConnection())
-                .Sequence.IncrementBy
+                .Sequence
+                .IncrementBy
         );
     }
 

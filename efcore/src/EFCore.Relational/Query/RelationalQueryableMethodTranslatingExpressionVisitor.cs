@@ -2238,9 +2238,9 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                         return entityShaper;
                     }
 
-                    var selectorLambda = selectMethodCallExpression.Arguments[
-                        1
-                    ].UnwrapLambdaFromQuote();
+                    var selectorLambda = selectMethodCallExpression
+                        .Arguments[1]
+                        .UnwrapLambdaFromQuote();
 
                     // short circuit what we know is wrong without a closer look
                     if (selectorLambda.Body is NewExpression or MemberInitExpression)

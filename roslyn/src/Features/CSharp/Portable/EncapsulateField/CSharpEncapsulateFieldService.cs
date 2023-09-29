@@ -253,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EncapsulateField
                 static d =>
                     d.GetSyntax()
                         .GetAncestor<FieldDeclarationSyntax>()
-                        .Modifiers.Any(SyntaxKind.NewKeyword)
+                        .Modifiers
+                        .Any(SyntaxKind.NewKeyword)
             );
 
         private static string GenerateFieldName(string correspondingPropertyName) =>

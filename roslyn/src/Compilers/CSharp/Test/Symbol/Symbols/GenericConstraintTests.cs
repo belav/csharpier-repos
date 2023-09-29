@@ -4223,9 +4223,10 @@ class C3 : I
             );
 
             var m = ((NamedTypeSymbol)compilation.GetMember("C1")).GetMember("I.M");
-            var constraintType = ((SourceOrdinaryMethodSymbol)m).TypeParameters[
-                0
-            ].ConstraintTypesNoUseSiteDiagnostics[0].Type;
+            var constraintType = ((SourceOrdinaryMethodSymbol)m)
+                .TypeParameters[0]
+                .ConstraintTypesNoUseSiteDiagnostics[0]
+                .Type;
             Assert.IsType<UnsupportedMetadataTypeSymbol>(constraintType);
             Assert.False(((NamedTypeSymbol)constraintType).IsSerializable);
         }
@@ -6231,9 +6232,10 @@ interface I6<U> : I3<I<U>, I<U>> { }";
                     "I<U>"
                 );
 
-                method = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I4").Interfaces()[
-                    0
-                ].GetMember<MethodSymbol>("M");
+                method = module.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("I4")
+                    .Interfaces()[0]
+                    .GetMember<MethodSymbol>("M");
                 CheckConstraints(
                     method.TypeParameters[0],
                     TypeParameterConstraintKind.None,
@@ -6244,9 +6246,10 @@ interface I6<U> : I3<I<U>, I<U>> { }";
                     "T"
                 );
 
-                method = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I5").Interfaces()[
-                    0
-                ].GetMember<MethodSymbol>("M");
+                method = module.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("I5")
+                    .Interfaces()[0]
+                    .GetMember<MethodSymbol>("M");
                 CheckConstraints(
                     method.TypeParameters[0],
                     TypeParameterConstraintKind.None,
@@ -6258,9 +6261,10 @@ interface I6<U> : I3<I<U>, I<U>> { }";
                     "I<T>"
                 );
 
-                method = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I6").Interfaces()[
-                    0
-                ].GetMember<MethodSymbol>("M");
+                method = module.GlobalNamespace
+                    .GetMember<NamedTypeSymbol>("I6")
+                    .Interfaces()[0]
+                    .GetMember<MethodSymbol>("M");
                 CheckConstraints(
                     method.TypeParameters[0],
                     TypeParameterConstraintKind.None,

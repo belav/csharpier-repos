@@ -1123,7 +1123,8 @@ namespace DbMetal.Generator
                     return;
                 customTypes
                     .First()
-                    .StartDirectives.Add(
+                    .StartDirectives
+                    .Add(
                         new CodeRegionDirective(
                             CodeRegionMode.Start,
                             string.Format(
@@ -1134,7 +1135,8 @@ namespace DbMetal.Generator
                     );
                 customTypes
                     .Last()
-                    .EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, null));
+                    .EndDirectives
+                    .Add(new CodeRegionDirective(CodeRegionMode.End, null));
                 entity.Members.AddRange(customTypes.ToArray());
             }
         }
@@ -1152,7 +1154,8 @@ namespace DbMetal.Generator
                 .ToArray();
             partialMethods
                 .First()
-                .StartDirectives.Add(
+                .StartDirectives
+                .Add(
                     new CodeRegionDirective(
                         CodeRegionMode.Start,
                         "Extensibility Method Declarations"
@@ -1160,7 +1163,8 @@ namespace DbMetal.Generator
                 );
             partialMethods
                 .Last()
-                .EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, null));
+                .EndDirectives
+                .Add(new CodeRegionDirective(CodeRegionMode.End, null));
             entity.Members.AddRange(partialMethods);
         }
 
@@ -1615,10 +1619,12 @@ namespace DbMetal.Generator
                     return;
                 childMembers
                     .First()
-                    .StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Children"));
+                    .StartDirectives
+                    .Add(new CodeRegionDirective(CodeRegionMode.Start, "Children"));
                 childMembers
                     .Last()
-                    .EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, null));
+                    .EndDirectives
+                    .Add(new CodeRegionDirective(CodeRegionMode.End, null));
                 entity.Members.AddRange(childMembers.ToArray());
             }
         }
@@ -1812,9 +1818,8 @@ namespace DbMetal.Generator
 
             handlers
                 .First()
-                .StartDirectives.Add(
-                    new CodeRegionDirective(CodeRegionMode.Start, "Attachment handlers")
-                );
+                .StartDirectives
+                .Add(new CodeRegionDirective(CodeRegionMode.Start, "Attachment handlers"));
             handlers.Last().EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, null));
             entity.Members.AddRange(handlers.ToArray());
         }
@@ -2050,10 +2055,12 @@ namespace DbMetal.Generator
                 return;
             parentMembers
                 .First()
-                .StartDirectives.Add(new CodeRegionDirective(CodeRegionMode.Start, "Parents"));
+                .StartDirectives
+                .Add(new CodeRegionDirective(CodeRegionMode.Start, "Parents"));
             parentMembers
                 .Last()
-                .EndDirectives.Add(new CodeRegionDirective(CodeRegionMode.End, null));
+                .EndDirectives
+                .Add(new CodeRegionDirective(CodeRegionMode.End, null));
             entity.Members.AddRange(parentMembers.ToArray());
         }
     }

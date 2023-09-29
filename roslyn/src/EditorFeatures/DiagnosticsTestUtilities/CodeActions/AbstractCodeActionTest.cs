@@ -233,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 Assert.NotNull(diffView.Viewer);
                 var previewContents = diffView.Viewer.RightView.TextBuffer
                     .AsTextContainer()
-                    .CurrentText.ToString();
+                    .CurrentText
+                    .ToString();
                 diffView.Dispose();
 
                 Assert.Equal(expectedPreviewContents, previewContents);

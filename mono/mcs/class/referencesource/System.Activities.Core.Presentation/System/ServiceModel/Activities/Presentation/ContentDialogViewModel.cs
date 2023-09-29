@@ -119,9 +119,9 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     contentProperty.SetValue(new TMessage());
                     contentProperty.Value.Properties["Message"].SetValue(this.MessageExpression);
-                    contentProperty.Value.Properties["DeclaredMessageType"].SetValue(
-                        this.DeclaredMessageType
-                    );
+                    contentProperty.Value
+                        .Properties["DeclaredMessageType"]
+                        .SetValue(this.DeclaredMessageType);
                 }
             }
 
@@ -138,11 +138,13 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 this.messageExpression = modelTreeManager
                     .WrapAsModelItem(new TMessage())
-                    .Properties["Message"].Value;
+                    .Properties["Message"]
+                    .Value;
                 this.declaredMessageType = null;
-                parameterModelItem = modelTreeManager.WrapAsModelItem(new TParameter()).Properties[
-                    "Parameters"
-                ].Value;
+                parameterModelItem = modelTreeManager
+                    .WrapAsModelItem(new TParameter())
+                    .Properties["Parameters"]
+                    .Value;
             }
             else
             {
@@ -154,14 +156,16 @@ namespace System.ServiceModel.Activities.Presentation
                         contentModelItem.Properties["DeclaredMessageType"].ComputedValue;
                     parameterModelItem = modelTreeManager
                         .WrapAsModelItem(new TParameter())
-                        .Properties["Parameters"].Value;
+                        .Properties["Parameters"]
+                        .Value;
                 }
                 else
                 {
                     this.editingMode = EditingMode.Parameter;
                     this.messageExpression = modelTreeManager
                         .WrapAsModelItem(new TMessage())
-                        .Properties["Message"].Value;
+                        .Properties["Message"]
+                        .Value;
                     this.declaredMessageType = null;
                     parameterModelItem = contentModelItem.Properties["Parameters"].Value;
                 }

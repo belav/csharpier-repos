@@ -1896,9 +1896,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (
@@ -1946,9 +1946,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (
@@ -1996,9 +1996,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(PropertyDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (
@@ -2046,9 +2046,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(IndexerDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (
@@ -2096,9 +2096,9 @@ x
             // do we parsed a method?
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             // we grab the open bracket for the Goo method decl
@@ -2196,9 +2196,9 @@ x
             // we grab the void keyword
             Assert.Equal(
                 typeof(MethodDeclarationSyntax),
-                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[
-                    0
-                ].GetType()
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
             );
 
             var keyword = (

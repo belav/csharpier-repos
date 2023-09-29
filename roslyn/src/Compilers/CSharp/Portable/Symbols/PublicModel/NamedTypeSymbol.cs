@@ -79,9 +79,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ImmutableArray<CustomModifier> INamedTypeSymbol.GetTypeArgumentCustomModifiers(int ordinal)
         {
-            return UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                ordinal
-            ].CustomModifiers;
+            return UnderlyingNamedTypeSymbol
+                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[ordinal]
+                .CustomModifiers;
         }
 
         INamedTypeSymbol INamedTypeSymbol.OriginalDefinition

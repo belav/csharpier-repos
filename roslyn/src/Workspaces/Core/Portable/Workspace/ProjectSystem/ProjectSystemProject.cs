@@ -748,7 +748,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                                     var metadataReference =
                                         _projectSystemProjectFactory.Workspace.CurrentSolution
                                             .GetRequiredProject(Id)
-                                            .MetadataReferences.Cast<PortableExecutableReference>()
+                                            .MetadataReferences
+                                            .Cast<PortableExecutableReference>()
                                             .Single(
                                                 m =>
                                                     m.FilePath == path && m.Properties == properties
@@ -1487,7 +1488,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                             // TODO: find a cleaner way to fetch this
                             var metadataReference = w.CurrentSolution
                                 .GetRequiredProject(Id)
-                                .MetadataReferences.Cast<PortableExecutableReference>()
+                                .MetadataReferences
+                                .Cast<PortableExecutableReference>()
                                 .Single(m => m.FilePath == fullPath && m.Properties == properties);
 
                             _projectSystemProjectFactory.FileWatchedReferenceFactory.StopWatchingReference(
@@ -1565,7 +1567,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
             return _projectSystemProjectFactory.Workspace.CurrentSolution
                 .GetRequiredProject(Id)
-                .AllProjectReferences.Contains(projectReference);
+                .AllProjectReferences
+                .Contains(projectReference);
         }
 
         public IReadOnlyList<ProjectReference> GetProjectReferences()

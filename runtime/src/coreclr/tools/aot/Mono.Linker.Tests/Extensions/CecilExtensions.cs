@@ -245,9 +245,10 @@ namespace Mono.Linker.Tests.Extensions
                         .Append(", ");
 
                 sb.Append(
-                    method.Parameters[
-                        method.Parameters.Count - 1
-                    ].ParameterType.GetDisplayNameWithoutNamespace()
+                    method
+                        .Parameters[method.Parameters.Count - 1]
+                        .ParameterType
+                        .GetDisplayNameWithoutNamespace()
                 );
             }
 

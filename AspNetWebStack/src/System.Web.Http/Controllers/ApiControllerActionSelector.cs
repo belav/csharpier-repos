@@ -508,8 +508,9 @@ namespace System.Web.Http.Controllers
                 if (routeData.Values.TryGetValue(RouteValueKeys.Action, out actionName))
                 {
                     // We have an explicit {action} value, do traditional binding. Just lookup by actionName
-                    HttpActionDescriptor[] actionsFoundByName =
-                        _standardActions.StandardActionNameMapping[actionName].ToArray();
+                    HttpActionDescriptor[] actionsFoundByName = _standardActions
+                        .StandardActionNameMapping[actionName]
+                        .ToArray();
 
                     // Throws HttpResponseException with NotFound status because no action matches the Name
                     if (actionsFoundByName.Length == 0)
@@ -821,7 +822,8 @@ namespace System.Web.Http.Controllers
                 if (
                     methodInfo
                         .GetBaseDefinition()
-                        .DeclaringType.IsAssignableFrom(TypeHelper.ApiControllerType)
+                        .DeclaringType
+                        .IsAssignableFrom(TypeHelper.ApiControllerType)
                 )
                 {
                     // is a method on Object, IHttpController, ApiController

@@ -140,7 +140,8 @@ namespace System.Web.Handlers
                     // check the <httpHandlers> section
                     HttpHandlerAction httpHandler = RuntimeConfig
                         .GetConfig(VirtualPath.Create(webResourcePath))
-                        .HttpHandlers.FindMapping("GET", VirtualPath.Create(_webResourceUrl));
+                        .HttpHandlers
+                        .FindMapping("GET", VirtualPath.Create(_webResourceUrl));
                     _handlerExists =
                         (httpHandler != null)
                         && (httpHandler.TypeInternal == typeof(AssemblyResourceLoader));

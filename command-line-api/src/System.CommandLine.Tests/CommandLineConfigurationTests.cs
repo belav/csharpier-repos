@@ -24,7 +24,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
     }
 
@@ -47,7 +49,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("Duplicate alias '--dupe' found on command 'subcommand'.");
     }
 
@@ -67,7 +71,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
     }
 
@@ -90,7 +96,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
     }
 
@@ -110,7 +118,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
     }
 
@@ -133,7 +143,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
     }
 
@@ -155,7 +167,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
     }
 
@@ -201,7 +215,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be($"Cycle detected in command tree. Command '{command.Name}' is its own ancestor.");
     }
 
@@ -219,7 +235,9 @@ public class CommandLineConfigurationTests
         validate
             .Should()
             .Throw<CommandLineConfigurationException>()
-            .Which.Message.Should()
+            .Which
+            .Message
+            .Should()
             .Be(
                 $"Cycle detected in command tree. Command '{rootCommand.Name}' is its own ancestor."
             );

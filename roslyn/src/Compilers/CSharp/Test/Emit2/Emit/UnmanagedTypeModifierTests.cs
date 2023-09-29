@@ -661,7 +661,8 @@ public class Child : Parent
                     var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
                     Assert.True(parentTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -674,7 +675,8 @@ public class Child : Parent
                     var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
                     Assert.True(childTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -717,7 +719,8 @@ public class Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -741,7 +744,8 @@ public class Child : Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -792,7 +796,8 @@ public class Child : Parent
                     var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
                     Assert.True(parentTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -805,7 +810,8 @@ public class Child : Parent
                     var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
                     Assert.True(childTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -845,7 +851,8 @@ public abstract class Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -869,7 +876,8 @@ public class Child : Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -917,7 +925,8 @@ public class Child : Parent
                     var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
                     Assert.True(parentTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -930,7 +939,8 @@ public class Child : Parent
                     var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
                     Assert.True(childTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -970,7 +980,8 @@ public interface Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -994,7 +1005,8 @@ public class Child : Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1042,7 +1054,8 @@ public class Child : Parent
                     var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
                     Assert.True(parentTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -1055,7 +1068,8 @@ public class Child : Parent
                     var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
                     Assert.True(childTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -1095,7 +1109,8 @@ public interface Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1119,7 +1134,8 @@ public class Child : Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1167,7 +1183,8 @@ public class Child : Parent
                     var parentTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(parentTypeParameter.HasValueTypeConstraint);
                     Assert.True(parentTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -1180,7 +1197,8 @@ public class Child : Parent
                     var childTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("Parent.M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(childTypeParameter.HasValueTypeConstraint);
                     Assert.True(childTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -1221,7 +1239,8 @@ public interface Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Parent")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1245,7 +1264,8 @@ public class Child : Parent
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("Parent.M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1309,7 +1329,8 @@ public class Program
                 {
                     var delegateTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("D`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(delegateTypeParameter.HasValueTypeConstraint);
                     Assert.True(delegateTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -1322,7 +1343,8 @@ public class Program
                     var lambdaTypeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Program")
                         .GetTypeMember("<>c__DisplayClass0_0")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(lambdaTypeParameter.HasValueTypeConstraint);
                     Assert.True(lambdaTypeParameter.HasUnmanagedTypeConstraint);
 
@@ -1352,7 +1374,8 @@ public class TestRef
                 {
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("D`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
                     Assert.False(typeParameter.HasConstructorConstraint); // .ctor  is an artifact of emit, we will ignore it on importing.
@@ -1389,7 +1412,8 @@ public class Program
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Program")
                         .GetTypeMember("<>c__DisplayClass0_0")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
                     Assert.False(typeParameter.HasConstructorConstraint); // .ctor  is an artifact of emit, we will ignore it on importing.
@@ -1818,7 +1842,8 @@ public class Test
             var typeParameter = c.GlobalNamespace
                 .GetTypeMember("TestRef")
                 .GetMethod("M")
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
             Assert.True(typeParameter.HasUnmanagedTypeConstraint);
             Assert.True(typeParameter.HasValueTypeConstraint);
             Assert.False(typeParameter.HasReferenceTypeConstraint);

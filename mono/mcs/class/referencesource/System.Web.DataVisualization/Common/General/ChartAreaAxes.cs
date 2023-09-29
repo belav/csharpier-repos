@@ -350,14 +350,14 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                     if (
                         currentAxis.minimum
-                        > currentAxis.ScaleSegments[
-                            currentAxis.ScaleSegments.Count - 1
-                        ].ScaleMaximum
+                        > currentAxis
+                            .ScaleSegments[currentAxis.ScaleSegments.Count - 1]
+                            .ScaleMaximum
                     )
                     {
-                        currentAxis.minimum = currentAxis.ScaleSegments[
-                            currentAxis.ScaleSegments.Count - 1
-                        ].ScaleMaximum;
+                        currentAxis.minimum = currentAxis
+                            .ScaleSegments[currentAxis.ScaleSegments.Count - 1]
+                            .ScaleMaximum;
                     }
                 }
             }
@@ -1140,9 +1140,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         (ChartArea)this,
                         xAxesSeries
                     );
-                    ChartValueType valueTypes = Common.DataManager.Series[
-                        xAxesSeries[0]
-                    ].XValueType;
+                    ChartValueType valueTypes = Common
+                        .DataManager
+                        .Series[xAxesSeries[0]]
+                        .XValueType;
                     if (
                         valueTypes != ChartValueType.Date
                         && valueTypes != ChartValueType.DateTime

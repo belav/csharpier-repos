@@ -699,7 +699,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     .GetAnnotatedNodes(s_replacementNodeAnnotation)
                     .Single()
                     .GetLastToken()
-                    .Span.End;
+                    .Span
+                    .End;
                 return (newRoot, nextCaretPosition);
             }
         }

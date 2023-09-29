@@ -5129,7 +5129,8 @@ class C
 
             var newExpression = ((InvocationExpressionSyntax)modifiedNode.Expression)
                 .ArgumentList
-                .Arguments[0].Expression;
+                .Arguments[0]
+                .Expression;
             var symbolInfo = speculativeModel.GetSymbolInfo(newExpression);
             Assert.Equal("System.Int32..ctor()", symbolInfo.Symbol.ToTestDisplayString());
             var typeInfo = speculativeModel.GetTypeInfo(newExpression);

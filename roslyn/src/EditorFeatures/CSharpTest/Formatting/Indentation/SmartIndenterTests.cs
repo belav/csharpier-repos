@@ -3364,7 +3364,8 @@ namespace NS
 
                 var indentationLine = projectedDocument
                     .GetTextBuffer()
-                    .CurrentSnapshot.GetLineFromPosition(projectedDocument.CursorPosition.Value);
+                    .CurrentSnapshot
+                    .GetLineFromPosition(projectedDocument.CursorPosition.Value);
                 var textView = projectedDocument.GetTextView();
                 var buffer = subjectDocument.GetTextBuffer();
                 var point = textView.BufferGraph.MapDownToBuffer(

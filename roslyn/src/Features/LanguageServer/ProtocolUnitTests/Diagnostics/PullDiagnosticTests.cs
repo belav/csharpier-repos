@@ -647,14 +647,18 @@ class B {";
 
             var csproj1Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj1")
+                .Projects
+                .Where(p => p.Name == "CSProj1")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Open either of the documents via LSP, we're tracking the URI and text.
             await OpenDocumentAsync(testLspServer, csproj1Document);
@@ -718,14 +722,18 @@ class B {";
 
             var csproj1Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj1")
+                .Projects
+                .Where(p => p.Name == "CSProj1")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Open either of the documents via LSP, we're tracking the URI and text.
             await OpenDocumentAsync(testLspServer, csproj1Document);
@@ -794,14 +802,18 @@ class B {";
                 .ConfigureAwait(false);
             var csproj1Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj1")
+                .Projects
+                .Where(p => p.Name == "CSProj1")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             await testLspServer.OpenDocumentAsync(csproj1Document.GetURI());
             await testLspServer.OpenDocumentAsync(csproj2Document.GetURI());
@@ -867,14 +879,18 @@ class B {";
                 .ConfigureAwait(false);
             var csproj1Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj1")
+                .Projects
+                .Where(p => p.Name == "CSProj1")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             await testLspServer.OpenDocumentAsync(csproj1Document.GetURI());
             await testLspServer.OpenDocumentAsync(csproj2Document.GetURI());
@@ -1429,8 +1445,10 @@ class A {
 
             var firstDocument = testLspServer
                 .GetCurrentSolution()
-                .Projects.Single()
-                .Documents.First();
+                .Projects
+                .Single()
+                .Documents
+                .First();
             await OpenDocumentAsync(testLspServer, firstDocument);
 
             var results = await RunGetWorkspacePullDiagnosticsAsync(
@@ -1866,9 +1884,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -1966,9 +1986,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj3Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj3")
+                .Projects
+                .Where(p => p.Name == "CSProj3")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we have a diagnostic in C.cs initially.
             var results = await RunGetWorkspacePullDiagnosticsAsync(
@@ -2062,9 +2084,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -2153,9 +2177,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -2232,9 +2258,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -2310,9 +2338,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.

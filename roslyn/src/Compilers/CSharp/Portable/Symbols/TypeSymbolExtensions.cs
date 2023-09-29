@@ -413,9 +413,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return null;
             if (type.IsExpressionTree())
             {
-                type = ((NamedTypeSymbol)type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                    0
-                ].Type;
+                type = ((NamedTypeSymbol)type)
+                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                    .Type;
             }
 
             return type.IsDelegateType() ? (NamedTypeSymbol)type : null;

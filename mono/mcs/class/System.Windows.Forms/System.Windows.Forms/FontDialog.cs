@@ -872,9 +872,9 @@ namespace System.Windows.Forms
                 if (strikethrough)
                     currentFontStyle = currentFontStyle | FontStyle.Strikeout;
 
-                fontstyleTextBox.Text = fontstyleListBox.Items[
-                    fontstyleListBox.SelectedIndex
-                ].ToString();
+                fontstyleTextBox.Text = fontstyleListBox
+                    .Items[fontstyleListBox.SelectedIndex]
+                    .ToString();
 
                 if (!internal_change)
                 {

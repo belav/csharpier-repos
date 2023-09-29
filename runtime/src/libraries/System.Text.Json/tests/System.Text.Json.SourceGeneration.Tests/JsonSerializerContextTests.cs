@@ -416,7 +416,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                         property.Get = (o) =>
                             System.Runtime.CompilerServices.Unsafe
                                 .Unbox<TestPoco>(o)
-                                .IntProperty.ToString();
+                                .IntProperty
+                                .ToString();
                         property.Set = (o, val) =>
                         {
                             System.Runtime.CompilerServices.Unsafe

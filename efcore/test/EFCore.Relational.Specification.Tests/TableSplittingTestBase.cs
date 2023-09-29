@@ -190,7 +190,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
             scooterEntry
                 .Reference(v => v.Engine)
-                .TargetEntry.Property<int>("SeatingCapacity")
+                .TargetEntry
+                .Property<int>("SeatingCapacity")
                 .CurrentValue = 1;
 
             context.SaveChanges();

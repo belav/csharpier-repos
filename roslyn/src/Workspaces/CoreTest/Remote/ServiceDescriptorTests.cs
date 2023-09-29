@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         public static IEnumerable<object[]> AllServiceDescriptors =>
             ServiceDescriptors.Instance
                 .GetTestAccessor()
-                .Descriptors.Select(
+                .Descriptors
+                .Select(
                     descriptor =>
                         new object[]
                         {
@@ -430,7 +431,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var descriptorsWithCallbackServiceTypes = ServiceDescriptors.Instance
                 .GetTestAccessor()
-                .Descriptors.Where(d => d.Value.descriptor64.ClientInterface != null)
+                .Descriptors
+                .Where(d => d.Value.descriptor64.ClientInterface != null)
                 .Select(d => d.Key);
 
             var callbackDispatcherServiceTypes = callbackDispatchers.Select(

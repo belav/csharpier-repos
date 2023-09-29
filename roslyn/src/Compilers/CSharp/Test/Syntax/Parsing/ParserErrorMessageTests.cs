@@ -4582,7 +4582,8 @@ public class Test
                 SyntaxKind.InKeyword,
                 anonymousMethodExpression.ParameterList.Parameters
                     .Single()
-                    .Modifiers.Single()
+                    .Modifiers
+                    .Single()
                     .Kind()
             );
 

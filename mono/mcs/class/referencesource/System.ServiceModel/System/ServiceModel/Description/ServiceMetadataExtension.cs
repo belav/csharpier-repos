@@ -409,7 +409,8 @@ namespace System.ServiceModel.Description
                         channelDispatcher.Endpoints.Count == 1
                         && channelDispatcher.Endpoints[0].DispatchRuntime.SingletonInstanceContext
                             != null
-                        && channelDispatcher.Endpoints[0]
+                        && channelDispatcher
+                            .Endpoints[0]
                             .DispatchRuntime
                             .SingletonInstanceContext
                             .UserObject is HttpGetImpl

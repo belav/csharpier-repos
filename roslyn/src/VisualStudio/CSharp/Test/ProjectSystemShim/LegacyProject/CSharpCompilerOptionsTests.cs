@@ -119,7 +119,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             string getCurrentCompilationOutputAssemblyPath() =>
                 environment.Workspace.CurrentSolution
                     .GetRequiredProject(project.Test_ProjectSystemProject.Id)
-                    .CompilationOutputInfo.AssemblyPath;
+                    .CompilationOutputInfo
+                    .AssemblyPath;
 
             Assert.Equal(initialPath, getCurrentCompilationOutputAssemblyPath());
 
@@ -154,7 +155,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             string getCurrentCompilationOutputAssemblyPath() =>
                 environment.Workspace.CurrentSolution
                     .GetRequiredProject(project.Test_ProjectSystemProject.Id)
-                    .CompilationOutputInfo.AssemblyPath;
+                    .CompilationOutputInfo
+                    .AssemblyPath;
 
             Assert.Null(getCurrentCompilationOutputAssemblyPath());
 

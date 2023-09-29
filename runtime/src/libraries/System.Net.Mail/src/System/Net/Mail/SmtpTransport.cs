@@ -400,9 +400,9 @@ namespace System.Net.Mail
                         thisPtr._failedRecipientExceptions.Add(
                             new SmtpFailedRecipientException(
                                 thisPtr._connection.Reader!.StatusCode,
-                                thisPtr._toCollection[thisPtr._toIndex - 1].GetSmtpAddress(
-                                    thisPtr._allowUnicode
-                                ),
+                                thisPtr
+                                    ._toCollection[thisPtr._toIndex - 1]
+                                    .GetSmtpAddress(thisPtr._allowUnicode),
                                 response
                             )
                         );

@@ -144,7 +144,8 @@ S5();
             var solution = workspace.CurrentSolution
                 .AddProject("proj", "proj", LanguageNames.CSharp)
                 .AddDocument("doc", SourceText.From(source, Encoding.UTF8), filePath: "a.cs")
-                .Project.Solution;
+                .Project
+                .Solution;
 
             var project = solution.Projects.Single();
             var document = project.Documents.Single();
@@ -227,7 +228,8 @@ S1();
             var solution = workspace.CurrentSolution
                 .AddProject("proj", "proj", LanguageNames.CSharp)
                 .AddDocument("doc", SourceText.From(source, Encoding.UTF8), filePath: "a.cs")
-                .Project.Solution;
+                .Project
+                .Solution;
 
             var project = solution.Projects.Single();
             var document = project.Documents.Single();
@@ -299,7 +301,8 @@ class C
             var solution = workspace.CurrentSolution
                 .AddProject("proj", "proj", LanguageNames.CSharp)
                 .AddDocument("doc", SourceText.From(source, Encoding.UTF8), filePath: "a.cs")
-                .Project.Solution;
+                .Project
+                .Solution;
 
             var project = solution.Projects.Single();
             var document = project.Documents.Single();

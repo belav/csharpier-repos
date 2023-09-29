@@ -1624,7 +1624,8 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             BoundProperties = new List<ParameterDescriptor>(),
             MethodInfo = typeof(TestController)
                 .GetTypeInfo()
-                .DeclaredMethods.First(
+                .DeclaredMethods
+                .First(
                     m => m.Name.Equals("ActionMethodWithDefaultValues", StringComparison.Ordinal)
                 ),
             Parameters = new List<ParameterDescriptor>

@@ -543,9 +543,9 @@ namespace Microsoft.VisualBasic.Activities
                     FindTypeReferences(listInit.NewExpression, typeReferences);
                     for (int i = 0; i < listInit.Initializers.Count; i++)
                     {
-                        ReadOnlyCollection<Expression> arguments = listInit.Initializers[
-                            i
-                        ].Arguments;
+                        ReadOnlyCollection<Expression> arguments = listInit
+                            .Initializers[i]
+                            .Arguments;
                         for (
                             int argumentIndex = 0;
                             argumentIndex < arguments.Count;

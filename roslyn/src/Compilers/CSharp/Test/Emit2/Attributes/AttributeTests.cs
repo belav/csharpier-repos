@@ -12248,7 +12248,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
 
             comp = CreateCompilation(
@@ -12262,7 +12263,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
         }
 
@@ -12286,7 +12288,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
@@ -12302,7 +12305,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
         }
 
@@ -12336,7 +12340,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
 
             comp = CreateCompilation(
@@ -12350,7 +12355,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
         }
 
@@ -12385,7 +12391,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
 
             comp = CreateCompilation(
@@ -12399,7 +12406,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
         }
 
@@ -12434,7 +12442,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
 
             comp = CreateCompilation(
@@ -12448,7 +12457,8 @@ public class C
                     .GetTypeMember("C")
                     .GetAttributes()
                     .Single()
-                    .AttributeClass.IsGenericType
+                    .AttributeClass
+                    .IsGenericType
             );
         }
 

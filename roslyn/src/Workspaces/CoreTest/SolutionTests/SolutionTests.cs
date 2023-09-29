@@ -1986,12 +1986,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // We always have a non-null SyntaxTreeOptionsProvider for C# and VB projects
             var originalSyntaxTreeOptionsProvider = solution.Projects
                 .Single()
-                .CompilationOptions!.SyntaxTreeOptionsProvider;
+                .CompilationOptions!
+                .SyntaxTreeOptionsProvider;
             Assert.NotNull(originalSyntaxTreeOptionsProvider);
 
             var defaultOptions = solution.Projects
                 .Single()
-                .Services.GetRequiredService<ICompilationFactoryService>()
+                .Services
+                .GetRequiredService<ICompilationFactoryService>()
                 .GetDefaultCompilationOptions();
             Assert.Null(defaultOptions.SyntaxTreeOptionsProvider);
 
@@ -2001,7 +2003,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // back. The SyntaxTreeOptionsProvider should behave the same as the prior one and thus should be equal.
             var newSyntaxTreeOptionsProvider = solution.Projects
                 .Single()
-                .CompilationOptions!.SyntaxTreeOptionsProvider;
+                .CompilationOptions!
+                .SyntaxTreeOptionsProvider;
             Assert.NotNull(newSyntaxTreeOptionsProvider);
             Assert.Equal(originalSyntaxTreeOptionsProvider, newSyntaxTreeOptionsProvider);
         }
@@ -3350,7 +3353,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 .AddProject("goo", "goo.dll", LanguageNames.CSharp)
                 .AddMetadataReference(s_mscorlib)
                 .AddDocument("goo.cs", "public class Goo { }")
-                .Project.Solution;
+                .Project
+                .Solution;
 
             await ValidateSolutionAndCompilationsAsync(solution);
         }
@@ -3538,7 +3542,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution
                     .GetProject(project1)
                     .GetCompilationAsync()
-                    .Result.GetAssemblyOrModuleSymbol(mefReference);
+                    .Result
+                    .GetAssemblyOrModuleSymbol(mefReference);
             var namespacesAndTypes = assemblyReference.GlobalNamespace.GetAllNamespacesAndTypes(
                 CancellationToken.None
             );
@@ -3552,7 +3557,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution
                     .GetProject(project1)
                     .GetCompilationAsync()
-                    .Result.GetAssemblyOrModuleSymbol(mefReference);
+                    .Result
+                    .GetAssemblyOrModuleSymbol(mefReference);
             Assert.Null(assemblyReference);
 
             await ValidateSolutionAndCompilationsAsync(solution);
@@ -3769,7 +3775,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     CSharpSyntaxFormattingOptions.Default,
                     CancellationToken.None
                 )
-                .Result.GetSyntaxRootAsync();
+                .Result
+                .GetSyntaxRootAsync();
             var solution2 = solution1.WithDocumentSyntaxRoot(documentId, newRoot);
 
             Assert.NotEqual(solution1, solution2);
@@ -4378,7 +4385,8 @@ End Class";
 
             // reset the syntax root, to make it 'refactored' by adding an attribute
             var newRoot = doc.GetSyntaxRootAsync()
-                .Result.WithAdditionalAnnotations(SyntaxAnnotation.ElasticAnnotation);
+                .Result
+                .WithAdditionalAnnotations(SyntaxAnnotation.ElasticAnnotation);
             var doc2 = doc.Project.Solution
                 .WithDocumentSyntaxRoot(doc.Id, newRoot, PreservationMode.PreserveValue)
                 .GetDocument(doc.Id);
@@ -4977,7 +4985,8 @@ public class C : A {
             // Nothing should have incomplete references, and everything should build
             var frozenSolution = document
                 .WithFrozenPartialSemantics(CancellationToken.None)
-                .Project.Solution;
+                .Project
+                .Solution;
 
             Assert.True(frozenSolution.GetProject(project1.Id).HasSuccessfullyLoadedAsync().Result);
             Assert.True(frozenSolution.GetProject(project2.Id).HasSuccessfullyLoadedAsync().Result);
@@ -5012,7 +5021,8 @@ public class C : A {
             var project = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("RegularDocument.cs", "// Source File", filePath: "RegularDocument.cs")
-                .Project.AddDocument(
+                .Project
+                .AddDocument(
                     "RegularDocument2.cs",
                     "// Source File",
                     filePath: "RegularDocument2.cs"
@@ -5295,7 +5305,9 @@ public class C : A {
                 return solution
                     .GetProject(pid)
                     .GetCompilationAsync()
-                    .Result.SyntaxTrees.ToImmutableArray();
+                    .Result
+                    .SyntaxTrees
+                    .ToImmutableArray();
             }
 
             solution = solution.AddProject(pid, "test", "test.dll", LanguageNames.CSharp);
@@ -5676,7 +5688,8 @@ public class C : A {
 
             var originalProvider = solution
                 .GetProject(projectId)
-                .CompilationOptions.SyntaxTreeOptionsProvider;
+                .CompilationOptions
+                .SyntaxTreeOptionsProvider;
             Assert.False(originalProvider.TryGetGlobalDiagnosticValue("CA1234", default, out _));
 
             var editorConfigDocumentId = DocumentId.CreateNewId(projectId);
@@ -5700,7 +5713,8 @@ public class C : A {
 
             var newProvider = solution
                 .GetProject(projectId)
-                .CompilationOptions.SyntaxTreeOptionsProvider;
+                .CompilationOptions
+                .SyntaxTreeOptionsProvider;
             Assert.True(
                 newProvider.TryGetGlobalDiagnosticValue("CA1234", default, out var severity)
             );
@@ -5709,7 +5723,8 @@ public class C : A {
             solution = solution.RemoveAnalyzerConfigDocument(editorConfigDocumentId);
             var finalProvider = solution
                 .GetProject(projectId)
-                .CompilationOptions.SyntaxTreeOptionsProvider;
+                .CompilationOptions
+                .SyntaxTreeOptionsProvider;
             Assert.False(finalProvider.TryGetGlobalDiagnosticValue("CA1234", default, out _));
         }
 

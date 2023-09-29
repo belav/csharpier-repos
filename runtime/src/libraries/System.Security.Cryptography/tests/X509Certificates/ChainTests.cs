@@ -826,26 +826,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder.Chain.ChainElements[0].ChainElementStatus.Aggregate(
-                        X509ChainStatusFlags.NoError,
-                        (a, status) => a | status.Status
-                    )
+                    holder.Chain
+                        .ChainElements[0]
+                        .ChainElementStatus
+                        .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
                 );
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder.Chain.ChainElements[1].ChainElementStatus.Aggregate(
-                        X509ChainStatusFlags.NoError,
-                        (a, status) => a | status.Status
-                    )
+                    holder.Chain
+                        .ChainElements[1]
+                        .ChainElementStatus
+                        .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
                 );
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder.Chain.ChainElements[2].ChainElementStatus.Aggregate(
-                        X509ChainStatusFlags.NoError,
-                        (a, status) => a | status.Status
-                    )
+                    holder.Chain
+                        .ChainElements[2]
+                        .ChainElementStatus
+                        .Aggregate(X509ChainStatusFlags.NoError, (a, status) => a | status.Status)
                 );
             }
         }

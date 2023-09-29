@@ -201,9 +201,9 @@ namespace MonoTests.System.Windows.Forms
 
             Assert.AreEqual(
                 null,
-                dgv.Rows[0].HeaderCell.GetInheritedContextMenuStrip(
-                    dgv.Rows[0].HeaderCell.RowIndex
-                ),
+                dgv.Rows[0]
+                    .HeaderCell
+                    .GetInheritedContextMenuStrip(dgv.Rows[0].HeaderCell.RowIndex),
                 "A2"
             );
 
@@ -213,9 +213,9 @@ namespace MonoTests.System.Windows.Forms
 
             Assert.AreSame(
                 cms1,
-                dgv.Rows[0].HeaderCell.GetInheritedContextMenuStrip(
-                    dgv.Rows[0].HeaderCell.RowIndex
-                ),
+                dgv.Rows[0]
+                    .HeaderCell
+                    .GetInheritedContextMenuStrip(dgv.Rows[0].HeaderCell.RowIndex),
                 "A3"
             );
 
@@ -225,18 +225,18 @@ namespace MonoTests.System.Windows.Forms
             dgv.Rows[0].ContextMenuStrip = cms2;
             Assert.AreSame(
                 cms1,
-                dgv.Rows[0].HeaderCell.GetInheritedContextMenuStrip(
-                    dgv.Rows[0].HeaderCell.RowIndex
-                ),
+                dgv.Rows[0]
+                    .HeaderCell
+                    .GetInheritedContextMenuStrip(dgv.Rows[0].HeaderCell.RowIndex),
                 "A4"
             );
 
             dgv.Rows[0].HeaderCell.ContextMenuStrip = cms2;
             Assert.AreSame(
                 cms2,
-                dgv.Rows[0].HeaderCell.GetInheritedContextMenuStrip(
-                    dgv.Rows[0].HeaderCell.RowIndex
-                ),
+                dgv.Rows[0]
+                    .HeaderCell
+                    .GetInheritedContextMenuStrip(dgv.Rows[0].HeaderCell.RowIndex),
                 "A5"
             );
         }

@@ -1176,7 +1176,9 @@ class C
                 var source = context.SyntaxProvider.CreateSyntaxProvider(
                     (c, _) => c is FieldDeclarationSyntax fds,
                     (c, _) =>
-                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                        ((FieldDeclarationSyntax)c.Node)
+                            .Declaration
+                            .Variables[0]
                             .Identifier
                             .ValueText
                 );
@@ -1234,7 +1236,9 @@ class classD
                 var source = context.SyntaxProvider.CreateSyntaxProvider(
                     (c, _) => c is FieldDeclarationSyntax fds,
                     (c, _) =>
-                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                        ((FieldDeclarationSyntax)c.Node)
+                            .Declaration
+                            .Variables[0]
                             .Identifier
                             .ValueText
                 );
@@ -1310,7 +1314,9 @@ class C
                         return false;
                     },
                     (c, _) =>
-                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                        ((FieldDeclarationSyntax)c.Node)
+                            .Declaration
+                            .Variables[0]
                             .Identifier
                             .ValueText
                 );
@@ -1397,7 +1403,9 @@ class D
                     .CreateSyntaxProvider(
                         (c, _) => c is FieldDeclarationSyntax fds,
                         (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText
                     )
@@ -1529,7 +1537,9 @@ class D
                     .CreateSyntaxProvider(
                         (c, _) => c is FieldDeclarationSyntax fds,
                         (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText
                     )
@@ -1670,7 +1680,9 @@ class D
                 var source = context.SyntaxProvider.CreateSyntaxProvider(
                     (c, _) => c is FieldDeclarationSyntax fds,
                     (c, _) =>
-                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                        ((FieldDeclarationSyntax)c.Node)
+                            .Declaration
+                            .Variables[0]
                             .Identifier
                             .ValueText
                 );
@@ -1682,7 +1694,9 @@ class D
                 var source = context.SyntaxProvider.CreateSyntaxProvider(
                     (c, _) => c is FieldDeclarationSyntax fds,
                     (c, _) =>
-                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                        ((FieldDeclarationSyntax)c.Node)
+                            .Declaration
+                            .Variables[0]
                             .Identifier
                             .ValueText
                 );
@@ -1742,7 +1756,9 @@ class E
                     .CreateSyntaxProvider(
                         (c, _) => c is FieldDeclarationSyntax fds,
                         (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText
                     )
@@ -1878,7 +1894,9 @@ class E
                     .CreateSyntaxProvider(
                         (c, _) => c is FieldDeclarationSyntax fds,
                         (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText
                     )
@@ -1987,7 +2005,9 @@ class E
                             return false;
                         },
                         (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText
                     )
@@ -2179,7 +2199,9 @@ class C
                 var source = context.SyntaxProvider.CreateSyntaxProvider(
                     (c, _) => c is FieldDeclarationSyntax fds,
                     (c, _) =>
-                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                        ((FieldDeclarationSyntax)c.Node)
+                            .Declaration
+                            .Variables[0]
                             .Identifier
                             .ValueText
                 );
@@ -2281,11 +2303,15 @@ class C
                     (c, _) =>
                     {
                         syntaxCalledFor.Add(
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText
                         );
-                        return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                        return ((FieldDeclarationSyntax)c.Node)
+                            .Declaration
+                            .Variables[0]
                             .Identifier
                             .ValueText;
                     }
@@ -2350,11 +2376,15 @@ class C
                     (c, _) =>
                     {
                         syntaxCalledFor.Add(
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText
                         );
-                        return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                        return ((FieldDeclarationSyntax)c.Node)
+                            .Declaration
+                            .Variables[0]
                             .Identifier
                             .ValueText;
                     }
@@ -2441,7 +2471,9 @@ class C
                         (c, _) => c is FieldDeclarationSyntax fds,
                         (c, _) =>
                         {
-                            return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            return ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText;
                         }
@@ -2558,7 +2590,9 @@ class C
                         (c, _) => c is FieldDeclarationSyntax fds,
                         (c, _) =>
                         {
-                            return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            return ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText;
                         }
@@ -2654,7 +2688,9 @@ class C
                         (c, _) => c is FieldDeclarationSyntax fds,
                         (c, _) =>
                         {
-                            return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            return ((FieldDeclarationSyntax)c.Node)
+                                .Declaration
+                                .Variables[0]
                                 .Identifier
                                 .ValueText;
                         }

@@ -686,7 +686,8 @@ class C : I1
 
                     var synthesizedExplicitImplementation = @class
                         .GetSynthesizedExplicitImplementations(default(CancellationToken))
-                        .ForwardingMethods.Single();
+                        .ForwardingMethods
+                        .Single();
 
                     Assert.Equal(
                         classIndexer.GetMethod,
@@ -1805,7 +1806,8 @@ class B
 
             var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("B")
-                .Indexers.Single();
+                .Indexers
+                .Single();
             Assert.Equal(WellKnownMemberNames.Indexer, indexer.Name);
             Assert.Equal("A", indexer.MetadataName);
             Assert.Equal("get_A", indexer.GetMethod.Name);
@@ -1833,7 +1835,8 @@ interface I
 
             var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("I")
-                .Indexers.Single();
+                .Indexers
+                .Single();
             Assert.Equal("@indexer", indexer.MetadataName);
             Assert.Equal("get_@indexer", indexer.GetMethod.MetadataName);
             Assert.Equal("set_@indexer", indexer.SetMethod.MetadataName);
@@ -2592,7 +2595,8 @@ class Program
 
             var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("Program")
-                .Indexers.Single();
+                .Indexers
+                .Single();
             Assert.True(indexer.IsIndexer);
             Assert.Equal("A", indexer.MetadataName);
             Assert.True(

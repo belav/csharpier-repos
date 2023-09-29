@@ -397,7 +397,8 @@ namespace Microsoft.Interop
             // Insert the unmanaged element type into the marshaller type
             TypeSyntax unmanagedElementType = elementMarshaller
                 .AsNativeType(elementInfo)
-                .Syntax.GetCompatibleGenericTypeParameterSyntax();
+                .Syntax
+                .GetCompatibleGenericTypeParameterSyntax();
             ManagedTypeInfo marshallerType = marshallerData.MarshallerType;
             TypeSyntax marshallerTypeSyntax = ReplacePlaceholderSyntaxWithUnmanagedTypeSyntax(
                 marshallerType.Syntax,

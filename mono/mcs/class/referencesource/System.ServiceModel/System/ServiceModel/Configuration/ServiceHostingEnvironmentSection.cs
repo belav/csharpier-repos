@@ -25,9 +25,9 @@ namespace System.ServiceModel.Configuration
 
             if (
                 PropertyValueOrigin.SetHere
-                == ElementInformation.Properties[
-                    ConfigurationStrings.MinFreeMemoryPercentageToActivateService
-                ].ValueOrigin
+                == ElementInformation
+                    .Properties[ConfigurationStrings.MinFreeMemoryPercentageToActivateService]
+                    .ValueOrigin
             )
             {
                 try

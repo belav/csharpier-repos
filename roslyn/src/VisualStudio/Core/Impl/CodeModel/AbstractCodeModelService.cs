@@ -344,7 +344,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 var obj = project
                     .GetRequiredCompilationAsync(CancellationToken.None)
-                    .Result.GetSpecialType(SpecialType.System_Object);
+                    .Result
+                    .GetSpecialType(SpecialType.System_Object);
                 return (EnvDTE.CodeElement)ExternalCodeClass.Create(state, projectId, obj);
             }
 

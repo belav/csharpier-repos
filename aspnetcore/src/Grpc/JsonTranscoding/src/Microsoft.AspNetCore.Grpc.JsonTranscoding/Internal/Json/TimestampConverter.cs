@@ -34,10 +34,10 @@ internal sealed class TimestampConverter<TMessage> : SettingsConverterBase<TMess
         }
         else
         {
-            message.Descriptor.Fields[Timestamp.SecondsFieldNumber].Accessor.SetValue(
-                message,
-                seconds
-            );
+            message.Descriptor
+                .Fields[Timestamp.SecondsFieldNumber]
+                .Accessor
+                .SetValue(message, seconds);
             message.Descriptor.Fields[Timestamp.NanosFieldNumber].Accessor.SetValue(message, nanos);
         }
         return message;

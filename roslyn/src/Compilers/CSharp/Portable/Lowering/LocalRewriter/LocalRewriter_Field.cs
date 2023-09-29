@@ -126,9 +126,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     rewrittenReceiver = _factory.Field(rewrittenReceiver, nestedFieldSymbol);
 
                     currentLinkType = (NamedTypeSymbol)
-                        currentLinkType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            NamedTypeSymbol.ValueTupleRestPosition - 1
-                        ].Type;
+                        currentLinkType
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
+                                NamedTypeSymbol.ValueTupleRestPosition - 1
+                            ]
+                            .Type;
                 } while (
                     !TypeSymbol.Equals(
                         underlyingField.ContainingType,

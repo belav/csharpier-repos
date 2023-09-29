@@ -6470,9 +6470,10 @@ class Program
             Assert.True(methodParam.IsMetadataIn);
             Assert.True(methodParam.IsMetadataOut);
 
-            var localFunctionParam = verifier.FindLocalFunction("local").Parameters[
-                0
-            ].GetSymbol<ParameterSymbol>();
+            var localFunctionParam = verifier
+                .FindLocalFunction("local")
+                .Parameters[0]
+                .GetSymbol<ParameterSymbol>();
             Assert.True(localFunctionParam.IsMetadataIn);
             Assert.True(localFunctionParam.IsMetadataOut);
 
@@ -6535,9 +6536,10 @@ class Program
             Assert.True(methodParam.IsMetadataIn);
             Assert.False(methodParam.IsMetadataOut);
 
-            var localFunctionParam = verifier.FindLocalFunction("local").Parameters[
-                0
-            ].GetSymbol<ParameterSymbol>();
+            var localFunctionParam = verifier
+                .FindLocalFunction("local")
+                .Parameters[0]
+                .GetSymbol<ParameterSymbol>();
             Assert.True(localFunctionParam.IsMetadataIn);
             Assert.False(localFunctionParam.IsMetadataOut);
 
@@ -6601,9 +6603,10 @@ class Program
             Assert.False(methodParam.IsMetadataIn);
             Assert.True(methodParam.IsMetadataOut);
 
-            var localFunctionParam = verifier.FindLocalFunction("local").Parameters[
-                0
-            ].GetSymbol<ParameterSymbol>();
+            var localFunctionParam = verifier
+                .FindLocalFunction("local")
+                .Parameters[0]
+                .GetSymbol<ParameterSymbol>();
             Assert.False(localFunctionParam.IsMetadataIn);
             Assert.True(localFunctionParam.IsMetadataOut);
 

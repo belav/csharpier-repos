@@ -432,7 +432,8 @@ namespace Mono.ILASM
                 string version = System.Reflection.Assembly
                     .GetExecutingAssembly()
                     .GetName()
-                    .Version.ToString();
+                    .Version
+                    .ToString();
                 Console.WriteLine("Mono IL assembler compiler version {0}", version);
                 Environment.Exit(0);
             }

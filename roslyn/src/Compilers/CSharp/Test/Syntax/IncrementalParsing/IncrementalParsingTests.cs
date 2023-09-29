@@ -1902,10 +1902,14 @@ namespace N"
 
             // Verify that the first child node of the root is equivalent between incremental tree and full parse tree
             Assert.Equal(
-                parsedTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0]
+                parsedTree
+                    .GetCompilationUnitRoot()
+                    .ChildNodesAndTokens()[0]
                     .AsNode()
                     .ToFullString(),
-                incrementalTree.GetCompilationUnitRoot().ChildNodesAndTokens()[0]
+                incrementalTree
+                    .GetCompilationUnitRoot()
+                    .ChildNodesAndTokens()[0]
                     .AsNode()
                     .ToFullString()
             );

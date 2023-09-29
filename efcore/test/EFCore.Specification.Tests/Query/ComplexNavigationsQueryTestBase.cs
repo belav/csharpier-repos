@@ -2361,7 +2361,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             ss.Set<Level2>()
                                 .OrderBy(l2i => l2i.Id)
                                 .First()
-                                .OneToOne_Required_FK_Inverse2.Name
+                                .OneToOne_Required_FK_Inverse2
+                                .Name
                     )
         );
 
@@ -2382,7 +2383,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     select new { Navigation = l2i.OneToOne_Required_FK_Inverse2, Constant = 7 }
                 )
                     .First()
-                    .Navigation.Name
+                    .Navigation
+                    .Name
         );
 
     [ConditionalTheory]
@@ -3278,7 +3280,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             ss.Set<Level2>()
                                 .OrderBy(l => l.Id)
                                 .First()
-                                .OneToOne_Required_FK_Inverse2.Name
+                                .OneToOne_Required_FK_Inverse2
+                                .Name
                     )
         );
 
@@ -3294,7 +3297,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             ss.Set<Level2>()
                                 .OrderBy(l => l.Id)
                                 .First()
-                                .OneToOne_Required_FK_Inverse2.Name == "L1 02"
+                                .OneToOne_Required_FK_Inverse2
+                                .Name == "L1 02"
                     )
         );
 
@@ -3310,7 +3314,9 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             ss.Set<Level3>()
                                 .OrderBy(l => l.Id)
                                 .First()
-                                .OneToOne_Required_FK_Inverse3.OneToOne_Required_FK_Inverse2.Name
+                                .OneToOne_Required_FK_Inverse3
+                                .OneToOne_Required_FK_Inverse2
+                                .Name
                     )
         );
 
@@ -4242,7 +4248,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                             l1.OneToMany_Optional1
                                 .OrderBy(l2 => l2.Id)
                                 .FirstOrDefault()
-                                .OneToMany_Optional2.OrderBy(l3 => l3.Id)
+                                .OneToMany_Optional2
+                                .OrderBy(l3 => l3.Id)
                                 .FirstOrDefault()
                                 .Name
                     ),
@@ -4982,7 +4989,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                                 Pushdown = l1.OneToMany_Optional1
                                     .Where(x => x.Name == "L2 02")
                                     .FirstOrDefault()
-                                    .OneToMany_Optional2.ToList()
+                                    .OneToMany_Optional2
+                                    .ToList()
                             }
                     ),
             elementSorter: e => e.Id,
@@ -5011,7 +5019,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                                 Pushdown = l1.OneToMany_Optional1
                                     .Where(x => x.Name == "L2 02")
                                     .FirstOrDefault()
-                                    .OneToMany_Optional2.OrderBy(x => x.Id)
+                                    .OneToMany_Optional2
+                                    .OrderBy(x => x.Id)
                                     .FirstOrDefault()
                                     .Name
                             }

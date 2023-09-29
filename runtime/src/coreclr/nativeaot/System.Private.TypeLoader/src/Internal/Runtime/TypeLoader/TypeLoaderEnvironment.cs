@@ -464,9 +464,9 @@ namespace Internal.Runtime.TypeLoader
                     if (!EnsureTypeHandleForType(parsedMethod.Instantiation[i]))
                         return false;
 
-                    genericMethodTypeArgumentHandles[i] = parsedMethod.Instantiation[
-                        i
-                    ].RuntimeTypeHandle;
+                    genericMethodTypeArgumentHandles[i] = parsedMethod
+                        .Instantiation[i]
+                        .RuntimeTypeHandle;
                 }
             }
 

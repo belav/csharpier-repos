@@ -237,7 +237,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var project = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
                 .AddAdditionalDocument("Test.txt", "Hello, world!")
-                .Project.AddAdditionalDocument("Test2.txt", "Hello, world!")
+                .Project
+                .AddAdditionalDocument("Test2.txt", "Hello, world!")
                 .Project;
 
             var compilation = await project.GetRequiredCompilationAsync(CancellationToken.None);
@@ -251,9 +252,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(2, compilation.SyntaxTrees.Count());
             Assert.Equal(
                 2,
-                runResult.TrackedSteps[
-                    GenerateFileForEachAdditionalFileWithContentsCommented.StepName
-                ].Length
+                runResult
+                    .TrackedSteps[GenerateFileForEachAdditionalFileWithContentsCommented.StepName]
+                    .Length
             );
             Assert.All(
                 runResult.TrackedSteps[
@@ -290,9 +291,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(2, compilation.SyntaxTrees.Count());
             Assert.Equal(
                 2,
-                runResult.TrackedSteps[
-                    GenerateFileForEachAdditionalFileWithContentsCommented.StepName
-                ].Length
+                runResult
+                    .TrackedSteps[GenerateFileForEachAdditionalFileWithContentsCommented.StepName]
+                    .Length
             );
             Assert.Contains(
                 runResult.TrackedSteps[
@@ -332,9 +333,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(3, compilation.SyntaxTrees.Count());
             Assert.Equal(
                 2,
-                runResult.TrackedSteps[
-                    GenerateFileForEachAdditionalFileWithContentsCommented.StepName
-                ].Length
+                runResult
+                    .TrackedSteps[GenerateFileForEachAdditionalFileWithContentsCommented.StepName]
+                    .Length
             );
             Assert.All(
                 runResult.TrackedSteps[
@@ -368,7 +369,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var project = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
                 .AddDocument("Hello.cs", "// Source File")
-                .Project.AddAdditionalDocument("Test.txt", "Hello, world!")
+                .Project
+                .AddAdditionalDocument("Test.txt", "Hello, world!")
                 .Project;
 
             var documentId = project.DocumentIds.Single();
@@ -381,7 +383,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             project = project.Solution
                 .WithDocumentText(documentId, SourceText.From("// Changed Source File"))
-                .Projects.Single();
+                .Projects
+                .Single();
 
             await AssertCompilationContainsOneRegularAndOneGeneratedFile(
                 project,
@@ -447,7 +450,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     additionalDocumentId,
                     SourceText.From("Hello, everyone!")
                 )
-                .Projects.Single();
+                .Projects
+                .Single();
 
             if (assertAfterFirstChange)
                 await AssertCompilationContainsGeneratedFilesAsync(project, "// Hello, everyone!");
@@ -457,7 +461,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     additionalDocumentId,
                     SourceText.From("Good evening, everyone!")
                 )
-                .Projects.Single();
+                .Projects
+                .Single();
 
             if (assertAfterSecondChange)
                 await AssertCompilationContainsGeneratedFilesAsync(
@@ -497,7 +502,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var project = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
                 .AddDocument("Hello.cs", "// Source File")
-                .Project.AddAdditionalDocument("Test.txt", "Hello, world!")
+                .Project
+                .AddAdditionalDocument("Test.txt", "Hello, world!")
                 .Project;
 
             var fullCompilation = await project.GetRequiredCompilationAsync(CancellationToken.None);
@@ -537,7 +543,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     projectBeforeChange.AdditionalDocumentIds.Single(),
                     SourceText.From("Hello, world!!!!")
                 )
-                .Projects.Single();
+                .Projects
+                .Single();
 
             var generatedDocumentAfterChange = Assert.Single(
                 await projectAfterChange.GetSourceGeneratedDocumentsAsync()
@@ -602,7 +609,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
                 .AddAdditionalDocument("Test.txt", "Hello, world!")
-                .Project.Solution;
+                .Project
+                .Solution;
 
             var projectIdWithGenerator = solution.ProjectIds.Single();
             var projectIdWithReference = ProjectId.CreateNewId();
@@ -666,7 +674,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var project = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
                 .AddDocument("RegularDocument.cs", "// Source File", filePath: "RegularDocument.cs")
-                .Project.AddAdditionalDocument("Test.txt", "Hello, world!")
+                .Project
+                .AddAdditionalDocument("Test.txt", "Hello, world!")
                 .Project;
 
             // Ensure we've ran generators at least once
@@ -700,7 +709,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var project = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
                 .AddDocument("RegularDocument.cs", "// Source File", filePath: "RegularDocument.cs")
-                .Project.AddAdditionalDocument("Test.txt", "Hello, world!")
+                .Project
+                .AddAdditionalDocument("Test.txt", "Hello, world!")
                 .Project;
 
             var generatedTreeBeforeChange = await Assert
@@ -727,7 +737,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var project = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference)
                 .AddDocument("RegularDocument.cs", "// Source File", filePath: "RegularDocument.cs")
-                .Project.AddAdditionalDocument("Test.txt", "Hello, world!")
+                .Project
+                .AddAdditionalDocument("Test.txt", "Hello, world!")
                 .Project;
 
             var generatedTreeBeforeChange = await Assert
@@ -1174,7 +1185,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             project = project.Solution
                 .AddDocument(documentInfo)
-                .Projects.Single()
+                .Projects
+                .Single()
                 .AddAnalyzerReference(analyzerReference);
 
             _ = await project.GetCompilationAsync();

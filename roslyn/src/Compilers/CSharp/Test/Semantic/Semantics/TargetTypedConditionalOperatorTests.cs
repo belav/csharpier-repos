@@ -491,7 +491,8 @@ delegate int Del(int x);
                     naturalType,
                     model
                         .GetTypeInfo(conditionalExpr)
-                        .Type.ToTestDisplayString(includeNonNullable: false)
+                        .Type
+                        .ToTestDisplayString(includeNonNullable: false)
                 );
             }
 
@@ -504,7 +505,8 @@ delegate int Del(int x);
                 convertedType,
                 model
                     .GetTypeInfo(conditionalExpr)
-                    .ConvertedType.ToTestDisplayString(includeNonNullable: false)
+                    .ConvertedType
+                    .ToTestDisplayString(includeNonNullable: false)
             );
 
             if (!expectedDiagnostics.Any())
@@ -517,13 +519,15 @@ delegate int Del(int x);
                     convertedType,
                     model
                         .GetTypeInfo(conditionalExpr.WhenTrue)
-                        .ConvertedType.ToTestDisplayString(includeNonNullable: false)
+                        .ConvertedType
+                        .ToTestDisplayString(includeNonNullable: false)
                 ); //in parent to catch conversion
                 Assert.Equal(
                     convertedType,
                     model
                         .GetTypeInfo(conditionalExpr.WhenFalse)
-                        .ConvertedType.ToTestDisplayString(includeNonNullable: false)
+                        .ConvertedType
+                        .ToTestDisplayString(includeNonNullable: false)
                 ); //in parent to catch conversion
             }
         }

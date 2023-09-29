@@ -1021,9 +1021,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(result.Result.BadArgumentsOpt.Length == 1);
             Debug.Assert(arguments.Names[result.Result.BadArgumentsOpt[0]].HasValue);
-            (string name, Location location) = arguments.Names[
-                result.Result.BadArgumentsOpt[0]
-            ].GetValueOrDefault();
+            (string name, Location location) = arguments
+                .Names[result.Result.BadArgumentsOpt[0]]
+                .GetValueOrDefault();
             Debug.Assert(name != null);
 
             // CS: Named argument '{0}' cannot be specified multiple times

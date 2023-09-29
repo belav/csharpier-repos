@@ -260,7 +260,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 workspace.TryApplyChanges(
                     project
                         .AddAnalyzerConfigDocument(".editorconfig", SourceText.From(""))
-                        .Project.Solution
+                        .Project
+                        .Solution
                 )
             );
         }

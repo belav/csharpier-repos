@@ -63,9 +63,9 @@ namespace System.Workflow.ComponentModel.Design
                     if (index < connectorsCount)
                         return designer.Connectors[index].AccessibilityObject;
                     else
-                        return designer.ContainedDesigners[
-                            index - connectorsCount
-                        ].AccessibilityObject;
+                        return designer
+                            .ContainedDesigners[index - connectorsCount]
+                            .AccessibilityObject;
                 }
                 else
                 {
@@ -73,9 +73,9 @@ namespace System.Workflow.ComponentModel.Design
                     if (index < containedDesignersCount)
                         return designer.ContainedDesigners[index].AccessibilityObject;
                     else
-                        return designer.Connectors[
-                            index - containedDesignersCount
-                        ].AccessibilityObject;
+                        return designer
+                            .Connectors[index - containedDesignersCount]
+                            .AccessibilityObject;
                 }
             }
 

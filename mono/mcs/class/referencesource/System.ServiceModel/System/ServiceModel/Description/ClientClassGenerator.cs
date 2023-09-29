@@ -375,9 +375,10 @@ namespace System.ServiceModel.Description
                 helperMethod = GenerateHelperMethod(declaringContractTypeRef, methodImpl);
                 if (helperMethod != null)
                 {
-                    clientType.Members[methodPosition].CustomAttributes.Add(
-                        CreateEditorBrowsableAttribute(EditorBrowsableState.Advanced)
-                    );
+                    clientType
+                        .Members[methodPosition]
+                        .CustomAttributes
+                        .Add(CreateEditorBrowsableAttribute(EditorBrowsableState.Advanced));
                     clientType.Members.Add(helperMethod);
                 }
             }

@@ -156,10 +156,12 @@ public class JsonQueryExpression : Expression, IPrintableExpression
         var newKeyPropertyMap = new Dictionary<IProperty, ColumnExpression>();
         var targetPrimaryKeyProperties = targetEntityType
             .FindPrimaryKey()!
-            .Properties.Take(_keyPropertyMap.Count);
+            .Properties
+            .Take(_keyPropertyMap.Count);
         var sourcePrimaryKeyProperties = EntityType
             .FindPrimaryKey()!
-            .Properties.Take(_keyPropertyMap.Count);
+            .Properties
+            .Take(_keyPropertyMap.Count);
         foreach (
             var (target, source) in targetPrimaryKeyProperties.Zip(
                 sourcePrimaryKeyProperties,

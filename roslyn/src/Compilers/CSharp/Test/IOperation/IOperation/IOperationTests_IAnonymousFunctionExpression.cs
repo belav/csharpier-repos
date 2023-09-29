@@ -478,8 +478,10 @@ class Program
                 (IDelegateCreationOperation)
                     variableDeclarationGroupOperation.Declarations
                         .Single()
-                        .Declarators.Single()
-                        .Initializer.Value
+                        .Declarators
+                        .Single()
+                        .Initializer
+                        .Value
             ).Target;
             var lambdaOperation = (IAnonymousFunctionOperation)
                 semanticModel.GetOperation(lambdaSyntax);
@@ -494,8 +496,10 @@ class Program
                 (IDelegateCreationOperation)
                     variableDeclarationGroupOperationSecondRequest.Declarations
                         .Single()
-                        .Declarators.Single()
-                        .Initializer.Value
+                        .Declarators
+                        .Single()
+                        .Initializer
+                        .Value
             ).Target;
             var lambdaOperationSecondRequest = (IAnonymousFunctionOperation)
                 semanticModel.GetOperation(lambdaSyntax);

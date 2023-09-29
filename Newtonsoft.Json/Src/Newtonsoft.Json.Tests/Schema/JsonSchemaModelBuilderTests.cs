@@ -127,39 +127,46 @@ namespace Newtonsoft.Json.Tests.Schema
             );
             Assert.AreEqual(
                 9,
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].MaximumLength
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .MaximumLength
             );
             Assert.AreEqual(
                 7,
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].MinimumLength
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .MinimumLength
             );
             Assert.AreEqual(
                 2,
-                model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"]
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
                     .Patterns
                     .Count
             );
             Assert.AreEqual(
                 "hi",
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].Patterns[0]
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .Patterns[0]
             );
             Assert.AreEqual(
                 "hi2u",
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].Patterns[1]
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .Patterns[1]
             );
             Assert.AreEqual(
                 null,
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].Properties
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .Properties
             );
             Assert.AreEqual(
                 null,
@@ -167,9 +174,10 @@ namespace Newtonsoft.Json.Tests.Schema
             );
             Assert.AreEqual(
                 null,
-                model.Properties["thirdproperty"].Properties[
-                    "thirdproperty_firstproperty"
-                ].AdditionalProperties
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .AdditionalProperties
             );
         }
 

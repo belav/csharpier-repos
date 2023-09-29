@@ -181,10 +181,12 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 var end = FadeOutOperatorToken
                     ? syntaxFacts
                         .GetOperatorTokenOfMemberAccessExpression(match.MemberAccessExpression)
-                        .Span.End
+                        .Span
+                        .End
                     : syntaxFacts
                         .GetExpressionOfMemberAccessExpression(match.MemberAccessExpression)!
-                        .Span.End;
+                        .Span
+                        .End;
 
                 var location1 = Location.Create(
                     syntaxTree,

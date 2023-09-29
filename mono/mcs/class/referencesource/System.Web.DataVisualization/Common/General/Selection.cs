@@ -1814,11 +1814,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 )
                 {
                     // Take tool tip from data point
-                    toolTipText = _chartControl.Series[seriesName].Points[
-                        dataPointIndex
-                    ].ReplaceKeywords(
-                        _chartControl.Series[seriesName].Points[dataPointIndex].ToolTip
-                    );
+                    toolTipText = _chartControl
+                        .Series[seriesName]
+                        .Points[dataPointIndex]
+                        .ReplaceKeywords(
+                            _chartControl.Series[seriesName].Points[dataPointIndex].ToolTip
+                        );
                 }
                 else
                 {
@@ -1841,11 +1842,12 @@ namespace System.Web.UI.DataVisualization.Charting
                 )
                 {
                     // Take tool tip from data point
-                    toolTipText = _chartControl.Series[seriesName].Points[
-                        dataPointIndex
-                    ].ReplaceKeywords(
-                        _chartControl.Series[seriesName].Points[dataPointIndex].LabelToolTip
-                    );
+                    toolTipText = _chartControl
+                        .Series[seriesName]
+                        .Points[dataPointIndex]
+                        .ReplaceKeywords(
+                            _chartControl.Series[seriesName].Points[dataPointIndex].LabelToolTip
+                        );
                 }
             }
 
@@ -1904,9 +1906,9 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (seriesName.Length > 0)
                         {
                             // Take tool tip from series
-                            toolTipText = _chartControl.Series[seriesName].ReplaceKeywords(
-                                _chartControl.Series[seriesName].LegendToolTip
-                            );
+                            toolTipText = _chartControl
+                                .Series[seriesName]
+                                .ReplaceKeywords(_chartControl.Series[seriesName].LegendToolTip);
                         }
                     }
                     else
@@ -1917,13 +1919,15 @@ namespace System.Web.UI.DataVisualization.Charting
                         )
                         {
                             // Take tool tip from data point
-                            toolTipText = _chartControl.Series[seriesName].Points[
-                                dataPointIndex
-                            ].ReplaceKeywords(
-                                _chartControl.Series[seriesName].Points[
-                                    dataPointIndex
-                                ].LegendToolTip
-                            );
+                            toolTipText = _chartControl
+                                .Series[seriesName]
+                                .Points[dataPointIndex]
+                                .ReplaceKeywords(
+                                    _chartControl
+                                        .Series[seriesName]
+                                        .Points[dataPointIndex]
+                                        .LegendToolTip
+                                );
                         }
                     }
                 }

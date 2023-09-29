@@ -3224,7 +3224,8 @@ public class InternalForeignKeyBuilder
                 {
                     principalKey = principalEntityTypeBuilder.Metadata
                         .RootType()
-                        .Builder.HasKey(principalProperties, configurationSource)!
+                        .Builder
+                        .HasKey(principalProperties, configurationSource)!
                         .Metadata;
                 }
 
@@ -3857,7 +3858,8 @@ public class InternalForeignKeyBuilder
                 principalProperties != null
                     ? principalEntityType
                         .RootType()
-                        .Builder.HasKey(principalProperties, configurationSource)!
+                        .Builder
+                        .HasKey(principalProperties, configurationSource)!
                         .Metadata
                     : principalEntityType.FindPrimaryKey();
             if (principalKey != null)

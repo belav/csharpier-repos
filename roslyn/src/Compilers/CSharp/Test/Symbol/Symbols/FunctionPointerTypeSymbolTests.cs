@@ -70,7 +70,9 @@ class C
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single()
-                .ParameterList.Parameters.Single()
+                .ParameterList
+                .Parameters
+                .Single()
                 .Type;
 
             FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
@@ -917,7 +919,9 @@ class C
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single()
-                .ParameterList.Parameters.Single()
+                .ParameterList
+                .Parameters
+                .Single()
                 .Type;
 
             FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
@@ -1573,7 +1577,8 @@ class C
                 (ArrayTypeSyntax)functionPointerTypeSyntax.ParameterList.Parameters.Single().Type!
             ).RankSpecifiers
                 .Single()
-                .Sizes.Single();
+                .Sizes
+                .Single();
 
             var a = (ILocalSymbol)model.GetSymbolInfo(misplacedDeclaration).Symbol!;
             Assert.NotNull(a);
@@ -2309,8 +2314,10 @@ unsafe class C
                 "System.Runtime.InteropServices.OutAttribute[missing]",
                 ptr.Signature.Parameters
                     .Single()
-                    .RefCustomModifiers.Single()
-                    .Modifier.ToTestDisplayString()
+                    .RefCustomModifiers
+                    .Single()
+                    .Modifier
+                    .ToTestDisplayString()
             );
         }
 

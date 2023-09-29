@@ -43,7 +43,8 @@ public class NotMappedMemberAttributeConvention : IEntityTypeAddedConvention
         var entityType = entityTypeBuilder.Metadata;
         var members = entityType
             .GetRuntimeProperties()
-            .Values.Cast<MemberInfo>()
+            .Values
+            .Cast<MemberInfo>()
             .Concat(entityType.GetRuntimeFields().Values);
 
         foreach (var member in members)

@@ -3471,7 +3471,8 @@ record struct R(in int P1);
             var verifier = CompileAndVerify(comp, expectedOutput: "(42, 43)");
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(in System.Int32 P1)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -3493,7 +3494,8 @@ record struct R(params int[] Array);
             CompileAndVerify(comp, expectedOutput: "(42, 43, 44, 45)");
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(params System.Int32[] Array)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }

@@ -59,7 +59,8 @@ namespace IdeCoreBenchmarks
             var document = solution.GetDocument(documentId);
             var root = document
                 .GetSyntaxRootAsync(CancellationToken.None)
-                .Result.WithAdditionalAnnotations(Formatter.Annotation);
+                .Result
+                .WithAdditionalAnnotations(Formatter.Annotation);
             solution = solution.WithDocumentSyntaxRoot(documentId, root);
 
             _document = solution.GetDocument(documentId);

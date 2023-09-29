@@ -766,7 +766,8 @@ namespace Internal.Runtime.TypeLoader
             {
                 RuntimeTypeHandle thBaseTypeTemplate = type.RuntimeTypeHandle
                     .ToEETypePtr()
-                    ->BaseType->ToRuntimeTypeHandle();
+                    ->BaseType
+                    ->ToRuntimeTypeHandle();
                 if (thBaseTypeTemplate.IsNull())
                     return null;
 

@@ -199,7 +199,8 @@ namespace HttpStress
                         fileSizeLimitBytes: 100 << 20,
                         rollOnFileSizeLimit: true
                     )
-                    .MinimumLevel.Debug();
+                    .MinimumLevel
+                    .Debug();
             }
             if (configuration.LogAspNet)
             {

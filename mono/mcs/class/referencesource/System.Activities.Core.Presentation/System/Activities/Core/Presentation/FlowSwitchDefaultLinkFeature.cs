@@ -19,7 +19,8 @@ namespace System.Activities.Core.Presentation
             if (
                 context.Services
                     .GetService<DesignerConfigurationService>()
-                    .TargetFrameworkName.IsLessThan45()
+                    .TargetFrameworkName
+                    .IsLessThan45()
             )
             {
                 AttributeTableBuilder builder = new AttributeTableBuilder();

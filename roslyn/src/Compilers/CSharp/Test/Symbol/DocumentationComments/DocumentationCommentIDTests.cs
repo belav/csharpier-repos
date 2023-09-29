@@ -291,7 +291,8 @@ class C
             var symbol = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
-                .Parameters.Single();
+                .Parameters
+                .Single();
             Assert.Equal(SymbolKind.Parameter, symbol.Kind);
             Assert.Null(symbol.GetDocumentationCommentId());
         }

@@ -203,9 +203,10 @@ namespace System.ServiceModel.Activities
                     "Client side contract should have exactly one operation!"
                 );
 
-                serviceEndpoint.Contract.Operations[0].Behaviors.Add(
-                    new TransactionFlowAttribute(TransactionFlowOption.Allowed)
-                );
+                serviceEndpoint.Contract
+                    .Operations[0]
+                    .Behaviors
+                    .Add(new TransactionFlowAttribute(TransactionFlowOption.Allowed));
             }
             else
             {

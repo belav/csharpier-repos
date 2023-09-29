@@ -2767,9 +2767,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics,
                     ErrorCode.ERR_ExpressionTreeMustHaveDelegate,
                     syntax,
-                    ((NamedTypeSymbol)targetType).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                        0
-                    ].Type
+                    ((NamedTypeSymbol)targetType)
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                        .Type
                 );
                 return;
             }

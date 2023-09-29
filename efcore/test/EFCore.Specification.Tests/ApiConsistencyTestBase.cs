@@ -983,7 +983,9 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                             != "relationalDependencies"
                     )
                     // Check that the parameter has a non-public copy constructor, identifying C# 9 records
-                    || !it.GetConstructors()[0].GetParameters()[0].ParameterType
+                    || !it.GetConstructors()[0]
+                        .GetParameters()[0]
+                        .ParameterType
                         .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
                         .Any(
                             c =>

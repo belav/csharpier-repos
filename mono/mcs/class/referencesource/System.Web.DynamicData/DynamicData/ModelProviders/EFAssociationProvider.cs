@@ -191,7 +191,8 @@ namespace System.Web.DynamicData.ModelProviders
                     // Get the primary keys on the "from" side of the relationship. i.e Product.Category -> ProductID
                     return navigationProperty.FromEndMember
                         .GetEntityType()
-                        .KeyMembers.Select(m => m.Name);
+                        .KeyMembers
+                        .Select(m => m.Name);
                 }
             }
             return navigationProperty.GetDependentProperties().Select(m => m.Name);

@@ -1412,7 +1412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         isChecked: false,
                         ref useSiteInfo
                     )
-                    .Kind.IsImplicitConversion()
+                    .Kind
+                    .IsImplicitConversion()
             )
             {
                 // error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type

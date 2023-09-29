@@ -3249,7 +3249,8 @@ namespace A
             );
 
             var expr = tree.FindNodeOrTokenByKind(SyntaxKind.StringLiteralToken)
-                .Parent.FirstAncestorOrSelf<ExpressionStatementSyntax>()
+                .Parent
+                .FirstAncestorOrSelf<ExpressionStatementSyntax>()
                 .Expression;
 
             var global = compilation.GlobalNamespace;
@@ -4308,7 +4309,11 @@ class Program
                             .IndexOf("Main", StringComparison.Ordinal)
                     )
                     .Parent;
-            IdentifierNameSyntax x = methodDecl.Body.Statements[0].Declaration.Variables[0]
+            IdentifierNameSyntax x = methodDecl
+                .Body
+                .Statements[0]
+                .Declaration
+                .Variables[0]
                 .Initializer
                 .Value
                 .Body;
@@ -4330,7 +4335,8 @@ class Program
 
             var globalStmt = tree.GetCompilationUnitRoot()
                 .FindToken(tree.GetCompilationUnitRoot().ToFullString().IndexOf('/'))
-                .Parent.AncestorsAndSelf()
+                .Parent
+                .AncestorsAndSelf()
                 .Single(x => x.IsKind(SyntaxKind.GlobalStatement));
 
             var symbol = model.GetDeclaredSymbol(globalStmt);
@@ -4658,7 +4664,9 @@ public class X { }
                 (
                     (ClassDeclarationSyntax)
                         ((CompilationUnitSyntax)tree2.GetCompilationUnitRoot()).Members[0]
-                ).AttributeLists[0].Attributes[0];
+                )
+                    .AttributeLists[0]
+                    .Attributes[0];
             var model = c2.GetSemanticModel(tree2);
 
             var symbolInfo = model.GetSymbolInfo(attr);
@@ -4855,10 +4863,13 @@ class M {
         {
             return SyntaxFactory
                 .ParseCompilationUnit(source + " class X {}")
-                .Members.First()
+                .Members
+                .First()
                 .AsTypeDeclarationSyntax()
-                .AttributeLists.First()
-                .Attributes.First();
+                .AttributeLists
+                .First()
+                .Attributes
+                .First();
         }
 
         [WorkItem(653957, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/653957")]
@@ -5215,8 +5226,10 @@ class C {
 
             var attr8 = SyntaxFactory
                 .ParseCompilationUnit(@"[assembly: O(""hello"")]")
-                .AttributeLists.First()
-                .Attributes.First();
+                .AttributeLists
+                .First()
+                .Attributes
+                .First();
 
             success = parentModel.TryGetSpeculativeSemanticModel(
                 position3,

@@ -167,7 +167,8 @@ namespace B
             var additionalDocument = workspace.CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("test.cs", "", filePath: "test.cs")
-                .Project.AddAdditionalDocument(
+                .Project
+                .AddAdditionalDocument(
                     "AdditionalDocument.txt",
                     "First line in file",
                     filePath: "AdditionalDocument.txt"

@@ -1358,9 +1358,9 @@ namespace System.Net.Mail
                         }
                         else if ((int)info.StatusCode == 235)
                         {
-                            thisPtr.connection.authenticationModules[
-                                thisPtr.currentModule
-                            ].CloseContext(thisPtr.connection);
+                            thisPtr.connection
+                                .authenticationModules[thisPtr.currentModule]
+                                .CloseContext(thisPtr.connection);
                             thisPtr.connection.isConnected = true;
                             thisPtr.InvokeCallback();
                             return;
@@ -1381,15 +1381,15 @@ namespace System.Net.Mail
                 {
                     // We don't need credential on the continued auth assuming they were captured on the first call.
                     // That should always work, otherwise what if a new credential has been returned?
-                    Authorization auth = connection.authenticationModules[
-                        currentModule
-                    ].Authenticate(
-                        authResponse,
-                        null,
-                        connection,
-                        connection.client.TargetName,
-                        connection.channelBindingToken
-                    );
+                    Authorization auth = connection
+                        .authenticationModules[currentModule]
+                        .Authenticate(
+                            authResponse,
+                            null,
+                            connection,
+                            connection.client.TargetName,
+                            connection.channelBindingToken
+                        );
                     if (auth == null)
                     {
                         throw new SmtpException(SR.GetString(SR.SmtpAuthenticationFailed));
@@ -1433,9 +1433,9 @@ namespace System.Net.Mail
                         LineInfo info = AuthCommand.EndSend(result);
                         if ((int)info.StatusCode == 235)
                         {
-                            thisPtr.connection.authenticationModules[
-                                thisPtr.currentModule
-                            ].CloseContext(thisPtr.connection);
+                            thisPtr.connection
+                                .authenticationModules[thisPtr.currentModule]
+                                .CloseContext(thisPtr.connection);
                             thisPtr.connection.isConnected = true;
                             thisPtr.InvokeCallback();
                             return;

@@ -138,9 +138,10 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
             RegexOptions.Multiline
         ).Match(serviceWorkerAssetsManifestContents);
         Assert.True(serviceWorkerAssetsManifestVersionMatch.Success);
-        var serviceWorkerAssetsManifestVersionJson = serviceWorkerAssetsManifestVersionMatch.Groups[
-            1
-        ].Captures[0].Value;
+        var serviceWorkerAssetsManifestVersionJson = serviceWorkerAssetsManifestVersionMatch
+            .Groups[1]
+            .Captures[0]
+            .Value;
         var serviceWorkerAssetsManifestVersion = JsonSerializer.Deserialize<string>(
             serviceWorkerAssetsManifestVersionJson
         );

@@ -191,9 +191,9 @@ namespace System.Workflow.Activities.Design
                 SR2.GetString(SR2.ParameterDirectionIn)
             );
             // move focus to newly added cell
-            this.parametersGrid.CurrentCell = this.parametersGrid.Rows[
-                this.parametersGrid.Rows.Count - 2
-            ].Cells[this.nameColumn.Index];
+            this.parametersGrid.CurrentCell = this.parametersGrid
+                .Rows[this.parametersGrid.Rows.Count - 2]
+                .Cells[this.nameColumn.Index];
             UpdateOperationParameters();
             RefreshParameterOperationButtons();
         }
@@ -258,9 +258,9 @@ namespace System.Workflow.Activities.Design
         {
             DataGridViewComboBoxEditingControl combo = sender as DataGridViewComboBoxEditingControl;
 
-            DataGridViewCell currentCell = this.parametersGrid.Rows[
-                combo.EditingControlRowIndex
-            ].Cells[this.typeColumn.Index];
+            DataGridViewCell currentCell = this.parametersGrid
+                .Rows[combo.EditingControlRowIndex]
+                .Cells[this.typeColumn.Index];
             if (
                 combo.DroppedDown
                 && combo.Text.Equals(SR2.GetString(SR2.BrowseType))
@@ -442,9 +442,11 @@ namespace System.Workflow.Activities.Design
                 if (
                     typeof(void).ToString().Equals(e.FormattedValue)
                     && !(
-                        this.parametersGrid.Rows[e.RowIndex].Cells[
-                            this.nameColumn.Index
-                        ].Value.Equals(SR2.GetString(SR2.ReturnValueString))
+                        this.parametersGrid
+                            .Rows[e.RowIndex]
+                            .Cells[this.nameColumn.Index]
+                            .Value
+                            .Equals(SR2.GetString(SR2.ReturnValueString))
                     )
                 )
                 {
@@ -502,9 +504,11 @@ namespace System.Workflow.Activities.Design
         {
             EnableFormCancelButton();
             if (
-                !this.parametersGrid.Rows[this.parametersGrid.RowCount - 1].Cells[
-                    this.nameColumn.Index
-                ].Value.Equals(this.ParameterTemplateRowName)
+                !this.parametersGrid
+                    .Rows[this.parametersGrid.RowCount - 1]
+                    .Cells[this.nameColumn.Index]
+                    .Value
+                    .Equals(this.ParameterTemplateRowName)
             )
             {
                 DataGridViewRow editedRow = this.parametersGrid.Rows[e.RowIndex];

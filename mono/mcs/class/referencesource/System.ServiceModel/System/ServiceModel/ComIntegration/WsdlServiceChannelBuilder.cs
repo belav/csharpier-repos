@@ -378,7 +378,8 @@ namespace System.ServiceModel.ComIntegration
         {
             Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS.ClientSection
                 .GetSection()
-                .Metadata.LoadWsdlImportExtensions();
+                .Metadata
+                .LoadWsdlImportExtensions();
 
             for (int i = 0; i < wsdlImportExtensions.Count; i++)
             {
@@ -398,7 +399,8 @@ namespace System.ServiceModel.ComIntegration
         {
             Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS.ClientSection
                 .GetSection()
-                .Metadata.LoadWsdlImportExtensions();
+                .Metadata
+                .LoadWsdlImportExtensions();
 
             for (int i = 0; i < wsdlImportExtensions.Count; i++)
             {

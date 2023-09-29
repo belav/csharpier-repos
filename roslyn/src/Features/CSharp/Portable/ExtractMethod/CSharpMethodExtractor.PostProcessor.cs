@@ -362,9 +362,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return statements;
                 }
 
-                var variable = declaration.Declaration.Variables[0].WithInitializer(
-                    SyntaxFactory.EqualsValueClause(assignmentExpression.Right)
-                );
+                var variable = declaration.Declaration
+                    .Variables[0]
+                    .WithInitializer(SyntaxFactory.EqualsValueClause(assignmentExpression.Right));
                 using var _ = ArrayBuilder<StatementSyntax>.GetInstance(out var result);
 
                 result.Add(

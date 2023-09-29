@@ -264,7 +264,8 @@ namespace Microsoft.Quic
             {
                 return ref MemoryMarshal
                     .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
-                    .Anonymous.CertificateHash;
+                    .Anonymous
+                    .CertificateHash;
             }
         }
 
@@ -274,7 +275,8 @@ namespace Microsoft.Quic
             {
                 return ref MemoryMarshal
                     .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
-                    .Anonymous.CertificateHashStore;
+                    .Anonymous
+                    .CertificateHashStore;
             }
         }
 
@@ -284,7 +286,8 @@ namespace Microsoft.Quic
             {
                 return ref MemoryMarshal
                     .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
-                    .Anonymous.CertificateContext;
+                    .Anonymous
+                    .CertificateContext;
             }
         }
 
@@ -294,7 +297,8 @@ namespace Microsoft.Quic
             {
                 return ref MemoryMarshal
                     .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
-                    .Anonymous.CertificateFile;
+                    .Anonymous
+                    .CertificateFile;
             }
         }
 
@@ -304,7 +308,8 @@ namespace Microsoft.Quic
             {
                 return ref MemoryMarshal
                     .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
-                    .Anonymous.CertificateFileProtected;
+                    .Anonymous
+                    .CertificateFileProtected;
             }
         }
 
@@ -314,7 +319,8 @@ namespace Microsoft.Quic
             {
                 return ref MemoryMarshal
                     .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
-                    .Anonymous.CertificatePkcs12;
+                    .Anonymous
+                    .CertificatePkcs12;
             }
         }
 

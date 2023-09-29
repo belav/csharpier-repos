@@ -224,11 +224,13 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
             Contract.ThrowIfTrue(fieldSymbol == null || propertySymbol == null);
 
             declarator = (TVariableDeclarator)
-                await fieldSymbol.DeclaringSyntaxReferences[0]
+                await fieldSymbol
+                    .DeclaringSyntaxReferences[0]
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
             property = GetPropertyDeclaration(
-                await propertySymbol.DeclaringSyntaxReferences[0]
+                await propertySymbol
+                    .DeclaringSyntaxReferences[0]
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false)
             );

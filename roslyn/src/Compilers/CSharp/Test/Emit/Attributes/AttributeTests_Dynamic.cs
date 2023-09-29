@@ -920,7 +920,8 @@ public delegate dynamic[] MyDelegate(dynamic[] x);
                             "System.Boolean[]",
                             dynamicAttribute.AttributeConstructor.Parameters
                                 .Single()
-                                .TypeWithAnnotations.ToTestDisplayString()
+                                .TypeWithAnnotations
+                                .ToTestDisplayString()
                         );
 
                         TypedConstant argument =

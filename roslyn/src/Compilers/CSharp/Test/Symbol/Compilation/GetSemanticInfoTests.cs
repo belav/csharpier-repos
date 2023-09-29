@@ -1900,7 +1900,8 @@ class C
 
             var indexerSymbol = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
-                .Indexers.Where(i => i.ParameterCount == 1)
+                .Indexers
+                .Where(i => i.ParameterCount == 1)
                 .Single()
                 .GetPublicSymbol();
             Assert.Equal(indexerSymbol, bindInfo.Symbol);
@@ -1943,12 +1944,14 @@ class C
 
             var indexerSymbol1 = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
-                .Indexers.Where(i => i.ParameterCount == 1)
+                .Indexers
+                .Where(i => i.ParameterCount == 1)
                 .Single()
                 .GetPublicSymbol();
             var indexerSymbol2 = comp.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
-                .Indexers.Where(i => i.ParameterCount == 2)
+                .Indexers
+                .Where(i => i.ParameterCount == 2)
                 .Single()
                 .GetPublicSymbol();
             var candidateIndexers = ImmutableArray.Create<ISymbol>(indexerSymbol1, indexerSymbol2);
@@ -3940,10 +3943,13 @@ class C
             var operatorSymbol = operators
                 .Where(
                     method =>
-                        method.Parameters[0].Type.Equals(
-                            method.Parameters[1].Type,
-                            SymbolEqualityComparer.ConsiderEverything
-                        )
+                        method
+                            .Parameters[0]
+                            .Type
+                            .Equals(
+                                method.Parameters[1].Type,
+                                SymbolEqualityComparer.ConsiderEverything
+                            )
                 )
                 .Single();
 
@@ -5084,7 +5090,8 @@ class C
             var position = text.IndexOf("< >", StringComparison.Ordinal);
             var syntax = tree.GetCompilationUnitRoot()
                 .FindToken(position)
-                .Parent.DescendantNodesAndSelf()
+                .Parent
+                .DescendantNodesAndSelf()
                 .OfType<OmittedTypeArgumentSyntax>()
                 .Single();
 
@@ -5122,7 +5129,8 @@ class C
             var position = text.IndexOf("< >", StringComparison.Ordinal);
             var syntax = tree.GetCompilationUnitRoot()
                 .FindToken(position)
-                .Parent.DescendantNodesAndSelf()
+                .Parent
+                .DescendantNodesAndSelf()
                 .OfType<OmittedTypeArgumentSyntax>()
                 .Single();
 
@@ -5161,7 +5169,8 @@ class C
             var position = text.IndexOf("S<,,,>", StringComparison.Ordinal);
             var syntax = tree.GetCompilationUnitRoot()
                 .FindToken(position)
-                .Parent.DescendantNodesAndSelf()
+                .Parent
+                .DescendantNodesAndSelf()
                 .OfType<GenericNameSyntax>()
                 .Single();
 

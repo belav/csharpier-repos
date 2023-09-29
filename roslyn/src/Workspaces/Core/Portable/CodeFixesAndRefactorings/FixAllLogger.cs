@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                     {
                         m[providerKey] = fixAllState.Provider
                             .GetType()
-                            .FullName!.GetHashCode()
+                            .FullName!
+                            .GetHashCode()
                             .ToString();
                         m[CodeActionEquivalenceKey] = fixAllState.CodeActionEquivalenceKey
                             ?.GetHashCode()

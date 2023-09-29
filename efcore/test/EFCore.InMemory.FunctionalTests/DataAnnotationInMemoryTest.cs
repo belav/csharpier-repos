@@ -38,7 +38,8 @@ public class DataAnnotationInMemoryTest
             context.Model
                 .FindEntityType(typeof(BookDetails))
                 .FindNavigation(nameof(BookDetails.AnotherBook))
-                .ForeignKey.IsRequired
+                .ForeignKey
+                .IsRequired
         );
     }
 

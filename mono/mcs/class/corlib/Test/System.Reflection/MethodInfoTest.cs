@@ -1156,9 +1156,11 @@ namespace MonoTests.System.Reflection
             var typeofT = typeof(GenericClass<>).GetGenericArguments()[0];
             var typeofK = typeof(GenericClass<>).GetMethod("Method2").GetGenericArguments()[0];
 
-            var type = typeof(GenericClass<>).GetMethod("Method").GetMethodBody().LocalVariables[
-                0
-            ].LocalType;
+            var type = typeof(GenericClass<>)
+                .GetMethod("Method")
+                .GetMethodBody()
+                .LocalVariables[0]
+                .LocalType;
             Assert.AreEqual(typeofT, type);
             Assert.AreEqual(typeof(GenericClass<>), type.DeclaringType);
 

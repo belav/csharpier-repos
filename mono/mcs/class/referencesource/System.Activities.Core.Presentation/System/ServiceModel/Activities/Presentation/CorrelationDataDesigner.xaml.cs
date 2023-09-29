@@ -161,14 +161,14 @@ namespace System.ServiceModel.Activities.Presentation
                     )
                 )
                 {
-                    this.Activity.Properties[
-                        InitializeCorrelationDesigner.CorrelationPropertyName
-                    ].SetValue(this.CorrelationHandle);
-                    ModelItemCollection correlationDataCollection = this.Activity.Properties[
-                        InitializeCorrelationDesigner.CorrelationDataPropertyName
-                    ]
+                    this.Activity
+                        .Properties[InitializeCorrelationDesigner.CorrelationPropertyName]
+                        .SetValue(this.CorrelationHandle);
+                    ModelItemCollection correlationDataCollection = this.Activity
+                        .Properties[InitializeCorrelationDesigner.CorrelationDataPropertyName]
                         .Dictionary
-                        .Properties["ItemsCollection"].Collection;
+                        .Properties["ItemsCollection"]
+                        .Collection;
                     correlationDataCollection.Clear();
                     foreach (CorrelationDataWrapper wrapper in this.CorrelationInitializeData)
                     {

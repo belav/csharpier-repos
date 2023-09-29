@@ -13197,9 +13197,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (incrementOperator is object)
                 {
-                    targetTypeOfOperandConversion = incrementOperator.Parameters[
-                        0
-                    ].TypeWithAnnotations;
+                    targetTypeOfOperandConversion = incrementOperator
+                        .Parameters[0]
+                        .TypeWithAnnotations;
                     assignmentKind = AssignmentKind.Argument;
                     parameter = incrementOperator.Parameters[0];
                 }

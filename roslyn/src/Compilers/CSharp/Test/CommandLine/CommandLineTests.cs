@@ -14130,7 +14130,8 @@ using System.Diagnostics; // Unused.
                     .CreateFromImage(
                         comp.EmitToArray(new EmitOptions(runtimeMetadataVersion: "v4.0.30319"))
                     )
-                    .Module.MetadataVersion
+                    .Module
+                    .MetadataVersion
             );
 
             comp = CreateEmptyCompilation(
@@ -14143,7 +14144,8 @@ using System.Diagnostics; // Unused.
                     .CreateFromImage(
                         comp.EmitToArray(new EmitOptions(runtimeMetadataVersion: "_+@%#*^"))
                     )
-                    .Module.MetadataVersion
+                    .Module
+                    .MetadataVersion
             );
         }
 

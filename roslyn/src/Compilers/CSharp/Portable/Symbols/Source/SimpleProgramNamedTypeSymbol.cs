@@ -42,9 +42,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             return (SynthesizedSimpleProgramEntryPointSymbol?)
-                GetSimpleProgramNamedTypeSymbol(
-                    compilation
-                )?.GetMembersAndInitializers().NonTypeMembers[0];
+                GetSimpleProgramNamedTypeSymbol(compilation)
+                    ?.GetMembersAndInitializers()
+                    .NonTypeMembers[0];
         }
 
         private static SimpleProgramNamedTypeSymbol? GetSimpleProgramNamedTypeSymbol(

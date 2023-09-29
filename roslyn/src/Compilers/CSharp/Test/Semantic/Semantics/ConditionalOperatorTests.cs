@@ -1498,13 +1498,15 @@ interface I<in T, out U> {{ }}";
                         expectedType,
                         model
                             .GetTypeInfo(conditionalExpr.WhenTrue)
-                            .ConvertedType.ToTestDisplayString()
+                            .ConvertedType
+                            .ToTestDisplayString()
                     ); //in parent to catch conversion
                     Assert.Equal(
                         expectedType,
                         model
                             .GetTypeInfo(conditionalExpr.WhenFalse)
-                            .ConvertedType.ToTestDisplayString()
+                            .ConvertedType
+                            .ToTestDisplayString()
                     ); //in parent to catch conversion
                 }
             }

@@ -780,7 +780,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 var current = solution.GetProject(projectId);
                 solution = current
                     .AddDocument($"Document{i}", SourceText.From(documents[i]))
-                    .Project.Solution;
+                    .Project
+                    .Solution;
             }
 
             for (var i = 0; i < additionalDocuments.Length; i++)
@@ -791,7 +792,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                         $"AdditionalDocument{i}",
                         SourceText.From(additionalDocuments[i])
                     )
-                    .Project.Solution;
+                    .Project
+                    .Solution;
             }
 
             for (var i = 0; i < p2pReferences.Length; i++)

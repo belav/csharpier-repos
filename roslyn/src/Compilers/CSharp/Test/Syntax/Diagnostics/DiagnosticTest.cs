@@ -2323,7 +2323,8 @@ public class C
             var errorCodeName = nodes
                 .OfType<Syntax.PragmaWarningDirectiveTriviaSyntax>()
                 .First()
-                .ErrorCodes.OfType<Syntax.IdentifierNameSyntax>()
+                .ErrorCodes
+                .OfType<Syntax.IdentifierNameSyntax>()
                 .First()
                 .Identifier;
 

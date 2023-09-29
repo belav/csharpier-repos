@@ -3316,7 +3316,8 @@ public class RelationalModelValidator : ModelValidator
 
         var ownerEntityTypeKeyPropertiesCount = ownership.PrincipalEntityType
             .FindPrimaryKey()!
-            .Properties.Count;
+            .Properties
+            .Count;
         var expectedKeyCount = ownership.IsUnique
             ? ownerEntityTypeKeyPropertiesCount
             : ownerEntityTypeKeyPropertiesCount + 1;

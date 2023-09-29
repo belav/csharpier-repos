@@ -58,7 +58,8 @@ namespace System.CommandLine.Tests
 
             result.CommandResult.Children
                 .ElementAt(0)
-                .Tokens.Select(t => t.Value)
+                .Tokens
+                .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("argument1");
         }
@@ -105,7 +106,9 @@ namespace System.CommandLine.Tests
             create
                 .Should()
                 .Throw<ArgumentException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain($"Alias cannot contain whitespace: \"{alias}\"");
         }
 
@@ -124,7 +127,9 @@ namespace System.CommandLine.Tests
             addAlias
                 .Should()
                 .Throw<ArgumentException>()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Contain($"Alias cannot contain whitespace: \"{alias}\"");
         }
 

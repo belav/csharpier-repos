@@ -399,7 +399,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                                                         && (
                                                             MetadataHelper
                                                                 .GetOppositeEnd(end)
-                                                                .EntitySet.EdmEquals(rightExtent)
+                                                                .EntitySet
+                                                                .EdmEquals(rightExtent)
                                                         )
                                                     )
                                             )
@@ -410,7 +411,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                                         var associationCell in associationSets.Where(
                                             c =>
                                                 c.GetRightQuery(target)
-                                                    .Extent.EdmEquals(association)
+                                                    .Extent
+                                                    .EdmEquals(association)
                                         )
                                     )
                                     {

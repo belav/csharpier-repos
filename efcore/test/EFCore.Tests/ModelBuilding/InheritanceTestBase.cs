@@ -1047,7 +1047,8 @@ public abstract partial class ModelBuilderTest
                 ConfigurationSource.DataAnnotation,
                 baseEntityType
                     .FindNavigation(nameof(BaseTypeWithKeyAnnotation.Navigation))
-                    .ForeignKey.GetConfigurationSource()
+                    .ForeignKey
+                    .GetConfigurationSource()
             );
             Assert.Equal(
                 ConfigurationSource.Convention,
@@ -1079,13 +1080,15 @@ public abstract partial class ModelBuilderTest
                 ConfigurationSource.DataAnnotation,
                 baseEntityType
                     .FindNavigation(nameof(BaseTypeWithKeyAnnotation.Navigation))
-                    .ForeignKey.GetConfigurationSource()
+                    .ForeignKey
+                    .GetConfigurationSource()
             );
             Assert.Equal(
                 ConfigurationSource.Explicit,
                 derivedEntityType
                     .FindNavigation(nameof(DerivedTypeWithKeyAnnotation.Navigation))
-                    .ForeignKey.GetConfigurationSource()
+                    .ForeignKey
+                    .GetConfigurationSource()
             );
             Assert.Equal(
                 ConfigurationSource.Explicit,

@@ -1552,9 +1552,10 @@ namespace System.Web.UI.DataVisualization.Charting
                     bool failed = true;
                     if (((DataRow)enumerator.Current).Table.Columns.Contains(field))
                     {
-                        columnDataType = ((DataRow)enumerator.Current).Table.Columns[
-                            field
-                        ].DataType;
+                        columnDataType = ((DataRow)enumerator.Current)
+                            .Table
+                            .Columns[field]
+                            .DataType;
                         failed = false;
                     }
 
@@ -1571,9 +1572,10 @@ namespace System.Web.UI.DataVisualization.Charting
 
                         if (parseSucceed)
                         {
-                            columnDataType = ((DataRow)enumerator.Current).Table.Columns[
-                                columnIndex
-                            ].DataType;
+                            columnDataType = ((DataRow)enumerator.Current)
+                                .Table
+                                .Columns[columnIndex]
+                                .DataType;
                             failed = false;
                         }
                         else
@@ -1601,9 +1603,11 @@ namespace System.Web.UI.DataVisualization.Charting
                     bool failed = true;
                     if (((DataRowView)enumerator.Current).DataView.Table.Columns.Contains(field))
                     {
-                        columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[
-                            field
-                        ].DataType;
+                        columnDataType = ((DataRowView)enumerator.Current)
+                            .DataView
+                            .Table
+                            .Columns[field]
+                            .DataType;
                         failed = false;
                     }
 
@@ -1622,7 +1626,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             columnDataType = ((DataRowView)enumerator.Current)
                                 .DataView
                                 .Table
-                                .Columns[columnIndex].DataType;
+                                .Columns[columnIndex]
+                                .DataType;
                             failed = false;
                         }
                         else
@@ -1638,9 +1643,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
                 else if (((DataRowView)enumerator.Current).DataView.Table.Columns.Count > 0)
                 {
-                    columnDataType = ((DataRowView)enumerator.Current).DataView.Table.Columns[
-                        0
-                    ].DataType;
+                    columnDataType = ((DataRowView)enumerator.Current)
+                        .DataView
+                        .Table
+                        .Columns[0]
+                        .DataType;
                 }
             }
             // If original object is DbDataRecord

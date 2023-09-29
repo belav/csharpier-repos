@@ -95,9 +95,9 @@ namespace System.ServiceModel.Configuration
         internal bool IsEtwProviderIdFromConfigFile()
         {
             return PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.EtwProviderId
-                ].ValueOrigin;
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.EtwProviderId]
+                    .ValueOrigin;
         }
     }
 }

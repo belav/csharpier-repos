@@ -78,7 +78,8 @@ namespace System.Activities.Core.Presentation
                     this.ModelItem.PropertyChanged += OnModelItemPropertyChanged;
                     this.parentStateModelItem =
                         StateContainerEditor.GetParentStateModelItemForTransition(this.ModelItem);
-                    this.parentStateModelItem.Properties[StateDesigner.TransitionsPropertyName]
+                    this.parentStateModelItem
+                        .Properties[StateDesigner.TransitionsPropertyName]
                         .Collection
                         .CollectionChanged += OnTransitionsModelItemCollectionChanged;
                     ExpandableItemWrapper selectedItem = this.UpdateTransitionsSharingTrigger();
@@ -98,7 +99,8 @@ namespace System.Activities.Core.Presentation
                     this.TransitionsSharingTrigger.CollectionChanged -=
                         OnTransitionsCollectionChanged;
                     this.ModelItem.PropertyChanged -= OnModelItemPropertyChanged;
-                    this.parentStateModelItem.Properties[StateDesigner.TransitionsPropertyName]
+                    this.parentStateModelItem
+                        .Properties[StateDesigner.TransitionsPropertyName]
                         .Collection
                         .CollectionChanged -= OnTransitionsModelItemCollectionChanged;
                     this.SelectedTransition = null;
@@ -165,9 +167,9 @@ namespace System.Activities.Core.Presentation
                 if (triggerModelItem != null)
                 {
                     foreach (
-                        ModelItem transitionModelItem in this.parentStateModelItem.Properties[
-                            StateDesigner.TransitionsPropertyName
-                        ].Collection
+                        ModelItem transitionModelItem in this.parentStateModelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection
                     )
                     {
                         if (transitionModelItem != this.ModelItem)
@@ -214,9 +216,9 @@ namespace System.Activities.Core.Presentation
                     if (thisPointCollection != null && thisPointCollection.Count > 1)
                     {
                         foreach (
-                            ModelItem transitionModelItem in this.parentStateModelItem.Properties[
-                                StateDesigner.TransitionsPropertyName
-                            ].Collection
+                            ModelItem transitionModelItem in this.parentStateModelItem
+                                .Properties[StateDesigner.TransitionsPropertyName]
+                                .Collection
                         )
                         {
                             if (transitionModelItem != this.ModelItem)
@@ -231,9 +233,9 @@ namespace System.Activities.Core.Presentation
                                     if (pointCollection[0].IsEqualTo(thisPointCollection[0]))
                                     {
                                         Fx.Assert(
-                                            transitionModelItem.Properties[
-                                                TriggerPropertyName
-                                            ].Value == null,
+                                            transitionModelItem
+                                                .Properties[TriggerPropertyName]
+                                                .Value == null,
                                             "Transition trigger should be null."
                                         );
                                         bool expandTransition = false;
@@ -333,9 +335,9 @@ namespace System.Activities.Core.Presentation
                 {
                     if (wrapper.Item != this.ModelItem)
                     {
-                        wrapper.Item.Properties[TriggerPropertyName].SetValue(
-                            this.ModelItem.Properties[TriggerPropertyName].Value
-                        );
+                        wrapper.Item
+                            .Properties[TriggerPropertyName]
+                            .SetValue(this.ModelItem.Properties[TriggerPropertyName].Value);
                     }
                 }
             }
@@ -361,10 +363,9 @@ namespace System.Activities.Core.Presentation
                         ModelItem movedModelItem = this.TransitionsSharingTrigger[
                             e.NewStartingIndex
                         ].Item;
-                        ModelItemCollection transitionsCollection =
-                            this.parentStateModelItem.Properties[
-                                StateDesigner.TransitionsPropertyName
-                            ].Collection;
+                        ModelItemCollection transitionsCollection = this.parentStateModelItem
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection;
                         // moving down
                         if (e.OldStartingIndex < e.NewStartingIndex)
                         {
@@ -530,9 +531,9 @@ namespace System.Activities.Core.Presentation
                     .Select(
                         modelItem =>
                             (
-                                modelItem.Properties[
-                                    StateDesigner.DisplayNamePropertyName
-                                ].ComputedValue as string
+                                modelItem
+                                    .Properties[StateDesigner.DisplayNamePropertyName]
+                                    .ComputedValue as string
                             )
                     )
                     .Where(displayName => !string.IsNullOrEmpty(displayName))
@@ -574,17 +575,17 @@ namespace System.Activities.Core.Presentation
             ModelItem toStateModelItem = null;
 
             foreach (
-                ModelItem stateModelItem in stateMachineModelItem.Properties[
-                    StateMachineDesigner.StatesPropertyName
-                ].Collection
+                ModelItem stateModelItem in stateMachineModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
             )
             {
                 if (
                     string.Equals(
                         stateName,
-                        stateModelItem.Properties[
-                            StateDesigner.DisplayNamePropertyName
-                        ].ComputedValue as string,
+                        stateModelItem
+                            .Properties[StateDesigner.DisplayNamePropertyName]
+                            .ComputedValue as string,
                         StringComparison.Ordinal
                     )
                 )
@@ -608,21 +609,22 @@ namespace System.Activities.Core.Presentation
                 ModelItem triggerModelItem = this.ModelItem.Properties[TriggerPropertyName].Value;
                 State toState = toStateModelItem.GetCurrentValue() as State;
 
-                ModelItem newTransitionItem = this.parentStateModelItem.Properties[
-                    StateDesigner.TransitionsPropertyName
-                ].Collection.Add(
-                    new Transition()
-                    {
-                        Trigger =
-                            null == triggerModelItem
-                                ? null
-                                : triggerModelItem.GetCurrentValue() as Activity,
-                        DisplayName = StateContainerEditor.GenerateTransitionName(
-                            stateMachineModelItem
-                        ),
-                        To = toState
-                    }
-                );
+                ModelItem newTransitionItem = this.parentStateModelItem
+                    .Properties[StateDesigner.TransitionsPropertyName]
+                    .Collection
+                    .Add(
+                        new Transition()
+                        {
+                            Trigger =
+                                null == triggerModelItem
+                                    ? null
+                                    : triggerModelItem.GetCurrentValue() as Activity,
+                            DisplayName = StateContainerEditor.GenerateTransitionName(
+                                stateMachineModelItem
+                            ),
+                            To = toState
+                        }
+                    );
 
                 this.ViewStateService.StoreViewState(newTransitionItem, ExpandViewStateKey, true);
 
@@ -670,9 +672,9 @@ namespace System.Activities.Core.Presentation
             Dictionary<ModelItem, int> stateToConnectionMap = new Dictionary<ModelItem, int>();
 
             foreach (
-                ModelItem stateModelItem in stateMachineModelItem.Properties[
-                    StateMachineDesigner.StatesPropertyName
-                ].Collection
+                ModelItem stateModelItem in stateMachineModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
             )
             {
                 if (!stateToConnectionMap.ContainsKey(stateModelItem))
@@ -681,17 +683,17 @@ namespace System.Activities.Core.Presentation
                 }
 
                 foreach (
-                    ModelItem transitionModelItem in stateModelItem.Properties[
-                        StateDesigner.TransitionsPropertyName
-                    ].Collection
+                    ModelItem transitionModelItem in stateModelItem
+                        .Properties[StateDesigner.TransitionsPropertyName]
+                        .Collection
                 )
                 {
                     // to simplify the model, count a source connection as one, regardless of whether it is shared Trigger or not.
                     stateToConnectionMap[stateModelItem]++;
 
-                    ModelItem toStateModelItem = transitionModelItem.Properties[
-                        TransitionDesigner.ToPropertyName
-                    ].Value;
+                    ModelItem toStateModelItem = transitionModelItem
+                        .Properties[TransitionDesigner.ToPropertyName]
+                        .Value;
                     Fx.Assert(toStateModelItem != null, "To state of a transition cannot be null.");
 
                     if (stateToConnectionMap.ContainsKey(toStateModelItem))
@@ -718,9 +720,10 @@ namespace System.Activities.Core.Presentation
                 modelItem =>
                     modelItem.Properties[StateDesigner.DisplayNamePropertyName].Value == null
                         ? SR.EmptyName
-                        : modelItem.Properties[
-                            StateDesigner.DisplayNamePropertyName
-                        ].Value.GetCurrentValue()
+                        : modelItem
+                            .Properties[StateDesigner.DisplayNamePropertyName]
+                            .Value
+                            .GetCurrentValue()
             );
         }
 

@@ -136,7 +136,9 @@ namespace System.Xml.Xsl.IlGen
                 // Get MethodInfo for method that computes the value of this global
                 methGlobal = XmlILAnnotation
                     .Write(iter)
-                    .CachedIteratorDescriptor.Storage.GlobalLocation;
+                    .CachedIteratorDescriptor
+                    .Storage
+                    .GlobalLocation;
                 isCached = !iter.XmlType.IsSingleton;
 
                 // Notify the StaticDataManager of the new global value

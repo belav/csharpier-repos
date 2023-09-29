@@ -72,9 +72,9 @@ namespace System.Activities.Presentation
 
             EditingContext context = ((IModelTreeItem)activityModelItem).ModelTreeManager.Context;
 
-            ModelItemCollection inputData = parentModelItem.Properties[
-                propertyValue.ParentProperty.PropertyName
-            ].Collection;
+            ModelItemCollection inputData = parentModelItem
+                .Properties[propertyValue.ParentProperty.PropertyName]
+                .Collection;
             IEnumerable<Type> rawInputData = inputData.GetCurrentValue() as IEnumerable<Type>;
             Fx.Assert(rawInputData != null, "rawInputData is null or is not IEnumerable<Type>.");
 

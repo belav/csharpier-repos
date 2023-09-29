@@ -590,17 +590,17 @@ namespace System.Workflow.Activities
                             if (invokeWebService.ParameterBindings.Contains(paramName))
                             {
                                 if (
-                                    invokeWebService.ParameterBindings[paramName].IsBindingSet(
-                                        WorkflowParameterBinding.ValueProperty
-                                    )
+                                    invokeWebService
+                                        .ParameterBindings[paramName]
+                                        .IsBindingSet(WorkflowParameterBinding.ValueProperty)
                                 )
-                                    paramValue = invokeWebService.ParameterBindings[
-                                        paramName
-                                    ].GetBinding(WorkflowParameterBinding.ValueProperty);
+                                    paramValue = invokeWebService
+                                        .ParameterBindings[paramName]
+                                        .GetBinding(WorkflowParameterBinding.ValueProperty);
                                 else
-                                    paramValue = invokeWebService.ParameterBindings[
-                                        paramName
-                                    ].GetValue(WorkflowParameterBinding.ValueProperty);
+                                    paramValue = invokeWebService
+                                        .ParameterBindings[paramName]
+                                        .GetValue(WorkflowParameterBinding.ValueProperty);
                             }
                             if (
                                 !invokeWebService.ParameterBindings.Contains(paramName)

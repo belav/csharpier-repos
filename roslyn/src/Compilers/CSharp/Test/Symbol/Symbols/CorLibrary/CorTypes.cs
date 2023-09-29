@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
                 .GetMembers("M1")
                 .OfType<MethodSymbol>()
                 .Single()
-                .Parameters[0].TypeWithAnnotations;
+                .Parameters[0]
+                .TypeWithAnnotations;
 
             Assert.Equal(TypeKind.Error, p.Type.TypeKind);
             Assert.Equal(SpecialType.System_Int32, p.SpecialType);
@@ -187,7 +188,9 @@ namespace System
                 }
             }
 
-            var system_object = msCorLibRef.Modules[0].GlobalNamespace
+            var system_object = msCorLibRef
+                .Modules[0]
+                .GlobalNamespace
                 .GetMembers("System")
                 .Select(m => (NamespaceSymbol)m)
                 .Single()

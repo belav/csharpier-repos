@@ -4782,7 +4782,9 @@ namespace Microsoft.CodeAnalysis.Operations
                     || patternDisposeInfo.Method
                         .GetParameters()
                         .Last()
-                        .OriginalDefinition.Type.IsSZArray()
+                        .OriginalDefinition
+                        .Type
+                        .IsSZArray()
             );
 
             var args = DeriveArguments(

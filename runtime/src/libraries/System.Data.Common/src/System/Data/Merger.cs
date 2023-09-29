@@ -465,9 +465,11 @@ namespace System.Data
                     {
                         for (int i = oldCount; i < targetTable.Columns.Count; i++)
                         {
-                            targetTable.Columns[i].CopyExpressionFrom(
-                                table.Columns[targetTable.Columns[i].ColumnName]!
-                            );
+                            targetTable
+                                .Columns[i]
+                                .CopyExpressionFrom(
+                                    table.Columns[targetTable.Columns[i].ColumnName]!
+                                );
                         }
                     }
 

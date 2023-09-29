@@ -513,7 +513,8 @@ namespace System.Web.SessionState
 
                         s_configExecutionTimeout = RuntimeConfig
                             .GetConfig()
-                            .HttpRuntime.ExecutionTimeout;
+                            .HttpRuntime
+                            .ExecutionTimeout;
 
                         s_configRegenerateExpiredSessionId = config.RegenerateExpiredSessionId;
                         s_configCookieless = config.Cookieless;

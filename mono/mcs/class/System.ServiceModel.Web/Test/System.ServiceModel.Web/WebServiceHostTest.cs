@@ -138,16 +138,18 @@ namespace MonoTests.System.ServiceModel.Web
             {
                 Assert.AreEqual(
                     typeof(EndpointAddressMessageFilter),
-                    ((ChannelDispatcher)host.ChannelDispatchers[0]).Endpoints[
-                        0
-                    ].AddressFilter.GetType(),
+                    ((ChannelDispatcher)host.ChannelDispatchers[0])
+                        .Endpoints[0]
+                        .AddressFilter
+                        .GetType(),
                     "AddressFilter.GetType #1"
                 );
                 Assert.AreEqual(
                     typeof(ActionMessageFilter),
-                    ((ChannelDispatcher)host.ChannelDispatchers[0]).Endpoints[
-                        0
-                    ].ContractFilter.GetType(),
+                    ((ChannelDispatcher)host.ChannelDispatchers[0])
+                        .Endpoints[0]
+                        .ContractFilter
+                        .GetType(),
                     "ContractFilter.GetType #1"
                 );
             };
@@ -155,16 +157,18 @@ namespace MonoTests.System.ServiceModel.Web
             {
                 Assert.AreEqual(
                     typeof(PrefixEndpointAddressMessageFilter),
-                    ((ChannelDispatcher)host.ChannelDispatchers[0]).Endpoints[
-                        0
-                    ].AddressFilter.GetType(),
+                    ((ChannelDispatcher)host.ChannelDispatchers[0])
+                        .Endpoints[0]
+                        .AddressFilter
+                        .GetType(),
                     "AddressFilter.GetType #2"
                 );
                 Assert.AreEqual(
                     typeof(MatchAllMessageFilter),
-                    ((ChannelDispatcher)host.ChannelDispatchers[0]).Endpoints[
-                        0
-                    ].ContractFilter.GetType(),
+                    ((ChannelDispatcher)host.ChannelDispatchers[0])
+                        .Endpoints[0]
+                        .ContractFilter
+                        .GetType(),
                     "ContractFilter.GetType #2"
                 );
             };

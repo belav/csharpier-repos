@@ -6532,24 +6532,28 @@ namespace System.Web.UI.DataVisualization.Charting
         public double GetPositionFromAxis(string chartAreaName, AxisName axis, double axisValue)
         {
             if (axis == AxisName.X)
-                return _common.ChartPicture.ChartAreas[chartAreaName].AxisX.GetLinearPosition(
-                    axisValue
-                );
+                return _common.ChartPicture
+                    .ChartAreas[chartAreaName]
+                    .AxisX
+                    .GetLinearPosition(axisValue);
 
             if (axis == AxisName.X2)
-                return _common.ChartPicture.ChartAreas[chartAreaName].AxisX2.GetLinearPosition(
-                    axisValue
-                );
+                return _common.ChartPicture
+                    .ChartAreas[chartAreaName]
+                    .AxisX2
+                    .GetLinearPosition(axisValue);
 
             if (axis == AxisName.Y)
-                return _common.ChartPicture.ChartAreas[chartAreaName].AxisY.GetLinearPosition(
-                    axisValue
-                );
+                return _common.ChartPicture
+                    .ChartAreas[chartAreaName]
+                    .AxisY
+                    .GetLinearPosition(axisValue);
 
             if (axis == AxisName.Y2)
-                return _common.ChartPicture.ChartAreas[chartAreaName].AxisY2.GetLinearPosition(
-                    axisValue
-                );
+                return _common.ChartPicture
+                    .ChartAreas[chartAreaName]
+                    .AxisY2
+                    .GetLinearPosition(axisValue);
 
             return 0;
         }

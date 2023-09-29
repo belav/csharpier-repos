@@ -1173,7 +1173,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 );
                 var semanticModel = await workspace.CurrentSolution.Projects
                     .Single()
-                    .Documents.Single()
+                    .Documents
+                    .Single()
                     .GetSemanticModelAsync();
 
                 return new TestContext(expected, ignoreResult, language, workspace, semanticModel);
@@ -1294,8 +1295,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                                 formattingOptions,
                                 CancellationToken.None
                             )
-                            .Result.GetSyntaxRootAsync()
-                            .Result.ToFullString();
+                            .Result
+                            .GetSyntaxRootAsync()
+                            .Result
+                            .ToFullString();
 
                         Assert.Equal(_expected, actual);
                     }

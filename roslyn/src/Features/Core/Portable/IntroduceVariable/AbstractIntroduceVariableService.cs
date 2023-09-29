@@ -385,11 +385,13 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 state.IsConstant
                 && !state
                     .GetSemanticMap(cancellationToken)
-                    .AllReferencedSymbols.OfType<ILocalSymbol>()
+                    .AllReferencedSymbols
+                    .OfType<ILocalSymbol>()
                     .Any()
                 && !state
                     .GetSemanticMap(cancellationToken)
-                    .AllReferencedSymbols.OfType<IParameterSymbol>()
+                    .AllReferencedSymbols
+                    .OfType<IParameterSymbol>()
                     .Any()
             )
             {

@@ -208,9 +208,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         )
                         && TypeSymbol.Equals(
                             _eventTypeWithAnnotations.Type,
-                            (
-                                (NamedTypeSymbol)candidateAssociatedFieldType
-                            ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0].Type,
+                            ((NamedTypeSymbol)candidateAssociatedFieldType)
+                                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                                .Type,
                             TypeCompareKind.ConsiderEverything2
                         )
                     )

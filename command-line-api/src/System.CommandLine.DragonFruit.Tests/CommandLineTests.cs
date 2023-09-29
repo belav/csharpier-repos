@@ -66,7 +66,8 @@ namespace System.CommandLine.DragonFruit.Tests
             stdOut
                 .Should()
                 .ContainAll("--name <name>", "Specifies the name option")
-                .And.Contain("Options:");
+                .And
+                .Contain("Options:");
             stdOut.Should().Contain($"Description:{Environment.NewLine}  Normal summary");
         }
 
@@ -89,7 +90,8 @@ namespace System.CommandLine.DragonFruit.Tests
             stdOut
                 .Should()
                 .ContainAll("--name <name>", "Specifies the name option")
-                .And.Contain("Options:");
+                .And
+                .Contain("Options:");
             stdOut
                 .Should()
                 .Contain(
@@ -116,7 +118,8 @@ namespace System.CommandLine.DragonFruit.Tests
             stdOut
                 .Should()
                 .ContainAll("--name <name>", "Specifies the name option")
-                .And.Contain("Options:");
+                .And
+                .Contain("Options:");
             stdOut
                 .Should()
                 .Contain(
@@ -142,7 +145,8 @@ namespace System.CommandLine.DragonFruit.Tests
             stdOut
                 .Should()
                 .ContainAll("--name <name>", "name [default: Bruce]")
-                .And.Contain("Options:");
+                .And
+                .Contain("Options:");
         }
 
         [Fact]

@@ -886,7 +886,8 @@ namespace System.Web
                 {
                     _asyncPreloadModeFlags = RuntimeConfig
                         .GetConfig(this)
-                        .HttpRuntime.AsyncPreloadMode;
+                        .HttpRuntime
+                        .AsyncPreloadMode;
                     _asyncPreloadModeFlagsSet = true;
                 }
                 return _asyncPreloadModeFlags;

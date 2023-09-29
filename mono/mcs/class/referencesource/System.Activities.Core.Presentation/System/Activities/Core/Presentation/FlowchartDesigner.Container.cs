@@ -330,9 +330,10 @@ namespace System.Activities.Core.Presentation
                                     shouldStoreCurrentSizeViewState = false;
                                 }
 
-                                ModelItem item = this.ModelItem.Properties["Nodes"].Collection.Add(
-                                    element
-                                );
+                                ModelItem item = this.ModelItem
+                                    .Properties["Nodes"]
+                                    .Collection
+                                    .Add(element);
 
                                 // if the pasted item is a flowswitch but the default target is not in the pasted selection,
                                 // reset the DefaultCaseDisplayName to "Default".
@@ -418,9 +419,10 @@ namespace System.Activities.Core.Presentation
                         // When paste a non-flowstep object to flowchart, the existing hintsize of the object
                         // should be removed, and let flowchart panel to compute the right size.
                         VirtualizedContainerService.SetHintSize(workflowElementToPaste, null);
-                        ModelItem flowStepItem = this.ModelItem.Properties["Nodes"].Collection.Add(
-                            flowStep
-                        );
+                        ModelItem flowStepItem = this.ModelItem
+                            .Properties["Nodes"]
+                            .Collection
+                            .Add(flowStep);
 
                         if (flowStepItem != null)
                         {

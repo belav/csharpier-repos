@@ -277,9 +277,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     {
                         AddSuppressWrappingIfOnSingleLineOperation(
                             list,
-                            switchSection.Labels[switchSection.Labels.Count - 1].GetFirstToken(
-                                includeZeroWidth: true
-                            ),
+                            switchSection
+                                .Labels[switchSection.Labels.Count - 1]
+                                .GetFirstToken(includeZeroWidth: true),
                             switchSection.GetLastToken(includeZeroWidth: true)
                         );
                     }

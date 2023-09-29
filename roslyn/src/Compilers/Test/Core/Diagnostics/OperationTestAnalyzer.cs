@@ -1530,9 +1530,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         {
                             if (argument.Value is IArrayCreationOperation arrayValue)
                             {
-                                Optional<object> dimensionSize = arrayValue.DimensionSizes[
-                                    0
-                                ].ConstantValue;
+                                Optional<object> dimensionSize = arrayValue
+                                    .DimensionSizes[0]
+                                    .ConstantValue;
                                 if (
                                     dimensionSize.HasValue
                                     && IntegralValue(dimensionSize.Value) > 3
@@ -1574,9 +1574,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         {
                             if (argument.Value is IArrayCreationOperation arrayValue)
                             {
-                                Optional<object> dimensionSize = arrayValue.DimensionSizes[
-                                    0
-                                ].ConstantValue;
+                                Optional<object> dimensionSize = arrayValue
+                                    .DimensionSizes[0]
+                                    .ConstantValue;
                                 if (
                                     dimensionSize.HasValue
                                     && IntegralValue(dimensionSize.Value) > 3

@@ -1705,7 +1705,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             .WithOne(g => g.A)
             .HasForeignKey<G>(a => a.Id)
             .HasPrincipalKey<A>(b => b.Id)
-            .Metadata.IsRequiredDependent = true;
+            .Metadata
+            .IsRequiredDependent = true;
         modelBuilder.Entity<A>().ToTable("Table").Ignore(a => a.P0);
         modelBuilder.Entity<B>().ToTable("Table").Property(b => b.P0).HasColumnName(nameof(A.P0));
         modelBuilder
@@ -3792,7 +3793,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+            .Metadata
+            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
         modelBuilder.Entity<Cat>();
 
         VerifyError(
@@ -4020,7 +4022,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+            .Metadata
+            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
         ;
 
         VerifyError(
@@ -4180,7 +4183,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                         .HasParameter(a => a.Name)
             )
             .Property(b => b.Name)
-            .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+            .Metadata
+            .SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
 
         VerifyError(
             RelationalStrings.StoredProcedureInputParameterForInsertNonSaveProperty(
@@ -4208,7 +4212,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                         .HasParameter(a => a.Name)
             )
             .Property(b => b.Name)
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            .Metadata
+            .SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
         VerifyError(
             RelationalStrings.StoredProcedureInputParameterForUpdateNonSaveProperty(
@@ -4233,7 +4238,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                 s => s.HasParameter(a => a.Id, pb => pb.IsOutput()).HasParameter("FavoritePersonId")
             )
             .Property(b => b.Name)
-            .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+            .Metadata
+            .SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
 
         Validate(modelBuilder);
     }
@@ -4249,7 +4255,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                 s => s.HasOriginalValueParameter(a => a.Id).HasParameter("FavoritePersonId")
             )
             .Property(b => b.Name)
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            .Metadata
+            .SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
         Validate(modelBuilder);
     }
@@ -4306,7 +4313,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+            .Metadata
+            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
         ;
         modelBuilder.Entity<Cat>();
 
@@ -4330,7 +4338,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+            .Metadata
+            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
         ;
         modelBuilder.Entity<Cat>().UpdateUsingStoredProcedure(s => s.HasParameter(c => c.Breed));
 
@@ -4438,7 +4447,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+            .Metadata
+            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
         VerifyError(
             RelationalStrings.StoredProcedureGeneratedPropertiesNotMapped(
@@ -4467,7 +4477,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+            .Metadata
+            .SetAfterSaveBehavior(PropertySaveBehavior.Save);
         modelBuilder
             .Entity<Cat>()
             .UpdateUsingStoredProcedure(
@@ -4745,7 +4756,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         {
             e.ToTable("foo");
             e.Property(p => p.Name)
-                .Metadata.SetColumnName("bar", StoreObjectIdentifier.Table("foo"));
+                .Metadata
+                .SetColumnName("bar", StoreObjectIdentifier.Table("foo"));
         });
 
         Validate(modelBuilder);

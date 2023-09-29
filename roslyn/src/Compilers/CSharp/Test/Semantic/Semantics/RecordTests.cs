@@ -892,9 +892,10 @@ public record A(int, string ) { }
             );
 
             Assert.IsType<ParameterSyntax>(
-                comp.GetMember<NamedTypeSymbol>("A").Constructors[0].Parameters[
-                    1
-                ].DeclaringSyntaxReferences
+                comp.GetMember<NamedTypeSymbol>("A")
+                    .Constructors[0]
+                    .Parameters[1]
+                    .DeclaringSyntaxReferences
                     .Single()
                     .GetSyntax()
             );
@@ -942,9 +943,10 @@ public record A(int, int ) { }
             );
 
             Assert.IsType<ParameterSyntax>(
-                comp.GetMember<NamedTypeSymbol>("A").Constructors[0].Parameters[
-                    1
-                ].DeclaringSyntaxReferences
+                comp.GetMember<NamedTypeSymbol>("A")
+                    .Constructors[0]
+                    .Parameters[1]
+                    .DeclaringSyntaxReferences
                     .Single()
                     .GetSyntax()
             );
@@ -15291,10 +15293,10 @@ B"
             {
                 var parameterType = method.Parameters[0].TypeWithAnnotations;
                 Assert.True(
-                    method.OverriddenMethod.Parameters[0].TypeWithAnnotations.Equals(
-                        parameterType,
-                        TypeCompareKind.ConsiderEverything
-                    )
+                    method.OverriddenMethod
+                        .Parameters[0]
+                        .TypeWithAnnotations
+                        .Equals(parameterType, TypeCompareKind.ConsiderEverything)
                 );
                 AssertEx.Equal(expectedModifiers, parameterType.CustomModifiers);
             }
@@ -22098,7 +22100,8 @@ False
                 );
 
             var copyCtor = comp.GetMember<NamedTypeSymbol>("A")
-                .InstanceConstructors.Where(c => c.ParameterCount == 1)
+                .InstanceConstructors
+                .Where(c => c.ParameterCount == 1)
                 .Single();
             Assert.Equal(Accessibility.Protected, copyCtor.DeclaredAccessibility);
             Assert.False(copyCtor.IsOverride);
@@ -22108,7 +22111,8 @@ False
             Assert.True(copyCtor.IsImplicitlyDeclared);
 
             copyCtor = comp.GetMember<NamedTypeSymbol>("B")
-                .InstanceConstructors.Where(c => c.ParameterCount == 1)
+                .InstanceConstructors
+                .Where(c => c.ParameterCount == 1)
                 .Single();
             Assert.Equal(Accessibility.Private, copyCtor.DeclaredAccessibility);
             Assert.False(copyCtor.IsOverride);
@@ -27150,19 +27154,22 @@ interface I {}
                     "Base..ctor(System.Int32 X)",
                     speculativeModel!
                         .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     speculativeModel
                         .GetSymbolInfo(speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     CSharpExtensions
                         .GetSymbolInfo(speculativeModel, speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
 
                 Assert.True(
@@ -27187,19 +27194,22 @@ interface I {}
                     "Base..ctor(System.Int32 X)",
                     speculativeModel!
                         .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     speculativeModel
                         .GetSymbolInfo(speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     CSharpExtensions
                         .GetSymbolInfo(speculativeModel, speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
 
                 Assert.Throws<ArgumentNullException>(
@@ -27276,7 +27286,9 @@ interface I {}
                             .DescendantNodes()
                             .OfType<ConstructorInitializerSyntax>()
                             .Single()
-                            .ArgumentList.OpenParenToken.SpanStart,
+                            .ArgumentList
+                            .OpenParenToken
+                            .SpanStart,
                         (SyntaxNode)speculativePrimaryInitializer,
                         SpeculativeBindingOption.BindAsExpression
                     )
@@ -27579,7 +27591,9 @@ interface I {}
                             .DescendantNodes()
                             .OfType<ConstructorInitializerSyntax>()
                             .Single()
-                            .ArgumentList.OpenParenToken.SpanStart,
+                            .ArgumentList
+                            .OpenParenToken
+                            .SpanStart,
                         (SyntaxNode)speculativePrimaryInitializer,
                         SpeculativeBindingOption.BindAsExpression
                     )
@@ -30714,7 +30728,8 @@ public class C
             );
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(in System.Int32 P1)", "R..ctor(R original)" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -30766,7 +30781,8 @@ public class C
             );
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[]
             {
                 "R..ctor(params System.Int32[] Array)",
@@ -37334,7 +37350,9 @@ record R1(int x);
                 .DescendantNodes()
                 .OfType<PrimaryConstructorBaseTypeSyntax>()
                 .Single()
-                .ArgumentList.Arguments[0].Expression;
+                .ArgumentList
+                .Arguments[0]
+                .Expression;
 
             AssertEx.Equal(
                 "System.Int32 X",
@@ -37369,7 +37387,9 @@ record R1(int x);
                 .DescendantNodes()
                 .OfType<PrimaryConstructorBaseTypeSyntax>()
                 .Single()
-                .ArgumentList.Arguments[0].Expression;
+                .ArgumentList
+                .Arguments[0]
+                .Expression;
             var attrApplication = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<AttributeSyntax>()

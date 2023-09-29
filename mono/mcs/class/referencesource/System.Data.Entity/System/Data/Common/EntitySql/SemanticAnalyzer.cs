@@ -3026,7 +3026,8 @@ namespace System.Data.Common.EntitySql
                                 astBuiltInExpr.Kind.ToString().ToUpperInvariant(),
                                 TypeHelpers
                                     .GetElementTypeUsage(leftExpr.ResultType)
-                                    .EdmType.FullName
+                                    .EdmType
+                                    .FullName
                             )
                         );
                     }
@@ -3047,7 +3048,8 @@ namespace System.Data.Common.EntitySql
                                 astBuiltInExpr.Kind.ToString().ToUpperInvariant(),
                                 TypeHelpers
                                     .GetElementTypeUsage(rightExpr.ResultType)
-                                    .EdmType.FullName
+                                    .EdmType
+                                    .FullName
                             )
                         );
                     }

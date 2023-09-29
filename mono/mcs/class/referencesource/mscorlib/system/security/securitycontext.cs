@@ -358,7 +358,8 @@ namespace System.Security
 #else
             return Thread.CurrentThread
                 .GetExecutionContextReader()
-                .SecurityContext.IsFlowSuppressed(flags);
+                .SecurityContext
+                .IsFlowSuppressed(flags);
 #endif
         }
 

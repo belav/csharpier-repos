@@ -67,7 +67,8 @@ namespace System.Workflow.Runtime
                         );
                     bool removed = qService
                         .GetQueueState(this.queueName)
-                        .AsynchronousListeners.Remove(subscriber);
+                        .AsynchronousListeners
+                        .Remove(subscriber);
                     if (!removed)
                     {
                         WorkflowTrace.Runtime.TraceEvent(
@@ -143,7 +144,8 @@ namespace System.Workflow.Runtime
                     );
                 bool removed = qService
                     .GetQueueState(this.queueName)
-                    .AsynchronousListeners.Remove(subscriber);
+                    .AsynchronousListeners
+                    .Remove(subscriber);
                 if (!removed)
                 {
                     WorkflowTrace.Runtime.TraceEvent(
@@ -168,7 +170,8 @@ namespace System.Workflow.Runtime
                 {
                     qService
                         .GetQueueState(this.queueName)
-                        .SynchronousListeners.Add(
+                        .SynchronousListeners
+                        .Add(
                             new ActivityExecutorDelegateInfo<QueueEventArgs>(
                                 value,
                                 qService.CallingActivity
@@ -185,7 +188,8 @@ namespace System.Workflow.Runtime
                 {
                     qService
                         .GetQueueState(this.queueName)
-                        .SynchronousListeners.Remove(
+                        .SynchronousListeners
+                        .Remove(
                             new ActivityExecutorDelegateInfo<QueueEventArgs>(
                                 value,
                                 qService.CallingActivity
@@ -206,7 +210,8 @@ namespace System.Workflow.Runtime
             {
                 qService
                     .GetQueueState(this.queueName)
-                    .SynchronousListeners.Add(
+                    .SynchronousListeners
+                    .Add(
                         new ActivityExecutorDelegateInfo<QueueEventArgs>(
                             eventListener,
                             qService.CallingActivity
@@ -226,7 +231,8 @@ namespace System.Workflow.Runtime
             {
                 qService
                     .GetQueueState(this.queueName)
-                    .SynchronousListeners.Remove(
+                    .SynchronousListeners
+                    .Remove(
                         new ActivityExecutorDelegateInfo<QueueEventArgs>(
                             eventListener,
                             qService.CallingActivity

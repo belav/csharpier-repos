@@ -278,9 +278,11 @@ blah blah
 
             // Decode contents.
             string result = Encoding.UTF8.GetString(stream.ToArray());
-            string attachment = result.Split(new[] { "attachment" }, StringSplitOptions.None)[1]
+            string attachment = result
+                .Split(new[] { "attachment" }, StringSplitOptions.None)[1]
                 .Trim()
-                .Split('-')[0].Trim();
+                .Split('-')[0]
+                .Trim();
 
             return (result, attachment);
         }

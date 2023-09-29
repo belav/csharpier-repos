@@ -5441,7 +5441,8 @@ namespace System
                 comp.SourceModule.GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<MethodSymbol>("M2")
-                    .Parameters[0].Type;
+                    .Parameters[0]
+                    .Type;
             AssertTupleTypeEquality(m2Tuple);
             AssertTestDisplayString(
                 m2Tuple.GetMembers(),
@@ -14346,10 +14347,9 @@ class C
             );
             Assert.Equal("T1 (T1, T2).Item1", m1Item1.OriginalDefinition.ToTestDisplayString());
             Assert.True(
-                m1Item1.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m1Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m1Item1.ContainingType.OriginalDefinition
+                    .TupleElements[0]
+                    .Equals(m1Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.True(m1Item1.Equals(m1Item1));
             Assert.Equal(
@@ -14377,10 +14377,9 @@ class C
             );
             Assert.Equal("T1 (T1, T2).Item1", m2Item1.OriginalDefinition.ToTestDisplayString());
             Assert.True(
-                m2Item1.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m2Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m2Item1.ContainingType.OriginalDefinition
+                    .TupleElements[0]
+                    .Equals(m2Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.True(m2Item1.Equals(m2Item1));
             Assert.Equal(
@@ -14417,10 +14416,9 @@ class C
                 m2a2.ToTestDisplayString()
             );
             Assert.True(
-                m2a2.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m1Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m2a2.ContainingType.OriginalDefinition
+                    .TupleElements[0]
+                    .Equals(m1Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.Equal(
                 "System.Int32 (System.Int32 a2, System.Int32 b2).Item1",
@@ -16082,17 +16080,20 @@ class C
                 .LookupSymbols(node.SpanStart, name: "v1")
                 .OfType<ILocalSymbol>()
                 .Single()
-                .Type.GetSymbol<NamedTypeSymbol>();
+                .Type
+                .GetSymbol<NamedTypeSymbol>();
             var m2Tuple = model
                 .LookupSymbols(node.SpanStart, name: "v2")
                 .OfType<ILocalSymbol>()
                 .Single()
-                .Type.GetSymbol<NamedTypeSymbol>();
+                .Type
+                .GetSymbol<NamedTypeSymbol>();
             var m6Tuple = model
                 .LookupSymbols(node.SpanStart, name: "v6")
                 .OfType<ILocalSymbol>()
                 .Single()
-                .Type.GetSymbol<NamedTypeSymbol>();
+                .Type
+                .GetSymbol<NamedTypeSymbol>();
 
             AssertEx.Equal(
                 new[]
@@ -16236,10 +16237,9 @@ class C
             Assert.Equal("TupleElementFieldSymbol", m1Item1.GetType().Name);
             Assert.NotSame(m1Item1, m1Item1.OriginalDefinition);
             Assert.True(
-                m1Item1.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m1Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m1Item1.ContainingType.OriginalDefinition
+                    .TupleElements[0]
+                    .Equals(m1Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.Equal("T1 (T1, T2).Item1", m1Item1.OriginalDefinition.ToTestDisplayString());
             Assert.IsType<SourceMemberFieldSymbolFromDeclarator>(m1Item1.OriginalDefinition);
@@ -16269,10 +16269,9 @@ class C
             Assert.Equal("TupleElementFieldSymbol", m2Item1.GetType().Name);
             Assert.NotSame(m2Item1, m2Item1.OriginalDefinition);
             Assert.True(
-                m2Item1.ContainingType.OriginalDefinition.TupleElements[0].Equals(
-                    m2Item1.OriginalDefinition,
-                    TypeCompareKind.ConsiderEverything
-                )
+                m2Item1.ContainingType.OriginalDefinition
+                    .TupleElements[0]
+                    .Equals(m2Item1.OriginalDefinition, TypeCompareKind.ConsiderEverything)
             );
             Assert.Equal("T1 (T1, T2).Item1", m2Item1.OriginalDefinition.ToTestDisplayString());
             Assert.IsType<SourceMemberFieldSymbolFromDeclarator>(m2Item1.OriginalDefinition);
@@ -18172,9 +18171,10 @@ static class Test4
                 .Where(id => id.Identifier.ValueText == "M5")
                 .Single();
             symbolInfo = model.GetSymbolInfo(m5);
-            var m5Tuple = ((IMethodSymbol)symbolInfo.Symbol).TypeParameters[
-                0
-            ].ConstraintTypes.Single();
+            var m5Tuple = ((IMethodSymbol)symbolInfo.Symbol)
+                .TypeParameters[0]
+                .ConstraintTypes
+                .Single();
             Assert.True(m5Tuple.IsTupleType);
             Assert.Equal(
                 "(System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32, System.Int32)",
@@ -26339,9 +26339,9 @@ public class C4 : I1<(int c, int d)>
             Assert.Equal(
                 "void C3.I1<(System.Int32 c, System.Int32 d)>.M()",
                 c3.FindImplementationForInterfaceMember(
-                        comp.GetTypeByMetadataName("C4").InterfacesNoUseSiteDiagnostics()[
-                            0
-                        ].GetMember("M")
+                        comp.GetTypeByMetadataName("C4")
+                            .InterfacesNoUseSiteDiagnostics()[0]
+                            .GetMember("M")
                     )
                     .ToTestDisplayString()
             );

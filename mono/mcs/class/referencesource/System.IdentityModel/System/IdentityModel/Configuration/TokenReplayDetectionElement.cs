@@ -55,9 +55,9 @@ namespace System.IdentityModel.Configuration
                 return (
                     ElementInformation.Properties[ConfigurationStrings.Enabled].ValueOrigin
                         != PropertyValueOrigin.Default
-                    || ElementInformation.Properties[
-                        ConfigurationStrings.ExpirationPeriod
-                    ].ValueOrigin != PropertyValueOrigin.Default
+                    || ElementInformation
+                        .Properties[ConfigurationStrings.ExpirationPeriod]
+                        .ValueOrigin != PropertyValueOrigin.Default
                 );
             }
         }

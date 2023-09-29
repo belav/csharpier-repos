@@ -325,7 +325,8 @@ class C
                 info.IsCompletedProperty.ToTestDisplayString()
             );
             var semanticModel = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var decl = compilation.SyntaxTrees[0]
+            var decl = compilation
+                .SyntaxTrees[0]
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()

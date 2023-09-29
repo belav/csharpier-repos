@@ -2911,9 +2911,9 @@ namespace System.Xml.Serialization
                             string anyNs = element.AnyNamespaces ?? "##any";
                             if (xmlName.Substring(0, xmlName.Length - 1) == anyNs)
                             {
-                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping.Constants[
-                                    j
-                                ].Name;
+                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping
+                                    .Constants[j]
+                                    .Name;
                                 found = true;
                                 break;
                             }
@@ -2934,9 +2934,9 @@ namespace System.Xml.Serialization
                                 || element.Namespace == choiceNs
                             )
                             {
-                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping.Constants[
-                                    j
-                                ].Name;
+                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping
+                                    .Constants[j]
+                                    .Name;
                                 found = true;
                                 break;
                             }

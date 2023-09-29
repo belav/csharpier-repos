@@ -314,7 +314,8 @@ namespace System.ServiceModel.Discovery.Udp
                         nic =>
                             nic.SupportsMulticast
                             && nic.GetIPProperties()
-                                .MulticastAddresses.Any(mca => mca.Address.Equals(ip))
+                                .MulticastAddresses
+                                .Any(mca => mca.Address.Equals(ip))
                     );
                 int port = LocalAddress.Uri.Port;
                 if (isMulticast)

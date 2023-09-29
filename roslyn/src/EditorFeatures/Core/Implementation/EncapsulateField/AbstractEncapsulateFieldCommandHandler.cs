@@ -135,9 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EncapsulateField
             using (
                 var undoTransaction = _undoManager
                     .GetTextBufferUndoManager(args.SubjectBuffer)
-                    .TextBufferUndoHistory.CreateTransaction(
-                        EditorFeaturesResources.Encapsulate_Field
-                    )
+                    .TextBufferUndoHistory
+                    .CreateTransaction(EditorFeaturesResources.Encapsulate_Field)
             )
             {
                 if (!workspace.TryApplyChanges(finalSolution))

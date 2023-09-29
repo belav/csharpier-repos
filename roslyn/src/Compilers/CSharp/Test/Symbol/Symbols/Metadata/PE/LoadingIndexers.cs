@@ -864,10 +864,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Assert.NotEqual(
                         parameterModoptIndexer.Parameters
                             .Last()
-                            .TypeWithAnnotations.CustomModifiers.Length,
+                            .TypeWithAnnotations
+                            .CustomModifiers
+                            .Length,
                         parameterModoptIndexer.GetMethod.Parameters
                             .Last()
-                            .TypeWithAnnotations.CustomModifiers.Length
+                            .TypeWithAnnotations
+                            .CustomModifiers
+                            .Length
                     );
 
                     var returnTypeModoptIndexer = @class.GetIndexer<PEPropertySymbol>(

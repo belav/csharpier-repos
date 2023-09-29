@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodSynchronous
             else if (returnType.OriginalDefinition.Equals(knownTypes.TaskOfTType))
             {
                 // If the return type is Task<T>, then make the new return type "T".
-                newReturnType = returnType.GetTypeArguments()[0]
+                newReturnType = returnType
+                    .GetTypeArguments()[0]
                     .GenerateTypeSyntax()
                     .WithTriviaFrom(returnTypeSyntax);
             }

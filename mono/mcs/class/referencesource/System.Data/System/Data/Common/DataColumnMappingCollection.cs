@@ -479,11 +479,9 @@ namespace System.Data.Common
                         Debug.WriteLine("mapping match on SourceColumn \"" + sourceColumn + "\"");
                     }
 #endif
-                    return columnMappings.items[index].GetDataColumnBySchemaAction(
-                        dataTable,
-                        dataType,
-                        schemaAction
-                    );
+                    return columnMappings
+                        .items[index]
+                        .GetDataColumnBySchemaAction(dataTable, dataType, schemaAction);
                 }
             }
             if (ADP.IsEmpty(sourceColumn))

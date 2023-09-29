@@ -165,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
                 .EndPointIsReachable;
             var requiresBlock = !operation.SemanticModel
                 .AnalyzeDataFlow(node)
-                .VariablesDeclared.IsDefaultOrEmpty;
+                .VariablesDeclared
+                .IsDefaultOrEmpty;
 
             var statements = ArrayBuilder<SyntaxNode>.GetInstance();
             if (node is BlockSyntax block)

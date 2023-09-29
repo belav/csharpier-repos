@@ -2801,7 +2801,8 @@ public class PublicClass
                 compWithReal.SourceModule
                     .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -2867,7 +2868,8 @@ public class PublicClass
                 compWithReal2.SourceModule
                     .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -2924,7 +2926,8 @@ public class PublicClass
                 compWithMetadata.SourceModule
                     .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -2985,7 +2988,8 @@ public class PublicClass
                 compWithRef.SourceModule
                     .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -3104,7 +3108,8 @@ public class C : I
                     input.SourceModule
                         .GetReferencedAssemblySymbols()
                         .Last()
-                        .GlobalNamespace.GetMembers()
+                        .GlobalNamespace
+                        .GetMembers()
                         .Select(m => m.ToDisplayString())
                 );
 
@@ -3204,7 +3209,8 @@ public class C : I
                     input.SourceModule
                         .GetReferencedAssemblySymbols()
                         .Last()
-                        .GlobalNamespace.GetMembers()
+                        .GlobalNamespace
+                        .GetMembers()
                         .Select(m => m.ToDisplayString())
                 );
 
@@ -3304,7 +3310,8 @@ public class C : I
                     input.SourceModule
                         .GetReferencedAssemblySymbols()
                         .Last()
-                        .GlobalNamespace.GetMembers()
+                        .GlobalNamespace
+                        .GetMembers()
                         .Select(m => m.ToDisplayString())
                 );
 
@@ -3446,7 +3453,8 @@ struct S
                 compWithRef.SourceModule
                     .GetReferencedAssemblySymbols()
                     .Last()
-                    .GlobalNamespace.GetMembers()
+                    .GlobalNamespace
+                    .GetMembers()
                     .Select(m => m.ToDisplayString())
             );
 
@@ -6884,7 +6892,8 @@ class Viewable
             var compilation = CreateCompilation(source, null, TestOptions.ReleaseDll);
             var peReader = ModuleMetadata
                 .CreateFromStream(compilation.EmitToStream())
-                .Module.GetMetadataReader();
+                .Module
+                .GetMetadataReader();
 
             int P1RVA = 0;
             int P2RVA = 0;

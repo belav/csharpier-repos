@@ -369,7 +369,8 @@ public class CosmosModelValidatorTest : ModelValidatorTestBase
         modelBuilder
             .Entity<Order>()
             .ToContainer("Orders")
-            .Metadata.SetContainingPropertyName("Prop");
+            .Metadata
+            .SetContainingPropertyName("Prop");
 
         VerifyError(
             CosmosStrings.ContainerContainingPropertyConflict(nameof(Order), "Orders", "Prop"),

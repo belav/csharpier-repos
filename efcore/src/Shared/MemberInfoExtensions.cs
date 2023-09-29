@@ -33,10 +33,12 @@ internal static class EntityFrameworkMemberInfoExtensions
                                 .IsSubclassOf(propertyInfo.DeclaringType)
                             || propertyInfo.DeclaringType
                                 .GetTypeInfo()
-                                .ImplementedInterfaces.Contains(otherPropertyInfo.DeclaringType)
+                                .ImplementedInterfaces
+                                .Contains(otherPropertyInfo.DeclaringType)
                             || otherPropertyInfo.DeclaringType
                                 .GetTypeInfo()
-                                .ImplementedInterfaces.Contains(propertyInfo.DeclaringType)
+                                .ImplementedInterfaces
+                                .Contains(propertyInfo.DeclaringType)
                         )
                     )
                 )
@@ -63,7 +65,8 @@ internal static class EntityFrameworkMemberInfoExtensions
                                 .IsSubclassOf(propertyInfo.DeclaringType)
                             || otherPropertyInfo.DeclaringType
                                 .GetTypeInfo()
-                                .ImplementedInterfaces.Contains(propertyInfo.DeclaringType)
+                                .ImplementedInterfaces
+                                .Contains(propertyInfo.DeclaringType)
                         )
                     )
                 )

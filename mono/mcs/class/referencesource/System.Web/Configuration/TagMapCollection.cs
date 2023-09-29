@@ -108,9 +108,9 @@ namespace System.Web.Configuration
                                             tmi.TagType
                                         ),
                                         tmi.ElementInformation.Properties["mappedTagType"].Source,
-                                        tmi.ElementInformation.Properties[
-                                            "mappedTagType"
-                                        ].LineNumber
+                                        tmi.ElementInformation
+                                            .Properties["mappedTagType"]
+                                            .LineNumber
                                     );
                                 }
 

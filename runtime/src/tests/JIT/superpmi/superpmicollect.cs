@@ -276,7 +276,8 @@ namespace SuperPMICollection
             using (
                 var resourceStream = typeof(SuperPMICollectionClass)
                     .GetTypeInfo()
-                    .Assembly.GetManifestResourceStream("SpmiTestNames")
+                    .Assembly
+                    .GetManifestResourceStream("SpmiTestNames")
             )
             using (var streamReader = new StreamReader(resourceStream))
             {

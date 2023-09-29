@@ -703,9 +703,10 @@ namespace Microsoft.Interop
                             .WithExplicitInterfaceSpecifier(
                                 ExplicitInterfaceSpecifier(
                                     IdentifierName(
-                                        methodStub.ContainingSyntaxContext.ContainingSyntax[
-                                            0
-                                        ].Identifier
+                                        methodStub
+                                            .ContainingSyntaxContext
+                                            .ContainingSyntax[0]
+                                            .Identifier
                                     )
                                 )
                             )

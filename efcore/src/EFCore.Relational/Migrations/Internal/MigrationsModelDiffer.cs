@@ -838,7 +838,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             var clrType = clrProperty.DeclaringType!;
             var index = clrType
                 .GetTypeInfo()
-                .DeclaredProperties.IndexOf(clrProperty, PropertyInfoEqualityComparer.Instance);
+                .DeclaredProperties
+                .IndexOf(clrProperty, PropertyInfoEqualityComparer.Instance);
 
             Check.DebugAssert(clrType != null, "clrType is null");
             types.GetOrAddNew(clrType)[index] = clrProperty;
@@ -878,10 +879,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 var clrType = linkingNavigationProperty.DeclaringType!;
                 var index = clrType
                     .GetTypeInfo()
-                    .DeclaredProperties.IndexOf(
-                        linkingNavigationProperty,
-                        PropertyInfoEqualityComparer.Instance
-                    );
+                    .DeclaredProperties
+                    .IndexOf(linkingNavigationProperty, PropertyInfoEqualityComparer.Instance);
 
                 Check.DebugAssert(clrType != null, "clrType is null");
                 types.GetOrAddNew(clrType)[index] = linkingNavigationProperty;

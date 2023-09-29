@@ -190,7 +190,8 @@ public class MonthDays : idx
 
             var indexer = compilation.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("MonthDays")
-                .Indexers.Single();
+                .Indexers
+                .Single();
             Assert.Equal(Microsoft.CodeAnalysis.WellKnownMemberNames.Indexer, indexer.Name);
             Assert.Equal("MonthInfoIndexer", indexer.MetadataName);
         }

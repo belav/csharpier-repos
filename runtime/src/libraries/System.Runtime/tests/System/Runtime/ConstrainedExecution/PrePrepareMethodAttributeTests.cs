@@ -32,9 +32,9 @@ namespace System.Runtime.ConstrainedExecution.Tests
         public void SettableOnConstructors()
         {
             Assert.NotNull(
-                typeof(ConstrainedType).GetConstructors()[
-                    0
-                ].GetCustomAttribute<PrePrepareMethodAttribute>()
+                typeof(ConstrainedType)
+                    .GetConstructors()[0]
+                    .GetCustomAttribute<PrePrepareMethodAttribute>()
             );
         }
     }

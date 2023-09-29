@@ -233,10 +233,12 @@ namespace TypeSystemTests
 
             TypeDesc paramArrayWithBaseClassConstraint = _testModule
                 .GetType("Casting", "ClassWithBaseClassConstraint`1")
-                .Instantiation[0].MakeArrayType();
+                .Instantiation[0]
+                .MakeArrayType();
             TypeDesc paramArrayWithInterfaceConstraint = _testModule
                 .GetType("Casting", "ClassWithInterfaceConstraint`1")
-                .Instantiation[0].MakeArrayType();
+                .Instantiation[0]
+                .MakeArrayType();
 
             Assert.True(paramArrayWithBaseClassConstraint.CanCastTo(baseArrayType));
             Assert.False(paramArrayWithInterfaceConstraint.CanCastTo(iFooArrayType));

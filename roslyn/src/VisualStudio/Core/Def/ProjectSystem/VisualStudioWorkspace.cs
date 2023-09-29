@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices
         {
             _backgroundCompilationDisabled = this.Services
                 .GetRequiredService<IWorkspaceConfigurationService>()
-                .Options.DisableBackgroundCompilation;
+                .Options
+                .DisableBackgroundCompilation;
             if (!_backgroundCompilationDisabled)
             {
                 _backgroundCompiler = new BackgroundCompiler(this);

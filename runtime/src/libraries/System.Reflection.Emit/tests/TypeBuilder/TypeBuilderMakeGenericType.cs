@@ -24,7 +24,8 @@ namespace System.Reflection.Emit.Tests
 
             string thisAssemblyFullName = typeof(TypeBuilderMakeGenericType)
                 .GetTypeInfo()
-                .Assembly.FullName;
+                .Assembly
+                .FullName;
             yield return new object[]
             {
                 new string[] { "U", "T" },

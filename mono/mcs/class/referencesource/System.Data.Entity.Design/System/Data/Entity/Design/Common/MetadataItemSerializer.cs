@@ -586,11 +586,13 @@ namespace System.Data.Entity.Design.Common
                     TranslateFacetNameToAttributeName(DesignXmlConstants.StoreGeneratedPattern),
                     DesignXmlConstants.EdmAnnotationNamespace,
                     GetAttributeValueString(
-                        member.MetadataProperties[
-                            DesignXmlConstants.EdmAnnotationNamespace
-                                + ":"
-                                + DesignXmlConstants.StoreGeneratedPattern
-                        ].Value
+                        member
+                            .MetadataProperties[
+                                DesignXmlConstants.EdmAnnotationNamespace
+                                    + ":"
+                                    + DesignXmlConstants.StoreGeneratedPattern
+                            ]
+                            .Value
                     )
                 );
             }
@@ -884,11 +886,13 @@ namespace System.Data.Entity.Design.Common
                     TranslateFacetNameToAttributeName(DesignXmlConstants.LazyLoadingEnabled),
                     DesignXmlConstants.EdmAnnotationNamespace,
                     GetAttributeValueString(
-                        container.MetadataProperties[
-                            DesignXmlConstants.EdmAnnotationNamespace
-                                + ":"
-                                + DesignXmlConstants.LazyLoadingEnabled
-                        ].Value
+                        container
+                            .MetadataProperties[
+                                DesignXmlConstants.EdmAnnotationNamespace
+                                    + ":"
+                                    + DesignXmlConstants.LazyLoadingEnabled
+                            ]
+                            .Value
                     )
                 );
             }

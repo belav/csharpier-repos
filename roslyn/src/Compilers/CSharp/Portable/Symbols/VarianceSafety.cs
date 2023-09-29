@@ -473,9 +473,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 for (int i = 0; i < namedType.Arity; i++)
                 {
                     TypeParameterSymbol typeParam = namedType.TypeParameters[i];
-                    TypeSymbol typeArg = namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                        i
-                    ].Type;
+                    TypeSymbol typeArg = namedType
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[i]
+                        .Type;
 
                     bool requireOut;
                     bool requireIn;

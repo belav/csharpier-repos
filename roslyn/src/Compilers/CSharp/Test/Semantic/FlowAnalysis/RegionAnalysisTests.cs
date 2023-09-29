@@ -3246,7 +3246,8 @@ class C
             );
 
             var semanticModel = compilation.GetSemanticModel(compilation.SyntaxTrees[0]);
-            var statement = compilation.SyntaxTrees[0]
+            var statement = compilation
+                .SyntaxTrees[0]
                 .GetCompilationUnitRoot()
                 .DescendantNodesAndSelf()
                 .OfType<StatementSyntax>()

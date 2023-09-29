@@ -387,7 +387,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 var document = this.CurrentSolution
                     .GetProject(projectIdAndContainer.projectId)
-                    .Documents.Single();
+                    .Documents
+                    .Single();
 
                 // We must close the document prior to deleting the project
                 OnDocumentClosed(

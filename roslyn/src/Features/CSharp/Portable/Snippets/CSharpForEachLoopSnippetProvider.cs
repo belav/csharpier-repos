@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                         symbol.GetSymbolType() != null
                         && symbol
                             .GetSymbolType()!
-                            .AllInterfaces.Any(
+                            .AllInterfaces
+                            .Any(
                                 namedSymbol =>
                                     namedSymbol.SpecialType
                                         is SpecialType.System_Collections_Generic_IEnumerable_T

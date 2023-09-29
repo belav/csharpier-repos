@@ -4606,7 +4606,8 @@ class Program
                             "System.Int32 N",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4620,13 +4621,15 @@ class Program
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Type.ToTestDisplayString()
+                                .Type
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .ConvertedType.ToTestDisplayString()
+                                .ConvertedType
+                                .ToTestDisplayString()
                         );
                         break;
                     case 4:
@@ -4674,7 +4677,8 @@ class Program
                             "System.Int64",
                             model
                                 .GetSymbolInfo(((TypePatternSyntax)pattern).Type)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4706,7 +4710,8 @@ class Program
                             "System.Int32",
                             model
                                 .GetSymbolInfo(((TypePatternSyntax)pattern).Type)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4736,7 +4741,8 @@ class Program
                             "System.Int64",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4754,7 +4760,8 @@ class Program
                             "System.Int32",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4808,7 +4815,8 @@ class Program
                             "System.Char A",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4826,7 +4834,8 @@ class Program
                             "System.Char Z",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -4868,7 +4877,8 @@ class Program
                             "System.Char a",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4886,7 +4896,8 @@ class Program
                             "System.Char z",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -4940,7 +4951,8 @@ class Program
                             "System.Char c0",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -4958,7 +4970,8 @@ class Program
                             "System.Char c9",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -5053,7 +5066,8 @@ class Program
                             "System.Int32 N",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5067,13 +5081,15 @@ class Program
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Type.ToTestDisplayString()
+                                .Type
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .ConvertedType.ToTestDisplayString()
+                                .ConvertedType
+                                .ToTestDisplayString()
                         );
                         break;
                     case 4:
@@ -5121,7 +5137,8 @@ class Program
                             "System.Int64",
                             model
                                 .GetSymbolInfo(((TypePatternSyntax)pattern).Type)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5147,13 +5164,15 @@ class Program
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Type.ToTestDisplayString()
+                                .Type
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Int32",
                             model
                                 .GetTypeInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .ConvertedType.ToTestDisplayString()
+                                .ConvertedType
+                                .ToTestDisplayString()
                         );
                         break;
                     case 11:
@@ -5176,7 +5195,8 @@ class Program
                             "System.Int32",
                             model
                                 .GetSymbolInfo(((TypePatternSyntax)pattern).Type)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5206,7 +5226,8 @@ class Program
                             "System.Int64",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5224,7 +5245,8 @@ class Program
                             "System.Int32",
                             model
                                 .GetSymbolInfo(((ConstantPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5278,7 +5300,8 @@ class Program
                             "System.Char A",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5296,7 +5319,8 @@ class Program
                             "System.Char Z",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -5338,7 +5362,8 @@ class Program
                             "System.Char a",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5356,7 +5381,8 @@ class Program
                             "System.Char z",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",
@@ -5410,7 +5436,8 @@ class Program
                             "System.Char c0",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Object",
@@ -5428,7 +5455,8 @@ class Program
                             "System.Char c9",
                             model
                                 .GetSymbolInfo(((RelationalPatternSyntax)pattern).Expression)
-                                .Symbol.ToTestDisplayString()
+                                .Symbol
+                                .ToTestDisplayString()
                         );
                         Assert.Equal(
                             "System.Char",

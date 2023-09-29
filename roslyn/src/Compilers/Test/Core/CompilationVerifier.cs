@@ -887,7 +887,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 .GetAllSynthesizedMembers()
                 .Where(e => e.Key.ToString() == containingTypeName)
                 .Single()
-                .Value.Where(s => s.Kind == SymbolKind.Field)
+                .Value
+                .Where(s => s.Kind == SymbolKind.Field)
                 .Select(f => $"{((IFieldSymbol)f.GetISymbol()).Type.ToString()} {f.Name}")
                 .ToList();
             AssertEx.SetEqual(expectedFields, members);

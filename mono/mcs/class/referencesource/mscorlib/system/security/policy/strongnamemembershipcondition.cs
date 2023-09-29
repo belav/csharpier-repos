@@ -229,7 +229,8 @@ namespace System.Security.Policy
             // This is ok as long as you change the hard coded string above and change the assert below.
             Contract.Assert(
                 this.GetType()
-                    .FullName.Equals("System.Security.Policy.StrongNameMembershipCondition"),
+                    .FullName
+                    .Equals("System.Security.Policy.StrongNameMembershipCondition"),
                 "Class name changed!"
             );
 

@@ -85,7 +85,8 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
         {
             namespaceDefinition = scopeDefinitionHandle
                 .GetScopeDefinition(reader)
-                .RootNamespaceDefinition.GetNamespaceDefinition(reader);
+                .RootNamespaceDefinition
+                .GetNamespaceDefinition(reader);
             NamespaceDefinitionHandleCollection candidates =
                 namespaceDefinition.NamespaceDefinitions;
             int idx = namespaceParts.Length;

@@ -151,7 +151,8 @@
                 {
                     _sourceAsEnumerable.ValueUser
                         .ElementAt(i)
-                        .Name.ShouldBe(destination.ValueUser.ElementAt(i).Name);
+                        .Name
+                        .ShouldBe(destination.ValueUser.ElementAt(i).Name);
                 }
 
                 _sourceAsEnumerable.ValueIUser.Count().ShouldBe(destination.ValueIUser.Count());
@@ -159,10 +160,12 @@
                 {
                     _sourceAsEnumerable.ValueIUser
                         .ElementAt(i)
-                        .Name.ShouldBe(destination.ValueIUser.ElementAt(i).Name);
+                        .Name
+                        .ShouldBe(destination.ValueIUser.ElementAt(i).Name);
                     _sourceAsEnumerable.ValueIUser
                         .ElementAt(i)
-                        .Age.ShouldBe(destination.ValueIUser.ElementAt(i).Age);
+                        .Age
+                        .ShouldBe(destination.ValueIUser.ElementAt(i).Age);
                 }
             }
 
@@ -191,7 +194,8 @@
                 {
                     _sourceAsEnumerable.ValueUser
                         .ElementAt(i)
-                        .Name.ShouldBe(destination.ValueUser.ElementAt(i).Name);
+                        .Name
+                        .ShouldBe(destination.ValueUser.ElementAt(i).Name);
                 }
 
                 _sourceAsEnumerable.ValueIUser.Count().ShouldBe(destination.ValueIUser.Count());
@@ -199,10 +203,12 @@
                 {
                     _sourceAsEnumerable.ValueIUser
                         .ElementAt(i)
-                        .Name.ShouldBe(destination.ValueIUser.ElementAt(i).Name);
+                        .Name
+                        .ShouldBe(destination.ValueIUser.ElementAt(i).Name);
                     _sourceAsEnumerable.ValueIUser
                         .ElementAt(i)
-                        .Age.ShouldBe(destination.ValueIUser.ElementAt(i).Age);
+                        .Age
+                        .ShouldBe(destination.ValueIUser.ElementAt(i).Age);
                 }
             }
 

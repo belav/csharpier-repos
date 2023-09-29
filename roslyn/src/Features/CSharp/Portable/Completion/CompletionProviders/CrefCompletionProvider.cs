@@ -161,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // walk up to the node the DocumentationTrivia is attached to.
             var parentNode = token.Parent
                 ?.FirstAncestorOrSelf<DocumentationCommentTriviaSyntax>()
-                ?.ParentTrivia.Token.Parent;
+                ?.ParentTrivia.Token
+                .Parent;
             _testSpeculativeNodeCallback?.Invoke(parentNode);
             if (parentNode == null)
             {

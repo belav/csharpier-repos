@@ -497,9 +497,11 @@ namespace System.Activities.Presentation
                         ModelItem argumentKVPair = collection.Add(mutableKVPair);
                         if (wrapper.Expression != null)
                         {
-                            argumentKVPair.Properties["Value"].Value.Properties[
-                                "Expression"
-                            ].SetValue(wrapper.Expression.GetCurrentValue());
+                            argumentKVPair
+                                .Properties["Value"]
+                                .Value
+                                .Properties["Expression"]
+                                .SetValue(wrapper.Expression.GetCurrentValue());
                         }
                     }
                 }
@@ -512,9 +514,9 @@ namespace System.Activities.Presentation
                         ModelItem argumentItem = collection.Add(argument);
                         if (wrapper.Expression != null)
                         {
-                            argumentItem.Properties["Expression"].SetValue(
-                                wrapper.Expression.GetCurrentValue()
-                            );
+                            argumentItem
+                                .Properties["Expression"]
+                                .SetValue(wrapper.Expression.GetCurrentValue());
                         }
                     }
                 }
@@ -564,9 +566,9 @@ namespace System.Activities.Presentation
                     if (innerArgumentTypes.Length > 0)
                     {
                         Type innerArgumentType = innerArgumentTypes[0];
-                        this.WPF_DataGrid.Columns[
-                            DynamicArgumentDesigner.ArgumentTypeColumn
-                        ].IsReadOnly = !innerArgumentType.IsGenericParameter;
+                        this.WPF_DataGrid
+                            .Columns[DynamicArgumentDesigner.ArgumentTypeColumn]
+                            .IsReadOnly = !innerArgumentType.IsGenericParameter;
                     }
                 }
             }

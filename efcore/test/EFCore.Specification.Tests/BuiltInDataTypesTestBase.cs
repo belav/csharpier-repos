@@ -3345,7 +3345,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                 foreach (
                     var property in modelBuilder
                         .Entity<BuiltInDataTypes>()
-                        .Metadata.GetProperties()
+                        .Metadata
+                        .GetProperties()
                         .Where(p => p.Name != "Id")
                 )
                 {
@@ -3358,7 +3359,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                 foreach (
                     var property in modelBuilder
                         .Entity<BuiltInNullableDataTypes>()
-                        .Metadata.GetProperties()
+                        .Metadata
+                        .GetProperties()
                         .Where(p => p.Name != "Id")
                 )
                 {

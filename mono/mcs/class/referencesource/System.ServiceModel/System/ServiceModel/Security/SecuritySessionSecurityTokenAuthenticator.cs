@@ -882,9 +882,9 @@ namespace System.ServiceModel.Security
                 if (
                     supportingTokenProperty.IncomingSupportingTokens[i].SecurityTokenAttachmentMode
                         != SecurityTokenAttachmentMode.Endorsing
-                    && supportingTokenProperty.IncomingSupportingTokens[
-                        i
-                    ].SecurityTokenAttachmentMode != SecurityTokenAttachmentMode.SignedEndorsing
+                    && supportingTokenProperty
+                        .IncomingSupportingTokens[i]
+                        .SecurityTokenAttachmentMode != SecurityTokenAttachmentMode.SignedEndorsing
                 )
                 {
                     continue;

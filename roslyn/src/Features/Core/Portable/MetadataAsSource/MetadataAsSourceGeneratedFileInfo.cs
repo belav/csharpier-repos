@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             // Just say it's always a DLL since we probably won't have a Main method
             var compilationOptions = workspace.Services
                 .GetLanguageServices(LanguageName)
-                .CompilationFactory!.GetDefaultCompilationOptions()
+                .CompilationFactory!
+                .GetDefaultCompilationOptions()
                 .WithOutputKind(OutputKind.DynamicallyLinkedLibrary);
 
             var extension = LanguageName == LanguageNames.CSharp ? ".cs" : ".vb";

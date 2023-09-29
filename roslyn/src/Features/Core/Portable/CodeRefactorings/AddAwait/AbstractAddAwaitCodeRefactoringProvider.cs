@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
                             node.GetRequiredParent().GetRequiredParent(),
                             cancellationToken
                         )
-                        .Type.IsErrorType()
+                        .Type
+                        .IsErrorType()
                 )
                     return false;
             }

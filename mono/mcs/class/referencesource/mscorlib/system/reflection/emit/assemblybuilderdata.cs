@@ -166,9 +166,9 @@ namespace System.Reflection.Emit
                     }
                     if (m_OverrideUnmanagedVersionInfo == false)
                     {
-                        m_nativeVersion.m_strCopyright = m_CABuilders[i].m_constructorArgs[
-                            0
-                        ].ToString();
+                        m_nativeVersion.m_strCopyright = m_CABuilders[i]
+                            .m_constructorArgs[0]
+                            .ToString();
                     }
                 }
                 else if (conType.Equals(typeof(System.Reflection.AssemblyTrademarkAttribute)))
@@ -187,9 +187,9 @@ namespace System.Reflection.Emit
                     }
                     if (m_OverrideUnmanagedVersionInfo == false)
                     {
-                        m_nativeVersion.m_strTrademark = m_CABuilders[i].m_constructorArgs[
-                            0
-                        ].ToString();
+                        m_nativeVersion.m_strTrademark = m_CABuilders[i]
+                            .m_constructorArgs[0]
+                            .ToString();
                     }
                 }
                 else if (conType.Equals(typeof(System.Reflection.AssemblyProductAttribute)))
@@ -199,9 +199,9 @@ namespace System.Reflection.Emit
                         // assert that we should only have one argument for this CA and the type should
                         // be a string.
                         //
-                        m_nativeVersion.m_strProduct = m_CABuilders[i].m_constructorArgs[
-                            0
-                        ].ToString();
+                        m_nativeVersion.m_strProduct = m_CABuilders[i]
+                            .m_constructorArgs[0]
+                            .ToString();
                     }
                 }
                 else if (conType.Equals(typeof(System.Reflection.AssemblyCompanyAttribute)))
@@ -220,9 +220,9 @@ namespace System.Reflection.Emit
                         // assert that we should only have one argument for this CA and the type should
                         // be a string.
                         //
-                        m_nativeVersion.m_strCompany = m_CABuilders[i].m_constructorArgs[
-                            0
-                        ].ToString();
+                        m_nativeVersion.m_strCompany = m_CABuilders[i]
+                            .m_constructorArgs[0]
+                            .ToString();
                     }
                 }
                 else if (conType.Equals(typeof(System.Reflection.AssemblyDescriptionAttribute)))
@@ -236,9 +236,9 @@ namespace System.Reflection.Emit
                             )
                         );
                     }
-                    m_nativeVersion.m_strDescription = m_CABuilders[i].m_constructorArgs[
-                        0
-                    ].ToString();
+                    m_nativeVersion.m_strDescription = m_CABuilders[i]
+                        .m_constructorArgs[0]
+                        .ToString();
                 }
                 else if (conType.Equals(typeof(System.Reflection.AssemblyTitleAttribute)))
                 {
@@ -268,9 +268,9 @@ namespace System.Reflection.Emit
                     }
                     if (m_OverrideUnmanagedVersionInfo == false)
                     {
-                        m_nativeVersion.m_strProductVersion = m_CABuilders[i].m_constructorArgs[
-                            0
-                        ].ToString();
+                        m_nativeVersion.m_strProductVersion = m_CABuilders[i]
+                            .m_constructorArgs[0]
+                            .ToString();
                     }
                 }
                 else if (conType.Equals(typeof(System.Reflection.AssemblyCultureAttribute)))
@@ -306,9 +306,9 @@ namespace System.Reflection.Emit
                     }
                     if (m_OverrideUnmanagedVersionInfo == false)
                     {
-                        m_nativeVersion.m_strFileVersion = m_CABuilders[i].m_constructorArgs[
-                            0
-                        ].ToString();
+                        m_nativeVersion.m_strFileVersion = m_CABuilders[i]
+                            .m_constructorArgs[0]
+                            .ToString();
                     }
                 }
             }

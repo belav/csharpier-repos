@@ -1226,7 +1226,8 @@ namespace System.Data.Common.Internal.Materialization
             List<Expression> keyReaders = new List<Expression>(entityIdentity.Keys.Length);
             for (int i = 0; i < entityIdentity.Keys.Length; i++)
             {
-                Expression keyReader = entityIdentity.Keys[i]
+                Expression keyReader = entityIdentity
+                    .Keys[i]
                     .Accept(translator, new TranslatorArg(typeof(object)))
                     .Expression;
                 keyReaders.Add(keyReader);
@@ -1873,7 +1874,8 @@ namespace System.Data.Common.Internal.Materialization
                 }
 
                 // get translation of property value
-                Expression valueReader = columnMap.Properties[i]
+                Expression valueReader = columnMap
+                    .Properties[i]
                     .Accept(this, new TranslatorArg(propertyType))
                     .Expression;
 
@@ -2048,7 +2050,8 @@ namespace System.Data.Common.Internal.Materialization
             Expression[] discriminatorReaders = new Expression[columnMap.TypeDiscriminators.Length];
             for (int i = 0; i < discriminatorReaders.Length; i++)
             {
-                discriminatorReaders[i] = columnMap.TypeDiscriminators[i]
+                discriminatorReaders[i] = columnMap
+                    .TypeDiscriminators[i]
                     .Accept(this, new TranslatorArg(typeof(object)))
                     .Expression;
             }
@@ -2198,7 +2201,8 @@ namespace System.Data.Common.Internal.Materialization
 
             for (int ordinal = 0; ordinal < propertyCount; ordinal++)
             {
-                Expression propertyReader = columnMap.Properties[ordinal]
+                Expression propertyReader = columnMap
+                    .Properties[ordinal]
                     .Accept(this, new TranslatorArg(typeof(Object)))
                     .Expression;
 

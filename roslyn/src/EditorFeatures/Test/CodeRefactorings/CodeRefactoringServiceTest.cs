@@ -239,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 .Single()
                 .AddAnalyzerReference(reference)
                 .AddAdditionalDocument("test.txt", "", filePath: "test.txt")
-                .Project.AddAdditionalDocument("test.log", "", filePath: "test.log")
+                .Project
+                .AddAdditionalDocument("test.log", "", filePath: "test.log")
                 .Project;
 
             // Verify available refactorings for .txt additional document
@@ -263,12 +264,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             // Verify code refactoring application
             var codeAction = txtRefactorings
                 .Single(s => s.CodeActions.Single().action.Title == refactoring1.Title)
-                .CodeActions.Single()
+                .CodeActions
+                .Single()
                 .action;
             var solution = await codeAction.GetChangedSolutionInternalAsync();
             var changedtxtDocument = solution.Projects
                 .Single()
-                .AdditionalDocuments.Single(t => t.Id == txtAdditionalDocument.Id);
+                .AdditionalDocuments
+                .Single(t => t.Id == txtAdditionalDocument.Id);
             Assert.Empty(
                 txtAdditionalDocument.GetTextSynchronously(CancellationToken.None).ToString()
             );
@@ -320,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                     SourceText.From(""),
                     filePath: "c:\\.editorconfig"
                 )
-                .Project.AddAnalyzerConfigDocument(
+                .Project
+                .AddAnalyzerConfigDocument(
                     ".globalconfig",
                     SourceText.From("is_global = true"),
                     filePath: "c:\\.globalconfig"
@@ -348,12 +352,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             // Verify code refactoring application
             var codeAction = editorConfigRefactorings
                 .Single(s => s.CodeActions.Single().action.Title == refactoring1.Title)
-                .CodeActions.Single()
+                .CodeActions
+                .Single()
                 .action;
             var solution = await codeAction.GetChangedSolutionInternalAsync();
             var changedEditorConfig = solution.Projects
                 .Single()
-                .AnalyzerConfigDocuments.Single(t => t.Id == editorConfig.Id);
+                .AnalyzerConfigDocuments
+                .Single(t => t.Id == editorConfig.Id);
             Assert.Empty(editorConfig.GetTextSynchronously(CancellationToken.None).ToString());
             Assert.Equal(
                 refactoring1.Title,
@@ -374,7 +380,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             var globalConfigRefactoring = Assert.Single(globalConfigRefactorings);
             var globalConfigRefactoringTitle = globalConfigRefactoring.CodeActions
                 .Single()
-                .action.Title;
+                .action
+                .Title;
             Assert.Equal(refactoring2.Title, globalConfigRefactoringTitle);
         }
 

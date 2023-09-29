@@ -794,9 +794,11 @@ namespace System.Windows.Forms.PropertyGridInternal
                     return true;
                 else if (
                     PropertyDescriptor.IsReadOnly
-                    && TypeDescriptor.GetAttributes(PropertyDescriptor.PropertyType)[
-                        typeof(ImmutableObjectAttribute)
-                    ].Equals(ImmutableObjectAttribute.Yes)
+                    && TypeDescriptor
+                        .GetAttributes(PropertyDescriptor.PropertyType)[
+                            typeof(ImmutableObjectAttribute)
+                        ]
+                        .Equals(ImmutableObjectAttribute.Yes)
                 )
                     return true;
                 else if (ShouldCreateParentInstance && ParentEntry.IsReadOnly)

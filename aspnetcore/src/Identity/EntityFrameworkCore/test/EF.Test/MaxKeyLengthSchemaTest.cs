@@ -43,7 +43,8 @@ public class MaxKeyLengthSchemaTest : IClassFixture<ScratchDatabaseFixture>
         {
             scope.ServiceProvider
                 .GetRequiredService<VerstappenDbContext>()
-                .Database.EnsureCreated();
+                .Database
+                .EnsureCreated();
         }
     }
 

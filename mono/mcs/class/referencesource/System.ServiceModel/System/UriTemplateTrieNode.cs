@@ -622,10 +622,9 @@ namespace System
             for (int i = 0; i < pes.Items.Count - 1; ++i)
             {
                 Fx.Assert(
-                    pes.Items[i].Key.IsPathPartiallyEquivalentAt(
-                        pes.Items[i + 1].Key,
-                        pes.SegmentsCount
-                    ),
+                    pes.Items[i]
+                        .Key
+                        .IsPathPartiallyEquivalentAt(pes.Items[i + 1].Key, pes.SegmentsCount),
                     "all elements of a PES must be path partially-equivalent"
                 );
             }

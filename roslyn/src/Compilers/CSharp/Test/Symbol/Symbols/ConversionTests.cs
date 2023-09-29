@@ -2165,7 +2165,8 @@ class C
             var interfaceI3 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
             var typeIntArrayWithCustomModifiers = interfaceI3
                 .GetMember<MethodSymbol>("M1")
-                .Parameters.Single()
+                .Parameters
+                .Single()
                 .Type;
 
             Assert.True(

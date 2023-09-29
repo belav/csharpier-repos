@@ -1088,7 +1088,8 @@ public class Derived : Base, Interface
             Assert.False(
                 derivedClass
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Any()
+                    .ForwardingMethods
+                    .Any()
             );
         }
 
@@ -1925,7 +1926,8 @@ class C : B, I { }
 
             var synthesizedExplicitImpl = classC
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Equal(classC, synthesizedExplicitImpl.ContainingType);
             Assert.Equal(
                 interfaceMethod,
@@ -1999,7 +2001,8 @@ class C : B, I { }
                 0,
                 classC
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Length
+                    .ForwardingMethods
+                    .Length
             );
         }
 
@@ -2215,7 +2218,8 @@ class D : B, I
             var derivedType = comp2.GlobalNamespace.GetMember<SourceNamedTypeSymbol>("D");
             var bridgeMethod = derivedType
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Equal("NonVirtual", bridgeMethod.ImplementingMethod.Name);
         }
 
@@ -2370,7 +2374,8 @@ public class D : B, I
 
             var synthesized = derivedType
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Equal(baseMethod, synthesized.ImplementingMethod);
             Assert.Equal(interfaceMethod, synthesized.ExplicitInterfaceImplementations.Single());
 
@@ -3197,7 +3202,8 @@ public interface I
             Assert.True(
                 derivedType
                     .GetSynthesizedExplicitImplementations(cancellationToken: default)
-                    .ForwardingMethods.IsEmpty
+                    .ForwardingMethods
+                    .IsEmpty
             );
 
             var interfaceMember = comp.GetMember<MethodSymbol>(interfaceMemberName);

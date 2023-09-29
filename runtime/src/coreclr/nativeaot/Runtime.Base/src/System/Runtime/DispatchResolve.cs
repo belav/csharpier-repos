@@ -234,9 +234,9 @@ namespace System.Runtime
             {
                 if (i->_usInterfaceMethodSlot == itfSlotNumber)
                 {
-                    MethodTable* pCurEntryType = pTgtType->InterfaceMap[
-                        i->_usInterfaceIndex
-                    ].InterfaceType;
+                    MethodTable* pCurEntryType = pTgtType
+                        ->InterfaceMap[i->_usInterfaceIndex]
+                        .InterfaceType;
 
                     if (pCurEntryType->IsCloned)
                         pCurEntryType = pCurEntryType->CanonicalEEType;
@@ -331,9 +331,12 @@ namespace System.Runtime
                 StaticVirtualMethodContextSource.None => null,
                 StaticVirtualMethodContextSource.ContextFromThisClass => pTgtType,
                 _
-                    => pTgtType->InterfaceMap[
-                        usEncodedValue - StaticVirtualMethodContextSource.ContextFromFirstInterface
-                    ].InterfaceType
+                    => pTgtType
+                        ->InterfaceMap[
+                            usEncodedValue
+                                - StaticVirtualMethodContextSource.ContextFromFirstInterface
+                        ]
+                        .InterfaceType
             };
         }
     }

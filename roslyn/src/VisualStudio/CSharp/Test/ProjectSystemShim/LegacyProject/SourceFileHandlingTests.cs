@@ -46,7 +46,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             var document = environment.Workspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single();
+                .Documents
+                .Single();
 
             Assert.Equal(new[] { "LinkFolder" }, document.Folders);
         }
@@ -61,7 +62,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             var document = environment.Workspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single();
+                .Documents
+                .Single();
 
             Assert.Empty(document.Folders);
         }
@@ -79,7 +81,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             var document = environment.Workspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single();
+                .Documents
+                .Single();
 
             Assert.Empty(document.Folders);
         }
@@ -97,7 +100,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             var document = environment.Workspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single();
+                .Documents
+                .Single();
 
             Assert.Equal(new[] { "RelativeFolder" }, document.Folders);
         }

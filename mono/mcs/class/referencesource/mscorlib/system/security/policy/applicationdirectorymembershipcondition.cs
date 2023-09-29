@@ -112,9 +112,8 @@ namespace System.Security.Policy
             // This is ok as long as you change the hard coded string above and change the assert below.
             BCLDebug.Assert(
                 this.GetType()
-                    .FullName.Equals(
-                        "System.Security.Policy.ApplicationDirectoryMembershipCondition"
-                    ),
+                    .FullName
+                    .Equals("System.Security.Policy.ApplicationDirectoryMembershipCondition"),
                 "Class name changed!"
             );
 

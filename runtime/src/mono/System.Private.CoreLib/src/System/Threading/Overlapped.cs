@@ -278,7 +278,8 @@ namespace System.Threading
 
             OverlappedData
                 .GetOverlappedFromNative(nativeOverlappedPtr)
-                ._overlapped!._overlappedData = null!;
+                ._overlapped!
+                ._overlappedData = null!;
             OverlappedData.FreeNativeOverlapped(nativeOverlappedPtr);
         }
     }

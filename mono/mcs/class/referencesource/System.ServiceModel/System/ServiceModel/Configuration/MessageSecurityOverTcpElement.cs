@@ -46,9 +46,9 @@ namespace System.ServiceModel.Configuration
             security.ClientCredentialType = this.ClientCredentialType;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.AlgorithmSuite
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.AlgorithmSuite]
+                    .ValueOrigin
             )
             {
                 security.AlgorithmSuite = this.AlgorithmSuite;

@@ -1179,7 +1179,8 @@ public class EntityEntryTest
 
         var modified = context
             .Entry(entity)
-            .Properties.Where(e => e.IsModified)
+            .Properties
+            .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
 
@@ -1192,7 +1193,8 @@ public class EntityEntryTest
 
         modified = context
             .Entry(entity)
-            .Properties.Where(e => e.IsModified)
+            .Properties
+            .Where(e => e.IsModified)
             .Select(e => e.Metadata.Name)
             .ToList();
 

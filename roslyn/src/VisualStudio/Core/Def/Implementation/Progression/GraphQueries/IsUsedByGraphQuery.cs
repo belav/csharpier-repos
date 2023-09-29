@@ -83,9 +83,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             if (location.SourceTree == null)
                 return null;
 
-            var lineText = location.SourceTree.GetText(cancellationToken).Lines[
-                span.StartLinePosition.Line
-            ].ToString();
+            var lineText = location.SourceTree
+                .GetText(cancellationToken)
+                .Lines[span.StartLinePosition.Line]
+                .ToString();
             var filePath = location.SourceTree.FilePath;
             var sourceLocation = GraphBuilder.TryCreateSourceLocation(filePath, span.Span);
             if (sourceLocation == null)

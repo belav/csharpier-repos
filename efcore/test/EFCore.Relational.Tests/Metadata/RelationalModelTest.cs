@@ -1945,7 +1945,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     specialCustomerType
                         .GetInsertStoredProcedureMappings()
                         .Single(m => m.IncludesDerivedTypes)
-                        .StoreStoredProcedure.Name
+                        .StoreStoredProcedure
+                        .Name
                 );
                 Assert.Null(baseInsertSproc.Schema);
                 Assert.Equal(
@@ -2001,7 +2002,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     specialCustomerType
                         .GetUpdateStoredProcedureMappings()
                         .Single(m => m.IncludesDerivedTypes)
-                        .StoreStoredProcedure.Name
+                        .StoreStoredProcedure
+                        .Name
                 );
 
                 Assert.Null(baseUpdateSproc.Schema);
@@ -2058,7 +2060,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     specialCustomerType
                         .GetDeleteStoredProcedureMappings()
                         .Single(m => m.IncludesDerivedTypes)
-                        .StoreStoredProcedure.Name
+                        .StoreStoredProcedure
+                        .Name
                 );
 
                 Assert.Null(baseDeleteSproc.Schema);
@@ -2758,7 +2761,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         specialCustomerType
                             .GetInsertStoredProcedureMappings()
                             .Single()
-                            .StoreStoredProcedure.Name
+                            .StoreStoredProcedure
+                            .Name
                     );
 
                     Assert.Null(customerInsertSproc.Schema);
@@ -2796,7 +2800,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         specialCustomerType
                             .GetUpdateStoredProcedureMappings()
                             .Single()
-                            .StoreStoredProcedure.Name
+                            .StoreStoredProcedure
+                            .Name
                     );
                     Assert.Null(customerUpdateSproc.Schema);
                     Assert.Equal(
@@ -2832,7 +2837,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         specialCustomerType
                             .GetDeleteStoredProcedureMappings()
                             .Single()
-                            .StoreStoredProcedure.Name
+                            .StoreStoredProcedure
+                            .Name
                     );
                     Assert.Null(customerDeleteSproc.Schema);
                     Assert.Equal(

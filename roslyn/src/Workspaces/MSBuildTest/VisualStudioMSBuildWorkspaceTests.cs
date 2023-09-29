@@ -2760,7 +2760,8 @@ class C1
             var documents = solution
                 .GetProjectsByName("CSharpProject")
                 .FirstOrDefault()
-                .Documents.ToList();
+                .Documents
+                .ToList();
             var document = documents.Single(d => d.Name.Contains("CSharpClass"));
             var text = await document.GetTextAsync();
             var newText = SourceText.From("using System.Diagnostics;\r\n" + text.ToString());
@@ -2790,7 +2791,8 @@ class C1
             var documents = solution
                 .GetProjectsByName("CSharpProject")
                 .FirstOrDefault()
-                .AdditionalDocuments.ToList();
+                .AdditionalDocuments
+                .ToList();
             var document = documents.Single(d => d.Name.Contains("ValidAdditionalFile"));
             var text = await document.GetTextAsync();
             var newText = SourceText.From("New Text In Additional File.\r\n" + text.ToString());
@@ -2868,7 +2870,8 @@ class C1
 
             var xaml = workspace.CurrentSolution
                 .GetProject(csProjectId)
-                .AdditionalDocuments.FirstOrDefault(d => d.Name == "XamlFile.xaml");
+                .AdditionalDocuments
+                .FirstOrDefault(d => d.Name == "XamlFile.xaml");
             Assert.NotNull(xaml);
 
             // removing additional documents not supported

@@ -127,7 +127,8 @@ namespace System.Activities.Core.Presentation
             List<ModelItem> allStateModelItemsToDelete = new List<ModelItem>();
             IEnumerable<ModelItem> selectedStateModelItems = this.Context.Items
                 .GetValue<Selection>()
-                .SelectedObjects.Where<ModelItem>(
+                .SelectedObjects
+                .Where<ModelItem>(
                     (p) =>
                     {
                         return p.ItemType == typeof(State);
@@ -187,9 +188,9 @@ namespace System.Activities.Core.Presentation
                     {
                         StateContainerEditor
                             .GetParentStateModelItemForTransition(connectorModelItem)
-                            .Properties[StateDesigner.TransitionsPropertyName].Collection.Add(
-                            connectorModelItem
-                        );
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection
+                            .Add(connectorModelItem);
                     }
                 }
             }
@@ -367,7 +368,8 @@ namespace System.Activities.Core.Presentation
 
                 ModelItem[] selectedItems = this.Context.Items
                     .GetValue<Selection>()
-                    .SelectedObjects.ToArray();
+                    .SelectedObjects
+                    .ToArray();
                 string errorMessage;
                 if (!CanPasteTransition(destinationState, out errorMessage, selectedItems))
                 {
@@ -401,12 +403,13 @@ namespace System.Activities.Core.Presentation
                             .GetRequiredService<ModelTreeManager>()
                             .WrapAsModelItem(pastedTransition);
                         ModelItem sourceState = selectedItem;
-                        sourceState.Properties[
-                            StateDesigner.TransitionsPropertyName
-                        ].Collection.Add(transitionModelItem);
-                        transitionModelItem.Properties[TransitionDesigner.ToPropertyName].SetValue(
-                            destinationState
-                        );
+                        sourceState
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection
+                            .Add(transitionModelItem);
+                        transitionModelItem
+                            .Properties[TransitionDesigner.ToPropertyName]
+                            .SetValue(destinationState);
 
                         if (isFirst)
                         {
@@ -474,12 +477,14 @@ namespace System.Activities.Core.Presentation
                     {
                         ModelItem stateModelItem =
                             (this.ModelItem.ItemType == typeof(StateMachine))
-                                ? this.ModelItem.Properties[
-                                    StateMachineDesigner.StatesPropertyName
-                                ].Collection.Add(state)
-                                : GetStateMachineModelItem(this.ModelItem).Properties[
-                                    StateMachineDesigner.StatesPropertyName
-                                ].Collection.Add(state);
+                                ? this.ModelItem
+                                    .Properties[StateMachineDesigner.StatesPropertyName]
+                                    .Collection
+                                    .Add(state)
+                                : GetStateMachineModelItem(this.ModelItem)
+                                    .Properties[StateMachineDesigner.StatesPropertyName]
+                                    .Collection
+                                    .Add(state);
                         modelItemsPasted.Add(stateModelItem);
                     }
 

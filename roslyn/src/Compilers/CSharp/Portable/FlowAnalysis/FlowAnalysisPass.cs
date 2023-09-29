@@ -166,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 getErrorsOnly(
                                     diagnostics
                                         .ToReadOnly()
-                                        .Diagnostics.Skip(initialDiagnosticCount)
+                                        .Diagnostics
+                                        .Skip(initialDiagnosticCount)
                                 )
                             )
                     );

@@ -64,7 +64,8 @@ namespace System.Text.Json.Serialization.Tests
                     properties
                         .Where(prop => prop.Name == "MyBooleanTrue")
                         .First()
-                        .Value.GetBoolean()
+                        .Value
+                        .GetBoolean()
                 );
             }
         }
@@ -120,7 +121,8 @@ namespace System.Text.Json.Serialization.Tests
                     properties
                         .Where(prop => prop.Name == "MyBooleanTrue")
                         .First()
-                        .Value.GetBoolean()
+                        .Value
+                        .GetBoolean()
                 );
             }
         }
@@ -1039,7 +1041,8 @@ namespace System.Text.Json.Serialization.Tests
                 ((JsonElement)obj.MyOverflow["MyOverflow"])
                     .EnumerateObject()
                     .First()
-                    .Value.GetInt32()
+                    .Value
+                    .GetInt32()
             );
 
             // Attempt to deserialize null into the overflow property. This is also treated as a missing property.
@@ -1079,7 +1082,8 @@ namespace System.Text.Json.Serialization.Tests
                 ((JsonElement)obj.ActualDictionary["Key"])
                     .EnumerateObject()
                     .First()
-                    .Value.GetInt32()
+                    .Value
+                    .GetInt32()
             );
 
             // Attempt to deserialize null into the dictionary and overflow property. This is also treated as a missing property.

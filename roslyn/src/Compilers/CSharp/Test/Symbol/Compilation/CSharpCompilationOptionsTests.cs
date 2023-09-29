@@ -371,7 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithMainTypeName(null)
-                    .Errors.Length
+                    .Errors
+                    .Length
             );
             new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                 .WithMainTypeName("blah\0goo")
@@ -473,14 +474,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithUsings("A", "B")
                     .WithUsings(null)
-                    .Usings.Count()
+                    .Usings
+                    .Count()
             );
             Assert.Equal(
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithUsings("A", "B")
                     .WithUsings((string[])null)
-                    .Usings.Count()
+                    .Usings
+                    .Count()
             );
 
             new CSharpCompilationOptions(OutputKind.ConsoleApplication)
@@ -521,14 +524,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 3,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithSpecificDiagnosticOptions(warnings)
-                    .SpecificDiagnosticOptions.Count
+                    .SpecificDiagnosticOptions
+                    .Count
             );
 
             Assert.Equal(
                 0,
                 new CSharpCompilationOptions(OutputKind.ConsoleApplication)
                     .WithSpecificDiagnosticOptions(null)
-                    .SpecificDiagnosticOptions.Count
+                    .SpecificDiagnosticOptions
+                    .Count
             );
 
             Assert.Equal(

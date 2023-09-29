@@ -564,7 +564,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                 .OrderBy(xx => xx.Id)
                                 .Select(xx => xx.OwnedReferenceRoot)
                                 .FirstOrDefault()
-                                .OwnedReferenceBranch.Date
+                                .OwnedReferenceBranch
+                                .Date
                     )
         );
 
@@ -1062,9 +1063,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             new
                             {
                                 x.Id,
-                                x.OwnedCollectionRoot[0].OwnedCollectionBranch[
-                                    prm
-                                ].OwnedCollectionLeaf
+                                x.OwnedCollectionRoot[0]
+                                    .OwnedCollectionBranch[prm]
+                                    .OwnedCollectionLeaf
                             }
                     )
                     .AsNoTracking(),
@@ -1188,9 +1189,10 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 ss.Set<JsonEntityBasic>()
                     .Where(
                         x =>
-                            x.OwnedCollectionRoot[1].OwnedCollectionBranch[prm].OwnedCollectionLeaf[
-                                x.Id - 1
-                            ].SomethingSomething == "e1_c2_c1_c1"
+                            x.OwnedCollectionRoot[1]
+                                .OwnedCollectionBranch[prm]
+                                .OwnedCollectionLeaf[x.Id - 1]
+                                .SomethingSomething == "e1_c2_c1_c1"
                     ),
             entryCount: 40
         );
@@ -1234,9 +1236,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                         new
                                         {
                                             x.Id,
-                                            CollectionElement = x.OwnedCollectionRoot[
-                                                prm
-                                            ].OwnedCollectionBranch
+                                            CollectionElement = x.OwnedCollectionRoot[prm]
+                                                .OwnedCollectionBranch
                                                 .Select(xx => "Foo")
                                                 .ElementAt(0)
                                         }
@@ -1272,9 +1273,8 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                         new
                                         {
                                             x.Id,
-                                            CollectionElement = x.OwnedCollectionRoot[
-                                                prm + x.Id
-                                            ].OwnedCollectionBranch
+                                            CollectionElement = x.OwnedCollectionRoot[prm + x.Id]
+                                                .OwnedCollectionBranch
                                                 .Select(xx => x.Id)
                                                 .ElementAt(0)
                                         }
@@ -1505,9 +1505,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         x =>
                             new
                             {
-                                DuplicateMix = x.OwnedReferenceRoot.OwnedCollectionBranch[
-                                    0
-                                ].OwnedCollectionLeaf[prm],
+                                DuplicateMix = x.OwnedReferenceRoot
+                                    .OwnedCollectionBranch[0]
+                                    .OwnedCollectionLeaf[prm],
                                 DuplicatePrm = x.OwnedReferenceRoot.OwnedCollectionBranch[prm],
                                 x.Id,
                                 Original = x.OwnedReferenceRoot.OwnedCollectionBranch,
@@ -1696,9 +1696,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                 CollectionElement1 = x.OwnedCollectionRoot[
                                     prm
                                 ].OwnedCollectionBranch[1],
-                                CollectionElement2 = x.OwnedCollectionRoot[1].OwnedCollectionBranch[
-                                    1
-                                ].OwnedReferenceLeaf,
+                                CollectionElement2 = x.OwnedCollectionRoot[1]
+                                    .OwnedCollectionBranch[1]
+                                    .OwnedReferenceLeaf,
                                 CollectionElement3 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
                                 CollectionElement4 = x.OwnedCollectionRoot[
                                     prm
@@ -1706,9 +1706,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                 CollectionElement5 = x.OwnedCollectionRoot[
                                     prm
                                 ].OwnedCollectionBranch[x.Id],
-                                CollectionElement6 = x.OwnedCollectionRoot[
-                                    x.Id
-                                ].OwnedCollectionBranch[1].OwnedReferenceLeaf,
+                                CollectionElement6 = x.OwnedCollectionRoot[x.Id]
+                                    .OwnedCollectionBranch[1]
+                                    .OwnedReferenceLeaf,
                                 CollectionElement7 = x.OwnedCollectionRoot[1].OwnedReferenceBranch,
                                 CollectionElement8 = x.OwnedCollectionRoot[
                                     x.Id

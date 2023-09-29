@@ -3497,9 +3497,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var metadataName = MetadataTypeName.FromFullName(fullName);
             foreach (
-                var referencedAssembly in Compilation.Assembly.Modules[
-                    0
-                ].GetReferencedAssemblySymbols()
+                var referencedAssembly in Compilation.Assembly
+                    .Modules[0]
+                    .GetReferencedAssemblySymbols()
             )
             {
                 var forwardedType =

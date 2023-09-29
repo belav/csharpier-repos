@@ -77,7 +77,8 @@ public class InjectOrderByPropertyExpressionMutator : ExpressionMutator
     private class ExpressionFinder : ExpressionVisitor
     {
         private List<PropertyInfo> GetValidPropertiesForOrderBy(Expression expression) =>
-            expression.Type.GetGenericArguments()[0]
+            expression.Type
+                .GetGenericArguments()[0]
                 .GetProperties()
                 .Where(p => !p.GetMethod.IsStatic)
                 .Where(p => IsOrderedableType(p.PropertyType))

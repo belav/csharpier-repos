@@ -254,7 +254,9 @@ public class FlatteningWithSourceValidation : NonValidatingSpecBase
     public void Should_validate() =>
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Errors.Single()
-            .UnmappedPropertyNames.Single()
+            .Errors
+            .Single()
+            .UnmappedPropertyNames
+            .Single()
             .ShouldBe(nameof(Address.Id));
 }

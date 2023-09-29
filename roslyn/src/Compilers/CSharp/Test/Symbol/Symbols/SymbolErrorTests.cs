@@ -8948,13 +8948,17 @@ public static int AT = (new { field = 2 }).field;
 
             Assert.Equal(
                 1,
-                comp.Assembly.Modules[1].GlobalNamespace
+                comp.Assembly
+                    .Modules[1]
+                    .GlobalNamespace
                     .GetTypeMembers("<ModuleA01>f__AnonymousType0", 1)
                     .Length
             );
             Assert.Equal(
                 1,
-                comp.Assembly.Modules[2].GlobalNamespace
+                comp.Assembly
+                    .Modules[2]
+                    .GlobalNamespace
                     .GetTypeMembers("<ModuleB01>f__AnonymousType0", 1)
                     .Length
             );

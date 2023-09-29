@@ -3836,7 +3836,8 @@ class C
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
                 .Single()
-                .Initializer.Value;
+                .Initializer
+                .Value;
             var literalOperation = model.GetOperation(initializer);
 
             var stringTextBuilder = new StringBuilder();

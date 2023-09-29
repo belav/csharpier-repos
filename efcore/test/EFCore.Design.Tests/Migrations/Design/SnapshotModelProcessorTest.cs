@@ -76,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             )
                 .Build(SqlServerTestHelpers.Instance.CreateContext())
                 .CreateScope()
-                .ServiceProvider.GetRequiredService<ISnapshotModelProcessor>();
+                .ServiceProvider
+                .GetRequiredService<ISnapshotModelProcessor>();
 
             Assert.NotNull(snapshotModelProcessor);
         }
@@ -201,8 +202,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 model
                     .FindEntityType(typeof(Blog))
                     .FindNavigation(nameof(Blog.Details))
-                    .TargetEntityType.FindPrimaryKey()
-                    .Properties.Single()
+                    .TargetEntityType
+                    .FindPrimaryKey()
+                    .Properties
+                    .Single()
                     .Name
             );
         }

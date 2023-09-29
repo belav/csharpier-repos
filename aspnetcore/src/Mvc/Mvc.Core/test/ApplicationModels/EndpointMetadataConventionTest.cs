@@ -164,9 +164,10 @@ public class EndpointMetadataConventionTest
             typeof(TestController),
             nameof(TestController.ActionWithParameterMetadata)
         );
-        action.Selectors[0].EndpointMetadata.Add(
-            new CustomEndpointMetadata() { Source = MetadataSource.Caller }
-        );
+        action
+            .Selectors[0]
+            .EndpointMetadata
+            .Add(new CustomEndpointMetadata() { Source = MetadataSource.Caller });
         var convention = GetConvention();
 
         //Act

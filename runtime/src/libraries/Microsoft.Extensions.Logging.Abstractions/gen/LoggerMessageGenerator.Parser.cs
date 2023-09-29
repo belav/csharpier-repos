@@ -396,9 +396,9 @@ namespace Microsoft.Extensions.Logging.Generators
                                             if (paramSymbol.DeclaringSyntaxReferences.Length > 0)
                                             {
                                                 ParameterSyntax paramSyntax =
-                                                    paramSymbol.DeclaringSyntaxReferences[
-                                                        0
-                                                    ].GetSyntax(_cancellationToken)
+                                                    paramSymbol
+                                                        .DeclaringSyntaxReferences[0]
+                                                        .GetSyntax(_cancellationToken)
                                                     as ParameterSyntax;
                                                 if (
                                                     paramSyntax != null

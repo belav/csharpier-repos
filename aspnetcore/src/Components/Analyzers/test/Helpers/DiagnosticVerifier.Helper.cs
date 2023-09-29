@@ -73,7 +73,8 @@ public abstract partial class DiagnosticVerifier
         {
             var compilationWithAnalyzers = project
                 .GetCompilationAsync()
-                .Result.WithAnalyzers(ImmutableArray.Create(analyzer));
+                .Result
+                .WithAnalyzers(ImmutableArray.Create(analyzer));
             var diags = compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync().Result;
             foreach (var diag in diags)
             {

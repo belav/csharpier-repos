@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
                 .First()
                 .AddMetadataReference(TestMetadata.Net451.mscorlib)
                 .AddDocument("document", "")
-                .Project.Solution;
+                .Project
+                .Solution;
             Assert.True(previewWorkspace.TryApplyChanges(addedSolution));
             Assert.Equal(
                 1,
@@ -93,16 +94,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             var text = "class C {}";
             var changedSolution = previewWorkspace.CurrentSolution.Projects
                 .First()
-                .Documents.First()
+                .Documents
+                .First()
                 .WithText(SourceText.From(text))
-                .Project.Solution;
+                .Project
+                .Solution;
             Assert.True(previewWorkspace.TryApplyChanges(changedSolution));
             Assert.Equal(
                 previewWorkspace.CurrentSolution.Projects
                     .First()
-                    .Documents.First()
+                    .Documents
+                    .First()
                     .GetTextAsync()
-                    .Result.ToString(),
+                    .Result
+                    .ToString(),
                 text
             );
 
@@ -191,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
                 )
                 .AddProject("project", "project.dll", LanguageNames.CSharp)
                 .AddDocument("document", "class { }")
-                .Project.Solution;
+                .Project
+                .Solution;
 
             Assert.True(previewWorkspace.TryApplyChanges(solution));
 

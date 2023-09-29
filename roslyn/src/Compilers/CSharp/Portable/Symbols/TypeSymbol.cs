@@ -2867,9 +2867,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             SourceMemberContainerTypeSymbol snt = null;
             if (
-                implementingType.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics[
-                    @interface
-                ].Contains(@interface)
+                implementingType
+                    .InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics[@interface]
+                    .Contains(@interface)
             )
             {
                 snt = implementingType as SourceMemberContainerTypeSymbol;

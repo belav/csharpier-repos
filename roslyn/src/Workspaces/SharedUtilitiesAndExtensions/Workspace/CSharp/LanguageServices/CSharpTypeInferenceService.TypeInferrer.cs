@@ -2386,16 +2386,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         if (invocation.ArgumentList.Arguments.Count > 0)
                         {
-                            var argumentExpression = invocation.ArgumentList.Arguments[
-                                0
-                            ].Expression;
+                            var argumentExpression = invocation
+                                .ArgumentList
+                                .Arguments[0]
+                                .Expression;
 
                             if (argumentExpression != null)
                             {
                                 var argumentTypes = GetTypes(argumentExpression);
                                 var delegateType = argumentTypes
                                     .FirstOrDefault()
-                                    .InferredType.GetDelegateType(this.Compilation);
+                                    .InferredType
+                                    .GetDelegateType(this.Compilation);
                                 var typeArg =
                                     delegateType?.TypeArguments.Length > 0
                                         ? delegateType.TypeArguments[0]

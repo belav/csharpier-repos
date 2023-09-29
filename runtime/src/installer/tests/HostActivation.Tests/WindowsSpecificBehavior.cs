@@ -31,7 +31,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     "Reported OS version is newer or equal to the true OS version - no shims."
                 );
         }
@@ -75,8 +76,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining("CreateDirectoryW with long path succeeded");
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdOutContaining("CreateDirectoryW with long path succeeded");
         }
 
         // Testing the standalone version (apphost) would require to make a copy of the entire SDK

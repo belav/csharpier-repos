@@ -88,10 +88,9 @@ public class WebTransportSessionTests : Http3TestBase
                 exitTcs.SetResult();
                 break;
             case 3: // automatic abort due to host stream aborting
-                Http3Api.Connection._streams[session.SessionId].Abort(
-                    new(),
-                    System.Net.Http.Http3ErrorCode.InternalError
-                );
+                Http3Api.Connection
+                    ._streams[session.SessionId]
+                    .Abort(new(), System.Net.Http.Http3ErrorCode.InternalError);
                 break;
         }
 

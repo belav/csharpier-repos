@@ -272,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // document that doesn't support compiler diagnostics such as FSharp or TypeScript
                 return hostAnalyzers
                     .CreateDiagnosticAnalyzersPerReference(project)
-                    .Values.SelectMany(v => v)
+                    .Values
+                    .SelectMany(v => v)
                     .ToImmutableArrayOrEmpty();
             }
 

@@ -237,7 +237,10 @@ public class IdentityBuilderTest
         var provider = services.BuildServiceProvider();
         var tokenProviders = provider
             .GetRequiredService<IOptions<IdentityOptions>>()
-            .Value.Tokens.ProviderMap.Values;
+            .Value
+            .Tokens
+            .ProviderMap
+            .Values;
         Assert.Equal(4, tokenProviders.Count());
     }
 

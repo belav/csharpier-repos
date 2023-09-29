@@ -118,7 +118,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     // text most likely already read in
                     return _workspace.CurrentSolution
                         .GetDocument(currentDocumentId)
-                        .State.GetTextSynchronously(CancellationToken.None)
+                        .State
+                        .GetTextSynchronously(CancellationToken.None)
                         .Lines;
                 }
             }

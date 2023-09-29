@@ -289,11 +289,13 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             originalUIItems.Single(parent => parent.Name.Equals("App")).IsExpanded = false;
             originalUIItems
                 .Single(parent => parent.Name.Equals("MyClass"))
-                .Children.Single(child => child.Name.Equals("Method2"))
+                .Children
+                .Single(child => child.Name.Equals("Method2"))
                 .IsExpanded = false;
             originalUIItems
                 .Single(parent => parent.Name.Equals("foo"))
-                .Children.Single(child => child.Name.Equals("r"))
+                .Children
+                .Single(child => child.Name.Equals("r"))
                 .IsExpanded = false;
 
             // Apply same expansion as originalUIItems to updatedUIItems
@@ -342,7 +344,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             // Call ExpandAncestors on a child node
             var selectedNode = uiItems
                 .Single(parent => parent.Name.Equals("MyClass"))
-                .Children.Single(child => child.Name.Equals("Method2"));
+                .Children
+                .Single(child => child.Name.Equals("Method2"));
             DocumentOutlineHelper.ExpandAncestors(uiItems, selectedNode.RangeSpan);
 
             // Confirm that only the child node and its ancestors are expanded

@@ -223,9 +223,9 @@ namespace System.Reflection.Tests
                 );
                 for (int j = 0; j < cad1.NamedArguments.Count; j++)
                 {
-                    cad1.NamedArguments[j].TypedValue.ValidateEqualButFreshlyAllocated(
-                        cad2.NamedArguments[j].TypedValue
-                    );
+                    cad1.NamedArguments[j]
+                        .TypedValue
+                        .ValidateEqualButFreshlyAllocated(cad2.NamedArguments[j].TypedValue);
                 }
             }
         }

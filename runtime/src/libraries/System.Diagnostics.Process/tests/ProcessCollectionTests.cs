@@ -15,7 +15,8 @@ namespace System.Diagnostics.Tests
         {
             ProcessModule[] mArray = Process
                 .GetCurrentProcess()
-                .Modules.Cast<ProcessModule>()
+                .Modules
+                .Cast<ProcessModule>()
                 .ToArray();
 
             // Constructor

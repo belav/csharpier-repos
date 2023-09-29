@@ -95,7 +95,8 @@ public partial class Startup
     {
         var serverAddresses = ctx.RequestServices
             .GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>();
+            .Features
+            .Get<IServerAddressesFeature>();
         await ctx.Response.WriteAsync(string.Join(",", serverAddresses.Addresses));
     }
 

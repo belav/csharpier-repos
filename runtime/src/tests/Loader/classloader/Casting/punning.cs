@@ -28,7 +28,8 @@ partial class Program
         IntPtr fptr = typeof(A.Class)
             .GetMethod("GetFieldGeneric")
             .MakeGenericMethod(typeof(object))
-            .MethodHandle.GetFunctionPointer();
+            .MethodHandle
+            .GetFunctionPointer();
         Assert.NotEqual(IntPtr.Zero, fptr);
         var b = new Caller.Struct<object>() { Field = 0x55 };
         int fieldValue = Caller.Class.CallGetField(b, fptr, null);

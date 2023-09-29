@@ -2504,9 +2504,9 @@ namespace System.ServiceModel.Channels
                                             querySet.CsAddrInfos.Length
                                         ];
                                         for (int i = 0; i < querySet.CsAddrInfos.Length; i++)
-                                            pnrpRegistration.Addresses[i] = querySet.CsAddrInfos[
-                                                i
-                                            ].LocalAddr;
+                                            pnrpRegistration.Addresses[i] = querySet
+                                                .CsAddrInfos[i]
+                                                .LocalAddr;
 
                                         // add it to the list to return later.
                                         // all cloud enumeratos in the same scope will reference the same list and hence the lock.

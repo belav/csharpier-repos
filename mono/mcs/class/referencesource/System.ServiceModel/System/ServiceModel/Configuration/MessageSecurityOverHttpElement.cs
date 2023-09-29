@@ -57,9 +57,9 @@ namespace System.ServiceModel.Configuration
             security.NegotiateServiceCredential = this.NegotiateServiceCredential;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.AlgorithmSuite
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.AlgorithmSuite]
+                    .ValueOrigin
             )
             {
                 security.AlgorithmSuite = this.AlgorithmSuite;

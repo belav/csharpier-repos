@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                             new TextChange(new TextSpan(text.Length - 1, 1), string.Empty)
                         )
                     )
-                    .Project.Solution
+                    .Project
+                    .Solution
             );
 
             await wrapper.WaitForTags();
@@ -215,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             // Now product the first diagnostic and fire the events.
             var tree = await workspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single()
+                .Documents
+                .Single()
                 .GetRequiredSyntaxTreeAsync(CancellationToken.None);
             var span = TextSpan.FromBounds(0, 5);
             diagnosticService.CreateDiagnosticAndFireEvents(
@@ -275,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             // Create and fire the diagnostic events before the tagger is even made.
             var tree = await workspace.CurrentSolution.Projects
                 .Single()
-                .Documents.Single()
+                .Documents
+                .Single()
                 .GetRequiredSyntaxTreeAsync(CancellationToken.None);
             var span = TextSpan.FromBounds(0, 5);
             diagnosticService.CreateDiagnosticAndFireEvents(

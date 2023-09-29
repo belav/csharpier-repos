@@ -161,7 +161,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 static property =>
                     property.DeclaringEntityType.Model
                         .GetModelDependencies()
-                        .TypeMappingSource.FindMapping(property)!
+                        .TypeMappingSource
+                        .FindMapping(property)!
             );
 
         /// <summary>

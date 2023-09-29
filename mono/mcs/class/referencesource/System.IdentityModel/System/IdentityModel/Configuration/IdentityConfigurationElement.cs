@@ -172,14 +172,14 @@ namespace System.IdentityModel.Configuration
                     || IssuerNameRegistry.IsConfigured
                     || IssuerTokenResolver.IsConfigured
                     || (
-                        ElementInformation.Properties[
-                            ConfigurationStrings.SaveBootstrapContext
-                        ].ValueOrigin != PropertyValueOrigin.Default
+                        ElementInformation
+                            .Properties[ConfigurationStrings.SaveBootstrapContext]
+                            .ValueOrigin != PropertyValueOrigin.Default
                     )
                     || (
-                        ElementInformation.Properties[
-                            ConfigurationStrings.MaximumClockSkew
-                        ].ValueOrigin != PropertyValueOrigin.Default
+                        ElementInformation
+                            .Properties[ConfigurationStrings.MaximumClockSkew]
+                            .ValueOrigin != PropertyValueOrigin.Default
                     )
                     || ServiceTokenResolver.IsConfigured
                     || TokenReplayDetection.IsConfigured

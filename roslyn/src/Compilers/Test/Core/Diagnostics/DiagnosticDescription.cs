@@ -699,7 +699,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         assertText.AppendLine(
                             l.SourceTree
                                 .GetText()
-                                .Lines.GetLineFromPosition(l.SourceSpan.Start)
+                                .Lines
+                                .GetLineFromPosition(l.SourceSpan.Start)
                                 .ToString()
                         );
                     }

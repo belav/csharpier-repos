@@ -546,73 +546,85 @@ namespace System.Reflection.Runtime.General
                     return handle
                         .ToConstantBooleanArrayHandle(reader)
                         .GetConstantBooleanArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantCharArray:
                     return handle
                         .ToConstantCharArrayHandle(reader)
                         .GetConstantCharArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantByteArray:
                     return handle
                         .ToConstantByteArrayHandle(reader)
                         .GetConstantByteArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantSByteArray:
                     return handle
                         .ToConstantSByteArrayHandle(reader)
                         .GetConstantSByteArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantInt16Array:
                     return handle
                         .ToConstantInt16ArrayHandle(reader)
                         .GetConstantInt16Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantUInt16Array:
                     return handle
                         .ToConstantUInt16ArrayHandle(reader)
                         .GetConstantUInt16Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantInt32Array:
                     return handle
                         .ToConstantInt32ArrayHandle(reader)
                         .GetConstantInt32Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantUInt32Array:
                     return handle
                         .ToConstantUInt32ArrayHandle(reader)
                         .GetConstantUInt32Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantInt64Array:
                     return handle
                         .ToConstantInt64ArrayHandle(reader)
                         .GetConstantInt64Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantUInt64Array:
                     return handle
                         .ToConstantUInt64ArrayHandle(reader)
                         .GetConstantUInt64Array(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantSingleArray:
                     return handle
                         .ToConstantSingleArrayHandle(reader)
                         .GetConstantSingleArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantDoubleArray:
                     return handle
                         .ToConstantDoubleArrayHandle(reader)
                         .GetConstantDoubleArray(reader)
-                        .Value.ToArray();
+                        .Value
+                        .ToArray();
 
                 case HandleType.ConstantEnumArray:
                     return TryParseConstantEnumArray(
@@ -686,49 +698,57 @@ namespace System.Reflection.Runtime.General
                     return enumArray.Value
                         .ToConstantByteArrayHandle(reader)
                         .GetConstantByteArray(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantSByteArray:
                     return enumArray.Value
                         .ToConstantSByteArrayHandle(reader)
                         .GetConstantSByteArray(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantInt16Array:
                     return enumArray.Value
                         .ToConstantInt16ArrayHandle(reader)
                         .GetConstantInt16Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantUInt16Array:
                     return enumArray.Value
                         .ToConstantUInt16ArrayHandle(reader)
                         .GetConstantUInt16Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantInt32Array:
                     return enumArray.Value
                         .ToConstantInt32ArrayHandle(reader)
                         .GetConstantInt32Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantUInt32Array:
                     return enumArray.Value
                         .ToConstantUInt32ArrayHandle(reader)
                         .GetConstantUInt32Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantInt64Array:
                     return enumArray.Value
                         .ToConstantInt64ArrayHandle(reader)
                         .GetConstantInt64Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 case HandleType.ConstantUInt64Array:
                     return enumArray.Value
                         .ToConstantUInt64ArrayHandle(reader)
                         .GetConstantUInt64Array(reader)
-                        .Value.ToArray(elementType);
+                        .Value
+                        .ToArray(elementType);
 
                 default:
                     throw new BadImageFormatException();

@@ -486,7 +486,8 @@ namespace System.Linq.Expressions
 }";
             CreateCompilationWithMscorlib40AndSystemCore(program)
                 .Emit(new System.IO.MemoryStream())
-                .Diagnostics.Verify(
+                .Diagnostics
+                .Verify(
                     // (9,9): warning CS0436: The type 'System.Linq.Expressions.Expression<T>' in '' conflicts with the imported type 'System.Linq.Expressions.Expression<TDelegate>' in 'System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
                     //         Expression<Func<int>> e = () => 1;
                     Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Expression<Func<int>>")

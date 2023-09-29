@@ -886,9 +886,9 @@ namespace System.Net.Mail
                         {
                             IAsyncResult result = AuthCommand.BeginSend(
                                 _connection,
-                                _connection._authenticationModules[
-                                    _currentModule
-                                ].AuthenticationType,
+                                _connection
+                                    ._authenticationModules[_currentModule]
+                                    .AuthenticationType,
                                 auth.Message,
                                 s_authenticateCallback,
                                 this
@@ -942,9 +942,9 @@ namespace System.Net.Mail
                         }
                         else if ((int)info.StatusCode == 235)
                         {
-                            thisPtr._connection._authenticationModules[
-                                thisPtr._currentModule
-                            ].CloseContext(thisPtr._connection);
+                            thisPtr._connection
+                                ._authenticationModules[thisPtr._currentModule]
+                                .CloseContext(thisPtr._connection);
                             thisPtr._connection._isConnected = true;
                             thisPtr.InvokeCallback();
                             return;
@@ -965,15 +965,15 @@ namespace System.Net.Mail
                 {
                     // We don't need credential on the continued auth assuming they were captured on the first call.
                     // That should always work, otherwise what if a new credential has been returned?
-                    Authorization? auth = _connection._authenticationModules[
-                        _currentModule
-                    ].Authenticate(
-                        _authResponse,
-                        null,
-                        _connection,
-                        _connection._client!.TargetName,
-                        null
-                    );
+                    Authorization? auth = _connection
+                        ._authenticationModules[_currentModule]
+                        .Authenticate(
+                            _authResponse,
+                            null,
+                            _connection,
+                            _connection._client!.TargetName,
+                            null
+                        );
                     if (auth == null)
                     {
                         throw new SmtpException(SR.SmtpAuthenticationFailed);
@@ -993,9 +993,9 @@ namespace System.Net.Mail
                     LineInfo info = AuthCommand.EndSend(result);
                     if ((int)info.StatusCode == 235)
                     {
-                        _connection._authenticationModules[_currentModule].CloseContext(
-                            _connection
-                        );
+                        _connection
+                            ._authenticationModules[_currentModule]
+                            .CloseContext(_connection);
                         _connection._isConnected = true;
                         InvokeCallback();
                         return false;
@@ -1019,9 +1019,9 @@ namespace System.Net.Mail
                         LineInfo info = AuthCommand.EndSend(result);
                         if ((int)info.StatusCode == 235)
                         {
-                            thisPtr._connection._authenticationModules[
-                                thisPtr._currentModule
-                            ].CloseContext(thisPtr._connection);
+                            thisPtr._connection
+                                ._authenticationModules[thisPtr._currentModule]
+                                .CloseContext(thisPtr._connection);
                             thisPtr._connection._isConnected = true;
                             thisPtr.InvokeCallback();
                             return;

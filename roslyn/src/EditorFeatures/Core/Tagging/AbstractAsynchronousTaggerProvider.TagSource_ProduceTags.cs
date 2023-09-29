@@ -536,7 +536,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     {
                         var snapshot = spansToTag
                             .First(s => s.SnapshotSpan.Snapshot.TextBuffer == latestBuffer)
-                            .SnapshotSpan.Snapshot;
+                            .SnapshotSpan
+                            .Snapshot;
 
                         if (oldTagTrees.TryGetValue(latestBuffer, out var previousSpans))
                         {

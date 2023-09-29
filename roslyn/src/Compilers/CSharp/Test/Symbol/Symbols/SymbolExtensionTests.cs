@@ -307,7 +307,8 @@ class Test
                         .Where(id => id.Identifier.ValueText == "Method")
                         .Single()
                 )
-                .Symbol.GetSymbol<MethodSymbol>();
+                .Symbol
+                .GetSymbol<MethodSymbol>();
 
             AssertEx.Equal(
                 "System.String C1<System.Int32 modopt(C2<G>)>.Method()",

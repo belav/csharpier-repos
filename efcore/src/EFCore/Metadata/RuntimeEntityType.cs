@@ -888,7 +888,8 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
                     {
                         ((IModel)entityType.Model)
                             .GetModelDependencies()
-                            .ConstructorBindingFactory.GetBindings(
+                            .ConstructorBindingFactory
+                            .GetBindings(
                                 entityType,
                                 out entityType._constructorBinding,
                                 out entityType._serviceOnlyConstructorBinding

@@ -1553,11 +1553,14 @@ namespace System.Data.Tests
             };
 
             //add Foreign Key (different name)
-            dsTarget1.Tables["Child2"].Constraints.Add(
-                "Child2_FK_2",
-                dsTarget1.Tables["Parent"].Columns["ParentId"],
-                dsTarget1.Tables["Child2"].Columns["ParentId"]
-            );
+            dsTarget1
+                .Tables["Child2"]
+                .Constraints
+                .Add(
+                    "Child2_FK_2",
+                    dsTarget1.Tables["Parent"].Columns["ParentId"],
+                    dsTarget1.Tables["Child2"].Columns["ParentId"]
+                );
 
             //add relation (different name)
             //dsTarget1.Relations.Add("Parent_Child_1",dsTarget1.Tables["Parent"].Columns["ParentId"],dsTarget1.Tables["Child"].Columns["ParentId"]);
@@ -1578,11 +1581,13 @@ namespace System.Data.Tests
             ds.Tables["Parent"].Columns["String2"].Unique = true; //will not be merged
 
             //add Foreign Key
-            ds.Tables["Child2"].Constraints.Add(
-                "Child2_FK",
-                ds.Tables["Parent"].Columns["ParentId"],
-                ds.Tables["Child2"].Columns["ParentId"]
-            );
+            ds.Tables["Child2"]
+                .Constraints
+                .Add(
+                    "Child2_FK",
+                    ds.Tables["Parent"].Columns["ParentId"],
+                    ds.Tables["Child2"].Columns["ParentId"]
+                );
 
             //add relation
             ds.Relations.Add(
@@ -1683,11 +1688,9 @@ namespace System.Data.Tests
             DataSet ds1 = ds.Copy();
 
             table2.Constraints.Add("fk", pcol, ccol);
-            ds1.Tables[1].Constraints.Add(
-                "fk",
-                ds1.Tables[0].Columns["col2"],
-                ds1.Tables[1].Columns["col2"]
-            );
+            ds1.Tables[1]
+                .Constraints
+                .Add("fk", ds1.Tables[0].Columns["col2"], ds1.Tables[1].Columns["col2"]);
 
             // No Exceptions should be thrown
             ds.Merge(ds1);
@@ -1861,11 +1864,9 @@ namespace System.Data.Tests
             {
                 DataSet ds1 = ds.Copy();
                 DataSet ds2 = ds.Copy();
-                ds2.Tables[0].Constraints.Add(
-                    "fk",
-                    ds2.Tables[0].Columns[0],
-                    ds2.Tables[1].Columns[0]
-                );
+                ds2.Tables[0]
+                    .Constraints
+                    .Add("fk", ds2.Tables[0].Columns[0], ds2.Tables[1].Columns[0]);
                 ds1.Tables[0].Constraints.Add("uc", ds1.Tables[0].Columns[0], false);
                 ds1.Merge(ds2, true, MissingSchemaAction.Error);
             });

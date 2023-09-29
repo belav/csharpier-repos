@@ -207,7 +207,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         {
             var dataMember = builderContext.QueryContext.DataContext.Mapping
                 .GetTable(tableExpression.Type)
-                .RowType.GetDataMember(memberInfo);
+                .RowType
+                .GetDataMember(memberInfo);
             if (dataMember == null)
                 return null;
             return RegisterColumn(
@@ -226,7 +227,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         {
             var dataMember = builderContext.QueryContext.DataContext.Mapping
                 .GetTable(table.Type)
-                .RowType.GetDataMember(memberInfo);
+                .RowType
+                .GetDataMember(memberInfo);
             if (dataMember == null)
                 return null;
             return new ColumnExpression(table, dataMember);
@@ -419,7 +421,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             foreach (
                 var metaMember in builderContext.QueryContext.DataContext.Mapping
                     .GetTable(tableExpression.Type)
-                    .RowType.PersistentDataMembers
+                    .RowType
+                    .PersistentDataMembers
             )
             {
                 yield return RegisterColumn(tableExpression, metaMember.Member, builderContext);

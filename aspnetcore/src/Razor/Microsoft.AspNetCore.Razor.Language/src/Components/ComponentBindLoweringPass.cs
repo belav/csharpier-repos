@@ -525,13 +525,16 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
 
                 expressionNode.Children.Clear();
                 expressionNode.Children.Add(new CSharpExpressionIntermediateNode());
-                expressionNode.Children[0].Children.Add(
-                    new IntermediateToken()
-                    {
-                        Content = $"() => {original.Content}",
-                        Kind = TokenKind.CSharp
-                    }
-                );
+                expressionNode
+                    .Children[0]
+                    .Children
+                    .Add(
+                        new IntermediateToken()
+                        {
+                            Content = $"() => {original.Content}",
+                            Kind = TokenKind.CSharp
+                        }
+                    );
             }
 
             return expressionNode == null

@@ -64,9 +64,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             );
             var newSolution = workspace.CurrentSolution
                 .WithAnalyzerReferences(new[] { analyzerReference })
-                .Projects.Single()
+                .Projects
+                .Single()
                 .AddAdditionalDocument(name: "dummy.txt", text: "", filePath: "dummy.txt")
-                .Project.Solution;
+                .Project
+                .Solution;
             workspace.TryApplyChanges(newSolution);
 
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
@@ -119,7 +121,8 @@ class C
 
                 var ideEngineDocument = ideEngineWorkspace.CurrentSolution.Projects
                     .Single()
-                    .Documents.Single();
+                    .Documents
+                    .Single();
                 await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
                     ideEngineWorkspace,
                     ideEngineDocument,
@@ -416,7 +419,8 @@ class C
 
                 var ideEngineDocument = ideEngineWorkspace.CurrentSolution.Projects
                     .Single()
-                    .Documents.Single();
+                    .Documents
+                    .Single();
                 var diagnostics = await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
                     ideEngineWorkspace,
                     ideEngineDocument,

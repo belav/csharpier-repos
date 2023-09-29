@@ -57,7 +57,8 @@ public abstract class EventIdTestBase
 
         var eventIdFields = eventIdType
             .GetTypeInfo()
-            .DeclaredFields.Where(
+            .DeclaredFields
+            .Where(
                 p =>
                     p.FieldType == typeof(EventId)
                     && p.GetCustomAttribute<ObsoleteAttribute>() == null

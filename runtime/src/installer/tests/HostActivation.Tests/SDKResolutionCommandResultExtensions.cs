@@ -19,7 +19,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 ? assertion.NotHaveStdErrContaining(noSdkMessage)
                 : assertion
                     .HaveStdErrContaining(noSdkMessage)
-                    .And.HaveStdErrContaining("Download a .NET SDK:");
+                    .And
+                    .HaveStdErrContaining("Download a .NET SDK:");
         }
 
         public static AndConstraint<CommandResultAssertions> NotFindCompatibleSdk(

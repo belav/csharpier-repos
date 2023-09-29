@@ -48,7 +48,8 @@ public class EnumToUnderlyingType : IntegrationTest<EnumToUnderlyingType.Databas
         {
             ProjectTo<CustomerViewModel>(context.Customers)
                 .First()
-                .ConsoleColor.ShouldBe((int)ConsoleColor.Yellow);
+                .ConsoleColor
+                .ShouldBe((int)ConsoleColor.Yellow);
         }
     }
 }
@@ -101,7 +102,8 @@ public class UnderlyingTypeToEnum : IntegrationTest<UnderlyingTypeToEnum.Databas
         {
             ProjectTo<CustomerViewModel>(context.Customers)
                 .First()
-                .ConsoleColor.ShouldBe(ConsoleColor.Yellow);
+                .ConsoleColor
+                .ShouldBe(ConsoleColor.Yellow);
         }
     }
 }
@@ -154,7 +156,8 @@ public class EnumToEnum : IntegrationTest<EnumToEnum.DatabaseInitializer>
         {
             ProjectTo<CustomerViewModel>(context.Customers)
                 .First()
-                .ConsoleColor.ShouldBe(ConsoleColor.DarkYellow);
+                .ConsoleColor
+                .ShouldBe(ConsoleColor.DarkYellow);
         }
     }
 }

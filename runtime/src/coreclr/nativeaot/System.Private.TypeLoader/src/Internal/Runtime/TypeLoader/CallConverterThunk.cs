@@ -1302,9 +1302,9 @@ namespace Internal.Runtime.TypeLoader
                     if (conversionParams._dynamicInvokeByRefObjectArgs[i] == null)
                         continue;
 
-                    object byrefObjectArgValue = conversionParams._dynamicInvokeByRefObjectArgs[
-                        i
-                    ]._object;
+                    object byrefObjectArgValue = conversionParams
+                        ._dynamicInvokeByRefObjectArgs[i]
+                        ._object;
                     conversionParams._dynamicInvokeParams[i] = byrefObjectArgValue;
                 }
             }

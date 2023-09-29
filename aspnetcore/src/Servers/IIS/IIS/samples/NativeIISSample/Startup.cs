@@ -135,7 +135,8 @@ public class Startup
                 await context.Response.WriteAsync(Environment.NewLine);
                 var addresses = context.RequestServices
                     .GetService<IServer>()
-                    .Features.Get<IServerAddressesFeature>();
+                    .Features
+                    .Get<IServerAddressesFeature>();
                 foreach (var key in addresses.Addresses)
                 {
                     await context.Response.WriteAsync(key + Environment.NewLine);

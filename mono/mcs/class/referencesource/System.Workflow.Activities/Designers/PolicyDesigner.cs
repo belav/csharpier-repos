@@ -84,10 +84,9 @@ namespace System.Workflow.Activities
             }
 
             // force revalidation by setting a property
-            TypeDescriptor.GetProperties(activity)["RuleSetReference"].SetValue(
-                activity,
-                activity.RuleSetReference
-            );
+            TypeDescriptor
+                .GetProperties(activity)["RuleSetReference"]
+                .SetValue(activity, activity.RuleSetReference);
         }
     }
 

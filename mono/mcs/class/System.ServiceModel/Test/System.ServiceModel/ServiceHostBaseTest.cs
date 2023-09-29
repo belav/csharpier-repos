@@ -290,9 +290,12 @@ namespace MonoTests.System.ServiceModel
 
             h.Description.Endpoints[0].Behaviors.Add(new MyEndpointBehavior(st, h));
             h.Description.Endpoints[0].Contract.Behaviors.Add(new MyContractBehavior(st, h));
-            h.Description.Endpoints[0].Contract.Operations[0].Behaviors.Add(
-                new MyOperationBehavior(st, h)
-            );
+            h.Description
+                .Endpoints[0]
+                .Contract
+                .Operations[0]
+                .Behaviors
+                .Add(new MyOperationBehavior(st, h));
 
             h.Open();
             h.Close();
@@ -315,15 +318,21 @@ namespace MonoTests.System.ServiceModel
 
             h.Description.Endpoints[0].Behaviors.Add(new MyEndpointBehavior(st, h));
             h.Description.Endpoints[0].Contract.Behaviors.Add(new MyContractBehavior(st, h));
-            h.Description.Endpoints[0].Contract.Operations[0].Behaviors.Add(
-                new MyOperationBehavior(st, h)
-            );
+            h.Description
+                .Endpoints[0]
+                .Contract
+                .Operations[0]
+                .Behaviors
+                .Add(new MyOperationBehavior(st, h));
 
             h.Description.Endpoints[1].Behaviors.Add(new MyEndpointBehavior(st, h));
             h.Description.Endpoints[1].Contract.Behaviors.Add(new MyContractBehavior(st, h));
-            h.Description.Endpoints[1].Contract.Operations[0].Behaviors.Add(
-                new MyOperationBehavior(st, h)
-            );
+            h.Description
+                .Endpoints[1]
+                .Contract
+                .Operations[0]
+                .Behaviors
+                .Add(new MyOperationBehavior(st, h));
             h.Open();
             h.Close();
 

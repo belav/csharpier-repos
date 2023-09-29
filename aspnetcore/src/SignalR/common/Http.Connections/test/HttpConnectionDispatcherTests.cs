@@ -3182,8 +3182,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
         var url = host.Services
             .GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.Single();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .Single();
 
         string token = "";
         using (var client = new HttpClient())
@@ -3264,8 +3266,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
         var url = host.Services
             .GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.Single();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .Single();
 
         var cookies = new CookieContainer();
         using (var client = new HttpClient(new HttpClientHandler() { CookieContainer = cookies }))
@@ -3395,8 +3399,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
         var url = host.Services
             .GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.Single();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .Single();
 
         string token;
         using (var client = new HttpClient())
@@ -3453,8 +3459,10 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
         var manager = host.Services.GetRequiredService<HttpConnectionManager>();
         var url = host.Services
             .GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.Single();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .Single();
 
         url += "/foo";
         var stream = new MemoryStream();

@@ -211,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
                 var newSourceText = newDocument
                     .GetSyntaxRootSynchronously(CancellationToken)
-                    .SyntaxTree.GetText(CancellationToken);
+                    .SyntaxTree
+                    .GetText(CancellationToken);
                 var baseLine = newSourceText.Lines.GetLineFromPosition(
                     desiredIndentation.BasePosition
                 );

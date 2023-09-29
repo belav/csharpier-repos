@@ -71,7 +71,8 @@ namespace System.Runtime.Remoting.Messaging
         {
             return Thread.CurrentThread
                 .GetExecutionContextReader()
-                .LogicalCallContext.GetData(name);
+                .LogicalCallContext
+                .GetData(name);
         }
 
         /*=========================================================================
@@ -81,7 +82,8 @@ namespace System.Runtime.Remoting.Messaging
         {
             return Thread.CurrentThread
                 .GetExecutionContextReader()
-                .IllogicalCallContext.GetData(name);
+                .IllogicalCallContext
+                .GetData(name);
         }
 
         internal static IPrincipal Principal
@@ -91,7 +93,8 @@ namespace System.Runtime.Remoting.Messaging
             {
                 return Thread.CurrentThread
                     .GetExecutionContextReader()
-                    .LogicalCallContext.Principal;
+                    .LogicalCallContext
+                    .Principal;
             }
             [System.Security.SecurityCritical] // auto-generated
             set

@@ -36,7 +36,8 @@ namespace Internal.TypeSystem
                 {
                     return value
                         .ToEETypePtr()
-                        ->RelatedParameterType->ToRuntimeTypeHandle()
+                        ->RelatedParameterType
+                        ->ToRuntimeTypeHandle()
                         .Equals(key);
                 }
             }

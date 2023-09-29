@@ -263,10 +263,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveResolvedAssembly(includedAssemblyPaths, app)
-                    .And.NotHaveResolvedAssembly(excludedAssemblyPaths, app)
-                    .And.HaveResolvedNativeLibraryPath(includedNativeLibraryPaths, app)
-                    .And.NotHaveResolvedNativeLibraryPath(excludedNativeLibraryPaths, app);
+                    .And
+                    .HaveResolvedAssembly(includedAssemblyPaths, app)
+                    .And
+                    .NotHaveResolvedAssembly(excludedAssemblyPaths, app)
+                    .And
+                    .HaveResolvedNativeLibraryPath(includedNativeLibraryPaths, app)
+                    .And
+                    .NotHaveResolvedNativeLibraryPath(excludedNativeLibraryPaths, app);
             }
         }
     }
@@ -301,14 +305,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 .RunComponentResolutionTest(component, command => command.RuntimeId(rid))
                 .Should()
                 .Pass()
-                .And.HaveSuccessfullyResolvedComponentDependencies()
-                .And.HaveResolvedComponentDependencyAssembly(includedAssemblyPaths, component)
-                .And.NotHaveResolvedComponentDependencyAssembly(excludedAssemblyPaths, component)
-                .And.HaveResolvedComponentDependencyNativeLibraryPath(
+                .And
+                .HaveSuccessfullyResolvedComponentDependencies()
+                .And
+                .HaveResolvedComponentDependencyAssembly(includedAssemblyPaths, component)
+                .And
+                .NotHaveResolvedComponentDependencyAssembly(excludedAssemblyPaths, component)
+                .And
+                .HaveResolvedComponentDependencyNativeLibraryPath(
                     includedNativeLibraryPaths,
                     component
                 )
-                .And.NotHaveResolvedComponentDependencyNativeLibraryPath(
+                .And
+                .NotHaveResolvedComponentDependencyNativeLibraryPath(
                     excludedNativeLibraryPaths,
                     component
                 );
@@ -376,12 +385,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 )
                 .Should()
                 .Pass()
-                .And.HaveSuccessfullyResolvedComponentDependencies()
-                .And.NotHaveResolvedComponentDependencyAssembly(assemblyPaths, component)
-                .And.NotHaveResolvedComponentDependencyNativeLibraryPath(
-                    nativeLibrarypaths,
-                    component
-                );
+                .And
+                .HaveSuccessfullyResolvedComponentDependencies()
+                .And
+                .NotHaveResolvedComponentDependencyAssembly(assemblyPaths, component)
+                .And
+                .NotHaveResolvedComponentDependencyNativeLibraryPath(nativeLibrarypaths, component);
         }
 
         public class ComponentSharedTestState : SharedTestState
@@ -440,14 +449,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 )
                 .Should()
                 .Pass()
-                .And.HaveSuccessfullyResolvedComponentDependencies()
-                .And.HaveResolvedComponentDependencyAssembly(includedAssemblyPaths, component)
-                .And.NotHaveResolvedComponentDependencyAssembly(excludedAssemblyPaths, component)
-                .And.HaveResolvedComponentDependencyNativeLibraryPath(
+                .And
+                .HaveSuccessfullyResolvedComponentDependencies()
+                .And
+                .HaveResolvedComponentDependencyAssembly(includedAssemblyPaths, component)
+                .And
+                .NotHaveResolvedComponentDependencyAssembly(excludedAssemblyPaths, component)
+                .And
+                .HaveResolvedComponentDependencyNativeLibraryPath(
                     includedNativeLibraryPaths,
                     component
                 )
-                .And.NotHaveResolvedComponentDependencyNativeLibraryPath(
+                .And
+                .NotHaveResolvedComponentDependencyNativeLibraryPath(
                     excludedNativeLibraryPaths,
                     component
                 );

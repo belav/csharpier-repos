@@ -95,9 +95,9 @@ namespace Microsoft.Interop.Analyzers
                     }
 
                     membersToAdd.UnionWith(
-                        diagnostic.Properties[MissingMemberNames.Key].Split(
-                            MissingMemberNames.Delimiter
-                        )
+                        diagnostic
+                            .Properties[MissingMemberNames.Key]
+                            .Split(MissingMemberNames.Delimiter)
                     );
                 }
 
@@ -327,7 +327,8 @@ namespace Microsoft.Interop.Analyzers
                                 locationInAttribute.SourceSpan
                             )
                     )
-                    .ConstructorArguments[0].Value!;
+                    .ConstructorArguments[0]
+                    .Value!;
 
         private static void AddMissingMembers(
             DocumentEditor editor,

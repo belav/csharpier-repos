@@ -560,7 +560,9 @@ namespace ILLink.RoslynAnalyzer
         {
             var url = requiresAttribute?.NamedArguments
                 .FirstOrDefault(na => na.Key == "Url")
-                .Value.Value?.ToString();
+                .Value
+                .Value
+                ?.ToString();
             return MessageFormat.FormatRequiresAttributeUrlArg(url);
         }
 

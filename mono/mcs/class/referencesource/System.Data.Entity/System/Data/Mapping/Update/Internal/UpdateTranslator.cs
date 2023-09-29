@@ -330,9 +330,9 @@ namespace System.Data.Mapping.Update.Internal
 
                         if (!hasNullValue)
                         {
-                            EntitySet principalSet = associationSet.AssociationSetEnds[
-                                constraint.FromRole.Name
-                            ].EntitySet;
+                            EntitySet principalSet = associationSet
+                                .AssociationSetEnds[constraint.FromRole.Name]
+                                .EntitySet;
                             if (1 == keyValues.Length)
                             {
                                 principalKey = new EntityKey(principalSet, keyValues[0]);
@@ -662,9 +662,10 @@ namespace System.Data.Mapping.Update.Internal
 
                 // determine if type compensation is required
                 IExtendedDataRecord recordWithMetadata = (IExtendedDataRecord)targetRecord;
-                EdmMember member = recordWithMetadata.DataRecordInfo.FieldMetadata[
-                    context.RecordOrdinal
-                ].FieldType;
+                EdmMember member = recordWithMetadata
+                    .DataRecordInfo
+                    .FieldMetadata[context.RecordOrdinal]
+                    .FieldType;
 
                 value = value ?? DBNull.Value; // records expect DBNull rather than null
                 value = AlignReturnValue(value, member, context);

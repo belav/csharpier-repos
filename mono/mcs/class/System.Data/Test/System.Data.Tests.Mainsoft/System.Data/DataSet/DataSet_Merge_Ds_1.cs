@@ -93,11 +93,14 @@ namespace tests.system_data_dll.System_Data
             };
 
             //add Foreign Key (different name)
-            dsTarget1.Tables["Child2"].Constraints.Add(
-                "Child2_FK_2",
-                dsTarget1.Tables["Parent"].Columns["ParentId"],
-                dsTarget1.Tables["Child2"].Columns["ParentId"]
-            );
+            dsTarget1
+                .Tables["Child2"]
+                .Constraints
+                .Add(
+                    "Child2_FK_2",
+                    dsTarget1.Tables["Parent"].Columns["ParentId"],
+                    dsTarget1.Tables["Child2"].Columns["ParentId"]
+                );
 
             //add relation (different name)
             //dsTarget1.Relations.Add("Parent_Child_1",dsTarget1.Tables["Parent"].Columns["ParentId"],dsTarget1.Tables["Child"].Columns["ParentId"]);
@@ -119,11 +122,13 @@ namespace tests.system_data_dll.System_Data
             ds.Tables["Parent"].Columns["String2"].Unique = true; //will not be merged
 
             //add Foreign Key
-            ds.Tables["Child2"].Constraints.Add(
-                "Child2_FK",
-                ds.Tables["Parent"].Columns["ParentId"],
-                ds.Tables["Child2"].Columns["ParentId"]
-            );
+            ds.Tables["Child2"]
+                .Constraints
+                .Add(
+                    "Child2_FK",
+                    ds.Tables["Parent"].Columns["ParentId"],
+                    ds.Tables["Child2"].Columns["ParentId"]
+                );
 
             //add relation
             ds.Relations.Add(

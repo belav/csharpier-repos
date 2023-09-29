@@ -90,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
             var tree = SyntaxFactory.ParseSyntaxTree(source);
             var root = tree.GetRoot();
             var declarationNode = root.FindToken(position)
-                .Parent.FirstAncestorOrSelf<TDeclaration>();
+                .Parent
+                .FirstAncestorOrSelf<TDeclaration>();
 
             var actualSpans = GetBreakpointSequence(declarationNode, position).ToArray();
 

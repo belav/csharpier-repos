@@ -211,9 +211,10 @@ namespace System.Activities.Core.Presentation
         )
         {
             object casesDict = casesProperties.Dictionary.GetCurrentValue();
-            ModelItemCollection collection = casesProperties.Value.Properties[
-                "ItemsCollection"
-            ].Collection;
+            ModelItemCollection collection = casesProperties
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
             MethodInfo method = genericGetCaseName.MakeGenericMethod(type);
             object[] parameters = new object[] { collection, null };
             string result = (string)method.Invoke(null, parameters);
@@ -466,9 +467,10 @@ namespace System.Activities.Core.Presentation
 
         public static bool ContainsCaseKey(ModelProperty casesProp, object key)
         {
-            ModelItemCollection itemsCollection = casesProp.Value.Properties[
-                "ItemsCollection"
-            ].Collection;
+            ModelItemCollection itemsCollection = casesProp
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
             return ContainsCaseKey(itemsCollection, key);
         }
 
@@ -495,9 +497,10 @@ namespace System.Activities.Core.Presentation
 
         public static ModelItem GetCaseModelItem(ModelProperty casesProp, object key)
         {
-            ModelItemCollection itemsCollection = casesProp.Value.Properties[
-                "ItemsCollection"
-            ].Collection;
+            ModelItemCollection itemsCollection = casesProp
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
             return GenericFlowSwitchHelper.GetCaseModelItem(itemsCollection, key);
         }
 
@@ -530,9 +533,10 @@ namespace System.Activities.Core.Presentation
 
         public static ModelItem[] GetCaseKeys(ModelProperty casesProp)
         {
-            ModelItemCollection itemsCollection = casesProp.Value.Properties[
-                "ItemsCollection"
-            ].Collection;
+            ModelItemCollection itemsCollection = casesProp
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
             ModelItem[] keys = new ModelItem[itemsCollection.Count];
             for (int i = 0; i < itemsCollection.Count; i++)
             {
@@ -543,9 +547,10 @@ namespace System.Activities.Core.Presentation
 
         public static void RemoveCase(ModelProperty casesProp, object key)
         {
-            ModelItemCollection itemsCollection = casesProp.Value.Properties[
-                "ItemsCollection"
-            ].Collection;
+            ModelItemCollection itemsCollection = casesProp
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
 
             if (GenericFlowSwitchHelper.FlowSwitchNullCaseKeyIdentifier.Equals(key))
             {
@@ -576,9 +581,10 @@ namespace System.Activities.Core.Presentation
                 "Property type should be IDictonary<T, FlowNode>"
             );
             Type keyType = propertyType.GetGenericArguments()[0];
-            ModelItemCollection itemsCollection = casesPropperties.Value.Properties[
-                "ItemsCollection"
-            ].Collection;
+            ModelItemCollection itemsCollection = casesPropperties
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
 
             Type caseType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(
                 new Type[] { keyType, typeof(FlowNode) }

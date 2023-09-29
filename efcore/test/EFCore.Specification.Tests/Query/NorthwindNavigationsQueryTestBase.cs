@@ -845,7 +845,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                         c =>
                             ss.Set<Order>()
                                 .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                .Customer.City
+                                .Customer
+                                .City
                     )
         );
 
@@ -893,7 +894,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                             != null
                                 ? ss.Set<Order>()
                                     .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                    .Customer.City
+                                    .Customer
+                                    .City
                                 : null
                     )
         );
@@ -913,7 +915,8 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                             ss.Set<Order>()
                                 .OrderBy(o => o.CustomerID)
                                 .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                .Customer.City
+                                .Customer
+                                .City
                     )
         );
 

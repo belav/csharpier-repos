@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "System.Int32",
                 attribute.AttributeConstructor.Parameters
                     .Single()
-                    .TypeWithAnnotations.ToTestDisplayString()
+                    .TypeWithAnnotations
+                    .ToTestDisplayString()
             );
             Assert.Empty(attribute.CommonNamedArguments);
 
@@ -125,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "System.Diagnostics.DebuggableAttribute.DebuggingModes",
                 attribute.AttributeConstructor.Parameters
                     .Single()
-                    .TypeWithAnnotations.ToTestDisplayString()
+                    .TypeWithAnnotations
+                    .ToTestDisplayString()
             );
             Assert.Empty(attribute.CommonNamedArguments);
 
@@ -322,14 +324,16 @@ abstract class C
                         peModule
                             .GetCustomAttributesForToken(((PEMethodSymbol)p.GetMethod).Handle)
                             .Single()
-                            .AttributeClass.Name
+                            .AttributeClass
+                            .Name
                     );
                     Assert.Equal(
                         "CompilerGeneratedAttribute",
                         peModule
                             .GetCustomAttributesForToken(((PEMethodSymbol)p.SetMethod).Handle)
                             .Single()
-                            .AttributeClass.Name
+                            .AttributeClass
+                            .Name
                     );
 
                     // no attributes on abstract property accessors
@@ -347,14 +351,16 @@ abstract class C
                         peModule
                             .GetCustomAttributesForToken(((PEMethodSymbol)e.AddMethod).Handle)
                             .Single()
-                            .AttributeClass.Name
+                            .AttributeClass
+                            .Name
                     );
                     Assert.Equal(
                         "CompilerGeneratedAttribute",
                         peModule
                             .GetCustomAttributesForToken(((PEMethodSymbol)e.RemoveMethod).Handle)
                             .Single()
-                            .AttributeClass.Name
+                            .AttributeClass
+                            .Name
                     );
                 }
             );

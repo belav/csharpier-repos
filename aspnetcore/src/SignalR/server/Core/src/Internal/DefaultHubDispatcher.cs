@@ -970,11 +970,13 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
                 hubMethodInvocationMessage.Arguments?.Length > hubInvocationArgumentPointer
                 && (
                     hubMethodInvocationMessage.Arguments[hubInvocationArgumentPointer] == null
-                    || descriptor.OriginalParameterTypes[parameterPointer].IsAssignableFrom(
-                        hubMethodInvocationMessage.Arguments[
-                            hubInvocationArgumentPointer
-                        ]?.GetType()
-                    )
+                    || descriptor
+                        .OriginalParameterTypes[parameterPointer]
+                        .IsAssignableFrom(
+                            hubMethodInvocationMessage
+                                .Arguments[hubInvocationArgumentPointer]
+                                ?.GetType()
+                        )
                 )
             )
             {

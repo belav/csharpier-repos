@@ -343,9 +343,10 @@ namespace System.Windows.Forms
                         }
                         else
                         {
-                            return owner.Parent.Controls[
-                                owner.Parent.Controls.Count - 1
-                            ].AccessibilityObject;
+                            return owner
+                                .Parent
+                                .Controls[owner.Parent.Controls.Count - 1]
+                                .AccessibilityObject;
                         }
                     }
                     else

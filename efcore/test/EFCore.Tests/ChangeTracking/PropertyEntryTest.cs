@@ -143,7 +143,8 @@ public class PropertyEntryTest
                         LongName = "B"
                     }
                 )
-                .Entity.Id;
+                .Entity
+                .Id;
 
             context.SaveChanges();
         }

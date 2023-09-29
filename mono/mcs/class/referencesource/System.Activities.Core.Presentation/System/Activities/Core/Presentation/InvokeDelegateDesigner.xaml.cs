@@ -92,9 +92,9 @@ namespace System.Activities.Core.Presentation
 
             this.isSetInternally = true;
             this.chooser.Properties = ModelItem.Root.Properties["Properties"].Collection;
-            this.chooser.SelectedPropertyName = ModelItem.Properties[
-                DelegatePropertyName
-            ].Reference;
+            this.chooser.SelectedPropertyName = ModelItem
+                .Properties[DelegatePropertyName]
+                .Reference;
             this.isSetInternally = false;
         }
 
@@ -177,15 +177,15 @@ namespace System.Activities.Core.Presentation
                 property.Type
             );
 
-            ModelItemCollection collection = this.ModelItem.Properties[
-                DelegateArgumentsPropertyName
-            ]
+            ModelItemCollection collection = this.ModelItem
+                .Properties[DelegateArgumentsPropertyName]
                 .Value
-                .Properties["ItemsCollection"].Collection;
+                .Properties["ItemsCollection"]
+                .Collection;
 
-            Type underlyingArgumentType = this.ModelItem.Properties[
-                DelegateArgumentsPropertyName
-            ].Value
+            Type underlyingArgumentType = this.ModelItem
+                .Properties[DelegateArgumentsPropertyName]
+                .Value
                 .GetCurrentValue()
                 .GetType()
                 .GetGenericArguments()[1];

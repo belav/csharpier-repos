@@ -463,18 +463,21 @@ namespace D
                             return new MethodDebugInfoBytes.Builder()
                                 .AddForward(methodToken2)
                                 .Build()
-                                .Bytes.ToArray();
+                                .Bytes
+                                .ToArray();
                         case methodToken2:
                             return new MethodDebugInfoBytes.Builder()
                                 .AddForward(methodToken3)
                                 .Build()
-                                .Bytes.ToArray();
+                                .Bytes
+                                .ToArray();
                         case methodToken3:
                             return new MethodDebugInfoBytes.Builder(
                                 new[] { new[] { importString } }
                             )
                                 .Build()
-                                .Bytes.ToArray();
+                                .Bytes
+                                .ToArray();
                         default:
                             throw null;
                     }
@@ -540,7 +543,8 @@ namespace D
                             return new MethodDebugInfoBytes.Builder()
                                 .AddForward(methodToken1)
                                 .Build()
-                                .Bytes.ToArray();
+                                .Bytes
+                                .ToArray();
                         default:
                             throw null;
                     }

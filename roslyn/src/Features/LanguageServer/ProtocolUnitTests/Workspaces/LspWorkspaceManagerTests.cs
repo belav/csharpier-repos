@@ -31,8 +31,10 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         await using var testLspServer = await CreateTestLspServerAsync(markup);
         var documentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.First()
+            .Projects
+            .First()
+            .Documents
+            .First()
             .GetURI();
 
         await testLspServer.OpenDocumentAsync(documentUri, "LSP text");
@@ -73,13 +75,17 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         );
         var firstDocumentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.Single(d => d.FilePath!.Contains("test1"))
+            .Projects
+            .First()
+            .Documents
+            .Single(d => d.FilePath!.Contains("test1"))
             .GetURI();
         var secondDocumentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.Single(d => d.FilePath!.Contains("test2"))
+            .Projects
+            .First()
+            .Documents
+            .Single(d => d.FilePath!.Contains("test2"))
             .GetURI();
 
         var firstDocument = await OpenDocumentAndVerifyLspTextAsync(
@@ -170,14 +176,18 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         );
         var firstDocumentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.Single(d => d.FilePath!.Contains("test1"))
+            .Projects
+            .First()
+            .Documents
+            .Single(d => d.FilePath!.Contains("test1"))
             .GetURI();
 
         var secondDocument = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.Single(d => d.FilePath!.Contains("test2"));
+            .Projects
+            .First()
+            .Documents
+            .Single(d => d.FilePath!.Contains("test2"));
         var secondDocumentUri = secondDocument.GetURI();
 
         // Open one of the documents via LSP and verify we have created our LSP solution.
@@ -226,8 +236,10 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         await using var testLspServer = await CreateTestLspServerAsync(markup);
         var documentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.Single(d => d.FilePath!.Contains("test1"))
+            .Projects
+            .First()
+            .Documents
+            .Single(d => d.FilePath!.Contains("test1"))
             .GetURI();
 
         // Open the document via LSP and verify the initial project name.
@@ -264,8 +276,10 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         await using var testLspServer = await CreateTestLspServerAsync(markup);
         var documentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.Single(d => d.FilePath!.Contains("test1"))
+            .Projects
+            .First()
+            .Documents
+            .Single(d => d.FilePath!.Contains("test1"))
             .GetURI();
 
         // Open the document via LSP with different text from the workspace and verify the initial project name.
@@ -304,8 +318,10 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         await using var testLspServer = await CreateTestLspServerAsync(markup);
         var documentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.Single(d => d.FilePath!.Contains("test1"))
+            .Projects
+            .First()
+            .Documents
+            .Single(d => d.FilePath!.Contains("test1"))
             .GetURI();
 
         // Open the document via LSP to create the initial LSP solution.
@@ -729,8 +745,10 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
         await using var testLspServer = await CreateTestLspServerAsync(markup);
         var documentUri = testLspServer
             .GetCurrentSolution()
-            .Projects.First()
-            .Documents.First()
+            .Projects
+            .First()
+            .Documents
+            .First()
             .GetURI();
 
         // Calling get text buffer opens the document in the workspace.

@@ -69,23 +69,25 @@ namespace tests.system_data_dll.System_Data
             ds1.Tables.Add(GHTUtils.DataProvider.CreateChildDataTable());
 
             //add data to check GH bug of DataSet.ReadXml of empty strings
-            ds1.Tables[1].Rows.Add(
-                new object[]
-                {
-                    7,
-                    1,
-                    string.Empty,
-                    string.Empty,
-                    new DateTime(2000, 1, 1, 0, 0, 0, 0),
-                    35
-                }
-            );
-            ds1.Tables[1].Rows.Add(
-                new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 }
-            );
-            ds1.Tables[1].Rows.Add(
-                new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 }
-            );
+            ds1.Tables[1]
+                .Rows
+                .Add(
+                    new object[]
+                    {
+                        7,
+                        1,
+                        string.Empty,
+                        string.Empty,
+                        new DateTime(2000, 1, 1, 0, 0, 0, 0),
+                        35
+                    }
+                );
+            ds1.Tables[1]
+                .Rows
+                .Add(new object[] { 7, 2, " ", "		", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
+            ds1.Tables[1]
+                .Rows
+                .Add(new object[] { 7, 3, "", "", new DateTime(2000, 1, 1, 0, 0, 0, 0), 35 });
 
             System.IO.StringWriter sw = new System.IO.StringWriter();
             //write xml file, data only

@@ -964,9 +964,9 @@ public static partial class DataContractSerializerTests
         {
             Assert.True(
                 dict2.DictionaryProperty.ContainsKey(entry.Key)
-                    && dict2.DictionaryProperty[entry.Key].Equals(
-                        dict.DictionaryProperty[entry.Key]
-                    )
+                    && dict2
+                        .DictionaryProperty[entry.Key]
+                        .Equals(dict.DictionaryProperty[entry.Key])
             );
         }
     }

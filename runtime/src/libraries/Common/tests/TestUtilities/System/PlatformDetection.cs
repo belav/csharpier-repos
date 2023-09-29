@@ -27,7 +27,8 @@ namespace System
             () =>
                 Environment
                     .GetEnvironmentVariables()
-                    .Keys.Cast<string>()
+                    .Keys
+                    .Cast<string>()
                     .Any(key => key.StartsWith("HELIX"))
         );
         public static bool IsInHelix => s_IsInHelix.Value;

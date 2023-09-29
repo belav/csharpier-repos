@@ -997,7 +997,8 @@ namespace DebuggerTests
                     Assert.False(result.IsOk, "result.IsOk");
                     Assert.True(result.IsErr, "result.IsErr");
 
-                    var hasErrorMessage = result.Error["exceptionDetails"]
+                    var hasErrorMessage = result
+                        .Error["exceptionDetails"]
                         ?["exception"]?["description"]?.Value<string>()
                         ?.Contains(error_msg);
                     Assert.True((hasErrorMessage ?? false), "Exception message not found");

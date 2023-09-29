@@ -1897,11 +1897,9 @@ namespace System.Web.UI.DataVisualization.Charting
             if (this.Chart != null && this.Chart.chartPicture.SuppressExceptions)
             {
                 // Get series axis
-                Axis axisY = this.Chart.ChartAreas[this.ChartArea].GetAxis(
-                    AxisName.Y,
-                    this.YAxisType,
-                    this.YSubAxisName
-                );
+                Axis axisY = this.Chart
+                    .ChartAreas[this.ChartArea]
+                    .GetAxis(AxisName.Y, this.YAxisType, this.YSubAxisName);
 
                 foreach (DataPoint point in this.Points)
                 {

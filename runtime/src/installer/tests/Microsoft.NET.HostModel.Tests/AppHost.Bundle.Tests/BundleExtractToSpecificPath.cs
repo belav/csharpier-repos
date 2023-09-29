@@ -58,7 +58,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             var extractDir = BundleHelper.GetExtractionDir(fixture, bundler);
             extractDir
@@ -108,7 +109,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             var extractedFiles = BundleHelper.GetExtractedFiles(fixture, bundleOptions);
             var extractedDir = new DirectoryInfo(
@@ -148,7 +150,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             var extractDir = BundleHelper.GetExtractionDir(fixture, bundler);
 
@@ -172,7 +175,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             extractDir.Should().NotBeModifiedAfter(firstWriteTime);
         }
@@ -204,7 +208,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             // Remove the extracted files, but keep the extraction directory
             var extractDir = BundleHelper.GetExtractionDir(fixture, bundler);
@@ -233,7 +238,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             extractDir.Should().HaveFiles(extractedFiles);
         }
@@ -259,7 +265,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(expectedErrorMessagePart);
+                .And
+                .HaveStdErrContaining(expectedErrorMessagePart);
         }
 
         [Fact]
@@ -295,7 +302,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             var extractedFiles = BundleHelper.GetExtractedFiles(
                 sharedTestState.TestFixture,

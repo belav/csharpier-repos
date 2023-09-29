@@ -1175,9 +1175,11 @@ namespace System.Web.Security
                                 directoryInfo.GetPassword(),
                                 directoryInfo.AuthenticationTypes
                             );
-                            readersEntry.Properties["member"].Add(
-                                PropertyManager.GetPropertyValue(userEntry, "distinguishedName")
-                            );
+                            readersEntry
+                                .Properties["member"]
+                                .Add(
+                                    PropertyManager.GetPropertyValue(userEntry, "distinguishedName")
+                                );
                             readersEntry.CommitChanges();
                         }
                     }
@@ -5474,9 +5476,10 @@ namespace System.Web.Security
                 throw new ProviderException(response.ErrorMessage);
 
             foreach (
-                string supportedExtension in response.Entries[0].Attributes[
-                    "supportedExtension"
-                ].GetValues(typeof(string))
+                string supportedExtension in response
+                    .Entries[0]
+                    .Attributes["supportedExtension"]
+                    .GetValues(typeof(string))
             )
             {
                 if (StringUtil.EqualsIgnoreCase(supportedExtension, LDAP_SERVER_FAST_BIND_OID))

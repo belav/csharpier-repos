@@ -33,7 +33,8 @@ namespace System.CommandLine.Tests
                 .Select(e => e.Message)
                 .Should()
                 .HaveCount(1)
-                .And.Contain(
+                .And
+                .Contain(
                     "Argument 'none-of-those' not recognized. Must be one of:\n\t'this'\n\t'that'\n\t'the-other-thing'"
                 );
         }
@@ -63,9 +64,11 @@ namespace System.CommandLine.Tests
 
             parseResult
                 .FindResultFor(option)
-                .ErrorMessage.Should()
+                .ErrorMessage
+                .Should()
                 .Be(parseResult.Errors.Single().Message)
-                .And.Should()
+                .And
+                .Should()
                 .NotBeNull();
         }
 
@@ -81,9 +84,11 @@ namespace System.CommandLine.Tests
 
             parseResult
                 .FindResultFor(argument)
-                .ErrorMessage.Should()
+                .ErrorMessage
+                .Should()
                 .Be(parseResult.Errors.Single().Message)
-                .And.Should()
+                .And
+                .Should()
                 .NotBeNull();
         }
 
@@ -115,7 +120,9 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(
                     LocalizationResources.Instance.UnrecognizedArgument(
                         "not-key1",
@@ -137,7 +144,9 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(LocalizationResources.Instance.UnrecognizedArgument("key2", new[] { "key1" }));
 
             argument.AcceptOnlyFromAmong("key2");
@@ -161,7 +170,9 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(
                     LocalizationResources.Instance.UnrecognizedArgument(
                         "not-value1",
@@ -180,7 +191,8 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .HaveCount(1)
-                .And.Contain(e => e.Message == "Required argument missing for option: '-x'.");
+                .And
+                .Contain(e => e.Message == "Required argument missing for option: '-x'.");
         }
 
         [Fact]
@@ -193,8 +205,11 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .HaveCount(1)
-                .And.Contain(e => e.SymbolResult.Symbol == command)
-                .Which.Message.Should()
+                .And
+                .Contain(e => e.SymbolResult.Symbol == command)
+                .Which
+                .Message
+                .Should()
                 .Be("Option '-x' is required.");
         }
 
@@ -211,8 +226,11 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .HaveCount(1)
-                .And.Contain(e => e.SymbolResult.Symbol == command)
-                .Which.Message.Should()
+                .And
+                .Contain(e => e.SymbolResult.Symbol == command)
+                .Which
+                .Message
+                .Should()
                 .Be("Option '--xray' is required.");
         }
 
@@ -268,7 +286,8 @@ namespace System.CommandLine.Tests
                 .Select(e => e.Message)
                 .Should()
                 .HaveCount(1)
-                .And.Contain(e => e == "Unrecognized command or argument 'some-arg'.");
+                .And
+                .Contain(e => e == "Unrecognized command or argument 'some-arg'.");
         }
 
         [Fact]
@@ -302,7 +321,8 @@ namespace System.CommandLine.Tests
                 .Select(e => e.Message)
                 .Should()
                 .HaveCount(1)
-                .And.Contain("Options '--one' and '--two' cannot be used together.");
+                .And
+                .Contain("Options '--one' and '--two' cannot be used together.");
         }
 
         [Fact]
@@ -324,8 +344,11 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .HaveCount(1)
-                .And.Contain(e => e.SymbolResult.Symbol == option)
-                .Which.Message.Should()
+                .And
+                .Contain(e => e.SymbolResult.Symbol == option)
+                .Which
+                .Message
+                .Should()
                 .Be("Option -x cannot be set to 123");
         }
 
@@ -348,8 +371,11 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .HaveCount(1)
-                .And.Contain(e => e.SymbolResult.Symbol == argument)
-                .Which.Message.Should()
+                .And
+                .Contain(e => e.SymbolResult.Symbol == argument)
+                .Which
+                .Message
+                .Should()
                 .Be("Argument x cannot be set to 123");
         }
 
@@ -409,8 +435,11 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .HaveCount(1)
-                .And.Contain(e => e.SymbolResult.Symbol == option)
-                .Which.Message.Should()
+                .And
+                .Contain(e => e.SymbolResult.Symbol == option)
+                .Which
+                .Message
+                .Should()
                 .Be("Invoked validator");
         }
 
@@ -515,7 +544,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol == command.Arguments.First()
                             && e.Message
@@ -537,7 +567,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "x"
                             && e.Message
@@ -604,7 +635,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol == command.Arguments.First()
                             && e.Message
@@ -627,7 +659,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "x"
                             && e.Message
@@ -688,7 +721,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File does not exist: '{path}'."
@@ -709,7 +743,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File does not exist: '{path}'."
@@ -730,7 +765,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"Directory does not exist: '{path}'."
@@ -751,7 +787,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"Directory does not exist: '{path}'."
@@ -772,7 +809,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol == command.Arguments.First()
                             && e.Message == $"File or directory does not exist: '{path}'."
@@ -793,7 +831,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File or directory does not exist: '{path}'."
@@ -814,7 +853,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File does not exist: '{path}'."
@@ -835,7 +875,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.Contain(
+                    .And
+                    .Contain(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File does not exist: '{path}'."
@@ -856,7 +897,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.ContainSingle(
+                    .And
+                    .ContainSingle(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"Directory does not exist: '{path}'."
@@ -877,7 +919,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.ContainSingle(
+                    .And
+                    .ContainSingle(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"Directory does not exist: '{path}'."
@@ -942,7 +985,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.ContainSingle(
+                    .And
+                    .ContainSingle(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File or directory does not exist: '{path}'."
@@ -963,7 +1007,8 @@ namespace System.CommandLine.Tests
                 result.Errors
                     .Should()
                     .HaveCount(1)
-                    .And.ContainSingle(
+                    .And
+                    .ContainSingle(
                         e =>
                             e.SymbolResult.Symbol.Name == "to"
                             && e.Message == $"File or directory does not exist: '{path}'."
@@ -1134,7 +1179,9 @@ namespace System.CommandLine.Tests
             parseResult.Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Required argument missing for option: '--opt'.");
         }
 
@@ -1194,7 +1241,9 @@ namespace System.CommandLine.Tests
             parseResult.Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be("Required argument missing for option: '-o'.");
         }
 

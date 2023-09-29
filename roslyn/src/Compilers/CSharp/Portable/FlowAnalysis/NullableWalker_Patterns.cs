@@ -480,9 +480,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 int extensionExtra = method.RequiresInstanceReceiver ? 0 : 1;
                                 for (int i = 0; i < method.ParameterCount - extensionExtra; i++)
                                 {
-                                    var parameterType = method.Parameters[
-                                        i + extensionExtra
-                                    ].TypeWithAnnotations;
+                                    var parameterType = method
+                                        .Parameters[i + extensionExtra]
+                                        .TypeWithAnnotations;
                                     var output = new BoundDagTemp(
                                         e.Syntax,
                                         parameterType.Type,

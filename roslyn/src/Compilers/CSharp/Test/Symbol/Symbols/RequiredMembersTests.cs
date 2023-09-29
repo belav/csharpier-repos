@@ -6790,7 +6790,8 @@ public class Derived : Base
                     copyCtor
                         .GetAttributes()
                         .Single(a => a.AttributeClass!.IsWellKnownSetsRequiredMembersAttribute())
-                        .AttributeConstructor.ToTestDisplayString()
+                        .AttributeConstructor
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -6876,7 +6877,8 @@ public class Derived : Base
                     copyCtor
                         .GetAttributes()
                         .Single(a => a.AttributeClass!.IsWellKnownSetsRequiredMembersAttribute())
-                        .AttributeConstructor.ToTestDisplayString()
+                        .AttributeConstructor
+                        .ToTestDisplayString()
                 );
             }
         }

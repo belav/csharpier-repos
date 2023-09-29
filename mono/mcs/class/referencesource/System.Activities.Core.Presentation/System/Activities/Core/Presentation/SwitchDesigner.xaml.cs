@@ -175,9 +175,11 @@ namespace System.Activities.Core.Presentation
                 this.Context.Services.GetService<ViewStateService>();
 
             foreach (
-                ModelItem modelItem in this.ModelItem.Properties["Cases"].Dictionary.Properties[
-                    "ItemsCollection"
-                ].Collection
+                ModelItem modelItem in this.ModelItem
+                    .Properties["Cases"]
+                    .Dictionary
+                    .Properties["ItemsCollection"]
+                    .Collection
             )
             {
                 bool? isExpanded = (bool?)
@@ -206,9 +208,11 @@ namespace System.Activities.Core.Presentation
             else
             {
                 foreach (
-                    ModelItem caseObject in this.ModelItem.Properties["Cases"]
+                    ModelItem caseObject in this.ModelItem
+                        .Properties["Cases"]
                         .Dictionary
-                        .Properties["ItemsCollection"].Collection
+                        .Properties["ItemsCollection"]
+                        .Collection
                 )
                 {
                     if (IsDescendantOfCase(caseObject, selection.PrimarySelection))

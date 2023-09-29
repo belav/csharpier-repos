@@ -1246,7 +1246,8 @@ namespace System.Net.Http.Functional.Tests
                         );
                         string bodyContent = System.Text.Json.JsonDocument
                             .Parse(responseContent)
-                            .RootElement.GetProperty("BodyContent")
+                            .RootElement
+                            .GetProperty("BodyContent")
                             .GetString();
                         Assert.Contains(stringContent.Substring(startingPosition), bodyContent);
                         if (startingPosition != 0)

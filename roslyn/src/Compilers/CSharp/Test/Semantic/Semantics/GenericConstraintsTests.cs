@@ -570,7 +570,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
@@ -593,7 +594,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.True(typeParameter.HasValueTypeConstraint);
@@ -617,7 +619,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.True(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
@@ -641,7 +644,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
                 Assert.False(typeParameter.HasValueTypeConstraint);
@@ -1270,7 +1274,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.Equal(
@@ -1298,7 +1303,8 @@ public class Test2
 
             var typeParameter = compilation.GlobalNamespace
                 .GetTypeMember("Test")
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
 
             Assert.True(typeParameter.HasValueTypeConstraint);
             Assert.False(typeParameter.HasReferenceTypeConstraint);
@@ -1315,7 +1321,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.True(typeParameter.HasReferenceTypeConstraint);
                 Assert.False(typeParameter.HasConstructorConstraint);
@@ -1337,7 +1344,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.True(typeParameter.HasConstructorConstraint);
@@ -1936,7 +1944,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.Equal(
@@ -1964,7 +1973,8 @@ public class Test2
 
             var typeParameter = compilation.GlobalNamespace
                 .GetTypeMember("Test")
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
 
             Assert.True(typeParameter.HasValueTypeConstraint);
             Assert.False(typeParameter.HasReferenceTypeConstraint);
@@ -1981,7 +1991,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.True(typeParameter.HasReferenceTypeConstraint);
                 Assert.False(typeParameter.HasConstructorConstraint);
@@ -2003,7 +2014,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
                 Assert.False(typeParameter.HasValueTypeConstraint);
                 Assert.False(typeParameter.HasReferenceTypeConstraint);
                 Assert.True(typeParameter.HasConstructorConstraint);
@@ -2503,7 +2515,8 @@ public class Test2
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.HasUnmanagedTypeConstraint);
                 AssertEx.Equal(
@@ -2788,7 +2801,8 @@ class Legacy
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2817,7 +2831,8 @@ public class Test
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
                     .GetMethod("M")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2840,7 +2855,8 @@ public class Test
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("D")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.IsValueType);
                 Assert.False(typeParameter.IsReferenceType);
@@ -2879,7 +2895,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
 
                     Assert.True(typeParameter.IsValueType);
                     Assert.False(typeParameter.IsReferenceType);
@@ -3804,7 +3821,8 @@ public unsafe class C<U> where U : unmanaged
             {
                 var typeParameter = module.GlobalNamespace
                     .GetTypeMember("Test")
-                    .TypeParameters.Single();
+                    .TypeParameters
+                    .Single();
 
                 Assert.True(typeParameter.HasUnmanagedTypeConstraint);
                 Assert.True(typeParameter.HasValueTypeConstraint);
@@ -3970,20 +3988,23 @@ public class Program
                     Assert.True(
                         module.ContainingAssembly
                             .GetTypeByMetadataName("D`1")
-                            .TypeParameters.Single()
+                            .TypeParameters
+                            .Single()
                             .HasUnmanagedTypeConstraint
                     );
                     Assert.True(
                         module.ContainingAssembly
                             .GetTypeByMetadataName("Test`1")
-                            .TypeParameters.Single()
+                            .TypeParameters
+                            .Single()
                             .HasUnmanagedTypeConstraint
                     );
                     Assert.True(
                         module.ContainingAssembly
                             .GetTypeByMetadataName("Test`1")
                             .GetTypeMember("<>c__DisplayClass2_0")
-                            .TypeParameters.Single()
+                            .TypeParameters
+                            .Single()
                             .HasUnmanagedTypeConstraint
                     );
                 }

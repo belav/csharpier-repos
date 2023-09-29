@@ -89,9 +89,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             //
             // When looking for the pattern members, we look for original definitions, not
             // constructed members
-            method.OriginalDefinition.Parameters[0]
-                .Type
-                .SpecialType == SpecialType.System_Int32;
+            method.OriginalDefinition.Parameters[0].Type.SpecialType == SpecialType.System_Int32;
 
         /// <summary>
         /// Look for methods like "SomeType MyType.Slice(int start, int length)".  Note that the

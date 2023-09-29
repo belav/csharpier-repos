@@ -249,7 +249,8 @@ public class TypeMap
         {
             properties = Profile
                 .CreateTypeDetails(DestinationType)
-                .WriteAccessors.Select(p => p.Name)
+                .WriteAccessors
+                .Select(p => p.Name)
                 .Where(p => !ConstructorParameterMatches(p))
                 .Except(MappedMembers().Select(m => m.DestinationName))
                 .Except(PathMaps.Select(p => p.MemberPath.First.Name));
@@ -261,7 +262,8 @@ public class TypeMap
                 .Select(pm => pm.SourceMember.Name);
             properties = Profile
                 .CreateTypeDetails(SourceType)
-                .ReadAccessors.Select(p => p.Name)
+                .ReadAccessors
+                .Select(p => p.Name)
                 .Except(MappedMembers().Select(m => m.GetSourceMemberName()))
                 .Except(IncludedMembersNames)
                 .Except(IncludedMembers.Select(m => m.GetMember()?.Name))

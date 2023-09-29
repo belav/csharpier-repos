@@ -233,9 +233,9 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 SendMessageContent messageContent =
                     ((Send)this.ModelItem.GetCurrentValue()).Content as SendMessageContent;
-                this.ModelItem.Properties[DeclaredMessageType].SetValue(
-                    null == messageContent ? null : messageContent.Message.ArgumentType
-                );
+                this.ModelItem
+                    .Properties[DeclaredMessageType]
+                    .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
             }
         }
 

@@ -441,10 +441,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                 // SQL derived datasource
                                 Type selectArgsType = dataSource
                                     .GetType()
-                                    .Assembly.GetType(
-                                        "System.Web.UI.DataSourceSelectArguments",
-                                        true
-                                    );
+                                    .Assembly
+                                    .GetType("System.Web.UI.DataSourceSelectArguments", true);
                                 ConstructorInfo ci = selectArgsType.GetConstructor(new Type[] { });
                                 dataSource = m.Invoke(
                                     dataSource,

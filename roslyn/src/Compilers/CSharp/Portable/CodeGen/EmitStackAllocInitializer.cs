@@ -161,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             int index = 0;
             int elementTypeSizeInBytes = elementType
                 .EnumUnderlyingTypeOrSelf()
-                .SpecialType.SizeInBytes();
+                .SpecialType
+                .SizeInBytes();
             foreach (BoundExpression init in inits)
             {
                 if (includeConstants || init.ConstantValueOpt == null)

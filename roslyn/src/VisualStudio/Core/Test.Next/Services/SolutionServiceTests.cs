@@ -852,7 +852,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var frozenText1 = SourceText.From("// Hello, World!");
             var frozenSolution1 = solution
                 .WithFrozenSourceGeneratedDocument(documentIdentity, frozenText1)
-                .Project.Solution;
+                .Project
+                .Solution;
 
             assetProvider = await GetAssetProviderAsync(
                 workspace,
@@ -878,7 +879,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var frozenText2 = SourceText.From("// Hello, World! A second time!");
             var frozenSolution2 = solution
                 .WithFrozenSourceGeneratedDocument(documentIdentity, frozenText2)
-                .Project.Solution;
+                .Project
+                .Solution;
 
             assetProvider = await GetAssetProviderAsync(
                 workspace,

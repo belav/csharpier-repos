@@ -772,17 +772,17 @@ namespace System.Workflow.Activities
                                 if (webServiceReceive.ParameterBindings.Contains(paramName))
                                 {
                                     if (
-                                        webServiceReceive.ParameterBindings[paramName].IsBindingSet(
-                                            WorkflowParameterBinding.ValueProperty
-                                        )
+                                        webServiceReceive
+                                            .ParameterBindings[paramName]
+                                            .IsBindingSet(WorkflowParameterBinding.ValueProperty)
                                     )
-                                        paramValue = webServiceReceive.ParameterBindings[
-                                            paramName
-                                        ].GetBinding(WorkflowParameterBinding.ValueProperty);
+                                        paramValue = webServiceReceive
+                                            .ParameterBindings[paramName]
+                                            .GetBinding(WorkflowParameterBinding.ValueProperty);
                                     else
-                                        paramValue = webServiceReceive.ParameterBindings[
-                                            paramName
-                                        ].GetValue(WorkflowParameterBinding.ValueProperty);
+                                        paramValue = webServiceReceive
+                                            .ParameterBindings[paramName]
+                                            .GetValue(WorkflowParameterBinding.ValueProperty);
                                 }
 
                                 if (!paramType.IsPublic || !paramType.IsSerializable)
@@ -996,7 +996,8 @@ namespace System.Workflow.Activities
             if (rootActivity.GetType().FullName.IndexOf(".") != -1)
                 namespaceName = rootActivity
                     .GetType()
-                    .FullName.Substring(0, rootActivity.GetType().FullName.LastIndexOf('.'));
+                    .FullName
+                    .Substring(0, rootActivity.GetType().FullName.LastIndexOf('.'));
 
             foreach (CodeNamespace codeNamespace in codeNamespaceCollection)
             {

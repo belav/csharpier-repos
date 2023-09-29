@@ -5575,7 +5575,8 @@ class C
                 .DescendantNodes()
                 .OfType<VariableDeclarationSyntax>()
                 .Single()
-                .Span.End;
+                .Span
+                .End;
 
             var lookupResults = model.LookupSymbols(position);
 
@@ -6557,9 +6558,9 @@ class Program
             var actualAnnotations = invocations
                 .Select(
                     inv =>
-                        (((IMethodSymbol)model.GetSymbolInfo(inv).Symbol)).TypeArguments[
-                            0
-                        ].NullableAnnotation
+                        (((IMethodSymbol)model.GetSymbolInfo(inv).Symbol))
+                            .TypeArguments[0]
+                            .NullableAnnotation
                 )
                 .ToArray();
             var expectedAnnotations = new[]
@@ -6921,13 +6922,15 @@ public class C
                 "System.String?",
                 model
                     .GetTypeInfo(assignmentsInLambda[0].Right)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
             AssertEx.Equal(
                 "System.String!",
                 model
                     .GetTypeInfo(assignmentsInLambda[2].Right)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 
@@ -6951,7 +6954,8 @@ public class C
                 "System.String!",
                 model
                     .GetTypeInfo(switchExpressionInput)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
 
             // New model should be able to get info, including nullability, without issue
@@ -6960,7 +6964,8 @@ public class C
                 "System.String!",
                 model
                     .GetTypeInfo(switchExpressionInput)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
 
@@ -7074,7 +7079,8 @@ class C
                 .DescendantNodes()
                 .OfType<BinaryExpressionSyntax>()
                 .Single()
-                .Right.DescendantNodes()
+                .Right
+                .DescendantNodes()
                 .OfType<ArgumentSyntax>()
                 .Single()
                 .Expression;
@@ -7082,7 +7088,8 @@ class C
                 "System.Object?",
                 model
                     .GetTypeInfo(binaryRightArgument)
-                    .Type.ToTestDisplayString(includeNonNullable: true)
+                    .Type
+                    .ToTestDisplayString(includeNonNullable: true)
             );
         }
     }

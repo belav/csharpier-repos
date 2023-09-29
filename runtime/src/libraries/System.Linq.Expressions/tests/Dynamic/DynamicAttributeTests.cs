@@ -43,9 +43,10 @@ namespace System.Runtime.CompilerServices.Tests
         {
             IList<bool> flags = (
                 (DynamicAttribute)
-                    GetType().GetMethod(nameof(ParamsAndReturns)).GetParameters()[
-                        0
-                    ].GetCustomAttribute(typeof(DynamicAttribute))
+                    GetType()
+                        .GetMethod(nameof(ParamsAndReturns))
+                        .GetParameters()[0]
+                        .GetCustomAttribute(typeof(DynamicAttribute))
             ).TransformFlags;
             Assert.Equal(1, flags.Count);
             Assert.True(flags[0]);
@@ -58,7 +59,8 @@ namespace System.Runtime.CompilerServices.Tests
                 (DynamicAttribute)
                     GetType()
                         .GetMethod(nameof(ParamsAndReturns))
-                        .ReturnParameter.GetCustomAttribute(typeof(DynamicAttribute))
+                        .ReturnParameter
+                        .GetCustomAttribute(typeof(DynamicAttribute))
             ).TransformFlags;
             Assert.Equal(1, flags.Count);
             Assert.True(flags[0]);
@@ -69,9 +71,10 @@ namespace System.Runtime.CompilerServices.Tests
         {
             IList<bool> flags = (
                 (DynamicAttribute)
-                    GetType().GetMethod(nameof(ParamsAndReturns)).GetParameters()[
-                        1
-                    ].GetCustomAttribute(typeof(DynamicAttribute))
+                    GetType()
+                        .GetMethod(nameof(ParamsAndReturns))
+                        .GetParameters()[1]
+                        .GetCustomAttribute(typeof(DynamicAttribute))
             ).TransformFlags;
             Assert.Equal(new[] { false, true }, flags);
         }
@@ -81,9 +84,10 @@ namespace System.Runtime.CompilerServices.Tests
         {
             IList<bool> flags = (
                 (DynamicAttribute)
-                    GetType().GetMethod(nameof(ParamsAndReturns)).GetParameters()[
-                        2
-                    ].GetCustomAttribute(typeof(DynamicAttribute))
+                    GetType()
+                        .GetMethod(nameof(ParamsAndReturns))
+                        .GetParameters()[2]
+                        .GetCustomAttribute(typeof(DynamicAttribute))
             ).TransformFlags;
             Assert.Equal(new[] { false, true }, flags);
         }
@@ -93,9 +97,10 @@ namespace System.Runtime.CompilerServices.Tests
         {
             IList<bool> flags = (
                 (DynamicAttribute)
-                    GetType().GetMethod(nameof(ParamsAndReturns)).GetParameters()[
-                        3
-                    ].GetCustomAttribute(typeof(DynamicAttribute))
+                    GetType()
+                        .GetMethod(nameof(ParamsAndReturns))
+                        .GetParameters()[3]
+                        .GetCustomAttribute(typeof(DynamicAttribute))
             ).TransformFlags;
             Assert.Equal(new[] { false, true, false }, flags);
         }
@@ -105,9 +110,10 @@ namespace System.Runtime.CompilerServices.Tests
         {
             IList<bool> flags = (
                 (DynamicAttribute)
-                    GetType().GetMethod(nameof(ParamsAndReturns)).GetParameters()[
-                        4
-                    ].GetCustomAttribute(typeof(DynamicAttribute))
+                    GetType()
+                        .GetMethod(nameof(ParamsAndReturns))
+                        .GetParameters()[4]
+                        .GetCustomAttribute(typeof(DynamicAttribute))
             ).TransformFlags;
             Assert.Equal(new[] { false, false, true }, flags);
         }
@@ -117,9 +123,10 @@ namespace System.Runtime.CompilerServices.Tests
         {
             IList<bool> flags = (
                 (DynamicAttribute)
-                    GetType().GetMethod(nameof(ParamsAndReturns)).GetParameters()[
-                        5
-                    ].GetCustomAttribute(typeof(DynamicAttribute))
+                    GetType()
+                        .GetMethod(nameof(ParamsAndReturns))
+                        .GetParameters()[5]
+                        .GetCustomAttribute(typeof(DynamicAttribute))
             ).TransformFlags;
             Assert.Equal(new[] { false, true, false, false, true, false }, flags);
         }

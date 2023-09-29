@@ -194,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
                     .Single()
-                    .ReturnType.Kind
+                    .ReturnType
+                    .Kind
             );
 
             var asm2 = MetadataTestHelpers.GetSymbolsForReferences(
@@ -760,7 +761,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .GetMembers("Foo")
                     .OfType<MethodSymbol>()
                     .Single()
-                    .ReturnType.Kind
+                    .ReturnType
+                    .Kind
             );
 
             Assert.Same(asm2[0], asm1[0]);
@@ -4270,7 +4272,9 @@ class Module1
             Assert.NotEqual(module1, module2);
             Assert.Same(module1.Module, module2.Module);
 
-            NamedTypeSymbol classModule1 = c1AsmRef.Modules[0].GlobalNamespace
+            NamedTypeSymbol classModule1 = c1AsmRef
+                .Modules[0]
+                .GlobalNamespace
                 .GetTypeMembers("Module1")
                 .Single();
             MethodSymbol m1 = classModule1.GetMembers("M1").OfType<MethodSymbol>().Single();

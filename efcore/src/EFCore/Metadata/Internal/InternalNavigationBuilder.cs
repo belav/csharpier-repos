@@ -213,17 +213,23 @@ public class InternalNavigationBuilder
                 return Metadata.IsOnDependent
                     ? foreignKey.Builder
                         .IsRequired(required, configurationSource)!
-                        .Metadata.DependentToPrincipal!.Builder
+                        .Metadata
+                        .DependentToPrincipal!
+                        .Builder
                     : foreignKey.Builder
                         .IsRequiredDependent(required, configurationSource)!
-                        .Metadata.PrincipalToDependent!.Builder;
+                        .Metadata
+                        .PrincipalToDependent!
+                        .Builder;
             }
 
             if (Metadata.IsOnDependent)
             {
                 return foreignKey.Builder
                     .IsRequired(required, configurationSource)!
-                    .Metadata.DependentToPrincipal!.Builder;
+                    .Metadata
+                    .DependentToPrincipal!
+                    .Builder;
             }
 
             throw new InvalidOperationException(

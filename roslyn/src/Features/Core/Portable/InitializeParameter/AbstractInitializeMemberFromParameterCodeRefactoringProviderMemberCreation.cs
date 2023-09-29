@@ -746,7 +746,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             {
                 var declarationService =
                     document.GetRequiredLanguageService<ISymbolDeclarationService>();
-                var propertySyntax = await declarationService.GetDeclarations(fieldOrProperty)[0]
+                var propertySyntax = await declarationService
+                    .GetDeclarations(fieldOrProperty)[0]
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var withoutThrowNotImplemented = RemoveThrowNotImplemented(propertySyntax);
@@ -794,9 +795,9 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
                 if (statement != null && fieldOrProperty is TSymbol symbol)
                 {
-                    var symbolSyntax = symbol.DeclaringSyntaxReferences[0].GetSyntax(
-                        cancellationToken
-                    );
+                    var symbolSyntax = symbol
+                        .DeclaringSyntaxReferences[0]
+                        .GetSyntax(cancellationToken);
                     if (symbolSyntax.Ancestors().Contains(typeDeclaration))
                     {
                         if (before)

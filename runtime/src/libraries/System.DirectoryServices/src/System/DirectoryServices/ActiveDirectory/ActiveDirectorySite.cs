@@ -1625,13 +1625,15 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryEntry connectionEntry = result.GetDirectoryEntry();
                     string cn = (string)
                         PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.Cn)!;
-                    string transport = Utils.GetDNComponents(
-                        (string)
-                            PropertyManager.GetSearchResultPropertyValue(
-                                result,
-                                PropertyManager.DistinguishedName
-                            )!
-                    )[1].Value!;
+                    string transport = Utils
+                        .GetDNComponents(
+                            (string)
+                                PropertyManager.GetSearchResultPropertyValue(
+                                    result,
+                                    PropertyManager.DistinguishedName
+                                )!
+                        )[1]
+                        .Value!;
                     ActiveDirectorySiteLink? link = null;
                     if (string.Equals(transport, "IP", StringComparison.OrdinalIgnoreCase))
                         link = new ActiveDirectorySiteLink(

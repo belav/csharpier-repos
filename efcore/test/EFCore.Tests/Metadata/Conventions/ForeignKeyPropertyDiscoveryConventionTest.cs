@@ -421,7 +421,9 @@ public class ForeignKeyPropertyDiscoveryConventionTest
         var dependentTypeBuilder = DependentType.Builder;
         var fkProperty = dependentTypeBuilder
             .PrimaryKey(new[] { DependentEntity.IDProperty }, ConfigurationSource.Explicit)
-            .Metadata.Properties.Single();
+            .Metadata
+            .Properties
+            .Single();
 
         var relationshipBuilder = dependentTypeBuilder
             .HasRelationship(PrincipalType, "SomeNav", null, ConfigurationSource.Convention)

@@ -119,12 +119,14 @@ namespace Microsoft.NET.HostModel.Tests
             bundler.BundleManifest.Files
                 .Where(entry => entry.RelativePath.Equals("rel/app.repeat.dll"))
                 .Single()
-                .Type.Should()
+                .Type
+                .Should()
                 .Be(FileType.Assembly);
             bundler.BundleManifest.Files
                 .Where(entry => entry.RelativePath.Equals("rel/system.repeat.dll"))
                 .Single()
-                .Type.Should()
+                .Type
+                .Should()
                 .Be(FileType.Assembly);
         }
 
@@ -159,9 +161,11 @@ namespace Microsoft.NET.HostModel.Tests
             );
             Assert
                 .Throws<ArgumentException>(() => bundler.GenerateBundle(fileSpecs))
-                .Message.Should()
+                .Message
+                .Should()
                 .Contain("rel/app.repeat")
-                .And.Contain(BundleHelper.GetAppPath(fixture));
+                .And
+                .Contain(BundleHelper.GetAppPath(fixture));
         }
 
         [Fact]
@@ -198,12 +202,14 @@ namespace Microsoft.NET.HostModel.Tests
             bundler.BundleManifest.Files
                 .Where(entry => entry.RelativePath.Equals("rel/app.repeat.dll"))
                 .Single()
-                .Type.Should()
+                .Type
+                .Should()
                 .Be(FileType.Assembly);
             bundler.BundleManifest.Files
                 .Where(entry => entry.RelativePath.Equals("rel/app.Repeat.dll"))
                 .Single()
-                .Type.Should()
+                .Type
+                .Should()
                 .Be(FileType.Assembly);
         }
 
@@ -299,11 +305,15 @@ namespace Microsoft.NET.HostModel.Tests
             );
             Assert
                 .Throws<ArgumentException>(() => bundler.GenerateBundle(fileSpecs))
-                .Message.Should()
+                .Message
+                .Should()
                 .Contain("rel/system.repeat.dll")
-                .And.NotContain("rel/app.repeat.dll")
-                .And.Contain(appPath)
-                .And.Contain(systemLibPath);
+                .And
+                .NotContain("rel/app.repeat.dll")
+                .And
+                .Contain(appPath)
+                .And
+                .Contain(systemLibPath);
         }
 
         [Fact]
@@ -350,12 +360,14 @@ namespace Microsoft.NET.HostModel.Tests
             bundler.BundleManifest.Files
                 .Where(entry => entry.RelativePath.Equals(depsJson))
                 .Single()
-                .Type.Should()
+                .Type
+                .Should()
                 .Be(FileType.DepsJson);
             bundler.BundleManifest.Files
                 .Where(entry => entry.RelativePath.Equals(runtimeconfigJson))
                 .Single()
-                .Type.Should()
+                .Type
+                .Should()
                 .Be(FileType.RuntimeConfigJson);
             bundleDir.Should().NotHaveFiles(jsonFiles);
         }
@@ -485,7 +497,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World!");
+                .And
+                .HaveStdOutContaining("Hello World!");
         }
 
         public class SharedTestState : IDisposable

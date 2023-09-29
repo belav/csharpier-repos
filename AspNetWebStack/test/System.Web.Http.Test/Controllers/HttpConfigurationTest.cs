@@ -347,11 +347,13 @@ namespace System.Web.Http
                 settings,
                 config
             );
-            clonedConfig.Formatters[0].GetPerRequestFormatterInstance(
-                typeof(string),
-                new HttpRequestMessage(),
-                new MediaTypeHeaderValue("application/mine")
-            );
+            clonedConfig
+                .Formatters[0]
+                .GetPerRequestFormatterInstance(
+                    typeof(string),
+                    new HttpRequestMessage(),
+                    new MediaTypeHeaderValue("application/mine")
+                );
 
             // Assert
             Assert.True(calledTrace);

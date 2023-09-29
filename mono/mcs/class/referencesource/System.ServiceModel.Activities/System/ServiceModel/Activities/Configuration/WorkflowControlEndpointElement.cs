@@ -234,9 +234,10 @@ namespace System.ServiceModel.Activities.Configuration
 
         bool HasAddressSetByUser(ConfigurationElement configurationElement)
         {
-            return configurationElement.ElementInformation.Properties[
-                    System.ServiceModel.Configuration.ConfigurationStrings.Address
-                ].ValueOrigin != PropertyValueOrigin.Default;
+            return configurationElement
+                    .ElementInformation
+                    .Properties[System.ServiceModel.Configuration.ConfigurationStrings.Address]
+                    .ValueOrigin != PropertyValueOrigin.Default;
         }
     }
 }

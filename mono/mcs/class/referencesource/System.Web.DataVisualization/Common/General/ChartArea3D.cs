@@ -911,9 +911,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 foreach (string seriesName in this._series)
                 {
                     if (
-                        this.Common.DataManager.Series[seriesName].IsCustomPropertySet(
-                            CustomPropertyName.DrawSideBySide
-                        )
+                        this.Common.DataManager
+                            .Series[seriesName]
+                            .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                     )
                     {
                         string attribValue = this.Common.DataManager.Series[seriesName][

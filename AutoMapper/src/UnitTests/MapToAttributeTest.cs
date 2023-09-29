@@ -103,9 +103,9 @@ public class MapToAttributeTest : AutoMapperSpecBase
         new(cfg =>
         {
             cfg.Internal()
-                .MemberConfiguration.NameToMemberMappers.Add(
-                    new SourceToDestinationNameMapperAttributesMember()
-                );
+                .MemberConfiguration
+                .NameToMemberMappers
+                .Add(new SourceToDestinationNameMapperAttributesMember());
             cfg.CreateProfile(
                 "New Profile",
                 profile =>

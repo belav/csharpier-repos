@@ -407,7 +407,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
                 return _semanticModel
                     .AnalyzeDataFlow(statementOrExpression)
-                    .DataFlowsIn.Contains(_localSymbol);
+                    .DataFlowsIn
+                    .Contains(_localSymbol);
             }
 
             private bool LocalFlowsIn(

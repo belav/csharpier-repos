@@ -390,7 +390,8 @@ namespace System.Text.RegularExpressions.Generator
                     string optionsLiteral = Literal(options);
                     return SyntaxFactory
                         .ParseExpression(optionsLiteral)
-                        .SyntaxTree.GetRoot(cancellationToken);
+                        .SyntaxTree
+                        .GetRoot(cancellationToken);
                 }
             }
 

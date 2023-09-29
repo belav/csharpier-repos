@@ -483,9 +483,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
 
                     // Wrap the argument in parentheses (in order to not introduce any precedence problems).
                     // But also add a simplification annotation so we can remove the parens if possible.
-                    var argumentExpression = currentInvocation.ArgumentList.Arguments[
-                        0
-                    ].Expression.Parenthesize();
+                    var argumentExpression = currentInvocation.ArgumentList
+                        .Arguments[0]
+                        .Expression
+                        .Parenthesize();
 
                     var expression = SyntaxFactory.AssignmentExpression(
                         SyntaxKind.SimpleAssignmentExpression,

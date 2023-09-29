@@ -21,7 +21,8 @@ public class DbContextHealthCheckTest
             var registration = Assert.Single(
                 services
                     .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
-                    .Value.Registrations
+                    .Value
+                    .Registrations
             );
             var check = ActivatorUtilities.CreateInstance<DbContextHealthCheck<TestDbContext>>(
                 scope.ServiceProvider
@@ -53,7 +54,8 @@ public class DbContextHealthCheckTest
             var registration = Assert.Single(
                 services
                     .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
-                    .Value.Registrations
+                    .Value
+                    .Registrations
             );
             var check = ActivatorUtilities.CreateInstance<DbContextHealthCheck<TestDbContext>>(
                 scope.ServiceProvider
@@ -91,7 +93,8 @@ public class DbContextHealthCheckTest
             var registration = Assert.Single(
                 services
                     .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
-                    .Value.Registrations
+                    .Value
+                    .Registrations
             );
             var check = ActivatorUtilities.CreateInstance<DbContextHealthCheck<TestDbContext>>(
                 scope.ServiceProvider
@@ -124,7 +127,8 @@ public class DbContextHealthCheckTest
             var registration = Assert.Single(
                 services
                     .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
-                    .Value.Registrations
+                    .Value
+                    .Registrations
             );
             var check = ActivatorUtilities.CreateInstance<DbContextHealthCheck<TestDbContext>>(
                 scope.ServiceProvider
@@ -157,7 +161,8 @@ public class DbContextHealthCheckTest
             var registration = Assert.Single(
                 services
                     .GetRequiredService<IOptions<HealthCheckServiceOptions>>()
-                    .Value.Registrations
+                    .Value
+                    .Registrations
             );
             var check = ActivatorUtilities.CreateInstance<DbContextHealthCheck<TestDbContext>>(
                 scope.ServiceProvider

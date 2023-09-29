@@ -623,23 +623,21 @@ namespace System.Workflow.Activities
                                             )
                                             {
                                                 if (
-                                                    webServiceResponse.ParameterBindings[
-                                                        paramName
-                                                    ].IsBindingSet(
-                                                        WorkflowParameterBinding.ValueProperty
-                                                    )
+                                                    webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .IsBindingSet(
+                                                            WorkflowParameterBinding.ValueProperty
+                                                        )
                                                 )
-                                                    paramValue =
-                                                        webServiceResponse.ParameterBindings[
-                                                            paramName
-                                                        ].GetBinding(
+                                                    paramValue = webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .GetBinding(
                                                             WorkflowParameterBinding.ValueProperty
                                                         );
                                                 else
-                                                    paramValue =
-                                                        webServiceResponse.ParameterBindings[
-                                                            paramName
-                                                        ].GetValue(
+                                                    paramValue = webServiceResponse
+                                                        .ParameterBindings[paramName]
+                                                        .GetValue(
                                                             WorkflowParameterBinding.ValueProperty
                                                         );
                                             }

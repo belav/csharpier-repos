@@ -545,7 +545,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var prefix = (MarkupTextLiteralSyntax)
                 SyntaxFactory
                     .MarkupTextLiteral(prefixTokens)
-                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+                    .Green
+                    .CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             if (
@@ -584,7 +585,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                     );
                     var mergedAttribute = SyntaxFactory
                         .MarkupTextLiteral(mergedLiterals)
-                        .Green.CreateRed(node.Parent, node.Position);
+                        .Green
+                        .CreateRed(node.Parent, node.Position);
                     Visit(mergedAttribute);
                 }
                 else
@@ -624,7 +626,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var literals = MergeLiterals(node.NamePrefix?.LiteralTokens, node.Name?.LiteralTokens);
             var literal = SyntaxFactory
                 .MarkupTextLiteral(literals)
-                .Green.CreateRed(node.Parent, node.Position);
+                .Green
+                .CreateRed(node.Parent, node.Position);
 
             Visit(literal);
         }
@@ -838,7 +841,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 // CSharp but since they are duplicate, they should just be markup.
                 var markupLiteral = SyntaxFactory
                     .MarkupTextLiteral(node.LiteralTokens)
-                    .Green.CreateRed(node.Parent, node.Position);
+                    .Green
+                    .CreateRed(node.Parent, node.Position);
                 Visit(markupLiteral);
                 return;
             }
@@ -1228,7 +1232,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .MarkupTextLiteral(valueTokens.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is MarkupTextLiteralSyntax))
@@ -1241,7 +1246,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .MarkupTextLiteral(builder.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is CSharpExpressionLiteralSyntax))
@@ -1256,7 +1262,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .CSharpExpressionLiteral(builder.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 rewritten = context != null ? rewritten.WithSpanContext(context) : rewritten;
                 Visit(rewritten);
             }
@@ -1501,7 +1508,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var prefix = (MarkupTextLiteralSyntax)
                 SyntaxFactory
                     .MarkupTextLiteral(prefixTokens)
-                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+                    .Green
+                    .CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             _builder.Push(
@@ -1530,7 +1538,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             var prefix = (MarkupTextLiteralSyntax)
                 SyntaxFactory
                     .MarkupTextLiteral(prefixTokens)
-                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+                    .Green
+                    .CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
             _builder.Add(
@@ -1887,7 +1896,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 // CSharp but since they are duplicate, they should just be markup.
                 var markupLiteral = SyntaxFactory
                     .MarkupTextLiteral(node.LiteralTokens)
-                    .Green.CreateRed(node.Parent, node.Position);
+                    .Green
+                    .CreateRed(node.Parent, node.Position);
                 Visit(markupLiteral);
                 return;
             }
@@ -2413,7 +2423,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .MarkupTextLiteral(valueTokens.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is MarkupTextLiteralSyntax))
@@ -2426,7 +2437,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .MarkupTextLiteral(builder.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is CSharpExpressionLiteralSyntax))
@@ -2441,7 +2453,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 }
                 var rewritten = SyntaxFactory
                     .CSharpExpressionLiteral(builder.ToList())
-                    .Green.CreateRed(node.Parent, position);
+                    .Green
+                    .CreateRed(node.Parent, position);
                 rewritten = context != null ? rewritten.WithSpanContext(context) : rewritten;
                 Visit(rewritten);
             }

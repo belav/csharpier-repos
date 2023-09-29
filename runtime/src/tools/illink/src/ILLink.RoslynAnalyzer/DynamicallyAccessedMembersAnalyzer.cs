@@ -542,12 +542,12 @@ namespace ILLink.RoslynAnalyzer
 
             for (int i = 0; i < overrideMethod.TypeParameters.Length; i++)
             {
-                var methodTypeParameterAnnotation = overrideMethod.TypeParameters[
-                    i
-                ].GetDynamicallyAccessedMemberTypes();
-                var overriddenMethodTypeParameterAnnotation = baseMethod.TypeParameters[
-                    i
-                ].GetDynamicallyAccessedMemberTypes();
+                var methodTypeParameterAnnotation = overrideMethod
+                    .TypeParameters[i]
+                    .GetDynamicallyAccessedMemberTypes();
+                var overriddenMethodTypeParameterAnnotation = baseMethod
+                    .TypeParameters[i]
+                    .GetDynamicallyAccessedMemberTypes();
                 if (methodTypeParameterAnnotation != overriddenMethodTypeParameterAnnotation)
                 {
                     (
@@ -560,23 +560,27 @@ namespace ILLink.RoslynAnalyzer
                         overriddenMethodTypeParameterAnnotation
                     );
 
-                    Location attributableSymbolLocation = attributableMethod.TypeParameters[
-                        i
-                    ].Locations[0];
+                    Location attributableSymbolLocation = attributableMethod
+                        .TypeParameters[i]
+                        .Locations[0];
 
                     // code fix does not support merging multiple attributes. If an attribute is present or the method is not in source, do not provide args for code fix.
                     (Location[]? sourceLocation, Dictionary<string, string?>? DAMArgs) =
                         (
                             !attributableSymbolLocation.IsInSource
                             || (
-                                overrideMethod.TypeParameters[i].TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
-                                && baseMethod.TypeParameters[i].TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
+                                overrideMethod
+                                    .TypeParameters[i]
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
+                                && baseMethod
+                                    .TypeParameters[i]
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
                             )
                         )
                             ? (null, null)
@@ -660,9 +664,9 @@ namespace ILLink.RoslynAnalyzer
                         != DynamicallyAccessedMemberTypes.None
                 // None on parameter of 'set' matches unannotated
                 || methodSymbol.MethodKind == MethodKind.PropertySet
-                    && methodSymbol.Parameters[
-                        methodSymbol.Parameters.Length - 1
-                    ].GetDynamicallyAccessedMemberTypes() != DynamicallyAccessedMemberTypes.None
+                    && methodSymbol
+                        .Parameters[methodSymbol.Parameters.Length - 1]
+                        .GetDynamicallyAccessedMemberTypes() != DynamicallyAccessedMemberTypes.None
             )
             {
                 context.ReportDiagnostic(

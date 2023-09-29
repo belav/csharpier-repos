@@ -96,9 +96,9 @@ namespace System.Web.WebPages.Test
                 "NameObjectEntry",
                 BindingFlags.NonPublic
             );
-            var entry = entryType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)[
-                0
-            ].Invoke(new object[] { "foo1", "bar2" });
+            var entry = entryType
+                .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)[0]
+                .Invoke(new object[] { "foo1", "bar2" });
             var entriesArray = (ArrayList)
                 typeof(NameObjectCollectionBase)
                     .GetField("_entriesArray", BindingFlags.Instance | BindingFlags.NonPublic)

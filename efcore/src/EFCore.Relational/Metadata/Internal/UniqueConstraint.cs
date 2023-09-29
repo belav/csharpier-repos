@@ -77,7 +77,8 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
             static constraint =>
                 constraint.Table.Model.Model
                     .GetRelationalDependencies()
-                    .RowKeyValueFactoryFactory.Create(constraint)
+                    .RowKeyValueFactoryFactory
+                    .Create(constraint)
         );
 
     /// <summary>

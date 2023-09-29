@@ -106,7 +106,8 @@ namespace System.Web.Mvc.Async
             if (
                 methodInfo
                     .GetBaseDefinition()
-                    .DeclaringType.IsAssignableFrom(typeof(AsyncController))
+                    .DeclaringType
+                    .IsAssignableFrom(typeof(AsyncController))
             )
             {
                 // is a method on Object, ControllerBase, Controller, or AsyncController

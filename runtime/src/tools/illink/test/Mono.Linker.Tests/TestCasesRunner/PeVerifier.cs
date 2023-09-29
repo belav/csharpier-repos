@@ -60,9 +60,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             var peVerifyAttrs = original.MainModule
                 .GetType(linkResult.TestCase.ReconstructedFullTypeName)
-                .CustomAttributes.Where(
-                    attr => attr.AttributeType.Name == nameof(SkipPeVerifyAttribute)
-                );
+                .CustomAttributes
+                .Where(attr => attr.AttributeType.Name == nameof(SkipPeVerifyAttribute));
             skipCheckEntirely = false;
             assembliesToSkip = new HashSet<string>();
             foreach (var attr in peVerifyAttrs)

@@ -477,7 +477,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
             return _module.Assembly
                 .GetName()
-                .Name.CompareTo(otherInliningInfo._module.Assembly.GetName().Name);
+                .Name
+                .CompareTo(otherInliningInfo._module.Assembly.GetName().Name);
         }
 
         public override int ClassCode => -87382891;

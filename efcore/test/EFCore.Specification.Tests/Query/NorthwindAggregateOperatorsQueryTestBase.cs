@@ -840,7 +840,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                             c.Orders
                                 .OrderBy(o => o.OrderID)
                                 .FirstOrDefault()
-                                .OrderDetails.OrderBy(od => od.ProductID)
+                                .OrderDetails
+                                .OrderBy(od => od.ProductID)
                                 .FirstOrDefault()
                     ),
             ss =>
@@ -875,7 +876,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
                                 c.Orders
                                     .OrderBy(o => o.OrderID)
                                     .FirstOrDefault()
-                                    .OrderDetails.OrderBy(od => od.ProductID)
+                                    .OrderDetails
+                                    .OrderBy(od => od.ProductID)
                                     .FirstOrDefault()
                                     .ProductID
                     ),

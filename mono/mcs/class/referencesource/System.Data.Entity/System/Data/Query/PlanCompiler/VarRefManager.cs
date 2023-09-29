@@ -99,9 +99,11 @@ namespace System.Data.Query.PlanCompiler
                     )
                     {
                         if (
-                            parent.Children[i]
+                            parent
+                                .Children[i]
                                 .GetNodeInfo(m_command)
-                                .ExternalReferences.Overlaps(keys)
+                                .ExternalReferences
+                                .Overlaps(keys)
                         )
                         {
                             return true;

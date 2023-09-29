@@ -193,7 +193,8 @@ namespace Microsoft.Extensions.Http
             var count = 0;
             Options
                 .Get("github")
-                .HttpClientActions.Add(b =>
+                .HttpClientActions
+                .Add(b =>
                 {
                     count++;
                 });
@@ -235,7 +236,8 @@ namespace Microsoft.Extensions.Http
 
             Options
                 .Get("github")
-                .HttpMessageHandlerBuilderActions.Add(b =>
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
                 {
                     b.PrimaryHandler = expected[7];
 
@@ -422,7 +424,8 @@ namespace Microsoft.Extensions.Http
             var disposeHandler = new DisposeTrackingHandler();
             Options
                 .Get("github")
-                .HttpMessageHandlerBuilderActions.Add(b =>
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
                 {
                     b.AdditionalHandlers.Add(disposeHandler);
                 });
@@ -504,7 +507,8 @@ namespace Microsoft.Extensions.Http
             var disposeHandler = new DisposeTrackingHandler();
             Options
                 .Get("github")
-                .HttpMessageHandlerBuilderActions.Add(b =>
+                .HttpMessageHandlerBuilderActions
+                .Add(b =>
                 {
                     b.AdditionalHandlers.Add(disposeHandler);
                 });

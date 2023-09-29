@@ -3314,7 +3314,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 comp.CreateArrayTypeSymbol(
                     elementType,
                     elementNullableAnnotation: CodeAnalysis.NullableAnnotation.None
-                ).ElementType.NullableAnnotation
+                )
+                    .ElementType
+                    .NullableAnnotation
             );
             Assert.Equal(
                 CodeAnalysis.NullableAnnotation.None,
@@ -3328,7 +3330,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 comp.CreateArrayTypeSymbol(
                     elementType,
                     elementNullableAnnotation: CodeAnalysis.NullableAnnotation.None
-                ).ElementType.NullableAnnotation
+                )
+                    .ElementType
+                    .NullableAnnotation
             );
             Assert.Equal(
                 CodeAnalysis.NullableAnnotation.NotAnnotated,
@@ -3342,7 +3346,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 comp.CreateArrayTypeSymbol(
                     elementType,
                     elementNullableAnnotation: CodeAnalysis.NullableAnnotation.NotAnnotated
-                ).ElementType.NullableAnnotation
+                )
+                    .ElementType
+                    .NullableAnnotation
             );
             Assert.Equal(
                 CodeAnalysis.NullableAnnotation.Annotated,
@@ -3356,7 +3362,9 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 comp.CreateArrayTypeSymbol(
                     elementType,
                     elementNullableAnnotation: CodeAnalysis.NullableAnnotation.Annotated
-                ).ElementType.NullableAnnotation
+                )
+                    .ElementType
+                    .NullableAnnotation
             );
         }
 

@@ -212,7 +212,9 @@ public class Test : C107
                 new[] { metadataTestLib1, metadataTestLib2 },
                 assemblyValidator: (assembly) =>
                 {
-                    var refs = assembly.Modules[0].ReferencedAssemblies
+                    var refs = assembly
+                        .Modules[0]
+                        .ReferencedAssemblies
                         .OrderBy(r => r.Name)
                         .ToArray();
                     Assert.Equal(2, refs.Length);
@@ -2562,9 +2564,10 @@ class C
                     );
                     Assert.Equal(
                         "System.Object",
-                        beginInvoke.Parameters[
-                            invoke.Parameters.Length + 1
-                        ].Type.ToTestDisplayString()
+                        beginInvoke
+                            .Parameters[invoke.Parameters.Length + 1]
+                            .Type
+                            .ToTestDisplayString()
                     );
 
                     var invokeReturn = invoke.ReturnType;
@@ -3262,7 +3265,8 @@ public class C
                 {
                     var parameters = module.ContainingAssembly
                         .GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.Parameters;
+                        .DelegateInvokeMethod
+                        .Parameters;
                     Assert.Equal(4, parameters.Length);
 
                     Assert.True(parameters[0].IsMetadataIn);
@@ -3274,7 +3278,8 @@ public class C
                 {
                     var delegateParameters = module.ContainingAssembly
                         .GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.Parameters;
+                        .DelegateInvokeMethod
+                        .Parameters;
                     Assert.Equal(4, delegateParameters.Length);
 
                     Assert.True(delegateParameters[0].IsMetadataIn);

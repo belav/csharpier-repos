@@ -183,7 +183,8 @@ SELECT 1 ELSE SELECT 0"
                     FileName = builder.AttachDBFilename,
                     Collation = Dependencies.CurrentContext.Context
                         .GetService<IDesignTimeModel>()
-                        .Model.GetRelationalModel()
+                        .Model
+                        .GetRelationalModel()
                         .Collation
                 }
             }

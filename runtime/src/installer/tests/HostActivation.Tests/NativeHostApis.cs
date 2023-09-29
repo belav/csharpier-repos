@@ -33,8 +33,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining("Done waiting for breadcrumb thread to exit...");
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .HaveStdErrContaining("Done waiting for breadcrumb thread to exit...");
         }
 
         [Fact]
@@ -51,9 +53,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining("Unhandled exception.")
-                .And.HaveStdErrContaining("System.Exception: Goodbye World")
-                .And.NotHaveStdErrContaining("Done waiting for breadcrumb thread to exit...");
+                .And
+                .HaveStdErrContaining("Unhandled exception.")
+                .And
+                .HaveStdErrContaining("System.Exception: Goodbye World")
+                .And
+                .NotHaveStdErrContaining("Done waiting for breadcrumb thread to exit...");
         }
 
         private class SdkResolutionFixture
@@ -167,8 +172,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("hostfxr_get_available_sdks:Success")
-                    .And.HaveStdOutContaining($"hostfxr_get_available_sdks sdks:[{expectedList}]");
+                    .And
+                    .HaveStdOutContaining("hostfxr_get_available_sdks:Success")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_available_sdks sdks:[{expectedList}]");
             }
         }
 
@@ -196,8 +203,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_get_available_sdks:Success")
-                .And.HaveStdOutContaining($"hostfxr_get_available_sdks sdks:[{expectedList}]");
+                .And
+                .HaveStdOutContaining("hostfxr_get_available_sdks:Success")
+                .And
+                .HaveStdOutContaining($"hostfxr_get_available_sdks sdks:[{expectedList}]");
         }
 
         [Fact]
@@ -219,8 +228,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
-                .And.HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
+                .And
+                .HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
+                .And
+                .HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
         }
 
         [Fact]
@@ -245,8 +256,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
-                .And.HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
+                .And
+                .HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
+                .And
+                .HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
         }
 
         [Fact]
@@ -283,8 +296,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
-                .And.HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
+                .And
+                .HaveStdOutContaining("hostfxr_resolve_sdk2:Success")
+                .And
+                .HaveStdOutContaining($"hostfxr_resolve_sdk2 data:[{expectedData}]");
         }
 
         [Fact]
@@ -347,20 +362,26 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info sdk versions:[{expectedSdkVersions}]"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info sdk paths:[{expectedSdkPaths}]"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info framework names:[{expectedFrameworkNames}]"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info framework versions:[{expectedFrameworkVersions}]"
                 )
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"hostfxr_get_dotnet_environment_info framework paths:[{expectedFrameworkPaths}]"
                 );
         }
@@ -416,20 +437,26 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info sdk versions:[{expectedSdkVersions}]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info sdk paths:[{expectedSdkPaths}]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework names:[{expectedFrameworkNames}]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework versions:[{expectedFrameworkVersions}]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework paths:[{expectedFrameworkPaths}]"
                     );
             }
@@ -456,18 +483,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
-                    .And.HaveStdOutContaining(
-                        $"hostfxr_get_dotnet_environment_info sdk versions:[]"
-                    )
-                    .And.HaveStdOutContaining($"hostfxr_get_dotnet_environment_info sdk paths:[]")
-                    .And.HaveStdOutContaining(
-                        $"hostfxr_get_dotnet_environment_info framework names:[]"
-                    )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_dotnet_environment_info sdk versions:[]")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_dotnet_environment_info sdk paths:[]")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_dotnet_environment_info framework names:[]")
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework versions:[]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework paths:[]"
                     );
             }
@@ -496,14 +525,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .Execute()
                     .Should()
                     .Pass()
-                    .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
-                    .And.HaveStdOutContaining(
-                        $"hostfxr_get_dotnet_environment_info framework names:[]"
-                    )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success")
+                    .And
+                    .HaveStdOutContaining($"hostfxr_get_dotnet_environment_info framework names:[]")
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework versions:[]"
                     )
-                    .And.HaveStdOutContaining(
+                    .And
+                    .HaveStdOutContaining(
                         $"hostfxr_get_dotnet_environment_info framework paths:[]"
                     );
             }
@@ -521,7 +552,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success");
+                .And
+                .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Success");
         }
 
         [Fact]
@@ -539,8 +571,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Should()
                 .Pass()
                 // 0x80008081 (InvalidArgFailure)
-                .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Fail[-2147450751]")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Fail[-2147450751]")
+                .And
+                .HaveStdErrContaining(
                     "hostfxr_get_dotnet_environment_info received an invalid argument: result should not be null."
                 );
         }
@@ -560,8 +594,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Should()
                 .Pass()
                 // 0x80008081 (InvalidArgFailure)
-                .And.HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Fail[-2147450751]")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("hostfxr_get_dotnet_environment_info:Fail[-2147450751]")
+                .And
+                .HaveStdErrContaining(
                     "hostfxr_get_dotnet_environment_info received an invalid argument: reserved should be null."
                 );
         }
@@ -597,10 +633,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining(
+                .And
+                .HaveStdOutContaining(
                     $"APP_CONTEXT_BASE_DIRECTORY = {Path.GetDirectoryName(fixture.TestProject.AppDll)}"
                 )
-                .And.HaveStdOutContaining($"DOES_NOT_EXIST = <none>");
+                .And
+                .HaveStdOutContaining($"DOES_NOT_EXIST = <none>");
         }
 
         public class SharedTestState : IDisposable

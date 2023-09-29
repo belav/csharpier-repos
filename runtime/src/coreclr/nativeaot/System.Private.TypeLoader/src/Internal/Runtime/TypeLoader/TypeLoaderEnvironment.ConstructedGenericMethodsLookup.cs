@@ -64,9 +64,9 @@ namespace Internal.Runtime.TypeLoader
 
                 for (int i = 0; i < _genericMethodArgumentHandles.Length; i++)
                     if (
-                        !other._genericMethodArgumentHandles[i].Equals(
-                            _genericMethodArgumentHandles[i]
-                        )
+                        !other
+                            ._genericMethodArgumentHandles[i]
+                            .Equals(_genericMethodArgumentHandles[i])
                     )
                         return false;
 

@@ -62,7 +62,8 @@ namespace Roslyn.Test.Utilities.CoreClr
                 var mainPdb = mainOutput.Value.Pdb;
                 var corLibIdentity = mainCompilation
                     .GetSpecialType(SpecialType.System_Object)
-                    .ContainingAssembly.Identity;
+                    .ContainingAssembly
+                    .Identity;
                 var identity = mainCompilation.Assembly.Identity;
                 _emitData.MainModule = new ModuleData(
                     identity,

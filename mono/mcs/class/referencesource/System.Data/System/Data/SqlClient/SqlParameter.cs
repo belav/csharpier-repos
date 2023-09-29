@@ -1659,9 +1659,9 @@ namespace System.Data.SqlClient
                 bool[] keyCols = new bool[fieldCount];
                 bool hasKey = false;
                 int ordinalForIsKey = schema.Columns[SchemaTableColumn.IsKey].Ordinal;
-                int ordinalForColumnOrdinal = schema.Columns[
-                    SchemaTableColumn.ColumnOrdinal
-                ].Ordinal;
+                int ordinalForColumnOrdinal = schema
+                    .Columns[SchemaTableColumn.ColumnOrdinal]
+                    .Ordinal;
                 // Extract column metadata
                 for (int rowOrdinal = 0; rowOrdinal < fieldCount; rowOrdinal++)
                 {

@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         )
                         && metadataDecoder
                             .GetTypeSymbolForSerializedType(stateMachineTypeName)
-                            .OriginalDefinition.Equals(containingType)
+                            .OriginalDefinition
+                            .Equals(containingType)
                     )
                     {
                         return candidateMethod;

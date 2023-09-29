@@ -518,9 +518,10 @@ namespace MonoTests.System.Data.Utils
                     dsExpected.Tables.Add();
                 for (int i = 0; i < Idr.FieldCount; i++)
                 {
-                    dsExpected.Tables[dsExpected.Tables.Count - 1].Columns.Add(
-                        new DataColumn(Idr.GetName(i), Idr.GetFieldType(i))
-                    );
+                    dsExpected
+                        .Tables[dsExpected.Tables.Count - 1]
+                        .Columns
+                        .Add(new DataColumn(Idr.GetName(i), Idr.GetFieldType(i)));
                     if (ReadSchemaOnly)
                     { // add schema info
                         dsExpected.Tables[dsExpected.Tables.Count - 1].Columns[i].AllowDBNull =
@@ -827,9 +828,10 @@ namespace MonoTests.System.Data.Utils
             try
             {
                 BeginCase("DBConcurrencyException - Insert");
-                dsResultException.Tables[0].Rows.Add(
-                    new object[] { 9996, "Ofer", "Borshtein", "Insert" }
-                );
+                dsResultException
+                    .Tables[0]
+                    .Rows
+                    .Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
                 //no row with row version Insert exists - records affected = 0
                 NumberOfAffectedRows = -1;
                 try
@@ -1061,9 +1063,10 @@ namespace MonoTests.System.Data.Utils
             try
             {
                 BeginCase("DBConcurrencyException - Insert");
-                dsResultException.Tables[0].Rows.Add(
-                    new object[] { 9996, "Ofer", "Borshtein", "Insert" }
-                );
+                dsResultException
+                    .Tables[0]
+                    .Rows
+                    .Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
                 //no row with row version Insert exists - records affected = 0
                 NumberOfAffectedRows = -1;
                 try
@@ -1304,9 +1307,10 @@ namespace MonoTests.System.Data.Utils
             try
             {
                 BeginCase("DBConcurrencyException - Insert");
-                dsResultException.Tables[0].Rows.Add(
-                    new object[] { 9996, "Ofer", "Borshtein", "Insert" }
-                );
+                dsResultException
+                    .Tables[0]
+                    .Rows
+                    .Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
                 dsResultException.Tables[0].Rows.CopyTo(drArr, 0);
                 //no row with row version Insert exists - records affected = 0
                 NumberOfAffectedRows = -1;
@@ -1545,9 +1549,10 @@ namespace MonoTests.System.Data.Utils
             try
             {
                 BeginCase("DBConcurrencyException - Insert");
-                dsResultException.Tables[0].Rows.Add(
-                    new object[] { 9996, "Ofer", "Borshtein", "Insert" }
-                );
+                dsResultException
+                    .Tables[0]
+                    .Rows
+                    .Add(new object[] { 9996, "Ofer", "Borshtein", "Insert" });
                 //no row with row version Insert exists - records affected = 0
                 NumberOfAffectedRows = -1;
                 try

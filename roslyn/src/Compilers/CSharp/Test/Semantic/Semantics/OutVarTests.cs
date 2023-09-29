@@ -23850,7 +23850,8 @@ class B
                     compilation
                         .GetSemanticModel(tree)
                         .GetTypeInfo(x1Ref[0])
-                        .Type.ToTestDisplayString()
+                        .Type
+                        .ToTestDisplayString()
                 );
 
                 var x2Decl = GetOutVarDeclarations(tree, "x2").Single();
@@ -23862,7 +23863,8 @@ class B
                     compilation
                         .GetSemanticModel(tree)
                         .GetTypeInfo(x2Ref[0])
-                        .Type.ToTestDisplayString()
+                        .Type
+                        .ToTestDisplayString()
                 );
 
                 var x3Decl = GetOutVarDeclarations(tree, "x3").Single();
@@ -23874,7 +23876,8 @@ class B
                     compilation
                         .GetSemanticModel(tree)
                         .GetTypeInfo(x3Ref[0])
-                        .Type.ToTestDisplayString()
+                        .Type
+                        .ToTestDisplayString()
                 );
 
                 var x4Decl = GetOutVarDeclarations(tree, "x4").Single();
@@ -23886,7 +23889,8 @@ class B
                     compilation
                         .GetSemanticModel(tree)
                         .GetTypeInfo(x4Ref[0])
-                        .Type.ToTestDisplayString()
+                        .Type
+                        .ToTestDisplayString()
                 );
 
                 CompileAndVerify(
@@ -24196,7 +24200,8 @@ public class Cls
             var model = compilation.GetSemanticModel(tree);
             Assert.Equal(
                 1,
-                compilation.SyntaxTrees[0]
+                compilation
+                    .SyntaxTrees[0]
                     .GetRoot()
                     .DescendantNodesAndSelf()
                     .OfType<DeclarationExpressionSyntax>()
@@ -24583,7 +24588,8 @@ public class X
                 decl.Ancestors()
                     .OfType<VariableDeclaratorSyntax>()
                     .First()
-                    .ArgumentList.Contains(decl)
+                    .ArgumentList
+                    .Contains(decl)
             );
         }
 

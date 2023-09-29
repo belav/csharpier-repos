@@ -234,11 +234,13 @@ public class C
             var sourceParameter = sourceAssembly.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
-                .Parameters.Single();
+                .Parameters
+                .Single();
             var referencedParameter = referencedAssembly.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
-                .Parameters.Single();
+                .Parameters
+                .Single();
             var distinguisher = new SymbolDistinguisher(comp, sourceParameter, referencedParameter);
             // NOTE: Locations come from parameter *types*.
             // NOTE: RefKind retained.
@@ -350,11 +352,13 @@ public class C
             var sourceParameter = sourceAssembly.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
-                .Parameters.Single();
+                .Parameters
+                .Single();
             var referencedParameter = referencedAssembly.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
-                .Parameters.Single();
+                .Parameters
+                .Single();
             var distinguisher = new SymbolDistinguisher(comp, sourceParameter, referencedParameter);
             // NOTE: Locations come from parameter element types.
             // NOTE: 'params' retained.
@@ -380,10 +384,12 @@ public class C
 
             var sourceType = sourceAssembly.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
             var referencedType = referencedAssembly.GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
             var distinguisher = new SymbolDistinguisher(comp, sourceType, referencedType);
             // NOTE: Locations come from element types.
             Assert.Equal("T [file.cs(1)]", distinguisher.First.ToString());

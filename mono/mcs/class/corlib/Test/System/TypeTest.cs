@@ -430,14 +430,14 @@ namespace MonoTests.System
                 BindingFlags.Instance | BindingFlags.NonPublic
             );
             Assert.IsTrue(
-                mi.GetParameters()[2].ParameterType.IsAssignableFrom(
-                    mi.GetParameters()[1].ParameterType
-                )
+                mi.GetParameters()[2]
+                    .ParameterType
+                    .IsAssignableFrom(mi.GetParameters()[1].ParameterType)
             );
             Assert.IsTrue(
-                mi.GetParameters()[1].ParameterType.IsAssignableFrom(
-                    mi.GetParameters()[1].ParameterType
-                )
+                mi.GetParameters()[1]
+                    .ParameterType
+                    .IsAssignableFrom(mi.GetParameters()[1].ParameterType)
             );
 
             // Tests for type parameters
@@ -446,9 +446,9 @@ namespace MonoTests.System
                 BindingFlags.Instance | BindingFlags.NonPublic
             );
             Assert.IsTrue(
-                mi.GetParameters()[0].ParameterType.IsAssignableFrom(
-                    mi.GetParameters()[0].ParameterType
-                )
+                mi.GetParameters()[0]
+                    .ParameterType
+                    .IsAssignableFrom(mi.GetParameters()[0].ParameterType)
             );
             Assert.IsFalse(mi.GetParameters()[0].ParameterType.IsAssignableFrom(typeof(int)));
 
@@ -539,7 +539,8 @@ namespace MonoTests.System
             // Tests for byref types
             Type paramType = typeof(TypeTest)
                 .GetMethod("ByrefMethod", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetParameters()[0].ParameterType;
+                .GetParameters()[0]
+                .ParameterType;
             Assert.IsFalse(paramType.IsSubclassOf(typeof(ValueType)), "#02");
             Assert.IsNull(paramType.BaseType, "#02-b");
             Assert.IsTrue(paramType.IsSubclassOf(typeof(Object)), "#03");
@@ -587,9 +588,10 @@ namespace MonoTests.System
                 typeof(NewVTable).GetMethod("byref_method", new Type[] { typeof(int) }),
                 "#06"
             );
-            Type byrefInt = typeof(NewVTable).GetMethod("byref_method").GetParameters()[
-                0
-            ].ParameterType;
+            Type byrefInt = typeof(NewVTable)
+                .GetMethod("byref_method")
+                .GetParameters()[0]
+                .ParameterType;
             Assert.IsNotNull(
                 typeof(NewVTable).GetMethod("byref_method", new Type[] { byrefInt }),
                 "#07"
@@ -4151,7 +4153,9 @@ namespace MonoTests.System
 
             try
             {
-                var x = typeof(DeclaringMethodFoo).GetMethod("Test2").GetParameters()[0]
+                var x = typeof(DeclaringMethodFoo)
+                    .GetMethod("Test2")
+                    .GetParameters()[0]
                     .ParameterType
                     .DeclaringMethod;
                 Assert.Fail("#4");
@@ -4160,7 +4164,9 @@ namespace MonoTests.System
 
             try
             {
-                var x = typeof(DeclaringMethodBar<>).GetMethod("Test2").GetParameters()[0]
+                var x = typeof(DeclaringMethodBar<>)
+                    .GetMethod("Test2")
+                    .GetParameters()[0]
                     .ParameterType
                     .DeclaringMethod;
                 Assert.Fail("#5");
@@ -4265,12 +4271,14 @@ namespace MonoTests.System
             Type string_byref = typeof(object).MakeByRefType();
             Type struct0_byref = typeof(Size4).MakeByRefType();
             Type struct1_byref = typeof(Size4b).MakeByRefType();
-            Type mvar0_byref = typeof(TypeTest).GetMethod("Bug331126").GetGenericArguments()[
-                0
-            ].MakeByRefType();
-            Type mvar1_byref = typeof(TypeTest).GetMethod("Bug331126").GetGenericArguments()[
-                1
-            ].MakeByRefType();
+            Type mvar0_byref = typeof(TypeTest)
+                .GetMethod("Bug331126")
+                .GetGenericArguments()[0]
+                .MakeByRefType();
+            Type mvar1_byref = typeof(TypeTest)
+                .GetMethod("Bug331126")
+                .GetGenericArguments()[1]
+                .MakeByRefType();
 
             Assert.IsFalse(typeof(int).IsAssignableFrom(int_byref), "#1");
             Assert.IsFalse(int_byref.IsAssignableFrom(typeof(int)), "#2");

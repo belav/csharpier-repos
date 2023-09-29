@@ -174,7 +174,8 @@ namespace System.CommandLine.Tests
             result.Errors.Should().HaveCount(1);
             result.Errors
                 .Single()
-                .Message.Should()
+                .Message
+                .Should()
                 .Be("Response file not found 'nonexistent.rsp'.");
         }
 
@@ -208,7 +209,8 @@ namespace System.CommandLine.Tests
                 result.Errors.Should().HaveCount(1);
                 result.Errors
                     .Single()
-                    .Message.Should()
+                    .Message
+                    .Should()
                     .StartWith($"Error reading response file '{nonexistent}'");
             }
         }

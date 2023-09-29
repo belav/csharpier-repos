@@ -1695,9 +1695,9 @@ namespace System.Workflow.ComponentModel.Design
                     && typeof(FreeformActivityDesigner).IsAssignableFrom(DesignerType)
                 )
                 {
-                    int connectorSize = CompositeDesignerTheme.ConnectorSizes[
-                        (int)ContainingTheme.AmbientTheme.DesignerSize
-                    ].Height;
+                    int connectorSize = CompositeDesignerTheme
+                        .ConnectorSizes[(int)ContainingTheme.AmbientTheme.DesignerSize]
+                        .Height;
                     return new Size(connectorSize, connectorSize);
                 }
                 else

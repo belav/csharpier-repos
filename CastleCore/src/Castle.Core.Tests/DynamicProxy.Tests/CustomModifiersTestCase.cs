@@ -182,9 +182,10 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modopts = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[
-                0
-            ].GetOptionalCustomModifiers();
+            var modopts = this.generatedTypes[typeName]
+                .GetMethod("Foo")
+                .GetParameters()[0]
+                .GetOptionalCustomModifiers();
 
             CollectionAssert.AreEqual(
                 expected: CustomModifiersTestCase.customModifiers[typeNameWithoutSuffix].Reverse(),
@@ -222,9 +223,10 @@ namespace Castle.DynamicProxy.Tests
             var typeNameWithoutSuffix = typeName.Substring(0, typeName.Length - suffix.Length);
             Assume.That(CustomModifiersTestCase.customModifiers.ContainsKey(typeNameWithoutSuffix));
 
-            var modreqs = this.generatedTypes[typeName].GetMethod("Foo").GetParameters()[
-                0
-            ].GetRequiredCustomModifiers();
+            var modreqs = this.generatedTypes[typeName]
+                .GetMethod("Foo")
+                .GetParameters()[0]
+                .GetRequiredCustomModifiers();
             Assume.That(modreqs.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 
             CollectionAssert.AreEqual(
@@ -251,7 +253,8 @@ namespace Castle.DynamicProxy.Tests
 
             var modopts = this.generatedTypes[typeName]
                 .GetMethod("Foo")
-                .ReturnParameter.GetOptionalCustomModifiers();
+                .ReturnParameter
+                .GetOptionalCustomModifiers();
             Assume.That(modopts.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 
             CollectionAssert.AreEqual(
@@ -278,7 +281,8 @@ namespace Castle.DynamicProxy.Tests
 
             var modreqs = this.generatedTypes[typeName]
                 .GetMethod("Foo")
-                .ReturnParameter.GetRequiredCustomModifiers();
+                .ReturnParameter
+                .GetRequiredCustomModifiers();
             Assume.That(modreqs.Length > 0); // If this fails on mono/linux we have to revisit the commits and issues for IL method custom modifiers. https://github.com/castleproject/Core/issues/277
 
             CollectionAssert.AreEqual(

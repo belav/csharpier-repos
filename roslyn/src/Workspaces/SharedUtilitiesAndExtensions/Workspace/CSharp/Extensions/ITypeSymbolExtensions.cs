@@ -180,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         )
         {
             var namespaceUsings = root.FindToken(position)
-                .Parent!.GetAncestors<BaseNamespaceDeclarationSyntax>()
+                .Parent!
+                .GetAncestors<BaseNamespaceDeclarationSyntax>()
                 .SelectMany(n => n.Usings);
             var allUsings = root is CompilationUnitSyntax compilationUnit
                 ? compilationUnit.Usings.Concat(namespaceUsings)

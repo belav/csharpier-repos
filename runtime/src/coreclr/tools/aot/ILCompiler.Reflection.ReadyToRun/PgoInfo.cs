@@ -61,9 +61,11 @@ namespace ILCompiler.Reflection.ReadyToRun
                 }
                 else
                 {
-                    return _r2rReader.ImportSections[tableIndex].Entries[
-                        fixupIndex
-                    ].Signature.ToString(_formatOptions);
+                    return _r2rReader
+                        .ImportSections[tableIndex]
+                        .Entries[fixupIndex]
+                        .Signature
+                        .ToString(_formatOptions);
                 }
             }
 
@@ -77,9 +79,11 @@ namespace ILCompiler.Reflection.ReadyToRun
                 }
                 else
                 {
-                    return _r2rReader.ImportSections[tableIndex].Entries[
-                        fixupIndex
-                    ].Signature.ToString(_formatOptions);
+                    return _r2rReader
+                        .ImportSections[tableIndex]
+                        .Entries[fixupIndex]
+                        .Signature
+                        .ToString(_formatOptions);
                 }
             }
         }

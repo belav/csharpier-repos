@@ -2696,9 +2696,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                                 || accessor.Body.Statements.Count > 1
                                 || (
                                     accessor.Body.Statements.Count == 1
-                                    && !accessor.Body.Statements[0].IsKind(
-                                        SyntaxKind.ReturnStatement
-                                    )
+                                    && !accessor.Body
+                                        .Statements[0]
+                                        .IsKind(SyntaxKind.ReturnStatement)
                                 )
                             )
                             {
@@ -4254,9 +4254,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return false;
             }
 
-            return methodDeclaration.ParameterList.Parameters[0].Modifiers.Any(
-                SyntaxKind.ThisKeyword
-            );
+            return methodDeclaration.ParameterList
+                .Parameters[0]
+                .Modifiers
+                .Any(SyntaxKind.ThisKeyword);
         }
 
         private static bool IsPartialMethod(MethodDeclarationSyntax methodDeclaration) =>

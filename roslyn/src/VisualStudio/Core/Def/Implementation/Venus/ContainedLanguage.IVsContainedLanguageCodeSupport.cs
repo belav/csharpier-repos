@@ -315,7 +315,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             var document = this.ContainedDocument
                 .GetOpenTextContainer()
-                .CurrentText.GetOpenDocumentInCurrentContextWithChanges();
+                .CurrentText
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 throw new InvalidOperationException();

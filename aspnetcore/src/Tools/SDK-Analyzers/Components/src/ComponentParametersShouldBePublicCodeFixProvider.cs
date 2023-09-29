@@ -48,7 +48,8 @@ public class ComponentParametersShouldBePublicCodeFixProvider : CodeFixProvider
 
         // Find the type declaration identified by the diagnostic.
         var declaration = root.FindToken(diagnosticSpan.Start)
-            .Parent.AncestorsAndSelf()
+            .Parent
+            .AncestorsAndSelf()
             .OfType<PropertyDeclarationSyntax>()
             .First();
 

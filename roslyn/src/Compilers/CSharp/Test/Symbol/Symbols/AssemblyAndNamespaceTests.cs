@@ -288,14 +288,16 @@ namespace NS.NS1 {
             Assert.True(
                 constituents.Contains(
                     comp.GetReferencedAssemblySymbol(compRef1)
-                        .GlobalNamespace.GetMembers("N1")
+                        .GlobalNamespace
+                        .GetMembers("N1")
                         .Single() as NamespaceSymbol
                 )
             );
             Assert.True(
                 constituents.Contains(
                     comp.GetReferencedAssemblySymbol(compRef2)
-                        .GlobalNamespace.GetMembers("N1")
+                        .GlobalNamespace
+                        .GetMembers("N1")
                         .Single() as NamespaceSymbol
                 )
             );
@@ -368,14 +370,16 @@ namespace NS.NS1 {
             Assert.True(
                 constituents.Contains(
                     comp.GetReferencedAssemblySymbol(compRef1)
-                        .GlobalNamespace.GetMembers("N1")
+                        .GlobalNamespace
+                        .GetMembers("N1")
                         .Single() as NamespaceSymbol
                 )
             );
             Assert.True(
                 constituents.Contains(
                     comp.GetReferencedAssemblySymbol(compRef2)
-                        .GlobalNamespace.GetMembers("N1")
+                        .GlobalNamespace
+                        .GetMembers("N1")
                         .Single() as NamespaceSymbol
                 )
             );

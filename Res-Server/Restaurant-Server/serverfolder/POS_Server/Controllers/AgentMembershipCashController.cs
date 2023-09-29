@@ -212,7 +212,8 @@ namespace POS_Server.Controllers
                                     //discountValue = S.LastOrDefault().discountValue,
                                     //total = S.LastOrDefault().total,
                                     agentMembershipcashobj = S.LastOrDefault()
-                                        .agentMembershipcashobjList.LastOrDefault(),
+                                        .agentMembershipcashobjList
+                                        .LastOrDefault(),
                                     agentMembershipcashobjList =
                                         S.LastOrDefault().agentMembershipcashobjList,
                                 }

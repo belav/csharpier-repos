@@ -1062,7 +1062,8 @@ namespace AutoMapper.UnitTests
                 var source = new Source { Value = 15 };
                 Should
                     .Throw<AutoMapperMappingException>(() => Mapper.Map<IDest>(source))
-                    .Message.ShouldStartWith("Cannot create interface " + typeof(IDest).FullName);
+                    .Message
+                    .ShouldStartWith("Cannot create interface " + typeof(IDest).FullName);
             }
         }
     }

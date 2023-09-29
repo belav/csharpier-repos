@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                     SourceText.From(source, Encoding.UTF8),
                     filePath: Path.Combine(TempRoot.Root, "test.cs")
                 )
-                .Project.Solution;
+                .Project
+                .Solution;
         }
 
         private static void TestSpans(string source, Func<SyntaxNode, bool> hasLabel)
@@ -534,7 +535,8 @@ class C
                 )
                 .GetProject(projectId)
                 .AddDocument("test.cs", root, filePath: Path.Combine(TempRoot.Root, "test.cs"))
-                .Project.Solution;
+                .Project
+                .Solution;
 
             var oldProject = oldSolution.Projects.Single();
             var oldDocument = oldProject.Documents.Single();

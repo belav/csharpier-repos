@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     ImmutableArray.Create("test"),
                     @".\Add"
                 )
-                .Project.Solution;
+                .Project
+                .Solution;
 
             return solution
                 .WithAnalyzerReferences(
@@ -329,10 +330,12 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var firstProjectChecksum = await solution
                 .GetProject(solution.ProjectIds[0])
-                .State.GetChecksumAsync(CancellationToken.None);
+                .State
+                .GetChecksumAsync(CancellationToken.None);
             var secondProjectChecksum = await solution
                 .GetProject(solution.ProjectIds[1])
-                .State.GetChecksumAsync(CancellationToken.None);
+                .State
+                .GetChecksumAsync(CancellationToken.None);
 
             var validator = new SerializationValidator(workspace.Services);
 
@@ -976,11 +979,13 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         {
             var csharpOptions = CSharp.CSharpCompilation
                 .Create("dummy")
-                .Options.WithNullableContextOptions(NullableContextOptions.Warnings)
+                .Options
+                .WithNullableContextOptions(NullableContextOptions.Warnings)
                 .WithMetadataImportOptions(MetadataImportOptions.All);
             var vbOptions = VisualBasic.VisualBasicCompilation
                 .Create("dummy")
-                .Options.WithMetadataImportOptions(MetadataImportOptions.Internal);
+                .Options
+                .WithMetadataImportOptions(MetadataImportOptions.Internal);
 
             using var workspace = CreateWorkspace();
             var serializer = workspace.Services.GetService<ISerializerService>();

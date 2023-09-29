@@ -72,9 +72,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             result
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("New instance of Server created")
-                .And.HaveStdOutContaining($"Activation of {sharedState.ClsidString} succeeded.")
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdOutContaining("New instance of Server created")
+                .And
+                .HaveStdOutContaining($"Activation of {sharedState.ClsidString} succeeded.")
+                .And
+                .HaveStdErrContaining(
                     $"Executing as a {(selfContained ? "self-contained" : "framework-dependent")} app"
                 );
         }

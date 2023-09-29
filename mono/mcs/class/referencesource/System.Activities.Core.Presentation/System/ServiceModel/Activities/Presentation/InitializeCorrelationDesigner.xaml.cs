@@ -80,9 +80,9 @@ namespace System.ServiceModel.Activities.Presentation
 
         void UpdateButton()
         {
-            this.btnCorrelationData.Content = this.ModelItem.Properties[
-                CorrelationDataPropertyName
-            ].IsSet
+            this.btnCorrelationData.Content = this.ModelItem
+                .Properties[CorrelationDataPropertyName]
+                .IsSet
                 ? this.FindResource("viewTitle")
                 : this.FindResource("defineTitle");
         }
@@ -139,9 +139,11 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     wrapperCollection = new ObservableCollection<CorrelationDataWrapper>();
                     foreach (
-                        ModelItem entry in modelItem.Properties[CorrelationDataPropertyName]
+                        ModelItem entry in modelItem
+                            .Properties[CorrelationDataPropertyName]
                             .Dictionary
-                            .Properties["ItemsCollection"].Collection
+                            .Properties["ItemsCollection"]
+                            .Collection
                     )
                     {
                         wrapperCollection.Add(

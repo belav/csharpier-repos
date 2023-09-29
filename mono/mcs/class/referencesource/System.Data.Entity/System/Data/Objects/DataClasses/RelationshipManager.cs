@@ -969,17 +969,17 @@ namespace System.Data.Objects.DataClasses
                 )
             )
             {
-                EntityType end2EntityType = (
-                    (AssociationType)assocSet.ElementType
-                ).AssociationEndMembers[1].GetEntityType();
+                EntityType end2EntityType = ((AssociationType)assocSet.ElementType)
+                    .AssociationEndMembers[1]
+                    .GetEntityType();
                 if (end2EntityType.IsAssignableFrom(ownerEntityType))
                 {
                     yield return ((AssociationType)assocSet.ElementType).AssociationEndMembers[0];
                 }
                 // not "else" because of associations between the same entity sets
-                EntityType end1EntityType = (
-                    (AssociationType)assocSet.ElementType
-                ).AssociationEndMembers[0].GetEntityType();
+                EntityType end1EntityType = ((AssociationType)assocSet.ElementType)
+                    .AssociationEndMembers[0]
+                    .GetEntityType();
                 if (end1EntityType.IsAssignableFrom(ownerEntityType))
                 {
                     yield return ((AssociationType)assocSet.ElementType).AssociationEndMembers[1];

@@ -193,9 +193,9 @@ namespace System.Windows.Forms
                 // where datasource is an empty IEnumerable
                 // and need to find out the datamember type
 
-                Type property_type = ListBindingHelper.GetListItemProperties(datasource)[
-                    datamember
-                ].PropertyType;
+                Type property_type = ListBindingHelper
+                    .GetListItemProperties(datasource)[datamember]
+                    .PropertyType;
                 Type t = typeof(BindingList<>).MakeGenericType(new Type[] { property_type });
                 l = (IList)Activator.CreateInstance(t);
             }

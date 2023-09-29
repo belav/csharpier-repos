@@ -382,7 +382,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                         includeDirectives: true,
                         includeDocumentationComments: true
                     )
-                    .Span.End;
+                    .Span
+                    .End;
             }
 
             return nextToken.Span.End;

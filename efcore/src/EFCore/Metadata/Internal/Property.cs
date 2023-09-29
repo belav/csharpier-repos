@@ -602,7 +602,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
                 factoryType.IsAbstract
                 || !factoryType
                     .GetTypeInfo()
-                    .DeclaredConstructors.Any(c => c.IsPublic && c.GetParameters().Length == 0)
+                    .DeclaredConstructors
+                    .Any(c => c.IsPublic && c.GetParameters().Length == 0)
             )
             {
                 throw new InvalidOperationException(
@@ -936,7 +937,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
                     static property =>
                         property.DeclaringEntityType.Model
                             .GetModelDependencies()
-                            .TypeMappingSource.FindMapping(property)!
+                            .TypeMappingSource
+                            .FindMapping(property)!
                 )
                 : _typeMapping;
         set => SetTypeMapping(value, ConfigurationSource.Explicit);

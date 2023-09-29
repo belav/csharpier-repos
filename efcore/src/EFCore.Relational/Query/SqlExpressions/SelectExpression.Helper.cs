@@ -1203,7 +1203,8 @@ public sealed partial class SelectExpression
                     var tpcTablesExpression = kvp.Key;
                     var subSelectExpressions = tpcTablesExpression
                         .Prune(kvp.Value.Item2)
-                        .SelectExpressions.Select(e => AssignUniqueAliasToTable(e))
+                        .SelectExpressions
+                        .Select(e => AssignUniqueAliasToTable(e))
                         .ToList();
                     var firstSelectExpression = subSelectExpressions[0]; // There will be at least one.
 

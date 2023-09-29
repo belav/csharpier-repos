@@ -167,7 +167,8 @@ internal sealed class DeferredHostBuilder : IHostBuilder
             // but it's rarely a valid token for Start
             using var reg2 = _host.Services
                 .GetRequiredService<IHostApplicationLifetime>()
-                .ApplicationStarted.UnsafeRegister(_ => _hostStartedTcs.TrySetResult(), null);
+                .ApplicationStarted
+                .UnsafeRegister(_ => _hostStartedTcs.TrySetResult(), null);
 
             await _hostStartedTcs.Task.ConfigureAwait(false);
         }

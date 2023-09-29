@@ -847,7 +847,10 @@ class Test : Derived
             );
 
             Assert.Empty(
-                comp3.GetReferencedAssemblySymbol(ref2).Modules[0].ReferencedAssemblySymbols
+                comp3
+                    .GetReferencedAssemblySymbol(ref2)
+                    .Modules[0]
+                    .ReferencedAssemblySymbols
                     .OfType<MissingAssemblySymbol>()
                     .First()
                     .GetPublicSymbol()

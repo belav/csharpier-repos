@@ -6017,14 +6017,15 @@ class UsePia5
             );
 
             Assert.Null(
-                compilation1.SourceModule.GetReferencedAssemblySymbols()[1].Modules[
-                    0
-                ].LookupTopLevelMetadataType(ref fullName)
+                compilation1.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
+                    .Modules[0]
+                    .LookupTopLevelMetadataType(ref fullName)
             );
             Assert.Null(
-                compilation1.SourceModule.GetReferencedAssemblySymbols()[1].GetTypeByMetadataName(
-                    fullName.FullName
-                )
+                compilation1.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
+                    .GetTypeByMetadataName(fullName.FullName)
             );
 
             VerifyEmitDiagnostics(compilation1, false, expected);
@@ -6049,14 +6050,15 @@ class UsePia5
             );
             Assert.True(isNoPiaLocalType);
             Assert.Null(
-                compilation2.SourceModule.GetReferencedAssemblySymbols()[1].Modules[
-                    0
-                ].LookupTopLevelMetadataType(ref fullName)
+                compilation2.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
+                    .Modules[0]
+                    .LookupTopLevelMetadataType(ref fullName)
             );
             Assert.Null(
-                compilation2.SourceModule.GetReferencedAssemblySymbols()[1].GetTypeByMetadataName(
-                    fullName.FullName
-                )
+                compilation2.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
+                    .GetTypeByMetadataName(fullName.FullName)
             );
 
             VerifyEmitDiagnostics(compilation2, false, expected);
@@ -6071,14 +6073,15 @@ class UsePia5
             );
 
             Assert.Null(
-                compilation3.SourceModule.GetReferencedAssemblySymbols()[1].Modules[
-                    0
-                ].LookupTopLevelMetadataType(ref fullName)
+                compilation3.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
+                    .Modules[0]
+                    .LookupTopLevelMetadataType(ref fullName)
             );
             Assert.Null(
-                compilation3.SourceModule.GetReferencedAssemblySymbols()[1].GetTypeByMetadataName(
-                    fullName.FullName
-                )
+                compilation3.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
+                    .GetTypeByMetadataName(fullName.FullName)
             );
 
             CompileAndVerify(compilation3);
@@ -6103,14 +6106,15 @@ class UsePia5
             );
             Assert.True(isNoPiaLocalType);
             Assert.Null(
-                compilation4.SourceModule.GetReferencedAssemblySymbols()[1].Modules[
-                    0
-                ].LookupTopLevelMetadataType(ref fullName)
+                compilation4.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
+                    .Modules[0]
+                    .LookupTopLevelMetadataType(ref fullName)
             );
             Assert.Null(
-                compilation4.SourceModule.GetReferencedAssemblySymbols()[1].GetTypeByMetadataName(
-                    fullName.FullName
-                )
+                compilation4.SourceModule
+                    .GetReferencedAssemblySymbols()[1]
+                    .GetTypeByMetadataName(fullName.FullName)
             );
 
             CompileAndVerify(compilation4);
@@ -7801,7 +7805,8 @@ class Program
             Assert.True(
                 ((PEModuleSymbol)p1.ContainingModule).Module.MetadataReader
                     .GetParameter(p1.Handle)
-                    .Name.IsNil
+                    .Name
+                    .IsNil
             );
 
             var p2 = (PEParameterSymbol)parameters[2];
@@ -7814,7 +7819,8 @@ class Program
                 Assert.True(
                     ((PEModuleSymbol)p2.ContainingModule).Module.MetadataReader
                         .GetParameter(p2.Handle)
-                        .Name.IsNil
+                        .Name
+                        .IsNil
                 );
             }
 

@@ -661,9 +661,12 @@ namespace System.ServiceModel.Activities
                 {
                     if (
                         operation.Messages[1].MessageType != null
-                        || operation.Messages[1].Body.ReturnValue.Type.IsAssignableFrom(
-                            typeof(System.ServiceModel.Channels.Message)
-                        )
+                        || operation
+                            .Messages[1]
+                            .Body
+                            .ReturnValue
+                            .Type
+                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                     )
                     {
                         receiveActivity.Content = new ReceiveMessageContent();

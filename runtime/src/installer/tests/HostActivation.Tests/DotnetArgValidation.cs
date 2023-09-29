@@ -28,7 +28,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"The application to execute does not exist: '{assemblyName}'"
                 );
         }
@@ -44,7 +45,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"The application to execute does not exist: '{assemblyName}'"
                 );
         }
@@ -68,7 +70,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"dotnet exec needs a managed .dll or .exe extension. The application specified was '{assemblyName}'"
                 );
         }
@@ -83,7 +86,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining($"Failed to parse supported options or their values:");
+                .And
+                .HaveStdErrContaining($"Failed to parse supported options or their values:");
         }
 
         [Fact]
@@ -98,8 +102,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining($"The application '{fileName}' does not exist")
-                .And.FindAnySdk(false);
+                .And
+                .HaveStdErrContaining($"The application '{fileName}' does not exist")
+                .And
+                .FindAnySdk(false);
         }
 
         // Return a non-existent path that contains a mix of / and \

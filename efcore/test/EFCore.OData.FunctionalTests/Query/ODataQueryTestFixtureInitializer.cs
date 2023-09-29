@@ -88,8 +88,10 @@ public class ODataQueryTestFixtureInitializer
 
         var baseAddress = selfHostServer.Services
             .GetService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First();
         var clientFactory = selfHostServer.Services.GetRequiredService<IHttpClientFactory>();
 
         return (baseAddress, clientFactory, selfHostServer);

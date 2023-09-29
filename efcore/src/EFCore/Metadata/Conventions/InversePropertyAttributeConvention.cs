@@ -91,7 +91,8 @@ public class InversePropertyAttributeConvention
         var inverseNavigationPropertyInfo =
             targetEntityType
                 .GetRuntimeProperties()
-                .Values.FirstOrDefault(
+                .Values
+                .FirstOrDefault(
                     p =>
                         string.Equals(
                             p.GetSimpleMemberName(),
@@ -101,7 +102,8 @@ public class InversePropertyAttributeConvention
                 )
             ?? targetEntityType
                 .GetRuntimeProperties()
-                .Values.FirstOrDefault(
+                .Values
+                .FirstOrDefault(
                     p =>
                         string.Equals(
                             p.GetSimpleMemberName(),

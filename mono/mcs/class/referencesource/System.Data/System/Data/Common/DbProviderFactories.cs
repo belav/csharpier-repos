@@ -259,7 +259,8 @@ namespace System.Data.Common
 
                     // OracleClient Provider: Include only if it installed
                     if (
-                        configDataTable.Rows[i][AssemblyQualifiedName]
+                        configDataTable
+                            .Rows[i][AssemblyQualifiedName]
                             .ToString()
                             .ToLowerInvariant()
                             .Contains(

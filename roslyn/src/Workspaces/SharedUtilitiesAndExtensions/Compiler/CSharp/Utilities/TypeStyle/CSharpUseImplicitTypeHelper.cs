@@ -397,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                         if (
                             semanticModel
                                 .GetSymbolInfo(n, cancellationToken)
-                                .Symbol.IsKind(SymbolKind.Local) == true
+                                .Symbol
+                                .IsKind(SymbolKind.Local) == true
                         )
                         {
                             return true;

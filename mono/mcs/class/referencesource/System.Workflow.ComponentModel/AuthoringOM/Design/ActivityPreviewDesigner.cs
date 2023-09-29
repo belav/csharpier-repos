@@ -547,16 +547,16 @@ namespace System.Workflow.ComponentModel.Design
 
             int index = StripItemIndexFromActivity(obj as Activity);
             if (direction == DesignerNavigationDirection.Left && index >= 0)
-                nextObject = this.previewStrip.Items[
-                    (index > 0) ? index - 1 : this.previewStrip.Items.Count - 1
-                ].UserData[DesignerUserDataKeys.Activity];
+                nextObject = this.previewStrip
+                    .Items[(index > 0) ? index - 1 : this.previewStrip.Items.Count - 1]
+                    .UserData[DesignerUserDataKeys.Activity];
             else if (
                 direction == DesignerNavigationDirection.Right
                 && index <= this.previewStrip.Items.Count - 1
             )
-                nextObject = this.previewStrip.Items[
-                    (index < this.previewStrip.Items.Count - 1) ? index + 1 : 0
-                ].UserData[DesignerUserDataKeys.Activity];
+                nextObject = this.previewStrip
+                    .Items[(index < this.previewStrip.Items.Count - 1) ? index + 1 : 0]
+                    .UserData[DesignerUserDataKeys.Activity];
 
             return nextObject;
         }

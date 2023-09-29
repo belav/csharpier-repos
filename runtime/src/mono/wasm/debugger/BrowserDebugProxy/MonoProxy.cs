@@ -803,7 +803,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             string src_url = methodInfo.Assembly.Sources
                 .Single(sf => sf.SourceId == methodInfo.SourceId)
-                .Url.ToString();
+                .Url
+                .ToString();
 
             return Result.OkFromObject(
                 new
@@ -1779,7 +1780,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     $"Entrypoint assembly and method token {assemblyAndMethodToken.Value["result"]["value"].Value<string>()}"
                 );
 
-                var assemblyAndMethodTokenArr = assemblyAndMethodToken.Value["result"]["value"]
+                var assemblyAndMethodTokenArr = assemblyAndMethodToken
+                    .Value["result"]["value"]
                     .Value<string>()
                     .Split('|', StringSplitOptions.TrimEntries);
                 var assemblyName = assemblyAndMethodTokenArr[0];

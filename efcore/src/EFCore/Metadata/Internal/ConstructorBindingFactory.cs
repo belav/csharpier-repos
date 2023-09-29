@@ -102,7 +102,8 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
         foreach (
             var constructor in entityType.ClrType
                 .GetTypeInfo()
-                .DeclaredConstructors.Where(c => !c.IsStatic)
+                .DeclaredConstructors
+                .Where(c => !c.IsStatic)
         )
         {
             // Trying to find the constructor with the most service properties

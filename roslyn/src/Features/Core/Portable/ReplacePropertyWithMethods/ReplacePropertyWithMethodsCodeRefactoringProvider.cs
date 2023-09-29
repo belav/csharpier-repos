@@ -456,7 +456,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 var definition = referencedSymbol.Definition as IPropertySymbol;
                 if (definition?.DeclaringSyntaxReferences.Length > 0)
                 {
-                    var syntax = await definition.DeclaringSyntaxReferences[0]
+                    var syntax = await definition
+                        .DeclaringSyntaxReferences[0]
                         .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     if (syntax != null)

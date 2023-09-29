@@ -377,7 +377,9 @@ public class MismatchedKeyTypesSqlServerTest
             ),
             Assert
                 .Throws<TargetInvocationException>(() => context.SaveChanges())
-                .InnerException!.InnerException!.Message
+                .InnerException!
+                .InnerException!
+                .Message
         );
     }
 

@@ -55,10 +55,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion)
-                .And.FindAnySdk(false)
-                .And.HaveStdErrContaining("aka.ms/dotnet/download")
-                .And.NotHaveStdErrContaining("Checking if resolved SDK dir");
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion)
+                .And
+                .FindAnySdk(false)
+                .And
+                .HaveStdErrContaining("aka.ms/dotnet/download")
+                .And
+                .NotHaveStdErrContaining("Checking if resolved SDK dir");
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.4.1", "9999.3.4-dummy");
@@ -69,8 +73,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion)
-                .And.FindAnySdk(true);
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion)
+                .And
+                .FindAnySdk(true);
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.3");
@@ -81,8 +87,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion)
-                .And.FindAnySdk(true);
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion)
+                .And
+                .FindAnySdk(true);
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.4");
@@ -93,7 +101,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.4"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.4"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.5-dummy");
@@ -104,7 +113,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.5-dummy"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.5-dummy"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.600");
@@ -115,7 +125,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.5-dummy"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.5-dummy"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.4-global-dummy");
@@ -126,19 +137,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.4-global-dummy"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.4-global-dummy"));
 
             // Verify we have the expected SDK versions
             RunTest("--list-sdks")
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("9999.3.4-dummy")
-                .And.HaveStdOutContaining("9999.3.4-global-dummy")
-                .And.HaveStdOutContaining("9999.4.1")
-                .And.HaveStdOutContaining("9999.3.3")
-                .And.HaveStdOutContaining("9999.3.4")
-                .And.HaveStdOutContaining("9999.3.600")
-                .And.HaveStdOutContaining("9999.3.5-dummy");
+                .And
+                .HaveStdOutContaining("9999.3.4-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.4-global-dummy")
+                .And
+                .HaveStdOutContaining("9999.4.1")
+                .And
+                .HaveStdOutContaining("9999.3.3")
+                .And
+                .HaveStdOutContaining("9999.3.4")
+                .And
+                .HaveStdOutContaining("9999.3.600")
+                .And
+                .HaveStdOutContaining("9999.3.5-dummy");
         }
 
         [Fact]
@@ -154,8 +173,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion)
-                .And.FindAnySdk(false);
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion)
+                .And
+                .FindAnySdk(false);
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.57", "9999.3.4-dummy");
@@ -166,8 +187,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion)
-                .And.FindAnySdk(true);
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion)
+                .And
+                .FindAnySdk(true);
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.300", "9999.7.304-global-dummy");
@@ -178,8 +201,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion)
-                .And.FindAnySdk(true);
+                .And
+                .NotFindCompatibleSdk(globalJsonPath, requestedVersion)
+                .And
+                .FindAnySdk(true);
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.304");
@@ -190,7 +215,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.304"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.304"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.399", "9999.3.399-dummy", "9999.3.400");
@@ -201,7 +227,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.399"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.399"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.2400", "9999.3.3004");
@@ -212,7 +239,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.399"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.399"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.3.304-global-dummy");
@@ -223,23 +251,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.304-global-dummy"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.3.304-global-dummy"));
 
             // Verify we have the expected SDK versions
             RunTest("--list-sdks")
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("9999.3.57")
-                .And.HaveStdOutContaining("9999.3.4-dummy")
-                .And.HaveStdOutContaining("9999.3.300")
-                .And.HaveStdOutContaining("9999.7.304-global-dummy")
-                .And.HaveStdOutContaining("9999.3.399")
-                .And.HaveStdOutContaining("9999.3.399-dummy")
-                .And.HaveStdOutContaining("9999.3.400")
-                .And.HaveStdOutContaining("9999.3.2400")
-                .And.HaveStdOutContaining("9999.3.3004")
-                .And.HaveStdOutContaining("9999.3.304")
-                .And.HaveStdOutContaining("9999.3.304-global-dummy");
+                .And
+                .HaveStdOutContaining("9999.3.57")
+                .And
+                .HaveStdOutContaining("9999.3.4-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.300")
+                .And
+                .HaveStdOutContaining("9999.7.304-global-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.399")
+                .And
+                .HaveStdOutContaining("9999.3.399-dummy")
+                .And
+                .HaveStdOutContaining("9999.3.400")
+                .And
+                .HaveStdOutContaining("9999.3.2400")
+                .And
+                .HaveStdOutContaining("9999.3.3004")
+                .And
+                .HaveStdOutContaining("9999.3.304")
+                .And
+                .HaveStdOutContaining("9999.3.304-global-dummy");
         }
 
         [Fact]
@@ -264,7 +304,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.4"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.4"));
 
             // Verify we have the expected SDK versions
             RunTest("--list-sdks").Should().Pass().And.HaveStdOutContaining("9999.0.4");
@@ -285,7 +326,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.3-dummy.10"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.3-dummy.10"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.0.3");
@@ -297,7 +339,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.3"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.3"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.0.100");
@@ -309,7 +352,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.100"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.100"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.0.80");
@@ -321,7 +365,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.100"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.100"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.0.5500000");
@@ -333,7 +378,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.5500000"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.5500000"));
 
             // Add SDK versions
             AddAvailableSdkVersions("9999.0.52000000");
@@ -345,20 +391,29 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.52000000"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.0.52000000"));
 
             // Verify we have the expected SDK versions
             RunTest("--list-sdks")
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("9999.0.0")
-                .And.HaveStdOutContaining("9999.0.3-dummy.9")
-                .And.HaveStdOutContaining("9999.0.3-dummy.10")
-                .And.HaveStdOutContaining("9999.0.3")
-                .And.HaveStdOutContaining("9999.0.100")
-                .And.HaveStdOutContaining("9999.0.80")
-                .And.HaveStdOutContaining("9999.0.5500000")
-                .And.HaveStdOutContaining("9999.0.52000000");
+                .And
+                .HaveStdOutContaining("9999.0.0")
+                .And
+                .HaveStdOutContaining("9999.0.3-dummy.9")
+                .And
+                .HaveStdOutContaining("9999.0.3-dummy.10")
+                .And
+                .HaveStdOutContaining("9999.0.3")
+                .And
+                .HaveStdOutContaining("9999.0.100")
+                .And
+                .HaveStdOutContaining("9999.0.80")
+                .And
+                .HaveStdOutContaining("9999.0.5500000")
+                .And
+                .HaveStdOutContaining("9999.0.52000000");
         }
 
         [Theory]
@@ -384,7 +439,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput(Requested));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput(Requested));
         }
 
         [Theory]
@@ -401,7 +457,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var expectation = RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.1.402"));
+                .And
+                .HaveStdErrContaining(ExpectedResolvedSdkOutput("9999.1.402"));
 
             foreach (var message in messages)
             {
@@ -442,7 +499,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 result
                     .Should()
                     .Pass()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"SDK path resolved to [{Path.Combine(ExecutableDotNet.BinPath, "sdk", expected)}]"
                     );
             }
@@ -476,7 +534,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var result = RunTest()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"SDK path resolved to [{Path.Combine(ExecutableDotNet.BinPath, "sdk", ExpectedVersion)}]"
                 );
         }

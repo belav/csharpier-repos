@@ -933,8 +933,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     Debug.Assert(_propertyEntry != null);
 
                     // set the value on the directory entry
-                    _propertyEntry.Properties[PropertyManager.IsMemberOfPartialAttributeSet].Value =
-                        value;
+                    _propertyEntry
+                        .Properties[PropertyManager.IsMemberOfPartialAttributeSet]
+                        .Value = value;
                 }
                 _isInGlobalCatalog = value;
             }

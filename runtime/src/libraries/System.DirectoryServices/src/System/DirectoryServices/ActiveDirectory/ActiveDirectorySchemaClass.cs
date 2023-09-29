@@ -358,25 +358,25 @@ namespace System.DirectoryServices.ActiveDirectory
                 // set the possibleSuperiors property
                 if (_possibleSuperiors != null)
                 {
-                    _classEntry.Properties[PropertyManager.PossibleSuperiors].AddRange(
-                        _possibleSuperiors.GetMultiValuedProperty()
-                    );
+                    _classEntry
+                        .Properties[PropertyManager.PossibleSuperiors]
+                        .AddRange(_possibleSuperiors.GetMultiValuedProperty());
                 }
 
                 // set the mandatoryProperties property
                 if (_mandatoryProperties != null)
                 {
-                    _classEntry.Properties[PropertyManager.MustContain].AddRange(
-                        _mandatoryProperties.GetMultiValuedProperty()
-                    );
+                    _classEntry
+                        .Properties[PropertyManager.MustContain]
+                        .AddRange(_mandatoryProperties.GetMultiValuedProperty());
                 }
 
                 // set the optionalProperties property
                 if (_optionalProperties != null)
                 {
-                    _classEntry.Properties[PropertyManager.MayContain].AddRange(
-                        _optionalProperties.GetMultiValuedProperty()
-                    );
+                    _classEntry
+                        .Properties[PropertyManager.MayContain]
+                        .AddRange(_optionalProperties.GetMultiValuedProperty());
                 }
 
                 // set the subClassOf property

@@ -1265,7 +1265,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     .ConfigureAwait(false);
                 return oldDocumentActiveStatements
                     .GetStatement(baseActiveStatement.Ordinal)
-                    .ExceptionRegions.IsActiveStatementCovered;
+                    .ExceptionRegions
+                    .IsActiveStatementCovered;
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
             {

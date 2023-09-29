@@ -1017,20 +1017,18 @@ namespace System.Data
                                 rel.parentColumnNames[j]
                             ];
                         else
-                            parents[j] = dataSet.Tables[
-                                rel.parentTableName,
-                                rel.parentTableNamespace
-                            ].Columns[rel.parentColumnNames[j]];
+                            parents[j] = dataSet
+                                .Tables[rel.parentTableName, rel.parentTableNamespace]
+                                .Columns[rel.parentColumnNames[j]];
 
                         if (rel.childTableNamespace == null)
                             childs[j] = dataSet.Tables[rel.childTableName].Columns[
                                 rel.childColumnNames[j]
                             ];
                         else
-                            childs[j] = dataSet.Tables[
-                                rel.childTableName,
-                                rel.childTableNamespace
-                            ].Columns[rel.childColumnNames[j]];
+                            childs[j] = dataSet
+                                .Tables[rel.childTableName, rel.childTableNamespace]
+                                .Columns[rel.childColumnNames[j]];
                     }
 
                     DataRelation newRelation = new DataRelation(

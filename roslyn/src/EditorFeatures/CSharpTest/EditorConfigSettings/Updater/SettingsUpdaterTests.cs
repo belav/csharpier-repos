@@ -81,7 +81,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             var solution = workspace.CurrentSolution;
             var documentId = solution.Projects
                 .Single()
-                .State.AnalyzerConfigDocumentStates.Ids.First();
+                .State
+                .AnalyzerConfigDocumentStates
+                .Ids
+                .First();
             var text = SourceText.From(contents);
             var newSolution1 = solution.WithAnalyzerConfigDocumentText(
                 documentId,

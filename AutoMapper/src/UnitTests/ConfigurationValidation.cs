@@ -401,7 +401,9 @@ public class NonMemberExpressionWithSourceValidation : NonValidatingSpecBase
     public void Should_be_ignored() =>
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Source.Value));
+            .Errors[0]
+            .UnmappedPropertyNames[0]
+            .ShouldBe(nameof(Source.Value));
 }
 
 public class MatchingNonMemberExpressionWithSourceValidation : NonValidatingSpecBase
@@ -427,7 +429,9 @@ public class MatchingNonMemberExpressionWithSourceValidation : NonValidatingSpec
     public void Should_be_ignored() =>
         new Action(AssertConfigurationIsValid)
             .ShouldThrow<AutoMapperConfigurationException>()
-            .Errors[0].UnmappedPropertyNames[0].ShouldBe(nameof(Source.Value));
+            .Errors[0]
+            .UnmappedPropertyNames[0]
+            .ShouldBe(nameof(Source.Value));
 }
 
 public class When_testing_a_dto_with_fully_mapped_and_custom_matchers : AutoMapperSpecBase

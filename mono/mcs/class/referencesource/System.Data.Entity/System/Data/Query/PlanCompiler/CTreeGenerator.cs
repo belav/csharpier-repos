@@ -541,7 +541,8 @@ namespace System.Data.Query.PlanCompiler
 
             DbGroupExpressionBinding newBinding = inputInfo
                 .CreateBinding()
-                .Expression.GroupBindAs(varName, groupVarName);
+                .Expression
+                .GroupBindAs(varName, groupVarName);
             GroupByScope newScope = new GroupByScope(newBinding, inputInfo.PublishedVars);
             _bindingScopes.Push(newScope);
             return newScope;

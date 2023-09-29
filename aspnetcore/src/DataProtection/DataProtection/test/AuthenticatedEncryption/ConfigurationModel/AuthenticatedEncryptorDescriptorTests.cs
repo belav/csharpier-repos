@@ -33,14 +33,16 @@ public class AuthenticatedEncryptorDescriptorTests
     {
         // Parse test input
         int keyLengthInBits = Int32.Parse(
-            Regex.Match(encryptionAlgorithm.ToString(), @"^AES_(?<keyLength>\d{3})_CBC$").Groups[
-                "keyLength"
-            ].Value,
+            Regex
+                .Match(encryptionAlgorithm.ToString(), @"^AES_(?<keyLength>\d{3})_CBC$")
+                .Groups["keyLength"]
+                .Value,
             CultureInfo.InvariantCulture
         );
         string hashAlgorithm = Regex
             .Match(validationAlgorithm.ToString(), @"^HMAC(?<hashAlgorithm>.*)$")
-            .Groups["hashAlgorithm"].Value;
+            .Groups["hashAlgorithm"]
+            .Value;
 
         // Arrange
         var masterKey = Secret.Random(512 / 8);
@@ -82,9 +84,10 @@ public class AuthenticatedEncryptorDescriptorTests
     {
         // Parse test input
         int keyLengthInBits = Int32.Parse(
-            Regex.Match(encryptionAlgorithm.ToString(), @"^AES_(?<keyLength>\d{3})_GCM$").Groups[
-                "keyLength"
-            ].Value,
+            Regex
+                .Match(encryptionAlgorithm.ToString(), @"^AES_(?<keyLength>\d{3})_GCM$")
+                .Groups["keyLength"]
+                .Value,
             CultureInfo.InvariantCulture
         );
 
@@ -129,9 +132,10 @@ public class AuthenticatedEncryptorDescriptorTests
     {
         // Parse test input
         int keyLengthInBits = Int32.Parse(
-            Regex.Match(encryptionAlgorithm.ToString(), @"^AES_(?<keyLength>\d{3})_GCM$").Groups[
-                "keyLength"
-            ].Value,
+            Regex
+                .Match(encryptionAlgorithm.ToString(), @"^AES_(?<keyLength>\d{3})_GCM$")
+                .Groups["keyLength"]
+                .Value,
             CultureInfo.InvariantCulture
         );
 
@@ -210,9 +214,10 @@ public class AuthenticatedEncryptorDescriptorTests
     {
         // Parse test input
         int keyLengthInBits = Int32.Parse(
-            Regex.Match(encryptionAlgorithm.ToString(), @"^AES_(?<keyLength>\d{3})_CBC$").Groups[
-                "keyLength"
-            ].Value,
+            Regex
+                .Match(encryptionAlgorithm.ToString(), @"^AES_(?<keyLength>\d{3})_CBC$")
+                .Groups["keyLength"]
+                .Value,
             CultureInfo.InvariantCulture
         );
 

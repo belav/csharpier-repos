@@ -298,9 +298,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             foreach (string seriesName in typeSeries)
             {
                 if (
-                    common.DataManager.Series[seriesName].IsCustomPropertySet(
-                        CustomPropertyName.DrawSideBySide
-                    )
+                    common.DataManager
+                        .Series[seriesName]
+                        .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                 )
                 {
                     string attribValue = common.DataManager.Series[seriesName][
@@ -772,9 +772,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 foreach (string seriesName in typeSeries)
                 {
                     if (
-                        common.DataManager.Series[seriesName].IsCustomPropertySet(
-                            CustomPropertyName.DrawSideBySide
-                        )
+                        common.DataManager
+                            .Series[seriesName]
+                            .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                     )
                     {
                         string attribValue = common.DataManager.Series[seriesName][

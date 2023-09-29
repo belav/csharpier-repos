@@ -880,7 +880,9 @@ namespace System.CommandLine.Tests
             result.Errors
                 .Should()
                 .ContainSingle()
-                .Which.Message.Should()
+                .Which
+                .Message
+                .Should()
                 .Be(
                     $"Cannot parse argument 'SleepyDay' for option '--day' as expected type 'System.DayOfWeek'. Did you mean one of the following?{NewLine}Friday{NewLine}Monday{NewLine}Saturday{NewLine}Sunday{NewLine}Thursday{NewLine}Tuesday{NewLine}Wednesday"
                 );

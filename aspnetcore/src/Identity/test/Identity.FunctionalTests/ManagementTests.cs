@@ -180,7 +180,8 @@ public abstract class ManagementTests<TStartup, TContext>
         Assert.NotNull(
             principals[1].Identities
                 .Single()
-                .Claims.Single(c => c.Type == ClaimTypes.AuthenticationMethod)
+                .Claims
+                .Single(c => c.Type == ClaimTypes.AuthenticationMethod)
                 .Value
         );
 
@@ -400,11 +401,13 @@ public abstract class ManagementTests<TStartup, TContext>
     {
         var expectedPrincipalClaim = expectedPrincipal.Identities
             .Single()
-            .Claims.Single(c => c.Type == claimType)
+            .Claims
+            .Single(c => c.Type == claimType)
             .Value;
         var actualPrincipalClaim = actualPrincipal.Identities
             .Single()
-            .Claims.Single(c => c.Type == claimType)
+            .Claims
+            .Single(c => c.Type == claimType)
             .Value;
         Assert.Equal(expectedPrincipalClaim, actualPrincipalClaim);
     }
@@ -417,11 +420,13 @@ public abstract class ManagementTests<TStartup, TContext>
     {
         var expectedPrincipalClaim = expectedPrincipal.Identities
             .Single()
-            .Claims.Single(c => c.Type == claimType)
+            .Claims
+            .Single(c => c.Type == claimType)
             .Value;
         var actualPrincipalClaim = actualPrincipal.Identities
             .Single()
-            .Claims.Single(c => c.Type == claimType)
+            .Claims
+            .Single(c => c.Type == claimType)
             .Value;
         Assert.NotEqual(expectedPrincipalClaim, actualPrincipalClaim);
     }

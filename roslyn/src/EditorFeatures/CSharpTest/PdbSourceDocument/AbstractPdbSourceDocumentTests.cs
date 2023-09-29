@@ -189,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 var document = masWorkspace!.CurrentSolution.Projects
                     .First()
-                    .Documents.First(d => d.FilePath == file.FilePath);
+                    .Documents
+                    .First(d => d.FilePath == file.FilePath);
 
                 // Mapping the project from the generated document should map back to the original project
                 var provider = workspace.ExportProvider

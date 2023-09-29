@@ -469,9 +469,9 @@ namespace System.Data
                     {
                         for (int i = oldCount; i < targetTable.Columns.Count; i++)
                         {
-                            targetTable.Columns[i].Expression = table.Columns[
-                                targetTable.Columns[i].ColumnName
-                            ].Expression;
+                            targetTable.Columns[i].Expression = table
+                                .Columns[targetTable.Columns[i].ColumnName]
+                                .Expression;
                         }
                     }
 

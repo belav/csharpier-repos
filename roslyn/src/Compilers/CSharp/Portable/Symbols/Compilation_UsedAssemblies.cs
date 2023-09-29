@@ -264,11 +264,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                                     )
                                                     {
                                                         Debug.Assert(
-                                                            retargetingAssembly.Modules[
-                                                                0
-                                                            ].ReferencedAssemblySymbols.Contains(
-                                                                underlyingDependency
-                                                            )
+                                                            retargetingAssembly
+                                                                .Modules[0]
+                                                                .ReferencedAssemblySymbols
+                                                                .Contains(underlyingDependency)
                                                         );
                                                         dependency = underlyingDependency;
                                                     }

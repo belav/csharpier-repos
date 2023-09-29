@@ -73,9 +73,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 _modifiers,
                 ContainingType.Locations[0],
                 (CSharpSyntaxNode)
-                    ((SourceMemberContainerTypeSymbol)ContainingType).SyntaxReferences[
-                        0
-                    ].GetSyntax(),
+                    ((SourceMemberContainerTypeSymbol)ContainingType)
+                        .SyntaxReferences[0]
+                        .GetSyntax(),
                 diagnostics
             );
         }

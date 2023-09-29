@@ -40,7 +40,8 @@ public class PreserveComponentStateBenchmark
             .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
             .AddScoped(typeof(ILogger<>), typeof(NullLogger<>))
             .AddMvc()
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
     }
 
     // From 30 entries of about 100 bytes (~3K) to 100 entries with 100K per entry (~10MB)

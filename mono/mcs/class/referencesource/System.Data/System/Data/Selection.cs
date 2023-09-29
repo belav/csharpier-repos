@@ -469,9 +469,10 @@ namespace System.Data
 
             // Need to use compare because subtraction will wrap
             // to positive for very large neg numbers, etc.
-            int diff = table.recordManager[record1].rowID.CompareTo(
-                table.recordManager[record2].rowID
-            );
+            int diff = table
+                .recordManager[record1]
+                .rowID
+                .CompareTo(table.recordManager[record2].rowID);
 
             // if they're two records in the same row, we need to be able to distinguish them.
             if ((diff == 0) && (record1 != record2))

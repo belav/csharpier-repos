@@ -296,7 +296,8 @@ namespace System.Workflow.Activities.Rules
             Type underlyingType = typeof(int);
             if (
                 type.GetType()
-                    .FullName.Equals(
+                    .FullName
+                    .Equals(
                         "System.Workflow.ComponentModel.Compiler.DesignTimeType",
                         StringComparison.Ordinal
                     )

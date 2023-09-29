@@ -977,9 +977,9 @@ namespace System.DirectoryServices.AccountManagement
                     if (!foreignPrincipal.fakePrincipal)
                     {
                         string groupDN = (string)
-                            ((DirectoryEntry)foreignPrincipal.UnderlyingObject).Properties[
-                                "distinguishedName"
-                            ].Value;
+                            ((DirectoryEntry)foreignPrincipal.UnderlyingObject)
+                                .Properties["distinguishedName"]
+                                .Value;
 
                         GlobalDebug.WriteLineIf(
                             GlobalDebug.Info,
@@ -1075,9 +1075,9 @@ namespace System.DirectoryServices.AccountManagement
             );
 
             string groupDN = (string)
-                ((DirectoryEntry)foreignGroup.UnderlyingObject).Properties[
-                    "distinguishedName"
-                ].Value;
+                ((DirectoryEntry)foreignGroup.UnderlyingObject)
+                    .Properties["distinguishedName"]
+                    .Value;
             _groupsVisited.Add(groupDN);
 
             GlobalDebug.WriteLineIf(
@@ -1127,9 +1127,9 @@ namespace System.DirectoryServices.AccountManagement
             _memberSearchersQueue.Enqueue(ds);
 
             string groupDN = (string)
-                ((DirectoryEntry)foreignGroup.UnderlyingObject).Properties[
-                    "distinguishedName"
-                ].Value;
+                ((DirectoryEntry)foreignGroup.UnderlyingObject)
+                    .Properties["distinguishedName"]
+                    .Value;
             _groupsVisited.Add(groupDN);
 
             GlobalDebug.WriteLineIf(

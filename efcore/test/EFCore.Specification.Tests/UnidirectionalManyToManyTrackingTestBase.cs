@@ -748,20 +748,23 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context
                     .Entry(rightEntities[0])
                     .Collection("UnidirectionalEntityCompositeKey")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
                     .Count()
             );
             Assert.Single(
                 context
                     .Entry(rightEntities[1])
                     .Collection("UnidirectionalEntityCompositeKey")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
             Assert.Single(
                 context
                     .Entry(rightEntities[2])
                     .Collection("UnidirectionalEntityCompositeKey")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
 
             var joinEntities = context.ChangeTracker
@@ -1434,7 +1437,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context
                     .Entry(leftEntities[0])
                     .Collection<UnidirectionalEntityTwo>("UnidirectionalEntityTwo")
-                    .CurrentValue!.Count()
+                    .CurrentValue!
+                    .Count()
             );
             Assert.Single(
                 context
@@ -1833,20 +1837,23 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context
                     .Entry(rightEntities[0])
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
                     .Count()
             );
             Assert.Single(
                 context
                     .Entry(rightEntities[1])
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
             Assert.Single(
                 context
                     .Entry(rightEntities[2])
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
 
             VerifyRelationshipSnapshots(context, leftEntities);
@@ -2235,7 +2242,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context
                     .Entry(rightEntities[0])
                     .Collection<UnidirectionalEntityOne>("UnidirectionalEntityOne")
-                    .CurrentValue!.Count()
+                    .CurrentValue!
+                    .Count()
             );
             Assert.Single(
                 context
@@ -2739,20 +2747,23 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context
                     .Entry(rightEntities[0])
                     .Collection("UnidirectionalEntityOne1")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
                     .Count()
             );
             Assert.Single(
                 context
                     .Entry(rightEntities[1])
                     .Collection("UnidirectionalEntityOne1")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
             Assert.Single(
                 context
                     .Entry(rightEntities[2])
                     .Collection("UnidirectionalEntityOne1")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
 
             VerifyRelationshipSnapshots(context, leftEntities);
@@ -3211,20 +3222,23 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context
                     .Entry(rightEntities[0])
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
                     .Count()
             );
             Assert.Single(
                 context
                     .Entry(rightEntities[1])
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
             Assert.Single(
                 context
                     .Entry(rightEntities[2])
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
 
             VerifyRelationshipSnapshots(context, leftEntities);
@@ -3458,7 +3472,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                     var oneSkipNav = context
                         .Entry(right)
                         .Collection("UnidirectionalEntityOne")
-                        .CurrentValue?.Cast<object>();
+                        .CurrentValue
+                        ?.Cast<object>();
                     if (left.TwoSkipShared?.Contains(right) == true)
                     {
                         Assert.Contains(left, oneSkipNav!);
@@ -3708,7 +3723,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context
                     .Entry(rightEntities[0])
                     .Collection("UnidirectionalEntityOne1")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
                     .Count()
             );
             Assert.Single(
@@ -4160,7 +4176,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture>
                 context
                     .Entry(leftEntities[0])
                     .Collection<UnidirectionalEntityThree>("UnidirectionalEntityThree")
-                    .CurrentValue!.Count()
+                    .CurrentValue!
+                    .Count()
             );
             Assert.Single(
                 context

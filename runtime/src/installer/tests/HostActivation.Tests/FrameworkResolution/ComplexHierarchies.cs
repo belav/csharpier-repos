@@ -73,7 +73,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 // looks for hostpolicy in MiddleWare, instead of Microsoft.NETCore.App.
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining("hostpolicy");
+                .And
+                .HaveStdErrContaining("hostpolicy");
             //.ShouldHaveResolvedFramework(
             //    MicrosoftNETCoreApp, "5.1.1")
             //.And.HaveResolvedFramework("MiddleWare", "2.1.")

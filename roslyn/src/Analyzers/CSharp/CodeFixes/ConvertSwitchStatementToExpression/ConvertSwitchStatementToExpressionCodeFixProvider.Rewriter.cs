@@ -370,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 // expression before rewriting as a switch expression
                 var expressionType = _semanticModel
                     .GetSymbolInfo(node.Expression)
-                    .Symbol.GetSymbolType();
+                    .Symbol
+                    .GetSymbolType();
                 var expressionConvertedType = _semanticModel
                     .GetTypeInfo(node.Expression)
                     .ConvertedType;

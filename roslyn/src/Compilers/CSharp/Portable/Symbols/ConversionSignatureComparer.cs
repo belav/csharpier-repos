@@ -53,11 +53,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     TypeCompareKind.IgnoreDynamicAndTupleNames
                         | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                 )
-                && member1.ParameterTypesWithAnnotations[0].Equals(
-                    member2.ParameterTypesWithAnnotations[0],
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                && member1
+                    .ParameterTypesWithAnnotations[0]
+                    .Equals(
+                        member2.ParameterTypesWithAnnotations[0],
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
                 && (
                     member1.Name == WellKnownMemberNames.ImplicitConversionName
                     || member2.Name == WellKnownMemberNames.ImplicitConversionName

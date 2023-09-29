@@ -95,7 +95,8 @@ public abstract class DiagnosticAnalyzerTestBase
 
         var metadataReferences = DependencyContext
             .Load(GetType().Assembly)
-            .CompileLibraries.SelectMany(c => c.ResolveReferencePaths())
+            .CompileLibraries
+            .SelectMany(c => c.ResolveReferencePaths())
             .Select(path => MetadataReference.CreateFromFile(path))
             .Cast<MetadataReference>()
             .ToList();

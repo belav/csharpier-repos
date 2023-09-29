@@ -1751,7 +1751,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             for (var index = 0; index <= jsonProjectionInfo.AdditionalPath.Length; index++)
             {
                 var jsonElementCacheKey = jsonProjectionInfo.AdditionalPath[..index];
-                var keyValuesCacheKey = jsonProjectionInfo.AdditionalPath[..index]
+                var keyValuesCacheKey = jsonProjectionInfo
+                    .AdditionalPath[..index]
                     .Select(x => (x.ConstantArrayIndex, x.NonConstantArrayIndex))
                     .ToArray();
 

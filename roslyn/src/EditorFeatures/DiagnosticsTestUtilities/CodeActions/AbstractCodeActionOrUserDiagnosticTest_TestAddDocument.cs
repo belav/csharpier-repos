@@ -133,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 Assert.NotNull(modifiedProjectId);
                 addedDocument = newSolution
                     .GetProject(modifiedProjectId)
-                    .Documents.SingleOrDefault(doc => doc.Name == expectedDocumentName);
+                    .Documents
+                    .SingleOrDefault(doc => doc.Name == expectedDocumentName);
             }
 
             Assert.NotNull(addedDocument);

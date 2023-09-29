@@ -117,8 +117,10 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
 
         var address = host.Services
             .GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First()
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First()
             .Replace("https://", "wss://");
 
         using var webSocket = new ClientWebSocket
@@ -420,8 +422,10 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     {
         var address = host.Services
             .GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First();
 
         // WinHttpHandler always uses default credentials on localhost
         return new HttpClient(
@@ -441,8 +445,10 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     {
         var address = host.Services
             .GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First();
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First();
 
         return new HttpClient(
             new HttpClientHandler()

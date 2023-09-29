@@ -44,7 +44,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -83,7 +84,8 @@ public class Test<T> where T : unmanaged
                 {
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -132,7 +134,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -172,7 +175,8 @@ public delegate void D<T>() where T : unmanaged;
                 {
                     var typeParameter = module.GlobalNamespace
                         .GetTypeMember("D")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -218,7 +222,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -258,7 +263,8 @@ public class Test<T> where T : unmanaged
                 {
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -308,7 +314,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -349,7 +356,8 @@ public delegate void D<T>() where T : unmanaged;
                 {
                     var typeParameter = module.GlobalNamespace
                         .GetTypeMember("D")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -393,7 +401,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -435,7 +444,8 @@ public class Test<T> where T : unmanaged
                 {
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -486,7 +496,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -528,7 +539,8 @@ public delegate void D<T>() where T : unmanaged;
                 {
                     var typeParameter = module.GlobalNamespace
                         .GetTypeMember("D")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -560,7 +572,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("M")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -589,7 +602,8 @@ public class Test<T> where T : unmanaged
                 {
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -628,7 +642,8 @@ public class Test
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod("<M>g__N|0_0")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -658,7 +673,8 @@ public delegate void D<T>() where T : unmanaged;
                 {
                     var typeParameter = module.GlobalNamespace
                         .GetTypeMember("D")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -934,7 +950,8 @@ public class Test2<T> : Test1<T> where T : unmanaged { }
                 {
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test2`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1057,7 +1074,8 @@ public class Test1<T> where T : unmanaged
                 {
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test1`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
@@ -1083,7 +1101,8 @@ public class Test2<T> : Test1<T> where T : unmanaged
                 {
                     var typeParameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test2`1")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
                     Assert.True(typeParameter.HasValueTypeConstraint);
                     Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 

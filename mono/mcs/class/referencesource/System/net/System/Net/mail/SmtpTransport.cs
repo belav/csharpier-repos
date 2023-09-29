@@ -548,9 +548,9 @@ namespace System.Net.Mail
                         thisPtr.failedRecipientExceptions.Add(
                             new SmtpFailedRecipientException(
                                 thisPtr.connection.Reader.StatusCode,
-                                thisPtr.toCollection[thisPtr.toIndex - 1].GetSmtpAddress(
-                                    thisPtr.allowUnicode
-                                ),
+                                thisPtr
+                                    .toCollection[thisPtr.toIndex - 1]
+                                    .GetSmtpAddress(thisPtr.allowUnicode),
                                 response
                             )
                         );

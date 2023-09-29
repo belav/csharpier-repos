@@ -120,14 +120,14 @@ namespace System.Web.Configuration
 
                                 // Remember the config file location info, in case an error
                                 // occurs later when we use this data
-                                namespaceEntry.Line = ni.ElementInformation.Properties[
-                                    "namespace"
-                                ].LineNumber;
+                                namespaceEntry.Line = ni.ElementInformation
+                                    .Properties["namespace"]
+                                    .LineNumber;
 
                                 //
-                                namespaceEntry.VirtualPath = ni.ElementInformation.Properties[
-                                    "namespace"
-                                ].Source;
+                                namespaceEntry.VirtualPath = ni.ElementInformation
+                                    .Properties["namespace"]
+                                    .Source;
                                 // If the namespace was given Programactically it needs to still have a
                                 // valid line number of the compiler chokes (1 based).
                                 if (namespaceEntry.Line == 0)

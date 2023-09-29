@@ -282,8 +282,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                     .OfType<IMethodSymbol>()
             );
 
-            SyntaxNode emittedImplementationSyntax =
-                await methodImplementation.DeclaringSyntaxReferences[0].GetSyntaxAsync();
+            SyntaxNode emittedImplementationSyntax = await methodImplementation
+                .DeclaringSyntaxReferences[0]
+                .GetSyntaxAsync();
 
             SemanticModel model = compilation.GetSemanticModel(
                 emittedImplementationSyntax.SyntaxTree

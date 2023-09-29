@@ -358,7 +358,8 @@ class C
 
                     var initValueLineNumber = syntaxTree
                         .GetLineSpan(initValueSyntax.Span)
-                        .StartLinePosition.Line;
+                        .StartLinePosition
+                        .Line;
                     Assert.Equal(expectedInitializer.LineNumber, initValueLineNumber);
 
                     Assert.Equal(expectedInitializer.FieldName, boundFieldInit.Field.Name);

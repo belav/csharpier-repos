@@ -473,7 +473,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
             info.Tables
                 .First()
-                .Columns.Add(
+                .Columns
+                .Add(
                     new DatabaseColumn
                     {
                         Table = info.Tables.First(),

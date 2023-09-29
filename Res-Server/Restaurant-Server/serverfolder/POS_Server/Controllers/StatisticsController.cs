@@ -7554,7 +7554,8 @@ else
                                                         C.cashTransId == (long)x2.cashTransIdSource
                                                 )
                                                 .FirstOrDefault()
-                                                .pos.name
+                                                .pos
+                                                .name
                                     ),
                                 frombranchId = C.transType == "p"
                                     ? C.pos.branchId
@@ -7565,7 +7566,8 @@ else
                                                 x2 => C.cashTransId == (long)x2.cashTransIdSource
                                             )
                                             .FirstOrDefault()
-                                            .pos.branchId,
+                                            .pos
+                                            .branchId,
                                 frombranchName = C.transType == "p"
                                     ? C.pos.branches.name
                                     : C.transType == "d"
@@ -7575,7 +7577,9 @@ else
                                                 x2 => C.cashTransId == (long)x2.cashTransIdSource
                                             )
                                             .FirstOrDefault()
-                                            .pos.branches.name,
+                                            .pos
+                                            .branches
+                                            .name,
                                 toposId = C.transType == "d"
                                     ? C.posId
                                     : (
@@ -7600,7 +7604,8 @@ else
                                                         C.cashTransId == (long)x2.cashTransIdSource
                                                 )
                                                 .FirstOrDefault()
-                                                .pos.name
+                                                .pos
+                                                .name
                                     ),
                                 tobranchId = C.transType == "d"
                                     ? C.pos.branchId
@@ -7611,7 +7616,8 @@ else
                                                 x2 => C.cashTransId == (long)x2.cashTransIdSource
                                             )
                                             .FirstOrDefault()
-                                            .pos.branchId,
+                                            .pos
+                                            .branchId,
                                 tobranchName = C.transType == "d"
                                     ? C.pos.branches.name
                                     : C.transType == "d"
@@ -7621,7 +7627,9 @@ else
                                                 x2 => C.cashTransId == (long)x2.cashTransIdSource
                                             )
                                             .FirstOrDefault()
-                                            .pos.branches.name,
+                                            .pos
+                                            .branches
+                                            .name,
                             }
                         ).ToList();
 

@@ -1752,7 +1752,8 @@ namespace Internal.Reflection.Execution
 
                     MethodSignature signature = _methodHandle
                         .GetMethod(_metadataReader)
-                        .Signature.GetMethodSignature(_metadataReader);
+                        .Signature
+                        .GetMethodSignature(_metadataReader);
 
                     // Check the return type for generic vars
                     MethodInfo reflectionMethodInfo = _methodBase as MethodInfo;
@@ -1767,8 +1768,9 @@ namespace Internal.Reflection.Execution
                     foreach (Handle paramSigHandle in signature.Parameters)
                     {
                         _returnTypeAndParametersHandlesCache[index] = paramSigHandle;
-                        _returnTypeAndParametersTypesCache[index] =
-                            _methodBase.GetParametersNoCopy()[index - 1].ParameterType;
+                        _returnTypeAndParametersTypesCache[index] = _methodBase
+                            .GetParametersNoCopy()[index - 1]
+                            .ParameterType;
                         index++;
                     }
                 }

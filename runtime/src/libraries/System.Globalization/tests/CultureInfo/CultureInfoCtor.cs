@@ -473,7 +473,9 @@ namespace System.Globalization.Tests
             Assert.True(
                 CultureInfo
                     .GetCultureInfo(cultureName)
-                    .CompareInfo.Name.Equals(cultureName, StringComparison.OrdinalIgnoreCase)
+                    .CompareInfo
+                    .Name
+                    .Equals(cultureName, StringComparison.OrdinalIgnoreCase)
             );
         }
     }

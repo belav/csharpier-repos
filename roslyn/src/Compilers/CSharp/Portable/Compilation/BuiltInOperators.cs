@@ -797,7 +797,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (NamedTypeSymbol)readonlySpanOfByte
                 ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
                     .Single()
-                    .Type.SpecialType is SpecialType.System_Byte
+                    .Type
+                    .SpecialType is SpecialType.System_Byte
             );
 
             if (_builtInUtf8Concatenation is null)

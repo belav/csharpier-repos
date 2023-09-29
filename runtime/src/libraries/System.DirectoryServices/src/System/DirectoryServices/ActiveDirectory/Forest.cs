@@ -1161,9 +1161,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             Marshal.PtrToStructure(currentItem, dsNameResultItem);
                             if (dsNameResultItem.status == NativeMethods.DsNameNoError)
                             {
-                                string siteName = Utils.GetDNComponents(dsNameResultItem.name!)[
-                                    0
-                                ].Value!;
+                                string siteName = Utils
+                                    .GetDNComponents(dsNameResultItem.name!)[0]
+                                    .Value!;
                                 // an existing site
                                 sites.Add(new ActiveDirectorySite(_context, siteName, true));
                             }

@@ -53,11 +53,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Only the last placeholder may be the out parameter.
             Debug.Assert(
                 placeholders.IsEmpty
-                    || placeholders.AsSpan()[..^1].All(
-                        item =>
-                            item.ArgumentIndex
-                            != BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter
-                    )
+                    || placeholders
+                        .AsSpan()[..^1]
+                        .All(
+                            item =>
+                                item.ArgumentIndex
+                                != BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter
+                        )
             );
             Debug.Assert(!positionInfo.IsDefault);
             BuilderType = builderType;

@@ -120,9 +120,9 @@ namespace System.Activities.Core.Presentation
                 )
                 {
                     this.FlowchartWidth = (double)
-                        TypeDescriptor.GetProperties(this.ModelItem)[
-                            FlowchartSizeFeature.WidthPropertyName
-                        ].GetValue(this.ModelItem);
+                        TypeDescriptor
+                            .GetProperties(this.ModelItem)[FlowchartSizeFeature.WidthPropertyName]
+                            .GetValue(this.ModelItem);
                 }
                 else if (
                     string.Equals(
@@ -133,9 +133,9 @@ namespace System.Activities.Core.Presentation
                 )
                 {
                     this.FlowchartHeight = (double)
-                        TypeDescriptor.GetProperties(this.ModelItem)[
-                            FlowchartSizeFeature.HeightPropertyName
-                        ].GetValue(this.ModelItem);
+                        TypeDescriptor
+                            .GetProperties(this.ModelItem)[FlowchartSizeFeature.HeightPropertyName]
+                            .GetValue(this.ModelItem);
                 }
             }
             if (
@@ -358,9 +358,10 @@ namespace System.Activities.Core.Presentation
                     if (
                         collectionChange.Collection.Parent != null
                         && collectionChange.Collection.Parent.Parent != null
-                        && this.ModelItem.Properties["Nodes"].Collection.Contains(
-                            collectionChange.Collection.Parent.Parent
-                        )
+                        && this.ModelItem
+                            .Properties["Nodes"]
+                            .Collection
+                            .Contains(collectionChange.Collection.Parent.Parent)
                         && collectionChange.Collection.Parent.Parent.ItemType.IsGenericType
                         && collectionChange.Collection.Parent.Parent.ItemType.GetGenericTypeDefinition()
                             == typeof(FlowSwitch<>)
@@ -417,9 +418,10 @@ namespace System.Activities.Core.Presentation
 
                     if (
                         dictionaryChange.Dictionary.Parent != null
-                        && this.ModelItem.Properties["Nodes"].Collection.Contains(
-                            dictionaryChange.Dictionary.Parent
-                        )
+                        && this.ModelItem
+                            .Properties["Nodes"]
+                            .Collection
+                            .Contains(dictionaryChange.Dictionary.Parent)
                         && dictionaryChange.Dictionary.Parent.ItemType.IsGenericType
                         && dictionaryChange.Dictionary.Parent.ItemType.GetGenericTypeDefinition()
                             == typeof(FlowSwitch<>)
@@ -1010,7 +1012,9 @@ namespace System.Activities.Core.Presentation
                     {
                         ModelItem linkModelItem = FlowchartDesigner.GetLinkModelItem(connector);
                         if (
-                            linkModelItem.Properties["IsDefaultCase"].Value
+                            linkModelItem
+                                .Properties["IsDefaultCase"]
+                                .Value
                                 .GetCurrentValue()
                                 .Equals(true) && propertyName.Equals("Default")
                         )
@@ -1022,7 +1026,9 @@ namespace System.Activities.Core.Presentation
                         {
                             ModelItem connectorCaseMI = linkModelItem.Properties["Case"].Value;
                             if (
-                                linkModelItem.Properties["IsDefaultCase"].Value
+                                linkModelItem
+                                    .Properties["IsDefaultCase"]
+                                    .Value
                                     .GetCurrentValue()
                                     .Equals(false)
                             )

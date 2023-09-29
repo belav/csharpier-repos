@@ -613,7 +613,8 @@ namespace Internal.TypeSystem.Ecma
                                 // the deriving type
                                 Instantiation newSubstitution = typeDescToInspect
                                     .GetTypeDefinition()
-                                    .BaseType.Instantiation;
+                                    .BaseType
+                                    .Instantiation;
                                 if (!substitution.IsNull)
                                 {
                                     TypeDesc[] newSubstitutionTypes = new TypeDesc[

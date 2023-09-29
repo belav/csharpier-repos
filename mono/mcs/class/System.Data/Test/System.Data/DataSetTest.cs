@@ -1825,16 +1825,18 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet("ExampleDataSet");
 
             ds.Tables.Add(new DataTable("ExampleDataTable"));
-            ds.Tables["ExampleDataTable"].Columns.Add(
-                new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute)
-            );
+            ds.Tables["ExampleDataTable"]
+                .Columns
+                .Add(new DataColumn("PrimaryKeyColumn", typeof(int), "", MappingType.Attribute));
             ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"].AllowDBNull = false;
 
-            ds.Tables["ExampleDataTable"].Constraints.Add(
-                "PK_ExampleDataTable",
-                ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
-                true
-            );
+            ds.Tables["ExampleDataTable"]
+                .Constraints
+                .Add(
+                    "PK_ExampleDataTable",
+                    ds.Tables["ExampleDataTable"].Columns["PrimaryKeyColumn"],
+                    true
+                );
 
             ds.AcceptChanges();
             StringWriter sw = new StringWriter();
@@ -2033,9 +2035,9 @@ namespace MonoTests.System.Data
             // Add MyType DataTable
             ds.Tables.Add("MyType");
 
-            ds.Tables["MyType"].Columns.Add(
-                new DataColumn("Desc", typeof(string), "", MappingType.Attribute)
-            );
+            ds.Tables["MyType"]
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.Attribute));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
 
             ds.AcceptChanges();

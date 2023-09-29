@@ -118,9 +118,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MoveType
                     );
 
                     var oldDocumentId = workspace.Documents[0].Id;
-                    var expectedText = workspace.Documents[0]
+                    var expectedText = workspace
+                        .Documents[0]
                         .GetTextBuffer()
-                        .CurrentSnapshot.GetText();
+                        .CurrentSnapshot
+                        .GetText();
                     var spans = workspace.Documents[0].SelectedSpans;
 
                     var codeActionTitle = string.Format(

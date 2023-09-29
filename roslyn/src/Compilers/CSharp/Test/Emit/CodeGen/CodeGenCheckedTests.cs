@@ -3811,7 +3811,8 @@ class C
                         nodeToSpeculate,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.ToTestDisplayString()
+                    .Symbol
+                    .ToTestDisplayString()
             );
 
             var checkedNode = tree.GetRoot()
@@ -3828,7 +3829,8 @@ class C
                         nodeToSpeculate,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.ToTestDisplayString()
+                    .Symbol
+                    .ToTestDisplayString()
             );
         }
 
@@ -3866,7 +3868,8 @@ class C
                         nodeToSpeculate,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Symbol.ToTestDisplayString()
+                    .Symbol
+                    .ToTestDisplayString()
             );
         }
     }

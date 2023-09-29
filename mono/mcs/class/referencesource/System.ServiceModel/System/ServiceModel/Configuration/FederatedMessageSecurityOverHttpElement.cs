@@ -145,9 +145,9 @@ namespace System.ServiceModel.Configuration
             }
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.IssuerMetadata
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.IssuerMetadata]
+                    .ValueOrigin
             )
             {
                 security.IssuerMetadataAddress = ConfigLoader.LoadEndpointAddress(

@@ -418,7 +418,8 @@ public class C : I
 
             var bridge = @class
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Same(csharpGetter, bridge.ImplementingMethod);
             Assert.Same(ilGetter, bridge.ExplicitInterfaceImplementations.Single());
 
@@ -459,7 +460,8 @@ public class C : I
                 0,
                 @class
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Length
+                    .ForwardingMethods
+                    .Length
             ); //not needed
         }
 
@@ -1039,7 +1041,8 @@ public class G<T>
 
             var tsym = comp2
                 .GetReferencedAssemblySymbol(mtref)
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("G");
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("G");
             Assert.NotNull(tsym);
 
             var mems = tsym.GetMembers().Where(s => s.Kind == SymbolKind.Method);

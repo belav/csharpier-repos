@@ -180,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 && variableDeclaration.Variables.Count == 1
                 && variableDeclaration.Variables
                     .Single()
-                    .Initializer.IsKind(SyntaxKind.EqualsValueClause);
+                    .Initializer
+                    .IsKind(SyntaxKind.EqualsValueClause);
         }
 
         protected virtual bool ShouldAnalyzeForEachStatement(

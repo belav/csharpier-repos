@@ -497,7 +497,9 @@ public class NavigationAttributeConventionTest
                 nameof(Principal.Dependents),
                 ConfigurationSource.Convention
             )
-            .Metadata.DeclaringEntityType.Builder;
+            .Metadata
+            .DeclaringEntityType
+            .Builder;
 
         Assert.Contains(
             principalEntityTypeBuilder.Metadata.GetNavigations(),

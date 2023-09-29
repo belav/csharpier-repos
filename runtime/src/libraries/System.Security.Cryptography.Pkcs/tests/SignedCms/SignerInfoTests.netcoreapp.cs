@@ -67,9 +67,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(2, cms.SignerInfos[0].UnsignedAttributes.Count);
             Assert.Equal(2, cms.SignerInfos[0].CounterSignerInfos.Count);
-            byte[] secondSignerCounterSignature = cms.SignerInfos[0].CounterSignerInfos[
-                1
-            ].GetSignature();
+            byte[] secondSignerCounterSignature = cms.SignerInfos[0]
+                .CounterSignerInfos[1]
+                .GetSignature();
 
             cms.SignerInfos[0].RemoveUnsignedAttribute(
                 cms.SignerInfos[0].UnsignedAttributes[0].Values[0]

@@ -592,8 +592,10 @@ abstract class C<T> where T : unmanaged         // Line 4
             var comp = await project.GetCompilationAsync();
 
             var constraint = comp.GetTypeByMetadataName("C`1")
-                .TypeParameters.Single()
-                .ConstraintTypes.Single();
+                .TypeParameters
+                .Single()
+                .ConstraintTypes
+                .Single();
             var result = (await SymbolFinder.FindReferencesAsync(constraint, solution)).Single();
 
             Verify(result, new HashSet<int> { 1, 4 });

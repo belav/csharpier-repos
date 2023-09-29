@@ -110,9 +110,9 @@ namespace System.Activities.Core.Presentation
 
                     if (!isMoveOrAutoSplit)
                     {
-                        realFlowSwitchMI.Properties[
-                            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                        ].SetValue(FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue);
+                        realFlowSwitchMI
+                            .Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName]
+                            .SetValue(FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue);
                     }
                 }
                 else

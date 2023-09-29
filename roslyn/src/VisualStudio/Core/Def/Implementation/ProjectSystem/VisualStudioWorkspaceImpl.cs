@@ -666,7 +666,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             var parseOptionsService = CurrentSolution
                 .GetRequiredProject(projectId)
-                .LanguageServices.GetRequiredService<IParseOptionsChangingService>();
+                .LanguageServices
+                .GetRequiredService<IParseOptionsChangingService>();
             var storage = ProjectPropertyStorage.Create(
                 TryGetDTEProject(projectId),
                 ServiceProvider.GlobalProvider
@@ -1489,7 +1490,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     var textBuffer = this.CurrentSolution
                         .GetTextDocument(documentId)!
                         .GetTextSynchronously(CancellationToken.None)
-                        .Container.TryGetTextBuffer();
+                        .Container
+                        .TryGetTextBuffer();
 
                     if (textBuffer != null)
                     {

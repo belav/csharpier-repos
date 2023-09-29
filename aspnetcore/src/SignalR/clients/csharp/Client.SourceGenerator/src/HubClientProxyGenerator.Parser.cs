@@ -287,12 +287,14 @@ internal sealed partial class HubClientProxyGenerator
             sourceGenerationSpec.SetterClassName = registerCallbackProviderClassSymbol.Name;
             sourceGenerationSpec.SetterNamespace =
                 registerCallbackProviderClassSymbol.ContainingNamespace.ToString();
-            sourceGenerationSpec.SetterTypeParameterName =
-                registerCallbackProviderMethodSymbol.TypeParameters[0].Name;
+            sourceGenerationSpec.SetterTypeParameterName = registerCallbackProviderMethodSymbol
+                .TypeParameters[0]
+                .Name;
             sourceGenerationSpec.SetterHubConnectionParameterName =
                 registerCallbackProviderMethodSymbol.Parameters[0].Name;
-            sourceGenerationSpec.SetterProviderParameterName =
-                registerCallbackProviderMethodSymbol.Parameters[1].Name;
+            sourceGenerationSpec.SetterProviderParameterName = registerCallbackProviderMethodSymbol
+                .Parameters[1]
+                .Name;
 
             var providerSymbols =
                 new Dictionary<string, (ITypeSymbol, MemberAccessExpressionSyntax)>();

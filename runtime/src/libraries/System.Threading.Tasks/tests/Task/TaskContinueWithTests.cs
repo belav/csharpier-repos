@@ -834,9 +834,9 @@ namespace System.Threading.Tasks.Tests
                                             (ex != null)
                                                 && (ex.GetType() == typeof(AggregateException))
                                                 && (
-                                                    ((AggregateException)ex).InnerExceptions[
-                                                        0
-                                                    ].GetType() == typeof(TaskCanceledException)
+                                                    ((AggregateException)ex)
+                                                        .InnerExceptions[0]
+                                                        .GetType() == typeof(TaskCanceledException)
                                                 ),
                                             "RunContinueWithAllParamsTestsNoState: Expected AE(TCE) for Wait after pre-cancellation"
                                         );
@@ -931,9 +931,9 @@ namespace System.Threading.Tasks.Tests
                                             (ex != null)
                                                 && (ex.GetType() == typeof(AggregateException))
                                                 && (
-                                                    ((AggregateException)ex).InnerExceptions[
-                                                        0
-                                                    ].GetType() == typeof(TaskCanceledException)
+                                                    ((AggregateException)ex)
+                                                        .InnerExceptions[0]
+                                                        .GetType() == typeof(TaskCanceledException)
                                                 ),
                                             "RunContinueWithAllParamsTestsNoState overloads: Expected AE(TCE) for Wait after pre-cancellation"
                                         );

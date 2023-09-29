@@ -292,7 +292,8 @@ namespace ILLink.RoslynAnalyzer.Tests
                         .ChildNodes()
                         .OfType<IdentifierNameSyntax>()
                         .First()
-                        .Identifier.ValueText;
+                        .Identifier
+                        .ValueText;
                 }
                 else if (argument.NameColon is NameColonSyntax nameColon)
                 {

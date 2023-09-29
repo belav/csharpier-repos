@@ -276,7 +276,8 @@ public partial class RoutePatternParserTests
                         for (var i = 0; i < parsedRoutePattern.ParameterPolicies.Count; i++)
                         {
                             var expected = parsedRoutePattern.ParameterPolicies[i].Content;
-                            var actual = routeParameter.Policies[i]
+                            var actual = routeParameter
+                                .Policies[i]
                                 .Substring(1)
                                 .Replace("{{", "{")
                                 .Replace("}}", "}");

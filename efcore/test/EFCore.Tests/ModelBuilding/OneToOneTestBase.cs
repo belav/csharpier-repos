@@ -3138,7 +3138,8 @@ public abstract partial class ModelBuilderTest
                     .FindEntityType(typeof(Nob))
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
             Assert.Equal(
@@ -3147,7 +3148,8 @@ public abstract partial class ModelBuilderTest
                     .FindEntityType(typeof(Hob))
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
         }
@@ -3176,7 +3178,8 @@ public abstract partial class ModelBuilderTest
                     .FindEntityType(typeof(Nob))
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
             Assert.Equal(
@@ -3185,7 +3188,8 @@ public abstract partial class ModelBuilderTest
                     .FindEntityType(typeof(Hob))
                     .GetForeignKeys()
                     .Single()
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ClrType
             );
         }
@@ -4149,7 +4153,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -4173,7 +4179,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -4193,7 +4201,8 @@ public abstract partial class ModelBuilderTest
                 .FindEntityType(typeof(Quarks))
                 .GetForeignKeys()
                 .Single()
-                .Properties.Single();
+                .Properties
+                .Single();
             Assert.Equal("_forUp", fkProperty.Name);
             Assert.Equal(typeof(int), fkProperty.ClrType);
             Assert.Equal("_forUp", fkProperty.FieldInfo.Name);
@@ -4714,7 +4723,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Book))
                     .FindNavigation(Book.BookDetailsNavigation.Name)
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }

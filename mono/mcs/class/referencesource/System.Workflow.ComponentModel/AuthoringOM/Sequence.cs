@@ -42,10 +42,12 @@ namespace System.Workflow.ComponentModel
                 return ActivityExecutionStatus.Closed;
             else
             {
-                activity.EnabledActivities[0].RegisterForStatusChange(
-                    Activity.ClosedEvent,
-                    (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity
-                );
+                activity
+                    .EnabledActivities[0]
+                    .RegisterForStatusChange(
+                        Activity.ClosedEvent,
+                        (IActivityEventListener<ActivityExecutionStatusChangedEventArgs>)activity
+                    );
                 executionContext.ExecuteActivity(activity.EnabledActivities[0]);
                 activity.SetValue(
                     ActiveChildQualifiedNameProperty,

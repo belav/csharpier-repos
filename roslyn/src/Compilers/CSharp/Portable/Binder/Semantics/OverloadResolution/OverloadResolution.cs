@@ -3207,9 +3207,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Dig through Task<...> for an async lambda.
                     if (y.OriginalDefinition.IsGenericTaskType(Compilation))
                     {
-                        y = ((NamedTypeSymbol)y).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            0
-                        ].Type;
+                        y = ((NamedTypeSymbol)y)
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            .Type;
                     }
                     else
                     {
@@ -3509,12 +3509,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // - T1 is Task<S1>, T2 is Task<S2>, and S1 is a better conversion target than S2
                     return BetterConversionTargetCore(
-                        ((NamedTypeSymbol)type1).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            0
-                        ].Type,
-                        ((NamedTypeSymbol)type2).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            0
-                        ].Type,
+                        ((NamedTypeSymbol)type1)
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            .Type,
+                        ((NamedTypeSymbol)type2)
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            .Type,
                         ref useSiteInfo,
                         betterConversionTargetRecursionLimit
                     );

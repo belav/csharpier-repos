@@ -94,9 +94,10 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
             RegexOptions.Multiline
         ).Match(serviceWorkerAssetsManifestContents);
         Assert.True(serviceWorkerAssetsManifestVersionMatch.Success);
-        var serviceWorkerAssetsManifestVersionJson = serviceWorkerAssetsManifestVersionMatch.Groups[
-            1
-        ].Captures[0].Value;
+        var serviceWorkerAssetsManifestVersionJson = serviceWorkerAssetsManifestVersionMatch
+            .Groups[1]
+            .Captures[0]
+            .Value;
         var serviceWorkerAssetsManifestVersion = JsonSerializer.Deserialize<string>(
             serviceWorkerAssetsManifestVersionJson
         );
@@ -179,7 +180,8 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
             .GetProperty("IdentityServer")
             .EnumerateObject()
             .Single()
-            .Value.EnumerateObject()
+            .Value
+            .EnumerateObject()
             .Single();
         var replacedSection = element
             .GetRawText()

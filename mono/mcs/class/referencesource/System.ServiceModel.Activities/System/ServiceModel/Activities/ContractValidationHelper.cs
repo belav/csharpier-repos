@@ -533,9 +533,10 @@ namespace System.ServiceModel.Activities
                         else
                         {
                             if (
-                                !targetMessage.Body.Parts[0].Type.IsAssignableFrom(
-                                    typeof(System.ServiceModel.Channels.Message)
-                                )
+                                !targetMessage.Body
+                                    .Parts[0]
+                                    .Type
+                                    .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                             )
                             {
                                 Constraint.AddValidationError(
@@ -1082,9 +1083,12 @@ namespace System.ServiceModel.Activities
                 {
                     if (
                         operation.Messages[1].MessageType != null
-                        || operation.Messages[1].Body.ReturnValue.Type.IsAssignableFrom(
-                            typeof(System.ServiceModel.Channels.Message)
-                        )
+                        || operation
+                            .Messages[1]
+                            .Body
+                            .ReturnValue
+                            .Type
+                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                     )
                     {
                         contentIsParameter = false;
@@ -1184,9 +1188,12 @@ namespace System.ServiceModel.Activities
                     else if (
                         operation.Messages[0].Body.Parts != null
                         && operation.Messages[0].Body.Parts.Count == 1
-                        && operation.Messages[0].Body.Parts[0].Type.IsAssignableFrom(
-                            typeof(System.ServiceModel.Channels.Message)
-                        )
+                        && operation
+                            .Messages[0]
+                            .Body
+                            .Parts[0]
+                            .Type
+                            .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                     )
                     {
                         contentIsParameter = false;

@@ -1261,9 +1261,10 @@ namespace System.Web
                     )
                     {
                         if (
-                            processConfig.ElementInformation.Properties[
-                                "maxWorkerThreads"
-                            ].LineNumber != 0
+                            processConfig
+                                .ElementInformation
+                                .Properties["maxWorkerThreads"]
+                                .LineNumber != 0
                         )
                         {
                             throw new ConfigurationErrorsException(
@@ -1273,12 +1274,14 @@ namespace System.Web
                                         CultureInfo.InvariantCulture
                                     )
                                 ),
-                                processConfig.ElementInformation.Properties[
-                                    "maxWorkerThreads"
-                                ].Source,
-                                processConfig.ElementInformation.Properties[
-                                    "maxWorkerThreads"
-                                ].LineNumber
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxWorkerThreads"]
+                                    .Source,
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxWorkerThreads"]
+                                    .LineNumber
                             );
                         }
                         else
@@ -1291,9 +1294,10 @@ namespace System.Web
                                     )
                                 ),
                                 processConfig.ElementInformation.Properties["maxIoThreads"].Source,
-                                processConfig.ElementInformation.Properties[
-                                    "maxIoThreads"
-                                ].LineNumber
+                                processConfig
+                                    .ElementInformation
+                                    .Properties["maxIoThreads"]
+                                    .LineNumber
                             );
                         }
                     }
@@ -1313,9 +1317,10 @@ namespace System.Web
                 if (runtimeConfig.MinLocalRequestFreeThreads > runtimeConfig.MinFreeThreads)
                 {
                     if (
-                        runtimeConfig.ElementInformation.Properties[
-                            "minLocalRequestFreeThreads"
-                        ].LineNumber == 0
+                        runtimeConfig
+                            .ElementInformation
+                            .Properties["minLocalRequestFreeThreads"]
+                            .LineNumber == 0
                     )
                     {
                         throw new ConfigurationErrorsException(
@@ -1328,12 +1333,14 @@ namespace System.Web
                     {
                         throw new ConfigurationErrorsException(
                             SR.GetString(SR.Local_free_threads_cannot_exceed_free_threads),
-                            runtimeConfig.ElementInformation.Properties[
-                                "minLocalRequestFreeThreads"
-                            ].Source,
-                            runtimeConfig.ElementInformation.Properties[
-                                "minLocalRequestFreeThreads"
-                            ].LineNumber
+                            runtimeConfig
+                                .ElementInformation
+                                .Properties["minLocalRequestFreeThreads"]
+                                .Source,
+                            runtimeConfig
+                                .ElementInformation
+                                .Properties["minLocalRequestFreeThreads"]
+                                .LineNumber
                         );
                     }
                 }

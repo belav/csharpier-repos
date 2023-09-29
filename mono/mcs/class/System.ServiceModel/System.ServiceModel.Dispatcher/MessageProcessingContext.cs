@@ -126,9 +126,9 @@ namespace System.ServiceModel.Dispatcher
             Message message = request_context.IncomingMessage;
 
             for (int i = 0; i < dispatch_runtime.MessageInspectors.Count; ++i)
-                msg_inspectors_states[i] = dispatch_runtime.MessageInspectors[
-                    i
-                ].AfterReceiveRequest(ref message, channel, request_context.InstanceContext);
+                msg_inspectors_states[i] = dispatch_runtime
+                    .MessageInspectors[i]
+                    .AfterReceiveRequest(ref message, channel, request_context.InstanceContext);
             request_context.IncomingMessage = message;
         }
 
@@ -136,10 +136,9 @@ namespace System.ServiceModel.Dispatcher
         {
             Message toBeChanged = request_context.ReplyMessage;
             for (int i = 0; i < dispatch_runtime.MessageInspectors.Count; ++i)
-                dispatch_runtime.MessageInspectors[i].BeforeSendReply(
-                    ref toBeChanged,
-                    msg_inspectors_states[i]
-                );
+                dispatch_runtime
+                    .MessageInspectors[i]
+                    .BeforeSendReply(ref toBeChanged, msg_inspectors_states[i]);
             request_context.ReplyMessage = toBeChanged;
         }
 
@@ -147,21 +146,21 @@ namespace System.ServiceModel.Dispatcher
         {
             callcontext_initializers_states = new object[operation.CallContextInitializers.Count];
             for (int i = 0; i < callcontext_initializers_states.Length; ++i)
-                callcontext_initializers_states[i] = operation.CallContextInitializers[
-                    i
-                ].BeforeInvoke(
-                    request_context.InstanceContext,
-                    channel,
-                    request_context.IncomingMessage
-                );
+                callcontext_initializers_states[i] = operation
+                    .CallContextInitializers[i]
+                    .BeforeInvoke(
+                        request_context.InstanceContext,
+                        channel,
+                        request_context.IncomingMessage
+                    );
         }
 
         public void AfterInvoke(DispatchOperation operation)
         {
             for (int i = 0; i < callcontext_initializers_states.Length; ++i)
-                operation.CallContextInitializers[i].AfterInvoke(
-                    callcontext_initializers_states[i]
-                );
+                operation
+                    .CallContextInitializers[i]
+                    .AfterInvoke(callcontext_initializers_states[i]);
         }
     }
 

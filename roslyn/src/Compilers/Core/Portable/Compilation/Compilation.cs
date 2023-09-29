@@ -2235,7 +2235,8 @@ namespace Microsoft.CodeAnalysis
                         {
                             manifestContents = typeof(Compilation)
                                 .GetTypeInfo()
-                                .Assembly.GetManifestResourceStream(
+                                .Assembly
+                                .GetManifestResourceStream(
                                     "Microsoft.CodeAnalysis.Resources.default.win32manifest"
                                 );
                         }

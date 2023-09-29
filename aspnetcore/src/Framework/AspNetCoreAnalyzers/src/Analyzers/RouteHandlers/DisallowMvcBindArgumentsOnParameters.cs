@@ -39,9 +39,9 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                 var location = Location.None;
                 if (!parameter.DeclaringSyntaxReferences.IsEmpty)
                 {
-                    var syntax = parameter.DeclaringSyntaxReferences[0].GetSyntax(
-                        context.CancellationToken
-                    );
+                    var syntax = parameter
+                        .DeclaringSyntaxReferences[0]
+                        .GetSyntax(context.CancellationToken);
                     location = syntax.GetLocation();
                 }
 

@@ -2052,14 +2052,18 @@ namespace System.IdentityModel.Tokens
                     && assertion.Subject.SubjectConfirmations != null
                     && assertion.Subject.SubjectConfirmations.Count != 0
                     && assertion.Subject.SubjectConfirmations[0].SubjectConfirmationData != null
-                    && assertion.Subject.SubjectConfirmations[0]
+                    && assertion
+                        .Subject
+                        .SubjectConfirmations[0]
                         .SubjectConfirmationData
                         .NotOnOrAfter
                         .HasValue
                 )
                 {
                     // The condition did not have NotOnOrAfter set, but SCD[0] has a NotOnOrAfter set, use that.
-                    tokenExpiration = assertion.Subject.SubjectConfirmations[0]
+                    tokenExpiration = assertion
+                        .Subject
+                        .SubjectConfirmations[0]
                         .SubjectConfirmationData
                         .NotOnOrAfter
                         .Value;

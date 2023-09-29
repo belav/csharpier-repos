@@ -90,10 +90,9 @@ namespace Internal.IL.Stubs
                     TypeDesc[] parameters = new TypeDesc[method.Signature.Length];
                     for (int i = 0; i < parameters.Length; i++)
                     {
-                        parameters[i] = method.Signature[i].ReplaceTypesInConstructionOfType(
-                            typesToReplace,
-                            replacementTypes
-                        );
+                        parameters[i] = method
+                            .Signature[i]
+                            .ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
                     }
                     TypeDesc returnType =
                         method.Signature.ReturnType.ReplaceTypesInConstructionOfType(

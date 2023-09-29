@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                     {
                         return method0.DeclaringSyntaxReferences
                             .Single()
-                            .SyntaxTree.GetRoot()
+                            .SyntaxTree
+                            .GetRoot()
                             .DescendantNodes()
                             .Single(n => n.IsKind(kind));
                     }

@@ -77,14 +77,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 diffViewer.RightView.ZoomLevel *= zoomLevel;
                 diffViewer.RightHost
                     .GetTextViewMargin(DiffOverviewMarginName)
-                    .VisualElement.Visibility = Visibility.Collapsed;
+                    .VisualElement
+                    .Visibility = Visibility.Collapsed;
             }
             else if (mode == DifferenceViewMode.LeftViewOnly)
             {
                 diffViewer.LeftView.ZoomLevel *= zoomLevel;
                 diffViewer.LeftHost
                     .GetTextViewMargin(DiffOverviewMarginName)
-                    .VisualElement.Visibility = Visibility.Collapsed;
+                    .VisualElement
+                    .Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 diffViewer.InlineView.ZoomLevel *= zoomLevel;
                 diffViewer.InlineHost
                     .GetTextViewMargin(DiffOverviewMarginName)
-                    .VisualElement.Visibility = Visibility.Collapsed;
+                    .VisualElement
+                    .Visibility = Visibility.Collapsed;
             }
 
             // Disable focus / tab stop for the diff viewer.

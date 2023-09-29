@@ -221,9 +221,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    int offset = attribute.CommonConstructorArguments[0].DecodeValue<int>(
-                        SpecialType.System_Int32
-                    );
+                    int offset = attribute
+                        .CommonConstructorArguments[0]
+                        .DecodeValue<int>(SpecialType.System_Int32);
                     if (offset < 0)
                     {
                         // Dev10 reports CS0647: "Error emitting attribute ..."

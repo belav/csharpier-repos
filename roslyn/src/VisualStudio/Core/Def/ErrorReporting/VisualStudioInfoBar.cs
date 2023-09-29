@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                             // Run given onClose action if there is one.
                             items
                                 .FirstOrDefault(i => i.Kind == InfoBarUI.UIKind.Close)
-                                .Action?.Invoke();
+                                .Action
+                                ?.Invoke();
 
                             if (infoBarCookie.HasValue)
                             {

@@ -417,9 +417,10 @@ namespace System.Activities.XamlIntegration
                                 // Rewrite "<Activity typeArgument=T>" to "<DynamicActivity typeArgument=T>"
                                 this.activityXamlType = this.innerReader.Type;
 
-                                Type activityType = this.innerReader.Type.TypeArguments[
-                                    0
-                                ].UnderlyingType;
+                                Type activityType = this.innerReader
+                                    .Type
+                                    .TypeArguments[0]
+                                    .UnderlyingType;
                                 Type activityReplacementGenericType;
                                 if (this.isBuilder)
                                 {

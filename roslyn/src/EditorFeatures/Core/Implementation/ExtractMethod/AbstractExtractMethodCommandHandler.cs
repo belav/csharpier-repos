@@ -342,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractMethod
         {
             using var undoTransaction = _undoManager
                 .GetTextBufferUndoManager(subjectBuffer)
-                .TextBufferUndoHistory.CreateTransaction("Extract Method");
+                .TextBufferUndoHistory
+                .CreateTransaction("Extract Method");
 
             // apply extract method code to buffer
             var document = extractMethodResult.Document;

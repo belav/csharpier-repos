@@ -402,7 +402,8 @@ class {|Identifier:A|}
 
             var document = testLspServer.TestWorkspace.CurrentSolution.Projects
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -484,7 +485,8 @@ class {|Identifier:A|}
 
             var document = testLspServer.TestWorkspace.CurrentSolution.Projects
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -537,7 +539,8 @@ class {|Identifier:A|}
 
             var document = testLspServer.TestWorkspace.CurrentSolution.Projects
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -586,7 +589,8 @@ class {|Identifier:A|}
 
             var document = testLspServer.TestWorkspace.CurrentSolution.Projects
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],
@@ -661,7 +665,8 @@ class {|Identifier:A|}
 
             var document = testLspServer.TestWorkspace.CurrentSolution.Projects
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var sourceText = await document.GetTextAsync();
             AssertJsonEquals(
                 results[0],

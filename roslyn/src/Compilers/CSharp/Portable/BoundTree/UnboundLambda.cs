@@ -1548,10 +1548,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 for (int i = 0; i < this.ParameterTypes.Length; i++)
                 {
                     if (
-                        !other.ParameterTypes[i].Equals(
-                            this.ParameterTypes[i],
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        !other
+                            .ParameterTypes[i]
+                            .Equals(this.ParameterTypes[i], TypeCompareKind.ConsiderEverything)
                         || other.ParameterRefKinds[i] != this.ParameterRefKinds[i]
                     )
                     {
@@ -2109,13 +2108,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                         (SimpleLambdaExpressionSyntax)syntax
                     ).Parameter.Identifier.GetLocation();
                 case SyntaxKind.ParenthesizedLambdaExpression:
-                    return ((ParenthesizedLambdaExpressionSyntax)syntax).ParameterList.Parameters[
-                        index
-                    ].Identifier.GetLocation();
+                    return ((ParenthesizedLambdaExpressionSyntax)syntax).ParameterList
+                        .Parameters[index]
+                        .Identifier
+                        .GetLocation();
                 case SyntaxKind.AnonymousMethodExpression:
-                    return ((AnonymousMethodExpressionSyntax)syntax).ParameterList!.Parameters[
-                        index
-                    ].Identifier.GetLocation();
+                    return ((AnonymousMethodExpressionSyntax)syntax).ParameterList!
+                        .Parameters[index]
+                        .Identifier
+                        .GetLocation();
             }
         }
 

@@ -149,16 +149,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 result
                     .Should()
                     .Pass()
-                    .And.HaveResolvedAssembly(
-                        Path.Combine(app.Location, $"{additionalLibName}.dll")
-                    );
+                    .And
+                    .HaveResolvedAssembly(Path.Combine(app.Location, $"{additionalLibName}.dll"));
             }
             else
             {
                 result
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveStdErrContaining(
                         $"Error:{Environment.NewLine}"
                             + $"  An assembly specified in the application dependencies manifest ({additionalLibName}.deps.json) was not found:"
                             + Environment.NewLine
@@ -187,8 +187,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     .Execute(expectedToFail: true)
                     .Should()
                     .Fail()
-                    .And.HaveUsedAdditionalDeps(invalidDepsFile)
-                    .And.HaveStdErrContaining(
+                    .And
+                    .HaveUsedAdditionalDeps(invalidDepsFile)
+                    .And
+                    .HaveStdErrContaining(
                         $"Error initializing the dependency resolver: An error occurred while parsing: {invalidDepsFile}"
                     );
             }

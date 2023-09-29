@@ -232,7 +232,8 @@ namespace Roslyn.Test.Utilities
         {
             var corLibIdentity = compilation
                 .GetSpecialType(SpecialType.System_Object)
-                .ContainingAssembly.Identity;
+                .ContainingAssembly
+                .Identity;
 
             // A Compilation can appear multiple times in a dependency graph as both a Compilation and as a MetadataReference
             // value.  Iterate the Compilations eagerly so they are always emitted directly and later references can re-use

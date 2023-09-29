@@ -348,9 +348,9 @@ public class CosmosProjectionBindingExpressionVisitor : ExpressionVisitor
         {
             case ProjectionBindingExpression innerProjectionBindingExpression:
                 innerEntityProjection = (EntityProjectionExpression)
-                    _selectExpression.Projection[
-                        innerProjectionBindingExpression.Index.Value
-                    ].Expression;
+                    _selectExpression
+                        .Projection[innerProjectionBindingExpression.Index.Value]
+                        .Expression;
                 break;
 
             case UnaryExpression unaryExpression:
@@ -575,9 +575,9 @@ public class CosmosProjectionBindingExpressionVisitor : ExpressionVisitor
             {
                 case ProjectionBindingExpression innerProjectionBindingExpression:
                     innerEntityProjection = (EntityProjectionExpression)
-                        _selectExpression.Projection[
-                            innerProjectionBindingExpression.Index.Value
-                        ].Expression;
+                        _selectExpression
+                            .Projection[innerProjectionBindingExpression.Index.Value]
+                            .Expression;
                     break;
 
                 case UnaryExpression unaryExpression:

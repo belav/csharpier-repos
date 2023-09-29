@@ -242,65 +242,65 @@ namespace System.ServiceModel.Configuration
 #pragma warning disable 56506 //Microsoft; base.CopyFrom() checks for 'from' being null
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.DefaultAlgorithmSuite
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.DefaultAlgorithmSuite]
+                    .ValueOrigin
             )
                 sbe.DefaultAlgorithmSuite = this.DefaultAlgorithmSuite;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.IncludeTimestamp
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.IncludeTimestamp]
+                    .ValueOrigin
             )
                 sbe.IncludeTimestamp = this.IncludeTimestamp;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.MessageSecurityVersion
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.MessageSecurityVersion]
+                    .ValueOrigin
             )
                 sbe.MessageSecurityVersion = this.MessageSecurityVersion;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.KeyEntropyMode
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.KeyEntropyMode]
+                    .ValueOrigin
             )
                 sbe.KeyEntropyMode = this.KeyEntropyMode;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.SecurityHeaderLayout
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.SecurityHeaderLayout]
+                    .ValueOrigin
             )
                 sbe.SecurityHeaderLayout = this.SecurityHeaderLayout;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.RequireDerivedKeys
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.RequireDerivedKeys]
+                    .ValueOrigin
             )
                 sbe.SetKeyDerivation(this.RequireDerivedKeys);
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.AllowInsecureTransport
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.AllowInsecureTransport]
+                    .ValueOrigin
             )
                 sbe.AllowInsecureTransport = this.AllowInsecureTransport;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.EnableUnsecuredResponse
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.EnableUnsecuredResponse]
+                    .ValueOrigin
             )
                 sbe.EnableUnsecuredResponse = this.EnableUnsecuredResponse;
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.ProtectTokens
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.ProtectTokens]
+                    .ValueOrigin
             )
                 sbe.ProtectTokens = this.ProtectTokens;
 #pragma warning restore
@@ -311,16 +311,16 @@ namespace System.ServiceModel.Configuration
             {
                 if (
                     PropertyValueOrigin.Default
-                    != this.ElementInformation.Properties[
-                        ConfigurationStrings.MessageProtectionOrder
-                    ].ValueOrigin
+                    != this.ElementInformation
+                        .Properties[ConfigurationStrings.MessageProtectionOrder]
+                        .ValueOrigin
                 )
                     ssbe.MessageProtectionOrder = this.MessageProtectionOrder;
                 if (
                     PropertyValueOrigin.Default
-                    != this.ElementInformation.Properties[
-                        ConfigurationStrings.RequireSignatureConfirmation
-                    ].ValueOrigin
+                    != this.ElementInformation
+                        .Properties[ConfigurationStrings.RequireSignatureConfirmation]
+                        .ValueOrigin
                 )
                     ssbe.RequireSignatureConfirmation = this.RequireSignatureConfirmation;
                 SecureConversationSecurityTokenParameters scParameters =
@@ -337,23 +337,23 @@ namespace System.ServiceModel.Configuration
             {
                 if (
                     PropertyValueOrigin.Default
-                    != this.ElementInformation.Properties[
-                        ConfigurationStrings.MessageProtectionOrder
-                    ].ValueOrigin
+                    != this.ElementInformation
+                        .Properties[ConfigurationStrings.MessageProtectionOrder]
+                        .ValueOrigin
                 )
                     asbe.MessageProtectionOrder = this.MessageProtectionOrder;
                 if (
                     PropertyValueOrigin.Default
-                    != this.ElementInformation.Properties[
-                        ConfigurationStrings.RequireSignatureConfirmation
-                    ].ValueOrigin
+                    != this.ElementInformation
+                        .Properties[ConfigurationStrings.RequireSignatureConfirmation]
+                        .ValueOrigin
                 )
                     asbe.RequireSignatureConfirmation = this.RequireSignatureConfirmation;
                 if (
                     PropertyValueOrigin.Default
-                    != this.ElementInformation.Properties[
-                        ConfigurationStrings.AllowSerializedSigningTokenOnReply
-                    ].ValueOrigin
+                    != this.ElementInformation
+                        .Properties[ConfigurationStrings.AllowSerializedSigningTokenOnReply]
+                        .ValueOrigin
                 )
                     asbe.AllowSerializedSigningTokenOnReply =
                         this.AllowSerializedSigningTokenOnReply;
@@ -377,9 +377,9 @@ namespace System.ServiceModel.Configuration
 
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.LocalClientSettings
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.LocalClientSettings]
+                    .ValueOrigin
             )
             {
                 this.LocalClientSettings.ApplyConfiguration(sbe.LocalClientSettings);
@@ -387,9 +387,9 @@ namespace System.ServiceModel.Configuration
 
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.LocalServiceSettings
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.LocalServiceSettings]
+                    .ValueOrigin
             )
             {
                 this.LocalServiceSettings.ApplyConfiguration(sbe.LocalServiceSettings);
@@ -404,121 +404,138 @@ namespace System.ServiceModel.Configuration
 
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.AllowSerializedSigningTokenOnReply
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.AllowSerializedSigningTokenOnReply]
+                    .ValueOrigin
             )
                 this.AllowSerializedSigningTokenOnReply = source.AllowSerializedSigningTokenOnReply;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.DefaultAlgorithmSuite
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.DefaultAlgorithmSuite]
+                    .ValueOrigin
             )
                 this.DefaultAlgorithmSuite = source.DefaultAlgorithmSuite;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.EnableUnsecuredResponse
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.EnableUnsecuredResponse]
+                    .ValueOrigin
             )
                 this.EnableUnsecuredResponse = source.EnableUnsecuredResponse;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.AllowInsecureTransport
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.AllowInsecureTransport]
+                    .ValueOrigin
             )
                 this.AllowInsecureTransport = source.AllowInsecureTransport;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.RequireDerivedKeys
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.RequireDerivedKeys]
+                    .ValueOrigin
             )
                 this.RequireDerivedKeys = source.RequireDerivedKeys;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.IncludeTimestamp
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.IncludeTimestamp]
+                    .ValueOrigin
             )
                 this.IncludeTimestamp = source.IncludeTimestamp;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.IssuedTokenParameters
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.IssuedTokenParameters]
+                    .ValueOrigin
             )
                 this.IssuedTokenParameters.Copy(source.IssuedTokenParameters);
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.MessageProtectionOrder
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.MessageProtectionOrder]
+                    .ValueOrigin
             )
                 this.MessageProtectionOrder = source.MessageProtectionOrder;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.ProtectTokens
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.ProtectTokens]
+                    .ValueOrigin
             )
                 this.ProtectTokens = source.ProtectTokens;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.MessageSecurityVersion
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.MessageSecurityVersion]
+                    .ValueOrigin
             )
                 this.MessageSecurityVersion = source.MessageSecurityVersion;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.RequireSignatureConfirmation
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.RequireSignatureConfirmation]
+                    .ValueOrigin
             )
                 this.RequireSignatureConfirmation = source.RequireSignatureConfirmation;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.RequireSecurityContextCancellation
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.RequireSecurityContextCancellation]
+                    .ValueOrigin
             )
                 this.RequireSecurityContextCancellation = source.RequireSecurityContextCancellation;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.CanRenewSecurityContextToken
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.CanRenewSecurityContextToken]
+                    .ValueOrigin
             )
                 this.CanRenewSecurityContextToken = source.CanRenewSecurityContextToken;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.KeyEntropyMode
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.KeyEntropyMode]
+                    .ValueOrigin
             )
                 this.KeyEntropyMode = source.KeyEntropyMode;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.SecurityHeaderLayout
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.SecurityHeaderLayout]
+                    .ValueOrigin
             )
                 this.SecurityHeaderLayout = source.SecurityHeaderLayout;
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.LocalClientSettings
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.LocalClientSettings]
+                    .ValueOrigin
             )
                 this.LocalClientSettings.CopyFrom(source.LocalClientSettings);
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.LocalServiceSettings
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.LocalServiceSettings]
+                    .ValueOrigin
             )
                 this.LocalServiceSettings.CopyFrom(source.LocalServiceSettings);
 

@@ -3114,8 +3114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     method.IsOverride
                     && method
                         .GetConstructedLeastOverriddenMethod(this, requireSameReturnType: false)
-                        .ContainingType.SpecialType
-                        == Microsoft.CodeAnalysis.SpecialType.System_Object
+                        .ContainingType
+                        .SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
                 )
                 {
                     return true;

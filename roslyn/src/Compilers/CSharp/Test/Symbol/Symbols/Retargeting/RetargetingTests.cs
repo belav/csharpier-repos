@@ -197,7 +197,8 @@ class C
                 retargetingNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<RetargetingFieldSymbol>("F2")
-                    .MarshallingInformation.TryGetSafeArrayElementUserDefinedSubtype()
+                    .MarshallingInformation
+                    .TryGetSafeArrayElementUserDefinedSubtype()
             );
         }
 
@@ -242,7 +243,8 @@ class C
                 retargetingNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<RetargetingMethodSymbol>("M")
-                    .ReturnValueMarshallingInformation.TryGetSafeArrayElementUserDefinedSubtype()
+                    .ReturnValueMarshallingInformation
+                    .TryGetSafeArrayElementUserDefinedSubtype()
             );
 
             Assert.IsType<RetargetingNamedTypeSymbol>(
@@ -873,7 +875,8 @@ public class C<T> where T : int
                 (RetargetingTypeParameterSymbol)
                     retargetingAssembly.GlobalNamespace
                         .GetTypeMember("Test")
-                        .TypeParameters.Single();
+                        .TypeParameters
+                        .Single();
             Assert.Equal(isUnmanaged, retargetingTypeParameter.HasUnmanagedTypeConstraint);
         }
 

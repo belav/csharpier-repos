@@ -200,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         )
         {
             var variableDeclarator = (VariableDeclaratorSyntax)
-                await fieldSymbol.DeclaringSyntaxReferences[0]
+                await fieldSymbol
+                    .DeclaringSyntaxReferences[0]
                     .GetSyntaxAsync(cancellationToken)
                     .ConfigureAwait(false);
             return variableDeclarator.Initializer?.Value;

@@ -781,9 +781,10 @@ namespace Microsoft.Interop.Analyzers
                                                     SyntaxFactory.DeclarationExpression(
                                                         declaration.Declaration.Type,
                                                         SyntaxFactory.SingleVariableDesignation(
-                                                            declaration.Declaration.Variables[
-                                                                0
-                                                            ].Identifier.WithoutTrivia()
+                                                            declaration.Declaration
+                                                                .Variables[0]
+                                                                .Identifier
+                                                                .WithoutTrivia()
                                                         )
                                                     )
                                                 )

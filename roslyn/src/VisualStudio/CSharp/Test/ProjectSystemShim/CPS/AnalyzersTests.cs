@@ -79,7 +79,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             project.SetOptions(ImmutableArray.Create($"/ruleset:{ruleSetFile.Path}"));
             var ca1012DiagnosticOption = environment.Workspace.CurrentSolution.Projects
                 .Single()
-                .CompilationOptions.SpecificDiagnosticOptions["CA1012"];
+                .CompilationOptions
+                .SpecificDiagnosticOptions["CA1012"];
             Assert.Equal(expected: ReportDiagnostic.Error, actual: ca1012DiagnosticOption);
         }
 

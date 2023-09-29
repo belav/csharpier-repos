@@ -403,12 +403,12 @@ namespace System.Data.Objects.DataClasses
                 );
                 AssociationType associationMetadata = (AssociationType)_relationMetadata;
 
-                EntitySet ownerEntitySet = ((AssociationSet)_relationshipSet).AssociationSetEnds[
-                    _fromEndProperty.Name
-                ].EntitySet;
-                EntitySet targetEntitySet = ((AssociationSet)_relationshipSet).AssociationSetEnds[
-                    _toEndProperty.Name
-                ].EntitySet;
+                EntitySet ownerEntitySet = ((AssociationSet)_relationshipSet)
+                    .AssociationSetEnds[_fromEndProperty.Name]
+                    .EntitySet;
+                EntitySet targetEntitySet = ((AssociationSet)_relationshipSet)
+                    .AssociationSetEnds[_toEndProperty.Name]
+                    .EntitySet;
 
                 EntityType targetEntityType = MetadataHelper.GetEntityTypeForEnd(
                     (AssociationEndMember)_toEndProperty
@@ -879,9 +879,9 @@ namespace System.Data.Objects.DataClasses
             if (refreshedCollection == null)
             {
                 refreshedCollection = new List<IEntityWrapper>();
-                EntitySet targetEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[
-                    TargetRoleName
-                ].EntitySet;
+                EntitySet targetEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[TargetRoleName]
+                    .EntitySet;
                 foreach (TEntity entity in collection)
                 {
                     IEntityWrapper wrapper = EntityWrapperFactory.WrapEntityUsingContext(
@@ -3053,7 +3053,8 @@ namespace System.Data.Objects.DataClasses
                                 associationset.ElementType == relationshipType
                                 && associationset.AssociationSetEnds[_navigation.From].EntitySet
                                     != entitySet
-                                && associationset.AssociationSetEnds[_navigation.From]
+                                && associationset
+                                    .AssociationSetEnds[_navigation.From]
                                     .EntitySet
                                     .ElementType == entitySet.ElementType
                             )
@@ -3173,9 +3174,9 @@ namespace System.Data.Objects.DataClasses
                 if ((EdmType)entitySetBase.ElementType == relationshipType)
                 {
                     if (
-                        ((AssociationSet)entitySetBase).AssociationSetEnds[
-                            _navigation.From
-                        ].EntitySet == entitySet
+                        ((AssociationSet)entitySetBase)
+                            .AssociationSetEnds[_navigation.From]
+                            .EntitySet == entitySet
                     )
                     {
                         relationshipSet = (RelationshipSet)entitySetBase;

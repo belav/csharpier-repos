@@ -184,9 +184,10 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
                 .Single(
                     mi =>
                         mi.GetGenericArguments().Count() == 3
-                        && mi.GetParameters()[0].ParameterType.GenericTypeArguments[
-                            1
-                        ].IsGenericParameter
+                        && mi.GetParameters()[0]
+                            .ParameterType
+                            .GenericTypeArguments[1]
+                            .IsGenericParameter
                 );
 
         private static readonly MethodInfo _thenIncludeAfterEnumerableMethodInfo =

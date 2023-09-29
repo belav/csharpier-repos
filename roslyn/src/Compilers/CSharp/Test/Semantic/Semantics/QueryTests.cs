@@ -1582,7 +1582,11 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM.Body.Statements[3].Declaration.Variables[0]
+            QueryExpressionSyntax q = methodM
+                .Body
+                .Statements[3]
+                .Declaration
+                .Variables[0]
                 .Initializer
                 .Value;
 
@@ -1812,7 +1816,11 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM.Body.Statements[3].Declaration.Variables[0]
+            QueryExpressionSyntax q = methodM
+                .Body
+                .Statements[3]
+                .Declaration
+                .Variables[0]
                 .Initializer
                 .Value;
 
@@ -1888,7 +1896,11 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM.Body.Statements[2].Declaration.Variables[0]
+            QueryExpressionSyntax q = methodM
+                .Body
+                .Statements[2]
+                .Declaration
+                .Variables[0]
                 .Initializer
                 .Value;
 
@@ -1934,7 +1946,11 @@ class Query
                 .Where(t => t.Identifier.ValueText == "Query")
                 .Single();
             dynamic methodM = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = methodM.Body.Statements[1].Declaration.Variables[0]
+            QueryExpressionSyntax q = methodM
+                .Body
+                .Statements[1]
+                .Declaration
+                .Variables[0]
                 .Initializer
                 .Value;
 
@@ -3248,7 +3264,10 @@ class C
                 .Where(t => t.Identifier.ValueText == "C")
                 .Single();
             dynamic main = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = main.Body.Statements[0].Declaration.Variables[0]
+            QueryExpressionSyntax q = main.Body
+                .Statements[0]
+                .Declaration
+                .Variables[0]
                 .Initializer
                 .Value;
             var info0 = model.GetQueryClauseInfo(q.FromClause);
@@ -3288,7 +3307,10 @@ class C
                 .Where(t => t.Identifier.ValueText == "C")
                 .Single();
             dynamic main = (MethodDeclarationSyntax)classC.Members[0];
-            QueryExpressionSyntax q = main.Body.Statements[0].Declaration.Variables[0]
+            QueryExpressionSyntax q = main.Body
+                .Statements[0]
+                .Declaration
+                .Variables[0]
                 .Initializer
                 .Value;
             var info0 = model.GetQueryClauseInfo(q.FromClause);
@@ -3961,7 +3983,9 @@ public class Test
             );
 
             var queryExpression = (QueryExpressionSyntax)
-                ((LocalDeclarationStatementSyntax)queryStatement).Declaration.Variables[0]
+                ((LocalDeclarationStatementSyntax)queryStatement)
+                    .Declaration
+                    .Variables[0]
                     .Initializer
                     .Value;
             JoinIntoClauseSyntax joinInto = (
@@ -4016,7 +4040,9 @@ public class Test2
             Assert.True(success);
 
             var queryExpression = (QueryExpressionSyntax)
-                ((LocalDeclarationStatementSyntax)queryStatement).Declaration.Variables[0]
+                ((LocalDeclarationStatementSyntax)queryStatement)
+                    .Declaration
+                    .Variables[0]
                     .Initializer
                     .Value;
             var queryContinuation = queryExpression.Body.Continuation;

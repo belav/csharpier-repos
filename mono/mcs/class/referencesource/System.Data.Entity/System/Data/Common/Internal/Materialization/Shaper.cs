@@ -639,9 +639,9 @@ namespace System.Data.Common.Internal.Materialization
                             if ((EdmType)entitySetBase.ElementType == associationType)
                             {
                                 if (
-                                    ((AssociationSet)entitySetBase).AssociationSetEnds[
-                                        sourceEndName
-                                    ].EntitySet == entitySet
+                                    ((AssociationSet)entitySetBase)
+                                        .AssociationSetEnds[sourceEndName]
+                                        .EntitySet == entitySet
                                 )
                                 {
                                     createRelatedEnd = true;

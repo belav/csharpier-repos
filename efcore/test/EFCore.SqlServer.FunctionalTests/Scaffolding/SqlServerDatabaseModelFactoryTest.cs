@@ -1663,7 +1663,8 @@ CREATE TABLE RowversionType (
                     "rowversion",
                     dbModel.Tables
                         .Single(t => t.Name == "RowversionType")
-                        .Columns.Single(c => c.Name == "rowversionColumn")
+                        .Columns
+                        .Single(c => c.Name == "rowversionColumn")
                         .StoreType
                 );
             },
@@ -2885,7 +2886,8 @@ DROP TABLE TestViewDefinition;"
             var databaseModelFactory = SqlServerTestHelpers.Instance
                 .CreateDesignServiceProvider(reporter: Fixture.OperationReporter)
                 .CreateScope()
-                .ServiceProvider.GetRequiredService<IDatabaseModelFactory>();
+                .ServiceProvider
+                .GetRequiredService<IDatabaseModelFactory>();
 
             var databaseModel = databaseModelFactory.Create(
                 Fixture.TestStore.ConnectionString,

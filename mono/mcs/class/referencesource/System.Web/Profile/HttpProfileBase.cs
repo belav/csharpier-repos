@@ -575,12 +575,14 @@ namespace System.Web.Profile
                                                     SR.Annoymous_id_module_not_enabled,
                                                     prop.Name
                                                 ),
-                                                config.ElementInformation.Properties[
-                                                    "inherits"
-                                                ].Source,
-                                                config.ElementInformation.Properties[
-                                                    "inherits"
-                                                ].LineNumber
+                                                config
+                                                    .ElementInformation
+                                                    .Properties["inherits"]
+                                                    .Source,
+                                                config
+                                                    .ElementInformation
+                                                    .Properties["inherits"]
+                                                    .LineNumber
                                             );
                                     }
                                     else if (attrib is System.ComponentModel.ReadOnlyAttribute)
@@ -610,12 +612,14 @@ namespace System.Web.Profile
                                                     SR.Profile_provider_not_found,
                                                     ((ProfileProviderAttribute)attrib).ProviderName
                                                 ),
-                                                config.ElementInformation.Properties[
-                                                    "inherits"
-                                                ].Source,
-                                                config.ElementInformation.Properties[
-                                                    "inherits"
-                                                ].LineNumber
+                                                config
+                                                    .ElementInformation
+                                                    .Properties["inherits"]
+                                                    .Source,
+                                                config
+                                                    .ElementInformation
+                                                    .Properties["inherits"]
+                                                    .LineNumber
                                             );
                                     }
                                 }

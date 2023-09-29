@@ -149,7 +149,8 @@ public class CosmosDbContextOptionsExtensionsTests
                 "databaseName",
                 cosmosOptionsAction
             )
-            .Options.FindExtension<CosmosOptionsExtension>();
+            .Options
+            .FindExtension<CosmosOptionsExtension>();
 
         Assert.Equal(
             extension.Info.GetServiceProviderHashCode(),

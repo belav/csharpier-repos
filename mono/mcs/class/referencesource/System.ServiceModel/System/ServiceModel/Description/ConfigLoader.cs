@@ -782,9 +782,10 @@ namespace System.ServiceModel.Description
                         }
 
                         if (
-                            endpointElement.ElementInformation.Properties[
-                                ConfigurationStrings.IsSystemEndpoint
-                            ].ValueOrigin != PropertyValueOrigin.Default
+                            endpointElement
+                                .ElementInformation
+                                .Properties[ConfigurationStrings.IsSystemEndpoint]
+                                .ValueOrigin != PropertyValueOrigin.Default
                         )
                         {
                             serviceEndpoint.IsSystemEndpoint = endpointElement.IsSystemEndpoint;
@@ -1466,9 +1467,10 @@ namespace System.ServiceModel.Description
 
             //isSystemEndpoint
             if (
-                serviceEndpointElementCopy.ElementInformation.Properties[
-                    ConfigurationStrings.IsSystemEndpoint
-                ].ValueOrigin != PropertyValueOrigin.Default
+                serviceEndpointElementCopy
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.IsSystemEndpoint]
+                    .ValueOrigin != PropertyValueOrigin.Default
             )
             {
                 endpoint.IsSystemEndpoint = serviceEndpointElementCopy.IsSystemEndpoint;

@@ -858,7 +858,8 @@ namespace Mono.Cecil
             if (th.HasTable(InterfaceImplTable.RId))
                 m_tableWriter
                     .GetInterfaceImplTable()
-                    .Rows.Sort(TableComparers.InterfaceImpl.Instance);
+                    .Rows
+                    .Sort(TableComparers.InterfaceImpl.Instance);
             th.Sorted |= ((long)1 << InterfaceImplTable.RId);
 
             if (th.HasTable(ConstantTable.RId))
@@ -868,13 +869,15 @@ namespace Mono.Cecil
             if (th.HasTable(MethodSemanticsTable.RId))
                 m_tableWriter
                     .GetMethodSemanticsTable()
-                    .Rows.Sort(TableComparers.MethodSem.Instance);
+                    .Rows
+                    .Sort(TableComparers.MethodSem.Instance);
             th.Sorted |= ((long)1 << MethodSemanticsTable.RId);
 
             if (th.HasTable(FieldMarshalTable.RId))
                 m_tableWriter
                     .GetFieldMarshalTable()
-                    .Rows.Sort(TableComparers.FieldMarshal.Instance);
+                    .Rows
+                    .Sort(TableComparers.FieldMarshal.Instance);
             th.Sorted |= ((long)1 << FieldMarshalTable.RId);
 
             if (th.HasTable(ClassLayoutTable.RId))
@@ -900,13 +903,15 @@ namespace Mono.Cecil
             if (th.HasTable(CustomAttributeTable.RId))
                 m_tableWriter
                     .GetCustomAttributeTable()
-                    .Rows.Sort(TableComparers.CustomAttribute.Instance);
+                    .Rows
+                    .Sort(TableComparers.CustomAttribute.Instance);
             th.Sorted |= ((long)1 << CustomAttributeTable.RId);
 
             if (th.HasTable(DeclSecurityTable.RId))
                 m_tableWriter
                     .GetDeclSecurityTable()
-                    .Rows.Sort(TableComparers.SecurityDeclaration.Instance);
+                    .Rows
+                    .Sort(TableComparers.SecurityDeclaration.Instance);
             th.Sorted |= ((long)1 << DeclSecurityTable.RId);
         }
 

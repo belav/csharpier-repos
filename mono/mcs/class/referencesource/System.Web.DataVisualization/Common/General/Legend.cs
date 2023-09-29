@@ -2402,7 +2402,9 @@ namespace System.Web.UI.DataVisualization.Charting
                                 LegendItem item = new LegendItem(point.Label, point.Color, "");
 
                                 // Check if series is drawn in 3D chart area
-                                bool area3D = this.Common.Chart.ChartAreas[series.ChartArea]
+                                bool area3D = this.Common
+                                    .Chart
+                                    .ChartAreas[series.ChartArea]
                                     .Area3DStyle
                                     .Enable3D;
 

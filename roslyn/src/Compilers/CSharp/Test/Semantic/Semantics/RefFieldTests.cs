@@ -12818,7 +12818,8 @@ struct B<T>
             {
                 VerifyParameterSymbol(
                     comp.GetMember<NamedTypeSymbol>("A")
-                        .Constructors.Single(c => !c.IsImplicitlyDeclared)
+                        .Constructors
+                        .Single(c => !c.IsImplicitlyDeclared)
                         .Parameters[0],
                     "scoped ref T t",
                     RefKind.Ref,
@@ -17486,7 +17487,8 @@ class Program
                     "R",
                     model
                         .GetSymbolInfo(type.SkipScoped(out _).SkipRef())
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -17540,7 +17542,8 @@ class Program
                     "R",
                     model
                         .GetSymbolInfo(type.SkipScoped(out _).SkipRef())
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -33783,7 +33786,8 @@ ref struct R
                     "R",
                     model
                         .GetSymbolInfo(type.SkipScoped(out _).SkipRef())
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -33843,7 +33847,8 @@ ref struct R
                     "R",
                     model
                         .GetSymbolInfo(type.SkipScoped(out _).SkipRef())
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
             }
         }

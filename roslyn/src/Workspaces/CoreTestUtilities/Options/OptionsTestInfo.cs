@@ -83,7 +83,9 @@ internal readonly record struct OptionsTestInfo(
                                             BindingFlags.Public
                                                 | BindingFlags.NonPublic
                                                 | BindingFlags.Static
-                                        )!.GetMethod!.IsPublic
+                                        )!
+                                            .GetMethod!
+                                            .IsPublic
                                         : field.IsPublic
                                 );
 

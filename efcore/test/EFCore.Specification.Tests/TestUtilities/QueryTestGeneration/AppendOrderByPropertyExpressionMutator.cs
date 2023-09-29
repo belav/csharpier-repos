@@ -9,7 +9,8 @@ public class AppendOrderByPropertyExpressionMutator : ExpressionMutator
         : base(context) { }
 
     private bool HasValidPropertyToOrderBy(Expression expression) =>
-        expression.Type.GetGenericArguments()[0]
+        expression.Type
+            .GetGenericArguments()[0]
             .GetProperties()
             .Where(p => !p.GetMethod.IsStatic)
             .Any(p => IsOrderedableType(p.PropertyType));

@@ -5834,7 +5834,8 @@ ORDER BY [p].[Id] DESC
                         {
                             ThingIds = e.Values
                                 .First()
-                                .Things.Select(t => t.Subthing.ThingId)
+                                .Things
+                                .Select(t => t.Subthing.ThingId)
                                 .ToList()
                         }
                 )
@@ -8466,15 +8467,22 @@ ORDER BY [u].[Id] DESC
 
             Assert.Equal(
                 10,
-                aggregate.FirstValueObject.SecondValueObjects[0]
+                aggregate
+                    .FirstValueObject
+                    .SecondValueObjects[0]
                     .FourthValueObject
-                    .FifthValueObjects[0].AnyValue
+                    .FifthValueObjects[0]
+                    .AnyValue
             );
             Assert.Equal(
                 20,
-                aggregate.FirstValueObject.SecondValueObjects[0].ThirdValueObjects[0]
+                aggregate
+                    .FirstValueObject
+                    .SecondValueObjects[0]
+                    .ThirdValueObjects[0]
                     .FourthValueObject
-                    .FifthValueObjects[0].AnyValue
+                    .FifthValueObjects[0]
+                    .AnyValue
             );
 
             AssertSql(

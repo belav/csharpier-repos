@@ -271,7 +271,8 @@ namespace System.Data.Services.Client
         {
             Edge edge = this.graph
                 .LookupVertex(source)
-                .OutgoingEdges.SingleOrDefault(e => e.Source.Item == source && e.Label == relation);
+                .OutgoingEdges
+                .SingleOrDefault(e => e.Source.Item == source && e.Label == relation);
             if (edge != null)
             {
                 this.graph.RemoveEdge(edge.Source.Item, edge.Target.Item, edge.Label);

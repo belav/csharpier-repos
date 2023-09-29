@@ -710,7 +710,8 @@ Environment.ProcessorCount
             var result = CSharpScript
                 .RunAsync("using System;", globals: new C1())
                 .ContinueWith("Environment")
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(2, result);
         }
@@ -721,7 +722,8 @@ Environment.ProcessorCount
             var result = CSharpScript
                 .RunAsync("int System = 2;", globals: new C1())
                 .ContinueWith("System")
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(2, result);
         }
@@ -1097,7 +1099,8 @@ result
                 .RunAsync("using System;")
                 .ContinueWith("int Sqr(int x) {return x*x;}")
                 .ContinueWith<Func<int, int>>("new Func<int,int>(Sqr)")
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(4, f(2));
         }
@@ -1197,7 +1200,8 @@ static List<int> result = new List<int>();"
                 .ContinueWith("result.Add(f());")
                 .ContinueWith("result.Add(x);")
                 .ContinueWith<List<int>>("result")
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(2, result.Count);
             Assert.Equal(1, result[0]);
@@ -1573,7 +1577,8 @@ new C()
                 .Create($@"#r ""{fileMain.Path}""")
                 .ContinueWith($@"M.X.F")
                 .RunAsync()
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
             Assert.Equal("exe", r2);
         }
 
@@ -1622,7 +1627,8 @@ new C()
                 .Create($@"#r ""{fileMain.Path}""")
                 .ContinueWith($@"M.X.F")
                 .RunAsync()
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
             Assert.Equal("dll", r2);
         }
 
@@ -2016,7 +2022,8 @@ new List<ArgumentException>()
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
             string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
                 .GetTypeInfo()
-                .Assembly.GetName()
+                .Assembly
+                .GetName()
                 .Name;
 
             // The host adds
@@ -2082,7 +2089,8 @@ new List<ArgumentException>()
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
             string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
                 .GetTypeInfo()
-                .Assembly.GetName()
+                .Assembly
+                .GetName()
                 .Name;
 
             // The host adds
@@ -2161,7 +2169,8 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
             string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
                 .GetTypeInfo()
-                .Assembly.GetName()
+                .Assembly
+                .GetName()
                 .Name;
 
             // The host adds
@@ -2630,7 +2639,8 @@ int F() => i + j + k + l;
 
 lambda.Invoke()"
                 )
-                .Result.ReturnValue;
+                .Result
+                .ReturnValue;
 
             Assert.Equal(4, result);
         }

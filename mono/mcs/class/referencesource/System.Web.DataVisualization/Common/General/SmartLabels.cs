@@ -1466,12 +1466,12 @@ namespace System.Web.UI.DataVisualization.Charting
                         for (int index = 0; index < (currentAxis.ScaleSegments.Count - 1); index++)
                         {
                             // Get break position in pixel coordinates
-                            RectangleF breakPosition = currentAxis.ScaleSegments[
-                                index
-                            ].GetBreakLinePosition(
-                                common.graph,
-                                currentAxis.ScaleSegments[index + 1]
-                            );
+                            RectangleF breakPosition = currentAxis
+                                .ScaleSegments[index]
+                                .GetBreakLinePosition(
+                                    common.graph,
+                                    currentAxis.ScaleSegments[index + 1]
+                                );
                             breakPosition = common.graph.GetRelativeRectangle(breakPosition);
 
                             // Create array list if needed

@@ -69,9 +69,9 @@ namespace Microsoft.AspNet.Facebook.Client
             foreach (PropertyInfo property in properties)
             {
                 string propertyName = property.Name;
-                AttributeCollection attributes = TypeDescriptor.GetProperties(modelType)[
-                    propertyName
-                ].Attributes;
+                AttributeCollection attributes = TypeDescriptor
+                    .GetProperties(modelType)[propertyName]
+                    .Attributes;
 
                 JsonIgnoreAttribute jsonIgnoreAttribute = (JsonIgnoreAttribute)
                     attributes[typeof(JsonIgnoreAttribute)];

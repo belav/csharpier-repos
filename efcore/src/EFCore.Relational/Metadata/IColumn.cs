@@ -30,7 +30,8 @@ public interface IColumn : IColumnBase
     int? MaxLength =>
         PropertyMappings
             .First()
-            .Property.GetMaxLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetMaxLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Gets the precision of data that is allowed in this column. For example, if the property is a <see cref="decimal" /> '
@@ -39,7 +40,8 @@ public interface IColumn : IColumnBase
     int? Precision =>
         PropertyMappings
             .First()
-            .Property.GetPrecision(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetPrecision(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Gets the scale of data that is allowed in this column. For example, if the property is a <see cref="decimal" /> '
@@ -48,7 +50,8 @@ public interface IColumn : IColumnBase
     int? Scale =>
         PropertyMappings
             .First()
-            .Property.GetScale(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetScale(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Gets a value indicating whether or not the property can persist Unicode characters.
@@ -56,7 +59,8 @@ public interface IColumn : IColumnBase
     bool? IsUnicode =>
         PropertyMappings
             .First()
-            .Property.IsUnicode(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .IsUnicode(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Returns a flag indicating whether the property is capable of storing only fixed-length data, such as strings.
@@ -64,7 +68,8 @@ public interface IColumn : IColumnBase
     bool? IsFixedLength =>
         PropertyMappings
             .First()
-            .Property.IsFixedLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .IsFixedLength(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Indicates whether or not this column acts as an automatic concurrency token by generating a different value
@@ -81,7 +86,8 @@ public interface IColumn : IColumnBase
     int? Order =>
         PropertyMappings
             .First()
-            .Property.GetColumnOrder(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetColumnOrder(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Returns the object that is used as the default value for this column.
@@ -134,7 +140,8 @@ public interface IColumn : IColumnBase
     string? DefaultValueSql =>
         PropertyMappings
             .First()
-            .Property.GetDefaultValueSql(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetDefaultValueSql(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Returns the SQL expression that is used as the computed value for this column.
@@ -142,7 +149,8 @@ public interface IColumn : IColumnBase
     string? ComputedColumnSql =>
         PropertyMappings
             .First()
-            .Property.GetComputedColumnSql(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetComputedColumnSql(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Returns whether the value of the computed column this property is mapped to is stored in the database, or calculated when
@@ -151,7 +159,8 @@ public interface IColumn : IColumnBase
     bool? IsStored =>
         PropertyMappings
             .First()
-            .Property.GetIsStored(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetIsStored(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Comment for this column
@@ -159,7 +168,8 @@ public interface IColumn : IColumnBase
     string? Comment =>
         PropertyMappings
             .First()
-            .Property.GetComment(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetComment(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Collation for this column
@@ -167,7 +177,8 @@ public interface IColumn : IColumnBase
     string? Collation =>
         PropertyMappings
             .First()
-            .Property.GetCollation(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
+            .Property
+            .GetCollation(StoreObjectIdentifier.Table(Table.Name, Table.Schema));
 
     /// <summary>
     ///     Returns the property mapping for the given entity type.

@@ -717,9 +717,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // Setup CorLibrary and NoPia stuff for newly created assemblies
 
                 var linkedReferencedAssembliesBuilder = ArrayBuilder<AssemblySymbol>.GetInstance();
-                var noPiaResolutionAssemblies = sourceAssembly.Modules[
-                    0
-                ].GetReferencedAssemblySymbols();
+                var noPiaResolutionAssemblies = sourceAssembly
+                    .Modules[0]
+                    .GetReferencedAssemblySymbols();
 
                 foreach (int i in newSymbols)
                 {
@@ -824,17 +824,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 for (int j = 0; j < moduleCount; j++)
                 {
                     ImmutableArray<AssemblyIdentity> referencedAssemblies =
-                        retargetingAssemblySymbol.UnderlyingAssembly.Modules[
-                            j
-                        ].GetReferencedAssemblies();
+                        retargetingAssemblySymbol.UnderlyingAssembly
+                            .Modules[j]
+                            .GetReferencedAssemblies();
 
                     // For source module skip underlying linked references
                     if (j == 0)
                     {
                         ImmutableArray<AssemblySymbol> underlyingReferencedAssemblySymbols =
-                            retargetingAssemblySymbol.UnderlyingAssembly.Modules[
-                                0
-                            ].GetReferencedAssemblySymbols();
+                            retargetingAssemblySymbol.UnderlyingAssembly
+                                .Modules[0]
+                                .GetReferencedAssemblySymbols();
 
                         int linkedUnderlyingReferences = 0;
                         foreach (AssemblySymbol asm in underlyingReferencedAssemblySymbols)

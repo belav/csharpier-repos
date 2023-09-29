@@ -85,14 +85,16 @@ public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventi
             {
                 0 => Array.Empty<Endpoint>(),
                 1
-                    => _routeGroupBuilder._dataSources[0].GetGroupedEndpoints(
-                        GetNextRouteGroupContext(
-                            prefix,
-                            conventions,
-                            finallyConventions,
-                            applicationServices
-                        )
-                    ),
+                    => _routeGroupBuilder
+                        ._dataSources[0]
+                        .GetGroupedEndpoints(
+                            GetNextRouteGroupContext(
+                                prefix,
+                                conventions,
+                                finallyConventions,
+                                applicationServices
+                            )
+                        ),
                 _
                     => SelectEndpointsFromAllDataSources(
                         GetNextRouteGroupContext(

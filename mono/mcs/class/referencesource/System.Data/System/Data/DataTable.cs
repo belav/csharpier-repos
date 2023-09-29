@@ -7813,10 +7813,10 @@ namespace System.Data
                             }
                             if (!hasExternaldependency)
                             {
-                                this.DataSet.Tables[
-                                    tempTable.TableName,
-                                    tempTable.Namespace
-                                ].Columns[dc.ColumnName].Expression = dc.Expression;
+                                this.DataSet
+                                    .Tables[tempTable.TableName, tempTable.Namespace]
+                                    .Columns[dc.ColumnName]
+                                    .Expression = dc.Expression;
                             }
                         }
                         hasExternaldependency = false;

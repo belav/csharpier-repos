@@ -282,9 +282,9 @@ namespace System.ServiceModel.Channels
                 if (i == SocketAddressList.maxAddresses)
                     break; // due to Marshalling fixed sized array of SocketAddresses.
                 socketHandles[i] = CriticalAllocHandleSocketAddress.FromIPAddress(address);
-                socketAddressList.Addresses[i].InitializeFromCriticalAllocHandleSocketAddress(
-                    socketHandles[i]
-                );
+                socketAddressList
+                    .Addresses[i]
+                    .InitializeFromCriticalAllocHandleSocketAddress(socketHandles[i]);
                 ++i;
             }
 

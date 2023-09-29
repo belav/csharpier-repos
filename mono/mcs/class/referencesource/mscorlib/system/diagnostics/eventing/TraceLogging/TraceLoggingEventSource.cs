@@ -476,10 +476,9 @@ namespace System.Diagnostics.Tracing
 
                     for (int i = 0; i < eventTypes.typeInfos.Length; i++)
                     {
-                        eventTypes.typeInfos[i].WriteObjectData(
-                            TraceLoggingDataCollector.Instance,
-                            values[i]
-                        );
+                        eventTypes
+                            .typeInfos[i]
+                            .WriteObjectData(TraceLoggingDataCollector.Instance, values[i]);
                     }
 
                     this.WriteEventRaw(

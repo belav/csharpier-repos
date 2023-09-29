@@ -13231,7 +13231,8 @@ public class C
             model.TryGetSpeculativeSemanticModel(
                 root.DescendantNodes()
                     .Single(n => n is ExpressionStatementSyntax { Parent: GlobalStatementSyntax })
-                    .Span.End,
+                    .Span
+                    .End,
                 nodeToSpeculate,
                 out var speculativeModelInTopLevel
             );
@@ -13244,7 +13245,8 @@ public class C
             model.TryGetSpeculativeSemanticModel(
                 root.DescendantNodes()
                     .Single(n => n is ExpressionStatementSyntax { Parent: BlockSyntax })
-                    .Span.End,
+                    .Span
+                    .End,
                 nodeToSpeculate,
                 out var speculativeModelOutsideTopLevel
             );

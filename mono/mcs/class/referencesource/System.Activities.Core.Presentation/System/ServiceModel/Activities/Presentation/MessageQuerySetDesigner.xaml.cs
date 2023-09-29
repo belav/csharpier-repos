@@ -103,9 +103,9 @@ namespace System.ServiceModel.Activities.Presentation
             if (null != query)
             {
                 //get reference to message query set dictionary
-                var messageQuerySet = this.MessageQuerySetContainer.Properties[
-                    this.querySetPropertyName
-                ].Dictionary;
+                var messageQuerySet = this.MessageQuerySetContainer
+                    .Properties[this.querySetPropertyName]
+                    .Dictionary;
                 //create unique key name
                 var name = messageQuerySet.GetUniqueName(key, p => (string)p.GetCurrentValue());
                 //add new entry with created key and query
@@ -149,14 +149,14 @@ namespace System.ServiceModel.Activities.Presentation
                 if (!this.MessageQuerySetContainer.Properties[this.querySetPropertyName].IsSet)
                 {
                     //initialize if required
-                    this.MessageQuerySetContainer.Properties[this.querySetPropertyName].SetValue(
-                        new MessageQuerySet()
-                    );
+                    this.MessageQuerySetContainer
+                        .Properties[this.querySetPropertyName]
+                        .SetValue(new MessageQuerySet());
                 }
                 //get reference to message query set
-                var input = this.MessageQuerySetContainer.Properties[
-                    this.querySetPropertyName
-                ].Dictionary;
+                var input = this.MessageQuerySetContainer
+                    .Properties[this.querySetPropertyName]
+                    .Dictionary;
 
                 if (null != input)
                 {
@@ -177,9 +177,9 @@ namespace System.ServiceModel.Activities.Presentation
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Remove:
-                    var messageQuerySet = this.MessageQuerySetContainer.Properties[
-                        this.querySetPropertyName
-                    ].Dictionary;
+                    var messageQuerySet = this.MessageQuerySetContainer
+                        .Properties[this.querySetPropertyName]
+                        .Dictionary;
                     foreach (MessageQueryEntry entry in e.OldItems)
                     {
                         messageQuerySet.Remove(entry.GetKey());
@@ -341,15 +341,16 @@ namespace System.ServiceModel.Activities.Presentation
                         PropertyName = ValueProperty,
                         PropertyGetter = (instance) =>
                             (
-                                ((MessageQueryEntry)instance).ReflectedObject.Properties[
-                                    ValueProperty
-                                ].ComputedValue
+                                ((MessageQueryEntry)instance)
+                                    .ReflectedObject
+                                    .Properties[ValueProperty]
+                                    .ComputedValue
                             ),
                         PropertySetter = (instance, value) =>
                         {
-                            ((MessageQueryEntry)instance).ReflectedObject.Properties[
-                                ValueProperty
-                            ].SetValue(value);
+                            ((MessageQueryEntry)instance).ReflectedObject
+                                .Properties[ValueProperty]
+                                .SetValue(value);
                         },
                     }
                 };

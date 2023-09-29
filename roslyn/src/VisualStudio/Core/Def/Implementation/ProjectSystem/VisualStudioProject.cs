@@ -692,7 +692,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                     // TODO: find a cleaner way to fetch this
                                     var metadataReference = _workspace.CurrentSolution
                                         .GetRequiredProject(Id)
-                                        .MetadataReferences.Cast<PortableExecutableReference>()
+                                        .MetadataReferences
+                                        .Cast<PortableExecutableReference>()
                                         .Single(
                                             m => m.FilePath == path && m.Properties == properties
                                         );
@@ -1318,7 +1319,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             // TODO: find a cleaner way to fetch this
                             var metadataReference = w.CurrentSolution
                                 .GetRequiredProject(Id)
-                                .MetadataReferences.Cast<PortableExecutableReference>()
+                                .MetadataReferences
+                                .Cast<PortableExecutableReference>()
                                 .Single(m => m.FilePath == fullPath && m.Properties == properties);
 
                             _workspace.FileWatchedReferenceFactory.StopWatchingReference(
@@ -1396,7 +1398,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             return _workspace.CurrentSolution
                 .GetRequiredProject(Id)
-                .AllProjectReferences.Contains(projectReference);
+                .AllProjectReferences
+                .Contains(projectReference);
         }
 
         public IReadOnlyList<ProjectReference> GetProjectReferences()

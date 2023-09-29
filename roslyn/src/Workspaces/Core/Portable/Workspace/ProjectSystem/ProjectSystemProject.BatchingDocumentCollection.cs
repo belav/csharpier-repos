@@ -632,7 +632,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                             // Right now we're only supporting dynamic files as actual source files, so it's OK to call GetDocument here
                             var attributes = w.CurrentSolution
                                 .GetRequiredDocument(documentId)
-                                .State.Attributes;
+                                .State
+                                .Attributes;
 
                             var documentInfo = new DocumentInfo(
                                 attributes,

@@ -218,7 +218,8 @@ namespace System.CommandLine
                         {
                             var currentProcessFullPath = Diagnostics.Process
                                 .GetCurrentProcess()
-                                .MainModule?.FileName;
+                                .MainModule
+                                ?.FileName;
                             var currentProcessFileNameWithoutExtension =
                                 Path.GetFileNameWithoutExtension(currentProcessFullPath);
 

@@ -313,7 +313,8 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
 
         private static readonly ConstructorInfo ValueBufferConstructor = typeof(ValueBuffer)
             .GetTypeInfo()
-            .DeclaredConstructors.Single(ci => ci.GetParameters().Length == 1);
+            .DeclaredConstructors
+            .Single(ci => ci.GetParameters().Length == 1);
 
         private static readonly PropertyInfo DbContextMemberInfo = typeof(QueryContext)
             .GetTypeInfo()

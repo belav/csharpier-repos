@@ -129,14 +129,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         DiagnosticExtensions
                             .GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp)
                             .GetType()
-                            .Assembly.Location,
+                            .Assembly
+                            .Location,
                         TestAnalyzerAssemblyLoader.LoadFromFile
                     ),
                     new AnalyzerFileReference(
                         DiagnosticExtensions
                             .GetCompilerDiagnosticAnalyzer(LanguageNames.VisualBasic)
                             .GetType()
-                            .Assembly.Location,
+                            .Assembly
+                            .Location,
                         TestAnalyzerAssemblyLoader.LoadFromFile
                     )
                 };

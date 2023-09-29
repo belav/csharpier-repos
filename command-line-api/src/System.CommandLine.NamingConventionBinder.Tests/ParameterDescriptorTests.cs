@@ -22,7 +22,8 @@ public class ParameterDescriptorTests
 
         modelDescriptor.ConstructorDescriptors
             .Single()
-            .ParameterDescriptors.Single()
+            .ParameterDescriptors
+            .Single()
             .GetDefaultValue()
             .Should()
             .Be(defaultValue);

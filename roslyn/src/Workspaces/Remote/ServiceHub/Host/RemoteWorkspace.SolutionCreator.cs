@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Remote
                             .ConfigureAwait(false);
                         solution = solution
                             .WithFrozenSourceGeneratedDocument(identity, sourceText)
-                            .Project.Solution;
+                            .Project
+                            .Solution;
                     }
 
 #if DEBUG

@@ -2867,7 +2867,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 var node = info.Tree
                                     .GetRoot(cancellationToken)
                                     .FindToken(info.Span.Start, findInsideTrivia: false)
-                                    .Parent!.FirstAncestorOrSelf<ExternAliasDirectiveSyntax>();
+                                    .Parent!
+                                    .FirstAncestorOrSelf<ExternAliasDirectiveSyntax>();
 
                                 if (
                                     node is object
@@ -3300,7 +3301,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (
                 syntaxAndDeclarations
                     .GetLazyState()
-                    .LoadDirectiveMap.TryGetValue(syntaxTree, out loadDirectives)
+                    .LoadDirectiveMap
+                    .TryGetValue(syntaxTree, out loadDirectives)
             )
             {
                 Debug.Assert(!loadDirectives.IsEmpty);
@@ -5192,9 +5194,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             bool isReadOnlySpanOfByteType(TypeSymbol type) =>
                 IsReadOnlySpanType(type)
-                && ((NamedTypeSymbol)type).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                    0
-                ].SpecialType == SpecialType.System_Byte;
+                && ((NamedTypeSymbol)type)
+                    .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                    .SpecialType == SpecialType.System_Byte;
         }
 
         protected override IMethodSymbol CommonCreateBuiltinOperator(

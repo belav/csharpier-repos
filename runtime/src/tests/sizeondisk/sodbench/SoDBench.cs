@@ -712,7 +712,8 @@ namespace SoDBench
                                             new AssemblyName(
                                                 typeof(SoDBenchOptions)
                                                     .GetTypeInfo()
-                                                    .Assembly.FullName
+                                                    .Assembly
+                                                    .FullName
                                             ).Version
                                         );
                                         Environment.Exit(0);

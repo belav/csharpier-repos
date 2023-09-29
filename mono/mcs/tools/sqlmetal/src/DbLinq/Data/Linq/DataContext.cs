@@ -532,7 +532,8 @@ namespace DbLinq.Data.Linq
                 values.Add(value);
                 IEnumerable<MetaAssociation> associationList = Mapping
                     .GetMetaType(value.GetType())
-                    .Associations.Where(a => !a.IsForeignKey);
+                    .Associations
+                    .Where(a => !a.IsForeignKey);
                 if (associationList.Any())
                 {
                     foreach (MetaAssociation association in associationList)
@@ -749,7 +750,8 @@ namespace DbLinq.Data.Linq
             Type thisType = entity.GetType();
             IEnumerable<MetaAssociation> associationList = Mapping
                 .GetMetaType(entity.GetType())
-                .Associations.Where(a => a.IsForeignKey);
+                .Associations
+                .Where(a => a.IsForeignKey);
             foreach (MetaAssociation association in associationList)
             {
                 //example of entityRef:Order.Employee
@@ -857,7 +859,8 @@ namespace DbLinq.Data.Linq
 
             IEnumerable<MetaAssociation> associationList = Mapping
                 .GetMetaType(entity.GetType())
-                .Associations.Where(a => !a.IsForeignKey);
+                .Associations
+                .Where(a => !a.IsForeignKey);
 
             if (associationList.Any())
             {

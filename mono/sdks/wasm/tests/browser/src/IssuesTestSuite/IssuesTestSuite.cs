@@ -32,7 +32,8 @@ namespace TestSuite
                 Console.WriteLine(_long);
                 Console.WriteLine(_long.ToString());
                 Console.WriteLine(
-                    enumType.GetMember(_long.ToString())[0]
+                    enumType
+                        .GetMember(_long.ToString())[0]
                         .GetCustomAttribute<DescriptionAttribute>()
                         .Description
                 );

@@ -3809,7 +3809,8 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
                     {
                         ((IModel)entityType.Model)
                             .GetModelDependencies()
-                            .ConstructorBindingFactory.GetBindings(
+                            .ConstructorBindingFactory
+                            .GetBindings(
                                 (IReadOnlyEntityType)entityType,
                                 out entityType._constructorBinding,
                                 out entityType._serviceOnlyConstructorBinding

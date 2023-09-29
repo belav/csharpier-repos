@@ -212,7 +212,8 @@ namespace DbLinq.Data.Linq.Implementation
                 foreach (
                     var dataMember in metaModel
                         .GetTable(entity.GetType())
-                        .RowType.PersistentDataMembers
+                        .RowType
+                        .PersistentDataMembers
                 )
                 {
                     var memberInfo = dataMember.Member;

@@ -317,9 +317,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 try
                 {
-                    _classEntry.Properties[_propertyName].Add(
-                        ((ActiveDirectorySchemaProperty)value).Name
-                    );
+                    _classEntry
+                        .Properties[_propertyName]
+                        .Add(((ActiveDirectorySchemaProperty)value).Name);
                 }
                 catch (COMException e)
                 {

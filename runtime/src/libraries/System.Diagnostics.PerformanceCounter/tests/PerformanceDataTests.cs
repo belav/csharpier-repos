@@ -148,9 +148,9 @@ namespace System.Diagnostics.Tests
                                     Assert.Equal(3, typingCsInstance.Counters[2].RawValue);
                                     Assert.Equal(
                                         3,
-                                        typingCsInstance.Counters[
-                                            "Words Typed In Interval"
-                                        ].RawValue
+                                        typingCsInstance
+                                            .Counters["Words Typed In Interval"]
+                                            .RawValue
                                     );
                                     Assert.Equal(3, wordsTypedInInterval.RawValue);
 

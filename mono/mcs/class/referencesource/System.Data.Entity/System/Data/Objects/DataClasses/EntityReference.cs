@@ -572,18 +572,18 @@ namespace System.Data.Objects.DataClasses
             stateManager.TransactionManager.BeginForeignKeyUpdate(this);
             try
             {
-                EntitySet principalEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[
-                    ToEndMember.Name
-                ].EntitySet;
+                EntitySet principalEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[ToEndMember.Name]
+                    .EntitySet;
                 StateManagerTypeMetadata principalTypeMetadata =
                     stateManager.GetOrAddStateManagerTypeMetadata(
                         principalEntity.IdentityType,
                         principalEntitySet
                     );
 
-                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[
-                    FromEndProperty.Name
-                ].EntitySet;
+                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[FromEndProperty.Name]
+                    .EntitySet;
                 StateManagerTypeMetadata dependentTypeMetadata =
                     stateManager.GetOrAddStateManagerTypeMetadata(
                         dependentEntity.IdentityType,
@@ -729,9 +729,9 @@ namespace System.Data.Objects.DataClasses
             stateManager.TransactionManager.BeginForeignKeyUpdate(this);
             try
             {
-                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[
-                    FromEndProperty.Name
-                ].EntitySet;
+                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[FromEndProperty.Name]
+                    .EntitySet;
                 StateManagerTypeMetadata dependentTypeMetadata =
                     stateManager.GetOrAddStateManagerTypeMetadata(
                         dependentEntity.IdentityType,
@@ -843,9 +843,9 @@ namespace System.Data.Objects.DataClasses
                                     entry.State == EntityState.Modified
                                     || entry.State == EntityState.Unchanged
                                 );
-                            EntitySet dependentEntitySet = (
-                                (AssociationSet)RelationshipSet
-                            ).AssociationSetEnds[FromEndProperty.Name].EntitySet;
+                            EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                                .AssociationSetEnds[FromEndProperty.Name]
+                                .EntitySet;
                             StateManagerTypeMetadata dependentTypeMetadata =
                                 stateManager.GetOrAddStateManagerTypeMetadata(
                                     WrappedOwner.IdentityType,

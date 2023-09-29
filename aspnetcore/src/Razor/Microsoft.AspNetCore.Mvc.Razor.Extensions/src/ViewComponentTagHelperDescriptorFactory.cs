@@ -358,7 +358,8 @@ internal class ViewComponentTagHelperDescriptorFactory
                         )
                 )
                 .FirstOrDefault()
-                .Value.Value as string;
+                .Value
+                .Value as string;
 
         if (!string.IsNullOrEmpty(name))
         {

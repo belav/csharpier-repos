@@ -447,9 +447,9 @@ public class DebuggerTestFirefox : DebuggerTestBase
             var o = JObject.FromObject(new { to = id, type = "getEnvironment" });
             var frame_props = await cli.SendCommand("getEnvironment", o, token);
             foreach (
-                var variable in frame_props.Value["result"]["value"]["bindings"][
-                    "variables"
-                ].Value<JObject>()
+                var variable in frame_props
+                    .Value["result"]["value"]["bindings"]["variables"]
+                    .Value<JObject>()
             )
             {
                 var varToAdd = ConvertFromFirefoxToDefaultFormat(variable);
@@ -471,7 +471,8 @@ public class DebuggerTestFirefox : DebuggerTestBase
             o = JObject.FromObject(
                 new
                 {
-                    to = propertyIterator.Value["result"]["value"]
+                    to = propertyIterator
+                        .Value["result"]["value"]
                         ?["iterator"]?["actor"].Value<string>()
                         .Replace("propertyIterator", ""),
                     type = "prototypeAndProperties"

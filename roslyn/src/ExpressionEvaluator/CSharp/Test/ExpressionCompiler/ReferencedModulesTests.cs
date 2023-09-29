@@ -1652,7 +1652,8 @@ class B : A
                             .GetMembers("A")
                             .OfType<NamedTypeSymbol>()
                             .Single()
-                            .ContainingAssembly.Identity
+                            .ContainingAssembly
+                            .Identity
                     );
                     Assert.Equal(
                         identityBS2,
@@ -1660,7 +1661,8 @@ class B : A
                             .GetMembers("B")
                             .OfType<NamedTypeSymbol>()
                             .Single()
-                            .ContainingAssembly.Identity
+                            .ContainingAssembly
+                            .Identity
                     );
 
                     string error;

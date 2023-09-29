@@ -1146,14 +1146,16 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                 ValueGenerated.Never,
                 bookOwnership1.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
             Assert.Equal(
                 ValueGenerated.Never,
                 bookOwnership2.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
 
@@ -1161,28 +1163,32 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                 ValueGenerated.Never,
                 bookLabel1Ownership1.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
             Assert.Equal(
                 ValueGenerated.Never,
                 bookLabel1Ownership2.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
             Assert.Equal(
                 ValueGenerated.Never,
                 bookLabel2Ownership1.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
             Assert.Equal(
                 ValueGenerated.Never,
                 bookLabel2Ownership2.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
 
@@ -1190,28 +1196,32 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                 ValueGenerated.Never,
                 bookLabel1Ownership11.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
             Assert.Equal(
                 ValueGenerated.Never,
                 bookLabel1Ownership21.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
             Assert.Equal(
                 ValueGenerated.Never,
                 bookLabel2Ownership11.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
             Assert.Equal(
                 ValueGenerated.Never,
                 bookLabel2Ownership21.DeclaringEntityType
                     .FindPrimaryKey()!
-                    .Properties.Single()
+                    .Properties
+                    .Single()
                     .ValueGenerated
             );
         }
@@ -1484,7 +1494,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
             var owner = model.FindEntityType(typeof(Customer))!;
             var owned = owner
                 .FindNavigation(nameof(Customer.Details))!
-                .ForeignKey.DeclaringEntityType;
+                .ForeignKey
+                .DeclaringEntityType;
             Assert.Equal(
                 new[] { nameof(CustomerDetails.Id), nameof(CustomerDetails.CustomerId) },
                 owned.GetProperties().Select(p => p.Name).ToArray()
@@ -2001,28 +2012,32 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                     outerOwnedEntity
                         .GetNavigations()
                         .Single(n => n.Name == "Reference1")
-                        .TargetEntityType.GetJsonPropertyName()
+                        .TargetEntityType
+                        .GetJsonPropertyName()
                 );
                 Assert.Equal(
                     "Reference2",
                     outerOwnedEntity
                         .GetNavigations()
                         .Single(n => n.Name == "Reference2")
-                        .TargetEntityType.GetJsonPropertyName()
+                        .TargetEntityType
+                        .GetJsonPropertyName()
                 );
                 Assert.Equal(
                     "Collection1",
                     outerOwnedEntity
                         .GetNavigations()
                         .Single(n => n.Name == "Collection1")
-                        .TargetEntityType.GetJsonPropertyName()
+                        .TargetEntityType
+                        .GetJsonPropertyName()
                 );
                 Assert.Equal(
                     "Collection2",
                     outerOwnedEntity
                         .GetNavigations()
                         .Single(n => n.Name == "Collection2")
-                        .TargetEntityType.GetJsonPropertyName()
+                        .TargetEntityType
+                        .GetJsonPropertyName()
                 );
             }
 
@@ -2393,28 +2408,32 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                     outerOwnedEntity
                         .GetNavigations()
                         .Single(n => n.Name == "Reference1")
-                        .TargetEntityType.GetJsonPropertyName()
+                        .TargetEntityType
+                        .GetJsonPropertyName()
                 );
                 Assert.Equal(
                     "RenamedReference2",
                     outerOwnedEntity
                         .GetNavigations()
                         .Single(n => n.Name == "Reference2")
-                        .TargetEntityType.GetJsonPropertyName()
+                        .TargetEntityType
+                        .GetJsonPropertyName()
                 );
                 Assert.Equal(
                     "RenamedCollection1",
                     outerOwnedEntity
                         .GetNavigations()
                         .Single(n => n.Name == "Collection1")
-                        .TargetEntityType.GetJsonPropertyName()
+                        .TargetEntityType
+                        .GetJsonPropertyName()
                 );
                 Assert.Equal(
                     "RenamedCollection2",
                     outerOwnedEntity
                         .GetNavigations()
                         .Single(n => n.Name == "Collection2")
-                        .TargetEntityType.GetJsonPropertyName()
+                        .TargetEntityType
+                        .GetJsonPropertyName()
                 );
             }
 

@@ -369,7 +369,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             var sproc = modelBuilder
                 .Entity<BookLabel>()
                 .UpdateUsingStoredProcedure(s => s.HasRowsAffectedResultColumn())
-                .Metadata.GetUpdateStoredProcedure()!;
+                .Metadata
+                .GetUpdateStoredProcedure()!;
 
             Assert.Equal(
                 RelationalStrings.StoredProcedureDuplicateRowsAffectedResultColumn(
@@ -409,7 +410,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             var sproc = modelBuilder
                 .Entity<BookLabel>()
                 .UpdateUsingStoredProcedure(s => s.HasRowsAffectedParameter())
-                .Metadata.GetUpdateStoredProcedure()!;
+                .Metadata
+                .GetUpdateStoredProcedure()!;
 
             Assert.Equal(
                 RelationalStrings.StoredProcedureDuplicateRowsAffectedParameter("BookLabel_Update"),
@@ -427,7 +429,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             var sproc = modelBuilder
                 .Entity<BookLabel>()
                 .InsertUsingStoredProcedure(s => s.HasParameter(b => b.Id))
-                .Metadata.GetInsertStoredProcedure()!;
+                .Metadata
+                .GetInsertStoredProcedure()!;
 
             Assert.Equal(
                 RelationalStrings.StoredProcedureDuplicateParameter("Id", "BookLabel_Insert"),
@@ -443,7 +446,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             var sproc = modelBuilder
                 .Entity<BookLabel>()
                 .InsertUsingStoredProcedure(s => s.HasOriginalValueParameter(b => b.Id))
-                .Metadata.GetInsertStoredProcedure()!;
+                .Metadata
+                .GetInsertStoredProcedure()!;
 
             Assert.Equal(
                 RelationalStrings.StoredProcedureDuplicateOriginalValueParameter(
@@ -464,7 +468,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             var sproc = modelBuilder
                 .Entity<BookLabel>()
                 .InsertUsingStoredProcedure(s => s.HasResultColumn(b => b.Id))
-                .Metadata.GetInsertStoredProcedure()!;
+                .Metadata
+                .GetInsertStoredProcedure()!;
 
             Assert.Equal(
                 RelationalStrings.StoredProcedureDuplicateResultColumn("Id", "BookLabel_Insert"),
@@ -480,8 +485,10 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             var param = modelBuilder
                 .Entity<BookLabel>()
                 .InsertUsingStoredProcedure(s => s.HasRowsAffectedParameter())
-                .Metadata.GetInsertStoredProcedure()!
-                .Parameters.Single();
+                .Metadata
+                .GetInsertStoredProcedure()!
+                .Parameters
+                .Single();
 
             Assert.Equal(
                 RelationalStrings.StoredProcedureParameterInvalidConfiguration(

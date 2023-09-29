@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 // We have the height and width required to display the inline diff snapshot now.
                 // Set the height and width of the ICocoaDifferenceViewer accordingly.
                 _diffViewer.VisualElement.SetFrameSize(new CoreGraphics.CGSize(_width, _height));
-                _diffViewer.VisualElement.Subviews[0].SetFrameSize(
-                    new CoreGraphics.CGSize(_width, _height)
-                );
+                _diffViewer.VisualElement
+                    .Subviews[0]
+                    .SetFrameSize(new CoreGraphics.CGSize(_width, _height));
             }
 
             private async Task<IProjectionSnapshot> GetInlineBufferSnapshotAsync(

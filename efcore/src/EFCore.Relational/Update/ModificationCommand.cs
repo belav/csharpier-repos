@@ -738,7 +738,8 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                 {
                     var ordinalProperty = previousEntry.EntityType
                         .FindPrimaryKey()!
-                        .Properties.Last();
+                        .Properties
+                        .Last();
                     ordinal = (int)previousEntry.GetCurrentProviderValue(ordinalProperty)! - 1;
                 }
 
@@ -754,7 +755,8 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
 
             var modifiedMembers = entry
                 .ToEntityEntry()
-                .Properties.Where(m => m.IsModified)
+                .Properties
+                .Where(m => m.IsModified)
                 .ToList();
             if (modifiedMembers.Count == 1)
             {

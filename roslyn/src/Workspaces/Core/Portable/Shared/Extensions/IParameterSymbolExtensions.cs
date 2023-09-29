@@ -84,12 +84,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             )
             {
                 // ok, we have a record constructor.  This might be the primary constructor or not.
-                var parameterSyntax = parameter.DeclaringSyntaxReferences[0].GetSyntax(
-                    cancellationToken
-                );
-                var constructorSyntax = constructor.DeclaringSyntaxReferences[0].GetSyntax(
-                    cancellationToken
-                );
+                var parameterSyntax = parameter
+                    .DeclaringSyntaxReferences[0]
+                    .GetSyntax(cancellationToken);
+                var constructorSyntax = constructor
+                    .DeclaringSyntaxReferences[0]
+                    .GetSyntax(cancellationToken);
                 if (
                     containingType.DeclaringSyntaxReferences.Any(
                         static (r, arg) =>

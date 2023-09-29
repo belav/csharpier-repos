@@ -497,9 +497,10 @@ namespace System.Web.Configuration.nBrowser
                     ) == 0
                 )
                 {
-                    Id = xmlNode.Attributes[a].Value.ToLower(
-                        System.Globalization.CultureInfo.CurrentCulture
-                    );
+                    Id = xmlNode
+                        .Attributes[a]
+                        .Value
+                        .ToLower(System.Globalization.CultureInfo.CurrentCulture);
                 }
                 else if (
                     string.Compare(
@@ -510,9 +511,10 @@ namespace System.Web.Configuration.nBrowser
                     ) == 0
                 )
                 {
-                    ParentId = xmlNode.Attributes[a].Value.ToLower(
-                        System.Globalization.CultureInfo.CurrentCulture
-                    );
+                    ParentId = xmlNode
+                        .Attributes[a]
+                        .Value
+                        .ToLower(System.Globalization.CultureInfo.CurrentCulture);
                 }
                 else if (
                     string.Compare(
@@ -523,9 +525,10 @@ namespace System.Web.Configuration.nBrowser
                     ) == 0
                 )
                 {
-                    RefId = xmlNode.Attributes[a].Value.ToLower(
-                        System.Globalization.CultureInfo.CurrentCulture
-                    );
+                    RefId = xmlNode
+                        .Attributes[a]
+                        .Value
+                        .ToLower(System.Globalization.CultureInfo.CurrentCulture);
                 }
             }
 

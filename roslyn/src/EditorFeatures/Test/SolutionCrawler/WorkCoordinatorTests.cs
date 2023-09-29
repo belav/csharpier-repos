@@ -235,7 +235,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             var changedSolution = solution
                 .AddProject("P3", "P3", LanguageNames.CSharp)
                 .AddDocument("D1", "")
-                .Project.Solution;
+                .Project
+                .Solution;
 
             var expectedDocumentEvents = 1;
 

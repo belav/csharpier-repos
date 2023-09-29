@@ -604,14 +604,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                     i++
                 )
                 {
-                    var underlyingTypeArgument =
-                        underlyingInterface.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            i
-                        ].Type;
-                    var nativeIntegerTypeArgument =
-                        nativeIntegerInterface.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            i
-                        ].Type;
+                    var underlyingTypeArgument = underlyingInterface
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[i]
+                        .Type;
+                    var nativeIntegerTypeArgument = nativeIntegerInterface
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[i]
+                        .Type;
                     Assert.Equal(
                         underlyingTypeArgument.Equals(
                             underlyingType,
@@ -1643,9 +1641,10 @@ public class B : A<nint>
             Assert.True(type2.IsErrorType());
 
             static TypeSymbol getConstraintType(CSharpCompilation comp) =>
-                comp.GetMember<MethodSymbol>("B.F").TypeParameters[
-                    0
-                ].ConstraintTypesNoUseSiteDiagnostics[0].Type;
+                comp.GetMember<MethodSymbol>("B.F")
+                    .TypeParameters[0]
+                    .ConstraintTypesNoUseSiteDiagnostics[0]
+                    .Type;
         }
 
         [Fact]

@@ -827,7 +827,8 @@ public class Derived : C<string>
             var property = (PropertySymbol)
                 comp.GlobalNamespace
                     .GetTypeMember("Derived")
-                    .BaseTypeNoUseSiteDiagnostics.GetMember("Property");
+                    .BaseTypeNoUseSiteDiagnostics
+                    .GetMember("Property");
             Assert.False(property.GetMethod.IsInitOnly);
             Assert.False(property.GetPublicSymbol().GetMethod.IsInitOnly);
             Assert.True(property.SetMethod.IsInitOnly);
@@ -4945,7 +4946,8 @@ public class D
                 "System.Runtime.CompilerServices.IsExternalInit",
                 property0.TypeWithAnnotations.CustomModifiers
                     .Single()
-                    .Modifier.ToTestDisplayString()
+                    .Modifier
+                    .ToTestDisplayString()
             );
             Assert.Equal("System.Int32", property0.TypeWithAnnotations.Type.ToTestDisplayString());
 
@@ -5437,7 +5439,8 @@ public struct S
             Assert.True(
                 ((Symbols.PublicModel.PropertySymbol)i)
                     .GetSymbol<PropertySymbol>()
-                    .SetMethod.IsDeclaredReadOnly
+                    .SetMethod
+                    .IsDeclaredReadOnly
             );
         }
 
@@ -5472,7 +5475,8 @@ public struct S
             Assert.True(
                 ((Symbols.PublicModel.PropertySymbol)i)
                     .GetSymbol<PropertySymbol>()
-                    .SetMethod.IsDeclaredReadOnly
+                    .SetMethod
+                    .IsDeclaredReadOnly
             );
         }
 
@@ -5977,13 +5981,15 @@ public class C
                     "libWithIsExternalInit",
                     comp.GetWellKnownType(
                         WellKnownType.System_Runtime_CompilerServices_IsExternalInit
-                    ).ContainingAssembly.Name
+                    )
+                        .ContainingAssembly
+                        .Name
                 );
                 Assert.Equal(
                     "corlibWithIsExternalInit",
-                    comp.GetTypeByMetadataName(
-                        "System.Runtime.CompilerServices.IsExternalInit"
-                    ).ContainingAssembly.Name
+                    comp.GetTypeByMetadataName("System.Runtime.CompilerServices.IsExternalInit")
+                        .ContainingAssembly
+                        .Name
                 );
             }
 
@@ -5998,13 +6004,15 @@ public class C
                     expectedAssemblyName,
                     comp.GetWellKnownType(
                         WellKnownType.System_Runtime_CompilerServices_IsExternalInit
-                    ).ContainingAssembly.Name
+                    )
+                        .ContainingAssembly
+                        .Name
                 );
                 Assert.Equal(
                     expectedAssemblyName,
-                    comp.GetTypeByMetadataName(
-                        "System.Runtime.CompilerServices.IsExternalInit"
-                    ).ContainingAssembly.Name
+                    comp.GetTypeByMetadataName("System.Runtime.CompilerServices.IsExternalInit")
+                        .ContainingAssembly
+                        .Name
                 );
             }
         }

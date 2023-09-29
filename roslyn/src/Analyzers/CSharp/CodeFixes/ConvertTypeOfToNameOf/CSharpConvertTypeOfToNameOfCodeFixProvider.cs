@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertTypeOfToNameOf
                 ((MemberAccessExpressionSyntax)node).Expression;
             var typeSymbol = model
                 .GetSymbolInfo(typeOfExpression.Type, cancellationToken)
-                .Symbol.GetSymbolType();
+                .Symbol
+                .GetSymbolType();
             Contract.ThrowIfNull(typeSymbol);
             return typeSymbol.GenerateExpressionSyntax();
         }

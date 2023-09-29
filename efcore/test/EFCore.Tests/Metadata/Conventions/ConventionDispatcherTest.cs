@@ -2143,7 +2143,8 @@ public class ConventionDispatcherTest
                 OrderDetails.OrderProperty,
                 ConfigurationSource.Convention
             )
-            .Metadata.DependentToPrincipal;
+            .Metadata
+            .DependentToPrincipal;
 
         var scope = useScope ? builder.Metadata.ConventionDispatcher.DelayConventions() : null;
 

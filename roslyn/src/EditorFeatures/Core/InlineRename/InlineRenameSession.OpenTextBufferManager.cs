@@ -1021,12 +1021,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     var snapshot = _openTextBufferManager._subjectBuffer.CurrentSnapshot;
                     var endPoint =
                         _openTextBufferManager._referenceSpanToLinkedRenameSpanMap.ContainsKey(span)
-                            ? _openTextBufferManager._referenceSpanToLinkedRenameSpanMap[
-                                span
-                            ].TrackingSpan.GetEndPoint(snapshot)
+                            ? _openTextBufferManager
+                                ._referenceSpanToLinkedRenameSpanMap[span]
+                                .TrackingSpan
+                                .GetEndPoint(snapshot)
                             : _openTextBufferManager._referenceSpanToLinkedRenameSpanMap
                                 .First(kvp => kvp.Key.OverlapsWith(span))
-                                .Value.TrackingSpan.GetEndPoint(snapshot);
+                                .Value
+                                .TrackingSpan
+                                .GetEndPoint(snapshot);
                     return _openTextBufferManager.ActiveTextView.BufferGraph
                         .MapUpToBuffer(
                             endPoint,

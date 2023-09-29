@@ -251,7 +251,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                                 expectedDescriptionOrNull != null
                                     ? completionService
                                         .GetDescriptionAsync(document, c, options, displayOptions)
-                                        .Result.Text == expectedDescriptionOrNull
+                                        .Result
+                                        .Text == expectedDescriptionOrNull
                                     : true
                             )
                     );
@@ -283,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                     expectedDescriptionOrNull != null
                     && completionService
                         .GetDescriptionAsync(document, c, options, displayOptions)
-                        .Result.Text != expectedDescriptionOrNull
+                        .Result
+                        .Text != expectedDescriptionOrNull
                 )
                     return false;
                 if (glyph.HasValue && !c.Tags.SequenceEqual(GlyphTags.GetTags((Glyph)glyph.Value)))
@@ -1415,7 +1417,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             {
                 var position = testWorkspace.Documents
                     .Single(d => d.Name == "SourceDocument")
-                    .CursorPosition.Value;
+                    .CursorPosition
+                    .Value;
                 var solution = testWorkspace.CurrentSolution;
                 var documentId = testWorkspace.Documents.Single(d => d.Name == "SourceDocument").Id;
                 var document = solution.GetDocument(documentId);
@@ -1512,7 +1515,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             {
                 var position = testWorkspace.Documents
                     .Single(d => d.Name == "SourceDocument")
-                    .CursorPosition.Value;
+                    .CursorPosition
+                    .Value;
                 var solution = testWorkspace.CurrentSolution;
                 var documentId = testWorkspace.Documents.Single(d => d.Name == "SourceDocument").Id;
                 var document = solution.GetDocument(documentId);

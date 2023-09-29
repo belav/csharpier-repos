@@ -2760,13 +2760,20 @@ class C { int Y => 2; }
                     "class Program { void Main() { System.Console.WriteLine(1); } }",
                     filePath: pathA
                 )
-                .Project.Solution.AddProject("B", "B", "C#")
+                .Project
+                .Solution
+                .AddProject("B", "B", "C#")
                 .AddDocument("Common.cs", "class Common {}", filePath: pathCommon)
-                .Project.AddDocument("B.cs", "class B {}", filePath: pathB)
-                .Project.Solution.AddProject("C", "C", "C#")
+                .Project
+                .AddDocument("B.cs", "class B {}", filePath: pathB)
+                .Project
+                .Solution
+                .AddProject("C", "C", "C#")
                 .AddDocument("Common.cs", "class Common {}", filePath: pathCommon)
-                .Project.AddDocument("C.cs", "class C {}", filePath: pathC)
-                .Project.Solution;
+                .Project
+                .AddDocument("C.cs", "class C {}", filePath: pathC)
+                .Project
+                .Solution;
 
             var debuggingSession = await StartDebuggingSessionAsync(service, solution);
             EnterBreakState(debuggingSession);
@@ -5685,9 +5692,9 @@ class C { int Y => 1; }
                 {
                     $"0: {document.FilePath}: (9,18)-(9,22) flags=[LeafFrame, MethodUpToDate]",
                 },
-                baseActiveStatementMap.DocumentPathMap[document.FilePath].Select(
-                    InspectActiveStatement
-                )
+                baseActiveStatementMap
+                    .DocumentPathMap[document.FilePath]
+                    .Select(InspectActiveStatement)
             );
 
             Assert.Equal(1, baseActiveStatementMap.InstructionMap.Count);

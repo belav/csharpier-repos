@@ -1512,9 +1512,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
                 if (!attributeData.HasErrors)
                 {
-                    string? indexerName = attributeData.CommonConstructorArguments[
-                        0
-                    ].DecodeValue<string>(SpecialType.System_String);
+                    string? indexerName = attributeData
+                        .CommonConstructorArguments[0]
+                        .DecodeValue<string>(SpecialType.System_String);
                     if (indexerName != null)
                     {
                         arguments
@@ -1819,9 +1819,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                string indexerName = attribute.CommonConstructorArguments[0].DecodeValue<string>(
-                    SpecialType.System_String
-                );
+                string indexerName = attribute
+                    .CommonConstructorArguments[0]
+                    .DecodeValue<string>(SpecialType.System_String);
                 if (indexerName == null || !SyntaxFacts.IsValidIdentifier(indexerName))
                 {
                     diagnostics.Add(

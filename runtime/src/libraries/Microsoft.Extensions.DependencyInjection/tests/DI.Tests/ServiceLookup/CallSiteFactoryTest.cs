@@ -1467,7 +1467,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private static ConstructorInfo GetConstructor(Type type, Type[] parameterTypes) =>
             type.GetTypeInfo()
-                .DeclaredConstructors.First(
+                .DeclaredConstructors
+                .First(
                     c =>
                         Enumerable.SequenceEqual(
                             c.GetParameters().Select(p => p.ParameterType),

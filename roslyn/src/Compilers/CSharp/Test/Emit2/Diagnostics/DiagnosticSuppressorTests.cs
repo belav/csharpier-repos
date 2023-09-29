@@ -767,7 +767,8 @@ class C { }";
             var suppressionInfo = diagnostics
                 .Select(d => d.ProgrammaticSuppressionInfo)
                 .Single()
-                .Suppressions.Single();
+                .Suppressions
+                .Single();
             Assert.Equal(suppressionId, suppressionInfo.Id);
             Assert.Equal(
                 suppressor.SuppressionDescriptor.Justification,

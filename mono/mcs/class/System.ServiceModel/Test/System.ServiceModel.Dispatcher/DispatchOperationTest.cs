@@ -216,7 +216,9 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             {
                 Assert.AreEqual(
                     1,
-                    ContractDescription.GetContract(typeof(TestFaultContract)).Operations[0]
+                    ContractDescription
+                        .GetContract(typeof(TestFaultContract))
+                        .Operations[0]
                         .Faults
                         .Count,
                     "s#0"

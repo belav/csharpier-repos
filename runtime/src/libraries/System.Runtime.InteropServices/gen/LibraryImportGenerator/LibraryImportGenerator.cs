@@ -236,9 +236,9 @@ namespace Microsoft.Interop
                                         SyntaxKind.NumericLiteralExpression,
                                         Literal(
                                             (int)
-                                                defaultDllImportSearchPathsAttribute.ConstructorArguments[
-                                                    0
-                                                ].Value!
+                                                defaultDllImportSearchPathsAttribute
+                                                    .ConstructorArguments[0]
+                                                    .Value!
                                         )
                                     )
                                 )

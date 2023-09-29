@@ -147,7 +147,8 @@ internal sealed class PInvokeTableGenerator
                 var entrypoint = (string)
                     dllimport.NamedArguments
                         .First(arg => arg.MemberName == "EntryPoint")
-                        .TypedValue.Value!;
+                        .TypedValue
+                        .Value!;
                 pinvokes.Add(new PInvoke(entrypoint, module, method));
 
                 string? signature = SignatureMapper.MethodToSignature(method);

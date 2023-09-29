@@ -401,7 +401,9 @@ namespace System.CommandLine.Tests.Binding
                     fsi =>
                         fsi.Should()
                             .BeOfType<DirectoryInfo>()
-                            .Which.FullName.Should()
+                            .Which
+                            .FullName
+                            .Should()
                             .Be(ExistingDirectory())
                 ),
                 BindingTestCase.Create<DirectoryInfo[]>(
@@ -409,7 +411,8 @@ namespace System.CommandLine.Tests.Binding
                     fsi =>
                         fsi.Should()
                             .BeAssignableTo<IEnumerable<DirectoryInfo>>()
-                            .Which.Select(d => d.FullName)
+                            .Which
+                            .Select(d => d.FullName)
                             .Should()
                             .BeEquivalentTo(new[] { ExistingDirectory(), ExistingDirectory() })
                 ),
@@ -418,7 +421,9 @@ namespace System.CommandLine.Tests.Binding
                     fsi =>
                         fsi.Should()
                             .BeOfType<FileInfo>()
-                            .Which.FullName.Should()
+                            .Which
+                            .FullName
+                            .Should()
                             .Be(ExistingFile()),
                     variationName: nameof(ExistingFile)
                 ),
@@ -427,7 +432,9 @@ namespace System.CommandLine.Tests.Binding
                     fsi =>
                         fsi.Should()
                             .BeOfType<DirectoryInfo>()
-                            .Which.FullName.Should()
+                            .Which
+                            .FullName
+                            .Should()
                             .Be(ExistingDirectory()),
                     variationName: nameof(ExistingDirectory)
                 ),
@@ -436,7 +443,9 @@ namespace System.CommandLine.Tests.Binding
                     fsi =>
                         fsi.Should()
                             .BeOfType<DirectoryInfo>()
-                            .Which.FullName.Should()
+                            .Which
+                            .FullName
+                            .Should()
                             .Be(NonexistentPathWithTrailingSlash()),
                     variationName: nameof(NonexistentPathWithTrailingSlash)
                 ),
@@ -445,7 +454,9 @@ namespace System.CommandLine.Tests.Binding
                     fsi =>
                         fsi.Should()
                             .BeOfType<DirectoryInfo>()
-                            .Which.FullName.Should()
+                            .Which
+                            .FullName
+                            .Should()
                             .Be(
                                 NonexistentPathWithTrailingSlash(),
                                 "DirectoryInfo replaces Path.AltDirectorySeparatorChar with Path.DirectorySeparatorChar on Windows"
@@ -457,7 +468,9 @@ namespace System.CommandLine.Tests.Binding
                     fsi =>
                         fsi.Should()
                             .BeOfType<FileInfo>()
-                            .Which.FullName.Should()
+                            .Which
+                            .FullName
+                            .Should()
                             .Be(NonexistentPathWithoutTrailingSlash()),
                     variationName: nameof(NonexistentPathWithoutTrailingSlash)
                 ),

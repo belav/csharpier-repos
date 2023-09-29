@@ -164,7 +164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                             .Where(arg => arg.Name == "c1")
                             .Select(arg => arg)
                             .Single()
-                            .Type.BaseType()
+                            .Type
+                            .BaseType()
                             .Kind
                     );
                     Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
@@ -172,7 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                             .Where(arg => arg.Name == "c1")
                             .Select(arg => arg)
                             .Single()
-                            .Type.BaseType()
+                            .Type
+                            .BaseType()
                     );
                 }
                 if (m.ReturnType.TypeKind != TypeKind.Struct)
@@ -283,7 +285,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
                     .Single()
-                    .Type.Kind
+                    .Type
+                    .Kind
             );
             Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
                 importedMethod.Parameters
@@ -318,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
                     .Single()
-                    .Type.Kind
+                    .Type
+                    .Kind
             );
             Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
                 importedMethod.Parameters
@@ -353,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
                     .Single()
-                    .Type.Kind
+                    .Type
+                    .Kind
             );
             Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
                 importedMethod.Parameters
@@ -410,7 +415,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     .Where(arg => arg.Name == "x")
                     .Select(arg => arg)
                     .Single()
-                    .Type.Kind
+                    .Type
+                    .Kind
             );
             Assert.IsType<NoPiaIllegalGenericInstantiationSymbol>(
                 importedMethod.Parameters
@@ -602,7 +608,8 @@ public class DrivedClass
                             .Where(arg => arg.Name == "c1")
                             .Select(arg => arg)
                             .Single()
-                            .Type.IsFromCompilation(localConsumer)
+                            .Type
+                            .IsFromCompilation(localConsumer)
                     );
                 }
                 if (m.ReturnType.TypeKind != TypeKind.Struct)
@@ -649,7 +656,8 @@ public class DrivedClass
             var nestedType = localConsumerRefsAsm
                 .Where(a => a.Name == "NoPIAGenerics1-Asm1")
                 .Single()
-                .GlobalNamespace.GetTypeMembers("NestedConstructs")
+                .GlobalNamespace
+                .GetTypeMembers("NestedConstructs")
                 .Single();
             var localField = nestedType.GetMembers("field1").OfType<FieldSymbol>().Single();
 
@@ -746,7 +754,8 @@ public class TypeRefs1
 
             var nestedType = localConsumerRefsAsm
                 .First(arg => arg.Name == "Dummy")
-                .GlobalNamespace.GetTypeMembers("TypeRefs1")
+                .GlobalNamespace
+                .GetTypeMembers("TypeRefs1")
                 .Single();
             var methodSymbol = nestedType.GetMembers("Method4").OfType<MethodSymbol>();
 

@@ -940,7 +940,8 @@ namespace DebuggerTests
             result = await cli.SendCommand("Runtime.callFunctionOn", cfo_args, token);
             Assert.False(result.IsOk, "result.IsOk");
 
-            var hasErrorMessage = result.Error["exceptionDetails"]
+            var hasErrorMessage = result
+                .Error["exceptionDetails"]
                 ?["exception"]?["description"]?.Value<string>()
                 ?.Contains(error_msg);
             Assert.True((hasErrorMessage ?? false), "Exception message not found");

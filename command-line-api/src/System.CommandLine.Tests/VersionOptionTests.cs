@@ -132,7 +132,8 @@ namespace System.CommandLine.Tests
 
             parser.Configuration.RootCommand.Subcommands
                 .Single(c => c.Name == "subcommand")
-                .Options.Should()
+                .Options
+                .Should()
                 .BeEmpty();
         }
 

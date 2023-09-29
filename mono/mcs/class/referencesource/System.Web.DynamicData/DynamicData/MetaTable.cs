@@ -1017,7 +1017,8 @@ namespace System.Web.DynamicData
         {
             RouteValueDictionary routeValues = DynamicDataRouteHandler
                 .GetRequestContext(context)
-                .RouteData.Values;
+                .RouteData
+                .Values;
             Dictionary<string, object> columnValues = new Dictionary<string, object>();
             foreach (var column in Columns)
             {

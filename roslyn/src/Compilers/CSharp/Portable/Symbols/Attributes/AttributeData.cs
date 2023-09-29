@@ -418,9 +418,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            var sense = arguments.Attribute.CommonConstructorArguments[0].DecodeValue<bool>(
-                SpecialType.System_Boolean
-            );
+            var sense = arguments.Attribute
+                .CommonConstructorArguments[0]
+                .DecodeValue<bool>(SpecialType.System_Boolean);
             if (value.Kind != TypedConstantKind.Array)
             {
                 var memberName = value.DecodeValue<string>(SpecialType.System_String);

@@ -96,9 +96,9 @@ namespace DbLinq.Ingres
                 {
                     // This is very bad...
                     if (
-                        !names.ColumnsNames[keyColRow.ReferencedTableName].ContainsKey(
-                            keyColRow.ReferencedColumnName
-                        )
+                        !names
+                            .ColumnsNames[keyColRow.ReferencedTableName]
+                            .ContainsKey(keyColRow.ReferencedColumnName)
                     )
                         continue;
 

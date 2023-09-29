@@ -472,9 +472,9 @@ namespace MS.Internal.Xml.Cache
                 // Virtualize collapsed text nodes
                 this.pageParent = this.pageCurrent;
                 this.idxParent = this.idxCurrent;
-                this.idxCurrent = this.pageCurrent[this.idxCurrent].Document.GetCollapsedTextNode(
-                    out this.pageCurrent
-                );
+                this.idxCurrent = this.pageCurrent[this.idxCurrent]
+                    .Document
+                    .GetCollapsedTextNode(out this.pageCurrent);
                 return true;
             }
 
@@ -634,9 +634,9 @@ namespace MS.Internal.Xml.Cache
                 // Virtualize collapsed text nodes
                 this.pageParent = this.pageCurrent;
                 this.idxParent = this.idxCurrent;
-                this.idxCurrent = this.pageCurrent[this.idxCurrent].Document.GetCollapsedTextNode(
-                    out this.pageCurrent
-                );
+                this.idxCurrent = this.pageCurrent[this.idxCurrent]
+                    .Document
+                    .GetCollapsedTextNode(out this.pageCurrent);
                 return true;
             }
 
@@ -743,9 +743,9 @@ namespace MS.Internal.Xml.Cache
 
                     this.pageParent = this.pageCurrent;
                     this.idxParent = this.idxCurrent;
-                    this.idxCurrent = this.pageCurrent[
-                        this.idxCurrent
-                    ].Document.GetCollapsedTextNode(out this.pageCurrent);
+                    this.idxCurrent = this.pageCurrent[this.idxCurrent]
+                        .Document
+                        .GetCollapsedTextNode(out this.pageCurrent);
                     return true;
                 }
 

@@ -272,10 +272,12 @@ namespace System.ServiceModel.Security
                         {
                             string issuanceAppliesToName;
                             string issuanceAppliesToNs;
-                            issuedTokensHeader.TokenIssuances[k].GetAppliesToQName(
-                                out issuanceAppliesToName,
-                                out issuanceAppliesToNs
-                            );
+                            issuedTokensHeader
+                                .TokenIssuances[k]
+                                .GetAppliesToQName(
+                                    out issuanceAppliesToName,
+                                    out issuanceAppliesToNs
+                                );
                             if (
                                 issuanceAppliesToName == expectedAppliesToQName.Name
                                 && issuanceAppliesToNs == expectedAppliesToQName.Namespace

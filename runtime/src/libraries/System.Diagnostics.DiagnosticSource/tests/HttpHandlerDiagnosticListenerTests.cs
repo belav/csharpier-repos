@@ -559,9 +559,9 @@ namespace System.Diagnostics.Tests
                             eventRecords.Records.First().Value,
                             "Request"
                         );
-                        string[] correlationContext = thisRequest.Headers[
-                            "Correlation-Context"
-                        ].Split(',');
+                        string[] correlationContext = thisRequest
+                            .Headers["Correlation-Context"]
+                            .Split(',');
 
                         Assert.Equal(3, correlationContext.Length);
                         Assert.Contains("key=value", correlationContext);

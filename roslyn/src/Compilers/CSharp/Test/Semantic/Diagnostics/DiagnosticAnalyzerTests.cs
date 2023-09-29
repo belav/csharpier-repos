@@ -5284,7 +5284,9 @@ class C
                 .DescendantNodes()
                 .OfType<FieldDeclarationSyntax>()
                 .Single()
-                .Declaration.Variables.Single()
+                .Declaration
+                .Variables
+                .Single()
                 .Identifier;
             var semanticModel1 = compilation.GetSemanticModel(tree1);
             var analyzer1 = new FieldAnalyzer("ID0001", syntax);

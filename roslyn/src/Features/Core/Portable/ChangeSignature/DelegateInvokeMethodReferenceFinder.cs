@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     e =>
                         state.SemanticModel
                             .GetSymbolInfo(e, cancellationToken)
-                            .Symbol?.OriginalDefinition == methodSymbol
+                            .Symbol
+                            ?.OriginalDefinition == methodSymbol
                 );
 
             return invocations

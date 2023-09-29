@@ -219,9 +219,9 @@ namespace System.ServiceModel.Activities.Presentation
             {
                 ReceiveMessageContent messageContent =
                     ((Receive)this.ModelItem.GetCurrentValue()).Content as ReceiveMessageContent;
-                this.ModelItem.Properties[DeclaredMessageType].SetValue(
-                    null == messageContent ? null : messageContent.Message.ArgumentType
-                );
+                this.ModelItem
+                    .Properties[DeclaredMessageType]
+                    .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
             }
         }
 
@@ -309,9 +309,9 @@ namespace System.ServiceModel.Activities.Presentation
                         .GetVariableCollection();
                     if (null != variableScope)
                     {
-                        ModelItemCollection correlations = receive.Properties[
-                            "CorrelationInitializers"
-                        ].Collection;
+                        ModelItemCollection correlations = receive
+                            .Properties["CorrelationInitializers"]
+                            .Collection;
                         bool hasRequestReplyHandle = false;
                         foreach (ModelItem item in correlations)
                         {

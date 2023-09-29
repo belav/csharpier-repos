@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis
             var systemAssemblyFile = typeof(Uri).Assembly.Location;
             s_gacDirectory = Directory
                 .GetParent(Path.GetDirectoryName(systemAssemblyFile))
-                .Parent.FullName;
+                .Parent
+                .FullName;
         }
 
         private static AssemblyName CreateAssemblyNameFromFile(string path) =>

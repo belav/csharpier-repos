@@ -408,10 +408,9 @@ namespace System.ServiceModel.Dispatcher
                 )
                 {
                     // this is an action message, in this case we can pass in the message itself since the filter will only read from the header
-                    result = this.tables[i].table.GetMatchingValue(
-                        messageToReadHeaders,
-                        out currentData
-                    );
+                    result = this.tables[i]
+                        .table
+                        .GetMatchingValue(messageToReadHeaders, out currentData);
                 }
                 else
                 {

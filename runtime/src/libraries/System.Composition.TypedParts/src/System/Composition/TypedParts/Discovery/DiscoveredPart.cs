@@ -303,7 +303,8 @@ namespace System.Composition.TypedParts.Discovery
             for (int index = 0; index < _partType.GenericTypeParameters.Length; index++)
             {
                 foreach (
-                    var genericParameterConstraints in _partType.GenericTypeParameters[index]
+                    var genericParameterConstraints in _partType
+                        .GenericTypeParameters[index]
                         .GetTypeInfo()
                         .GetGenericParameterConstraints()
                 )

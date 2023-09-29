@@ -126,7 +126,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             TypesTableNode otherTypesTable = (TypesTableNode)other;
             return _module.Assembly
                 .GetName()
-                .Name.CompareTo(otherTypesTable._module.Assembly.GetName().Name);
+                .Name
+                .CompareTo(otherTypesTable._module.Assembly.GetName().Name);
         }
 
         public override int ClassCode => -944318825;

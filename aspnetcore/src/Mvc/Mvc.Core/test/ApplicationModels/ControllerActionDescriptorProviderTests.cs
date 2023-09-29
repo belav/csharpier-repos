@@ -610,7 +610,8 @@ public class ControllerActionDescriptorProviderTests
                 a.ActionConstraints
                     .OfType<HttpMethodActionConstraint>()
                     .Single()
-                    .HttpMethods.Single() == "PUT"
+                    .HttpMethods
+                    .Single() == "PUT"
         );
         Assert.Equal(2, putActions.Count());
         Assert.Single(putActions, a => a.AttributeRouteInfo.Template.Equals("v1/All"));
@@ -622,7 +623,8 @@ public class ControllerActionDescriptorProviderTests
                 a.ActionConstraints
                     .OfType<HttpMethodActionConstraint>()
                     .Single()
-                    .HttpMethods.Single() == "POST"
+                    .HttpMethods
+                    .Single() == "POST"
         );
         Assert.Equal(2, routeActions.Count());
         Assert.Single(routeActions, a => a.AttributeRouteInfo.Template.Equals("v1/List"));
@@ -661,7 +663,8 @@ public class ControllerActionDescriptorProviderTests
                 a.ActionConstraints
                     .OfType<HttpMethodActionConstraint>()
                     .Single()
-                    .HttpMethods.Single() == "POST"
+                    .HttpMethods
+                    .Single() == "POST"
         );
         Assert.Equal(2, postActions.Count());
         Assert.Single(postActions, a => a.AttributeRouteInfo.Template.Equals("v1"));
@@ -673,7 +676,8 @@ public class ControllerActionDescriptorProviderTests
                 a.ActionConstraints
                     .OfType<HttpMethodActionConstraint>()
                     .Single()
-                    .HttpMethods.Single() == "PUT"
+                    .HttpMethods
+                    .Single() == "PUT"
         );
         Assert.Equal(2, putActions.Count());
         Assert.Single(putActions, a => a.AttributeRouteInfo.Template.Equals("v1/All"));

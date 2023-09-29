@@ -1669,16 +1669,20 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Unchanged,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1687,9 +1691,11 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1761,16 +1767,20 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Unchanged,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1779,9 +1789,11 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1856,18 +1868,22 @@ class C { }
         // the per-file global aliases get changed (because the last file is removed).
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
         // however, the collected global aliases stays the same.
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -1879,9 +1895,11 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Removed,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1964,16 +1982,20 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -1985,9 +2007,11 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Removed,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2063,16 +2087,20 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2084,9 +2112,11 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.New,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2179,16 +2209,20 @@ class Dummy {}
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2200,9 +2234,11 @@ class Dummy {}
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2354,16 +2390,20 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2375,9 +2415,11 @@ class C { }
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2447,16 +2489,20 @@ global using AAttribute = XAttribute;"
         );
         Assert.Equal(
             IncrementalStepRunReason.Modified,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Modified,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2468,9 +2514,11 @@ global using AAttribute = XAttribute;"
         );
         Assert.Equal(
             IncrementalStepRunReason.Modified,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2544,16 +2592,20 @@ global using BAttribute = XAttribute;"
         );
         Assert.Equal(
             IncrementalStepRunReason.Modified,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Modified,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2564,9 +2616,11 @@ global using BAttribute = XAttribute;"
         );
         Assert.Equal(
             IncrementalStepRunReason.Modified,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2656,16 +2710,20 @@ class D { }"
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2677,9 +2735,11 @@ class D { }"
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2761,16 +2821,20 @@ class D { }"
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2881,16 +2945,20 @@ class D { }"
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
             IncrementalStepRunReason.Cached,
-            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2902,9 +2970,11 @@ class D { }"
         );
         Assert.Equal(
             IncrementalStepRunReason.Modified,
-            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+            runResult
+                .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(

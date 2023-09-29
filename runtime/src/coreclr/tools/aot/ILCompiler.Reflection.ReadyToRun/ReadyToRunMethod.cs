@@ -609,9 +609,10 @@ namespace ILCompiler.Reflection.ReadyToRun
             int coldRuntimeFunctionId = ColdRuntimeFunctionId;
             int runtimeFunctionSize = _readyToRunReader.CalculateRuntimeFunctionSize();
             int runtimeFunctionOffset = _readyToRunReader.CompositeReader.GetOffset(
-                _readyToRunReader.ReadyToRunHeader.Sections[
-                    ReadyToRunSectionType.RuntimeFunctions
-                ].RelativeVirtualAddress
+                _readyToRunReader
+                    .ReadyToRunHeader
+                    .Sections[ReadyToRunSectionType.RuntimeFunctions]
+                    .RelativeVirtualAddress
             );
             int curOffset = runtimeFunctionOffset + runtimeFunctionId * runtimeFunctionSize;
             int coldOffset = runtimeFunctionOffset + coldRuntimeFunctionId * runtimeFunctionSize;

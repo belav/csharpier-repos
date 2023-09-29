@@ -249,9 +249,9 @@ namespace System.Data.Mapping
                         {
                             if (
                                 (
-                                    assocationSet.AssociationSetEnds[
-                                        constraint.ToRole.Name
-                                    ].EntitySet == entitySet
+                                    assocationSet
+                                        .AssociationSetEnds[constraint.ToRole.Name]
+                                        .EntitySet == entitySet
                                 )
                                 && (constraint.ToRole.GetEntityType().IsAssignableFrom(entityType))
                             )

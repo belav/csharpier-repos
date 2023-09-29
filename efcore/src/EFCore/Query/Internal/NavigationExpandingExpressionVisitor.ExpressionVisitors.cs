@@ -1021,9 +1021,9 @@ public partial class NavigationExpandingExpressionVisitor
                         }
                     }
 
-                    var filterExpression = entityReference.IncludePaths[
-                        navigationBase
-                    ].FilterExpression;
+                    var filterExpression = entityReference
+                        .IncludePaths[navigationBase]
+                        .FilterExpression;
                     if (
                         _queryStateManager
                         && navigationBase is ISkipNavigation skipNavigation

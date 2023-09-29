@@ -704,7 +704,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                         lazyModel ??= compilation.GetSemanticModel(root.SyntaxTree);
                         var symbol = lazyModel
                             .GetSymbolInfo(node, cancellationToken)
-                            .Symbol?.OriginalDefinition;
+                            .Symbol
+                            ?.OriginalDefinition;
                         if (symbol != null && IsCandidateSymbol(symbol))
                         {
                             builder.Add(symbol);

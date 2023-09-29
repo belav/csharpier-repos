@@ -2558,7 +2558,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -2583,7 +2585,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -2909,7 +2913,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Kappa))
                     .FindNavigation(nameof(Kappa.Omegas))
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -2929,7 +2935,9 @@ public abstract partial class ModelBuilderTest
                 modelBuilder.Model
                     .FindEntityType(typeof(Omega))
                     .FindNavigation(nameof(Omega.Kappa))
-                    .ForeignKey.Properties.Single()
+                    .ForeignKey
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -2974,7 +2982,8 @@ public abstract partial class ModelBuilderTest
                     .FindEntityType(typeof(DependentShadowFk))
                     .GetForeignKeys()
                     .Single()
-                    .Properties[0].Name
+                    .Properties[0]
+                    .Name
             );
         }
 

@@ -2013,7 +2013,8 @@ namespace System.Data.Mapping
                 if (
                     associationSet.ElementType.ReferentialConstraints
                         .Single()
-                        .ToProperties.All(p => dependentKeys.Contains(p))
+                        .ToProperties
+                        .All(p => dependentKeys.Contains(p))
                 )
                 {
                     EdmSchemaError error = AddToSchemaErrorsWithMemberInfo(

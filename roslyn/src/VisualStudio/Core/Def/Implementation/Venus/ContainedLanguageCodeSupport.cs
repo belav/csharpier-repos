@@ -298,7 +298,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             var position = type.Locations
                 .First(loc => loc.SourceTree == targetSyntaxTree)
-                .SourceSpan.Start;
+                .SourceSpan
+                .Start;
             var destinationType = syntaxFacts.GetContainingTypeDeclaration(
                 targetSyntaxTree.GetRoot(cancellationToken),
                 position

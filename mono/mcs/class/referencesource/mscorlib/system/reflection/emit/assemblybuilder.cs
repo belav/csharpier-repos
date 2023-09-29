@@ -2059,9 +2059,9 @@ namespace System.Reflection.Emit
                     //
                     for (i = 0; i < m_assemblyData.m_iCABuilder; i++)
                     {
-                        tkAttrs[i] = m_assemblyData.m_CABuilders[
-                            i
-                        ].PrepareCreateCustomAttributeToDisk(assemblyModule);
+                        tkAttrs[i] = m_assemblyData
+                            .m_CABuilders[i]
+                            .PrepareCreateCustomAttributeToDisk(assemblyModule);
                     }
                     for (i = 0; i < m_assemblyData.m_iCAs; i++)
                     {
@@ -2134,9 +2134,9 @@ namespace System.Reflection.Emit
                     //
                     for (i = 0; i < m_assemblyData.m_iCABuilder; i++)
                     {
-                        tkAttrs[i] = m_assemblyData.m_CABuilders[
-                            i
-                        ].PrepareCreateCustomAttributeToDisk(onDiskAssemblyModule);
+                        tkAttrs[i] = m_assemblyData
+                            .m_CABuilders[i]
+                            .PrepareCreateCustomAttributeToDisk(onDiskAssemblyModule);
                     }
                     for (i = 0; i < m_assemblyData.m_iCAs; i++)
                     {
@@ -2236,12 +2236,14 @@ namespace System.Reflection.Emit
                 {
                     for (i = 0; i < m_assemblyData.m_iCABuilder; i++)
                     {
-                        m_assemblyData.m_CABuilders[i].CreateCustomAttribute(
-                            onDiskAssemblyModule,
-                            AssemblyBuilderData.m_tkAssembly, // This is the AssemblyDef token
-                            tkAttrs[i],
-                            true
-                        );
+                        m_assemblyData
+                            .m_CABuilders[i]
+                            .CreateCustomAttribute(
+                                onDiskAssemblyModule,
+                                AssemblyBuilderData.m_tkAssembly, // This is the AssemblyDef token
+                                tkAttrs[i],
+                                true
+                            );
                     }
 
                     for (i = 0; i < m_assemblyData.m_iCAs; i++)

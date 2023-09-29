@@ -297,7 +297,8 @@ namespace System.Data.Mapping.ViewGeneration
             if (
                 originalCell
                     .GetLeftQuery(viewTarget)
-                    .Conditions.Where(
+                    .Conditions
+                    .Where(
                         restriction =>
                             restriction.RestrictedMemberSlot.MemberPath.Equals(memberToExpand)
                     )
@@ -305,7 +306,8 @@ namespace System.Data.Mapping.ViewGeneration
                     .Any()
                 || originalCell
                     .GetRightQuery(viewTarget)
-                    .Conditions.Where(
+                    .Conditions
+                    .Where(
                         restriction =>
                             restriction.RestrictedMemberSlot.MemberPath.Equals(rightSidePath)
                     )

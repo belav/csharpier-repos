@@ -383,7 +383,8 @@ namespace Tracing.Tests.Common
                                     pid = int.Parse(
                                         Regex
                                             .Match(filename, @"dotnet-diagnostic-(?<pid>\d+)")
-                                            .Groups["pid"].Value
+                                            .Groups["pid"]
+                                            .Value
                                     ),
                                     fileInfo = new FileInfo(filename)
                                 }

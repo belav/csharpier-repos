@@ -304,7 +304,8 @@ namespace System.Web.Mvc.Async.Test
             // Assert
             Assert.Equal(6, selector.NonAliasedMethods.Count);
 
-            List<MethodInfo> sortedMethods = selector.NonAliasedMethods["foo"]
+            List<MethodInfo> sortedMethods = selector
+                .NonAliasedMethods["foo"]
                 .OrderBy(method => method.GetParameters().Length)
                 .ToList();
             Assert.Equal("Foo", sortedMethods[0].Name);

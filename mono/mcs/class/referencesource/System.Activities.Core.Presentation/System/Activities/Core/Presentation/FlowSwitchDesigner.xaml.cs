@@ -70,7 +70,8 @@ namespace System.Activities.Core.Presentation
                 if (
                     this.Context.Services
                         .GetService<DesignerConfigurationService>()
-                        .TargetFrameworkName.IsLessThan45()
+                        .TargetFrameworkName
+                        .IsLessThan45()
                 )
                 {
                     this.displayNameTextBox.IsReadOnly = true;
@@ -251,9 +252,10 @@ namespace System.Activities.Core.Presentation
                     IFlowSwitchDefaultLink link = (IFlowSwitchDefaultLink)
                         linkModelItem.GetCurrentValue();
                     string defaultDisplayName = (string)
-                        this.ModelItem.Properties[
-                            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                        ].Value.GetCurrentValue();
+                        this.ModelItem
+                            .Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName]
+                            .Value
+                            .GetCurrentValue();
 
                     if (link.DefaultCaseDisplayName != defaultDisplayName)
                     {
@@ -264,9 +266,11 @@ namespace System.Activities.Core.Presentation
                             )
                         )
                         {
-                            linkModelItem.Properties[
-                                FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
-                            ].SetValue(defaultDisplayName);
+                            linkModelItem
+                                .Properties[
+                                    FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                                ]
+                                .SetValue(defaultDisplayName);
                             link.DefaultCaseDisplayName = defaultDisplayName;
                             scope.Complete();
                         }

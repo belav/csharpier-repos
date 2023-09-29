@@ -206,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     {
                         var textLine = baseToken.SyntaxTree
                             .GetText(cancellationToken)
-                            .Lines.GetLineFromPosition(baseToken.SpanStart);
+                            .Lines
+                            .GetLineFromPosition(baseToken.SpanStart);
                         baseToken = baseToken.SyntaxTree
                             .GetRoot(cancellationToken)
                             .FindToken(textLine.Start);

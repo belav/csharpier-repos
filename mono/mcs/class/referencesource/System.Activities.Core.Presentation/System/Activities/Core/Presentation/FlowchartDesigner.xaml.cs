@@ -456,13 +456,13 @@ namespace System.Activities.Core.Presentation
             this.shapeLocations.Clear();
 
             this.FlowchartWidth = (double)
-                TypeDescriptor.GetProperties(this.ModelItem)[
-                    FlowchartSizeFeature.WidthPropertyName
-                ].GetValue(this.ModelItem);
+                TypeDescriptor
+                    .GetProperties(this.ModelItem)[FlowchartSizeFeature.WidthPropertyName]
+                    .GetValue(this.ModelItem);
             this.FlowchartHeight = (double)
-                TypeDescriptor.GetProperties(this.ModelItem)[
-                    FlowchartSizeFeature.HeightPropertyName
-                ].GetValue(this.ModelItem);
+                TypeDescriptor
+                    .GetProperties(this.ModelItem)[FlowchartSizeFeature.HeightPropertyName]
+                    .GetValue(this.ModelItem);
 
             CreateStartSymbol();
             AddFlowElementsToDesigner(this.ModelItem.Properties["Nodes"].Collection, true);
@@ -1054,7 +1054,8 @@ namespace System.Activities.Core.Presentation
                             //If the Link source is dropped onto itself, we need to set the isLinkValidDueToLinkMove flag.
                             bool isLinkValidDueToLinkMove = FreeFormPanel
                                 .GetSourceConnectionPoint(movedConnector)
-                                .ParentDesigner.Equals(newViewElement);
+                                .ParentDesigner
+                                .Equals(newViewElement);
                             if (newConnectionPoint == null)
                             {
                                 linkCreated = CreateLinkGesture(
@@ -2121,9 +2122,10 @@ namespace System.Activities.Core.Presentation
                             {
                                 // FlowNode is a new created one, which means this is an Activity dragged
                                 // from somewhere else, outside of Flowchart.
-                                flowElementMI = this.ModelItem.Properties["Nodes"].Collection.Add(
-                                    flowElement
-                                );
+                                flowElementMI = this.ModelItem
+                                    .Properties["Nodes"]
+                                    .Collection
+                                    .Add(flowElement);
                                 flowNodeModelItemMap[flowElement] = flowElementMI;
                             }
                             newFlowStepMI = flowElementMI;
@@ -2168,9 +2170,10 @@ namespace System.Activities.Core.Presentation
                                 shouldStoreCurrentSizeViewState = false;
                             }
 
-                            newFlowStepMI = this.ModelItem.Properties["Nodes"].Collection.Add(
-                                flowStep
-                            );
+                            newFlowStepMI = this.ModelItem
+                                .Properties["Nodes"]
+                                .Collection
+                                .Add(flowStep);
                             droppedModelItem = newFlowStepMI.Properties["Action"].Value;
                         }
                         else if (typeof(FlowNode).IsAssignableFrom(droppedObject.GetType()))
@@ -2181,9 +2184,10 @@ namespace System.Activities.Core.Presentation
                                 this.StoreCurrentSizeViewStateWithUndo();
                                 shouldStoreCurrentSizeViewState = false;
                             }
-                            droppedModelItem = this.ModelItem.Properties["Nodes"].Collection.Add(
-                                droppedObject
-                            );
+                            droppedModelItem = this.ModelItem
+                                .Properties["Nodes"]
+                                .Collection
+                                .Add(droppedObject);
                             newFlowStepMI = droppedModelItem;
                         }
 

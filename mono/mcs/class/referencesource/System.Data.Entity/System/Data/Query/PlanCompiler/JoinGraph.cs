@@ -1934,9 +1934,11 @@ namespace System.Data.Query.PlanCompiler
                 // name equality on the right table vars
                 if (
                     !edge2.LeftVars[j].Equals(edge1.LeftVars[j])
-                    || !edge2.RightVars[j].ColumnMetadata.Name.Equals(
-                        edge1.RightVars[j].ColumnMetadata.Name
-                    )
+                    || !edge2
+                        .RightVars[j]
+                        .ColumnMetadata
+                        .Name
+                        .Equals(edge1.RightVars[j].ColumnMetadata.Name)
                 )
                 {
                     return false;
@@ -2047,9 +2049,11 @@ namespace System.Data.Query.PlanCompiler
             for (int i = 0; i < joinEdge.LeftVars.Count; i++)
             {
                 if (
-                    !joinEdge.LeftVars[i].ColumnMetadata.Name.Equals(
-                        joinEdge.RightVars[i].ColumnMetadata.Name
-                    )
+                    !joinEdge
+                        .LeftVars[i]
+                        .ColumnMetadata
+                        .Name
+                        .Equals(joinEdge.RightVars[i].ColumnMetadata.Name)
                 )
                 {
                     return false;

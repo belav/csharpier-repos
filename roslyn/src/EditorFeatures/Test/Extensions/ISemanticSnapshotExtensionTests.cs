@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             );
             var position = workspace.Documents
                 .Single(d => d.CursorPosition.HasValue)
-                .CursorPosition.Value;
+                .CursorPosition
+                .Value;
             var snapshot = workspace.Documents.Single().GetTextBuffer().CurrentSnapshot;
 
             var document = workspace.CurrentSolution.GetDocument(workspace.Documents.Single().Id);

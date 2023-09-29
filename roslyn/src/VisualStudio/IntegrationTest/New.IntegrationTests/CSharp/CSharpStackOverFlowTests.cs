@@ -81,7 +81,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         {
             var resourceStream = typeof(CSharpStackOverFlowTests)
                 .GetTypeInfo()
-                .Assembly.GetManifestResourceStream(
+                .Assembly
+                .GetManifestResourceStream(
                     "Roslyn.VisualStudio.NewIntegrationTests.Resources.LongClass.txt"
                 );
             using var reader = new StreamReader(resourceStream);

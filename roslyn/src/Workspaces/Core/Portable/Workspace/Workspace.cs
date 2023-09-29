@@ -2677,7 +2677,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !this.CurrentSolution
                     .GetProject(fromProjectId)!
-                    .ProjectReferences.Contains(projectReference)
+                    .ProjectReferences
+                    .Contains(projectReference)
             )
             {
                 throw new ArgumentException(
@@ -2700,7 +2701,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 this.CurrentSolution
                     .GetProject(fromProjectId)!
-                    .ProjectReferences.Contains(projectReference)
+                    .ProjectReferences
+                    .Contains(projectReference)
             )
             {
                 throw new ArgumentException(
@@ -2746,7 +2748,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !this.CurrentSolution
                     .GetProject(projectId)!
-                    .MetadataReferences.Contains(metadataReference)
+                    .MetadataReferences
+                    .Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_not_referenced);
@@ -2764,7 +2767,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 this.CurrentSolution
                     .GetProject(projectId)!
-                    .MetadataReferences.Contains(metadataReference)
+                    .MetadataReferences
+                    .Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_already_referenced);
@@ -2782,7 +2786,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 !this.CurrentSolution
                     .GetProject(projectId)!
-                    .AnalyzerReferences.Contains(analyzerReference)
+                    .AnalyzerReferences
+                    .Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(
@@ -2802,7 +2807,8 @@ namespace Microsoft.CodeAnalysis
             if (
                 this.CurrentSolution
                     .GetProject(projectId)!
-                    .AnalyzerReferences.Contains(analyzerReference)
+                    .AnalyzerReferences
+                    .Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(

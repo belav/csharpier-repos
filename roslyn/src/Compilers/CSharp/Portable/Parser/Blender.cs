@@ -164,7 +164,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // interpolated string literal in the changed range will be scanned in its entirety.
                 var column = oldTree.SyntaxTree
                     .GetLineSpan(new TextSpan(start, 0))
-                    .Span.Start.Character;
+                    .Span
+                    .Start
+                    .Character;
                 start = Math.Max(start - column, 0);
             }
 

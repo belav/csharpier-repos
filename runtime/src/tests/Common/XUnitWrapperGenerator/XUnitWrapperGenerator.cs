@@ -642,9 +642,10 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     else
                     {
                         switch (
-                            filterAttribute.AttributeConstructor.Parameters[1].Type.ToDisplayString(
-                                SymbolDisplayFormat.FullyQualifiedFormat
-                            )
+                            filterAttribute.AttributeConstructor
+                                .Parameters[1]
+                                .Type
+                                .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
                         )
                         {
                             case "global::Xunit.TestPlatforms":
@@ -735,9 +736,10 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                         int argumentValue = (int)
                             filterAttribute.ConstructorArguments[argumentIndex].Value!;
                         switch (
-                            filterAttribute.AttributeConstructor!.Parameters[
-                                argumentIndex
-                            ].Type.ToDisplayString()
+                            filterAttribute.AttributeConstructor!
+                                .Parameters[argumentIndex]
+                                .Type
+                                .ToDisplayString()
                         )
                         {
                             case "Xunit.TestPlatforms":

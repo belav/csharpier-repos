@@ -87,9 +87,11 @@ namespace MonoTests.Features
         {
             ChannelDispatcher dispatcher =
                 serviceHostBase.ChannelDispatchers[0] as ChannelDispatcher;
-            dispatcher.Endpoints[0].DispatchRuntime.MessageInspectors.Add(
-                new LoggerMessageInspector()
-            );
+            dispatcher
+                .Endpoints[0]
+                .DispatchRuntime
+                .MessageInspectors
+                .Add(new LoggerMessageInspector());
         }
 
         public void Validate(

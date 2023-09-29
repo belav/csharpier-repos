@@ -65,7 +65,8 @@ class Class : CppCli.CppInterface1
             // bridge method for implicit implementation has custom modifiers
             var method2ExplicitImpl = @class
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Same(classMethod2, method2ExplicitImpl.ImplementingMethod);
             AssertAllParametersHaveConstModOpt(method2ExplicitImpl);
         }
@@ -167,7 +168,8 @@ class Class : CppCli.CppBase1
                 0,
                 @class
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Length
+                    .ForwardingMethods
+                    .Length
             );
         }
 
@@ -222,7 +224,8 @@ class Derived : Base
                 0,
                 baseClass
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Length
+                    .ForwardingMethods
+                    .Length
             );
 
             var derivedClass = global.GetMember<SourceNamedTypeSymbol>("Derived");
@@ -242,7 +245,8 @@ class Derived : Base
                 0,
                 derivedClass
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Length
+                    .ForwardingMethods
+                    .Length
             );
         }
 
@@ -495,7 +499,8 @@ class Class3 : CppCli.CppBase2, CppCli.CppInterface1
             //Method2 is implemented in the base class
             var class2Method2SynthesizedExplicitImpl = class2
                 .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                .ForwardingMethods.Single();
+                .ForwardingMethods
+                .Single();
             Assert.Equal(
                 "Method2",
                 class2Method2SynthesizedExplicitImpl.ExplicitInterfaceImplementations.Single().Name
@@ -574,7 +579,8 @@ class Class : I2
             var classMethod1 = @class.GetMethod("I2.M1");
             var classMethod1CustomModifiers = classMethod1.Parameters
                 .Single()
-                .TypeWithAnnotations.CustomModifiers;
+                .TypeWithAnnotations
+                .CustomModifiers;
             Assert.Equal(2, classMethod1CustomModifiers.Length);
             foreach (var customModifier in classMethod1CustomModifiers)
             {
@@ -585,7 +591,8 @@ class Class : I2
             Assert.False(
                 @class
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Any()
+                    .ForwardingMethods
+                    .Any()
             );
         }
 
@@ -687,7 +694,8 @@ class Explicit : CppCli.CppIndexerInterface
                 0,
                 @class
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Length
+                    .ForwardingMethods
+                    .Length
             );
         }
 
@@ -776,7 +784,8 @@ class Override : CppCli.CppIndexerBase
                 0,
                 @class
                     .GetSynthesizedExplicitImplementations(CancellationToken.None)
-                    .ForwardingMethods.Length
+                    .ForwardingMethods
+                    .Length
             );
         }
 
@@ -2231,14 +2240,18 @@ class Derived : Base
                 int16Type,
                 baseProperty.SetMethod.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int16Type,
                 derivedProperty.SetMethod.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
 
@@ -2257,39 +2270,55 @@ class Derived : Base
                 int16Type,
                 baseIndexer.GetMethod.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int16Type,
                 derivedIndexer.GetMethod.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
 
             Assert.Equal(
                 int32Type,
-                baseIndexer.SetMethod.Parameters[0].TypeWithAnnotations.CustomModifiers
+                baseIndexer.SetMethod
+                    .Parameters[0]
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int32Type,
-                derivedIndexer.SetMethod.Parameters[0].TypeWithAnnotations.CustomModifiers
+                derivedIndexer.SetMethod
+                    .Parameters[0]
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier()
             );
 
             Assert.Equal(
                 int64Type,
-                baseIndexer.SetMethod.Parameters[1].TypeWithAnnotations.CustomModifiers
+                baseIndexer.SetMethod
+                    .Parameters[1]
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int64Type,
-                derivedIndexer.SetMethod.Parameters[1].TypeWithAnnotations.CustomModifiers
+                derivedIndexer.SetMethod
+                    .Parameters[1]
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier()
             );
@@ -2421,14 +2450,18 @@ class Derived : Base
                 int16Type,
                 baseIndexer.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int16Type,
                 derivedIndexer.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
 
@@ -2541,14 +2574,18 @@ class Implementation : I
                 int16Type,
                 interfaceProperty.SetMethod.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int16Type,
                 implementationProperty.SetMethod.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
 
@@ -2569,39 +2606,55 @@ class Implementation : I
                 int16Type,
                 interfaceIndexer.GetMethod.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int16Type,
                 implementationIndexer.GetMethod.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
 
             Assert.Equal(
                 int32Type,
-                interfaceIndexer.SetMethod.Parameters[0].TypeWithAnnotations.CustomModifiers
+                interfaceIndexer.SetMethod
+                    .Parameters[0]
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int32Type,
-                implementationIndexer.SetMethod.Parameters[0].TypeWithAnnotations.CustomModifiers
+                implementationIndexer.SetMethod
+                    .Parameters[0]
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier()
             );
 
             Assert.Equal(
                 int64Type,
-                interfaceIndexer.SetMethod.Parameters[1].TypeWithAnnotations.CustomModifiers
+                interfaceIndexer.SetMethod
+                    .Parameters[1]
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int64Type,
-                implementationIndexer.SetMethod.Parameters[1].TypeWithAnnotations.CustomModifiers
+                implementationIndexer.SetMethod
+                    .Parameters[1]
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier()
             );
@@ -2720,14 +2773,18 @@ class Implementation : I
                 int16Type,
                 interfaceIndexer.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
             Assert.Equal(
                 int16Type,
                 implementationIndexer.Parameters
                     .Single()
-                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .Single()
                     .Modifier()
             );
 
@@ -2769,7 +2826,8 @@ class Implementation : I
                         ConstModOptType,
                         param.TypeWithAnnotations.CustomModifiers
                             .Single()
-                            .Modifier.ToTestDisplayString()
+                            .Modifier
+                            .ToTestDisplayString()
                     );
                 }
             }

@@ -50,9 +50,9 @@ namespace System.Activities.Presentation
 
             EditingContext context = ((IModelTreeItem)activityModelItem).ModelTreeManager.Context;
 
-            var inputData = parentModelItem.Properties[
-                propertyValue.ParentProperty.PropertyName
-            ].Collection;
+            var inputData = parentModelItem
+                .Properties[propertyValue.ParentProperty.PropertyName]
+                .Collection;
 
             DynamicArgumentDesignerOptions options = new DynamicArgumentDesignerOptions
             {

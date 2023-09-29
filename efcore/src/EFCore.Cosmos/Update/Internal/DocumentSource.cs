@@ -355,9 +355,8 @@ public class DocumentSource
     private static IProperty? FindOrdinalKeyProperty(IEntityType entityType) =>
         entityType
             .FindPrimaryKey()!
-            .Properties.FirstOrDefault(
-                p => p.GetJsonPropertyName().Length == 0 && p.IsOrdinalKeyProperty()
-            );
+            .Properties
+            .FirstOrDefault(p => p.GetJsonPropertyName().Length == 0 && p.IsOrdinalKeyProperty());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

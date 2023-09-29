@@ -542,7 +542,8 @@ namespace System.Data.Linq.SqlClient
         {
             bool hasProvider = DbProviderFactories
                 .GetFactoryClasses()
-                .Rows.OfType<DataRow>()
+                .Rows
+                .OfType<DataRow>()
                 .Select(r => (string)r["InvariantName"])
                 .Contains(providerName, StringComparer.OrdinalIgnoreCase);
             if (hasProvider)
@@ -699,7 +700,8 @@ namespace System.Data.Linq.SqlClient
                     {
                         Type engineType = this.conManager.Connection
                             .GetType()
-                            .Module.GetType("System.Data.SqlServerCe.SqlCeEngine");
+                            .Module
+                            .GetType("System.Data.SqlServerCe.SqlCeEngine");
                         object engine = Activator.CreateInstance(
                             engineType,
                             new object[] { builder.ToString() }

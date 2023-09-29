@@ -553,7 +553,8 @@ namespace System.Runtime.Remoting.Proxies
                             // pick up call context from the thread
                             m.Properties[Message.CallContextKey] = Thread.CurrentThread
                                 .GetMutableExecutionContext()
-                                .LogicalCallContext.Clone();
+                                .LogicalCallContext
+                                .Clone();
                             ar = new AsyncResult(m);
                             AgileAsyncWorkerItem workItem = new AgileAsyncWorkerItem(
                                 m,

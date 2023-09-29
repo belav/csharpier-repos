@@ -19,9 +19,9 @@ class CorrectEncodingOfNestedTypes
 
     public static int Main()
     {
-        var t = typeof(CorrectEncodingOfNestedTypes).GetNestedTypes(BindingFlags.NonPublic)[
-            0
-        ].GetNestedTypes(BindingFlags.NonPublic)[0];
+        var t = typeof(CorrectEncodingOfNestedTypes)
+            .GetNestedTypes(BindingFlags.NonPublic)[0]
+            .GetNestedTypes(BindingFlags.NonPublic)[0];
         var m = t.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)[0];
         var ca = (AsyncStateMachineAttribute)m.GetCustomAttributes(true)[0];
         if (ca.StateMachineType.GetGenericArguments().Length != 1)

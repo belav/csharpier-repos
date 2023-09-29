@@ -313,7 +313,9 @@ namespace MonoTests.stand_alone.WebHarness
                                 if (tmpXmlElement.Attributes[tmpIgnoreAttr.Name] != null)
                                 {
                                     if (
-                                        tmpXmlElement.Attributes[tmpIgnoreAttr.Name].Value
+                                        tmpXmlElement
+                                            .Attributes[tmpIgnoreAttr.Name]
+                                            .Value
                                             .ToLower()
                                             .IndexOf("javascript") >= 0
                                     )

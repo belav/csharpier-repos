@@ -329,7 +329,8 @@ public class SqlServerValueGenerationScenariosTest
                 .Entity<Blog>()
                 .Property(e => e.Id)
                 .HasDefaultValueSql("next value for MySequence")
-                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+                .Metadata
+                .SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
         }
     }
 
@@ -779,7 +780,8 @@ public class SqlServerValueGenerationScenariosTest
                 .Entity<Blog>()
                 .Property(e => e.CreatedOn)
                 .HasDefaultValueSql("getdate()")
-                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+                .Metadata
+                .SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
         }
     }
 
@@ -901,7 +903,8 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
                 .Entity<FullNameBlog>()
                 .Property(e => e.FullName)
                 .HasComputedColumnSql("[dbo].[GetFullName]([FirstName], [LastName])")
-                .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+                .Metadata
+                .SetAfterSaveBehavior(PropertySaveBehavior.Throw);
         }
     }
 
@@ -1336,7 +1339,8 @@ END"
                 .Entity<Blog>()
                 .Property(e => e.Id)
                 .HasDefaultValueSql("next value for MySequence")
-                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
+                .Metadata
+                .SetBeforeSaveBehavior(PropertySaveBehavior.Throw);
         }
     }
 

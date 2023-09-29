@@ -252,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             plusEqualTokenEndPosition = newRoot
                 .GetAnnotatedNodesAndTokens(plusEqualsTokenAnnotation)
                 .Single()
-                .Span.End;
+                .Span
+                .End;
 
             return document.Project.Solution.WithDocumentText(
                 formattedDocument.Id,

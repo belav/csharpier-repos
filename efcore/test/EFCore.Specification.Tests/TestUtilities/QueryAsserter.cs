@@ -1915,7 +1915,8 @@ public class QueryAsserter
             expectedType.IsGenericType
             && expectedType
                 .GetTypeInfo()
-                .ImplementedInterfaces.Any(
+                .ImplementedInterfaces
+                .Any(
                     i =>
                         i.IsConstructedGenericType
                         && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)

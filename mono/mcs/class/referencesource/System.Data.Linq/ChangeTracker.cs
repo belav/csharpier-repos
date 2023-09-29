@@ -192,7 +192,8 @@ namespace System.Data.Linq
                 Type type = obj.GetType();
                 MetaType metaType = this.services.Model
                     .GetTable(type)
-                    .RowType.GetInheritanceType(type);
+                    .RowType
+                    .GetInheritanceType(type);
                 return this.PromoteFastTrackedObject(metaType, obj);
             }
 
@@ -705,7 +706,8 @@ namespace System.Data.Linq
 
                     MetaType rootMetaType = this.tracker.services.Model
                         .GetTable(instanceType)
-                        .RowType.InheritanceRoot;
+                        .RowType
+                        .InheritanceRoot;
                     foreach (
                         MetaDataMember mm in rootMetaType
                             .GetInheritanceType(instanceType)

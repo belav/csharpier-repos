@@ -42,8 +42,9 @@ public class CosmosQueryMetadataExtractingExpressionVisitor : ExpressionVisitor
         {
             var innerQueryable = Visit(methodCallExpression.Arguments[0]);
 
-            _cosmosQueryCompilationContext.PartitionKeyFromExtension =
-                methodCallExpression.Arguments[1].GetConstantValue<string>();
+            _cosmosQueryCompilationContext.PartitionKeyFromExtension = methodCallExpression
+                .Arguments[1]
+                .GetConstantValue<string>();
 
             return innerQueryable;
         }

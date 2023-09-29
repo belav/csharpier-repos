@@ -238,7 +238,8 @@ public abstract partial class ModelBuilderTest
                 entity
                     .GetKeys()
                     .First(key => key != entity.FindPrimaryKey())
-                    .Properties.First()
+                    .Properties
+                    .First()
                     .Name
             );
         }
@@ -262,7 +263,8 @@ public abstract partial class ModelBuilderTest
                 entity
                     .GetKeys()
                     .First(key => key != entity.FindPrimaryKey())
-                    .Properties.First()
+                    .Properties
+                    .First()
                     .Name
             );
         }
@@ -284,7 +286,8 @@ public abstract partial class ModelBuilderTest
                 entity
                     .GetKeys()
                     .First(key => key != entity.FindPrimaryKey())
-                    .Properties.First()
+                    .Properties
+                    .First()
                     .Name
             );
         }

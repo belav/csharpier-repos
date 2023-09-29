@@ -491,7 +491,8 @@ public class RelationalScaffoldingModelFactoryTest
 
         info.Tables
             .First()
-            .Columns.Add(
+            .Columns
+            .Add(
                 new DatabaseColumn
                 {
                     Table = info.Tables.First(),

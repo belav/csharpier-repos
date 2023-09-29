@@ -34,7 +34,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             return result
                 .Should()
                 .Pass()
-                .And.HaveResolvedFramework(
+                .And
+                .HaveResolvedFramework(
                     resolvedFrameworkName,
                     resolvedFrameworkVersion,
                     resolvedFrameworkBasePath
@@ -103,7 +104,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             return result
                 .Should()
                 .Fail()
-                .And.DidNotFindCompatibleFrameworkVersion(frameworkName, requestedVersion);
+                .And
+                .DidNotFindCompatibleFrameworkVersion(frameworkName, requestedVersion);
         }
 
         public static AndConstraint<CommandResultAssertions> FailedToReconcileFrameworkReference(
@@ -134,7 +136,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 return result
                     .Should()
                     .Fail()
-                    .And.FailedToReconcileFrameworkReference(
+                    .And
+                    .FailedToReconcileFrameworkReference(
                         frameworkName,
                         lowerVersion,
                         higherVersion
@@ -159,7 +162,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 return result
                     .Should()
                     .Fail()
-                    .And.FailedToReconcileFrameworkReference(
+                    .And
+                    .FailedToReconcileFrameworkReference(
                         frameworkName,
                         lowerVersion,
                         higherVersion

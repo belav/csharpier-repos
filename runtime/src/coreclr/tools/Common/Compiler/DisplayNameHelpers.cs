@@ -81,9 +81,9 @@ namespace ILCompiler
                     sb.Append(method.Instantiation[i].GetDisplayNameWithoutNamespace()).Append(',');
 
                 sb.Append(
-                    method.Instantiation[
-                        method.Instantiation.Length - 1
-                    ].GetDisplayNameWithoutNamespace()
+                    method
+                        .Instantiation[method.Instantiation.Length - 1]
+                        .GetDisplayNameWithoutNamespace()
                 );
                 sb.Append('>');
             }

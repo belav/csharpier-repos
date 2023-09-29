@@ -100,10 +100,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 {
                     references.Add(
                         (ExpressionSyntax)
-                            diagnostic.AdditionalLocations[i].FindNode(
-                                getInnermostNodeForTie: true,
-                                cancellationToken
-                            )
+                            diagnostic
+                                .AdditionalLocations[i]
+                                .FindNode(getInnermostNodeForTie: true, cancellationToken)
                     );
                 }
 

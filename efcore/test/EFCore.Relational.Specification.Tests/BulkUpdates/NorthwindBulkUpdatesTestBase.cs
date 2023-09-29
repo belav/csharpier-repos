@@ -1388,7 +1388,9 @@ WHERE [CustomerID] LIKE 'A%'"
                     LastOrderDate = c.Orders
                         .OrderByDescending(o => o.OrderDate)
                         .FirstOrDefault()
-                        .OrderDate.Value.Year
+                        .OrderDate
+                        .Value
+                        .Year
                 },
             e => e.c,
             s => s.SetProperty(c => c.c.City, c => c.LastOrderDate.ToString()),

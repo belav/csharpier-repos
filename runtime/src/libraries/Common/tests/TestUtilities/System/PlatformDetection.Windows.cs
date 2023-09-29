@@ -287,10 +287,8 @@ namespace System
                     // desire to use this method elsewhere.
                     if (
                         e.GetType()
-                            .FullName.Equals(
-                                "System.EntryPointNotFoundException",
-                                StringComparison.Ordinal
-                            )
+                            .FullName
+                            .Equals("System.EntryPointNotFoundException", StringComparison.Ordinal)
                     )
                     {
                         // API doesn't exist, likely pre Win8

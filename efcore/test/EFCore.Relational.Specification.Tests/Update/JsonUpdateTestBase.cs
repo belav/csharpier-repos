@@ -184,9 +184,10 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             async context =>
             {
                 var updatedEntity = await context.JsonEntitiesBasic.SingleAsync();
-                var updatedReference = updatedEntity.OwnedReferenceRoot.OwnedCollectionBranch[
-                    0
-                ].OwnedReferenceLeaf;
+                var updatedReference = updatedEntity
+                    .OwnedReferenceRoot
+                    .OwnedCollectionBranch[0]
+                    .OwnedReferenceLeaf;
                 Assert.Equal("ss3", updatedReference.SomethingSomething);
             }
         );
@@ -553,15 +554,21 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var entity = query.Single();
                 entity.OwnedReferenceRoot.OwnedReferenceBranch.Date = new DateTime(2111, 11, 11);
                 entity.OwnedReferenceRoot.Name = "edit";
-                entity.OwnedCollectionRoot[0].OwnedCollectionBranch[1].OwnedCollectionLeaf[
-                    0
-                ].SomethingSomething = "yet another change";
-                entity.OwnedCollectionRoot[0].OwnedCollectionBranch[1].OwnedCollectionLeaf[
-                    1
-                ].SomethingSomething = "and another";
-                entity.OwnedCollectionRoot[0].OwnedCollectionBranch[0].OwnedCollectionLeaf[
-                    0
-                ].SomethingSomething = "...and another";
+                entity
+                    .OwnedCollectionRoot[0]
+                    .OwnedCollectionBranch[1]
+                    .OwnedCollectionLeaf[0]
+                    .SomethingSomething = "yet another change";
+                entity
+                    .OwnedCollectionRoot[0]
+                    .OwnedCollectionBranch[1]
+                    .OwnedCollectionLeaf[1]
+                    .SomethingSomething = "and another";
+                entity
+                    .OwnedCollectionRoot[0]
+                    .OwnedCollectionBranch[0]
+                    .OwnedCollectionLeaf[0]
+                    .SomethingSomething = "...and another";
 
                 ClearLog();
                 await context.SaveChangesAsync();
@@ -576,21 +583,27 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal("edit", result.OwnedReferenceRoot.Name);
                 Assert.Equal(
                     "yet another change",
-                    result.OwnedCollectionRoot[0].OwnedCollectionBranch[1].OwnedCollectionLeaf[
-                        0
-                    ].SomethingSomething
+                    result
+                        .OwnedCollectionRoot[0]
+                        .OwnedCollectionBranch[1]
+                        .OwnedCollectionLeaf[0]
+                        .SomethingSomething
                 );
                 Assert.Equal(
                     "and another",
-                    result.OwnedCollectionRoot[0].OwnedCollectionBranch[1].OwnedCollectionLeaf[
-                        1
-                    ].SomethingSomething
+                    result
+                        .OwnedCollectionRoot[0]
+                        .OwnedCollectionBranch[1]
+                        .OwnedCollectionLeaf[1]
+                        .SomethingSomething
                 );
                 Assert.Equal(
                     "...and another",
-                    result.OwnedCollectionRoot[0].OwnedCollectionBranch[0].OwnedCollectionLeaf[
-                        0
-                    ].SomethingSomething
+                    result
+                        .OwnedCollectionRoot[0]
+                        .OwnedCollectionBranch[0]
+                        .OwnedCollectionLeaf[0]
+                        .SomethingSomething
                 );
             }
         );
@@ -634,7 +647,9 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(45.32m, result.OwnedReferenceRoot.OwnedCollectionBranch[2].Fraction);
                 Assert.Equal(
                     "cc",
-                    result.OwnedReferenceRoot.OwnedCollectionBranch[2]
+                    result
+                        .OwnedReferenceRoot
+                        .OwnedCollectionBranch[2]
                         .OwnedReferenceLeaf
                         .SomethingSomething
                 );
@@ -650,12 +665,16 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var query = await context.JsonEntitiesBasic.ToListAsync();
                 var entity = query.Single();
-                entity.OwnedReferenceRoot.OwnedCollectionBranch[0].OwnedCollectionLeaf[
-                    0
-                ].SomethingSomething = "edit1";
-                entity.OwnedReferenceRoot.OwnedCollectionBranch[0].OwnedCollectionLeaf[
-                    1
-                ].SomethingSomething = "edit2";
+                entity
+                    .OwnedReferenceRoot
+                    .OwnedCollectionBranch[0]
+                    .OwnedCollectionLeaf[0]
+                    .SomethingSomething = "edit1";
+                entity
+                    .OwnedReferenceRoot
+                    .OwnedCollectionBranch[0]
+                    .OwnedCollectionLeaf[1]
+                    .SomethingSomething = "edit2";
 
                 ClearLog();
                 await context.SaveChangesAsync();
@@ -665,15 +684,19 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var result = await context.Set<JsonEntityBasic>().SingleAsync();
                 Assert.Equal(
                     "edit1",
-                    result.OwnedReferenceRoot.OwnedCollectionBranch[0].OwnedCollectionLeaf[
-                        0
-                    ].SomethingSomething
+                    result
+                        .OwnedReferenceRoot
+                        .OwnedCollectionBranch[0]
+                        .OwnedCollectionLeaf[0]
+                        .SomethingSomething
                 );
                 Assert.Equal(
                     "edit2",
-                    result.OwnedReferenceRoot.OwnedCollectionBranch[0].OwnedCollectionLeaf[
-                        1
-                    ].SomethingSomething
+                    result
+                        .OwnedReferenceRoot
+                        .OwnedCollectionBranch[0]
+                        .OwnedCollectionLeaf[1]
+                        .SomethingSomething
                 );
             }
         );
@@ -710,10 +733,14 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             {
                 var query = await context.JsonEntitiesBasic.ToListAsync();
                 var entity = query.Single();
-                entity.OwnedReferenceRoot.OwnedCollectionBranch[1].OwnedCollectionLeaf[
-                    0
-                ].SomethingSomething = "edit1";
-                entity.OwnedReferenceRoot.OwnedCollectionBranch[1]
+                entity
+                    .OwnedReferenceRoot
+                    .OwnedCollectionBranch[1]
+                    .OwnedCollectionLeaf[0]
+                    .SomethingSomething = "edit1";
+                entity
+                    .OwnedReferenceRoot
+                    .OwnedCollectionBranch[1]
                     .OwnedReferenceLeaf
                     .SomethingSomething = "edit2";
 
@@ -725,13 +752,17 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var result = await context.Set<JsonEntityBasic>().SingleAsync();
                 Assert.Equal(
                     "edit1",
-                    result.OwnedReferenceRoot.OwnedCollectionBranch[1].OwnedCollectionLeaf[
-                        0
-                    ].SomethingSomething
+                    result
+                        .OwnedReferenceRoot
+                        .OwnedCollectionBranch[1]
+                        .OwnedCollectionLeaf[0]
+                        .SomethingSomething
                 );
                 Assert.Equal(
                     "edit2",
-                    result.OwnedReferenceRoot.OwnedCollectionBranch[1]
+                    result
+                        .OwnedReferenceRoot
+                        .OwnedCollectionBranch[1]
                         .OwnedReferenceLeaf
                         .SomethingSomething
                 );
@@ -1540,9 +1571,11 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 Assert.Equal(523.532M, result.OwnedReferenceRoot.OwnedReferenceBranch.Fraction);
                 Assert.Equal(
                     "edit",
-                    result.OwnedReferenceRoot.OwnedReferenceBranch.OwnedCollectionLeaf[
-                        0
-                    ].SomethingSomething
+                    result
+                        .OwnedReferenceRoot
+                        .OwnedReferenceBranch
+                        .OwnedCollectionLeaf[0]
+                        .SomethingSomething
                 );
             }
         );

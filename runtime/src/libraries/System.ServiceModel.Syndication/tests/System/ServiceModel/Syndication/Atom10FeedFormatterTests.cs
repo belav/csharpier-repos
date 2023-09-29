@@ -1349,7 +1349,8 @@ namespace System.ServiceModel.Syndication.Tests
                         Assert.Equal(1, itemFourthCategory.ElementExtensions.Count);
                         Assert.Equal(
                             10,
-                            itemFourthCategory.ElementExtensions[0]
+                            itemFourthCategory
+                                .ElementExtensions[0]
                                 .GetObject<ExtensionObject>()
                                 .Value
                         );
@@ -1452,7 +1453,8 @@ namespace System.ServiceModel.Syndication.Tests
                         Assert.Equal(1, itemThirdContributor.ElementExtensions.Count);
                         Assert.Equal(
                             10,
-                            itemThirdContributor.ElementExtensions[0]
+                            itemThirdContributor
+                                .ElementExtensions[0]
                                 .GetObject<ExtensionObject>()
                                 .Value
                         );

@@ -591,12 +591,8 @@ public class InternalDbSet<
         {
             _context
                 .GetDependencies()
-                .EntityGraphAttacher.AttachGraph(
-                    entry,
-                    entityState,
-                    entityState,
-                    forceStateWhenUnknownKey: true
-                );
+                .EntityGraphAttacher
+                .AttachGraph(entry, entityState, entityState, forceStateWhenUnknownKey: true);
         }
         else
         {
@@ -616,7 +612,8 @@ public class InternalDbSet<
         entry.EntityState == EntityState.Detached
             ? _context
                 .GetDependencies()
-                .EntityGraphAttacher.AttachGraphAsync(
+                .EntityGraphAttacher
+                .AttachGraphAsync(
                     entry,
                     entityState,
                     entityState,

@@ -136,7 +136,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             MethodEntryPointTableNode otherMethodEntryPointTable = (MethodEntryPointTableNode)other;
             return _module.Assembly
                 .GetName()
-                .Name.CompareTo(otherMethodEntryPointTable._module.Assembly.GetName().Name);
+                .Name
+                .CompareTo(otherMethodEntryPointTable._module.Assembly.GetName().Name);
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

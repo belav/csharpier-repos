@@ -1464,9 +1464,8 @@ namespace MonoTests.System.Reflection
         {
             var x1 = Assembly
                 .GetExecutingAssembly()
-                .DefinedTypes.Where(
-                    l => l.FullName == "MonoTests.System.Reflection.TestDefinedTypes"
-                )
+                .DefinedTypes
+                .Where(l => l.FullName == "MonoTests.System.Reflection.TestDefinedTypes")
                 .Single();
             var x2 = Assembly
                 .GetExecutingAssembly()

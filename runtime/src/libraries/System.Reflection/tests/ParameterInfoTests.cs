@@ -583,7 +583,8 @@ namespace System.Reflection.Tests
         {
             var parameterWithNullMetadataToken = typeof(int[])
                 .GetProperty(nameof(Array.Length))
-                .GetMethod.ReturnParameter;
+                .GetMethod
+                .ReturnParameter;
             Assert.Equal(
                 typeof(Attribute[]),
                 Attribute.GetCustomAttributes(parameterWithNullMetadataToken).GetType()
@@ -713,7 +714,8 @@ namespace System.Reflection.Tests
         private static MethodInfo GetMethod(Type type, string name)
         {
             return type.GetTypeInfo()
-                .DeclaredMethods.FirstOrDefault(methodInfo => methodInfo.Name.Equals(name));
+                .DeclaredMethods
+                .FirstOrDefault(methodInfo => methodInfo.Name.Equals(name));
         }
 
         private class CustomDateTimeConstantAttribute : UsableCustomConstantAttribute

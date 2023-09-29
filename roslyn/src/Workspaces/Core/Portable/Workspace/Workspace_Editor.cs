@@ -993,7 +993,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     newSolution = document
                         .WithText(this.GetOpenDocumentText(oldSolution, docId))
-                        .Project.Solution;
+                        .Project
+                        .Solution;
                 }
             }
 
@@ -1013,7 +1014,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     newSolution = document
                         .WithText(this.GetOpenDocumentText(oldSolution, docId))
-                        .Project.Solution;
+                        .Project
+                        .Solution;
                 }
             }
 

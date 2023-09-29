@@ -1971,9 +1971,9 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
                 .Single(
                     m =>
                         m.Name == WellKnownMemberNames.ImplicitConversionName
-                        && m.Parameters[0].Type.Equals(
-                            _emptyCompilation.GetSpecialType(SpecialType.System_Byte)
-                        )
+                        && m.Parameters[0]
+                            .Type
+                            .Equals(_emptyCompilation.GetSpecialType(SpecialType.System_Byte))
                 );
             VerifySyntax<ConversionOperatorDeclarationSyntax>(
                 Generator.Declaration(conversion),

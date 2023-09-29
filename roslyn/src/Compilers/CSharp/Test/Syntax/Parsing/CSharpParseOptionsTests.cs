@@ -71,21 +71,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                 CSharpParseOptions.Default
                     .WithPreprocessorSymbols(ImmutableArray.Create<string>("A", "B"))
                     .WithPreprocessorSymbols(default(ImmutableArray<string>))
-                    .PreprocessorSymbols.Length
+                    .PreprocessorSymbols
+                    .Length
             );
             Assert.Equal(
                 0,
                 CSharpParseOptions.Default
                     .WithPreprocessorSymbols(ImmutableArray.Create<string>("A", "B"))
                     .WithPreprocessorSymbols((IEnumerable<string>)null)
-                    .PreprocessorSymbols.Length
+                    .PreprocessorSymbols
+                    .Length
             );
             Assert.Equal(
                 0,
                 CSharpParseOptions.Default
                     .WithPreprocessorSymbols(ImmutableArray.Create<string>("A", "B"))
                     .WithPreprocessorSymbols((string[])null)
-                    .PreprocessorSymbols.Length
+                    .PreprocessorSymbols
+                    .Length
             );
         }
 

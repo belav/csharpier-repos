@@ -66,7 +66,8 @@ namespace Activator
                         "GetClassFactoryForType",
                         BindingFlags.NonPublic | BindingFlags.Static
                     )
-                    .MethodHandle.GetFunctionPointer();
+                    .MethodHandle
+                    .GetFunctionPointer();
         private static delegate* <
             ComActivationContext,
             bool,
@@ -77,7 +78,8 @@ namespace Activator
                     "ClassRegistrationScenarioForType",
                     BindingFlags.NonPublic | BindingFlags.Static
                 )
-                .MethodHandle.GetFunctionPointer();
+                .MethodHandle
+                .GetFunctionPointer();
 
         private static ClassFactoryWrapper GetClassFactoryForType(ComActivationContext context)
         {

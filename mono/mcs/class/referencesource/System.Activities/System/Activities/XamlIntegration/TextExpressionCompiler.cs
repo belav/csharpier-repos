@@ -2318,7 +2318,8 @@ namespace System.Activities.XamlIntegration
                 {
                     baseTypeName = this.compiledDataContexts
                         .Peek()
-                        .CodeTypeDeclarationForReadOnly.Name;
+                        .CodeTypeDeclarationForReadOnly
+                        .Name;
                 }
                 else
                 {

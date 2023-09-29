@@ -1254,12 +1254,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
 
             // They should have the same content digests.
-            AsnEncodedData firstDigest = cms.SignerInfos[0].SignedAttributes
+            AsnEncodedData firstDigest = cms.SignerInfos[0]
+                .SignedAttributes
                 .OfType<CryptographicAttributeObject>()
                 .First(cao => cao.Oid.Value == Oids.MessageDigest)
                 .Values[0];
 
-            AsnEncodedData secondDigest = cms.SignerInfos[1].SignedAttributes
+            AsnEncodedData secondDigest = cms.SignerInfos[1]
+                .SignedAttributes
                 .OfType<CryptographicAttributeObject>()
                 .First(cao => cao.Oid.Value == Oids.MessageDigest)
                 .Values[0];

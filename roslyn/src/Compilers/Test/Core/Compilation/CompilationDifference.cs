@@ -199,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             var actual = EmitResult.Baseline.SynthesizedMembers
                 .Single(e => e.Key.ToString() == typeName)
-                .Value.Where(s => s.Kind == SymbolKind.Field)
+                .Value
+                .Where(s => s.Kind == SymbolKind.Field)
                 .Select(s => (IFieldSymbol)s.GetISymbol())
                 .Select(f => f.Name + ": " + f.Type);
             AssertEx.SetEqual(

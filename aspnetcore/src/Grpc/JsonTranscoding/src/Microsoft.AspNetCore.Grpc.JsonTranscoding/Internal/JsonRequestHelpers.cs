@@ -380,17 +380,17 @@ internal static class JsonRequestHelpers
         var contentType = serverCallContext.HttpContext.Request.ContentType;
         if (contentType != null)
         {
-            httpBody.Descriptor.Fields[HttpBody.ContentTypeFieldNumber].Accessor.SetValue(
-                httpBody,
-                contentType
-            );
+            httpBody.Descriptor
+                .Fields[HttpBody.ContentTypeFieldNumber]
+                .Accessor
+                .SetValue(httpBody, contentType);
         }
 
         var data = await ReadDataAsync(serverCallContext);
-        httpBody.Descriptor.Fields[HttpBody.DataFieldNumber].Accessor.SetValue(
-            httpBody,
-            UnsafeByteOperations.UnsafeWrap(data)
-        );
+        httpBody.Descriptor
+            .Fields[HttpBody.DataFieldNumber]
+            .Accessor
+            .SetValue(httpBody, UnsafeByteOperations.UnsafeWrap(data));
 
         return httpBody;
     }

@@ -1732,7 +1732,8 @@ namespace System
                                     !filter.Match(
                                         declaringType
                                             .GetRuntimeModule()
-                                            .MetadataImport.GetName(tkProperty)
+                                            .MetadataImport
+                                            .GetName(tkProperty)
                                     )
                                 );
                                 continue;
@@ -1741,7 +1742,8 @@ namespace System
                             Utf8String name;
                             name = declaringType
                                 .GetRuntimeModule()
-                                .MetadataImport.GetName(tkProperty);
+                                .MetadataImport
+                                .GetName(tkProperty);
 
                             if (!filter.Match(name))
                                 continue;

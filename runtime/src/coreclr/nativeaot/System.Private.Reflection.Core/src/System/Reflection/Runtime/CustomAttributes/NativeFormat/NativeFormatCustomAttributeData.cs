@@ -148,8 +148,10 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                     parameterTypeSignatureHandles = _customAttribute.Constructor
                         .ToQualifiedMethodHandle(_reader)
                         .GetQualifiedMethod(_reader)
-                        .Method.GetMethod(_reader)
-                        .Signature.GetMethodSignature(_reader)
+                        .Method
+                        .GetMethod(_reader)
+                        .Signature
+                        .GetMethodSignature(_reader)
                         .Parameters;
                     break;
 
@@ -157,7 +159,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                     parameterTypeSignatureHandles = _customAttribute.Constructor
                         .ToMemberReferenceHandle(_reader)
                         .GetMemberReference(_reader)
-                        .Signature.ToMethodSignatureHandle(_reader)
+                        .Signature
+                        .ToMethodSignatureHandle(_reader)
                         .GetMethodSignature(_reader)
                         .Parameters;
                     break;

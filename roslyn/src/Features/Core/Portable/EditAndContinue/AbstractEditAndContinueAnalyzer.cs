@@ -5058,9 +5058,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             // Find the node that matches this declaration
             SyntaxNode otherContainingNode;
-            var containingNode = containingSymbol.DeclaringSyntaxReferences[0].GetSyntax(
-                cancellationToken
-            );
+            var containingNode = containingSymbol
+                .DeclaringSyntaxReferences[0]
+                .GetSyntax(cancellationToken);
             if (editScript.Match.TryGetOldNode(containingNode, out var oldNode))
             {
                 otherContainingNode = oldNode;

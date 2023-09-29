@@ -336,7 +336,8 @@ namespace System.Runtime.Remoting.Proxies
             {
                 Thread.CurrentThread
                     .GetMutableExecutionContext()
-                    .LogicalCallContext.Merge(res_msg.LogicalCallContext);
+                    .LogicalCallContext
+                    .Merge(res_msg.LogicalCallContext);
             }
 
             exc = res_msg.Exception;

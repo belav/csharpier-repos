@@ -3939,9 +3939,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             if (
                 operation.Target?.Type?.OriginalDefinition.SpecialType
                     == SpecialType.System_Nullable_T
-                && ((INamedTypeSymbol)operation.Target.Type!).TypeArguments[0].Equals(
-                    operation.Type
-                )
+                && ((INamedTypeSymbol)operation.Target.Type!)
+                    .TypeArguments[0]
+                    .Equals(operation.Type)
             )
             {
                 nullableValueTypeReturn();

@@ -404,9 +404,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     }
 
                     // All linked data series from chart area which have Error bar chart type
-                    string linkedSeriesChartType = common.DataManager.Series[
-                        linkedSeriesName
-                    ].ChartTypeName;
+                    string linkedSeriesChartType = common
+                        .DataManager
+                        .Series[linkedSeriesName]
+                        .ChartTypeName;
                     ChartArea linkedSeriesArea = common.ChartPicture.ChartAreas[
                         common.DataManager.Series[linkedSeriesName].ChartArea
                     ];
@@ -443,9 +444,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     foreach (string seriesName in typeLinkedSeries)
                     {
                         if (
-                            common.DataManager.Series[seriesName].IsCustomPropertySet(
-                                CustomPropertyName.DrawSideBySide
-                            )
+                            common.DataManager
+                                .Series[seriesName]
+                                .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                         )
                         {
                             string attribValue = common.DataManager.Series[seriesName][
@@ -513,12 +514,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
                         sideBySideWidth =
                             (float)(
-                                common.DataManager.Series[linkedSeriesName].GetPointWidth(
-                                    graph,
-                                    hAxis,
-                                    interval,
-                                    0.8
-                                )
+                                common.DataManager
+                                    .Series[linkedSeriesName]
+                                    .GetPointWidth(graph, hAxis, interval, 0.8)
                             ) / numberOfLinkedSeries;
                     }
                 }
@@ -1422,9 +1420,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     }
 
                     // All linked data series from chart area which have Error bar chart type
-                    string linkedSeriesChartType = common.DataManager.Series[
-                        attribValue
-                    ].ChartTypeName;
+                    string linkedSeriesChartType = common
+                        .DataManager
+                        .Series[attribValue]
+                        .ChartTypeName;
                     List<string> typeLinkedSeries = area.GetSeriesFromChartType(
                         linkedSeriesChartType
                     );
@@ -1458,9 +1457,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     foreach (string seriesName in typeLinkedSeries)
                     {
                         if (
-                            common.DataManager.Series[seriesName].IsCustomPropertySet(
-                                CustomPropertyName.DrawSideBySide
-                            )
+                            common.DataManager
+                                .Series[seriesName]
+                                .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                         )
                         {
                             attribValue = common.DataManager.Series[seriesName][

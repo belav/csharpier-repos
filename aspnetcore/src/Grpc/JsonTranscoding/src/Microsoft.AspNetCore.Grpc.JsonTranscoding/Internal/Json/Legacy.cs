@@ -436,7 +436,8 @@ internal static class Legacy
         {
             return enumType
                 .GetTypeInfo()
-                .DeclaredFields.Where(f => f.IsStatic)
+                .DeclaredFields
+                .Where(f => f.IsStatic)
                 .Where(
                     f =>
                         f.GetCustomAttributes<OriginalNameAttribute>()

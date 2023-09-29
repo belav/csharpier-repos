@@ -606,7 +606,8 @@ public class PropertyAttributeConventionTest
             20,
             entityTypeBuilder
                 .Property<string>(nameof(F.StringLengthProperty))
-                .Metadata.GetMaxLength()
+                .Metadata
+                .GetMaxLength()
         );
     }
 

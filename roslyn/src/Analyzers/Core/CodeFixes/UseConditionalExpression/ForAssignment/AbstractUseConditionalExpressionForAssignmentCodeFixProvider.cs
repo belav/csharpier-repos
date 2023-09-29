@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         {
             var (title, key) = context.Diagnostics
                 .First()
-                .Properties.ContainsKey(UseConditionalExpressionHelpers.CanSimplifyName)
+                .Properties
+                .ContainsKey(UseConditionalExpressionHelpers.CanSimplifyName)
                 ? (AnalyzersResources.Simplify_check, nameof(AnalyzersResources.Simplify_check))
                 : (
                     AnalyzersResources.Convert_to_conditional_expression,

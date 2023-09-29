@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             AnalyzerService = (DiagnosticAnalyzerService?)
                 _registrationService
                     .GetTestAccessor()
-                    .AnalyzerProviders.SelectMany(pair => pair.Value)
+                    .AnalyzerProviders
+                    .SelectMany(pair => pair.Value)
                     .SingleOrDefault(
                         lazyProvider =>
                             lazyProvider.Metadata.Name

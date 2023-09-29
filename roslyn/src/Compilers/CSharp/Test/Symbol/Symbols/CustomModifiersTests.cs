@@ -1804,11 +1804,10 @@ class Module1
                 compilation1.SourceModule.CorLibrary(),
                 (
                     (CSharpCustomModifier)
-                        (
-                            (NamedTypeSymbol)test.Parameters.First().Type
-                        ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            0
-                        ].CustomModifiers.First()
+                        ((NamedTypeSymbol)test.Parameters.First().Type)
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            .CustomModifiers
+                            .First()
                 )
                     .ModifierSymbol
                     .ContainingAssembly
@@ -1836,11 +1835,10 @@ class Module1
                 compilation2.SourceModule.CorLibrary(),
                 (
                     (CSharpCustomModifier)
-                        (
-                            (NamedTypeSymbol)test.Parameters.First().Type
-                        ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[
-                            0
-                        ].CustomModifiers.First()
+                        ((NamedTypeSymbol)test.Parameters.First().Type)
+                            .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            .CustomModifiers
+                            .First()
                 )
                     .ModifierSymbol
                     .ContainingAssembly

@@ -3532,9 +3532,9 @@ namespace System.Xml.Serialization
                     !localA.LocalType.IsGenericType
                         || (
                             localA.LocalType.GetGenericArguments().Length == 1
-                            && localA.LocalType.GetGenericArguments()[0].IsAssignableFrom(
-                                elementType
-                            )
+                            && localA.LocalType
+                                .GetGenericArguments()[0]
+                                .IsAssignableFrom(elementType)
                         )
                 );
                 MethodInfo Add = localA.LocalType.GetMethod(

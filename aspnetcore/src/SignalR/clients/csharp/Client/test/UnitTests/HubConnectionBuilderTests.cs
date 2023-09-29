@@ -49,7 +49,8 @@ public class HubConnectionBuilderTests
     {
         var serviceProvider = new HubConnectionBuilder()
             .AddNewtonsoftJsonProtocol()
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
 
         var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(
             serviceProvider.GetService<IHubProtocol>()
@@ -70,7 +71,8 @@ public class HubConnectionBuilderTests
                     DateFormatString = "JUST A TEST"
                 };
             })
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
 
         var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(
             serviceProvider.GetService<IHubProtocol>()
@@ -104,7 +106,8 @@ public class HubConnectionBuilderTests
     {
         var serviceProvider = new HubConnectionBuilder()
             .AddMessagePackProtocol()
-            .Services.BuildServiceProvider();
+            .Services
+            .BuildServiceProvider();
 
         Assert.IsType<MessagePackHubProtocol>(serviceProvider.GetService<IHubProtocol>());
     }

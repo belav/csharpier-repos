@@ -183,9 +183,9 @@ namespace System.ServiceModel.Configuration
             }
             if (
                 PropertyValueOrigin.Default
-                != this.ElementInformation.Properties[
-                    ConfigurationStrings.DetectReplays
-                ].ValueOrigin
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.DetectReplays]
+                    .ValueOrigin
             )
                 settings.DetectReplays = this.DetectReplays;
             settings.IssuedCookieLifetime = this.IssuedCookieLifetime;
@@ -272,9 +272,10 @@ namespace System.ServiceModel.Configuration
             }
             if (
                 PropertyValueOrigin.Default
-                != source.ElementInformation.Properties[
-                    ConfigurationStrings.DetectReplays
-                ].ValueOrigin
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.DetectReplays]
+                    .ValueOrigin
             )
                 this.DetectReplays = source.DetectReplays;
             this.IssuedCookieLifetime = source.IssuedCookieLifetime;

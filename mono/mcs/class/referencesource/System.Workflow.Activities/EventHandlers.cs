@@ -311,9 +311,10 @@ namespace System.Workflow.Activities
                     for (int i = 0; i < eventHandlers.EnabledActivities.Count; ++i)
                     {
                         if (
-                            eventHandlers.EnabledActivities[i].QualifiedName.Equals(
-                                eda.QualifiedName
-                            )
+                            eventHandlers
+                                .EnabledActivities[i]
+                                .QualifiedName
+                                .Equals(eda.QualifiedName)
                         )
                         {
                             EventHandlerEventActivitySubscriber eventActivitySubscriber =

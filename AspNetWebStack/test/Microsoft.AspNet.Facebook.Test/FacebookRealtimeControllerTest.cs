@@ -52,7 +52,8 @@ namespace Microsoft.AspNet.Facebook.Test
                 challenge,
                 await userRealTimeController
                     .Get(subscriptionVerification)
-                    .Content.ReadAsStringAsync()
+                    .Content
+                    .ReadAsStringAsync()
             );
         }
 

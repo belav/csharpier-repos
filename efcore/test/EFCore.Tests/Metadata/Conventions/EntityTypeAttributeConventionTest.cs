@@ -64,7 +64,8 @@ public class EntityTypeAttributeConventionTest
             modelBuilder.Model
                 .FindEntityType(typeof(Customer))
                 .FindNavigation(nameof(Customer.Address))
-                .ForeignKey.IsOwnership
+                .ForeignKey
+                .IsOwnership
         );
     }
 

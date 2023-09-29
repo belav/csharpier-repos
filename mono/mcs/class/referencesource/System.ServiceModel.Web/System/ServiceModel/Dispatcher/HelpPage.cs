@@ -448,9 +448,9 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 knownTypes.Add(
                                     dataContractName,
-                                    typeDataContract.KnownDataContracts[
-                                        dataContractName
-                                    ].UnderlyingType
+                                    typeDataContract
+                                        .KnownDataContracts[dataContractName]
+                                        .UnderlyingType
                                 );
                             }
                         }

@@ -8367,7 +8367,8 @@ public class RubyTime
                         type.IsDynamic()
                         || symbol1.ContainingType
                             .EnumUnderlyingTypeOrSelf()
-                            .SpecialType.IsIntegralType()
+                            .SpecialType
+                            .IsIntegralType()
                     );
                     break;
 
@@ -8380,7 +8381,8 @@ public class RubyTime
                         || type.IsPointerType()
                         || symbol1.ContainingType
                             .EnumUnderlyingTypeOrSelf()
-                            .SpecialType.IsIntegralType()
+                            .SpecialType
+                            .IsIntegralType()
                         || symbol1.ContainingType.SpecialType == SpecialType.System_Char
                     );
                     break;
@@ -9428,7 +9430,8 @@ class Module1
                         || symbol1.ContainingSymbol.Kind == SymbolKind.PointerType
                         || symbol1.ContainingType
                             .EnumUnderlyingTypeOrSelf()
-                            .SpecialType.IsIntegralType();
+                            .SpecialType
+                            .IsIntegralType();
                     break;
             }
 

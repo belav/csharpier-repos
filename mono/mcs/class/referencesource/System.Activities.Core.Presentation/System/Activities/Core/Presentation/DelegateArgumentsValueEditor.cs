@@ -37,9 +37,9 @@ namespace System.Activities.Core.Presentation
                     null
                 );
             EditingContext context = ((IModelTreeItem)parentModelItem).ModelTreeManager.Context;
-            ModelItemDictionary inputData = parentModelItem.Properties[
-                propertyValue.ParentProperty.PropertyName
-            ].Dictionary;
+            ModelItemDictionary inputData = parentModelItem
+                .Properties[propertyValue.ParentProperty.PropertyName]
+                .Dictionary;
             DynamicArgumentDesignerOptions options = new DynamicArgumentDesignerOptions();
             options.Title = propertyValue.ParentProperty.DisplayName;
 

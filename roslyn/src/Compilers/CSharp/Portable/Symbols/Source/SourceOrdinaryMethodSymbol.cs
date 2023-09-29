@@ -372,7 +372,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         WellKnownMember.System_Runtime_CompilerServices_ExtensionAttribute__ctor,
                         out var useSiteInfo
                     );
-                    Location thisLocation = syntax.ParameterList.Parameters[0].Modifiers
+                    Location thisLocation = syntax.ParameterList
+                        .Parameters[0]
+                        .Modifiers
                         .FirstOrDefault(SyntaxKind.ThisKeyword)
                         .GetLocation();
                     if ((object)attributeConstructor == null)

@@ -29,7 +29,8 @@ namespace Microsoft.Interop.JavaScript
 
         internal static readonly string GeneratorVersion = typeof(JSImportGenerator).Assembly
             .GetName()
-            .Version.ToString();
+            .Version
+            .ToString();
 
         public SignatureContext SignatureContext { get; private init; }
 

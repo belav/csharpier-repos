@@ -966,9 +966,9 @@ namespace System.Web.UI.DataVisualization.Charting.Data
                 stackedMin = Math.Min(stackedMin, noStackedMin);
                 if (stackedMin == 0)
                 {
-                    stackedMin = this._series[series[0]].Points[
-                        this._series[series[0]].Points.Count - 1
-                    ].YValues[valueIndex];
+                    stackedMin = this._series[series[0]]
+                        .Points[this._series[series[0]].Points.Count - 1]
+                        .YValues[valueIndex];
                 }
                 returnValue = Math.Min(returnValue, stackedMin);
             }

@@ -245,9 +245,9 @@ namespace System.Data.OracleClient
                         tableMapping != null
                         && tableMapping.ColumnMappings.Contains(parameter.SourceColumn)
                     )
-                        dsColumnName = tableMapping.ColumnMappings[
-                            parameter.SourceColumn
-                        ].DataSetColumn;
+                        dsColumnName = tableMapping
+                            .ColumnMappings[parameter.SourceColumn]
+                            .DataSetColumn;
 
                     if (row != null)
                         parameter.Value = row[dsColumnName, DataRowVersion.Original];
@@ -272,9 +272,9 @@ namespace System.Data.OracleClient
                     tableMapping != null
                     && tableMapping.ColumnMappings.Contains(parameter.SourceColumn)
                 )
-                    dsColumnName = tableMapping.ColumnMappings[
-                        parameter.SourceColumn
-                    ].DataSetColumn;
+                    dsColumnName = tableMapping
+                        .ColumnMappings[parameter.SourceColumn]
+                        .DataSetColumn;
 
                 if (row != null)
                     parameter.Value = row[dsColumnName, DataRowVersion.Original];
@@ -336,9 +336,9 @@ namespace System.Data.OracleClient
                     tableMapping != null
                     && tableMapping.ColumnMappings.Contains(parameter.SourceColumn)
                 )
-                    dsColumnName = tableMapping.ColumnMappings[
-                        parameter.SourceColumn
-                    ].DataSetColumn;
+                    dsColumnName = tableMapping
+                        .ColumnMappings[parameter.SourceColumn]
+                        .DataSetColumn;
 
                 if (row != null)
                     parameter.Value = row[dsColumnName, DataRowVersion.Current];
@@ -400,9 +400,9 @@ namespace System.Data.OracleClient
                     tableMapping != null
                     && tableMapping.ColumnMappings.Contains(parameter.SourceColumn)
                 )
-                    dsColumnName = tableMapping.ColumnMappings[
-                        parameter.SourceColumn
-                    ].DataSetColumn;
+                    dsColumnName = tableMapping
+                        .ColumnMappings[parameter.SourceColumn]
+                        .DataSetColumn;
 
                 if (row != null)
                     parameter.Value = row[dsColumnName, DataRowVersion.Current];
@@ -441,9 +441,9 @@ namespace System.Data.OracleClient
                         tableMapping != null
                         && tableMapping.ColumnMappings.Contains(parameter.SourceColumn)
                     )
-                        dsColumnName = tableMapping.ColumnMappings[
-                            parameter.SourceColumn
-                        ].DataSetColumn;
+                        dsColumnName = tableMapping
+                            .ColumnMappings[parameter.SourceColumn]
+                            .DataSetColumn;
 
                     if (row != null)
                         parameter.Value = row[dsColumnName, DataRowVersion.Original];
@@ -469,9 +469,9 @@ namespace System.Data.OracleClient
                     tableMapping != null
                     && tableMapping.ColumnMappings.Contains(parameter.SourceColumn)
                 )
-                    dsColumnName = tableMapping.ColumnMappings[
-                        parameter.SourceColumn
-                    ].DataSetColumn;
+                    dsColumnName = tableMapping
+                        .ColumnMappings[parameter.SourceColumn]
+                        .DataSetColumn;
 
                 if (row != null)
                     parameter.Value = row[dsColumnName, DataRowVersion.Original];

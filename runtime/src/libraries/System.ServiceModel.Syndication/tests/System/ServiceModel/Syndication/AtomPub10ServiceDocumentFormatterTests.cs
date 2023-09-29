@@ -834,7 +834,8 @@ namespace System.ServiceModel.Syndication.Tests
                     Assert.Equal(1, secondDocumentSecondCategory.ElementExtensions.Count);
                     Assert.Equal(
                         10,
-                        secondDocumentSecondCategory.ElementExtensions[0]
+                        secondDocumentSecondCategory
+                            .ElementExtensions[0]
                             .GetObject<ExtensionObject>()
                             .Value
                     );

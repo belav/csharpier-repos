@@ -372,7 +372,8 @@ namespace System.Reflection
                 m_ctor = (RuntimeConstructorInfo)
                     scope
                         .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
-                        .MethodHandle.GetMethodInfo();
+                        .MethodHandle
+                        .GetMethodInfo();
             }
 
             ParameterInfo[] parameters = m_ctor.GetParametersNoCopy();
@@ -1813,7 +1814,8 @@ namespace System.Reflection
                 {
                     ctorWithParameters = decoratedModule
                         .ResolveMethod(caCtorToken, attributeType.GenericTypeArguments, null)!
-                        .MethodHandle.GetMethodInfo();
+                        .MethodHandle
+                        .GetMethodInfo();
                 }
                 else
                 {
@@ -2552,7 +2554,8 @@ namespace System.Reflection
                 field.DeclaringType is not null
                 && field
                     .GetRuntimeModule()
-                    .MetadataImport.GetFieldOffset(
+                    .MetadataImport
+                    .GetFieldOffset(
                         field.DeclaringType.MetadataToken,
                         field.MetadataToken,
                         out int fieldOffset
@@ -2602,7 +2605,8 @@ namespace System.Reflection
                     break;
             }
             type.GetRuntimeModule()
-                .MetadataImport.GetClassLayout(type.MetadataToken, out int pack, out int size);
+                .MetadataImport
+                .GetClassLayout(type.MetadataToken, out int pack, out int size);
 
             StructLayoutAttribute attribute = new StructLayoutAttribute(layoutKind);
 

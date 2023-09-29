@@ -538,9 +538,9 @@ namespace System.Activities.Core.Presentation
                 {
                     if (
                         modelItem.Properties[TransitionDesigner.TriggerPropertyName].Value
-                        == connectorModelItem.Properties[
-                            TransitionDesigner.TriggerPropertyName
-                        ].Value
+                        == connectorModelItem
+                            .Properties[TransitionDesigner.TriggerPropertyName]
+                            .Value
                     )
                     {
                         sourceConnectionPoint = FreeFormPanel.GetSourceConnectionPoint(connector);
@@ -559,9 +559,10 @@ namespace System.Activities.Core.Presentation
             foreach (ModelItem stateModelItem in stateModelItems)
             {
                 if (
-                    stateModelItem.Properties[
-                        StateDesigner.TransitionsPropertyName
-                    ].Collection.Contains(transitionModelItem)
+                    stateModelItem
+                        .Properties[StateDesigner.TransitionsPropertyName]
+                        .Collection
+                        .Contains(transitionModelItem)
                 )
                 {
                     return true;
@@ -674,15 +675,15 @@ namespace System.Activities.Core.Presentation
             HashSet<String> existingTransitionNames = new HashSet<string>();
 
             foreach (
-                ModelItem stateModelItem in stateMachineModelItem.Properties[
-                    StateMachineDesigner.StatesPropertyName
-                ].Collection
+                ModelItem stateModelItem in stateMachineModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
             )
             {
                 foreach (
-                    ModelItem transitionModelItem in stateModelItem.Properties[
-                        StateDesigner.TransitionsPropertyName
-                    ].Collection
+                    ModelItem transitionModelItem in stateModelItem
+                        .Properties[StateDesigner.TransitionsPropertyName]
+                        .Collection
                 )
                 {
                     existingTransitionNames.Add(

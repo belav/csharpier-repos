@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Empty(
                 diagnosticService
                     .GetTestAccessor()
-                    .EventListenerTracker.GetTestAccessor()
+                    .EventListenerTracker
+                    .GetTestAccessor()
                     .EventListeners
             );
 

@@ -303,7 +303,8 @@ class Test
                     var parameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod(".ctor")
-                        .Parameters.Single();
+                        .Parameters
+                        .Single();
 
                     Assert.Equal(RefKind.In, parameter.RefKind);
                     Assert.Empty(parameter.GetAttributes());
@@ -329,7 +330,8 @@ class Test
                     var parameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod(".ctor")
-                        .Parameters.Single();
+                        .Parameters
+                        .Single();
                     Assert.Empty(parameter.GetAttributes());
                 }
             );
@@ -363,7 +365,8 @@ class Test
                     var parameter = module.ContainingAssembly
                         .GetTypeByMetadataName("Test")
                         .GetMethod(".ctor")
-                        .Parameters.Single();
+                        .Parameters
+                        .Single();
 
                     Assert.Equal(RefKind.In, parameter.RefKind);
                     Assert.Empty(parameter.GetAttributes());
@@ -664,7 +667,8 @@ public delegate void D(in int x);
                 {
                     var parameter = module.ContainingAssembly
                         .GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.GetParameters()
+                        .DelegateInvokeMethod
+                        .GetParameters()
                         .Single();
                     Assert.Equal(RefKind.In, parameter.RefKind);
                     Assert.Empty(parameter.GetAttributes());
