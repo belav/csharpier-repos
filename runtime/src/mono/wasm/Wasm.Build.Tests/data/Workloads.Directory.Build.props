@@ -1,6 +1,0 @@
-<Project>
-  <PropertyGroup>
-    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
-    <PublishTrimmed>true</PublishTrimmed>
-  </PropertyGroup>
-</Project>
