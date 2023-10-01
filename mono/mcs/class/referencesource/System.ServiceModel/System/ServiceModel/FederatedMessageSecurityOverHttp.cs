@@ -100,9 +100,9 @@ namespace System.ServiceModel
             {
                 if (!SecurityKeyTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.issuedKeyType = value;
             }
@@ -130,20 +130,24 @@ namespace System.ServiceModel
                 && (version.TrustVersion == TrustVersion.WSTrustFeb2005)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.BearerKeyIncompatibleWithWSFederationHttpBinding)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.BearerKeyIncompatibleWithWSFederationHttpBinding)
+                        )
+                    );
             }
 
             if (isReliableSession && !this.EstablishSecurityContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SecureConversationRequiredByReliableSession)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecureConversationRequiredByReliableSession)
+                        )
+                    );
             }
 
             SecurityBindingElement result;

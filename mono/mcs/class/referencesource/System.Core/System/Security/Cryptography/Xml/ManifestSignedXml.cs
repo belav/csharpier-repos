@@ -215,10 +215,9 @@ namespace System.Security.Cryptography.Xml
                     keyBlob.cbData = publicKey.Length;
                     keyBlob.pbData = new IntPtr(pPublicKey);
 
-                    int hrToken = CapiNative.UnsafeNativeMethods._AxlPublicKeyBlobToPublicKeyToken(
-                        ref keyBlob,
-                        out tokenBuffer
-                    );
+                    int hrToken = CapiNative
+                        .UnsafeNativeMethods
+                        ._AxlPublicKeyBlobToPublicKeyToken(ref keyBlob, out tokenBuffer);
                     if (((uint)hrToken & 0x80000000) != 0)
                     {
                         return null;
@@ -559,10 +558,9 @@ namespace System.Security.Cryptography.Xml
 
             // Get the actual key hash
             SafeAxlBufferHandle issuerKeyBuffer = null;
-            int hrHash = X509Native.UnsafeNativeMethods._AxlGetIssuerPublicKeyHash(
-                publisherCertificate.Handle,
-                out issuerKeyBuffer
-            );
+            int hrHash = X509Native
+                .UnsafeNativeMethods
+                ._AxlGetIssuerPublicKeyHash(publisherCertificate.Handle, out issuerKeyBuffer);
             if (hrHash != (int)SignatureVerificationResult.Valid)
             {
                 return (SignatureVerificationResult)hrHash;
@@ -677,12 +675,14 @@ namespace System.Security.Cryptography.Xml
                         xmlBlob.cbData = licenseXml.Length;
                         xmlBlob.pbData = new IntPtr(pLicenseXml);
 
-                        int hrVerify = X509Native.UnsafeNativeMethods.CertVerifyAuthenticodeLicense(
-                            ref xmlBlob,
-                            verificationFlags,
-                            ref signer,
-                            ref timestamper
-                        );
+                        int hrVerify = X509Native
+                            .UnsafeNativeMethods
+                            .CertVerifyAuthenticodeLicense(
+                                ref xmlBlob,
+                                verificationFlags,
+                                ref signer,
+                                ref timestamper
+                            );
 
                         if (hrVerify == (int)SignatureVerificationResult.MissingSignature)
                         {

@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                 if (op is ApplyChangesOperation applyChanges)
                 {
                     var oldSolution = workspace.CurrentSolution;
-                    var newSolution = await applyChanges.ChangedSolution
+                    var newSolution = await applyChanges
+                        .ChangedSolution
                         .WithMergedLinkedFileChangesAsync(
                             oldSolution,
                             cancellationToken: cancellationToken
@@ -132,9 +133,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
             // Much of the work we're going to do will be on the UI thread, so switch there preemptively.
             // When we get to the expensive parts we can do in the BG then we'll switch over to relinquish
             // the UI thread.
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             if (operations.IsDefaultOrEmpty)
             {
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
 
             if (_renameService.ActiveSession != null)
             {
-                workspace.Services
+                workspace
+                    .Services
                     .GetService<INotificationService>()
                     ?.SendNotification(
                         EditorFeaturesResources.Cannot_apply_operation_while_a_rename_session_is_active,
@@ -173,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                     .ConfigureAwait(true);
 
                 using (
-                    workspace.Services
+                    workspace
+                        .Services
                         .GetRequiredService<ISourceTextUndoService>()
                         .RegisterUndoTransaction(text, title)
                 )
@@ -352,9 +355,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
             CancellationToken cancellationToken
         )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             var applied = true;
             var seenApplyChanges = false;
@@ -400,8 +403,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                     .FirstOrNull();
                 if (navigationTokenOpt.HasValue)
                 {
-                    var navigationService =
-                        workspace.Services.GetRequiredService<IDocumentNavigationService>();
+                    var navigationService = workspace
+                        .Services
+                        .GetRequiredService<IDocumentNavigationService>();
                     navigationService.TryNavigateToPosition(
                         workspace,
                         documentId,
@@ -430,8 +434,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                     )
                     {
                         var editorWorkspace = workspace;
-                        var navigationService =
-                            editorWorkspace.Services.GetRequiredService<IDocumentNavigationService>();
+                        var navigationService = editorWorkspace
+                            .Services
+                            .GetRequiredService<IDocumentNavigationService>();
                         if (
                             navigationService.TryNavigateToSpan(
                                 editorWorkspace,
@@ -441,9 +446,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                             )
                         )
                         {
-                            var openDocument = workspace.CurrentSolution.GetRequiredDocument(
-                                documentId
-                            );
+                            var openDocument = workspace
+                                .CurrentSolution
+                                .GetRequiredDocument(documentId);
                             var openRoot = openDocument.GetSyntaxRootSynchronously(
                                 cancellationToken
                             );

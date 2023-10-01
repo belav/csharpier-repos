@@ -251,15 +251,17 @@ namespace System.Workflow.Activities
                 }
                 catch (WorkflowOwnershipException)
                 {
-                    WorkflowActivityTrace.Activity.TraceEvent(
-                        TraceEventType.Warning,
-                        0,
-                        String.Format(
-                            System.Globalization.CultureInfo.InvariantCulture,
-                            "Workflow Web Host Encountered Workflow Instance Ownership conflict for instanceid {0}.",
-                            instance.InstanceId
-                        )
-                    );
+                    WorkflowActivityTrace
+                        .Activity
+                        .TraceEvent(
+                            TraceEventType.Warning,
+                            0,
+                            String.Format(
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                "Workflow Web Host Encountered Workflow Instance Ownership conflict for instanceid {0}.",
+                                instance.InstanceId
+                            )
+                        );
                     //Back-off for 1/2 sec. Should we make this configurable?
                     System.Threading.Thread.Sleep(500);
                     continue;

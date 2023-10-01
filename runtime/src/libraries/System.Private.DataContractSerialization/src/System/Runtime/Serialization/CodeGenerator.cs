@@ -449,16 +449,18 @@ namespace System.Runtime.Serialization
         internal static void VerifyParameterCount(MethodInfo methodInfo, int expectedCount)
         {
             if (methodInfo.GetParameters().Length != expectedCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.ParameterCountMismatch,
-                            methodInfo.Name,
-                            methodInfo.GetParameters().Length,
-                            expectedCount
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.ParameterCountMismatch,
+                                methodInfo.Name,
+                                methodInfo.GetParameters().Length,
+                                expectedCount
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         internal void Call(object? thisObj, MethodInfo methodInfo)
@@ -660,11 +662,20 @@ namespace System.Runtime.Serialization
                 memberType = property.PropertyType;
                 MethodInfo? getMethod = property.GetMethod;
                 if (getMethod == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.Format(SR.NoGetMethodForProperty, property.DeclaringType, property)
-                        )
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.NoGetMethodForProperty,
+                                    property.DeclaringType,
+                                    property
+                                )
+                            )
+                        );
                 Call(getMethod);
             }
             else if (memberInfo is MethodInfo method)
@@ -673,16 +684,21 @@ namespace System.Runtime.Serialization
                 Call(method);
             }
             else
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.CannotLoadMemberType,
-                            "Unknown",
-                            memberInfo.DeclaringType,
-                            memberInfo.Name
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.CannotLoadMemberType,
+                                "Unknown",
+                                memberInfo.DeclaringType,
+                                memberInfo.Name
+                            )
                         )
-                    )
-                );
+                    );
 
             return memberType;
         }
@@ -704,21 +720,35 @@ namespace System.Runtime.Serialization
             {
                 MethodInfo? setMethod = property.SetMethod;
                 if (setMethod == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.Format(SR.NoSetMethodForProperty, property.DeclaringType, property)
-                        )
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.NoSetMethodForProperty,
+                                    property.DeclaringType,
+                                    property
+                                )
+                            )
+                        );
                 Call(setMethod);
             }
             else if (memberInfo is MethodInfo method)
                 Call(method);
             else
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(SR.CannotLoadMemberType, "Unknown")
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(SR.CannotLoadMemberType, "Unknown")
+                        )
+                    );
         }
 
         internal void LoadDefaultValue(Type type)
@@ -788,14 +818,19 @@ namespace System.Runtime.Serialization
                 DiagnosticUtility.DebugAssert(
                     "Data can only be stored into ArgBuilder or LocalBuilder."
                 );
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.CanOnlyStoreIntoArgOrLocGot0,
-                            DataContract.GetClrTypeFullName(var.GetType())
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.CanOnlyStoreIntoArgOrLocGot0,
+                                DataContract.GetClrTypeFullName(var.GetType())
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -917,9 +952,12 @@ namespace System.Runtime.Serialization
                         DiagnosticUtility.DebugAssert(
                             "Char is not a valid schema primitive and should be treated as int in DataContract"
                         );
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.CharIsInvalidPrimitive)
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new NotSupportedException(SR.CharIsInvalidPrimitive));
                     case TypeCode.SByte:
                     case TypeCode.Byte:
                     case TypeCode.Int16:
@@ -953,14 +991,19 @@ namespace System.Runtime.Serialization
                     case TypeCode.Empty:
                     case TypeCode.DBNull:
                     default:
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.Format(
-                                    SR.UnknownConstantType,
-                                    DataContract.GetClrTypeFullName(valueType)
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                XmlObjectSerializer.CreateSerializationException(
+                                    SR.Format(
+                                        SR.UnknownConstantType,
+                                        DataContract.GetClrTypeFullName(valueType)
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
             }
         }
@@ -1099,14 +1142,19 @@ namespace System.Runtime.Serialization
             {
                 OpCode opCode = GetLdelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.Format(
-                                SR.ArrayTypeIsNotSupported_GeneratingCode,
-                                DataContract.GetClrTypeFullName(arrayElementType)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.ArrayTypeIsNotSupported_GeneratingCode,
+                                    DataContract.GetClrTypeFullName(arrayElementType)
+                                )
                             )
-                        )
-                    );
+                        );
                 _ilGen.Emit(opCode);
             }
         }
@@ -1145,14 +1193,19 @@ namespace System.Runtime.Serialization
             {
                 OpCode opCode = GetStelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.Format(
-                                SR.ArrayTypeIsNotSupported_GeneratingCode,
-                                DataContract.GetClrTypeFullName(arrayElementType)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.ArrayTypeIsNotSupported_GeneratingCode,
+                                    DataContract.GetClrTypeFullName(arrayElementType)
+                                )
                             )
-                        )
-                    );
+                        );
                 _ilGen.Emit(opCode);
             }
         }
@@ -1286,14 +1339,19 @@ namespace System.Runtime.Serialization
                 {
                     OpCode opCode = GetConvOpCode(Type.GetTypeCode(target));
                     if (opCode.Equals(OpCodes.Nop))
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.Format(
-                                    SR.NoConversionPossibleTo,
-                                    DataContract.GetClrTypeFullName(target)
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                XmlObjectSerializer.CreateSerializationException(
+                                    SR.Format(
+                                        SR.NoConversionPossibleTo,
+                                        DataContract.GetClrTypeFullName(target)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     else
                     {
                         _ilGen.Emit(opCode);
@@ -1306,15 +1364,20 @@ namespace System.Runtime.Serialization
                         Ldobj(target);
                 }
                 else
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.Format(
-                                SR.IsNotAssignableFrom,
-                                DataContract.GetClrTypeFullName(target),
-                                DataContract.GetClrTypeFullName(source)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.IsNotAssignableFrom,
+                                    DataContract.GetClrTypeFullName(target),
+                                    DataContract.GetClrTypeFullName(source)
+                                )
                             )
-                        )
-                    );
+                        );
             }
             else if (target.IsAssignableFrom(source))
             {
@@ -1334,15 +1397,20 @@ namespace System.Runtime.Serialization
                 Castclass(target);
             }
             else
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.IsNotAssignableFrom,
-                            DataContract.GetClrTypeFullName(target),
-                            DataContract.GetClrTypeFullName(source)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.IsNotAssignableFrom,
+                                DataContract.GetClrTypeFullName(target),
+                                DataContract.GetClrTypeFullName(source)
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         private IfState PopIfState()
@@ -1357,11 +1425,16 @@ namespace System.Runtime.Serialization
         [DoesNotReturn]
         private static void ThrowMismatchException(object expected)
         {
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                XmlObjectSerializer.CreateSerializationException(
-                    SR.Format(SR.ExpectingEnd, expected.ToString())
-                )
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(SR.ExpectingEnd, expected.ToString())
+                    )
+                );
         }
 
         internal Label[] Switch(int labelCount)

@@ -96,8 +96,9 @@ public abstract class ControllerBase
         {
             if (_metadataProvider == null)
             {
-                _metadataProvider =
-                    HttpContext?.RequestServices?.GetRequiredService<IModelMetadataProvider>();
+                _metadataProvider = HttpContext
+                    ?.RequestServices
+                    ?.GetRequiredService<IModelMetadataProvider>();
             }
 
             return _metadataProvider!;
@@ -122,8 +123,9 @@ public abstract class ControllerBase
         {
             if (_modelBinderFactory == null)
             {
-                _modelBinderFactory =
-                    HttpContext?.RequestServices?.GetRequiredService<IModelBinderFactory>();
+                _modelBinderFactory = HttpContext
+                    ?.RequestServices
+                    ?.GetRequiredService<IModelBinderFactory>();
             }
 
             return _modelBinderFactory!;
@@ -174,8 +176,9 @@ public abstract class ControllerBase
         {
             if (_objectValidator == null)
             {
-                _objectValidator =
-                    HttpContext?.RequestServices?.GetRequiredService<IObjectModelValidator>();
+                _objectValidator = HttpContext
+                    ?.RequestServices
+                    ?.GetRequiredService<IObjectModelValidator>();
             }
 
             return _objectValidator!;
@@ -200,8 +203,9 @@ public abstract class ControllerBase
         {
             if (_problemDetailsFactory == null)
             {
-                _problemDetailsFactory =
-                    HttpContext?.RequestServices?.GetRequiredService<ProblemDetailsFactory>();
+                _problemDetailsFactory = HttpContext
+                    ?.RequestServices
+                    ?.GetRequiredService<ProblemDetailsFactory>();
             }
 
             return _problemDetailsFactory!;

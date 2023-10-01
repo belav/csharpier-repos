@@ -743,7 +743,13 @@ namespace System.Web.UI.MobileControls
                     if (InDesigner)
                     {
                         // Indicate to the designer that it needs to add a prefix.
-                        System.Web.UI.Design.MobileControls.StyleSheetDesigner.SetRequiresDesignTimeChanges();
+                        System
+                            .Web
+                            .UI
+                            .Design
+                            .MobileControls
+                            .StyleSheetDesigner
+                            .SetRequiresDesignTimeChanges();
                     }
                     type = typeof(Style);
                     break;

@@ -90,11 +90,13 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.WebSocketContextWebSocketCannotBeAccessedError)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.WebSocketContextWebSocketCannotBeAccessedError)
+                        )
+                    );
             }
         }
     }

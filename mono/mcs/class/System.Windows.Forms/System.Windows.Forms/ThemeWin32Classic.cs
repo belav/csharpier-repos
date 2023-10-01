@@ -1441,55 +1441,70 @@ namespace System.Windows.Forms
         public virtual void DrawCheckBoxGlyph(Graphics g, CheckBox cb, Rectangle glyphArea)
         {
             if (cb.Pressed)
-                ThemeElements.CurrentTheme.CheckBoxPainter.PaintCheckBox(
-                    g,
-                    glyphArea,
-                    cb.BackColor,
-                    cb.ForeColor,
-                    ElementState.Pressed,
-                    cb.FlatStyle,
-                    cb.CheckState
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .CheckBoxPainter
+                    .PaintCheckBox(
+                        g,
+                        glyphArea,
+                        cb.BackColor,
+                        cb.ForeColor,
+                        ElementState.Pressed,
+                        cb.FlatStyle,
+                        cb.CheckState
+                    );
             else if (cb.InternalSelected)
-                ThemeElements.CurrentTheme.CheckBoxPainter.PaintCheckBox(
-                    g,
-                    glyphArea,
-                    cb.BackColor,
-                    cb.ForeColor,
-                    ElementState.Normal,
-                    cb.FlatStyle,
-                    cb.CheckState
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .CheckBoxPainter
+                    .PaintCheckBox(
+                        g,
+                        glyphArea,
+                        cb.BackColor,
+                        cb.ForeColor,
+                        ElementState.Normal,
+                        cb.FlatStyle,
+                        cb.CheckState
+                    );
             else if (cb.Entered)
-                ThemeElements.CurrentTheme.CheckBoxPainter.PaintCheckBox(
-                    g,
-                    glyphArea,
-                    cb.BackColor,
-                    cb.ForeColor,
-                    ElementState.Hot,
-                    cb.FlatStyle,
-                    cb.CheckState
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .CheckBoxPainter
+                    .PaintCheckBox(
+                        g,
+                        glyphArea,
+                        cb.BackColor,
+                        cb.ForeColor,
+                        ElementState.Hot,
+                        cb.FlatStyle,
+                        cb.CheckState
+                    );
             else if (!cb.Enabled)
-                ThemeElements.CurrentTheme.CheckBoxPainter.PaintCheckBox(
-                    g,
-                    glyphArea,
-                    cb.BackColor,
-                    cb.ForeColor,
-                    ElementState.Disabled,
-                    cb.FlatStyle,
-                    cb.CheckState
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .CheckBoxPainter
+                    .PaintCheckBox(
+                        g,
+                        glyphArea,
+                        cb.BackColor,
+                        cb.ForeColor,
+                        ElementState.Disabled,
+                        cb.FlatStyle,
+                        cb.CheckState
+                    );
             else
-                ThemeElements.CurrentTheme.CheckBoxPainter.PaintCheckBox(
-                    g,
-                    glyphArea,
-                    cb.BackColor,
-                    cb.ForeColor,
-                    ElementState.Normal,
-                    cb.FlatStyle,
-                    cb.CheckState
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .CheckBoxPainter
+                    .PaintCheckBox(
+                        g,
+                        glyphArea,
+                        cb.BackColor,
+                        cb.ForeColor,
+                        ElementState.Normal,
+                        cb.FlatStyle,
+                        cb.CheckState
+                    );
         }
 
         public virtual void DrawCheckBoxFocus(Graphics g, CheckBox cb, Rectangle focusArea)
@@ -4229,11 +4244,9 @@ namespace System.Windows.Forms
                             if (x_origin < rect.X)
                                 x_origin = rect.X;
 
-                            control.SmallImageList.Draw(
-                                dc,
-                                new Point(x_origin, y_origin),
-                                image_index
-                            );
+                            control
+                                .SmallImageList
+                                .Draw(dc, new Point(x_origin, y_origin), image_index);
                             rect.X += image_width;
                             rect.Width -= image_width;
                         }
@@ -6921,55 +6934,70 @@ namespace System.Windows.Forms
         public virtual void DrawRadioButtonGlyph(Graphics g, RadioButton rb, Rectangle glyphArea)
         {
             if (rb.Pressed)
-                ThemeElements.CurrentTheme.RadioButtonPainter.PaintRadioButton(
-                    g,
-                    glyphArea,
-                    rb.BackColor,
-                    rb.ForeColor,
-                    ElementState.Pressed,
-                    rb.FlatStyle,
-                    rb.Checked
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .RadioButtonPainter
+                    .PaintRadioButton(
+                        g,
+                        glyphArea,
+                        rb.BackColor,
+                        rb.ForeColor,
+                        ElementState.Pressed,
+                        rb.FlatStyle,
+                        rb.Checked
+                    );
             else if (rb.InternalSelected)
-                ThemeElements.CurrentTheme.RadioButtonPainter.PaintRadioButton(
-                    g,
-                    glyphArea,
-                    rb.BackColor,
-                    rb.ForeColor,
-                    ElementState.Normal,
-                    rb.FlatStyle,
-                    rb.Checked
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .RadioButtonPainter
+                    .PaintRadioButton(
+                        g,
+                        glyphArea,
+                        rb.BackColor,
+                        rb.ForeColor,
+                        ElementState.Normal,
+                        rb.FlatStyle,
+                        rb.Checked
+                    );
             else if (rb.Entered)
-                ThemeElements.CurrentTheme.RadioButtonPainter.PaintRadioButton(
-                    g,
-                    glyphArea,
-                    rb.BackColor,
-                    rb.ForeColor,
-                    ElementState.Hot,
-                    rb.FlatStyle,
-                    rb.Checked
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .RadioButtonPainter
+                    .PaintRadioButton(
+                        g,
+                        glyphArea,
+                        rb.BackColor,
+                        rb.ForeColor,
+                        ElementState.Hot,
+                        rb.FlatStyle,
+                        rb.Checked
+                    );
             else if (!rb.Enabled)
-                ThemeElements.CurrentTheme.RadioButtonPainter.PaintRadioButton(
-                    g,
-                    glyphArea,
-                    rb.BackColor,
-                    rb.ForeColor,
-                    ElementState.Disabled,
-                    rb.FlatStyle,
-                    rb.Checked
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .RadioButtonPainter
+                    .PaintRadioButton(
+                        g,
+                        glyphArea,
+                        rb.BackColor,
+                        rb.ForeColor,
+                        ElementState.Disabled,
+                        rb.FlatStyle,
+                        rb.Checked
+                    );
             else
-                ThemeElements.CurrentTheme.RadioButtonPainter.PaintRadioButton(
-                    g,
-                    glyphArea,
-                    rb.BackColor,
-                    rb.ForeColor,
-                    ElementState.Normal,
-                    rb.FlatStyle,
-                    rb.Checked
-                );
+                ThemeElements
+                    .CurrentTheme
+                    .RadioButtonPainter
+                    .PaintRadioButton(
+                        g,
+                        glyphArea,
+                        rb.BackColor,
+                        rb.ForeColor,
+                        ElementState.Normal,
+                        rb.FlatStyle,
+                        rb.Checked
+                    );
         }
 
         public virtual void DrawRadioButtonFocus(Graphics g, RadioButton rb, Rectangle focusArea)

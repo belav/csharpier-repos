@@ -34,7 +34,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = entity.residentialSectors
+                    var List = entity
+                        .residentialSectors
                         .Select(
                             S =>
                                 new ResidentialSectorsModel
@@ -85,7 +86,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var Item = entity.residentialSectors
+                    var Item = entity
+                        .residentialSectors
                         .Where(S => S.residentSecId == itemId)
                         .Select(
                             S =>
@@ -164,7 +166,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.residentialSectors
+                            tmpObject = entity
+                                .residentialSectors
                                 .Where(p => p.residentSecId == newObject.residentSecId)
                                 .FirstOrDefault();
                             tmpObject.residentSecId = newObject.residentSecId;
@@ -228,9 +231,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            residentialSectors DeleteObj = entity.residentialSectors.Find(
-                                residentSecId
-                            );
+                            residentialSectors DeleteObj = entity
+                                .residentialSectors
+                                .Find(residentSecId);
                             entity.residentialSectors.Remove(DeleteObj);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);

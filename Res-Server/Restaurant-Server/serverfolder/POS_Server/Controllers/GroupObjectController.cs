@@ -202,7 +202,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.groupObject
+                        var list = entity
+                            .groupObject
                             .Where(c => c.id == Id)
                             .Select(
                                 c =>
@@ -360,7 +361,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var tmps = entity.groupObject
+                                var tmps = entity
+                                    .groupObject
                                     .Where(p => p.id == newObject.id)
                                     .FirstOrDefault();
                                 tmps.id = newObject.id;

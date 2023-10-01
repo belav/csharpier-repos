@@ -136,9 +136,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var bag = DiagnosticBag.GetInstance();
                     bag.Add(
                         ErrorCode.ERR_SimpleProgramIsEmpty,
-                        (
-                            (EmptyStatementSyntax)firstGlobalStatement.Statement
-                        ).SemicolonToken.GetLocation()
+                        ((EmptyStatementSyntax)firstGlobalStatement.Statement)
+                            .SemicolonToken
+                            .GetLocation()
                     );
                     diagnostics = bag.ToReadOnlyAndFree();
                 }
@@ -226,9 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             : SingleTypeDeclaration.TypeDeclarationFlags.None
                     )
                     | SingleTypeDeclaration.TypeDeclarationFlags.IsSimpleProgram,
-                syntaxReference: firstGlobalStatement.SyntaxTree.GetReference(
-                    firstGlobalStatement.Parent
-                ),
+                syntaxReference: firstGlobalStatement
+                    .SyntaxTree
+                    .GetReference(firstGlobalStatement.Parent),
                 nameLocation: new SourceLocation(firstGlobalStatement.GetFirstToken()),
                 memberNames: ImmutableSegmentedDictionary<string, VoidResult>.Empty,
                 children: ImmutableArray<SingleTypeDeclaration>.Empty,
@@ -517,18 +517,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var usingDirective in usings)
             {
                 if (usingDirective.StaticKeyword != default)
-                    MessageID.IDS_FeatureUsingStatic.CheckFeatureAvailability(
-                        diagnostics,
-                        usingDirective,
-                        usingDirective.StaticKeyword.GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeatureUsingStatic
+                        .CheckFeatureAvailability(
+                            diagnostics,
+                            usingDirective,
+                            usingDirective.StaticKeyword.GetLocation()
+                        );
 
                 if (usingDirective.GlobalKeyword != default)
-                    MessageID.IDS_FeatureGlobalUsing.CheckFeatureAvailability(
-                        diagnostics,
-                        usingDirective,
-                        usingDirective.GlobalKeyword.GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeatureGlobalUsing
+                        .CheckFeatureAvailability(
+                            diagnostics,
+                            usingDirective,
+                            usingDirective.GlobalKeyword.GetLocation()
+                        );
             }
         }
 
@@ -538,11 +542,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             foreach (var externAlias in externs)
-                MessageID.IDS_FeatureExternAlias.CheckFeatureAvailability(
-                    diagnostics,
-                    externAlias,
-                    externAlias.ExternKeyword.GetLocation()
-                );
+                MessageID
+                    .IDS_FeatureExternAlias
+                    .CheckFeatureAvailability(
+                        diagnostics,
+                        externAlias,
+                        externAlias.ExternKeyword.GetLocation()
+                    );
         }
 
         public override SingleNamespaceOrTypeDeclaration VisitFileScopedNamespaceDeclaration(
@@ -589,11 +595,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (node is FileScopedNamespaceDeclarationSyntax)
             {
-                MessageID.IDS_FeatureFileScopedNamespace.CheckFeatureAvailability(
-                    diagnostics,
-                    node,
-                    node.NamespaceKeyword.GetLocation()
-                );
+                MessageID
+                    .IDS_FeatureFileScopedNamespace
+                    .CheckFeatureAvailability(
+                        diagnostics,
+                        node,
+                        node.NamespaceKeyword.GetLocation()
+                    );
 
                 if (node.Parent is FileScopedNamespaceDeclarationSyntax)
                 {
@@ -822,11 +830,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && record.ClassOrStructKeyword.Kind() != SyntaxKind.None
             )
             {
-                MessageID.IDS_FeatureRecordStructs.CheckFeatureAvailability(
-                    diagnostics,
-                    record,
-                    record.ClassOrStructKeyword.GetLocation()
-                );
+                MessageID
+                    .IDS_FeatureRecordStructs
+                    .CheckFeatureAvailability(
+                        diagnostics,
+                        record,
+                        record.ClassOrStructKeyword.GetLocation()
+                    );
             }
 
             var modifiers = node.Modifiers.ToDeclarationModifiers(
@@ -839,33 +849,27 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (modifier.IsKind(SyntaxKind.StaticKeyword) && kind == DeclarationKind.Class)
                 {
-                    MessageID.IDS_FeatureStaticClasses.CheckFeatureAvailability(
-                        diagnostics,
-                        node,
-                        modifier.GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeatureStaticClasses
+                        .CheckFeatureAvailability(diagnostics, node, modifier.GetLocation());
                 }
                 else if (
                     modifier.IsKind(SyntaxKind.ReadOnlyKeyword)
                     && kind is DeclarationKind.Struct or DeclarationKind.RecordStruct
                 )
                 {
-                    MessageID.IDS_FeatureReadOnlyStructs.CheckFeatureAvailability(
-                        diagnostics,
-                        node,
-                        modifier.GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeatureReadOnlyStructs
+                        .CheckFeatureAvailability(diagnostics, node, modifier.GetLocation());
                 }
                 else if (
                     modifier.IsKind(SyntaxKind.RefKeyword)
                     && kind is DeclarationKind.Struct or DeclarationKind.RecordStruct
                 )
                 {
-                    MessageID.IDS_FeatureRefStructs.CheckFeatureAvailability(
-                        diagnostics,
-                        node,
-                        modifier.GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeatureRefStructs
+                        .CheckFeatureAvailability(diagnostics, node, modifier.GetLocation());
                 }
             }
 
@@ -1289,9 +1293,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.ConstructorDeclaration:
                     anyNonTypeMembers = true;
                     set.TryAdd(
-                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member).Modifiers.Any(
-                            (int)SyntaxKind.StaticKeyword
-                        )
+                        ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member)
+                            .Modifiers
+                            .Any((int)SyntaxKind.StaticKeyword)
                             ? WellKnownMemberNames.StaticConstructorName
                             : WellKnownMemberNames.InstanceConstructorName
                     );

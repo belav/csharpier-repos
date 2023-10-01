@@ -365,16 +365,16 @@ public class EndpointMetadataConventionTest
     {
         public static void PopulateMetadata(EndpointParameterMetadataContext parameterContext)
         {
-            parameterContext.EndpointMetadata?.Add(
-                new ParameterNameMetadata { Name = parameterContext.Parameter?.Name }
-            );
+            parameterContext
+                .EndpointMetadata
+                ?.Add(new ParameterNameMetadata { Name = parameterContext.Parameter?.Name });
         }
 
         public static void PopulateMetadata(EndpointMetadataContext context)
         {
-            context.EndpointMetadata?.Add(
-                new CustomEndpointMetadata { Source = MetadataSource.Parameter }
-            );
+            context
+                .EndpointMetadata
+                ?.Add(new CustomEndpointMetadata { Source = MetadataSource.Parameter });
         }
     }
 
@@ -382,9 +382,9 @@ public class EndpointMetadataConventionTest
     {
         public static void PopulateMetadata(EndpointMetadataContext context)
         {
-            context.EndpointMetadata?.Add(
-                new CustomEndpointMetadata { Source = MetadataSource.ReturnType }
-            );
+            context
+                .EndpointMetadata
+                ?.Add(new CustomEndpointMetadata { Source = MetadataSource.ReturnType });
         }
 
         public Task ExecuteAsync(HttpContext httpContext) => throw new NotImplementedException();
@@ -394,9 +394,9 @@ public class EndpointMetadataConventionTest
     {
         public static void PopulateMetadata(EndpointMetadataContext context)
         {
-            context.EndpointMetadata?.Add(
-                new CustomEndpointMetadata { Source = MetadataSource.ReturnType }
-            );
+            context
+                .EndpointMetadata
+                ?.Add(new CustomEndpointMetadata { Source = MetadataSource.ReturnType });
         }
 
         public Task ExecuteResultAsync(ActionContext context) =>

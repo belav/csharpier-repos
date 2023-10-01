@@ -116,7 +116,8 @@ public class InteropClient : IDisposable
 
     public static void Run(string[] args)
     {
-        var parserResult = Parser.Default
+        var parserResult = Parser
+            .Default
             .ParseArguments<ClientOptions>(args)
             .WithNotParsed(errors => Environment.Exit(1))
             .WithParsed(options =>
@@ -794,13 +795,15 @@ public class InteropClient : IDisposable
         try
         {
             var probeCall = client.StreamingInputCall(CreateClientCompressionMetadata(false));
-            await probeCall.RequestStream.WriteAsync(
-                new StreamingInputCallRequest
-                {
-                    ExpectCompressed = new BoolValue { Value = true },
-                    Payload = CreateZerosPayload(27182)
-                }
-            );
+            await probeCall
+                .RequestStream
+                .WriteAsync(
+                    new StreamingInputCallRequest
+                    {
+                        ExpectCompressed = new BoolValue { Value = true },
+                        Payload = CreateZerosPayload(27182)
+                    }
+                );
 
             // cannot use Assert.ThrowsAsync because it uses Task.Wait and would deadlock.
             await probeCall;

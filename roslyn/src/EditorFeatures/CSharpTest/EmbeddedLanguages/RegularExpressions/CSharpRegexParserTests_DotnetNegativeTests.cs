@@ -115,7 +115,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
     <EndOfFile />
   </CompilationUnit>
   <Diagnostics>
-    <Diagnostic Message=""{FeaturesResources.Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[10..12)"" Text=""\k"" />
+    <Diagnostic Message=""{FeaturesResources .Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[10..12)"" Text=""\k"" />
   </Diagnostics>
   <Captures>
     <Capture Name=""0"" Span=""[10..13)"" Text=""\k&lt;"" />
@@ -141,7 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
     <EndOfFile />
   </CompilationUnit>
   <Diagnostics>
-    <Diagnostic Message=""{FeaturesResources.Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[10..12)"" Text=""\k"" />
+    <Diagnostic Message=""{FeaturesResources .Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[10..12)"" Text=""\k"" />
   </Diagnostics>
   <Captures>
     <Capture Name=""0"" Span=""[10..12)"" Text=""\k"" />
@@ -4171,7 +4171,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
     <EndOfFile />
   </CompilationUnit>
   <Diagnostics>
-    <Diagnostic Message=""{FeaturesResources.Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[35..37)"" Text=""\k"" />
+    <Diagnostic Message=""{FeaturesResources .Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[35..37)"" Text=""\k"" />
   </Diagnostics>
   <Captures>
     <Capture Name=""0"" Span=""[10..40)"" Text=""(?&lt;cat&gt;cat)\s+(?&lt;dog&gt;dog)\kcat"" />
@@ -5174,7 +5174,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
     <EndOfFile />
   </CompilationUnit>
   <Diagnostics>
-    <Diagnostic Message=""{FeaturesResources.Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[35..37)"" Text=""\k"" />
+    <Diagnostic Message=""{FeaturesResources .Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[35..37)"" Text=""\k"" />
   </Diagnostics>
   <Captures>
     <Capture Name=""0"" Span=""[10..38)"" Text=""(?&lt;cat&gt;cat)\s+(?&lt;dog&gt;dog)\k8"" />
@@ -5240,7 +5240,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
     <EndOfFile />
   </CompilationUnit>
   <Diagnostics>
-    <Diagnostic Message=""{FeaturesResources.Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[35..37)"" Text=""\k"" />
+    <Diagnostic Message=""{FeaturesResources .Malformed_named_back_reference .Replace("<", "&lt;") .Replace(">", "&gt;")}"" Span=""[35..37)"" Text=""\k"" />
   </Diagnostics>
   <Captures>
     <Capture Name=""0"" Span=""[10..38)"" Text=""(?&lt;cat&gt;cat)\s+(?&lt;dog&gt;dog)\k8"" />

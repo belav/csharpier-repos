@@ -300,11 +300,11 @@ namespace System.Activities.Core.Presentation
                 "this.ModelItem must implement IModelTreeItem"
             );
             using (
-                EditingScope editingScope = (
-                    (IModelTreeItem)this.ModelItem
-                ).ModelTreeManager.CreateEditingScope(
-                    System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
-                )
+                EditingScope editingScope = ((IModelTreeItem)this.ModelItem)
+                    .ModelTreeManager
+                    .CreateEditingScope(
+                        System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
+                    )
             )
             {
                 if (metaData != null)

@@ -454,9 +454,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         bool ISTGExist;
                         try
                         {
-                            ISTGExist = NTDSSiteEntry.Properties.Contains(
-                                "interSiteTopologyGenerator"
-                            );
+                            ISTGExist = NTDSSiteEntry
+                                .Properties
+                                .Contains("interSiteTopologyGenerator");
                         }
                         catch (COMException e)
                         {
@@ -945,10 +945,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     try
                     {
                         // create nTDSSiteSettings object
-                        DirectoryEntry tmpEntry = cachedEntry.Children.Add(
-                            "CN=NTDS Site Settings",
-                            "nTDSSiteSettings"
-                        );
+                        DirectoryEntry tmpEntry = cachedEntry
+                            .Children
+                            .Add("CN=NTDS Site Settings", "nTDSSiteSettings");
                         //set properties on the Site NTDS settings object
                         DirectoryServer? replica = InterSiteTopologyGenerator;
                         if (replica != null)
@@ -976,10 +975,9 @@ namespace System.DirectoryServices.ActiveDirectory
                         if (!IsADAM)
                         {
                             // create the licensingSiteSettings object
-                            tmpEntry = cachedEntry.Children.Add(
-                                "CN=Licensing Site Settings",
-                                "licensingSiteSettings"
-                            );
+                            tmpEntry = cachedEntry
+                                .Children
+                                .Add("CN=Licensing Site Settings", "licensingSiteSettings");
                             tmpEntry.CommitChanges();
                         }
                     }
@@ -1688,10 +1686,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 IntPtr info = (IntPtr)0;
                 // call DsReplicaSyncAllW
                 var dsListDomainsInSiteW = (delegate* unmanaged<IntPtr, char*, IntPtr*, int>)
-                    global::Interop.Kernel32.GetProcAddress(
-                        DirectoryContext.ADHandle,
-                        "DsListDomainsInSiteW"
-                    );
+                    global::Interop
+                        .Kernel32
+                        .GetProcAddress(DirectoryContext.ADHandle, "DsListDomainsInSiteW");
                 if (dsListDomainsInSiteW == null)
                 {
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastPInvokeError());
@@ -1756,10 +1753,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     // call DsFreeNameResultW
                     var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)
-                        global::Interop.Kernel32.GetProcAddress(
-                            DirectoryContext.ADHandle,
-                            "DsFreeNameResultW"
-                        );
+                        global::Interop
+                            .Kernel32
+                            .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                     if (dsFreeNameResultW == null)
                     {
                         throw ExceptionHelper.GetExceptionFromErrorCode(

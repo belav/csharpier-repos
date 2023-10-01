@@ -45,14 +45,16 @@ namespace System.ServiceModel.Description
             EndpointDispatcher endpointDispatcher
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(
-                        SR.SFXEndpointBehaviorUsedOnWrongSide,
-                        typeof(ClientViaBehavior).Name
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFXEndpointBehaviorUsedOnWrongSide,
+                            typeof(ClientViaBehavior).Name
+                        )
                     )
-                )
-            );
+                );
         }
 
         void IEndpointBehavior.ApplyClientBehavior(

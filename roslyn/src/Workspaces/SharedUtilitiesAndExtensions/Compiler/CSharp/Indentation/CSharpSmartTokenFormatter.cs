@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             // Exception 2: Similar behavior for do-while
             if (common.ContainsDiagnostics && !CloseBraceOfTryOrDoBlock(endToken))
             {
-                smartTokenformattingRules = ImmutableArray<AbstractFormattingRule>.Empty
+                smartTokenformattingRules = ImmutableArray<AbstractFormattingRule>
+                    .Empty
                     .Add(new NoLineChangeFormattingRule())
                     .AddRange(_formattingRules);
             }

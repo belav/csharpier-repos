@@ -41,9 +41,9 @@ namespace ILCompiler.DependencyAnalysis
 
         private static IEETypeNode GetEETypeNode(NodeFactory factory)
         {
-            DefType systemStringType = factory.TypeSystemContext.GetWellKnownType(
-                WellKnownType.String
-            );
+            DefType systemStringType = factory
+                .TypeSystemContext
+                .GetWellKnownType(WellKnownType.String);
 
             //
             // The GC requires a direct reference to frozen objects' EETypes. If System.String will be compiled into a separate

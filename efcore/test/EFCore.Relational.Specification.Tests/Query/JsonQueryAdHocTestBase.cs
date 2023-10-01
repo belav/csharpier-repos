@@ -96,7 +96,8 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         );
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities
+            var query = context
+                .Entities
                 .OrderBy(x => x.Id)
                 .Select(x => new { x.Reference.IntArray, x.Reference.ListOfString });
 
@@ -119,7 +120,8 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         );
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities
+            var query = context
+                .Entities
                 .OrderBy(x => x.Id)
                 .Select(x => new { x.Collection[0].IntArray, x.Collection[1].ListOfString });
 
@@ -142,7 +144,8 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         );
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities
+            var query = context
+                .Entities
                 .OrderBy(x => x.Id)
                 .Select(
                     x =>
@@ -210,11 +213,13 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
         );
         using (var context = contextFactory.CreateContext())
         {
-            var query = context.Entities.Where(
-                x =>
-                    x.Reference.IntArray.AsQueryable().ElementAt(0) == 1
-                    || x.Reference.ListOfString.AsQueryable().ElementAt(1) == "Bar"
-            );
+            var query = context
+                .Entities
+                .Where(
+                    x =>
+                        x.Reference.IntArray.AsQueryable().ElementAt(0) == 1
+                        || x.Reference.ListOfString.AsQueryable().ElementAt(1) == "Bar"
+                );
 
             if (async)
             {

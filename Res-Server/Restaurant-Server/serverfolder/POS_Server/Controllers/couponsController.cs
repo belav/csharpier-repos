@@ -34,7 +34,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var couponsList = entity.coupons
+                    var couponsList = entity
+                        .coupons
                         .Select(
                             c =>
                                 new CouponModel
@@ -71,7 +72,8 @@ namespace POS_Server.Controllers
                             if (couponitem.isActive == 1)
                             {
                                 long cId = (long)couponitem.cId;
-                                var copinv = entity.couponsInvoices
+                                var copinv = entity
+                                    .couponsInvoices
                                     .Where(x => x.couponId == cId)
                                     .Select(x => new { x.id })
                                     .FirstOrDefault();
@@ -103,7 +105,8 @@ namespace POS_Server.Controllers
                 DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var couponsList = entity.coupons
+                    var couponsList = entity
+                        .coupons
                         .Where(
                             x =>
                                 (x.remainQ > 0 || x.quantity == 0)
@@ -168,7 +171,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     #region public effective coupons
-                    var couponsList = entity.coupons
+                    var couponsList = entity
+                        .coupons
                         .Where(
                             x =>
                                 (x.remainQ > 0 || x.quantity == 0)
@@ -209,17 +213,19 @@ namespace POS_Server.Controllers
                     var publicCouponIds = couponsList.Select(x => x.cId).ToList();
 
                     var memberShipcoupons = (
-                        from c in entity.coupons.Where(
-                            x =>
-                                (x.remainQ > 0 || x.quantity == 0)
-                                && (x.startDate <= dtnow || x.startDate == null)
-                                && (x.endDate >= dtnow || x.endDate == null)
-                                && x.isActive == 1
-                                && !publicCouponIds.Contains(x.cId)
-                        )
-                        join cm in entity.couponsMemberships.Where(
-                            x => x.membershipId == memberShipId
-                        )
+                        from c in entity
+                            .coupons
+                            .Where(
+                                x =>
+                                    (x.remainQ > 0 || x.quantity == 0)
+                                    && (x.startDate <= dtnow || x.startDate == null)
+                                    && (x.endDate >= dtnow || x.endDate == null)
+                                    && x.isActive == 1
+                                    && !publicCouponIds.Contains(x.cId)
+                            )
+                        join cm in entity
+                            .couponsMemberships
+                            .Where(x => x.membershipId == memberShipId)
                             on c.cId equals cm.cId
                         join M in entity.memberships.Where(x => x.membershipId == memberShipId)
                             on cm.membershipId equals M.membershipId
@@ -301,7 +307,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var coupon = entity.coupons
+                    var coupon = entity
+                        .coupons
                         .Where(c => c.cId == cId)
                         .Select(
                             c =>
@@ -359,7 +366,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var coupon = entity.coupons
+                    var coupon = entity
+                        .coupons
                         .Where(c => c.code == code)
                         .Select(
                             c =>
@@ -417,7 +425,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var coupon = entity.coupons
+                    var coupon = entity
+                        .coupons
                         .Where(c => c.barcode == barcode)
                         .Select(
                             c =>
@@ -475,7 +484,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var coupon = entity.coupons
+                    var coupon = entity
+                        .coupons
                         .Where(c => c.code == code)
                         .Select(
                             c =>
@@ -519,7 +529,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var coupon = entity.coupons
+                    var coupon = entity
+                        .coupons
                         .Where(c => c.isActive == isActive)
                         .Select(
                             c =>
@@ -602,7 +613,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpcoupon = entity.coupons
+                            tmpcoupon = entity
+                                .coupons
                                 .Where(p => p.cId == Object.cId)
                                 .FirstOrDefault();
                             tmpcoupon.name = Object.name;

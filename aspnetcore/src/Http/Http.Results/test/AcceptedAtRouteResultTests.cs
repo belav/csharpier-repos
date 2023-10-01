@@ -86,7 +86,8 @@ public class AcceptedAtRouteResultTests
         PopulateMetadata<AcceptedAtRoute>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata
+        var producesResponseTypeMetadata = builder
+            .Metadata
             .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(StatusCodes.Status202Accepted, producesResponseTypeMetadata.StatusCode);

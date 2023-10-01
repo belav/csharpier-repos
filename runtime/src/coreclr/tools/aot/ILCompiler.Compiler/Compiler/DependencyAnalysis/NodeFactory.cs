@@ -1136,10 +1136,9 @@ namespace ILCompiler.DependencyAnalysis
         {
             get
             {
-                _systemArrayOfTClass ??= _systemArrayOfTClass = _context.SystemModule.GetKnownType(
-                    "System",
-                    "Array`1"
-                );
+                _systemArrayOfTClass ??= _systemArrayOfTClass = _context
+                    .SystemModule
+                    .GetKnownType("System", "Array`1");
                 return _systemArrayOfTClass;
             }
         }

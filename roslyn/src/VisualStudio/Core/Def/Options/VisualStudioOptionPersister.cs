@@ -42,10 +42,10 @@ internal sealed class VisualStudioOptionPersister : IOptionPersister
     public bool TryFetch(OptionKey2 optionKey, out object? value)
     {
         value = null;
-        return VisualStudioOptionStorage.Storages.TryGetValue(
-                optionKey.Option.Definition.ConfigName,
-                out var storage
-            ) && TryFetch(storage, optionKey, out value);
+        return VisualStudioOptionStorage
+                .Storages
+                .TryGetValue(optionKey.Option.Definition.ConfigName, out var storage)
+            && TryFetch(storage, optionKey, out value);
     }
 
     public bool TryFetch(
@@ -67,10 +67,9 @@ internal sealed class VisualStudioOptionPersister : IOptionPersister
     public bool TryPersist(OptionKey2 optionKey, object? value)
     {
         if (
-            !VisualStudioOptionStorage.Storages.TryGetValue(
-                optionKey.Option.Definition.ConfigName,
-                out var storage
-            )
+            !VisualStudioOptionStorage
+                .Storages
+                .TryGetValue(optionKey.Option.Definition.ConfigName, out var storage)
         )
         {
             return false;

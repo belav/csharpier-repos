@@ -212,11 +212,10 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         FieldInfo? newFieldInfo,
         FieldInfo? oldFieldInfo
     ) =>
-        DeclaringEntityType.Model.ConventionDispatcher.OnPropertyFieldChanged(
-            Builder,
-            newFieldInfo,
-            oldFieldInfo
-        );
+        DeclaringEntityType
+            .Model
+            .ConventionDispatcher
+            .OnPropertyFieldChanged(Builder, newFieldInfo, oldFieldInfo);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -935,7 +934,9 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
                     ref _typeMapping,
                     (IProperty)this,
                     static property =>
-                        property.DeclaringEntityType.Model
+                        property
+                            .DeclaringEntityType
+                            .Model
                             .GetModelDependencies()
                             .TypeMappingSource
                             .FindMapping(property)!
@@ -1341,12 +1342,10 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType.Model.ConventionDispatcher.OnPropertyAnnotationChanged(
-            Builder,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnPropertyAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

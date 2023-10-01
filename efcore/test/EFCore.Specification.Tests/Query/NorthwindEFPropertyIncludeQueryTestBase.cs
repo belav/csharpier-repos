@@ -214,8 +214,9 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
                 && methodCallExpression.Method.IsGenericMethod
             )
             {
-                var genericMethodDefinition =
-                    methodCallExpression.Method.GetGenericMethodDefinition();
+                var genericMethodDefinition = methodCallExpression
+                    .Method
+                    .GetGenericMethodDefinition();
                 if (genericMethodDefinition == _includeMethodInfo)
                 {
                     return BuildEFPropertyCallExpression(0, 1);

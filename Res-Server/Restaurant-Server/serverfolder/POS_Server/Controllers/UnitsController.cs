@@ -69,19 +69,23 @@ namespace POS_Server.Controllers
                             if (unitsList[i].isActive == 1)
                             {
                                 long unitId = (long)unitsList[i].unitId;
-                                var itemsL = entity.items
+                                var itemsL = entity
+                                    .items
                                     .Where(x => x.minUnitId == unitId)
                                     .Select(b => new { b.itemId })
                                     .ToList();
-                                var itemsMatL = entity.itemsMaterials
+                                var itemsMatL = entity
+                                    .itemsMaterials
                                     .Where(x => x.unitId == unitId)
                                     .Select(x => new { x.itemMatId })
                                     .FirstOrDefault();
-                                var itemsUnitL = entity.itemsUnits
+                                var itemsUnitL = entity
+                                    .itemsUnits
                                     .Where(x => x.unitId == unitId)
                                     .Select(x => new { x.itemUnitId })
                                     .FirstOrDefault();
-                                var unitsL = entity.units
+                                var unitsL = entity
+                                    .units
                                     .Where(x => x.parentid == unitId)
                                     .Select(x => new { x.unitId })
                                     .FirstOrDefault();
@@ -170,7 +174,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     // get all sub categories of categoryId
-                    List<itemsUnits> unitsList = entity.itemsUnits
+                    List<itemsUnits> unitsList = entity
+                        .itemsUnits
                         .ToList()
                         .Where(x => x.itemId == itemId)
                         .Select(
@@ -224,7 +229,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var unitsList = entity.units
+                    var unitsList = entity
+                        .units
                         .Where(u => u.isActive == 1)
                         .Select(
                             u =>
@@ -273,7 +279,8 @@ namespace POS_Server.Controllers
 
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var unit = entity.units
+                    var unit = entity
+                        .units
                         .Where(u => u.unitId == unitId)
                         .Select(
                             u =>
@@ -348,7 +355,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpUnit = entity.units
+                            tmpUnit = entity
+                                .units
                                 .Where(p => p.unitId == Object.unitId)
                                 .FirstOrDefault();
                             tmpUnit.name = Object.name;

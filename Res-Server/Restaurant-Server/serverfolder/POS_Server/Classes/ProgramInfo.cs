@@ -61,7 +61,8 @@ namespace POS_Server.Classes
             int customerCount = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                customerCount = entity.ProgramDetails
+                customerCount = entity
+                    .ProgramDetails
                     .Select(x => x.customerCount)
                     .SingleOrDefault();
             }

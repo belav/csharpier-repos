@@ -94,9 +94,9 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
             if (_configuration == null && Options.ConfigurationManager != null)
             {
-                _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
-                    Context.RequestAborted
-                );
+                _configuration = await Options
+                    .ConfigurationManager
+                    .GetConfigurationAsync(Context.RequestAborted);
             }
 
             var validationParameters = Options.TokenValidationParameters.Clone();
@@ -171,12 +171,14 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
                     if (Options.SaveToken)
                     {
-                        tokenValidatedContext.Properties.StoreTokens(
-                            new[]
-                            {
-                                new AuthenticationToken { Name = "access_token", Value = token }
-                            }
-                        );
+                        tokenValidatedContext
+                            .Properties
+                            .StoreTokens(
+                                new[]
+                                {
+                                    new AuthenticationToken { Name = "access_token", Value = token }
+                                }
+                            );
                     }
 
                     tokenValidatedContext.Success();

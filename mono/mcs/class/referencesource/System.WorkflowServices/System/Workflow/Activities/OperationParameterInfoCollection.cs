@@ -118,13 +118,15 @@ namespace System.Workflow.Activities
             {
                 if (!(value is OperationParameterInfo))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR2.GetString(
-                            SR2.Error_InvalidListItem,
-                            typeof(OperationParameterInfo).FullName
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "value",
+                            SR2.GetString(
+                                SR2.Error_InvalidListItem,
+                                typeof(OperationParameterInfo).FullName
+                            )
+                        );
                 }
                 ((IList<OperationParameterInfo>)this)[index] = (OperationParameterInfo)value;
             }
@@ -221,13 +223,15 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR2.GetString(
-                        SR2.Error_InvalidListItem,
-                        typeof(OperationParameterInfo).FullName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "value",
+                        SR2.GetString(
+                            SR2.Error_InvalidListItem,
+                            typeof(OperationParameterInfo).FullName
+                        )
+                    );
             }
             ((IList<OperationParameterInfo>)this).Add((OperationParameterInfo)value);
             return this.Count - 1;
@@ -242,13 +246,15 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR2.GetString(
-                        SR2.Error_InvalidListItem,
-                        typeof(OperationParameterInfo).FullName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "value",
+                        SR2.GetString(
+                            SR2.Error_InvalidListItem,
+                            typeof(OperationParameterInfo).FullName
+                        )
+                    );
             }
             return (((IList<OperationParameterInfo>)this).Contains((OperationParameterInfo)value));
         }
@@ -262,13 +268,15 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR2.GetString(
-                        SR2.Error_InvalidListItem,
-                        typeof(OperationParameterInfo).FullName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "value",
+                        SR2.GetString(
+                            SR2.Error_InvalidListItem,
+                            typeof(OperationParameterInfo).FullName
+                        )
+                    );
             }
             return ((IList<OperationParameterInfo>)this).IndexOf((OperationParameterInfo)value);
         }
@@ -277,9 +285,9 @@ namespace System.Workflow.Activities
         {
             if (index < 0 || index > base.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
             if (item == null)
             {
@@ -293,13 +301,15 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR2.GetString(
-                        SR2.Error_InvalidListItem,
-                        typeof(OperationParameterInfo).FullName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "value",
+                        SR2.GetString(
+                            SR2.Error_InvalidListItem,
+                            typeof(OperationParameterInfo).FullName
+                        )
+                    );
             }
             ((IList<OperationParameterInfo>)this).Insert(index, (OperationParameterInfo)value);
         }
@@ -308,13 +318,15 @@ namespace System.Workflow.Activities
         {
             if (!(value is OperationParameterInfo))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR2.GetString(
-                        SR2.Error_InvalidListItem,
-                        typeof(OperationParameterInfo).FullName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "value",
+                        SR2.GetString(
+                            SR2.Error_InvalidListItem,
+                            typeof(OperationParameterInfo).FullName
+                        )
+                    );
             }
             ((IList<OperationParameterInfo>)this).Remove((OperationParameterInfo)value);
         }
@@ -323,9 +335,9 @@ namespace System.Workflow.Activities
         {
             if (index < 0 || index >= base.Count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("index"));
             }
 
             base.RemoveAt(index);

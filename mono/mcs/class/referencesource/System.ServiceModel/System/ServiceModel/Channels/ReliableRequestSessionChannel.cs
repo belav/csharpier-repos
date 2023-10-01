@@ -728,9 +728,9 @@ namespace System.ServiceModel.Channels
                     if (fault != null)
                     {
                         this.session.OnLocalFault(null, fault, null);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            fault.CreateException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(fault.CreateException());
                     }
                 }
                 finally
@@ -1130,9 +1130,9 @@ namespace System.ServiceModel.Channels
             {
                 this.originalTimeout = timeout;
                 if (!parent.connection.AddMessage(message, timeout, this))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        this.parent.GetInvalidAddException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(this.parent.GetInvalidAddException());
             }
 
             public void Set(Message reply)
@@ -1199,23 +1199,25 @@ namespace System.ServiceModel.Channels
 
                     if (this.aborted)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            this.parent.CreateClosedException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(this.parent.CreateClosedException());
                     }
                     else if (this.faulted)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            this.parent.GetTerminalException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(this.parent.GetTerminalException());
                     }
                     else if (expired)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(
-                                SR.GetString(SR.TimeoutOnRequest, this.originalTimeout)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new TimeoutException(
+                                    SR.GetString(SR.TimeoutOnRequest, this.originalTimeout)
+                                )
+                            );
                     }
                     else
                     {
@@ -1305,13 +1307,15 @@ namespace System.ServiceModel.Channels
 
             public void BeginSendRequest(Message message, TimeSpan timeout)
             {
-                parent.connection.BeginAddMessage(
-                    message,
-                    timeout,
-                    this,
-                    Fx.ThunkCallback(new AsyncCallback(AddCompleted)),
-                    null
-                );
+                parent
+                    .connection
+                    .BeginAddMessage(
+                        message,
+                        timeout,
+                        this,
+                        Fx.ThunkCallback(new AsyncCallback(AddCompleted)),
+                        null
+                    );
             }
 
             public void Complete()

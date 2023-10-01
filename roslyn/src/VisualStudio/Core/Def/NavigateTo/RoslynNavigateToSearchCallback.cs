@@ -59,15 +59,17 @@ internal sealed partial class RoslynSearchItemsSourceProvider
         )
         {
             // Convert roslyn pattern matches to the platform type.
-            var matches = result.Matches.SelectAsArray(
-                static m =>
-                    new PatternMatch(
-                        ConvertKind(m.Kind),
-                        punctuationStripped: false,
-                        m.IsCaseSensitive,
-                        m.MatchedSpans.SelectAsArray(static s => s.ToSpan())
-                    )
-            );
+            var matches = result
+                .Matches
+                .SelectAsArray(
+                    static m =>
+                        new PatternMatch(
+                            ConvertKind(m.Kind),
+                            punctuationStripped: false,
+                            m.IsCaseSensitive,
+                            m.MatchedSpans.SelectAsArray(static s => s.ToSpan())
+                        )
+                );
 
             // Weight the items based on the overall pattern matching weights.  We want the items that have the best
             // pattern matches (low .Kind values) to have the highest float values (as higher is better for the VS

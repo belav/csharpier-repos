@@ -115,7 +115,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.invoices
+                    var banksList = entity
+                        .invoices
                         .Select(
                             b =>
                                 new
@@ -256,7 +257,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.invoices
+                    var banksList = entity
+                        .invoices
                         .Where(b => b.invoiceId == invoiceId)
                         .Select(
                             b =>
@@ -302,14 +304,16 @@ namespace POS_Server.Controllers
                                     shippingCostDiscount = b.shippingCostDiscount,
                                     membershipId = b.membershipId,
                                     invBarcode = b.invBarcode,
-                                    itemsCount = entity.itemsTransfer
+                                    itemsCount = entity
+                                        .itemsTransfer
                                         .Where(x => x.invoiceId == invoiceId)
                                         .Select(x => x.itemsTransId)
                                         .ToList()
                                         .Count,
                                     performed =
                                         (
-                                            entity.invoices
+                                            entity
+                                                .invoices
                                                 .Where(y => y.invoiceMainId == b.invoiceId)
                                                 .FirstOrDefault() == null
                                         )
@@ -318,7 +322,8 @@ namespace POS_Server.Controllers
                                 }
                         )
                         .FirstOrDefault();
-                    var dis = entity.couponsInvoices
+                    var dis = entity
+                        .couponsInvoices
                         .Where(C => C.InvoiceId == invoiceId)
                         .Select(
                             C =>
@@ -375,7 +380,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.invoices
+                    var banksList = entity
+                        .invoices
                         .Where(b => b.invoiceMainId == mainInvoiceId)
                         .Select(
                             b =>
@@ -443,7 +449,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.invoices
+                    var banksList = entity
+                        .invoices
                         .Where(b => b.invoiceId == invoiceId)
                         .Select(
                             b =>
@@ -567,9 +574,9 @@ namespace POS_Server.Controllers
                     else
                     {
                         var banksList = (
-                            from b in entity.invoices.Where(
-                                b => b.invNumber == invNum && b.branchId == branchId
-                            )
+                            from b in entity
+                                .invoices
+                                .Where(b => b.invNumber == invNum && b.branchId == branchId)
                             join l in entity.branches on b.branchId equals l.branchId into lj
                             from x in lj.DefaultIfEmpty()
                             select new InvoiceModel()
@@ -710,9 +717,9 @@ namespace POS_Server.Controllers
                     else
                     {
                         var invoicesList = (
-                            from b in entity.invoices.Where(
-                                x => invTypeL.Contains(x.invType) && x.branchId == branchId
-                            )
+                            from b in entity
+                                .invoices
+                                .Where(x => invTypeL.Contains(x.invType) && x.branchId == branchId)
                             join l in entity.branches on b.branchId equals l.branchId into lj
                             from x in lj.DefaultIfEmpty()
                             select new InvoiceModel()
@@ -844,7 +851,8 @@ namespace POS_Server.Controllers
                             taxtype = b.taxtype,
                             name = b.name,
                             isApproved = b.isApproved,
-                            branchCreatorName = entity.invoices
+                            branchCreatorName = entity
+                                .invoices
                                 .Where(m => m.invoiceId == b.invoiceMainId)
                                 .Select(m => m.branches.name)
                                 .FirstOrDefault(),
@@ -954,16 +962,16 @@ namespace POS_Server.Controllers
                             branchCreatorName =
                                 b.invoiceMainId != null
                                     ? (
-                                        from i in entity.invoices.Where(
-                                            m => m.invoiceId == b.invoiceMainId
-                                        )
+                                        from i in entity
+                                            .invoices
+                                            .Where(m => m.invoiceId == b.invoiceMainId)
                                         join b in entity.branches on i.branchId equals b.branchId
                                         select b.name
                                     ).FirstOrDefault()
                                     : (
-                                        from i in entity.invoices.Where(
-                                            m => m.invoiceMainId == b.invoiceId
-                                        )
+                                        from i in entity
+                                            .invoices
+                                            .Where(m => m.invoiceMainId == b.invoiceId)
                                         join b in entity.branches on i.branchId equals b.branchId
                                         select b.name
                                     ).FirstOrDefault(),
@@ -1107,9 +1115,9 @@ namespace POS_Server.Controllers
                             membershipId = b.membershipId,
                             invBarcode = b.invBarcode,
                             tables = (
-                                from it in entity.invoiceTables.Where(
-                                    y => y.invoiceId == b.invoiceId && y.isActive == 1
-                                )
+                                from it in entity
+                                    .invoiceTables
+                                    .Where(y => y.invoiceId == b.invoiceId && y.isActive == 1)
                                 join ts in entity.tables on it.tableId equals ts.tableId
                                 select new TableModel()
                                 {
@@ -1652,9 +1660,11 @@ namespace POS_Server.Controllers
                         branchesIds.Add(branches[i].branchId);
 
                     var invoice = (
-                        from b in entity.invoices.Where(
-                            b => b.invNumber == invNum && branchesIds.Contains((int)b.branchId)
-                        )
+                        from b in entity
+                            .invoices
+                            .Where(
+                                b => b.invNumber == invNum && branchesIds.Contains((int)b.branchId)
+                            )
                         join l in entity.branches on b.branchId equals l.branchId into lj
                         from x in lj.DefaultIfEmpty()
                         select new InvoiceModel()
@@ -1959,7 +1969,8 @@ namespace POS_Server.Controllers
                             where
                                 (
                                     s.orderStatusId
-                                    == entity.orderPreparingStatus
+                                    == entity
+                                        .orderPreparingStatus
                                         .Where(x => x.orderPreparingId == o.orderPreparingId)
                                         .Max(x => x.orderStatusId)
                                 )
@@ -2077,7 +2088,8 @@ namespace POS_Server.Controllers
                         where
                             (
                                 s.orderStatusId
-                                == entity.orderPreparingStatus
+                                == entity
+                                    .orderPreparingStatus
                                     .Where(x => x.orderPreparingId == o.orderPreparingId)
                                     .Max(x => x.orderStatusId)
                             )
@@ -2150,13 +2162,15 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var invoicesList = (
-                        from b in entity.invoices.Where(
-                            x =>
-                                (x.invType == "s" || x.invType == "ts" || x.invType == "ss")
-                                && x.branchCreatorId == branchId
-                                && x.shipUserId != null
-                                && x.isActive == true
-                        )
+                        from b in entity
+                            .invoices
+                            .Where(
+                                x =>
+                                    (x.invType == "s" || x.invType == "ts" || x.invType == "ss")
+                                    && x.branchCreatorId == branchId
+                                    && x.shipUserId != null
+                                    && x.isActive == true
+                            )
                         join op in entity.orderPreparing on b.invoiceId equals op.invoiceId
                         join s in entity.orderPreparingStatus
                             on op.orderPreparingId equals s.orderPreparingId
@@ -2166,7 +2180,8 @@ namespace POS_Server.Controllers
                             (
                                 statusL.Contains(s.status)
                                 && s.orderStatusId
-                                    == entity.orderPreparingStatus
+                                    == entity
+                                        .orderPreparingStatus
                                         .Where(x => x.orderPreparing.invoiceId == b.invoiceId)
                                         .Max(x => x.orderStatusId)
                             )
@@ -2214,7 +2229,8 @@ namespace POS_Server.Controllers
                                 b.deserved == 0
                                     ? "payed"
                                     : (b.deserved == b.totalNet ? "unpayed" : "partpayed"),
-                            branchCreatorName = entity.branches
+                            branchCreatorName = entity
+                                .branches
                                 .Where(X => X.branchId == b.branchCreatorId)
                                 .FirstOrDefault()
                                 .name,
@@ -2285,22 +2301,24 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var invoicesList = (
-                        from b in entity.invoices.Where(
-                            x =>
-                                x.agentId == agentId
-                                && typesList.Contains(x.invType)
-                                && x.deserved > 0
-                                && x.branchCreatorId == branchId
-                                && (
-                                    (x.shippingCompanyId == null && x.shipUserId == null)
-                                    || (
-                                        x.shippingCompanyId != null
-                                        && x.shipUserId == null
-                                        && x.isPrePaid == 1
+                        from b in entity
+                            .invoices
+                            .Where(
+                                x =>
+                                    x.agentId == agentId
+                                    && typesList.Contains(x.invType)
+                                    && x.deserved > 0
+                                    && x.branchCreatorId == branchId
+                                    && (
+                                        (x.shippingCompanyId == null && x.shipUserId == null)
+                                        || (
+                                            x.shippingCompanyId != null
+                                            && x.shipUserId == null
+                                            && x.isPrePaid == 1
+                                        )
+                                        || (x.shippingCompanyId != null && x.shipUserId != null)
                                     )
-                                    || (x.shippingCompanyId != null && x.shipUserId != null)
-                                )
-                        )
+                            )
                         select new InvoiceModel()
                         {
                             invoiceId = b.invoiceId,
@@ -2346,7 +2364,8 @@ namespace POS_Server.Controllers
                                 inv.invoiceMainId == null
                                 || (
                                     inv.invoiceMainId != null
-                                    && entity.invoices
+                                    && entity
+                                        .invoices
                                         .Where(
                                             x =>
                                                 x.invoiceId == inv.invoiceMainId
@@ -2365,7 +2384,8 @@ namespace POS_Server.Controllers
                         {
                             long invoiceId = inv.invoiceId;
 
-                            var statusObj = entity.orderPreparingStatus
+                            var statusObj = entity
+                                .orderPreparingStatus
                                 .Where(
                                     x =>
                                         x.orderPreparing.invoiceId == invoiceId
@@ -2507,16 +2527,18 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var invoicesList = (
-                        from b in entity.invoices.Where(
-                            x =>
-                                x.shippingCompanyId == shippingCompanyId
-                                && typesList.Contains(x.invType)
-                                && x.deserved > 0
-                                && x.shippingCompanyId != null
-                                && x.shipUserId == null
-                                && x.agentId != null
-                                && x.isPrePaid == 0
-                        )
+                        from b in entity
+                            .invoices
+                            .Where(
+                                x =>
+                                    x.shippingCompanyId == shippingCompanyId
+                                    && typesList.Contains(x.invType)
+                                    && x.deserved > 0
+                                    && x.shippingCompanyId != null
+                                    && x.shipUserId == null
+                                    && x.agentId != null
+                                    && x.isPrePaid == 0
+                            )
                         select new InvoiceModel()
                         {
                             invoiceId = b.invoiceId,
@@ -2575,7 +2597,8 @@ namespace POS_Server.Controllers
                         {
                             long invoiceId = inv.invoiceId;
 
-                            var statusObj = entity.orderPreparingStatus
+                            var statusObj = entity
+                                .orderPreparingStatus
                                 .Where(
                                     x =>
                                         x.orderPreparing.invoiceId == invoiceId
@@ -2658,13 +2681,15 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var invoicesList = (
-                        from b in entity.invoices.Where(
-                            x =>
-                                x.userId == userId
-                                && typesList.Contains(x.invType)
-                                && x.deserved > 0
-                                && x.branchCreatorId == branchId
-                        )
+                        from b in entity
+                            .invoices
+                            .Where(
+                                x =>
+                                    x.userId == userId
+                                    && typesList.Contains(x.invType)
+                                    && x.deserved > 0
+                                    && x.branchCreatorId == branchId
+                            )
                         select new InvoiceModel()
                         {
                             invoiceId = b.invoiceId,
@@ -2707,7 +2732,8 @@ namespace POS_Server.Controllers
                         {
                             long invoiceId = inv.invoiceId;
 
-                            var statusObj = entity.orderPreparingStatus
+                            var statusObj = entity
+                                .orderPreparingStatus
                                 .Where(
                                     x =>
                                         x.orderPreparing.invoiceId == invoiceId
@@ -2779,9 +2805,9 @@ namespace POS_Server.Controllers
                     if (branchId == 0)
                     {
                         var invoicesList = (
-                            from b in entity.invoices.Where(
-                                x => invTypeL.Contains(x.invType) && x.invoiceMainId == null
-                            )
+                            from b in entity
+                                .invoices
+                                .Where(x => invTypeL.Contains(x.invType) && x.invoiceMainId == null)
                             join l in entity.branches on b.branchId equals l.branchId into lj
                             from x in lj.DefaultIfEmpty()
                             select new InvoiceModel()
@@ -2839,12 +2865,14 @@ namespace POS_Server.Controllers
                     else
                     {
                         var invoicesList = (
-                            from b in entity.invoices.Where(
-                                x =>
-                                    invTypeL.Contains(x.invType)
-                                    && x.branchId == branchId
-                                    && x.invoiceMainId == null
-                            )
+                            from b in entity
+                                .invoices
+                                .Where(
+                                    x =>
+                                        invTypeL.Contains(x.invType)
+                                        && x.branchId == branchId
+                                        && x.invoiceMainId == null
+                                )
                             join l in entity.branches on b.branchId equals l.branchId into lj
                             from x in lj.DefaultIfEmpty()
                             select new InvoiceModel()
@@ -2932,7 +2960,8 @@ namespace POS_Server.Controllers
                 int lastNum = 0;
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    numberList = entity.invoices
+                    numberList = entity
+                        .invoices
                         .Where(b => b.invNumber.Contains(invCode + "-") && b.branchId == branchId)
                         .Select(b => b.invNumber)
                         .ToList();
@@ -2990,7 +3019,8 @@ namespace POS_Server.Controllers
                 {
                     DateTime dateSearch = DateTime.Parse(DateTime.Now.ToString().Split(' ')[0]);
 
-                    lastNum = entity.invoices
+                    lastNum = entity
+                        .invoices
                         .Where(
                             b =>
                                 invTypeL.Contains(b.invType)
@@ -3011,7 +3041,8 @@ namespace POS_Server.Controllers
             {
                 DateTime dateSearch = DateTime.Parse(DateTime.Now.ToString().Split(' ')[0]);
 
-                lastNum = entity.invoices
+                lastNum = entity
+                    .invoices
                     .Where(
                         b =>
                             salesType.Contains(b.invType)
@@ -3062,7 +3093,8 @@ namespace POS_Server.Controllers
                     }
 
                     // remove inv class
-                    var invClass = entity.invoiceClassDiscount
+                    var invClass = entity
+                        .invoiceClassDiscount
                         .Where(x => x.invoiceId == invoiceId)
                         .FirstOrDefault();
                     if (invClass != null)
@@ -3118,9 +3150,9 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var oldList = entity.invoiceClassDiscount.Where(
-                            p => p.invoiceId == invoiceId
-                        );
+                        var oldList = entity
+                            .invoiceClassDiscount
+                            .Where(p => p.invoiceId == invoiceId);
                         if (oldList.Count() > 0)
                         {
                             entity.invoiceClassDiscount.RemoveRange(oldList);
@@ -3357,7 +3389,8 @@ namespace POS_Server.Controllers
                 }
                 else
                 {
-                    tmpInvoice = entity.invoices
+                    tmpInvoice = entity
+                        .invoices
                         .Where(p => p.invoiceId == newObject.invoiceId)
                         .FirstOrDefault();
                     tmpInvoice.invNumber = newObject.invNumber;
@@ -3442,7 +3475,8 @@ namespace POS_Server.Controllers
                 }
                 else
                 {
-                    tmpInvoice = entity.invoices
+                    tmpInvoice = entity
+                        .invoices
                         .Where(p => p.invoiceId == newObject.invoiceId)
                         .FirstOrDefault();
                     tmpInvoice.invNumber = newObject.invNumber;
@@ -3564,7 +3598,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -3792,7 +3829,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -3969,7 +4009,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -4096,7 +4139,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -4141,7 +4187,8 @@ namespace POS_Server.Controllers
 
                 if (newObject.invoiceId != 0)
                 {
-                    exportInvoice = entity.invoices
+                    exportInvoice = entity
+                        .invoices
                         .Where(x => x.invoiceMainId == newObject.invoiceId)
                         .FirstOrDefault();
                     exportInvoice.branchId = sentExportInvoice.branchId;
@@ -4177,7 +4224,8 @@ namespace POS_Server.Controllers
                 }
                 else
                 {
-                    tmpInvoice = entity.invoices
+                    tmpInvoice = entity
+                        .invoices
                         .Where(p => p.invoiceId == newObject.invoiceId)
                         .FirstOrDefault();
                     tmpInvoice.invNumber = invNumber;
@@ -4240,7 +4288,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var exportInvoiceTmp = entity1.invoices
+                        var exportInvoiceTmp = entity1
+                            .invoices
                             .Where(p => p.invoiceId == exportInvoice.invoiceId)
                             .FirstOrDefault();
                         // exportInvoice.invNumber = invNumber;
@@ -4415,7 +4464,10 @@ namespace POS_Server.Controllers
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json
+                            res = System
+                                .Web
+                                .Helpers
+                                .Json
                                 .Encode(res)
                                 .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
@@ -4459,7 +4511,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -4577,7 +4632,10 @@ namespace POS_Server.Controllers
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json
+                            res = System
+                                .Web
+                                .Helpers
+                                .Json
                                 .Encode(res)
                                 .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
@@ -4621,7 +4679,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -4736,7 +4797,10 @@ namespace POS_Server.Controllers
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json
+                            res = System
+                                .Web
+                                .Helpers
+                                .Json
                                 .Encode(res)
                                 .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
@@ -4777,7 +4841,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -4866,7 +4933,10 @@ namespace POS_Server.Controllers
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json
+                            res = System
+                                .Web
+                                .Helpers
+                                .Json
                                 .Encode(res)
                                 .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
@@ -4899,7 +4969,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -4933,7 +5006,8 @@ namespace POS_Server.Controllers
 
                 branchCode = branch.code;
 
-                var numberList = entity.invoices
+                var numberList = entity
+                    .invoices
                     .Where(
                         b =>
                             b.invNumber.Contains(invoiceCode + "-") && b.branchCreatorId == branchId
@@ -5445,7 +5519,10 @@ namespace POS_Server.Controllers
                             message = "-3";
                             result += "Result:" + message;
 
-                            res = System.Web.Helpers.Json
+                            res = System
+                                .Web
+                                .Helpers
+                                .Json
                                 .Encode(res)
                                 .Substring(1, System.Web.Helpers.Json.Encode(res).Length - 2);
                             result += ",Message:'" + res + "'";
@@ -5510,7 +5587,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -5754,7 +5834,8 @@ namespace POS_Server.Controllers
                     reservations reservation = new reservations();
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var invTables = entity.invoiceTables
+                        var invTables = entity
+                            .invoiceTables
                             .Where(x => x.invoiceId == invoiceId)
                             .ToList();
                         entity.invoiceTables.RemoveRange(invTables);
@@ -5763,7 +5844,8 @@ namespace POS_Server.Controllers
                         if (reservationId != null)
                         {
                             reservation = entity.reservations.Find(reservationId);
-                            var resTables = entity.tablesReservations
+                            var resTables = entity
+                                .tablesReservations
                                 .Where(x => x.reservationId == reservationId)
                                 .ToList();
                             entity.tablesReservations.RemoveRange(resTables);
@@ -5809,7 +5891,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    List<invoiceTables> iol = entity.invoiceTables
+                    List<invoiceTables> iol = entity
+                        .invoiceTables
                         .Where(x => x.invoiceId == invoiceId)
                         .ToList();
                     entity.invoiceTables.RemoveRange(iol);
@@ -5902,7 +5985,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpInvoice = entity.invoices
+                            tmpInvoice = entity
+                                .invoices
                                 .Where(p => p.invoiceId == id)
                                 .FirstOrDefault();
                             int res = tmpInvoice.printedcount + countstep;
@@ -6006,7 +6090,8 @@ namespace POS_Server.Controllers
                         entity.SaveChanges();
 
                         // unlockItems
-                        var itemsLocations = entity.itemsLocations
+                        var itemsLocations = entity
+                            .itemsLocations
                             .Where(x => x.invoiceId == invoiceId)
                             .ToList();
                         foreach (itemsLocations il in itemsLocations)
@@ -6142,7 +6227,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -6244,7 +6332,8 @@ namespace POS_Server.Controllers
                         message = invoiceId.ToString();
 
                         #region update order prepairing status
-                        var orderPpList = entity.orderPreparing
+                        var orderPpList = entity
+                            .orderPreparing
                             .Where(x => x.invoiceId == invoiceId)
                             .ToList();
                         foreach (var order in orderPpList)
@@ -6282,7 +6371,10 @@ namespace POS_Server.Controllers
                     message = "0";
                 }
                 result += "Result:" + message;
-                string temp = System.Web.Helpers.Json
+                string temp = System
+                    .Web
+                    .Helpers
+                    .Json
                     .Encode(newObject.invNumber)
                     .Substring(1, System.Web.Helpers.Json.Encode(newObject.invNumber).Length - 2);
                 result += ",Message:'" + temp + "'";
@@ -6585,13 +6677,15 @@ namespace POS_Server.Controllers
                 var set = entity.setting.Where(x => x.name == "item_cost").FirstOrDefault();
                 string invoiceNum = "0";
                 if (set != null)
-                    invoiceNum = entity.setValues
+                    invoiceNum = entity
+                        .setValues
                         .Where(x => x.settingId == (int)set.settingId)
                         .Select(x => x.value)
                         .Single();
                 foreach (itemsTransfer item in newObject)
                 {
-                    var itemId = entity.itemsUnits
+                    var itemId = entity
+                        .itemsUnits
                         .Where(x => x.itemUnitId == (int)item.itemUnitId)
                         .Select(x => x.itemId)
                         .Single();
@@ -6655,11 +6749,13 @@ namespace POS_Server.Controllers
             int unitValue = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -6703,11 +6799,13 @@ namespace POS_Server.Controllers
             using (incposdbEntities entity = new incposdbEntities())
             {
                 var sumPrice = (
-                    from s in entity.itemsTransfer.Where(
-                        x =>
-                            itemUnits.Contains((int)x.itemUnitId)
-                            && invoiceIds.Contains((int)x.invoiceId)
-                    )
+                    from s in entity
+                        .itemsTransfer
+                        .Where(
+                            x =>
+                                itemUnits.Contains((int)x.itemUnitId)
+                                && invoiceIds.Contains((int)x.invoiceId)
+                        )
                     select s.quantity * s.price
                 ).Sum();
 
@@ -6737,7 +6835,8 @@ namespace POS_Server.Controllers
                         select u.itemUnitId
                     ).FirstOrDefault();
                 }
-                var lst = entity.itemsTransfer
+                var lst = entity
+                    .itemsTransfer
                     .Where(
                         x => x.itemUnitId == smallestUnitId && invoiceIds.Contains((int)x.invoiceId)
                     )
@@ -6750,11 +6849,13 @@ namespace POS_Server.Controllers
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == smallestUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -6785,7 +6886,8 @@ namespace POS_Server.Controllers
             {
                 //var sumNum = (from s in entity.itemsTransfer.Where(x => x.itemUnitId == itemUnitId && invoiceIds.Contains((int)x.invoiceId))
                 //              select s.quantity).Sum();
-                var lst = entity.itemsTransfer
+                var lst = entity
+                    .itemsTransfer
                     .Where(x => x.itemUnitId == itemUnitId && invoiceIds.Contains((int)x.invoiceId))
                     .Select(t => new ItemLocationModel { quantity = t.quantity, })
                     .ToList();
@@ -6795,11 +6897,13 @@ namespace POS_Server.Controllers
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -6835,11 +6939,13 @@ namespace POS_Server.Controllers
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -6874,11 +6980,13 @@ namespace POS_Server.Controllers
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -6928,11 +7036,13 @@ namespace POS_Server.Controllers
                 if (sumNum == null)
                     sumNum = 0;
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == smallestUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -7121,14 +7231,16 @@ namespace POS_Server.Controllers
                     DateTime dt = Convert.ToDateTime(DateTime.Today.ToShortDateString());
 
                     var invoicesList = (
-                        from I in entity.invoices.Where(
-                            x =>
-                                x.branchCreatorId == branchId
-                                && x.invType == "sh"
-                                && x.isActive == true
-                                && x.createUserId == userId
-                                && x.invDate >= dt
-                        )
+                        from I in entity
+                            .invoices
+                            .Where(
+                                x =>
+                                    x.branchCreatorId == branchId
+                                    && x.invType == "sh"
+                                    && x.isActive == true
+                                    && x.createUserId == userId
+                                    && x.invDate >= dt
+                            )
                         join IT in entity.itemsTransfer on I.invoiceId equals IT.invoiceId
                         from IU in entity.itemsUnits.Where(IU => IU.itemUnitId == IT.itemUnitId)
 
@@ -7701,14 +7813,16 @@ namespace POS_Server.Controllers
                     DateTime dt = Convert.ToDateTime(DateTime.Today.ToShortDateString());
 
                     var invoicesList = (
-                        from I in entity.invoices.Where(
-                            x =>
-                                x.branchCreatorId == branchId
-                                && x.invType == "d"
-                                && x.isActive == true
-                                && x.createUserId == userId
-                                && x.invDate >= dt
-                        )
+                        from I in entity
+                            .invoices
+                            .Where(
+                                x =>
+                                    x.branchCreatorId == branchId
+                                    && x.invType == "d"
+                                    && x.isActive == true
+                                    && x.createUserId == userId
+                                    && x.invDate >= dt
+                            )
                         join IT in entity.itemsTransfer on I.invoiceId equals IT.invoiceId
                         from IU in entity.itemsUnits.Where(IU => IU.itemUnitId == IT.itemUnitId)
 

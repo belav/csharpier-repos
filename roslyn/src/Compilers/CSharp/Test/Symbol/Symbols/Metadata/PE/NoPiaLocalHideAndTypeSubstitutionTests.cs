@@ -174,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     .Length
             );
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("LocalType1")
                 .Single();
 
@@ -244,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 .GetTypeMembers("FooStruct")
                 .Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType
@@ -328,7 +330,8 @@ static class TypeSubstitution
                 .ChildNamespace("InheritanceConflict");
             var canonicalTypeInter = canonicalType.GetTypeMembers("IBase").Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType
@@ -385,7 +388,8 @@ static class TypeSubstitution
                 .GetTypeMembers("FooEnum")
                 .Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType
@@ -445,7 +449,8 @@ static class TypeSubstitution
                 .GetTypeMembers("ISubFuncProp")
                 .Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType
@@ -492,12 +497,13 @@ static class TypeSubstitution
 
             var localConsumerRefsAsm = localConsumer.Assembly.GetNoPiaResolutionAssemblies();
 
-            var canonicalType = localConsumerRefsAsm[0].GlobalNamespace.ChildNamespace(
-                "GeneralEventScenario"
-            );
+            var canonicalType = localConsumerRefsAsm[0]
+                .GlobalNamespace
+                .ChildNamespace("GeneralEventScenario");
             var canonicalTypeInter = canonicalType.GetTypeMembers("EventHandler").Single();
 
-            NamedTypeSymbol classLocalType = localConsumer.GlobalNamespace
+            NamedTypeSymbol classLocalType = localConsumer
+                .GlobalNamespace
                 .GetTypeMembers("TypeSubstitution")
                 .Single();
             FieldSymbol localFieldSymbol = classLocalType
@@ -715,7 +721,8 @@ public class InterfaceImpl
             );
 
             Assert.True(
-                localType2.Assembly
+                localType2
+                    .Assembly
                     .GetNoPiaResolutionAssemblies()
                     .First(arg => arg.Name == "Dummy1")
                     .IsLinked

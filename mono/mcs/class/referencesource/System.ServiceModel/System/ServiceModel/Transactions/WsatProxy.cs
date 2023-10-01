@@ -49,9 +49,11 @@ namespace System.ServiceModel.Transactions
         {
             if (info.Context.ProtocolVersion != this.protocolVersion)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                    );
             }
 
             if (wsatConfig.OleTxUpgradeEnabled)
@@ -95,27 +97,33 @@ namespace System.ServiceModel.Transactions
                 // Our WS-AT protocol service for the context's protocol version should be enabled
                 if (!this.wsatConfig.IsProtocolServiceEnabled(this.protocolVersion))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TransactionException(
-                            SR.GetString(SR.WsatProtocolServiceDisabled, this.protocolVersion)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new TransactionException(
+                                SR.GetString(SR.WsatProtocolServiceDisabled, this.protocolVersion)
+                            )
+                        );
                 }
 
                 // We should have enabled inbound transactions
                 if (!this.wsatConfig.InboundEnabled)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TransactionException(SR.GetString(SR.InboundTransactionsDisabled))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new TransactionException(SR.GetString(SR.InboundTransactionsDisabled))
+                        );
                 }
 
                 // The sender should have enabled both WS-AT and outbound transactions
                 if (this.wsatConfig.IsDisabledRegistrationService(localContext.RegistrationService))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TransactionException(SR.GetString(SR.SourceTransactionsDisabled))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new TransactionException(SR.GetString(SR.SourceTransactionsDisabled))
+                        );
                 }
 
                 // Ask the WS-AT protocol service to unmarshal the transaction
@@ -125,11 +133,13 @@ namespace System.ServiceModel.Transactions
             Guid transactionId = localContext.LocalTransactionId;
             if (transactionId == Guid.Empty)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionException(
-                        SR.GetString(SR.InvalidCoordinationContextTransactionId)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionException(
+                            SR.GetString(SR.InvalidCoordinationContextTransactionId)
+                        )
+                    );
             }
 
             byte[] propagationToken = MarshalPropagationToken(
@@ -174,22 +184,26 @@ namespace System.ServiceModel.Transactions
             catch (WsatFaultException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionException(
-                        SR.GetString(SR.UnmarshalTransactionFaulted, e.Message),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionException(
+                            SR.GetString(SR.UnmarshalTransactionFaulted, e.Message),
+                            e
+                        )
+                    );
             }
             catch (WsatSendFailureException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerCommunicationException(
-                        SR.GetString(SR.TMCommunicationError),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionManagerCommunicationException(
+                            SR.GetString(SR.TMCommunicationError),
+                            e
+                        )
+                    );
             }
         }
 
@@ -354,9 +368,11 @@ namespace System.ServiceModel.Transactions
             catch (CreateChannelFailureException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionException(SR.GetString(SR.WsatProxyCreationFailed), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionException(SR.GetString(SR.WsatProxyCreationFailed), e)
+                    );
             }
         }
 
@@ -393,12 +409,14 @@ namespace System.ServiceModel.Transactions
                         catch (MessagingInitializationException e)
                         {
                             DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new TransactionException(
-                                    SR.GetString(SR.WsatMessagingInitializationFailed),
-                                    e
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new TransactionException(
+                                        SR.GetString(SR.WsatMessagingInitializationFailed),
+                                        e
+                                    )
+                                );
                         }
                     }
                 }

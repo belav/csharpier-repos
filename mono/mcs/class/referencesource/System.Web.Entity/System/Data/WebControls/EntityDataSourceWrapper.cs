@@ -45,10 +45,10 @@ namespace System.Web.UI.WebControls
 
             // retrieve state entry
             if (
-                !this._collection.Context.ObjectStateManager.TryGetObjectStateEntry(
-                    trackedEntity,
-                    out _stateEntry
-                )
+                !this._collection
+                    .Context
+                    .ObjectStateManager
+                    .TryGetObjectStateEntry(trackedEntity, out _stateEntry)
             )
             {
                 throw new ArgumentException(

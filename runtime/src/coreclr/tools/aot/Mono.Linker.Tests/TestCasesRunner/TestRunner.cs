@@ -213,9 +213,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
             var caseDefinedOptions = metadataProvider.GetLinkerOptions(sandbox.InputDirectory);
 
             builder.AddOutputDirectory(
-                sandbox.OutputDirectory.Combine(
-                    compilationResult.InputAssemblyPath.FileNameWithoutExtension + ".obj"
-                )
+                sandbox
+                    .OutputDirectory
+                    .Combine(compilationResult.InputAssemblyPath.FileNameWithoutExtension + ".obj")
             );
 
             foreach (var rspFile in sandbox.ResponseFiles)
@@ -227,9 +227,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 if (ext == ".dll" || ext == ".exe")
                 {
                     if (
-                        caseDefinedOptions.AssembliesAction.Contains(
-                            ("link", inputReference.FileNameWithoutExtension)
-                        )
+                        caseDefinedOptions
+                            .AssembliesAction
+                            .Contains(("link", inputReference.FileNameWithoutExtension))
                     )
                     {
                         builder.AddLinkAssembly(inputReference);

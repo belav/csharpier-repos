@@ -1272,7 +1272,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                var removed = LoadOptionalAkGraph(context).OptionalChildrenAk
+                var removed = LoadOptionalAkGraph(context)
+                    .OptionalChildrenAk
                     .OrderBy(c => c.Id)
                     .First();
 

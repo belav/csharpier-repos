@@ -56,16 +56,18 @@ namespace System.ServiceModel.Channels
             {
                 if (this.properties == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.WebSocketOpeningHandshakePropertiesNotAvailable,
-                                "RequestMessage",
-                                typeof(HttpResponseMessage).Name,
-                                typeof(DelegatingHandler).Name
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.WebSocketOpeningHandshakePropertiesNotAvailable,
+                                    "RequestMessage",
+                                    typeof(HttpResponseMessage).Name,
+                                    typeof(DelegatingHandler).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 return this.properties;

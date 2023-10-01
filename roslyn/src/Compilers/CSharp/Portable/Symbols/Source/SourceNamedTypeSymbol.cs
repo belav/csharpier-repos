@@ -210,11 +210,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         throw ExceptionUtilities.UnexpectedValue(typeDecl.Kind());
                 }
 
-                MessageID.IDS_FeatureGenerics.CheckFeatureAvailability(
-                    diagnostics,
-                    tpl,
-                    tpl.LessThanToken.GetLocation()
-                );
+                MessageID
+                    .IDS_FeatureGenerics
+                    .CheckFeatureAvailability(diagnostics, tpl, tpl.LessThanToken.GetLocation());
 
                 bool isInterfaceOrDelegate =
                     typeKind == SyntaxKind.InterfaceDeclaration
@@ -235,11 +233,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         }
                         else
                         {
-                            MessageID.IDS_FeatureTypeVariance.CheckFeatureAvailability(
-                                diagnostics,
-                                tp,
-                                tp.VarianceKeyword.GetLocation()
-                            );
+                            MessageID
+                                .IDS_FeatureTypeVariance
+                                .CheckFeatureAvailability(
+                                    diagnostics,
+                                    tp,
+                                    tp.VarianceKeyword.GetLocation()
+                                );
                         }
                     }
 
@@ -1225,13 +1225,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    beforeAttributePartBound: null,
-                    afterAttributePartBound: null,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        beforeAttributePartBound: null,
+                        afterAttributePartBound: null,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     arguments
@@ -1254,13 +1256,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    beforeAttributePartBound: null,
-                    afterAttributePartBound: null,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        beforeAttributePartBound: null,
+                        afterAttributePartBound: null,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     arguments
@@ -1283,13 +1287,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    beforeAttributePartBound: null,
-                    afterAttributePartBound: null,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        beforeAttributePartBound: null,
+                        afterAttributePartBound: null,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     string? name = attributeData.GetConstructorArgument<string>(
@@ -1336,13 +1342,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    beforeAttributePartBound: null,
-                    afterAttributePartBound: null,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        beforeAttributePartBound: null,
+                        afterAttributePartBound: null,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     AttributeUsageInfo info = this.DecodeAttributeUsageAttribute(
@@ -1384,13 +1392,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                    arguments.AttributeSyntax,
-                    arguments.AttributeType,
-                    beforeAttributePartBound: null,
-                    afterAttributePartBound: null,
-                    out hasAnyDiagnostics
-                );
+                (attributeData, boundAttribute) = arguments
+                    .Binder
+                    .GetAttribute(
+                        arguments.AttributeSyntax,
+                        arguments.AttributeType,
+                        beforeAttributePartBound: null,
+                        afterAttributePartBound: null,
+                        out hasAnyDiagnostics
+                    );
                 if (!attributeData.HasErrors)
                 {
                     arguments

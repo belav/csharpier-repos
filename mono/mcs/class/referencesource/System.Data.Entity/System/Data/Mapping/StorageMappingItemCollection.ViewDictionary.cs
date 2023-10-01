@@ -497,12 +497,16 @@ namespace System.Data.Mapping
                 if (!generatedViews.TryGetValue(extent, out view))
                 {
                     throw EntityUtil.InvalidOperation(
-                        System.Data.Entity.Strings.Mapping_Views_For_Extent_Not_Generated(
-                            (extent.EntityContainer.DataSpace == DataSpace.SSpace)
-                                ? "Table"
-                                : "EntitySet",
-                            extent.Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Mapping_Views_For_Extent_Not_Generated(
+                                (extent.EntityContainer.DataSpace == DataSpace.SSpace)
+                                    ? "Table"
+                                    : "EntitySet",
+                                extent.Name
+                            )
                     );
                 }
 
@@ -539,9 +543,13 @@ namespace System.Data.Mapping
                                 if (!viewContainerType.IsSubclassOf(typeof(EntityViewContainer)))
                                 {
                                     throw EntityUtil.InvalidOperation(
-                                        System.Data.Entity.Strings.Generated_View_Type_Super_Class(
-                                            StorageMslConstructs.EntityViewGenerationTypeName
-                                        )
+                                        System
+                                            .Data
+                                            .Entity
+                                            .Strings
+                                            .Generated_View_Type_Super_Class(
+                                                StorageMslConstructs.EntityViewGenerationTypeName
+                                            )
                                     );
                                 }
                                 EntityViewContainer viewContainer = (
@@ -739,20 +747,20 @@ namespace System.Data.Mapping
 
                         if (entityContainer != null)
                         {
-                            entityContainer.BaseEntitySets.TryGetValue(
-                                extentName,
-                                false,
-                                out extent
-                            );
+                            entityContainer
+                                .BaseEntitySets
+                                .TryGetValue(extentName, false, out extent);
                         }
                     }
 
                     if (extent == null)
                     {
                         throw new MappingException(
-                            System.Data.Entity.Strings.Generated_Views_Invalid_Extent(
-                                extentFullName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Generated_Views_Invalid_Extent(extentFullName)
                         );
                     }
 

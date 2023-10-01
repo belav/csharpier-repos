@@ -210,10 +210,9 @@ namespace System.Net.Cache
                         SR.GetString(
                             SR.net_log_cache_age1,
                             ((int)age.TotalSeconds).ToString(NumberFormatInfo.InvariantInfo),
-                            CacheEntry.LastSynchronizedUtc.ToString(
-                                "r",
-                                CultureInfo.InvariantCulture
-                            )
+                            CacheEntry
+                                .LastSynchronizedUtc
+                                .ToString("r", CultureInfo.InvariantCulture)
                         )
                     );
             }
@@ -664,9 +663,9 @@ namespace System.Net.Cache
                         Logging.RequestCache,
                         SR.GetString(
                             SR.net_log_cache_update_not_supported_for_ftp_restart,
-                            ((FtpWebRequest)Request).ContentOffset.ToString(
-                                CultureInfo.InvariantCulture
-                            )
+                            ((FtpWebRequest)Request)
+                                .ContentOffset
+                                .ToString(CultureInfo.InvariantCulture)
                         )
                     );
                 if (
@@ -679,10 +678,9 @@ namespace System.Net.Cache
                             Logging.RequestCache,
                             SR.GetString(
                                 SR.net_log_cache_removed_entry_because_ftp_restart_response_changed,
-                                CacheEntry.LastModifiedUtc.ToString(
-                                    "r",
-                                    CultureInfo.InvariantCulture
-                                ),
+                                CacheEntry
+                                    .LastModifiedUtc
+                                    .ToString("r", CultureInfo.InvariantCulture),
                                 resp.LastModified
                                     .ToUniversalTime()
                                     .ToString("r", CultureInfo.InvariantCulture)

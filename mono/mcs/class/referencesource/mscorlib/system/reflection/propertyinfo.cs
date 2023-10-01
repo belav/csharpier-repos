@@ -321,12 +321,9 @@ namespace System.Reflection
                     ConstArray sig;
 
                     void* name;
-                    GetRuntimeModule().MetadataImport.GetPropertyProps(
-                        m_token,
-                        out name,
-                        out flags,
-                        out sig
-                    );
+                    GetRuntimeModule()
+                        .MetadataImport
+                        .GetPropertyProps(m_token, out name, out flags, out sig);
 
                     m_signature = new Signature(
                         sig.Signature.ToPointer(),

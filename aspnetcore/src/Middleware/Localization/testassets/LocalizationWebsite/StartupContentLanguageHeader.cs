@@ -29,9 +29,10 @@ public class StartupContentLanguageHeader
         app.Run(
             async (context) =>
             {
-                var hasContentLanguageHeader = context.Response.Headers.ContainsKey(
-                    HeaderNames.ContentLanguage
-                );
+                var hasContentLanguageHeader = context
+                    .Response
+                    .Headers
+                    .ContainsKey(HeaderNames.ContentLanguage);
                 var contentLanguage = context.Response.Headers.ContentLanguage.ToString();
 
                 await context.Response.WriteAsync(hasContentLanguageHeader.ToString());

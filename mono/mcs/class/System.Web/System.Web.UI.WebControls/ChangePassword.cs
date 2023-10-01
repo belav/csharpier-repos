@@ -1579,28 +1579,32 @@ namespace System.Web.UI.WebControls
                     );
                 }
                 // Row #0
-                table.Controls.Add(
-                    CreateRow(
-                        new LiteralControl(_owner.ChangePasswordTitleText),
-                        null,
-                        null,
-                        _owner.TitleTextStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            new LiteralControl(_owner.ChangePasswordTitleText),
+                            null,
+                            null,
+                            _owner.TitleTextStyle,
+                            null
+                        )
+                    );
 
                 // Row #1
                 if (_owner.InstructionText.Length > 0)
                 {
-                    table.Controls.Add(
-                        CreateRow(
-                            new LiteralControl(_owner.InstructionText),
-                            null,
-                            null,
-                            _owner.InstructionTextStyle,
-                            null
-                        )
-                    );
+                    table
+                        .Controls
+                        .Add(
+                            CreateRow(
+                                new LiteralControl(_owner.InstructionText),
+                                null,
+                                null,
+                                _owner.InstructionTextStyle,
+                                null
+                            )
+                        );
                 }
 
                 // Row #2
@@ -1625,15 +1629,17 @@ namespace System.Web.UI.WebControls
                     UserNameRequired.ValidationGroup = _owner.ID;
                     UserNameRequired.ApplyStyle(_owner.ValidatorTextStyle);
 
-                    table.Controls.Add(
-                        CreateRow(
-                            UserNameLabel,
-                            UserName,
-                            UserNameRequired,
-                            _owner.LabelStyle,
-                            null
-                        )
-                    );
+                    table
+                        .Controls
+                        .Add(
+                            CreateRow(
+                                UserNameLabel,
+                                UserName,
+                                UserNameRequired,
+                                _owner.LabelStyle,
+                                null
+                            )
+                        );
                 }
 
                 // Row #3
@@ -1656,15 +1662,17 @@ namespace System.Web.UI.WebControls
                 CurrentPasswordRequired.ValidationGroup = _owner.ID;
                 CurrentPasswordRequired.ApplyStyle(_owner.ValidatorTextStyle);
 
-                table.Controls.Add(
-                    CreateRow(
-                        CurrentPasswordLabel,
-                        CurrentPassword,
-                        CurrentPasswordRequired,
-                        _owner.LabelStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            CurrentPasswordLabel,
+                            CurrentPassword,
+                            CurrentPasswordRequired,
+                            _owner.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #4
                 TextBox NewPassword = new TextBox();
@@ -1686,28 +1694,32 @@ namespace System.Web.UI.WebControls
                 NewPasswordRequired.ValidationGroup = _owner.ID;
                 NewPasswordRequired.ApplyStyle(_owner.ValidatorTextStyle);
 
-                table.Controls.Add(
-                    CreateRow(
-                        NewPasswordLabel,
-                        NewPassword,
-                        NewPasswordRequired,
-                        _owner.LabelStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            NewPasswordLabel,
+                            NewPassword,
+                            NewPasswordRequired,
+                            _owner.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #5
                 if (_owner.PasswordHintText.Length > 0)
                 {
-                    table.Controls.Add(
-                        CreateRow(
-                            new LiteralControl(String.Empty),
-                            new LiteralControl(_owner.PasswordHintText),
-                            new LiteralControl(String.Empty),
-                            null,
-                            _owner.PasswordHintStyle
-                        )
-                    );
+                    table
+                        .Controls
+                        .Add(
+                            CreateRow(
+                                new LiteralControl(String.Empty),
+                                new LiteralControl(_owner.PasswordHintText),
+                                new LiteralControl(String.Empty),
+                                null,
+                                _owner.PasswordHintStyle
+                            )
+                        );
                 }
 
                 // Row #6
@@ -1730,15 +1742,17 @@ namespace System.Web.UI.WebControls
                 ConfirmNewPasswordRequired.ValidationGroup = _owner.ID;
                 ConfirmNewPasswordRequired.ApplyStyle(_owner.ValidatorTextStyle);
 
-                table.Controls.Add(
-                    CreateRow(
-                        ConfirmNewPasswordLabel,
-                        ConfirmNewPassword,
-                        ConfirmNewPasswordRequired,
-                        _owner.LabelStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            ConfirmNewPasswordLabel,
+                            ConfirmNewPassword,
+                            ConfirmNewPasswordRequired,
+                            _owner.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #7
                 CompareValidator NewPasswordCompare = new CompareValidator();
@@ -1759,9 +1773,9 @@ namespace System.Web.UI.WebControls
                 if (_owner.FailureTextStyle.ForeColor.IsEmpty)
                     _owner.FailureTextStyle.ForeColor = System.Drawing.Color.Red;
 
-                table.Controls.Add(
-                    CreateRow(FailureTextLiteral, null, null, _owner.FailureTextStyle, null)
-                );
+                table
+                    .Controls
+                    .Add(CreateRow(FailureTextLiteral, null, null, _owner.FailureTextStyle, null));
 
                 // Row #9
                 WebControl ChangePasswordButton = null;
@@ -1805,15 +1819,17 @@ namespace System.Web.UI.WebControls
                 ((IButtonControl)CancelButton).Text = _owner.CancelButtonText;
                 ((IButtonControl)CancelButton).CausesValidation = false;
 
-                table.Controls.Add(
-                    CreateRow(
-                        ChangePasswordButton,
-                        CancelButton,
-                        new LiteralControl(String.Empty),
-                        null,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            ChangePasswordButton,
+                            CancelButton,
+                            new LiteralControl(String.Empty),
+                            null,
+                            null
+                        )
+                    );
 
                 // Row #10
                 TableRow linksRow = new TableRow();
@@ -1896,22 +1912,26 @@ namespace System.Web.UI.WebControls
                 table.ControlStyle.Height = Unit.Percentage(100);
 
                 // Row #0
-                table.Controls.Add(
-                    CreateRow(
-                        new LiteralControl(_cPassword.SuccessTitleText),
-                        _cPassword.TitleTextStyle,
-                        HorizontalAlign.Center
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            new LiteralControl(_cPassword.SuccessTitleText),
+                            _cPassword.TitleTextStyle,
+                            HorizontalAlign.Center
+                        )
+                    );
 
                 // Row #1
-                table.Controls.Add(
-                    CreateRow(
-                        new LiteralControl(_cPassword.SuccessText),
-                        _cPassword.SuccessTextStyle,
-                        HorizontalAlign.Center
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            new LiteralControl(_cPassword.SuccessText),
+                            _cPassword.SuccessTextStyle,
+                            HorizontalAlign.Center
+                        )
+                    );
 
                 // Row #3
                 WebControl ContinueButton = null;

@@ -129,7 +129,8 @@ namespace POS_Server.Controllers
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var notificationCount = entity.notificationUser
+                var notificationCount = entity
+                    .notificationUser
                     .Where(
                         x =>
                             (x.userId == userId || x.posId == posId)

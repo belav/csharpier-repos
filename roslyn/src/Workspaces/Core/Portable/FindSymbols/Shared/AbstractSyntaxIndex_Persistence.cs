@@ -144,7 +144,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // changed, all previous versions should be invalidated.
             var project = document.Project;
 
-            var documentChecksumState = await document.State
+            var documentChecksumState = await document
+                .State
                 .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
 

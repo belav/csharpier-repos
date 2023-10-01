@@ -51,8 +51,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             _frame = frame;
             _threadingContext = threadingContext;
             _workspace = workspace;
-            _stackExplorerService =
-                workspace.Services.GetRequiredService<IStackTraceExplorerService>();
+            _stackExplorerService = workspace
+                .Services
+                .GetRequiredService<IStackTraceExplorerService>();
         }
 
         public override bool ShowMouseOver => true;
@@ -154,8 +155,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                     // version of the file.
                     lineNumber = Math.Min(sourceText.Lines.Count, lineNumber);
 
-                    var navigationService =
-                        _workspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService = _workspace
+                        .Services
+                        .GetService<IDocumentNavigationService>();
                     if (navigationService is null)
                         return;
 
@@ -193,9 +195,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 
             var classLink = new Hyperlink();
             var classLinkText = className.ToString();
-            classLink.Inlines.Add(
-                MakeClassifiedRun(ClassificationTypeNames.ClassName, classLinkText)
-            );
+            classLink
+                .Inlines
+                .Add(MakeClassifiedRun(ClassificationTypeNames.ClassName, classLinkText));
             classLink.Click += (s, a) => NavigateToClass();
             classLink.RequestNavigate += (s, a) => NavigateToClass();
             yield return classLink;
@@ -220,9 +222,14 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             methodTextBuilder.Append(methodDeclaration.ArgumentList.ToFullString());
-            methodLink.Inlines.Add(
-                MakeClassifiedRun(ClassificationTypeNames.MethodName, methodTextBuilder.ToString())
-            );
+            methodLink
+                .Inlines
+                .Add(
+                    MakeClassifiedRun(
+                        ClassificationTypeNames.MethodName,
+                        methodTextBuilder.ToString()
+                    )
+                );
             methodLink.Click += (s, a) => NavigateToSymbol();
             methodLink.RequestNavigate += (s, a) => NavigateToSymbol();
             yield return methodLink;
@@ -241,9 +248,11 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 
                 var fileLink = new Hyperlink();
                 var fileLinkText = _frame.Root.FileInformationExpression.ToString();
-                fileLink.Inlines.Add(
-                    MakeClassifiedRun(ClassificationTypeNames.Text, fileInformation.ToString())
-                );
+                fileLink
+                    .Inlines
+                    .Add(
+                        MakeClassifiedRun(ClassificationTypeNames.Text, fileInformation.ToString())
+                    );
                 fileLink.Click += (s, a) => NavigateToFile();
                 fileLink.RequestNavigate += (s, a) => NavigateToFile();
                 yield return fileLink;

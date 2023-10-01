@@ -10,7 +10,8 @@ public class UnrollEqualsStartsWIth
 {
     public static int Main()
     {
-        var testTypes = typeof(UnrollEqualsStartsWIth).Assembly
+        var testTypes = typeof(UnrollEqualsStartsWIth)
+            .Assembly
             .GetTypes()
             .Where(t => t.Name.StartsWith("Tests_len"))
             .ToArray();

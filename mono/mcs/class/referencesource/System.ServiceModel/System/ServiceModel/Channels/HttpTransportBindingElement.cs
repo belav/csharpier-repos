@@ -170,11 +170,13 @@ namespace System.ServiceModel.Channels
                         .OSSupportsExtendedProtection
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new PlatformNotSupportedException(
-                            SR.GetString(SR.ExtendedProtectionNotSupported)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new PlatformNotSupportedException(
+                                SR.GetString(SR.ExtendedProtectionNotSupported)
+                            )
+                        );
                 }
 
                 this.extendedProtectionPolicy = value;
@@ -215,13 +217,15 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
 
                 maxBufferSizeInitialized = true;
@@ -238,27 +242,31 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
 
                 if (value > HttpTransportDefaults.MaxPendingAcceptsUpperLimit)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(
-                                SR.HttpMaxPendingAcceptsTooLargeError,
-                                HttpTransportDefaults.MaxPendingAcceptsUpperLimit
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(
+                                    SR.HttpMaxPendingAcceptsTooLargeError,
+                                    HttpTransportDefaults.MaxPendingAcceptsUpperLimit
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 this.maxPendingAccepts = value;
@@ -296,10 +304,12 @@ namespace System.ServiceModel.Channels
             {
                 if (!value.IsSingleton())
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.HttpProxyRequiresSingleAuthScheme, value)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.HttpProxyRequiresSingleAuthScheme, value)
+                        );
                 }
                 this.proxyAuthenticationScheme = value;
             }
@@ -335,23 +345,27 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRange0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRange0)
+                            )
+                        );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.requestInitializationTimeout = value;
@@ -540,42 +554,50 @@ namespace System.ServiceModel.Channels
 
             if (this.MessageHandlerFactory != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.HttpPipelineNotSupportedOnClientSide,
-                            "MessageHandlerFactory"
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.HttpPipelineNotSupportedOnClientSide,
+                                "MessageHandlerFactory"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
 #pragma warning suppress 56506 // Microsoft, context.Binding will never be null.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(
-                        SR.CouldnTCreateChannelForChannelType2,
-                        context.Binding.Name,
-                        typeof(TChannel)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(
+                            SR.CouldnTCreateChannelForChannelType2,
+                            context.Binding.Name,
+                            typeof(TChannel)
+                        )
+                    );
             }
 
             if (this.authenticationScheme == AuthenticationSchemes.None)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR.GetString(SR.HttpAuthSchemeCannotBeNone, this.authenticationScheme)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.HttpAuthSchemeCannotBeNone, this.authenticationScheme)
+                    );
             }
             else if (!this.authenticationScheme.IsSingleton())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "value",
-                    SR.GetString(SR.HttpRequiresSingleAuthScheme, this.authenticationScheme)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.HttpRequiresSingleAuthScheme, this.authenticationScheme)
+                    );
             }
 
             return (IChannelFactory<TChannel>)
@@ -649,15 +671,17 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
 #pragma warning suppress 56506 // Microsoft, context.Binding will never be null.
-                    "TChannel",
-                    SR.GetString(
-                        SR.CouldnTCreateChannelForChannelType2,
-                        context.Binding.Name,
-                        typeof(TChannel)
-                    )
-                );
+                        "TChannel",
+                        SR.GetString(
+                            SR.CouldnTCreateChannelForChannelType2,
+                            context.Binding.Name,
+                            typeof(TChannel)
+                        )
+                    );
             }
 
             UpdateAuthenticationSchemes(context);
@@ -690,14 +714,16 @@ namespace System.ServiceModel.Channels
                     //can't inherit from host because none were configured.
                     //We are throwing a "NotSupportedException" to be consistent with the type of exception that was thrown in this scenario,
                     //before the multi-auth feature, in HostedAspNetEnvironment.ValidateHttpSettings.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.AuthenticationSchemesCannotBeInheritedFromHost,
-                                bindingName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.AuthenticationSchemesCannotBeInheritedFromHost,
+                                    bindingName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
@@ -719,16 +745,18 @@ namespace System.ServiceModel.Channels
 
                     //We are throwing a "NotSupportedException" to be consistent with the type of exception that was thrown in this scenario,
                     //before the multi-auth feature, in HostedAspNetEnvironment.ValidateHttpSettings.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.AuthenticationSchemes_BindingAndHostConflict,
-                                hostSchemes,
-                                bindingName,
-                                this.AuthenticationScheme
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.AuthenticationSchemes_BindingAndHostConflict,
+                                    hostSchemes,
+                                    bindingName,
+                                    this.AuthenticationScheme
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             this.AuthenticationScheme = effectiveAutheSchemes;
@@ -759,11 +787,13 @@ namespace System.ServiceModel.Channels
                 ((IPolicyExportExtension)encodingBindingElement).ExportPolicy(exporter, context);
             }
 
-            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(
-                exporter,
-                context,
-                encodingBindingElement.MessageVersion.Addressing
-            );
+            WsdlExporter
+                .WSAddressingHelper
+                .AddWSAddressingAssertion(
+                    exporter,
+                    context,
+                    encodingBindingElement.MessageVersion.Addressing
+                );
         }
 
         internal virtual void OnExportPolicy(
@@ -904,15 +934,17 @@ namespace System.ServiceModel.Channels
 
                 if (foundAssertion)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.HttpTransportCannotHaveMultipleAuthenticationSchemes,
-                                policyContext.Contract.Namespace,
-                                policyContext.Contract.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.HttpTransportCannotHaveMultipleAuthenticationSchemes,
+                                    policyContext.Contract.Namespace,
+                                    policyContext.Contract.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 foundAssertion = true;
@@ -944,19 +976,21 @@ namespace System.ServiceModel.Channels
                         || result == TransferMode.Buffered
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR.GetString(
-                                    SR.WebSocketTransportPolicyAssertionInvalid,
-                                    policyContext.Contract.Namespace,
-                                    policyContext.Contract.Name,
-                                    transferMode,
-                                    TransferMode.Streamed,
-                                    TransferMode.StreamedRequest,
-                                    TransferMode.StreamedResponse
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(
+                                        SR.WebSocketTransportPolicyAssertionInvalid,
+                                        policyContext.Contract.Namespace,
+                                        policyContext.Contract.Name,
+                                        transferMode,
+                                        TransferMode.Streamed,
+                                        TransferMode.StreamedRequest,
+                                        TransferMode.StreamedResponse
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     this.TransferMode = result;
@@ -1108,8 +1142,10 @@ namespace System.ServiceModel.Channels
             out bool createdNew
         )
         {
-            BindingElementCollection bindingElements =
-                endpointContext.Endpoint.Binding.CreateBindingElements();
+            BindingElementCollection bindingElements = endpointContext
+                .Endpoint
+                .Binding
+                .CreateBindingElements();
             return FindMessageEncodingBindingElement(bindingElements, out createdNew);
         }
 

@@ -257,7 +257,8 @@ internal static class ServiceDescriptorHelpers
                 {
                     const int WrapperValueFieldNumber = Int32Value.ValueFieldNumber;
 
-                    var wrappedValue = messageValue.Descriptor
+                    var wrappedValue = messageValue
+                        .Descriptor
                         .Fields[WrapperValueFieldNumber]
                         .Accessor
                         .GetValue(messageValue);
@@ -383,9 +384,10 @@ internal static class ServiceDescriptorHelpers
                     pascalCase: true,
                     preservePeriod: false
                 );
-                var propertyInfo = responseBodyDescriptor.ContainingType.ClrType.GetProperty(
-                    propertyName
-                );
+                var propertyInfo = responseBodyDescriptor
+                    .ContainingType
+                    .ClrType
+                    .GetProperty(propertyName);
 
                 if (responseBodyDescriptor.IsRepeated)
                 {

@@ -56,10 +56,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         )
         {
             // first, find the token user just typed.
-            var token = documentSyntax.Root.FindToken(
-                Math.Max(0, caretPosition - 1),
-                findInsideTrivia: true
-            );
+            var token = documentSyntax
+                .Root
+                .FindToken(Math.Max(0, caretPosition - 1), findInsideTrivia: true);
             if (
                 token.IsMissing
                 || !ValidSingleOrMultiCharactersTokenKind(typedChar, token.Kind())
@@ -393,8 +392,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken tokenBeforeCaret
         )
         {
-            var formattingRuleFactory =
-                _services.SolutionServices.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var formattingRuleFactory = _services
+                .SolutionServices
+                .GetRequiredService<IHostDependentFormattingRuleFactoryService>();
             return ImmutableArray
                 .Create(formattingRuleFactory.CreateRule(document, position))
                 .AddRange(GetTypingRules(tokenBeforeCaret))

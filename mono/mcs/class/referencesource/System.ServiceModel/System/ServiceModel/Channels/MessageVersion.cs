@@ -68,9 +68,9 @@ namespace System.ServiceModel.Channels
 
             if (addressingVersion == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "addressingVersion"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("addressingVersion");
             }
 
             if (envelopeVersion == EnvelopeVersion.Soap12)
@@ -89,10 +89,12 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "addressingVersion",
-                        SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "addressingVersion",
+                            SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
+                        );
                 }
             }
             else if (envelopeVersion == EnvelopeVersion.Soap11)
@@ -111,10 +113,12 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "addressingVersion",
-                        SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "addressingVersion",
+                            SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
+                        );
                 }
             }
             else if (envelopeVersion == EnvelopeVersion.None)
@@ -125,18 +129,22 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "addressingVersion",
-                        SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "addressingVersion",
+                            SR.GetString(SR.AddressingVersionNotSupported, addressingVersion)
+                        );
                 }
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "envelopeVersion",
-                    SR.GetString(SR.EnvelopeVersionNotSupported, envelopeVersion)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "envelopeVersion",
+                        SR.GetString(SR.EnvelopeVersionNotSupported, envelopeVersion)
+                    );
             }
         }
 
@@ -224,14 +232,16 @@ namespace System.ServiceModel.Channels
             if (addressing == null)
             {
                 Fx.Assert("Invalid (null) addressing value");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        String.Format(
-                            CultureInfo.InvariantCulture,
-                            "MessageVersion.Addressing cannot be null"
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "MessageVersion.Addressing cannot be null"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (envelope != messageVersion.Envelope)

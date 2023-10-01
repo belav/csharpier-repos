@@ -34,13 +34,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
         private static bool IsOutParameterModifierContext(int position, CSharpSyntaxContext context)
         {
-            return context.SyntaxTree.IsParameterModifierContext(
-                    position,
-                    context.LeftToken,
-                    includeOperators: false,
-                    out _,
-                    out var previousModifier
-                ) && previousModifier is SyntaxKind.None or SyntaxKind.ScopedKeyword;
+            return context
+                    .SyntaxTree
+                    .IsParameterModifierContext(
+                        position,
+                        context.LeftToken,
+                        includeOperators: false,
+                        out _,
+                        out var previousModifier
+                    ) && previousModifier is SyntaxKind.None or SyntaxKind.ScopedKeyword;
         }
     }
 }

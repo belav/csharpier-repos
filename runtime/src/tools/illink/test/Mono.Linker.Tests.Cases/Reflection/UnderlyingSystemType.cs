@@ -34,9 +34,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
         [Kept]
         static void TestTypeUsedWithUnderlyingSystemType()
         {
-            _ = typeof(TypeUsedWithUnderlyingSystemType).UnderlyingSystemType.GetMethod(
-                nameof(TypeUsedWithUnderlyingSystemType.Method)
-            );
+            _ = typeof(TypeUsedWithUnderlyingSystemType)
+                .UnderlyingSystemType
+                .GetMethod(nameof(TypeUsedWithUnderlyingSystemType.Method));
         }
 
         [Kept]

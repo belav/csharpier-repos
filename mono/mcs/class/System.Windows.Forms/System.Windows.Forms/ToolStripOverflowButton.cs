@@ -99,9 +99,11 @@ namespace System.Windows.Forms
         protected override void OnPaint(PaintEventArgs e)
         {
             if (this.Owner != null)
-                this.Owner.Renderer.DrawOverflowButtonBackground(
-                    new ToolStripItemRenderEventArgs(e.Graphics, this)
-                );
+                this.Owner
+                    .Renderer
+                    .DrawOverflowButtonBackground(
+                        new ToolStripItemRenderEventArgs(e.Graphics, this)
+                    );
         }
 
         protected internal override void SetBounds(Rectangle bounds)

@@ -825,11 +825,13 @@ class Driver
             }
             if (to_aot.Count > 0)
             {
-                Console.Error.WriteLine(
-                    "Unknown assembly name '"
-                        + to_aot.Keys.ToArray()[0]
-                        + "' in --aot-assemblies option."
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "Unknown assembly name '"
+                            + to_aot.Keys.ToArray()[0]
+                            + "' in --aot-assemblies option."
+                    );
                 return 1;
             }
         }

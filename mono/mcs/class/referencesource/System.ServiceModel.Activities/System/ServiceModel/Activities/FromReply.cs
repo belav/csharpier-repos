@@ -80,9 +80,9 @@ namespace System.ServiceModel.Activities
 
             if (inMessage == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.NullReplyMessageContractMismatch)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.NullReplyMessageContractMismatch));
             }
             if (inMessage.IsFault)
             {

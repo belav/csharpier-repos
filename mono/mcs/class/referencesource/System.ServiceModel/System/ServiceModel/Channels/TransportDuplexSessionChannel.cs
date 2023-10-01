@@ -366,12 +366,14 @@ namespace System.ServiceModel.Channels
                     TD.CloseTimeout(SR.GetString(SR.CloseTimedOut, timeout));
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(
-                        SR.GetString(SR.CloseTimedOut, timeout),
-                        ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(SR.CloseTimedOut, timeout),
+                            ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
+                        )
+                    );
             }
 
             try
@@ -554,12 +556,14 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (!this.sendLock.TryEnter(timeoutHelper.RemainingTime()))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(
-                        SR.GetString(SR.SendToViaTimedOut, Via, timeout),
-                        ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(SR.SendToViaTimedOut, Via, timeout),
+                            ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
+                        )
+                    );
             }
 
             try
@@ -630,11 +634,13 @@ namespace System.ServiceModel.Channels
         {
             if (this.isOutputSessionClosed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SendCannotBeCalledAfterCloseOutputSession)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SendCannotBeCalledAfterCloseOutputSession)
+                        )
+                    );
             }
         }
 
@@ -908,11 +914,13 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    IAsyncResult closeInputSessionResult = this.channel.messageSource.BeginReceive(
-                        this.timeoutHelper.RemainingTime(),
-                        onCloseInputSession,
-                        this
-                    );
+                    IAsyncResult closeInputSessionResult = this.channel
+                        .messageSource
+                        .BeginReceive(
+                            this.timeoutHelper.RemainingTime(),
+                            onCloseInputSession,
+                            this
+                        );
 
                     if (!closeInputSessionResult.CompletedSynchronously)
                     {
@@ -993,11 +1001,9 @@ namespace System.ServiceModel.Channels
                 this.channel = channel;
 
                 if (
-                    !channel.sendLock.EnterAsync(
-                        this.timeoutHelper.RemainingTime(),
-                        onEnterComplete,
-                        this
-                    )
+                    !channel
+                        .sendLock
+                        .EnterAsync(this.timeoutHelper.RemainingTime(), onEnterComplete, this)
                 )
                 {
                     return;
@@ -1171,11 +1177,9 @@ namespace System.ServiceModel.Channels
                 this.streamedOutput = streamedOutput;
 
                 if (
-                    !channel.sendLock.EnterAsync(
-                        this.timeoutHelper.RemainingTime(),
-                        onEnterComplete,
-                        this
-                    )
+                    !channel
+                        .sendLock
+                        .EnterAsync(this.timeoutHelper.RemainingTime(), onEnterComplete, this)
                 )
                 {
                     return;

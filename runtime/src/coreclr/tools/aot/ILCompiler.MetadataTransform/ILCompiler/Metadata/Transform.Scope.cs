@@ -83,8 +83,9 @@ namespace ILCompiler.Metadata
                 Cts.Ecma.EcmaAssembly ecmaAssembly = module as Cts.Ecma.EcmaAssembly;
                 if (ecmaAssembly != null)
                 {
-                    Ecma.CustomAttributeHandleCollection customAttributes =
-                        ecmaAssembly.AssemblyDefinition.GetCustomAttributes();
+                    Ecma.CustomAttributeHandleCollection customAttributes = ecmaAssembly
+                        .AssemblyDefinition
+                        .GetCustomAttributes();
                     if (customAttributes.Count > 0)
                     {
                         scopeDefinition.CustomAttributes = HandleCustomAttributes(

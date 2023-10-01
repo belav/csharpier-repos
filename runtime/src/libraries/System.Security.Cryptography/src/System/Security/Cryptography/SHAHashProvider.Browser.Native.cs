@@ -76,13 +76,9 @@ namespace Internal.Cryptography
                 fixed (byte* src = srcArray)
                 fixed (byte* dest = destination)
                 {
-                    int res = Interop.BrowserCrypto.SimpleDigestHash(
-                        _impl,
-                        src,
-                        srcLength,
-                        dest,
-                        destination.Length
-                    );
+                    int res = Interop
+                        .BrowserCrypto
+                        .SimpleDigestHash(_impl, src, srcLength, dest, destination.Length);
                     Debug.Assert(res != 0);
                 }
             }

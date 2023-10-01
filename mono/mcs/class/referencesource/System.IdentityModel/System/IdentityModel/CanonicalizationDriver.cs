@@ -121,7 +121,8 @@ namespace System.IdentityModel
                     );
                     if (reader is WrappedReader)
                     {
-                        ((WrappedReader)reader).XmlTokens
+                        ((WrappedReader)reader)
+                            .XmlTokens
                             .GetWriter()
                             .WriteTo(writer, new DictionaryManager());
                     }
@@ -145,9 +146,13 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.NoInputIsSetForCanonicalization))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.NoInputIsSetForCanonicalization)
+                        )
+                    );
             }
         }
     }

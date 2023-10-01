@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 {
     public static class EditorTestCompositions
     {
-        public static readonly TestComposition Editor = TestComposition.Empty
+        public static readonly TestComposition Editor = TestComposition
+            .Empty
             .AddAssemblies(
                 // Microsoft.VisualStudio.Platform.VSEditor.dll:
                 Assembly.LoadFrom("Microsoft.VisualStudio.Platform.VSEditor.dll"),
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                 typeof(TestObscuringTipManager)
             ); // TODO: https://devdiv.visualstudio.com/DevDiv/_workitems?id=544569
 
-        public static readonly TestComposition EditorFeatures = FeaturesTestCompositions.Features
+        public static readonly TestComposition EditorFeatures = FeaturesTestCompositions
+            .Features
             .AddParts(typeof(TestGlobalOperationNotificationService))
             .Add(Editor)
             .AddAssemblies(
@@ -70,10 +72,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             .AddAssemblies(typeof(IInteractiveWindow).Assembly)
             .AddParts(typeof(TestInteractiveWindowEditorFactoryService));
 
-        public static readonly TestComposition LanguageServerProtocol =
-            FeaturesTestCompositions.Features.AddAssemblies(
-                typeof(LanguageServerResources).Assembly
-            );
+        public static readonly TestComposition LanguageServerProtocol = FeaturesTestCompositions
+            .Features
+            .AddAssemblies(typeof(LanguageServerResources).Assembly);
 
         public static readonly TestComposition LanguageServerProtocolEditorFeatures =
             EditorFeatures.AddAssemblies(typeof(LanguageServerResources).Assembly);

@@ -43,10 +43,9 @@ namespace Internal.TypeSystem.NoMetadata
             {
                 if (_instantiation.IsNull)
                 {
-                    uint genericArgCount =
-                        TypeLoaderEnvironment.Instance.GetGenericArgumentCountFromMethodNameAndSignature(
-                            _nameAndSignature
-                        );
+                    uint genericArgCount = TypeLoaderEnvironment
+                        .Instance
+                        .GetGenericArgumentCountFromMethodNameAndSignature(_nameAndSignature);
                     if (genericArgCount == 0)
                     {
                         _instantiation = Instantiation.Empty;
@@ -131,13 +130,15 @@ namespace Internal.TypeSystem.NoMetadata
                 methodInstantiation
             );
             if (owningType != instantiatedOwningType)
-                method = instantiatedOwningType.Context.ResolveRuntimeMethod(
-                    UnboxingStub,
-                    (DefType)instantiatedOwningType,
-                    _nameAndSignature,
-                    IntPtr.Zero,
-                    false
-                );
+                method = instantiatedOwningType
+                    .Context
+                    .ResolveRuntimeMethod(
+                        UnboxingStub,
+                        (DefType)instantiatedOwningType,
+                        _nameAndSignature,
+                        IntPtr.Zero,
+                        false
+                    );
 
             Instantiation instantiation = method.Instantiation;
             TypeDesc[] clone = null;
@@ -162,10 +163,9 @@ namespace Internal.TypeSystem.NoMetadata
 
             return (clone == null)
                 ? method
-                : method.Context.GetInstantiatedMethod(
-                    method.GetMethodDefinition(),
-                    new Instantiation(clone)
-                );
+                : method
+                    .Context
+                    .GetInstantiatedMethod(method.GetMethodDefinition(), new Instantiation(clone));
         }
 
         public override bool HasCustomAttribute(string attributeNamespace, string attributeName)

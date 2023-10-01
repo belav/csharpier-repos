@@ -14,9 +14,9 @@
                 throw new ArgumentNullException("bindingContext");
             }
 
-            ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName
-            );
+            ValueProviderResult valueResult = bindingContext
+                .ValueProvider
+                .GetValue(bindingContext.ModelName);
 
             // case 1: there was no <input ... /> element containing this data
             if (valueResult == null)

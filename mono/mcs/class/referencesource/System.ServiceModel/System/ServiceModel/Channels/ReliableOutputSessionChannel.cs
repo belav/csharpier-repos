@@ -620,9 +620,9 @@ namespace System.ServiceModel.Channels
                 if (fault != null)
                 {
                     this.ReliableSession.OnLocalFault(null, fault, null);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        fault.CreateException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(fault.CreateException());
                 }
             }
             finally
@@ -925,13 +925,13 @@ namespace System.ServiceModel.Channels
         void ThrowInvalidAddException()
         {
             if (this.State == CommunicationState.Faulted)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    this.GetTerminalException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(this.GetTerminalException());
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    this.CreateClosedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(this.CreateClosedException());
         }
 
         void UnblockClose()

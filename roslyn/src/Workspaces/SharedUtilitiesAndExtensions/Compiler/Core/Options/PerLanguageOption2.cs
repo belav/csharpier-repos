@@ -68,16 +68,17 @@ namespace Microsoft.CodeAnalysis.Options
 
             // options with per-language values shouldn't have language-specific prefix
             Debug.Assert(
-                !Definition.ConfigName.StartsWith(
-                    OptionDefinition.CSharpConfigNamePrefix,
-                    StringComparison.Ordinal
-                )
+                !Definition
+                    .ConfigName
+                    .StartsWith(OptionDefinition.CSharpConfigNamePrefix, StringComparison.Ordinal)
             );
             Debug.Assert(
-                !Definition.ConfigName.StartsWith(
-                    OptionDefinition.VisualBasicConfigNamePrefix,
-                    StringComparison.Ordinal
-                )
+                !Definition
+                    .ConfigName
+                    .StartsWith(
+                        OptionDefinition.VisualBasicConfigNamePrefix,
+                        StringComparison.Ordinal
+                    )
             );
         }
 

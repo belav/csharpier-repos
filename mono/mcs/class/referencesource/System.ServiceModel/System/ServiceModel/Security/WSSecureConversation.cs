@@ -189,9 +189,11 @@ namespace System.ServiceModel.Security
                         // DerivedKeys aren't referred to externally
                         return null;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("tokenReferenceStyle")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("tokenReferenceStyle")
+                            );
                 }
             }
 
@@ -223,9 +225,9 @@ namespace System.ServiceModel.Security
             {
                 if (tokenResolver == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "tokenResolver"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("tokenResolver");
                 }
 
                 id = reader.GetAttribute(
@@ -254,15 +256,18 @@ namespace System.ServiceModel.Security
                     )
                 )
                 {
-                    tokenToDeriveIdentifier =
-                        parent.WSSecurityTokenSerializer.ReadKeyIdentifierClause(reader);
+                    tokenToDeriveIdentifier = parent
+                        .WSSecurityTokenSerializer
+                        .ReadKeyIdentifierClause(reader);
                     tokenResolver.TryResolveToken(tokenToDeriveIdentifier, out tokenToDerive);
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.DerivedKeyTokenRequiresTokenReference))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.DerivedKeyTokenRequiresTokenReference))
+                        );
                 }
 
                 // no support for properties
@@ -279,11 +284,16 @@ namespace System.ServiceModel.Security
                     generation = reader.ReadContentAsInt();
                     reader.ReadEndElement();
                     if (generation < 0)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(SR.DerivedKeyInvalidGenerationSpecified, generation)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(
+                                    SR.GetString(
+                                        SR.DerivedKeyInvalidGenerationSpecified,
+                                        generation
+                                    )
+                                )
+                            );
                 }
 
                 offset = -1;
@@ -298,11 +308,13 @@ namespace System.ServiceModel.Security
                     offset = reader.ReadContentAsInt();
                     reader.ReadEndElement();
                     if (offset < 0)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(SR.DerivedKeyInvalidOffsetSpecified, offset)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(
+                                    SR.GetString(SR.DerivedKeyInvalidOffsetSpecified, offset)
+                                )
+                            );
                 }
 
                 length = DerivedKeySecurityToken.DefaultDerivedKeyLength;
@@ -343,15 +355,17 @@ namespace System.ServiceModel.Security
                 }
                 if (label != null && label.Length > this.maxKeyDerivationLabelLength)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.DerivedKeyTokenLabelTooLong,
-                                label.Length,
-                                this.maxKeyDerivationLabelLength
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.DerivedKeyTokenLabelTooLong,
+                                    label.Length,
+                                    this.maxKeyDerivationLabelLength
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 nonce = null;
@@ -364,15 +378,17 @@ namespace System.ServiceModel.Security
 
                 if (nonce != null && nonce.Length > this.maxKeyDerivationNonceLength)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.DerivedKeyTokenNonceTooLong,
-                                nonce.Length,
-                                this.maxKeyDerivationNonceLength
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.DerivedKeyTokenNonceTooLong,
+                                    nonce.Length,
+                                    this.maxKeyDerivationNonceLength
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 reader.ReadEndElement();
@@ -481,19 +497,20 @@ namespace System.ServiceModel.Security
                 }
                 if (derivedKeyToken.KeyDerivationAlgorithm != parent.DerivationAlgorithm)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(
-                                SR.UnsupportedKeyDerivationAlgorithm,
-                                derivedKeyToken.KeyDerivationAlgorithm
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.UnsupportedKeyDerivationAlgorithm,
+                                    derivedKeyToken.KeyDerivationAlgorithm
+                                )
                             )
-                        )
-                    );
+                        );
                 }
-                parent.WSSecurityTokenSerializer.WriteKeyIdentifierClause(
-                    writer,
-                    derivedKeyToken.TokenToDeriveIdentifier
-                );
+                parent
+                    .WSSecurityTokenSerializer
+                    .WriteKeyIdentifierClause(writer, derivedKeyToken.TokenToDeriveIdentifier);
 
                 // Don't support Properties element
                 if (
@@ -654,9 +671,11 @@ namespace System.ServiceModel.Security
                         }
                         return new SecurityContextKeyIdentifierClause(contextId, generation);
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("tokenReferenceStyle")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("tokenReferenceStyle")
+                            );
                 }
             }
 
@@ -795,9 +814,13 @@ namespace System.ServiceModel.Security
 
                 if (contextId == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(SR.GetString(SR.NoSecurityContextIdentifier))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.NoSecurityContextIdentifier)
+                            )
+                        );
                 }
 
                 if (sct == null && !isCookieMode)
@@ -813,11 +836,13 @@ namespace System.ServiceModel.Security
                 }
                 if (sct == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new SecurityContextTokenValidationException(
-                            SR.GetString(SR.SecurityContextNotRegistered, contextId, generation)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new SecurityContextTokenValidationException(
+                                SR.GetString(SR.SecurityContextNotRegistered, contextId, generation)
+                            )
+                        );
                 }
                 return sct;
             }
@@ -863,9 +888,11 @@ namespace System.ServiceModel.Security
                 {
                     if (sct.CookieBlob == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(SR.GetString(SR.NoCookieInSct))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(SR.GetString(SR.NoCookieInSct))
+                            );
                     }
 
                     // if the token has a cookie, write it out

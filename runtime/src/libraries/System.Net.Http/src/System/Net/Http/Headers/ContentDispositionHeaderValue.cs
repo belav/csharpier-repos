@@ -212,12 +212,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.ContentDispositionParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser
+                    .ContentDispositionParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (ContentDispositionHeaderValue)output!;

@@ -92,7 +92,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                         pszEventHandlerName,
                         itemidInsertionPoint,
                         useHandlesClause: false,
-                        additionalFormattingRule: targetDocument.Project.Services
+                        additionalFormattingRule: targetDocument
+                            .Project
+                            .Services
                             .GetService<IAdditionalFormattingRuleLanguageService>()
                             .GetAdditionalCodeGenerationRule(),
                         GlobalOptions,
@@ -286,8 +288,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 showProgress: false,
                 action: c =>
                 {
-                    var refactorNotifyServices =
-                        this.ComponentModel.DefaultExportProvider.GetExportedValues<IRefactorNotifyService>();
+                    var refactorNotifyServices = this.ComponentModel
+                        .DefaultExportProvider
+                        .GetExportedValues<IRefactorNotifyService>();
 
                     if (
                         !ContainedLanguageCodeSupport.TryRenameElement(

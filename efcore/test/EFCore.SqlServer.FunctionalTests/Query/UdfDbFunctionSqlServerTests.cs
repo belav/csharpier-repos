@@ -1025,44 +1025,54 @@ ORDER BY [a].[Id], [g].[Year]
         {
             base.Seed(context);
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[CustomerOrderCount] (@customerId int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[CustomerOrderCount] (@customerId int)
                                                     returns int
                                                     as
                                                     begin
                                                         return (select count(id) from orders where customerId = @customerId);
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function[dbo].[StarValue] (@starCount int, @value nvarchar(max))
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function[dbo].[StarValue] (@starCount int, @value nvarchar(max))
                                                     returns nvarchar(max)
                                                         as
                                                         begin
                                                     return replicate('*', @starCount) + @value
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function[dbo].[DollarValue] (@starCount int, @value nvarchar(max))
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function[dbo].[DollarValue] (@starCount int, @value nvarchar(max))
                                                     returns nvarchar(max)
                                                         as
                                                         begin
                                                     return replicate('$', @starCount) + @value
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[GetReportingPeriodStartDate] (@period int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[GetReportingPeriodStartDate] (@period int)
                                                     returns DateTime
                                                     as
                                                     begin
                                                         return '1998-01-01'
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[GetCustomerWithMostOrdersAfterDate] (@searchDate Date)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[GetCustomerWithMostOrdersAfterDate] (@searchDate Date)
                                                     returns int
                                                     as
                                                     begin
@@ -1072,10 +1082,12 @@ ORDER BY [a].[Id], [g].[Year]
                                                                 group by CustomerId
                                                                 order by count(id) desc)
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[IsTopCustomer] (@customerId int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[IsTopCustomer] (@customerId int)
                                                     returns bit
                                                     as
                                                     begin
@@ -1084,55 +1096,67 @@ ORDER BY [a].[Id], [g].[Year]
 
                                                         return 0
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[IdentityString] (@s nvarchar(max))
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[IdentityString] (@s nvarchar(max))
                                                     returns nvarchar(max)
                                                     as
                                                     begin
                                                         return @s;
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[IdentityStringPropagatesNull] (@s nvarchar(max))
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[IdentityStringPropagatesNull] (@s nvarchar(max))
                                                     returns nvarchar(max)
                                                     as
                                                     begin
                                                         return @s;
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[IdentityStringNonNullable] (@s nvarchar(max))
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[IdentityStringNonNullable] (@s nvarchar(max))
                                                     returns nvarchar(max)
                                                     as
                                                     begin
                                                         return COALESCE(@s, 'NULL');
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[IdentityStringNonNullableFluent] (@s nvarchar(max))
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[IdentityStringNonNullableFluent] (@s nvarchar(max))
                                                     returns nvarchar(max)
                                                     as
                                                     begin
                                                         return COALESCE(@s, 'NULL');
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[StringLength] (@s nvarchar(max))
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[StringLength] (@s nvarchar(max))
                                                     returns int
                                                     as
                                                     begin
                                                         return LEN(@s);
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].GetCustomerOrderCountByYear(@customerId int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].GetCustomerOrderCountByYear(@customerId int)
                                                     returns @reports table
                                                     (
                                                         CustomerId int not null,
@@ -1150,10 +1174,12 @@ ORDER BY [a].[Id], [g].[Year]
 
                                                         return
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].GetCustomerOrderCountByYearOnlyFrom2000(@customerId int, @onlyFrom2000 bit)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].GetCustomerOrderCountByYearOnlyFrom2000(@customerId int, @onlyFrom2000 bit)
                                                     returns @reports table
                                                     (
                                                         CustomerId int not null,
@@ -1171,10 +1197,12 @@ ORDER BY [a].[Id], [g].[Year]
 
                                                         return
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].GetTopTwoSellingProducts()
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].GetTopTwoSellingProducts()
                                                     returns @products table
                                                     (
                                                         ProductId int not null,
@@ -1190,10 +1218,12 @@ ORDER BY [a].[Id], [g].[Year]
 
                                                         return
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].GetTopSellingProductsForCustomer(@customerId int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].GetTopSellingProductsForCustomer(@customerId int)
                                                     returns @products table
                                                     (
                                                         ProductId int not null,
@@ -1210,10 +1240,12 @@ ORDER BY [a].[Id], [g].[Year]
 
                                                         return
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].GetOrdersWithMultipleProducts(@customerId int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].GetOrdersWithMultipleProducts(@customerId int)
                                                     returns @orders table
                                                     (
                                                         OrderId int not null,
@@ -1232,16 +1264,18 @@ ORDER BY [a].[Id], [g].[Year]
 
                                                         return
                                                     end"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                @"create function [dbo].[AddValues] (@a int, @b int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"create function [dbo].[AddValues] (@a int, @b int)
                                                     returns int
                                                     as
                                                     begin
                                                         return @a + @b;
                                                     end"
-            );
+                );
 
             context.SaveChanges();
         }

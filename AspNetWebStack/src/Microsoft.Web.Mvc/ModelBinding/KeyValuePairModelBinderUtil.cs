@@ -25,19 +25,19 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     )
                 };
 
-            IExtensibleModelBinder binder = parentBindingContext.ModelBinderProviders.GetBinder(
-                controllerContext,
-                propertyBindingContext
-            );
+            IExtensibleModelBinder binder = parentBindingContext
+                .ModelBinderProviders
+                .GetBinder(controllerContext, propertyBindingContext);
             if (binder != null)
             {
                 if (binder.BindModel(controllerContext, propertyBindingContext))
                 {
                     object untypedModel = propertyBindingContext.Model;
                     model = ModelBinderUtil.CastOrDefault<TModel>(untypedModel);
-                    parentBindingContext.ValidationNode.ChildNodes.Add(
-                        propertyBindingContext.ValidationNode
-                    );
+                    parentBindingContext
+                        .ValidationNode
+                        .ChildNodes
+                        .Add(propertyBindingContext.ValidationNode);
                     return true;
                 }
             }

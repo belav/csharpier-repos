@@ -45,11 +45,13 @@ namespace System.ServiceModel.Dispatcher
                 );
                 if (authPolicy == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.AuthenticationManagerShouldNotReturnNull)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.AuthenticationManagerShouldNotReturnNull)
+                            )
+                        );
                 }
             }
             catch (Exception ex)
@@ -108,9 +110,9 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    CreateFailedAuthenticationFaultException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(CreateFailedAuthenticationFaultException());
             }
 
             rpc.Request.Properties.Security.ServiceSecurityContext.AuthorizationPolicies =

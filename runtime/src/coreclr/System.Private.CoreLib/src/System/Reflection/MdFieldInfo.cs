@@ -143,9 +143,9 @@ namespace System.Reflection
             {
                 if (m_fieldType == null)
                 {
-                    ConstArray fieldMarshal = GetRuntimeModule().MetadataImport.GetSigOfFieldDef(
-                        m_tkField
-                    );
+                    ConstArray fieldMarshal = GetRuntimeModule()
+                        .MetadataImport
+                        .GetSigOfFieldDef(m_tkField);
 
                     m_fieldType = new Signature(
                         fieldMarshal.Signature.ToPointer(),

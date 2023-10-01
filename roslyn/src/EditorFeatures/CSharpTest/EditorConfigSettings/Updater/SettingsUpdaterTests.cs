@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
             Assert.True(
                 workspace.TryApplyChanges(
-                    workspace.CurrentSolution
+                    workspace
+                        .CurrentSolution
                         .AddProject(
                             ProjectInfo.Create(
                                 projectId,
@@ -71,7 +72,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         }
 
         private static IGlobalOptionService GetGlobalOptions(Workspace workspace) =>
-            workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
+            workspace
+                .Services
+                .SolutionServices
+                .ExportProvider
+                .GetExportedValue<IGlobalOptionService>();
 
         private static AnalyzerConfigDocument CreateAnalyzerConfigDocument(
             Workspace workspace,
@@ -79,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         )
         {
             var solution = workspace.CurrentSolution;
-            var documentId = solution.Projects
+            var documentId = solution
+                .Projects
                 .Single()
                 .State
                 .AnalyzerConfigDocumentStates
@@ -493,7 +499,8 @@ csharp_new_line_before_else = true";
             value = "false:error";
 
             var solution = workspace.CurrentSolution;
-            var editorconfig = solution.Projects
+            var editorconfig = solution
+                .Projects
                 .SelectMany(
                     p => p.AnalyzerConfigDocuments.Where(a => a.FilePath == EditorconfigPath)
                 )
@@ -542,9 +549,9 @@ csharp_new_line_before_else = true";
         public async Task TestNamingStyleSettingsUpdater()
         {
             var workspace = CreateWorkspaceWithProjectAndDocuments();
-            var settingsProviderFactory = workspace.Services.GetRequiredService<
-                IWorkspaceSettingsProviderFactory<NamingStyleSetting>
-            >();
+            var settingsProviderFactory = workspace
+                .Services
+                .GetRequiredService<IWorkspaceSettingsProviderFactory<NamingStyleSetting>>();
             var settingsProvider = settingsProviderFactory.GetForFile(EditorconfigPath);
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -590,48 +597,48 @@ csharp_new_line_before_else = true";
 
 # {CompilerExtensionsResources.Naming_rules}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.severity = error
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Interface.ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Begins_with_I.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.severity = error
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Interface.ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Begins_with_I.Replace(' ', '_').ToLowerInvariant()}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.severity = suggestion
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Types.ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.severity = suggestion
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Types.ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.severity = suggestion
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Non_Field_Members.Replace(' ', '_').Replace('-', '_').ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.severity = suggestion
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Non_Field_Members.Replace(' ', '_').Replace('-', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
 
 # {CompilerExtensionsResources.Symbol_specifications}
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.applicable_kinds = interface
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.required_modifiers = 
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.applicable_kinds = interface
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.required_modifiers = 
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.applicable_kinds = class, struct, interface, enum
-dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Types .ToLowerInvariant()}.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.{CompilerExtensionsResources .Types .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.required_modifiers = 
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_kinds = property, event, method
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.required_modifiers = 
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_kinds = property, event, method
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.required_modifiers = 
 
 # {CompilerExtensionsResources.Naming_styles}
 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = I
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = I
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 ";
 
         private readonly string ExpectedEditorConfigAfterAllSeveritiesChanged =
@@ -641,48 +648,48 @@ dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') 
 
 # {CompilerExtensionsResources.Naming_rules}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.severity = error
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Interface.ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Begins_with_I.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.severity = error
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Interface.ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Begins_with_I.Replace(' ', '_').ToLowerInvariant()}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.severity = error
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Types.ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.severity = error
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Types.ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.severity = error
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Non_Field_Members.Replace(' ', '_').Replace('-', '_').ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.severity = error
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Non_Field_Members.Replace(' ', '_').Replace('-', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
 
 # {CompilerExtensionsResources.Symbol_specifications}
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.applicable_kinds = interface
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.required_modifiers = 
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.applicable_kinds = interface
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.required_modifiers = 
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.applicable_kinds = class, struct, interface, enum
-dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Types .ToLowerInvariant()}.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.{CompilerExtensionsResources .Types .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.required_modifiers = 
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_kinds = property, event, method
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.required_modifiers = 
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_kinds = property, event, method
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.required_modifiers = 
 
 # {CompilerExtensionsResources.Naming_styles}
 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = I
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = I
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 ";
 
         private readonly string ExpectedEditorConfigAfterSymbolSpecChange =
@@ -692,48 +699,48 @@ dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') 
 
 # {CompilerExtensionsResources.Naming_rules}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.severity = error
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Interface.ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources.Begins_with_I.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.severity = error
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Interface.ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Interface + "_should_be_" + CompilerExtensionsResources .Begins_with_I .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.severity = error
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Types.ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.severity = error
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Types.ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources.Types + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
 
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.severity = error
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Non_Field_Members.Replace(' ', '_').Replace('-', '_').ToLowerInvariant()}
-dotnet_naming_rule.{(CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources.Pascal_Case.Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.severity = error
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.symbols = {CompilerExtensionsResources.Non_Field_Members.Replace(' ', '_').Replace('-', '_').ToLowerInvariant()}
+dotnet_naming_rule.{(CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') + "_should_be_" + CompilerExtensionsResources .Pascal_Case .Replace(' ', '_')).ToLowerInvariant()}.style = {CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').ToLowerInvariant()}
 
 # {CompilerExtensionsResources.Symbol_specifications}
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.applicable_kinds = interface
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-dotnet_naming_symbols.{CompilerExtensionsResources.Interface.ToLowerInvariant()}.required_modifiers = 
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.applicable_kinds = interface
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Interface .ToLowerInvariant()}.required_modifiers = 
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.applicable_kinds = class, struct, interface, enum
-dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Types .ToLowerInvariant()}.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.{CompilerExtensionsResources .Types .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.{CompilerExtensionsResources.Types.ToLowerInvariant()}.required_modifiers = 
 
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_kinds = property, event, method
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-dotnet_naming_symbols.{CompilerExtensionsResources.Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.required_modifiers = 
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_kinds = property, event, method
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.{CompilerExtensionsResources .Non_Field_Members .Replace(' ', '_') .Replace('-', '_') .ToLowerInvariant()}.required_modifiers = 
 
 # {CompilerExtensionsResources.Naming_styles}
 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = I
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = I
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Begins_with_I .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
-dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_prefix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.required_suffix = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.word_separator = 
+dotnet_naming_style.{CompilerExtensionsResources .Pascal_Case .Replace(' ', '_') .ToLowerInvariant()}.capitalization = pascal_case
 ";
 
         private class TestViewModel : ISettingsEditorViewModel

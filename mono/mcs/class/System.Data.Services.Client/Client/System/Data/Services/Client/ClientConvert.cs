@@ -220,10 +220,12 @@ namespace System.Data.Services.Client
                         null,
                         System.Globalization.CultureInfo.InvariantCulture
                     );
-            return System.Data.Services.Parsing.WebConvert.TryKeyPrimitiveToString(
-                bytes,
-                out result
-            );
+            return System
+                .Data
+                .Services
+                .Parsing
+                .WebConvert
+                .TryKeyPrimitiveToString(bytes, out result);
         }
 #endif
 
@@ -236,10 +238,12 @@ namespace System.Data.Services.Client
                 return TryKeyBinaryToString(value, out result);
             }
 #endif
-            return System.Data.Services.Parsing.WebConvert.TryKeyPrimitiveToString(
-                value,
-                out result
-            );
+            return System
+                .Data
+                .Services
+                .Parsing
+                .WebConvert
+                .TryKeyPrimitiveToString(value, out result);
         }
 
         internal static bool ToNamedType(string typeName, out Type type)
@@ -485,10 +489,13 @@ namespace System.Data.Services.Client
             if (
                 (type.Namespace == "System.Data.Linq")
                 && (
-                    System.Reflection.AssemblyName.ReferenceMatchesDefinition(
-                        type.Assembly.GetName(),
-                        new System.Reflection.AssemblyName(SystemDataLinq)
-                    )
+                    System
+                        .Reflection
+                        .AssemblyName
+                        .ReferenceMatchesDefinition(
+                            type.Assembly.GetName(),
+                            new System.Reflection.AssemblyName(SystemDataLinq)
+                        )
                 )
             )
             {

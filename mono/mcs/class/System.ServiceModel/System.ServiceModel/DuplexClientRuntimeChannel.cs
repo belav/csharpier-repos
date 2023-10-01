@@ -189,14 +189,16 @@ namespace System.ServiceModel.MonoInternal
         {
             bool isReply =
                 message != null
-                && Contract.Operations.Any(
-                    od =>
-                        (
-                            od.DeclaringContract.CallbackContractType
-                                == od.DeclaringContract.ContractType
-                            || !od.InCallbackContract
-                        ) && od.Messages.Any(md => md.Action == message.Headers.Action)
-                );
+                && Contract
+                    .Operations
+                    .Any(
+                        od =>
+                            (
+                                od.DeclaringContract.CallbackContractType
+                                    == od.DeclaringContract.ContractType
+                                || !od.InCallbackContract
+                            ) && od.Messages.Any(md => md.Action == message.Headers.Action)
+                    );
             if (isReply)
             {
                 if (ReplyHandlerQueue.Count > 0)

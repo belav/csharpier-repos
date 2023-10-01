@@ -100,9 +100,9 @@ namespace System.Workflow.Activities
                     if (eventActivitySubscription != null)
                     {
                         if (
-                            eventActivitySubscription.EventDrivenName.Equals(
-                                eventDriven.QualifiedName
-                            )
+                            eventActivitySubscription
+                                .EventDrivenName
+                                .Equals(eventDriven.QualifiedName)
                         )
                         {
                             // this EventDriven is already subscribed

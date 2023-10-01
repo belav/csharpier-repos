@@ -58,8 +58,9 @@ namespace System.ServiceModel.Discovery
 
             List<ServiceEndpoint> appEndpoints = this.GetApplicationEndpoints(serviceDescription);
 
-            DiscoveryServiceExtension discoveryServiceExtension =
-                serviceHostBase.Extensions.Find<DiscoveryServiceExtension>();
+            DiscoveryServiceExtension discoveryServiceExtension = serviceHostBase
+                .Extensions
+                .Find<DiscoveryServiceExtension>();
 
             if (discoveryServiceExtension == null)
             {
@@ -79,11 +80,13 @@ namespace System.ServiceModel.Discovery
 
             for (int i = 0; i < appEndpoints.Count; i++)
             {
-                appEndpoints[i].Behaviors.Add(
-                    new EndpointDiscoveryMetadataInitializer(
-                        discoveryServiceExtension.InternalPublishedEndpoints
-                    )
-                );
+                appEndpoints[i]
+                    .Behaviors
+                    .Add(
+                        new EndpointDiscoveryMetadataInitializer(
+                            discoveryServiceExtension.InternalPublishedEndpoints
+                        )
+                    );
             }
         }
 
@@ -105,8 +108,9 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("serviceHostBase");
             }
 
-            DiscoveryServiceExtension discoveryServiceExtension =
-                serviceHostBase.Extensions.Find<DiscoveryServiceExtension>();
+            DiscoveryServiceExtension discoveryServiceExtension = serviceHostBase
+                .Extensions
+                .Find<DiscoveryServiceExtension>();
             if (discoveryServiceExtension != null)
             {
                 DiscoveryService discoveryService =
@@ -119,24 +123,28 @@ namespace System.ServiceModel.Discovery
 
                 if (this.announcementEndpoints.Count > 0)
                 {
-                    serviceHostBase.ChannelDispatchers.Add(
-                        new OnlineAnnouncementChannelDispatcher(
-                            serviceHostBase,
-                            this.announcementEndpoints,
-                            discoveryServiceExtension.InternalPublishedEndpoints,
-                            discoveryService.MessageSequenceGenerator
-                        )
-                    );
+                    serviceHostBase
+                        .ChannelDispatchers
+                        .Add(
+                            new OnlineAnnouncementChannelDispatcher(
+                                serviceHostBase,
+                                this.announcementEndpoints,
+                                discoveryServiceExtension.InternalPublishedEndpoints,
+                                discoveryService.MessageSequenceGenerator
+                            )
+                        );
 
-                    serviceHostBase.ChannelDispatchers.Insert(
-                        0,
-                        new OfflineAnnouncementChannelDispatcher(
-                            serviceHostBase,
-                            this.announcementEndpoints,
-                            discoveryServiceExtension.InternalPublishedEndpoints,
-                            discoveryService.MessageSequenceGenerator
-                        )
-                    );
+                    serviceHostBase
+                        .ChannelDispatchers
+                        .Insert(
+                            0,
+                            new OfflineAnnouncementChannelDispatcher(
+                                serviceHostBase,
+                                this.announcementEndpoints,
+                                discoveryServiceExtension.InternalPublishedEndpoints,
+                                discoveryService.MessageSequenceGenerator
+                            )
+                        );
                 }
             }
         }

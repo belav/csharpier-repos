@@ -3510,9 +3510,9 @@ class D
         new C(out var a);
     }
 }",
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions
+                    .Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -3539,9 +3539,9 @@ class D
         new C(b: out var a);
     }
 }",
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions
+                    .Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -3568,9 +3568,9 @@ class D
         new C(out int a);
     }
 }",
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions
+                    .Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 
@@ -3597,9 +3597,9 @@ class D
         new C(b: out int a);
     }
 }",
-                parseOptions: TestOptions.Regular.WithLanguageVersion(
-                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
-                )
+                parseOptions: TestOptions
+                    .Regular
+                    .WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6)
             );
         }
 

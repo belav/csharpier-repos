@@ -111,9 +111,11 @@ public class ChromeTests : LoggedTest
                                 }
                                 else
                                 {
-                                    await context.Response.WriteAsync(
-                                        $"Interop {context.Request.Protocol} {context.Request.Method}"
-                                    );
+                                    await context
+                                        .Response
+                                        .WriteAsync(
+                                            $"Interop {context.Request.Protocol} {context.Request.Method}"
+                                        );
                                 }
                             })
                     );

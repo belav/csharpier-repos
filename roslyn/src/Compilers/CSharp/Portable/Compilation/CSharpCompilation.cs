@@ -1930,9 +1930,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         entryPoint = new EntryPoint(
                             entryPoint.MethodSymbol,
                             new ImmutableBindingDiagnostic<AssemblySymbol>(
-                                entryPoint.Diagnostics.Diagnostics.Concat(
-                                    diagnostics.ToReadOnlyAndFree()
-                                ),
+                                entryPoint
+                                    .Diagnostics
+                                    .Diagnostics
+                                    .Concat(diagnostics.ToReadOnlyAndFree()),
                                 entryPoint.Diagnostics.Dependencies
                             )
                         );
@@ -2705,12 +2706,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             Debug.Assert(
-                System.Runtime.CompilerServices.Unsafe.AreSame(
-                    ref cachedBinderFactories,
-                    ref ignoreAccessibility
-                        ? ref _ignoreAccessibilityBinderFactories
-                        : ref _binderFactories
-                )
+                System
+                    .Runtime
+                    .CompilerServices
+                    .Unsafe
+                    .AreSame(
+                        ref cachedBinderFactories,
+                        ref ignoreAccessibility
+                            ? ref _ignoreAccessibilityBinderFactories
+                            : ref _binderFactories
+                    )
             );
 
             var treeNum = GetSyntaxTreeOrdinal(syntaxTree);
@@ -4784,10 +4789,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (!elementNullableAnnotations.IsDefault)
             {
                 tupleType = tupleType.WithElementTypes(
-                    tupleType.TupleElementTypesWithAnnotations.ZipAsArray(
-                        elementNullableAnnotations,
-                        (t, a) => TypeWithAnnotations.Create(t.Type, a.ToInternalAnnotation())
-                    )
+                    tupleType
+                        .TupleElementTypesWithAnnotations
+                        .ZipAsArray(
+                            elementNullableAnnotations,
+                            (t, a) => TypeWithAnnotations.Create(t.Type, a.ToInternalAnnotation())
+                        )
                 );
             }
             return tupleType.GetPublicSymbol();
@@ -4910,11 +4917,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && csharpRightType.SpecialType != SpecialType.None
                 )
                 {
-                    var easyOutBinaryKind = OverloadResolution.BinopEasyOut.OpKind(
-                        binaryKind,
-                        csharpLeftType,
-                        csharpRightType
-                    );
+                    var easyOutBinaryKind = OverloadResolution
+                        .BinopEasyOut
+                        .OpKind(binaryKind, csharpLeftType, csharpRightType);
 
                     if (easyOutBinaryKind != BinaryOperatorKind.Error)
                     {
@@ -5267,10 +5272,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && csharpOperandType.SpecialType != SpecialType.None
                 )
                 {
-                    var easyOutUnaryKind = OverloadResolution.UnopEasyOut.OpKind(
-                        unaryKind,
-                        csharpOperandType
-                    );
+                    var easyOutUnaryKind = OverloadResolution
+                        .UnopEasyOut
+                        .OpKind(unaryKind, csharpOperandType);
 
                     if (easyOutUnaryKind != UnaryOperatorKind.Error)
                     {
@@ -5556,7 +5560,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     bool value =
                         SyntaxTrees
                             .FirstOrDefault()
-                            ?.Options?.Features?.ContainsKey("nullablePublicOnly") == true;
+                            ?.Options
+                            ?.Features
+                            ?.ContainsKey("nullablePublicOnly") == true;
                     _lazyEmitNullablePublicOnly = value.ToThreeState();
                 }
                 return _lazyEmitNullablePublicOnly.Value();
@@ -5905,7 +5911,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (mergedNamespace != null)
                     {
                         _cache[
-                            mergedNamespace.ConstituentNamespaces
+                            mergedNamespace
+                                .ConstituentNamespaces
                                 .OfType<SourceNamespaceSymbol>()
                                 .First()
                                 .MergedDeclaration

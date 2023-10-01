@@ -395,12 +395,14 @@ namespace System.Reflection
                     InitCustomAttributeType((RuntimeType)parameters[i].ParameterType)
                 );
 
-            FieldInfo[] fields = m_ctor.DeclaringType!.GetFields(
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
-            PropertyInfo[] properties = m_ctor.DeclaringType.GetProperties(
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-            );
+            FieldInfo[] fields = m_ctor
+                .DeclaringType!
+                .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            PropertyInfo[] properties = m_ctor
+                .DeclaringType
+                .GetProperties(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
             m_namedParams = new CustomAttributeNamedParameter[properties.Length + fields.Length];
             for (int i = 0; i < fields.Length; i++)
                 m_namedParams[i] = new CustomAttributeNamedParameter(

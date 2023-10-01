@@ -149,11 +149,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             bool isRefAssembly
         )
         {
-            return SourceModule.ContainingSourceAssembly.GetCustomAttributesToEmit(
-                this,
-                isRefAssembly,
-                emittingAssemblyAttributesInNetModule: OutputKind.IsNetModule()
-            );
+            return SourceModule
+                .ContainingSourceAssembly
+                .GetCustomAttributesToEmit(
+                    this,
+                    isRefAssembly,
+                    emittingAssemblyAttributesInNetModule: OutputKind.IsNetModule()
+                );
         }
 
         public sealed override IEnumerable<Cci.SecurityAttribute> GetSourceAssemblySecurityAttributes()
@@ -666,7 +668,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 return SpecializedCollections.EmptyEnumerable<Cci.INamespaceTypeDefinition>();
             }
 
-            return Compilation.AnonymousTypeManager
+            return Compilation
+                .AnonymousTypeManager
                 .GetAllCreatedTemplates()
 #if DEBUG
                 .Select(type => type.GetCciAdapter())

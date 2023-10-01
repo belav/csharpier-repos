@@ -63,11 +63,13 @@ namespace System.ServiceModel.Channels.Http
             if (e2.ChannelDispatcher.Endpoints.Count == 0)
                 return -1;
             // select the highest filter priority value in the Endpoints.
-            int p1 = e1.ChannelDispatcher.Endpoints
+            int p1 = e1.ChannelDispatcher
+                .Endpoints
                 .OrderByDescending(e => e.FilterPriority)
                 .First()
                 .FilterPriority;
-            int p2 = e2.ChannelDispatcher.Endpoints
+            int p2 = e2.ChannelDispatcher
+                .Endpoints
                 .OrderByDescending(e => e.FilterPriority)
                 .First()
                 .FilterPriority;

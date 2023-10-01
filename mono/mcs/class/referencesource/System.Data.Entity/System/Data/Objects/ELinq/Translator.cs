@@ -79,9 +79,13 @@ namespace System.Data.Objects.ELinq
                 if (linq == parent._funcletizer.RootContextExpression)
                 {
                     throw EntityUtil.InvalidOperation(
-                        System.Data.Entity.Strings.ELinq_UnsupportedUseOfContextParameter(
-                            parent._funcletizer.RootContextParameter.Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .ELinq_UnsupportedUseOfContextParameter(
+                                parent._funcletizer.RootContextParameter.Name
+                            )
                     );
                 }
 
@@ -167,11 +171,13 @@ namespace System.Data.Objects.ELinq
                         var nonNullableLinqType = TypeSystem.GetNonNullableType(linq.Type);
                         if (nonNullableLinqType.IsEnum)
                         {
-                            value = System.Convert.ChangeType(
-                                linq.Value,
-                                nonNullableLinqType.GetEnumUnderlyingType(),
-                                CultureInfo.InvariantCulture
-                            );
+                            value = System
+                                .Convert
+                                .ChangeType(
+                                    linq.Value,
+                                    nonNullableLinqType.GetEnumUnderlyingType(),
+                                    CultureInfo.InvariantCulture
+                                );
                         }
                     }
 
@@ -276,7 +282,8 @@ namespace System.Data.Objects.ELinq
                 {
                     try
                     {
-                        propertyInfo = propertyInfo.DeclaringType
+                        propertyInfo = propertyInfo
+                            .DeclaringType
                             .GetGenericTypeDefinition()
                             .GetProperty(
                                 propertyInfo.Name,
@@ -419,9 +426,9 @@ namespace System.Data.Objects.ELinq
                             && initializerMetadata.Kind == InitializerMetadataKind.Grouping
                         )
                         {
-                            propertyExpression = property.Instance.Property(
-                                ExpressionConverter.KeyColumnName
-                            );
+                            propertyExpression = property
+                                .Instance
+                                .Property(ExpressionConverter.KeyColumnName);
                             return true;
                         }
                     }

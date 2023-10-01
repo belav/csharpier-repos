@@ -102,13 +102,15 @@ namespace MonoTests.Microsoft.Build.BuildEngine
             project = engine.CreateNewProject();
             project.LoadXml(documentString);
 
-            project.PropertyGroups.CopyTo(
-                new BuildPropertyGroup[][]
-                {
-                    new BuildPropertyGroup[] { new BuildPropertyGroup() }
-                },
-                0
-            );
+            project
+                .PropertyGroups
+                .CopyTo(
+                    new BuildPropertyGroup[][]
+                    {
+                        new BuildPropertyGroup[] { new BuildPropertyGroup() }
+                    },
+                    0
+                );
         }
 
         // Index was outside the bounds of the array.

@@ -20,7 +20,8 @@ public class ParameterDescriptorTests
 
         var modelDescriptor = ModelDescriptor.FromType(type);
 
-        modelDescriptor.ConstructorDescriptors
+        modelDescriptor
+            .ConstructorDescriptors
             .Single()
             .ParameterDescriptors
             .Single()

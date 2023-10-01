@@ -101,9 +101,11 @@ namespace System.Web.Compilation
                     "MasterPageFile"
                 );
                 CodeExpression ct = new CodePrimitiveExpression(parser.MasterPageFile);
-                method.Statements.Add(
-                    AddLinePragma(new CodeAssignStatement(prop, ct), parser.DirectiveLocation)
-                );
+                method
+                    .Statements
+                    .Add(
+                        AddLinePragma(new CodeAssignStatement(prop, ct), parser.DirectiveLocation)
+                    );
             }
         }
     }

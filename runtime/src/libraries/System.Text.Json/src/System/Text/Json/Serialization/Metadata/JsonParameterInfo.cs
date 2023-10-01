@@ -106,10 +106,9 @@ namespace System.Text.Json.Serialization.Metadata
 
                 DefaultValueHolder holder;
                 if (
-                    matchingProperty.Options.TryGetTypeInfoCached(
-                        parameterType,
-                        out JsonTypeInfo? typeInfo
-                    )
+                    matchingProperty
+                        .Options
+                        .TryGetTypeInfoCached(parameterType, out JsonTypeInfo? typeInfo)
                 )
                 {
                     holder = typeInfo.DefaultValueHolder;

@@ -903,13 +903,15 @@ namespace Internal.Runtime.TypeLoader
                                 ofsCaller = conversionParams._callerArgs.GetNextOffset();
                                 pSrc = callerTransitionBlock + ofsCaller;
                                 stackSizeCaller = conversionParams._callerArgs.GetArgSize();
-                                isCallerArgPassedByRef =
-                                    conversionParams._callerArgs.IsArgPassedByRef();
+                                isCallerArgPassedByRef = conversionParams
+                                    ._callerArgs
+                                    .IsArgPassedByRef();
                             }
 
                             stackSizeCallee = conversionParams._calleeArgs.GetArgSize();
-                            isCalleeArgPassedByRef =
-                                conversionParams._calleeArgs.IsArgPassedByRef();
+                            isCalleeArgPassedByRef = conversionParams
+                                ._calleeArgs
+                                .IsArgPassedByRef();
                         }
                         else if (conversionParams._conversionInfo.IsAnyDynamicInvokerThunk)
                         {
@@ -922,9 +924,9 @@ namespace Internal.Runtime.TypeLoader
                             InvokeUtils.DynamicInvokeParamLookupType paramLookupType;
 
                             RuntimeTypeHandle argumentRuntimeTypeHandle;
-                            CorElementType argType = conversionParams._calleeArgs.GetArgType(
-                                out thArgType
-                            );
+                            CorElementType argType = conversionParams
+                                ._calleeArgs
+                                .GetArgType(out thArgType);
                             Debug.Assert(!thArgType.IsNull());
 
                             if (argType == CorElementType.ELEMENT_TYPE_BYREF)
@@ -963,8 +965,10 @@ namespace Internal.Runtime.TypeLoader
                                     ._dynamicInvokeArgHandle
                                     .Target = invokeParam;
                                 argPtr =
-                                    CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress()
-                                    + IntPtr.Size;
+                                    CallConversionParameters
+                                        .s_pinnedGCHandles
+                                        ._dynamicInvokeArgHandle
+                                        .GetRawTargetAddress() + IntPtr.Size;
                             }
                             else
                             {
@@ -983,8 +987,10 @@ namespace Internal.Runtime.TypeLoader
                                     .s_pinnedGCHandles
                                     ._dynamicInvokeArgHandle
                                     .Target = ((object[])invokeParam)[index];
-                                pinnedResultObject =
-                                    CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress();
+                                pinnedResultObject = CallConversionParameters
+                                    .s_pinnedGCHandles
+                                    ._dynamicInvokeArgHandle
+                                    .GetRawTargetAddress();
 
                                 if (conversionParams._calleeArgs.IsArgPassedByRef())
                                 {
@@ -1028,8 +1034,10 @@ namespace Internal.Runtime.TypeLoader
                                         index
                                     ];
                                     argPtr =
-                                        CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress()
-                                        + IntPtr.Size;
+                                        CallConversionParameters
+                                            .s_pinnedGCHandles
+                                            ._dynamicInvokeArgHandle
+                                            .GetRawTargetAddress() + IntPtr.Size;
                                 }
                                 else
                                 {
@@ -1046,10 +1054,12 @@ namespace Internal.Runtime.TypeLoader
                                 pSrc = (byte*)argPtr;
                             }
 
-                            stackSizeCaller = stackSizeCallee =
-                                conversionParams._calleeArgs.GetArgSize();
-                            isCallerArgPassedByRef = isCalleeArgPassedByRef =
-                                conversionParams._calleeArgs.IsArgPassedByRef();
+                            stackSizeCaller = stackSizeCallee = conversionParams
+                                ._calleeArgs
+                                .GetArgSize();
+                            isCallerArgPassedByRef = isCalleeArgPassedByRef = conversionParams
+                                ._calleeArgs
+                                .IsArgPassedByRef();
                         }
                         else
                         {
@@ -1059,10 +1069,12 @@ namespace Internal.Runtime.TypeLoader
                             stackSizeCallee = conversionParams._calleeArgs.GetArgSize();
                             stackSizeCaller = conversionParams._callerArgs.GetArgSize();
 
-                            isCalleeArgPassedByRef =
-                                conversionParams._calleeArgs.IsArgPassedByRef();
-                            isCallerArgPassedByRef =
-                                conversionParams._callerArgs.IsArgPassedByRef();
+                            isCalleeArgPassedByRef = conversionParams
+                                ._calleeArgs
+                                .IsArgPassedByRef();
+                            isCallerArgPassedByRef = conversionParams
+                                ._callerArgs
+                                .IsArgPassedByRef();
                         }
                     }
                     Debug.Assert(stackSizeCallee == stackSizeCaller);
@@ -1115,8 +1127,9 @@ namespace Internal.Runtime.TypeLoader
                             }
                             else
                             {
-                                CorElementType argElemType =
-                                    conversionParams._calleeArgs.GetArgType(out thArgType);
+                                CorElementType argElemType = conversionParams
+                                    ._calleeArgs
+                                    .GetArgType(out thArgType);
                                 ExtendingCopy_NoWriteBarrier(
                                     pSrc,
                                     pDest,
@@ -1138,8 +1151,9 @@ namespace Internal.Runtime.TypeLoader
                             {
                                 // Copy into the destination the data pointed at by the pointer in the source(caller) data.
                                 byte* pRealSrc = *(byte**)pSrc;
-                                CorElementType argElemType =
-                                    conversionParams._calleeArgs.GetArgType(out thArgType);
+                                CorElementType argElemType = conversionParams
+                                    ._calleeArgs
+                                    .GetArgType(out thArgType);
                                 ExtendingCopy_NoWriteBarrier(
                                     pRealSrc,
                                     pDest,
@@ -1318,17 +1332,15 @@ namespace Internal.Runtime.TypeLoader
             // the target method called by the delegate. Use the callee's ArgIterator instead to get the return type info
             if (conversionParams._conversionInfo.IsAnyDynamicInvokerThunk)
             {
-                returnType = conversionParams._calleeArgs.GetReturnType(
-                    out thRetType,
-                    out forceByRefUnused
-                );
+                returnType = conversionParams
+                    ._calleeArgs
+                    .GetReturnType(out thRetType, out forceByRefUnused);
             }
             else
             {
-                returnType = conversionParams._callerArgs.GetReturnType(
-                    out thRetType,
-                    out forceByRefUnused
-                );
+                returnType = conversionParams
+                    ._callerArgs
+                    .GetReturnType(out thRetType, out forceByRefUnused);
             }
             Debug.Assert(!thRetType.IsNull());
             int returnSize = TypeHandle.GetElemSize(returnType, thRetType);
@@ -1566,10 +1578,13 @@ namespace Internal.Runtime.TypeLoader
                             RuntimeAugments.IsUnmanagedPointerType(returnTypeRuntimeTypeHandle)
                         )
                         {
-                            returnValue = System.Reflection.Pointer.Box(
-                                *(void**)returnValueToCopy,
-                                Type.GetTypeFromHandle(returnTypeRuntimeTypeHandle)
-                            );
+                            returnValue = System
+                                .Reflection
+                                .Pointer
+                                .Box(
+                                    *(void**)returnValueToCopy,
+                                    Type.GetTypeFromHandle(returnTypeRuntimeTypeHandle)
+                                );
                         }
                         else if (RuntimeAugments.IsValueType(returnTypeRuntimeTypeHandle))
                         {
@@ -1586,8 +1601,10 @@ namespace Internal.Runtime.TypeLoader
                         }
                         CallConversionParameters.s_pinnedGCHandles._returnObjectHandle.Target =
                             returnValue;
-                        pinnedResultObject =
-                            CallConversionParameters.s_pinnedGCHandles._returnObjectHandle.GetRawTargetAddress();
+                        pinnedResultObject = CallConversionParameters
+                            .s_pinnedGCHandles
+                            ._returnObjectHandle
+                            .GetRawTargetAddress();
                         returnValueToCopy = (void*)&pinnedResultObject;
                     }
                     // Since we've changed the returnValueToCopy here, we need to update the idea of what we are returning

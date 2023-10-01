@@ -72,9 +72,9 @@ namespace Microsoft.CodeAnalysis.Workspaces
             }
             finally
             {
-                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 service.UnregisterForVisibilityChanges(subjectBuffer, callback);
             }
         }

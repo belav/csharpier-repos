@@ -87,10 +87,13 @@ namespace System.ServiceModel.Activation
         {
             this.BeforeAcceptWebSocket(response);
             this.webSocketContextTaskSource = new TaskCompletionSource<WebSocketContext>();
-            this.result.Application.Context.AcceptWebSocketRequest(
-                PostAcceptWebSocket,
-                new AspNetWebSocketOptions() { SubProtocol = protocol }
-            );
+            this.result
+                .Application
+                .Context
+                .AcceptWebSocketRequest(
+                    PostAcceptWebSocket,
+                    new AspNetWebSocketOptions() { SubProtocol = protocol }
+                );
             this.result.OnReplySent();
             return this.webSocketContextTaskSource.Task;
         }
@@ -291,9 +294,9 @@ namespace System.ServiceModel.Activation
                 // differentiate is by reading ahead
                 if (this.contentLength == 0)
                 {
-                    preReadBuffer = hostedHttpContext.result.GetPrereadBuffer(
-                        ref this.contentLength
-                    );
+                    preReadBuffer = hostedHttpContext
+                        .result
+                        .GetPrereadBuffer(ref this.contentLength);
                 }
             }
 
@@ -342,16 +345,21 @@ namespace System.ServiceModel.Activation
                 // Uri.Query always includes the '?'
                 if (this.hostedHttpContext.result.RequestUri.Query.Length > 1)
                 {
-                    requestProperty.QueryString =
-                        this.hostedHttpContext.result.RequestUri.Query.Substring(1);
+                    requestProperty.QueryString = this.hostedHttpContext
+                        .result
+                        .RequestUri
+                        .Query
+                        .Substring(1);
                 }
 
                 message.Properties.Add(HttpRequestMessageProperty.Name, requestProperty);
 
-                message.Properties.Add(
-                    HostingMessageProperty.Name,
-                    CreateMessagePropertyFromHostedResult(this.hostedHttpContext.result)
-                );
+                message
+                    .Properties
+                    .Add(
+                        HostingMessageProperty.Name,
+                        CreateMessagePropertyFromHostedResult(this.hostedHttpContext.result)
+                    );
                 message.Properties.Via = this.hostedHttpContext.result.RequestUri;
 
                 RemoteEndpointMessageProperty remoteEndpointProperty =
@@ -443,9 +451,11 @@ namespace System.ServiceModel.Activation
                 {
                     if (!this.result.TryStartStreamedRead())
                     {
-                        throw FxTrace.Exception.AsError(
-                            new CommunicationObjectAbortedException(SR.RequestContextAborted)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new CommunicationObjectAbortedException(SR.RequestContextAborted)
+                            );
                     }
 
                     bool throwing = true;
@@ -464,9 +474,9 @@ namespace System.ServiceModel.Activation
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace.Exception.AsError(
-                            CreateCommunicationException(hostedException)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(CreateCommunicationException(hostedException));
                     }
                     finally
                     {
@@ -485,9 +495,9 @@ namespace System.ServiceModel.Activation
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace.Exception.AsError(
-                            CreateCommunicationException(hostedException)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(CreateCommunicationException(hostedException));
                     }
                     finally
                     {
@@ -499,9 +509,11 @@ namespace System.ServiceModel.Activation
                 {
                     if (!this.result.TryStartStreamedRead())
                     {
-                        throw FxTrace.Exception.AsError(
-                            new CommunicationObjectAbortedException(SR.RequestContextAborted)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new CommunicationObjectAbortedException(SR.RequestContextAborted)
+                            );
                     }
 
                     try
@@ -510,9 +522,9 @@ namespace System.ServiceModel.Activation
                     }
                     catch (HttpException hostedException)
                     {
-                        throw FxTrace.Exception.AsError(
-                            CreateCommunicationException(hostedException)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(CreateCommunicationException(hostedException));
                     }
                     finally
                     {
@@ -855,18 +867,20 @@ namespace System.ServiceModel.Activation
                         {
                             if (this.context.Aborted)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new CommunicationObjectAbortedException(
-                                        SR.RequestContextAborted,
-                                        e
-                                    )
-                                );
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new CommunicationObjectAbortedException(
+                                            SR.RequestContextAborted,
+                                            e
+                                        )
+                                    );
                             }
                             else
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new CommunicationException(e.Message, e)
-                                );
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(new CommunicationException(e.Message, e));
                             }
                         }
                         else if (this.context.Aborted)
@@ -883,9 +897,13 @@ namespace System.ServiceModel.Activation
                                 );
                             }
 
-                            throw FxTrace.Exception.AsError(
-                                new CommunicationObjectAbortedException(SR.RequestContextAborted)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new CommunicationObjectAbortedException(
+                                        SR.RequestContextAborted
+                                    )
+                                );
                         }
                     }
                 }

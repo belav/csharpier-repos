@@ -42,10 +42,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return true;
             }
 
-            return referencedSymbol.Definition.ShouldShowWithNoReferenceLocations(
-                options,
-                showMetadataSymbolsWithoutReferences: true
-            );
+            return referencedSymbol
+                .Definition
+                .ShouldShowWithNoReferenceLocations(
+                    options,
+                    showMetadataSymbolsWithoutReferences: true
+                );
         }
 
         public static bool ShouldShowWithNoReferenceLocations(
@@ -139,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             using var _ = ArrayBuilder<ReferencedSymbol>.GetInstance(out var result);
             foreach (var reference in references)
             {
-                var isCaseSensitive = solution.Services
+                var isCaseSensitive = solution
+                    .Services
                     .GetLanguageServices(reference.Definition.Language)
                     .GetRequiredService<ISyntaxFactsService>()
                     .IsCaseSensitive;

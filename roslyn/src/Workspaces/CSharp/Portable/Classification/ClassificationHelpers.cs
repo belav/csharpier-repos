@@ -176,9 +176,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 case SyntaxKind.InterpolatedStringEndToken:
                 {
                     return token.Parent is InterpolatedStringExpressionSyntax interpolatedString
-                        && interpolatedString.StringStartToken.IsKind(
-                            SyntaxKind.InterpolatedVerbatimStringStartToken
-                        );
+                        && interpolatedString
+                            .StringStartToken
+                            .IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
                 }
 
                 case SyntaxKind.InterpolatedStringTextToken:
@@ -190,9 +190,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
 
                     return interpolatedStringText.Parent
                             is InterpolatedStringExpressionSyntax interpolatedString
-                        && interpolatedString.StringStartToken.IsKind(
-                            SyntaxKind.InterpolatedVerbatimStringStartToken
-                        );
+                        && interpolatedString
+                            .StringStartToken
+                            .IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
                 }
             }
 
@@ -407,9 +407,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
         }
 
         private static bool IsExtensionMethod(MethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.ParameterList.Parameters
+            methodDeclaration
+                .ParameterList
+                .Parameters
                 .FirstOrDefault()
-                ?.Modifiers.Any(SyntaxKind.ThisKeyword) == true;
+                ?.Modifiers
+                .Any(SyntaxKind.ThisKeyword) == true;
 
         private static string? GetClassificationForTypeDeclarationIdentifier(
             SyntaxToken identifier

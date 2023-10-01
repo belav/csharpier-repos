@@ -259,10 +259,10 @@ namespace System.Web.UI.DataVisualization.Charting
                                 )
                                     ? AreaAlignmentOrientations.Vertical
                                     : AreaAlignmentOrientations.Horizontal;
-                            this.axis.Common.ChartPicture.AlignChartAreasAxesView(
-                                this.axis.ChartArea,
-                                orientation
-                            );
+                            this.axis
+                                .Common
+                                .ChartPicture
+                                .AlignChartAreasAxesView(this.axis.ChartArea, orientation);
                         }
                     }
 
@@ -336,10 +336,10 @@ namespace System.Web.UI.DataVisualization.Charting
                                 )
                                     ? AreaAlignmentOrientations.Vertical
                                     : AreaAlignmentOrientations.Horizontal;
-                            this.axis.Common.ChartPicture.AlignChartAreasAxesView(
-                                this.axis.ChartArea,
-                                orientation
-                            );
+                            this.axis
+                                .Common
+                                .ChartPicture
+                                .AlignChartAreasAxesView(this.axis.ChartArea, orientation);
                         }
                     }
 #if Microsoft_CONTROL
@@ -393,10 +393,10 @@ namespace System.Web.UI.DataVisualization.Charting
                                 )
                                     ? AreaAlignmentOrientations.Vertical
                                     : AreaAlignmentOrientations.Horizontal;
-                            this.axis.Common.ChartPicture.AlignChartAreasAxesView(
-                                this.axis.ChartArea,
-                                orientation
-                            );
+                            this.axis
+                                .Common
+                                .ChartPicture
+                                .AlignChartAreasAxesView(this.axis.ChartArea, orientation);
                         }
                     }
 

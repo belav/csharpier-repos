@@ -220,10 +220,9 @@ namespace Microsoft.Interop
             return (type, other) switch
             {
                 (INamedTypeSymbol namedType, INamedTypeSymbol namedOther)
-                    => SymbolEqualityComparer.Default.Equals(
-                        namedType.ConstructedFrom,
-                        namedOther.ConstructedFrom
-                    ),
+                    => SymbolEqualityComparer
+                        .Default
+                        .Equals(namedType.ConstructedFrom, namedOther.ConstructedFrom),
                 _ => SymbolEqualityComparer.Default.Equals(type, other)
             };
         }
@@ -329,7 +328,8 @@ namespace Microsoft.Interop
                         // This value represents how many generic arguments the instantiatedTemplateType type would need to have the same total number of generic parameters as unboundConstructedType,
                         // including accounting for nesting.
                         numOriginalTypeArgumentsSubstituted += numArgumentsToPropogate;
-                        currentType.TypeParameters
+                        currentType
+                            .TypeParameters
                             .CastArray<ITypeSymbol>()
                             .CopyTo(
                                 currentType.TypeParameters.Length - numArgumentsToPropogate,

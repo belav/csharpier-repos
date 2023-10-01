@@ -183,7 +183,8 @@ public static class UpdateEntryExtensions
             if ((options & ChangeTrackerDebugStringOptions.IncludeNavigations) != 0)
             {
                 foreach (
-                    var navigation in entry.EntityType
+                    var navigation in entry
+                        .EntityType
                         .GetNavigations()
                         .Concat<INavigationBase>(entry.EntityType.GetSkipNavigations())
                 )
@@ -263,11 +264,9 @@ public static class UpdateEntryExtensions
 
             void AppendRelatedKey(IEntityType targetType, object value)
             {
-                var otherEntry = entry.StateManager.TryGetEntry(
-                    value,
-                    targetType,
-                    throwOnTypeMismatch: false
-                );
+                var otherEntry = entry
+                    .StateManager
+                    .TryGetEntry(value, targetType, throwOnTypeMismatch: false);
 
                 builder.Append(
                     otherEntry == null

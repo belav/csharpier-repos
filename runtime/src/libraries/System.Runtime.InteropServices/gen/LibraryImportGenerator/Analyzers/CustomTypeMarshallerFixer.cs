@@ -123,10 +123,10 @@ namespace Microsoft.Interop.Analyzers
                             == TypeNames.CustomTypeMarshallerAttribute
                     );
 
-                SyntaxNode attributeSyntax =
-                    await customTypeMarshallerAttribute.ApplicationSyntaxReference!
-                        .GetSyntaxAsync(fixAllContext.CancellationToken)
-                        .ConfigureAwait(false);
+                SyntaxNode attributeSyntax = await customTypeMarshallerAttribute
+                    .ApplicationSyntaxReference!
+                    .GetSyntaxAsync(fixAllContext.CancellationToken)
+                    .ConfigureAwait(false);
 
                 editor.ReplaceNode(
                     attributeSyntax,
@@ -208,10 +208,12 @@ namespace Microsoft.Interop.Analyzers
                 {
                     requiredShapeDiagnostics.Add(diagnostic);
                     if (
-                        diagnostic.Properties.TryGetValue(
-                            CustomTypeMarshallerAnalyzer.MissingMemberNames.Key,
-                            out string missingMembers
-                        )
+                        diagnostic
+                            .Properties
+                            .TryGetValue(
+                                CustomTypeMarshallerAnalyzer.MissingMemberNames.Key,
+                                out string missingMembers
+                            )
                     )
                     {
                         missingMemberNames.AddRange(
@@ -239,10 +241,12 @@ namespace Microsoft.Interop.Analyzers
                 {
                     featuresToAddDiagnostics.Add(diagnostic);
                     if (
-                        diagnostic.Properties.TryGetValue(
-                            CustomTypeMarshallerAnalyzer.MissingFeaturesKey,
-                            out string missingFeatures
-                        )
+                        diagnostic
+                            .Properties
+                            .TryGetValue(
+                                CustomTypeMarshallerAnalyzer.MissingFeaturesKey,
+                                out string missingFeatures
+                            )
                         && Enum.TryParse(
                             missingFeatures,
                             out CustomTypeMarshallerFeatures featuresValue
@@ -277,10 +281,10 @@ namespace Microsoft.Interop.Analyzers
                         == TypeNames.CustomTypeMarshallerAttribute
                 );
 
-            SyntaxNode attributeSyntax =
-                await customTypeMarshallerAttribute.ApplicationSyntaxReference!
-                    .GetSyntaxAsync(ct)
-                    .ConfigureAwait(false);
+            SyntaxNode attributeSyntax = await customTypeMarshallerAttribute
+                .ApplicationSyntaxReference!
+                .GetSyntaxAsync(ct)
+                .ConfigureAwait(false);
 
             SyntaxNode updatedDeclaration = AddMissingFeatures(
                 gen.GetName(attributeSyntax),
@@ -305,9 +309,9 @@ namespace Microsoft.Interop.Analyzers
 
             newAttributeSyntax = gen.AddAttributeArguments(
                 newAttributeSyntax,
-                customTypeMarshallerAttribute.ConstructorArguments.Select(
-                    a => gen.AttributeArgument(gen.TypedConstantExpression(a))
-                )
+                customTypeMarshallerAttribute
+                    .ConstructorArguments
+                    .Select(a => gen.AttributeArgument(gen.TypedConstantExpression(a)))
             );
 
             CustomTypeMarshallerFeatures newFeaturesValue = featuresToAdd;
@@ -315,7 +319,8 @@ namespace Microsoft.Interop.Analyzers
 
             newAttributeSyntax = gen.AddAttributeArguments(
                 newAttributeSyntax,
-                customTypeMarshallerAttribute.NamedArguments
+                customTypeMarshallerAttribute
+                    .NamedArguments
                     .Where(
                         (a, i) =>
                         {
@@ -336,7 +341,8 @@ namespace Microsoft.Interop.Analyzers
             SyntaxNode featureAttributeArgument = gen.AttributeArgument(
                 "Features",
                 gen.GetEnumValueAsFlagsExpression(
-                    customTypeMarshallerAttribute.AttributeClass
+                    customTypeMarshallerAttribute
+                        .AttributeClass
                         .GetMembers(
                             ManualTypeMarshallingHelper.CustomMarshallerAttributeFields.Features
                         )

@@ -37,9 +37,9 @@ public class DefaultTagHelperDescriptorProviderTest
         Assert.NotNull(compilation.GetTypeByMetadataName(editorBrowsableTypeName));
         var nullDescriptors = context.Results.Where(descriptor => descriptor == null);
         Assert.Empty(nullDescriptors);
-        var editorBrowsableDescriptor = context.Results.Where(
-            descriptor => descriptor.GetTypeName() == editorBrowsableTypeName
-        );
+        var editorBrowsableDescriptor = context
+            .Results
+            .Where(descriptor => descriptor.GetTypeName() == editorBrowsableTypeName);
         Assert.Empty(editorBrowsableDescriptor);
     }
 
@@ -111,14 +111,16 @@ namespace TestAssembly
 
         var context = TagHelperDescriptorProviderContext.Create();
         context.SetCompilation(compilation);
-        context.Items.SetTargetAssembly(
-            (IAssemblySymbol)
-                compilation.GetAssemblyOrModuleSymbol(
-                    compilation.References.First(
-                        r => r.Display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll")
+        context
+            .Items
+            .SetTargetAssembly(
+                (IAssemblySymbol)
+                    compilation.GetAssemblyOrModuleSymbol(
+                        compilation
+                            .References
+                            .First(r => r.Display.Contains("Microsoft.CodeAnalysis.Razor.Test.dll"))
                     )
-                )
-        );
+            );
 
         // Act
         descriptorProvider.Execute(context);

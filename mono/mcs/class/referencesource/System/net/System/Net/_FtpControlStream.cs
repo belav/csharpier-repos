@@ -140,9 +140,9 @@ namespace System.Net
             {
                 connection.m_DataSocket = listenSocket.EndAccept(asyncResult);
                 if (
-                    !connection.ServerAddress.Equals(
-                        ((IPEndPoint)connection.m_DataSocket.RemoteEndPoint).Address
-                    )
+                    !connection
+                        .ServerAddress
+                        .Equals(((IPEndPoint)connection.m_DataSocket.RemoteEndPoint).Address)
                 )
                 {
                     connection.m_DataSocket.Close();
@@ -760,9 +760,12 @@ namespace System.Net
                                 new PipelineEntry(
                                     FormatFtpCommand(
                                         "REST",
-                                        request.CacheProtocol.Validator.CacheEntry.StreamSize.ToString(
-                                            CultureInfo.InvariantCulture
-                                        )
+                                        request
+                                            .CacheProtocol
+                                            .Validator
+                                            .CacheEntry
+                                            .StreamSize
+                                            .ToString(CultureInfo.InvariantCulture)
                                     )
                                 )
                             );

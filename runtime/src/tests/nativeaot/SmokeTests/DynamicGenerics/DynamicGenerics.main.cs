@@ -37,7 +37,9 @@ public class EntryPointMain
             new CoreFXTestLibrary.Internal.TestInfo(
                 "MakeGenMethod.Test.TestGenericMethodsWithEnumParametersHavingDefaultValues",
                 () =>
-                    global::MakeGenMethod.Test.TestGenericMethodsWithEnumParametersHavingDefaultValues(),
+                    global::MakeGenMethod
+                        .Test
+                        .TestGenericMethodsWithEnumParametersHavingDefaultValues(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
@@ -188,13 +190,17 @@ public class EntryPointMain
             new CoreFXTestLibrary.Internal.TestInfo(
                 "ExistingInstantiations.Test.TestInstantiationsWithExistingArrayTypeArgs",
                 () =>
-                    global::ExistingInstantiations.Test.TestInstantiationsWithExistingArrayTypeArgs(),
+                    global::ExistingInstantiations
+                        .Test
+                        .TestInstantiationsWithExistingArrayTypeArgs(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
                 "TemplateDependencyFromGenArgs.TestRunner.TemplateDependencyFromGenArgsTest",
                 () =>
-                    global::TemplateDependencyFromGenArgs.TestRunner.TemplateDependencyFromGenArgsTest(),
+                    global::TemplateDependencyFromGenArgs
+                        .TestRunner
+                        .TemplateDependencyFromGenArgsTest(),
                 null
             ),
 #if UNIVERSAL_GENERICS
@@ -518,7 +524,9 @@ public class EntryPointMain
             new CoreFXTestLibrary.Internal.TestInfo(
                 "DelegateTest.TestRunner.TestMethodCellsWithUSGTargetsUsedOnNonUSGInstantiations",
                 () =>
-                    global::DelegateTest.TestRunner.TestMethodCellsWithUSGTargetsUsedOnNonUSGInstantiations(),
+                    global::DelegateTest
+                        .TestRunner
+                        .TestMethodCellsWithUSGTargetsUsedOnNonUSGInstantiations(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
@@ -609,7 +617,9 @@ public class EntryPointMain
             new CoreFXTestLibrary.Internal.TestInfo(
                 "DefaultValueDelegateParameterTests.Runner.TestCallUniversalGenericDelegate",
                 () =>
-                    global::DefaultValueDelegateParameterTests.Runner.TestCallUniversalGenericDelegate(),
+                    global::DefaultValueDelegateParameterTests
+                        .Runner
+                        .TestCallUniversalGenericDelegate(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
@@ -630,13 +640,17 @@ public class EntryPointMain
             new CoreFXTestLibrary.Internal.TestInfo(
                 "PartialUniversalGen.Test.TestOverrideMethodOnDerivedTypeWhereInstantiationArgsAreDifferentThanBaseType",
                 () =>
-                    global::PartialUniversalGen.Test.TestOverrideMethodOnDerivedTypeWhereInstantiationArgsAreDifferentThanBaseType(),
+                    global::PartialUniversalGen
+                        .Test
+                        .TestOverrideMethodOnDerivedTypeWhereInstantiationArgsAreDifferentThanBaseType(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
                 "PartialUniversalGen.Test.TestUniversalGenericThatDerivesFromBaseInstantiatedOverArray",
                 () =>
-                    global::PartialUniversalGen.Test.TestUniversalGenericThatDerivesFromBaseInstantiatedOverArray(),
+                    global::PartialUniversalGen
+                        .Test
+                        .TestUniversalGenericThatDerivesFromBaseInstantiatedOverArray(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
@@ -648,37 +662,49 @@ public class EntryPointMain
             new CoreFXTestLibrary.Internal.TestInfo(
                 "PartialUniversalGen.Test.TestUniversalGenericThatImplementsInterfaceOverArrayType",
                 () =>
-                    global::PartialUniversalGen.Test.TestUniversalGenericThatImplementsInterfaceOverArrayType(),
+                    global::PartialUniversalGen
+                        .Test
+                        .TestUniversalGenericThatImplementsInterfaceOverArrayType(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
                 "PartialUniversalGen.Test.TestUniversalGenericThatUsesCanonicalGenericMethod",
                 () =>
-                    global::PartialUniversalGen.Test.TestUniversalGenericThatUsesCanonicalGenericMethod(),
+                    global::PartialUniversalGen
+                        .Test
+                        .TestUniversalGenericThatUsesCanonicalGenericMethod(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
                 "PartialUniversalGen.Test.TestUniversalGenericThatUsesCanonicalGenericMethodWithActivatorCreateInstance",
                 () =>
-                    global::PartialUniversalGen.Test.TestUniversalGenericThatUsesCanonicalGenericMethodWithActivatorCreateInstance(),
+                    global::PartialUniversalGen
+                        .Test
+                        .TestUniversalGenericThatUsesCanonicalGenericMethodWithActivatorCreateInstance(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
                 "PartialUniversalGen.Test.TestUniversalGenericThatUsesCanonicalGenericType",
                 () =>
-                    global::PartialUniversalGen.Test.TestUniversalGenericThatUsesCanonicalGenericType(),
+                    global::PartialUniversalGen
+                        .Test
+                        .TestUniversalGenericThatUsesCanonicalGenericType(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
                 "PartialUniversalGen.Test.TestUniversalGenericThatUsesCanonicalGenericMethodWithConstraints",
                 () =>
-                    global::PartialUniversalGen.Test.TestUniversalGenericThatUsesCanonicalGenericMethodWithConstraints(),
+                    global::PartialUniversalGen
+                        .Test
+                        .TestUniversalGenericThatUsesCanonicalGenericMethodWithConstraints(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
                 "PartialUniversalGen.Test.TestDependenciesOfPartialUniversalCanonicalCode",
                 () =>
-                    global::PartialUniversalGen.Test.TestDependenciesOfPartialUniversalCanonicalCode(),
+                    global::PartialUniversalGen
+                        .Test
+                        .TestDependenciesOfPartialUniversalCanonicalCode(),
                 null
             ),
             new CoreFXTestLibrary.Internal.TestInfo(
@@ -750,12 +776,14 @@ public class EntryPointMain
             )
         };
         bool passed = CoreFXTestLibrary.Internal.Runner.RunTests(tests, args);
-        CoreFXTestLibrary.Logger.LogInformation(
-            "Passed: {0}, Failed: {1}, Number of Tests Run: {2}",
-            CoreFXTestLibrary.Internal.Runner.NumPassedTests,
-            CoreFXTestLibrary.Internal.Runner.NumFailedTests,
-            CoreFXTestLibrary.Internal.Runner.NumTests
-        );
+        CoreFXTestLibrary
+            .Logger
+            .LogInformation(
+                "Passed: {0}, Failed: {1}, Number of Tests Run: {2}",
+                CoreFXTestLibrary.Internal.Runner.NumPassedTests,
+                CoreFXTestLibrary.Internal.Runner.NumFailedTests,
+                CoreFXTestLibrary.Internal.Runner.NumTests
+            );
         if (passed && CoreFXTestLibrary.Internal.Runner.NumPassedTests > 0)
         {
             CoreFXTestLibrary.Logger.LogInformation("All tests PASSED.");
@@ -763,10 +791,12 @@ public class EntryPointMain
         }
         else
         {
-            CoreFXTestLibrary.Logger.LogInformation(
-                "{0} tests FAILED!",
-                CoreFXTestLibrary.Internal.Runner.NumFailedTests
-            );
+            CoreFXTestLibrary
+                .Logger
+                .LogInformation(
+                    "{0} tests FAILED!",
+                    CoreFXTestLibrary.Internal.Runner.NumFailedTests
+                );
             return CoreFXTestLibrary.Internal.Runner.NumFailedTests == 100
                 ? 101
                 : CoreFXTestLibrary.Internal.Runner.NumFailedTests;

@@ -196,9 +196,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                 {
                     // Create a new code style option value with the newValue
                     var configuredCodeStyleOption = codeStyleOption.WithValue(newValue);
-                    var optionValue = option.Definition.Serializer.Serialize(
-                        configuredCodeStyleOption
-                    );
+                    var optionValue = option
+                        .Definition
+                        .Serializer
+                        .Serialize(configuredCodeStyleOption);
 
                     // Add code action to configure the optionValue.
                     nestedActions.Add(

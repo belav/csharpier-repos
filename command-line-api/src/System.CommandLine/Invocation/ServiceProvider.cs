@@ -20,9 +20,11 @@ namespace System.CommandLine.Invocation
                 [typeof(IConsole)] = _ => bindingContext.Console,
                 [typeof(CancellationToken)] = _ => CancellationToken.None,
                 [typeof(HelpBuilder)] = _ =>
-                    bindingContext.ParseResult.Parser.Configuration.HelpBuilderFactory(
-                        bindingContext
-                    ),
+                    bindingContext
+                        .ParseResult
+                        .Parser
+                        .Configuration
+                        .HelpBuilderFactory(bindingContext),
                 [typeof(BindingContext)] = _ => bindingContext
             };
         }

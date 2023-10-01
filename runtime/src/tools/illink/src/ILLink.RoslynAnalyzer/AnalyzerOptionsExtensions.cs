@@ -23,10 +23,10 @@ namespace ILLink.RoslynAnalyzer
                 return null;
             }
 
-            return options.AnalyzerConfigOptionsProvider.GlobalOptions.TryGetValue(
-                $"build_property.{optionName}",
-                out var value
-            )
+            return options
+                .AnalyzerConfigOptionsProvider
+                .GlobalOptions
+                .TryGetValue($"build_property.{optionName}", out var value)
                 ? value
                 : null;
         }

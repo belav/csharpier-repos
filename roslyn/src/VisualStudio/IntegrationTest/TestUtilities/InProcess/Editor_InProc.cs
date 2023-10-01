@@ -250,20 +250,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public int GetLine() =>
             ExecuteOnActiveView(view =>
             {
-                view.Caret.Position.BufferPosition.GetLineAndCharacter(
-                    out var lineNumber,
-                    out var characterIndex
-                );
+                view.Caret
+                    .Position
+                    .BufferPosition
+                    .GetLineAndCharacter(out var lineNumber, out var characterIndex);
                 return lineNumber;
             });
 
         public int GetColumn() =>
             ExecuteOnActiveView(view =>
             {
-                view.Caret.Position.BufferPosition.GetLineAndCharacter(
-                    out var lineNumber,
-                    out var characterIndex
-                );
+                view.Caret
+                    .Position
+                    .BufferPosition
+                    .GetLineAndCharacter(out var lineNumber, out var characterIndex);
                 return characterIndex;
             });
 

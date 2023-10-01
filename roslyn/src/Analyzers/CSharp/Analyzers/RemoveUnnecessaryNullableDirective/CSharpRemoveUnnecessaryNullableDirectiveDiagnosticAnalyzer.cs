@@ -116,9 +116,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryNullableDirective
             >? possibleNullableImpactIntervalTree
         )
         {
-            var root = context.SemanticModel.SyntaxTree.GetCompilationUnitRoot(
-                context.CancellationToken
-            );
+            var root = context
+                .SemanticModel
+                .SyntaxTree
+                .GetCompilationUnitRoot(context.CancellationToken);
 
             using (
                 var simplifier = new NullableImpactingSpanWalker(

@@ -862,12 +862,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     Assert.True(parameterModoptIndexer.IsIndexer);
                     Assert.False(parameterModoptIndexer.MustCallMethodsDirectly); //NB: we allow this amount of variation (modopt is on, rather than in parameter type)
                     Assert.NotEqual(
-                        parameterModoptIndexer.Parameters
+                        parameterModoptIndexer
+                            .Parameters
                             .Last()
                             .TypeWithAnnotations
                             .CustomModifiers
                             .Length,
-                        parameterModoptIndexer.GetMethod.Parameters
+                        parameterModoptIndexer
+                            .GetMethod
+                            .Parameters
                             .Last()
                             .TypeWithAnnotations
                             .CustomModifiers

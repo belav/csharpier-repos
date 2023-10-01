@@ -317,9 +317,9 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                                 else
                                     throw new BadImageFormatException("Invalid register");
                                 transition = new GcTransitionCall((int)curOffs);
-                                transition.CallRegisters.Add(
-                                    new GcTransitionCall.CallRegister(reg, false)
-                                );
+                                transition
+                                    .CallRegisters
+                                    .Add(new GcTransitionCall.CallRegister(reg, false));
                                 AddNewTransition(transition);
 
                                 continue;

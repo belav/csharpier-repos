@@ -2407,14 +2407,16 @@ namespace MonoTests.System.Threading.Tasks
         [Test]
         public void ContinueWith_StateValueGeneric()
         {
-            var t = Task<int>.Factory.StartNew(
-                l =>
-                {
-                    Assert.AreEqual(1, l, "a-1");
-                    return 80;
-                },
-                1
-            );
+            var t = Task<int>
+                .Factory
+                .StartNew(
+                    l =>
+                    {
+                        Assert.AreEqual(1, l, "a-1");
+                        return 80;
+                    },
+                    1
+                );
 
             var c = t.ContinueWith(
                 (a, b) =>

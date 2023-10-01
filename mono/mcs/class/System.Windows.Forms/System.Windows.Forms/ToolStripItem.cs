@@ -1432,9 +1432,9 @@ namespace System.Windows.Forms
         {
             // Have the background rendered independently from OnPaint
             if (this.parent != null)
-                this.parent.Renderer.DrawItemBackground(
-                    new ToolStripItemRenderEventArgs(e.Graphics, this)
-                );
+                this.parent
+                    .Renderer
+                    .DrawItemBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
 
             OnPaint(e);
         }

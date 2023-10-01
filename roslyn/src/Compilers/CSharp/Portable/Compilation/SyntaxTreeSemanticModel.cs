@@ -732,9 +732,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // we have a winner
                     var decl = (BaseTypeDeclarationSyntax)parent.Parent.Parent;
                     var symbol = this.GetDeclaredSymbol(decl);
-                    return ConsList<TypeSymbol>.Empty.Prepend(
-                        symbol.GetSymbol().OriginalDefinition
-                    );
+                    return ConsList<TypeSymbol>
+                        .Empty
+                        .Prepend(symbol.GetSymbol().OriginalDefinition);
                 }
             }
 
@@ -1470,7 +1470,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 this,
                                 tuple.paramDecl,
                                 tuple.parameterSymbol,
-                                tuple.containing
+                                tuple
+                                    .containing
                                     .GetEnclosingBinder(tuple.paramDecl.SpanStart)
                                     .CreateBinderForParameterDefaultValue(
                                         tuple.parameterSymbol,
@@ -2313,9 +2314,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.ConstructorDeclaration:
                     if (
-                        ((ConstructorDeclarationSyntax)declaration).Modifiers.Any(
-                            SyntaxKind.StaticKeyword
-                        )
+                        ((ConstructorDeclarationSyntax)declaration)
+                            .Modifiers
+                            .Any(SyntaxKind.StaticKeyword)
                     )
                     {
                         return WellKnownMemberNames.StaticConstructorName;

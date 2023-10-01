@@ -7711,9 +7711,9 @@ public class C
                 .AddSyntaxTrees(
                     SyntaxFactory.ParseSyntaxTree(
                         src,
-                        options: CSharpParseOptions.Default.WithLanguageVersion(
-                            LanguageVersion.Preview
-                        )
+                        options: CSharpParseOptions
+                            .Default
+                            .WithLanguageVersion(LanguageVersion.Preview)
                     )
                 );
 

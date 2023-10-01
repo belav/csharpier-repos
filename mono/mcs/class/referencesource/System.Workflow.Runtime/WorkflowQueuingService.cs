@@ -71,22 +71,26 @@ namespace System.Workflow.Runtime
         internal WorkflowQueuingService(IWorkflowCoreRuntime rootWorkflowExecutor)
         {
             this.rootWorkflowExecutor = rootWorkflowExecutor;
-            this.rootWorkflowExecutor.RootActivity.SetValue(
-                WorkflowQueuingService.PendingMessagesProperty,
-                this.pendingQueueState.Messages
-            );
+            this.rootWorkflowExecutor
+                .RootActivity
+                .SetValue(
+                    WorkflowQueuingService.PendingMessagesProperty,
+                    this.pendingQueueState.Messages
+                );
             this.persistedQueueStates =
                 (Dictionary<IComparable, EventQueueState>)
-                    this.rootWorkflowExecutor.RootActivity.GetValue(
-                        WorkflowQueuingService.RootPersistedQueueStatesProperty
-                    );
+                    this.rootWorkflowExecutor
+                        .RootActivity
+                        .GetValue(WorkflowQueuingService.RootPersistedQueueStatesProperty);
             if (this.persistedQueueStates == null)
             {
                 this.persistedQueueStates = new Dictionary<IComparable, EventQueueState>();
-                this.rootWorkflowExecutor.RootActivity.SetValue(
-                    WorkflowQueuingService.RootPersistedQueueStatesProperty,
-                    this.persistedQueueStates
-                );
+                this.rootWorkflowExecutor
+                    .RootActivity
+                    .SetValue(
+                        WorkflowQueuingService.RootPersistedQueueStatesProperty,
+                        this.persistedQueueStates
+                    );
             }
             if (!this.Exists(pendingNotification))
                 this.CreateWorkflowQueue(pendingNotification, false);
@@ -97,15 +101,19 @@ namespace System.Workflow.Runtime
         {
             this.rootQueuingService = copyFromQueuingService;
             this.rootWorkflowExecutor = copyFromQueuingService.rootWorkflowExecutor;
-            this.rootWorkflowExecutor.RootActivity.SetValue(
-                WorkflowQueuingService.PendingMessagesProperty,
-                this.pendingQueueState.Messages
-            );
+            this.rootWorkflowExecutor
+                .RootActivity
+                .SetValue(
+                    WorkflowQueuingService.PendingMessagesProperty,
+                    this.pendingQueueState.Messages
+                );
             this.persistedQueueStates = new Dictionary<IComparable, EventQueueState>();
-            this.rootWorkflowExecutor.RootActivity.SetValue(
-                WorkflowQueuingService.LocalPersistedQueueStatesProperty,
-                this.persistedQueueStates
-            );
+            this.rootWorkflowExecutor
+                .RootActivity
+                .SetValue(
+                    WorkflowQueuingService.LocalPersistedQueueStatesProperty,
+                    this.persistedQueueStates
+                );
             SubscribeForRootMessageDelivery();
         }
 
@@ -154,11 +162,13 @@ namespace System.Workflow.Runtime
                     pendingQueue.Enqueue(queue.Dequeue());
                 }
 
-                WorkflowTrace.Runtime.TraceInformation(
-                    "Queuing Service: Deleting Queue with ID {0} for {1}",
-                    queueName.GetHashCode(),
-                    queueName
-                );
+                WorkflowTrace
+                    .Runtime
+                    .TraceInformation(
+                        "Queuing Service: Deleting Queue with ID {0} for {1}",
+                        queueName.GetHashCode(),
+                        queueName
+                    );
                 this.persistedQueueStates.Remove(queueName);
             }
         }
@@ -233,11 +243,13 @@ namespace System.Workflow.Runtime
                 // note enqueue allowed irrespective of dirty flag since it is delivered through
                 qState.Messages.Enqueue(item);
 
-                WorkflowTrace.Runtime.TraceInformation(
-                    "Queuing Service: Enqueue item Queue ID {0} for {1}",
-                    queueName.GetHashCode(),
-                    queueName
-                );
+                WorkflowTrace
+                    .Runtime
+                    .TraceInformation(
+                        "Queuing Service: Enqueue item Queue ID {0} for {1}",
+                        queueName.GetHashCode(),
+                        queueName
+                    );
 
                 // notify message arrived subscribers
                 for (
@@ -281,11 +293,13 @@ namespace System.Workflow.Runtime
                 // note enqueue allowed irrespective of dirty flag since it is delivered through
                 qState.Messages.Enqueue(item);
 
-                WorkflowTrace.Runtime.TraceInformation(
-                    "Queuing Service: Enqueue item Queue ID {0} for {1}",
-                    queueName.GetHashCode(),
-                    queueName
-                );
+                WorkflowTrace
+                    .Runtime
+                    .TraceInformation(
+                        "Queuing Service: Enqueue item Queue ID {0} for {1}",
+                        queueName.GetHashCode(),
+                        queueName
+                    );
 
                 // notify message arrived subscribers
                 for (
@@ -397,10 +411,12 @@ namespace System.Workflow.Runtime
             {
                 Queue q = GetQueue(pendingNotification).Messages;
                 q.Enqueue(new KeyValuePair<IComparable, EventQueueState>(queueName, qState));
-                WorkflowTrace.Runtime.TraceInformation(
-                    "Queuing Service: Queued delayed message notification for '{0}'",
-                    queueName.ToString()
-                );
+                WorkflowTrace
+                    .Runtime
+                    .TraceInformation(
+                        "Queuing Service: Queued delayed message notification for '{0}'",
+                        queueName.ToString()
+                    );
                 return q.Count == 1;
             }
             return false;
@@ -434,10 +450,12 @@ namespace System.Workflow.Runtime
                 KeyValuePair<IComparable, EventQueueState> pair =
                     (KeyValuePair<IComparable, EventQueueState>)q.Dequeue();
                 // notify message arrived subscribers
-                WorkflowTrace.Runtime.TraceInformation(
-                    "Queuing Service: Processing delayed message notification '{0}'",
-                    pair.Key.ToString()
-                );
+                WorkflowTrace
+                    .Runtime
+                    .TraceInformation(
+                        "Queuing Service: Processing delayed message notification '{0}'",
+                        pair.Key.ToString()
+                    );
                 for (
                     int i = 0;
                     messageArrivalEventHandlers != null && i < messageArrivalEventHandlers.Count;
@@ -478,11 +496,13 @@ namespace System.Workflow.Runtime
                         );
                         Debug.Assert(contextActivity != null);
                         subscriber.InvokeDelegate(contextActivity, args, false);
-                        WorkflowTrace.Runtime.TraceInformation(
-                            "Queuing Service: Notifying async subscriber on queue:'{0}' activity:{1}",
-                            queueName.ToString(),
-                            subscriber.ActivityQualifiedName
-                        );
+                        WorkflowTrace
+                            .Runtime
+                            .TraceInformation(
+                                "Queuing Service: Notifying async subscriber on queue:'{0}' activity:{1}",
+                                queueName.ToString(),
+                                subscriber.ActivityQualifiedName
+                            );
                     }
                 }
             }
@@ -530,11 +550,13 @@ namespace System.Workflow.Runtime
 
         private void NewQueue(IComparable queueID, bool enabled, bool transactional)
         {
-            WorkflowTrace.Runtime.TraceInformation(
-                "Queuing Service: Creating new Queue with ID {0} for {1}",
-                queueID.GetHashCode(),
-                queueID
-            );
+            WorkflowTrace
+                .Runtime
+                .TraceInformation(
+                    "Queuing Service: Creating new Queue with ID {0} for {1}",
+                    queueID.GetHashCode(),
+                    queueID
+                );
 
             if (this.persistedQueueStates.ContainsKey(queueID))
             {
@@ -872,22 +894,27 @@ namespace System.Workflow.Runtime
                 Debug.Assert(persistedQueueStatesSnapshot != null);
 
                 TransactionalProperties transactionalProperties =
-                    rootWorkflowExecutor.CurrentAtomicActivity.GetValue(
-                        WorkflowExecutor.TransactionalPropertiesProperty
-                    ) as TransactionalProperties;
+                    rootWorkflowExecutor
+                        .CurrentAtomicActivity
+                        .GetValue(WorkflowExecutor.TransactionalPropertiesProperty)
+                    as TransactionalProperties;
                 Debug.Assert(transactionalProperties != null);
 
                 // Restore queuing states and set root activity's dependency properties to the new values.
                 pendingQueueState = pendingQueueStateSnapshot;
                 persistedQueueStates = persistedQueueStatesSnapshot;
-                rootWorkflowExecutor.RootActivity.SetValue(
-                    WorkflowQueuingService.RootPersistedQueueStatesProperty,
-                    persistedQueueStatesSnapshot
-                );
-                rootWorkflowExecutor.RootActivity.SetValue(
-                    WorkflowQueuingService.PendingMessagesProperty,
-                    pendingQueueStateSnapshot.Messages
-                );
+                rootWorkflowExecutor
+                    .RootActivity
+                    .SetValue(
+                        WorkflowQueuingService.RootPersistedQueueStatesProperty,
+                        persistedQueueStatesSnapshot
+                    );
+                rootWorkflowExecutor
+                    .RootActivity
+                    .SetValue(
+                        WorkflowQueuingService.PendingMessagesProperty,
+                        pendingQueueStateSnapshot.Messages
+                    );
 
                 // Also call Subscribe...() because the .Complete() call called Unsubscribe
                 transactionalProperties.LocalQueuingService.SubscribeForRootMessageDelivery();
@@ -906,9 +933,10 @@ namespace System.Workflow.Runtime
             {
                 // Create transactionalProperties from currentAtomicActivity
                 TransactionalProperties transactionalProperties =
-                    this.rootWorkflowExecutor.CurrentAtomicActivity.GetValue(
-                        WorkflowExecutor.TransactionalPropertiesProperty
-                    ) as TransactionalProperties;
+                    this.rootWorkflowExecutor
+                        .CurrentAtomicActivity
+                        .GetValue(WorkflowExecutor.TransactionalPropertiesProperty)
+                    as TransactionalProperties;
 
                 // Create backup snapshot of root queuing service's persistedQueuesStates
                 // qService.persistedQueueStates is changed when LocalQueuingService.Complete is called later.

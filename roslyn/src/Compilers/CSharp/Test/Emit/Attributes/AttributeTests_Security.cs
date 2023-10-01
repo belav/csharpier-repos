@@ -55,11 +55,9 @@ public struct EventDescriptor
                             "System.Security.Permissions",
                             "HostProtectionAttribute"
                         );
-                        NamedTypeSymbol hostProtectionAttr =
-                            sourceAssembly.CorLibrary.LookupTopLevelMetadataType(
-                                ref emittedName,
-                                true
-                            );
+                        NamedTypeSymbol hostProtectionAttr = sourceAssembly
+                            .CorLibrary
+                            .LookupTopLevelMetadataType(ref emittedName, true);
                         Assert.NotNull(hostProtectionAttr);
 
                         // Verify type security attributes
@@ -2409,9 +2407,9 @@ public class MyClass
                     GetUniqueName(),
                     new[] { syntaxTree },
                     new[] { MscorlibRef },
-                    TestOptions.ReleaseDll.WithXmlReferenceResolver(
-                        new XmlFileResolver(tempDir.Path)
-                    )
+                    TestOptions
+                        .ReleaseDll
+                        .WithXmlReferenceResolver(new XmlFileResolver(tempDir.Path))
                 );
 
                 comp.VerifyDiagnostics(
@@ -2429,10 +2427,12 @@ public class MyClass
                     var emitResult = comp.Emit(output);
 
                     Assert.False(emitResult.Success);
-                    emitResult.Diagnostics.VerifyErrorCodes(
-                        Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr),
-                        Diagnostic(ErrorCode.ERR_PermissionSetAttributeFileReadError)
-                    );
+                    emitResult
+                        .Diagnostics
+                        .VerifyErrorCodes(
+                            Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr),
+                            Diagnostic(ErrorCode.ERR_PermissionSetAttributeFileReadError)
+                        );
                 }
             }
 

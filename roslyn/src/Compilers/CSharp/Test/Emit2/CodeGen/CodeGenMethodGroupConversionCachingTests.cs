@@ -7144,19 +7144,21 @@ class Test
             AssertEx.NotNull(field);
 
             var typeParameters = new List<TypeParameterSymbol>();
-            field.Type.VisitType(
-                static (typeSymbol, typeParameters, _) =>
-                {
-                    if (typeSymbol is TypeParameterSymbol typeParameter)
+            field
+                .Type
+                .VisitType(
+                    static (typeSymbol, typeParameters, _) =>
                     {
-                        typeParameters.Add(typeParameter);
-                    }
+                        if (typeSymbol is TypeParameterSymbol typeParameter)
+                        {
+                            typeParameters.Add(typeParameter);
+                        }
 
-                    return false;
-                },
-                typeParameters,
-                visitCustomModifiers: true
-            );
+                        return false;
+                    },
+                    typeParameters,
+                    visitCustomModifiers: true
+                );
 
             var typeParameter = Assert.Single(typeParameters);
             Assert.Equal("G", typeParameter.Name);
@@ -7221,9 +7223,9 @@ class Test
     {
         return module =>
         {
-            var containingType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                containingTypeName
-            );
+            var containingType = module
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>(containingTypeName);
             AssertEx.NotNull(containingType);
 
             var nestedTypes = containingType.GetTypeMembers();

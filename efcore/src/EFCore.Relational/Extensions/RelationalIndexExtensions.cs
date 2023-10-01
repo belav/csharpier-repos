@@ -224,7 +224,8 @@ public static class RelationalIndexExtensions
         {
             IReadOnlyIndex? linkedIndex = null;
             foreach (
-                var otherIndex in rootIndex.DeclaringEntityType
+                var otherIndex in rootIndex
+                    .DeclaringEntityType
                     .FindRowInternalForeignKeys(storeObject)
                     .SelectMany(fk => fk.PrincipalEntityType.GetIndexes())
             )

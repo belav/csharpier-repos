@@ -19,11 +19,13 @@ namespace System.Threading
                 get
                 {
                     if (
-                        !Interop.Kernel32.GetSystemTimes(
-                            out long idleTime,
-                            out long kernelTime,
-                            out long userTime
-                        )
+                        !Interop
+                            .Kernel32
+                            .GetSystemTimes(
+                                out long idleTime,
+                                out long kernelTime,
+                                out long userTime
+                            )
                     )
                     {
                         return 0;

@@ -63,7 +63,10 @@ namespace Microsoft.CodeAnalysis.Remote
             // We know in the remote layer this type must exist.
             =>
             (RemoteGlobalOperationNotificationService)
-                GetWorkspace().Services.SolutionServices.ExportProvider
+                GetWorkspace()
+                    .Services
+                    .SolutionServices
+                    .ExportProvider
                     .GetExports<IGlobalOperationNotificationService>()
                     .Single()
                     .Value;

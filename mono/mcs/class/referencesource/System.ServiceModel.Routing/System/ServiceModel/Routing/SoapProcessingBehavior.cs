@@ -64,9 +64,9 @@ namespace System.ServiceModel.Routing
             EndpointDispatcher endpointDispatcher
         )
         {
-            throw FxTrace.Exception.AsError(
-                new NotSupportedException(SR2.MarshalingBehaviorNotSupported)
-            );
+            throw FxTrace
+                .Exception
+                .AsError(new NotSupportedException(SR2.MarshalingBehaviorNotSupported));
         }
 
         public void Validate(ServiceEndpoint endpoint) { }

@@ -63,52 +63,58 @@ namespace System.Activities.Debugger
         {
             if (startLine <= 0)
             {
-                throw FxTrace.Exception.Argument(
-                    "startLine",
-                    SR.InvalidSourceLocationLineNumber("startLine", startLine)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "startLine",
+                        SR.InvalidSourceLocationLineNumber("startLine", startLine)
+                    );
             }
 
             if (startColumn <= 0)
             {
-                throw FxTrace.Exception.Argument(
-                    "startColumn",
-                    SR.InvalidSourceLocationColumn("startColumn", startColumn)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "startColumn",
+                        SR.InvalidSourceLocationColumn("startColumn", startColumn)
+                    );
             }
 
             if (endLine <= 0)
             {
-                throw FxTrace.Exception.Argument(
-                    "endLine",
-                    SR.InvalidSourceLocationLineNumber("endLine", endLine)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("endLine", SR.InvalidSourceLocationLineNumber("endLine", endLine));
             }
 
             if (endColumn <= 0)
             {
-                throw FxTrace.Exception.Argument(
-                    "endColumn",
-                    SR.InvalidSourceLocationColumn("endColumn", endColumn)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("endColumn", SR.InvalidSourceLocationColumn("endColumn", endColumn));
             }
 
             if (startLine > endLine)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "endLine",
-                    endLine,
-                    SR.OutOfRangeSourceLocationEndLine(startLine)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
+                        "endLine",
+                        endLine,
+                        SR.OutOfRangeSourceLocationEndLine(startLine)
+                    );
             }
 
             if ((startLine == endLine) && (startColumn > endColumn))
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "endColumn",
-                    endColumn,
-                    SR.OutOfRangeSourceLocationEndColumn(startColumn)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
+                        "endColumn",
+                        endColumn,
+                        SR.OutOfRangeSourceLocationEndColumn(startColumn)
+                    );
             }
 
             this.fileName = (fileName != null) ? fileName.ToUpperInvariant() : null;

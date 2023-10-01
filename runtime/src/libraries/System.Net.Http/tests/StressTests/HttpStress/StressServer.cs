@@ -127,21 +127,25 @@ namespace HttpStress
                                     HashAlgorithmName.SHA256,
                                     RSASignaturePadding.Pkcs1
                                 );
-                                certReq.CertificateExtensions.Add(
-                                    new X509BasicConstraintsExtension(false, false, 0, false)
-                                );
-                                certReq.CertificateExtensions.Add(
-                                    new X509EnhancedKeyUsageExtension(
-                                        new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
-                                        false
-                                    )
-                                );
-                                certReq.CertificateExtensions.Add(
-                                    new X509KeyUsageExtension(
-                                        X509KeyUsageFlags.DigitalSignature,
-                                        false
-                                    )
-                                );
+                                certReq
+                                    .CertificateExtensions
+                                    .Add(new X509BasicConstraintsExtension(false, false, 0, false));
+                                certReq
+                                    .CertificateExtensions
+                                    .Add(
+                                        new X509EnhancedKeyUsageExtension(
+                                            new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                                            false
+                                        )
+                                    );
+                                certReq
+                                    .CertificateExtensions
+                                    .Add(
+                                        new X509KeyUsageExtension(
+                                            X509KeyUsageFlags.DigitalSignature,
+                                            false
+                                        )
+                                    );
                                 X509Certificate2 cert = certReq.CreateSelfSigned(
                                     DateTimeOffset.UtcNow.AddMonths(-1),
                                     DateTimeOffset.UtcNow.AddMonths(1)
@@ -192,8 +196,8 @@ namespace HttpStress
                 }
 
                 loggerConfiguration = loggerConfiguration
-                // Output diagnostics to the file
-                .WriteTo
+                    // Output diagnostics to the file
+                    .WriteTo
                     .File(
                         Path.Combine(LogHttpEventListener.LogDirectory, "server.log"),
                         fileSizeLimitBytes: 100 << 20,
@@ -205,8 +209,9 @@ namespace HttpStress
             if (configuration.LogAspNet)
             {
                 loggerConfiguration = loggerConfiguration
-                // Output only warnings and errors
-                .WriteTo.Console(Serilog.Events.LogEventLevel.Warning);
+                    // Output only warnings and errors
+                    .WriteTo
+                    .Console(Serilog.Events.LogEventLevel.Warning);
             }
             Log.Logger = loggerConfiguration.CreateLogger();
             if (configuration.Trace)
@@ -266,7 +271,9 @@ namespace HttpStress
                 "/headers",
                 async context =>
                 {
-                    (string name, StringValues values)[] headersToEcho = context.Request.Headers
+                    (string name, StringValues values)[] headersToEcho = context
+                        .Request
+                        .Headers
                         .Where(h => h.Key.StartsWith("header-"))
                         // kestrel does not seem to be splitting comma separated header values, handle here
                         .Select(
@@ -473,10 +480,9 @@ namespace HttpStress
             int GetExpectedContentLength()
             {
                 if (
-                    ctx.Request.Headers.TryGetValue(
-                        ExpectedResponseContentLength,
-                        out StringValues values
-                    )
+                    ctx.Request
+                        .Headers
+                        .TryGetValue(ExpectedResponseContentLength, out StringValues values)
                     && values.Count == 1
                     && int.TryParse(values[0], out int result)
                 )

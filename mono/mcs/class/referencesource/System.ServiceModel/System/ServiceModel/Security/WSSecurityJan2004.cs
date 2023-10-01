@@ -94,9 +94,9 @@ namespace System.ServiceModel.Security
             )
             {
                 if (valueTypeUris == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "valueTypeUris"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("valueTypeUris");
 
                 this.tokenSerializer = tokenSerializer;
                 this.valueTypeUris = new string[valueTypeUris.GetLength(0)];
@@ -170,18 +170,22 @@ namespace System.ServiceModel.Security
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(
-                                    SR.GetString(SR.UnknownEncodingInBinarySecurityToken)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new MessageSecurityException(
+                                        SR.GetString(SR.UnknownEncodingInBinarySecurityToken)
+                                    )
+                                );
                         }
 
                         return CreateKeyIdentifierClauseFromBinaryCore(binaryData);
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("tokenReferenceStyle")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("tokenReferenceStyle")
+                            );
                 }
             }
 
@@ -214,11 +218,13 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(SR.UnknownEncodingInBinarySecurityToken)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.UnknownEncodingInBinarySecurityToken)
+                            )
+                        );
                 }
 
                 return ReadBinaryCore(wsuId, valueTypeUri, binaryData);
@@ -315,9 +321,9 @@ namespace System.ServiceModel.Security
                 SecurityTokenReferenceStyle tokenReferenceStyle
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             public override SecurityToken ReadTokenCore(
@@ -325,9 +331,9 @@ namespace System.ServiceModel.Security
                 SecurityTokenResolver tokenResolver
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             public override void WriteTokenCore(XmlDictionaryWriter writer, SecurityToken token)
@@ -466,9 +472,11 @@ namespace System.ServiceModel.Security
                         string assertionId = issuedTokenXml.GetAttribute(samlAssertionId);
                         return new SamlAssertionKeyIdentifierClause(assertionId);
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("tokenReferenceStyle")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("tokenReferenceStyle")
+                            );
                 }
             }
 
@@ -561,9 +569,11 @@ namespace System.ServiceModel.Security
                         // UP tokens aren't referred to externally
                         return null;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("tokenReferenceStyle")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("tokenReferenceStyle")
+                            );
                 }
             }
 
@@ -649,9 +659,13 @@ namespace System.ServiceModel.Security
                     && type != SecurityJan2004Strings.UPTokenPasswordTextValue
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.UnsupportedPasswordType, type))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.UnsupportedPasswordType, type)
+                            )
+                        );
                 }
 
                 return reader.ReadElementString();
@@ -785,18 +799,22 @@ namespace System.ServiceModel.Security
                             null
                         );
                     case SecurityTokenReferenceStyle.External:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(
-                                    SR.CantInferReferenceForToken,
-                                    EncryptedKey.ElementName.Value
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(
+                                    SR.GetString(
+                                        SR.CantInferReferenceForToken,
+                                        EncryptedKey.ElementName.Value
+                                    )
                                 )
-                            )
-                        );
+                            );
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("tokenReferenceStyle")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("tokenReferenceStyle")
+                            );
                 }
             }
 
@@ -839,11 +857,13 @@ namespace System.ServiceModel.Security
                     // ensure that the encryption algorithm is compatible
                     if (encryptionMethod != unwrappingSspiContext.KeyEncryptionAlgorithm)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(SR.BadKeyEncryptionAlgorithm, encryptionMethod)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(SR.BadKeyEncryptionAlgorithm, encryptionMethod)
+                                )
+                            );
                     }
                     byte[] unwrappedKey = unwrappingSspiContext.Decrypt(wrappedKey);
                     return new WrappedKeySecurityToken(
@@ -858,17 +878,19 @@ namespace System.ServiceModel.Security
                 {
                     if (tokenResolver == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentNullException("tokenResolver")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new ArgumentNullException("tokenResolver"));
                     }
                     if (unwrappingTokenIdentifier == null || unwrappingTokenIdentifier.Count == 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(SR.MissingKeyInfoInEncryptedKey)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(SR.MissingKeyInfoInEncryptedKey)
+                                )
+                            );
                     }
 
                     SecurityToken unwrappingToken;
@@ -881,27 +903,31 @@ namespace System.ServiceModel.Security
                         {
                             if (!resolver.CheckExternalWrapperMatch(unwrappingTokenIdentifier))
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new MessageSecurityException(
-                                        SR.GetString(
-                                            SR.EncryptedKeyWasNotEncryptedWithTheRequiredEncryptingToken,
-                                            unwrappingToken
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new MessageSecurityException(
+                                            SR.GetString(
+                                                SR.EncryptedKeyWasNotEncryptedWithTheRequiredEncryptingToken,
+                                                unwrappingToken
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(
-                                    SR.GetString(
-                                        SR.UnableToResolveKeyInfoForUnwrappingToken,
-                                        unwrappingTokenIdentifier,
-                                        resolver
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new MessageSecurityException(
+                                        SR.GetString(
+                                            SR.UnableToResolveKeyInfoForUnwrappingToken,
+                                            unwrappingTokenIdentifier,
+                                            resolver
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                     else
@@ -915,16 +941,18 @@ namespace System.ServiceModel.Security
                             if (exception is MessageSecurityException)
                                 throw;
 
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(
-                                    SR.GetString(
-                                        SR.UnableToResolveKeyInfoForUnwrappingToken,
-                                        unwrappingTokenIdentifier,
-                                        tokenResolver
-                                    ),
-                                    exception
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new MessageSecurityException(
+                                        SR.GetString(
+                                            SR.UnableToResolveKeyInfoForUnwrappingToken,
+                                            unwrappingTokenIdentifier,
+                                            tokenResolver
+                                        ),
+                                        exception
+                                    )
+                                );
                         }
                     }
                     SecurityKey unwrappingSecurityKey;
@@ -951,10 +979,9 @@ namespace System.ServiceModel.Security
                 WrappedKeySecurityToken wrappedKeyToken = token as WrappedKeySecurityToken;
                 wrappedKeyToken.EnsureEncryptedKeySetUp();
                 wrappedKeyToken.EncryptedKey.SecurityTokenSerializer = this.tokenSerializer;
-                wrappedKeyToken.EncryptedKey.WriteTo(
-                    writer,
-                    ServiceModelDictionaryManager.Instance
-                );
+                wrappedKeyToken
+                    .EncryptedKey
+                    .WriteTo(writer, ServiceModelDictionaryManager.Instance);
             }
         }
 
@@ -974,11 +1001,13 @@ namespace System.ServiceModel.Security
                 byte[] rawData
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(SR.CantInferReferenceForToken, ValueTypeAbsoluteUri)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(SR.CantInferReferenceForToken, ValueTypeAbsoluteUri)
+                        )
+                    );
             }
 
             public override SecurityToken ReadBinaryCore(
@@ -990,9 +1019,11 @@ namespace System.ServiceModel.Security
                 X509Certificate2 certificate;
                 if (!SecurityUtils.TryCreateX509CertificateFromRawData(rawData, out certificate))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MessageSecurityException(SR.GetString(SR.InvalidX509RawData))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(SR.GetString(SR.InvalidX509RawData))
+                        );
                 }
                 return new X509SecurityToken(certificate, id, false);
             }

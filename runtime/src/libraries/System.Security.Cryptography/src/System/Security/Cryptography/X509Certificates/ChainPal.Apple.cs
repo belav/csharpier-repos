@@ -16,8 +16,9 @@ namespace System.Security.Cryptography.X509Certificates
             | X509ChainStatusFlags.Revoked
             | X509ChainStatusFlags.OfflineRevocation;
 
-        private static readonly SafeCreateHandle s_emptyArray =
-            Interop.CoreFoundation.CFArrayCreate(Array.Empty<IntPtr>(), UIntPtr.Zero);
+        private static readonly SafeCreateHandle s_emptyArray = Interop
+            .CoreFoundation
+            .CFArrayCreate(Array.Empty<IntPtr>(), UIntPtr.Zero);
         private Stack<SafeHandle> _extraHandles;
         private SafeX509ChainHandle? _chainHandle;
         public X509ChainElement[]? ChainElements { get; private set; }
@@ -54,12 +55,14 @@ namespace System.Security.Cryptography.X509Certificates
             int osStatus;
 
             SafeX509ChainHandle chain;
-            int ret = Interop.AppleCrypto.AppleCryptoNative_X509ChainCreate(
-                certsArray,
-                policiesArray,
-                out chain,
-                out osStatus
-            );
+            int ret = Interop
+                .AppleCrypto
+                .AppleCryptoNative_X509ChainCreate(
+                    certsArray,
+                    policiesArray,
+                    out chain,
+                    out osStatus
+                );
 
             if (ret == 1)
             {
@@ -73,10 +76,9 @@ namespace System.Security.Cryptography.X509Certificates
 
                     try
                     {
-                        int error = Interop.AppleCrypto.X509ChainSetTrustAnchorCertificates(
-                            chain,
-                            customCertsArray
-                        );
+                        int error = Interop
+                            .AppleCrypto
+                            .X509ChainSetTrustAnchorCertificates(chain, customCertsArray);
                         if (error != 0)
                         {
                             throw Interop.AppleCrypto.CreateExceptionForOSStatus(error);
@@ -184,9 +186,10 @@ namespace System.Security.Cryptography.X509Certificates
                     // Only adds non self issued certs to the untrusted certs array. Trusted self signed
                     // certs will be added to the custom certs array.
                     if (
-                        !customTrustStore[i].SubjectName.RawData.ContentsEqual(
-                            customTrustStore[i].IssuerName.RawData
-                        )
+                        !customTrustStore[i]
+                            .SubjectName
+                            .RawData
+                            .ContentsEqual(customTrustStore[i].IssuerName.RawData)
                     )
                     {
                         safeHandles.Add(
@@ -233,10 +236,9 @@ namespace System.Security.Cryptography.X509Certificates
 
                 // Creating the array has the effect of calling CFRetain() on all of the pointers, so the native
                 // resource is safe even if we DangerousRelease=>ReleaseHandle them.
-                SafeCreateHandle certsArray = Interop.CoreFoundation.CFArrayCreate(
-                    ptrs,
-                    (UIntPtr)ptrs.Length
-                );
+                SafeCreateHandle certsArray = Interop
+                    .CoreFoundation
+                    .CFArrayCreate(ptrs, (UIntPtr)ptrs.Length);
                 _extraHandles.Push(certsArray);
                 return certsArray;
             }
@@ -264,17 +266,19 @@ namespace System.Security.Cryptography.X509Certificates
             int ret;
 
             using (
-                SafeCFDateHandle cfEvaluationTime = Interop.CoreFoundation.CFDateCreate(
-                    verificationTime
-                )
+                SafeCFDateHandle cfEvaluationTime = Interop
+                    .CoreFoundation
+                    .CFDateCreate(verificationTime)
             )
             {
-                ret = Interop.AppleCrypto.AppleCryptoNative_X509ChainEvaluate(
-                    _chainHandle!,
-                    cfEvaluationTime,
-                    allowNetwork,
-                    out osStatus
-                );
+                ret = Interop
+                    .AppleCrypto
+                    .AppleCryptoNative_X509ChainEvaluate(
+                        _chainHandle!,
+                        cfEvaluationTime,
+                        allowNetwork,
+                        out osStatus
+                    );
             }
 
             if (ret == 0)
@@ -318,17 +322,14 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 for (long elementIdx = 0; elementIdx < elementCount; elementIdx++)
                 {
-                    IntPtr certHandle = Interop.AppleCrypto.X509ChainGetCertificateAtIndex(
-                        chainHandle,
-                        elementIdx
-                    );
+                    IntPtr certHandle = Interop
+                        .AppleCrypto
+                        .X509ChainGetCertificateAtIndex(chainHandle, elementIdx);
 
                     int dwStatus;
-                    int ret = Interop.AppleCrypto.X509ChainGetStatusAtIndex(
-                        trustResults,
-                        elementIdx,
-                        out dwStatus
-                    );
+                    int ret = Interop
+                        .AppleCrypto
+                        .X509ChainGetStatusAtIndex(trustResults, elementIdx, out dwStatus);
 
                     // A return value of zero means no errors happened in locating the status (negative) or in
                     // parsing the status (positive).

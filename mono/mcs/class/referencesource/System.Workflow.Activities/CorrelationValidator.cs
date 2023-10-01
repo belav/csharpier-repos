@@ -970,12 +970,14 @@ namespace System.Workflow.Activities
                             ),
                             ErrorNumbers.Error_CorrelationInvalid
                         );
-                        error.UserData.Add(
-                            typeof(CorrelationParameterAttribute),
-                            (memberInfo.DeclaringType == interfaceType)
-                                ? memberInfo.Name
-                                : memberInfo.DeclaringType.Name
-                        );
+                        error
+                            .UserData
+                            .Add(
+                                typeof(CorrelationParameterAttribute),
+                                (memberInfo.DeclaringType == interfaceType)
+                                    ? memberInfo.Name
+                                    : memberInfo.DeclaringType.Name
+                            );
                         validationErrors.Add(error);
                     }
                     else if (
@@ -1000,12 +1002,14 @@ namespace System.Workflow.Activities
                             ),
                             ErrorNumbers.Error_CorrelationTypeNotConsistent
                         );
-                        error.UserData.Add(
-                            typeof(CorrelationAliasAttribute),
-                            (memberInfo.DeclaringType == interfaceType)
-                                ? memberInfo.Name
-                                : memberInfo.DeclaringType.Name
-                        );
+                        error
+                            .UserData
+                            .Add(
+                                typeof(CorrelationAliasAttribute),
+                                (memberInfo.DeclaringType == interfaceType)
+                                    ? memberInfo.Name
+                                    : memberInfo.DeclaringType.Name
+                            );
                         validationErrors.Add(error);
                     }
                 }

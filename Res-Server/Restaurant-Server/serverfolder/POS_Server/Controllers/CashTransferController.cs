@@ -105,7 +105,8 @@ namespace POS_Server.Controllers
                 }
                 else
                 {
-                    cashtr = entity.cashTransfer
+                    cashtr = entity
+                        .cashTransfer
                         .Where(p => p.cashTransId == newObject.cashTransId)
                         .First();
                     cashtr.transType = newObject.transType;
@@ -1161,7 +1162,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var cacht = entity.cashTransfer
+                        var cacht = entity
+                            .cashTransfer
                             .Where(C => C.cashTransId == cTId)
                             .Select(
                                 C =>
@@ -1313,7 +1315,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var cashList = entity.cashTransfer
+                        var cashList = entity
+                            .cashTransfer
                             .Where(
                                 C =>
                                     ((type == "all") ? true : C.transType == type)
@@ -1934,7 +1937,8 @@ namespace POS_Server.Controllers
                             {
                                 foreach (CashTransferModel ctitem in allList)
                                 {
-                                    cashobject = entity.cashTransfer
+                                    cashobject = entity
+                                        .cashTransfer
                                         .Where(C => C.cashTransId == ctitem.cashTransId)
                                         .FirstOrDefault();
                                     entity.cashTransfer.Remove(cashobject);
@@ -2146,7 +2150,8 @@ namespace POS_Server.Controllers
                                     cashobject = tempList.FirstOrDefault();
                                     cash = cashobject.cash;
                                     posidPull = cashobject.posId;
-                                    posobject = entity.pos
+                                    posobject = entity
+                                        .pos
                                         .Where(p => p.posId == posidPull)
                                         .FirstOrDefault();
                                     if (cashobject.cash <= posobject.balance)
@@ -2156,7 +2161,8 @@ namespace POS_Server.Controllers
                                         cashobject = allList
                                             .Where(C => C.transType == "d")
                                             .FirstOrDefault();
-                                        ctObject = entity.cashTransfer
+                                        ctObject = entity
+                                            .cashTransfer
                                             .Where(C => C.cashTransId == cashobject.cashTransId)
                                             .FirstOrDefault();
                                         ctObject.isConfirm = 1;
@@ -2167,7 +2173,8 @@ namespace POS_Server.Controllers
 
                                         //START decreas balance from pull pos
                                         posidD = ctObject.posId;
-                                        posobject = entity.pos
+                                        posobject = entity
+                                            .pos
                                             .Where(p => p.posId == posidPull)
                                             .FirstOrDefault();
 
@@ -2179,7 +2186,8 @@ namespace POS_Server.Controllers
                                         );
                                         // end
                                         //increase balance from d pos
-                                        posobjectD = entity.pos
+                                        posobjectD = entity
+                                            .pos
                                             .Where(p => p.posId == posidD)
                                             .FirstOrDefault();
                                         if (posobjectD.balance == null)
@@ -2821,7 +2829,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        long cachtrans = entity.cashTransfer
+                        long cachtrans = entity
+                            .cashTransfer
                             .Where(C => C.invId == invId && C.processType != "inv")
                             .ToList()
                             .Count();
@@ -2843,7 +2852,8 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var invoice = entity.invoices
+                var invoice = entity
+                    .invoices
                     .Where(x => x.invoiceId == invId)
                     .Select(
                         x =>
@@ -2867,7 +2877,8 @@ namespace POS_Server.Controllers
                             break;
                     }
                 }
-                int cachtrans = entity.cashTransfer
+                int cachtrans = entity
+                    .cashTransfer
                     .Where(
                         C =>
                             C.invId == invoiceId
@@ -2949,29 +2960,31 @@ namespace POS_Server.Controllers
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             var invList = (
-                                from b in entity.invoices.Where(
-                                    x =>
-                                        x.agentId == agentId
-                                        && typesList.Contains(x.invType)
-                                        && x.isActive == true
-                                        && x.deserved > 0
-                                        && (
-                                            (
-                                                x.shippingCompanyId == null
-                                                && x.shipUserId == null
-                                                && x.agentId != null
+                                from b in entity
+                                    .invoices
+                                    .Where(
+                                        x =>
+                                            x.agentId == agentId
+                                            && typesList.Contains(x.invType)
+                                            && x.isActive == true
+                                            && x.deserved > 0
+                                            && (
+                                                (
+                                                    x.shippingCompanyId == null
+                                                    && x.shipUserId == null
+                                                    && x.agentId != null
+                                                )
+                                                || (
+                                                    x.shippingCompanyId != null
+                                                    && x.shipUserId != null
+                                                    && x.agentId != null
+                                                )
+                                                || x.shippingCompanyId != null
+                                                    && x.shipUserId == null
+                                                    && x.agentId != null
+                                                    && x.isPrePaid == 1
                                             )
-                                            || (
-                                                x.shippingCompanyId != null
-                                                && x.shipUserId != null
-                                                && x.agentId != null
-                                            )
-                                            || x.shippingCompanyId != null
-                                                && x.shipUserId == null
-                                                && x.agentId != null
-                                                && x.isPrePaid == 1
-                                        )
-                                )
+                                    )
 
                                 select new InvoiceModel()
                                 {
@@ -3016,7 +3029,8 @@ namespace POS_Server.Controllers
                                 {
                                     long invoiceId = inv.invoiceId;
 
-                                    var statusObj = entity.orderPreparingStatus
+                                    var statusObj = entity
+                                        .orderPreparingStatus
                                         .Where(
                                             x =>
                                                 x.orderPreparing.invoiceId == invoiceId
@@ -3026,7 +3040,8 @@ namespace POS_Server.Controllers
 
                                     if (statusObj != null)
                                     {
-                                        int itemCount = entity.itemsTransfer
+                                        int itemCount = entity
+                                            .itemsTransfer
                                             .Where(x => x.invoiceId == invoiceId)
                                             .Select(x => x.itemsTransId)
                                             .ToList()
@@ -3411,15 +3426,17 @@ namespace POS_Server.Controllers
                         {
                             //var invList = (from b in entity.invoices.Where(x => x.shippingCompanyId == shippingCompanyId && typesList.Contains(x.invType) && x.deserved > 0)
                             var invList = (
-                                from b in entity.invoices.Where(
-                                    x =>
-                                        x.shippingCompanyId == shippingCompanyId
-                                        && typesList.Contains(x.invType)
-                                        && x.deserved > 0
-                                        && x.shippingCompanyId != null
-                                        && x.shipUserId == null
-                                        && x.agentId != null
-                                )
+                                from b in entity
+                                    .invoices
+                                    .Where(
+                                        x =>
+                                            x.shippingCompanyId == shippingCompanyId
+                                            && typesList.Contains(x.invType)
+                                            && x.deserved > 0
+                                            && x.shippingCompanyId != null
+                                            && x.shipUserId == null
+                                            && x.agentId != null
+                                    )
 
                                 select new InvoiceModel()
                                 {
@@ -3465,7 +3482,8 @@ namespace POS_Server.Controllers
                                 {
                                     long invoiceId = inv.invoiceId;
 
-                                    var statusObj = entity.orderPreparingStatus
+                                    var statusObj = entity
+                                        .orderPreparingStatus
                                         .Where(
                                             x =>
                                                 x.orderPreparing.invoiceId == invoiceId
@@ -3475,7 +3493,8 @@ namespace POS_Server.Controllers
 
                                     if (statusObj != null)
                                     {
-                                        int itemCount = entity.itemsTransfer
+                                        int itemCount = entity
+                                            .itemsTransfer
                                             .Where(x => x.invoiceId == invoiceId)
                                             .Select(x => x.itemsTransId)
                                             .ToList()
@@ -3497,9 +3516,9 @@ namespace POS_Server.Controllers
                                     case "feed": //get s, pb
                                         foreach (InvoiceModel inv in res)
                                         {
-                                            shippingCompany = entity.shippingCompanies.Find(
-                                                shippingCompanyId
-                                            );
+                                            shippingCompany = entity
+                                                .shippingCompanies
+                                                .Find(shippingCompanyId);
 
                                             decimal paid = 0;
                                             var invObj = entity.invoices.Find(inv.invoiceId);
@@ -3555,9 +3574,9 @@ namespace POS_Server.Controllers
                                         }
                                         if (amount > 0) // save remain amount
                                         {
-                                            shippingCompany = entity.shippingCompanies.Find(
-                                                shippingCompanyId
-                                            );
+                                            shippingCompany = entity
+                                                .shippingCompanies
+                                                .Find(shippingCompanyId);
 
                                             cashTr.cash = amount;
                                             cashTr.invId = null;
@@ -3604,9 +3623,9 @@ namespace POS_Server.Controllers
                                     switch (payType)
                                     {
                                         case "feed":
-                                            shippingCompany = entity.shippingCompanies.Find(
-                                                shippingCompanyId
-                                            );
+                                            shippingCompany = entity
+                                                .shippingCompanies
+                                                .Find(shippingCompanyId);
 
                                             cashTr.cash = amount;
                                             cashTr.invId = null;
@@ -4304,9 +4323,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            shippingCompanies shippingCompany = entity.shippingCompanies.Find(
-                                shippingCompanyId
-                            );
+                            shippingCompanies shippingCompany = entity
+                                .shippingCompanies
+                                .Find(shippingCompanyId);
 
                             foreach (invoices inv in invoiceList)
                             {
@@ -4345,7 +4364,8 @@ namespace POS_Server.Controllers
                                 //entity.SaveChanges();
 
                                 #region make order praparing status as "Done"
-                                var preparingOrders = entity.orderPreparing
+                                var preparingOrders = entity
+                                    .orderPreparing
                                     .Where(x => x.invoiceId == inv.invoiceId)
                                     .ToList();
 
@@ -4512,7 +4532,8 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            var cashesList = entity.cashTransfer
+                            var cashesList = entity
+                                .cashTransfer
                                 .Where(
                                     x =>
                                         x.userId == userId
@@ -4815,7 +4836,8 @@ namespace POS_Server.Controllers
                     int lastNum = 0;
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        numberList = entity.cashTransfer
+                        numberList = entity
+                            .cashTransfer
                             .Where(b => b.transNum.Contains(cashCode + "-"))
                             .Select(b => b.transNum)
                             .ToList();
@@ -4910,7 +4932,8 @@ namespace POS_Server.Controllers
                     int lastNum = 0;
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        numberList = entity.cashTransfer
+                        numberList = entity
+                            .cashTransfer
                             .Where(b => b.docNum.Contains(docNum + "-"))
                             .Select(b => b.docNum)
                             .ToList();
@@ -5154,7 +5177,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            cashtr = entity.cashTransfer
+                            cashtr = entity
+                                .cashTransfer
                                 .Where(p => p.cashTransId == newObject.cashTransId)
                                 .First();
                             cashtr.transType = newObject.transType;
@@ -5229,7 +5253,8 @@ namespace POS_Server.Controllers
                     string numberList = "";
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        numberList = entity.cashTransfer
+                        numberList = entity
+                            .cashTransfer
                             .Where(b => b.posId == posId && b.transType == "o")
                             .ToList()
                             .OrderBy(b => b.cashTransId)
@@ -5259,7 +5284,8 @@ namespace POS_Server.Controllers
             int sequence = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                numberList = entity.cashTransfer
+                numberList = entity
+                    .cashTransfer
                     .Where(b => b.transNum.Contains(cashCode + "-"))
                     .Select(b => b.transNum)
                     .ToList();
@@ -5872,7 +5898,8 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            var cashesList = entity.cashTransfer
+                            var cashesList = entity
+                                .cashTransfer
                                 .Where(
                                     x =>
                                         x.userId == userId
@@ -6132,7 +6159,8 @@ namespace POS_Server.Controllers
                         decimal basicAmount = amount;
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            var cashesList = entity.cashTransfer
+                            var cashesList = entity
+                                .cashTransfer
                                 .Where(
                                     x =>
                                         x.shippingCompanyId == shippingCompanyId
@@ -6143,7 +6171,8 @@ namespace POS_Server.Controllers
 
                             foreach (var cash in cashesList)
                             {
-                                var statusObj = entity.orderPreparingStatus
+                                var statusObj = entity
+                                    .orderPreparingStatus
                                     .Where(
                                         x =>
                                             x.orderPreparing.invoiceId == cash.invId
@@ -6234,12 +6263,14 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var cashes = (
-                        from b in entity.cashTransfer.Where(
-                            x =>
-                                x.userId == userId
-                                && x.processType == "commissionAgent"
-                                && x.deserved > 0
-                        )
+                        from b in entity
+                            .cashTransfer
+                            .Where(
+                                x =>
+                                    x.userId == userId
+                                    && x.processType == "commissionAgent"
+                                    && x.deserved > 0
+                            )
                         select new CashTransferModel()
                         {
                             cashTransId = b.cashTransId,
@@ -6288,15 +6319,17 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var cashes = (
-                        from b in entity.cashTransfer.Where(
-                            x =>
-                                x.userId == userId
-                                && (
-                                    x.processType.Trim() == "destroy"
-                                    || x.processType.Trim() == "shortage"
-                                )
-                                && x.deserved > 0
-                        )
+                        from b in entity
+                            .cashTransfer
+                            .Where(
+                                x =>
+                                    x.userId == userId
+                                    && (
+                                        x.processType.Trim() == "destroy"
+                                        || x.processType.Trim() == "shortage"
+                                    )
+                                    && x.deserved > 0
+                            )
                         select new CashTransferModel()
                         {
                             cashTransId = b.cashTransId,
@@ -6346,12 +6379,14 @@ namespace POS_Server.Controllers
                 {
                     List<CashTransferModel> res = new List<CashTransferModel>();
                     var cashes = (
-                        from b in entity.cashTransfer.Where(
-                            x =>
-                                x.shippingCompanyId == shippingComId
-                                && x.processType.Trim() == "deliver"
-                                && x.deserved > 0
-                        )
+                        from b in entity
+                            .cashTransfer
+                            .Where(
+                                x =>
+                                    x.shippingCompanyId == shippingComId
+                                    && x.processType.Trim() == "deliver"
+                                    && x.deserved > 0
+                            )
                         select new CashTransferModel()
                         {
                             cashTransId = b.cashTransId,
@@ -6373,7 +6408,8 @@ namespace POS_Server.Controllers
 
                     foreach (var cash in cashes)
                     {
-                        var statusObj = entity.orderPreparingStatus
+                        var statusObj = entity
+                            .orderPreparingStatus
                             .Where(
                                 x => x.orderPreparing.invoiceId == cash.invId && x.status == "Done"
                             )

@@ -2506,9 +2506,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             string analyzerName
         )
         {
-            var diagnosticIds = ImmutableSortedSet<string>.Empty.WithComparer(
-                StringComparer.OrdinalIgnoreCase
-            );
+            var diagnosticIds = ImmutableSortedSet<string>
+                .Empty
+                .WithComparer(StringComparer.OrdinalIgnoreCase);
             try
             {
                 foreach (var diagnostic in analyzer.SupportedDiagnostics)

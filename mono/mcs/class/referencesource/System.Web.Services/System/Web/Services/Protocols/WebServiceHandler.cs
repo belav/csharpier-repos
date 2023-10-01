@@ -126,10 +126,9 @@ namespace System.Web.Services.Protocols
                     : null;
                 if (Tracing.On)
                     Tracing.Enter(protocol.MethodInfo.ToString(), caller, userMethod);
-                object[] returnValues = protocol.MethodInfo.Invoke(
-                    protocol.Target,
-                    this.parameters
-                );
+                object[] returnValues = protocol
+                    .MethodInfo
+                    .Invoke(protocol.Target, this.parameters);
                 if (Tracing.On)
                     Tracing.Exit(protocol.MethodInfo.ToString(), caller);
                 WriteReturns(returnValues);
@@ -405,12 +404,14 @@ namespace System.Web.Services.Protocols
                 if (Tracing.On)
                     Tracing.Enter(protocol.MethodInfo.ToString(), caller, userMethod);
 
-                asyncResult = protocol.MethodInfo.BeginInvoke(
-                    protocol.Target,
-                    this.parameters,
-                    new AsyncCallback(this.Callback),
-                    asyncState
-                );
+                asyncResult = protocol
+                    .MethodInfo
+                    .BeginInvoke(
+                        protocol.Target,
+                        this.parameters,
+                        new AsyncCallback(this.Callback),
+                        asyncState
+                    );
 
                 if (Tracing.On)
                     Tracing.Enter(protocol.MethodInfo.ToString(), caller);

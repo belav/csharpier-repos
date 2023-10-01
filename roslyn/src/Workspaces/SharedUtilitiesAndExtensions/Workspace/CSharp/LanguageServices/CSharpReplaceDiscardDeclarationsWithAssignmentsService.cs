@@ -55,9 +55,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 {
                     case LocalDeclarationStatementSyntax localDeclarationStatement:
                         if (
-                            localDeclarationStatement.Declaration.Variables.Any(
-                                IsDiscardDeclaration
-                            )
+                            localDeclarationStatement
+                                .Declaration
+                                .Variables
+                                .Any(IsDiscardDeclaration)
                         )
                         {
                             RemoveDiscardHelper.ProcessDeclarationStatement(
@@ -129,9 +130,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                                 kind: SyntaxKind.IsExpression,
                                 left: isPatternExpression.Expression,
                                 operatorToken: isPatternExpression.IsKeyword,
-                                right: declarationPattern.Type.WithTrailingTrivia(
-                                    declarationPattern.GetTrailingTrivia()
-                                )
+                                right: declarationPattern
+                                    .Type
+                                    .WithTrailingTrivia(declarationPattern.GetTrailingTrivia())
                             );
                             editor.ReplaceNode(isPatternExpression, replacementNode);
                         }
@@ -227,7 +228,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
 
                 // Move the leading trivia from original local declaration statement
                 // to the first statement of the replacement statement list.
-                var leadingTrivia = _localDeclarationStatement.Declaration.Type
+                var leadingTrivia = _localDeclarationStatement
+                    .Declaration
+                    .Type
                     .GetLeadingTrivia()
                     .Concat(_localDeclarationStatement.Declaration.Type.GetTrailingTrivia());
                 _statementsBuilder[0] = _statementsBuilder[0].WithLeadingTrivia(leadingTrivia);

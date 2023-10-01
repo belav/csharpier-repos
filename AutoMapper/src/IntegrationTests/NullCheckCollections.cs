@@ -24,15 +24,17 @@ public class NullCheckCollectionsFirstOrDefault
     public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
     {
         protected override void Seed(TestContext context) =>
-            context.SourceTypes.Add(
-                new SourceType
-                {
-                    Parameters =
+            context
+                .SourceTypes
+                .Add(
+                    new SourceType
                     {
-                        new Parameter { Name = "Index", Value = 101 }
+                        Parameters =
+                        {
+                            new Parameter { Name = "Index", Value = 101 }
+                        }
                     }
-                }
-            );
+                );
     }
 
     public class TestContext : LocalDbContext

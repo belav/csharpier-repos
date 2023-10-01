@@ -151,12 +151,9 @@ namespace System.Web
                 string encodedValue = value;
                 if (HttpRuntime.EnableHeaderChecking)
                 {
-                    HttpEncoder.Current.HeaderNameValueEncode(
-                        name,
-                        value,
-                        out encodedName,
-                        out encodedValue
-                    );
+                    HttpEncoder
+                        .Current
+                        .HeaderNameValueEncode(name, value, out encodedName, out encodedValue);
                 }
 
                 // set the header encoding to the selected encoding

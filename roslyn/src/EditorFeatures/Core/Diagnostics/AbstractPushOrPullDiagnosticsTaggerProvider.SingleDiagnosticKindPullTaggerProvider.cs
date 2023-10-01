@@ -117,10 +117,12 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
             // is generating code that it doesn't want errors shown for.
             var buffer = snapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer?.Properties.TryGetProperty(
-                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
-                out suppressedDiagnosticsSpans
-            );
+            buffer
+                ?.Properties
+                .TryGetProperty(
+                    PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                    out suppressedDiagnosticsSpans
+                );
 
             var sourceText = snapshot.AsText();
 
@@ -132,8 +134,10 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
                 // correct project info to get reasonable results.
                 if (_diagnosticKind != DiagnosticKind.CompilerSyntax)
                 {
-                    var service =
-                        project.Solution.Services.GetRequiredService<IWorkspaceStatusService>();
+                    var service = project
+                        .Solution
+                        .Services
+                        .GetRequiredService<IWorkspaceStatusService>();
                     if (!await service.IsFullyLoadedAsync(cancellationToken).ConfigureAwait(false))
                         return;
 

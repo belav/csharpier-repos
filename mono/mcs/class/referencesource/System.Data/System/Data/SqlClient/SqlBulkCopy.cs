@@ -290,9 +290,10 @@ namespace System.Data.SqlClient
 
 #if !PROJECTK
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 #endif //PROJECTK
 
         //newly added member variables for Async modification, m = member variable to bcp
@@ -2645,14 +2646,15 @@ namespace System.Data.SqlClient
                             switch (this._rowSourceType)
                             {
                                 case ValueSourceType.DataTable:
-                                    index = ((DataTable)_rowSource).Columns.IndexOf(
-                                        unquotedColumnName
-                                    );
+                                    index = ((DataTable)_rowSource)
+                                        .Columns
+                                        .IndexOf(unquotedColumnName);
                                     break;
                                 case ValueSourceType.RowArray:
-                                    index = ((DataRow[])_rowSource)[0].Table.Columns.IndexOf(
-                                        unquotedColumnName
-                                    );
+                                    index = ((DataRow[])_rowSource)[0]
+                                        .Table
+                                        .Columns
+                                        .IndexOf(unquotedColumnName);
                                     break;
                                 case ValueSourceType.DbDataReader:
                                 case ValueSourceType.IDataReader:

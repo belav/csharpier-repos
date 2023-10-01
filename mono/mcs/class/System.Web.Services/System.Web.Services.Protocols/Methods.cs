@@ -226,10 +226,9 @@ namespace System.Web.Services.Protocols
             if (RequestNamespace == "")
                 RequestNamespace = parent.LogicalType.GetWebServiceNamespace(serviceNamespace, Use);
             if (ResponseNamespace == "")
-                ResponseNamespace = parent.LogicalType.GetWebServiceNamespace(
-                    serviceNamespace,
-                    Use
-                );
+                ResponseNamespace = parent
+                    .LogicalType
+                    .GetWebServiceNamespace(serviceNamespace, Use);
             if (RequestName == "")
                 RequestName = Name;
             if (ResponseName == "")

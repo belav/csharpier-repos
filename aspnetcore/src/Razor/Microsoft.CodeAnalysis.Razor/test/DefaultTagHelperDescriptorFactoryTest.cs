@@ -56,7 +56,11 @@ public class DefaultTagHelperDescriptorFactoryTest
                             builder
                                 .Name(string.Empty)
                                 .AddDiagnostic(
-                                    AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()
+                                    AspNetCore
+                                        .Razor
+                                        .Language
+                                        .RazorDiagnosticFactory
+                                        .CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()
                                 ),
                     }
                 },
@@ -68,10 +72,11 @@ public class DefaultTagHelperDescriptorFactoryTest
                             builder
                                 .Name("n@me")
                                 .AddDiagnostic(
-                                    AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName(
-                                        "n@me",
-                                        '@'
-                                    )
+                                    AspNetCore
+                                        .Razor
+                                        .Language
+                                        .RazorDiagnosticFactory
+                                        .CreateTagHelper_InvalidTargetedAttributeName("n@me", '@')
                                 ),
                     }
                 },
@@ -176,7 +181,11 @@ public class DefaultTagHelperDescriptorFactoryTest
                             builder
                                 .Name(string.Empty)
                                 .AddDiagnostic(
-                                    AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()
+                                    AspNetCore
+                                        .Razor
+                                        .Language
+                                        .RazorDiagnosticFactory
+                                        .CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace()
                                 ),
                     }
                 },
@@ -188,10 +197,11 @@ public class DefaultTagHelperDescriptorFactoryTest
                             builder
                                 .Name("n@me")
                                 .AddDiagnostic(
-                                    AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName(
-                                        "n@me",
-                                        '@'
-                                    )
+                                    AspNetCore
+                                        .Razor
+                                        .Language
+                                        .RazorDiagnosticFactory
+                                        .CreateTagHelper_InvalidTargetedAttributeName("n@me", '@')
                                 ),
                     }
                 },
@@ -203,10 +213,11 @@ public class DefaultTagHelperDescriptorFactoryTest
                             builder
                                 .Name("name@")
                                 .AddDiagnostic(
-                                    AspNetCore.Razor.Language.RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName(
-                                        "name@",
-                                        '@'
-                                    )
+                                    AspNetCore
+                                        .Razor
+                                        .Language
+                                        .RazorDiagnosticFactory
+                                        .CreateTagHelper_InvalidTargetedAttributeName("name@", '@')
                                 ),
                     }
                 },
@@ -2131,9 +2142,9 @@ public class DefaultTagHelperDescriptorFactoryTest
             .TagHelper_InvalidBoundAttributeNameStartsWith
             .Id;
         foreach (
-            var attribute in descriptor.BoundAttributes.Where(
-                a => a.Name.StartsWith("data-", StringComparison.OrdinalIgnoreCase)
-            )
+            var attribute in descriptor
+                .BoundAttributes
+                .Where(a => a.Name.StartsWith("data-", StringComparison.OrdinalIgnoreCase))
         )
         {
             var diagnostic = Assert.Single(attribute.Diagnostics);
@@ -2344,18 +2355,23 @@ public class DefaultTagHelperDescriptorFactoryTest
     {
         get
         {
-            var nullOrWhiteSpaceError =
-                AspNetCore.Razor.Language.Resources.FormatTagHelper_InvalidRestrictedChildNullOrWhitespace(
-                    "DynamicTestTagHelper"
-                );
+            var nullOrWhiteSpaceError = AspNetCore
+                .Razor
+                .Language
+                .Resources
+                .FormatTagHelper_InvalidRestrictedChildNullOrWhitespace("DynamicTestTagHelper");
 
             return GetInvalidNameOrPrefixData(
                 onNameError: (invalidInput, invalidCharacter) =>
-                    AspNetCore.Razor.Language.Resources.FormatTagHelper_InvalidRestrictedChild(
-                        "DynamicTestTagHelper",
-                        invalidInput,
-                        invalidCharacter
-                    ),
+                    AspNetCore
+                        .Razor
+                        .Language
+                        .Resources
+                        .FormatTagHelper_InvalidRestrictedChild(
+                            "DynamicTestTagHelper",
+                            invalidInput,
+                            invalidCharacter
+                        ),
                 whitespaceErrorString: nullOrWhiteSpaceError,
                 onDataError: null
             );
@@ -2408,10 +2424,14 @@ public class DefaultTagHelperDescriptorFactoryTest
 
             return GetInvalidNameOrPrefixData(
                 onNameError: (invalidInput, invalidCharacter) =>
-                    AspNetCore.Razor.Language.Resources.FormatTagHelper_InvalidTargetedParentTagName(
-                        invalidInput,
-                        invalidCharacter
-                    ),
+                    AspNetCore
+                        .Razor
+                        .Language
+                        .Resources
+                        .FormatTagHelper_InvalidTargetedParentTagName(
+                            invalidInput,
+                            invalidCharacter
+                        ),
                 whitespaceErrorString: nullOrWhiteSpaceError,
                 onDataError: null
             );
@@ -3141,9 +3161,9 @@ public class DefaultTagHelperDescriptorFactoryTest
         var descriptor = factory.CreateDescriptor(typeSymbol);
 
         // Assert
-        var documentations = descriptor.BoundAttributes.Select(
-            boundAttribute => boundAttribute.Documentation
-        );
+        var documentations = descriptor
+            .BoundAttributes
+            .Select(boundAttribute => boundAttribute.Documentation);
         Assert.Equal(expectedDocumentations, documentations);
     }
 

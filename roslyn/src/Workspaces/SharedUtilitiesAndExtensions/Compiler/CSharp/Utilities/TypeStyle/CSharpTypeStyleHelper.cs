@@ -178,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
             return isSupportedParentKind
                 && variableDeclaration.Variables.Count == 1
-                && variableDeclaration.Variables
+                && variableDeclaration
+                    .Variables
                     .Single()
                     .Initializer
                     .IsKind(SyntaxKind.EqualsValueClause);

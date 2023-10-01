@@ -95,21 +95,25 @@ namespace Internal.TypeSystem
                         if (
                             (
                                 argumentsRegistered
-                                && TypeLoaderEnvironment.Instance.TryLookupConstructedGenericTypeForComponents(
-                                    new TypeLoaderEnvironment.HandleBasedGenericTypeLookup(
-                                        typeAsDefType
-                                    ),
-                                    out rtth
-                                )
+                                && TypeLoaderEnvironment
+                                    .Instance
+                                    .TryLookupConstructedGenericTypeForComponents(
+                                        new TypeLoaderEnvironment.HandleBasedGenericTypeLookup(
+                                            typeAsDefType
+                                        ),
+                                        out rtth
+                                    )
                             )
                             || (
                                 arrayArgumentsFound
-                                && TypeLoaderEnvironment.Instance.TryLookupConstructedGenericTypeForComponents(
-                                    new TypeLoaderEnvironment.DefTypeBasedGenericTypeLookup(
-                                        typeAsDefType
-                                    ),
-                                    out rtth
-                                )
+                                && TypeLoaderEnvironment
+                                    .Instance
+                                    .TryLookupConstructedGenericTypeForComponents(
+                                        new TypeLoaderEnvironment.DefTypeBasedGenericTypeLookup(
+                                            typeAsDefType
+                                        ),
+                                        out rtth
+                                    )
                             )
                         )
                         {
@@ -142,17 +146,21 @@ namespace Internal.TypeSystem
                         )
                         || (
                             type is PointerType
-                            && TypeSystemContext.PointerTypesCache.TryGetValue(
-                                typeAsParameterType.ParameterType.RuntimeTypeHandle,
-                                out rtth
-                            )
+                            && TypeSystemContext
+                                .PointerTypesCache
+                                .TryGetValue(
+                                    typeAsParameterType.ParameterType.RuntimeTypeHandle,
+                                    out rtth
+                                )
                         )
                         || (
                             type is ByRefType
-                            && TypeSystemContext.ByRefTypesCache.TryGetValue(
-                                typeAsParameterType.ParameterType.RuntimeTypeHandle,
-                                out rtth
-                            )
+                            && TypeSystemContext
+                                .ByRefTypesCache
+                                .TryGetValue(
+                                    typeAsParameterType.ParameterType.RuntimeTypeHandle,
+                                    out rtth
+                                )
                         )
                     )
                     {

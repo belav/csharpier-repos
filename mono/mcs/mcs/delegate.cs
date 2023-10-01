@@ -448,32 +448,32 @@ namespace Mono.CSharp
             {
                 if (rtype.BuiltinType == BuiltinTypeSpec.Type.Dynamic)
                 {
-                    Module.PredefinedAttributes.Dynamic.EmitAttribute(
-                        CreateReturnBuilder().Builder
-                    );
+                    Module
+                        .PredefinedAttributes
+                        .Dynamic
+                        .EmitAttribute(CreateReturnBuilder().Builder);
                 }
                 else if (rtype.HasDynamicElement)
                 {
-                    Module.PredefinedAttributes.Dynamic.EmitAttribute(
-                        CreateReturnBuilder().Builder,
-                        rtype,
-                        Location
-                    );
+                    Module
+                        .PredefinedAttributes
+                        .Dynamic
+                        .EmitAttribute(CreateReturnBuilder().Builder, rtype, Location);
                 }
                 else if (rtype is ReadOnlyReferenceContainer)
                 {
-                    Module.PredefinedAttributes.IsReadOnly.EmitAttribute(
-                        CreateReturnBuilder().Builder
-                    );
+                    Module
+                        .PredefinedAttributes
+                        .IsReadOnly
+                        .EmitAttribute(CreateReturnBuilder().Builder);
                 }
 
                 if (rtype.HasNamedTupleElement)
                 {
-                    Module.PredefinedAttributes.TupleElementNames.EmitAttribute(
-                        CreateReturnBuilder().Builder,
-                        rtype,
-                        Location
-                    );
+                    Module
+                        .PredefinedAttributes
+                        .TupleElementNames
+                        .EmitAttribute(CreateReturnBuilder().Builder, rtype, Location);
                 }
 
                 ConstraintChecker.Check(this, ReturnType.Type, ReturnType.Location);
@@ -488,18 +488,16 @@ namespace Mono.CSharp
 
             if (BeginInvokeBuilder != null)
             {
-                BeginInvokeBuilder.ParameterInfo.ApplyAttributes(
-                    this,
-                    BeginInvokeBuilder.MethodBuilder
-                );
-                EndInvokeBuilder.ParameterInfo.ApplyAttributes(
-                    this,
-                    EndInvokeBuilder.MethodBuilder
-                );
+                BeginInvokeBuilder
+                    .ParameterInfo
+                    .ApplyAttributes(this, BeginInvokeBuilder.MethodBuilder);
+                EndInvokeBuilder
+                    .ParameterInfo
+                    .ApplyAttributes(this, EndInvokeBuilder.MethodBuilder);
 
-                BeginInvokeBuilder.MethodBuilder.SetImplementationFlags(
-                    MethodImplAttributes.Runtime
-                );
+                BeginInvokeBuilder
+                    .MethodBuilder
+                    .SetImplementationFlags(MethodImplAttributes.Runtime);
                 EndInvokeBuilder.MethodBuilder.SetImplementationFlags(MethodImplAttributes.Runtime);
             }
         }

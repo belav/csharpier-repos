@@ -56,8 +56,9 @@ public class WebTransportSessionTests : Http3TestBase
 
         // verify that we accepted a unidirectional stream
         Assert.NotNull(stream2);
-        var streamDirectionFeature2 =
-            stream2.Features.GetRequiredFeature<IStreamDirectionFeature>();
+        var streamDirectionFeature2 = stream2
+            .Features
+            .GetRequiredFeature<IStreamDirectionFeature>();
         Assert.False(streamDirectionFeature2.CanWrite);
         Assert.True(streamDirectionFeature2.CanRead);
 
@@ -88,7 +89,8 @@ public class WebTransportSessionTests : Http3TestBase
                 exitTcs.SetResult();
                 break;
             case 3: // automatic abort due to host stream aborting
-                Http3Api.Connection
+                Http3Api
+                    .Connection
                     ._streams[session.SessionId]
                     .Abort(new(), System.Net.Http.Http3ErrorCode.InternalError);
                 break;

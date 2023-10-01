@@ -158,7 +158,8 @@ namespace POS_Server.Controllers
                                 if (bonditem.isActive == 1)
                                 {
                                     long cId = (long)bonditem.bondId;
-                                    var casht = entity.cashTransfer
+                                    var casht = entity
+                                        .cashTransfer
                                         .Where(x => x.bondId == cId)
                                         .Select(x => new { x.bondId })
                                         .FirstOrDefault();
@@ -478,7 +479,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var item = entity.bondes
+                        var item = entity
+                            .bondes
                             .Where(c => c.bondId == Id)
                             .Select(
                                 c =>
@@ -591,7 +593,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.bondes
+                        var list = entity
+                            .bondes
                             .Where(c => c.isActive == isActive)
                             .Select(
                                 c =>
@@ -720,7 +723,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var tmpbond = entity.bondes
+                                var tmpbond = entity
+                                    .bondes
                                     .Where(p => p.bondId == newObject.bondId)
                                     .FirstOrDefault();
 

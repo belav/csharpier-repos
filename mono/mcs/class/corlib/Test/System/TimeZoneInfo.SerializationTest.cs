@@ -80,23 +80,29 @@ namespace MonoTests.System
         {
             var tz3rules = new TimeZoneInfo.AdjustmentRule[]
             {
-                TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(1, 1, 1),
-                    new DateTime(9999, 12, 31),
-                    TimeSpan.FromMinutes(23),
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 2, 15, 58, 0),
-                        3,
-                        2,
-                        DayOfWeek.Tuesday
-                    ),
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 2, 15, 59, 999),
-                        6,
-                        2,
-                        DayOfWeek.Tuesday
+                TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(1, 1, 1),
+                        new DateTime(9999, 12, 31),
+                        TimeSpan.FromMinutes(23),
+                        TimeZoneInfo
+                            .TransitionTime
+                            .CreateFloatingDateRule(
+                                new DateTime(1, 1, 1, 2, 15, 58, 0),
+                                3,
+                                2,
+                                DayOfWeek.Tuesday
+                            ),
+                        TimeZoneInfo
+                            .TransitionTime
+                            .CreateFloatingDateRule(
+                                new DateTime(1, 1, 1, 2, 15, 59, 999),
+                                6,
+                                2,
+                                DayOfWeek.Tuesday
+                            )
                     )
-                )
             };
             var tz3 = TimeZoneInfo.CreateCustomTimeZone(
                 "My Zone 3",
@@ -119,21 +125,19 @@ namespace MonoTests.System
         {
             var tz4rules = new TimeZoneInfo.AdjustmentRule[]
             {
-                TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(1, 1, 1),
-                    new DateTime(9999, 12, 31),
-                    TimeSpan.FromMinutes(23),
-                    TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                        new DateTime(1, 1, 1, 2, 15, 59, 48),
-                        3,
-                        2
-                    ),
-                    TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                        new DateTime(1, 1, 1, 2, 15, 59, 999),
-                        6,
-                        2
+                TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(1, 1, 1),
+                        new DateTime(9999, 12, 31),
+                        TimeSpan.FromMinutes(23),
+                        TimeZoneInfo
+                            .TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 15, 59, 48), 3, 2),
+                        TimeZoneInfo
+                            .TransitionTime
+                            .CreateFixedDateRule(new DateTime(1, 1, 1, 2, 15, 59, 999), 6, 2)
                     )
-                )
             };
             var tz4 = TimeZoneInfo.CreateCustomTimeZone(
                 "My Zone 4",
@@ -156,40 +160,52 @@ namespace MonoTests.System
         {
             var tz5rules = new TimeZoneInfo.AdjustmentRule[]
             {
-                TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(1, 1, 1),
-                    new DateTime(2012, 12, 31),
-                    TimeSpan.FromMinutes(23),
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 2, 15, 59, 999),
-                        3,
-                        2,
-                        DayOfWeek.Tuesday
+                TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(1, 1, 1),
+                        new DateTime(2012, 12, 31),
+                        TimeSpan.FromMinutes(23),
+                        TimeZoneInfo
+                            .TransitionTime
+                            .CreateFloatingDateRule(
+                                new DateTime(1, 1, 1, 2, 15, 59, 999),
+                                3,
+                                2,
+                                DayOfWeek.Tuesday
+                            ),
+                        TimeZoneInfo
+                            .TransitionTime
+                            .CreateFloatingDateRule(
+                                new DateTime(1, 1, 1, 2, 15, 59, 999),
+                                6,
+                                2,
+                                DayOfWeek.Tuesday
+                            )
                     ),
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 2, 15, 59, 999),
-                        6,
-                        2,
-                        DayOfWeek.Tuesday
+                TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2013, 1, 1),
+                        new DateTime(9999, 12, 31),
+                        TimeSpan.FromMinutes(48),
+                        TimeZoneInfo
+                            .TransitionTime
+                            .CreateFloatingDateRule(
+                                new DateTime(1, 1, 1, 2, 15, 59, 999),
+                                3,
+                                2,
+                                DayOfWeek.Tuesday
+                            ),
+                        TimeZoneInfo
+                            .TransitionTime
+                            .CreateFloatingDateRule(
+                                new DateTime(1, 1, 1, 2, 15, 59, 999),
+                                6,
+                                2,
+                                DayOfWeek.Tuesday
+                            )
                     )
-                ),
-                TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2013, 1, 1),
-                    new DateTime(9999, 12, 31),
-                    TimeSpan.FromMinutes(48),
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 2, 15, 59, 999),
-                        3,
-                        2,
-                        DayOfWeek.Tuesday
-                    ),
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 2, 15, 59, 999),
-                        6,
-                        2,
-                        DayOfWeek.Tuesday
-                    )
-                )
             };
             var tz5 = TimeZoneInfo.CreateCustomTimeZone(
                 "My Zone 5",
@@ -210,40 +226,52 @@ namespace MonoTests.System
         [Category("NotOnWindows")]
         public void DeserializeCustomZoneWithOddNamingAndMultipleDaylightRules()
         {
-            var rule1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(1, 1, 1),
-                new DateTime(2012, 12, 31),
-                TimeSpan.FromMinutes(23),
-                TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 2, 15, 59, 999),
-                    3,
-                    2,
-                    DayOfWeek.Tuesday
-                ),
-                TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 2, 15, 59, 999),
-                    6,
-                    2,
-                    DayOfWeek.Tuesday
-                )
-            );
-            var rule2 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                new DateTime(2013, 1, 1),
-                new DateTime(9999, 12, 31),
-                TimeSpan.FromMinutes(48),
-                TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 2, 15, 59, 999),
-                    3,
-                    2,
-                    DayOfWeek.Tuesday
-                ),
-                TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 2, 15, 59, 999),
-                    6,
-                    2,
-                    DayOfWeek.Tuesday
-                )
-            );
+            var rule1 = TimeZoneInfo
+                .AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(1, 1, 1),
+                    new DateTime(2012, 12, 31),
+                    TimeSpan.FromMinutes(23),
+                    TimeZoneInfo
+                        .TransitionTime
+                        .CreateFloatingDateRule(
+                            new DateTime(1, 1, 1, 2, 15, 59, 999),
+                            3,
+                            2,
+                            DayOfWeek.Tuesday
+                        ),
+                    TimeZoneInfo
+                        .TransitionTime
+                        .CreateFloatingDateRule(
+                            new DateTime(1, 1, 1, 2, 15, 59, 999),
+                            6,
+                            2,
+                            DayOfWeek.Tuesday
+                        )
+                );
+            var rule2 = TimeZoneInfo
+                .AdjustmentRule
+                .CreateAdjustmentRule(
+                    new DateTime(2013, 1, 1),
+                    new DateTime(9999, 12, 31),
+                    TimeSpan.FromMinutes(48),
+                    TimeZoneInfo
+                        .TransitionTime
+                        .CreateFloatingDateRule(
+                            new DateTime(1, 1, 1, 2, 15, 59, 999),
+                            3,
+                            2,
+                            DayOfWeek.Tuesday
+                        ),
+                    TimeZoneInfo
+                        .TransitionTime
+                        .CreateFloatingDateRule(
+                            new DateTime(1, 1, 1, 2, 15, 59, 999),
+                            6,
+                            2,
+                            DayOfWeek.Tuesday
+                        )
+                );
 
             var tz1 = TimeZoneInfo.FromSerializedString(
                 "My\\; Zone 5;-405;My Zone\\; 5 Name;My Zone 5\\; Standard Time;My Zone 5 Daylight\\; Time;[01:01:0001;12:31:2012;23;[0;02:15:59.999;3;2;2;];[0;02:15:59.999;6;2;2;];][01:01:2013;12:31:9999;48;[0;02:15:59.999;3;2;2;];[0;02:15:59.999;6;2;2;];];"

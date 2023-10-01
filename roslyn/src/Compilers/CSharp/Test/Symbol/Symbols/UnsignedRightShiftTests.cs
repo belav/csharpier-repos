@@ -3316,14 +3316,16 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3334,9 +3336,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator >>>'
@@ -3360,7 +3362,9 @@ class C
             );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3371,14 +3375,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3415,9 +3421,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -3453,9 +3459,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -3483,9 +3489,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator >>>='
@@ -3540,9 +3546,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -3569,14 +3575,16 @@ class C
 ";
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             var crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            var expectedSymbol = compilation.SourceModule.GlobalNamespace
+            var expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3587,9 +3595,9 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular10.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular10
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator >>>(C, int)'
@@ -3613,7 +3621,9 @@ class C
             );
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3624,14 +3634,16 @@ class C
 
             compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.Regular11.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .Regular11
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics();
 
             crefSyntax = CrefTests.GetCrefSyntaxes(compilation).Single();
-            expectedSymbol = compilation.SourceModule.GlobalNamespace
+            expectedSymbol = compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMember("C")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -3668,9 +3680,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -3706,9 +3718,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 
@@ -3736,9 +3748,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(
                 // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator >>>=(C, int)'
@@ -3793,9 +3805,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             compilation.VerifyDiagnostics(expected);
 

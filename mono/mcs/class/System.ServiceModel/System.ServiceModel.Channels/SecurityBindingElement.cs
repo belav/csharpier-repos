@@ -344,9 +344,9 @@ namespace System.ServiceModel.Channels
         )
         {
             var be = new TransportSecurityBindingElement() { MessageSecurityVersion = version };
-            be.EndpointSupportingTokenParameters.SignedEncrypted.Add(
-                new X509SecurityTokenParameters()
-            );
+            be.EndpointSupportingTokenParameters
+                .SignedEncrypted
+                .Add(new X509SecurityTokenParameters());
             return be;
         }
 
@@ -629,9 +629,9 @@ namespace System.ServiceModel.Channels
         {
             var be = new TransportSecurityBindingElement();
 #if !MOBILE && !XAMMAC_4_5 // FIXME: there should be whatever else to do for 2.1 instead.
-            be.EndpointSupportingTokenParameters.SignedEncrypted.Add(
-                new UserNameSecurityTokenParameters()
-            );
+            be.EndpointSupportingTokenParameters
+                .SignedEncrypted
+                .Add(new UserNameSecurityTokenParameters());
 #endif
             return be;
         }

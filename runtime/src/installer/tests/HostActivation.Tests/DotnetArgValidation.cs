@@ -21,7 +21,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void MuxerExec_MissingAppAssembly_Fails()
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.dll");
-            sharedTestState.BuiltDotNet
+            sharedTestState
+                .BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -38,7 +39,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void MuxerExec_MissingAppAssembly_BadExtension_Fails()
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.xzy");
-            sharedTestState.BuiltDotNet
+            sharedTestState
+                .BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -63,7 +65,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             fxDir = new DirectoryInfo(fxDir).GetDirectories()[0].FullName;
             string assemblyName = Path.Combine(fxDir, "Microsoft.NETCore.App.deps.json");
 
-            sharedTestState.BuiltDotNet
+            sharedTestState
+                .BuiltDotNet
                 .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -79,7 +82,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void MissingArgumentValue_Fails()
         {
-            sharedTestState.BuiltDotNet
+            sharedTestState
+                .BuiltDotNet
                 .Exec("--fx-version")
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -94,7 +98,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void InvalidFileOrCommand_NoSDK_ListsPossibleIssues()
         {
             string fileName = "NonExistent";
-            sharedTestState.BuiltDotNet
+            sharedTestState
+                .BuiltDotNet
                 .Exec(fileName)
                 .WorkingDirectory(sharedTestState.BaseDirectory.Location)
                 .CaptureStdOut()

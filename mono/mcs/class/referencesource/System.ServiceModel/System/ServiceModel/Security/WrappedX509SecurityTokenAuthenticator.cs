@@ -37,9 +37,9 @@ namespace System.ServiceModel.Security
         {
             if (wrappedX509SecurityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedX509SecurityTokenHandler"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedX509SecurityTokenHandler");
             }
 
             if (exceptionMapper == null)
@@ -118,9 +118,9 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenHandler"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenHandler");
             }
 
             return securityTokenHandler.MapToWindows;

@@ -1951,10 +1951,12 @@ public class PageModelTest
         testPageModel.Setup(p => p.OnPageHandlerExecuted(pageHandlerExecutedContext)).Verifiable();
 
         // Act
-        await testPageModel.Object.OnPageHandlerExecutionAsync(
-            pageHandlerExecutingContext,
-            () => Task.FromResult(pageHandlerExecutedContext)
-        );
+        await testPageModel
+            .Object
+            .OnPageHandlerExecutionAsync(
+                pageHandlerExecutingContext,
+                () => Task.FromResult(pageHandlerExecutedContext)
+            );
 
         testPageModel.Verify();
     }
@@ -1994,10 +1996,12 @@ public class PageModelTest
             .Throws(new Exception("Shouldn't be called"));
 
         // Act
-        await testPageModel.Object.OnPageHandlerExecutionAsync(
-            pageHandlerExecutingContext,
-            () => Task.FromResult(pageHandlerExecutedContext)
-        );
+        await testPageModel
+            .Object
+            .OnPageHandlerExecutionAsync(
+                pageHandlerExecutingContext,
+                () => Task.FromResult(pageHandlerExecutedContext)
+            );
 
         testPageModel.Verify();
     }

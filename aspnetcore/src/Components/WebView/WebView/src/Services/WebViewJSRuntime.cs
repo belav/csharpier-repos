@@ -16,9 +16,9 @@ internal sealed class WebViewJSRuntime : JSRuntime
     public WebViewJSRuntime()
     {
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions.Converters.Add(
-            new ElementReferenceJsonConverter(new WebElementReferenceContext(this))
-        );
+        JsonSerializerOptions
+            .Converters
+            .Add(new ElementReferenceJsonConverter(new WebElementReferenceContext(this)));
     }
 
     public void AttachToWebView(IpcSender ipcSender)

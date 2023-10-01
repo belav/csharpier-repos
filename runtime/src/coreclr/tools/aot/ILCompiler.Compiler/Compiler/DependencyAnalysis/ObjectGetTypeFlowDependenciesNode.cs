@@ -39,12 +39,14 @@ namespace ILCompiler.DependencyAnalysis
             if (_type.IsInterface)
                 return Array.Empty<DependencyListEntry>();
 
-            return Dataflow.ReflectionMethodBodyScanner.ProcessTypeGetTypeDataflow(
-                factory,
-                mdManager.FlowAnnotations,
-                mdManager.Logger,
-                _type
-            );
+            return Dataflow
+                .ReflectionMethodBodyScanner
+                .ProcessTypeGetTypeDataflow(
+                    factory,
+                    mdManager.FlowAnnotations,
+                    mdManager.Logger,
+                    _type
+                );
         }
 
         public override bool InterestingForDynamicDependencyAnalysis => false;

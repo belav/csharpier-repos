@@ -21,19 +21,19 @@
                 )
             };
 
-            IModelBinder binder = parentBindingContext.ModelBinderProviders.GetBinder(
-                modelBindingExecutionContext,
-                propertyBindingContext
-            );
+            IModelBinder binder = parentBindingContext
+                .ModelBinderProviders
+                .GetBinder(modelBindingExecutionContext, propertyBindingContext);
             if (binder != null)
             {
                 if (binder.BindModel(modelBindingExecutionContext, propertyBindingContext))
                 {
                     object untypedModel = propertyBindingContext.Model;
                     model = ModelBinderUtil.CastOrDefault<TModel>(untypedModel);
-                    parentBindingContext.ValidationNode.ChildNodes.Add(
-                        propertyBindingContext.ValidationNode
-                    );
+                    parentBindingContext
+                        .ValidationNode
+                        .ChildNodes
+                        .Add(propertyBindingContext.ValidationNode);
                     return true;
                 }
             }

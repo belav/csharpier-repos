@@ -120,10 +120,9 @@ namespace Internal.Reflection.Execution
         )
         {
             Debug.Assert(!RuntimeAugments.IsGenericType(runtimeTypeHandle));
-            return TypeLoaderEnvironment.Instance.TryGetMetadataForNamedType(
-                runtimeTypeHandle,
-                out qTypeDefinition
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .TryGetMetadataForNamedType(runtimeTypeHandle, out qTypeDefinition);
         }
 
         //
@@ -142,10 +141,10 @@ namespace Internal.Reflection.Execution
             //doesnt have reflection enabled it wont be a NativeFormatModuleInfo
             if (
                 !(
-                    ModuleList.Instance.TryGetModuleInfoByHandle(
-                        moduleHandle,
-                        out ModuleInfo untypedModuleInfo
-                    ) && (untypedModuleInfo is NativeFormatModuleInfo module)
+                    ModuleList
+                        .Instance
+                        .TryGetModuleInfoByHandle(moduleHandle, out ModuleInfo untypedModuleInfo)
+                    && (untypedModuleInfo is NativeFormatModuleInfo module)
                 )
             )
             {
@@ -199,10 +198,9 @@ namespace Internal.Reflection.Execution
             out RuntimeTypeHandle runtimeTypeHandle
         )
         {
-            return TypeLoaderEnvironment.Instance.TryGetNamedTypeForMetadata(
-                qTypeDefinition,
-                out runtimeTypeHandle
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .TryGetNamedTypeForMetadata(qTypeDefinition, out runtimeTypeHandle);
         }
 
         /// <summary>
@@ -283,12 +281,9 @@ namespace Internal.Reflection.Execution
 
             // For non-dynamic arrays try to look up the array type in the ArrayMap blobs;
             // attempt to dynamically create a new one if that doesn't succeed.
-            return TypeLoaderEnvironment.Instance.TryGetArrayTypeForElementType(
-                elementTypeHandle,
-                false,
-                -1,
-                out arrayTypeHandle
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .TryGetArrayTypeForElementType(elementTypeHandle, false, -1, out arrayTypeHandle);
         }
 
         //
@@ -336,12 +331,9 @@ namespace Internal.Reflection.Execution
                 );
             }
 
-            return TypeLoaderEnvironment.Instance.TryGetArrayTypeForElementType(
-                elementTypeHandle,
-                true,
-                rank,
-                out arrayTypeHandle
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .TryGetArrayTypeForElementType(elementTypeHandle, true, rank, out arrayTypeHandle);
         }
 
         //
@@ -356,10 +348,9 @@ namespace Internal.Reflection.Execution
             out RuntimeTypeHandle pointerTypeHandle
         )
         {
-            return TypeLoaderEnvironment.Instance.TryGetPointerTypeForTargetType(
-                targetTypeHandle,
-                out pointerTypeHandle
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .TryGetPointerTypeForTargetType(targetTypeHandle, out pointerTypeHandle);
         }
 
         //
@@ -390,10 +381,9 @@ namespace Internal.Reflection.Execution
             out RuntimeTypeHandle byRefTypeHandle
         )
         {
-            return TypeLoaderEnvironment.Instance.TryGetByRefTypeForTargetType(
-                targetTypeHandle,
-                out byRefTypeHandle
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .TryGetByRefTypeForTargetType(targetTypeHandle, out byRefTypeHandle);
         }
 
         //
@@ -427,11 +417,13 @@ namespace Internal.Reflection.Execution
         )
         {
             if (
-                TypeLoaderEnvironment.Instance.TryLookupConstructedGenericTypeForComponents(
-                    genericTypeDefinitionHandle,
-                    genericTypeArgumentHandles,
-                    out runtimeTypeHandle
-                )
+                TypeLoaderEnvironment
+                    .Instance
+                    .TryLookupConstructedGenericTypeForComponents(
+                        genericTypeDefinitionHandle,
+                        genericTypeArgumentHandles,
+                        out runtimeTypeHandle
+                    )
             )
             {
                 return true;
@@ -456,11 +448,13 @@ namespace Internal.Reflection.Execution
 
             ConstraintValidator.EnsureSatisfiesClassConstraints(typeDefinition, typeArguments);
 
-            return TypeLoaderEnvironment.Instance.TryGetConstructedGenericTypeForComponents(
-                genericTypeDefinitionHandle,
-                genericTypeArgumentHandles,
-                out runtimeTypeHandle
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .TryGetConstructedGenericTypeForComponents(
+                    genericTypeDefinitionHandle,
+                    genericTypeArgumentHandles,
+                    out runtimeTypeHandle
+                );
         }
 
         public sealed override MethodInvoker TryGetMethodInvoker(
@@ -469,11 +463,9 @@ namespace Internal.Reflection.Execution
             RuntimeTypeHandle[] genericMethodTypeArgumentHandles
         )
         {
-            MethodBase methodInfo = ReflectionCoreExecution.ExecutionDomain.GetMethod(
-                declaringTypeHandle,
-                methodHandle,
-                genericMethodTypeArgumentHandles
-            );
+            MethodBase methodInfo = ReflectionCoreExecution
+                .ExecutionDomain
+                .GetMethod(declaringTypeHandle, methodHandle, genericMethodTypeArgumentHandles);
 
             // Validate constraints first. This is potentially useless work if the method already exists, but it prevents bad
             // inputs to reach the type loader (we don't have support to e.g. represent pointer types within the type loader)
@@ -595,10 +587,10 @@ namespace Internal.Reflection.Execution
                 return IntPtr.Zero;
             else
             {
-                GCHandle reader =
-                    Internal.TypeSystem.LockFreeObjectInterner.GetInternedObjectHandle(
-                        methodHandle.Reader
-                    );
+                GCHandle reader = Internal
+                    .TypeSystem
+                    .LockFreeObjectInterner
+                    .GetInternedObjectHandle(methodHandle.Reader);
 
                 if (lookupResult.IsGVM)
                 {
@@ -687,9 +679,9 @@ namespace Internal.Reflection.Execution
             if ((methodInvokeMetadata.InvokeTableFlags & InvokeTableFlags.HasVirtualInvoke) != 0)
             {
                 resolver = TryGetVirtualResolveData(
-                    ModuleList.Instance.GetModuleInfoForMetadataReader(
-                        methodHandle.NativeFormatReader
-                    ),
+                    ModuleList
+                        .Instance
+                        .GetModuleInfoForMetadataReader(methodHandle.NativeFormatReader),
                     declaringTypeHandle,
                     methodHandle,
                     genericMethodTypeArgumentHandles,
@@ -997,11 +989,9 @@ namespace Internal.Reflection.Execution
                 int endIndex;
 
                 if (
-                    perModuleLookup.Value.TryGetOffsetsRange(
-                        canonOriginalLdFtnResult,
-                        out startIndex,
-                        out endIndex
-                    )
+                    perModuleLookup
+                        .Value
+                        .TryGetOffsetsRange(canonOriginalLdFtnResult, out startIndex, out endIndex)
                 )
                 {
                     for (int curIndex = startIndex; curIndex <= endIndex; curIndex++)
@@ -1047,11 +1037,9 @@ namespace Internal.Reflection.Execution
                 int endIndex;
 
                 if (
-                    perModuleLookup.Value.TryGetOffsetsRange(
-                        methodStartAddress,
-                        out startIndex,
-                        out endIndex
-                    )
+                    perModuleLookup
+                        .Value
+                        .TryGetOffsetsRange(methodStartAddress, out startIndex, out endIndex)
                 )
                 {
                     for (int curIndex = startIndex; curIndex <= endIndex; curIndex++)
@@ -1261,12 +1249,14 @@ namespace Internal.Reflection.Execution
                     if ((entryFlags & InvokeTableFlags.RequiresInstArg) != 0)
                     {
                         MethodNameAndSignature dummyNameAndSignature;
-                        bool success = TypeLoaderEnvironment.Instance.TryGetGenericMethodComponents(
-                            instantiationArgument,
-                            out declaringTypeHandle,
-                            out dummyNameAndSignature,
-                            out genericMethodTypeArgumentHandles
-                        );
+                        bool success = TypeLoaderEnvironment
+                            .Instance
+                            .TryGetGenericMethodComponents(
+                                instantiationArgument,
+                                out declaringTypeHandle,
+                                out dummyNameAndSignature,
+                                out genericMethodTypeArgumentHandles
+                            );
                         Debug.Assert(success);
                     }
                     else
@@ -1317,11 +1307,13 @@ namespace Internal.Reflection.Execution
                 uint nameAndSigOffset = entryMethodHandleOrNameAndSigRaw;
                 MethodNameAndSignature nameAndSig;
                 if (
-                    !TypeLoaderEnvironment.Instance.TryGetMethodNameAndSignatureFromNativeLayoutOffset(
-                        mappingTableModule.Handle,
-                        nameAndSigOffset,
-                        out nameAndSig
-                    )
+                    !TypeLoaderEnvironment
+                        .Instance
+                        .TryGetMethodNameAndSignatureFromNativeLayoutOffset(
+                            mappingTableModule.Handle,
+                            nameAndSigOffset,
+                            out nameAndSig
+                        )
                 )
                 {
                     Debug.Assert(false);
@@ -1329,11 +1321,13 @@ namespace Internal.Reflection.Execution
                 }
 
                 if (
-                    !TypeLoaderEnvironment.Instance.TryGetMetadataForTypeMethodNameAndSignature(
-                        declaringTypeHandle,
-                        nameAndSig,
-                        out methodHandle
-                    )
+                    !TypeLoaderEnvironment
+                        .Instance
+                        .TryGetMetadataForTypeMethodNameAndSignature(
+                            declaringTypeHandle,
+                            nameAndSig,
+                            out methodHandle
+                        )
                 )
                 {
                     Debug.Assert(false);
@@ -1352,20 +1346,24 @@ namespace Internal.Reflection.Execution
         )
         {
             MethodNameAndSignature nameAndSig;
-            bool success = TypeLoaderEnvironment.Instance.TryGetGenericMethodComponents(
-                instantiationArgument,
-                out declaringTypeHandle,
-                out nameAndSig,
-                out genericMethodTypeArgumentHandles
-            );
+            bool success = TypeLoaderEnvironment
+                .Instance
+                .TryGetGenericMethodComponents(
+                    instantiationArgument,
+                    out declaringTypeHandle,
+                    out nameAndSig,
+                    out genericMethodTypeArgumentHandles
+                );
             if (success)
             {
                 if (
-                    TypeLoaderEnvironment.Instance.TryGetMetadataForTypeMethodNameAndSignature(
-                        declaringTypeHandle,
-                        nameAndSig,
-                        out methodHandle
-                    )
+                    TypeLoaderEnvironment
+                        .Instance
+                        .TryGetMetadataForTypeMethodNameAndSignature(
+                            declaringTypeHandle,
+                            nameAndSig,
+                            out methodHandle
+                        )
                 )
                 {
                     return true;
@@ -1444,17 +1442,17 @@ namespace Internal.Reflection.Execution
                             staticsBase = fieldBase switch
                             {
                                 FieldTableFlags.GCStatic
-                                    => TypeLoaderEnvironment.Instance.TryGetGcStaticFieldData(
-                                        declaringTypeHandle
-                                    ),
+                                    => TypeLoaderEnvironment
+                                        .Instance
+                                        .TryGetGcStaticFieldData(declaringTypeHandle),
                                 FieldTableFlags.NonGCStatic
-                                    => TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(
-                                        declaringTypeHandle
-                                    ),
+                                    => TypeLoaderEnvironment
+                                        .Instance
+                                        .TryGetNonGcStaticFieldData(declaringTypeHandle),
                                 _
-                                    => TypeLoaderEnvironment.Instance.TryGetThreadStaticFieldData(
-                                        declaringTypeHandle
-                                    ),
+                                    => TypeLoaderEnvironment
+                                        .Instance
+                                        .TryGetThreadStaticFieldData(declaringTypeHandle),
                             };
                         }
                     }
@@ -1526,20 +1524,24 @@ namespace Internal.Reflection.Execution
             MethodNameAndSignature nameAndSignature;
             methodHandle = default(QMethodDefinition);
             if (
-                !TypeLoaderEnvironment.Instance.TryGetRuntimeMethodHandleComponents(
-                    runtimeMethodHandle,
-                    out declaringTypeHandle,
-                    out nameAndSignature,
-                    out genericMethodTypeArgumentHandles
-                )
+                !TypeLoaderEnvironment
+                    .Instance
+                    .TryGetRuntimeMethodHandleComponents(
+                        runtimeMethodHandle,
+                        out declaringTypeHandle,
+                        out nameAndSignature,
+                        out genericMethodTypeArgumentHandles
+                    )
             )
                 return false;
 
-            return TypeLoaderEnvironment.Instance.TryGetMetadataForTypeMethodNameAndSignature(
-                declaringTypeHandle,
-                nameAndSignature,
-                out methodHandle
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .TryGetMetadataForTypeMethodNameAndSignature(
+                    declaringTypeHandle,
+                    nameAndSignature,
+                    out methodHandle
+                );
         }
 
         //
@@ -1573,11 +1575,13 @@ namespace Internal.Reflection.Execution
 
             string fieldName;
             if (
-                !TypeLoaderEnvironment.Instance.TryGetRuntimeFieldHandleComponents(
-                    runtimeFieldHandle,
-                    out declaringTypeHandle,
-                    out fieldName
-                )
+                !TypeLoaderEnvironment
+                    .Instance
+                    .TryGetRuntimeFieldHandleComponents(
+                        runtimeFieldHandle,
+                        out declaringTypeHandle,
+                        out fieldName
+                    )
             )
                 return false;
 

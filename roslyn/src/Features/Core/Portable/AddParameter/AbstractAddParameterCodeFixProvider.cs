@@ -352,18 +352,20 @@ namespace Microsoft.CodeAnalysis.AddParameter
                             data.Method,
                             includeParameters: true
                         );
-                        codeAction = CodeAction.CodeActionWithNestedActions.Create(
-                            title: titleForNesting,
-                            ImmutableArray.Create(
-                                codeAction,
-                                CodeAction.Create(
-                                    titleCascading,
-                                    data.CreateChangedSolutionCascading,
-                                    equivalenceKey: titleCascading
-                                )
-                            ),
-                            isInlinable: true
-                        );
+                        codeAction = CodeAction
+                            .CodeActionWithNestedActions
+                            .Create(
+                                title: titleForNesting,
+                                ImmutableArray.Create(
+                                    codeAction,
+                                    CodeAction.Create(
+                                        titleCascading,
+                                        data.CreateChangedSolutionCascading,
+                                        equivalenceKey: titleCascading
+                                    )
+                                ),
+                                isInlinable: true
+                            );
                     }
 
                     // codeAction is now either a single fix or two fixes wrapped in a CodeActionWithNestedActions
@@ -418,11 +420,9 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 // Create a sub-menu entry with all the non-cascading CodeActions.
                 // We make sure the IDE does not inline. Otherwise the context menu gets flooded with our fixes.
                 builder.Add(
-                    CodeAction.CodeActionWithNestedActions.Create(
-                        nestedNonCascadingTitle,
-                        nonCascadingActions,
-                        isInlinable: false
-                    )
+                    CodeAction
+                        .CodeActionWithNestedActions
+                        .Create(nestedNonCascadingTitle, nonCascadingActions, isInlinable: false)
                 );
 
                 if (cascadingActions.Length > 0)
@@ -434,11 +434,9 @@ namespace Microsoft.CodeAnalysis.AddParameter
                         includeParameters: false
                     );
                     builder.Add(
-                        CodeAction.CodeActionWithNestedActions.Create(
-                            nestedCascadingTitle,
-                            cascadingActions,
-                            isInlinable: false
-                        )
+                        CodeAction
+                            .CodeActionWithNestedActions
+                            .Create(nestedCascadingTitle, cascadingActions, isInlinable: false)
                     );
                 }
 

@@ -380,15 +380,17 @@ namespace System.Workflow.ComponentModel.Design
 
                 object uiTypeEditor = RealPropertyDescriptor.GetEditor(typeof(UITypeEditor));
                 object value = (PropertyOwner != null) ? GetValue(PropertyOwner) : null;
-                bool propertiesSupported = RealPropertyDescriptor.Converter.GetPropertiesSupported(
-                    (PropertyOwner != null)
-                        ? new TypeDescriptorContext(
-                            ServiceProvider,
-                            RealPropertyDescriptor,
-                            PropertyOwner
-                        )
-                        : null
-                );
+                bool propertiesSupported = RealPropertyDescriptor
+                    .Converter
+                    .GetPropertiesSupported(
+                        (PropertyOwner != null)
+                            ? new TypeDescriptorContext(
+                                ServiceProvider,
+                                RealPropertyDescriptor,
+                                PropertyOwner
+                            )
+                            : null
+                    );
                 if (
                     ((uiTypeEditor == null && !propertiesSupported) || value is ActivityBind)
                     && !IsReadOnly
@@ -408,15 +410,17 @@ namespace System.Workflow.ComponentModel.Design
             if (editorBaseType == typeof(UITypeEditor) && !IsReadOnly)
             {
                 object value = (PropertyOwner != null) ? GetValue(PropertyOwner) : null;
-                bool propertiesSupported = RealPropertyDescriptor.Converter.GetPropertiesSupported(
-                    (PropertyOwner != null)
-                        ? new TypeDescriptorContext(
-                            ServiceProvider,
-                            RealPropertyDescriptor,
-                            PropertyOwner
-                        )
-                        : null
-                );
+                bool propertiesSupported = RealPropertyDescriptor
+                    .Converter
+                    .GetPropertiesSupported(
+                        (PropertyOwner != null)
+                            ? new TypeDescriptorContext(
+                                ServiceProvider,
+                                RealPropertyDescriptor,
+                                PropertyOwner
+                            )
+                            : null
+                    );
                 if (value is ActivityBind || (editor == null && !propertiesSupported))
                     editor = new BindUITypeEditor();
             }
@@ -617,11 +621,9 @@ namespace System.Workflow.ComponentModel.Design
                                     && attributeInfoAttribute.AttributeInfo.ArgumentValues.Count > 0
                                 )
                                     browsable = (bool)
-                                        attributeInfoAttribute.AttributeInfo.GetArgumentValueAs(
-                                            context,
-                                            0,
-                                            typeof(bool)
-                                        );
+                                        attributeInfoAttribute
+                                            .AttributeInfo
+                                            .GetArgumentValueAs(context, 0, typeof(bool));
                             }
                             catch { }
                         }
@@ -1018,14 +1020,16 @@ namespace System.Workflow.ComponentModel.Design
             )
             {
                 if (
-                    memberInfo.Name.Equals(
-                        name,
-                        (
-                            (ignoreCase)
-                                ? StringComparison.OrdinalIgnoreCase
-                                : StringComparison.Ordinal
+                    memberInfo
+                        .Name
+                        .Equals(
+                            name,
+                            (
+                                (ignoreCase)
+                                    ? StringComparison.OrdinalIgnoreCase
+                                    : StringComparison.Ordinal
+                            )
                         )
-                    )
                 )
                 {
                     matchingMember = memberInfo;

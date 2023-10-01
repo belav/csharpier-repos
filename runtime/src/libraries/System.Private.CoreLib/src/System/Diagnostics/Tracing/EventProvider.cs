@@ -302,16 +302,16 @@ namespace System.Diagnostics.Tracing
                                     int valueEnd = FindNull(data, valueIdx);
                                     if (valueEnd < data.Length)
                                     {
-                                        string key = System.Text.Encoding.UTF8.GetString(
-                                            data,
-                                            keyIndex,
-                                            keyEnd - keyIndex
-                                        );
-                                        string value = System.Text.Encoding.UTF8.GetString(
-                                            data,
-                                            valueIdx,
-                                            valueEnd - valueIdx
-                                        );
+                                        string key = System
+                                            .Text
+                                            .Encoding
+                                            .UTF8
+                                            .GetString(data, keyIndex, keyEnd - keyIndex);
+                                        string value = System
+                                            .Text
+                                            .Encoding
+                                            .UTF8
+                                            .GetString(data, valueIdx, valueEnd - valueIdx);
                                         args[key] = value;
                                     }
                                     keyIndex = valueEnd + 1;
@@ -501,14 +501,16 @@ namespace System.Diagnostics.Tracing
 
                     fixed (Guid* provider = &m_providerId)
                     {
-                        hr = Interop.Advapi32.EnumerateTraceGuidsEx(
-                            Interop.Advapi32.TRACE_QUERY_INFO_CLASS.TraceGuidQueryInfo,
-                            provider,
-                            sizeof(Guid),
-                            buffer,
-                            buffSize,
-                            out buffSize
-                        );
+                        hr = Interop
+                            .Advapi32
+                            .EnumerateTraceGuidsEx(
+                                Interop.Advapi32.TRACE_QUERY_INFO_CLASS.TraceGuidQueryInfo,
+                                provider,
+                                sizeof(Guid),
+                                buffer,
+                                buffSize,
+                                out buffSize
+                            );
                     }
                     if (hr == 0)
                         break;
@@ -1347,12 +1349,9 @@ namespace System.Diagnostics.Tracing
             {
                 try
                 {
-                    status = Interop.Advapi32.EventSetInformation(
-                        m_regHandle,
-                        eventInfoClass,
-                        data,
-                        dataSize
-                    );
+                    status = Interop
+                        .Advapi32
+                        .EventSetInformation(m_regHandle, eventInfoClass, data, dataSize);
                 }
                 catch (TypeLoadException)
                 {
@@ -1379,12 +1378,14 @@ namespace System.Diagnostics.Tracing
         )
         {
             Guid providerId = eventSource.Guid;
-            return Interop.Advapi32.EventRegister(
-                in providerId,
-                enableCallback,
-                callbackContext,
-                ref registrationHandle
-            );
+            return Interop
+                .Advapi32
+                .EventRegister(
+                    in providerId,
+                    enableCallback,
+                    callbackContext,
+                    ref registrationHandle
+                );
         }
 
         // Unregister an event provider.
@@ -1404,14 +1405,16 @@ namespace System.Diagnostics.Tracing
             EventProvider.EventData* userData
         )
         {
-            int error = Interop.Advapi32.EventWriteTransfer(
-                registrationHandle,
-                in eventDescriptor,
-                activityId,
-                relatedActivityId,
-                userDataCount,
-                userData
-            );
+            int error = Interop
+                .Advapi32
+                .EventWriteTransfer(
+                    registrationHandle,
+                    in eventDescriptor,
+                    activityId,
+                    relatedActivityId,
+                    userDataCount,
+                    userData
+                );
 
             switch (error)
             {

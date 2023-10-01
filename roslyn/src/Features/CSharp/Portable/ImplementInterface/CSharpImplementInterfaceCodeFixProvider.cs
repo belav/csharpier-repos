@@ -68,16 +68,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var actions = token.Parent
+            var actions = token
+                .Parent
                 .GetAncestorsOrThis<TypeSyntax>()
                 .Where(_interfaceName)
                 .Select(
                     n =>
                         service.GetCodeActions(
                             document,
-                            context.Options.GetImplementTypeGenerationOptions(
-                                document.Project.Services
-                            ),
+                            context
+                                .Options
+                                .GetImplementTypeGenerationOptions(document.Project.Services),
                             model,
                             n,
                             cancellationToken

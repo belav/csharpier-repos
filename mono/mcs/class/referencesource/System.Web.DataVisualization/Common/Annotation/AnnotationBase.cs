@@ -2787,8 +2787,10 @@ namespace System.Web.UI.DataVisualization.Charting
                                 (float)this.AnchorOffsetX,
                                 (float)this.AnchorOffsetY
                             );
-                            PointF newlocation =
-                                this.Chart.chartPicture.annotationSmartLabel.AdjustSmartLabelPosition(
+                            PointF newlocation = this.Chart
+                                .chartPicture
+                                .annotationSmartLabel
+                                .AdjustSmartLabelPosition(
                                     this.Common,
                                     this.Chart.chartPicture.ChartGraph,
                                     chartArea,
@@ -2814,8 +2816,10 @@ namespace System.Web.UI.DataVisualization.Charting
                             else
                             {
                                 // Get new position using alignment in format
-                                RectangleF newPosition =
-                                    this.Chart.chartPicture.annotationSmartLabel.GetLabelPosition(
+                                RectangleF newPosition = this.Chart
+                                    .chartPicture
+                                    .annotationSmartLabel
+                                    .GetLabelPosition(
                                         this.Chart.chartPicture.ChartGraph,
                                         newlocation,
                                         size,
@@ -2834,12 +2838,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     // Add annotation position into the list (to prevent overlapping)
                     using (StringFormat format = new StringFormat())
                     {
-                        this.Chart.chartPicture.annotationSmartLabel.AddSmartLabelPosition(
-                            this.Chart.chartPicture.ChartGraph,
-                            location,
-                            size,
-                            format
-                        );
+                        this.Chart
+                            .chartPicture
+                            .annotationSmartLabel
+                            .AddSmartLabelPosition(
+                                this.Chart.chartPicture.ChartGraph,
+                                location,
+                                size,
+                                format
+                            );
                     }
                 }
             }

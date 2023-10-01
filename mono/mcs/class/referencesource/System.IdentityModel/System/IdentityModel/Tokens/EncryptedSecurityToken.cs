@@ -37,9 +37,9 @@ namespace System.IdentityModel.Tokens
             }
             if (null == encryptingCredentials)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "encryptingCredentials"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("encryptingCredentials");
             }
 
             _encryptingCredentials = encryptingCredentials;

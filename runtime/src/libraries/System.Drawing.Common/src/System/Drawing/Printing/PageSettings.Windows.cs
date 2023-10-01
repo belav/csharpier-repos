@@ -81,14 +81,18 @@ namespace System.Drawing.Printing
 
                 try
                 {
-                    int dpiX = Interop.Gdi32.GetDeviceCaps(
-                        new HandleRef(dc, dc.Hdc),
-                        Interop.Gdi32.DeviceCapability.LOGPIXELSX
-                    );
-                    int hardMarginX_DU = Interop.Gdi32.GetDeviceCaps(
-                        new HandleRef(dc, dc.Hdc),
-                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
-                    );
+                    int dpiX = Interop
+                        .Gdi32
+                        .GetDeviceCaps(
+                            new HandleRef(dc, dc.Hdc),
+                            Interop.Gdi32.DeviceCapability.LOGPIXELSX
+                        );
+                    int hardMarginX_DU = Interop
+                        .Gdi32
+                        .GetDeviceCaps(
+                            new HandleRef(dc, dc.Hdc),
+                            Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
+                        );
                     hardMarginX = hardMarginX_DU * 100 / dpiX;
                 }
                 finally
@@ -111,14 +115,18 @@ namespace System.Drawing.Printing
 
                 try
                 {
-                    int dpiY = Interop.Gdi32.GetDeviceCaps(
-                        new HandleRef(dc, dc.Hdc),
-                        Interop.Gdi32.DeviceCapability.LOGPIXELSY
-                    );
-                    int hardMarginY_DU = Interop.Gdi32.GetDeviceCaps(
-                        new HandleRef(dc, dc.Hdc),
-                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
-                    );
+                    int dpiY = Interop
+                        .Gdi32
+                        .GetDeviceCaps(
+                            new HandleRef(dc, dc.Hdc),
+                            Interop.Gdi32.DeviceCapability.LOGPIXELSY
+                        );
+                    int hardMarginY_DU = Interop
+                        .Gdi32
+                        .GetDeviceCaps(
+                            new HandleRef(dc, dc.Hdc),
+                            Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
+                        );
                     hardMarginY = hardMarginY_DU * 100 / dpiY;
                 }
                 finally
@@ -175,9 +183,9 @@ namespace System.Drawing.Printing
                 if (_paperSource == null)
                 {
                     IntPtr modeHandle = printerSettings.GetHdevmode();
-                    IntPtr modePointer = Interop.Kernel32.GlobalLock(
-                        new HandleRef(this, modeHandle)
-                    );
+                    IntPtr modePointer = Interop
+                        .Kernel32
+                        .GlobalLock(new HandleRef(this, modeHandle));
                     Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)
                         Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
 
@@ -207,48 +215,48 @@ namespace System.Drawing.Printing
 
                 try
                 {
-                    int dpiX = Interop.Gdi32.GetDeviceCaps(
-                        hdc,
-                        Interop.Gdi32.DeviceCapability.LOGPIXELSX
-                    );
-                    int dpiY = Interop.Gdi32.GetDeviceCaps(
-                        hdc,
-                        Interop.Gdi32.DeviceCapability.LOGPIXELSY
-                    );
+                    int dpiX = Interop
+                        .Gdi32
+                        .GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.LOGPIXELSX);
+                    int dpiY = Interop
+                        .Gdi32
+                        .GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.LOGPIXELSY);
                     if (!Landscape)
                     {
                         //
                         // Need to convert the printable area to 100th of an inch from the device units
                         printableArea.X =
                             (float)
-                                Interop.Gdi32.GetDeviceCaps(
-                                    hdc,
-                                    Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
-                                )
+                                Interop
+                                    .Gdi32
+                                    .GetDeviceCaps(
+                                        hdc,
+                                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
+                                    )
                             * 100
                             / dpiX;
                         printableArea.Y =
                             (float)
-                                Interop.Gdi32.GetDeviceCaps(
-                                    hdc,
-                                    Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
-                                )
+                                Interop
+                                    .Gdi32
+                                    .GetDeviceCaps(
+                                        hdc,
+                                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
+                                    )
                             * 100
                             / dpiY;
                         printableArea.Width =
                             (float)
-                                Interop.Gdi32.GetDeviceCaps(
-                                    hdc,
-                                    Interop.Gdi32.DeviceCapability.HORZRES
-                                )
+                                Interop
+                                    .Gdi32
+                                    .GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.HORZRES)
                             * 100
                             / dpiX;
                         printableArea.Height =
                             (float)
-                                Interop.Gdi32.GetDeviceCaps(
-                                    hdc,
-                                    Interop.Gdi32.DeviceCapability.VERTRES
-                                )
+                                Interop
+                                    .Gdi32
+                                    .GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.VERTRES)
                             * 100
                             / dpiY;
                     }
@@ -258,34 +266,36 @@ namespace System.Drawing.Printing
                         // Need to convert the printable area to 100th of an inch from the device units
                         printableArea.Y =
                             (float)
-                                Interop.Gdi32.GetDeviceCaps(
-                                    hdc,
-                                    Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
-                                )
+                                Interop
+                                    .Gdi32
+                                    .GetDeviceCaps(
+                                        hdc,
+                                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETX
+                                    )
                             * 100
                             / dpiX;
                         printableArea.X =
                             (float)
-                                Interop.Gdi32.GetDeviceCaps(
-                                    hdc,
-                                    Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
-                                )
+                                Interop
+                                    .Gdi32
+                                    .GetDeviceCaps(
+                                        hdc,
+                                        Interop.Gdi32.DeviceCapability.PHYSICALOFFSETY
+                                    )
                             * 100
                             / dpiY;
                         printableArea.Height =
                             (float)
-                                Interop.Gdi32.GetDeviceCaps(
-                                    hdc,
-                                    Interop.Gdi32.DeviceCapability.HORZRES
-                                )
+                                Interop
+                                    .Gdi32
+                                    .GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.HORZRES)
                             * 100
                             / dpiX;
                         printableArea.Width =
                             (float)
-                                Interop.Gdi32.GetDeviceCaps(
-                                    hdc,
-                                    Interop.Gdi32.DeviceCapability.VERTRES
-                                )
+                                Interop
+                                    .Gdi32
+                                    .GetDeviceCaps(hdc, Interop.Gdi32.DeviceCapability.VERTRES)
                             * 100
                             / dpiY;
                     }
@@ -309,9 +319,9 @@ namespace System.Drawing.Printing
                 if (_printerResolution == null)
                 {
                     IntPtr modeHandle = printerSettings.GetHdevmode();
-                    IntPtr modePointer = Interop.Kernel32.GlobalLock(
-                        new HandleRef(this, modeHandle)
-                    );
+                    IntPtr modePointer = Interop
+                        .Kernel32
+                        .GlobalLock(new HandleRef(this, modeHandle));
                     Interop.Gdi32.DEVMODE mode = (Interop.Gdi32.DEVMODE)
                         Marshal.PtrToStructure(modePointer, typeof(Interop.Gdi32.DEVMODE))!;
 
@@ -505,14 +515,16 @@ namespace System.Drawing.Printing
             // a buffer overrun
             if (mode.dmDriverExtra >= ExtraBytes)
             {
-                int retCode = Interop.Winspool.DocumentProperties(
-                    NativeMethods.NullHandleRef,
-                    NativeMethods.NullHandleRef,
-                    printerSettings.PrinterName,
-                    modePointer,
-                    modePointer,
-                    SafeNativeMethods.DM_IN_BUFFER | SafeNativeMethods.DM_OUT_BUFFER
-                );
+                int retCode = Interop
+                    .Winspool
+                    .DocumentProperties(
+                        NativeMethods.NullHandleRef,
+                        NativeMethods.NullHandleRef,
+                        printerSettings.PrinterName,
+                        modePointer,
+                        modePointer,
+                        SafeNativeMethods.DM_IN_BUFFER | SafeNativeMethods.DM_OUT_BUFFER
+                    );
                 if (retCode < 0)
                 {
                     Interop.Kernel32.GlobalFree(modePointer);

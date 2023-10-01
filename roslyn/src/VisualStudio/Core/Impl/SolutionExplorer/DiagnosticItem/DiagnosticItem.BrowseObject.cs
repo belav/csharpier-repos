@@ -43,9 +43,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             {
                 get
                 {
-                    return _diagnosticItem.Descriptor.Description.ToString(
-                        CultureInfo.CurrentUICulture
-                    );
+                    return _diagnosticItem
+                        .Descriptor
+                        .Description
+                        .ToString(CultureInfo.CurrentUICulture);
                 }
             }
 
@@ -81,9 +82,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             {
                 get
                 {
-                    return _diagnosticItem.Descriptor.MessageFormat.ToString(
-                        CultureInfo.CurrentUICulture
-                    );
+                    return _diagnosticItem
+                        .Descriptor
+                        .MessageFormat
+                        .ToString(CultureInfo.CurrentUICulture);
                 }
             }
 

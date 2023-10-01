@@ -181,9 +181,9 @@ namespace Internal.Runtime.TypeLoader
                 TypeDefinitionHandle typeDefHandle = qTypeDefinition.NativeFormatHandle;
                 int hashCode = typeDefHandle.ComputeHashCode(metadataReader);
 
-                NativeFormatModuleInfo module = ModuleList.Instance.GetModuleInfoForMetadataReader(
-                    metadataReader
-                );
+                NativeFormatModuleInfo module = ModuleList
+                    .Instance
+                    .GetModuleInfoForMetadataReader(metadataReader);
 
                 NativeReader typeMapReader;
                 if (TryGetNativeReaderForBlob(module, ReflectionMapBlob.TypeMap, out typeMapReader))
@@ -308,8 +308,9 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             int hashCode = typeRefHandle.ComputeHashCode(metadataReader);
-            NativeFormatModuleInfo typeRefModule =
-                ModuleList.Instance.GetModuleInfoForMetadataReader(metadataReader);
+            NativeFormatModuleInfo typeRefModule = ModuleList
+                .Instance
+                .GetModuleInfoForMetadataReader(metadataReader);
             return TryGetNamedTypeForTypeReference_Inner(
                 metadataReader,
                 typeRefModule,
@@ -342,8 +343,9 @@ namespace Internal.Runtime.TypeLoader
         )
         {
             int hashCode = typeRefHandle.ComputeHashCode(metadataReader);
-            NativeFormatModuleInfo typeRefModule =
-                ModuleList.Instance.GetModuleInfoForMetadataReader(metadataReader);
+            NativeFormatModuleInfo typeRefModule = ModuleList
+                .Instance
+                .GetModuleInfoForMetadataReader(metadataReader);
             runtimeTypeHandle = default(RuntimeTypeHandle);
 
             foreach (
@@ -542,9 +544,9 @@ namespace Internal.Runtime.TypeLoader
                     // Use the CctorContextMap instead.
 
                     var moduleHandle = RuntimeAugments.GetModuleFromTypeHandle(typeHandle);
-                    NativeFormatModuleInfo module = ModuleList.Instance.GetModuleInfoByHandle(
-                        moduleHandle
-                    );
+                    NativeFormatModuleInfo module = ModuleList
+                        .Instance
+                        .GetModuleInfoByHandle(moduleHandle);
                     Debug.Assert(!moduleHandle.IsNull);
 
                     NativeReader typeMapReader;
@@ -831,11 +833,13 @@ namespace Internal.Runtime.TypeLoader
 
                 MethodNameAndSignature nameAndSig;
                 if (
-                    !TypeLoaderEnvironment.Instance.TryGetMethodNameAndSignatureFromNativeLayoutOffset(
-                        module.Handle,
-                        nameAndSigPointerToken,
-                        out nameAndSig
-                    )
+                    !TypeLoaderEnvironment
+                        .Instance
+                        .TryGetMethodNameAndSignatureFromNativeLayoutOffset(
+                            module.Handle,
+                            nameAndSigPointerToken,
+                            out nameAndSig
+                        )
                 )
                 {
                     Debug.Assert(false);
@@ -885,20 +889,23 @@ namespace Internal.Runtime.TypeLoader
                     RuntimeSignature methodSignature;
 
                     if (
-                        !TypeLoaderEnvironment.Instance.TryGetMethodNameAndSignaturePointersFromNativeLayoutSignature(
-                            module.Handle,
-                            nameAndSigPointerToken,
-                            out methodName,
-                            out methodSignature
-                        )
+                        !TypeLoaderEnvironment
+                            .Instance
+                            .TryGetMethodNameAndSignaturePointersFromNativeLayoutSignature(
+                                module.Handle,
+                                nameAndSigPointerToken,
+                                out methodName,
+                                out methodSignature
+                            )
                     )
                     {
                         Debug.Assert(false);
                         return false;
                     }
 
-                    RuntimeMethodHandle gvmSlot =
-                        TypeLoaderEnvironment.Instance.GetRuntimeMethodHandleForComponents(
+                    RuntimeMethodHandle gvmSlot = TypeLoaderEnvironment
+                        .Instance
+                        .GetRuntimeMethodHandleForComponents(
                             declaringTypeOfVirtualInvoke,
                             methodName.NativeLayoutSignature(),
                             methodSignature,
@@ -997,9 +1004,9 @@ namespace Internal.Runtime.TypeLoader
                 declaringTypeHandle,
                 canonFormKind
             );
-            TypeManagerHandle methodHandleModule = ModuleList.Instance.GetModuleForMetadataReader(
-                metadataReader
-            );
+            TypeManagerHandle methodHandleModule = ModuleList
+                .Instance
+                .GetModuleForMetadataReader(metadataReader);
 
             foreach (
                 NativeFormatModuleInfo module in ModuleList.EnumerateModules(
@@ -1120,12 +1127,14 @@ namespace Internal.Runtime.TypeLoader
                 out IntPtr dictionary
             )
             {
-                return TypeLoaderEnvironment.Instance.TryGetGenericMethodDictionaryForComponents(
-                    _declaringTypeHandle,
-                    _genericMethodTypeArgumentHandles,
-                    nameAndSignature,
-                    out dictionary
-                );
+                return TypeLoaderEnvironment
+                    .Instance
+                    .TryGetGenericMethodDictionaryForComponents(
+                        _declaringTypeHandle,
+                        _genericMethodTypeArgumentHandles,
+                        nameAndSignature,
+                        out dictionary
+                    );
             }
 
             public bool IsUninterestingDictionaryComponent(IntPtr dictionary)
@@ -1154,11 +1163,13 @@ namespace Internal.Runtime.TypeLoader
                 CanonicalFormKind canonFormKind
             )
             {
-                return TypeLoaderEnvironment.Instance.CanInstantiationsShareCode(
-                    methodInstantiation,
-                    _genericMethodTypeArgumentHandles,
-                    canonFormKind
-                );
+                return TypeLoaderEnvironment
+                    .Instance
+                    .CanInstantiationsShareCode(
+                        methodInstantiation,
+                        _genericMethodTypeArgumentHandles,
+                        canonFormKind
+                    );
             }
         }
 
@@ -1257,11 +1268,13 @@ namespace Internal.Runtime.TypeLoader
                     uint nameAndSigToken = entryParser.GetUnsigned();
                     MethodNameAndSignature nameAndSig;
                     if (
-                        !TypeLoaderEnvironment.Instance.TryGetMethodNameAndSignatureFromNativeLayoutOffset(
-                            _moduleHandle,
-                            nameAndSigToken,
-                            out nameAndSig
-                        )
+                        !TypeLoaderEnvironment
+                            .Instance
+                            .TryGetMethodNameAndSignatureFromNativeLayoutOffset(
+                                _moduleHandle,
+                                nameAndSigToken,
+                                out nameAndSig
+                            )
                     )
                     {
                         Debug.Assert(false);
@@ -1304,11 +1317,13 @@ namespace Internal.Runtime.TypeLoader
 
                     uint nameAndSigPointerToken = entryParser.GetUnsigned();
                     if (
-                        !TypeLoaderEnvironment.Instance.TryGetMethodNameAndSignatureFromNativeLayoutOffset(
-                            _moduleHandle,
-                            nameAndSigPointerToken,
-                            out _nameAndSignature
-                        )
+                        !TypeLoaderEnvironment
+                            .Instance
+                            .TryGetMethodNameAndSignatureFromNativeLayoutOffset(
+                                _moduleHandle,
+                                nameAndSigPointerToken,
+                                out _nameAndSignature
+                            )
                     )
                     {
                         Debug.Assert(false); //Error
@@ -1443,12 +1458,14 @@ namespace Internal.Runtime.TypeLoader
                 }
 
                 RuntimeTypeHandle dummy1;
-                bool success = TypeLoaderEnvironment.Instance.TryGetGenericMethodComponents(
-                    _entryDictionary,
-                    out dummy1,
-                    out _nameAndSignature,
-                    out _entryMethodInstantiation
-                );
+                bool success = TypeLoaderEnvironment
+                    .Instance
+                    .TryGetGenericMethodComponents(
+                        _entryDictionary,
+                        out dummy1,
+                        out _nameAndSignature,
+                        out _entryMethodInstantiation
+                    );
                 Debug.Assert(
                     success
                         && dummy1.Equals(_entryType)

@@ -60,11 +60,13 @@ namespace System.Activities.DurableInstancing
         {
             if (((SaveWorkflowCommand)command).InstanceKeyMetadataChanges.Count > 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new InstancePersistenceCommandException(
-                        SR.InstanceKeyMetadataChangesNotSupported
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InstancePersistenceCommandException(
+                            SR.InstanceKeyMetadataChangesNotSupported
+                        )
+                    );
             }
         }
 
@@ -384,10 +386,12 @@ namespace System.Activities.DurableInstancing
             InstanceValue binaryBlockingBookmarks;
 
             if (
-                saveWorkflowCommand.InstanceData.TryGetValue(
-                    SqlWorkflowInstanceStoreConstants.BinaryBlockingBookmarksPropertyName,
-                    out binaryBlockingBookmarks
-                )
+                saveWorkflowCommand
+                    .InstanceData
+                    .TryGetValue(
+                        SqlWorkflowInstanceStoreConstants.BinaryBlockingBookmarksPropertyName,
+                        out binaryBlockingBookmarks
+                    )
             )
             {
                 StringBuilder bookmarkListBuilder = new StringBuilder(
@@ -419,10 +423,12 @@ namespace System.Activities.DurableInstancing
             InstanceValue executionStatusProperty;
 
             if (
-                saveWorkflowCommand.InstanceData.TryGetValue(
-                    SqlWorkflowInstanceStoreConstants.StatusPropertyName,
-                    out executionStatusProperty
-                )
+                saveWorkflowCommand
+                    .InstanceData
+                    .TryGetValue(
+                        SqlWorkflowInstanceStoreConstants.StatusPropertyName,
+                        out executionStatusProperty
+                    )
             )
             {
                 executionStatus = (string)executionStatusProperty.Value;
@@ -436,10 +442,12 @@ namespace System.Activities.DurableInstancing
             InstanceValue pendingTimerExpirationPropertyValue;
 
             if (
-                saveWorkflowCommand.InstanceData.TryGetValue(
-                    SqlWorkflowInstanceStoreConstants.PendingTimerExpirationPropertyName,
-                    out pendingTimerExpirationPropertyValue
-                )
+                saveWorkflowCommand
+                    .InstanceData
+                    .TryGetValue(
+                        SqlWorkflowInstanceStoreConstants.PendingTimerExpirationPropertyName,
+                        out pendingTimerExpirationPropertyValue
+                    )
             )
             {
                 DateTime pendingTimerExpiration = (
@@ -503,28 +511,29 @@ namespace System.Activities.DurableInstancing
         {
             InstanceValue instanceValue;
             if (
-                saveWorkflowCommand.InstanceMetadataChanges.TryGetValue(
-                    WorkflowNamespace.WorkflowHostType,
-                    out instanceValue
-                )
+                saveWorkflowCommand
+                    .InstanceMetadataChanges
+                    .TryGetValue(WorkflowNamespace.WorkflowHostType, out instanceValue)
             )
             {
                 XName workflowHostType = instanceValue.Value as XName;
 
                 if (workflowHostType == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InstancePersistenceCommandException(
-                            SR.InvalidMetadataValue(
-                                WorkflowNamespace.WorkflowHostType,
-                                typeof(XName).Name
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InstancePersistenceCommandException(
+                                SR.InvalidMetadataValue(
+                                    WorkflowNamespace.WorkflowHostType,
+                                    typeof(XName).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
-                byte[] workflowHostTypeBuffer = Encoding.Unicode.GetBytes(
-                    ((XName)instanceValue.Value).ToString()
-                );
+                byte[] workflowHostTypeBuffer = Encoding
+                    .Unicode
+                    .GetBytes(((XName)instanceValue.Value).ToString());
                 return new Guid(HashHelper.ComputeHash(workflowHostTypeBuffer));
             }
             return null;
@@ -535,10 +544,12 @@ namespace System.Activities.DurableInstancing
             InstanceValue statusPropertyValue;
 
             if (
-                saveWorkflowCommand.InstanceData.TryGetValue(
-                    SqlWorkflowInstanceStoreConstants.StatusPropertyName,
-                    out statusPropertyValue
-                )
+                saveWorkflowCommand
+                    .InstanceData
+                    .TryGetValue(
+                        SqlWorkflowInstanceStoreConstants.StatusPropertyName,
+                        out statusPropertyValue
+                    )
                 && ((string)statusPropertyValue.Value)
                     == SqlWorkflowInstanceStoreConstants.ExecutingStatusPropertyValue
             )
@@ -654,63 +665,66 @@ namespace System.Activities.DurableInstancing
             string relativeServicePath = null;
 
             if (
-                saveWorkflowCommand.InstanceMetadataChanges.TryGetValue(
-                    PersistenceMetadataNamespace.ActivationType,
-                    out instanceValue
-                )
+                saveWorkflowCommand
+                    .InstanceMetadataChanges
+                    .TryGetValue(PersistenceMetadataNamespace.ActivationType, out instanceValue)
             )
             {
                 if (PersistenceMetadataNamespace.ActivationTypes.WAS.Equals(instanceValue.Value))
                 {
                     if (
-                        saveWorkflowCommand.InstanceMetadataChanges.TryGetValue(
-                            WorkflowServiceNamespace.Service,
-                            out instanceValue
-                        )
+                        saveWorkflowCommand
+                            .InstanceMetadataChanges
+                            .TryGetValue(WorkflowServiceNamespace.Service, out instanceValue)
                     )
                     {
                         serviceName = ((XName)instanceValue.Value).LocalName;
                         serviceNamespace = ((XName)instanceValue.Value).Namespace.NamespaceName;
                     }
                     if (
-                        saveWorkflowCommand.InstanceMetadataChanges.TryGetValue(
-                            WorkflowServiceNamespace.SiteName,
-                            out instanceValue
-                        )
+                        saveWorkflowCommand
+                            .InstanceMetadataChanges
+                            .TryGetValue(WorkflowServiceNamespace.SiteName, out instanceValue)
                     )
                     {
                         site = (string)instanceValue.Value;
                     }
                     if (
-                        saveWorkflowCommand.InstanceMetadataChanges.TryGetValue(
-                            WorkflowServiceNamespace.RelativeApplicationPath,
-                            out instanceValue
-                        )
+                        saveWorkflowCommand
+                            .InstanceMetadataChanges
+                            .TryGetValue(
+                                WorkflowServiceNamespace.RelativeApplicationPath,
+                                out instanceValue
+                            )
                     )
                     {
                         relativeApplicationPath = (string)instanceValue.Value;
                     }
                     if (
-                        saveWorkflowCommand.InstanceMetadataChanges.TryGetValue(
-                            WorkflowServiceNamespace.RelativeServicePath,
-                            out instanceValue
-                        )
+                        saveWorkflowCommand
+                            .InstanceMetadataChanges
+                            .TryGetValue(
+                                WorkflowServiceNamespace.RelativeServicePath,
+                                out instanceValue
+                            )
                     )
                     {
                         relativeServicePath = (string)instanceValue.Value;
                     }
 
-                    byte[] serviceDeploymentHashBuffer = Encoding.Unicode.GetBytes(
-                        string.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}#{1}#{2}#{3}#{4}",
-                            serviceName ?? string.Empty,
-                            serviceNamespace ?? string.Empty,
-                            site ?? string.Empty,
-                            relativeApplicationPath ?? string.Empty,
-                            relativeServicePath ?? string.Empty
-                        )
-                    );
+                    byte[] serviceDeploymentHashBuffer = Encoding
+                        .Unicode
+                        .GetBytes(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}#{1}#{2}#{3}#{4}",
+                                serviceName ?? string.Empty,
+                                serviceNamespace ?? string.Empty,
+                                site ?? string.Empty,
+                                relativeApplicationPath ?? string.Empty,
+                                relativeServicePath ?? string.Empty
+                            )
+                        );
                     this.serviceDeploymentHash = new Guid(
                         HashHelper.ComputeHash(serviceDeploymentHashBuffer)
                     );
@@ -720,9 +734,11 @@ namespace System.Activities.DurableInstancing
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InstancePersistenceCommandException(SR.NonWASActivationNotSupported)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InstancePersistenceCommandException(SR.NonWASActivationNotSupported)
+                        );
                 }
             }
 
@@ -814,10 +830,9 @@ namespace System.Activities.DurableInstancing
             try
             {
                 SaveWorkflowAsyncResult.serviceDeploymentIdsCacheLock.EnterReadLock();
-                SaveWorkflowAsyncResult.serviceDeploymentIdsCache.TryGetValue(
-                    this.serviceDeploymentHash,
-                    out this.serviceDeploymentId
-                );
+                SaveWorkflowAsyncResult
+                    .serviceDeploymentIdsCache
+                    .TryGetValue(this.serviceDeploymentHash, out this.serviceDeploymentId);
             }
             finally
             {
@@ -1177,14 +1192,16 @@ namespace System.Activities.DurableInstancing
                             )
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InstancePersistenceException(
-                                    SR.CannotPromoteAsSqlVariant(
-                                        propertyValue.Value.GetType().ToString(),
-                                        name.ToString()
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InstancePersistenceException(
+                                        SR.CannotPromoteAsSqlVariant(
+                                            propertyValue.Value.GetType().ToString(),
+                                            name.ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         string parameterName = string.Format(

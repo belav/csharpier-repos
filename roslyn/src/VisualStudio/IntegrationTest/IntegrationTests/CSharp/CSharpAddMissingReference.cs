@@ -117,37 +117,39 @@ class Program
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(true);
-            VisualStudio.SolutionExplorer.CreateSolution(
-                "ReferenceErrors",
-                solutionElement: XElement.Parse(
-                    "<Solution>"
-                        + $"   <Project ProjectName=\"{ClassLibrary1Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.WinFormsApplication}\" Language=\"{LanguageNames.VisualBasic}\">"
-                        + "       <Document FileName=\"Class1.vb\"><![CDATA["
-                        + FileInLibraryProject1
-                        + "]]>"
-                        + "       </Document>"
-                        + "   </Project>"
-                        + $"   <Project ProjectName=\"{ClassLibrary2Name}\" ProjectReferences=\"{ClassLibrary3Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ClassLibrary}\" Language=\"{LanguageNames.VisualBasic}\">"
-                        + "       <Document FileName=\"Class1.vb\"><![CDATA["
-                        + FileInLibraryProject2
-                        + "]]>"
-                        + "       </Document>"
-                        + "   </Project>"
-                        + $"   <Project ProjectName=\"{ClassLibrary3Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ClassLibrary}\" Language=\"{LanguageNames.VisualBasic}\">"
-                        + "       <Document FileName=\"Class1.vb\"><![CDATA["
-                        + FileInLibraryProject3
-                        + "]]>"
-                        + "       </Document>"
-                        + "   </Project>"
-                        + $"   <Project ProjectName=\"{ConsoleProjectName}\" ProjectReferences=\"{ClassLibrary1Name};{ClassLibrary2Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ConsoleApplication}\" Language=\"{LanguageNames.CSharp}\">"
-                        + "       <Document FileName=\"Program.cs\"><![CDATA["
-                        + FileInConsoleProject1
-                        + "]]>"
-                        + "       </Document>"
-                        + "   </Project>"
-                        + "</Solution>"
-                )
-            );
+            VisualStudio
+                .SolutionExplorer
+                .CreateSolution(
+                    "ReferenceErrors",
+                    solutionElement: XElement.Parse(
+                        "<Solution>"
+                            + $"   <Project ProjectName=\"{ClassLibrary1Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.WinFormsApplication}\" Language=\"{LanguageNames.VisualBasic}\">"
+                            + "       <Document FileName=\"Class1.vb\"><![CDATA["
+                            + FileInLibraryProject1
+                            + "]]>"
+                            + "       </Document>"
+                            + "   </Project>"
+                            + $"   <Project ProjectName=\"{ClassLibrary2Name}\" ProjectReferences=\"{ClassLibrary3Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ClassLibrary}\" Language=\"{LanguageNames.VisualBasic}\">"
+                            + "       <Document FileName=\"Class1.vb\"><![CDATA["
+                            + FileInLibraryProject2
+                            + "]]>"
+                            + "       </Document>"
+                            + "   </Project>"
+                            + $"   <Project ProjectName=\"{ClassLibrary3Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ClassLibrary}\" Language=\"{LanguageNames.VisualBasic}\">"
+                            + "       <Document FileName=\"Class1.vb\"><![CDATA["
+                            + FileInLibraryProject3
+                            + "]]>"
+                            + "       </Document>"
+                            + "   </Project>"
+                            + $"   <Project ProjectName=\"{ConsoleProjectName}\" ProjectReferences=\"{ClassLibrary1Name};{ClassLibrary2Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ConsoleApplication}\" Language=\"{LanguageNames.CSharp}\">"
+                            + "       <Document FileName=\"Program.cs\"><![CDATA["
+                            + FileInConsoleProject1
+                            + "]]>"
+                            + "       </Document>"
+                            + "   </Project>"
+                            + "</Solution>"
+                    )
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.AddMissingReference)]
@@ -157,22 +159,28 @@ class Program
             VisualStudio.SolutionExplorer.OpenFile(consoleProject, "Program.cs");
             VisualStudio.Editor.PlaceCaret("y.goo", charsOffset: 1);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
-                applyFix: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction(
+                    "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
+                    applyFix: false
+                );
             VisualStudio.Editor.PlaceCaret("y.ee", charsOffset: 1);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
-                applyFix: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction(
+                    "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
+                    applyFix: false
+                );
             VisualStudio.Editor.PlaceCaret("a.bar", charsOffset: 1);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Add project reference to 'ClassLibrary3'.",
-                applyFix: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Add project reference to 'ClassLibrary3'.", applyFix: false);
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.AddMissingReference)]
@@ -182,26 +190,35 @@ class Program
             VisualStudio.SolutionExplorer.OpenFile(consoleProject, "Program.cs");
             VisualStudio.Editor.PlaceCaret("y.goo", charsOffset: 1);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
-                applyFix: true
-            );
-            VisualStudio.SolutionExplorer.Verify.AssemblyReferencePresent(
-                project: consoleProject,
-                assemblyName: "System.Windows.Forms",
-                assemblyVersion: "4.0.0.0",
-                assemblyPublicKeyToken: "b77a5c561934e089"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction(
+                    "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
+                    applyFix: true
+                );
+            VisualStudio
+                .SolutionExplorer
+                .Verify
+                .AssemblyReferencePresent(
+                    project: consoleProject,
+                    assemblyName: "System.Windows.Forms",
+                    assemblyVersion: "4.0.0.0",
+                    assemblyPublicKeyToken: "b77a5c561934e089"
+                );
             VisualStudio.Editor.PlaceCaret("a.bar", charsOffset: 1);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Add project reference to 'ClassLibrary3'.",
-                applyFix: true
-            );
-            VisualStudio.SolutionExplorer.Verify.ProjectReferencePresent(
-                project: consoleProject,
-                referencedProjectName: ClassLibrary3Name
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Add project reference to 'ClassLibrary3'.", applyFix: true);
+            VisualStudio
+                .SolutionExplorer
+                .Verify
+                .ProjectReferencePresent(
+                    project: consoleProject,
+                    referencedProjectName: ClassLibrary3Name
+                );
         }
     }
 }

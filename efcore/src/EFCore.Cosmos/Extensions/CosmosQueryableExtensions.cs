@@ -43,14 +43,16 @@ public static class CosmosQueryableExtensions
         Check.NotNull(partitionKey, nameof(partitionKey));
 
         return source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    instance: null,
-                    method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                    source.Expression,
-                    Expression.Constant(partitionKey)
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression,
+                        Expression.Constant(partitionKey)
+                    )
                 )
-            )
             : source;
     }
 

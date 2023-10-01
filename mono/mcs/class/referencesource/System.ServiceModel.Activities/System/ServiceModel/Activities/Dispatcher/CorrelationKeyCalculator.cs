@@ -153,9 +153,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (!allOptional)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new ProtocolException(SR2.EmptyCorrelationQueryResults)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(new ProtocolException(SR2.EmptyCorrelationQueryResults));
                         }
                     }
                     else
@@ -207,9 +207,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (!allOptional)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new ProtocolException(SR2.EmptyCorrelationQueryResults)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(new ProtocolException(SR2.EmptyCorrelationQueryResults));
                         }
                     }
                     else

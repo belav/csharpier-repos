@@ -175,10 +175,9 @@ namespace System.Web.Security
             if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider)
             {
                 // If new crypto routines are enabled, call them instead.
-                ICryptoService cryptoService =
-                    AspNetCryptoServiceProvider.Instance.GetCryptoService(
-                        Purpose.FormsAuthentication_Ticket
-                    );
+                ICryptoService cryptoService = AspNetCryptoServiceProvider
+                    .Instance
+                    .GetCryptoService(Purpose.FormsAuthentication_Ticket);
                 byte[] unprotectedData = cryptoService.Unprotect(bBlob);
                 ticketLength = unprotectedData.Length;
                 bBlob = unprotectedData;
@@ -309,10 +308,9 @@ namespace System.Web.Security
             // Step 1b: If new crypto routines are enabled, call them instead.
             if (AspNetCryptoServiceProvider.Instance.IsDefaultProvider)
             {
-                ICryptoService cryptoService =
-                    AspNetCryptoServiceProvider.Instance.GetCryptoService(
-                        Purpose.FormsAuthentication_Ticket
-                    );
+                ICryptoService cryptoService = AspNetCryptoServiceProvider
+                    .Instance
+                    .GetCryptoService(Purpose.FormsAuthentication_Ticket);
                 byte[] protectedData = cryptoService.Protect(bBlob);
                 bBlob = protectedData;
             }

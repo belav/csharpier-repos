@@ -123,12 +123,9 @@ namespace System.Runtime.InteropServices.JavaScript
             params object[] parms
         )
         {
-            Interop.Runtime.CreateCSOwnedObjectRef(
-                typeName,
-                parms,
-                out int exception,
-                out object res
-            );
+            Interop
+                .Runtime
+                .CreateCSOwnedObjectRef(typeName, parms, out int exception, out object res);
             if (exception != 0)
                 throw new JSException((string)res);
 

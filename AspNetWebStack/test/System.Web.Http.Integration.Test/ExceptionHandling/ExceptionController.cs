@@ -216,10 +216,11 @@ namespace System.Web.Http
         {
             IEnumerable<string> values;
             if (
-                actionContext.ControllerContext.Request.Headers.TryGetValues(
-                    ResponseExceptionHeaderKey,
-                    out values
-                )
+                actionContext
+                    .ControllerContext
+                    .Request
+                    .Headers
+                    .TryGetValues(ResponseExceptionHeaderKey, out values)
             )
             {
                 string statusString = values.First() as string;

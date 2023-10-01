@@ -184,12 +184,14 @@ namespace System.Workflow.Activities.Design
                 this.parametersGrid.Rows.Count != 0,
                 "parameters grid should have atleast the dummy <add new> item"
             );
-            this.parametersGrid.Rows.Insert(
-                this.parametersGrid.Rows.Count - 1,
-                GenerateParameterName(),
-                typeof(string),
-                SR2.GetString(SR2.ParameterDirectionIn)
-            );
+            this.parametersGrid
+                .Rows
+                .Insert(
+                    this.parametersGrid.Rows.Count - 1,
+                    GenerateParameterName(),
+                    typeof(string),
+                    SR2.GetString(SR2.ParameterDirectionIn)
+                );
             // move focus to newly added cell
             this.parametersGrid.CurrentCell = this.parametersGrid
                 .Rows[this.parametersGrid.Rows.Count - 2]
@@ -641,15 +643,17 @@ namespace System.Workflow.Activities.Design
 
                 // add the retval as the first parameter
                 AddToTypeList(returnType);
-                this.parametersGrid.Rows.Insert(
-                    0,
-                    new object[]
-                    {
-                        SR2.GetString(SR2.ReturnValueString),
-                        returnType,
-                        SR2.GetString(SR2.ParameterDirectionOut)
-                    }
-                );
+                this.parametersGrid
+                    .Rows
+                    .Insert(
+                        0,
+                        new object[]
+                        {
+                            SR2.GetString(SR2.ReturnValueString),
+                            returnType,
+                            SR2.GetString(SR2.ParameterDirectionOut)
+                        }
+                    );
                 DataGridViewRow returnValueRow = this.parametersGrid.Rows[0];
                 returnValueRow.Cells[this.nameColumn.Index].ReadOnly = true;
                 returnValueRow.Cells[this.directionColumn.Index].ReadOnly = true;
@@ -660,9 +664,9 @@ namespace System.Workflow.Activities.Design
         {
             WorkflowServiceOperationListItem item = (WorkflowServiceOperationListItem)this.Item;
             if (
-                this.protectionLevelComboBox.SelectedItem.Equals(
-                    SR2.GetString(SR2.UseRuntimeDefaults)
-                )
+                this.protectionLevelComboBox
+                    .SelectedItem
+                    .Equals(SR2.GetString(SR2.UseRuntimeDefaults))
             )
             {
                 item.Operation.ResetProtectionLevel();

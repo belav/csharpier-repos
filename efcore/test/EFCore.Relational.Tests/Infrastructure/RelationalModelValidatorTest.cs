@@ -3579,9 +3579,9 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        (
-            (IConventionEntityType)modelBuilder.Entity<TestMethods>().HasNoKey().Metadata
-        ).Builder.ToFunction(TestMethods.MethodBMi);
+        ((IConventionEntityType)modelBuilder.Entity<TestMethods>().HasNoKey().Metadata)
+            .Builder
+            .ToFunction(TestMethods.MethodBMi);
 
         VerifyError(
             RelationalStrings.InvalidMappedFunctionWithParameters(

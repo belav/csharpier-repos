@@ -41,7 +41,8 @@ namespace System.ServiceModel.Dispatcher
                         mrc.Channel is ISessionChannel<IInputSession>
                         || mrc.Channel is ISessionChannel<IDuplexSession>
                     )
-                    && host.Description.Behaviors
+                    && host.Description
+                        .Behaviors
                         .Find<ServiceBehaviorAttribute>()
                         .InstanceContextMode == InstanceContextMode.PerSession
                 )

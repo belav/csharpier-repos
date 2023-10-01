@@ -50,9 +50,9 @@ namespace System
             Debug.Assert(enumType is RuntimeType);
             Debug.Assert(enumType.IsEnum);
 
-            return ReflectionAugments.ReflectionCoreCallbacks.GetEnumInfo<TUnderlyingValue>(
-                enumType
-            );
+            return ReflectionAugments
+                .ReflectionCoreCallbacks
+                .GetEnumInfo<TUnderlyingValue>(enumType);
         }
 #pragma warning restore
 

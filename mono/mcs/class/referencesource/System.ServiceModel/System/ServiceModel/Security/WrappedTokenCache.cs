@@ -38,9 +38,9 @@ namespace System.ServiceModel.Security
 
             if (sctClaimsHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "sctClaimsHandler"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("sctClaimsHandler");
             }
 
             _tokenCache = tokenCache;
@@ -217,9 +217,11 @@ namespace System.ServiceModel.Security
             );
             if (_tokenCache.Get(key) == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID4285, sessionToken.ContextId.ToString())
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperInvalidOperation(
+                        SR.GetString(SR.ID4285, sessionToken.ContextId.ToString())
+                    );
             }
             _tokenCache.AddOrUpdate(key, sessionToken, expiryTime);
         }

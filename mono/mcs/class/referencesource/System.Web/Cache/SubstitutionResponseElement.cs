@@ -38,9 +38,11 @@ namespace System.Web.Caching
         private void OnSerializingMethod(StreamingContext context)
         {
             // create a string representation of the callback
-            _targetTypeName = System.Web.UI.Util.GetAssemblyQualifiedTypeName(
-                _callback.Method.ReflectedType
-            );
+            _targetTypeName = System
+                .Web
+                .UI
+                .Util
+                .GetAssemblyQualifiedTypeName(_callback.Method.ReflectedType);
             _methodName = _callback.Method.Name;
         }
 

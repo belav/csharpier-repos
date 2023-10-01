@@ -57,9 +57,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
             CompileAndVerify(
                 source,
                 validator: validator,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -2736,9 +2736,9 @@ B",
                 source: source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -2792,9 +2792,9 @@ static class S
 }";
             var compilation = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             Action<ModuleSymbol> validator = module =>
             {
@@ -2907,7 +2907,8 @@ internal static class C
                 comp,
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace
+                    var method = module
+                        .GlobalNamespace
                         .GetMember<NamedTypeSymbol>("C")
                         .GetMember<PEMethodSymbol>("M1");
                     Assert.True(method.IsExtensionMethod);
@@ -3156,7 +3157,8 @@ class Program
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics();
 
-            var extensionMethod = compilation.GlobalNamespace
+            var extensionMethod = compilation
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
@@ -3210,7 +3212,8 @@ public struct MyStruct<T>
             );
             compilation2.VerifyDiagnostics();
 
-            var extensionMethod = compilation2.GlobalNamespace
+            var extensionMethod = compilation2
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
@@ -3244,7 +3247,8 @@ public struct MyStruct<T>
                     .WithLocation(5, 9)
             );
 
-            extensionMethod = compilation2.GlobalNamespace
+            extensionMethod = compilation2
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);
@@ -4679,7 +4683,8 @@ public static class C
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics();
 
-            var extensionMethod = compilation.GlobalNamespace
+            var extensionMethod = compilation
+                .GlobalNamespace
                 .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M");
             Assert.True(extensionMethod.IsExtensionMethod);

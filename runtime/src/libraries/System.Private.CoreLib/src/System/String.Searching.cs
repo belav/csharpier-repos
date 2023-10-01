@@ -51,19 +51,16 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(
-                        this,
-                        value,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .IndexOf(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(
-                        this,
-                        value,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .IndexOf(this, value, GetCaseCompareOfComparisonCulture(comparisonType));
 
                 case StringComparison.Ordinal:
                     return IndexOf(value);
@@ -292,23 +289,28 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.IndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .IndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.IndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .IndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
@@ -479,33 +481,40 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return CultureInfo.CurrentCulture.CompareInfo.LastIndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .LastIndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return CompareInfo.Invariant.LastIndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .LastIndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
 
                 case StringComparison.Ordinal:
                 case StringComparison.OrdinalIgnoreCase:
-                    return CompareInfo.Invariant.LastIndexOf(
-                        this,
-                        value,
-                        startIndex,
-                        count,
-                        GetCompareOptionsFromOrdinalStringComparison(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .LastIndexOf(
+                            this,
+                            value,
+                            startIndex,
+                            count,
+                            GetCompareOptionsFromOrdinalStringComparison(comparisonType)
+                        );
 
                 default:
                     throw (value is null)

@@ -302,9 +302,9 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
 
             if (useIds)
             {
-                existingAddress2Person3.IdNotes.Add(
-                    new NoteWithId { Id = 4, Content = "City note" }
-                );
+                existingAddress2Person3
+                    .IdNotes
+                    .Add(new NoteWithId { Id = 4, Content = "City note" });
             }
             else
             {
@@ -606,9 +606,9 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
         var options = Fixture.CreateOptions();
         using (var context = new EmbeddedTransportationContext(options))
         {
-            var bike = await context.Vehicles.SingleAsync(
-                v => v.Name == "Trek Pro Fit Madone 6 Series"
-            );
+            var bike = await context
+                .Vehicles
+                .SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
             bike.Operator = new Operator { Name = "Chris Horner" };
 
@@ -622,9 +622,9 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
 
         using (var context = new EmbeddedTransportationContext(options))
         {
-            var bike = await context.Vehicles.SingleAsync(
-                v => v.Name == "Trek Pro Fit Madone 6 Series"
-            );
+            var bike = await context
+                .Vehicles
+                .SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
             Assert.Equal("repairman", bike.Operator.Name);
         }
     }
@@ -635,9 +635,9 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
         var options = Fixture.CreateOptions();
         using (var context = new EmbeddedTransportationContext(options))
         {
-            var bike = await context.Vehicles.SingleAsync(
-                v => v.Name == "Trek Pro Fit Madone 6 Series"
-            );
+            var bike = await context
+                .Vehicles
+                .SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
             var newBike = new Vehicle
             {
@@ -655,9 +655,9 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
 
         using (var context = new EmbeddedTransportationContext(options))
         {
-            var bike = await context.Vehicles.SingleAsync(
-                v => v.Name == "Trek Pro Fit Madone 6 Series"
-            );
+            var bike = await context
+                .Vehicles
+                .SingleAsync(v => v.Name == "Trek Pro Fit Madone 6 Series");
 
             Assert.Equal(2, bike.SeatingCapacity);
             Assert.NotNull(bike.Operator);

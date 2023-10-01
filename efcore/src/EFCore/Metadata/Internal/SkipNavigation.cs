@@ -205,11 +205,10 @@ public class SkipNavigation
 
             return isChanging
                 ? (ForeignKey?)
-                    DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationForeignKeyChanged(
-                        Builder,
-                        foreignKey,
-                        oldForeignKey
-                    )
+                    DeclaringEntityType
+                        .Model
+                        .ConventionDispatcher
+                        .OnSkipNavigationForeignKeyChanged(Builder, foreignKey, oldForeignKey)
                 : foreignKey;
         }
 
@@ -252,11 +251,10 @@ public class SkipNavigation
 
         return isChanging
             ? (ForeignKey?)
-                DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationForeignKeyChanged(
-                    Builder,
-                    foreignKey,
-                    oldForeignKey!
-                )
+                DeclaringEntityType
+                    .Model
+                    .ConventionDispatcher
+                    .OnSkipNavigationForeignKeyChanged(Builder, foreignKey, oldForeignKey!)
             : foreignKey;
     }
 
@@ -301,11 +299,10 @@ public class SkipNavigation
 
             return isChanging
                 ? (SkipNavigation?)
-                    DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationInverseChanged(
-                        Builder,
-                        inverse!,
-                        oldInverse!
-                    )
+                    DeclaringEntityType
+                        .Model
+                        .ConventionDispatcher
+                        .OnSkipNavigationInverseChanged(Builder, inverse!, oldInverse!)
                 : inverse;
         }
 
@@ -342,11 +339,10 @@ public class SkipNavigation
 
         return isChanging
             ? (SkipNavigation?)
-                DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationInverseChanged(
-                    Builder,
-                    inverse,
-                    oldInverse!
-                )
+                DeclaringEntityType
+                    .Model
+                    .ConventionDispatcher
+                    .OnSkipNavigationInverseChanged(Builder, inverse, oldInverse!)
             : inverse;
     }
 
@@ -392,12 +388,10 @@ public class SkipNavigation
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType.Model.ConventionDispatcher.OnSkipNavigationAnnotationChanged(
-            Builder,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnSkipNavigationAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

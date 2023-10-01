@@ -105,13 +105,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
                     }
                     else if (
                         getAccessor.Body != null
-                        && getAccessor.Body.TryConvertToArrowExpressionBody(
-                            propertyDeclaration.Kind(),
-                            languageVersion,
-                            expressionBodyPreference,
-                            out var arrowExpression,
-                            out var semicolonToken
-                        )
+                        && getAccessor
+                            .Body
+                            .TryConvertToArrowExpressionBody(
+                                propertyDeclaration.Kind(),
+                                languageVersion,
+                                expressionBodyPreference,
+                                out var arrowExpression,
+                                out var semicolonToken
+                            )
                     )
                     {
                         return propertyDeclaration
@@ -125,11 +127,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             {
                 if (
                     propertyDeclaration.ExpressionBody != null
-                    && propertyDeclaration.ExpressionBody.TryConvertToBlock(
-                        propertyDeclaration.SemicolonToken,
-                        createReturnStatementForExpression: true,
-                        block: out var block
-                    )
+                    && propertyDeclaration
+                        .ExpressionBody
+                        .TryConvertToBlock(
+                            propertyDeclaration.SemicolonToken,
+                            createReturnStatementForExpression: true,
+                            block: out var block
+                        )
                 )
                 {
                     var accessor = SyntaxFactory
@@ -247,13 +251,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             )
             {
                 if (
-                    accessorDeclaration.Body.TryConvertToArrowExpressionBody(
-                        accessorDeclaration.Kind(),
-                        languageVersion,
-                        expressionBodyPreference,
-                        out var arrowExpression,
-                        out var semicolonToken
-                    )
+                    accessorDeclaration
+                        .Body
+                        .TryConvertToArrowExpressionBody(
+                            accessorDeclaration.Kind(),
+                            languageVersion,
+                            expressionBodyPreference,
+                            out var arrowExpression,
+                            out var semicolonToken
+                        )
                 )
                 {
                     return accessorDeclaration
@@ -269,12 +275,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             )
             {
                 if (
-                    accessorDeclaration.ExpressionBody.TryConvertToBlock(
-                        accessorDeclaration.SemicolonToken,
-                        createReturnStatementForExpression: accessorDeclaration.Kind()
-                            == SyntaxKind.GetAccessorDeclaration,
-                        block: out var block
-                    )
+                    accessorDeclaration
+                        .ExpressionBody
+                        .TryConvertToBlock(
+                            accessorDeclaration.SemicolonToken,
+                            createReturnStatementForExpression: accessorDeclaration.Kind()
+                                == SyntaxKind.GetAccessorDeclaration,
+                            block: out var block
+                        )
                 )
                 {
                     return accessorDeclaration
@@ -483,7 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
 
                     // Wrap the argument in parentheses (in order to not introduce any precedence problems).
                     // But also add a simplification annotation so we can remove the parens if possible.
-                    var argumentExpression = currentInvocation.ArgumentList
+                    var argumentExpression = currentInvocation
+                        .ArgumentList
                         .Arguments[0]
                         .Expression
                         .Parenthesize();

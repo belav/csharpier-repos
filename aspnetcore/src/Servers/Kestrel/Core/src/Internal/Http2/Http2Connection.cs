@@ -540,8 +540,9 @@ internal sealed partial class Http2Connection
                                     detectedVersion
                                 );
 
-                                var responseBytes = InvalidHttp1xErrorResponseBytes ??=
-                                    Encoding.ASCII.GetBytes(
+                                var responseBytes = InvalidHttp1xErrorResponseBytes ??= Encoding
+                                    .ASCII
+                                    .GetBytes(
                                         "HTTP/1.1 400 Bad Request\r\n"
                                             + "Connection: close\r\n"
                                             + "Content-Type: text/plain\r\n"
@@ -1503,10 +1504,9 @@ internal sealed partial class Http2Connection
             throw;
         }
 
-        KestrelEventSource.Log.RequestQueuedStart(
-            _currentHeadersStream,
-            AspNetCore.Http.HttpProtocol.Http2
-        );
+        KestrelEventSource
+            .Log
+            .RequestQueuedStart(_currentHeadersStream, AspNetCore.Http.HttpProtocol.Http2);
 
         // _scheduleInline is only true in tests
         if (!_scheduleInline)

@@ -52,14 +52,17 @@ namespace Microsoft.Interop
                     );
                 bool runtimeMarshallingDisabled =
                     disabledRuntimeMarshallingAttributeType is not null
-                    && env.Compilation.Assembly
+                    && env.Compilation
+                        .Assembly
                         .GetAttributes()
                         .Any(
                             attr =>
-                                SymbolEqualityComparer.Default.Equals(
-                                    attr.AttributeClass,
-                                    disabledRuntimeMarshallingAttributeType
-                                )
+                                SymbolEqualityComparer
+                                    .Default
+                                    .Equals(
+                                        attr.AttributeClass,
+                                        disabledRuntimeMarshallingAttributeType
+                                    )
                         );
 
                 // Since the char type can go into the P/Invoke signature here, we can only use it when

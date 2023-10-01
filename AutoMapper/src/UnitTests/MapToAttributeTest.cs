@@ -44,7 +44,8 @@ public class SourceToDestinationNameMapperAttributesMember : ISourceToDestinatio
     {
         if (!_allSourceMembers.TryGetValue(sourceTypeDetails, out SourceMember[] sourceMembers))
         {
-            sourceMembers = sourceTypeDetails.ReadAccessors
+            sourceMembers = sourceTypeDetails
+                .ReadAccessors
                 .Select(sourceMember => new SourceMember(sourceMember))
                 .Where(s => s.Attribute != null)
                 .ToArray();

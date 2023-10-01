@@ -23,9 +23,9 @@ public class FunctionsDirectivePassTest : RazorProjectEngineTestBase
         var codeDocument = RazorCodeDocument.Create(sourceDocument);
 
         var irDocument = new DocumentIntermediateNode();
-        irDocument.Children.Add(
-            new DirectiveIntermediateNode() { Directive = FunctionsDirective.Directive, }
-        );
+        irDocument
+            .Children
+            .Add(new DirectiveIntermediateNode() { Directive = FunctionsDirective.Directive, });
 
         // Act
         pass.Execute(codeDocument, irDocument);

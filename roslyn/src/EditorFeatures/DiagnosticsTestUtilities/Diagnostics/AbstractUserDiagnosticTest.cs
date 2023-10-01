@@ -59,9 +59,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             // Special case for single diagnostic reported with annotated span.
             if (expected.Length == 1 && !expected[0].HasLocation)
             {
-                var hostDocumentsWithAnnotations = workspace.Documents.Where(
-                    d => d.SelectedSpans.Any()
-                );
+                var hostDocumentsWithAnnotations = workspace
+                    .Documents
+                    .Where(d => d.SelectedSpans.Any());
                 if (hostDocumentsWithAnnotations.Count() == 1)
                 {
                     var expectedSpan = hostDocumentsWithAnnotations.Single().SelectedSpans.Single();

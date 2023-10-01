@@ -29,11 +29,13 @@ public class ResponseBodyTests
                     var startingTcs = new TaskCompletionSource(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    httpContext.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    httpContext
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
                     await httpContext.Response.StartAsync();
                     Assert.True(httpContext.Response.HasStarted);
                     Assert.True(httpContext.Response.Headers.IsReadOnly);
@@ -70,11 +72,13 @@ public class ResponseBodyTests
                     var startingTcs = new TaskCompletionSource(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    httpContext.Response.OnStarting(() =>
-                    {
-                        startingTcs.SetResult();
-                        return Task.CompletedTask;
-                    });
+                    httpContext
+                        .Response
+                        .OnStarting(() =>
+                        {
+                            startingTcs.SetResult();
+                            return Task.CompletedTask;
+                        });
                     await httpContext.Response.CompleteAsync();
                     Assert.True(httpContext.Response.HasStarted);
                     Assert.True(httpContext.Response.Headers.IsReadOnly);
@@ -213,9 +217,9 @@ public class ResponseBodyTests
                 {
                     httpContext.Response.Headers["transfeR-Encoding"] = "CHunked";
                     Stream stream = httpContext.Response.Body;
-                    var responseBytes = Encoding.ASCII.GetBytes(
-                        "10\r\nManually Chunked\r\n0\r\n\r\n"
-                    );
+                    var responseBytes = Encoding
+                        .ASCII
+                        .GetBytes("10\r\nManually Chunked\r\n0\r\n\r\n");
                     await stream.WriteAsync(responseBytes, 0, responseBytes.Length);
                 }
             )
@@ -389,15 +393,17 @@ public class ResponseBodyTests
                 httpContext =>
                 {
                     httpContext.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                    httpContext.Response.OnStarting(
-                        state =>
-                        {
-                            onStartingCalled = true;
-                            Assert.Same(state, httpContext);
-                            return Task.FromResult(0);
-                        },
-                        httpContext
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            state =>
+                            {
+                                onStartingCalled = true;
+                                Assert.Same(state, httpContext);
+                                return Task.FromResult(0);
+                            },
+                            httpContext
+                        );
                     httpContext.Response.Body.Write(new byte[10], 0, 10);
                     return Task.FromResult(0);
                 }
@@ -428,18 +434,23 @@ public class ResponseBodyTests
                 out address,
                 httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        state =>
-                        {
-                            onStartingCalled = true;
-                            Assert.Same(state, httpContext);
-                            return Task.FromResult(0);
-                        },
-                        httpContext
-                    );
-                    httpContext.Response.Body.EndWrite(
-                        httpContext.Response.Body.BeginWrite(new byte[10], 0, 10, null, null)
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            state =>
+                            {
+                                onStartingCalled = true;
+                                Assert.Same(state, httpContext);
+                                return Task.FromResult(0);
+                            },
+                            httpContext
+                        );
+                    httpContext
+                        .Response
+                        .Body
+                        .EndWrite(
+                            httpContext.Response.Body.BeginWrite(new byte[10], 0, 10, null, null)
+                        );
                     return Task.FromResult(0);
                 }
             )
@@ -469,15 +480,17 @@ public class ResponseBodyTests
                 out address,
                 httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        state =>
-                        {
-                            onStartingCalled = true;
-                            Assert.Same(state, httpContext);
-                            return Task.FromResult(0);
-                        },
-                        httpContext
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            state =>
+                            {
+                                onStartingCalled = true;
+                                Assert.Same(state, httpContext);
+                                return Task.FromResult(0);
+                            },
+                            httpContext
+                        );
                     return httpContext.Response.Body.WriteAsync(new byte[10], 0, 10);
                 }
             )

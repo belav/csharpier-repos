@@ -188,9 +188,11 @@ namespace System.Data.Mapping
                         if (memberMapping != null)
                         {
                             throw new MappingException(
-                                System.Data.Entity.Strings.Mapping_Duplicate_PropertyMap_CaseInsensitive(
-                                    propertyName
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .Mapping_Duplicate_PropertyMap_CaseInsensitive(propertyName)
                             );
                         }
                         memberMapping = keyValuePair.Value;

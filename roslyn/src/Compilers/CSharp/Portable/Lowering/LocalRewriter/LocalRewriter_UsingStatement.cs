@@ -640,7 +640,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(expression == null);
                 Debug.Assert(
-                    method.Parameters
+                    method
+                        .Parameters
                         .AsSpan()[1..]
                         .All(
                             assertParametersAreOptional,
@@ -664,14 +665,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             Debug.Assert(
-                methodArgumentInfo.Arguments.All(
-                    arg =>
-                        arg
-                            is not BoundConversion
-                            {
-                                ConversionKind: ConversionKind.InterpolatedStringHandler
-                            }
-                )
+                methodArgumentInfo
+                    .Arguments
+                    .All(
+                        arg =>
+                            arg
+                                is not BoundConversion
+                                {
+                                    ConversionKind: ConversionKind.InterpolatedStringHandler
+                                }
+                    )
             );
 #endif
 

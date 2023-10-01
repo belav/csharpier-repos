@@ -215,9 +215,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 {
                     // Associate the diagnostics from the request that match the diagnostic fixed by the code action by ID.
                     // The request diagnostics are already restricted to the code fix location by the request.
-                    var diagnosticCodesFixedByAction = codeFixAction.CodeFix.Diagnostics.Select(
-                        d => d.Id
-                    );
+                    var diagnosticCodesFixedByAction = codeFixAction
+                        .CodeFix
+                        .Diagnostics
+                        .Select(d => d.Id);
                     using var _ = ArrayBuilder<LSP.Diagnostic>.GetInstance(
                         out var diagnosticsBuilder
                     );

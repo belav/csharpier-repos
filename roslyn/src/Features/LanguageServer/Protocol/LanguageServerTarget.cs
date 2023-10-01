@@ -147,7 +147,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                     _target._clientCapabilities,
                     $"{nameof(InitializeAsync)} has not been called."
                 );
-                var result = await _target._requestDispatcher
+                var result = await _target
+                    ._requestDispatcher
                     .ExecuteRequestAsync<TRequestType, TResponseType>(
                         _method,
                         requestType,

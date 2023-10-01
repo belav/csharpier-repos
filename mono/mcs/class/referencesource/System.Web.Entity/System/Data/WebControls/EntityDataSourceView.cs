@@ -557,7 +557,8 @@ namespace System.Web.UI.WebControls
 
             foreach (object element in entities)
             {
-                var elementEntitySet = Context.ObjectStateManager
+                var elementEntitySet = Context
+                    .ObjectStateManager
                     .GetObjectStateEntry(element)
                     .EntitySet;
                 if (elementEntitySet != EntitySet)
@@ -995,9 +996,11 @@ namespace System.Web.UI.WebControls
                         // If the results have an identity/primary keys, gather them from restricted type or the element type from the set the control is querying
                         // Make sure to use keys from the ObjectSpace type in case there were name mappings
                         EntityType entityType =
-                            Context.MetadataWorkspace.GetObjectSpaceType(
-                                CSpaceFilteredEntityType ?? EntitySet.ElementType
-                            ) as EntityType;
+                            Context
+                                .MetadataWorkspace
+                                .GetObjectSpaceType(
+                                    CSpaceFilteredEntityType ?? EntitySet.ElementType
+                                ) as EntityType;
                         propTable = new EntityDataSourceViewSchema(
                             results,
                             entityType.KeyMembers.Select(x => x.Name).ToArray()
@@ -1034,10 +1037,9 @@ namespace System.Web.UI.WebControls
             }
 
             //This is the automatically generated Where clause.
-            IOrderedDictionary paramValues = _owner.WhereParameters.GetValues(
-                _owner.HttpContext,
-                _owner
-            );
+            IOrderedDictionary paramValues = _owner
+                .WhereParameters
+                .GetValues(_owner.HttpContext, _owner);
             // Under some conditions, the paramValues has a null entry.
             StringBuilder whereClauseBuilder = new StringBuilder();
             List<ObjectParameter> whereParameterList = new List<ObjectParameter>();
@@ -1478,10 +1480,14 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    contextType = System.Web.Compilation.BuildManager.GetType(
-                        _owner.ContextTypeName, /*throw on error*/
-                        true
-                    );
+                    contextType = System
+                        .Web
+                        .Compilation
+                        .BuildManager
+                        .GetType(
+                            _owner.ContextTypeName, /*throw on error*/
+                            true
+                        );
                 }
 
                 ConstructorInfo ctxInfo = contextType.GetConstructor(
@@ -1517,8 +1523,11 @@ namespace System.Web.UI.WebControls
                         // Since we don't have the type from the strongly-typed context,
                         // load from all of the referenced assemblies, including code from App_Code and the top-level directory:
                         // http://msdn2.microsoft.com/en-us/library/system.web.compilation.buildmanager.getreferencedassemblies.aspx
-                        ICollection codeAssemblies =
-                            System.Web.Compilation.BuildManager.GetReferencedAssemblies();
+                        ICollection codeAssemblies = System
+                            .Web
+                            .Compilation
+                            .BuildManager
+                            .GetReferencedAssemblies();
                         foreach (Assembly assembly in codeAssemblies)
                         {
                             if (ShouldTryLoadTypesFrom(assembly))
@@ -1850,9 +1859,9 @@ namespace System.Web.UI.WebControls
                 {
                     return null;
                 }
-                StructuralType oSpaceType = Context.MetadataWorkspace.GetObjectSpaceType(
-                    EntityCSpaceType
-                );
+                StructuralType oSpaceType = Context
+                    .MetadataWorkspace
+                    .GetObjectSpaceType(EntityCSpaceType);
                 return oSpaceType;
             }
         }
@@ -1873,11 +1882,13 @@ namespace System.Web.UI.WebControls
                 if (!String.IsNullOrEmpty(_owner.EntityTypeFilter))
                 {
                     cSpaceType = (EntityType)
-                        Context.MetadataWorkspace.GetType(
-                            _owner.EntityTypeFilter,
-                            EntitySet.ElementType.NamespaceName,
-                            DataSpace.CSpace
-                        );
+                        Context
+                            .MetadataWorkspace
+                            .GetType(
+                                _owner.EntityTypeFilter,
+                                EntitySet.ElementType.NamespaceName,
+                                DataSpace.CSpace
+                            );
                     if (
                         !EntityDataSourceUtil.IsTypeOrSubtypeOf(
                             EntitySet.ElementType,
@@ -1925,10 +1936,9 @@ namespace System.Web.UI.WebControls
         {
             get
             {
-                return Context.MetadataWorkspace.GetEntityContainer(
-                    ContainerName,
-                    DataSpace.CSpace
-                );
+                return Context
+                    .MetadataWorkspace
+                    .GetEntityContainer(ContainerName, DataSpace.CSpace);
             }
         }
 
@@ -1978,10 +1988,9 @@ namespace System.Web.UI.WebControls
             {
                 if (null == _keyMembers)
                 {
-                    EntityContainer entityContainer = Context.MetadataWorkspace.GetEntityContainer(
-                        ContainerName,
-                        DataSpace.CSpace
-                    );
+                    EntityContainer entityContainer = Context
+                        .MetadataWorkspace
+                        .GetEntityContainer(ContainerName, DataSpace.CSpace);
                     EntitySet entitySet = entityContainer.GetEntitySetByName(
                         _owner.EntitySetName,
                         false
@@ -2062,10 +2071,9 @@ namespace System.Web.UI.WebControls
 
         internal void ValidateEntitySetName()
         {
-            EntityContainer entityContainer = Context.MetadataWorkspace.GetEntityContainer(
-                ContainerName,
-                DataSpace.CSpace
-            );
+            EntityContainer entityContainer = Context
+                .MetadataWorkspace
+                .GetEntityContainer(ContainerName, DataSpace.CSpace);
             EntitySet entitySet;
             if (
                 !entityContainer.TryGetEntitySetByName(
@@ -2087,11 +2095,9 @@ namespace System.Web.UI.WebControls
         {
             EntityContainer container;
             if (
-                !Context.MetadataWorkspace.TryGetEntityContainer(
-                    ContainerName,
-                    DataSpace.CSpace,
-                    out container
-                )
+                !Context
+                    .MetadataWorkspace
+                    .TryGetEntityContainer(ContainerName, DataSpace.CSpace, out container)
             )
             {
                 throw new InvalidOperationException(

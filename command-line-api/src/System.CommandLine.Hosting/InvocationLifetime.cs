@@ -56,20 +56,24 @@ namespace System.CommandLine.Hosting
         {
             if (!Options.SuppressStatusMessages)
             {
-                appStartedReg = ApplicationLifetime.ApplicationStarted.Register(
-                    state =>
-                    {
-                        ((InvocationLifetime)state).OnApplicationStarted();
-                    },
-                    this
-                );
-                appStoppingReg = ApplicationLifetime.ApplicationStopping.Register(
-                    state =>
-                    {
-                        ((InvocationLifetime)state).OnApplicationStopping();
-                    },
-                    this
-                );
+                appStartedReg = ApplicationLifetime
+                    .ApplicationStarted
+                    .Register(
+                        state =>
+                        {
+                            ((InvocationLifetime)state).OnApplicationStarted();
+                        },
+                        this
+                    );
+                appStoppingReg = ApplicationLifetime
+                    .ApplicationStopping
+                    .Register(
+                        state =>
+                        {
+                            ((InvocationLifetime)state).OnApplicationStopping();
+                        },
+                        this
+                    );
             }
 
             invokeCancelReg = invokeCancelToken.Register(

@@ -67,11 +67,11 @@ namespace TypeSystemTests
             Stream peStream = preLoadedFile;
             peStream ??= File.OpenRead(filePath);
 
-            ModuleDesc module = Internal.TypeSystem.Ecma.EcmaModule.Create(
-                this,
-                new PEReader(peStream),
-                containingAssembly: null
-            );
+            ModuleDesc module = Internal
+                .TypeSystem
+                .Ecma
+                .EcmaModule
+                .Create(this, new PEReader(peStream), containingAssembly: null);
             _modules.Add(simpleName, module);
             return module;
         }

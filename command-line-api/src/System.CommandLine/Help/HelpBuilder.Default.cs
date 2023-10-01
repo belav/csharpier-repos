@@ -110,7 +110,8 @@ public partial class HelpBuilder
             HelpContext context
         )
         {
-            var aliases = symbol.Aliases
+            var aliases = symbol
+                .Aliases
                 .Select(r => r.SplitPrefix())
                 .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)

@@ -395,8 +395,11 @@ namespace Microsoft.CodeAnalysis.CodeActions
             if (document.SupportsSyntaxTree)
             {
                 // TODO: avoid ILegacyGlobalOptionsWorkspaceService https://github.com/dotnet/roslyn/issues/60777
-                var globalOptions =
-                    document.Project.Solution.Services.GetService<ILegacyGlobalOptionsWorkspaceService>();
+                var globalOptions = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetService<ILegacyGlobalOptionsWorkspaceService>();
                 var fallbackOptions =
                     globalOptions?.CleanCodeGenerationOptionsProvider
                     ?? CodeActionOptions.DefaultProvider;

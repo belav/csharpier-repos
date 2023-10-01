@@ -186,9 +186,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             string libraryName;
             string referenceOwnerName = null;
 
-            var isCompilationAssembly = containingAssembly.Identity.Equals(
-                compilation.Assembly.Identity
-            );
+            var isCompilationAssembly = containingAssembly
+                .Identity
+                .Equals(compilation.Assembly.Identity);
             if (isCompilationAssembly)
             {
                 libraryName = GetLibraryName(project);

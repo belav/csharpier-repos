@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         {
             if (_service != null)
             {
-                return await _service.Value
+                return await _service
+                    .Value
                     .GetRenameInfoAsync(document, position, cancellationToken)
                     .ConfigureAwait(false);
             }

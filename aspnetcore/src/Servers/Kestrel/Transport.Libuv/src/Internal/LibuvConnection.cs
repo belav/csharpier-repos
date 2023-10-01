@@ -229,10 +229,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             var currentWritableBuffer = Input.GetMemory(MinAllocBufferSize);
             _bufferHandle = currentWritableBuffer.Pin();
 
-            return handle.Libuv.buf_init(
-                (IntPtr)_bufferHandle.Pointer,
-                currentWritableBuffer.Length
-            );
+            return handle
+                .Libuv
+                .buf_init((IntPtr)_bufferHandle.Pointer, currentWritableBuffer.Length);
         }
 
         private static void ReadCallback(UvStreamHandle handle, int status, object state)

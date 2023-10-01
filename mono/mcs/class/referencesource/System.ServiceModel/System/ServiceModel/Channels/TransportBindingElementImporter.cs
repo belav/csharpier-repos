@@ -48,9 +48,9 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56506 // Microsoft, these properties cannot be null in this context
             if (context.Endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "context.Endpoint.Binding"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("context.Endpoint.Binding");
             }
 
 #pragma warning suppress 56506 // Microsoft, CustomBinding.Elements never be null
@@ -104,8 +104,9 @@ namespace System.ServiceModel.Channels
             TransportBindingElement transportBindingElement
         )
         {
-            EndpointAddress address = context.Endpoint.Address =
-                WsdlImporter.WSAddressingHelper.ImportAddress(context.WsdlPort);
+            EndpointAddress address = context.Endpoint.Address = WsdlImporter
+                .WSAddressingHelper
+                .ImportAddress(context.WsdlPort);
             if (address != null)
             {
                 context.Endpoint.Address = address;
@@ -161,11 +162,9 @@ namespace System.ServiceModel.Channels
         )
         {
             XmlQualifiedName wsdlBindingQName;
-            string transportUri =
-                WsdlImporter.SoapInPolicyWorkaroundHelper.FindAdHocTransportPolicy(
-                    policyContext,
-                    out wsdlBindingQName
-                );
+            string transportUri = WsdlImporter
+                .SoapInPolicyWorkaroundHelper
+                .FindAdHocTransportPolicy(policyContext, out wsdlBindingQName);
 
             if (
                 transportUri != null

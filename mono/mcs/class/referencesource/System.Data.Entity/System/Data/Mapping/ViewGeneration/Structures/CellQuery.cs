@@ -391,19 +391,21 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                                 foreach (
                                     var association in associations.Where(
                                         association =>
-                                            association.AssociationSetEnds.Any(
-                                                end =>
-                                                    (
-                                                        end.CorrespondingAssociationEndMember.RelationshipMultiplicity
-                                                            == RelationshipMultiplicity.One
-                                                        && (
-                                                            MetadataHelper
-                                                                .GetOppositeEnd(end)
-                                                                .EntitySet
-                                                                .EdmEquals(rightExtent)
+                                            association
+                                                .AssociationSetEnds
+                                                .Any(
+                                                    end =>
+                                                        (
+                                                            end.CorrespondingAssociationEndMember.RelationshipMultiplicity
+                                                                == RelationshipMultiplicity.One
+                                                            && (
+                                                                MetadataHelper
+                                                                    .GetOppositeEnd(end)
+                                                                    .EntitySet
+                                                                    .EdmEquals(rightExtent)
+                                                            )
                                                         )
-                                                    )
-                                            )
+                                                )
                                     )
                                 )
                                 {
@@ -434,9 +436,16 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         {
                             // condition of NotNull and slot not being projected
                             builder.AppendLine(
-                                System.Data.Entity.Strings.ViewGen_NotNull_No_Projected_Slot(
-                                    restriction.RestrictedMemberSlot.MemberPath.PathToString(false)
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .ViewGen_NotNull_No_Projected_Slot(
+                                        restriction
+                                            .RestrictedMemberSlot
+                                            .MemberPath
+                                            .PathToString(false)
+                                    )
                             );
                             foundError = true;
                         }

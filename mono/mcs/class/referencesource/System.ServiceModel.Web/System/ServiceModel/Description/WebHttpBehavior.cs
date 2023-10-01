@@ -48,9 +48,9 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageBodyStyleHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.defaultBodyStyle = value;
             }
@@ -63,9 +63,9 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.defaultOutgoingRequestFormat = value;
             }
@@ -78,9 +78,9 @@ namespace System.ServiceModel.Description
             {
                 if (!WebMessageFormatHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.defaultOutgoingReplyFormat = value;
             }
@@ -117,7 +117,8 @@ namespace System.ServiceModel.Description
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("clientRuntime");
             }
-            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint.Binding
+            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint
+                .Binding
                 .CreateBindingElements()
                 .Find<WebMessageEncodingBindingElement>();
             if (
@@ -125,9 +126,11 @@ namespace System.ServiceModel.Description
                 && webEncodingBindingElement.CrossDomainScriptAccessEnabled
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR2.CrossDomainJavascriptNotsupported)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR2.CrossDomainJavascriptNotsupported)
+                    );
             }
 #pragma warning disable 56506 // Microsoft, endpoint.Contract is never null
             this.reflector = new XmlSerializerOperationBehavior.Reflector(
@@ -164,11 +167,12 @@ namespace System.ServiceModel.Description
             }
             if (endpointDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "endpointDispatcher"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("endpointDispatcher");
             }
-            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint.Binding
+            WebMessageEncodingBindingElement webEncodingBindingElement = endpoint
+                .Binding
                 .CreateBindingElements()
                 .Find<WebMessageEncodingBindingElement>();
             if (
@@ -176,20 +180,22 @@ namespace System.ServiceModel.Description
                 && webEncodingBindingElement.CrossDomainScriptAccessEnabled
             )
             {
-                ISecurityCapabilities securityCapabilities =
-                    endpoint.Binding.GetProperty<ISecurityCapabilities>(
-                        new BindingParameterCollection()
-                    );
+                ISecurityCapabilities securityCapabilities = endpoint
+                    .Binding
+                    .GetProperty<ISecurityCapabilities>(new BindingParameterCollection());
                 if (securityCapabilities.SupportsClientAuthentication)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported)
+                        );
                 }
                 if (
-                    endpoint.Contract.Behaviors.Contains(
-                        typeof(JavascriptCallbackBehaviorAttribute)
-                    )
+                    endpoint
+                        .Contract
+                        .Behaviors
+                        .Contains(typeof(JavascriptCallbackBehaviorAttribute))
                 )
                 {
                     JavascriptCallbackBehaviorAttribute behavior =
@@ -201,9 +207,12 @@ namespace System.ServiceModel.Description
                 {
                     this.JavascriptCallbackParameterName = defaultCallbackParameterName;
                 }
-                endpointDispatcher.DispatchRuntime.MessageInspectors.Add(
-                    new JavascriptCallbackMessageInspector(this.JavascriptCallbackParameterName)
-                );
+                endpointDispatcher
+                    .DispatchRuntime
+                    .MessageInspectors
+                    .Add(
+                        new JavascriptCallbackMessageInspector(this.JavascriptCallbackParameterName)
+                    );
             }
             if (this.HelpEnabled)
             {
@@ -249,9 +258,10 @@ namespace System.ServiceModel.Description
                 // WCF v1 installs any Action="*" op into UnhandledDispatchOperation, but WebHttpBehavior
                 // doesn't want this, so we 'move' that operation back into normal set of operations
 #pragma warning disable 56506 // Microsoft, endpointDispatcher.DispatchRuntime.{Operations,UnhandledDispatchOperation} is never null
-                endpointDispatcher.DispatchRuntime.Operations.Add(
-                    endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation
-                );
+                endpointDispatcher
+                    .DispatchRuntime
+                    .Operations
+                    .Add(endpointDispatcher.DispatchRuntime.UnhandledDispatchOperation);
 #pragma warning restore 56506
             }
 
@@ -279,9 +289,10 @@ namespace System.ServiceModel.Description
                         this,
                         new List<MultiplexingFormatMapping> { xmlFormatMapping, jsonFormatMapping }
                     );
-                    endpointDispatcher.DispatchRuntime.MessageInspectors.Add(
-                        formatSelectingMessageInspector
-                    );
+                    endpointDispatcher
+                        .DispatchRuntime
+                        .MessageInspectors
+                        .Add(formatSelectingMessageInspector);
                 }
             }
             else
@@ -345,14 +356,12 @@ namespace System.ServiceModel.Description
                         // some of the formatters in MultiplexingDispatchMessageFormatter might not be present
                         // i.e. the JSON formatter
 
-                        replyDispatchAsMultiplexing.DefaultContentTypes.Add(
-                            WebMessageFormat.Xml,
-                            xmlContentType
-                        );
-                        replyDispatchAsMultiplexing.DefaultContentTypes.Add(
-                            WebMessageFormat.Json,
-                            jsonContentType
-                        );
+                        replyDispatchAsMultiplexing
+                            .DefaultContentTypes
+                            .Add(WebMessageFormat.Xml, xmlContentType);
+                        replyDispatchAsMultiplexing
+                            .DefaultContentTypes
+                            .Add(WebMessageFormat.Json, jsonContentType);
 
                         if (formatSelectingMessageInspector != null)
                         {
@@ -450,11 +459,16 @@ namespace System.ServiceModel.Description
             EndpointAddress address = endpoint.Address;
             if (address.Headers.Count > 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.WebHttpServiceEndpointCannotHaveMessageHeaders, address)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WebHttpServiceEndpointCannotHaveMessageHeaders,
+                                address
+                            )
+                        )
+                    );
             }
         }
 
@@ -576,43 +590,49 @@ namespace System.ServiceModel.Description
             Binding binding = serviceEndpoint.Binding;
             if (binding.Scheme != "http" && binding.Scheme != "https")
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.WCFBindingCannotBeUsedWithUriOperationSelectorBehaviorBadScheme,
-                            serviceEndpoint.Contract.Name,
-                            behaviorName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WCFBindingCannotBeUsedWithUriOperationSelectorBehaviorBadScheme,
+                                serviceEndpoint.Contract.Name,
+                                behaviorName
+                            )
                         )
-                    )
-                );
+                    );
             }
             if (binding.MessageVersion != MessageVersion.None)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.WCFBindingCannotBeUsedWithUriOperationSelectorBehaviorBadMessageVersion,
-                            serviceEndpoint.Address.Uri.AbsoluteUri,
-                            behaviorName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WCFBindingCannotBeUsedWithUriOperationSelectorBehaviorBadMessageVersion,
+                                serviceEndpoint.Address.Uri.AbsoluteUri,
+                                behaviorName
+                            )
                         )
-                    )
-                );
+                    );
             }
             TransportBindingElement transportBindingElement = binding
                 .CreateBindingElements()
                 .Find<TransportBindingElement>();
             if (transportBindingElement != null && !transportBindingElement.ManualAddressing)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.ManualAddressingCannotBeFalseWithTransportBindingElement,
-                            serviceEndpoint.Address.Uri.AbsoluteUri,
-                            behaviorName,
-                            transportBindingElement.GetType().Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.ManualAddressingCannotBeFalseWithTransportBindingElement,
+                                serviceEndpoint.Address.Uri.AbsoluteUri,
+                                behaviorName,
+                                transportBindingElement.GetType().Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -647,16 +667,18 @@ namespace System.ServiceModel.Description
             {
                 if (dcsob == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.JsonFormatRequiresDataContract,
-                                od.Name,
-                                od.DeclaringContract.Name,
-                                od.DeclaringContract.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.JsonFormatRequiresDataContract,
+                                    od.Name,
+                                    od.DeclaringContract.Name,
+                                    od.DeclaringContract.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return CreateDataContractJsonSerializerOperationFormatter(od, dcsob, isWrapped);
             }
@@ -721,9 +743,11 @@ namespace System.ServiceModel.Description
                         .ChannelDispatcher
                         .IncludeExceptionDetailInFaults
                 );
-                endpointDispatcher.DispatchRuntime.ChannelDispatcher.ErrorHandlers.Add(
-                    errorHandler
-                );
+                endpointDispatcher
+                    .DispatchRuntime
+                    .ChannelDispatcher
+                    .ErrorHandlers
+                    .Add(errorHandler);
             }
         }
 
@@ -944,7 +968,8 @@ namespace System.ServiceModel.Description
             bool useJson = (requestFormat == WebMessageFormat.Json);
             WebMessageEncodingBindingElement webEncoding =
                 (useJson)
-                    ? endpoint.Binding
+                    ? endpoint
+                        .Binding
                         .CreateBindingElements()
                         .Find<WebMessageEncodingBindingElement>()
                     : null;
@@ -955,18 +980,20 @@ namespace System.ServiceModel.Description
             // validate that endpoint.Address is not null before accessing the endpoint.Address.Uri. This is to avoid throwing a NullRefException while constructing a UriTemplateClientFormatter
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.ServiceEndpointMustHaveNonNullAddress,
-                            typeof(ServiceEndpoint),
-                            typeof(ChannelFactory),
-                            typeof(WebHttpEndpoint),
-                            AddressPropertyName,
-                            typeof(ServiceEndpoint)
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.ServiceEndpointMustHaveNonNullAddress,
+                                typeof(ServiceEndpoint),
+                                typeof(ChannelFactory),
+                                typeof(WebHttpEndpoint),
+                                AddressPropertyName,
+                                typeof(ServiceEndpoint)
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             UriTemplateClientFormatter throwAway = new UriTemplateClientFormatter(
@@ -1283,42 +1310,48 @@ namespace System.ServiceModel.Description
                 {
                     // WebGet will give you UriTemplate parameters by default.
                     // We need a special error message for this case to prevent confusion.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.GETCannotHaveMCParameter,
-                                operationDescription.Name,
-                                operationDescription.DeclaringContract.Name,
-                                operationDescription.Messages[0].MessageType.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.GETCannotHaveMCParameter,
+                                    operationDescription.Name,
+                                    operationDescription.DeclaringContract.Name,
+                                    operationDescription.Messages[0].MessageType.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.UTParamsDoNotComposeWithMessageContract,
-                                operationDescription.Name,
-                                operationDescription.DeclaringContract.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.UTParamsDoNotComposeWithMessageContract,
+                                    operationDescription.Name,
+                                    operationDescription.DeclaringContract.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
             if (IsUntypedMessage(operationDescription.Messages[0]))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.UTParamsDoNotComposeWithMessage,
-                            operationDescription.Name,
-                            operationDescription.DeclaringContract.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.UTParamsDoNotComposeWithMessage,
+                                operationDescription.Name,
+                                operationDescription.DeclaringContract.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -1326,11 +1359,17 @@ namespace System.ServiceModel.Description
         {
             if (wga != null && wia != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.MultipleWebAttributes, od.Name, od.DeclaringContract.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.MultipleWebAttributes,
+                                od.Name,
+                                od.DeclaringContract.Name
+                            )
+                        )
+                    );
             }
         }
 
@@ -1444,15 +1483,17 @@ namespace System.ServiceModel.Description
             {
                 if (message.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.AtMostOneRequestBodyParameterAllowedForUnwrappedMessages,
-                                declaringOperation.Name,
-                                declaringOperation.DeclaringContract.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.AtMostOneRequestBodyParameterAllowedForUnwrappedMessages,
+                                    declaringOperation.Name,
+                                    declaringOperation.DeclaringContract.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (message.Body.Parts.Count == 1 && message.Body.Parts[0].Type != typeof(void))
                 {
@@ -1464,15 +1505,17 @@ namespace System.ServiceModel.Description
             {
                 if (message.Body.Parts.Count > 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.OnlyReturnValueBodyParameterAllowedForUnwrappedMessages,
-                                declaringOperation.Name,
-                                declaringOperation.DeclaringContract.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.OnlyReturnValueBodyParameterAllowedForUnwrappedMessages,
+                                    declaringOperation.Name,
+                                    declaringOperation.DeclaringContract.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (
                     message.Body.ReturnValue != null
@@ -1511,15 +1554,17 @@ namespace System.ServiceModel.Description
                 }
                 if (hasStream && message.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR2.GetString(
-                                SR2.AtMostOneRequestBodyParameterAllowedForStream,
-                                declaringOperation.Name,
-                                declaringOperation.DeclaringContract.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR2.GetString(
+                                    SR2.AtMostOneRequestBodyParameterAllowedForStream,
+                                    declaringOperation.Name,
+                                    declaringOperation.DeclaringContract.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return hasStream;
             }
@@ -1530,16 +1575,18 @@ namespace System.ServiceModel.Description
                 {
                     if (typeof(Stream) == message.Body.Parts[i].Type)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(
-                                SR2.GetString(
-                                    SR2.NoOutOrRefStreamParametersAllowed,
-                                    message.Body.Parts[i].Name,
-                                    declaringOperation.Name,
-                                    declaringOperation.DeclaringContract.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(
+                                    SR2.GetString(
+                                        SR2.NoOutOrRefStreamParametersAllowed,
+                                        message.Body.Parts[i].Name,
+                                        declaringOperation.Name,
+                                        declaringOperation.DeclaringContract.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 if (
@@ -1550,15 +1597,17 @@ namespace System.ServiceModel.Description
                     // validate that there are no out or ref params
                     if (message.Body.Parts.Count > 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(
-                                SR2.GetString(
-                                    SR2.NoOutOrRefParametersAllowedWithStreamResult,
-                                    declaringOperation.Name,
-                                    declaringOperation.DeclaringContract.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(
+                                    SR2.GetString(
+                                        SR2.NoOutOrRefParametersAllowedWithStreamResult,
+                                        declaringOperation.Name,
+                                        declaringOperation.DeclaringContract.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     type = message.Body.ReturnValue.Type;
                     return true;
@@ -1618,16 +1667,18 @@ namespace System.ServiceModel.Description
             {
                 if (dcsob == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.JsonFormatRequiresDataContract,
-                                od.Name,
-                                od.DeclaringContract.Name,
-                                od.DeclaringContract.Namespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.JsonFormatRequiresDataContract,
+                                    od.Name,
+                                    od.DeclaringContract.Name,
+                                    od.DeclaringContract.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return CreateDataContractJsonSerializerOperationFormatter(od, dcsob, isWrapped);
             }
@@ -1814,29 +1865,33 @@ namespace System.ServiceModel.Description
                 {
                     if (!IsTypedMessage(operation.Messages[0]))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.GETCannotHaveBody,
-                                    operation.Name,
-                                    operation.DeclaringContract.Name,
-                                    operation.Messages[0].Body.Parts[0].Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR2.GetString(
+                                        SR2.GETCannotHaveBody,
+                                        operation.Name,
+                                        operation.DeclaringContract.Name,
+                                        operation.Messages[0].Body.Parts[0].Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.GETCannotHaveMCParameter,
-                                    operation.Name,
-                                    operation.DeclaringContract.Name,
-                                    operation.Messages[0].MessageType.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR2.GetString(
+                                        SR2.GETCannotHaveMCParameter,
+                                        operation.Name,
+                                        operation.DeclaringContract.Name,
+                                        operation.Messages[0].MessageType.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -1881,8 +1936,9 @@ namespace System.ServiceModel.Description
 
         internal static bool IsXmlSerializerFaultFormat(OperationDescription operationDescription)
         {
-            XmlSerializerOperationBehavior xsob =
-                operationDescription.Behaviors.Find<XmlSerializerOperationBehavior>();
+            XmlSerializerOperationBehavior xsob = operationDescription
+                .Behaviors
+                .Find<XmlSerializerOperationBehavior>();
             return (xsob != null && xsob.XmlSerializerFormatAttribute.SupportFaults);
         }
 
@@ -1898,18 +1954,25 @@ namespace System.ServiceModel.Description
                 {
                     if (description.Type == typeof(Stream))
                     {
-                        throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                System.ServiceModel.SR2.GetString(
-                                    System.ServiceModel.SR2.StreamBodyMemberNotSupported,
-                                    this.GetType().ToString(),
-                                    contractName,
-                                    opName,
-                                    md.MessageType.ToString(),
-                                    description.Name
+                        throw System
+                            .ServiceModel
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    System
+                                        .ServiceModel
+                                        .SR2
+                                        .GetString(
+                                            System.ServiceModel.SR2.StreamBodyMemberNotSupported,
+                                            this.GetType().ToString(),
+                                            contractName,
+                                            opName,
+                                            md.MessageType.ToString(),
+                                            description.Name
+                                        )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -1927,16 +1990,18 @@ namespace System.ServiceModel.Description
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.RpcEncodedNotSupportedForNoneMessageVersion,
-                            od.Name,
-                            od.DeclaringContract.Name,
-                            od.DeclaringContract.Namespace
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.RpcEncodedNotSupportedForNoneMessageVersion,
+                                od.Name,
+                                od.DeclaringContract.Name,
+                                od.DeclaringContract.Namespace
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -1950,29 +2015,33 @@ namespace System.ServiceModel.Description
             {
                 if (md.Body.Parts.Count > 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.InvalidMessageContractWithoutWrapperName,
-                                opName,
-                                contractName,
-                                md.MessageType
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.InvalidMessageContractWithoutWrapperName,
+                                    opName,
+                                    contractName,
+                                    md.MessageType
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (md.Body.Parts.Count == 1 && md.Body.Parts[0].Multiple)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.MCAtMostOneRequestBodyParameterAllowedForUnwrappedMessages,
-                                opName,
-                                contractName,
-                                md.MessageType
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.MCAtMostOneRequestBodyParameterAllowedForUnwrappedMessages,
+                                    opName,
+                                    contractName,
+                                    md.MessageType
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -1985,11 +2054,13 @@ namespace System.ServiceModel.Description
         {
             if (md.Headers.Count != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.InvalidMethodWithSOAPHeaders, opName, contractName)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.InvalidMethodWithSOAPHeaders, opName, contractName)
+                        )
+                    );
             }
         }
 
@@ -2029,10 +2100,13 @@ namespace System.ServiceModel.Description
             JavascriptCallbackResponseMessageProperty javascriptProperty = null;
             if (
                 !String.IsNullOrEmpty(callbackParameterName)
-                && !OperationContext.Current.OutgoingMessageProperties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                    JavascriptCallbackResponseMessageProperty.Name,
-                    out javascriptProperty
-                )
+                && !OperationContext
+                    .Current
+                    .OutgoingMessageProperties
+                    .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                        JavascriptCallbackResponseMessageProperty.Name,
+                        out javascriptProperty
+                    )
             )
             {
                 UriTemplateMatch match = WebOperationContext
@@ -2049,10 +2123,13 @@ namespace System.ServiceModel.Description
                         {
                             CallbackFunctionName = callbackName
                         };
-                        OperationContext.Current.OutgoingMessageProperties.Add(
-                            JavascriptCallbackResponseMessageProperty.Name,
-                            javascriptProperty
-                        );
+                        OperationContext
+                            .Current
+                            .OutgoingMessageProperties
+                            .Add(
+                                JavascriptCallbackResponseMessageProperty.Name,
+                                javascriptProperty
+                            );
                     }
                 }
             }

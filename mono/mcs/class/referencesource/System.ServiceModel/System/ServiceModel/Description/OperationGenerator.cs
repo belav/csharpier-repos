@@ -95,15 +95,17 @@ namespace System.ServiceModel.Description
         )
         {
             if (context == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
             if (context.Operation == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.OperationPropertyIsRequiredForAttributeGeneration)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.OperationPropertyIsRequiredForAttributeGeneration)
+                        )
+                    );
 
             MethodSignatureGenerator methodSignatureGenerator = new MethodSignatureGenerator(
                 this,
@@ -179,9 +181,10 @@ namespace System.ServiceModel.Description
                 this.IsEncoded = isEncoded;
                 this.WrappedBodyTypeGenerator = wrappedBodyTypeGenerator;
                 this.KnownTypes = knownTypes;
-                this.MessageContractType = context.ServiceContractGenerator.OptionsInternal.IsSet(
-                    ServiceContractGenerationOptions.TypedMessages
-                )
+                this.MessageContractType = context
+                    .ServiceContractGenerator
+                    .OptionsInternal
+                    .IsSet(ServiceContractGenerationOptions.TypedMessages)
                     ? MessageContractType.WrappedMessageContract
                     : MessageContractType.None;
 
@@ -252,16 +255,18 @@ namespace System.ServiceModel.Description
                 {
                     if (this.Method == this.Context.TaskMethod)
                     {
-                        this.Method.Comments.Add(
-                            new CodeCommentStatement(
-                                SR.GetString(
-                                    SR.SFxCodeGenWarning,
+                        this.Method
+                            .Comments
+                            .Add(
+                                new CodeCommentStatement(
                                     SR.GetString(
-                                        SR.SFxCannotImportAsParameters_OutputParameterAndTask
+                                        SR.SFxCodeGenWarning,
+                                        SR.GetString(
+                                            SR.SFxCannotImportAsParameters_OutputParameterAndTask
+                                        )
                                     )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     return true;
@@ -304,9 +309,11 @@ namespace System.ServiceModel.Description
                 {
                     this.MessageContractType = ex.MessageContractType;
                     CodeMemberMethod method = this.Method;
-                    method.Comments.Add(
-                        new CodeCommentStatement(SR.GetString(SR.SFxCodeGenWarning, ex.Message))
-                    );
+                    method
+                        .Comments
+                        .Add(
+                            new CodeCommentStatement(SR.GetString(SR.SFxCodeGenWarning, ex.Message))
+                        );
                     method.Parameters.Clear();
                     method.Parameters.AddRange(methodParameters);
                     if (this.Context.IsAsync)
@@ -328,14 +335,16 @@ namespace System.ServiceModel.Description
                 if (this.HasUntypedMessages)
                 {
                     if (!this.IsCompletelyUntyped)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ParameterModeException(
-                                SR.GetString(
-                                    SR.SFxCannotImportAsParameters_Message,
-                                    this.Context.Operation.CodeName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ParameterModeException(
+                                    SR.GetString(
+                                        SR.SFxCannotImportAsParameters_Message,
+                                        this.Context.Operation.CodeName
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     CreateUntypedMessages();
                 }
@@ -387,10 +396,10 @@ namespace System.ServiceModel.Description
                         return;
                 }
 
-                CodeNamespace ns =
-                    this.Context.ServiceContractGenerator.NamespaceManager.EnsureNamespace(
-                        this.ContractNS
-                    );
+                CodeNamespace ns = this.Context
+                    .ServiceContractGenerator
+                    .NamespaceManager
+                    .EnsureNamespace(this.ContractNS);
 
                 if (!this.Request.IsUntypedMessage)
                 {
@@ -405,10 +414,12 @@ namespace System.ServiceModel.Description
                             ref this.IsNewRequest,
                             out this.BeginPartCodeGenerator
                         );
-                    this.Method.Parameters.Insert(
-                        0,
-                        new CodeParameterDeclarationExpression(typedReqMessageRef, "request")
-                    );
+                    this.Method
+                        .Parameters
+                        .Insert(
+                            0,
+                            new CodeParameterDeclarationExpression(typedReqMessageRef, "request")
+                        );
                 }
 
                 if (!this.Oneway && !this.Response.IsUntypedMessage)
@@ -461,8 +472,10 @@ namespace System.ServiceModel.Description
                 {
                     UniqueCodeNamespaceScope namespaceScope = new UniqueCodeNamespaceScope(ns);
 
-                    CodeTypeDeclaration typedMessageDecl =
-                        Context.Contract.TypeFactory.CreateClassType();
+                    CodeTypeDeclaration typedMessageDecl = Context
+                        .Contract
+                        .TypeFactory
+                        .CreateClassType();
                     string messageName = XmlName.IsNullOrEmpty(message.MessageName)
                         ? null
                         : message.MessageName.DecodedName;
@@ -561,18 +574,21 @@ namespace System.ServiceModel.Description
                 bool isResponseMessage = this.Response != null && this.Response.IsUntypedMessage;
 
                 if (isRequestMessage)
-                    this.Method.Parameters.Insert(
-                        0,
-                        new CodeParameterDeclarationExpression(
-                            Context.ServiceContractGenerator.GetCodeTypeReference(
-                                (typeof(Message))
-                            ),
-                            "request"
-                        )
-                    );
+                    this.Method
+                        .Parameters
+                        .Insert(
+                            0,
+                            new CodeParameterDeclarationExpression(
+                                Context
+                                    .ServiceContractGenerator
+                                    .GetCodeTypeReference((typeof(Message))),
+                                "request"
+                            )
+                        );
                 if (isResponseMessage)
-                    this.EndMethod.ReturnType =
-                        Context.ServiceContractGenerator.GetCodeTypeReference(typeof(Message));
+                    this.EndMethod.ReturnType = Context
+                        .ServiceContractGenerator
+                        .GetCodeTypeReference(typeof(Message));
             }
 
             void CreateOrOverrideActionProperties()
@@ -643,9 +659,11 @@ namespace System.ServiceModel.Description
                 )
                 {
                     Fx.Assert(
-                        System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(
-                            name
-                        ),
+                        System
+                            .CodeDom
+                            .Compiler
+                            .CodeGenerator
+                            .IsValidLanguageIndependentIdentifier(name),
                         String.Format(
                             System.Globalization.CultureInfo.InvariantCulture,
                             "Type name '{0}' is not ValidLanguageIndependentIdentifier!",
@@ -849,9 +867,11 @@ namespace System.ServiceModel.Description
             {
                 Fx.Assert(
                     String.IsNullOrEmpty(typeName)
-                        || System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(
-                            typeName
-                        ),
+                        || System
+                            .CodeDom
+                            .Compiler
+                            .CodeGenerator
+                            .IsValidLanguageIndependentIdentifier(typeName),
                     String.Format(
                         System.Globalization.CultureInfo.InvariantCulture,
                         "Type name '{0}' is not ValidLanguageIndependentIdentifier!",
@@ -859,8 +879,10 @@ namespace System.ServiceModel.Description
                     )
                 );
                 UniqueCodeNamespaceScope namespaceScope = new UniqueCodeNamespaceScope(ns);
-                CodeTypeDeclaration wrapperTypeDecl =
-                    Context.Contract.TypeFactory.CreateClassType();
+                CodeTypeDeclaration wrapperTypeDecl = Context
+                    .Contract
+                    .TypeFactory
+                    .CreateClassType();
                 CodeTypeReference wrapperTypeRef = namespaceScope.AddUnique(
                     wrapperTypeDecl,
                     typeName + "Body",
@@ -1032,10 +1054,9 @@ namespace System.ServiceModel.Description
 
                 CodeAttributeDeclarationCollection importedAttributes = null;
 
-                bool hasAttributes = this.Parent.ParameterAttributes.TryGetValue(
-                    part,
-                    out importedAttributes
-                );
+                bool hasAttributes = this.Parent
+                    .ParameterAttributes
+                    .TryGetValue(part, out importedAttributes);
 
                 wrappedBodyTypeGenerator.AddMemberAttributes(
                     messageName,
@@ -1126,11 +1147,13 @@ namespace System.ServiceModel.Description
                 else if (this.Parent.parameterTypes.ContainsKey(setting))
                     return this.Parent.parameterTypes[setting];
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SfxNoTypeSpecifiedForParameter, setting.Name)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SfxNoTypeSpecifiedForParameter, setting.Name)
+                            )
+                        );
             }
 
             void AddAdditionalAttributes(
@@ -1151,15 +1174,17 @@ namespace System.ServiceModel.Description
                         if (isAdditionalAttributesAllowed)
                             attributes.AddRange(localAttributes);
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ParameterModeException(
-                                    SR.GetString(
-                                        SR.SfxUseTypedMessageForCustomAttributes,
-                                        setting.Name,
-                                        localAttributes[0].AttributeType.BaseType
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ParameterModeException(
+                                        SR.GetString(
+                                            SR.SfxUseTypedMessageForCustomAttributes,
+                                            setting.Name,
+                                            localAttributes[0].AttributeType.BaseType
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
                 }
             }
@@ -1177,15 +1202,17 @@ namespace System.ServiceModel.Description
                         );
                     if (message.HasProtectionLevel)
                     {
-                        messageContractAttr.Arguments.Add(
-                            new CodeAttributeArgument(
-                                "ProtectionLevel",
-                                new CodeFieldReferenceExpression(
-                                    new CodeTypeReferenceExpression(typeof(ProtectionLevel)),
-                                    message.ProtectionLevel.ToString()
+                        messageContractAttr
+                            .Arguments
+                            .Add(
+                                new CodeAttributeArgument(
+                                    "ProtectionLevel",
+                                    new CodeFieldReferenceExpression(
+                                        new CodeTypeReferenceExpression(typeof(ProtectionLevel)),
+                                        message.ProtectionLevel.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -1201,34 +1228,42 @@ namespace System.ServiceModel.Description
                     if (message.Body.WrapperName != null)
                     {
                         // use encoded name to specify exactly what goes on the wire.
-                        messageContractAttr.Arguments.Add(
-                            new CodeAttributeArgument(
-                                "WrapperName",
-                                new CodePrimitiveExpression(
-                                    NamingHelper.CodeName(message.Body.WrapperName)
+                        messageContractAttr
+                            .Arguments
+                            .Add(
+                                new CodeAttributeArgument(
+                                    "WrapperName",
+                                    new CodePrimitiveExpression(
+                                        NamingHelper.CodeName(message.Body.WrapperName)
+                                    )
                                 )
-                            )
-                        );
-                        messageContractAttr.Arguments.Add(
-                            new CodeAttributeArgument(
-                                "WrapperNamespace",
-                                new CodePrimitiveExpression(message.Body.WrapperNamespace)
-                            )
-                        );
-                        messageContractAttr.Arguments.Add(
-                            new CodeAttributeArgument(
-                                "IsWrapped",
-                                new CodePrimitiveExpression(true)
-                            )
-                        );
+                            );
+                        messageContractAttr
+                            .Arguments
+                            .Add(
+                                new CodeAttributeArgument(
+                                    "WrapperNamespace",
+                                    new CodePrimitiveExpression(message.Body.WrapperNamespace)
+                                )
+                            );
+                        messageContractAttr
+                            .Arguments
+                            .Add(
+                                new CodeAttributeArgument(
+                                    "IsWrapped",
+                                    new CodePrimitiveExpression(true)
+                                )
+                            );
                     }
                     else
-                        messageContractAttr.Arguments.Add(
-                            new CodeAttributeArgument(
-                                "IsWrapped",
-                                new CodePrimitiveExpression(false)
-                            )
-                        );
+                        messageContractAttr
+                            .Arguments
+                            .Add(
+                                new CodeAttributeArgument(
+                                    "IsWrapped",
+                                    new CodePrimitiveExpression(false)
+                                )
+                            );
                 }
 
                 internal static void AddEditorBrowsableAttribute(
@@ -1250,10 +1285,10 @@ namespace System.ServiceModel.Description
                 {
                     if (message.XsdTypeName != null && !message.XsdTypeName.IsEmpty)
                     {
-                        contract.ServiceContractGenerator.GeneratedTypedMessages.Add(
-                            message,
-                            codeTypeReference
-                        );
+                        contract
+                            .ServiceContractGenerator
+                            .GeneratedTypedMessages
+                            .Add(message, codeTypeReference);
                     }
                 }
 
@@ -1268,10 +1303,10 @@ namespace System.ServiceModel.Description
                         codeTypeReference = null;
                         return false;
                     }
-                    return contract.ServiceContractGenerator.GeneratedTypedMessages.TryGetValue(
-                        message,
-                        out codeTypeReference
-                    );
+                    return contract
+                        .ServiceContractGenerator
+                        .GeneratedTypedMessages
+                        .TryGetValue(message, out codeTypeReference);
                 }
 
                 internal static void GenerateConstructors(CodeTypeDeclaration typeDecl)
@@ -1289,15 +1324,17 @@ namespace System.ServiceModel.Description
                         CodeParameterDeclarationExpression param =
                             new CodeParameterDeclarationExpression(field.Type, field.Name);
                         otherCtor.Parameters.Add(param);
-                        otherCtor.Statements.Add(
-                            new CodeAssignStatement(
-                                new CodeFieldReferenceExpression(
-                                    new CodeThisReferenceExpression(),
-                                    field.Name
-                                ),
-                                new CodeArgumentReferenceExpression(param.Name)
-                            )
-                        );
+                        otherCtor
+                            .Statements
+                            .Add(
+                                new CodeAssignStatement(
+                                    new CodeFieldReferenceExpression(
+                                        new CodeThisReferenceExpression(),
+                                        field.Name
+                                    ),
+                                    new CodeArgumentReferenceExpression(param.Name)
+                                )
+                            );
                     }
                     if (otherCtor.Parameters.Count > 0)
                         typeDecl.Members.Add(otherCtor);
@@ -1404,40 +1441,46 @@ namespace System.ServiceModel.Description
                         );
                     }
                     if (setting.Namespace != defaultNS)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ParameterModeException(
-                                SR.GetString(
-                                    SR.SFxCannotImportAsParameters_NamespaceMismatch,
-                                    setting.Namespace,
-                                    defaultNS
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ParameterModeException(
+                                    SR.GetString(
+                                        SR.SFxCannotImportAsParameters_NamespaceMismatch,
+                                        setting.Namespace,
+                                        defaultNS
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
 
                 internal static void ValidateProtectionLevel(MethodSignatureGenerator parent)
                 {
                     if (parent.Request != null && parent.Request.HasProtectionLevel)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ParameterModeException(
-                                SR.GetString(
-                                    SR.SFxCannotImportAsParameters_MessageHasProtectionLevel,
-                                    parent.Request.Action == null ? "" : parent.Request.Action
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ParameterModeException(
+                                    SR.GetString(
+                                        SR.SFxCannotImportAsParameters_MessageHasProtectionLevel,
+                                        parent.Request.Action == null ? "" : parent.Request.Action
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     if (parent.Response != null && parent.Response.HasProtectionLevel)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ParameterModeException(
-                                SR.GetString(
-                                    SR.SFxCannotImportAsParameters_MessageHasProtectionLevel,
-                                    parent.Response.Action == null ? "" : parent.Response.Action
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ParameterModeException(
+                                    SR.GetString(
+                                        SR.SFxCannotImportAsParameters_MessageHasProtectionLevel,
+                                        parent.Response.Action == null ? "" : parent.Response.Action
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -1447,26 +1490,30 @@ namespace System.ServiceModel.Description
                         parent.Request.Body.WrapperName == null
                         || (parent.Response != null && parent.Response.Body.WrapperName == null)
                     )
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ParameterModeException(
-                                SR.GetString(
-                                    SR.SFxCannotImportAsParameters_Bare,
-                                    parent.Context.Operation.CodeName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ParameterModeException(
+                                    SR.GetString(
+                                        SR.SFxCannotImportAsParameters_Bare,
+                                        parent.Context.Operation.CodeName
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     if (!StringEqualOrNull(parent.Request.Body.WrapperNamespace, parent.ContractNS))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ParameterModeException(
-                                SR.GetString(
-                                    SR.SFxCannotImportAsParameters_DifferentWrapperNs,
-                                    parent.Request.MessageName,
-                                    parent.Request.Body.WrapperNamespace,
-                                    parent.ContractNS
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ParameterModeException(
+                                    SR.GetString(
+                                        SR.SFxCannotImportAsParameters_DifferentWrapperNs,
+                                        parent.Request.MessageName,
+                                        parent.Request.Body.WrapperNamespace,
+                                        parent.ContractNS
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     XmlName defaultName = new XmlName(parent.DefaultName);
                     if (
@@ -1476,16 +1523,18 @@ namespace System.ServiceModel.Description
                             StringComparison.Ordinal
                         )
                     )
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ParameterModeException(
-                                SR.GetString(
-                                    SR.SFxCannotImportAsParameters_DifferentWrapperName,
-                                    parent.Request.MessageName,
-                                    parent.Request.Body.WrapperName,
-                                    defaultName.EncodedName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ParameterModeException(
+                                    SR.GetString(
+                                        SR.SFxCannotImportAsParameters_DifferentWrapperName,
+                                        parent.Request.MessageName,
+                                        parent.Request.Body.WrapperName,
+                                        defaultName.EncodedName
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     if (parent.Response != null)
                     {
@@ -1495,16 +1544,18 @@ namespace System.ServiceModel.Description
                                 parent.ContractNS
                             )
                         )
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ParameterModeException(
-                                    SR.GetString(
-                                        SR.SFxCannotImportAsParameters_DifferentWrapperNs,
-                                        parent.Response.MessageName,
-                                        parent.Response.Body.WrapperNamespace,
-                                        parent.ContractNS
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ParameterModeException(
+                                        SR.GetString(
+                                            SR.SFxCannotImportAsParameters_DifferentWrapperNs,
+                                            parent.Response.MessageName,
+                                            parent.Response.Body.WrapperNamespace,
+                                            parent.ContractNS
+                                        )
                                     )
-                                )
-                            );
+                                );
 
                         if (
                             !String.Equals(
@@ -1513,16 +1564,18 @@ namespace System.ServiceModel.Description
                                 StringComparison.Ordinal
                             )
                         )
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ParameterModeException(
-                                    SR.GetString(
-                                        SR.SFxCannotImportAsParameters_DifferentWrapperName,
-                                        parent.Response.MessageName,
-                                        parent.Response.Body.WrapperName,
-                                        defaultName.EncodedName
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ParameterModeException(
+                                        SR.GetString(
+                                            SR.SFxCannotImportAsParameters_DifferentWrapperName,
+                                            parent.Response.MessageName,
+                                            parent.Response.Body.WrapperName,
+                                            defaultName.EncodedName
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
                 }
 
@@ -1532,48 +1585,62 @@ namespace System.ServiceModel.Description
                     {
                         if (parent.IsEncoded)
                         {
-                            parent.Context.Contract.ServiceContractGenerator.Errors.Add(
-                                new MetadataConversionError(
-                                    SR.GetString(
-                                        SR.SFxCannotImportAsParameters_HeadersAreIgnoredInEncoded,
-                                        parent.Request.MessageName
-                                    ),
-                                    true /*isWarning*/
-                                )
-                            );
+                            parent
+                                .Context
+                                .Contract
+                                .ServiceContractGenerator
+                                .Errors
+                                .Add(
+                                    new MetadataConversionError(
+                                        SR.GetString(
+                                            SR.SFxCannotImportAsParameters_HeadersAreIgnoredInEncoded,
+                                            parent.Request.MessageName
+                                        ),
+                                        true /*isWarning*/
+                                    )
+                                );
                         }
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ParameterModeException(
-                                    SR.GetString(
-                                        SR.SFxCannotImportAsParameters_HeadersAreUnsupported,
-                                        parent.Request.MessageName
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ParameterModeException(
+                                        SR.GetString(
+                                            SR.SFxCannotImportAsParameters_HeadersAreUnsupported,
+                                            parent.Request.MessageName
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
 
                     if (!parent.Oneway && parent.Response.Headers.Count > 0)
                     {
                         if (parent.IsEncoded)
-                            parent.Context.Contract.ServiceContractGenerator.Errors.Add(
-                                new MetadataConversionError(
-                                    SR.GetString(
-                                        SR.SFxCannotImportAsParameters_HeadersAreIgnoredInEncoded,
-                                        parent.Response.MessageName
-                                    ),
-                                    true /*isWarning*/
-                                )
-                            );
-                        else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ParameterModeException(
-                                    SR.GetString(
-                                        SR.SFxCannotImportAsParameters_HeadersAreUnsupported,
-                                        parent.Response.MessageName
+                            parent
+                                .Context
+                                .Contract
+                                .ServiceContractGenerator
+                                .Errors
+                                .Add(
+                                    new MetadataConversionError(
+                                        SR.GetString(
+                                            SR.SFxCannotImportAsParameters_HeadersAreIgnoredInEncoded,
+                                            parent.Response.MessageName
+                                        ),
+                                        true /*isWarning*/
                                     )
-                                )
-                            );
+                                );
+                        else
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ParameterModeException(
+                                        SR.GetString(
+                                            SR.SFxCannotImportAsParameters_HeadersAreUnsupported,
+                                            parent.Response.MessageName
+                                        )
+                                    )
+                                );
                     }
                 }
 
@@ -1600,7 +1667,8 @@ namespace System.ServiceModel.Description
                 else
                 {
                     taskReturnType = new CodeTypeReference(
-                        this.Context.ServiceContractGenerator
+                        this.Context
+                            .ServiceContractGenerator
                             .GetCodeTypeReference(ServiceReflector.taskTResultType)
                             .BaseType,
                         resultType

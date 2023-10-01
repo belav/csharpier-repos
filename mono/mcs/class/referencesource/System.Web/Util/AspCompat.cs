@@ -433,9 +433,9 @@ namespace System.Web.Util
             {
                 try
                 {
-                    regKey = Registry.ClassesRoot.OpenSubKey(
-                        "CLSID\\{" + clsid + "}\\InprocServer32"
-                    );
+                    regKey = Registry
+                        .ClassesRoot
+                        .OpenSubKey("CLSID\\{" + clsid + "}\\InprocServer32");
                     if (regKey != null)
                         threadingModel = (String)regKey.GetValue("ThreadingModel");
                 }

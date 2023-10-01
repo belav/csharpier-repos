@@ -119,10 +119,12 @@ namespace System.ServiceModel.Channels
                 {
                     // validate that the request message contains our expected header
                     result = context.RequestMessage;
-                    result.Properties.Add(
-                        RequestContextMessageProperty.Name,
-                        new RequestContextMessageProperty(context)
-                    );
+                    result
+                        .Properties
+                        .Add(
+                            RequestContextMessageProperty.Name,
+                            new RequestContextMessageProperty(context)
+                        );
 
                     if (this.validateHeader)
                     {
@@ -422,10 +424,12 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         this.message = context.RequestMessage;
-                        this.message.Properties.Add(
-                            RequestContextMessageProperty.Name,
-                            new RequestContextMessageProperty(context)
-                        );
+                        this.message
+                            .Properties
+                            .Add(
+                                RequestContextMessageProperty.Name,
+                                new RequestContextMessageProperty(context)
+                            );
 
                         if (validateHeader)
                         {

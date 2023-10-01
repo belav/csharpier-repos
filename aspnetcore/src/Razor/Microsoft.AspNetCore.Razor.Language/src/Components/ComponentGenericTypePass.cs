@@ -153,9 +153,9 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                     && TryFindGenericTypeNames(attribute.BoundAttribute, out var typeParameters)
                 )
                 {
-                    var attributeValueIsLambda = _pass.TypeNameFeature.IsLambda(
-                        GetContent(attribute)
-                    );
+                    var attributeValueIsLambda = _pass
+                        .TypeNameFeature
+                        .IsLambda(GetContent(attribute));
                     var provideCascadingGenericTypes = new CascadingGenericTypeParameter
                     {
                         GenericTypeNames = typeParameters,
@@ -216,10 +216,9 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                 {
                     if (
                         candidateAncestor.ProvidesCascadingGenericTypes != null
-                        && candidateAncestor.ProvidesCascadingGenericTypes.TryGetValue(
-                            uncoveredBindingKey,
-                            out var genericTypeProvider
-                        )
+                        && candidateAncestor
+                            .ProvidesCascadingGenericTypes
+                            .TryGetValue(uncoveredBindingKey, out var genericTypeProvider)
                     )
                     {
                         // If the parameter value is an expression that includes multiple generic types, we only want
@@ -477,7 +476,8 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
             @namespace = string.IsNullOrEmpty(@namespace) ? "__Blazor" : "__Blazor." + @namespace;
             @namespace += "." + documentNode.FindPrimaryClass().ClassName;
 
-            var genericTypeConstraints = node.Component.BoundAttributes
+            var genericTypeConstraints = node.Component
+                .BoundAttributes
                 .Where(
                     t =>
                         t.Metadata.ContainsKey(
@@ -500,7 +500,8 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
             node.TypeInferenceNode = typeInferenceNode;
 
             // Now we need to insert the type inference node into the tree.
-            var namespaceNode = documentNode.Children
+            var namespaceNode = documentNode
+                .Children
                 .OfType<NamespaceDeclarationIntermediateNode>()
                 .Where(
                     n =>
@@ -526,7 +527,8 @@ internal class ComponentGenericTypePass : ComponentIntermediateNodePassBase, IRa
                 documentNode.Children.Add(namespaceNode);
             }
 
-            var classNode = namespaceNode.Children
+            var classNode = namespaceNode
+                .Children
                 .OfType<ClassDeclarationIntermediateNode>()
                 .Where(n => n.ClassName == "TypeInference")
                 .FirstOrDefault();

@@ -101,10 +101,9 @@ public class MemberClassifier : IMemberClassifier
 
         if (!((Annotatable)entityType).IsReadOnly && entityType.IsInModel)
         {
-            entityType.Builder.HasAnnotation(
-                CoreAnnotationNames.NavigationCandidates,
-                navigationCandidates
-            );
+            entityType
+                .Builder
+                .HasAnnotation(CoreAnnotationNames.NavigationCandidates, navigationCandidates);
         }
 
         return navigationCandidates;
@@ -217,9 +216,9 @@ public class MemberClassifier : IMemberClassifier
             return false;
         }
 
-        var configurationType = ((Model)model).Configuration?.GetConfigurationType(
-            propertyInfo.PropertyType
-        );
+        var configurationType = ((Model)model)
+            .Configuration
+            ?.GetConfigurationType(propertyInfo.PropertyType);
         return configurationType == TypeConfigurationType.Property
             || (configurationType == null && _typeMappingSource.FindMapping(propertyInfo) != null);
     }

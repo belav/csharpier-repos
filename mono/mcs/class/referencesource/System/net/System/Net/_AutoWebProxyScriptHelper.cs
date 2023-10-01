@@ -1005,13 +1005,15 @@ namespace System.Net
                     SocketAddress.IPv6AddressSize
                 );
                 //Parse the string to a v6 address structure
-                SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.WSAStringToAddress(
-                    IPAddressStrings[i],
-                    AddressFamily.InterNetworkV6,
-                    IntPtr.Zero,
-                    saddrv6.m_Buffer,
-                    ref saddrv6.m_Size
-                );
+                SocketError errorCode = UnsafeNclNativeMethods
+                    .OSSOCK
+                    .WSAStringToAddress(
+                        IPAddressStrings[i],
+                        AddressFamily.InterNetworkV6,
+                        IntPtr.Zero,
+                        saddrv6.m_Buffer,
+                        ref saddrv6.m_Size
+                    );
                 if (errorCode != SocketError.Success)
                 {
                     //Could not parse this into a SOCKADDR_IN6
@@ -1020,13 +1022,15 @@ namespace System.Net
                         AddressFamily.InterNetwork,
                         SocketAddress.IPv4AddressSize
                     );
-                    errorCode = UnsafeNclNativeMethods.OSSOCK.WSAStringToAddress(
-                        IPAddressStrings[i],
-                        AddressFamily.InterNetwork,
-                        IntPtr.Zero,
-                        saddrv4.m_Buffer,
-                        ref saddrv4.m_Size
-                    );
+                    errorCode = UnsafeNclNativeMethods
+                        .OSSOCK
+                        .WSAStringToAddress(
+                            IPAddressStrings[i],
+                            AddressFamily.InterNetwork,
+                            IntPtr.Zero,
+                            saddrv4.m_Buffer,
+                            ref saddrv4.m_Size
+                        );
                     if (errorCode != SocketError.Success)
                     {
                         //This address is neither IPv4 nor IPv6 string throw

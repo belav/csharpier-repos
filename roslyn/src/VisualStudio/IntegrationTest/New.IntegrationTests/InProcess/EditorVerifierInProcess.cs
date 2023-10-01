@@ -64,12 +64,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var expectedTextAfterCaret = expectedText[expectedCaretMarkupEndIndex..];
 
             var lineText = await TestServices.Editor.GetCurrentLineTextAsync(cancellationToken);
-            var lineTextBeforeCaret = await TestServices.Editor.GetLineTextBeforeCaretAsync(
-                cancellationToken
-            );
-            var lineTextAfterCaret = await TestServices.Editor.GetLineTextAfterCaretAsync(
-                cancellationToken
-            );
+            var lineTextBeforeCaret = await TestServices
+                .Editor
+                .GetLineTextBeforeCaretAsync(cancellationToken);
+            var lineTextAfterCaret = await TestServices
+                .Editor
+                .GetLineTextAfterCaretAsync(cancellationToken);
 
             Assert.Equal(expectedTextBeforeCaret, lineTextBeforeCaret);
             Assert.Equal(expectedTextAfterCaret, lineTextAfterCaret);
@@ -178,10 +178,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             void WorkspaceChangedHandler(object sender, WorkspaceChangeEventArgs e) =>
                 events.Add(e);
 
-            var workspace =
-                await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
-                    cancellationToken
-                );
+            var workspace = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<VisualStudioWorkspace>(cancellationToken);
             using var workspaceEventRestorer = WithWorkspaceChangedHandler(
                 workspace,
                 WorkspaceChangedHandler
@@ -225,28 +224,34 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     )
                 );
 
-                var result = await TestServices.Editor.ApplyLightBulbActionAsync(
-                    applyFix,
-                    fixAllScope,
-                    blockUntilComplete,
-                    cancellationToken
-                );
+                var result = await TestServices
+                    .Editor
+                    .ApplyLightBulbActionAsync(
+                        applyFix,
+                        fixAllScope,
+                        blockUntilComplete,
+                        cancellationToken
+                    );
 
                 if (blockUntilComplete)
                 {
                     // wait for action to complete
-                    await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                        new[] { FeatureAttribute.Workspace, FeatureAttribute.LightBulb, },
-                        cancellationToken
-                    );
+                    await TestServices
+                        .Workspace
+                        .WaitForAllAsyncOperationsAsync(
+                            new[] { FeatureAttribute.Workspace, FeatureAttribute.LightBulb, },
+                            cancellationToken
+                        );
 
                     if (codeActionLogger.Messages.Any())
                     {
                         foreach (var e in events)
                         {
-                            codeActionLogger.Messages.Add(
-                                $"{e.OldSolution.WorkspaceVersion} to {e.NewSolution.WorkspaceVersion}: {e.Kind} {e.DocumentId}"
-                            );
+                            codeActionLogger
+                                .Messages
+                                .Add(
+                                    $"{e.OldSolution.WorkspaceVersion} to {e.NewSolution.WorkspaceVersion}: {e.Kind} {e.DocumentId}"
+                                );
                         }
                     }
 
@@ -293,16 +298,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[]
-                {
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
-                },
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[]
+                    {
+                        FeatureAttribute.Workspace,
+                        FeatureAttribute.SolutionCrawlerLegacy,
+                        FeatureAttribute.DiagnosticService,
+                        FeatureAttribute.ErrorSquiggles
+                    },
+                    cancellationToken
+                );
 
             var actualTags = await TestServices.Editor.GetErrorTagsAsync(cancellationToken);
             Assert.Equal(expectedTags.Length, actualTags.Length);
@@ -345,19 +352,21 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[]
-                {
-                    FeatureAttribute.SolutionCrawlerLegacy,
-                    FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.Classification
-                },
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[]
+                    {
+                        FeatureAttribute.SolutionCrawlerLegacy,
+                        FeatureAttribute.DiagnosticService,
+                        FeatureAttribute.Classification
+                    },
+                    cancellationToken
+                );
 
-            var actualTokenTypes = await TestServices.Editor.GetCurrentClassificationsAsync(
-                cancellationToken
-            );
+            var actualTokenTypes = await TestServices
+                .Editor
+                .GetCurrentClassificationsAsync(cancellationToken);
             Assert.Equal(1, actualTokenTypes.Length);
             Assert.Contains(tokenType, actualTokenTypes[0]);
             Assert.NotEqual("text", tokenType);

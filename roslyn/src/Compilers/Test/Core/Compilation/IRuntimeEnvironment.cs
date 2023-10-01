@@ -142,7 +142,9 @@ namespace Roslyn.Test.Utilities
                 var isCorLib = isManifestModule && corLibIdentity == identity;
                 foreach (var module in EnumerateModules(metadata))
                 {
-                    ImmutableArray<byte> bytes = module.Module.PEReaderOpt
+                    ImmutableArray<byte> bytes = module
+                        .Module
+                        .PEReaderOpt
                         .GetEntireImage()
                         .GetContent();
                     ModuleData moduleData;
@@ -289,9 +291,9 @@ namespace Roslyn.Test.Utilities
             EmitOptions emitOptions
         )
         {
-            emitOptions ??= EmitOptions.Default.WithDebugInformationFormat(
-                DebugInformationFormat.Embedded
-            );
+            emitOptions ??= EmitOptions
+                .Default
+                .WithDebugInformationFormat(DebugInformationFormat.Embedded);
 
             using var executableStream = new MemoryStream();
 
@@ -303,7 +305,8 @@ namespace Roslyn.Test.Utilities
                     : null;
 
             // Note: don't forget to name the source inputs to get them embedded for debugging
-            var embeddedTexts = compilation.SyntaxTrees
+            var embeddedTexts = compilation
+                .SyntaxTrees
                 .Select(t => (filePath: t.FilePath, text: t.GetText()))
                 .Where(t => t.text.CanBeEmbedded && !string.IsNullOrEmpty(t.filePath))
                 .Select(t => EmbeddedText.FromSource(t.filePath, t.text))

@@ -127,10 +127,12 @@ public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
         TestWorkspace workspace
     )
     {
-        var capabilitiesProvider =
-            workspace.ExportProvider.GetExportedValue<ExperimentalCapabilitiesProvider>();
-        var servicesProvider =
-            workspace.ExportProvider.GetExportedValue<VSTypeScriptLspServiceProvider>();
+        var capabilitiesProvider = workspace
+            .ExportProvider
+            .GetExportedValue<ExperimentalCapabilitiesProvider>();
+        var servicesProvider = workspace
+            .ExportProvider
+            .GetExportedValue<VSTypeScriptLspServiceProvider>();
 
         var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(outputStream, inputStream))
         {

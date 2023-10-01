@@ -162,10 +162,11 @@ namespace System.Data.Mapping.ViewGeneration
                 .OfType<EntitySet>()
                 .Select(it => it.ElementType);
             //Get all the foreign key association sets in these entity sets
-            var allForeignKeyAssociationSets =
-                this.m_entityContainerMapping.EdmEntityContainer.BaseEntitySets
-                    .OfType<AssociationSet>()
-                    .Where(it => it.ElementType.IsForeignKey);
+            var allForeignKeyAssociationSets = this.m_entityContainerMapping
+                .EdmEntityContainer
+                .BaseEntitySets
+                .OfType<AssociationSet>()
+                .Where(it => it.ElementType.IsForeignKey);
             //Find all the foreign key associations that have corresponding sets
             var oneToOneForeignKeyAssociationsForThisWrapper = allForeignKeyAssociationSets.Select(
                 it => it.ElementType
@@ -307,11 +308,15 @@ namespace System.Data.Mapping.ViewGeneration
             {
                 if (!tokenMember.DeclaringType.IsAssignableFrom(extentType))
                 {
-                    string message = System.Data.Entity.Strings.ViewGen_Concurrency_Derived_Class(
-                        tokenMember.Name,
-                        tokenMember.DeclaringType.Name,
-                        m_extent
-                    );
+                    string message = System
+                        .Data
+                        .Entity
+                        .Strings
+                        .ViewGen_Concurrency_Derived_Class(
+                            tokenMember.Name,
+                            tokenMember.DeclaringType.Name,
+                            m_extent
+                        );
                     ErrorLog.Record record = new ErrorLog.Record(
                         true,
                         ViewGenErrorCode.ConcurrencyDerivedClass,
@@ -329,9 +334,12 @@ namespace System.Data.Mapping.ViewGeneration
                 foreach (LeftCellWrapper wrapper in m_cellWrappers)
                 {
                     Set<MemberPath> conditionMembers = new Set<MemberPath>(
-                        wrapper.OnlyInputCell.CQuery.WhereClause.MemberRestrictions.Select(
-                            oneOf => oneOf.RestrictedMemberSlot.MemberPath
-                        ),
+                        wrapper
+                            .OnlyInputCell
+                            .CQuery
+                            .WhereClause
+                            .MemberRestrictions
+                            .Select(oneOf => oneOf.RestrictedMemberSlot.MemberPath),
                         MemberPath.EqualityComparer
                     );
                     conditionMembers.Intersect(tokenPaths);

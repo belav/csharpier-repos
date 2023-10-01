@@ -170,11 +170,15 @@ namespace System.Security.Policy
                 ParseCertificate();
 
             SecurityElement root = new SecurityElement("IMembershipCondition");
-            System.Security.Util.XMLUtil.AddClassAttribute(
-                root,
-                this.GetType(),
-                "System.Security.Policy.PublisherMembershipCondition"
-            );
+            System
+                .Security
+                .Util
+                .XMLUtil
+                .AddClassAttribute(
+                    root,
+                    this.GetType(),
+                    "System.Security.Policy.PublisherMembershipCondition"
+                );
             // If you hit this assert then most likely you are trying to change the name of this class.
             // This is ok as long as you change the hard coded string above and change the assert below.
             Contract.Assert(

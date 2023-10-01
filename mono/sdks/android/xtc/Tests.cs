@@ -20,7 +20,8 @@ namespace RuntimeTests
             // TODO: If the Android app being tested is included in the solution then open
             // the Unit Tests window, right click Test Apps, select Add App Project
             // and select the app projects that should be tested.
-            app = ConfigureApp.Android
+            app = ConfigureApp
+                .Android
                 // TODO: Update this path to point to your Android app and uncomment the
                 // code if the app is not included in the solution.
                 .ApkFile("/Users/kumpera/src/mono-sdks/android/AndroidRunner-debug.apk")

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetNormalTypePreambleParts(constructor, semanticModel, position),
                 GetSeparatorParts(),
                 GetNormalTypePostambleParts(),
-                constructor.Parameters
+                constructor
+                    .Parameters
                     .Select(
                         p =>
                             Convert(

@@ -57,10 +57,9 @@ namespace System.Workflow.ComponentModel
             {
                 // release locks and status change locks
                 context.ReleaseLocks(false);
-                context.Activity.UnregisterForStatusChange(
-                    Activity.LockCountOnStatusChangeChangedEvent,
-                    this
-                );
+                context
+                    .Activity
+                    .UnregisterForStatusChange(Activity.LockCountOnStatusChangeChangedEvent, this);
                 context.Activity.ReleaseLockOnStatusChange(this);
             }
         }

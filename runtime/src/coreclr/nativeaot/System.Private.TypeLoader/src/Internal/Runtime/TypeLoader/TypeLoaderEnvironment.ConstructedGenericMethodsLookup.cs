@@ -193,11 +193,13 @@ namespace Internal.Runtime.TypeLoader
                 // Hash table names / sigs are indirected through to the native layout info
                 MethodNameAndSignature nameAndSignature;
                 if (
-                    !TypeLoaderEnvironment.Instance.TryGetMethodNameAndSignatureFromNativeLayoutOffset(
-                        moduleHandle,
-                        entryParser.GetUnsigned(),
-                        out nameAndSignature
-                    )
+                    !TypeLoaderEnvironment
+                        .Instance
+                        .TryGetMethodNameAndSignatureFromNativeLayoutOffset(
+                            moduleHandle,
+                            entryParser.GetUnsigned(),
+                            out nameAndSignature
+                        )
                 )
                     return false;
 
@@ -547,11 +549,13 @@ namespace Internal.Runtime.TypeLoader
 
                     // Hash table names / sigs are indirected through to the native layout info
                     if (
-                        !TypeLoaderEnvironment.Instance.TryGetMethodNameAndSignatureFromNativeLayoutOffset(
-                            module.Handle,
-                            entryParser.GetUnsigned(),
-                            out methodNameAndSignature
-                        )
+                        !TypeLoaderEnvironment
+                            .Instance
+                            .TryGetMethodNameAndSignatureFromNativeLayoutOffset(
+                                module.Handle,
+                                entryParser.GetUnsigned(),
+                                out methodNameAndSignature
+                            )
                     )
                         continue;
 

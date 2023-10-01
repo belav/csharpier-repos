@@ -41,13 +41,9 @@ namespace System.Security.Cryptography
                 SafeNCryptKeyHandle? keyHandle = null;
                 try
                 {
-                    ErrorCode errorCode = Interop.NCrypt.NCryptOpenKey(
-                        providerHandle,
-                        out keyHandle,
-                        keyName,
-                        0,
-                        options
-                    );
+                    ErrorCode errorCode = Interop
+                        .NCrypt
+                        .NCryptOpenKey(providerHandle, out keyHandle, keyName, 0, options);
                     if (errorCode == ErrorCode.NTE_BAD_KEYSET)
                         return false;
                     if (errorCode != ErrorCode.ERROR_SUCCESS)

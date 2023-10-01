@@ -232,10 +232,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                 var result = threadingService.ExecuteSynchronously(async () =>
                 {
-                    var configuredProject = await browseObjectContext.UnconfiguredProject
+                    var configuredProject = await browseObjectContext
+                        .UnconfiguredProject
                         .GetSuggestedConfiguredProjectAsync()
                         .ConfigureAwait(false);
-                    return await configuredProject!.Services.PackageReferences!
+                    return await configuredProject!
+                        .Services
+                        .PackageReferences!
                         .AddAsync(packageName, version)
                         .ConfigureAwait(false);
                 });
@@ -262,10 +265,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                 threadingService.ExecuteSynchronously(async () =>
                 {
-                    var configuredProject = await browseObjectContext.UnconfiguredProject
+                    var configuredProject = await browseObjectContext
+                        .UnconfiguredProject
                         .GetSuggestedConfiguredProjectAsync()
                         .ConfigureAwait(false);
-                    await configuredProject!.Services.PackageReferences!
+                    await configuredProject!
+                        .Services
+                        .PackageReferences!
                         .RemoveAsync(packageName)
                         .ConfigureAwait(false);
                 });
@@ -322,10 +328,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (
                 languageName.Equals("csharp", StringComparison.OrdinalIgnoreCase)
-                && _csharpProjectTemplates.Value.TryGetValue(
-                    projectTemplate,
-                    out var csharpProjectTemplate
-                )
+                && _csharpProjectTemplates
+                    .Value
+                    .TryGetValue(projectTemplate, out var csharpProjectTemplate)
             )
             {
                 return _solution.GetProjectTemplate(csharpProjectTemplate, languageName);
@@ -333,10 +338,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (
                 languageName.Equals("visualbasic", StringComparison.OrdinalIgnoreCase)
-                && _visualBasicProjectTemplates.Value.TryGetValue(
-                    projectTemplate,
-                    out var visualBasicProjectTemplate
-                )
+                && _visualBasicProjectTemplates
+                    .Value
+                    .TryGetValue(projectTemplate, out var visualBasicProjectTemplate)
             )
             {
                 return _solution.GetProjectTemplate(visualBasicProjectTemplate, languageName);
@@ -409,8 +413,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             // state believing a debugger session was active.
             //
             // This delay should be replaced with a proper wait condition once the correct one is determined.
-            var debugService =
-                GetComponentModelService<VisualStudioWorkspace>().Services.GetRequiredService<IDebuggingWorkspaceService>();
+            var debugService = GetComponentModelService<VisualStudioWorkspace>()
+                .Services
+                .GetRequiredService<IDebuggingWorkspaceService>();
             using (var debugSessionEndedEvent = new ManualResetEventSlim(initialState: false))
             {
                 debugService.BeforeDebuggingStateChanged += (_, e) =>
@@ -474,7 +479,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
 
             var waitingService = new TestWaitingService(
-                GetComponentModel().DefaultExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>()
+                GetComponentModel()
+                    .DefaultExportProvider
+                    .GetExportedValue<AsynchronousOperationListenerProvider>()
             );
             waitingService.WaitForAsyncOperations(
                 FeatureAttribute.Workspace,
@@ -561,7 +568,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private EnvDTE.Project GetProject(string nameOrFileName)
         {
             Contract.ThrowIfNull(_solution);
-            return _solution.Projects
+            return _solution
+                .Projects
                 .OfType<EnvDTE.Project>()
                 .First(
                     p =>
@@ -1121,7 +1129,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static void SaveFileWithExtraValidation(EnvDTE.Document document)
         {
             var textDocument = (EnvDTE.TextDocument)document.Object(nameof(EnvDTE.TextDocument));
-            var currentTextInDocument = textDocument.StartPoint
+            var currentTextInDocument = textDocument
+                .StartPoint
                 .CreateEditPoint()
                 .GetText(textDocument.EndPoint);
             var fullPath = document.FullName;
@@ -1140,7 +1149,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         )
         {
             Contract.ThrowIfNull(_solution);
-            var project = _solution.Projects
+            var project = _solution
+                .Projects
                 .Cast<EnvDTE.Project>()
                 .First(x => x.Name == projectName);
             var projectPath = Path.GetDirectoryName(project.FullName);

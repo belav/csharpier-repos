@@ -33,9 +33,11 @@ inner.AddEndpointFilterFactory(
         return async invocationContext =>
         {
             tags ??=
-                invocationContext.HttpContext
+                invocationContext
+                    .HttpContext
                     .GetEndpoint()
-                    ?.Metadata.GetMetadata<ITagsMetadata>()
+                    ?.Metadata
+                    .GetMetadata<ITagsMetadata>()
                     ?.Tags ?? Array.Empty<string>();
 
             Console.WriteLine("Running filter!");

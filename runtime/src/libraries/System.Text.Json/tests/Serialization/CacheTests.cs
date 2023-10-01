@@ -259,11 +259,13 @@ namespace System.Text.Json.Serialization.Tests
             );
             Assert.NotEqual(0, classes.Count);
 
-            Type updateHandler = typeof(JsonSerializerOptions).Assembly.GetType(
-                "System.Text.Json.JsonSerializerOptionsUpdateHandler",
-                throwOnError: true,
-                ignoreCase: false
-            );
+            Type updateHandler = typeof(JsonSerializerOptions)
+                .Assembly
+                .GetType(
+                    "System.Text.Json.JsonSerializerOptionsUpdateHandler",
+                    throwOnError: true,
+                    ignoreCase: false
+                );
             MethodInfo beforeUpdate = updateHandler.GetMethod("BeforeUpdate");
             beforeUpdate.Invoke(null, new object[] { null });
             Assert.Equal(0, classes.Count);

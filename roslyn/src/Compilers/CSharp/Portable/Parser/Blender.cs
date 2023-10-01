@@ -162,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // If the changed range starts inside an interpolated string, we
                 // move the start of the change range to the beginning of the line so that any
                 // interpolated string literal in the changed range will be scanned in its entirety.
-                var column = oldTree.SyntaxTree
+                var column = oldTree
+                    .SyntaxTree
                     .GetLineSpan(new TextSpan(start, 0))
                     .Span
                     .Start

@@ -35,22 +35,26 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (keySizeInBits <= 0 || keySizeInBits >= 512)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "keySizeInBits",
-                        SR.GetString(SR.ValueMustBeInRange, 0, 512)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "keySizeInBits",
+                            SR.GetString(SR.ValueMustBeInRange, 0, 512)
+                        )
+                    );
             }
 
             if ((keySizeInBits % 8) != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "keySizeInBits",
-                        SR.GetString(SR.KeyLengthMustBeMultipleOfEight, keySizeInBits)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "keySizeInBits",
+                            SR.GetString(SR.KeyLengthMustBeMultipleOfEight, keySizeInBits)
+                        )
+                    );
             }
 
             this.id = id;

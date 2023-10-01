@@ -39,7 +39,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var usersList = entity.users
+                    var usersList = entity
+                        .users
                         .Where(u => u.isActive == 1 && u.userId != 1)
                         .Select(
                             u =>
@@ -70,7 +71,8 @@ namespace POS_Server.Controllers
                                     isAdmin = u.isAdmin,
                                     groupId = u.groupId,
                                     driverIsAvailable = u.driverIsAvailable,
-                                    groupName = entity.groups
+                                    groupName = entity
+                                        .groups
                                         .Where(g => g.groupId == u.groupId)
                                         .FirstOrDefault()
                                         .name,
@@ -110,7 +112,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var usersList = entity.users
+                    var usersList = entity
+                        .users
                         .Where(
                             u =>
                                 u.userId != 1
@@ -149,7 +152,8 @@ namespace POS_Server.Controllers
                                     isAdmin = u.isAdmin,
                                     groupId = u.groupId,
                                     driverIsAvailable = u.driverIsAvailable,
-                                    groupName = entity.groups
+                                    groupName = entity
+                                        .groups
                                         .Where(g => g.groupId == u.groupId)
                                         .FirstOrDefault()
                                         .name,
@@ -217,7 +221,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        usersList = entity.users
+                        usersList = entity
+                            .users
                             .Where(u => u.isActive == 1 && u.username == userName)
                             .Select(
                                 u =>
@@ -248,7 +253,8 @@ namespace POS_Server.Controllers
                                         isAdmin = u.isAdmin,
                                         groupId = u.groupId,
                                         driverIsAvailable = u.driverIsAvailable,
-                                        groupName = entity.groups
+                                        groupName = entity
+                                            .groups
                                             .Where(g => g.groupId == u.groupId)
                                             .FirstOrDefault()
                                             .name,
@@ -322,7 +328,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var usersList = entity.users
+                    var usersList = entity
+                        .users
                         .Select(
                             u =>
                                 new UserModel()
@@ -351,7 +358,8 @@ namespace POS_Server.Controllers
                                     isAdmin = u.isAdmin,
                                     groupId = u.groupId,
                                     driverIsAvailable = u.driverIsAvailable,
-                                    groupName = entity.groups
+                                    groupName = entity
+                                        .groups
                                         .Where(g => g.groupId == u.groupId)
                                         .FirstOrDefault()
                                         .name,
@@ -370,7 +378,8 @@ namespace POS_Server.Controllers
                             if (usersList[i].isActive == 1)
                             {
                                 long userId = (long)usersList[i].userId;
-                                var usersPos = entity.posUsers
+                                var usersPos = entity
+                                    .posUsers
                                     .Where(x => x.userId == userId)
                                     .Select(b => new { b.posUserId })
                                     .FirstOrDefault();
@@ -410,7 +419,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var user = entity.users
+                    var user = entity
+                        .users
                         .Where(u => u.userId == userId)
                         .Select(
                             u =>
@@ -440,7 +450,8 @@ namespace POS_Server.Controllers
                                     u.isAdmin,
                                     u.driverIsAvailable,
                                     u.groupId,
-                                    groupName = entity.groups
+                                    groupName = entity
+                                        .groups
                                         .Where(g => g.groupId == u.groupId)
                                         .FirstOrDefault()
                                         .name,
@@ -557,7 +568,8 @@ namespace POS_Server.Controllers
                             balanceType = u.balanceType,
                             isAdmin = u.isAdmin,
                             groupId = u.groupId,
-                            groupName = entity.groups
+                            groupName = entity
+                                .groups
                                 .Where(g => g.groupId == u.groupId)
                                 .FirstOrDefault()
                                 .name,
@@ -619,7 +631,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var residentSecId = entity.agents
+                    var residentSecId = entity
+                        .agents
                         .Where(x => x.agentId == customerId)
                         .Select(x => x.residentSecId)
                         .SingleOrDefault();
@@ -629,12 +642,15 @@ namespace POS_Server.Controllers
                     if (residentSecId != null)
                     {
                         usersList = (
-                            from u in entity.users.Where(
-                                u => u.userId != 1 && u.isActive == 1 && u.driverIsAvailable == 1
-                            )
-                            join su in entity.residentialSectorsUsers.Where(
-                                x => x.residentSecId == residentSecId
-                            )
+                            from u in entity
+                                .users
+                                .Where(
+                                    u =>
+                                        u.userId != 1 && u.isActive == 1 && u.driverIsAvailable == 1
+                                )
+                            join su in entity
+                                .residentialSectorsUsers
+                                .Where(x => x.residentSecId == residentSecId)
                                 on u.userId equals su.userId
                             select new UserModel
                             {
@@ -660,7 +676,8 @@ namespace POS_Server.Controllers
                                 isAdmin = u.isAdmin,
                                 driverIsAvailable = u.driverIsAvailable,
                                 groupId = u.groupId,
-                                groupName = entity.groups
+                                groupName = entity
+                                    .groups
                                     .Where(g => g.groupId == u.groupId)
                                     .FirstOrDefault()
                                     .name,
@@ -673,7 +690,8 @@ namespace POS_Server.Controllers
 
                     if (usersList.Count == 0)
                     {
-                        usersList = entity.users
+                        usersList = entity
+                            .users
                             .Where(
                                 u =>
                                     u.userId != 1
@@ -710,7 +728,8 @@ namespace POS_Server.Controllers
                                         isAdmin = u.isAdmin,
                                         driverIsAvailable = u.driverIsAvailable,
                                         groupId = u.groupId,
-                                        groupName = entity.groups
+                                        groupName = entity
+                                            .groups
                                             .Where(g => g.groupId == u.groupId)
                                             .FirstOrDefault()
                                             .name,
@@ -822,7 +841,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            userObj = entity.users
+                            userObj = entity
+                                .users
                                 .Where(p => p.userId == newObject.userId)
                                 .FirstOrDefault();
                             userObj.name = newObject.name;
@@ -967,9 +987,9 @@ namespace POS_Server.Controllers
                             ".tiff",
                             ".jfif"
                         };
-                        var ext = postedFile.FileName.Substring(
-                            postedFile.FileName.LastIndexOf('.')
-                        );
+                        var ext = postedFile
+                            .FileName
+                            .Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
@@ -1249,7 +1269,8 @@ namespace POS_Server.Controllers
                     //check support user
                     if (userName == "Support@Increase")
                     {
-                        var suppUser = entity.users
+                        var suppUser = entity
+                            .users
                             .Where(
                                 u =>
                                     u.isActive == 1
@@ -1262,14 +1283,16 @@ namespace POS_Server.Controllers
                             return 1;
                     }
                     //compair login date with last login date for this user
-                    var user = entity.users
+                    var user = entity
+                        .users
                         .Where(
                             x => x.username == userName && x.password == password && x.isActive == 1
                         )
                         .FirstOrDefault();
                     if (user != null)
                     {
-                        var logs = entity.usersLogs
+                        var logs = entity
+                            .usersLogs
                             .Where(x => x.userId == user.userId)
                             .OrderByDescending(x => x.sInDate)
                             .FirstOrDefault();
@@ -1282,7 +1305,8 @@ namespace POS_Server.Controllers
                         return -1;
                     else
                     {
-                        var tmpObject = entity.posSetting
+                        var tmpObject = entity
+                            .posSetting
                             .Where(x => x.posId == posId)
                             .FirstOrDefault();
                         if (tmpObject != null)
@@ -1301,10 +1325,12 @@ namespace POS_Server.Controllers
                             }
                         }
                         // check serial && package avalilability
-                        var serial = entity.posSetting
+                        var serial = entity
+                            .posSetting
                             .Where(x => x.posId == posId && x.posSerials.isActive == true)
                             .FirstOrDefault();
-                        var programDetails = entity.ProgramDetails
+                        var programDetails = entity
+                            .ProgramDetails
                             .Where(x => x.isActive == true)
                             .FirstOrDefault();
                         if (serial == null || programDetails == null)
@@ -1467,9 +1493,9 @@ namespace POS_Server.Controllers
                     set = settingsCls.Where(l => l.name == "user_path").FirstOrDefault();
 
                     var userPath = (
-                        from c in entity.setValues.Where(
-                            x => x.settingId == set.settingId && x.value.Contains("first")
-                        )
+                        from c in entity
+                            .setValues
+                            .Where(x => x.settingId == set.settingId && x.value.Contains("first"))
                         join us in entity.userSetValues.Where(x => x.userId == userId)
                             on c.valId equals us.valId
                         select new
@@ -1522,7 +1548,8 @@ namespace POS_Server.Controllers
                     result += ",dateFormat:'" + val + "'";
 
                     //currency info
-                    var regions = entity.countriesCodes
+                    var regions = entity
+                        .countriesCodes
                         .Where(x => x.isDefault == 1)
                         .FirstOrDefault();
                     if (regions == null)
@@ -1670,7 +1697,8 @@ namespace POS_Server.Controllers
                     #endregion
 
                     #region get print settings
-                    var printList = entity.setValues
+                    var printList = entity
+                        .setValues
                         .ToList()
                         .Where(x => x.notes == "print")
                         .Select(
@@ -1683,7 +1711,8 @@ namespace POS_Server.Controllers
                                     X.isSystem,
                                     X.settingId,
                                     X.notes,
-                                    name = entity.setting
+                                    name = entity
+                                        .setting
                                         .ToList()
                                         .Where(s => s.settingId == X.settingId)
                                         .FirstOrDefault()

@@ -139,9 +139,9 @@ namespace ILCompiler.DependencyAnalysis
             );
             if (
                 factory.CompilationModuleGroup.ContainsType(canonicalOwningType)
-                || !factory.CompilationModuleGroup.ShouldReferenceThroughImportTable(
-                    canonicalOwningType
-                )
+                || !factory
+                    .CompilationModuleGroup
+                    .ShouldReferenceThroughImportTable(canonicalOwningType)
             )
                 result.Add(GetDictionaryLayout(factory), "Layout");
 
@@ -169,11 +169,9 @@ namespace ILCompiler.DependencyAnalysis
                 }
             }
 
-            factory.MetadataManager.GetDependenciesForGenericDictionary(
-                ref result,
-                factory,
-                _owningType
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesForGenericDictionary(ref result, factory, _owningType);
 
             return result;
         }
@@ -243,11 +241,13 @@ namespace ILCompiler.DependencyAnalysis
         )
         {
             CombinedDependencyList list = null;
-            factory.MetadataManager.GetConditionalDependenciesDueToMethodGenericDictionary(
-                ref list,
-                factory,
-                _owningMethod
-            );
+            factory
+                .MetadataManager
+                .GetConditionalDependenciesDueToMethodGenericDictionary(
+                    ref list,
+                    factory,
+                    _owningMethod
+                );
             return list
                 ?? (IEnumerable<CombinedDependencyListEntry>)
                     System.Array.Empty<CombinedDependencyListEntry>();
@@ -270,11 +270,9 @@ namespace ILCompiler.DependencyAnalysis
                 _owningMethod
             );
 
-            factory.InteropStubManager.AddMarshalAPIsGenericDependencies(
-                ref dependencies,
-                factory,
-                _owningMethod
-            );
+            factory
+                .InteropStubManager
+                .AddMarshalAPIsGenericDependencies(ref dependencies, factory, _owningMethod);
 
             // Lazy generic use of the Activator.CreateInstance<T> heuristic requires tracking type parameters that are used in lazy generics.
             if (factory.LazyGenericsPolicy.UsesLazyGenerics(_owningMethod))
@@ -322,11 +320,9 @@ namespace ILCompiler.DependencyAnalysis
             // Make sure the dictionary can also be populated
             dependencies.Add(factory.ShadowConcreteMethod(_owningMethod), "Dictionary contents");
 
-            factory.MetadataManager.GetDependenciesForGenericDictionary(
-                ref dependencies,
-                factory,
-                _owningMethod
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesForGenericDictionary(ref dependencies, factory, _owningMethod);
 
             return dependencies;
         }

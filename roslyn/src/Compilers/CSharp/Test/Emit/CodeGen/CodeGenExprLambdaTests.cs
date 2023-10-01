@@ -5573,15 +5573,17 @@ class C
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result.Diagnostics.Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
-                    // (30,36): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
-                    //     static Expression<D> E = () => new C();
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "new C()")
-                        .WithArguments("System.Type", "GetTypeFromHandle")
-                        .WithLocation(30, 36)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion),
+                        // (30,36): error CS0656: Missing compiler required member 'System.Type.GetTypeFromHandle'
+                        //     static Expression<D> E = () => new C();
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "new C()")
+                            .WithArguments("System.Type", "GetTypeFromHandle")
+                            .WithLocation(30, 36)
+                    );
             }
         }
 
@@ -5641,20 +5643,22 @@ class B<T>
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result.Diagnostics.Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                    // (37,36): error CS0656: Missing compiler required member 'System.Reflection.FieldInfo.GetFieldFromHandle'
-                    //     static Expression<D> G = () => F;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F")
-                        .WithArguments("System.Reflection.FieldInfo", "GetFieldFromHandle")
-                        .WithLocation(37, 36),
-                    // (42,36): error CS0656: Missing compiler required member 'System.Reflection.FieldInfo.GetFieldFromHandle'
-                    //     static Expression<D> G = () => F;
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F")
-                        .WithArguments("System.Reflection.FieldInfo", "GetFieldFromHandle")
-                        .WithLocation(42, 36)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                        // (37,36): error CS0656: Missing compiler required member 'System.Reflection.FieldInfo.GetFieldFromHandle'
+                        //     static Expression<D> G = () => F;
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F")
+                            .WithArguments("System.Reflection.FieldInfo", "GetFieldFromHandle")
+                            .WithLocation(37, 36),
+                        // (42,36): error CS0656: Missing compiler required member 'System.Reflection.FieldInfo.GetFieldFromHandle'
+                        //     static Expression<D> G = () => F;
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F")
+                            .WithArguments("System.Reflection.FieldInfo", "GetFieldFromHandle")
+                            .WithLocation(42, 36)
+                    );
             }
         }
 
@@ -5721,30 +5725,32 @@ class B<T>
             using (var stream = new MemoryStream())
             {
                 var result = compilation.Emit(stream);
-                result.Diagnostics.Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                    // (39,36): error CS0656: Missing compiler required member 'System.Reflection.MethodBase.GetMethodFromHandle'
-                    //     static Expression<D> F = () => new A(null);
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "new A(null)")
-                        .WithArguments("System.Reflection.MethodBase", "GetMethodFromHandle")
-                        .WithLocation(39, 36),
-                    // (40,36): error CS0656: Missing compiler required member 'System.Reflection.MethodBase.GetMethodFromHandle'
-                    //     static Expression<D> G = () => M();
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "M()")
-                        .WithArguments("System.Reflection.MethodBase", "GetMethodFromHandle")
-                        .WithLocation(40, 36),
-                    // (46,36): error CS0656: Missing compiler required member 'System.Reflection.MethodBase.GetMethodFromHandle'
-                    //     static Expression<D> F = () => new B<object>(null);
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "new B<object>(null)")
-                        .WithArguments("System.Reflection.MethodBase", "GetMethodFromHandle")
-                        .WithLocation(46, 36),
-                    // (47,36): error CS0656: Missing compiler required member 'System.Reflection.MethodBase.GetMethodFromHandle'
-                    //     static Expression<D> G = () => M();
-                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "M()")
-                        .WithArguments("System.Reflection.MethodBase", "GetMethodFromHandle")
-                        .WithLocation(47, 36)
-                );
+                result
+                    .Diagnostics
+                    .Verify(
+                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                        // (39,36): error CS0656: Missing compiler required member 'System.Reflection.MethodBase.GetMethodFromHandle'
+                        //     static Expression<D> F = () => new A(null);
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "new A(null)")
+                            .WithArguments("System.Reflection.MethodBase", "GetMethodFromHandle")
+                            .WithLocation(39, 36),
+                        // (40,36): error CS0656: Missing compiler required member 'System.Reflection.MethodBase.GetMethodFromHandle'
+                        //     static Expression<D> G = () => M();
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "M()")
+                            .WithArguments("System.Reflection.MethodBase", "GetMethodFromHandle")
+                            .WithLocation(40, 36),
+                        // (46,36): error CS0656: Missing compiler required member 'System.Reflection.MethodBase.GetMethodFromHandle'
+                        //     static Expression<D> F = () => new B<object>(null);
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "new B<object>(null)")
+                            .WithArguments("System.Reflection.MethodBase", "GetMethodFromHandle")
+                            .WithLocation(46, 36),
+                        // (47,36): error CS0656: Missing compiler required member 'System.Reflection.MethodBase.GetMethodFromHandle'
+                        //     static Expression<D> G = () => M();
+                        Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "M()")
+                            .WithArguments("System.Reflection.MethodBase", "GetMethodFromHandle")
+                            .WithLocation(47, 36)
+                    );
             }
         }
 

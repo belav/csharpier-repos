@@ -439,10 +439,9 @@ namespace System.Resources
                 String lastReadString;
                 lock (this)
                 {
-                    _store.BaseStream.Seek(
-                        _nameSectionOffset + GetNamePosition(index),
-                        SeekOrigin.Begin
-                    );
+                    _store
+                        .BaseStream
+                        .Seek(_nameSectionOffset + GetNamePosition(index), SeekOrigin.Begin);
                     lastReadString = _store.ReadString();
                 }
                 BCLDebug.Log(
@@ -486,10 +485,9 @@ namespace System.Resources
             {
                 for (int i = lo; i <= hi; i++)
                 {
-                    _store.BaseStream.Seek(
-                        _nameSectionOffset + GetNamePosition(i),
-                        SeekOrigin.Begin
-                    );
+                    _store
+                        .BaseStream
+                        .Seek(_nameSectionOffset + GetNamePosition(i), SeekOrigin.Begin);
                     if (CompareStringEqualsName(name))
                     {
                         int dataPos = _store.ReadInt32();

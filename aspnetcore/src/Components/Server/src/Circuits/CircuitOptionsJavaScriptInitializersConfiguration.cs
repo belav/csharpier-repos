@@ -19,9 +19,9 @@ internal sealed class CircuitOptionsJavaScriptInitializersConfiguration
 
     public void Configure(CircuitOptions options)
     {
-        var file = _environment.WebRootFileProvider.GetFileInfo(
-            $"{_environment.ApplicationName}.modules.json"
-        );
+        var file = _environment
+            .WebRootFileProvider
+            .GetFileInfo($"{_environment.ApplicationName}.modules.json");
         if (file.Exists)
         {
             var initializers = JsonSerializer.Deserialize<string[]>(file.CreateReadStream());

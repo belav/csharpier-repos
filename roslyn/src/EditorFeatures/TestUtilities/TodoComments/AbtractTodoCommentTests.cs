@@ -29,10 +29,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.TodoComments
             using var workspace = CreateWorkspace(codeWithMarker);
 
             var tokenList = DefaultTokenList;
-            workspace.GlobalOptions.SetGlobalOption(
-                new OptionKey(TodoCommentOptionsStorage.TokenList),
-                tokenList
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(new OptionKey(TodoCommentOptionsStorage.TokenList), tokenList);
 
             var hostDocument = workspace.Documents.First();
             var initialTextSnapshot = hostDocument.GetTextBuffer().CurrentSnapshot;

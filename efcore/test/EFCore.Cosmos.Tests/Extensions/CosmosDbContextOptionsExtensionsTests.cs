@@ -34,13 +34,15 @@ public class CosmosDbContextOptionsExtensionsTests
 
         using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            var coreOptions = serviceScope.ServiceProvider
+            var coreOptions = serviceScope
+                .ServiceProvider
                 .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 .GetExtension<CoreOptionsExtension>();
 
             Assert.True(coreOptions.DetailedErrorsEnabled);
 
-            var cosmosOptions = serviceScope.ServiceProvider
+            var cosmosOptions = serviceScope
+                .ServiceProvider
                 .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
                 .GetExtension<CosmosOptionsExtension>();
 

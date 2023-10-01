@@ -66,11 +66,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 );
 
                 if (
-                    operation.SemanticModel.TryGetSpeculativeSemanticModel(
-                        typeSyntax.SpanStart,
-                        dummyStatement,
-                        out var speculativeModel
-                    )
+                    operation
+                        .SemanticModel
+                        .TryGetSpeculativeSemanticModel(
+                            typeSyntax.SpanStart,
+                            dummyStatement,
+                            out var speculativeModel
+                        )
                 )
                 {
                     var originalInfo = operation.SemanticModel.GetTypeInfo(binaryExpression.Right);

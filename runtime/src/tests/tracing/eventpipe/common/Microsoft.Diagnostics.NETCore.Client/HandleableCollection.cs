@@ -88,9 +88,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             foreach (Tuple<TaskCompletionSource<T>, Handler> tuple in _handlers)
             {
-                tuple.Item1.TrySetException(
-                    new ObjectDisposedException(nameof(HandleableCollection<T>))
-                );
+                tuple
+                    .Item1
+                    .TrySetException(new ObjectDisposedException(nameof(HandleableCollection<T>)));
             }
             _handlers.Clear();
         }
@@ -148,9 +148,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
             using var cancellation = new CancellationTokenSource(timeout);
 
             var completionSource = new TaskCompletionSource<T>();
-            using var _ = cancellation.Token.Register(
-                () => completionSource.TrySetException(new TimeoutException())
-            );
+            using var _ = cancellation
+                .Token
+                .Register(() => completionSource.TrySetException(new TimeoutException()));
 
             RunOrQueueHandler(handler, completionSource);
 

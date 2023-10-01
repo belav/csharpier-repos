@@ -129,14 +129,16 @@ namespace System.ServiceModel.Configuration
             XmlReader reader
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ConfigurationErrorsException(
-                    SR.GetString(
-                        SR.ConfigEndpointExtensionNotFound,
-                        ConfigurationHelpers.GetEndpointsSectionPath(elementName)
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigEndpointExtensionNotFound,
+                            ConfigurationHelpers.GetEndpointsSectionPath(elementName)
+                        )
                     )
-                )
-            );
+                );
         }
 
         internal static bool TryAdd(
@@ -292,34 +294,38 @@ namespace System.ServiceModel.Configuration
 
                 if (endpointCollectionElement == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidSection,
-                                ConfigurationHelpers.GetEndpointsSectionPath(endpoint)
-                            ),
-                            configurationElement.ElementInformation.Source,
-                            configurationElement.ElementInformation.LineNumber
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidSection,
+                                    ConfigurationHelpers.GetEndpointsSectionPath(endpoint)
+                                ),
+                                configurationElement.ElementInformation.Source,
+                                configurationElement.ElementInformation.LineNumber
+                            )
+                        );
                 }
 
                 if (!String.IsNullOrEmpty(endpointConfiguration))
                 {
                     if (!endpointCollectionElement.ContainsKey(endpointConfiguration))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigInvalidEndpointName,
-                                    endpointConfiguration,
-                                    ConfigurationHelpers.GetEndpointsSectionPath(endpoint),
-                                    ConfigurationStrings.EndpointConfiguration
-                                ),
-                                configurationElement.ElementInformation.Source,
-                                configurationElement.ElementInformation.LineNumber
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.ConfigInvalidEndpointName,
+                                        endpointConfiguration,
+                                        ConfigurationHelpers.GetEndpointsSectionPath(endpoint),
+                                        ConfigurationStrings.EndpointConfiguration
+                                    ),
+                                    configurationElement.ElementInformation.Source,
+                                    configurationElement.ElementInformation.LineNumber
+                                )
+                            );
                     }
                 }
             }

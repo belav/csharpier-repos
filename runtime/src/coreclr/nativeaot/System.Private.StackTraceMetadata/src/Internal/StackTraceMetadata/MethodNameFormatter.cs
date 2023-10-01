@@ -138,9 +138,9 @@ namespace Internal.StackTraceMetadata
 
             if (methodInst.Method.HandleType == HandleType.MemberReference)
             {
-                MemberReferenceHandle methodRefHandle = methodInst.Method.ToMemberReferenceHandle(
-                    _metadataReader
-                );
+                MemberReferenceHandle methodRefHandle = methodInst
+                    .Method
+                    .ToMemberReferenceHandle(_metadataReader);
                 MemberReference methodRef = methodRefHandle.GetMemberReference(_metadataReader);
                 EmitContainingTypeAndMethodName(methodRef, out MethodSignature methodSignature);
                 EmitGenericArguments(methodInst.GenericTypeArguments);
@@ -148,8 +148,9 @@ namespace Internal.StackTraceMetadata
             }
             else
             {
-                QualifiedMethodHandle qualifiedMethodHandle =
-                    methodInst.Method.ToQualifiedMethodHandle(_metadataReader);
+                QualifiedMethodHandle qualifiedMethodHandle = methodInst
+                    .Method
+                    .ToQualifiedMethodHandle(_metadataReader);
                 QualifiedMethod qualifiedMethod = _metadataReader.GetQualifiedMethod(
                     qualifiedMethodHandle
                 );
@@ -222,7 +223,8 @@ namespace Internal.StackTraceMetadata
             }
 
             Method method = methodHandle.GetMethod(_metadataReader);
-            HandleCollection typeVector = method.Signature
+            HandleCollection typeVector = method
+                .Signature
                 .GetMethodSignature(_metadataReader)
                 .Parameters;
             ParameterHandleCollection.Enumerator parameters = method.Parameters.GetEnumerator();
@@ -689,7 +691,8 @@ namespace Internal.StackTraceMetadata
                             Debug.Assert(false);
                             return default(HandleCollection);
                         }
-                        return typeSpec.Signature
+                        return typeSpec
+                            .Signature
                             .ToTypeInstantiationSignatureHandle(metadataReader)
                             .GetTypeInstantiationSignature(metadataReader)
                             .GenericTypeArguments;
@@ -728,7 +731,8 @@ namespace Internal.StackTraceMetadata
                             .ToQualifiedMethodHandle(metadataReader)
                             .GetQualifiedMethod(metadataReader);
                         typeContext = GetTypeContext(metadataReader, qualifiedMethod.EnclosingType);
-                        methodContext = qualifiedMethod.Method
+                        methodContext = qualifiedMethod
+                            .Method
                             .GetMethod(metadataReader)
                             .GenericParameters;
                         break;

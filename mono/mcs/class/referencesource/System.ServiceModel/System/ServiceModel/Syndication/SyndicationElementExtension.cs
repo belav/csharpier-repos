@@ -73,15 +73,15 @@ namespace System.ServiceModel.Syndication
         {
             if (dataContractExtension == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "dataContractExtension"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("dataContractExtension");
             }
             if (outerName == string.Empty)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.OuterNameOfElementExtensionEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.OuterNameOfElementExtensionEmpty));
             }
             if (dataContractSerializer == null)
             {
@@ -104,9 +104,9 @@ namespace System.ServiceModel.Syndication
         {
             if (xmlSerializerExtension == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "xmlSerializerExtension"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("xmlSerializerExtension");
             }
             if (serializer == null)
             {

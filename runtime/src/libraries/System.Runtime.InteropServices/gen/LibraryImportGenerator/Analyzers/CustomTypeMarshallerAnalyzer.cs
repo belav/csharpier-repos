@@ -531,15 +531,15 @@ namespace Microsoft.Interop.Analyzers
 
         private void PrepareForAnalysis(CompilationStartAnalysisContext context)
         {
-            INamedTypeSymbol? spanOfT = context.Compilation.GetTypeByMetadataName(
-                TypeNames.System_Span_Metadata
-            );
+            INamedTypeSymbol? spanOfT = context
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.System_Span_Metadata);
             INamedTypeSymbol? spanOfByte = spanOfT?.Construct(
                 context.Compilation.GetSpecialType(SpecialType.System_Byte)
             );
-            INamedTypeSymbol? readOnlySpanOfT = context.Compilation.GetTypeByMetadataName(
-                TypeNames.System_ReadOnlySpan_Metadata
-            );
+            INamedTypeSymbol? readOnlySpanOfT = context
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.System_ReadOnlySpan_Metadata);
             INamedTypeSymbol? readOnlySpanOfByte = readOnlySpanOfT?.Construct(
                 context.Compilation.GetSpecialType(SpecialType.System_Byte)
             );
@@ -619,7 +619,8 @@ namespace Microsoft.Interop.Analyzers
                     IFieldSymbol field => field.Type,
                     _ => throw new InvalidOperationException()
                 };
-                AttributeData? attributeData = context.Symbol
+                AttributeData? attributeData = context
+                    .Symbol
                     .GetAttributes()
                     .FirstOrDefault(
                         attr =>
@@ -739,10 +740,9 @@ namespace Microsoft.Interop.Analyzers
                 return (left, right) switch
                 {
                     (INamedTypeSymbol namedLeft, INamedTypeSymbol namedRight)
-                        => SymbolEqualityComparer.Default.Equals(
-                            namedLeft.ConstructedFrom,
-                            namedRight.ConstructedFrom
-                        ),
+                        => SymbolEqualityComparer
+                            .Default
+                            .Equals(namedLeft.ConstructedFrom, namedRight.ConstructedFrom),
                     _ => SymbolEqualityComparer.Default.Equals(left, right)
                 };
             }
@@ -811,10 +811,12 @@ namespace Microsoft.Interop.Analyzers
                         );
                         return;
                     }
-                    type = generic.ConstructedFrom.Construct(
-                        marshallerType.TypeArguments,
-                        marshallerType.TypeArgumentNullableAnnotations
-                    );
+                    type = generic
+                        .ConstructedFrom
+                        .Construct(
+                            marshallerType.TypeArguments,
+                            marshallerType.TypeArgumentNullableAnnotations
+                        );
                 }
 
                 IMethodSymbol? inConstructor = null;
@@ -869,19 +871,21 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 GetInConstructorShapeRule(marshallerData.Kind),
-                                ImmutableDictionary<string, string>.Empty.Add(
-                                    MissingMemberNames.Key,
-                                    GetInConstructorMissingMemberName(marshallerData.Kind)
-                                ),
+                                ImmutableDictionary<string, string>
+                                    .Empty
+                                    .Add(
+                                        MissingMemberNames.Key,
+                                        GetInConstructorMissingMemberName(marshallerData.Kind)
+                                    ),
                                 marshallerType.ToDisplayString(),
                                 type.ToDisplayString()
                             )
                         );
                     }
                     if (
-                        marshallerData.Features.HasFlag(
-                            CustomTypeMarshallerFeatures.CallerAllocatedBuffer
-                        )
+                        marshallerData
+                            .Features
+                            .HasFlag(CustomTypeMarshallerFeatures.CallerAllocatedBuffer)
                     )
                     {
                         if (callerAllocatedSpanConstructor is null)
@@ -891,12 +895,14 @@ namespace Microsoft.Interop.Analyzers
                                     GetCallerAllocatedBufferConstructorShapeRule(
                                         marshallerData.Kind
                                     ),
-                                    ImmutableDictionary<string, string>.Empty.Add(
-                                        MissingMemberNames.Key,
-                                        GetCallerAllocatedBufferConstructorMissingMemberName(
-                                            marshallerData.Kind
-                                        )
-                                    ),
+                                    ImmutableDictionary<string, string>
+                                        .Empty
+                                        .Add(
+                                            MissingMemberNames.Key,
+                                            GetCallerAllocatedBufferConstructorMissingMemberName(
+                                                marshallerData.Kind
+                                            )
+                                        ),
                                     marshallerType.ToDisplayString(),
                                     type.ToDisplayString()
                                 )
@@ -919,10 +925,12 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 CallerAllocatedBufferConstructorProvidedShouldSpecifyFeatureRule,
-                                ImmutableDictionary<string, string>.Empty.Add(
-                                    MissingFeaturesKey,
-                                    nameof(CustomTypeMarshallerFeatures.CallerAllocatedBuffer)
-                                ),
+                                ImmutableDictionary<string, string>
+                                    .Empty
+                                    .Add(
+                                        MissingFeaturesKey,
+                                        nameof(CustomTypeMarshallerFeatures.CallerAllocatedBuffer)
+                                    ),
                                 marshallerType.ToDisplayString()
                             )
                         );
@@ -948,10 +956,9 @@ namespace Microsoft.Interop.Analyzers
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             OutRequiresToManagedRule,
-                            ImmutableDictionary<string, string>.Empty.Add(
-                                MissingMemberNames.Key,
-                                ShapeMemberNames.Value.ToManaged
-                            ),
+                            ImmutableDictionary<string, string>
+                                .Empty
+                                .Add(MissingMemberNames.Key, ShapeMemberNames.Value.ToManaged),
                             marshallerType.ToDisplayString()
                         )
                     );
@@ -1003,10 +1010,9 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 LinearCollectionInRequiresCollectionMethodsRule,
-                                ImmutableDictionary<string, string>.Empty.Add(
-                                    MissingMemberNames.Key,
-                                    missingMembers
-                                ),
+                                ImmutableDictionary<string, string>
+                                    .Empty
+                                    .Add(MissingMemberNames.Key, missingMembers),
                                 marshallerType.ToDisplayString()
                             )
                         );
@@ -1036,10 +1042,9 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 LinearCollectionOutRequiresCollectionMethodsRule,
-                                ImmutableDictionary<string, string>.Empty.Add(
-                                    MissingMemberNames.Key,
-                                    missingMembers
-                                ),
+                                ImmutableDictionary<string, string>
+                                    .Empty
+                                    .Add(MissingMemberNames.Key, missingMembers),
                                 marshallerType.ToDisplayString()
                             )
                         );
@@ -1048,14 +1053,16 @@ namespace Microsoft.Interop.Analyzers
                     if (
                         getManagedValuesSourceMethod is not null
                         && getManagedValuesDestinationMethod is not null
-                        && !SymbolEqualityComparer.Default.Equals(
-                            (
-                                (INamedTypeSymbol)getManagedValuesSourceMethod.ReturnType
-                            ).TypeArguments[0],
-                            (
-                                (INamedTypeSymbol)getManagedValuesDestinationMethod.ReturnType
-                            ).TypeArguments[0]
-                        )
+                        && !SymbolEqualityComparer
+                            .Default
+                            .Equals(
+                                (
+                                    (INamedTypeSymbol)getManagedValuesSourceMethod.ReturnType
+                                ).TypeArguments[0],
+                                (
+                                    (INamedTypeSymbol)getManagedValuesDestinationMethod.ReturnType
+                                ).TypeArguments[0]
+                            )
                     )
                     {
                         context.ReportDiagnostic(
@@ -1072,10 +1079,12 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 LinearCollectionOutRequiresIntConstructorRule,
-                                ImmutableDictionary<string, string>.Empty.Add(
-                                    MissingMemberNames.Key,
-                                    MissingMemberNames.CollectionNativeElementSizeConstructor
-                                ),
+                                ImmutableDictionary<string, string>
+                                    .Empty
+                                    .Add(
+                                        MissingMemberNames.Key,
+                                        MissingMemberNames.CollectionNativeElementSizeConstructor
+                                    ),
                                 marshallerType.ToDisplayString()
                             )
                         );
@@ -1104,28 +1113,30 @@ namespace Microsoft.Interop.Analyzers
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             UnmanagedResourcesRequiresFreeNativeRule,
-                            ImmutableDictionary<string, string>.Empty.Add(
-                                MissingMemberNames.Key,
-                                ShapeMemberNames.Value.FreeNative
-                            ),
+                            ImmutableDictionary<string, string>
+                                .Empty
+                                .Add(MissingMemberNames.Key, ShapeMemberNames.Value.FreeNative),
                             marshallerType.ToDisplayString(),
                             type.ToDisplayString()
                         )
                     );
                 }
                 else if (
-                    !marshallerData.Features.HasFlag(
-                        CustomTypeMarshallerFeatures.UnmanagedResources
-                    ) && ManualTypeMarshallingHelper.HasFreeNativeMethod(marshallerType)
+                    !marshallerData
+                        .Features
+                        .HasFlag(CustomTypeMarshallerFeatures.UnmanagedResources)
+                    && ManualTypeMarshallingHelper.HasFreeNativeMethod(marshallerType)
                 )
                 {
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             FreeNativeMethodProvidedShouldSpecifyUnmanagedResourcesFeatureRule,
-                            ImmutableDictionary<string, string>.Empty.Add(
-                                MissingFeaturesKey,
-                                nameof(CustomTypeMarshallerFeatures.UnmanagedResources)
-                            ),
+                            ImmutableDictionary<string, string>
+                                .Empty
+                                .Add(
+                                    MissingFeaturesKey,
+                                    nameof(CustomTypeMarshallerFeatures.UnmanagedResources)
+                                ),
                             marshallerType.ToDisplayString()
                         )
                     );
@@ -1140,9 +1151,9 @@ namespace Microsoft.Interop.Analyzers
                 ITypeSymbol nativeType = marshallerType;
 
                 if (
-                    marshallerData.Features.HasFlag(
-                        CustomTypeMarshallerFeatures.TwoStageMarshalling
-                    )
+                    marshallerData
+                        .Features
+                        .HasFlag(CustomTypeMarshallerFeatures.TwoStageMarshalling)
                 )
                 {
                     if (
@@ -1153,10 +1164,12 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 InTwoStageMarshallingRequiresToNativeValueRule,
-                                ImmutableDictionary<string, string>.Empty.Add(
-                                    MissingMemberNames.Key,
-                                    ShapeMemberNames.Value.ToNativeValue
-                                ),
+                                ImmutableDictionary<string, string>
+                                    .Empty
+                                    .Add(
+                                        MissingMemberNames.Key,
+                                        ShapeMemberNames.Value.ToNativeValue
+                                    ),
                                 marshallerType.ToDisplayString()
                             )
                         );
@@ -1169,10 +1182,12 @@ namespace Microsoft.Interop.Analyzers
                         context.ReportDiagnostic(
                             marshallerType.CreateDiagnostic(
                                 OutTwoStageMarshallingRequiresFromNativeValueRule,
-                                ImmutableDictionary<string, string>.Empty.Add(
-                                    MissingMemberNames.Key,
-                                    ShapeMemberNames.Value.FromNativeValue
-                                ),
+                                ImmutableDictionary<string, string>
+                                    .Empty
+                                    .Add(
+                                        MissingMemberNames.Key,
+                                        ShapeMemberNames.Value.FromNativeValue
+                                    ),
                                 marshallerType.ToDisplayString()
                             )
                         );
@@ -1182,10 +1197,12 @@ namespace Microsoft.Interop.Analyzers
                     if (
                         toNativeValueMethod is not null
                         && fromNativeValueMethod is not null
-                        && !SymbolEqualityComparer.Default.Equals(
-                            toNativeValueMethod.ReturnType,
-                            fromNativeValueMethod.Parameters[0].Type
-                        )
+                        && !SymbolEqualityComparer
+                            .Default
+                            .Equals(
+                                toNativeValueMethod.ReturnType,
+                                fromNativeValueMethod.Parameters[0].Type
+                            )
                     )
                     {
                         context.ReportDiagnostic(
@@ -1200,10 +1217,12 @@ namespace Microsoft.Interop.Analyzers
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             FromNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule,
-                            ImmutableDictionary<string, string>.Empty.Add(
-                                MissingFeaturesKey,
-                                nameof(CustomTypeMarshallerFeatures.TwoStageMarshalling)
-                            ),
+                            ImmutableDictionary<string, string>
+                                .Empty
+                                .Add(
+                                    MissingFeaturesKey,
+                                    nameof(CustomTypeMarshallerFeatures.TwoStageMarshalling)
+                                ),
                             marshallerType.ToDisplayString()
                         )
                     );
@@ -1213,10 +1232,12 @@ namespace Microsoft.Interop.Analyzers
                     context.ReportDiagnostic(
                         marshallerType.CreateDiagnostic(
                             ToNativeValueMethodProvidedShouldSpecifyTwoStageMarshallingFeatureRule,
-                            ImmutableDictionary<string, string>.Empty.Add(
-                                MissingFeaturesKey,
-                                nameof(CustomTypeMarshallerFeatures.TwoStageMarshalling)
-                            ),
+                            ImmutableDictionary<string, string>
+                                .Empty
+                                .Add(
+                                    MissingFeaturesKey,
+                                    nameof(CustomTypeMarshallerFeatures.TwoStageMarshalling)
+                                ),
                             marshallerType.ToDisplayString()
                         )
                     );
@@ -1265,10 +1286,14 @@ namespace Microsoft.Interop.Analyzers
                 }
 
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        ManualTypeMarshallingHelper.GetDefaultMarshallerInfo(type).marshallerType,
-                        marshallerType
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            ManualTypeMarshallingHelper
+                                .GetDefaultMarshallerInfo(type)
+                                .marshallerType,
+                            marshallerType
+                        )
                     && ManualTypeMarshallingHelper.FindGetPinnableReference(type)
                         is IMethodSymbol managedGetPinnableReferenceMethod
                 )

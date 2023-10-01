@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
 
             var cancellationToken = context.CancellationToken;
             var operationLocation = operation.Syntax.GetLocation();
-            var declarationLocation = context.OwningSymbol
+            var declarationLocation = context
+                .OwningSymbol
                 .DeclaringSyntaxReferences[0]
                 .GetSyntax(cancellationToken)
                 .GetLocation();

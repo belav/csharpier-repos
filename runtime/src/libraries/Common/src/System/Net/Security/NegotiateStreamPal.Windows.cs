@@ -47,12 +47,14 @@ namespace System.Net.Security
             SafeSspiAuthDataHandle? authData = null;
             try
             {
-                Interop.SECURITY_STATUS result = Interop.SspiCli.SspiEncodeStringsAsAuthIdentity(
-                    credential.UserName,
-                    credential.Domain,
-                    credential.Password,
-                    out authData
-                );
+                Interop.SECURITY_STATUS result = Interop
+                    .SspiCli
+                    .SspiEncodeStringsAsAuthIdentity(
+                        credential.UserName,
+                        credential.Domain,
+                        credential.Password,
+                        out authData
+                    );
 
                 if (result != Interop.SECURITY_STATUS.OK)
                 {
@@ -328,11 +330,9 @@ namespace System.Net.Security
                 };
 
                 uint qop;
-                int errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(
-                    securityContext,
-                    ref sdcInOut,
-                    out qop
-                );
+                int errorCode = GlobalSSPI
+                    .SSPIAuth
+                    .DecryptMessage(securityContext, ref sdcInOut, out qop);
                 if (errorCode != 0)
                 {
                     unwrappedOffset = 0;
@@ -410,11 +410,9 @@ namespace System.Net.Security
                 };
 
                 uint qop = requestEncryption ? 0 : Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
-                int errorCode = GlobalSSPI.SSPIAuth.EncryptMessage(
-                    securityContext,
-                    ref sdcInOut,
-                    qop
-                );
+                int errorCode = GlobalSSPI
+                    .SSPIAuth
+                    .EncryptMessage(securityContext, ref sdcInOut, qop);
 
                 if (errorCode != 0)
                 {
@@ -499,11 +497,9 @@ namespace System.Net.Security
                 }
 
                 uint qop = isConfidential ? 0 : Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
-                int errorCode = GlobalSSPI.SSPIAuth.EncryptMessage(
-                    securityContext,
-                    ref sdcInOut,
-                    qop
-                );
+                int errorCode = GlobalSSPI
+                    .SSPIAuth
+                    .EncryptMessage(securityContext, ref sdcInOut, qop);
 
                 if (errorCode != 0)
                 {
@@ -580,11 +576,9 @@ namespace System.Net.Security
                 };
 
                 uint qop;
-                int errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(
-                    securityContext,
-                    ref sdcInOut,
-                    out qop
-                );
+                int errorCode = GlobalSSPI
+                    .SSPIAuth
+                    .DecryptMessage(securityContext, ref sdcInOut, out qop);
 
                 if (errorCode != 0)
                 {
@@ -658,11 +652,9 @@ namespace System.Net.Security
                     dataBuffer->BufferType = realDataType;
                 }
 
-                errorCode = GlobalSSPI.SSPIAuth.DecryptMessage(
-                    securityContext,
-                    ref sdcInOut,
-                    out qop
-                );
+                errorCode = GlobalSSPI
+                    .SSPIAuth
+                    .DecryptMessage(securityContext, ref sdcInOut, out qop);
 
                 if (errorCode != 0)
                 {

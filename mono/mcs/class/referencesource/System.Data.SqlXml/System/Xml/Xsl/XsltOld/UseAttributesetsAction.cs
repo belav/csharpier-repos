@@ -76,9 +76,9 @@ namespace System.Xml.Xsl.XsltOld
                 case ProcessingSets:
                     if (frame.Counter < this.useAttributeSets.Length)
                     {
-                        AttributeSetAction action = processor.RootAction.GetAttributeSet(
-                            this.useAttributeSets[frame.Counter]
-                        );
+                        AttributeSetAction action = processor
+                            .RootAction
+                            .GetAttributeSet(this.useAttributeSets[frame.Counter]);
                         frame.IncrementCounter();
                         processor.PushActionFrame(action, frame.NodeSet);
                     }

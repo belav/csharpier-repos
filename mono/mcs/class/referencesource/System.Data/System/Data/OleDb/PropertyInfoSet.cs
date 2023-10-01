@@ -118,9 +118,9 @@ namespace System.Data.OleDb
                             propertyInfo._vtype = propinfo.vtType;
                             propertyInfo._supportedValues = propinfo.vValue;
                             propertyInfo._description = propinfo.pwszDescription;
-                            propertyInfo._lowercase = propinfo.pwszDescription.ToLower(
-                                CultureInfo.InvariantCulture
-                            );
+                            propertyInfo._lowercase = propinfo
+                                .pwszDescription
+                                .ToLower(CultureInfo.InvariantCulture);
                             propertyInfo._type = PropertyInfoSet.FromVtType(propinfo.vtType);
 
                             if (Bid.AdvancedOn)

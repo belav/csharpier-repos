@@ -28,13 +28,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             {
                 var tcs = new TaskCompletionSource<VoidResult>();
 
-                Helper.Automation.AddAutomationEventHandler(
-                    UIA_EventIds.UIA_Invoke_InvokedEventId,
-                    element,
-                    TreeScope.TreeScope_Element,
-                    cacheRequest: null,
-                    new AutomationEventHandler((src, e) => tcs.SetResult(default))
-                );
+                Helper
+                    .Automation
+                    .AddAutomationEventHandler(
+                        UIA_EventIds.UIA_Invoke_InvokedEventId,
+                        element,
+                        TreeScope.TreeScope_Element,
+                        cacheRequest: null,
+                        new AutomationEventHandler((src, e) => tcs.SetResult(default))
+                    );
 
                 element.Invoke();
                 await tcs.Task;
@@ -54,10 +56,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             IUIAutomationElement? element = null;
             var scope = recursive ? TreeScope.TreeScope_Descendants : TreeScope.TreeScope_Children;
-            var condition = Helper.Automation.CreatePropertyCondition(
-                AutomationElementIdentifiers.NameProperty.Id,
-                elementName
-            );
+            var condition = Helper
+                .Automation
+                .CreatePropertyCondition(AutomationElementIdentifiers.NameProperty.Id, elementName);
 
             // TODO(Dustin): This is code is a bit terrifying. If anything goes wrong and the automation
             // element can't be found, it'll continue to spin until the heat death of the universe.

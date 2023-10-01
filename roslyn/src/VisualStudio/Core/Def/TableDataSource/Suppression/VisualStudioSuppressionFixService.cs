@@ -85,8 +85,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
             _editHandlerService = editHandlerService;
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _vsHierarchyItemManager = vsHierarchyItemManager;
-            _fixMultipleOccurencesService =
-                workspace.Services.GetRequiredService<IFixMultipleOccurrencesService>();
+            _fixMultipleOccurencesService = workspace
+                .Services
+                .GetRequiredService<IFixMultipleOccurrencesService>();
             _projectMap = workspace.Services.GetRequiredService<IHierarchyItemToProjectIdMap>();
             _listener = listenerProvider.GetListener(FeatureAttribute.ErrorList);
             _globalOptions = globalOptions;
@@ -233,9 +234,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
             CancellationToken cancellationToken
         )
         {
-            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<DiagnosticData>.GetInstance(
-                out var builder
-            );
+            using var _ = CodeAnalysis
+                .PooledObjects
+                .ArrayBuilder<DiagnosticData>
+                .GetInstance(out var builder);
 
             var buildDiagnostics = _buildErrorDiagnosticService
                 .GetBuildErrors()
@@ -277,10 +279,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                                 .ConfigureAwait(false);
                             foreach (var diagnostic in group)
                             {
-                                var span =
-                                    diagnostic.DataLocation.UnmappedFileSpan.GetClampedTextSpan(
-                                        text
-                                    );
+                                var span = diagnostic
+                                    .DataLocation
+                                    .UnmappedFileSpan
+                                    .GetClampedTextSpan(text);
                                 builder.Add(
                                     diagnostic.WithLocations(
                                         diagnostic.DataLocation.WithSpan(span, tree),
@@ -856,12 +858,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                         }
 
                         // Filter out stale diagnostics in error list.
-                        documentDiagnosticsToFix = documentDiagnostics.Value.Where(
-                            d =>
-                                latestDocumentDiagnostics.Contains(d)
-                                || d.IsBuildDiagnostic()
-                                || SuppressionHelpers.IsSynthesizedExternalSourceDiagnostic(d)
-                        );
+                        documentDiagnosticsToFix = documentDiagnostics
+                            .Value
+                            .Where(
+                                d =>
+                                    latestDocumentDiagnostics.Contains(d)
+                                    || d.IsBuildDiagnostic()
+                                    || SuppressionHelpers.IsSynthesizedExternalSourceDiagnostic(d)
+                            );
                     }
                     else
                     {

@@ -87,10 +87,9 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 
             // Match handler parameter against route parameters. If it is a route parameter it needs to be parsable/bindable in some fashion.
             if (
-                routeUsage.RoutePattern.TryGetRouteParameter(
-                    handlerDelegateParameter.Name,
-                    out var routeParameter
-                )
+                routeUsage
+                    .RoutePattern
+                    .TryGetRouteParameter(handlerDelegateParameter.Name, out var routeParameter)
             )
             {
                 var parsability = ParsabilityHelper.GetParsability(

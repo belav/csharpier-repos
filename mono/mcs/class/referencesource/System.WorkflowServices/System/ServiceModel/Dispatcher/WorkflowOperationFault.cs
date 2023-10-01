@@ -63,9 +63,9 @@ namespace System.ServiceModel.Dispatcher
 
         protected override void OnWriteDetailContents(XmlDictionaryWriter writer)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
     }
 }

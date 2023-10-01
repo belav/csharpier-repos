@@ -152,10 +152,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             var called = false;
             callBackService.NotificationCallback = (t, m, s) => called = true;
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(
-                PredefinedCommandHandlerNames.ExtractMethod,
-                ContentTypeNames.CSharpContentType
-            );
+            var handler = workspace
+                .ExportProvider
+                .GetCommandHandler<ExtractMethodCommandHandler>(
+                    PredefinedCommandHandlerNames.ExtractMethod,
+                    ContentTypeNames.CSharpContentType
+                );
 
             handler.ExecuteCommand(
                 new ExtractMethodCommandArgs(view, view.TextBuffer),

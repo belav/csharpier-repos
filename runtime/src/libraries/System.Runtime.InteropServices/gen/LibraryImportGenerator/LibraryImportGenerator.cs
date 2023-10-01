@@ -44,7 +44,8 @@ namespace Microsoft.Interop
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Collect all methods adorned with LibraryImportAttribute
-            var attributedMethods = context.SyntaxProvider
+            var attributedMethods = context
+                .SyntaxProvider
                 .ForAttributeWithMetadataName(
                     TypeNames.LibraryImportAttribute,
                     static (node, ct) => node is MethodDeclarationSyntax,
@@ -93,8 +94,9 @@ namespace Microsoft.Interop
             );
 
             // Compute generator options
-            IncrementalValueProvider<LibraryImportGeneratorOptions> stubOptions =
-                context.AnalyzerConfigOptionsProvider.Select(
+            IncrementalValueProvider<LibraryImportGeneratorOptions> stubOptions = context
+                .AnalyzerConfigOptionsProvider
+                .Select(
                     static (options, ct) => new LibraryImportGeneratorOptions(options.GlobalOptions)
                 );
 
@@ -324,18 +326,18 @@ namespace Microsoft.Interop
         )
         {
             ct.ThrowIfCancellationRequested();
-            INamedTypeSymbol? lcidConversionAttrType =
-                environment.Compilation.GetTypeByMetadataName(TypeNames.LCIDConversionAttribute);
-            INamedTypeSymbol? suppressGCTransitionAttrType =
-                environment.Compilation.GetTypeByMetadataName(
-                    TypeNames.SuppressGCTransitionAttribute
-                );
-            INamedTypeSymbol? unmanagedCallConvAttrType =
-                environment.Compilation.GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute);
-            INamedTypeSymbol? defaultDllImportSearchPathsAttrType =
-                environment.Compilation.GetTypeByMetadataName(
-                    TypeNames.DefaultDllImportSearchPathsAttribute
-                );
+            INamedTypeSymbol? lcidConversionAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.LCIDConversionAttribute);
+            INamedTypeSymbol? suppressGCTransitionAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.SuppressGCTransitionAttribute);
+            INamedTypeSymbol? unmanagedCallConvAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute);
+            INamedTypeSymbol? defaultDllImportSearchPathsAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.DefaultDllImportSearchPathsAttribute);
             // Get any attributes of interest on the method
             AttributeData? generatedDllImportAttr = null;
             AttributeData? lcidConversionAttr = null;
@@ -353,40 +355,36 @@ namespace Microsoft.Interop
                 }
                 else if (
                     lcidConversionAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        lcidConversionAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, lcidConversionAttrType)
                 )
                 {
                     lcidConversionAttr = attr;
                 }
                 else if (
                     suppressGCTransitionAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        suppressGCTransitionAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, suppressGCTransitionAttrType)
                 )
                 {
                     suppressGCTransitionAttribute = attr;
                 }
                 else if (
                     unmanagedCallConvAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        unmanagedCallConvAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, unmanagedCallConvAttrType)
                 )
                 {
                     unmanagedCallConvAttribute = attr;
                 }
                 else if (
                     defaultDllImportSearchPathsAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        defaultDllImportSearchPathsAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, defaultDllImportSearchPathsAttrType)
                 )
                 {
                     defaultDllImportSearchPathsAttribute = attr;
@@ -564,13 +562,15 @@ namespace Microsoft.Interop
             code = code.AddStatements(dllImport);
 
             return (
-                pinvokeStub.ContainingSyntaxContext.WrapMemberInContainingSyntaxWithUnsafeModifier(
-                    PrintGeneratedSource(
-                        pinvokeStub.StubMethodSyntaxTemplate,
-                        pinvokeStub.SignatureContext,
-                        code
-                    )
-                ),
+                pinvokeStub
+                    .ContainingSyntaxContext
+                    .WrapMemberInContainingSyntaxWithUnsafeModifier(
+                        PrintGeneratedSource(
+                            pinvokeStub.StubMethodSyntaxTemplate,
+                            pinvokeStub.SignatureContext,
+                            code
+                        )
+                    ),
                 pinvokeStub.Diagnostics.Array.AddRange(diagnostics.Diagnostics)
             );
         }
@@ -611,9 +611,9 @@ namespace Microsoft.Interop
             }
 
             if (
-                pinvokeData.IsUserDefined.HasFlag(
-                    InteropAttributeMember.StringMarshallingCustomType
-                )
+                pinvokeData
+                    .IsUserDefined
+                    .HasFlag(InteropAttributeMember.StringMarshallingCustomType)
             )
             {
                 // Report a diagnostic when forwarding explicitly due to generator options or down-level support. Otherwise, StringMarshallingCustomType can just be omitted

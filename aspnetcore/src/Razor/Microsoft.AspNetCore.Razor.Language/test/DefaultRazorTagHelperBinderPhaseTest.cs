@@ -56,7 +56,8 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
 
         // Assert
         var rewrittenTree = codeDocument.GetSyntaxTree();
-        var erroredNode = rewrittenTree.Root
+        var erroredNode = rewrittenTree
+            .Root
             .DescendantNodes()
             .First(n => n.GetSpanContext()?.ChunkGenerator is AddTagHelperChunkGenerator);
         var chunkGenerator = Assert.IsType<AddTagHelperChunkGenerator>(
@@ -105,7 +106,8 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
 
         // Assert
         var rewrittenTree = codeDocument.GetSyntaxTree();
-        var erroredNode = rewrittenTree.Root
+        var erroredNode = rewrittenTree
+            .Root
             .DescendantNodes()
             .First(n => n.GetSpanContext()?.ChunkGenerator is RemoveTagHelperChunkGenerator);
         var chunkGenerator = Assert.IsType<RemoveTagHelperChunkGenerator>(
@@ -156,7 +158,8 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
 
         // Assert
         var rewrittenTree = codeDocument.GetSyntaxTree();
-        var erroredNode = rewrittenTree.Root
+        var erroredNode = rewrittenTree
+            .Root
             .DescendantNodes()
             .First(
                 n => n.GetSpanContext()?.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator
@@ -1449,10 +1452,9 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     public void IsTypeInNamespace_WorksAsExpected(string typeName, string @namespace, bool expected)
     {
         // Arrange & Act
-        var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInNamespace(
-            typeName,
-            @namespace
-        );
+        var result = DefaultRazorTagHelperBinderPhase
+            .ComponentDirectiveVisitor
+            .IsTypeInNamespace(typeName, @namespace);
 
         // Assert
         Assert.Equal(expected, result);
@@ -1473,10 +1475,9 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     )
     {
         // Arrange & Act
-        var result = DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTypeInScope(
-            typeName,
-            currentNamespace
-        );
+        var result = DefaultRazorTagHelperBinderPhase
+            .ComponentDirectiveVisitor
+            .IsTypeInScope(typeName, currentNamespace);
 
         // Assert
         Assert.Equal(expected, result);
@@ -1495,10 +1496,9 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
         );
 
         // Act
-        var result =
-            DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTagHelperFromMangledClass(
-                descriptor
-            );
+        var result = DefaultRazorTagHelperBinderPhase
+            .ComponentDirectiveVisitor
+            .IsTagHelperFromMangledClass(descriptor);
 
         // Assert
         Assert.True(result);
@@ -1527,12 +1527,9 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     )
     {
         // Arrange & Act
-        var result =
-            DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.TrySplitNamespaceAndType(
-                fullTypeName,
-                out var @namespace,
-                out var typeName
-            );
+        var result = DefaultRazorTagHelperBinderPhase
+            .ComponentDirectiveVisitor
+            .TrySplitNamespaceAndType(fullTypeName, out var @namespace, out var typeName);
 
         // Assert
         Assert.Equal(expectedResult, result);
@@ -1554,12 +1551,9 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
         // Arrange & Act
         var tagHelperDescriptor = CreateTagHelperDescriptor("CoolTag", fullTypeName, AssemblyA);
 
-        var result =
-            DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.TrySplitNamespaceAndType(
-                tagHelperDescriptor,
-                out var @namespace,
-                out var typeName
-            );
+        var result = DefaultRazorTagHelperBinderPhase
+            .ComponentDirectiveVisitor
+            .TrySplitNamespaceAndType(tagHelperDescriptor, out var @namespace, out var typeName);
 
         // Assert
         Assert.Equal(expectedResult, result);
@@ -1569,12 +1563,9 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
         Assert.True(new StringSegment(expectedTypeName).Equals(typeName, StringComparison.Ordinal));
 
         // Try again to make sure caching works
-        result =
-            DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.TrySplitNamespaceAndType(
-                tagHelperDescriptor,
-                out @namespace,
-                out typeName
-            );
+        result = DefaultRazorTagHelperBinderPhase
+            .ComponentDirectiveVisitor
+            .TrySplitNamespaceAndType(tagHelperDescriptor, out @namespace, out typeName);
 
         Assert.Equal(expectedResult, result);
         Assert.True(

@@ -167,11 +167,14 @@ namespace System.Net.Quic.Implementations.MsQuic
                     void*,
                     QUIC_CONNECTION_EVENT*,
                     int> nativeCallback = &NativeCallback;
-                MsQuicApi.Api.ApiTable->SetCallbackHandler(
-                    _state.Handle.QuicHandle,
-                    nativeCallback,
-                    (void*)GCHandle.ToIntPtr(_state.StateGCHandle)
-                );
+                MsQuicApi
+                    .Api
+                    .ApiTable
+                    ->SetCallbackHandler(
+                        _state.Handle.QuicHandle,
+                        nativeCallback,
+                        (void*)GCHandle.ToIntPtr(_state.StateGCHandle)
+                    );
             }
             catch
             {
@@ -214,12 +217,15 @@ namespace System.Net.Quic.Implementations.MsQuic
                 QUIC_HANDLE* handle;
                 Debug.Assert(!Monitor.IsEntered(_state), "!Monitor.IsEntered(_state)");
                 ThrowIfFailure(
-                    MsQuicApi.Api.ApiTable->ConnectionOpen(
-                        MsQuicApi.Api.Registration.QuicHandle,
-                        &NativeCallback,
-                        (void*)GCHandle.ToIntPtr(_state.StateGCHandle),
-                        &handle
-                    ),
+                    MsQuicApi
+                        .Api
+                        .ApiTable
+                        ->ConnectionOpen(
+                            MsQuicApi.Api.Registration.QuicHandle,
+                            &NativeCallback,
+                            (void*)GCHandle.ToIntPtr(_state.StateGCHandle),
+                            &handle
+                        ),
                     "Could not open the connection"
                 );
                 _state.Handle = new SafeMsQuicConnectionHandle(handle);
@@ -266,10 +272,12 @@ namespace System.Net.Quic.Implementations.MsQuic
                 if (listenerState != null)
                 {
                     if (
-                        listenerState.PendingConnections.TryRemove(
-                            state.Handle.DangerousGetHandle(),
-                            out MsQuicConnection? connection
-                        )
+                        listenerState
+                            .PendingConnections
+                            .TryRemove(
+                                state.Handle.DangerousGetHandle(),
+                                out MsQuicConnection? connection
+                            )
                     )
                     {
                         // Move connection from pending to Accept queue and hand it out.
@@ -295,10 +303,12 @@ namespace System.Net.Quic.Implementations.MsQuic
                     state.Handle,
                     QUIC_PARAM_CONN_LOCAL_ADDRESS
                 );
-                state.Connection.SetNegotiatedAlpn(
-                    (IntPtr)connectionEvent.CONNECTED.NegotiatedAlpn,
-                    connectionEvent.CONNECTED.NegotiatedAlpnLength
-                );
+                state
+                    .Connection
+                    .SetNegotiatedAlpn(
+                        (IntPtr)connectionEvent.CONNECTED.NegotiatedAlpn,
+                        connectionEvent.CONNECTED.NegotiatedAlpnLength
+                    );
                 state.Connection = null;
 
                 state.Connected = true;
@@ -359,10 +369,13 @@ namespace System.Net.Quic.Implementations.MsQuic
                 // This is inbound connection that never got connected - because of TLS validation or some other reason.
                 // Remove connection from pending queue and dispose it.
                 if (
-                    state.ListenerState.PendingConnections.TryRemove(
-                        state.Handle.DangerousGetHandle(),
-                        out MsQuicConnection? connection
-                    )
+                    state
+                        .ListenerState
+                        .PendingConnections
+                        .TryRemove(
+                            state.Handle.DangerousGetHandle(),
+                            out MsQuicConnection? connection
+                        )
                 )
                 {
                     connection.Dispose();
@@ -474,9 +487,10 @@ namespace System.Net.Quic.Implementations.MsQuic
                     chain = new X509Chain();
                     chain.ChainPolicy.RevocationMode = state.RevocationMode;
                     chain.ChainPolicy.RevocationFlag = X509RevocationFlag.ExcludeRoot;
-                    chain.ChainPolicy.ApplicationPolicy.Add(
-                        state.IsServer ? s_clientAuthOid : s_serverAuthOid
-                    );
+                    chain
+                        .ChainPolicy
+                        .ApplicationPolicy
+                        .Add(state.IsServer ? s_clientAuthOid : s_serverAuthOid);
 
                     if (additionalCertificates != null && additionalCertificates.Count > 1)
                     {
@@ -573,7 +587,9 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             try
             {
-                stream = await _state.AcceptQueue.Reader
+                stream = await _state
+                    .AcceptQueue
+                    .Reader
                     .ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -733,13 +749,16 @@ namespace System.Net.Quic.Implementations.MsQuic
             {
                 Debug.Assert(!Monitor.IsEntered(_state), "!Monitor.IsEntered(_state)");
                 ThrowIfFailure(
-                    MsQuicApi.Api.ApiTable->ConnectionStart(
-                        _state.Handle.QuicHandle,
-                        _configuration.QuicHandle,
-                        af,
-                        (sbyte*)pTargetHost,
-                        (ushort)port
-                    ),
+                    MsQuicApi
+                        .Api
+                        .ApiTable
+                        ->ConnectionStart(
+                            _state.Handle.QuicHandle,
+                            _configuration.QuicHandle,
+                            af,
+                            (sbyte*)pTargetHost,
+                            (ushort)port
+                        ),
                     "Failed to connect to peer"
                 );
 
@@ -769,11 +788,10 @@ namespace System.Net.Quic.Implementations.MsQuic
             try
             {
                 Debug.Assert(!Monitor.IsEntered(_state), "!Monitor.IsEntered(_state)");
-                MsQuicApi.Api.ApiTable->ConnectionShutdown(
-                    _state.Handle.QuicHandle,
-                    Flags,
-                    (ulong)ErrorCode
-                );
+                MsQuicApi
+                    .Api
+                    .ApiTable
+                    ->ConnectionShutdown(_state.Handle.QuicHandle, Flags, (ulong)ErrorCode);
             }
             catch
             {
@@ -882,7 +900,9 @@ namespace System.Net.Quic.Implementations.MsQuic
         {
             _state.AcceptQueue.Writer.TryComplete();
             await foreach (
-                MsQuicStream stream in _state.AcceptQueue.Reader
+                MsQuicStream stream in _state
+                    .AcceptQueue
+                    .Reader
                     .ReadAllAsync()
                     .ConfigureAwait(false)
             )
@@ -915,11 +935,14 @@ namespace System.Net.Quic.Implementations.MsQuic
             {
                 // Handle can be null if outbound constructor failed and we are called from finalizer.
                 Debug.Assert(!Monitor.IsEntered(_state), "!Monitor.IsEntered(_state)");
-                MsQuicApi.Api.ApiTable->ConnectionShutdown(
-                    _state.Handle.QuicHandle,
-                    QUIC_CONNECTION_SHUTDOWN_FLAGS.SILENT,
-                    0
-                );
+                MsQuicApi
+                    .Api
+                    .ApiTable
+                    ->ConnectionShutdown(
+                        _state.Handle.QuicHandle,
+                        QUIC_CONNECTION_SHUTDOWN_FLAGS.SILENT,
+                        0
+                    );
             }
 
             bool releaseHandles = false;

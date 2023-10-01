@@ -704,11 +704,13 @@ namespace MonoTests.System.Reflection.Emit
         [Test]
         public void JaggedArrays()
         {
-            var ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName("Foo"),
-                AssemblyBuilderAccess.Save,
-                tempDir
-            );
+            var ab = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName("Foo"),
+                    AssemblyBuilderAccess.Save,
+                    tempDir
+                );
             var modb = ab.DefineDynamicModule("Foo", "Foo.dll");
             var tb = modb.DefineType("T");
             tb.SetCustomAttribute(
@@ -813,11 +815,9 @@ namespace MonoTests.System.Reflection.Emit
             //
             // the important bit is that we pass the ConstructorBuilder to the CustomAttributeBuilder
             var assemblyName = new AssemblyName("Repro55681");
-            var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName,
-                AssemblyBuilderAccess.Save,
-                tempDir
-            );
+            var assemblyBuilder = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save, tempDir);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule("Repro55681", "Repro55681.dll");
             var typeBuilder = moduleBuilder.DefineType(
                 "MyAttr",
@@ -846,11 +846,9 @@ namespace MonoTests.System.Reflection.Emit
             //
             // the important bit is that we pass the ConstructorBuilder to the CustomAttributeBuilder
             var assemblyName1 = new AssemblyName("Repro55681-2a");
-            var assemblyBuilder1 = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName1,
-                AssemblyBuilderAccess.Save,
-                tempDir
-            );
+            var assemblyBuilder1 = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(assemblyName1, AssemblyBuilderAccess.Save, tempDir);
             var moduleBuilder1 = assemblyBuilder1.DefineDynamicModule(
                 "Repro55681-2a",
                 "Repro55681-2a.dll"
@@ -866,11 +864,9 @@ namespace MonoTests.System.Reflection.Emit
             typeBuilder1.CreateType();
 
             var assemblyName2 = new AssemblyName("Repro55681-2b");
-            var assemblyBuilder2 = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName2,
-                AssemblyBuilderAccess.Save,
-                tempDir
-            );
+            var assemblyBuilder2 = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(assemblyName2, AssemblyBuilderAccess.Save, tempDir);
             var moduleBuilder2 = assemblyBuilder2.DefineDynamicModule(
                 "Repro55681-2b",
                 "Repro55681-2b.dll"
@@ -902,11 +898,9 @@ namespace MonoTests.System.Reflection.Emit
             //
             // The data decoding needs to handle null string (encoded as 0xFF) properly.
             var aName = new AssemblyName("Repro12747");
-            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                aName,
-                AssemblyBuilderAccess.RunAndSave,
-                tempDir
-            );
+            var assembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(aName, AssemblyBuilderAccess.RunAndSave, tempDir);
             var module = assembly.DefineDynamicModule(aName.Name, aName.Name + ".dll");
 
             var prototypeMethodName = nameof(MethodForNullStringMarshalAsFields);
@@ -972,10 +966,9 @@ namespace MonoTests.System.Reflection.Emit
             // MethodInfo.GetParameters() called on a dynamic assembly would attempt to copy the custom_name and cookie, which could be junk depending
             // on how the union is being used.
             var aName = new AssemblyName("TestAssembly");
-            var testAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                aName,
-                AssemblyBuilderAccess.RunAndSave
-            );
+            var testAssembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(aName, AssemblyBuilderAccess.RunAndSave);
             var testModule = testAssembly.DefineDynamicModule(aName.Name, aName.Name + ".dll");
 
             var typeBuilder = testModule.DefineType("TestType");

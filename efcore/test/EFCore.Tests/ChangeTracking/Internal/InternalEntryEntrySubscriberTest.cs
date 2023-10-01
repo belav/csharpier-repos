@@ -19,9 +19,9 @@ public class InternalEntryEntrySubscriberTest
         ChangeTrackingStrategy changeTrackingStrategy
     )
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
-            BuildModel(changeTrackingStrategy)
-        );
+        var entry = InMemoryTestHelpers
+            .Instance
+            .CreateInternalEntry<FullNotificationEntity>(BuildModel(changeTrackingStrategy));
 
         entry.SetEntityState(EntityState.Unchanged);
 
@@ -36,9 +36,9 @@ public class InternalEntryEntrySubscriberTest
         ChangeTrackingStrategy changeTrackingStrategy
     )
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
-            BuildModel(changeTrackingStrategy)
-        );
+        var entry = InMemoryTestHelpers
+            .Instance
+            .CreateInternalEntry<FullNotificationEntity>(BuildModel(changeTrackingStrategy));
 
         entry.SetEntityState(EntityState.Unchanged);
 
@@ -49,9 +49,11 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact]
     public void Notifying_collections_are_not_created_when_snapshot_tracking()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
-            BuildModel(ChangeTrackingStrategy.Snapshot)
-        );
+        var entry = InMemoryTestHelpers
+            .Instance
+            .CreateInternalEntry<FullNotificationEntity>(
+                BuildModel(ChangeTrackingStrategy.Snapshot)
+            );
 
         entry.SetEntityState(EntityState.Unchanged);
 
@@ -66,9 +68,9 @@ public class InternalEntryEntrySubscriberTest
         ChangeTrackingStrategy changeTrackingStrategy
     )
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
-            BuildModel(changeTrackingStrategy)
-        );
+        var entry = InMemoryTestHelpers
+            .Instance
+            .CreateInternalEntry<FullNotificationEntity>(BuildModel(changeTrackingStrategy));
 
         entry.SetEntityState(EntityState.Unchanged);
 
@@ -80,9 +82,11 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact]
     public void Non_notifying_collection_acceptable_when_snapshot_tracking()
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
-            BuildModel(ChangeTrackingStrategy.Snapshot)
-        );
+        var entry = InMemoryTestHelpers
+            .Instance
+            .CreateInternalEntry<FullNotificationEntity>(
+                BuildModel(ChangeTrackingStrategy.Snapshot)
+            );
 
         var collection = new List<ChangedOnlyNotificationEntity>();
         ((FullNotificationEntity)entry.Entity).RelatedCollection = collection;
@@ -100,9 +104,9 @@ public class InternalEntryEntrySubscriberTest
         ChangeTrackingStrategy changeTrackingStrategy
     )
     {
-        var entry = InMemoryTestHelpers.Instance.CreateInternalEntry<FullNotificationEntity>(
-            BuildModel(changeTrackingStrategy)
-        );
+        var entry = InMemoryTestHelpers
+            .Instance
+            .CreateInternalEntry<FullNotificationEntity>(BuildModel(changeTrackingStrategy));
 
         ((FullNotificationEntity)entry.Entity).RelatedCollection =
             new List<ChangedOnlyNotificationEntity>();
@@ -228,10 +232,12 @@ public class InternalEntryEntrySubscriberTest
         ICollection<ChangedOnlyNotificationEntity> collection
     )
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<INavigationFixer, TestNavigationListener>(),
-            BuildModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<INavigationFixer, TestNavigationListener>(),
+                BuildModel()
+            );
 
         var testListener = contextServices
             .GetRequiredService<IEnumerable<INavigationFixer>>()
@@ -248,10 +254,12 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact]
     public void Entry_subscribes_to_INotifyPropertyChanging_and_INotifyPropertyChanged_for_properties()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
-            BuildModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
+                BuildModel()
+            );
 
         var testListener = contextServices
             .GetRequiredService<IEnumerable<IChangeDetector>>()
@@ -275,10 +283,12 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact]
     public void Entry_handles_null_or_empty_string_in_INotifyPropertyChanging_and_INotifyPropertyChanged()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
-            BuildModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
+                BuildModel()
+            );
 
         var testListener = contextServices
             .GetRequiredService<IEnumerable<IChangeDetector>>()
@@ -312,10 +322,12 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact]
     public void Entry_subscribes_to_INotifyPropertyChanging_and_INotifyPropertyChanged_for_navigations()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
-            BuildModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
+                BuildModel()
+            );
 
         var testListener = contextServices
             .GetRequiredService<IEnumerable<IChangeDetector>>()
@@ -339,10 +351,12 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact]
     public void Subscriptions_to_INotifyPropertyChanging_and_INotifyPropertyChanged_ignore_unmapped_properties()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
-            BuildModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
+                BuildModel()
+            );
 
         var testListener = contextServices
             .GetRequiredService<IEnumerable<IChangeDetector>>()
@@ -364,10 +378,12 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact]
     public void Entry_unsubscribes_to_INotifyPropertyChanging_and_INotifyPropertyChanged()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
-            BuildModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
+                BuildModel()
+            );
 
         var testListener = contextServices
             .GetRequiredService<IEnumerable<IChangeDetector>>()
@@ -422,10 +438,12 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact]
     public void Entry_unsubscribes_to_INotifyCollectionChanged()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<INavigationFixer, TestNavigationListener>(),
-            BuildModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<INavigationFixer, TestNavigationListener>(),
+                BuildModel()
+            );
 
         var testListener = contextServices
             .GetRequiredService<IEnumerable<INavigationFixer>>()
@@ -477,10 +495,12 @@ public class InternalEntryEntrySubscriberTest
     [ConditionalFact] // Issue #26023
     public void Entry_re_subscribes_to_INotifyCollectionChanged_when_collection_instance_changes()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<INavigationFixer, TestNavigationListener>(),
-            BuildModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<INavigationFixer, TestNavigationListener>(),
+                BuildModel()
+            );
 
         var testListener = contextServices
             .GetRequiredService<IEnumerable<INavigationFixer>>()
@@ -537,10 +557,12 @@ public class InternalEntryEntrySubscriberTest
     [InlineData(false)]
     public void Entries_are_unsubscribed_when_context_is_disposed_or_cleared(bool useClear)
     {
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
-            BuildModel()
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddScoped<IChangeDetector, TestPropertyListener>(),
+                BuildModel()
+            );
 
         var testListener = context
             .GetService<IEnumerable<IChangeDetector>>()

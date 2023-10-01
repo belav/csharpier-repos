@@ -41,7 +41,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var invoiceStatus = entity.invoiceStatus
+                    var invoiceStatus = entity
+                        .invoiceStatus
                         .Where(x => x.invoiceId == invoiceId)
                         .Select(
                             c =>
@@ -114,7 +115,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpStatus = entity.invoiceStatus
+                            tmpStatus = entity
+                                .invoiceStatus
                                 .Where(p => p.invStatusId == Object.invStatusId)
                                 .FirstOrDefault();
                             tmpStatus.notes = Object.notes;

@@ -201,12 +201,14 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     Name = "__handle"
                 };
-                receive.CorrelationInitializers.Add(
-                    new RequestReplyCorrelationInitializer
-                    {
-                        CorrelationHandle = new InArgument<CorrelationHandle>(handle)
-                    }
-                );
+                receive
+                    .CorrelationInitializers
+                    .Add(
+                        new RequestReplyCorrelationInitializer
+                        {
+                            CorrelationHandle = new InArgument<CorrelationHandle>(handle)
+                        }
+                    );
                 reply.Request = receive;
 
                 Activity replyActivity = reply;
@@ -221,10 +223,9 @@ namespace System.ServiceModel.Activities.Presentation
                     }
 
                     faultReply.Request = receive;
-                    string faultName = faultReply.DisplayName.Substring(
-                        0,
-                        faultReply.DisplayName.Length - SendFaultReply.Length
-                    );
+                    string faultName = faultReply
+                        .DisplayName
+                        .Substring(0, faultReply.DisplayName.Length - SendFaultReply.Length);
                     faultReply.DisplayName = receive.OperationName + SendFaultReplySuffix;
                     replySelector.Cases.Add(faultName, faultReply);
                 }

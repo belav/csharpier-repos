@@ -95,9 +95,11 @@ namespace ILCompiler.DependencyAnalysis
             {
                 new DependencyListEntry(factory.MethodEntrypoint(method), "Dynamic invoke stub"),
                 new DependencyListEntry(
-                    factory.NativeLayout.PlacedSignatureVertex(
-                        factory.NativeLayout.MethodNameAndSignatureVertex(method)
-                    ),
+                    factory
+                        .NativeLayout
+                        .PlacedSignatureVertex(
+                            factory.NativeLayout.MethodNameAndSignatureVertex(method)
+                        ),
                     "Dynamic invoke stub"
                 ),
                 new DependencyListEntry(
@@ -164,9 +166,11 @@ namespace ILCompiler.DependencyAnalysis
 
             for (int i = 0; i < sortedList.Count; i++)
             {
-                var nameAndSig = factory.NativeLayout.PlacedSignatureVertex(
-                    factory.NativeLayout.MethodNameAndSignatureVertex(sortedList[i].Key)
-                );
+                var nameAndSig = factory
+                    .NativeLayout
+                    .PlacedSignatureVertex(
+                        factory.NativeLayout.MethodNameAndSignatureVertex(sortedList[i].Key)
+                    );
 
                 if (factory.Target.SupportsRelativePointers)
                 {

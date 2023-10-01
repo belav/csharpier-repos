@@ -216,7 +216,9 @@ namespace System.Web.UI
             // and to make sure this is an expected name/value pair from an event validation
             // perspective.
 
-            IPage.ClientScript.GetPostBackEventReference(new PostBackOptions(this, String.Empty));
+            IPage
+                .ClientScript
+                .GetPostBackEventReference(new PostBackOptions(this, String.Empty));
         }
 
         [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers")]

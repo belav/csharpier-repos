@@ -467,9 +467,10 @@ namespace ILCompiler
                     TargetArchitecture targetArch = Helpers.GetTargetArchitecture(arch);
                     bool first = true;
                     foreach (
-                        var instructionSet in Internal.JitInterface.InstructionSetFlags.ArchitectureToValidInstructionSets(
-                            targetArch
-                        )
+                        var instructionSet in Internal
+                            .JitInterface
+                            .InstructionSetFlags
+                            .ArchitectureToValidInstructionSets(targetArch)
                     )
                     {
                         // Only instruction sets with are specifiable should be printed to the help text

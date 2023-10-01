@@ -89,8 +89,9 @@ namespace ILCompiler.DependencyAnalysis
             _writableDataNode = factory.Target.SupportsRelativePointers
                 ? new WritableDataNode(this)
                 : null;
-            _hasConditionalDependenciesFromMetadataManager =
-                factory.MetadataManager.HasConditionalDependenciesDueToEETypePresence(type);
+            _hasConditionalDependenciesFromMetadataManager = factory
+                .MetadataManager
+                .HasConditionalDependenciesDueToEETypePresence(type);
 
             factory.TypeSystemContext.EnsureLoadableType(type);
 
@@ -208,9 +209,10 @@ namespace ILCompiler.DependencyAnalysis
                                     // Having a long list of interesting types affects the compilation throughput heavily.
                                     if (
                                         slotDecl.OwningType == _type
-                                        || _type.BaseType.ResolveInterfaceMethodTarget(
-                                            genericDefinition
-                                        ) != slotDecl
+                                        || _type
+                                            .BaseType
+                                            .ResolveInterfaceMethodTarget(genericDefinition)
+                                            != slotDecl
                                     )
                                     {
                                         return true;
@@ -412,12 +414,9 @@ namespace ILCompiler.DependencyAnalysis
                         factory.MetadataManager.NoteOverridingMethod(decl, impl);
                     }
 
-                    factory.MetadataManager.GetDependenciesForOverridingMethod(
-                        ref result,
-                        factory,
-                        decl,
-                        impl
-                    );
+                    factory
+                        .MetadataManager
+                        .GetDependenciesForOverridingMethod(ref result, factory, decl, impl);
                 }
 
                 Debug.Assert(
@@ -520,17 +519,18 @@ namespace ILCompiler.DependencyAnalysis
                                 );
                             }
 
-                            factory.MetadataManager.NoteOverridingMethod(
-                                interfaceMethod,
-                                implMethod
-                            );
+                            factory
+                                .MetadataManager
+                                .NoteOverridingMethod(interfaceMethod, implMethod);
 
-                            factory.MetadataManager.GetDependenciesForOverridingMethod(
-                                ref result,
-                                factory,
-                                interfaceMethod,
-                                implMethod
-                            );
+                            factory
+                                .MetadataManager
+                                .GetDependenciesForOverridingMethod(
+                                    ref result,
+                                    factory,
+                                    interfaceMethod,
+                                    implMethod
+                                );
                         }
                         else
                         {
@@ -542,8 +542,9 @@ namespace ILCompiler.DependencyAnalysis
                                 .RuntimeInterfaces[interfaceIndex];
                             MethodDesc interfaceMethodDefinition = interfaceMethod;
                             if (!interfaceType.IsTypeDefinition)
-                                interfaceMethodDefinition =
-                                    factory.TypeSystemContext.GetMethodForInstantiatedType(
+                                interfaceMethodDefinition = factory
+                                    .TypeSystemContext
+                                    .GetMethodForInstantiatedType(
                                         interfaceMethod.GetTypicalMethodDefinition(),
                                         (InstantiatedType)interfaceOnDefinition
                                     );
@@ -574,8 +575,9 @@ namespace ILCompiler.DependencyAnalysis
                                 )
                                 {
                                     // Canonical instance default methods need to go through a thunk that adds the right generic context
-                                    defaultIntfMethod =
-                                        factory.TypeSystemContext.GetDefaultInterfaceMethodImplementationThunk(
+                                    defaultIntfMethod = factory
+                                        .TypeSystemContext
+                                        .GetDefaultInterfaceMethodImplementationThunk(
                                             defaultIntfMethod,
                                             _type.ConvertToCanonForm(CanonicalFormKind.Specific),
                                             providingInterfaceDefinitionType
@@ -589,28 +591,27 @@ namespace ILCompiler.DependencyAnalysis
                                     )
                                 );
 
-                                factory.MetadataManager.NoteOverridingMethod(
-                                    interfaceMethod,
-                                    implMethod
-                                );
+                                factory
+                                    .MetadataManager
+                                    .NoteOverridingMethod(interfaceMethod, implMethod);
 
-                                factory.MetadataManager.GetDependenciesForOverridingMethod(
-                                    ref result,
-                                    factory,
-                                    interfaceMethod,
-                                    implMethod
-                                );
+                                factory
+                                    .MetadataManager
+                                    .GetDependenciesForOverridingMethod(
+                                        ref result,
+                                        factory,
+                                        interfaceMethod,
+                                        implMethod
+                                    );
                             }
                         }
                     }
                 }
             }
 
-            factory.MetadataManager.GetConditionalDependenciesDueToEETypePresence(
-                ref result,
-                factory,
-                _type
-            );
+            factory
+                .MetadataManager
+                .GetConditionalDependenciesDueToEETypePresence(ref result, factory, _type);
 
             return result;
         }
@@ -736,11 +737,9 @@ namespace ILCompiler.DependencyAnalysis
             {
                 // If necessary MethodTable is the highest load level for this type, ask the metadata manager
                 // if we have any dependencies due to reflectability.
-                factory.MetadataManager.GetDependenciesDueToReflectability(
-                    ref dependencies,
-                    factory,
-                    _type
-                );
+                factory
+                    .MetadataManager
+                    .GetDependenciesDueToReflectability(ref dependencies, factory, _type);
 
                 // If necessary MethodTable is the highest load level, consider this a module use
                 if (_type is MetadataType mdType)

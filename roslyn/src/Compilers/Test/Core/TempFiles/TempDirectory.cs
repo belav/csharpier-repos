@@ -75,10 +75,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// </summary>
         public TempFile CopyFile(string originalPath, string name = null)
         {
-            string filePath = System.IO.Path.Combine(
-                _path,
-                name ?? System.IO.Path.GetFileName(originalPath)
-            );
+            string filePath = System
+                .IO
+                .Path
+                .Combine(_path, name ?? System.IO.Path.GetFileName(originalPath));
             File.Copy(originalPath, filePath);
             return _root.AddFile(new DisposableFile(filePath));
         }

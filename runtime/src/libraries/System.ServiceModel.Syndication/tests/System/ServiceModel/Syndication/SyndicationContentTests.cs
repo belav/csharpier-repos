@@ -289,7 +289,8 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal("text/xml", content.Type);
             Assert.Equal(
                 10,
-                content.Extension
+                content
+                    .Extension
                     .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
                     .Value
             );
@@ -332,7 +333,8 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal("text/xml", content.Type);
             Assert.Equal(
                 10,
-                content.Extension
+                content
+                    .Extension
                     .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
                     .Value
             );
@@ -373,7 +375,8 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Equal("text/xml", content.Type);
             Assert.Equal(
                 10,
-                content.Extension
+                content
+                    .Extension
                     .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
                     .Value
             );

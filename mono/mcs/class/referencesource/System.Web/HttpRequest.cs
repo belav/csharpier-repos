@@ -926,12 +926,10 @@ namespace System.Web
 
             while (i < l)
             {
-                i = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                    headerValue,
-                    attrName,
-                    i,
-                    CompareOptions.IgnoreCase
-                );
+                i = CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .IndexOf(headerValue, attrName, i, CompareOptions.IgnoreCase);
                 if (i < 0)
                     break;
                 if (i + k >= l)
@@ -3179,13 +3177,15 @@ namespace System.Web
 
             int validationFailureIndex;
             if (
-                !RequestValidator.Current.IsValidRequestString(
-                    contextToProvide,
-                    value,
-                    requestCollection,
-                    collectionKey,
-                    out validationFailureIndex
-                )
+                !RequestValidator
+                    .Current
+                    .IsValidRequestString(
+                        contextToProvide,
+                        value,
+                        requestCollection,
+                        collectionKey,
+                        out validationFailureIndex
+                    )
             )
             {
                 // Display only the piece of the string that caused the problem, padded by on each side

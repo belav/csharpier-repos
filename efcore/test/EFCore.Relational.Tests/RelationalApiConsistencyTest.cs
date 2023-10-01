@@ -34,7 +34,8 @@ public class RelationalApiConsistencyTest
     [ConditionalFact]
     public void Readonly_relational_metadata_methods_have_expected_name()
     {
-        var errors = Fixture.RelationalMetadataMethods
+        var errors = Fixture
+            .RelationalMetadataMethods
             .SelectMany(m => m.Select(ValidateMethodName))
             .Where(e => e != null)
             .ToList();

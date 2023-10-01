@@ -29,10 +29,9 @@ namespace System.Text.Json
             @"
 ";
 
-        private static readonly bool s_replaceNewlines = !StringComparer.Ordinal.Equals(
-            CompiledNewline,
-            Environment.NewLine
-        );
+        private static readonly bool s_replaceNewlines = !StringComparer
+            .Ordinal
+            .Equals(CompiledNewline, Environment.NewLine);
 
         public static string NewtonsoftReturnStringHelper(TextReader reader)
         {

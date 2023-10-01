@@ -105,11 +105,13 @@ namespace System.Data.Objects.Internal
                     )
                 };
 
-                AssemblyBuilder assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    assemblyName,
-                    s_ProxyAssemblyBuilderAccess,
-                    attributeBuilders
-                );
+                AssemblyBuilder assemblyBuilder = AppDomain
+                    .CurrentDomain
+                    .DefineDynamicAssembly(
+                        assemblyName,
+                        s_ProxyAssemblyBuilderAccess,
+                        attributeBuilders
+                    );
 
                 if (s_ProxyAssemblyBuilderAccess == AssemblyBuilderAccess.RunAndSave)
                 {
@@ -741,15 +743,17 @@ namespace System.Data.Objects.Internal
             TypeAttributes access =
                 ospaceEntityType.ClrType.Attributes & TypeAttributes.VisibilityMask;
 
-            ConstructorInfo ctor = ospaceEntityType.ClrType.GetConstructor(
-                BindingFlags.NonPublic
-                    | BindingFlags.Public
-                    | BindingFlags.Instance
-                    | BindingFlags.CreateInstance,
-                null,
-                Type.EmptyTypes,
-                null
-            );
+            ConstructorInfo ctor = ospaceEntityType
+                .ClrType
+                .GetConstructor(
+                    BindingFlags.NonPublic
+                        | BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.CreateInstance,
+                    null,
+                    Type.EmptyTypes,
+                    null
+                );
             bool accessableCtor =
                 ctor != null
                 && (
@@ -1847,8 +1851,11 @@ namespace System.Data.Objects.Internal
             MethodAttributes methodAccess =
                 baseSetter.Attributes & MethodAttributes.MemberAccessMask;
 
-            string cannotSetException =
-                System.Data.Entity.Strings.EntityProxyTypeInfo_CannotSetEntityCollectionProperty(
+            string cannotSetException = System
+                .Data
+                .Entity
+                .Strings
+                .EntityProxyTypeInfo_CannotSetEntityCollectionProperty(
                     propertyBuilder.Name,
                     typeBuilder.Name
                 );

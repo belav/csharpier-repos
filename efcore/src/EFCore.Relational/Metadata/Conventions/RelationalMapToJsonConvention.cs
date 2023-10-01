@@ -75,7 +75,8 @@ public class RelationalMapToJsonConvention
     )
     {
         foreach (
-            var jsonEntityType in modelBuilder.Metadata
+            var jsonEntityType in modelBuilder
+                .Metadata
                 .GetEntityTypes()
                 .Where(e => e.IsMappedToJson())
         )

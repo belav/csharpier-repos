@@ -309,12 +309,11 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        Builder.ModelBuilder.Metadata.ConventionDispatcher.OnIndexAnnotationChanged(
-            Builder,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        Builder
+            .ModelBuilder
+            .Metadata
+            .ConventionDispatcher
+            .OnIndexAnnotationChanged(Builder, name, annotation, oldAnnotation);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

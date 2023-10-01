@@ -91,19 +91,21 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 method.ExplicitInterfaceImplementations,
                 method.Name,
                 updatedTypeParameters,
-                method.Parameters.SelectAsArray(
-                    p =>
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            p.GetAttributes(),
-                            p.RefKind,
-                            p.IsParams,
-                            p.Type.SubstituteTypes(mapping, typeGenerator),
-                            p.Name,
-                            p.IsOptional,
-                            p.HasExplicitDefaultValue,
-                            p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
-                        )
-                )
+                method
+                    .Parameters
+                    .SelectAsArray(
+                        p =>
+                            CodeGenerationSymbolFactory.CreateParameterSymbol(
+                                p.GetAttributes(),
+                                p.RefKind,
+                                p.IsParams,
+                                p.Type.SubstituteTypes(mapping, typeGenerator),
+                                p.Name,
+                                p.IsOptional,
+                                p.HasExplicitDefaultValue,
+                                p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
+                            )
+                    )
             );
         }
 
@@ -227,10 +229,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var methodHasAttribute = method.GetAttributes().Any(shouldRemoveAttribute, arg);
 
-            var someParameterHasAttribute = method.Parameters.Any(
-                static (m, arg) => m.GetAttributes().Any(shouldRemoveAttribute, arg),
-                arg
-            );
+            var someParameterHasAttribute = method
+                .Parameters
+                .Any(static (m, arg) => m.GetAttributes().Any(shouldRemoveAttribute, arg), arg);
 
             var returnTypeHasAttribute = method
                 .GetReturnTypeAttributes()
@@ -248,24 +249,26 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 attributes: method
                     .GetAttributes()
                     .WhereAsArray(static (a, arg) => !shouldRemoveAttribute(a, arg), arg),
-                parameters: method.Parameters.SelectAsArray(
-                    static (p, arg) =>
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            p.GetAttributes()
-                                .WhereAsArray(
-                                    static (a, arg) => !shouldRemoveAttribute(a, arg),
-                                    arg
-                                ),
-                            p.RefKind,
-                            p.IsParams,
-                            p.Type,
-                            p.Name,
-                            p.IsOptional,
-                            p.HasExplicitDefaultValue,
-                            p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
-                        ),
-                    arg
-                ),
+                parameters: method
+                    .Parameters
+                    .SelectAsArray(
+                        static (p, arg) =>
+                            CodeGenerationSymbolFactory.CreateParameterSymbol(
+                                p.GetAttributes()
+                                    .WhereAsArray(
+                                        static (a, arg) => !shouldRemoveAttribute(a, arg),
+                                        arg
+                                    ),
+                                p.RefKind,
+                                p.IsParams,
+                                p.Type,
+                                p.Name,
+                                p.IsOptional,
+                                p.HasExplicitDefaultValue,
+                                p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
+                            ),
+                        arg
+                    ),
                 returnTypeAttributes: method
                     .GetReturnTypeAttributes()
                     .WhereAsArray(static (a, arg) => !shouldRemoveAttribute(a, arg), arg)
@@ -294,11 +297,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // If the methods' parameter types differ, or they have different names, then one can't
             // be more specific than the other.
             if (
-                !SignatureComparer.Instance.HaveSameSignature(
-                    method1.Parameters,
-                    method2.Parameters
-                )
-                || !method1.Parameters
+                !SignatureComparer
+                    .Instance
+                    .HaveSameSignature(method1.Parameters, method2.Parameters)
+                || !method1
+                    .Parameters
                     .Select(p => p.Name)
                     .SequenceEqual(method2.Parameters.Select(p => p.Name))
             )

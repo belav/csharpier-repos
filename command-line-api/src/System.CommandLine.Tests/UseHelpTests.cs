@@ -31,7 +31,8 @@ namespace System.CommandLine.Tests
 
             await result.InvokeAsync(_console);
 
-            _console.Out
+            _console
+                .Out
                 .ToString()
                 .Should()
                 .Contain($"{RootCommand.ExecutableName} command subcommand [options]");
@@ -226,7 +227,8 @@ namespace System.CommandLine.Tests
             var console = new TestConsole();
             parser.Invoke("-h", console);
 
-            console.Out
+            console
+                .Out
                 .ToString()
                 .Should()
                 .ContainAll(
@@ -246,7 +248,8 @@ namespace System.CommandLine.Tests
             var console = new TestConsole();
             parser.Invoke("-h", console);
 
-            console.Out
+            console
+                .Out
                 .ToString()
                 .Should()
                 .Be($"one{NewLine}{NewLine}two{NewLine}{NewLine}three{NewLine}{NewLine}{NewLine}");
@@ -319,7 +322,8 @@ namespace System.CommandLine.Tests
             parser.Invoke("custom -h", customOutput);
 
             typicalOutput.Out.ToString().Should().Be(GetDefaultHelp(commandWithTypicalHelp, false));
-            customOutput.Out
+            customOutput
+                .Out
                 .ToString()
                 .Should()
                 .Be(

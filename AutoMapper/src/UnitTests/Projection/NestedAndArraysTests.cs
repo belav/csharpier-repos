@@ -105,10 +105,14 @@
 
                 Assert.Equal(viewModel.EntityID, entity.EntityID);
                 Assert.True(
-                    entity.SubEntities.All(
-                        subEntity =>
-                            viewModel.SubEntities.Any(s => s.Description == subEntity.Description)
-                    )
+                    entity
+                        .SubEntities
+                        .All(
+                            subEntity =>
+                                viewModel
+                                    .SubEntities
+                                    .Any(s => s.Description == subEntity.Description)
+                        )
                 );
             }
         }

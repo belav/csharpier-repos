@@ -259,8 +259,9 @@ namespace System.ServiceModel.Activities.Diagnostics
 
         static bool TryGetFullVirtualPath(ServiceHostBase serviceHost, out string uri)
         {
-            VirtualPathExtension pathExtension =
-                serviceHost.Extensions.Find<VirtualPathExtension>();
+            VirtualPathExtension pathExtension = serviceHost
+                .Extensions
+                .Find<VirtualPathExtension>();
             if (pathExtension == null)
             {
                 uri = null;

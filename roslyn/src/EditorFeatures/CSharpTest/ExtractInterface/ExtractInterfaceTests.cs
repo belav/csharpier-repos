@@ -555,9 +555,9 @@ namespace OuterNamespace
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp10
-                ),
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp10),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -570,9 +570,9 @@ namespace OuterNamespace
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
-                result.NavigationDocumentId
-            );
+            var interfaceDocument = result
+                .UpdatedSolution
+                .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
             Assert.Equal(
@@ -606,9 +606,9 @@ namespace OuterNamespace
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp9
-                ),
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp9),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -621,9 +621,9 @@ namespace OuterNamespace
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
-                result.NavigationDocumentId
-            );
+            var interfaceDocument = result
+                .UpdatedSolution
+                .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
             Assert.Equal(
@@ -658,9 +658,9 @@ namespace OuterNamespace
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp10
-                ),
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp10),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -673,9 +673,9 @@ namespace OuterNamespace
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
-                result.NavigationDocumentId
-            );
+            var interfaceDocument = result
+                .UpdatedSolution
+                .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
             Assert.Equal(
@@ -1007,9 +1007,9 @@ namespace N
             using var testState = ExtractInterfaceTestState.Create(
                 markup,
                 LanguageNames.CSharp,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp10
-                ),
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp10),
                 options: new OptionsCollection(LanguageNames.CSharp)
                 {
                     {
@@ -1021,9 +1021,9 @@ namespace N
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
-                result.NavigationDocumentId
-            );
+            var interfaceDocument = result
+                .UpdatedSolution
+                .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
             Assert.Equal(expectedInterfaceCode, interfaceCode);
@@ -1197,9 +1197,9 @@ abstract class MyClass$$
 
             var result = await testState.ExtractViaCommandAsync();
 
-            var interfaceDocument = result.UpdatedSolution.GetRequiredDocument(
-                result.NavigationDocumentId
-            );
+            var interfaceDocument = result
+                .UpdatedSolution
+                .GetRequiredDocument(result.NavigationDocumentId);
             var interfaceCode = (await interfaceDocument.GetTextAsync()).ToString();
 
             Assert.Equal(
@@ -1676,8 +1676,9 @@ class $$Test<T, U>
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler =
-                workspace.ExportProvider.GetCommandHandler<ExtractInterfaceCommandHandler>(
+            var handler = workspace
+                .ExportProvider
+                .GetCommandHandler<ExtractInterfaceCommandHandler>(
                     PredefinedCommandHandlerNames.ExtractInterface,
                     ContentTypeNames.CSharpContentType
                 );

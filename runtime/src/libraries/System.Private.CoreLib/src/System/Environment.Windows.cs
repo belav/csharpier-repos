@@ -21,10 +21,12 @@ namespace System
                 uint length;
                 while (
                     (
-                        length = Interop.Kernel32.GetCurrentDirectory(
-                            (uint)builder.Capacity,
-                            ref builder.GetPinnableReference()
-                        )
+                        length = Interop
+                            .Kernel32
+                            .GetCurrentDirectory(
+                                (uint)builder.Capacity,
+                                ref builder.GetPinnableReference()
+                            )
                     ) > builder.Capacity
                 )
                 {
@@ -83,11 +85,13 @@ namespace System
             uint length;
             while (
                 (
-                    length = Interop.Kernel32.ExpandEnvironmentStrings(
-                        name,
-                        ref builder.GetPinnableReference(),
-                        (uint)builder.Capacity
-                    )
+                    length = Interop
+                        .Kernel32
+                        .ExpandEnvironmentStrings(
+                            name,
+                            ref builder.GetPinnableReference(),
+                            (uint)builder.Capacity
+                        )
                 ) > builder.Capacity
             )
             {
@@ -108,23 +112,27 @@ namespace System
             try
             {
                 if (
-                    Interop.Advapi32.OpenProcessToken(
-                        Interop.Kernel32.GetCurrentProcess(),
-                        (int)Interop.Advapi32.TOKEN_ACCESS_LEVELS.Read,
-                        out token
-                    )
+                    Interop
+                        .Advapi32
+                        .OpenProcessToken(
+                            Interop.Kernel32.GetCurrentProcess(),
+                            (int)Interop.Advapi32.TOKEN_ACCESS_LEVELS.Read,
+                            out token
+                        )
                 )
                 {
                     Interop.Advapi32.TOKEN_ELEVATION elevation = default;
 
                     if (
-                        Interop.Advapi32.GetTokenInformation(
-                            token,
-                            Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenElevation,
-                            &elevation,
-                            (uint)sizeof(Interop.Advapi32.TOKEN_ELEVATION),
-                            out _
-                        )
+                        Interop
+                            .Advapi32
+                            .GetTokenInformation(
+                                token,
+                                Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenElevation,
+                                &elevation,
+                                (uint)sizeof(Interop.Advapi32.TOKEN_ELEVATION),
+                                out _
+                            )
                     )
                     {
                         return elevation.TokenIsElevated != Interop.BOOL.FALSE;
@@ -157,11 +165,13 @@ namespace System
             uint length;
             while (
                 (
-                    length = Interop.Kernel32.GetModuleFileName(
-                        IntPtr.Zero,
-                        ref builder.GetPinnableReference(),
-                        (uint)builder.Capacity
-                    )
+                    length = Interop
+                        .Kernel32
+                        .GetModuleFileName(
+                            IntPtr.Zero,
+                            ref builder.GetPinnableReference(),
+                            (uint)builder.Capacity
+                        )
                 ) >= builder.Capacity
             )
             {
@@ -208,10 +218,12 @@ namespace System
                 uint length;
                 while (
                     (
-                        length = Interop.Kernel32.GetSystemDirectoryW(
-                            ref builder.GetPinnableReference(),
-                            (uint)builder.Capacity
-                        )
+                        length = Interop
+                            .Kernel32
+                            .GetSystemDirectoryW(
+                                ref builder.GetPinnableReference(),
+                                (uint)builder.Capacity
+                            )
                     ) > builder.Capacity
                 )
                 {
@@ -237,13 +249,15 @@ namespace System
                     Interop.User32.USEROBJECTFLAGS flags = default;
                     uint dummy = 0;
                     if (
-                        Interop.User32.GetUserObjectInformationW(
-                            handle,
-                            Interop.User32.UOI_FLAGS,
-                            &flags,
-                            (uint)sizeof(Interop.User32.USEROBJECTFLAGS),
-                            ref dummy
-                        )
+                        Interop
+                            .User32
+                            .GetUserObjectInformationW(
+                                handle,
+                                Interop.User32.UOI_FLAGS,
+                                &flags,
+                                (uint)sizeof(Interop.User32.USEROBJECTFLAGS),
+                                ref dummy
+                            )
                     )
                     {
                         return ((flags.dwFlags & Interop.User32.WSF_VISIBLE) != 0);
@@ -264,11 +278,13 @@ namespace System
                 memoryCounters.cb = (uint)(sizeof(Interop.Kernel32.PROCESS_MEMORY_COUNTERS));
 
                 if (
-                    !Interop.Kernel32.GetProcessMemoryInfo(
-                        Interop.Kernel32.GetCurrentProcess(),
-                        ref memoryCounters,
-                        memoryCounters.cb
-                    )
+                    !Interop
+                        .Kernel32
+                        .GetProcessMemoryInfo(
+                            Interop.Kernel32.GetCurrentProcess(),
+                            ref memoryCounters,
+                            memoryCounters.cb
+                        )
                 )
                 {
                     return 0;

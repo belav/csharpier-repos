@@ -50,9 +50,9 @@ namespace MonoTests.System.ServiceModel.Discovery
             ahost.AddServiceEndpoint(aendpoint);
             ahost.Open();
             foreach (var cd in ahost.ChannelDispatchers)
-                TextWriter.Null.WriteLine(
-                    "AnnouncementService.ChannelDispatcher " + cd.Listener.Uri
-                );
+                TextWriter
+                    .Null
+                    .WriteLine("AnnouncementService.ChannelDispatcher " + cd.Listener.Uri);
         }
 
         public void Dispose()

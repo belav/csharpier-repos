@@ -586,10 +586,12 @@ namespace Microsoft.Win32.SafeHandles
             }
 
             if (
-                !Interop.Sys.TryGetFileSystemType(
-                    this,
-                    out Interop.Sys.UnixFileSystemTypes unixFileSystemType
-                )
+                !Interop
+                    .Sys
+                    .TryGetFileSystemType(
+                        this,
+                        out Interop.Sys.UnixFileSystemTypes unixFileSystemType
+                    )
             )
             {
                 return false; // assume we should not acquire the lock if we don't know the File System

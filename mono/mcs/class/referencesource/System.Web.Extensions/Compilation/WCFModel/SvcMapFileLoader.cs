@@ -65,10 +65,12 @@ namespace Microsoft.VSDesigner.WCFModel
                 _mapFileSchemaSet = new XmlSchemaSet();
 
                 using (
-                    var stream = typeof(SvcMapFileImpl).Assembly.GetManifestResourceStream(
-                        typeof(SvcMapFileImpl),
-                        @"Schema.ServiceMapSchema.xsd"
-                    )
+                    var stream = typeof(SvcMapFileImpl)
+                        .Assembly
+                        .GetManifestResourceStream(
+                            typeof(SvcMapFileImpl),
+                            @"Schema.ServiceMapSchema.xsd"
+                        )
                 )
                 {
                     _mapFileSchemaSet.Add(XmlSchema.Read(stream, null));

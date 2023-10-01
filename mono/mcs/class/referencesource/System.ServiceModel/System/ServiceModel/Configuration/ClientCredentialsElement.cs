@@ -123,15 +123,17 @@ namespace System.ServiceModel.Configuration
                 Type credentialsType = System.Type.GetType(this.Type, true);
                 if (!typeof(ClientCredentials).IsAssignableFrom(credentialsType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidClientCredentialsType,
-                                this.Type,
-                                credentialsType.AssemblyQualifiedName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidClientCredentialsType,
+                                    this.Type,
+                                    credentialsType.AssemblyQualifiedName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 behavior = (ClientCredentials)Activator.CreateInstance(credentialsType);
             }

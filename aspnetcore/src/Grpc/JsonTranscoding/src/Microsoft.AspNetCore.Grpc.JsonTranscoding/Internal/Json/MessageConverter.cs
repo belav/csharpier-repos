@@ -47,9 +47,10 @@ internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessag
                         if (fieldDescriptor.ContainingOneof != null)
                         {
                             if (
-                                fieldDescriptor.ContainingOneof.Accessor.GetCaseFieldDescriptor(
-                                    message
-                                ) != null
+                                fieldDescriptor
+                                    .ContainingOneof
+                                    .Accessor
+                                    .GetCaseFieldDescriptor(message) != null
                             )
                             {
                                 throw new InvalidOperationException(

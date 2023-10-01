@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
                     }
                 }"
             );
-            var position = workspace.Documents
+            var position = workspace
+                .Documents
                 .Single(d => d.CursorPosition.HasValue)
                 .CursorPosition
                 .Value;

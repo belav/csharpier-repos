@@ -269,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
         )
         {
             // Get the compilation unit usings and set them up to format when moved.
-            var usingsToAdd = compilationUnit.Usings
+            var usingsToAdd = compilationUnit
+                .Usings
                 .Where(u => u.GlobalKeyword == default)
                 .Select(
                     d => d.WithAdditionalAnnotations(Formatter.Annotation, s_warningAnnotation)
@@ -308,8 +309,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             CompilationUnitSyntax compilationUnit
         )
         {
-            var namespaceDeclarations =
-                compilationUnit.Members.OfType<BaseNamespaceDeclarationSyntax>();
+            var namespaceDeclarations = compilationUnit
+                .Members
+                .OfType<BaseNamespaceDeclarationSyntax>();
             var namespaceDeclarationMap = namespaceDeclarations.ToDictionary(
                 namespaceDeclaration => namespaceDeclaration,
                 RemoveUsingsFromNamespace
@@ -322,7 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Get the using directives from the namespaces and set them up to format when moved.
-            var usingsToAdd = namespaceDeclarationMap.Values
+            var usingsToAdd = namespaceDeclarationMap
+                .Values
                 .SelectMany(result => result.usingsFromNamespace)
                 .Select(
                     directive =>
@@ -338,9 +341,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Update the compilation unit with the usings from the namespace declaration.
-            var newUsings = compilationUnitWithReplacedNamespaces.Usings.AddRange(
-                deduplicatedUsings
-            );
+            var newUsings = compilationUnitWithReplacedNamespaces
+                .Usings
+                .AddRange(deduplicatedUsings);
             var compilationUnitWithUsings = compilationUnitWithReplacedNamespaces.WithUsings(
                 newUsings
             );
@@ -368,18 +371,20 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             ImmutableArray<UsingDirectiveSyntax> usingsFromNamespace
         ) RemoveUsingsFromNamespace(BaseNamespaceDeclarationSyntax usingContainer)
         {
-            var namespaceDeclarations =
-                usingContainer.Members.OfType<BaseNamespaceDeclarationSyntax>();
+            var namespaceDeclarations = usingContainer
+                .Members
+                .OfType<BaseNamespaceDeclarationSyntax>();
             var namespaceDeclarationMap = namespaceDeclarations.ToDictionary(
                 namespaceDeclaration => namespaceDeclaration,
                 namespaceDeclaration => RemoveUsingsFromNamespace(namespaceDeclaration)
             );
 
             // Get the using directives from the namespaces.
-            var usingsFromNamespaces = namespaceDeclarationMap.Values.SelectMany(
-                result => result.usingsFromNamespace
-            );
-            var allUsings = usingContainer.Usings
+            var usingsFromNamespaces = namespaceDeclarationMap
+                .Values
+                .SelectMany(result => result.usingsFromNamespace);
+            var allUsings = usingContainer
+                .Usings
                 .AsEnumerable()
                 .Concat(usingsFromNamespaces)
                 .ToImmutableArray();

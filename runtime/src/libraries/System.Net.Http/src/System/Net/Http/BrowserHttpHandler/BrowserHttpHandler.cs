@@ -165,10 +165,9 @@ namespace System.Net.Http
                     ? request.RequestUri.AbsoluteUri
                     : request.RequestUri.ToString();
 
-                bool hasFetchOptions = request.Options.TryGetValue(
-                    FetchOptions,
-                    out IDictionary<string, object>? fetchOptions
-                );
+                bool hasFetchOptions = request
+                    .Options
+                    .TryGetValue(FetchOptions, out IDictionary<string, object>? fetchOptions);
                 int optionCount =
                     1
                     + (allowAutoRedirect.HasValue ? 1 : 0)
@@ -226,7 +225,8 @@ namespace System.Net.Http
                 {
                     if (request.Content is StringContent)
                     {
-                        string body = await request.Content
+                        string body = await request
+                            .Content
                             .ReadAsStringAsync(cancellationToken)
                             .ConfigureAwait(true);
                         cancellationToken.ThrowIfCancellationRequested();
@@ -243,7 +243,8 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        byte[] buffer = await request.Content
+                        byte[] buffer = await request
+                            .Content
                             .ReadAsByteArrayAsync(cancellationToken)
                             .ConfigureAwait(true);
                         cancellationToken.ThrowIfCancellationRequested();

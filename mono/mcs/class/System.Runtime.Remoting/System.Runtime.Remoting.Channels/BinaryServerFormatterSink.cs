@@ -189,10 +189,9 @@ namespace System.Runtime.Remoting.Channels
 
                 MethodCallHeaderHandler mhh = new MethodCallHeaderHandler(uri);
                 requestMsg = (IMessage)
-                    _binaryCore.Deserializer.Deserialize(
-                        requestStream,
-                        new HeaderHandler(mhh.HandleHeaders)
-                    );
+                    _binaryCore
+                        .Deserializer
+                        .Deserialize(requestStream, new HeaderHandler(mhh.HandleHeaders));
 
                 res = next_sink.ProcessMessage(
                     sinkStack,

@@ -104,10 +104,9 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
                     if (sourceType != null)
                     {
                         foreach (
-                            var converterInfo in self.Dependencies.ValueConverterSelector.Select(
-                                sourceType,
-                                providerType
-                            )
+                            var converterInfo in self.Dependencies
+                                .ValueConverterSelector
+                                .Select(sourceType, providerType)
                         )
                         {
                             var mappingInfoUsed = info.WithConverter(converterInfo);
@@ -116,9 +115,9 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
                             if (mapping == null && providerType != null)
                             {
                                 foreach (
-                                    var secondConverterInfo in self.Dependencies.ValueConverterSelector.Select(
-                                        providerType
-                                    )
+                                    var secondConverterInfo in self.Dependencies
+                                        .ValueConverterSelector
+                                        .Select(providerType)
                                 )
                                 {
                                     mapping = self.FindMapping(

@@ -183,9 +183,9 @@ namespace System.Text.Json.Node.Tests
         [Fact]
         public static void ReadSimpleObjectWithTrailingTrivia()
         {
-            byte[] data = Encoding.UTF8.GetBytes(
-                SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t"
-            );
+            byte[] data = Encoding
+                .UTF8
+                .GetBytes(SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t");
             using (MemoryStream stream = new MemoryStream(data))
             {
                 var options = new JsonDocumentOptions

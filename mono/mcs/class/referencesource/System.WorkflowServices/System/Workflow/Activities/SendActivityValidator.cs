@@ -19,20 +19,24 @@ namespace System.Workflow.Activities
             SendActivity sendActivity = obj as SendActivity;
             if (sendActivity == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "obj",
-                    SR2.GetString(SR2.Error_ArgumentTypeInvalid, "obj", typeof(SendActivity))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "obj",
+                        SR2.GetString(SR2.Error_ArgumentTypeInvalid, "obj", typeof(SendActivity))
+                    );
             }
 
             ITypeProvider typeProvider = manager.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.General_MissingService, typeof(ITypeProvider).Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.General_MissingService, typeof(ITypeProvider).Name)
+                        )
+                    );
             }
 
             if (sendActivity.ServiceOperationInfo == null)

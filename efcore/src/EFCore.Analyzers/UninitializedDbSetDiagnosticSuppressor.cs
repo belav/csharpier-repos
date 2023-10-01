@@ -66,12 +66,12 @@ public sealed class UninitializedDbSetDiagnosticSuppressor : DiagnosticSuppresso
 
             if (dbSetTypeSymbol is null || dbContextTypeSymbol is null)
             {
-                dbSetTypeSymbol = context.Compilation.GetTypeByMetadataName(
-                    "Microsoft.EntityFrameworkCore.DbSet`1"
-                );
-                dbContextTypeSymbol = context.Compilation.GetTypeByMetadataName(
-                    "Microsoft.EntityFrameworkCore.DbContext"
-                );
+                dbSetTypeSymbol = context
+                    .Compilation
+                    .GetTypeByMetadataName("Microsoft.EntityFrameworkCore.DbSet`1");
+                dbContextTypeSymbol = context
+                    .Compilation
+                    .GetTypeByMetadataName("Microsoft.EntityFrameworkCore.DbContext");
 
                 if (dbSetTypeSymbol is null || dbContextTypeSymbol is null)
                 {
@@ -81,10 +81,11 @@ public sealed class UninitializedDbSetDiagnosticSuppressor : DiagnosticSuppresso
 
             // Check that the property is actually a DbSet<T>, and that its containing type inherits from DbContext
             if (
-                propertySymbol.Type.OriginalDefinition.Equals(
-                    dbSetTypeSymbol,
-                    SymbolEqualityComparer.Default
-                ) && InheritsFrom(propertySymbol.ContainingType, dbContextTypeSymbol)
+                propertySymbol
+                    .Type
+                    .OriginalDefinition
+                    .Equals(dbSetTypeSymbol, SymbolEqualityComparer.Default)
+                && InheritsFrom(propertySymbol.ContainingType, dbContextTypeSymbol)
             )
             {
                 context.ReportSuppression(

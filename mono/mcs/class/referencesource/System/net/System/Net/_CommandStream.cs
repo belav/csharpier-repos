@@ -259,10 +259,9 @@ namespace System.Net
                     byte[] sendBuffer = Encoding.GetBytes(m_Commands[m_Index].Command);
                     if (Logging.On)
                     {
-                        string sendCommand = m_Commands[m_Index].Command.Substring(
-                            0,
-                            m_Commands[m_Index].Command.Length - 2
-                        );
+                        string sendCommand = m_Commands[m_Index]
+                            .Command
+                            .Substring(0, m_Commands[m_Index].Command.Length - 2);
                         if (m_Commands[m_Index].HasFlag(PipelineEntryFlags.DontLogParameter))
                         {
                             int index = sendCommand.IndexOf(' ');

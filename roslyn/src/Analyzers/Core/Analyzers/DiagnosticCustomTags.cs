@@ -12,8 +12,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static class DiagnosticCustomTags
     {
-        private static readonly string s_enforceOnBuildNeverTag =
-            EnforceOnBuild.Never.ToCustomTag();
+        private static readonly string s_enforceOnBuildNeverTag = EnforceOnBuild
+            .Never
+            .ToCustomTag();
 
         private static readonly string[] s_microsoftCustomTags = new string[]
         {

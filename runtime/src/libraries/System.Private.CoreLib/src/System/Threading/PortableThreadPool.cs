@@ -136,12 +136,14 @@ namespace System.Threading
 
             if (NativeRuntimeEventSource.Log.IsEnabled())
             {
-                NativeRuntimeEventSource.Log.ThreadPoolMinMaxThreads(
-                    (ushort)_minThreads,
-                    (ushort)_maxThreads,
-                    (ushort)_legacy_minIOCompletionThreads,
-                    (ushort)_legacy_maxIOCompletionThreads
-                );
+                NativeRuntimeEventSource
+                    .Log
+                    .ThreadPoolMinMaxThreads(
+                        (ushort)_minThreads,
+                        (ushort)_maxThreads,
+                        (ushort)_legacy_minIOCompletionThreads,
+                        (ushort)_legacy_maxIOCompletionThreads
+                    );
             }
 
             _separated.counts.NumThreadsGoal = _minThreads;
@@ -215,12 +217,14 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolMinMaxThreads(
-                        (ushort)_minThreads,
-                        (ushort)_maxThreads,
-                        (ushort)_legacy_minIOCompletionThreads,
-                        (ushort)_legacy_maxIOCompletionThreads
-                    );
+                    NativeRuntimeEventSource
+                        .Log
+                        .ThreadPoolMinMaxThreads(
+                            (ushort)_minThreads,
+                            (ushort)_maxThreads,
+                            (ushort)_legacy_minIOCompletionThreads,
+                            (ushort)_legacy_maxIOCompletionThreads
+                        );
                 }
             }
             finally
@@ -287,12 +291,14 @@ namespace System.Threading
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
-                    NativeRuntimeEventSource.Log.ThreadPoolMinMaxThreads(
-                        (ushort)_minThreads,
-                        (ushort)_maxThreads,
-                        (ushort)_legacy_minIOCompletionThreads,
-                        (ushort)_legacy_maxIOCompletionThreads
-                    );
+                    NativeRuntimeEventSource
+                        .Log
+                        .ThreadPoolMinMaxThreads(
+                            (ushort)_minThreads,
+                            (ushort)_maxThreads,
+                            (ushort)_legacy_minIOCompletionThreads,
+                            (ushort)_legacy_maxIOCompletionThreads
+                        );
                 }
                 return true;
             }
@@ -402,12 +408,9 @@ namespace System.Threading
 
                     short oldNumThreadsGoal = counts.NumThreadsGoal;
                     int newNumThreadsGoal;
-                    (newNumThreadsGoal, _threadAdjustmentIntervalMs) =
-                        HillClimbing.ThreadPoolHillClimber.Update(
-                            oldNumThreadsGoal,
-                            elapsedSeconds,
-                            numCompletions
-                        );
+                    (newNumThreadsGoal, _threadAdjustmentIntervalMs) = HillClimbing
+                        .ThreadPoolHillClimber
+                        .Update(oldNumThreadsGoal, elapsedSeconds, numCompletions);
                     if (oldNumThreadsGoal != (short)newNumThreadsGoal)
                     {
                         _separated.counts.InterlockedSetNumThreadsGoal((short)newNumThreadsGoal);

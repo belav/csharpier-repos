@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 .First()
                 .Value
                 .FirstOrDefault()
-                ?.Location.SourceSpan;
+                ?.Location
+                .SourceSpan;
             var diagnosticIds = GetDiagnosticsIds(diagnosticsToFix.Values);
             var diagnosticProvider = new FixMultipleDiagnosticProvider(diagnosticsToFix);
             return new FixAllState(

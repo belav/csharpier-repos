@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SimpleNameSyntax GetNameWithTriviaMoved(
             this MemberAccessExpressionSyntax memberAccess
         ) =>
-            memberAccess.Name
+            memberAccess
+                .Name
                 .WithLeadingTrivia(GetLeadingTriviaForSimplifiedMemberAccess(memberAccess))
                 .WithTrailingTrivia(memberAccess.GetTrailingTrivia());
 

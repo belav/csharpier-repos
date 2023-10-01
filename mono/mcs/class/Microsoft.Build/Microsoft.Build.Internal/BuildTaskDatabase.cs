@@ -198,7 +198,8 @@ namespace Microsoft.Build.Internal
                 var pg =
                     ut.ParameterGroup == null
                         ? null
-                        : ut.ParameterGroup.Parameters
+                        : ut.ParameterGroup
+                            .Parameters
                             .Select(
                                 p =>
                                     new TaskPropertyInfo(

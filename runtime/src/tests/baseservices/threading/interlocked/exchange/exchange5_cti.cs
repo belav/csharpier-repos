@@ -31,9 +31,11 @@ public class InterlockedExchange5
     public static int Main(string[] args)
     {
         InterlockedExchange5 exchange5 = new InterlockedExchange5();
-        TestLibrary.TestFramework.BeginTestCase(
-            "Testing System.Threading.Interlocked.Exchange(System.Object@,System.Object)..."
-        );
+        TestLibrary
+            .TestFramework
+            .BeginTestCase(
+                "Testing System.Threading.Interlocked.Exchange(System.Object@,System.Object)..."
+            );
 
         if (exchange5.RunTests())
         {
@@ -62,9 +64,11 @@ public class InterlockedExchange5
     public bool PosTest1()
     {
         bool retVal = true;
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: Verify multiple threads share the same resource by using Interlocked.Exchange method..."
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest1: Verify multiple threads share the same resource by using Interlocked.Exchange method..."
+            );
 
         try
         {
@@ -99,10 +103,9 @@ public class InterlockedExchange5
                 // resource (10)
                 if (resource > 0 && resource + entry != 10)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "001",
-                        "The number of resource is consumed is wrong!"
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError("001", "The number of resource is consumed is wrong!");
                     retVal = false;
                 }
             }
@@ -142,9 +145,11 @@ public class InterlockedExchange5
             {
                 // consume a resource
                 resource--;
-                TestLibrary.TestFramework.LogInformation(
-                    String.Format("The resource is reduced, the remainder is {0}", resource)
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        String.Format("The resource is reduced, the remainder is {0}", resource)
+                    );
             }
             else
             {

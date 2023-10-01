@@ -36,7 +36,8 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContextIgnoreVirtuals<LazyNonVirtualNavEntity>();
         Assert.NotNull(
-            context.Model
+            context
+                .Model
                 .FindEntityType(typeof(LazyNonVirtualNavEntity))!
                 .FindNavigation(nameof(LazyNonVirtualNavEntity.SelfRef))
         );

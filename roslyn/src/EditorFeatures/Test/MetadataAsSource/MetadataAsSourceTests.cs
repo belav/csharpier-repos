@@ -2077,7 +2077,8 @@ public class [|C|]
         {
             using var context = TestContext.Create();
             var projectId = ProjectId.CreateNewId();
-            var project = context.CurrentSolution
+            var project = context
+                .CurrentSolution
                 .AddProject(projectId, "ProjectB", "ProjectB", LanguageNames.CSharp)
                 .GetProject(projectId)
                 .WithMetadataReferences(context.DefaultProject.MetadataReferences)
@@ -2095,7 +2096,8 @@ public class [|C|]
         {
             using var context = TestContext.Create(LanguageNames.CSharp);
             var projectId = ProjectId.CreateNewId();
-            var project = context.CurrentSolution
+            var project = context
+                .CurrentSolution
                 .AddProject(projectId, "ProjectB", "ProjectB", LanguageNames.VisualBasic)
                 .GetProject(projectId)
                 .WithMetadataReferences(context.DefaultProject.MetadataReferences)

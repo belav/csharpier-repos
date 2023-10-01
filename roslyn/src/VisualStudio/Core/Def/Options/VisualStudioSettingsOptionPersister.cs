@@ -90,10 +90,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 );
                 if (
                     optionValue.HasValue
-                    && _legacyGlobalOptions.GlobalOptions.RefreshOption(
-                        entry.optionKey,
-                        optionValue.Value
-                    )
+                    && _legacyGlobalOptions
+                        .GlobalOptions
+                        .RefreshOption(entry.optionKey, optionValue.Value)
                 )
                 {
                     // We may be updating the values of internally defined public options.
@@ -134,11 +133,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 )
             )
             {
-                var fallbackResult = lazyReadFallback.Value.TryRead(
-                    optionKey.Language,
-                    (storageKey, storageType) =>
-                        TryReadOptionValue(optionKey, storageKey, storageType)
-                );
+                var fallbackResult = lazyReadFallback
+                    .Value
+                    .TryRead(
+                        optionKey.Language,
+                        (storageKey, storageType) =>
+                            TryReadOptionValue(optionKey, storageKey, storageType)
+                    );
                 if (fallbackResult.HasValue)
                 {
                     value = fallbackResult.Value;

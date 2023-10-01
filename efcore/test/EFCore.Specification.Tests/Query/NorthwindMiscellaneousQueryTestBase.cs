@@ -3799,7 +3799,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         {
             try
             {
-                context.Customers
+                context
+                    .Customers
                     .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                     .ToList();
             }
@@ -3844,7 +3845,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         {
             try
             {
-                context.Customers
+                context
+                    .Customers
                     .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                     .ToList();
             }
@@ -4678,7 +4680,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         o =>
                             new Order
                             {
-                                OrderDate = o.OrderDate.Value
+                                OrderDate = o.OrderDate
+                                    .Value
                                     .AddDays(o.OrderDate.Value.Millisecond / millisecondsPerDay)
                                     .AddMilliseconds(
                                         o.OrderDate.Value.Millisecond % millisecondsPerDay
@@ -6714,7 +6717,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     )
     {
         using var context = CreateContext();
-        var orderIds = context.Customers
+        var orderIds = context
+            .Customers
             .Where(c => c.CustomerID == "ALFKI")
             .SelectMany(c => c.Orders)
             .Select(o => o.OrderID)
@@ -7186,15 +7190,16 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
         {
             var results = (
-                await context.Customers
+                await context
+                    .Customers
                     .Select(
                         c =>
                             new
                             {
                                 c.CustomerID,
-                                Orders = context.Orders.Where(
-                                    o => o.Customer.CustomerID == c.CustomerID
-                                )
+                                Orders = context
+                                    .Orders
+                                    .Where(o => o.Customer.CustomerID == c.CustomerID)
                             }
                     )
                     .ToListAsync()

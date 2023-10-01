@@ -68,9 +68,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 base1,
                 module1.TypeRefHandleToTypeMap[
                     (TypeReferenceHandle)
-                        module1.Module.GetBaseTypeOfTypeOrThrow(
-                            ((PENamedTypeSymbol)derived1).Handle
-                        )
+                        module1
+                            .Module
+                            .GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)derived1).Handle)
                 ]
             );
             Assert.True(
@@ -138,12 +138,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             // System.Func`1 in both isn't ambiguous because one forwards to the other.
             Assert.Equal(
                 funcType,
-                compilation.Assembly.GetTypeByMetadataName(
-                    funcTypeMetadataName,
-                    includeReferences: true,
-                    isWellKnownType: false,
-                    conflicts: out var _
-                )
+                compilation
+                    .Assembly
+                    .GetTypeByMetadataName(
+                        funcTypeMetadataName,
+                        includeReferences: true,
+                        isWellKnownType: false,
+                        conflicts: out var _
+                    )
             );
         }
 

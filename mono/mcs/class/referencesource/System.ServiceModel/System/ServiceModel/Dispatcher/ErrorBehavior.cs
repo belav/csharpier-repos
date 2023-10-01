@@ -33,10 +33,9 @@ namespace System.ServiceModel.Dispatcher
             if (fault != null)
             {
                 string action;
-                MessageFault messageFault = rpc.Operation.FaultFormatter.Serialize(
-                    fault,
-                    out action
-                );
+                MessageFault messageFault = rpc.Operation
+                    .FaultFormatter
+                    .Serialize(fault, out action);
                 if (action == null)
                     action = rpc.RequestVersion.Addressing.DefaultFaultAction;
                 if (messageFault != null)

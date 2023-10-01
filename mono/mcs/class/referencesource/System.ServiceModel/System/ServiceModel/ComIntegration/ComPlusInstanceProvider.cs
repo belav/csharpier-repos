@@ -30,11 +30,13 @@ namespace System.ServiceModel.ComIntegration
 
         public object GetInstance(InstanceContext instanceContext)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.ComPlusInstanceProviderRequiresMessage0)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ComPlusInstanceProviderRequiresMessage0)
+                    )
+                );
         }
 
         // We call ContextUtil.IsInTransaction and ContextUtil.TransactionId, from a non-APTCA assembly. There is no identified security vulnerability with these properties,
@@ -75,12 +77,14 @@ namespace System.ServiceModel.ComIntegration
                         )
                             impersonateContext = callerIdentity.Impersonate();
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new COMException(
-                                    SR.GetString(SR.BadImpersonationLevelForOutOfProcWas),
-                                    HR.ERROR_BAD_IMPERSONATION_LEVEL
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new COMException(
+                                        SR.GetString(SR.BadImpersonationLevelForOutOfProcWas),
+                                        HR.ERROR_BAD_IMPERSONATION_LEVEL
+                                    )
+                                );
                     }
 
                     CLSCTX clsctx = CLSCTX.SERVER;
@@ -121,17 +125,20 @@ namespace System.ServiceModel.ComIntegration
                 if (message.Headers.From != null)
                     from = message.Headers.From.Uri;
 
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.ComPlusInstanceCreationError,
-                    from == null ? string.Empty : from.ToString(),
-                    this.info.AppID.ToString(),
-                    this.info.Clsid.ToString(),
-                    incomingTransactionID.ToString(),
-                    callerIdentity.Name,
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
+                        (uint)
+                            System.Runtime.Diagnostics.EventLogEventId.ComPlusInstanceCreationError,
+                        from == null ? string.Empty : from.ToString(),
+                        this.info.AppID.ToString(),
+                        this.info.Clsid.ToString(),
+                        incomingTransactionID.ToString(),
+                        callerIdentity.Name,
+                        e.ToString()
+                    );
 
                 throw TraceUtility.ThrowHelperError(e, message);
             }

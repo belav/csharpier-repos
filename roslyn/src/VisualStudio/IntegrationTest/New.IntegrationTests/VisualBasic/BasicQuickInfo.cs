@@ -33,9 +33,9 @@ End Class",
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
-                HangMitigatingCancellationToken
-            );
+            var quickInfo = await TestServices
+                .Editor
+                .GetQuickInfoAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 "Class System.String\r\nRepresents text as a sequence of UTF-16 code units.To browse the .NET Framework source code for this type, see the Reference Source.",
                 quickInfo
@@ -58,9 +58,9 @@ End Class",
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.InvokeQuickInfoAsync(HangMitigatingCancellationToken);
-            var quickInfo = await TestServices.Editor.GetQuickInfoAsync(
-                HangMitigatingCancellationToken
-            );
+            var quickInfo = await TestServices
+                .Editor
+                .GetQuickInfoAsync(HangMitigatingCancellationToken);
             Assert.Equal(
                 @"Class TestProj.العربية123
 This is an XML doc comment defined in code.",

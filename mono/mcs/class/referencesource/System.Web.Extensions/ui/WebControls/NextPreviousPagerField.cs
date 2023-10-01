@@ -686,57 +686,65 @@ namespace System.Web.UI.WebControls
         {
             if (ShowFirstPageButton)
             {
-                container.Controls.Add(
-                    CreateControl(
-                        DataControlCommands.FirstPageCommandArgument,
-                        FirstPageText,
-                        fieldIndex,
-                        FirstPageImageUrl,
-                        EnablePreviousPage
-                    )
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateControl(
+                            DataControlCommands.FirstPageCommandArgument,
+                            FirstPageText,
+                            fieldIndex,
+                            FirstPageImageUrl,
+                            EnablePreviousPage
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
 
             if (ShowPreviousPageButton)
             {
-                container.Controls.Add(
-                    CreateControl(
-                        DataControlCommands.PreviousPageCommandArgument,
-                        PreviousPageText,
-                        fieldIndex,
-                        PreviousPageImageUrl,
-                        EnablePreviousPage
-                    )
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateControl(
+                            DataControlCommands.PreviousPageCommandArgument,
+                            PreviousPageText,
+                            fieldIndex,
+                            PreviousPageImageUrl,
+                            EnablePreviousPage
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
 
             if (ShowNextPageButton)
             {
-                container.Controls.Add(
-                    CreateControl(
-                        DataControlCommands.NextPageCommandArgument,
-                        NextPageText,
-                        fieldIndex,
-                        NextPageImageUrl,
-                        EnableNextPage
-                    )
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateControl(
+                            DataControlCommands.NextPageCommandArgument,
+                            NextPageText,
+                            fieldIndex,
+                            NextPageImageUrl,
+                            EnableNextPage
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
 
             if (ShowLastPageButton)
             {
-                container.Controls.Add(
-                    CreateControl(
-                        DataControlCommands.LastPageCommandArgument,
-                        LastPageText,
-                        fieldIndex,
-                        LastPageImageUrl,
-                        EnableNextPage
-                    )
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateControl(
+                            DataControlCommands.LastPageCommandArgument,
+                            LastPageText,
+                            fieldIndex,
+                            LastPageImageUrl,
+                            EnableNextPage
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
         }
@@ -747,32 +755,34 @@ namespace System.Web.UI.WebControls
 
             if (ShowFirstPageButton)
             {
-                container.Controls.Add(
-                    CreateLink(FirstPageText, 0, FirstPageImageUrl, EnablePreviousPage)
-                );
+                container
+                    .Controls
+                    .Add(CreateLink(FirstPageText, 0, FirstPageImageUrl, EnablePreviousPage));
                 AddNonBreakingSpace(container);
             }
 
             if (ShowPreviousPageButton)
             {
                 int pageIndex = (_startRowIndex / _maximumRows) - 1;
-                container.Controls.Add(
-                    CreateLink(
-                        PreviousPageText,
-                        pageIndex,
-                        PreviousPageImageUrl,
-                        EnablePreviousPage
-                    )
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateLink(
+                            PreviousPageText,
+                            pageIndex,
+                            PreviousPageImageUrl,
+                            EnablePreviousPage
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
 
             if (ShowNextPageButton)
             {
                 int pageIndex = (_startRowIndex + _maximumRows) / _maximumRows;
-                container.Controls.Add(
-                    CreateLink(NextPageText, pageIndex, NextPageImageUrl, EnableNextPage)
-                );
+                container
+                    .Controls
+                    .Add(CreateLink(NextPageText, pageIndex, NextPageImageUrl, EnableNextPage));
                 AddNonBreakingSpace(container);
             }
 
@@ -780,9 +790,9 @@ namespace System.Web.UI.WebControls
             {
                 int pageIndex =
                     (_totalRowCount / _maximumRows) - (_totalRowCount % _maximumRows == 0 ? 1 : 0);
-                container.Controls.Add(
-                    CreateLink(LastPageText, pageIndex, LastPageImageUrl, EnableNextPage)
-                );
+                container
+                    .Controls
+                    .Add(CreateLink(LastPageText, pageIndex, LastPageImageUrl, EnableNextPage));
                 AddNonBreakingSpace(container);
             }
         }

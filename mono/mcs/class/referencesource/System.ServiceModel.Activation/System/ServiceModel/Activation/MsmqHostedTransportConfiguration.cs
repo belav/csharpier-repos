@@ -22,9 +22,9 @@ namespace System.ServiceModel.Activation
         {
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
 
-            string[] bindings = HostedTransportConfigurationManager.MetabaseSettings.GetBindings(
-                addressing.Scheme
-            );
+            string[] bindings = HostedTransportConfigurationManager
+                .MetabaseSettings
+                .GetBindings(addressing.Scheme);
 
             this.uniqueManager = new MsmqHostedTransportManager(bindings, addressing);
 

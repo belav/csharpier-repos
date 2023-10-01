@@ -1906,16 +1906,15 @@ namespace System.Net.Http.Functional.Tests
                 // abort the control stream
                 if (graceful)
                 {
-                    await connection.OutboundControlStream.SendResponseBodyAsync(
-                        Array.Empty<byte>(),
-                        isFinal: true
-                    );
+                    await connection
+                        .OutboundControlStream
+                        .SendResponseBodyAsync(Array.Empty<byte>(), isFinal: true);
                 }
                 else
                 {
-                    connection.OutboundControlStream.Abort(
-                        Http3LoopbackConnection.H3_INTERNAL_ERROR
-                    );
+                    connection
+                        .OutboundControlStream
+                        .Abort(Http3LoopbackConnection.H3_INTERNAL_ERROR);
                 }
 
                 // wait for client task before tearing down the requestStream and connection

@@ -53,8 +53,9 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCompilationStartAction(context =>
             {
                 // Nothing to do if the LibraryImportAttribute is not in the compilation
-                INamedTypeSymbol? libraryImportAttrType =
-                    context.Compilation.GetBestTypeByMetadataName(TypeNames.LibraryImportAttribute);
+                INamedTypeSymbol? libraryImportAttrType = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.LibraryImportAttribute);
                 if (libraryImportAttrType == null)
                     return;
 
@@ -82,10 +83,9 @@ namespace Microsoft.Interop.Analyzers
             foreach (AttributeData attr in method.GetAttributes())
             {
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        libraryImportAttrType
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, libraryImportAttrType)
                 )
                 {
                     return;

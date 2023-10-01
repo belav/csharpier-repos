@@ -376,11 +376,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var matchLabelSyntax = (CasePatternSwitchLabelSyntax)node;
 
-                    MessageID.IDS_FeaturePatternMatching.CheckFeatureAvailability(
-                        diagnostics,
-                        node,
-                        node.Keyword.GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeaturePatternMatching
+                        .CheckFeatureAvailability(diagnostics, node, node.Keyword.GetLocation());
 
                     BoundPattern pattern = sectionBinder.BindPattern(
                         matchLabelSyntax.Pattern,

@@ -4068,7 +4068,9 @@ class X : Base
                     "void X.Add(System.Collections.Generic.List<System.Byte> x)",
                     "void X.Add(X x)"
                 },
-                Roslyn.Utilities.EnumerableExtensions
+                Roslyn
+                    .Utilities
+                    .EnumerableExtensions
                     .Order(symbolInfo.CandidateSymbols.Select(s => s.ToTestDisplayString()))
                     .ToArray()
             );

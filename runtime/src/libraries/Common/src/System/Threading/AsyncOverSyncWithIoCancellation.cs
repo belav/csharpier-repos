@@ -249,11 +249,13 @@ namespace System.Threading
             ThreadHandle = t_currentThreadHandle;
             if (ThreadHandle is null)
             {
-                ThreadHandle = Interop.Kernel32.OpenThread(
-                    Interop.Kernel32.THREAD_TERMINATE,
-                    bInheritHandle: false,
-                    Interop.Kernel32.GetCurrentThreadId()
-                );
+                ThreadHandle = Interop
+                    .Kernel32
+                    .OpenThread(
+                        Interop.Kernel32.THREAD_TERMINATE,
+                        bInheritHandle: false,
+                        Interop.Kernel32.GetCurrentThreadId()
+                    );
                 if (ThreadHandle.IsInvalid)
                 {
                     int lastError = Marshal.GetLastPInvokeError();

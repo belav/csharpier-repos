@@ -48,11 +48,11 @@ namespace System.ServiceModel
             WSAddressing10ProblemHeaderQNameFault phf = new WSAddressing10ProblemHeaderQNameFault(
                 this
             );
-            Message message = System.ServiceModel.Channels.Message.CreateMessage(
-                messageVersion,
-                phf,
-                messageVersion.Addressing.FaultAction
-            );
+            Message message = System
+                .ServiceModel
+                .Channels
+                .Message
+                .CreateMessage(messageVersion, phf, messageVersion.Addressing.FaultAction);
             phf.AddHeaders(message.Headers);
             return message;
         }

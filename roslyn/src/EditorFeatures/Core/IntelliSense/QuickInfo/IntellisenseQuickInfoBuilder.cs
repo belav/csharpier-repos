@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             }
 
             var elements = new List<object>();
-            var descSection = quickInfoItem.Sections.FirstOrDefault(
-                s => s.Kind == QuickInfoSectionKinds.Description
-            );
+            var descSection = quickInfoItem
+                .Sections
+                .FirstOrDefault(s => s.Kind == QuickInfoSectionKinds.Description);
             if (descSection != null)
             {
                 var isFirstElement = true;
@@ -80,9 +80,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 new ContainerElement(ContainerElementStyle.Wrapped, firstLineElements)
             );
 
-            var documentationCommentSection = quickInfoItem.Sections.FirstOrDefault(
-                s => s.Kind == QuickInfoSectionKinds.DocumentationComments
-            );
+            var documentationCommentSection = quickInfoItem
+                .Sections
+                .FirstOrDefault(s => s.Kind == QuickInfoSectionKinds.DocumentationComments);
             if (documentationCommentSection != null)
             {
                 var isFirstElement = true;
@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 
             // Add the remaining sections as Stacked style
             elements.AddRange(
-                quickInfoItem.Sections
+                quickInfoItem
+                    .Sections
                     .Where(
                         s =>
                             s.Kind

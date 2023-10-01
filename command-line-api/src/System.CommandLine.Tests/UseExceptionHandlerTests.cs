@@ -35,7 +35,8 @@ namespace System.CommandLine.Tests
 
             var resultCode = await parser.InvokeAsync("the-command", _console);
 
-            _console.Error
+            _console
+                .Error
                 .ToString()
                 .Should()
                 .Contain("Unhandled exception: System.Exception: oops!");

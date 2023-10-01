@@ -198,9 +198,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         )
         {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var position = sourceText.Lines.GetPosition(
-                ProtocolConversions.PositionToLinePosition(autoInsertParams.Position)
-            );
+            var position = sourceText
+                .Lines
+                .GetPosition(ProtocolConversions.PositionToLinePosition(autoInsertParams.Position));
 
             var serviceAndContext = await GetBraceCompletionContextAsync(
                     position,
@@ -248,9 +248,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     // If tabs were inserted the desired caret column can remain beyond the line text.
                     // So just set the caret position to the end of the newly indented line.
                     var caretLineInIndentedText = indentedText.Lines[desiredCaretLinePosition.Line];
-                    desiredCaretLinePosition = indentedText.Lines.GetLinePosition(
-                        caretLineInIndentedText.End
-                    );
+                    desiredCaretLinePosition = indentedText
+                        .Lines
+                        .GetLinePosition(caretLineInIndentedText.End);
                 }
                 else
                 {

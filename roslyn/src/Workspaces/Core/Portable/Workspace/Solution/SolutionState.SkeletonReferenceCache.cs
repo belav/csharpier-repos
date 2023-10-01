@@ -305,8 +305,9 @@ internal partial class SolutionState
                             compilation
                         );
 
-                        var temporaryStorageService =
-                            workspace.Services.GetRequiredService<ITemporaryStorageServiceInternal>();
+                        var temporaryStorageService = workspace
+                            .Services
+                            .GetRequiredService<ITemporaryStorageServiceInternal>();
                         var storage = temporaryStorageService.CreateTemporaryStreamStorage();
 
                         stream.Position = 0;
@@ -337,7 +338,8 @@ internal partial class SolutionState
                             {
                                 // log errors in the format of
                                 // CS0001:1;CS002:10;...
-                                var groups = emitResult.Diagnostics
+                                var groups = emitResult
+                                    .Diagnostics
                                     .GroupBy(d => d.Id)
                                     .Select(g => $"{g.Key}:{g.Count()}");
                                 m["Errors"] = string.Join(";", groups);

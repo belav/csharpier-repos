@@ -152,11 +152,13 @@ namespace System.ServiceModel.MsmqIntegration
 
             MsmqIntegrationMessageProperty property = MsmqIntegrationMessageProperty.Get(message);
             if (null == property)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(SR.MsmqMessageDoesntHaveIntegrationProperty)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(SR.MsmqMessageDoesntHaveIntegrationProperty)
+                        )
+                    );
             if (null != property.Body)
                 stream = this.factory.Serialize(property);
 

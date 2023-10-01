@@ -62,7 +62,8 @@ public class WasmExecutor : IExecutor
         int exitCode = 0;
 
         // The class is internal
-        typeof(InProcessNoEmitToolchain).Assembly
+        typeof(InProcessNoEmitToolchain)
+            .Assembly
             .GetType("BenchmarkDotNet.Toolchains.InProcess.NoEmit.InProcessNoEmitRunner")
             .GetMethod("Run")
             .Invoke(null, new object[] { host, executeParameters.BenchmarkCase });

@@ -491,9 +491,9 @@ namespace System.Security.Cryptography.Encryption.Tests.Asymmetric
                 )
                 {
                     cryptoStream.Write(
-                        Encoding.ASCII.GetBytes(
-                            "Sample string that's bigger than cryptoAlg.BlockSize"
-                        )
+                        Encoding
+                            .ASCII
+                            .GetBytes("Sample string that's bigger than cryptoAlg.BlockSize")
                     );
                     cryptoStream.FlushFinalBlock();
                 }

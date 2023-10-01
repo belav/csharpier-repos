@@ -125,9 +125,9 @@ public class N : D.K<M>
                         dump
                     );
                 },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -724,9 +724,9 @@ public class A
                 source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -861,9 +861,9 @@ public class A
                 source: source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -959,9 +959,9 @@ class Properties
                 source: source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -1183,9 +1183,9 @@ class C : I
                 source: source,
                 sourceSymbolValidator: validator(true),
                 symbolValidator: validator(false),
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
         }
 
@@ -1244,9 +1244,9 @@ class C
     }
 }",
                 parseOptions: TestOptions.Regular,
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
             Action<ModuleSymbol> validator = module =>
             {
@@ -1316,9 +1316,9 @@ struct S
     }
 }",
                 parseOptions: TestOptions.Regular,
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
-                    MetadataImportOptions.Internal
-                )
+                options: TestOptions
+                    .ReleaseExe
+                    .WithMetadataImportOptions(MetadataImportOptions.Internal)
             );
 
             Action<ModuleSymbol> validator = module =>
@@ -1469,14 +1469,16 @@ class Program
                     }
                     // Overridden property should be E but overridden
                     // accessor should be D.set_Q.
-                    var overriddenProperty = module.GlobalNamespace
+                    var overriddenProperty = module
+                        .GlobalNamespace
                         .GetTypeMembers("E")
                         .Single()
                         .GetMembers("Q")
                         .Single();
                     Assert.NotNull(overriddenProperty);
                     Assert.Same(overriddenProperty, propertyQ.OverriddenProperty);
-                    var overriddenAccessor = module.GlobalNamespace
+                    var overriddenAccessor = module
+                        .GlobalNamespace
                         .GetTypeMembers("D")
                         .Single()
                         .GetMembers("set_Q")
@@ -1691,9 +1693,9 @@ class C : B<string>
             }
             else
             {
-                var backingField = property.ContainingType.GetField(
-                    GeneratedNames.MakeBackingFieldName(property.Name)
-                );
+                var backingField = property
+                    .ContainingType
+                    .GetField(GeneratedNames.MakeBackingFieldName(property.Name));
                 var attribute = backingField.GetAttributes().Single();
 
                 Assert.Equal(
@@ -3049,7 +3051,8 @@ class Program
         [Fact]
         public void PEHeaders2()
         {
-            var options = EmitOptions.Default
+            var options = EmitOptions
+                .Default
                 .WithFileAlignment(512)
                 .WithBaseAddress(0x123456789ABCDEF)
                 .WithHighEntropyVirtualAddressSpace(true)
@@ -3062,7 +3065,8 @@ class Program
 
             var peStream = CreateCompilationWithMscorlib40(
                     syntax,
-                    options: TestOptions.DebugExe
+                    options: TestOptions
+                        .DebugExe
                         .WithPlatform(Platform.X64)
                         .WithDeterministic(true),
                     assemblyName: "B37A4FCD-ED76-4924-A2AD-298836056E00"
@@ -3196,7 +3200,8 @@ class T
 
             Action<ModuleSymbol> verifier = module =>
             {
-                var parameters = module.GlobalNamespace
+                var parameters = module
+                    .GlobalNamespace
                     .GetTypeMember("T")
                     .GetMethod("M")
                     .GetParameters();
@@ -3224,7 +3229,8 @@ class T
 
             Action<ModuleSymbol> verifier = module =>
             {
-                var parameters = module.GlobalNamespace
+                var parameters = module
+                    .GlobalNamespace
                     .GetTypeMember("T")
                     .GetMethod("get_Item")
                     .GetParameters();
@@ -3258,12 +3264,13 @@ public class C
 
             CompileAndVerify(
                 text,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 sourceSymbolValidator: module =>
                 {
-                    var parameters = module.ContainingAssembly
+                    var parameters = module
+                        .ContainingAssembly
                         .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod
                         .Parameters;
@@ -3276,7 +3283,8 @@ public class C
                 },
                 symbolValidator: module =>
                 {
-                    var delegateParameters = module.ContainingAssembly
+                    var delegateParameters = module
+                        .ContainingAssembly
                         .GetTypeByMetadataName("D")
                         .DelegateInvokeMethod
                         .Parameters;
@@ -3287,7 +3295,8 @@ public class C
                     Assert.True(delegateParameters[2].IsMetadataIn);
                     Assert.False(delegateParameters[3].IsMetadataIn);
 
-                    var lambdaParameters = module.GlobalNamespace
+                    var lambdaParameters = module
+                        .GlobalNamespace
                         .GetTypeMember("C")
                         .GetTypeMember("<>c")
                         .GetMethod("<M>b__0_0")
@@ -3319,12 +3328,13 @@ public class C
 
             CompileAndVerify(
                 text,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var parameters = module.GlobalNamespace
+                    var parameters = module
+                        .GlobalNamespace
                         .GetTypeMember("C")
                         .GetMember("<M>g__local|0_0")
                         .GetParameters();
@@ -3350,7 +3360,8 @@ class T
 
             Action<ModuleSymbol> verifier = module =>
             {
-                var parameters = module.GlobalNamespace
+                var parameters = module
+                    .GlobalNamespace
                     .GetTypeMember("T")
                     .GetMethod("M")
                     .GetParameters();
@@ -3386,7 +3397,8 @@ public interface T
                 comAssembly,
                 symbolValidator: module =>
                 {
-                    var parameters = module.GlobalNamespace
+                    var parameters = module
+                        .GlobalNamespace
                         .GetTypeMember("T")
                         .GetMethod("M")
                         .GetParameters();
@@ -3415,7 +3427,8 @@ class User
                 references: new[] { comAssembly.EmitToImageReference(embedInteropTypes: true) },
                 symbolValidator: module =>
                 {
-                    var parameters = module.GlobalNamespace
+                    var parameters = module
+                        .GlobalNamespace
                         .GetTypeMember("T")
                         .GetMethod("M")
                         .GetParameters();
@@ -3538,7 +3551,8 @@ Child called";
                 expectedOutput: expectedOutput,
                 symbolValidator: module =>
                 {
-                    var childParameters = module.ContainingAssembly
+                    var childParameters = module
+                        .ContainingAssembly
                         .GetTypeByMetadataName("Child")
                         .GetMethod("M")
                         .GetParameters();
@@ -3569,7 +3583,8 @@ public class Parent
                 reference,
                 symbolValidator: module =>
                 {
-                    var sourceParentParameters = module.GlobalNamespace
+                    var sourceParentParameters = module
+                        .GlobalNamespace
                         .GetTypeMember("Parent")
                         .GetMethod("M")
                         .GetParameters();
@@ -3596,12 +3611,13 @@ public class Child : Parent, IParent
             CompileAndVerify(
                 source: source,
                 references: new[] { reference.EmitToImageReference() },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var interfaceParameters = module.GlobalNamespace
+                    var interfaceParameters = module
+                        .GlobalNamespace
                         .GetTypeMember("IParent")
                         .GetMethod("M")
                         .GetParameters();
@@ -3610,7 +3626,8 @@ public class Child : Parent, IParent
                     Assert.True(interfaceParameters[0].IsMetadataOut);
                     Assert.True(interfaceParameters[1].IsMetadataOut);
 
-                    var proxyChildParameters = module.GlobalNamespace
+                    var proxyChildParameters = module
+                        .GlobalNamespace
                         .GetTypeMember("Child")
                         .GetMethod("IParent.M")
                         .GetParameters();
@@ -3639,7 +3656,8 @@ public class Parent
                 reference,
                 symbolValidator: module =>
                 {
-                    var sourceParentParameters = module.GlobalNamespace
+                    var sourceParentParameters = module
+                        .GlobalNamespace
                         .GetTypeMember("Parent")
                         .GetMethod("M")
                         .GetParameters();
@@ -3666,12 +3684,13 @@ public class Child : Parent, IParent
             CompileAndVerify(
                 source: source,
                 references: new[] { reference.EmitToImageReference() },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var interfaceParameters = module.GlobalNamespace
+                    var interfaceParameters = module
+                        .GlobalNamespace
                         .GetTypeMember("IParent")
                         .GetMethod("M")
                         .GetParameters();
@@ -3680,7 +3699,8 @@ public class Child : Parent, IParent
                     Assert.True(interfaceParameters[0].IsMetadataIn);
                     Assert.True(interfaceParameters[1].IsMetadataIn);
 
-                    var proxyChildParameters = module.GlobalNamespace
+                    var proxyChildParameters = module
+                        .GlobalNamespace
                         .GetTypeMember("Child")
                         .GetMethod("IParent.M")
                         .GetParameters();

@@ -22,18 +22,23 @@ namespace System.Runtime.Serialization
         internal void EndWrite()
         {
             if (depth != 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.IXmlSerializableMissingEndElements,
-                            (
-                                obj == null
-                                    ? string.Empty
-                                    : DataContract.GetClrTypeFullName(obj.GetType())
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.IXmlSerializableMissingEndElements,
+                                (
+                                    obj == null
+                                        ? string.Empty
+                                        : DataContract.GetClrTypeFullName(obj.GetType())
+                                )
                             )
                         )
-                    )
-                );
+                    );
             this.obj = null;
         }
 
@@ -68,18 +73,23 @@ namespace System.Runtime.Serialization
         public override void WriteEndElement()
         {
             if (depth == 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.IXmlSerializableWritePastSubTree,
-                            (
-                                obj == null
-                                    ? string.Empty
-                                    : DataContract.GetClrTypeFullName(obj.GetType())
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.IXmlSerializableWritePastSubTree,
+                                (
+                                    obj == null
+                                        ? string.Empty
+                                        : DataContract.GetClrTypeFullName(obj.GetType())
+                                )
                             )
                         )
-                    )
-                );
+                    );
             xmlWriter.WriteEndElement();
             depth--;
         }
@@ -87,29 +97,39 @@ namespace System.Runtime.Serialization
         public override void WriteFullEndElement()
         {
             if (depth == 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.IXmlSerializableWritePastSubTree,
-                            (
-                                obj == null
-                                    ? string.Empty
-                                    : DataContract.GetClrTypeFullName(obj.GetType())
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.IXmlSerializableWritePastSubTree,
+                                (
+                                    obj == null
+                                        ? string.Empty
+                                        : DataContract.GetClrTypeFullName(obj.GetType())
+                                )
                             )
                         )
-                    )
-                );
+                    );
             xmlWriter.WriteFullEndElement();
             depth--;
         }
 
         public override void Close()
         {
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                XmlObjectSerializer.CreateSerializationException(
-                    SR.GetString(SR.IXmlSerializableIllegalOperation)
-                )
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.IXmlSerializableIllegalOperation)
+                    )
+                );
         }
 
         public override void WriteStartAttribute(string prefix, string localName, string ns)

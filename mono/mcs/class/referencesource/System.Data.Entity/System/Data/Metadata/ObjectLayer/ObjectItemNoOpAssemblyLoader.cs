@@ -22,11 +22,13 @@ namespace System.Data.Metadata.Edm
         {
             // don't do anything but make sure we know we have seen this assembly
             if (
-                !SessionData.KnownAssemblies.Contains(
-                    SourceAssembly,
-                    SessionData.ObjectItemAssemblyLoaderFactory,
-                    SessionData.EdmItemCollection
-                )
+                !SessionData
+                    .KnownAssemblies
+                    .Contains(
+                        SourceAssembly,
+                        SessionData.ObjectItemAssemblyLoaderFactory,
+                        SessionData.EdmItemCollection
+                    )
             )
             {
                 AddToKnownAssemblies();

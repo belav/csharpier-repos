@@ -129,9 +129,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         //multiple values of condition represent disjunction in conditions (not currently supported)
                         // if there is any condition constant that is NotNull
                         if (
-                            condition.Domain.Values.All(
-                                conditionConstant => (conditionConstant.Equals(Constant.NotNull))
-                            )
+                            condition
+                                .Domain
+                                .Values
+                                .All(
+                                    conditionConstant =>
+                                        (conditionConstant.Equals(Constant.NotNull))
+                                )
                         )
                         {
                             continue;
@@ -155,9 +159,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                         )
                     )
                     {
-                        string message = System.Data.Entity.Strings.ViewGen_InvalidCondition(
-                            memberPath.PathToString(false)
-                        );
+                        string message = System
+                            .Data
+                            .Entity
+                            .Strings
+                            .ViewGen_InvalidCondition(memberPath.PathToString(false));
                         ErrorLog.Record record = new ErrorLog.Record(
                             true,
                             ViewGenErrorCode.InvalidCondition,

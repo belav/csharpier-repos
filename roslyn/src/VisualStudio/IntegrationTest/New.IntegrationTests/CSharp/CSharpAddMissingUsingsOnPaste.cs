@@ -30,15 +30,17 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task VerifyDisabled()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Example.cs",
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
 "
-            );
+                );
             await SetUpEditorAsync(
                 @"
 using System;
@@ -54,8 +56,9 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -89,16 +92,18 @@ class Program
         public async Task VerifyAddImportsOnPaste()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Example.cs",
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             await SetUpEditorAsync(
                 @"
 using System;
@@ -115,13 +120,13 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            await using var telemetry =
-                await TestServices.Telemetry.EnableTestTelemetryChannelAsync(
-                    HangMitigatingCancellationToken
-                );
+            await using var telemetry = await TestServices
+                .Telemetry
+                .EnableTestTelemetryChannelAsync(HangMitigatingCancellationToken);
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -161,15 +166,17 @@ class Program
         public async Task VerifyIndentation()
         {
             var project = ProjectName;
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "Example.cs",
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "Example.cs",
+                    contents: @"
 public class Example
 {
 }
 "
-            );
+                );
             await SetUpEditorAsync(
                 @"
 namespace MyNs
@@ -188,8 +195,9 @@ namespace MyNs
                 HangMitigatingCancellationToken
             );
 
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -225,22 +233,24 @@ namespace MyNs
 
         private async Task PasteAsync(string text, CancellationToken cancellationToken)
         {
-            var provider =
-                await TestServices.Shell.GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(
+            var provider = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IAsynchronousOperationListenerProvider>(
                     HangMitigatingCancellationToken
                 );
             var waiter = (IAsynchronousOperationWaiter)
                 provider.GetListener(FeatureAttribute.AddImportsOnPaste);
 
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[] { FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawlerLegacy },
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[] { FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawlerLegacy },
+                    cancellationToken
+                );
             Clipboard.SetText(text);
-            await TestServices.Shell.ExecuteCommandAsync(
-                VSConstants.VSStd97CmdID.Paste,
-                cancellationToken
-            );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(VSConstants.VSStd97CmdID.Paste, cancellationToken);
 
             await waiter.ExpeditedWaitAsync();
         }

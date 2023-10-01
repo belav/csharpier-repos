@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             // add annotations to the symbols that we selected so we can find them later to pull up
             // These symbols should all have (singular) definitions, but in the case that we can't find
             // any location, we just won't move that particular symbol
-            var memberNodes = moveOptions.SelectedMembers
+            var memberNodes = moveOptions
+                .SelectedMembers
                 .Select(symbol => symbol.Locations.FirstOrDefault())
                 .WhereNotNull()
                 .SelectAsArray(loc => loc.FindNode(cancellationToken));
@@ -83,7 +84,9 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 // we already have our destination type, but we need to find the document it is in
                 // When it is an existing type, "FileName" points to a full path rather than just the name
                 // There should be no two docs that have the same file path
-                var destinationDocId = _document.Project.Solution
+                var destinationDocId = _document
+                    .Project
+                    .Solution
                     .GetDocumentIdsWithFilePath(moveOptions.FileName)
                     .Single();
                 var fixedSolution = await RefactorAndMoveAsync(
@@ -239,7 +242,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             var newTypeRoot = await newTypeDoc
                 .GetRequiredSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var newTypeNode = newType.DeclaringSyntaxReferences
+            var newTypeNode = newType
+                .DeclaringSyntaxReferences
                 .SelectAsArray(sRef => sRef.GetSyntax(cancellationToken))
                 .First(node => newTypeRoot.Contains(node));
             newTypeRoot = newTypeRoot.TrackNodes(newTypeNode);
@@ -365,10 +369,10 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             // keep extension method flag attached to node through dict
             var trackNodesDict = referenceLocations.ToImmutableDictionary(
                 refLoc =>
-                    refLoc.location.Location.FindNode(
-                        getInnermostNodeForTie: true,
-                        cancellationToken
-                    )
+                    refLoc
+                        .location
+                        .Location
+                        .FindNode(getInnermostNodeForTie: true, cancellationToken)
             );
 
             var docEditor = await DocumentEditor
@@ -503,7 +507,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 .Flatten()
                 .SelectMany(
                     refSymbol =>
-                        refSymbol.Locations
+                        refSymbol
+                            .Locations
                             .Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
                             .Select(loc => (loc, refSymbol.Definition.IsExtensionMethod()))
                 )

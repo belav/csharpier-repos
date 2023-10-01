@@ -35,11 +35,14 @@ namespace System.CommandLine.Invocation
                 {
                     if (first)
                     {
-                        console.Out.WriteLine(
-                            result.CommandResult.LocalizationResources.SuggestionsTokenNotMatched(
-                                token
-                            )
-                        );
+                        console
+                            .Out
+                            .WriteLine(
+                                result
+                                    .CommandResult
+                                    .LocalizationResources
+                                    .SuggestionsTokenNotMatched(token)
+                            );
                         first = false;
                     }
 
@@ -55,13 +58,15 @@ namespace System.CommandLine.Invocation
                 return Array.Empty<string>();
             }
 
-            IEnumerable<string> possibleMatches = targetSymbol.Children
+            IEnumerable<string> possibleMatches = targetSymbol
+                .Children
                 .OfType<IdentifierSymbol>()
                 .Where(x => !x.IsHidden)
                 .Where(x => x.Aliases.Count > 0)
                 .Select(
                     symbol =>
-                        symbol.Aliases
+                        symbol
+                            .Aliases
                             .OrderBy(x => GetDistance(token, x))
                             .ThenByDescending(x => GetStartsWithDistance(token, x))
                             .First()

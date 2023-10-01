@@ -850,9 +850,9 @@ namespace System.Workflow.Activities.Common
                                 mismatch =
                                     (parameters[index].ParameterType == null)
                                     || (
-                                        !parameters[index].ParameterType.IsAssignableFrom(
-                                            types[index]
-                                        )
+                                        !parameters[index]
+                                            .ParameterType
+                                            .IsAssignableFrom(types[index])
                                     );
                         }
                         else
@@ -952,9 +952,9 @@ namespace System.Workflow.Activities.Common
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static void UpdateTypeProviderAssembliesRegistry(string assemblyName)
         {
-            RegistryKey referenceKey = Registry.CurrentUser.CreateSubKey(
-                TypeProviderRegistryKeyPath
-            );
+            RegistryKey referenceKey = Registry
+                .CurrentUser
+                .CreateSubKey(TypeProviderRegistryKeyPath);
             if (referenceKey != null)
             {
                 try

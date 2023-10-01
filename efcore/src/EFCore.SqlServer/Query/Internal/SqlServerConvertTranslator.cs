@@ -41,17 +41,19 @@ public class SqlServerConvertTranslator : IMethodCallTranslator
             typeof(string)
         };
 
-    private static readonly IEnumerable<MethodInfo> SupportedMethods = TypeMapping.Keys.SelectMany(
-        t =>
-            typeof(Convert)
-                .GetTypeInfo()
-                .GetDeclaredMethods(t)
-                .Where(
-                    m =>
-                        m.GetParameters().Length == 1
-                        && SupportedTypes.Contains(m.GetParameters().First().ParameterType)
-                )
-    );
+    private static readonly IEnumerable<MethodInfo> SupportedMethods = TypeMapping
+        .Keys
+        .SelectMany(
+            t =>
+                typeof(Convert)
+                    .GetTypeInfo()
+                    .GetDeclaredMethods(t)
+                    .Where(
+                        m =>
+                            m.GetParameters().Length == 1
+                            && SupportedTypes.Contains(m.GetParameters().First().ParameterType)
+                    )
+        );
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 

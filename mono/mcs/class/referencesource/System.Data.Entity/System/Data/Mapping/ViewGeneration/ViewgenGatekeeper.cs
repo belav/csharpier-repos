@@ -115,7 +115,8 @@ namespace System.Data.Mapping.ViewGeneration
 
             List<ForeignConstraint> foreignKeyConstraints = result.ForeignKeyConstraints;
             // Get a Clone of cell groups from cache since cells are modified during viewgen, and we dont want the cached copy to change
-            List<CellGroup> cellGroups = cellGroups = result.CellGroups
+            List<CellGroup> cellGroups = cellGroups = result
+                .CellGroups
                 .Select(setOfcells => new CellGroup(setOfcells.Select(cell => new Cell(cell))))
                 .ToList();
             List<Cell> cells = result.Cells;
@@ -331,9 +332,11 @@ namespace System.Data.Mapping.ViewGeneration
                     isFirst = false;
                     extentBuilder.Append(extent.Name);
                 }
-                string message = System.Data.Entity.Strings.ViewGen_Missing_Set_Mapping(
-                    extentBuilder
-                );
+                string message = System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ViewGen_Missing_Set_Mapping(extentBuilder);
                 // Find the cell with smallest line number - so that we can
                 // point to the beginning of the file
                 int lowestLineNum = -1;

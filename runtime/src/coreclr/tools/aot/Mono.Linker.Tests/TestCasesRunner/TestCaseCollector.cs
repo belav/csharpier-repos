@@ -83,17 +83,17 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     // This makes life a little easier when writing these supporting files as it removes some constraints you would previously have
                     // had to follow such as ensuring a class exists that matches the file name and putting [NotATestCase] on that class
                     if (
-                        relativeParents.RecursiveParents.Any(
-                            p => p.Elements.Any() && p.FileName == "Dependencies"
-                        )
+                        relativeParents
+                            .RecursiveParents
+                            .Any(p => p.Elements.Any() && p.FileName == "Dependencies")
                     )
                         continue;
 
                     // Magic: Anything in a directory named Individual is expected to be ran by it's own [Test] rather than as part of [TestCaseSource]
                     if (
-                        relativeParents.RecursiveParents.Any(
-                            p => p.Elements.Any() && p.FileName == "Individual"
-                        )
+                        relativeParents
+                            .RecursiveParents
+                            .Any(p => p.Elements.Any() && p.FileName == "Individual")
                     )
                         continue;
 
@@ -177,9 +177,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
             TestCase testCase
         )
         {
-            var typeDefinition = caseAssemblyDefinition.MainModule.GetType(
-                testCase.ReconstructedFullTypeName
-            );
+            var typeDefinition = caseAssemblyDefinition
+                .MainModule
+                .GetType(testCase.ReconstructedFullTypeName);
 
             // For all of the Test Cases, the full type name we constructed from the directory structure will be correct and we can successfully find
             // the type from GetType.

@@ -117,15 +117,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
         {
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
             var foreachStatement = (ForEachStatementSyntax)node;
-            var openBraceLine = parsedDocument.Text.Lines
+            var openBraceLine = parsedDocument
+                .Text
+                .Lines
                 .GetLineFromPosition(foreachStatement.Statement.SpanStart)
                 .LineNumber;
 
             var indentationOptions = new IndentationOptions(syntaxFormattingOptions);
             var newLine = indentationOptions.FormattingOptions.NewLine;
 
-            var indentationService =
-                parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
+            var indentationService = parsedDocument
+                .LanguageServices
+                .GetRequiredService<IIndentationService>();
             var indentation = indentationService.GetIndentation(
                 parsedDocument,
                 openBraceLine + 1,
@@ -170,9 +173,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             var foreachStatement = (ForEachStatementSyntax)snippet;
             var blockStatement = (BlockSyntax)foreachStatement.Statement;
             blockStatement = blockStatement.WithCloseBraceToken(
-                blockStatement.CloseBraceToken.WithPrependedLeadingTrivia(
-                    SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
-                )
+                blockStatement
+                    .CloseBraceToken
+                    .WithPrependedLeadingTrivia(
+                        SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
+                    )
             );
             var newForEachStatement = foreachStatement.ReplaceNode(
                 foreachStatement.Statement,

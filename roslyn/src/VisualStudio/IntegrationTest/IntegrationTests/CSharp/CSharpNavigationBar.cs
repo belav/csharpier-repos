@@ -40,12 +40,9 @@ struct S
 
         public override async Task DisposeAsync()
         {
-            VisualStudio.Workspace.SetFeatureOption(
-                "NavigationBarOptions",
-                "ShowNavigationBar",
-                "C#",
-                "True"
-            );
+            VisualStudio
+                .Workspace
+                .SetFeatureOption("NavigationBarOptions", "ShowNavigationBar", "C#", "True");
             await base.DisposeAsync();
         }
 
@@ -66,11 +63,14 @@ struct S
             Assert.Equal(expectedItems, VisualStudio.Editor.GetMemberNavBarItems());
             VisualStudio.Editor.SelectMemberNavBarItem("operator !=(C c1, C c2)");
 
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "public static bool operator $$!=(C c1, C c2) { return false; }",
-                assertCaretPosition: true,
-                trimWhitespace: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText(
+                    "public static bool operator $$!=(C c1, C c2) { return false; }",
+                    assertCaretPosition: true,
+                    trimWhitespace: true
+                );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.NavigationBar)]
@@ -87,11 +87,10 @@ struct S
 
             VerifyLeftSelected("S");
             VerifyRightSelected("Goo()");
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "struct $$S",
-                assertCaretPosition: true,
-                trimWhitespace: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText("struct $$S", assertCaretPosition: true, trimWhitespace: true);
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.NavigationBar)]
@@ -109,11 +108,14 @@ struct S$$
             var expectedItems = new[] { "Bar()", "Goo()", };
             Assert.Equal(expectedItems, VisualStudio.Editor.GetMemberNavBarItems());
             VisualStudio.Editor.SelectMemberNavBarItem("Bar()");
-            VisualStudio.Editor.Verify.CurrentLineText(
-                "void $$Bar() { }",
-                assertCaretPosition: true,
-                trimWhitespace: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentLineText(
+                    "void $$Bar() { }",
+                    assertCaretPosition: true,
+                    trimWhitespace: true
+                );
 
             VisualStudio.ExecuteCommand("Edit.LineUp");
             VerifyRightSelected("Goo()");
@@ -122,8 +124,10 @@ struct S$$
         [WpfFact, Trait(Traits.Feature, Traits.Features.NavigationBar)]
         public void TestSplitWindow()
         {
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 class C
 {
     public void M(int i) { }
@@ -135,7 +139,7 @@ struct S
     int Goo() { }
     void Bar() { }
 }"
-            );
+                );
             VisualStudio.ExecuteCommand("Window.Split");
             VisualStudio.Editor.PlaceCaret("this", charsOffset: 1);
             VerifyLeftSelected("C");
@@ -149,20 +153,14 @@ struct S
         [WpfFact, Trait(Traits.Feature, Traits.Features.NavigationBar)]
         public void VerifyOption()
         {
-            VisualStudio.Workspace.SetFeatureOption(
-                "NavigationBarOptions",
-                "ShowNavigationBar",
-                "C#",
-                "False"
-            );
+            VisualStudio
+                .Workspace
+                .SetFeatureOption("NavigationBarOptions", "ShowNavigationBar", "C#", "False");
             Assert.False(VisualStudio.Editor.IsNavBarEnabled());
 
-            VisualStudio.Workspace.SetFeatureOption(
-                "NavigationBarOptions",
-                "ShowNavigationBar",
-                "C#",
-                "True"
-            );
+            VisualStudio
+                .Workspace
+                .SetFeatureOption("NavigationBarOptions", "ShowNavigationBar", "C#", "True");
             Assert.True(VisualStudio.Editor.IsNavBarEnabled());
         }
 

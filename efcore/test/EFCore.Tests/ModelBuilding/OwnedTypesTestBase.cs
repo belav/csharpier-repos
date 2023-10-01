@@ -1310,7 +1310,8 @@ public abstract partial class ModelBuilderTest
             Assert.NotSame(bookOwnership1.DeclaringEntityType, bookOwnership2.DeclaringEntityType);
             Assert.Equal(
                 typeof(int),
-                bookOwnership1.DeclaringEntityType
+                bookOwnership1
+                    .DeclaringEntityType
                     .GetForeignKeys()
                     .Single()
                     .Properties
@@ -1319,7 +1320,8 @@ public abstract partial class ModelBuilderTest
             );
             Assert.Equal(
                 typeof(int),
-                bookOwnership1.DeclaringEntityType
+                bookOwnership1
+                    .DeclaringEntityType
                     .GetForeignKeys()
                     .Single()
                     .Properties
@@ -1837,16 +1839,20 @@ public abstract partial class ModelBuilderTest
             Assert.Null(bookOwnership1.DependentToPrincipal);
             Assert.Null(bookOwnership2.DependentToPrincipal);
 
-            var bookLabel1Ownership1 = bookOwnership1.DeclaringEntityType
+            var bookLabel1Ownership1 = bookOwnership1
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
-            var bookLabel1Ownership2 = bookOwnership1.DeclaringEntityType
+            var bookLabel1Ownership2 = bookOwnership1
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
-            var bookLabel2Ownership1 = bookOwnership2.DeclaringEntityType
+            var bookLabel2Ownership1 = bookOwnership2
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
-            var bookLabel2Ownership2 = bookOwnership2.DeclaringEntityType
+            var bookLabel2Ownership2 = bookOwnership2
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
 
@@ -1861,16 +1867,20 @@ public abstract partial class ModelBuilderTest
                 bookLabel2Ownership2.DependentToPrincipal.Name
             );
 
-            var bookLabel1Ownership1Subownership = bookLabel1Ownership1.DeclaringEntityType
+            var bookLabel1Ownership1Subownership = bookLabel1Ownership1
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
-            var bookLabel1Ownership2Subownership = bookLabel1Ownership2.DeclaringEntityType
+            var bookLabel1Ownership2Subownership = bookLabel1Ownership2
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
-            var bookLabel2Ownership1Subownership = bookLabel2Ownership1.DeclaringEntityType
+            var bookLabel2Ownership1Subownership = bookLabel2Ownership1
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
-            var bookLabel2Ownership2Subownership = bookLabel2Ownership2.DeclaringEntityType
+            var bookLabel2Ownership2Subownership = bookLabel2Ownership2
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
 
@@ -1952,10 +1962,12 @@ public abstract partial class ModelBuilderTest
                 .ForeignKey;
             Assert.Equal(nameof(BookLabel.Book), bookOwnership.DependentToPrincipal.Name);
 
-            var bookLabelOwnership1 = bookOwnership.DeclaringEntityType
+            var bookLabelOwnership1 = bookOwnership
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
-            var bookLabelOwnership2 = bookOwnership.DeclaringEntityType
+            var bookLabelOwnership2 = bookOwnership
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
 
@@ -1965,10 +1977,12 @@ public abstract partial class ModelBuilderTest
                 bookLabelOwnership2.DependentToPrincipal.Name
             );
 
-            var bookLabel2Ownership1Subownership = bookLabelOwnership1.DeclaringEntityType
+            var bookLabel2Ownership1Subownership = bookLabelOwnership1
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.SpecialBookLabel))
                 .ForeignKey;
-            var bookLabel2Ownership2Subownership = bookLabelOwnership2.DeclaringEntityType
+            var bookLabel2Ownership2Subownership = bookLabelOwnership2
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
 
@@ -1979,14 +1993,14 @@ public abstract partial class ModelBuilderTest
                 bookLabelOwnership2.DeclaringEntityType.FindNavigation(nameof(BookLabel.Book))
             );
             Assert.NotNull(
-                bookLabel2Ownership1Subownership.DeclaringEntityType.FindNavigation(
-                    nameof(BookLabel.Book)
-                )
+                bookLabel2Ownership1Subownership
+                    .DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.Book))
             );
             Assert.NotNull(
-                bookLabel2Ownership2Subownership.DeclaringEntityType.FindNavigation(
-                    nameof(BookLabel.Book)
-                )
+                bookLabel2Ownership2Subownership
+                    .DeclaringEntityType
+                    .FindNavigation(nameof(BookLabel.Book))
             );
             Assert.Equal(
                 nameof(SpecialBookLabel.AnotherBookLabel),
@@ -2025,7 +2039,8 @@ public abstract partial class ModelBuilderTest
                 .FindEntityType(typeof(BookLabel))
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
-            var selfOwnership = bookLabelOwnership.DeclaringEntityType
+            var selfOwnership = bookLabelOwnership
+                .DeclaringEntityType
                 .FindNavigation(nameof(BookLabel.AnotherBookLabel))
                 .ForeignKey;
             Assert.NotSame(selfOwnership.PrincipalEntityType, selfOwnership.DeclaringEntityType);

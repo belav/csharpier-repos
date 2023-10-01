@@ -1445,11 +1445,13 @@ namespace System.Net.Sockets.Tests
                 int sent = client.SendTo(new byte[1], new IPEndPoint(connectTo, port));
                 Assert.Equal(1, sent);
 
-                bool success = server.WaitHandle.WaitOne(
-                    expectedToTimeout
-                        ? TestSettings.FailingTestTimeout
-                        : TestSettings.PassingTestTimeout
-                ); // Make sure the bytes were received
+                bool success = server
+                    .WaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                            ? TestSettings.FailingTestTimeout
+                            : TestSettings.PassingTestTimeout
+                    ); // Make sure the bytes were received
                 if (!success)
                 {
                     throw new TimeoutException();
@@ -1611,11 +1613,13 @@ namespace System.Net.Sockets.Tests
                 int sent = client.EndSendTo(async);
                 Assert.Equal(1, sent);
 
-                bool success = server.WaitHandle.WaitOne(
-                    expectedToTimeout
-                        ? TestSettings.FailingTestTimeout
-                        : TestSettings.PassingTestTimeout
-                ); // Make sure the bytes were received
+                bool success = server
+                    .WaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                            ? TestSettings.FailingTestTimeout
+                            : TestSettings.PassingTestTimeout
+                    ); // Make sure the bytes were received
                 if (!success)
                 {
                     throw new TimeoutException();
@@ -1799,11 +1803,13 @@ namespace System.Net.Sockets.Tests
                     }
                 }
 
-                bool success = server.WaitHandle.WaitOne(
-                    expectedToTimeout
-                        ? TestSettings.FailingTestTimeout
-                        : TestSettings.PassingTestTimeout
-                ); // Make sure the bytes were received
+                bool success = server
+                    .WaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                            ? TestSettings.FailingTestTimeout
+                            : TestSettings.PassingTestTimeout
+                    ); // Make sure the bytes were received
                 if (!success)
                 {
                     throw new TimeoutException();
@@ -2107,11 +2113,13 @@ namespace System.Net.Sockets.Tests
                 // Assert.Equal(connectTo.MapToIPv6(), remoteEndPoint.Address);
 
                 SocketUdpClient client = new SocketUdpClient(_log, serverSocket, connectTo, port);
-                bool success = async.AsyncWaitHandle.WaitOne(
-                    expectedToTimeout
-                        ? TestSettings.FailingTestTimeout
-                        : TestSettings.PassingTestTimeout
-                );
+                bool success = async
+                    .AsyncWaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                            ? TestSettings.FailingTestTimeout
+                            : TestSettings.PassingTestTimeout
+                    );
                 if (!success)
                 {
                     throw new TimeoutException();
@@ -2615,9 +2623,9 @@ namespace System.Net.Sockets.Tests
                     Assert.Equal(expectedEP, args.RemoteEndPoint);
                     Assert.True(
                         args.ReceiveMessageFromPacketInfo.Address.Equals(IPAddress.Loopback)
-                            || args.ReceiveMessageFromPacketInfo.Address.Equals(
-                                IPAddress.Loopback.MapToIPv6()
-                            )
+                            || args.ReceiveMessageFromPacketInfo
+                                .Address
+                                .Equals(IPAddress.Loopback.MapToIPv6())
                     );
                 }
             }
@@ -2951,11 +2959,13 @@ namespace System.Net.Sockets.Tests
                 // Assert.Equal(connectTo.MapToIPv6(), remoteEndPoint.Address);
 
                 SocketUdpClient client = new SocketUdpClient(_log, serverSocket, connectTo, port);
-                bool success = async.AsyncWaitHandle.WaitOne(
-                    expectedToTimeout
-                        ? TestSettings.FailingTestTimeout
-                        : TestSettings.PassingTestTimeout
-                );
+                bool success = async
+                    .AsyncWaitHandle
+                    .WaitOne(
+                        expectedToTimeout
+                            ? TestSettings.FailingTestTimeout
+                            : TestSettings.PassingTestTimeout
+                    );
                 if (!success)
                 {
                     throw new TimeoutException();

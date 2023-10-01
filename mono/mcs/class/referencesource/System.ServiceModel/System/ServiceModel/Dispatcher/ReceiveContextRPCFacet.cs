@@ -42,14 +42,16 @@ namespace System.ServiceModel.Dispatcher
             ReceiveContext receiveContext = null;
             if (!ReceiveContext.TryGet(messageRpc.Request, out receiveContext))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxReceiveContextPropertyMissing,
-                            typeof(ReceiveContext).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxReceiveContextPropertyMissing,
+                                typeof(ReceiveContext).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
             messageRpc.Request.Properties.Remove(ReceiveContext.Name);
 

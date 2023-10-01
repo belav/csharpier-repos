@@ -1156,9 +1156,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 // Adjust for active statements that cover more than the old member span.
                                 // For example, C# variable declarators that represent field initializers:
                                 //   [|public int <<F = Expr()>>;|]
-                                var adjustedOldStatementStart = oldMember.FullSpan.Contains(
-                                    oldStatementSpan.Start
-                                )
+                                var adjustedOldStatementStart = oldMember
+                                    .FullSpan
+                                    .Contains(oldStatementSpan.Start)
                                     ? oldStatementSpan.Start
                                     : oldMember.SpanStart;
 
@@ -1864,7 +1864,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return;
                 }
 
-                newStatementSyntax = bodyMatch.NewRoot
+                newStatementSyntax = bodyMatch
+                    .NewRoot
                     .FindToken(newStatementSyntaxSpan.Start)
                     .Parent;
 
@@ -3201,9 +3202,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             IParameterSymbol newParameter,
             bool exact
         ) =>
-            (
-                exact ? s_exactSymbolEqualityComparer : s_runtimeSymbolEqualityComparer
-            ).ParameterEquivalenceComparer.Equals(oldParameter, newParameter);
+            (exact ? s_exactSymbolEqualityComparer : s_runtimeSymbolEqualityComparer)
+                .ParameterEquivalenceComparer
+                .Equals(oldParameter, newParameter);
 
         protected static bool TypeParameterConstraintsEquivalent(
             ITypeParameterSymbol oldParameter,
@@ -3451,9 +3452,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 {
                                     // pick the first declaration in the new file that contains the namespace change:
                                     var newTypeDeclaration = GetSymbolDeclarationSyntax(
-                                        newSymbol.DeclaringSyntaxReferences.First(
-                                            r => r.SyntaxTree == edit.NewNode!.SyntaxTree
-                                        ),
+                                        newSymbol
+                                            .DeclaringSyntaxReferences
+                                            .First(r => r.SyntaxTree == edit.NewNode!.SyntaxTree),
                                         cancellationToken
                                     );
 
@@ -4086,10 +4087,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                             if (oldBody != null)
                                             {
                                                 // The old symbol's declaration syntax may be located in a different document than the old version of the current document.
-                                                var oldSyntaxDocument =
-                                                    oldProject.Solution.GetRequiredDocument(
-                                                        oldDeclaration.SyntaxTree
-                                                    );
+                                                var oldSyntaxDocument = oldProject
+                                                    .Solution
+                                                    .GetRequiredDocument(oldDeclaration.SyntaxTree);
                                                 var oldSyntaxModel = await oldSyntaxDocument
                                                     .GetRequiredSemanticModelAsync(
                                                         cancellationToken
@@ -5683,10 +5683,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 // VB implements clause
                 if (
-                    !oldMethod.ExplicitInterfaceImplementations.SequenceEqual(
-                        newMethod.ExplicitInterfaceImplementations,
-                        SymbolsEquivalent
-                    )
+                    !oldMethod
+                        .ExplicitInterfaceImplementations
+                        .SequenceEqual(
+                            newMethod.ExplicitInterfaceImplementations,
+                            SymbolsEquivalent
+                        )
                 )
                 {
                     rudeEdit = RudeEditKind.ImplementsClauseUpdate;
@@ -6636,25 +6638,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 foreach (var match in oldAttributes.Value)
                 {
                     if (
-                        SymbolEquivalenceComparer.Instance.Equals(
-                            match.AttributeClass,
-                            attribute.AttributeClass
-                        )
+                        SymbolEquivalenceComparer
+                            .Instance
+                            .Equals(match.AttributeClass, attribute.AttributeClass)
                     )
                     {
                         if (
-                            SymbolEquivalenceComparer.Instance.Equals(
-                                match.AttributeConstructor,
-                                attribute.AttributeConstructor
-                            )
-                            && match.ConstructorArguments.SequenceEqual(
-                                attribute.ConstructorArguments,
-                                TypedConstantComparer.Instance
-                            )
-                            && match.NamedArguments.SequenceEqual(
-                                attribute.NamedArguments,
-                                NamedArgumentComparer.Instance
-                            )
+                            SymbolEquivalenceComparer
+                                .Instance
+                                .Equals(match.AttributeConstructor, attribute.AttributeConstructor)
+                            && match
+                                .ConstructorArguments
+                                .SequenceEqual(
+                                    attribute.ConstructorArguments,
+                                    TypedConstantComparer.Instance
+                                )
+                            && match
+                                .NamedArguments
+                                .SequenceEqual(
+                                    attribute.NamedArguments,
+                                    NamedArgumentComparer.Instance
+                                )
                         )
                         {
                             return match;
@@ -6813,14 +6817,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     m =>
                         m.IsImplicitlyDeclared
                         && m.Parameters.Length == 1
-                        && SymbolEqualityComparer.Default.Equals(
-                            m.Parameters[0].Type,
-                            compilation.GetTypeByMetadataName(typeof(StringBuilder).FullName!)
-                        )
-                        && SymbolEqualityComparer.Default.Equals(
-                            m.ReturnType,
-                            compilation.GetTypeByMetadataName(typeof(bool).FullName!)
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(
+                                m.Parameters[0].Type,
+                                compilation.GetTypeByMetadataName(typeof(StringBuilder).FullName!)
+                            )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(
+                                m.ReturnType,
+                                compilation.GetTypeByMetadataName(typeof(bool).FullName!)
+                            )
                 );
             if (result is not null)
             {
@@ -6834,10 +6842,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     m =>
                         m.IsImplicitlyDeclared
                         && m.Parameters.Length == 1
-                        && SymbolEqualityComparer.Default.Equals(
-                            m.Parameters[0].Type,
-                            m.ContainingType
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(m.Parameters[0].Type, m.ContainingType)
                 );
             if (result is not null)
             {
@@ -7113,9 +7120,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return false;
             }
 
-            lazyLayoutAttribute ??= model.Compilation.GetTypeByMetadataName(
-                typeof(StructLayoutAttribute).FullName!
-            );
+            lazyLayoutAttribute ??= model
+                .Compilation
+                .GetTypeByMetadataName(typeof(StructLayoutAttribute).FullName!);
             if (lazyLayoutAttribute == null)
             {
                 return false;
@@ -7261,10 +7268,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 var oldType = updatesInCurrentDocument.OldType;
 
-                var anyInitializerUpdatesInCurrentDocument =
-                    updatesInCurrentDocument.ChangedDeclarations.Keys.Any(
-                        IsDeclarationWithInitializer
-                    );
+                var anyInitializerUpdatesInCurrentDocument = updatesInCurrentDocument
+                    .ChangedDeclarations
+                    .Keys
+                    .Any(IsDeclarationWithInitializer);
                 var isPartialEdit = IsPartialEdit(oldType, newType, oldSyntaxTree, newSyntaxTree);
 
                 // Create a syntax map that aggregates syntax maps of the constructor body and all initializers in this document.
@@ -7331,9 +7338,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         if (
                             !isPrimaryRecordConstructor
                             && !anyInitializerUpdatesInCurrentDocument
-                            && !updatesInCurrentDocument.ChangedDeclarations.ContainsKey(
-                                newDeclaration
-                            )
+                            && !updatesInCurrentDocument
+                                .ChangedDeclarations
+                                .ContainsKey(newDeclaration)
                         )
                         {
                             continue;
@@ -7407,7 +7414,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         )
                         {
                             // attribute rude edit to one of the modified members
-                            var firstSpan = updatesInCurrentDocument.ChangedDeclarations.Keys
+                            var firstSpan = updatesInCurrentDocument
+                                .ChangedDeclarations
+                                .Keys
                                 .Where(IsDeclarationWithInitializer)
                                 .Aggregate(
                                     (min: int.MaxValue, span: default(TextSpan)),
@@ -7470,14 +7479,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 continue;
                             }
 
-                            oldCtor = oldType.InstanceConstructors.Single(
-                                c =>
-                                    c.Parameters.Length == 1
-                                    && SymbolEqualityComparer.Default.Equals(
-                                        c.Parameters[0].Type,
-                                        c.ContainingType
-                                    )
-                            );
+                            oldCtor = oldType
+                                .InstanceConstructors
+                                .Single(
+                                    c =>
+                                        c.Parameters.Length == 1
+                                        && SymbolEqualityComparer
+                                            .Default
+                                            .Equals(c.Parameters[0].Type, c.ContainingType)
+                                );
                             // The copy constructor does not have a syntax map
                             syntaxMapToUse = null;
                             // Since there is no syntax map, we don't need to handle anything special to merge them for partial types.
@@ -8136,7 +8146,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         }
                         else
                         {
-                            errorSpan = newCaptures[reverseCapturesMap.IndexOf(i)].Locations
+                            errorSpan = newCaptures[reverseCapturesMap.IndexOf(i)]
+                                .Locations
                                 .Single()
                                 .SourceSpan;
                             rudeEdit = RudeEditKind.DeleteLambdaWithMultiScopeCapture;
@@ -8236,7 +8247,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var containingLambda = parameter.ContainingSymbol as IMethodSymbol;
             if (containingLambda?.MethodKind is MethodKind.LambdaMethod or MethodKind.LocalFunction)
             {
-                var oldContainingLambdaSyntax = containingLambda.DeclaringSyntaxReferences
+                var oldContainingLambdaSyntax = containingLambda
+                    .DeclaringSyntaxReferences
                     .Single()
                     .GetSyntax(cancellationToken);
                 return (oldContainingLambdaSyntax, parameter.Ordinal);
@@ -8384,7 +8396,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
                 else
                 {
-                    var newCaptureSyntax = newCapture.DeclaringSyntaxReferences
+                    var newCaptureSyntax = newCapture
+                        .DeclaringSyntaxReferences
                         .Single()
                         .GetSyntax(cancellationToken);
 
@@ -8748,7 +8761,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     || HasParameterClosureScope(member)
                 )
                 {
-                    var result = localOrParameter.DeclaringSyntaxReferences
+                    var result = localOrParameter
+                        .DeclaringSyntaxReferences
                         .Single()
                         .GetSyntax(cancellationToken);
                     Debug.Assert(IsLambda(result));
@@ -8758,7 +8772,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return memberBody;
             }
 
-            var node = localOrParameter.DeclaringSyntaxReferences
+            var node = localOrParameter
+                .DeclaringSyntaxReferences
                 .Single()
                 .GetSyntax(cancellationToken);
             while (true)

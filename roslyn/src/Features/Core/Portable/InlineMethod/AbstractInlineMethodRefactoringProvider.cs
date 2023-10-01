@@ -272,11 +272,16 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 invocationOperation
             );
 
-            var nestedCodeAction = CodeAction.CodeActionWithNestedActions.Create(
-                string.Format(FeaturesResources.Inline_0, calleeMethodSymbol.ToNameDisplayString()),
-                codeActions,
-                isInlinable: true
-            );
+            var nestedCodeAction = CodeAction
+                .CodeActionWithNestedActions
+                .Create(
+                    string.Format(
+                        FeaturesResources.Inline_0,
+                        calleeMethodSymbol.ToNameDisplayString()
+                    ),
+                    codeActions,
+                    isInlinable: true
+                );
 
             context.RegisterRefactoring(nestedCodeAction, calleeInvocationNode.Span);
         }
@@ -525,8 +530,9 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     var rightHandSideValue = _syntaxFacts.GetRightHandSideOfAssignment(
                         inlineMethodContext.InlineExpression
                     );
-                    var (parameterSymbol, name) =
-                        methodParametersInfo.ParametersWithVariableDeclarationArgument.Single();
+                    var (parameterSymbol, name) = methodParametersInfo
+                        .ParametersWithVariableDeclarationArgument
+                        .Single();
                     var declarationNode = (TStatementSyntax)
                         syntaxGenerator.LocalDeclarationStatement(
                             parameterSymbol.Type,

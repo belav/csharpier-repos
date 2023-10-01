@@ -483,10 +483,9 @@ namespace System.Diagnostics
                 )
                 {
                     string? filterAndPayloadSpecs = null;
-                    command.Arguments!.TryGetValue(
-                        "FilterAndPayloadSpecs",
-                        out filterAndPayloadSpecs
-                    );
+                    command
+                        .Arguments!
+                        .TryGetValue("FilterAndPayloadSpecs", out filterAndPayloadSpecs);
 
                     if (!IsEnabled(EventLevel.Informational, Keywords.IgnoreShortCutKeywords))
                     {
@@ -832,58 +831,60 @@ namespace System.Diagnostics
 
                 // Set up a subscription that watches for the given Diagnostic Sources and events which will call back
                 // to the EventSource.
-                _diagnosticsListenersSubscription = DiagnosticListener.AllListeners.Subscribe(
-                    new CallbackObserver<DiagnosticListener>(
-                        delegate(DiagnosticListener newListener)
-                        {
-                            if (
-                                listenerNameFilter == null
-                                || listenerNameFilter == newListener.Name
-                            )
+                _diagnosticsListenersSubscription = DiagnosticListener
+                    .AllListeners
+                    .Subscribe(
+                        new CallbackObserver<DiagnosticListener>(
+                            delegate(DiagnosticListener newListener)
                             {
-                                _eventSource.NewDiagnosticListener(newListener.Name);
-                                Predicate<string>? eventNameFilterPredicate = null;
-                                if (eventNameFilter != null)
-                                    eventNameFilterPredicate = (string eventName) =>
-                                        eventNameFilter == eventName;
-
-                                [UnconditionalSuppressMessage(
-                                    "ReflectionAnalysis",
-                                    "IL2026:RequiresUnreferencedCode",
-                                    Justification = "DiagnosticSource.Write is marked with RequiresUnreferencedCode."
-                                )]
-                                [UnconditionalSuppressMessage(
-                                    "ReflectionAnalysis",
-                                    "IL2119",
-                                    Justification = "DAM on EventSource references this compiler-generated local function which calls a "
-                                        + "method that requires unreferenced code. EventSource will not access this local function."
-                                )]
-                                void OnEventWritten(KeyValuePair<string, object?> evnt)
+                                if (
+                                    listenerNameFilter == null
+                                    || listenerNameFilter == newListener.Name
+                                )
                                 {
-                                    // The filter given to the DiagnosticSource may not work if users don't is 'IsEnabled' as expected.
-                                    // Thus we look for any events that may have snuck through and filter them out before forwarding.
-                                    if (eventNameFilter != null && eventNameFilter != evnt.Key)
-                                        return;
+                                    _eventSource.NewDiagnosticListener(newListener.Name);
+                                    Predicate<string>? eventNameFilterPredicate = null;
+                                    if (eventNameFilter != null)
+                                        eventNameFilterPredicate = (string eventName) =>
+                                            eventNameFilter == eventName;
 
-                                    var outputArgs = this.Morph(evnt.Value);
-                                    var eventName = evnt.Key;
-                                    writeEvent(newListener.Name, eventName, outputArgs);
+                                    [UnconditionalSuppressMessage(
+                                        "ReflectionAnalysis",
+                                        "IL2026:RequiresUnreferencedCode",
+                                        Justification = "DiagnosticSource.Write is marked with RequiresUnreferencedCode."
+                                    )]
+                                    [UnconditionalSuppressMessage(
+                                        "ReflectionAnalysis",
+                                        "IL2119",
+                                        Justification = "DAM on EventSource references this compiler-generated local function which calls a "
+                                            + "method that requires unreferenced code. EventSource will not access this local function."
+                                    )]
+                                    void OnEventWritten(KeyValuePair<string, object?> evnt)
+                                    {
+                                        // The filter given to the DiagnosticSource may not work if users don't is 'IsEnabled' as expected.
+                                        // Thus we look for any events that may have snuck through and filter them out before forwarding.
+                                        if (eventNameFilter != null && eventNameFilter != evnt.Key)
+                                            return;
+
+                                        var outputArgs = this.Morph(evnt.Value);
+                                        var eventName = evnt.Key;
+                                        writeEvent(newListener.Name, eventName, outputArgs);
+                                    }
+
+                                    var subscription = newListener.Subscribe(
+                                        new CallbackObserver<KeyValuePair<string, object?>>(
+                                            OnEventWritten
+                                        ),
+                                        eventNameFilterPredicate
+                                    );
+                                    _liveSubscriptions = new Subscriptions(
+                                        subscription,
+                                        _liveSubscriptions
+                                    );
                                 }
-
-                                var subscription = newListener.Subscribe(
-                                    new CallbackObserver<KeyValuePair<string, object?>>(
-                                        OnEventWritten
-                                    ),
-                                    eventNameFilterPredicate
-                                );
-                                _liveSubscriptions = new Subscriptions(
-                                    subscription,
-                                    _liveSubscriptions
-                                );
                             }
-                        }
-                    )
-                );
+                        )
+                    );
             }
 
             internal FilterAndTransform(
@@ -1868,9 +1869,9 @@ namespace System.Diagnostics
                             );
                             _propertyFetch =
                                 (Func<TObject, TProperty>)
-                                    property.GetMethod!.CreateDelegate(
-                                        typeof(Func<TObject, TProperty>)
-                                    );
+                                    property
+                                        .GetMethod!
+                                        .CreateDelegate(typeof(Func<TObject, TProperty>));
                         }
 
                         public override object? Fetch(object? obj)
@@ -1894,9 +1895,9 @@ namespace System.Diagnostics
                             Debug.Assert(typeof(TStruct) == type);
                             _propertyFetch =
                                 (StructFunc<TStruct, TProperty>)
-                                    property.GetMethod!.CreateDelegate(
-                                        typeof(StructFunc<TStruct, TProperty>)
-                                    );
+                                    property
+                                        .GetMethod!
+                                        .CreateDelegate(typeof(StructFunc<TStruct, TProperty>));
                         }
 
                         public override object? Fetch(object? obj)

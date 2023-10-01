@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
             }
 
             if (
-                !_editorOptionsService.GlobalOptions.GetOption(
-                    InternalFeatureOnOffOptions.SmartIndenter
-                )
+                !_editorOptionsService
+                    .GlobalOptions
+                    .GetOption(InternalFeatureOnOffOptions.SmartIndenter)
             )
             {
                 return null;

@@ -428,12 +428,10 @@ namespace System.Threading
                 }
 
                 LockHolder dummyLockHolder = default;
-                int waitResult = Thread.CurrentThread.WaitInfo.Wait(
-                    timeoutMilliseconds,
-                    interruptible,
-                    isSleep: true,
-                    ref dummyLockHolder
-                );
+                int waitResult = Thread
+                    .CurrentThread
+                    .WaitInfo
+                    .Wait(timeoutMilliseconds, interruptible, isSleep: true, ref dummyLockHolder);
                 Debug.Assert(waitResult == WaitHandle.WaitTimeout);
             }
 

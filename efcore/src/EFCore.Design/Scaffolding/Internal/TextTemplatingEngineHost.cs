@@ -185,7 +185,9 @@ public class TextTemplatingEngineHost
     /// </summary>
     public virtual string ResolveAssemblyReference(string assemblyReference)
     {
-        var path = DependencyContext.Default?.CompileLibraries
+        var path = DependencyContext
+            .Default
+            ?.CompileLibraries
             .FirstOrDefault(
                 l => l.Assemblies.Any(a => Path.GetFileNameWithoutExtension(a) == assemblyReference)
             )

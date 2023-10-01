@@ -43,15 +43,17 @@ namespace System.Threading
             SafeWaitHandle threadHandle;
 
             if (
-                Interop.Kernel32.DuplicateHandle(
-                    currentProcHandle,
-                    currentThreadHandle,
-                    currentProcHandle,
-                    out threadHandle,
-                    0,
-                    false,
-                    Interop.Kernel32.DUPLICATE_SAME_ACCESS
-                )
+                Interop
+                    .Kernel32
+                    .DuplicateHandle(
+                        currentProcHandle,
+                        currentThreadHandle,
+                        currentProcHandle,
+                        out threadHandle,
+                        0,
+                        false,
+                        Interop.Kernel32.DUPLICATE_SAME_ACCESS
+                    )
             )
             {
                 return threadHandle;
@@ -211,15 +213,17 @@ namespace System.Threading
                 stackSize = AllocationGranularity;
             }
 
-            _osHandle = Interop.Kernel32.CreateThread(
-                IntPtr.Zero,
-                (IntPtr)stackSize,
-                &ThreadEntryPoint,
-                (IntPtr)thisThreadHandle,
-                Interop.Kernel32.CREATE_SUSPENDED
-                    | Interop.Kernel32.STACK_SIZE_PARAM_IS_A_RESERVATION,
-                out _
-            );
+            _osHandle = Interop
+                .Kernel32
+                .CreateThread(
+                    IntPtr.Zero,
+                    (IntPtr)stackSize,
+                    &ThreadEntryPoint,
+                    (IntPtr)thisThreadHandle,
+                    Interop.Kernel32.CREATE_SUSPENDED
+                        | Interop.Kernel32.STACK_SIZE_PARAM_IS_A_RESERVATION,
+                    out _
+                );
 
             if (_osHandle.IsInvalid)
             {
@@ -350,18 +354,22 @@ namespace System.Threading
                 return;
 
 #if ENABLE_WINRT
-            int hr = Interop.WinRT.RoInitialize(
-                (state == ApartmentState.STA)
-                    ? Interop.WinRT.RO_INIT_SINGLETHREADED
-                    : Interop.WinRT.RO_INIT_MULTITHREADED
-            );
+            int hr = Interop
+                .WinRT
+                .RoInitialize(
+                    (state == ApartmentState.STA)
+                        ? Interop.WinRT.RO_INIT_SINGLETHREADED
+                        : Interop.WinRT.RO_INIT_MULTITHREADED
+                );
 #else
-            int hr = Interop.Ole32.CoInitializeEx(
-                IntPtr.Zero,
-                (state == ApartmentState.STA)
-                    ? Interop.Ole32.COINIT_APARTMENTTHREADED
-                    : Interop.Ole32.COINIT_MULTITHREADED
-            );
+            int hr = Interop
+                .Ole32
+                .CoInitializeEx(
+                    IntPtr.Zero,
+                    (state == ApartmentState.STA)
+                        ? Interop.Ole32.COINIT_APARTMENTTHREADED
+                        : Interop.Ole32.COINIT_MULTITHREADED
+                );
 #endif
             if (hr < 0)
             {

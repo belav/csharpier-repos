@@ -175,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     case SyntaxKind.WhereClause:
                         return SyntaxFactory.Block(
                             SyntaxFactory.IfStatement(
-                                ((WhereClauseSyntax)node).Condition
+                                ((WhereClauseSyntax)node)
+                                    .Condition
                                     .WithAdditionalAnnotations(Simplifier.Annotation)
                                     .WithoutTrivia(),
                                 statement
@@ -303,7 +304,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                                                     joinClause.LeftExpression
                                                                 ),
                                                                 SyntaxFactory.Argument(
-                                                                    joinClause.RightExpression.WithoutTrailingTrivia()
+                                                                    joinClause
+                                                                        .RightExpression
+                                                                        .WithoutTrailingTrivia()
                                                                 )
                                                             }
                                                         )
@@ -962,9 +965,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                         lastSelectExpression is IdentifierNameSyntax identifierName
                         && forEachStatement.Identifier.ValueText
                             == identifierName.Identifier.ValueText
-                        && queryExpressionProcessingInfo.IdentifierNames.Contains(
-                            identifierName.Identifier.ValueText
-                        )
+                        && queryExpressionProcessingInfo
+                            .IdentifierNames
+                            .Contains(identifierName.Identifier.ValueText)
                     )
                     {
                         var forEachStatementTypeSymbolType = _semanticModel

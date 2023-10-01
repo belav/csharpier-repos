@@ -1954,13 +1954,18 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         foreach (var kvp in arguments)
         {
-            actionDescriptor.Parameters.Add(
-                new ControllerParameterDescriptor()
-                {
-                    Name = kvp.Key,
-                    ParameterInfo = method.GetParameters().Where(p => p.Name == kvp.Key).Single(),
-                }
-            );
+            actionDescriptor
+                .Parameters
+                .Add(
+                    new ControllerParameterDescriptor()
+                    {
+                        Name = kvp.Key,
+                        ParameterInfo = method
+                            .GetParameters()
+                            .Where(p => p.Name == kvp.Key)
+                            .Single(),
+                    }
+                );
         }
 
         return CreateInvoker(filters, actionDescriptor, new TestController(), arguments);

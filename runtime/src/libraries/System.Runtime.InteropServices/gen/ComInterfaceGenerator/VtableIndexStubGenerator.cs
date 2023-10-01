@@ -59,7 +59,8 @@ namespace Microsoft.Interop
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Get all methods with the [VirtualMethodIndex] attribute.
-            var attributedMethods = context.SyntaxProvider
+            var attributedMethods = context
+                .SyntaxProvider
                 .ForAttributeWithMetadataName(
                     TypeNames.VirtualMethodIndexAttribute,
                     static (node, ct) => node is MethodDeclarationSyntax,
@@ -379,18 +380,18 @@ namespace Microsoft.Interop
         )
         {
             ct.ThrowIfCancellationRequested();
-            INamedTypeSymbol? lcidConversionAttrType =
-                environment.Compilation.GetTypeByMetadataName(TypeNames.LCIDConversionAttribute);
-            INamedTypeSymbol? suppressGCTransitionAttrType =
-                environment.Compilation.GetTypeByMetadataName(
-                    TypeNames.SuppressGCTransitionAttribute
-                );
-            INamedTypeSymbol? unmanagedCallConvAttrType =
-                environment.Compilation.GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute);
-            INamedTypeSymbol iUnmanagedInterfaceTypeType =
-                environment.Compilation.GetTypeByMetadataName(
-                    TypeNames.IUnmanagedInterfaceType_Metadata
-                )!;
+            INamedTypeSymbol? lcidConversionAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.LCIDConversionAttribute);
+            INamedTypeSymbol? suppressGCTransitionAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.SuppressGCTransitionAttribute);
+            INamedTypeSymbol? unmanagedCallConvAttrType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute);
+            INamedTypeSymbol iUnmanagedInterfaceTypeType = environment
+                .Compilation
+                .GetTypeByMetadataName(TypeNames.IUnmanagedInterfaceType_Metadata)!;
             // Get any attributes of interest on the method
             AttributeData? virtualMethodIndexAttr = null;
             AttributeData? lcidConversionAttr = null;
@@ -408,30 +409,27 @@ namespace Microsoft.Interop
                 }
                 else if (
                     lcidConversionAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        lcidConversionAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, lcidConversionAttrType)
                 )
                 {
                     lcidConversionAttr = attr;
                 }
                 else if (
                     suppressGCTransitionAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        suppressGCTransitionAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, suppressGCTransitionAttrType)
                 )
                 {
                     suppressGCTransitionAttribute = attr;
                 }
                 else if (
                     unmanagedCallConvAttrType is not null
-                    && SymbolEqualityComparer.Default.Equals(
-                        attr.AttributeClass,
-                        unmanagedCallConvAttrType
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(attr.AttributeClass, unmanagedCallConvAttrType)
                 )
                 {
                     unmanagedCallConvAttribute = attr;
@@ -457,9 +455,9 @@ namespace Microsoft.Interop
             }
 
             if (
-                virtualMethodIndexData.IsUserDefined.HasFlag(
-                    InteropAttributeMember.StringMarshalling
-                )
+                virtualMethodIndexData
+                    .IsUserDefined
+                    .HasFlag(InteropAttributeMember.StringMarshalling)
             )
             {
                 // User specified StringMarshalling.Custom without specifying StringMarshallingCustomType
@@ -540,13 +538,14 @@ namespace Microsoft.Interop
             var typeKeyOwner = ManagedTypeInfo.CreateTypeInfoForTypeSymbol(symbol.ContainingType);
             ManagedTypeInfo typeKeyType = SpecialTypeInfo.Byte;
 
-            INamedTypeSymbol? iUnmanagedInterfaceTypeInstantiation =
-                symbol.ContainingType.AllInterfaces.FirstOrDefault(
+            INamedTypeSymbol? iUnmanagedInterfaceTypeInstantiation = symbol
+                .ContainingType
+                .AllInterfaces
+                .FirstOrDefault(
                     iface =>
-                        SymbolEqualityComparer.Default.Equals(
-                            iface.OriginalDefinition,
-                            iUnmanagedInterfaceTypeType
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(iface.OriginalDefinition, iUnmanagedInterfaceTypeType)
                 );
             if (iUnmanagedInterfaceTypeInstantiation is null)
             {
@@ -692,7 +691,8 @@ namespace Microsoft.Interop
             );
 
             return (
-                methodStub.ContainingSyntaxContext
+                methodStub
+                    .ContainingSyntaxContext
                     .AddContainingSyntax(NativeTypeContainingSyntax)
                     .WrapMemberInContainingSyntaxWithUnsafeModifier(
                         PrintGeneratedSource(
@@ -765,14 +765,17 @@ namespace Microsoft.Interop
                                     InitializerExpression(
                                         SyntaxKind.CollectionInitializerExpression,
                                         SeparatedList<ExpressionSyntax>(
-                                            methodStub.CallingConvention.Array.Select(
-                                                callConv =>
-                                                    TypeOfExpression(
-                                                        ParseName(
-                                                            $"System.Runtime.CompilerServices.CallConv{callConv.Name.ValueText}"
+                                            methodStub
+                                                .CallingConvention
+                                                .Array
+                                                .Select(
+                                                    callConv =>
+                                                        TypeOfExpression(
+                                                            ParseName(
+                                                                $"System.Runtime.CompilerServices.CallConv{callConv.Name.ValueText}"
+                                                            )
                                                         )
-                                                    )
-                                            )
+                                                )
                                         )
                                     )
                                 )
@@ -795,7 +798,8 @@ namespace Microsoft.Interop
                 .WithBody(code);
 
             return (
-                methodStub.ContainingSyntaxContext
+                methodStub
+                    .ContainingSyntaxContext
                     .AddContainingSyntax(NativeTypeContainingSyntax)
                     .WrapMemberInContainingSyntaxWithUnsafeModifier(unmanagedToManagedStub),
                 methodStub.Diagnostics.Array.AddRange(diagnostics.Diagnostics)
@@ -948,9 +952,9 @@ namespace Microsoft.Interop
         )
         {
             const string vtableParameter = "vtable";
-            ContainingSyntaxContext containingSyntax = vtableMethods.Key.AddContainingSyntax(
-                NativeTypeContainingSyntax
-            );
+            ContainingSyntaxContext containingSyntax = vtableMethods
+                .Key
+                .AddContainingSyntax(NativeTypeContainingSyntax);
             MethodDeclarationSyntax populateVtableMethod = MethodDeclaration(
                     PredefinedType(Token(SyntaxKind.VoidKeyword)),
                     "PopulateUnmanagedVirtualMethodTable"

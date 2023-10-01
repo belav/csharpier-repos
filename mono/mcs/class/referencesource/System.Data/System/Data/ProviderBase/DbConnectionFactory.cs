@@ -28,9 +28,10 @@ namespace System.Data.ProviderBase
         private const int PruningPeriod = 30 * 1000; // thirty seconds
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         // s_pendingOpenNonPooled is an array of tasks used to throttle creation of non-pooled connections to
         // a maximum of Environment.ProcessorCount at a time.
@@ -407,7 +408,9 @@ namespace System.Data.ProviderBase
                                     if (retry.TrySetResult(task.Result))
                                     {
 #if !MOBILE
-                                        PerformanceCounters.NumberOfNonPooledConnections.Increment();
+                                        PerformanceCounters
+                                            .NumberOfNonPooledConnections
+                                            .Increment();
 #endif
                                     }
                                     else
@@ -773,7 +776,9 @@ namespace System.Data.ProviderBase
                                     );
                                 }
 #if !MOBILE
-                                PerformanceCounters.NumberOfInactiveConnectionPoolGroups.Decrement();
+                                PerformanceCounters
+                                    .NumberOfInactiveConnectionPoolGroups
+                                    .Decrement();
 #endif
                             }
                         }

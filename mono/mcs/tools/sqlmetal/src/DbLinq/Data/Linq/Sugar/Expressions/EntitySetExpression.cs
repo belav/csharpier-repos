@@ -102,12 +102,14 @@ namespace DbLinq.Data.Linq.Sugar.Expressions
             var entityType = EntitySetType.GetGenericArguments()[0];
 
             // BUG: This is ignoring External Mappings from XmlMappingSource.
-            var mappingType = builderContext.QueryContext.DataContext.Mapping.GetMetaType(
-                entityType
-            );
-            var foreignKeys = mappingType.Associations.Where(
-                a => a.IsForeignKey && a.OtherType.Type == sourceTable.Type
-            );
+            var mappingType = builderContext
+                .QueryContext
+                .DataContext
+                .Mapping
+                .GetMetaType(entityType);
+            var foreignKeys = mappingType
+                .Associations
+                .Where(a => a.IsForeignKey && a.OtherType.Type == sourceTable.Type);
 
             foreach (var fk in foreignKeys)
             {

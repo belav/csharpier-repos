@@ -71,9 +71,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                             for (int i = 0; i < 1024; i++)
                             {
-                                await context.Response.BodyWriter.WriteAsync(
-                                    new Memory<byte>(bytes, 0, bytes.Length)
-                                );
+                                await context
+                                    .Response
+                                    .BodyWriter
+                                    .WriteAsync(new Memory<byte>(bytes, 0, bytes.Length));
                             }
                         });
                     });
@@ -345,10 +346,13 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     {
                         for (var i = 0; i < 1000; i++)
                         {
-                            await context.Response.BodyWriter.WriteAsync(
-                                new Memory<byte>(scratchBuffer, 0, scratchBuffer.Length),
-                                context.RequestAborted
-                            );
+                            await context
+                                .Response
+                                .BodyWriter
+                                .WriteAsync(
+                                    new Memory<byte>(scratchBuffer, 0, scratchBuffer.Length),
+                                    context.RequestAborted
+                                );
                             await Task.Delay(10);
                         }
                     }
@@ -424,11 +428,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     for (var i = 0; i < responseBodySegmentCount; i++)
                     {
-                        await context.Response.Body.WriteAsync(
-                            scratchBuffer,
-                            0,
-                            scratchBuffer.Length
-                        );
+                        await context
+                            .Response
+                            .Body
+                            .WriteAsync(scratchBuffer, 0, scratchBuffer.Length);
                         await Task.Delay(10);
                     }
 
@@ -455,9 +458,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
             // After the RequestAborted token is tripped, the connection reset should be logged.
             // On Linux and macOS, the connection close is still sometimes observed as a FIN despite the LingerState.
-            var presShutdownTransportLogs = TestSink.Writes.Where(
-                w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
-            );
+            var presShutdownTransportLogs = TestSink
+                .Writes
+                .Where(
+                    w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+                );
             var connectionResetLogs = presShutdownTransportLogs.Where(
                 w =>
                     w.EventId == connectionResetEventId
@@ -470,16 +475,18 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             await appCompletedTcs.Task.DefaultTimeout();
         }
 
-        var coreLogs = TestSink.Writes.Where(
-            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections"
-        );
+        var coreLogs = TestSink
+            .Writes
+            .Where(w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections");
         Assert.Single(coreLogs.Where(w => w.EventId == connectionStopEventId));
 
-        var transportLogs = TestSink.Writes.Where(
-            w =>
-                w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
-                || w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
-        );
+        var transportLogs = TestSink
+            .Writes
+            .Where(
+                w =>
+                    w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
+                    || w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            );
 
         Assert.Empty(transportLogs.Where(w => w.LogLevel > LogLevel.Debug));
     }
@@ -515,15 +522,15 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        var transportLogs = TestSink.Writes.Where(
-            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
-        );
+        var transportLogs = TestSink
+            .Writes
+            .Where(w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets");
 
         // The "Microsoft.AspNetCore.Server.Kestrel" logger may contain info level logs because resetting the connection can cause
         // partial headers to be read leading to a bad request.
-        var coreLogs = TestSink.Writes.Where(
-            w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel"
-        );
+        var coreLogs = TestSink
+            .Writes
+            .Where(w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel");
 
         Assert.Empty(transportLogs.Where(w => w.LogLevel > LogLevel.Debug));
         Assert.Empty(coreLogs.Where(w => w.LogLevel > LogLevel.Information));
@@ -595,10 +602,13 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             {
                 for (; i < chunks; i++)
                 {
-                    await context.Response.BodyWriter.WriteAsync(
-                        new Memory<byte>(chunkData, 0, chunkData.Length),
-                        context.RequestAborted
-                    );
+                    await context
+                        .Response
+                        .BodyWriter
+                        .WriteAsync(
+                            new Memory<byte>(chunkData, 0, chunkData.Length),
+                            context.RequestAborted
+                        );
                     await Task.Yield();
                 }
 
@@ -707,10 +717,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async context =>
                 {
-                    context.RequestAborted.Register(() =>
-                    {
-                        aborted.SetResult();
-                    });
+                    context
+                        .RequestAborted
+                        .Register(() =>
+                        {
+                            aborted.SetResult();
+                        });
 
                     context.Response.ContentLength = chunks * chunkSize;
 
@@ -718,10 +730,13 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     {
                         for (var i = 0; i < chunks; i++)
                         {
-                            await context.Response.BodyWriter.WriteAsync(
-                                new Memory<byte>(chunkData, 0, chunkData.Length),
-                                context.RequestAborted
-                            );
+                            await context
+                                .Response
+                                .BodyWriter
+                                .WriteAsync(
+                                    new Memory<byte>(chunkData, 0, chunkData.Length),
+                                    context.RequestAborted
+                                );
                         }
                     }
                     catch (OperationCanceledException)
@@ -826,10 +841,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(() =>
-            {
-                requestAborted.SetResult();
-            });
+            context
+                .RequestAborted
+                .Register(() =>
+                {
+                    requestAborted.SetResult();
+                });
 
             try
             {
@@ -919,17 +936,22 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(() =>
-            {
-                requestAborted = true;
-            });
+            context
+                .RequestAborted
+                .Register(() =>
+                {
+                    requestAborted = true;
+                });
 
             for (var i = 0; i < chunkCount; i++)
             {
-                await context.Response.BodyWriter.WriteAsync(
-                    new Memory<byte>(chunkData, 0, chunkData.Length),
-                    context.RequestAborted
-                );
+                await context
+                    .Response
+                    .BodyWriter
+                    .WriteAsync(
+                        new Memory<byte>(chunkData, 0, chunkData.Length),
+                        context.RequestAborted
+                    );
             }
 
             appFuncCompleted.SetResult();
@@ -1008,10 +1030,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(() =>
-            {
-                requestAborted = true;
-            });
+            context
+                .RequestAborted
+                .Register(() =>
+                {
+                    requestAborted = true;
+                });
 
             context.Response.Headers[$"X-Custom-Header"] = headerStringValues;
             context.Response.ContentLength = 0;
@@ -1097,17 +1121,22 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(() =>
-            {
-                requestAborted = true;
-            });
+            context
+                .RequestAborted
+                .Register(() =>
+                {
+                    requestAborted = true;
+                });
 
             for (var i = 0; i < chunkCount; i++)
             {
-                await context.Response.BodyWriter.WriteAsync(
-                    new Memory<byte>(chunkData, 0, chunkData.Length),
-                    context.RequestAborted
-                );
+                await context
+                    .Response
+                    .BodyWriter
+                    .WriteAsync(
+                        new Memory<byte>(chunkData, 0, chunkData.Length),
+                        context.RequestAborted
+                    );
             }
 
             appFuncCompleted.SetResult();

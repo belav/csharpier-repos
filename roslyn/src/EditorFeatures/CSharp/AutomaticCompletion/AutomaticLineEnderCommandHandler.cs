@@ -117,8 +117,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 return SpecializedCollections.EmptyList<TextChange>();
             }
 
-            var formatter =
-                document.LanguageServices.GetRequiredService<ISyntaxFormattingService>();
+            var formatter = document
+                .LanguageServices
+                .GetRequiredService<ISyntaxFormattingService>();
             return formatter
                 .GetFormattingResult(
                     root,

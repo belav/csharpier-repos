@@ -37,8 +37,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             // constructor, operator and finalizer are excluded.
             var (document, _, cancellationToken) = context;
 
-            _service ??=
-                document.Project.Solution.Services.GetService<IPullMemberUpOptionsService>();
+            _service ??= document
+                .Project
+                .Solution
+                .Services
+                .GetService<IPullMemberUpOptionsService>();
             if (_service == null)
             {
                 return;
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         {
             var allDestinations = selectedMembers.All(m => m.IsKind(SymbolKind.Field))
                 ? containingType.GetBaseTypes().ToImmutableArray()
-                : containingType.AllInterfaces
+                : containingType
+                    .AllInterfaces
                     .Concat(containingType.GetBaseTypes())
                     .ToImmutableArray();
 

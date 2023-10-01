@@ -327,7 +327,9 @@ namespace @foreach { }
             CSharpCompilation comp = CreateCompilation(syntaxTree);
             UsingDirectiveSyntax usingAlias = (
                 syntaxTree.GetCompilationUnitRoot() as CompilationUnitSyntax
-            ).Usings.First();
+            )
+                .Usings
+                .First();
             var alias = comp.GetSemanticModel(syntaxTree).GetDeclaredSymbol(usingAlias);
             Assert.Equal("for", alias.Name);
             Assert.Equal("@for", alias.ToString());
@@ -471,9 +473,9 @@ class Test
 
             var compilation = CreateCompilation(
                 text,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
 
             compilation.VerifyDiagnostics(

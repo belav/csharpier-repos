@@ -31,9 +31,9 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         var cancellationRegistration = default(CancellationTokenRegistration);
         if (cancellationToken.CanBeCanceled)
         {
-            cancellationRegistration = _responseStream.RequestContext.RegisterForCancellation(
-                cancellationToken
-            );
+            cancellationRegistration = _responseStream
+                .RequestContext
+                .RegisterForCancellation(cancellationToken);
         }
         _cancellationToken = cancellationToken;
         _cancellationRegistration = cancellationRegistration;
@@ -162,8 +162,9 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
                     .HttpDataChunkFromFileHandle;
                 _dataChunks[1].fromFile.offset = (ulong)offset;
                 _dataChunks[1].fromFile.count = (ulong)count;
-                _dataChunks[1].fromFile.fileHandle =
-                    _fileStream.SafeFileHandle.DangerousGetHandle();
+                _dataChunks[1].fromFile.fileHandle = _fileStream
+                    .SafeFileHandle
+                    .DangerousGetHandle();
                 // Nothing to pin for the file handle.
 
                 // No need to pin the CRLF data
@@ -178,8 +179,9 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
                     .HttpDataChunkFromFileHandle;
                 _dataChunks[0].fromFile.offset = (ulong)offset;
                 _dataChunks[0].fromFile.count = (ulong)count;
-                _dataChunks[0].fromFile.fileHandle =
-                    _fileStream.SafeFileHandle.DangerousGetHandle();
+                _dataChunks[0].fromFile.fileHandle = _fileStream
+                    .SafeFileHandle
+                    .DangerousGetHandle();
             }
 
             // This call will pin needed memory

@@ -34,12 +34,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                TypeMap = TypeMap.Empty.WithConcatAlphaRename(
-                    containingMethod,
-                    this,
-                    out _typeParameters,
-                    out _constructedFromTypeParameters
-                );
+                TypeMap = TypeMap
+                    .Empty
+                    .WithConcatAlphaRename(
+                        containingMethod,
+                        this,
+                        out _typeParameters,
+                        out _constructedFromTypeParameters
+                    );
             }
         }
 

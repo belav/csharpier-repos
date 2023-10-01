@@ -101,10 +101,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 methodOrdinal,
                 typeKind
             );
-            compilationState.ModuleBuilderOpt.CompilationState.SetStateMachineType(
-                method,
-                stateMachineType
-            );
+            compilationState
+                .ModuleBuilderOpt
+                .CompilationState
+                .SetStateMachineType(method, stateMachineType);
 
             AsyncRewriter rewriter = isAsyncEnumerableOrEnumerator
                 ? new AsyncIteratorRewriter(
@@ -338,9 +338,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             // local.$builder.Start(ref local) -- binding to the method AsyncTaskMethodBuilder<typeArgs>.Start()
-            var startMethod = methodScopeAsyncMethodBuilderMemberCollection.Start.Construct(
-                frameType
-            );
+            var startMethod = methodScopeAsyncMethodBuilderMemberCollection
+                .Start
+                .Construct(frameType);
             if (methodScopeAsyncMethodBuilderMemberCollection.CheckGenericMethodConstraints)
             {
                 startMethod.CheckConstraints(

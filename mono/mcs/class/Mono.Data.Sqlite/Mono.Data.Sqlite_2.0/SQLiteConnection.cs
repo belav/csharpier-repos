@@ -2157,11 +2157,10 @@ namespace Mono.Data.Sqlite
                             .Replace('\r', ' ')
                             .Replace('\n', ' ')
                             .Replace('\t', ' ');
-                        nPos = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                            strItem,
-                            " AS ",
-                            CompareOptions.IgnoreCase
-                        );
+                        nPos = CultureInfo
+                            .InvariantCulture
+                            .CompareInfo
+                            .IndexOf(strItem, " AS ", CompareOptions.IgnoreCase);
                         if (nPos > -1)
                         {
                             strItem = strItem.Substring(nPos + 4).Trim();
@@ -2616,11 +2615,10 @@ namespace Mono.Data.Sqlite
                                 .Replace('\r', ' ')
                                 .Replace('\n', ' ')
                                 .Replace('\t', ' ');
-                            n = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                                strSql,
-                                " AS ",
-                                CompareOptions.IgnoreCase
-                            );
+                            n = CultureInfo
+                                .InvariantCulture
+                                .CompareInfo
+                                .IndexOf(strSql, " AS ", CompareOptions.IgnoreCase);
                             if (n < 0)
                                 continue;
 

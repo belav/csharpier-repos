@@ -44,12 +44,14 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         )
         {
             bool isBottom;
-            var constraints = IntervalInference.ConstraintsFor.LessThan<
-                IIntervalEnvironment<TVar, TExpr, TInterval, Rational>,
-                TVar,
-                TExpr,
-                TInterval
-            >(left, right, env.Decoder, env, out isBottom);
+            var constraints = IntervalInference
+                .ConstraintsFor
+                .LessThan<
+                    IIntervalEnvironment<TVar, TExpr, TInterval, Rational>,
+                    TVar,
+                    TExpr,
+                    TInterval
+                >(left, right, env.Decoder, env, out isBottom);
             if (isBottom)
                 return env.Bottom;
 
@@ -76,12 +78,14 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         )
         {
             bool isBottom;
-            var constraints = IntervalInference.ConstraintsFor.LessEqualThan<
-                IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
-                TVar,
-                TExpr,
-                TInterval
-            >(left, right, env.Decoder, env, out isBottom);
+            var constraints = IntervalInference
+                .ConstraintsFor
+                .LessEqualThan<
+                    IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
+                    TVar,
+                    TExpr,
+                    TInterval
+                >(left, right, env.Decoder, env, out isBottom);
             if (isBottom)
                 return env.Bottom;
 
@@ -98,12 +102,14 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
             IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational> env
         )
         {
-            var constraints = IntervalInference.ConstraintsFor.GreaterEqualThanZero<
-                IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
-                TVar,
-                TExpr,
-                TInterval
-            >(expr, env.Decoder, env);
+            var constraints = IntervalInference
+                .ConstraintsFor
+                .GreaterEqualThanZero<
+                    IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
+                    TVar,
+                    TExpr,
+                    TInterval
+                >(expr, env.Decoder, env);
             return AssumeConstraints(constraints, env);
         }
 
@@ -115,12 +121,14 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         {
             TInterval refined;
             if (
-                !IntervalInference.ConstraintsFor.TryRefineLessEqualThan<
-                    IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
-                    TVar,
-                    TExpr,
-                    TInterval
-                >(intv, right, env, out refined)
+                !IntervalInference
+                    .ConstraintsFor
+                    .TryRefineLessEqualThan<
+                        IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
+                        TVar,
+                        TExpr,
+                        TInterval
+                    >(intv, right, env, out refined)
             )
                 return env;
 
@@ -140,12 +148,14 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         {
             TInterval refined;
             if (
-                !IntervalInference.ConstraintsFor.TryRefineLessEqualThan<
-                    IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
-                    TVar,
-                    TExpr,
-                    TInterval
-                >(intv, right, env, out refined)
+                !IntervalInference
+                    .ConstraintsFor
+                    .TryRefineLessEqualThan<
+                        IntervalEnvironmentBase<TVar, TExpr, TInterval, Rational>,
+                        TVar,
+                        TExpr,
+                        TInterval
+                    >(intv, right, env, out refined)
             )
                 return env;
 

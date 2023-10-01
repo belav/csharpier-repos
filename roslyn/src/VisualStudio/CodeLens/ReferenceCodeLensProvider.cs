@@ -107,7 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     keys = _dataPoints.Keys.ToImmutableArray();
                 }
 
-                var projectVersions = await _lazyCodeLensCallbackService.Value
+                var projectVersions = await _lazyCodeLensCallbackService
+                    .Value
                     .InvokeAsync<ImmutableDictionary<Guid, string>>(
                         this,
                         nameof(ICodeLensContext.GetProjectVersionsAsync),
@@ -348,7 +349,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     }
                 }
 
-                var entries = referenceLocationDescriptors?.references
+                var entries = referenceLocationDescriptors
+                    ?.references
                     .Select(referenceLocationDescriptor =>
                     {
                         ImageId imageId = default;

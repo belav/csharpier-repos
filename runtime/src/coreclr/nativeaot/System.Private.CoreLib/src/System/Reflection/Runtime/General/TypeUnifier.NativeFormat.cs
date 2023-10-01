@@ -87,10 +87,12 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
             if (typeHandle.IsNull())
             {
                 if (
-                    !ReflectionCoreExecution.ExecutionEnvironment.TryGetNamedTypeForMetadata(
-                        new QTypeDefinition(metadataReader, typeDefHandle),
-                        out typeHandle
-                    )
+                    !ReflectionCoreExecution
+                        .ExecutionEnvironment
+                        .TryGetNamedTypeForMetadata(
+                            new QTypeDefinition(metadataReader, typeDefHandle),
+                            out typeHandle
+                        )
                 )
                     typeHandle = default(RuntimeTypeHandle);
             }

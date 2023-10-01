@@ -339,9 +339,9 @@ namespace System.Net.Http
 
         bool GetConnectionKeepAlive(HttpRequestHeaders headers)
         {
-            return headers.Connection.Any(
-                l => string.Equals(l, "Keep-Alive", StringComparison.OrdinalIgnoreCase)
-            );
+            return headers
+                .Connection
+                .Any(l => string.Equals(l, "Keep-Alive", StringComparison.OrdinalIgnoreCase));
         }
 
         internal virtual HttpWebRequest CreateWebRequest(HttpRequestMessage request)

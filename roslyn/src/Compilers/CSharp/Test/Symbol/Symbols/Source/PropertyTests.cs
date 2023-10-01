@@ -3523,9 +3523,9 @@ interface I1
 
             var comp = CreateCompilation(
                 source,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.CSharp5
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.CSharp5)
             );
             comp.GetDeclarationDiagnostics()
                 .Verify(

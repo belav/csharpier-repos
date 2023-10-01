@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureRecords.CheckFeatureAvailability(
-                diagnostics,
-                syntax,
-                syntax.WithKeyword.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureRecords
+                .CheckFeatureAvailability(diagnostics, syntax, syntax.WithKeyword.GetLocation());
 
             var receiver = BindRValueWithoutTargetType(syntax.Expression, diagnostics);
             var receiverType = receiver.Type;

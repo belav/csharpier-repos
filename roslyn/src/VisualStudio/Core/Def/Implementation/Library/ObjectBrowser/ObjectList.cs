@@ -639,17 +639,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 var project = this.LibraryManager.GetProject(projectListItem.ProjectId);
                 if (project != null)
                 {
-                    return this.LibraryManager.LibraryService.NavInfoFactory.CreateForProject(
-                        project
-                    );
+                    return this.LibraryManager
+                        .LibraryService
+                        .NavInfoFactory
+                        .CreateForProject(project);
                 }
             }
 
             if (listItem is ReferenceListItem referenceListItem)
             {
-                return this.LibraryManager.LibraryService.NavInfoFactory.CreateForReference(
-                    referenceListItem.MetadataReference
-                );
+                return this.LibraryManager
+                    .LibraryService
+                    .NavInfoFactory
+                    .CreateForReference(referenceListItem.MetadataReference);
             }
 
             if (listItem is SymbolListItem symbolListItem)
@@ -778,9 +780,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 case _VSOBJLISTELEMPROPID.VSOBJLISTELEMPROPID_HELPKEYWORD:
                     if (listItem is SymbolListItem symbolListItem)
                     {
-                        var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(
-                            symbolListItem.ProjectId
-                        );
+                        var project = this.LibraryManager
+                            .Workspace
+                            .CurrentSolution
+                            .GetProject(symbolListItem.ProjectId);
                         if (project != null)
                         {
                             var compilation = project
@@ -790,8 +793,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                             var symbol = symbolListItem.ResolveSymbol(compilation);
                             if (symbol != null)
                             {
-                                var helpContextService =
-                                    project.LanguageServices.GetService<IHelpContextService>();
+                                var helpContextService = project
+                                    .LanguageServices
+                                    .GetService<IHelpContextService>();
 
                                 pvar = helpContextService.FormatSymbol(symbol);
                                 return true;
@@ -850,15 +854,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         {
             try
             {
-                using var token = _manager.AsynchronousOperationListener.BeginAsyncOperation(
-                    nameof(GoToSourceAsync)
-                );
-                using var context = _manager.OperationExecutor.BeginExecute(
-                    ServicesVSResources.IntelliSense,
-                    EditorFeaturesResources.Navigating,
-                    allowCancellation: true,
-                    showProgress: false
-                );
+                using var token = _manager
+                    .AsynchronousOperationListener
+                    .BeginAsyncOperation(nameof(GoToSourceAsync));
+                using var context = _manager
+                    .OperationExecutor
+                    .BeginExecute(
+                        ServicesVSResources.IntelliSense,
+                        EditorFeaturesResources.Navigating,
+                        allowCancellation: true,
+                        showProgress: false
+                    );
 
                 var cancellationToken = context.UserCancellationToken;
                 if (
@@ -867,15 +873,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     && symbolItem.SupportsGoToDefinition
                 )
                 {
-                    var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(
-                        symbolItem.ProjectId
-                    );
+                    var project = this.LibraryManager
+                        .Workspace
+                        .CurrentSolution
+                        .GetProject(symbolItem.ProjectId);
                     var compilation = await project
                         .GetCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var symbol = symbolItem.ResolveSymbol(compilation);
 
-                    await this.LibraryManager.Workspace
+                    await this.LibraryManager
+                        .Workspace
                         .TryGoToDefinitionAsync(symbol, project, cancellationToken)
                         .ConfigureAwait(false);
                 }
@@ -1030,9 +1038,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
             if (listItem is ProjectListItem projectListItem)
             {
-                var hierarchy = this.LibraryManager.Workspace.GetHierarchy(
-                    projectListItem.ProjectId
-                );
+                var hierarchy = this.LibraryManager
+                    .Workspace
+                    .GetHierarchy(projectListItem.ProjectId);
                 if (hierarchy == null)
                 {
                     return false;
@@ -1055,9 +1063,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     return false;
                 }
 
-                var project = this.LibraryManager.Workspace.CurrentSolution.GetProject(
-                    projectListItem.ProjectId
-                );
+                var project = this.LibraryManager
+                    .Workspace
+                    .CurrentSolution
+                    .GetProject(projectListItem.ProjectId);
                 if (project == null)
                 {
                     return false;

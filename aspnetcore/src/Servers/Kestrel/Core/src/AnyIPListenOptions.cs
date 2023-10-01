@@ -32,11 +32,9 @@ internal sealed class AnyIPListenOptions : ListenOptions
             )
         {
             context.Logger.LogTrace(ex, CoreStrings.FailedToBindToIPv6Any, IPEndPoint.Port);
-            context.Logger.LogDebug(
-                CoreStrings.FallbackToIPv4Any,
-                IPEndPoint.Port,
-                IPEndPoint.Port
-            );
+            context
+                .Logger
+                .LogDebug(CoreStrings.FallbackToIPv4Any, IPEndPoint.Port, IPEndPoint.Port);
 
             // for machines that do not support IPv6
             EndPoint = new IPEndPoint(IPAddress.Any, IPEndPoint.Port);

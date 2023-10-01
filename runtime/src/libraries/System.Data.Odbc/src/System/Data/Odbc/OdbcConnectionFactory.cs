@@ -86,7 +86,9 @@ namespace System.Data.Odbc
             // get the DBMS Name
             odbcOuterConnection.GetInfoStringUnhandled(ODBC32.SQL_INFO.DRIVER_NAME);
 
-            Stream? XMLStream = System.Reflection.Assembly
+            Stream? XMLStream = System
+                .Reflection
+                .Assembly
                 .GetExecutingAssembly()
                 .GetManifestResourceStream("System.Data.Odbc.OdbcMetaData.xml");
 

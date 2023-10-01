@@ -426,25 +426,29 @@ namespace System.Xml
                 try
                 {
 #if SILVERLIGHT
-                    return XmlUntypedStringConverter.Instance.FromString(
-                        strContentValue,
-                        returnType,
-                        (
-                            namespaceResolver == null
-                                ? this as IXmlNamespaceResolver
-                                : namespaceResolver
-                        )
-                    );
+                    return XmlUntypedStringConverter
+                        .Instance
+                        .FromString(
+                            strContentValue,
+                            returnType,
+                            (
+                                namespaceResolver == null
+                                    ? this as IXmlNamespaceResolver
+                                    : namespaceResolver
+                            )
+                        );
 #else
-                    return XmlUntypedConverter.Untyped.ChangeType(
-                        strContentValue,
-                        returnType,
-                        (
-                            namespaceResolver == null
-                                ? this as IXmlNamespaceResolver
-                                : namespaceResolver
-                        )
-                    );
+                    return XmlUntypedConverter
+                        .Untyped
+                        .ChangeType(
+                            strContentValue,
+                            returnType,
+                            (
+                                namespaceResolver == null
+                                    ? this as IXmlNamespaceResolver
+                                    : namespaceResolver
+                            )
+                        );
 #endif
                 }
                 catch (FormatException e)
@@ -661,19 +665,15 @@ namespace System.Xml
 #if SILVERLIGHT
             return (returnType == typeof(string))
                 ? string.Empty
-                : XmlUntypedStringConverter.Instance.FromString(
-                    string.Empty,
-                    returnType,
-                    namespaceResolver
-                );
+                : XmlUntypedStringConverter
+                    .Instance
+                    .FromString(string.Empty, returnType, namespaceResolver);
 #else
             return (returnType == typeof(string))
                 ? string.Empty
-                : XmlUntypedConverter.Untyped.ChangeType(
-                    string.Empty,
-                    returnType,
-                    namespaceResolver
-                );
+                : XmlUntypedConverter
+                    .Untyped
+                    .ChangeType(string.Empty, returnType, namespaceResolver);
 #endif
         }
 

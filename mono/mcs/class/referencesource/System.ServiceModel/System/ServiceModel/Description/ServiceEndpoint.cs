@@ -151,10 +151,9 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.UriMustBeAbsolute)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.UriMustBeAbsolute));
                 }
                 this.listenUri = value;
             }
@@ -167,9 +166,9 @@ namespace System.ServiceModel.Description
             {
                 if (!ListenUriModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.listenUriMode = value;
             }
@@ -195,19 +194,23 @@ namespace System.ServiceModel.Description
         {
             if (Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.AChannelServiceEndpointSBindingIsNull0)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.AChannelServiceEndpointSBindingIsNull0)
+                        )
+                    );
             }
             if (Contract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.AChannelServiceEndpointSContractIsNull0)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.AChannelServiceEndpointSContractIsNull0)
+                        )
+                    );
             }
             this.Contract.EnsureInvariants();
             this.Binding.EnsureInvariants(this.Contract.Name);

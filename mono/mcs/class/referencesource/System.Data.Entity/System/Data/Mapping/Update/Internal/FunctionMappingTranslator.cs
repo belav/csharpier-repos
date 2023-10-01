@@ -164,9 +164,9 @@ namespace System.Data.Mapping.Update.Internal
                             StorageModificationFunctionResultBinding resultBinding in functionMapping.ResultBindings
                         )
                         {
-                            PropagatorResult result = stateEntry.Current.GetMemberValue(
-                                resultBinding.Property
-                            );
+                            PropagatorResult result = stateEntry
+                                .Current
+                                .GetMemberValue(resultBinding.Property);
                             command.AddResultColumn(translator, resultBinding.ColumnName, result);
                         }
                     }
@@ -355,14 +355,18 @@ namespace System.Data.Mapping.Update.Internal
                         {
                             // get the actual value
                             PropagatorResult relationshipResult = parameterBinding.IsCurrent
-                                ? translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
-                                    relationshipEntry,
-                                    ModifiedPropertiesBehavior.AllModified
-                                )
-                                : translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
-                                    relationshipEntry,
-                                    ModifiedPropertiesBehavior.AllModified
-                                );
+                                ? translator
+                                    .RecordConverter
+                                    .ConvertCurrentValuesToPropagatorResult(
+                                        relationshipEntry,
+                                        ModifiedPropertiesBehavior.AllModified
+                                    )
+                                : translator
+                                    .RecordConverter
+                                    .ConvertOriginalValuesToPropagatorResult(
+                                        relationshipEntry,
+                                        ModifiedPropertiesBehavior.AllModified
+                                    );
                             PropagatorResult endResult = relationshipResult.GetMemberValue(
                                 endMember
                             );

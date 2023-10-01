@@ -228,9 +228,11 @@ namespace System.Workflow.ComponentModel.Compiler
                     foreach (AttributeInfoAttribute attribInfo in attributes)
                     {
                         if (
-                            attribInfo.AttributeInfo.AttributeType.FullName.Equals(
-                                attributeType.FullName
-                            )
+                            attribInfo
+                                .AttributeInfo
+                                .AttributeType
+                                .FullName
+                                .Equals(attributeType.FullName)
                         )
                         {
                             alreadyExists = true;

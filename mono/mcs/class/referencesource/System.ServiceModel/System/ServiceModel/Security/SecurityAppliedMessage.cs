@@ -79,11 +79,13 @@ namespace System.ServiceModel.Security
         {
             if (this.delayedApplicationHandled)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.DelayedSecurityApplicationAlreadyCompleted)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.DelayedSecurityApplicationAlreadyCompleted)
+                        )
+                    );
             }
             this.delayedApplicationHandled = true;
         }
@@ -148,9 +150,9 @@ namespace System.ServiceModel.Security
                     }
                     return;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateBadStateException("OnWriteStartBody")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(CreateBadStateException("OnWriteStartBody"));
             }
         }
 
@@ -178,9 +180,9 @@ namespace System.ServiceModel.Security
                     );
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateBadStateException("OnWriteBodyContents")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(CreateBadStateException("OnWriteBodyContents"));
             }
         }
 
@@ -512,10 +514,10 @@ namespace System.ServiceModel.Security
             this.InnerMessage.WriteStartBody(writer);
             if (this.bodyIdInserted)
             {
-                this.securityHeader.StandardsManager.IdManager.WriteIdAttribute(
-                    writer,
-                    this.bodyId
-                );
+                this.securityHeader
+                    .StandardsManager
+                    .IdManager
+                    .WriteIdAttribute(writer, this.bodyId);
             }
         }
 

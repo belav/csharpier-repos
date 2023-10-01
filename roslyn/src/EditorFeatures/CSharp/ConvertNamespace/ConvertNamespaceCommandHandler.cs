@@ -120,9 +120,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             edit.Apply();
 
             // Place the caret right after the semicolon of the file-scoped namespace.
-            args.TextView.Caret.MoveTo(
-                new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, semicolonSpan.End)
-            );
+            args.TextView
+                .Caret
+                .MoveTo(new SnapshotPoint(args.SubjectBuffer.CurrentSnapshot, semicolonSpan.End));
 
             transaction?.Complete();
         }
@@ -152,8 +152,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
                 return default;
 
             var caret = caretOpt.Value.Position;
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return default;
 

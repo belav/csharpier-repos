@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document
+            var root = await context
+                .Document
                 .GetRequiredSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var diagnostic = context.Diagnostics.First();
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
                 parenthesizedExpression.Expression is ConditionalExpressionSyntax conditional
                 && parenthesizedExpression
                     .GetAncestor<InterpolatedStringExpressionSyntax>()
-                    ?.StringStartToken.Kind() == SyntaxKind.InterpolatedStringStartToken
+                    ?.StringStartToken
+                    .Kind() == SyntaxKind.InterpolatedStringStartToken
             )
             {
                 // If they have something like:

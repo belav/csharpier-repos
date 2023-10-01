@@ -220,9 +220,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.NullableComplexType,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.ComplexObject_NullableComplexTypesNotSupported(
-                        this.FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .ComplexObject_NullableComplexTypesNotSupported(this.FQName)
                 );
             }
         }

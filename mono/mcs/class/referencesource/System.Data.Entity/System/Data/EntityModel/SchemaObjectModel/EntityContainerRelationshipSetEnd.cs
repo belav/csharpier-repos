@@ -102,18 +102,19 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (_entitySet == null)
             {
-                _entitySet = this.ParentElement.ParentElement.FindEntitySet(
-                    _unresolvedEntitySetName
-                );
+                _entitySet = this.ParentElement
+                    .ParentElement
+                    .FindEntitySet(_unresolvedEntitySetName);
                 if (_entitySet == null)
                 {
                     AddError(
                         ErrorCode.InvalidEndEntitySet,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidEntitySetNameReference(
-                            _unresolvedEntitySetName,
-                            Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .InvalidEntitySetNameReference(_unresolvedEntitySetName, Name)
                     );
                 }
             }
@@ -146,9 +147,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.InvalidEndEntitySet,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidEndEntitySetTypeMismatch(
-                        _relationshipEnd.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InvalidEndEntitySetTypeMismatch(_relationshipEnd.Name)
                 );
             }
         }

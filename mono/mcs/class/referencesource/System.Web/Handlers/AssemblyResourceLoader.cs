@@ -481,10 +481,9 @@ namespace System.Web.Handlers
                 IScriptResourceDefinition definition = null;
                 if (ClientScriptManager._scriptResourceMapping != null)
                 {
-                    definition = ClientScriptManager._scriptResourceMapping.GetDefinition(
-                        resourceName,
-                        assembly
-                    );
+                    definition = ClientScriptManager
+                        ._scriptResourceMapping
+                        .GetDefinition(resourceName, assembly);
                     if (definition != null)
                     {
                         if (!String.IsNullOrEmpty(definition.ResourceName))

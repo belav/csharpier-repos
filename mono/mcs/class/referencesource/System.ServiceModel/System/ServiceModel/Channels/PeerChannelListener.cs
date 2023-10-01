@@ -43,8 +43,10 @@ namespace System.ServiceModel.Channels
             this.port = bindingElement.Port;
             this.resolver = peerResolver;
             this.readerQuotas = new XmlDictionaryReaderQuotas();
-            BinaryMessageEncodingBindingElement encoder =
-                context.Binding.Elements.Find<BinaryMessageEncodingBindingElement>();
+            BinaryMessageEncodingBindingElement encoder = context
+                .Binding
+                .Elements
+                .Find<BinaryMessageEncodingBindingElement>();
             if (encoder != null)
                 encoder.ReaderQuotas.CopyTo(this.readerQuotas);
             else
@@ -263,16 +265,18 @@ namespace System.ServiceModel.Channels
                 if (foundPeerNode.MaxReceivedMessageSize < MaxReceivedMessageSize)
                 {
                     foundPeerNode.Release();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.PeerMaxReceivedMessageSizeConflict,
-                                MaxReceivedMessageSize,
-                                foundPeerNode.MaxReceivedMessageSize,
-                                this.Uri
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.PeerMaxReceivedMessageSizeConflict,
+                                    MaxReceivedMessageSize,
+                                    foundPeerNode.MaxReceivedMessageSize,
+                                    this.Uri
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // associate with the PeerNode and open it

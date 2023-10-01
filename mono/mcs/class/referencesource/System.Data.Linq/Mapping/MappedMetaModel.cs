@@ -2107,10 +2107,12 @@ namespace System.Data.Linq.Mapping
             for (int i = 0; i < names.Length; i++)
             {
                 names[i] = names[i].Trim();
-                MemberInfo[] rmis = mtype.Type.GetMember(
-                    names[i],
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-                );
+                MemberInfo[] rmis = mtype
+                    .Type
+                    .GetMember(
+                        names[i],
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                    );
                 if (rmis == null || rmis.Length != 1)
                 {
                     throw Error.BadKeyMember(names[i], keyFields, mtype.Name);

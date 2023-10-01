@@ -1157,8 +1157,9 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
             var options = new InitializedCollectionsOptions();
             config.Bind(options);
 
-            var array =
-                options.AlreadyInitializedCustomListIndirectlyDerivedFromIEnumerable.ToArray();
+            var array = options
+                .AlreadyInitializedCustomListIndirectlyDerivedFromIEnumerable
+                .ToArray();
 
             Assert.Equal(4, array.Length);
 

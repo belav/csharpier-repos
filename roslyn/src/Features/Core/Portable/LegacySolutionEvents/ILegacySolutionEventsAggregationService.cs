@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
         )
         {
             foreach (var service in _eventsServices)
-                await service.Value
+                await service
+                    .Value
                     .OnWorkspaceChangedAsync(args, cancellationToken)
                     .ConfigureAwait(false);
         }

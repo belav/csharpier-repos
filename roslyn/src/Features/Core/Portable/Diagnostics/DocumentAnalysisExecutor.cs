@@ -55,8 +55,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _logPerformanceInfo = logPerformanceInfo;
             _onAnalysisException = onAnalysisException;
 
-            var compilationBasedAnalyzers =
-                compilationWithAnalyzers?.Analyzers.ToImmutableHashSet();
+            var compilationBasedAnalyzers = compilationWithAnalyzers
+                ?.Analyzers
+                .ToImmutableHashSet();
             _compilationBasedAnalyzersInAnalysisScope =
                 compilationBasedAnalyzers != null
                     ? analysisScope.Analyzers.WhereAsArray(compilationBasedAnalyzers.Contains)
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 "We only support syntactic analysis for non-source documents"
             );
 
-            var loadDiagnostic = await textDocument.State
+            var loadDiagnostic = await textDocument
+                .State
                 .GetLoadDiagnosticAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -145,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var isCompilerAnalyzer = analyzer.IsCompilerAnalyzer();
             if (kind != AnalysisKind.Syntax && isCompilerAnalyzer)
             {
-                var isEnabled = await textDocument.Project
+                var isEnabled = await textDocument
+                    .Project
                     .HasSuccessfullyLoadedAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -500,8 +503,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             // Check if IWorkspaceVenusSpanMappingService is present for remapping.
-            var diagnosticSpanMappingService =
-                textDocument.Project.Solution.Workspace.Services.GetService<IWorkspaceVenusSpanMappingService>();
+            var diagnosticSpanMappingService = textDocument
+                .Project
+                .Solution
+                .Workspace
+                .Services
+                .GetService<IWorkspaceVenusSpanMappingService>();
             if (diagnosticSpanMappingService == null)
             {
                 return diagnostics;

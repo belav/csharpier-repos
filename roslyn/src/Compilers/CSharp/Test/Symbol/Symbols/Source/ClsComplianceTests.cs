@@ -1227,9 +1227,9 @@ public class D : C<long>
 
             CreateCompilation(
                     source,
-                    options: TestOptions.ReleaseDll.WithNullableContextOptions(
-                        nullableContextOptions
-                    )
+                    options: TestOptions
+                        .ReleaseDll
+                        .WithNullableContextOptions(nullableContextOptions)
                 )
                 .VerifyDiagnostics(
                     // (7,32): warning CS3001: Argument type 'C<int>.N' is not CLS-compliant

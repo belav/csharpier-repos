@@ -167,7 +167,8 @@ public class InterfacesTests
         }
 
         {
-            TypeInfo genOfMy = TypeOf.IT_WithInterfaceOverArrayType
+            TypeInfo genOfMy = TypeOf
+                .IT_WithInterfaceOverArrayType
                 .MakeGenericType(TypeOf.CommonType1)
                 .GetTypeInfo();
             TypeInfo intf = genOfMy.ImplementedInterfaces.Single().GetTypeInfo();
@@ -193,7 +194,8 @@ public class InterfacesTests
     {
         {
             Type frobberOfMy = TypeOf.IT_Frobber.MakeGenericType(TypeOf.CommonType1);
-            TypeInfo iFrobberOfMy = TypeOf.IT_IFrobber
+            TypeInfo iFrobberOfMy = TypeOf
+                .IT_IFrobber
                 .MakeGenericType(TypeOf.CommonType1)
                 .GetTypeInfo();
             object o = Activator.CreateInstance(frobberOfMy);
@@ -202,7 +204,8 @@ public class InterfacesTests
         }
 
         {
-            TypeInfo frobberOfMy = TypeOf.IT_Frobber
+            TypeInfo frobberOfMy = TypeOf
+                .IT_Frobber
                 .MakeGenericType(TypeOf.CommonType1)
                 .GetTypeInfo();
             string result = (string)
@@ -217,10 +220,9 @@ public class InterfacesTests
         {
             // Direct call case
             {
-                Type useFrobberType = TypeOf.IT_UseFrobber.MakeGenericType(
-                    TypeOf.IT_FrobtasticFrobberStruct,
-                    TypeOf.CommonType1
-                );
+                Type useFrobberType = TypeOf
+                    .IT_UseFrobber
+                    .MakeGenericType(TypeOf.IT_FrobtasticFrobberStruct, TypeOf.CommonType1);
                 UseFrobberBase useFrobber = (UseFrobberBase)
                     Activator.CreateInstance(useFrobberType);
 
@@ -230,10 +232,9 @@ public class InterfacesTests
 #if UNIVERSAL_GENERICS
             // LoadVirtualFunction case (used by USG callers)
             {
-                Type useFrobberType = TypeOf.IT_UseFrobber.MakeGenericType(
-                    TypeOf.IT_AnotherFrobtasticFrobberStruct,
-                    TypeOf.CommonType1
-                );
+                Type useFrobberType = TypeOf
+                    .IT_UseFrobber
+                    .MakeGenericType(TypeOf.IT_AnotherFrobtasticFrobberStruct, TypeOf.CommonType1);
                 UseFrobberBase useFrobber = (UseFrobberBase)
                     Activator.CreateInstance(useFrobberType);
 

@@ -76,9 +76,9 @@ namespace Roslyn.Test.Utilities
                     Debug.Assert(sta.StaThread == Thread.CurrentThread);
 
                     using (
-                        await SharedData.TestSerializationGate.DisposableWaitAsync(
-                            CancellationToken.None
-                        )
+                        await SharedData
+                            .TestSerializationGate
+                            .DisposableWaitAsync(CancellationToken.None)
                     )
                     {
                         try

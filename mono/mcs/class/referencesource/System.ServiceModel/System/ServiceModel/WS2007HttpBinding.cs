@@ -71,15 +71,17 @@ namespace System.ServiceModel
             WS2007HttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            ConfigurationStrings.WS2007HttpBindingCollectionElementName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                ConfigurationStrings.WS2007HttpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {

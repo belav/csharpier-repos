@@ -20,7 +20,8 @@ namespace System.CommandLine.Tests.Binding
 
             var modelDescriptor = ModelDescriptor.FromType(type);
 
-            modelDescriptor.ConstructorDescriptors
+            modelDescriptor
+                .ConstructorDescriptors
                 .Single()
                 .ParameterDescriptors
                 .Single()

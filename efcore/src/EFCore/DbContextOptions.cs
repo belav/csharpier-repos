@@ -168,9 +168,11 @@ public abstract class DbContextOptions : IDbContextOptions
             .All(
                 p =>
                     p.First.Value.Ordinal == p.Second.Value.Ordinal
-                    && p.First.Value.Extension.Info.ShouldUseSameServiceProvider(
-                        p.Second.Value.Extension.Info
-                    )
+                    && p.First
+                        .Value
+                        .Extension
+                        .Info
+                        .ShouldUseSameServiceProvider(p.Second.Value.Extension.Info)
             );
 
     /// <inheritdoc />

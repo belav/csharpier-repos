@@ -50,15 +50,17 @@ namespace System
             }
             if (segment.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(
-                        SR.GetString(
-                            SR.UTInvalidWildcardInVariableOrLiteral,
-                            template.originalTemplate,
-                            UriTemplate.WildcardPath
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(
+                                SR.UTInvalidWildcardInVariableOrLiteral,
+                                template.originalTemplate,
+                                UriTemplate.WildcardPath
+                            )
                         )
-                    )
-                );
+                    );
             }
             // '*' is not usually escaped by the Uri\UriBuilder to %2a, since we forbid passing a
             // clear character and the workaroud is to pass the escaped form, we should replace the
@@ -72,10 +74,12 @@ namespace System
                 // This path through UriBuilder will sometimes '----' various segments
                 // such as '../' and './'.  When this happens and the result is an empty
                 // string, we should just throw and tell the user we don't handle that.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "segment",
-                    SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "segment",
+                        SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
+                    );
             }
             return new UriTemplateLiteralPathSegment(escapedIfNecessarySegment);
         }

@@ -85,11 +85,9 @@ namespace Mono.Linker.Dataflow
             mark();
 
             if (ReportingEnabled)
-                _context.ReflectionPatternRecorder.RecognizedReflectionAccessPattern(
-                    Source,
-                    Instruction,
-                    accessedItem
-                );
+                _context
+                    .ReflectionPatternRecorder
+                    .RecognizedReflectionAccessPattern(Source, Instruction, accessedItem);
         }
 
         public void RecordUnrecognizedPattern(int messageCode, string message)
@@ -104,14 +102,16 @@ namespace Mono.Linker.Dataflow
 #endif
 
             if (ReportingEnabled)
-                _context.ReflectionPatternRecorder.UnrecognizedReflectionAccessPattern(
-                    Origin,
-                    Source,
-                    Instruction,
-                    MemberWithRequirements,
-                    message,
-                    messageCode
-                );
+                _context
+                    .ReflectionPatternRecorder
+                    .UnrecognizedReflectionAccessPattern(
+                        Origin,
+                        Source,
+                        Instruction,
+                        MemberWithRequirements,
+                        message,
+                        messageCode
+                    );
         }
 
         public void Dispose()

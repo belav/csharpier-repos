@@ -197,16 +197,18 @@ namespace MonoTests.System.Web.DynamicData
             HttpContext.Current = ctx;
             MetaModel m = Utils.GetModel<MyDataContext2>();
 
-            RouteTable.Routes.Add(
-                new DynamicDataRoute("{table}/{action}.aspx")
-                {
-                    Constraints = new RouteValueDictionary(
-                        new { action = "List|Details|Edit|Insert" }
-                    ),
-                    Model = m,
-                    RouteHandler = new MyDynamicDataRouteHandler()
-                }
-            );
+            RouteTable
+                .Routes
+                .Add(
+                    new DynamicDataRoute("{table}/{action}.aspx")
+                    {
+                        Constraints = new RouteValueDictionary(
+                            new { action = "List|Details|Edit|Insert" }
+                        ),
+                        Model = m,
+                        RouteHandler = new MyDynamicDataRouteHandler()
+                    }
+                );
 
             MetaTable t = m.Tables[0];
 
@@ -344,16 +346,18 @@ namespace MonoTests.System.Web.DynamicData
             HttpContext.Current = ctx;
             MetaModel m = Utils.GetModel<MyDataContext2>();
 
-            RouteTable.Routes.Add(
-                new DynamicDataRoute("{table}/{action}.aspx")
-                {
-                    Constraints = new RouteValueDictionary(
-                        new { action = "List|Details|Edit|Insert" }
-                    ),
-                    Model = m,
-                    RouteHandler = new MyDynamicDataRouteHandler()
-                }
-            );
+            RouteTable
+                .Routes
+                .Add(
+                    new DynamicDataRoute("{table}/{action}.aspx")
+                    {
+                        Constraints = new RouteValueDictionary(
+                            new { action = "List|Details|Edit|Insert" }
+                        ),
+                        Model = m,
+                        RouteHandler = new MyDynamicDataRouteHandler()
+                    }
+                );
 
             // .NET stacktrace:
             //

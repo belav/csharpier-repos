@@ -82,9 +82,9 @@ public class SqlServerModelValidator : RelationalModelValidator
                 (
                     (
                         columnTypeConfigurationSource == null
-                        && ConfigurationSource.Convention.Overrides(
-                            property.GetTypeMappingConfigurationSource()
-                        )
+                        && ConfigurationSource
+                            .Convention
+                            .Overrides(property.GetTypeMappingConfigurationSource())
                     )
                     || (
                         columnTypeConfigurationSource != null
@@ -92,12 +92,12 @@ public class SqlServerModelValidator : RelationalModelValidator
                     )
                 )
                 && (
-                    ConfigurationSource.Convention.Overrides(
-                        property.GetPrecisionConfigurationSource()
-                    )
-                    || ConfigurationSource.Convention.Overrides(
-                        property.GetScaleConfigurationSource()
-                    )
+                    ConfigurationSource
+                        .Convention
+                        .Overrides(property.GetPrecisionConfigurationSource())
+                    || ConfigurationSource
+                        .Convention
+                        .Overrides(property.GetScaleConfigurationSource())
                 )
             )
             {
@@ -516,9 +516,9 @@ public class SqlServerModelValidator : RelationalModelValidator
         if (identityColumns.Count > 1)
         {
             var sb = new StringBuilder().AppendJoin(
-                identityColumns.Values.Select(
-                    p => "'" + p.DeclaringEntityType.DisplayName() + "." + p.Name + "'"
-                )
+                identityColumns
+                    .Values
+                    .Select(p => "'" + p.DeclaringEntityType.DisplayName() + "." + p.Name + "'")
             );
             throw new InvalidOperationException(
                 SqlServerStrings.MultipleIdentityColumns(sb, storeObject.DisplayName())

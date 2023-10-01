@@ -95,10 +95,10 @@ namespace System.Data.Linq
                 {
                     try
                     {
-                        item.Type.Table.InsertMethod.Invoke(
-                            this.context,
-                            new object[] { item.Current }
-                        );
+                        item.Type
+                            .Table
+                            .InsertMethod
+                            .Invoke(this.context, new object[] { item.Current });
                     }
                     catch (TargetInvocationException tie)
                     {
@@ -171,10 +171,10 @@ namespace System.Data.Linq
                     // internal original values
                     try
                     {
-                        item.Type.Table.UpdateMethod.Invoke(
-                            this.context,
-                            new object[] { item.Current }
-                        );
+                        item.Type
+                            .Table
+                            .UpdateMethod
+                            .Invoke(this.context, new object[] { item.Current });
                     }
                     catch (TargetInvocationException tie)
                     {
@@ -242,10 +242,10 @@ namespace System.Data.Linq
                 {
                     try
                     {
-                        item.Type.Table.DeleteMethod.Invoke(
-                            this.context,
-                            new object[] { item.Current }
-                        );
+                        item.Type
+                            .Table
+                            .DeleteMethod
+                            .Invoke(this.context, new object[] { item.Current });
                     }
                     catch (TargetInvocationException tie)
                     {
@@ -388,9 +388,9 @@ namespace System.Data.Linq
             {
                 List<MetaDataMember> membersToSync = new List<MetaDataMember>();
                 foreach (
-                    MetaDataMember metaMember in metaType.PersistentDataMembers.OrderBy(
-                        m => m.Ordinal
-                    )
+                    MetaDataMember metaMember in metaType
+                        .PersistentDataMembers
+                        .OrderBy(m => m.Ordinal)
                 )
                 {
                     // add all auto generated members for the specified update type to the auto-sync list
@@ -434,10 +434,13 @@ namespace System.Data.Linq
             )
             {
                 System.Diagnostics.Debug.Assert(item != null);
-                System.Diagnostics.Debug.Assert(
-                    item.IsNew || item.IsPossiblyModified,
-                    "AutoSyncMembers should only be called for new and modified objects."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        item.IsNew || item.IsPossiblyModified,
+                        "AutoSyncMembers should only be called for new and modified objects."
+                    );
                 object[] syncRollbackValues = null;
                 if (syncResults != null)
                 {

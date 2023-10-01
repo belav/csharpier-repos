@@ -118,9 +118,11 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
                         (
                             await Assert.ThrowsAsync<InvalidOperationException>(
                                 () =>
-                                    context.MeterReadings.ExecuteUpdateAsync(
-                                        s => s.SetProperty(m => m.CurrentRead, "Value")
-                                    )
+                                    context
+                                        .MeterReadings
+                                        .ExecuteUpdateAsync(
+                                            s => s.SetProperty(m => m.CurrentRead, "Value")
+                                        )
                             )
                         ).Message
                     )
@@ -143,9 +145,11 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
                         Assert
                             .Throws<InvalidOperationException>(
                                 () =>
-                                    context.MeterReadings.ExecuteUpdate(
-                                        s => s.SetProperty(m => m.CurrentRead, "Value")
-                                    )
+                                    context
+                                        .MeterReadings
+                                        .ExecuteUpdate(
+                                            s => s.SetProperty(m => m.CurrentRead, "Value")
+                                        )
                             )
                             .Message
                     )

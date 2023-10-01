@@ -92,17 +92,19 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.ID4065,
-                            XmlSignatureConstants.Elements.KeyInfo,
-                            XmlSignatureConstants.Namespace,
-                            dicReader.LocalName,
-                            dicReader.NamespaceURI
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.ID4065,
+                                XmlSignatureConstants.Elements.KeyInfo,
+                                XmlSignatureConstants.Namespace,
+                                dicReader.LocalName,
+                                dicReader.NamespaceURI
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             dicReader.ReadStartElement();
@@ -114,17 +116,19 @@ namespace System.IdentityModel.Tokens
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.ID4065,
-                            XmlSignatureConstants.Elements.KeyValue,
-                            XmlSignatureConstants.Namespace,
-                            dicReader.LocalName,
-                            dicReader.NamespaceURI
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.ID4065,
+                                XmlSignatureConstants.Elements.KeyValue,
+                                XmlSignatureConstants.Namespace,
+                                dicReader.LocalName,
+                                dicReader.NamespaceURI
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             dicReader.ReadStartElement();
@@ -165,10 +169,12 @@ namespace System.IdentityModel.Tokens
             RsaSecurityToken rsaToken = (RsaSecurityToken)token;
             if (rsaToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "token",
-                    SR.GetString(SR.ID0018, typeof(RsaSecurityToken))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "token",
+                        SR.GetString(SR.ID0018, typeof(RsaSecurityToken))
+                    );
             }
 
             if (this.Configuration == null)
@@ -250,10 +256,12 @@ namespace System.IdentityModel.Tokens
 
             if (rsaToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "token",
-                    SR.GetString(SR.ID0018, typeof(RsaSecurityToken))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "token",
+                        SR.GetString(SR.ID0018, typeof(RsaSecurityToken))
+                    );
             }
 
             RSAParameters rsaParams = rsaToken.Rsa.ExportParameters(false);

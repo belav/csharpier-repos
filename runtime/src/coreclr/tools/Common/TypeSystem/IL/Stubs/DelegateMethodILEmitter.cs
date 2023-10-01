@@ -20,10 +20,9 @@ namespace Internal.IL.Stubs
                 // BeginInvoke and EndInvoke are not supported on .NET Core
                 ILEmitter emit = new ILEmitter();
                 ILCodeStream codeStream = emit.NewCodeStream();
-                MethodDesc notSupportedExceptionHelper = method.Context.GetHelperEntryPoint(
-                    "ThrowHelpers",
-                    "ThrowPlatformNotSupportedException"
-                );
+                MethodDesc notSupportedExceptionHelper = method
+                    .Context
+                    .GetHelperEntryPoint("ThrowHelpers", "ThrowPlatformNotSupportedException");
                 codeStream.EmitCallThrowHelper(emit, notSupportedExceptionHelper);
                 return emit.Link(method);
             }
@@ -38,10 +37,9 @@ namespace Internal.IL.Stubs
                 // but it remains to be proven that this is an actual customer scenario.
                 ILEmitter emit = new ILEmitter();
                 ILCodeStream codeStream = emit.NewCodeStream();
-                MethodDesc notSupportedExceptionHelper = method.Context.GetHelperEntryPoint(
-                    "ThrowHelpers",
-                    "ThrowPlatformNotSupportedException"
-                );
+                MethodDesc notSupportedExceptionHelper = method
+                    .Context
+                    .GetHelperEntryPoint("ThrowHelpers", "ThrowPlatformNotSupportedException");
                 codeStream.EmitCallThrowHelper(emit, notSupportedExceptionHelper);
                 return emit.Link(method);
             }
@@ -94,11 +92,10 @@ namespace Internal.IL.Stubs
                             .Signature[i]
                             .ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
                     }
-                    TypeDesc returnType =
-                        method.Signature.ReturnType.ReplaceTypesInConstructionOfType(
-                            typesToReplace,
-                            replacementTypes
-                        );
+                    TypeDesc returnType = method
+                        .Signature
+                        .ReturnType
+                        .ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
                     signature = new MethodSignature(
                         signature.Flags,
                         signature.GenericParameterCount,

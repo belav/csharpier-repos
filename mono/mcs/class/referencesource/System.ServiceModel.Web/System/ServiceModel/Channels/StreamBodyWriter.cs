@@ -116,14 +116,16 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.XmlWriterBackedStreamPropertyGetNotSupported,
-                                "Length"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.XmlWriterBackedStreamPropertyGetNotSupported,
+                                    "Length"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -131,35 +133,41 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.XmlWriterBackedStreamPropertyGetNotSupported,
-                                "Position"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.XmlWriterBackedStreamPropertyGetNotSupported,
+                                    "Position"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 set
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.XmlWriterBackedStreamPropertySetNotSupported,
-                                "Position"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.XmlWriterBackedStreamPropertySetNotSupported,
+                                    "Position"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
             public override int Read(byte[] buffer, int offset, int count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "Read")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "Read")
+                        )
+                    );
             }
 
             public override IAsyncResult BeginRead(
@@ -170,47 +178,57 @@ namespace System.ServiceModel.Channels
                 object state
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "BeginRead")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "BeginRead")
+                        )
+                    );
             }
 
             public override int EndRead(IAsyncResult asyncResult)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "EndRead")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "EndRead")
+                        )
+                    );
             }
 
             public override int ReadByte()
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "ReadByte")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "ReadByte")
+                        )
+                    );
             }
 
             public override long Seek(long offset, SeekOrigin origin)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "Seek")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "Seek")
+                        )
+                    );
             }
 
             public override void SetLength(long value)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "SetLength")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.XmlWriterBackedStreamMethodNotSupported, "SetLength")
+                        )
+                    );
             }
 
             public override void Write(byte[] buffer, int offset, int count)

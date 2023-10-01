@@ -58,7 +58,8 @@ public class NoContentResultTests
         PopulateMetadata<NoContent>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata
+        var producesResponseTypeMetadata = builder
+            .Metadata
             .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(StatusCodes.Status204NoContent, producesResponseTypeMetadata.StatusCode);

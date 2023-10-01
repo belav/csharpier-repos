@@ -464,20 +464,19 @@ namespace System.IO
             // On Unix 'rename' will overwrite the destination file if it already exists, we need to manually check.
             if (
                 !isCaseSensitiveRename
-                && Interop.Sys.LStat(
-                    destNoDirectorySeparator,
-                    out Interop.Sys.FileStatus destFileStatus
-                ) >= 0
+                && Interop
+                    .Sys
+                    .LStat(destNoDirectorySeparator, out Interop.Sys.FileStatus destFileStatus) >= 0
             )
             {
                 // Maintain order of exceptions as on Windows.
 
                 // Throw if the source doesn't exist.
                 if (
-                    Interop.Sys.LStat(
-                        srcNoDirectorySeparator,
-                        out Interop.Sys.FileStatus sourceFileStatus
-                    ) < 0
+                    Interop
+                        .Sys
+                        .LStat(srcNoDirectorySeparator, out Interop.Sys.FileStatus sourceFileStatus)
+                    < 0
                 )
                 {
                     throw new DirectoryNotFoundException(

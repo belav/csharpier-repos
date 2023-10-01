@@ -56,7 +56,9 @@ namespace System.CommandLine.Tests
         {
             var result = _parser.Parse("outer inner --option argument1");
 
-            result.CommandResult.Children
+            result
+                .CommandResult
+                .Children
                 .ElementAt(0)
                 .Tokens
                 .Select(t => t.Value)
@@ -76,7 +78,9 @@ namespace System.CommandLine.Tests
 
             result.CommandResult.Parent.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg1");
 
-            result.CommandResult.Tokens
+            result
+                .CommandResult
+                .Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("arg2", "arg3");

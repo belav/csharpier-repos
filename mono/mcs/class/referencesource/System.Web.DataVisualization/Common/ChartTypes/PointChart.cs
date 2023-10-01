@@ -423,9 +423,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 //************************************************************
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 //************************************************************
@@ -624,9 +626,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 // Break series loop.
@@ -718,32 +722,36 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Insert circle area
             if (pointMarkerStyle == MarkerStyle.Circle)
             {
-                common.HotRegionsList.AddHotRegion(
-                    insertIndex,
-                    graph,
-                    markerPosition.X,
-                    markerPosition.Y,
-                    relativeMarkerSize.Width / 2f,
-                    point,
-                    seriesName,
-                    pointIndex
-                );
+                common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        insertIndex,
+                        graph,
+                        markerPosition.X,
+                        markerPosition.Y,
+                        relativeMarkerSize.Width / 2f,
+                        point,
+                        seriesName,
+                        pointIndex
+                    );
             }
             // All other markers represented as rectangles
             else
             {
                 // Insert area
-                common.HotRegionsList.AddHotRegion(
-                    new RectangleF(
-                        markerPosition.X - relativeMarkerSize.Width / 2f,
-                        markerPosition.Y - relativeMarkerSize.Height / 2f,
-                        relativeMarkerSize.Width,
-                        relativeMarkerSize.Height
-                    ),
-                    point,
-                    seriesName,
-                    pointIndex
-                );
+                common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        new RectangleF(
+                            markerPosition.X - relativeMarkerSize.Width / 2f,
+                            markerPosition.Y - relativeMarkerSize.Height / 2f,
+                            relativeMarkerSize.Width,
+                            relativeMarkerSize.Height
+                        ),
+                        point,
+                        seriesName,
+                        pointIndex
+                    );
             }
         }
 
@@ -1471,44 +1479,43 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     circCoord[1] = markerRotatedPosition.Y;
                     circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                    common.HotRegionsList.AddHotRegion(
-                        insertIndex,
-                        graph,
-                        circCoord[0],
-                        circCoord[1],
-                        circCoord[2],
-                        point,
-                        ser.Name,
-                        pointEx.index - 1
-                    );
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            insertIndex,
+                            graph,
+                            circCoord[0],
+                            circCoord[1],
+                            circCoord[2],
+                            point,
+                            ser.Name,
+                            pointEx.index - 1
+                        );
                 }
 
                 // Insert path for 3D bar
                 if (pointMarkerStyle == MarkerStyle.Square)
                 {
-                    common.HotRegionsList.AddHotRegion(
-                        rectPath,
-                        false,
-                        graph,
-                        point,
-                        ser.Name,
-                        pointEx.index - 1
-                    );
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(rectPath, false, graph, point, ser.Name, pointEx.index - 1);
                 }
                 // All other markers represented as rectangles
                 else
                 {
-                    common.HotRegionsList.AddHotRegion(
-                        new RectangleF(
-                            markerRotatedPosition.X - relativeMarkerSize.Width / 2f,
-                            markerRotatedPosition.Y - relativeMarkerSize.Height / 2f,
-                            relativeMarkerSize.Width,
-                            relativeMarkerSize.Height
-                        ),
-                        point,
-                        ser.Name,
-                        pointEx.index - 1
-                    );
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            new RectangleF(
+                                markerRotatedPosition.X - relativeMarkerSize.Width / 2f,
+                                markerRotatedPosition.Y - relativeMarkerSize.Height / 2f,
+                                relativeMarkerSize.Width,
+                                relativeMarkerSize.Height
+                            ),
+                            point,
+                            ser.Name,
+                            pointEx.index - 1
+                        );
                 }
             }
             if (rectPath != null)

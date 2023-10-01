@@ -233,12 +233,14 @@ namespace System.ServiceModel.Configuration
 
             // ClientCertificate
             if (!String.IsNullOrEmpty(ClientCertificate.FindValue))
-                behavior.ClientCertificate.SetCertificate(
-                    ClientCertificate.StoreLocation,
-                    ClientCertificate.StoreName,
-                    ClientCertificate.X509FindType,
-                    ClientCertificate.FindValue
-                );
+                behavior
+                    .ClientCertificate
+                    .SetCertificate(
+                        ClientCertificate.StoreLocation,
+                        ClientCertificate.StoreName,
+                        ClientCertificate.X509FindType,
+                        ClientCertificate.FindValue
+                    );
 
             // HttpDigest
             if (HttpDigest.ImpersonationLevel != TokenImpersonationLevel.None)
@@ -264,12 +266,14 @@ namespace System.ServiceModel.Configuration
 
             // Peer
             if (!String.IsNullOrEmpty(Peer.Certificate.FindValue))
-                behavior.Peer.SetCertificate(
-                    Peer.Certificate.StoreLocation,
-                    Peer.Certificate.StoreName,
-                    Peer.Certificate.X509FindType,
-                    Peer.Certificate.FindValue
-                );
+                behavior
+                    .Peer
+                    .SetCertificate(
+                        Peer.Certificate.StoreLocation,
+                        Peer.Certificate.StoreName,
+                        Peer.Certificate.X509FindType,
+                        Peer.Certificate.FindValue
+                    );
             // cb.Peer.MeshPassword = /* cannot fill it here */
             behavior.Peer.MessageSenderAuthentication.CustomCertificateValidator =
                 (X509CertificateValidator)CreateInstance(

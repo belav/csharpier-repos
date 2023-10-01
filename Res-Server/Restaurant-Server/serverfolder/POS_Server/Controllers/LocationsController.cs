@@ -66,7 +66,8 @@ namespace POS_Server.Controllers
                             if (locationsList[i].isActive == 1)
                             {
                                 long locationId = (long)locationsList[i].locationId;
-                                var itemsLocationL = entity.itemsLocations
+                                var itemsLocationL = entity
+                                    .itemsLocations
                                     .Where(x => x.locationId == locationId)
                                     .Select(b => new { b.itemsLocId })
                                     .FirstOrDefault();
@@ -106,7 +107,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var location = entity.locations
+                    var location = entity
+                        .locations
                         .Where(u => u.locationId == locationId)
                         .Select(
                             L =>
@@ -193,7 +195,8 @@ namespace POS_Server.Controllers
                             if (locationsList[i].isActive == 1)
                             {
                                 long locationId = (long)locationsList[i].locationId;
-                                var itemsLocationL = entity.itemsLocations
+                                var itemsLocationL = entity
+                                    .itemsLocations
                                     .Where(x => x.locationId == locationId)
                                     .Select(b => new { b.itemsLocId })
                                     .FirstOrDefault();
@@ -326,7 +329,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpLocation = entity.locations
+                            var tmpLocation = entity
+                                .locations
                                 .Where(p => p.locationId == newObject.locationId)
                                 .FirstOrDefault();
                             tmpLocation.x = newObject.x;
@@ -543,7 +547,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var oldList = entity.locations
+                    var oldList = entity
+                        .locations
                         .Where(x => x.sectionId == sectionId)
                         .Select(x => new { x.locationId })
                         .ToList();

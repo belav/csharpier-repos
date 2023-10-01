@@ -14,8 +14,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         // If there's ever a platform that blocks RSASSA+SHA-1 but doesn't block ECDSA or DSA with SHA-1,
         // the logic here will need to get more complicated.
         public static bool SupportsX509Sha1Signatures { get; } =
-            System.Security.Cryptography.Tests.SignatureSupport.CanProduceSha1Signature(
-                RSA.Create()
-            );
+            System
+                .Security
+                .Cryptography
+                .Tests
+                .SignatureSupport
+                .CanProduceSha1Signature(RSA.Create());
     }
 }

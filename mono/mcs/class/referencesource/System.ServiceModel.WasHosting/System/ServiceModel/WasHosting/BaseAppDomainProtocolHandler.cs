@@ -102,15 +102,17 @@ namespace System.ServiceModel.WasHosting
                     "BaseAppDomainProtocolHandler.StartListenerChannel() failed in OnStart():\r\n"
                         + exception
                 );
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
-                    (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostFailedToListen,
-                    listenerChannelContext.AppKey,
-                    this.protocolId,
-                    TraceUtility.CreateSourceString(this),
-                    exception.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.WebHost,
+                        (uint)System.Runtime.Diagnostics.EventLogEventId.WebHostFailedToListen,
+                        listenerChannelContext.AppKey,
+                        this.protocolId,
+                        TraceUtility.CreateSourceString(this),
+                        exception.ToString()
+                    );
 
                 throw;
             }

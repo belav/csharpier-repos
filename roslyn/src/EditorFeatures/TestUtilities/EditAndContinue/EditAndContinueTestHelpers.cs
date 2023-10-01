@@ -283,7 +283,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     );
 
                     // check lines of line edits:
-                    _ = expectedResult.LineEdits
+                    _ = expectedResult
+                        .LineEdits
                         .Zip(
                             result.LineEdits,
                             (expected, actual) =>
@@ -442,7 +443,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         }
                     }
 
-                    var deletedSymbolContainer = actualSemanticEdit.DeletedSymbolContainer
+                    var deletedSymbolContainer = actualSemanticEdit
+                        .DeletedSymbolContainer
                         ?.Resolve(newCompilation, ignoreAssemblyKey: true)
                         .Symbol;
                     Assert.Equal(
@@ -465,7 +467,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 // Partial types must match:
                 Assert.Equal(
                     expectedSemanticEdit.PartialType?.Invoke(newCompilation),
-                    actualSemanticEdit.PartialType
+                    actualSemanticEdit
+                        .PartialType
                         ?.Resolve(newCompilation, ignoreAssemblyKey: true)
                         .Symbol
                 );
@@ -633,11 +636,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         partners =>
                             new MatchingPair
                             {
-                                Old = partners.Key
+                                Old = partners
+                                    .Key
                                     .ToString()
                                     .Replace("\r\n", " ")
                                     .Replace("\n", " "),
-                                New = partners.Value
+                                New = partners
+                                    .Value
                                     .ToString()
                                     .Replace("\r\n", " ")
                                     .Replace("\n", " ")

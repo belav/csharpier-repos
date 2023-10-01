@@ -436,10 +436,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.FunctionWithNonEdmTypeNotSupported,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System.Data.Entity.Strings.FunctionWithNonEdmPrimitiveTypeNotSupported(
-                                typeName,
-                                this.ParentElement.FQName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .FunctionWithNonEdmPrimitiveTypeNotSupported(
+                                    typeName,
+                                    this.ParentElement.FQName
+                                )
                         );
                     }
                     else
@@ -448,10 +452,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.FunctionWithNonPrimitiveTypeNotSupported,
                             EdmSchemaErrorSeverity.Error,
                             this,
-                            System.Data.Entity.Strings.FunctionWithNonPrimitiveTypeNotSupported(
-                                typeName,
-                                this.ParentElement.FQName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .FunctionWithNonPrimitiveTypeNotSupported(
+                                    typeName,
+                                    this.ParentElement.FQName
+                                )
                         );
                     }
                     return;

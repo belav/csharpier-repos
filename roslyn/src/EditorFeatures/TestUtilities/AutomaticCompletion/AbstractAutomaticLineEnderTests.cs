@@ -110,14 +110,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             var buffer = workspace.Documents.Single().GetTextBuffer();
             var nextHandlerInvoked = false;
 
-            view.Options.GlobalOptions.SetOptionValue(
-                DefaultOptions.ConvertTabsToSpacesOptionId,
-                !useTabs
-            );
-            view.Options.GlobalOptions.SetOptionValue(
-                DefaultOptions.IndentStyleId,
-                IndentingStyle.Smart
-            );
+            view.Options
+                .GlobalOptions
+                .SetOptionValue(DefaultOptions.ConvertTabsToSpacesOptionId, !useTabs);
+            view.Options
+                .GlobalOptions
+                .SetOptionValue(DefaultOptions.IndentStyleId, IndentingStyle.Smart);
 
             view.Caret.MoveTo(
                 new SnapshotPoint(

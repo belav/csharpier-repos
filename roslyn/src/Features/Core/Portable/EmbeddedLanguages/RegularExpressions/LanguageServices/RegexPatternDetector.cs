@@ -418,11 +418,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         {
             options = default;
 
-            var parameter = _info.SemanticFacts.FindParameterForArgument(
-                semanticModel,
-                argumentNode,
-                cancellationToken
-            );
+            var parameter = _info
+                .SemanticFacts
+                .FindParameterForArgument(semanticModel, argumentNode, cancellationToken);
             if (parameter?.Name != _patternName)
             {
                 return false;

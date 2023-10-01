@@ -140,9 +140,10 @@ namespace System.Web.Mvc
                     controllerContext.RequestContext.RouteData = bestCandidate.RouteData;
 
                     // We need to remove any optional parameters that haven't gotten a value (See MvcHandler)
-                    bestCandidate.RouteData.Values.RemoveFromDictionary(
-                        (entry) => entry.Value == UrlParameter.Optional
-                    );
+                    bestCandidate
+                        .RouteData
+                        .Values
+                        .RemoveFromDictionary((entry) => entry.Value == UrlParameter.Optional);
 
                     return bestCandidate.ActionDescriptor;
                 }
@@ -245,10 +246,9 @@ namespace System.Web.Mvc
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 FallbackToEmptyPrefix = (parameterDescriptor.BindingInfo.Prefix == null), // only fall back if prefix not specified
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                    null,
-                    parameterType
-                ),
+                ModelMetadata = ModelMetadataProviders
+                    .Current
+                    .GetMetadataForType(null, parameterType),
                 ModelName = parameterName,
                 ModelState = controllerContext.Controller.ViewData.ModelState,
                 PropertyFilter = propertyFilter,

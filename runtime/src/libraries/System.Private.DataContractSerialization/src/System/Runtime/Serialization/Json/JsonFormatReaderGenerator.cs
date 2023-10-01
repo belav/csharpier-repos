@@ -120,9 +120,9 @@ namespace System.Runtime.Serialization.Json
                     ReadClass(classContract);
 
                 if (
-                    Globals.TypeOfIDeserializationCallback.IsAssignableFrom(
-                        classContract.UnderlyingType
-                    )
+                    Globals
+                        .TypeOfIDeserializationCallback
+                        .IsAssignableFrom(classContract.UnderlyingType)
                 )
                 {
                     _ilg.Call(
@@ -352,9 +352,9 @@ namespace System.Runtime.Serialization.Json
 
             private static bool HasFactoryMethod(ClassDataContract classContract)
             {
-                return Globals.TypeOfIObjectReference.IsAssignableFrom(
-                    classContract.UnderlyingType
-                );
+                return Globals
+                    .TypeOfIObjectReference
+                    .IsAssignableFrom(classContract.UnderlyingType);
             }
 
             private bool InvokeFactoryMethod(ClassDataContract classContract)
@@ -613,19 +613,26 @@ namespace System.Runtime.Serialization.Json
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             private void ReadISerializable(ClassDataContract classContract)
             {
-                ConstructorInfo? ctor = classContract.UnderlyingType.GetConstructor(
-                    Globals.ScanAllMembers,
-                    JsonFormatGeneratorStatics.SerInfoCtorArgs
-                );
-                if (ctor == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.Format(
-                                SR.SerializationInfo_ConstructorNotFound,
-                                DataContract.GetClrTypeFullName(classContract.UnderlyingType)
-                            )
-                        )
+                ConstructorInfo? ctor = classContract
+                    .UnderlyingType
+                    .GetConstructor(
+                        Globals.ScanAllMembers,
+                        JsonFormatGeneratorStatics.SerInfoCtorArgs
                     );
+                if (ctor == null)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.SerializationInfo_ConstructorNotFound,
+                                    DataContract.GetClrTypeFullName(classContract.UnderlyingType)
+                                )
+                            )
+                        );
                 _ilg.LoadAddress(_objectLocal);
                 _ilg.ConvertAddress(_objectLocal.LocalType, _objectType!);
                 _ilg.Call(
@@ -838,9 +845,9 @@ namespace System.Runtime.Serialization.Json
                     switch (collectionContract.Kind)
                     {
                         case CollectionKind.GenericDictionary:
-                            type = Globals.TypeOfDictionaryGeneric.MakeGenericType(
-                                itemType.GetGenericArguments()
-                            );
+                            type = Globals
+                                .TypeOfDictionaryGeneric
+                                .MakeGenericType(itemType.GetGenericArguments());
                             constructor = type.GetConstructor(
                                 BindingFlags.Instance
                                     | BindingFlags.Public
@@ -933,8 +940,9 @@ namespace System.Runtime.Serialization.Json
                 if (isArray)
                 {
                     Debug.Assert(growingCollection != null);
-                    MethodInfo ensureArraySizeMethod =
-                        XmlFormatGeneratorStatics.EnsureArraySizeMethod.MakeGenericMethod(itemType);
+                    MethodInfo ensureArraySizeMethod = XmlFormatGeneratorStatics
+                        .EnsureArraySizeMethod
+                        .MakeGenericMethod(itemType);
                     _ilg.Call(null, ensureArraySizeMethod, growingCollection, i);
                     _ilg.Stloc(growingCollection);
                     _ilg.StoreArrayElement(growingCollection, i, value);
@@ -953,8 +961,9 @@ namespace System.Runtime.Serialization.Json
                 _ilg.EndFor();
                 if (isArray)
                 {
-                    MethodInfo trimArraySizeMethod =
-                        XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(itemType);
+                    MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics
+                        .TrimArraySizeMethod
+                        .MakeGenericMethod(itemType);
                     _ilg.Call(null, trimArraySizeMethod, growingCollection, i);
                     _ilg.Stloc(_objectLocal);
                     _ilg.Call(

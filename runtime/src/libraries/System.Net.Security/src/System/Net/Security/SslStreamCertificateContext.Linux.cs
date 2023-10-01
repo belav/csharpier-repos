@@ -201,15 +201,14 @@ namespace System.Net.Security
             IntPtr issuer = caCert.Handle;
 
             using (
-                SafeOcspRequestHandle ocspRequest = Interop.Crypto.X509BuildOcspRequest(
-                    subject,
-                    issuer
-                )
+                SafeOcspRequestHandle ocspRequest = Interop
+                    .Crypto
+                    .X509BuildOcspRequest(subject, issuer)
             )
             {
-                byte[] rentedBytes = ArrayPool<byte>.Shared.Rent(
-                    Interop.Crypto.GetOcspRequestDerSize(ocspRequest)
-                );
+                byte[] rentedBytes = ArrayPool<byte>
+                    .Shared
+                    .Rent(Interop.Crypto.GetOcspRequestDerSize(ocspRequest));
                 int encodingSize = Interop.Crypto.EncodeOcspRequest(ocspRequest, rentedBytes);
                 ArraySegment<byte> encoded = new ArraySegment<byte>(rentedBytes, 0, encodingSize);
 
@@ -219,20 +218,25 @@ namespace System.Net.Security
                 for (int i = 0; i < _ocspUrls.Count; i++)
                 {
                     string url = MakeUrl(_ocspUrls[i], rentedChars);
-                    ret = await System.Net.Http.X509ResourceClient
+                    ret = await System
+                        .Net
+                        .Http
+                        .X509ResourceClient
                         .DownloadAssetAsync(url, TimeSpan.MaxValue)
                         .ConfigureAwait(false);
 
                     if (ret is not null)
                     {
                         if (
-                            !Interop.Crypto.X509DecodeOcspToExpiration(
-                                ret,
-                                ocspRequest,
-                                subject,
-                                issuer,
-                                out DateTimeOffset expiration
-                            )
+                            !Interop
+                                .Crypto
+                                .X509DecodeOcspToExpiration(
+                                    ret,
+                                    ocspRequest,
+                                    subject,
+                                    issuer,
+                                    out DateTimeOffset expiration
+                                )
                         )
                         {
                             continue;

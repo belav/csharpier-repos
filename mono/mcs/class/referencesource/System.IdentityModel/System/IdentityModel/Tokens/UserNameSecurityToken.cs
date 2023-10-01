@@ -21,9 +21,9 @@ namespace System.IdentityModel.Tokens
             if (userName == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("userName");
             if (userName == string.Empty)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.UserNameCannotBeEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.UserNameCannotBeEmpty));
 
             this.userName = userName;
             this.password = password;

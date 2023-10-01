@@ -257,9 +257,9 @@ namespace System.Activities.Core.Presentation
                 if (connPoint != null)
                 {
                     outgoingConnectors.AddRange(
-                        connPoint.AttachedConnectors.Where(
-                            p => FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint)
-                        )
+                        connPoint
+                            .AttachedConnectors
+                            .Where(p => FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint))
                     );
                 }
             }
@@ -275,9 +275,12 @@ namespace System.Activities.Core.Presentation
                 if (connPoint != null)
                 {
                     incomingConnectors.AddRange(
-                        connPoint.AttachedConnectors.Where(
-                            p => FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)
-                        )
+                        connPoint
+                            .AttachedConnectors
+                            .Where(
+                                p =>
+                                    FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)
+                            )
                     );
                 }
             }
@@ -594,7 +597,8 @@ namespace System.Activities.Core.Presentation
             {
                 State state = statesToProcess.Dequeue();
 
-                IEnumerable<Transition> toRemove = state.Transitions
+                IEnumerable<Transition> toRemove = state
+                    .Transitions
                     .Where<Transition>(
                         (p) =>
                         {

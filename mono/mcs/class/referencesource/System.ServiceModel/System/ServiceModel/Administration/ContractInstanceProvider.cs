@@ -375,10 +375,9 @@ namespace System.ServiceModel.Administration
                 ContractDescription contractDescription;
                 UpdateContracts();
                 if (
-                    ContractInstanceProvider.knownContracts.TryGetValue(
-                        contractName,
-                        out contractDescription
-                    )
+                    ContractInstanceProvider
+                        .knownContracts
+                        .TryGetValue(contractName, out contractDescription)
                 )
                 {
                     bFound = true;

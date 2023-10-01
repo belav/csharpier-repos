@@ -125,9 +125,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(LoadPairScalarVector64NonTemporal_UInt32 testClass)
             {
-                _fld = AdvSimd.Arm64.LoadPairScalarVector64NonTemporal(
-                    (UInt32*)(testClass._dataTable.inArrayPtr)
-                );
+                _fld = AdvSimd
+                    .Arm64
+                    .LoadPairScalarVector64NonTemporal((UInt32*)(testClass._dataTable.inArrayPtr));
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, _fld);
                 testClass.ValidateResult(
@@ -169,9 +169,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario));
 
-            var result = AdvSimd.Arm64.LoadPairScalarVector64NonTemporal(
-                (UInt32*)(_dataTable.inArrayPtr)
-            );
+            var result = AdvSimd
+                .Arm64
+                .LoadPairScalarVector64NonTemporal((UInt32*)(_dataTable.inArrayPtr));
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
         }
@@ -195,9 +195,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            _clsVar = AdvSimd.Arm64.LoadPairScalarVector64NonTemporal(
-                (UInt32*)(_dataTable.inArrayPtr)
-            );
+            _clsVar = AdvSimd
+                .Arm64
+                .LoadPairScalarVector64NonTemporal((UInt32*)(_dataTable.inArrayPtr));
 
             Unsafe.Write(_dataTable.outArrayPtr, _clsVar);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -208,9 +208,9 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassLclFldScenario));
 
             var test = new LoadPairScalarVector64NonTemporal_UInt32();
-            test._fld = AdvSimd.Arm64.LoadPairScalarVector64NonTemporal(
-                (UInt32*)(_dataTable.inArrayPtr)
-            );
+            test._fld = AdvSimd
+                .Arm64
+                .LoadPairScalarVector64NonTemporal((UInt32*)(_dataTable.inArrayPtr));
 
             Unsafe.Write(_dataTable.outArrayPtr, test._fld);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -221,9 +221,9 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario));
 
             var test = TestStruct.Create();
-            test._fld = AdvSimd.Arm64.LoadPairScalarVector64NonTemporal(
-                (UInt32*)(_dataTable.inArrayPtr)
-            );
+            test._fld = AdvSimd
+                .Arm64
+                .LoadPairScalarVector64NonTemporal((UInt32*)(_dataTable.inArrayPtr));
 
             Unsafe.Write(_dataTable.outArrayPtr, test._fld);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -295,12 +295,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.LoadPairScalarVector64NonTemporal)}<UInt32>(Vector64<UInt32>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.LoadPairScalarVector64NonTemporal)}<UInt32>(Vector64<UInt32>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($" result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

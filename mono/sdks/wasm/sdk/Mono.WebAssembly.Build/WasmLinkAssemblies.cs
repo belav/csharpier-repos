@@ -291,10 +291,9 @@ namespace Mono.WebAssembly.Build
         static string GetNetCoreVersion()
         {
             var assembly = typeof(System.Runtime.GCSettings).Assembly;
-            var assemblyPath = assembly.CodeBase.Split(
-                new[] { '/', '\\' },
-                StringSplitOptions.RemoveEmptyEntries
-            );
+            var assemblyPath = assembly
+                .CodeBase
+                .Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
             int netCoreAppIndex = Array.IndexOf(assemblyPath, "Microsoft.NETCore.App");
             if (netCoreAppIndex > 0 && netCoreAppIndex < assemblyPath.Length - 2)
                 return assemblyPath[netCoreAppIndex + 1];

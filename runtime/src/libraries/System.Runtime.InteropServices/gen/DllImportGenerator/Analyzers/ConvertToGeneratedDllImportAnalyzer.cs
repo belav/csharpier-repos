@@ -47,18 +47,18 @@ namespace Microsoft.Interop.Analyzers
             context.RegisterCompilationStartAction(compilationContext =>
             {
                 // Nothing to do if the GeneratedDllImportAttribute is not in the compilation
-                INamedTypeSymbol? generatedDllImportAttrType =
-                    compilationContext.Compilation.GetTypeByMetadataName(
-                        TypeNames.GeneratedDllImportAttribute
-                    );
+                INamedTypeSymbol? generatedDllImportAttrType = compilationContext
+                    .Compilation
+                    .GetTypeByMetadataName(TypeNames.GeneratedDllImportAttribute);
                 if (generatedDllImportAttrType == null)
                     return;
 
                 var knownUnsupportedTypes = new List<ITypeSymbol>(s_unsupportedTypeNames.Length);
                 foreach (string typeName in s_unsupportedTypeNames)
                 {
-                    INamedTypeSymbol? unsupportedType =
-                        compilationContext.Compilation.GetTypeByMetadataName(typeName);
+                    INamedTypeSymbol? unsupportedType = compilationContext
+                        .Compilation
+                        .GetTypeByMetadataName(typeName);
                     if (unsupportedType != null)
                     {
                         knownUnsupportedTypes.Add(unsupportedType);

@@ -108,18 +108,18 @@ namespace System.ServiceModel.Security.Tokens
             else
             {
                 this.bootstrapProtectionRequirements = new ChannelProtectionRequirements();
-                this.bootstrapProtectionRequirements.IncomingEncryptionParts.AddParts(
-                    new MessagePartSpecification(true)
-                );
-                this.bootstrapProtectionRequirements.IncomingSignatureParts.AddParts(
-                    new MessagePartSpecification(true)
-                );
-                this.bootstrapProtectionRequirements.OutgoingEncryptionParts.AddParts(
-                    new MessagePartSpecification(true)
-                );
-                this.bootstrapProtectionRequirements.OutgoingSignatureParts.AddParts(
-                    new MessagePartSpecification(true)
-                );
+                this.bootstrapProtectionRequirements
+                    .IncomingEncryptionParts
+                    .AddParts(new MessagePartSpecification(true));
+                this.bootstrapProtectionRequirements
+                    .IncomingSignatureParts
+                    .AddParts(new MessagePartSpecification(true));
+                this.bootstrapProtectionRequirements
+                    .OutgoingEncryptionParts
+                    .AddParts(new MessagePartSpecification(true));
+                this.bootstrapProtectionRequirements
+                    .OutgoingSignatureParts
+                    .AddParts(new MessagePartSpecification(true));
             }
             this.requireCancellation = requireCancellation;
         }

@@ -34,12 +34,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     return typeSyntax;
                 }
 
-                var typeStyle = CSharpUseImplicitTypeHelper.Instance.AnalyzeTypeName(
-                    typeSyntax,
-                    this.SemanticModel,
-                    this.Options,
-                    this.CancellationToken
-                );
+                var typeStyle = CSharpUseImplicitTypeHelper
+                    .Instance
+                    .AnalyzeTypeName(
+                        typeSyntax,
+                        this.SemanticModel,
+                        this.Options,
+                        this.CancellationToken
+                    );
 
                 if (!typeStyle.IsStylePreferred || !typeStyle.CanConvert())
                 {

@@ -66,7 +66,8 @@ namespace POS_Server.Controllers
                             if (List[i].isActive == 1)
                             {
                                 long shippingCompanyId = (long)List[i].shippingCompanyId;
-                                var itemsI = entity.invoices
+                                var itemsI = entity
+                                    .invoices
                                     .Where(x => x.shippingCompanyId == shippingCompanyId)
                                     .Select(b => new { b.invoiceId })
                                     .FirstOrDefault();
@@ -107,7 +108,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var usersList = entity.shippingCompanies
+                    var usersList = entity
+                        .shippingCompanies
                         .Where(
                             s =>
                                 s.isActive == 1
@@ -169,7 +171,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var row = entity.shippingCompanies
+                    var row = entity
+                        .shippingCompanies
                         .Where(u => u.shippingCompanyId == shippingCompanyId)
                         .Select(
                             S =>
@@ -260,7 +263,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpObject = entity.shippingCompanies
+                            var tmpObject = entity
+                                .shippingCompanies
                                 .Where(p => p.shippingCompanyId == newObject.shippingCompanyId)
                                 .FirstOrDefault();
 
@@ -395,9 +399,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            shippingCompanies objectDelete = entity.shippingCompanies.Find(
-                                shippingCompanyId
-                            );
+                            shippingCompanies objectDelete = entity
+                                .shippingCompanies
+                                .Find(shippingCompanyId);
 
                             entity.shippingCompanies.Remove(objectDelete);
                             message = entity.SaveChanges().ToString();
@@ -417,9 +421,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            shippingCompanies objectDelete = entity.shippingCompanies.Find(
-                                shippingCompanyId
-                            );
+                            shippingCompanies objectDelete = entity
+                                .shippingCompanies
+                                .Find(shippingCompanyId);
 
                             objectDelete.isActive = 0;
                             objectDelete.updateUserId = userId;

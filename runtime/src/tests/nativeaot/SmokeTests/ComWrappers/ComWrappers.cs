@@ -296,9 +296,9 @@ namespace ComWrappersTests
         [UnmanagedCallersOnly]
         public static int DoWork(IntPtr thisPtr, int param)
         {
-            var inst = ComWrappers.ComInterfaceDispatch.GetInstance<IComInterface>(
-                (ComWrappers.ComInterfaceDispatch*)thisPtr
-            );
+            var inst = ComWrappers
+                .ComInterfaceDispatch
+                .GetInstance<IComInterface>((ComWrappers.ComInterfaceDispatch*)thisPtr);
             return inst.DoWork(param);
         }
     }

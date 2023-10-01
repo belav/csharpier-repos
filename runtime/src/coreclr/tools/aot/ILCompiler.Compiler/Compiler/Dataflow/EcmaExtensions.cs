@@ -65,10 +65,9 @@ namespace ILCompiler.Dataflow
             foreach (var propertyHandle in reader.GetTypeDefinition(type.Handle).GetProperties())
             {
                 if (
-                    reader.StringComparer.Equals(
-                        reader.GetPropertyDefinition(propertyHandle).Name,
-                        name
-                    )
+                    reader
+                        .StringComparer
+                        .Equals(reader.GetPropertyDefinition(propertyHandle).Name, name)
                 )
                 {
                     return new PropertyPseudoDesc(type, propertyHandle);

@@ -130,10 +130,9 @@ namespace System.Data.Mapping
                     }
 
                     // Create map from column name to condition.
-                    var columnMap = entityTypeMapping.Conditions.ToDictionary(
-                        condition => condition.ColumnName,
-                        condition => condition
-                    );
+                    var columnMap = entityTypeMapping
+                        .Conditions
+                        .ToDictionary(condition => condition.ColumnName, condition => condition);
 
                     // Align conditions with discriminator columns.
                     var columnMappings = new List<FunctionImportEntityTypeMappingCondition>(
@@ -464,10 +463,9 @@ namespace System.Data.Mapping
                                 )
                             );
                             Vertex isNullVertex = converter.TranslateTermToVertex(isNull);
-                            condition = converter.Solver.And(
-                                condition,
-                                converter.Solver.Not(isNullVertex)
-                            );
+                            condition = converter
+                                .Solver
+                                .And(condition, converter.Solver.Not(isNullVertex));
                         }
                         else
                         {
@@ -477,10 +475,9 @@ namespace System.Data.Mapping
                                     conditionValue
                                 )
                             );
-                            condition = converter.Solver.And(
-                                condition,
-                                converter.TranslateTermToVertex(hasValue)
-                            );
+                            condition = converter
+                                .Solver
+                                .And(condition, converter.TranslateTermToVertex(hasValue));
                         }
                     }
                 }
@@ -512,17 +509,15 @@ namespace System.Data.Mapping
                     // Determine if this mapping is a positive or negative case for the current type.
                     if (entityTypeMapping.ImpliedEntityTypes[i])
                     {
-                        candidateFunction = converter.Solver.And(
-                            candidateFunction,
-                            mappingConditions[j]
-                        );
+                        candidateFunction = converter
+                            .Solver
+                            .And(candidateFunction, mappingConditions[j]);
                     }
                     else
                     {
-                        candidateFunction = converter.Solver.And(
-                            candidateFunction,
-                            converter.Solver.Not(mappingConditions[j])
-                        );
+                        candidateFunction = converter
+                            .Solver
+                            .And(candidateFunction, converter.Solver.Not(mappingConditions[j]));
                     }
                 }
                 candidateFunctions[i] = candidateFunction;
@@ -534,12 +529,14 @@ namespace System.Data.Mapping
             {
                 // Create a function that evaluates to true iff. the current candidate function is true
                 // and every other candidate function is false.
-                Vertex isExactlyThisTypeCondition = converter.Solver.And(
-                    candidateFunctions.Select(
-                        (typeCondition, ordinal) =>
-                            ordinal == i ? typeCondition : converter.Solver.Not(typeCondition)
-                    )
-                );
+                Vertex isExactlyThisTypeCondition = converter
+                    .Solver
+                    .And(
+                        candidateFunctions.Select(
+                            (typeCondition, ordinal) =>
+                                ordinal == i ? typeCondition : converter.Solver.Not(typeCondition)
+                        )
+                    );
 
                 // If the above conjunction is satisfiable, it means some row configuration exists producing the type.
                 if (!isExactlyThisTypeCondition.IsZero())
@@ -573,10 +570,9 @@ namespace System.Data.Mapping
                     // Determine if this mapping is a positive or negative case for the current type.
                     if (entityTypeMapping.ImpliedEntityTypes[i])
                     {
-                        candidateFunction = converter.Solver.And(
-                            candidateFunction,
-                            mappingConditions[j]
-                        );
+                        candidateFunction = converter
+                            .Solver
+                            .And(candidateFunction, mappingConditions[j]);
                     }
                 }
                 candidateFunctions[i] = candidateFunction;
@@ -596,7 +592,8 @@ namespace System.Data.Mapping
                     for (int j = i + 1; j < candidateFunctions.Length; ++j)
                     {
                         if (
-                            !converter.Solver
+                            !converter
+                                .Solver
                                 .And(candidateFunctions[i], candidateFunctions[j])
                                 .IsZero()
                         )
@@ -825,10 +822,9 @@ namespace System.Data.Mapping
             // Check that the type is supported and comparable.
             PrimitiveType primitiveType;
             if (
-                !ClrProviderManifest.Instance.TryGetPrimitiveType(
-                    columnValueType,
-                    out primitiveType
-                )
+                !ClrProviderManifest
+                    .Instance
+                    .TryGetPrimitiveType(columnValueType, out primitiveType)
                 || !StorageMappingItemLoader.IsTypeSupportedForCondition(
                     primitiveType.PrimitiveTypeKind
                 )

@@ -69,7 +69,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // HACK: to keep F# working, we will ensure we return the ProjectId if there is a project that matches this path. Otherwise, we'll just return
             // a random ProjectId, which is sufficient for their needs. They'll simply observe there is no project with that ID, and then go and create a
             // new project. Then they call this function again, and fetch the real ID.
-            return _workspace.CurrentSolution.Projects
+            return _workspace
+                    .CurrentSolution
+                    .Projects
                     .FirstOrDefault(p => p.FilePath == filePath)
                     ?.Id ?? ProjectId.CreateNewId("ProjectNotFound");
         }
@@ -100,7 +102,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         [Obsolete("This is a compatibility shim for TypeScript and F#; please do not use it.")]
         internal bool TryGetProjectByBinPath(string filePath, out AbstractProject project)
         {
-            var projectsWithBinPath = _workspace.CurrentSolution.Projects
+            var projectsWithBinPath = _workspace
+                .CurrentSolution
+                .Projects
                 .Where(
                     p =>
                         string.Equals(
@@ -161,15 +165,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     Hierarchy = project.Hierarchy,
                     ProjectGuid = project.Guid,
                 };
-                project.VisualStudioProject = this.ThreadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        _projectFactory.CreateAndAddToWorkspaceAsync(
-                            project.ProjectSystemName,
-                            project.Language,
-                            creationInfo,
-                            CancellationToken.None
-                        )
-                );
+                project.VisualStudioProject = this.ThreadingContext
+                    .JoinableTaskFactory
+                    .Run(
+                        () =>
+                            _projectFactory.CreateAndAddToWorkspaceAsync(
+                                project.ProjectSystemName,
+                                project.Language,
+                                creationInfo,
+                                CancellationToken.None
+                            )
+                    );
                 project.UpdateVisualStudioProjectProperties();
             }
             else

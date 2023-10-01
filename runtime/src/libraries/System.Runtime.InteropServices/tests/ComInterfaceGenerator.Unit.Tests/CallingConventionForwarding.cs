@@ -267,9 +267,9 @@ namespace ComInterfaceGenerator.Unit.Tests
             string methodName
         )
         {
-            INamedTypeSymbol? userDefinedInterface = compilation.Assembly.GetTypeByMetadataName(
-                userDefinedInterfaceName
-            );
+            INamedTypeSymbol? userDefinedInterface = compilation
+                .Assembly
+                .GetTypeByMetadataName(userDefinedInterfaceName);
             Assert.NotNull(userDefinedInterface);
 
             INamedTypeSymbol generatedInterfaceImplementation = Assert.Single(

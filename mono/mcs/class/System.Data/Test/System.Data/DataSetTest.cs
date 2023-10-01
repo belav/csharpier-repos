@@ -2372,9 +2372,11 @@ namespace MonoTests.System.Data
             parent.Columns.Add("id", typeof(int));
             child.Columns.Add("ref_id", typeof(int));
 
-            child.Constraints.Add(
-                new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
-            );
+            child
+                .Constraints
+                .Add(
+                    new ForeignKeyConstraint("fk_constraint", parent.Columns[0], child.Columns[0])
+                );
 
             DataRow dr = parent.NewRow();
             dr[0] = 1;

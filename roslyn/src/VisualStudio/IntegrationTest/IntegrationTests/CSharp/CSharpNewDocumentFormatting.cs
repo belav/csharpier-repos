@@ -34,11 +34,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.ConsoleApplication,
-                LanguageNames.CSharp
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.CSharp
+                );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -52,11 +54,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 
             VisualStudio.Workspace.SetFileScopedNamespaces(true);
 
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.CSharpNetCoreConsoleApplication,
-                LanguageNames.CSharp
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.CSharpNetCoreConsoleApplication,
+                    LanguageNames.CSharp
+                );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -84,11 +88,13 @@ csharp_style_namespace_declarations = block_scoped
 "
             );
 
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                    LanguageNames.CSharp
+                );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -129,11 +135,13 @@ csharp_style_namespace_declarations = block_scoped
 "
             );
 
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                    LanguageNames.CSharp
+                );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();
@@ -163,11 +171,13 @@ csharp_style_namespace_declarations = file_scoped
 "
             );
 
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
-                LanguageNames.CSharp
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.CSharpNetCoreClassLibrary,
+                    LanguageNames.CSharp
+                );
 
             VisualStudio.ErrorList.ShowErrorList();
             VisualStudio.ErrorList.Verify.NoErrors();

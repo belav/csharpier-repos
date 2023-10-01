@@ -58,9 +58,9 @@ namespace System.Workflow.ComponentModel.Compiler
                         try
                         {
                             if (
-                                MultiTargetingInfo.MultiTargetingUtilities.IsFrameworkReferenceAssembly(
-                                    filePath
-                                )
+                                MultiTargetingInfo
+                                    .MultiTargetingUtilities
+                                    .IsFrameworkReferenceAssembly(filePath)
                             )
                             {
                                 this.assembly = Assembly.Load(asmName.FullName);

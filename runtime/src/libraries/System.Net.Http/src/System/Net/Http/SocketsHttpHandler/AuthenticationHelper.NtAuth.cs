@@ -71,10 +71,12 @@ namespace System.Net.Http
         private static bool ProxySupportsConnectionAuth(HttpResponseMessage response)
         {
             if (
-                !response.Headers.TryGetValues(
-                    KnownHeaders.ProxySupport.Descriptor,
-                    out IEnumerable<string>? values
-                )
+                !response
+                    .Headers
+                    .TryGetValues(
+                        KnownHeaders.ProxySupport.Descriptor,
+                        out IEnumerable<string>? values
+                    )
             )
             {
                 return false;
@@ -246,9 +248,9 @@ namespace System.Net.Http
                                 Credential = challenge.Credential,
                                 TargetName = spn,
                                 RequiredProtectionLevel = requiredProtectionLevel,
-                                Binding = connection.TransportContext?.GetChannelBinding(
-                                    ChannelBindingKind.Endpoint
-                                )
+                                Binding = connection
+                                    .TransportContext
+                                    ?.GetChannelBinding(ChannelBindingKind.Endpoint)
                             };
 
                         using NegotiateAuthentication authContext = new NegotiateAuthentication(

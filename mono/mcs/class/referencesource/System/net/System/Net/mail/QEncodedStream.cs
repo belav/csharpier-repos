@@ -712,13 +712,15 @@ namespace System.Net.Mime
                     );
                     if (this.written < this.count)
                     {
-                        IAsyncResult result = this.parent.BaseStream.BeginWrite(
-                            this.parent.WriteState.Buffer,
-                            0,
-                            this.parent.WriteState.Length,
-                            onWrite,
-                            this
-                        );
+                        IAsyncResult result = this.parent
+                            .BaseStream
+                            .BeginWrite(
+                                this.parent.WriteState.Buffer,
+                                0,
+                                this.parent.WriteState.Length,
+                                onWrite,
+                                this
+                            );
                         if (!result.CompletedSynchronously)
                             break;
                         CompleteWrite(result);

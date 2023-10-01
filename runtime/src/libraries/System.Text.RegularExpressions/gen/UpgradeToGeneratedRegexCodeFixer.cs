@@ -43,7 +43,8 @@ namespace System.Text.RegularExpressions.Generator
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             // Fetch the node to fix, and register the codefix by invoking the ConvertToSourceGenerator method.
-            SyntaxNode? root = await context.Document
+            SyntaxNode? root = await context
+                .Document
                 .GetSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             if (root is null)
@@ -124,7 +125,8 @@ namespace System.Text.RegularExpressions.Generator
                 .OfType<TypeDeclarationSyntax>()
                 .FirstOrDefault();
 
-            typeDeclarationOrCompilationUnit ??= await nodeToFix.SyntaxTree
+            typeDeclarationOrCompilationUnit ??= await nodeToFix
+                .SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -187,7 +189,8 @@ namespace System.Text.RegularExpressions.Generator
             typeDeclarationOrCompilationUnit =
                 typeDeclarationOrCompilationUnit is TypeDeclarationSyntax
                     ? nodeToFix.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault()
-                    : await nodeToFix.SyntaxTree
+                    : await nodeToFix
+                        .SyntaxTree
                         .GetRootAsync(cancellationToken)
                         .ConfigureAwait(false);
 

@@ -88,12 +88,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // The token may be part of a larger name (for example, `int` in `public static operator int[](Goo g);`.
                         // So check if the symbol's location encompasses the span of the token we're asking about.
                         if (
-                            symbol.Locations.Any(
-                                static (loc, location) =>
-                                    loc.SourceTree == location.SourceTree
-                                    && loc.SourceSpan.Contains(location.SourceSpan),
-                                location
-                            )
+                            symbol
+                                .Locations
+                                .Any(
+                                    static (loc, location) =>
+                                        loc.SourceTree == location.SourceTree
+                                        && loc.SourceSpan.Contains(location.SourceSpan),
+                                    location
+                                )
                         )
                             return symbol;
                     }
@@ -118,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool LastEnumValueHasInitializer(INamedTypeSymbol namedTypeSymbol)
         {
-            var enumDecl = namedTypeSymbol.DeclaringSyntaxReferences
+            var enumDecl = namedTypeSymbol
+                .DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<EnumDeclarationSyntax>()
                 .FirstOrDefault();
@@ -313,9 +316,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             var syntaxRefs = typeSymbol.DeclaringSyntaxReferences;
             return syntaxRefs.Any(
                 static (n, cancellationToken) =>
-                    ((BaseTypeDeclarationSyntax)n.GetSyntax(cancellationToken)).Modifiers.Any(
-                        SyntaxKind.PartialKeyword
-                    ),
+                    ((BaseTypeDeclarationSyntax)n.GetSyntax(cancellationToken))
+                        .Modifiers
+                        .Any(SyntaxKind.PartialKeyword),
                 cancellationToken
             );
         }
@@ -329,14 +332,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (memberDeclaration)
             {
                 case FieldDeclarationSyntax field:
-                    return field.Declaration.Variables.Select(
-                        v => semanticModel.GetRequiredDeclaredSymbol(v, cancellationToken)
-                    );
+                    return field
+                        .Declaration
+                        .Variables
+                        .Select(v => semanticModel.GetRequiredDeclaredSymbol(v, cancellationToken));
 
                 case EventFieldDeclarationSyntax eventField:
-                    return eventField.Declaration.Variables.Select(
-                        v => semanticModel.GetRequiredDeclaredSymbol(v, cancellationToken)
-                    );
+                    return eventField
+                        .Declaration
+                        .Variables
+                        .Select(v => semanticModel.GetRequiredDeclaredSymbol(v, cancellationToken));
 
                 default:
                     return SpecializedCollections.SingletonEnumerable(
@@ -429,7 +434,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // Returning SymbolInfo for a comma token is the last resort
                         // in an order by clause if no other tokens to bind to a are present.
                         // See also the proposal at https://github.com/dotnet/roslyn/issues/23394
-                        var separators = orderByClauseSyntax.Orderings
+                        var separators = orderByClauseSyntax
+                            .Orderings
                             .GetSeparators()
                             .ToImmutableList();
                         var index = separators.IndexOf(token);

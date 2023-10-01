@@ -145,7 +145,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     public override ImmutableArray<DiagnosticTableItem> GetItems()
                     {
                         return _source.AggregateItems(
-                            _source._buildErrorSource
+                            _source
+                                ._buildErrorSource
                                 .GetBuildErrors()
                                 .GroupBy(
                                     d => d,
@@ -323,12 +324,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         {
                             // We couldn't find a document matching a known ID when the item was created, so it may be a
                             // source generator output.
-                            var documents = threadingContext.JoinableTaskFactory.Run(
-                                () =>
-                                    project
-                                        .GetSourceGeneratedDocumentsAsync(cancellationToken)
-                                        .AsTask()
-                            );
+                            var documents = threadingContext
+                                .JoinableTaskFactory
+                                .Run(
+                                    () =>
+                                        project
+                                            .GetSourceGeneratedDocumentsAsync(cancellationToken)
+                                            .AsTask()
+                                );
                             if (documentId is not null)
                             {
                                 if (documents.Any(document => document.Id == documentId))

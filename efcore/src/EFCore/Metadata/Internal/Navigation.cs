@@ -340,13 +340,16 @@ public class Navigation : PropertyBase, IMutableNavigation, IConventionNavigatio
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation
     ) =>
-        DeclaringType.Model.ConventionDispatcher.OnNavigationAnnotationChanged(
-            ForeignKey.Builder,
-            this,
-            name,
-            annotation,
-            oldAnnotation
-        );
+        DeclaringType
+            .Model
+            .ConventionDispatcher
+            .OnNavigationAnnotationChanged(
+                ForeignKey.Builder,
+                this,
+                name,
+                annotation,
+                oldAnnotation
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -55,11 +55,11 @@ namespace System.ServiceModel
             );
             MessageFault fault = MessageFault.CreateFault(code, reason);
             string faultAction = messageVersion.Addressing.DefaultFaultAction;
-            Message message = System.ServiceModel.Channels.Message.CreateMessage(
-                messageVersion,
-                fault,
-                faultAction
-            );
+            Message message = System
+                .ServiceModel
+                .Channels
+                .Message
+                .CreateMessage(messageVersion, fault, faultAction);
             if (this.envelopeVersion == EnvelopeVersion.Soap12)
             {
                 this.AddNotUnderstoodHeaders(message.Headers);

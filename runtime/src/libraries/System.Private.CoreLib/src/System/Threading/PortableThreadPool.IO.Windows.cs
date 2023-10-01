@@ -54,12 +54,14 @@ namespace System.Threading
 
         private static nint CreateIOCompletionPort()
         {
-            nint port = Interop.Kernel32.CreateIoCompletionPort(
-                new IntPtr(-1),
-                IntPtr.Zero,
-                UIntPtr.Zero,
-                IOCompletionPollerCount
-            );
+            nint port = Interop
+                .Kernel32
+                .CreateIoCompletionPort(
+                    new IntPtr(-1),
+                    IntPtr.Zero,
+                    UIntPtr.Zero,
+                    IOCompletionPollerCount
+                );
             if (port == 0)
             {
                 int hr = Marshal.GetHRForLastWin32Error();
@@ -103,12 +105,9 @@ namespace System.Threading
             }
 
             if (
-                !Interop.Kernel32.PostQueuedCompletionStatus(
-                    _ioPort,
-                    0,
-                    UIntPtr.Zero,
-                    (IntPtr)nativeOverlapped
-                )
+                !Interop
+                    .Kernel32
+                    .PostQueuedCompletionStatus(_ioPort, 0, UIntPtr.Zero, (IntPtr)nativeOverlapped)
             )
             {
                 ThrowHelper.ThrowApplicationException(Marshal.GetHRForLastWin32Error());
@@ -208,14 +207,16 @@ namespace System.Threading
                 Debug.Assert(_events != null);
 
                 while (
-                    Interop.Kernel32.GetQueuedCompletionStatusEx(
-                        _port,
-                        _nativeEvents,
-                        NativeEventCapacity,
-                        out int nativeEventCount,
-                        Timeout.Infinite,
-                        false
-                    )
+                    Interop
+                        .Kernel32
+                        .GetQueuedCompletionStatusEx(
+                            _port,
+                            _nativeEvents,
+                            NativeEventCapacity,
+                            out int nativeEventCount,
+                            Timeout.Infinite,
+                            false
+                        )
                 )
                 {
                     Debug.Assert(nativeEventCount > 0);
@@ -250,13 +251,15 @@ namespace System.Threading
                 {
                     uint errorCode = Interop.Errors.ERROR_SUCCESS;
                     if (
-                        !Interop.Kernel32.GetQueuedCompletionStatus(
-                            _port,
-                            out uint bytesTransferred,
-                            out _,
-                            out nint nativeOverlappedPtr,
-                            Timeout.Infinite
-                        )
+                        !Interop
+                            .Kernel32
+                            .GetQueuedCompletionStatus(
+                                _port,
+                                out uint bytesTransferred,
+                                out _,
+                                out nint nativeOverlappedPtr,
+                                Timeout.Infinite
+                            )
                     )
                     {
                         errorCode = (uint)Marshal.GetLastPInvokeError();

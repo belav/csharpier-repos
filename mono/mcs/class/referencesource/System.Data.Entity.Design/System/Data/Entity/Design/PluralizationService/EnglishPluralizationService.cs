@@ -656,7 +656,8 @@ namespace System.Data.Entity.Design.PluralizationServices
             );
 
             this._knownSingluarWords = new List<string>(
-                _irregularPluralsDictionary.Keys
+                _irregularPluralsDictionary
+                    .Keys
                     .Concat(_assimilatedClassicalInflectionDictionary.Keys)
                     .Concat(_oSuffixDictionary.Keys)
                     .Concat(_classicalInflectionDictionary.Keys)
@@ -671,7 +672,8 @@ namespace System.Data.Entity.Design.PluralizationServices
             ); // see the _knowConflictingPluralList comment above
 
             this._knownPluralWords = new List<string>(
-                _irregularPluralsDictionary.Values
+                _irregularPluralsDictionary
+                    .Values
                     .Concat(_assimilatedClassicalInflectionDictionary.Values)
                     .Concat(_oSuffixDictionary.Values)
                     .Concat(_classicalInflectionDictionary.Values)

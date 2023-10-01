@@ -153,9 +153,9 @@ namespace System.Workflow.ComponentModel
                     if (useEnabledActivities)
                     {
                         foreach (
-                            Activity activity2 in Design.Helpers.GetAllEnabledActivities(
-                                (CompositeActivity)activity
-                            )
+                            Activity activity2 in Design
+                                .Helpers
+                                .GetAllEnabledActivities((CompositeActivity)activity)
                         )
                             queue.Enqueue(activity2);
                     }

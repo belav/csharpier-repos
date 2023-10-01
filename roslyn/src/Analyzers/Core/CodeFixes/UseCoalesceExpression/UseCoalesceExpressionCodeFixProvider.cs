@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             ImmutableArray.Create(IDEDiagnosticIds.UseCoalesceExpressionDiagnosticId);
 
         protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
-            !diagnostic.Descriptor
+            !diagnostic
+                .Descriptor
                 .ImmutableCustomTags()
                 .Contains(WellKnownDiagnosticTags.Unnecessary);
 

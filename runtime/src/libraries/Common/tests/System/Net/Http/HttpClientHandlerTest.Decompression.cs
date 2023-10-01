@@ -290,10 +290,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         if (!string.IsNullOrEmpty(manualAcceptEncodingHeaderValues))
                         {
-                            client.DefaultRequestHeaders.Add(
-                                "Accept-Encoding",
-                                manualAcceptEncodingHeaderValues
-                            );
+                            client
+                                .DefaultRequestHeaders
+                                .Add("Accept-Encoding", manualAcceptEncodingHeaderValues);
                         }
 
                         Task<HttpResponseMessage> clientTask = client.SendAsync(
@@ -374,10 +373,9 @@ namespace System.Net.Http.Functional.Tests
 
                     using (HttpClient client = CreateHttpClient(handler))
                     {
-                        client.DefaultRequestHeaders.Add(
-                            "Accept-Encoding",
-                            manualAcceptEncodingHeaderValues
-                        );
+                        client
+                            .DefaultRequestHeaders
+                            .Add("Accept-Encoding", manualAcceptEncodingHeaderValues);
 
                         Task<HttpResponseMessage> clientTask = client.SendAsync(
                             TestAsync,

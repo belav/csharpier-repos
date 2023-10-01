@@ -111,10 +111,11 @@ namespace System.Data.Common.EntitySql
             //
             throw EntityUtil.EntitySqlError(
                 errCtx,
-                System.Data.Entity.Strings.ArgumentTypesAreIncompatible(
-                    leftType.Identity,
-                    rightType.Identity
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ArgumentTypesAreIncompatible(leftType.Identity, rightType.Identity)
             );
         }
 
@@ -142,12 +143,16 @@ namespace System.Data.Common.EntitySql
             {
                 throw EntityUtil.EntitySqlError(
                     errCtx,
-                    System.Data.Entity.Strings.TypeKindMismatch(
-                        GetReadableTypeKind(leftType),
-                        GetReadableTypeName(leftType),
-                        GetReadableTypeKind(rightType),
-                        GetReadableTypeName(rightType)
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .TypeKindMismatch(
+                            GetReadableTypeKind(leftType),
+                            GetReadableTypeName(leftType),
+                            GetReadableTypeKind(rightType),
+                            GetReadableTypeName(rightType)
+                        )
                 );
             }
 
@@ -161,19 +166,27 @@ namespace System.Data.Common.EntitySql
                     {
                         if (isRootType)
                         {
-                            errorMessage = System.Data.Entity.Strings.InvalidRootRowType(
-                                GetReadableTypeName(leftRow),
-                                GetReadableTypeName(rightRow)
-                            );
+                            errorMessage = System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidRootRowType(
+                                    GetReadableTypeName(leftRow),
+                                    GetReadableTypeName(rightRow)
+                                );
                         }
                         else
                         {
-                            errorMessage = System.Data.Entity.Strings.InvalidRowType(
-                                GetReadableTypeName(leftRow),
-                                GetReadableTypeName(rootLeftType),
-                                GetReadableTypeName(rightRow),
-                                GetReadableTypeName(rootRightType)
-                            );
+                            errorMessage = System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidRowType(
+                                    GetReadableTypeName(leftRow),
+                                    GetReadableTypeName(rootLeftType),
+                                    GetReadableTypeName(rightRow),
+                                    GetReadableTypeName(rootRightType)
+                                );
                         }
 
                         throw EntityUtil.EntitySqlError(errCtx, errorMessage);
@@ -207,19 +220,27 @@ namespace System.Data.Common.EntitySql
                     {
                         if (isRootType)
                         {
-                            errorMessage = System.Data.Entity.Strings.InvalidEntityRootTypeArgument(
-                                GetReadableTypeName(leftType),
-                                GetReadableTypeName(rightType)
-                            );
+                            errorMessage = System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidEntityRootTypeArgument(
+                                    GetReadableTypeName(leftType),
+                                    GetReadableTypeName(rightType)
+                                );
                         }
                         else
                         {
-                            errorMessage = System.Data.Entity.Strings.InvalidEntityTypeArgument(
-                                GetReadableTypeName(leftType),
-                                GetReadableTypeName(rootLeftType),
-                                GetReadableTypeName(rightType),
-                                GetReadableTypeName(rootRightType)
-                            );
+                            errorMessage = System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidEntityTypeArgument(
+                                    GetReadableTypeName(leftType),
+                                    GetReadableTypeName(rootLeftType),
+                                    GetReadableTypeName(rightType),
+                                    GetReadableTypeName(rootRightType)
+                                );
                         }
                         throw EntityUtil.EntitySqlError(errCtx, errorMessage);
                     }
@@ -232,19 +253,27 @@ namespace System.Data.Common.EntitySql
                     {
                         if (isRootType)
                         {
-                            errorMessage = System.Data.Entity.Strings.InvalidRootComplexType(
-                                GetReadableTypeName(leftComplex),
-                                GetReadableTypeName(rightComplex)
-                            );
+                            errorMessage = System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidRootComplexType(
+                                    GetReadableTypeName(leftComplex),
+                                    GetReadableTypeName(rightComplex)
+                                );
                         }
                         else
                         {
-                            errorMessage = System.Data.Entity.Strings.InvalidComplexType(
-                                GetReadableTypeName(leftComplex),
-                                GetReadableTypeName(rootLeftType),
-                                GetReadableTypeName(rightComplex),
-                                GetReadableTypeName(rootRightType)
-                            );
+                            errorMessage = System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidComplexType(
+                                    GetReadableTypeName(leftComplex),
+                                    GetReadableTypeName(rootLeftType),
+                                    GetReadableTypeName(rightComplex),
+                                    GetReadableTypeName(rootRightType)
+                                );
                         }
                         throw EntityUtil.EntitySqlError(errCtx, errorMessage);
                     }
@@ -266,8 +295,11 @@ namespace System.Data.Common.EntitySql
                     {
                         if (isRootType)
                         {
-                            errorMessage =
-                                System.Data.Entity.Strings.InvalidPlaceholderRootTypeArgument(
+                            errorMessage = System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidPlaceholderRootTypeArgument(
                                     GetReadableTypeKind(leftType),
                                     GetReadableTypeName(leftType),
                                     GetReadableTypeKind(rightType),
@@ -276,8 +308,11 @@ namespace System.Data.Common.EntitySql
                         }
                         else
                         {
-                            errorMessage =
-                                System.Data.Entity.Strings.InvalidPlaceholderTypeArgument(
+                            errorMessage = System
+                                .Data
+                                .Entity
+                                .Strings
+                                .InvalidPlaceholderTypeArgument(
                                     GetReadableTypeKind(leftType),
                                     GetReadableTypeName(leftType),
                                     GetReadableTypeName(rootLeftType),

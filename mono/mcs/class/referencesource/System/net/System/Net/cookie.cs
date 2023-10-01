@@ -1719,9 +1719,9 @@ namespace System.Net
                                             int.TryParse(CheckQuoted(m_tokenizer.Value), out parsed)
                                         )
                                         {
-                                            cookie.Expires = DateTime.Now.AddSeconds(
-                                                (double)parsed
-                                            );
+                                            cookie.Expires = DateTime
+                                                .Now
+                                                .AddSeconds((double)parsed);
                                         }
                                         else
                                         {

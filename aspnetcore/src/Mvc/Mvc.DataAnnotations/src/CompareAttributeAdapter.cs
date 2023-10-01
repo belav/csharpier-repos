@@ -104,10 +104,12 @@ internal sealed class CompareAttributeAdapter : AttributeAdapterBase<CompareAttr
                 && validationContext.ModelMetadata.ContainerType != null
             )
             {
-                var otherProperty = validationContext.MetadataProvider.GetMetadataForProperty(
-                    validationContext.ModelMetadata.ContainerType,
-                    attribute.OtherProperty
-                );
+                var otherProperty = validationContext
+                    .MetadataProvider
+                    .GetMetadataForProperty(
+                        validationContext.ModelMetadata.ContainerType,
+                        attribute.OtherProperty
+                    );
                 if (otherProperty != null)
                 {
                     return otherProperty.GetDisplayName();

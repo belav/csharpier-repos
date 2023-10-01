@@ -234,13 +234,15 @@ namespace System.CommandLine.Tests
 
                 var result = new Parser(command).Parse(providedArgs);
 
-                var numberOfMissingArgs = result.Errors.Count(
-                    e =>
-                        e.Message
-                        == LocalizationResources.Instance.RequiredArgumentMissing(
-                            result.CommandResult
-                        )
-                );
+                var numberOfMissingArgs = result
+                    .Errors
+                    .Count(
+                        e =>
+                            e.Message
+                            == LocalizationResources
+                                .Instance
+                                .RequiredArgumentMissing(result.CommandResult)
+                    );
 
                 numberOfMissingArgs
                     .Should()

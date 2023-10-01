@@ -789,11 +789,11 @@ namespace System.Runtime.Remoting
                             String typeName = null;
                             String assemName = null;
 
-                            System.Runtime.Remoting.TypeInfo.ParseTypeAndAssembly(
-                                srvTypeName,
-                                out typeName,
-                                out assemName
-                            );
+                            System
+                                .Runtime
+                                .Remoting
+                                .TypeInfo
+                                .ParseTypeAndAssembly(srvTypeName, out typeName, out assemName);
                             BCLDebug.Assert(
                                 (null != typeName) && (null != assemName),
                                 "non-null values expected"
@@ -823,10 +823,9 @@ namespace System.Runtime.Remoting
                                 serverType = null;
                             BCLDebug.Assert(serverType != null, "bad objRef!");
 
-                            ret1 = InteropServices.Marshal.GetTypedObjectForIUnknown(
-                                pUnk,
-                                serverType
-                            );
+                            ret1 = InteropServices
+                                .Marshal
+                                .GetTypedObjectForIUnknown(pUnk, serverType);
                             if (ret1 != null)
                             {
                                 ret = ret1;
@@ -1041,9 +1040,11 @@ namespace System.Runtime.Remoting
             if (!idObj.IsWellKnown())
             {
                 // Create the envoy info
-                EnvoyInfo = System.Runtime.Remoting.EnvoyInfo.CreateEnvoyInfo(
-                    idObj as ServerIdentity
-                );
+                EnvoyInfo = System
+                    .Runtime
+                    .Remoting
+                    .EnvoyInfo
+                    .CreateEnvoyInfo(idObj as ServerIdentity);
 
                 // Create the channel info
                 IChannelInfo chan = (IChannelInfo)new ChannelInfo();

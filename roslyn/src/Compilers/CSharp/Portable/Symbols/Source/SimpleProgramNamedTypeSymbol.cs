@@ -51,7 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             CSharpCompilation compilation
         )
         {
-            return compilation.SourceModule.GlobalNamespace
+            return compilation
+                .SourceModule
+                .GlobalNamespace
                 .GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName)
                 .OfType<SimpleProgramNamedTypeSymbol>()
                 .SingleOrDefault();
@@ -253,17 +255,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             return new MembersAndInitializers(
-                nonTypeMembers: declaration.Declarations.SelectAsArray<
-                    SingleTypeDeclaration,
-                    Symbol
-                >(
-                    singleDeclaration =>
-                        new SynthesizedSimpleProgramEntryPointSymbol(
-                            this,
-                            singleDeclaration,
-                            diagnostics
-                        )
-                ),
+                nonTypeMembers: declaration
+                    .Declarations
+                    .SelectAsArray<SingleTypeDeclaration, Symbol>(
+                        singleDeclaration =>
+                            new SynthesizedSimpleProgramEntryPointSymbol(
+                                this,
+                                singleDeclaration,
+                                diagnostics
+                            )
+                    ),
                 staticInitializers: ImmutableArray<
                     ImmutableArray<FieldOrPropertyInitializer>
                 >.Empty,

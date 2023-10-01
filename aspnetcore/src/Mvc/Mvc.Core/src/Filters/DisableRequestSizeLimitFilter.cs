@@ -50,8 +50,10 @@ internal sealed partial class DisableRequestSizeLimitFilter
             return;
         }
 
-        var maxRequestBodySizeFeature =
-            context.HttpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
+        var maxRequestBodySizeFeature = context
+            .HttpContext
+            .Features
+            .Get<IHttpMaxRequestBodySizeFeature>();
 
         if (maxRequestBodySizeFeature == null)
         {

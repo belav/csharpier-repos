@@ -388,7 +388,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
                 return VSConstants.E_INVALIDARG;
 
             // Fire and forget
-            var asynchronousOperationListener = LibraryManager.ComponentModel
+            var asynchronousOperationListener = LibraryManager
+                .ComponentModel
                 .GetService<IAsynchronousOperationListenerProvider>()
                 .GetListener(FeatureAttribute.LibraryManager);
             var asyncToken = asynchronousOperationListener.BeginAsyncOperation(

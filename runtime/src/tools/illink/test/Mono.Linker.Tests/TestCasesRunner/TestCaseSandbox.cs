@@ -49,9 +49,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 string.IsNullOrEmpty(namePrefix) ? "linker_tests" : namePrefix
             );
 
-            var locationRelativeToRoot = testCase.SourceFile.Parent.RelativeTo(
-                testCase.RootCasesDirectory
-            );
+            var locationRelativeToRoot = testCase
+                .SourceFile
+                .Parent
+                .RelativeTo(testCase.RootCasesDirectory);
             var suiteDirectory = rootDirectory.Combine(locationRelativeToRoot);
             _directory = suiteDirectory.Combine(testCase.SourceFile.FileNameWithoutExtension);
 

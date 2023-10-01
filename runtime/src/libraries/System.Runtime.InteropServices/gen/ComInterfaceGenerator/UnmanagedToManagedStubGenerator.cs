@@ -53,10 +53,10 @@ namespace Microsoft.Interop
             }
 
             if (
-                _marshallers.ManagedReturnMarshaller.Generator.UsesNativeIdentifier(
-                    _marshallers.ManagedReturnMarshaller.TypeInfo,
-                    _context
-                )
+                _marshallers
+                    .ManagedReturnMarshaller
+                    .Generator
+                    .UsesNativeIdentifier(_marshallers.ManagedReturnMarshaller.TypeInfo, _context)
             )
             {
                 // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.

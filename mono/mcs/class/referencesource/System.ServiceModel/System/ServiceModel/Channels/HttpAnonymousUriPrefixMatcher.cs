@@ -29,17 +29,16 @@ namespace System.ServiceModel.Channels
         {
             if (anonymousUriPrefix == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "anonymousUriPrefix"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("anonymousUriPrefix");
             }
 
             if (!anonymousUriPrefix.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "anonymousUriPrefix",
-                    SR.GetString(SR.UriMustBeAbsolute)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("anonymousUriPrefix", SR.GetString(SR.UriMustBeAbsolute));
             }
 
             if (this.anonymousUriPrefixes == null)

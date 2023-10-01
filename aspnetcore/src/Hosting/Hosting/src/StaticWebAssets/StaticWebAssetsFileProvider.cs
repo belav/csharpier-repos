@@ -118,7 +118,8 @@ namespace Microsoft.AspNetCore.Hosting.StaticWebAssets
             {
                 // We MUST use the Value property here because it is unescaped.
                 _nextSegment =
-                    remainingPath.Value
+                    remainingPath
+                        .Value
                         ?.Split("/", StringSplitOptions.RemoveEmptyEntries)
                         .FirstOrDefault() ?? string.Empty;
             }

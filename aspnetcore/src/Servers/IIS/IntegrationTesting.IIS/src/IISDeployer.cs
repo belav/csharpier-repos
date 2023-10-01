@@ -82,18 +82,18 @@ public class IISDeployer : IISDeployerBase
             DeploymentParameters.PublishApplicationBeforeDeployment = true;
             // Move ASPNETCORE_DETAILEDERRORS to web config env variables
             if (
-                IISDeploymentParameters.EnvironmentVariables.ContainsKey(
-                    DetailedErrorsEnvironmentVariable
-                )
+                IISDeploymentParameters
+                    .EnvironmentVariables
+                    .ContainsKey(DetailedErrorsEnvironmentVariable)
             )
             {
                 IISDeploymentParameters.WebConfigBasedEnvironmentVariables[
                     DetailedErrorsEnvironmentVariable
                 ] = IISDeploymentParameters.EnvironmentVariables[DetailedErrorsEnvironmentVariable];
 
-                IISDeploymentParameters.EnvironmentVariables.Remove(
-                    DetailedErrorsEnvironmentVariable
-                );
+                IISDeploymentParameters
+                    .EnvironmentVariables
+                    .Remove(DetailedErrorsEnvironmentVariable);
             }
             // Do not override settings set on parameters
             if (
@@ -150,7 +150,8 @@ public class IISDeployer : IISDeployerBase
             if (
                 aspNetCore
                     .Attribute("processPath")
-                    ?.Value.StartsWith("dotnet", StringComparison.Ordinal) == true
+                    ?.Value
+                    .StartsWith("dotnet", StringComparison.Ordinal) == true
             )
             {
                 aspNetCore.SetAttributeValue(
@@ -183,10 +184,9 @@ public class IISDeployer : IISDeployerBase
             }
 
             if (
-                DeploymentParameters.EnvironmentVariables.TryGetValue(
-                    "ASPNETCORE_MODULE_DEBUG_FILE",
-                    out debugFile
-                )
+                DeploymentParameters
+                    .EnvironmentVariables
+                    .TryGetValue("ASPNETCORE_MODULE_DEBUG_FILE", out debugFile)
             )
             {
                 debugLogLocations.Add(debugFile);
@@ -449,11 +449,13 @@ public class IISDeployer : IISDeployerBase
                     {
                         if (
                             appPool.WorkerProcesses != null
-                            && appPool.WorkerProcesses.Any(
-                                wp =>
-                                    wp.State == WorkerProcessState.Running
-                                    || wp.State == WorkerProcessState.Stopping
-                            )
+                            && appPool
+                                .WorkerProcesses
+                                .Any(
+                                    wp =>
+                                        wp.State == WorkerProcessState.Running
+                                        || wp.State == WorkerProcessState.Stopping
+                                )
                         )
                         {
                             throw new InvalidOperationException("WorkerProcess not stopped yet");

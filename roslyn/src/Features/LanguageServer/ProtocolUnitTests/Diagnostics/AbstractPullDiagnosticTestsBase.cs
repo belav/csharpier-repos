@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
                 }
 
                 AssertEx.NotNull(returnedResult);
-                return returnedResult.Items
+                return returnedResult
+                    .Items
                     .Select(diagnostics => ConvertWorkspaceDiagnosticResult(diagnostics))
                     .ToImmutableArray();
             }

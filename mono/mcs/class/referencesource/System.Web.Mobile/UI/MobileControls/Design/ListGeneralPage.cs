@@ -128,14 +128,16 @@ namespace System.Web.UI.Design.MobileControls
                 _decorationCombo.SetBounds(8, 40, 161, 21);
                 _decorationCombo.DropDownStyle = ComboBoxStyle.DropDownList;
                 _decorationCombo.SelectedIndexChanged += new EventHandler(this.OnSetPageDirty);
-                _decorationCombo.Items.AddRange(
-                    new object[]
-                    {
-                        SR.GetString(SR.ListGeneralPage_DecorationNone),
-                        SR.GetString(SR.ListGeneralPage_DecorationBulleted),
-                        SR.GetString(SR.ListGeneralPage_DecorationNumbered)
-                    }
-                );
+                _decorationCombo
+                    .Items
+                    .AddRange(
+                        new object[]
+                        {
+                            SR.GetString(SR.ListGeneralPage_DecorationNone),
+                            SR.GetString(SR.ListGeneralPage_DecorationBulleted),
+                            SR.GetString(SR.ListGeneralPage_DecorationNumbered)
+                        }
+                    );
                 _decorationCombo.TabIndex = 2;
 
                 pagingGroup.SetBounds(4, 77, 372, 16);
@@ -177,16 +179,18 @@ namespace System.Web.UI.Design.MobileControls
                 _selectTypeCombo.SetBounds(8, 40, 161, 21);
                 _selectTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
                 _selectTypeCombo.SelectedIndexChanged += new EventHandler(this.OnSetPageDirty);
-                _selectTypeCombo.Items.AddRange(
-                    new object[]
-                    {
-                        SR.GetString(SR.ListGeneralPage_SelectTypeDropDown),
-                        SR.GetString(SR.ListGeneralPage_SelectTypeListBox),
-                        SR.GetString(SR.ListGeneralPage_SelectTypeRadio),
-                        SR.GetString(SR.ListGeneralPage_SelectTypeMultiSelectListBox),
-                        SR.GetString(SR.ListGeneralPage_SelectTypeCheckBox)
-                    }
-                );
+                _selectTypeCombo
+                    .Items
+                    .AddRange(
+                        new object[]
+                        {
+                            SR.GetString(SR.ListGeneralPage_SelectTypeDropDown),
+                            SR.GetString(SR.ListGeneralPage_SelectTypeListBox),
+                            SR.GetString(SR.ListGeneralPage_SelectTypeRadio),
+                            SR.GetString(SR.ListGeneralPage_SelectTypeMultiSelectListBox),
+                            SR.GetString(SR.ListGeneralPage_SelectTypeCheckBox)
+                        }
+                    );
                 _selectTypeCombo.TabIndex = 2;
 
                 rowsLabel.SetBounds(211, 24, 161, 16);

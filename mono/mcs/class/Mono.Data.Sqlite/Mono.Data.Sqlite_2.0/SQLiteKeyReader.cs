@@ -451,13 +451,10 @@ namespace Mono.Data.Sqlite
         {
             Sync(i);
             if (_keyInfo[i].query != null)
-                return _keyInfo[i].query._reader.GetBytes(
-                    _keyInfo[i].column,
-                    fieldOffset,
-                    buffer,
-                    bufferoffset,
-                    length
-                );
+                return _keyInfo[i]
+                    .query
+                    ._reader
+                    .GetBytes(_keyInfo[i].column, fieldOffset, buffer, bufferoffset, length);
             else
                 throw new InvalidCastException();
         }
@@ -475,13 +472,10 @@ namespace Mono.Data.Sqlite
         {
             Sync(i);
             if (_keyInfo[i].query != null)
-                return _keyInfo[i].query._reader.GetChars(
-                    _keyInfo[i].column,
-                    fieldOffset,
-                    buffer,
-                    bufferoffset,
-                    length
-                );
+                return _keyInfo[i]
+                    .query
+                    ._reader
+                    .GetChars(_keyInfo[i].column, fieldOffset, buffer, bufferoffset, length);
             else
                 throw new InvalidCastException();
         }

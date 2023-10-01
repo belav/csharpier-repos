@@ -141,7 +141,8 @@ namespace POS_Server.Controllers
                                 x => x.tableId == tableId && x.invoices.invType == "sd"
                             );
 
-                            var invoiceTables = entity.invoiceTables
+                            var invoiceTables = entity
+                                .invoiceTables
                                 .Where(searchPredicate1)
                                 .ToList();
                             if (invoiceTables.Count > 0)
@@ -174,7 +175,8 @@ namespace POS_Server.Controllers
                                 x => branchIds.Contains((int)x.branchId)
                             );
 
-                        dashBoardModel.reservationsCount = entity.reservations
+                        dashBoardModel.reservationsCount = entity
+                            .reservations
                             .Where(resSearchPredicate)
                             .ToList()
                             .Count();
@@ -244,7 +246,8 @@ namespace POS_Server.Controllers
                     string res = "{";
 
                     #region accuracy
-                    var accuracy = entity.setValues
+                    var accuracy = entity
+                        .setValues
                         .Where(x => x.setting.name == "accuracy")
                         .Select(x => x.value)
                         .FirstOrDefault();
@@ -252,7 +255,8 @@ namespace POS_Server.Controllers
                     #endregion
 
                     #region currency
-                    var currency = entity.countriesCodes
+                    var currency = entity
+                        .countriesCodes
                         .Where(x => x.isDefault == 1)
                         .Select(
                             c =>
@@ -272,7 +276,8 @@ namespace POS_Server.Controllers
                     #endregion
 
                     #region invoice types
-                    var dinningHall = entity.setValues
+                    var dinningHall = entity
+                        .setValues
                         .Where(x => x.setting.name == "typesOfService_diningHall")
                         .Select(x => x.value)
                         .FirstOrDefault();
@@ -282,7 +287,8 @@ namespace POS_Server.Controllers
                     else
                         res += "typesOfService_diningHall:" + 0 + ",";
 
-                    var takeaway = entity.setValues
+                    var takeaway = entity
+                        .setValues
                         .Where(x => x.setting.name == "typesOfService_takeAway")
                         .Select(x => x.value)
                         .FirstOrDefault();
@@ -291,7 +297,8 @@ namespace POS_Server.Controllers
                     else
                         res += "typesOfService_takeAway:" + 0 + ",";
 
-                    var selfService = entity.setValues
+                    var selfService = entity
+                        .setValues
                         .Where(x => x.setting.name == "typesOfService_selfService")
                         .Select(x => x.value)
                         .FirstOrDefault();
@@ -450,7 +457,8 @@ namespace POS_Server.Controllers
                             manualDiscountValue = b.manualDiscountValue,
                             cashReturn = b.cashReturn,
                             invBarcode = b.invBarcode,
-                            itemsCount = entity.itemsTransfer
+                            itemsCount = entity
+                                .itemsTransfer
                                 .Where(m => m.invoiceId == b.invoiceId)
                                 .ToList()
                                 .Count(),
@@ -655,9 +663,9 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var tables = (
-                        from tr in entity.tablesReservations.Where(
-                            x => x.reservationId == reservationId
-                        )
+                        from tr in entity
+                            .tablesReservations
+                            .Where(x => x.reservationId == reservationId)
                         join ts in entity.tables on tr.tableId equals ts.tableId
                         select new TableModel()
                         {
@@ -732,9 +740,9 @@ namespace POS_Server.Controllers
                     if (invoiceId > 0)
                     {
                         var tables = (
-                            from tr in entity.tablesReservations.Where(
-                                x => x.reservationId == reservationId
-                            )
+                            from tr in entity
+                                .tablesReservations
+                                .Where(x => x.reservationId == reservationId)
                             join ts in entity.tables on tr.tableId equals ts.tableId
                             select new TableModel()
                             {
@@ -867,7 +875,8 @@ namespace POS_Server.Controllers
                                 agentAddress = b.agents.address,
                                 agentMobile = b.agents.mobile,
                                 agentResSectorsName = b.agents.residentialSectors.name,
-                                itemsCount = entity.itemsTransfer
+                                itemsCount = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == b.invoiceId)
                                     .Count(),
                             }
@@ -876,15 +885,16 @@ namespace POS_Server.Controllers
                         foreach (InvoiceModel inv in invoices)
                         {
                             var prepOrders = (
-                                from o in entity.orderPreparing.Where(
-                                    x => x.invoiceId == inv.invoiceId
-                                )
+                                from o in entity
+                                    .orderPreparing
+                                    .Where(x => x.invoiceId == inv.invoiceId)
                                 join s in entity.orderPreparingStatus
                                     on o.orderPreparingId equals s.orderPreparingId
                                 where
                                     (
                                         s.orderStatusId
-                                        == entity.orderPreparingStatus
+                                        == entity
+                                            .orderPreparingStatus
                                             .Where(x => x.orderPreparingId == o.orderPreparingId)
                                             .Max(x => x.orderStatusId)
                                     )
@@ -997,7 +1007,8 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         #region edit orders status
-                        var orders = entity.orderPreparing
+                        var orders = entity
+                            .orderPreparing
                             .Where(x => x.invoiceId == invoiceId)
                             .ToList();
 
@@ -1073,15 +1084,16 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var prepOrder = (
-                            from o in entity.orderPreparing.Where(
-                                x => x.orderPreparingId == orderId
-                            )
+                            from o in entity
+                                .orderPreparing
+                                .Where(x => x.orderPreparingId == orderId)
                             join s in entity.orderPreparingStatus
                                 on o.orderPreparingId equals s.orderPreparingId
                             where
                                 (
                                     s.orderStatusId
-                                    == entity.orderPreparingStatus
+                                    == entity
+                                        .orderPreparingStatus
                                         .Where(x => x.orderPreparingId == o.orderPreparingId)
                                         .Max(x => x.orderStatusId)
                                 )
@@ -1099,11 +1111,13 @@ namespace POS_Server.Controllers
                                 invNum = o.invoices.invNumber,
                                 invType = o.invoices.invType,
                                 shippingCompanyId = o.invoices.shippingCompanyId,
-                                waiter = entity.users
+                                waiter = entity
+                                    .users
                                     .Where(x => x.userId == o.invoices.waiterId)
                                     .Select(x => x.name)
                                     .FirstOrDefault(),
-                                items = entity.itemOrderPreparing
+                                items = entity
+                                    .itemOrderPreparing
                                     .Where(x => x.orderPreparingId == o.orderPreparingId)
                                     .Select(
                                         x =>
@@ -1136,11 +1150,13 @@ namespace POS_Server.Controllers
                         {
                             if (prepOrder.preparingTime == null || prepOrder.preparingTime == 0)
                             {
-                                var orderItemUnits = entity.itemOrderPreparing
+                                var orderItemUnits = entity
+                                    .itemOrderPreparing
                                     .Where(x => x.orderPreparingId == prepOrder.orderPreparingId)
                                     .Select(x => x.itemUnitId)
                                     .ToList();
-                                prepOrder.preparingTime = entity.menuSettings
+                                prepOrder.preparingTime = entity
+                                    .menuSettings
                                     .Where(x => orderItemUnits.Contains(x.itemUnitId))
                                     .Select(x => x.preparingTime)
                                     .Max();
@@ -1152,9 +1168,9 @@ namespace POS_Server.Controllers
                         #region get invoice tables
                         var tables = (
                             from t in entity.tables.Where(x => x.isActive == 1)
-                            join it in entity.invoiceTables.Where(
-                                x => x.invoiceId == prepOrder.invoiceId
-                            )
+                            join it in entity
+                                .invoiceTables
+                                .Where(x => x.invoiceId == prepOrder.invoiceId)
                                 on t.tableId equals it.tableId
                             select new TableModel() { tableId = t.tableId, name = t.name, }
                         ).ToList();
@@ -1175,7 +1191,8 @@ namespace POS_Server.Controllers
                         else
                         {
                             DateTime createDate = (DateTime)
-                                entity.orderPreparingStatus
+                                entity
+                                    .orderPreparingStatus
                                     .Where(
                                         x =>
                                             x.orderPreparingId == prepOrder.orderPreparingId
@@ -1195,7 +1212,8 @@ namespace POS_Server.Controllers
                             {
                                 long id = (long)item.itemsTransId;
 
-                                item.itemsIngredients = entity.itemsTransferIngredients
+                                item.itemsIngredients = entity
+                                    .itemsTransferIngredients
                                     .Where(x => x.itemsTransId == id)
                                     .Select(
                                         x =>
@@ -1478,9 +1496,14 @@ namespace POS_Server.Controllers
                     #endregion
                     #region delivery Permission
                     var deliverUser = (
-                        from u in entity.users.Where(
-                            u => u.userId == userId && u.isActive == 1 && u.driverIsAvailable == 1
-                        )
+                        from u in entity
+                            .users
+                            .Where(
+                                u =>
+                                    u.userId == userId
+                                    && u.isActive == 1
+                                    && u.driverIsAvailable == 1
+                            )
                         select new UserModel { userId = u.userId, username = u.username, }
                     ).FirstOrDefault();
 
@@ -1547,20 +1570,23 @@ namespace POS_Server.Controllers
                     foreach (string st in statusL)
                     {
                         var invoicesList = (
-                            from b in entity.invoices.Where(
-                                x =>
-                                    invTypeL.Contains(x.invType)
-                                    && x.shipUserId == shipUserId
-                                    && x.isActive == true
-                                    && x.deserved > 0
-                            )
+                            from b in entity
+                                .invoices
+                                .Where(
+                                    x =>
+                                        invTypeL.Contains(x.invType)
+                                        && x.shipUserId == shipUserId
+                                        && x.isActive == true
+                                        && x.deserved > 0
+                                )
                             join s in entity.invoiceStatus on b.invoiceId equals s.invoiceId
                             where
                                 (
                                     s.status == st
                                     && s.invoiceId == b.invoiceId
                                     && s.invStatusId
-                                        == entity.invoiceStatus
+                                        == entity
+                                            .invoiceStatus
                                             .Where(x => x.invoiceId == b.invoiceId)
                                             .Max(x => x.invStatusId)
                                 )
@@ -1602,7 +1628,8 @@ namespace POS_Server.Controllers
                                 shippingCost = b.shippingCost,
                                 realShippingCost = b.realShippingCost,
                                 status = s.status,
-                                itemsCount = entity.itemsTransfer
+                                itemsCount = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == b.invoiceId)
                                     .Select(x => x.itemsTransId)
                                     .ToList()

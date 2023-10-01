@@ -165,7 +165,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var item = entity.printers
+                    var item = entity
+                        .printers
                         .Where(u => u.printerId == printerId)
                         .Select(
                             S =>
@@ -249,7 +250,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                tmpObject = entity.printers
+                                tmpObject = entity
+                                    .printers
                                     .Where(p => p.printerId == newObject.printerId)
                                     .FirstOrDefault();
 
@@ -394,7 +396,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.printers
+                            tmpObject = entity
+                                .printers
                                 .Where(p => p.printerId == newObject.printerId)
                                 .FirstOrDefault();
 

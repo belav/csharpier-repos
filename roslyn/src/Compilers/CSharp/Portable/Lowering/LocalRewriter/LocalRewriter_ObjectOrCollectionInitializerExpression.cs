@@ -195,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(addMethod.Name == "Add");
             Debug.Assert(
-                addMethod.Parameters
+                addMethod
+                    .Parameters
                     .Skip(addMethod.IsExtensionMethod ? 1 : 0)
                     .All(p => p.RefKind == RefKind.None || p.RefKind == RefKind.In)
             );
@@ -692,7 +693,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #if DEBUG
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             Debug.Assert(
-                _compilation.Conversions
+                _compilation
+                    .Conversions
                     .ClassifyConversionFromType(
                         rewrittenReceiver.Type,
                         memberSymbol.ContainingType,

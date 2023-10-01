@@ -117,14 +117,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditAndContinue
                     )
                     .ConfigureAwait(false);
 
-                var updates = moduleUpdates.Updates.SelectAsArray(
-                    update =>
-                        new ManagedHotReloadUpdate(
-                            update.Module,
-                            update.ILDelta,
-                            update.MetadataDelta
-                        )
-                );
+                var updates = moduleUpdates
+                    .Updates
+                    .SelectAsArray(
+                        update =>
+                            new ManagedHotReloadUpdate(
+                                update.Module,
+                                update.ILDelta,
+                                update.MetadataDelta
+                            )
+                    );
 
                 var diagnostics = await EmitSolutionUpdateResults
                     .GetHotReloadDiagnosticsAsync(

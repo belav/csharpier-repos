@@ -216,7 +216,8 @@ namespace System.CommandLine
 
                         try
                         {
-                            var currentProcessFullPath = Diagnostics.Process
+                            var currentProcessFullPath = Diagnostics
+                                .Process
                                 .GetCurrentProcess()
                                 .MainModule
                                 ?.FileName;
@@ -368,9 +369,10 @@ ERR:
                     context.Console.ResetTerminalForegroundColor();
                     context.Console.SetTerminalForegroundRed();
 
-                    context.Console.Error.Write(
-                        context.LocalizationResources.ExceptionHandlerHeader()
-                    );
+                    context
+                        .Console
+                        .Error
+                        .Write(context.LocalizationResources.ExceptionHandlerHeader());
                     context.Console.Error.WriteLine(exception.ToString());
 
                     context.Console.ResetTerminalForegroundColor();
@@ -713,9 +715,10 @@ ERR:
                     if (context.ParseResult.FindResultFor(versionOption) is { })
                     {
                         if (
-                            context.ParseResult.Errors.Any(
-                                e => e.SymbolResult?.Symbol is VersionOption
-                            )
+                            context
+                                .ParseResult
+                                .Errors
+                                .Any(e => e.SymbolResult?.Symbol is VersionOption)
                         )
                         {
                             context.InvocationResult = static ctx =>
@@ -763,9 +766,10 @@ ERR:
                     if (context.ParseResult.FindResultFor(versionOption) is { })
                     {
                         if (
-                            context.ParseResult.Errors.Any(
-                                e => e.SymbolResult?.Symbol is VersionOption
-                            )
+                            context
+                                .ParseResult
+                                .Errors
+                                .Any(e => e.SymbolResult?.Symbol is VersionOption)
                         )
                         {
                             context.InvocationResult = static ctx =>

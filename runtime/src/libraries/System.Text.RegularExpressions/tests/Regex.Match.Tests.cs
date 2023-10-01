@@ -2534,10 +2534,12 @@ namespace System.Text.RegularExpressions.Tests
                             @"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@(([0-9a-zA-Z])+([-\w]*[0-9a-zA-Z])*\.)+[a-zA-Z]{2,9})$";
                         string input = new string('a', 50) + "@a.a";
 
-                        AppDomain.CurrentDomain.SetData(
-                            RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
-                            TimeSpan.FromMilliseconds(100)
-                        );
+                        AppDomain
+                            .CurrentDomain
+                            .SetData(
+                                RegexHelpers.DefaultMatchTimeout_ConfigKeyName,
+                                TimeSpan.FromMilliseconds(100)
+                            );
 
                         if (
                             (RegexOptions)int.Parse(optionsString, CultureInfo.InvariantCulture)

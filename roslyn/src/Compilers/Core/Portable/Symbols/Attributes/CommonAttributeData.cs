@@ -619,9 +619,9 @@ namespace Microsoft.CodeAnalysis
                         break;
 
                     case "Size":
-                        size = namedArg.Value.DecodeValue<int>(
-                            Microsoft.CodeAnalysis.SpecialType.System_Int32
-                        );
+                        size = namedArg
+                            .Value
+                            .DecodeValue<int>(Microsoft.CodeAnalysis.SpecialType.System_Int32);
                         if (size < 0)
                         {
                             messageProvider.ReportInvalidNamedArgument(

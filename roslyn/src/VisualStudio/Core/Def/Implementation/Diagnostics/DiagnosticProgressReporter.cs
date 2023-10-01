@@ -184,14 +184,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     ? ServicesVSResources.Paused_0_tasks_in_queue
                     : ServicesVSResources.Evaluating_0_tasks_in_queue;
 
-            _taskHandler.Progress.Report(
-                new TaskProgressData
-                {
-                    ProgressText = string.Format(statusMessage, _lastPendingItemCount),
-                    CanBeCanceled = false,
-                    PercentComplete = null,
-                }
-            );
+            _taskHandler
+                .Progress
+                .Report(
+                    new TaskProgressData
+                    {
+                        ProgressText = string.Format(statusMessage, _lastPendingItemCount),
+                        CanBeCanceled = false,
+                        PercentComplete = null,
+                    }
+                );
         }
 
         private void StopTaskCenter()

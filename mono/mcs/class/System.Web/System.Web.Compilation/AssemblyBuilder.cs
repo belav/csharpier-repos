@@ -932,9 +932,11 @@ namespace System.Web.Compilation
                 catch (Exception) { }
 
 #if DEBUG
-                Console.Error.WriteLine(
-                    "********************************************************************"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "********************************************************************"
+                    );
                 Console.Error.WriteLine("Compilation failed.");
                 Console.Error.WriteLine("Output:");
                 foreach (string s in results.Output)
@@ -950,9 +952,11 @@ namespace System.Web.Compilation
                     Console.Error.WriteLine("File text:\n{0}\n", fileText);
                 else
                     Console.Error.WriteLine("No file text available");
-                Console.Error.WriteLine(
-                    "********************************************************************"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "********************************************************************"
+                    );
 #endif
                 throw new CompilationException(
                     virtualPath != null ? virtualPath.Original : String.Empty,

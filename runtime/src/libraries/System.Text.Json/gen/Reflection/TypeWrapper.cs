@@ -203,11 +203,15 @@ namespace System.Text.Json.Reflection
         public override string? Namespace =>
             IsArray
                 ? GetElementType().Namespace
-                : _typeSymbol.ContainingNamespace?.ToDisplayString(
-                    SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                        SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
-                    )
-                );
+                : _typeSymbol
+                    .ContainingNamespace
+                    ?.ToDisplayString(
+                        SymbolDisplayFormat
+                            .FullyQualifiedFormat
+                            .WithGlobalNamespaceStyle(
+                                SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
+                            )
+                    );
 
         public override Type UnderlyingSystemType => this;
 
@@ -258,9 +262,9 @@ namespace System.Text.Json.Reflection
                 )
                 {
                     if (
-                        currentSymbol.TypeArguments.Any(
-                            arg => arg.TypeKind == TypeKind.TypeParameter
-                        )
+                        currentSymbol
+                            .TypeArguments
+                            .Any(arg => arg.TypeKind == TypeKind.TypeParameter)
                     )
                     {
                         return true;
@@ -273,10 +277,9 @@ namespace System.Text.Json.Reflection
 
         public override bool IsGenericTypeDefinition =>
             IsGenericType
-            && SymbolEqualityComparer.Default.Equals(
-                _namedTypeSymbol,
-                _namedTypeSymbol.ConstructedFrom
-            );
+            && SymbolEqualityComparer
+                .Default
+                .Equals(_namedTypeSymbol, _namedTypeSymbol.ConstructedFrom);
 
         public override bool IsGenericParameter => _typeSymbol.TypeKind == TypeKind.TypeParameter;
 
@@ -382,7 +385,8 @@ namespace System.Text.Json.Reflection
 
         public override Type MakeArrayType()
         {
-            return _metadataLoadContext.Compilation
+            return _metadataLoadContext
+                .Compilation
                 .CreateArrayTypeSymbol(_typeSymbol)
                 .AsType(_metadataLoadContext);
         }
@@ -736,10 +740,9 @@ namespace System.Text.Json.Reflection
 
             return tr is not null
                 && (
-                    tr._typeSymbol.AllInterfaces.Contains(
-                        _typeSymbol,
-                        SymbolEqualityComparer.Default
-                    )
+                    tr._typeSymbol
+                        .AllInterfaces
+                        .Contains(_typeSymbol, SymbolEqualityComparer.Default)
                     || (
                         tr._namedTypeSymbol != null
                         && tr._namedTypeSymbol

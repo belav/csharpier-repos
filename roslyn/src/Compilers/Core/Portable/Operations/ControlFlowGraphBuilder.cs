@@ -2196,10 +2196,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             Debug.Assert(candidate.IsStackSpillRegion);
                             if (
                                 candidate.HasCaptureIds
-                                && candidate.CaptureIds.Any(
-                                    (id, set) => set.Contains(id),
-                                    idsStillOnTheStack
-                                )
+                                && candidate
+                                    .CaptureIds
+                                    .Any((id, set) => set.Contains(id), idsStillOnTheStack)
                             )
                             {
                                 currentSpillRegion = candidate;
@@ -8643,9 +8642,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 #if DEBUG
             Debug.Assert(_evalStack[maxStackDepth + 1].frameOpt != null);
             if (
-                _currentInterpolatedStringHandlerArgumentContext?.ApplicableCreationOperations.Contains(
-                    operation
-                ) == true
+                _currentInterpolatedStringHandlerArgumentContext
+                    ?.ApplicableCreationOperations
+                    .Contains(operation) == true
             )
             {
                 for (
@@ -9232,10 +9231,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             {
                 Debug.Assert(_currentImplicitInstance.AnonymousTypePropertyValues is not null);
                 if (
-                    _currentImplicitInstance.AnonymousTypePropertyValues.TryGetValue(
-                        operation.Property,
-                        out IOperation? captured
-                    )
+                    _currentImplicitInstance
+                        .AnonymousTypePropertyValues
+                        .TryGetValue(operation.Property, out IOperation? captured)
                 )
                 {
                     return captured is IFlowCaptureReferenceOperation reference
@@ -10062,10 +10060,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             return new ListPatternOperation(
                 operation.LengthSymbol,
                 operation.IndexerSymbol,
-                operation.Patterns.SelectAsArray(
-                    (p, @this) => (IPatternOperation)@this.VisitRequired(p),
-                    this
-                ),
+                operation
+                    .Patterns
+                    .SelectAsArray((p, @this) => (IPatternOperation)@this.VisitRequired(p), this),
                 operation.DeclaredSymbol,
                 operation.InputType,
                 operation.NarrowedType,
@@ -10083,14 +10080,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             return new RecursivePatternOperation(
                 operation.MatchedType,
                 operation.DeconstructSymbol,
-                operation.DeconstructionSubpatterns.SelectAsArray(
-                    (p, @this) => (IPatternOperation)@this.VisitRequired(p),
-                    this
-                ),
-                operation.PropertySubpatterns.SelectAsArray(
-                    (p, @this) => (IPropertySubpatternOperation)@this.VisitRequired(p),
-                    this
-                ),
+                operation
+                    .DeconstructionSubpatterns
+                    .SelectAsArray((p, @this) => (IPatternOperation)@this.VisitRequired(p), this),
+                operation
+                    .PropertySubpatterns
+                    .SelectAsArray(
+                        (p, @this) => (IPropertySubpatternOperation)@this.VisitRequired(p),
+                        this
+                    ),
                 operation.DeclaredSymbol,
                 operation.InputType,
                 operation.NarrowedType,
@@ -10464,7 +10462,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 var initializers = operation.Initializer.Initializers;
 
-                var properties = operation.Type
+                var properties = operation
+                    .Type
                     .GetMembers()
                     .Where(m => m.Kind == SymbolKind.Property)
                     .Select(m => (IPropertySymbol)m);

@@ -29,11 +29,9 @@ namespace System.Data.Odbc
                 {
                     case ODBC32.SQL_HANDLE.ENV:
                         Debug.Assert(null == parentHandle, "did not expect a parent handle");
-                        retcode = Interop.Odbc.SQLAllocHandle(
-                            handleType,
-                            IntPtr.Zero,
-                            out base.handle
-                        );
+                        retcode = Interop
+                            .Odbc
+                            .SQLAllocHandle(handleType, IntPtr.Zero, out base.handle);
                         break;
                     case ODBC32.SQL_HANDLE.DBC:
                     case ODBC32.SQL_HANDLE.STMT:
@@ -41,11 +39,9 @@ namespace System.Data.Odbc
                         Debug.Assert(null != parentHandle, "expected a parent handle"); // safehandle can't be null
                         parentHandle.DangerousAddRef(ref mustRelease);
 
-                        retcode = Interop.Odbc.SQLAllocHandle(
-                            handleType,
-                            parentHandle,
-                            out base.handle
-                        );
+                        retcode = Interop
+                            .Odbc
+                            .SQLAllocHandle(handleType, parentHandle, out base.handle);
                         break;
                     //              case ODBC32.SQL_HANDLE.DESC:
                     default:
@@ -192,15 +188,17 @@ namespace System.Data.Odbc
         {
             // ODBC (MSDN) documents it expects a buffer large enough to hold 5(+L'\0') unicode characters
             char[] buffer = new char[6];
-            ODBC32.SQLRETURN retcode = Interop.Odbc.SQLGetDiagFieldW(
-                HandleType,
-                this,
-                (short)1,
-                ODBC32.SQL_DIAG_SQLSTATE,
-                buffer,
-                checked((short)(2 * buffer.Length)), // expects number of bytes, see \\kbinternal\kb\articles\294\1\69.HTM
-                out _
-            );
+            ODBC32.SQLRETURN retcode = Interop
+                .Odbc
+                .SQLGetDiagFieldW(
+                    HandleType,
+                    this,
+                    (short)1,
+                    ODBC32.SQL_DIAG_SQLSTATE,
+                    buffer,
+                    checked((short)(2 * buffer.Length)), // expects number of bytes, see \\kbinternal\kb\articles\294\1\69.HTM
+                    out _
+                );
             ODBC.TraceODBC(3, "SQLGetDiagFieldW", retcode);
             if (
                 (retcode == ODBC32.SQLRETURN.SUCCESS)
@@ -228,16 +226,18 @@ namespace System.Data.Odbc
             // See https://docs.microsoft.com/sql/odbc/reference/syntax/sqlgetdiagrec-function
             char[] buffer = new char[6];
             char[] message = new char[1024];
-            ODBC32.SQLRETURN retcode = Interop.Odbc.SQLGetDiagRecW(
-                HandleType,
-                this,
-                record,
-                buffer,
-                out nativeError,
-                message,
-                checked((short)message.Length),
-                out cchActual
-            );
+            ODBC32.SQLRETURN retcode = Interop
+                .Odbc
+                .SQLGetDiagRecW(
+                    HandleType,
+                    this,
+                    record,
+                    buffer,
+                    out nativeError,
+                    message,
+                    checked((short)message.Length),
+                    out cchActual
+                );
             ODBC.TraceODBC(3, "SQLGetDiagRecW", retcode);
 
             if (
@@ -271,14 +271,16 @@ namespace System.Data.Odbc
             out int numericAttribute
         )
         {
-            ODBC32.SQLRETURN retcode = Interop.Odbc.SQLGetDescFieldW(
-                this,
-                checked((short)i),
-                attribute,
-                buffer,
-                buffer.ShortLength,
-                out numericAttribute
-            );
+            ODBC32.SQLRETURN retcode = Interop
+                .Odbc
+                .SQLGetDescFieldW(
+                    this,
+                    checked((short)i),
+                    attribute,
+                    buffer,
+                    buffer.ShortLength,
+                    out numericAttribute
+                );
             ODBC.TraceODBC(3, "SQLGetDescFieldW", retcode);
             return retcode;
         }

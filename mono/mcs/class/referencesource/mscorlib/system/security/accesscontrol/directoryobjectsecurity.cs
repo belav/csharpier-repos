@@ -379,78 +379,90 @@ namespace System.Security.AccessControl
                 switch (modification)
                 {
                     case AccessControlModification.Add:
-                        _securityDescriptor.DiscretionaryAcl.AddAccess(
-                            AccessControlType.Allow,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .AddAccess(
+                                AccessControlType.Allow,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     case AccessControlModification.Set:
-                        _securityDescriptor.DiscretionaryAcl.SetAccess(
-                            AccessControlType.Allow,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .SetAccess(
+                                AccessControlType.Allow,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     case AccessControlModification.Reset:
-                        _securityDescriptor.DiscretionaryAcl.RemoveAccess(
-                            AccessControlType.Deny,
-                            sid,
-                            -1,
-                            InheritanceFlags.ContainerInherit,
-                            0,
-                            ObjectAceFlags.None,
-                            Guid.Empty,
-                            Guid.Empty
-                        );
-                        _securityDescriptor.DiscretionaryAcl.SetAccess(
-                            AccessControlType.Allow,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .RemoveAccess(
+                                AccessControlType.Deny,
+                                sid,
+                                -1,
+                                InheritanceFlags.ContainerInherit,
+                                0,
+                                ObjectAceFlags.None,
+                                Guid.Empty,
+                                Guid.Empty
+                            );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .SetAccess(
+                                AccessControlType.Allow,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     case AccessControlModification.Remove:
-                        result = _securityDescriptor.DiscretionaryAcl.RemoveAccess(
-                            AccessControlType.Allow,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        result = _securityDescriptor
+                            .DiscretionaryAcl
+                            .RemoveAccess(
+                                AccessControlType.Allow,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     case AccessControlModification.RemoveAll:
-                        result = _securityDescriptor.DiscretionaryAcl.RemoveAccess(
-                            AccessControlType.Allow,
-                            sid,
-                            -1,
-                            InheritanceFlags.ContainerInherit,
-                            0,
-                            ObjectAceFlags.None,
-                            Guid.Empty,
-                            Guid.Empty
-                        );
+                        result = _securityDescriptor
+                            .DiscretionaryAcl
+                            .RemoveAccess(
+                                AccessControlType.Allow,
+                                sid,
+                                -1,
+                                InheritanceFlags.ContainerInherit,
+                                0,
+                                ObjectAceFlags.None,
+                                Guid.Empty,
+                                Guid.Empty
+                            );
                         if (result == false)
                         {
                             Contract.Assert(false, "Invalid operation");
@@ -460,16 +472,18 @@ namespace System.Security.AccessControl
                         break;
 
                     case AccessControlModification.RemoveSpecific:
-                        _securityDescriptor.DiscretionaryAcl.RemoveAccessSpecific(
-                            AccessControlType.Allow,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .RemoveAccessSpecific(
+                                AccessControlType.Allow,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     default:
@@ -484,78 +498,90 @@ namespace System.Security.AccessControl
                 switch (modification)
                 {
                     case AccessControlModification.Add:
-                        _securityDescriptor.DiscretionaryAcl.AddAccess(
-                            AccessControlType.Deny,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .AddAccess(
+                                AccessControlType.Deny,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     case AccessControlModification.Set:
-                        _securityDescriptor.DiscretionaryAcl.SetAccess(
-                            AccessControlType.Deny,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .SetAccess(
+                                AccessControlType.Deny,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     case AccessControlModification.Reset:
-                        _securityDescriptor.DiscretionaryAcl.RemoveAccess(
-                            AccessControlType.Allow,
-                            sid,
-                            -1,
-                            InheritanceFlags.ContainerInherit,
-                            0,
-                            ObjectAceFlags.None,
-                            Guid.Empty,
-                            Guid.Empty
-                        );
-                        _securityDescriptor.DiscretionaryAcl.SetAccess(
-                            AccessControlType.Deny,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .RemoveAccess(
+                                AccessControlType.Allow,
+                                sid,
+                                -1,
+                                InheritanceFlags.ContainerInherit,
+                                0,
+                                ObjectAceFlags.None,
+                                Guid.Empty,
+                                Guid.Empty
+                            );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .SetAccess(
+                                AccessControlType.Deny,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     case AccessControlModification.Remove:
-                        result = _securityDescriptor.DiscretionaryAcl.RemoveAccess(
-                            AccessControlType.Deny,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        result = _securityDescriptor
+                            .DiscretionaryAcl
+                            .RemoveAccess(
+                                AccessControlType.Deny,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     case AccessControlModification.RemoveAll:
-                        result = _securityDescriptor.DiscretionaryAcl.RemoveAccess(
-                            AccessControlType.Deny,
-                            sid,
-                            -1,
-                            InheritanceFlags.ContainerInherit,
-                            0,
-                            ObjectAceFlags.None,
-                            Guid.Empty,
-                            Guid.Empty
-                        );
+                        result = _securityDescriptor
+                            .DiscretionaryAcl
+                            .RemoveAccess(
+                                AccessControlType.Deny,
+                                sid,
+                                -1,
+                                InheritanceFlags.ContainerInherit,
+                                0,
+                                ObjectAceFlags.None,
+                                Guid.Empty,
+                                Guid.Empty
+                            );
                         if (result == false)
                         {
                             Contract.Assert(false, "Invalid operation");
@@ -565,16 +591,18 @@ namespace System.Security.AccessControl
                         break;
 
                     case AccessControlModification.RemoveSpecific:
-                        _securityDescriptor.DiscretionaryAcl.RemoveAccessSpecific(
-                            AccessControlType.Deny,
-                            sid,
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags,
-                            rule.ObjectFlags,
-                            rule.ObjectType,
-                            rule.InheritedObjectType
-                        );
+                        _securityDescriptor
+                            .DiscretionaryAcl
+                            .RemoveAccessSpecific(
+                                AccessControlType.Deny,
+                                sid,
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags,
+                                rule.ObjectFlags,
+                                rule.ObjectType,
+                                rule.InheritedObjectType
+                            );
                         break;
 
                     default:
@@ -660,78 +688,90 @@ namespace System.Security.AccessControl
             switch (modification)
             {
                 case AccessControlModification.Add:
-                    _securityDescriptor.SystemAcl.AddAudit(
-                        rule.AuditFlags,
-                        sid,
-                        rule.AccessMask,
-                        rule.InheritanceFlags,
-                        rule.PropagationFlags,
-                        rule.ObjectFlags,
-                        rule.ObjectType,
-                        rule.InheritedObjectType
-                    );
+                    _securityDescriptor
+                        .SystemAcl
+                        .AddAudit(
+                            rule.AuditFlags,
+                            sid,
+                            rule.AccessMask,
+                            rule.InheritanceFlags,
+                            rule.PropagationFlags,
+                            rule.ObjectFlags,
+                            rule.ObjectType,
+                            rule.InheritedObjectType
+                        );
                     break;
 
                 case AccessControlModification.Set:
-                    _securityDescriptor.SystemAcl.SetAudit(
-                        rule.AuditFlags,
-                        sid,
-                        rule.AccessMask,
-                        rule.InheritanceFlags,
-                        rule.PropagationFlags,
-                        rule.ObjectFlags,
-                        rule.ObjectType,
-                        rule.InheritedObjectType
-                    );
+                    _securityDescriptor
+                        .SystemAcl
+                        .SetAudit(
+                            rule.AuditFlags,
+                            sid,
+                            rule.AccessMask,
+                            rule.InheritanceFlags,
+                            rule.PropagationFlags,
+                            rule.ObjectFlags,
+                            rule.ObjectType,
+                            rule.InheritedObjectType
+                        );
                     break;
 
                 case AccessControlModification.Reset:
-                    _securityDescriptor.SystemAcl.RemoveAudit(
-                        AuditFlags.Failure | AuditFlags.Success,
-                        sid,
-                        -1,
-                        InheritanceFlags.ContainerInherit,
-                        0,
-                        ObjectAceFlags.None,
-                        Guid.Empty,
-                        Guid.Empty
-                    );
-                    _securityDescriptor.SystemAcl.SetAudit(
-                        rule.AuditFlags,
-                        sid,
-                        rule.AccessMask,
-                        rule.InheritanceFlags,
-                        rule.PropagationFlags,
-                        rule.ObjectFlags,
-                        rule.ObjectType,
-                        rule.InheritedObjectType
-                    );
+                    _securityDescriptor
+                        .SystemAcl
+                        .RemoveAudit(
+                            AuditFlags.Failure | AuditFlags.Success,
+                            sid,
+                            -1,
+                            InheritanceFlags.ContainerInherit,
+                            0,
+                            ObjectAceFlags.None,
+                            Guid.Empty,
+                            Guid.Empty
+                        );
+                    _securityDescriptor
+                        .SystemAcl
+                        .SetAudit(
+                            rule.AuditFlags,
+                            sid,
+                            rule.AccessMask,
+                            rule.InheritanceFlags,
+                            rule.PropagationFlags,
+                            rule.ObjectFlags,
+                            rule.ObjectType,
+                            rule.InheritedObjectType
+                        );
                     break;
 
                 case AccessControlModification.Remove:
-                    result = _securityDescriptor.SystemAcl.RemoveAudit(
-                        rule.AuditFlags,
-                        sid,
-                        rule.AccessMask,
-                        rule.InheritanceFlags,
-                        rule.PropagationFlags,
-                        rule.ObjectFlags,
-                        rule.ObjectType,
-                        rule.InheritedObjectType
-                    );
+                    result = _securityDescriptor
+                        .SystemAcl
+                        .RemoveAudit(
+                            rule.AuditFlags,
+                            sid,
+                            rule.AccessMask,
+                            rule.InheritanceFlags,
+                            rule.PropagationFlags,
+                            rule.ObjectFlags,
+                            rule.ObjectType,
+                            rule.InheritedObjectType
+                        );
                     break;
 
                 case AccessControlModification.RemoveAll:
-                    result = _securityDescriptor.SystemAcl.RemoveAudit(
-                        AuditFlags.Failure | AuditFlags.Success,
-                        sid,
-                        -1,
-                        InheritanceFlags.ContainerInherit,
-                        0,
-                        ObjectAceFlags.None,
-                        Guid.Empty,
-                        Guid.Empty
-                    );
+                    result = _securityDescriptor
+                        .SystemAcl
+                        .RemoveAudit(
+                            AuditFlags.Failure | AuditFlags.Success,
+                            sid,
+                            -1,
+                            InheritanceFlags.ContainerInherit,
+                            0,
+                            ObjectAceFlags.None,
+                            Guid.Empty,
+                            Guid.Empty
+                        );
                     if (result == false)
                     {
                         Contract.Assert(false, "Invalid operation");
@@ -741,16 +781,18 @@ namespace System.Security.AccessControl
                     break;
 
                 case AccessControlModification.RemoveSpecific:
-                    _securityDescriptor.SystemAcl.RemoveAuditSpecific(
-                        rule.AuditFlags,
-                        sid,
-                        rule.AccessMask,
-                        rule.InheritanceFlags,
-                        rule.PropagationFlags,
-                        rule.ObjectFlags,
-                        rule.ObjectType,
-                        rule.InheritedObjectType
-                    );
+                    _securityDescriptor
+                        .SystemAcl
+                        .RemoveAuditSpecific(
+                            rule.AuditFlags,
+                            sid,
+                            rule.AccessMask,
+                            rule.InheritanceFlags,
+                            rule.PropagationFlags,
+                            rule.ObjectFlags,
+                            rule.ObjectType,
+                            rule.InheritedObjectType
+                        );
                     break;
 
                 default:

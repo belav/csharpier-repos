@@ -111,9 +111,9 @@ namespace {TestNamespace}{suiteNamespacePart}
             // Find testcase assembly
             foreach (var reference in context.Compilation.References)
             {
-                ISymbol? assemblyOrModule = context.Compilation.GetAssemblyOrModuleSymbol(
-                    reference
-                );
+                ISymbol? assemblyOrModule = context
+                    .Compilation
+                    .GetAssemblyOrModuleSymbol(reference);
                 if (assemblyOrModule is IAssemblySymbol asmSym && asmSym.Name == TestCaseAssembly)
                 {
                     assemblySymbol = asmSym;
@@ -176,10 +176,9 @@ namespace {TestNamespace}{suiteNamespacePart}
                 suiteName = kvp.Key;
                 var cases = kvp.Value;
 
-                bool newTestSuite = !existingTestCases.Suites.TryGetValue(
-                    suiteName,
-                    out HashSet<string> existingCases
-                );
+                bool newTestSuite = !existingTestCases
+                    .Suites
+                    .TryGetValue(suiteName, out HashSet<string> existingCases);
                 var newCases = newTestSuite ? cases : cases.Except(existingCases);
                 // Skip generating a test class if all testcases in the suite already exist.
                 if (!newCases.Any())

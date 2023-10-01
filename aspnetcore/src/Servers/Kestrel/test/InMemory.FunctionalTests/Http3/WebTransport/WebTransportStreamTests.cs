@@ -51,7 +51,9 @@ public class WebTransportStreamTests : Http3TestBase
         await stream.Transport.Output.FlushAsync();
 
         var memoryOut = new Memory<byte>(new byte[5]);
-        var length = await stream.Transport.Input
+        var length = await stream
+            .Transport
+            .Input
             .AsStream()
             .ReadAsync(memoryOut, CancellationToken.None);
 

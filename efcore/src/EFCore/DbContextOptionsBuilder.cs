@@ -255,10 +255,12 @@ public class DbContextOptionsBuilder : IDbContextOptionsBuilderInfrastructure
                         for (var i = 0; i < categoriesArray.Length; i++)
                         {
                             if (
-                                eventId.Name!.StartsWith(
-                                    categoriesArray[i],
-                                    StringComparison.OrdinalIgnoreCase
-                                )
+                                eventId
+                                    .Name!
+                                    .StartsWith(
+                                        categoriesArray[i],
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
                             {
                                 return true;

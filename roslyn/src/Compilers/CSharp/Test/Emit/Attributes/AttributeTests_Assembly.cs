@@ -792,10 +792,12 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly
+                            .ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -879,10 +881,12 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly
+                            .ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -958,10 +962,12 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly
+                            .ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1044,10 +1050,12 @@ class Program
                         reader.GetBlobBytes(file2.HashValue)
                     );
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly
+                            .ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1159,10 +1167,12 @@ class Program
                         reader.GetBlobBytes(file2.HashValue)
                     );
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly
+                            .ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1307,10 +1317,12 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly
+                            .ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1487,10 +1499,12 @@ class Program
                     );
 
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly
+                            .ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1523,10 +1537,12 @@ class Program
                     AssemblyDefinition assembly = peReader.GetAssemblyDefinition();
                     Assert.Equal(AssemblyHashAlgorithm.MD5, assembly.HashAlgorithm);
                     Assert.Null(
-                        peAssembly.ManifestModule.FindTargetAttributes(
-                            peAssembly.Handle,
-                            AttributeDescription.AssemblyAlgorithmIdAttribute
-                        )
+                        peAssembly
+                            .ManifestModule
+                            .FindTargetAttributes(
+                                peAssembly.Handle,
+                                AttributeDescription.AssemblyAlgorithmIdAttribute
+                            )
                     );
                 }
             );
@@ -1812,7 +1828,8 @@ public class C {}
         {
             // SOURCE ATTRIBUTES
 
-            var sourceAttributes = compilation.Assembly
+            var sourceAttributes = compilation
+                .Assembly
                 .GetAttributes()
                 .Where(
                     a =>
@@ -1831,7 +1848,8 @@ public class C {}
                     var expectedEmittedAttrsCount =
                         expectedSrcAttrCount - expectedDuplicateAttrCount;
 
-                    var metadataAttributes = module.ContainingAssembly
+                    var metadataAttributes = module
+                        .ContainingAssembly
                         .GetAttributes()
                         .Where(
                             a =>
@@ -2928,7 +2946,8 @@ public class C { }
                 assembly,
                 symbolValidator: moduleSymbol =>
                 {
-                    var attrs = moduleSymbol.ContainingAssembly
+                    var attrs = moduleSymbol
+                        .ContainingAssembly
                         .GetAttributes()
                         .Select(a => a.ToString())
                         .ToArray();

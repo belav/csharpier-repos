@@ -40,11 +40,9 @@ namespace System.Workflow.Runtime.Hosting
 
         public WorkflowWebHostingModule()
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Web Hosting Module Created"
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(TraceEventType.Information, 0, "Workflow Web Hosting Module Created");
         }
 
         /// <summary>
@@ -53,11 +51,13 @@ namespace System.Workflow.Runtime.Hosting
         /// <param name="application"></param>
         void IHttpModule.Init(HttpApplication application)
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Workflow Web Hosting Module Initialized"
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Workflow Web Hosting Module Initialized"
+                );
 
             this.currentApplication = application;
 
@@ -71,22 +71,22 @@ namespace System.Workflow.Runtime.Hosting
         void OnAcquireRequestState(Object sender, EventArgs e)
         {
             //Performs Cookie based routing.
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "WebHost Module Routing Begin"
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(TraceEventType.Information, 0, "WebHost Module Routing Begin");
 
-            HttpCookie routingCookie = HttpContext.Current.Request.Cookies.Get(
-                "WF_WorkflowInstanceId"
-            );
+            HttpCookie routingCookie = HttpContext
+                .Current
+                .Request
+                .Cookies
+                .Get("WF_WorkflowInstanceId");
 
             if (routingCookie != null)
             {
-                HttpContext.Current.Items.Add(
-                    "__WorkflowInstanceId__",
-                    new Guid(routingCookie.Value)
-                );
+                HttpContext
+                    .Current
+                    .Items
+                    .Add("__WorkflowInstanceId__", new Guid(routingCookie.Value));
             }
             //else no routing information found, it could be activation request or non workflow based request.
         }

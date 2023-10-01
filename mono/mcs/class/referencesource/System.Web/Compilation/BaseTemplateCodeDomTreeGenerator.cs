@@ -126,9 +126,9 @@ namespace System.Web.Compilation
             CodeExpressionStatement call = new CodeExpressionStatement(methodInvoke);
             methodInvoke.Method.TargetObject = new CodeThisReferenceExpression();
             methodInvoke.Method.MethodName = "WriteUTF8ResourceString";
-            methodInvoke.Parameters.Add(
-                new CodeArgumentReferenceExpression(renderMethodParameterName)
-            );
+            methodInvoke
+                .Parameters
+                .Add(new CodeArgumentReferenceExpression(renderMethodParameterName));
             methodInvoke.Parameters.Add(new CodePrimitiveExpression(offset));
             methodInvoke.Parameters.Add(new CodePrimitiveExpression(size));
             methodInvoke.Parameters.Add(new CodePrimitiveExpression(fAsciiOnly));
@@ -227,13 +227,15 @@ namespace System.Web.Compilation
             if (fTemplate || (cpse != null && cpse.ReadOnly))
             {
                 if (builder is RootBuilder)
-                    method.Parameters.Add(
-                        new CodeParameterDeclarationExpression(_sourceDataClass.Name, "__ctrl")
-                    );
+                    method
+                        .Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(_sourceDataClass.Name, "__ctrl")
+                        );
                 else
-                    method.Parameters.Add(
-                        new CodeParameterDeclarationExpression(ctrlType, "__ctrl")
-                    );
+                    method
+                        .Parameters
+                        .Add(new CodeParameterDeclarationExpression(ctrlType, "__ctrl"));
             }
             else
             {
@@ -283,9 +285,9 @@ namespace System.Web.Compilation
             // Add a control parameter if it's a ControlSkin
             if (fControlSkin)
             {
-                method.Parameters.Add(
-                    new CodeParameterDeclarationExpression(typeof(Control).FullName, "ctrl")
-                );
+                method
+                    .Parameters
+                    .Add(new CodeParameterDeclarationExpression(typeof(Control).FullName, "ctrl"));
             }
 
             BuildBuildMethodInternal(
@@ -380,12 +382,16 @@ namespace System.Web.Compilation
                     builder as DataBoundLiteralControlBuilder;
                 if (dataBoundBuilder != null)
                 {
-                    newExpr.Parameters.Add(
-                        new CodePrimitiveExpression(dataBoundBuilder.GetStaticLiteralsCount())
-                    );
-                    newExpr.Parameters.Add(
-                        new CodePrimitiveExpression(dataBoundBuilder.GetDataBoundLiteralCount())
-                    );
+                    newExpr
+                        .Parameters
+                        .Add(
+                            new CodePrimitiveExpression(dataBoundBuilder.GetStaticLiteralsCount())
+                        );
+                    newExpr
+                        .Parameters
+                        .Add(
+                            new CodePrimitiveExpression(dataBoundBuilder.GetDataBoundLiteralCount())
+                        );
                 }
 
                 // e.g. {{controlTypeName}} __ctrl;
@@ -539,12 +545,14 @@ namespace System.Web.Compilation
                     ctrlRefExpr,
                     "InitializeAsUserControl"
                 );
-                methCallExpression.Parameters.Add(
-                    new CodePropertyReferenceExpression(
-                        new CodeThisReferenceExpression(),
-                        pagePropertyName
-                    )
-                );
+                methCallExpression
+                    .Parameters
+                    .Add(
+                        new CodePropertyReferenceExpression(
+                            new CodeThisReferenceExpression(),
+                            pagePropertyName
+                        )
+                    );
                 methCallStatement = new CodeExpressionStatement(methCallExpression);
                 methCallStatement.LinePragma = linePragma;
                 statements.Add(methCallStatement);
@@ -749,9 +757,9 @@ namespace System.Web.Compilation
                     CodeBinaryOperatorType.IdentityInequality,
                     new CodePrimitiveExpression(null)
                 );
-                templateIfStmt.TrueStatements.Add(
-                    new CodeExpressionStatement(instantiateTemplateExpr)
-                );
+                templateIfStmt
+                    .TrueStatements
+                    .Add(new CodeExpressionStatement(instantiateTemplateExpr));
                 buildSubControlBlock = templateIfStmt.FalseStatements;
                 statements.Add(templateIfStmt);
             }
@@ -806,9 +814,9 @@ namespace System.Web.Compilation
                             new CodeThisReferenceExpression(),
                             "AddContentTemplate"
                         );
-                        cmiExpression.Parameters.Add(
-                            new CodePrimitiveExpression(contentPlaceHolderID)
-                        );
+                        cmiExpression
+                            .Parameters
+                            .Add(new CodePrimitiveExpression(contentPlaceHolderID));
                         cmiExpression.Parameters.Add(cocExpr);
 
                         CodeExpressionStatement ceStatement = new CodeExpressionStatement(
@@ -963,7 +971,8 @@ namespace System.Web.Compilation
                             {
                                 call.Parameters.Add(
                                     new CodePrimitiveExpression(
-                                        ctrlBuilder.ControlType
+                                        ctrlBuilder
+                                            .ControlType
                                             .GetHashCode()
                                             .ToString(CultureInfo.InvariantCulture)
                                     )
@@ -1033,15 +1042,15 @@ namespace System.Web.Compilation
                                     new CodeThisReferenceExpression();
                                 methCallExpression.Method.MethodName =
                                     "CreateResourceBasedLiteralControl";
-                                methCallExpression.Parameters.Add(
-                                    new CodePrimitiveExpression(offset)
-                                );
-                                methCallExpression.Parameters.Add(
-                                    new CodePrimitiveExpression(size)
-                                );
-                                methCallExpression.Parameters.Add(
-                                    new CodePrimitiveExpression(fAsciiOnly)
-                                );
+                                methCallExpression
+                                    .Parameters
+                                    .Add(new CodePrimitiveExpression(offset));
+                                methCallExpression
+                                    .Parameters
+                                    .Add(new CodePrimitiveExpression(size));
+                                methCallExpression
+                                    .Parameters
+                                    .Add(new CodePrimitiveExpression(fAsciiOnly));
                                 expr = methCallExpression;
                             }
 
@@ -1141,9 +1150,9 @@ namespace System.Web.Compilation
                             new CodeThisReferenceExpression(),
                             buildMethodPrefix + pseSub.Builder.ID
                         );
-                        methCallExpression.Parameters.Add(
-                            new CodePropertyReferenceExpression(ctrlRefExpr, pseSub.Name)
-                        );
+                        methCallExpression
+                            .Parameters
+                            .Add(new CodePropertyReferenceExpression(ctrlRefExpr, pseSub.Name));
                         methCallStatement = new CodeExpressionStatement(methCallExpression);
                         methCallStatement.LinePragma = linePragma;
                         currentStmts.Add(methCallStatement);
@@ -1415,9 +1424,9 @@ namespace System.Web.Compilation
                 CodeStatementCollection statements = new CodeStatementCollection();
 
                 // add a container control parameter
-                method.Parameters.Add(
-                    new CodeParameterDeclarationExpression(typeof(Control), containerVarName)
-                );
+                method
+                    .Parameters
+                    .Add(new CodeParameterDeclarationExpression(typeof(Control), containerVarName));
 
                 // OrderedDictionary table;
                 CodeVariableDeclarationStatement tableDecl = new CodeVariableDeclarationStatement(
@@ -1535,9 +1544,9 @@ namespace System.Web.Compilation
                                     "FindControl"
                                 );
                             string findControlParameter = entry.ControlID;
-                            findControlCallExpression.Parameters.Add(
-                                new CodePrimitiveExpression(findControlParameter)
-                            );
+                            findControlCallExpression
+                                .Parameters
+                                .Add(new CodePrimitiveExpression(findControlParameter));
                             CodeCastExpression castExpression = new CodeCastExpression(
                                 entry.ControlType,
                                 findControlCallExpression
@@ -1776,12 +1785,12 @@ namespace System.Web.Compilation
                 method.Attributes &= ~MemberAttributes.AccessMask;
                 method.Attributes |= MemberAttributes.Public;
 
-                method.Parameters.Add(
-                    new CodeParameterDeclarationExpression(typeof(object), "sender")
-                );
-                method.Parameters.Add(
-                    new CodeParameterDeclarationExpression(typeof(EventArgs), "e")
-                );
+                method
+                    .Parameters
+                    .Add(new CodeParameterDeclarationExpression(typeof(object), "sender"));
+                method
+                    .Parameters
+                    .Add(new CodeParameterDeclarationExpression(typeof(EventArgs), "e"));
 
                 CodeStatementCollection topMethodStatements = new CodeStatementCollection();
                 CodeStatementCollection otherMethodStatements = new CodeStatementCollection();
@@ -1979,9 +1988,14 @@ namespace System.Web.Compilation
                         ParameterInfo[] paramInfos = mi.GetParameters();
                         foreach (ParameterInfo pi in paramInfos)
                         {
-                            method.Parameters.Add(
-                                new CodeParameterDeclarationExpression(pi.ParameterType, pi.Name)
-                            );
+                            method
+                                .Parameters
+                                .Add(
+                                    new CodeParameterDeclarationExpression(
+                                        pi.ParameterType,
+                                        pi.Name
+                                    )
+                                );
                         }
 
                         nextStmts = otherStatements;
@@ -2101,15 +2115,17 @@ namespace System.Web.Compilation
                 ApplyEditorBrowsableCustomAttribute(method);
             }
 
-            method.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    typeof(HtmlTextWriter),
-                    renderMethodParameterName
-                )
-            );
-            method.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(Control), "parameterContainer")
-            );
+            method
+                .Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        typeof(HtmlTextWriter),
+                        renderMethodParameterName
+                    )
+                );
+            method
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(Control), "parameterContainer"));
 
             _sourceDataClass.Members.Add(method);
 
@@ -2253,9 +2269,9 @@ namespace System.Web.Compilation
                         // Don't generate a line pragma on the RenderControl call, as it degrades the
                         // debugging experience (VSWhidbey 482416)
 
-                        methodInvoke.Parameters.Add(
-                            new CodeArgumentReferenceExpression(renderMethodParameterName)
-                        );
+                        methodInvoke
+                            .Parameters
+                            .Add(new CodeArgumentReferenceExpression(renderMethodParameterName));
                         method.Statements.Add(methodCall);
                     }
                 }
@@ -2421,26 +2437,30 @@ namespace System.Web.Compilation
 
             if (Parser.ControlBuilderInterceptor != null)
             {
-                Parser.ControlBuilderInterceptor.OnProcessGeneratedCode(
+                Parser
+                    .ControlBuilderInterceptor
+                    .OnProcessGeneratedCode(
+                        builder,
+                        _codeCompileUnit,
+                        _intermediateClass,
+                        _sourceDataClass,
+                        buildMethod,
+                        dataBindingMethod,
+                        builder.AdditionalState
+                    );
+            }
+
+            // Give the ParseRecorder a chance to look at and modify the tree
+            Parser
+                .ParseRecorders
+                .ProcessGeneratedCode(
                     builder,
                     _codeCompileUnit,
                     _intermediateClass,
                     _sourceDataClass,
                     buildMethod,
-                    dataBindingMethod,
-                    builder.AdditionalState
+                    dataBindingMethod
                 );
-            }
-
-            // Give the ParseRecorder a chance to look at and modify the tree
-            Parser.ParseRecorders.ProcessGeneratedCode(
-                builder,
-                _codeCompileUnit,
-                _intermediateClass,
-                _sourceDataClass,
-                buildMethod,
-                dataBindingMethod
-            );
         }
 
         internal virtual CodeExpression BuildStringPropertyExpression(PropertyEntry pse)

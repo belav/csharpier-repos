@@ -127,28 +127,30 @@ public class ResponseCompressionTests : LoggedTest
             else if (variant.Server == ServerType.IISExpress && !hostCompression)
             {
                 var iisDeploymentParameters = new IISDeploymentParameters(deploymentParameters);
-                iisDeploymentParameters.ServerConfigActionList.Add(
-                    (element, _) =>
-                    {
-                        var compressionElement = element
-                            .RequiredElement("system.webServer")
-                            .RequiredElement("httpCompression");
+                iisDeploymentParameters
+                    .ServerConfigActionList
+                    .Add(
+                        (element, _) =>
+                        {
+                            var compressionElement = element
+                                .RequiredElement("system.webServer")
+                                .RequiredElement("httpCompression");
 
-                        compressionElement
-                            .RequiredElement("dynamicTypes")
-                            .Elements()
-                            .SkipLast(1)
-                            .Remove();
+                            compressionElement
+                                .RequiredElement("dynamicTypes")
+                                .Elements()
+                                .SkipLast(1)
+                                .Remove();
 
-                        compressionElement
-                            .RequiredElement("staticTypes")
-                            .Elements()
-                            .SkipLast(1)
-                            .Remove();
-                        // last element in both dynamicTypes and staticTypes disables compression
-                        // <add mimeType="*/*" enabled="false" />
-                    }
-                );
+                            compressionElement
+                                .RequiredElement("staticTypes")
+                                .Elements()
+                                .SkipLast(1)
+                                .Remove();
+                            // last element in both dynamicTypes and staticTypes disables compression
+                            // <add mimeType="*/*" enabled="false" />
+                        }
+                    );
                 deploymentParameters = iisDeploymentParameters;
             }
 

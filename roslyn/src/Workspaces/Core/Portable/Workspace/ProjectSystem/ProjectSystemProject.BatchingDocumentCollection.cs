@@ -145,10 +145,12 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     _orderedDocumentsInBatch = _orderedDocumentsInBatch?.Add(documentId);
 
                     _documentPathsToDocumentIds.Add(fullPath, documentId);
-                    _project._documentWatchedFiles.Add(
-                        documentId,
-                        _project._documentFileChangeContext.EnqueueWatchingFile(fullPath)
-                    );
+                    _project
+                        ._documentWatchedFiles
+                        .Add(
+                            documentId,
+                            _project._documentFileChangeContext.EnqueueWatchingFile(fullPath)
+                        );
 
                     if (_project._activeBatchScopes > 0)
                     {
@@ -156,12 +158,12 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(
-                            w => _documentAddAction(w, documentInfo)
-                        );
-                        _project._projectSystemProjectFactory.RaiseOnDocumentsAdded(
-                            ImmutableArray.Create(fullPath)
-                        );
+                        _project
+                            ._projectSystemProjectFactory
+                            .ApplyChangeToWorkspace(w => _documentAddAction(w, documentInfo));
+                        _project
+                            ._projectSystemProjectFactory
+                            .RaiseOnDocumentsAdded(ImmutableArray.Create(fullPath));
                     }
                 }
 
@@ -229,14 +231,16 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
-                        {
-                            _project._projectSystemProjectFactory.AddDocumentToDocumentsNotFromFiles_NoLock(
-                                documentInfo.Id
-                            );
-                            _documentAddAction(w, documentInfo);
-                            w.OnDocumentOpened(documentInfo.Id, textContainer);
-                        });
+                        _project
+                            ._projectSystemProjectFactory
+                            .ApplyChangeToWorkspace(w =>
+                            {
+                                _project
+                                    ._projectSystemProjectFactory
+                                    .AddDocumentToDocumentsNotFromFiles_NoLock(documentInfo.Id);
+                                _documentAddAction(w, documentInfo);
+                                w.OnDocumentOpened(documentInfo.Id, textContainer);
+                            });
                     }
                 }
 
@@ -286,9 +290,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 else
                 {
                     // right now, assumption is dynamically generated file can never be opened in editor
-                    _project._projectSystemProjectFactory.ApplyChangeToWorkspace(
-                        w => _documentAddAction(w, documentInfo)
-                    );
+                    _project
+                        ._projectSystemProjectFactory
+                        .ApplyChangeToWorkspace(w => _documentAddAction(w, documentInfo));
                 }
             }
 
@@ -373,9 +377,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(
-                            w => _documentRemoveAction(w, documentId)
-                        );
+                        _project
+                            ._projectSystemProjectFactory
+                            .ApplyChangeToWorkspace(w => _documentRemoveAction(w, documentId));
                     }
                 }
                 else
@@ -430,9 +434,11 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     //    as a part of the active batch or immediately)
                     // 2. It hasn't been pushed yet, but is contained in _documentsAddedInBatch
                     if (
-                        _project._projectSystemProjectFactory.Workspace.CurrentSolution.GetDocument(
-                            documentId
-                        ) != null
+                        _project
+                            ._projectSystemProjectFactory
+                            .Workspace
+                            .CurrentSolution
+                            .GetDocument(documentId) != null
                     )
                     {
                         if (_project._activeBatchScopes > 0)
@@ -441,21 +447,23 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                         }
                         else
                         {
-                            _project._projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
-                            {
-                                // Just pass null for the filePath, since this document is immediately being removed
-                                // anyways -- whatever we set won't really be read since the next change will
-                                // come through.
-                                // TODO: Can't we just remove the document without closing it?
-                                w.OnDocumentClosed(
-                                    documentId,
-                                    new SourceTextLoader(textContainer, filePath: null)
-                                );
-                                _documentRemoveAction(w, documentId);
-                                _project._projectSystemProjectFactory.RemoveDocumentToDocumentsNotFromFiles_NoLock(
-                                    documentId
-                                );
-                            });
+                            _project
+                                ._projectSystemProjectFactory
+                                .ApplyChangeToWorkspace(w =>
+                                {
+                                    // Just pass null for the filePath, since this document is immediately being removed
+                                    // anyways -- whatever we set won't really be read since the next change will
+                                    // come through.
+                                    // TODO: Can't we just remove the document without closing it?
+                                    w.OnDocumentClosed(
+                                        documentId,
+                                        new SourceTextLoader(textContainer, filePath: null)
+                                    );
+                                    _documentRemoveAction(w, documentId);
+                                    _project
+                                        ._projectSystemProjectFactory
+                                        .RemoveDocumentToDocumentsNotFromFiles_NoLock(documentId);
+                                });
                         }
                     }
                     else
@@ -539,15 +547,17 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                         return;
                     }
 
-                    await _project._projectSystemProjectFactory
+                    await _project
+                        ._projectSystemProjectFactory
                         .ApplyBatchChangeToWorkspaceAsync(solutionChanges =>
                         {
                             foreach (var (documentId, textLoader) in documentsToChange)
                             {
                                 if (
-                                    !_project._projectSystemProjectFactory.Workspace.IsDocumentOpen(
-                                        documentId
-                                    )
+                                    !_project
+                                        ._projectSystemProjectFactory
+                                        .Workspace
+                                        .IsDocumentOpen(documentId)
                                 )
                                 {
                                     solutionChanges.UpdateSolutionForDocumentAction(
@@ -610,39 +620,41 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                             )
                         );
 
-                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
-                        {
-                            if (w.IsDocumentOpen(documentId))
+                        _project
+                            ._projectSystemProjectFactory
+                            .ApplyChangeToWorkspace(w =>
                             {
-                                return;
-                            }
+                                if (w.IsDocumentOpen(documentId))
+                                {
+                                    return;
+                                }
 
-                            // we do not expect JTF to be used around this code path. and contract of fileInfoProvider is it being real free-threaded
-                            // meaning it can't use JTF to go back to UI thread.
-                            // so, it is okay for us to call regular ".Result" on a task here.
-                            var fileInfo = fileInfoProvider
-                                .GetDynamicFileInfoAsync(
-                                    _project.Id,
-                                    _project._filePath,
-                                    projectSystemFilePath,
-                                    CancellationToken.None
-                                )
-                                .WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
+                                // we do not expect JTF to be used around this code path. and contract of fileInfoProvider is it being real free-threaded
+                                // meaning it can't use JTF to go back to UI thread.
+                                // so, it is okay for us to call regular ".Result" on a task here.
+                                var fileInfo = fileInfoProvider
+                                    .GetDynamicFileInfoAsync(
+                                        _project.Id,
+                                        _project._filePath,
+                                        projectSystemFilePath,
+                                        CancellationToken.None
+                                    )
+                                    .WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
 
-                            // Right now we're only supporting dynamic files as actual source files, so it's OK to call GetDocument here
-                            var attributes = w.CurrentSolution
-                                .GetRequiredDocument(documentId)
-                                .State
-                                .Attributes;
+                                // Right now we're only supporting dynamic files as actual source files, so it's OK to call GetDocument here
+                                var attributes = w.CurrentSolution
+                                    .GetRequiredDocument(documentId)
+                                    .State
+                                    .Attributes;
 
-                            var documentInfo = new DocumentInfo(
-                                attributes,
-                                fileInfo.TextLoader,
-                                fileInfo.DocumentServiceProvider
-                            );
+                                var documentInfo = new DocumentInfo(
+                                    attributes,
+                                    fileInfo.TextLoader,
+                                    fileInfo.DocumentServiceProvider
+                                );
 
-                            w.OnDocumentReloaded(documentInfo);
-                        });
+                                w.OnDocumentReloaded(documentInfo);
+                            });
                     }
                 }
             }
@@ -689,14 +701,16 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     }
                     else
                     {
-                        _project._projectSystemProjectFactory.ApplyChangeToWorkspace(
-                            _project.Id,
-                            solution =>
-                                solution.WithProjectDocumentsOrder(
-                                    _project.Id,
-                                    documentIds.ToImmutable()
-                                )
-                        );
+                        _project
+                            ._projectSystemProjectFactory
+                            .ApplyChangeToWorkspace(
+                                _project.Id,
+                                solution =>
+                                    solution.WithProjectDocumentsOrder(
+                                        _project.Id,
+                                        documentIds.ToImmutable()
+                                    )
+                            );
                     }
                 }
             }
@@ -759,10 +773,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 {
                     solutionChanges.UpdateSolutionForProjectAction(
                         _project.Id,
-                        solutionChanges.Solution.WithProjectDocumentsOrder(
-                            _project.Id,
-                            _orderedDocumentsInBatch
-                        )
+                        solutionChanges
+                            .Solution
+                            .WithProjectDocumentsOrder(_project.Id, _orderedDocumentsInBatch)
                     );
                     _orderedDocumentsInBatch = null;
                 }

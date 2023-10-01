@@ -165,28 +165,32 @@ namespace System.Web.Util
             Debug.Trace(
                 "HashCodeCombiner",
                 "FileMajorPart: "
-                    + fileVersionInfo.FileMajorPart
+                    + fileVersionInfo
+                        .FileMajorPart
                         .GetHashCode()
                         .ToString("x", CultureInfo.InvariantCulture)
             );
             Debug.Trace(
                 "HashCodeCombiner",
                 "FileMinorPart: "
-                    + fileVersionInfo.FileMinorPart
+                    + fileVersionInfo
+                        .FileMinorPart
                         .GetHashCode()
                         .ToString("x", CultureInfo.InvariantCulture)
             );
             Debug.Trace(
                 "HashCodeCombiner",
                 "FileBuildPart: "
-                    + fileVersionInfo.FileBuildPart
+                    + fileVersionInfo
+                        .FileBuildPart
                         .GetHashCode()
                         .ToString("x", CultureInfo.InvariantCulture)
             );
             Debug.Trace(
                 "HashCodeCombiner",
                 "FilePrivatePart: "
-                    + fileVersionInfo.FilePrivatePart
+                    + fileVersionInfo
+                        .FilePrivatePart
                         .GetHashCode()
                         .ToString("x", CultureInfo.InvariantCulture)
             );

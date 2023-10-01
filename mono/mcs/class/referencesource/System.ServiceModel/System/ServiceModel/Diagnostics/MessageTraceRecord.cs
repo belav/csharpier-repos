@@ -59,7 +59,12 @@ namespace System.ServiceModel.Diagnostics
                         xml.WriteStartElement("Security");
                         xml.WriteElementString(
                             "IsAnonymous",
-                            message.Properties.Security.ServiceSecurityContext.IsAnonymous.ToString()
+                            message
+                                .Properties
+                                .Security
+                                .ServiceSecurityContext
+                                .IsAnonymous
+                                .ToString()
                         );
                         bool windowsIdentityUsed =
                             message.Properties.Security.ServiceSecurityContext.WindowsIdentity

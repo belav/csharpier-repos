@@ -100,9 +100,9 @@ namespace System.Web.Services.Description
                 if (schema == null)
                 {
                     schema = XmlSchema.Read(
-                        typeof(ServiceDescription).Assembly.GetManifestResourceStream(
-                            "wsdl-1.1.xsd"
-                        ),
+                        typeof(ServiceDescription)
+                            .Assembly
+                            .GetManifestResourceStream("wsdl-1.1.xsd"),
                         null
                     );
                 }

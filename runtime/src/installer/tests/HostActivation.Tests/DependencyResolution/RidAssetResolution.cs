@@ -256,7 +256,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     .Build()
             )
             {
-                SharedState.DotNetWithNetCoreApp
+                SharedState
+                    .DotNetWithNetCoreApp
                     .Exec(app.AppDll)
                     .EnableTracingAndCaptureOutputs()
                     .RuntimeId(rid)

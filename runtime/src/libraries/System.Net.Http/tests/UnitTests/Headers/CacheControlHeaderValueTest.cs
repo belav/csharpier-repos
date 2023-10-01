@@ -756,20 +756,20 @@ namespace System.Net.Http.Tests
                 "http://microsoft.com"
             );
 
-            request.Headers.TryAddWithoutValidation(
-                KnownHeaders.CacheControl.Descriptor,
-                "min-fresh=123"
-            );
-            request.Headers.TryAddWithoutValidation(
-                KnownHeaders.CacheControl.Descriptor,
-                string.Empty
-            );
+            request
+                .Headers
+                .TryAddWithoutValidation(KnownHeaders.CacheControl.Descriptor, "min-fresh=123");
+            request
+                .Headers
+                .TryAddWithoutValidation(KnownHeaders.CacheControl.Descriptor, string.Empty);
 
             Assert.True(
-                request.Headers.TryGetValues(
-                    KnownHeaders.CacheControl.Descriptor,
-                    out IEnumerable<string>? values
-                )
+                request
+                    .Headers
+                    .TryGetValues(
+                        KnownHeaders.CacheControl.Descriptor,
+                        out IEnumerable<string>? values
+                    )
             );
             Assert.Equal("min-fresh=123", Assert.Single(values));
         }

@@ -107,9 +107,9 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                             _cancellationTokenParameter
                         )
                         : Expression.Call(
-                            EnumerableMethods.SingleWithoutPredicate.MakeGenericMethod(
-                                serverEnumerable.Type.GetSequenceType()
-                            ),
+                            EnumerableMethods
+                                .SingleWithoutPredicate
+                                .MakeGenericMethod(serverEnumerable.Type.GetSequenceType()),
                             serverEnumerable
                         );
 
@@ -123,9 +123,9 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                             _cancellationTokenParameter
                         )
                         : Expression.Call(
-                            EnumerableMethods.SingleOrDefaultWithoutPredicate.MakeGenericMethod(
-                                serverEnumerable.Type.GetSequenceType()
-                            ),
+                            EnumerableMethods
+                                .SingleOrDefaultWithoutPredicate
+                                .MakeGenericMethod(serverEnumerable.Type.GetSequenceType()),
                             serverEnumerable
                         );
             }
@@ -464,14 +464,16 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                             Expression.Constant(primaryKey),
                             Expression.NewArrayInit(
                                 typeof(object),
-                                primaryKey.Properties.Select(
-                                    p =>
-                                        valueBufferExpression.CreateValueBufferReadValueExpression(
-                                            typeof(object),
-                                            p.GetIndex(),
-                                            p
-                                        )
-                                )
+                                primaryKey
+                                    .Properties
+                                    .Select(
+                                        p =>
+                                            valueBufferExpression.CreateValueBufferReadValueExpression(
+                                                typeof(object),
+                                                p.GetIndex(),
+                                                p
+                                            )
+                                    )
                             ),
                             Expression.Constant(!entityShaperExpression.IsNullable),
                             hasNullKeyVariable
@@ -522,7 +524,8 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                     {
                         expressions.Add(
                             Expression.IfThen(
-                                primaryKey.Properties
+                                primaryKey
+                                    .Properties
                                     .Select(
                                         p =>
                                             Expression.NotEqual(
@@ -553,7 +556,8 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                         );
                         expressions.Add(
                             Expression.IfThenElse(
-                                primaryKey.Properties
+                                primaryKey
+                                    .Properties
                                     .Select(
                                         p =>
                                             Expression.NotEqual(
@@ -579,14 +583,16 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
                                         keyValuesVariable,
                                         Expression.NewArrayInit(
                                             typeof(object),
-                                            primaryKey.Properties.Select(
-                                                p =>
-                                                    valueBufferExpression.CreateValueBufferReadValueExpression(
-                                                        typeof(object),
-                                                        p.GetIndex(),
-                                                        p
-                                                    )
-                                            )
+                                            primaryKey
+                                                .Properties
+                                                .Select(
+                                                    p =>
+                                                        valueBufferExpression.CreateValueBufferReadValueExpression(
+                                                            typeof(object),
+                                                            p.GetIndex(),
+                                                            p
+                                                        )
+                                                )
                                         )
                                     ),
                                     Expression.Call(

@@ -613,10 +613,9 @@ namespace System.Web.UI
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelBinderProviders = ModelBinderProviders.Providers,
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
-                    () => model,
-                    typeof(TModel)
-                ),
+                ModelMetadata = ModelMetadataProviders
+                    .Current
+                    .GetMetadataForType(() => model, typeof(TModel)),
                 ModelState = ModelState,
                 ValueProvider = valueProvider
             };
@@ -2096,11 +2095,9 @@ namespace System.Web.UI
                 {
                     // ASP.NET 4.5 Crypto DCR: Go through the new AspNetCryptoServiceProvider
                     // if we're configured to do so.
-                    ICryptoService cryptoService =
-                        AspNetCryptoServiceProvider.Instance.GetCryptoService(
-                            purpose,
-                            CryptoServiceOptions.CacheableOutput
-                        );
+                    ICryptoService cryptoService = AspNetCryptoServiceProvider
+                        .Instance
+                        .GetCryptoService(purpose, CryptoServiceOptions.CacheableOutput);
                     clearData = cryptoService.Unprotect(protectedData);
                 }
                 else
@@ -2255,10 +2252,10 @@ namespace System.Web.UI
                 ret = null;
             // If page was posted due to a HttpResponse.Redirect, ignore the postback.
             else if (
-                Request.QueryStringText.IndexOf(
-                    HttpResponse.RedirectQueryStringAssignment,
-                    StringComparison.Ordinal
-                ) != -1
+                Request
+                    .QueryStringText
+                    .IndexOf(HttpResponse.RedirectQueryStringAssignment, StringComparison.Ordinal)
+                != -1
             )
                 ret = null;
 
@@ -2301,11 +2298,9 @@ namespace System.Web.UI
             {
                 // ASP.NET 4.5 Crypto DCR: Go through the new AspNetCryptoServiceProvider
                 // if we're configured to do so.
-                ICryptoService cryptoService =
-                    AspNetCryptoServiceProvider.Instance.GetCryptoService(
-                        purpose,
-                        CryptoServiceOptions.CacheableOutput
-                    );
+                ICryptoService cryptoService = AspNetCryptoServiceProvider
+                    .Instance
+                    .GetCryptoService(purpose, CryptoServiceOptions.CacheableOutput);
                 protectedData = cryptoService.Protect(clearData);
             }
             else
@@ -7414,17 +7409,19 @@ window.onload = WebForm_RestoreScrollPosition;
 
                     try
                     {
-                        _page.Context.InvokeCancellableCallback(
-                            new WaitCallback(o =>
-                            {
-                                _page.ProcessRequest(
-                                    false /*includeStagesBeforeAsyncPoint*/
-                                    ,
-                                    true /*includeStagesAfterAsyncPoint*/
-                                );
-                            }),
-                            null
-                        );
+                        _page
+                            .Context
+                            .InvokeCancellableCallback(
+                                new WaitCallback(o =>
+                                {
+                                    _page.ProcessRequest(
+                                        false /*includeStagesBeforeAsyncPoint*/
+                                        ,
+                                        true /*includeStagesAfterAsyncPoint*/
+                                    );
+                                }),
+                                null
+                            );
                     }
                     catch (Exception e)
                     {
@@ -8120,10 +8117,11 @@ window.onload = WebForm_RestoreScrollPosition;
             }
             else
             {
-                System.Web.Util.Debug.Trace(
-                    "tpeters",
-                    prefix + "ObjViewState: " + controlViewState.ToString()
-                );
+                System
+                    .Web
+                    .Util
+                    .Debug
+                    .Trace("tpeters", prefix + "ObjViewState: " + controlViewState.ToString());
             }
 
             if (childViewState != null)
@@ -8135,10 +8133,11 @@ window.onload = WebForm_RestoreScrollPosition;
 
                     if (control == null)
                     {
-                        System.Web.Util.Debug.Trace(
-                            "tpeters",
-                            prefix + "Control index: " + index.ToString()
-                        );
+                        System
+                            .Web
+                            .Util
+                            .Debug
+                            .Trace("tpeters", prefix + "Control index: " + index.ToString());
                         WalkViewState(value, null, indentLevel + 1);
                     }
                     else
@@ -8157,10 +8156,14 @@ window.onload = WebForm_RestoreScrollPosition;
                                 s = "out of range";
                             }
                         }
-                        System.Web.Util.Debug.Trace(
-                            "tpeters",
-                            prefix + "Control index: " + index.ToString() + " control: " + s
-                        );
+                        System
+                            .Web
+                            .Util
+                            .Debug
+                            .Trace(
+                                "tpeters",
+                                prefix + "Control index: " + index.ToString() + " control: " + s
+                            );
                         if (recurse)
                         {
                             WalkViewState(value, control.Controls[index], indentLevel + 1);

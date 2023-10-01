@@ -145,16 +145,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     h => h.Document.Id == document.Id
                 );
 
-                return highlightsForDocument.HighlightSpans.SelectAsArray(
-                    h =>
-                        new DocumentHighlight
-                        {
-                            Range = ProtocolConversions.TextSpanToRange(h.TextSpan, text),
-                            Kind = ProtocolConversions.HighlightSpanKindToDocumentHighlightKind(
-                                h.Kind
-                            ),
-                        }
-                );
+                return highlightsForDocument
+                    .HighlightSpans
+                    .SelectAsArray(
+                        h =>
+                            new DocumentHighlight
+                            {
+                                Range = ProtocolConversions.TextSpanToRange(h.TextSpan, text),
+                                Kind = ProtocolConversions.HighlightSpanKindToDocumentHighlightKind(
+                                    h.Kind
+                                ),
+                            }
+                    );
             }
 
             return ImmutableArray<DocumentHighlight>.Empty;

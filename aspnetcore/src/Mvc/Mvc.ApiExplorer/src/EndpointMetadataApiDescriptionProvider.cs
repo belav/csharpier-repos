@@ -71,23 +71,25 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
             )
             {
                 // We need to detect if any of the methods allow inferred body
-                var disableInferredBody = httpMethodMetadata.HttpMethods.Any(
-                    ShouldDisableInferredBody
-                );
+                var disableInferredBody = httpMethodMetadata
+                    .HttpMethods
+                    .Any(ShouldDisableInferredBody);
 
                 // REVIEW: Should we add an ApiDescription for endpoints without IHttpMethodMetadata? Swagger doesn't handle
                 // a null HttpMethod even though it's nullable on ApiDescription, so we'd need to define "default" HTTP methods.
                 // In practice, the Delegate will be called for any HTTP method if there is no IHttpMethodMetadata.
                 foreach (var httpMethod in httpMethodMetadata.HttpMethods)
                 {
-                    context.Results.Add(
-                        CreateApiDescription(
-                            routeEndpoint,
-                            httpMethod,
-                            methodInfo,
-                            disableInferredBody
-                        )
-                    );
+                    context
+                        .Results
+                        .Add(
+                            CreateApiDescription(
+                                routeEndpoint,
+                                httpMethod,
+                                methodInfo,
+                                disableInferredBody
+                            )
+                        );
                 }
             }
         }
@@ -123,7 +125,8 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         var apiDescription = new ApiDescription
         {
             HttpMethod = httpMethod,
-            GroupName = routeEndpoint.Metadata
+            GroupName = routeEndpoint
+                .Metadata
                 .GetMetadata<IEndpointGroupNameMetadata>()
                 ?.EndpointGroupName,
             RelativePath = routeEndpoint.RoutePattern.RawText?.TrimStart('/'),
@@ -365,9 +368,9 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
             );
         }
         else if (
-            parameter.CustomAttributes.Any(
-                a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
-            )
+            parameter
+                .CustomAttributes
+                .Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType))
             || parameter.ParameterType == typeof(HttpContext)
             || parameter.ParameterType == typeof(HttpRequest)
             || parameter.ParameterType == typeof(HttpResponse)
@@ -488,9 +491,9 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
 
         // We favor types added via the extension methods (which implements IProducesResponseTypeMetadata)
         // over those that are added via attributes.
-        var responseMetadataTypes = producesResponseMetadataTypes.Values.Concat(
-            responseProviderMetadataTypes.Values
-        );
+        var responseMetadataTypes = producesResponseMetadataTypes
+            .Values
+            .Concat(responseProviderMetadataTypes.Values);
 
         if (responseMetadataTypes.Any())
         {

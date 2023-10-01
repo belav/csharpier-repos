@@ -183,12 +183,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                GenericHeaderParser.ContentRangeParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                GenericHeaderParser
+                    .ContentRangeParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (ContentRangeHeaderValue)output!;

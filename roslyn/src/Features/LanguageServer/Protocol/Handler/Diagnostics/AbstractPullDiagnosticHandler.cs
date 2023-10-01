@@ -564,10 +564,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         private static VSDiagnosticRank? ConvertRank(DiagnosticData diagnosticData)
         {
             if (
-                diagnosticData.Properties.TryGetValue(
-                    PullDiagnosticConstants.Priority,
-                    out var priority
-                )
+                diagnosticData
+                    .Properties
+                    .TryGetValue(PullDiagnosticConstants.Priority, out var priority)
             )
             {
                 return priority switch

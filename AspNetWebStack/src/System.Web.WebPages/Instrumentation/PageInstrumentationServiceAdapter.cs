@@ -11,9 +11,9 @@ namespace System.Web.WebPages.Instrumentation
 {
     internal partial class PageInstrumentationServiceAdapter
     {
-        private static readonly Type _targetType = typeof(HttpContext).Assembly.GetType(
-            "System.Web.Instrumentation.PageInstrumentationService"
-        );
+        private static readonly Type _targetType = typeof(HttpContext)
+            .Assembly
+            .GetType("System.Web.Instrumentation.PageInstrumentationService");
         private IReadOnlyList<PageExecutionListenerAdapter> _listenerAdapters;
 
         internal PageInstrumentationServiceAdapter()

@@ -181,14 +181,16 @@ public static class WebHostExtensions
         var waitForStop = new TaskCompletionSource(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        applicationLifetime.ApplicationStopping.Register(
-            obj =>
-            {
-                var tcs = (TaskCompletionSource)obj!;
-                tcs.TrySetResult();
-            },
-            waitForStop
-        );
+        applicationLifetime
+            .ApplicationStopping
+            .Register(
+                obj =>
+                {
+                    var tcs = (TaskCompletionSource)obj!;
+                    tcs.TrySetResult();
+                },
+                waitForStop
+            );
 
         await waitForStop.Task;
 

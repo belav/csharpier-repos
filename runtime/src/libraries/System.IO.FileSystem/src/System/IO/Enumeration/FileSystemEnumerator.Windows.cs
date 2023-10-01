@@ -92,13 +92,15 @@ namespace System.IO.Enumeration
         /// </summary>
         private IntPtr CreateDirectoryHandle(string path, bool ignoreNotFound = false)
         {
-            IntPtr handle = Interop.Kernel32.CreateFile_IntPtr(
-                path,
-                Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
-                FileShare.ReadWrite | FileShare.Delete,
-                FileMode.Open,
-                Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS
-            );
+            IntPtr handle = Interop
+                .Kernel32
+                .CreateFile_IntPtr(
+                    path,
+                    Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
+                    FileShare.ReadWrite | FileShare.Delete,
+                    FileMode.Open,
+                    Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS
+                );
 
             if (handle == IntPtr.Zero || handle == (IntPtr)(-1))
             {

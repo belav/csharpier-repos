@@ -99,9 +99,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
                 // Suggest names from existing overloads.
                 if (
-                    nameInfo.PossibleSymbolKinds.Any(
-                        static k => k.SymbolKind == SymbolKind.Parameter
-                    )
+                    nameInfo
+                        .PossibleSymbolKinds
+                        .Any(static k => k.SymbolKind == SymbolKind.Parameter)
                 )
                 {
                     var (_, partialSemanticModel) = await document
@@ -288,13 +288,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     .GetMembers()
                     .OfType<IMethodSymbol>()
                     .FirstOrDefault(m => m.IsValidGetEnumerator() || m.IsValidGetAsyncEnumerator())
-                    ?.ReturnType?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
+                    ?.ReturnType
+                    ?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
                     .OfType<IPropertySymbol>()
                     .FirstOrDefault(p => p.GetMethod != null)
                     ?.Type;
 
                 // This can happen for an un-implemented IEnumerable or IAsyncEnumerable.
-                collectionType ??= namedType.AllInterfaces
+                collectionType ??= namedType
+                    .AllInterfaces
                     .FirstOrDefault(
                         t =>
                             t.OriginalDefinition.SpecialType
@@ -508,7 +510,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (overloads.IsEmpty)
                 return;
 
-            var currentParameterNames = baseMethod.ParameterList.Parameters
+            var currentParameterNames = baseMethod
+                .ParameterList
+                .Parameters
                 .Select(p => p.Identifier.ValueText)
                 .ToImmutableHashSet();
 

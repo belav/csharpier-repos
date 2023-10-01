@@ -140,9 +140,9 @@ public class TriggerConvention : IEntityTypeBaseTypeChangedConvention, IEntityTy
             {
                 foreach (var checkConstraintToBeRemoved in triggersToBeRemoved)
                 {
-                    checkConstraintToBeRemoved.EntityType.RemoveTrigger(
-                        checkConstraintToBeRemoved.ModelName
-                    );
+                    checkConstraintToBeRemoved
+                        .EntityType
+                        .RemoveTrigger(checkConstraintToBeRemoved.ModelName);
                 }
             }
 

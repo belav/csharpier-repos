@@ -124,23 +124,27 @@ namespace System.Activities.Core.Presentation
 
         static bool ShouldSuppressAddingConnectorsWhenAddingStateVisuals(EditingScope scope)
         {
-            return scope.Changes.Any<Change>(
-                (p) =>
-                {
-                    return p != null
-                        && p.GetType() == typeof(SuppressAddingConnectorWhenAddingStateVisual);
-                }
-            );
+            return scope
+                .Changes
+                .Any<Change>(
+                    (p) =>
+                    {
+                        return p != null
+                            && p.GetType() == typeof(SuppressAddingConnectorWhenAddingStateVisual);
+                    }
+                );
         }
 
         static bool IsTransitionReordering(EditingScope scope)
         {
-            return scope.Changes.Any<Change>(
-                (p) =>
-                {
-                    return p != null && p.GetType() == typeof(TransitionReorderChange);
-                }
-            );
+            return scope
+                .Changes
+                .Any<Change>(
+                    (p) =>
+                    {
+                        return p != null && p.GetType() == typeof(TransitionReorderChange);
+                    }
+                );
         }
 
         // All the connectors are directly contained by the statemachine editor. This is because connectors can go across states.

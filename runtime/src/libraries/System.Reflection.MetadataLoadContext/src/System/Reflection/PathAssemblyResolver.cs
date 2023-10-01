@@ -75,10 +75,9 @@ namespace System.Reflection
                     Assembly assemblyFromPath = context.LoadFromAssemblyPath(path);
                     AssemblyName assemblyNameFromPath = assemblyFromPath.GetName();
                     if (
-                        assemblyName.Name.Equals(
-                            assemblyNameFromPath.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        assemblyName
+                            .Name
+                            .Equals(assemblyNameFromPath.Name, StringComparison.OrdinalIgnoreCase)
                     )
                     {
                         ReadOnlySpan<byte> pktFromAssembly =

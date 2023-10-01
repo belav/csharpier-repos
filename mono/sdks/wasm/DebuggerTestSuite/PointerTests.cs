@@ -904,7 +904,8 @@ namespace DebuggerTests
 
                     // try to deref the non-pointer object, as a pointer
                     await GetProperties(
-                        complex["value"]["objectId"]
+                        complex["value"]
+                            ["objectId"]
                             .Value<string>()
                             .Replace(":object:", ":pointer:"),
                         expect_ok: false

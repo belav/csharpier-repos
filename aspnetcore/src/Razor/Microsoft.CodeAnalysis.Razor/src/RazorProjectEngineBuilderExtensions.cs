@@ -29,7 +29,8 @@ public static class RazorProjectEngineBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        var existingFeature = builder.Features
+        var existingFeature = builder
+            .Features
             .OfType<ConfigureParserForCSharpVersionFeature>()
             .FirstOrDefault();
         if (existingFeature != null)
@@ -41,9 +42,9 @@ public static class RazorProjectEngineBuilderExtensions
         var effectiveCSharpLanguageVersion = LanguageVersionFacts.MapSpecifiedToEffectiveVersion(
             csharpLanguageVersion
         );
-        builder.Features.Add(
-            new ConfigureParserForCSharpVersionFeature(effectiveCSharpLanguageVersion)
-        );
+        builder
+            .Features
+            .Add(new ConfigureParserForCSharpVersionFeature(effectiveCSharpLanguageVersion));
 
         return builder;
     }

@@ -355,7 +355,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             res.AddRange(methodDef.Parameters.Select(p => new VarInfo(p)));
             res.AddRange(
-                methodDef.DebugInformation
+                methodDef
+                    .DebugInformation
                     .GetScopes()
                     .Where(
                         s =>
@@ -509,9 +510,9 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         private void ProcessSourceLink()
         {
-            var sourceLinkDebugInfo = image.CustomDebugInformations.FirstOrDefault(
-                i => i.Kind == CustomDebugInformationKind.SourceLink
-            );
+            var sourceLinkDebugInfo = image
+                .CustomDebugInformations
+                .FirstOrDefault(i => i.Kind == CustomDebugInformationKind.SourceLink);
 
             if (sourceLinkDebugInfo != null)
             {

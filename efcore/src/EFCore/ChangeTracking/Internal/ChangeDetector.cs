@@ -325,14 +325,17 @@ public class ChangeDetector : IChangeDetector
                 _logger.ForeignKeyChangeDetected(entry, property, snapshotValue, currentValue);
             }
 
-            entry.StateManager.InternalEntityEntryNotifier.KeyPropertyChanged(
-                entry,
-                property,
-                keys,
-                foreignKeys,
-                snapshotValue,
-                currentValue
-            );
+            entry
+                .StateManager
+                .InternalEntityEntryNotifier
+                .KeyPropertyChanged(
+                    entry,
+                    property,
+                    keys,
+                    foreignKeys,
+                    snapshotValue,
+                    currentValue
+                );
 
             return true;
         }
@@ -413,12 +416,9 @@ public class ChangeDetector : IChangeDetector
                     }
                 }
 
-                stateManager.InternalEntityEntryNotifier.NavigationCollectionChanged(
-                    entry,
-                    navigationBase,
-                    added,
-                    removed
-                );
+                stateManager
+                    .InternalEntityEntryNotifier
+                    .NavigationCollectionChanged(entry, navigationBase, added, removed);
 
                 return true;
             }
@@ -448,12 +448,9 @@ public class ChangeDetector : IChangeDetector
                 _logger.ReferenceChangeDetected(entry, navigation, snapshotValue, currentValue);
             }
 
-            stateManager.InternalEntityEntryNotifier.NavigationReferenceChanged(
-                entry,
-                navigation,
-                snapshotValue,
-                currentValue
-            );
+            stateManager
+                .InternalEntityEntryNotifier
+                .NavigationReferenceChanged(entry, navigation, snapshotValue, currentValue);
 
             return true;
         }

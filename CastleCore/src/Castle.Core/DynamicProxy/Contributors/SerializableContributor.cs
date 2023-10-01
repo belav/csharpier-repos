@@ -54,24 +54,32 @@ namespace Castle.DynamicProxy.Contributors
 
             var typeLocal = getObjectData.CodeBuilder.DeclareLocal(typeof(Type));
 
-            getObjectData.CodeBuilder.AddStatement(
-                new AssignStatement(
-                    typeLocal,
-                    new MethodInvocationExpression(
-                        null,
-                        TypeMethods.StaticGetType,
-                        new LiteralStringExpression(
-                            typeof(ProxyObjectReference).AssemblyQualifiedName
-                        ),
-                        new LiteralBoolExpression(true),
-                        new LiteralBoolExpression(false)
+            getObjectData
+                .CodeBuilder
+                .AddStatement(
+                    new AssignStatement(
+                        typeLocal,
+                        new MethodInvocationExpression(
+                            null,
+                            TypeMethods.StaticGetType,
+                            new LiteralStringExpression(
+                                typeof(ProxyObjectReference).AssemblyQualifiedName
+                            ),
+                            new LiteralBoolExpression(true),
+                            new LiteralBoolExpression(false)
+                        )
                     )
-                )
-            );
+                );
 
-            getObjectData.CodeBuilder.AddStatement(
-                new MethodInvocationExpression(info, SerializationInfoMethods.SetType, typeLocal)
-            );
+            getObjectData
+                .CodeBuilder
+                .AddStatement(
+                    new MethodInvocationExpression(
+                        info,
+                        SerializationInfoMethods.SetType,
+                        typeLocal
+                    )
+                );
 
             foreach (var field in emitter.GetAllFields())
             {
@@ -88,59 +96,71 @@ namespace Castle.DynamicProxy.Contributors
 
             var interfacesLocal = getObjectData.CodeBuilder.DeclareLocal(typeof(string[]));
 
-            getObjectData.CodeBuilder.AddStatement(
-                new AssignStatement(
-                    interfacesLocal,
-                    new NewArrayExpression(interfaces.Length, typeof(string))
-                )
-            );
+            getObjectData
+                .CodeBuilder
+                .AddStatement(
+                    new AssignStatement(
+                        interfacesLocal,
+                        new NewArrayExpression(interfaces.Length, typeof(string))
+                    )
+                );
 
             for (var i = 0; i < interfaces.Length; i++)
             {
-                getObjectData.CodeBuilder.AddStatement(
-                    new AssignArrayStatement(
-                        interfacesLocal,
-                        i,
-                        new LiteralStringExpression(interfaces[i].AssemblyQualifiedName)
-                    )
-                );
+                getObjectData
+                    .CodeBuilder
+                    .AddStatement(
+                        new AssignArrayStatement(
+                            interfacesLocal,
+                            i,
+                            new LiteralStringExpression(interfaces[i].AssemblyQualifiedName)
+                        )
+                    );
             }
 
-            getObjectData.CodeBuilder.AddStatement(
-                new MethodInvocationExpression(
-                    info,
-                    SerializationInfoMethods.AddValue_Object,
-                    new LiteralStringExpression("__interfaces"),
-                    interfacesLocal
-                )
-            );
+            getObjectData
+                .CodeBuilder
+                .AddStatement(
+                    new MethodInvocationExpression(
+                        info,
+                        SerializationInfoMethods.AddValue_Object,
+                        new LiteralStringExpression("__interfaces"),
+                        interfacesLocal
+                    )
+                );
 
-            getObjectData.CodeBuilder.AddStatement(
-                new MethodInvocationExpression(
-                    info,
-                    SerializationInfoMethods.AddValue_Object,
-                    new LiteralStringExpression("__baseType"),
-                    new LiteralStringExpression(emitter.BaseType.AssemblyQualifiedName)
-                )
-            );
+            getObjectData
+                .CodeBuilder
+                .AddStatement(
+                    new MethodInvocationExpression(
+                        info,
+                        SerializationInfoMethods.AddValue_Object,
+                        new LiteralStringExpression("__baseType"),
+                        new LiteralStringExpression(emitter.BaseType.AssemblyQualifiedName)
+                    )
+                );
 
-            getObjectData.CodeBuilder.AddStatement(
-                new MethodInvocationExpression(
-                    info,
-                    SerializationInfoMethods.AddValue_Object,
-                    new LiteralStringExpression("__proxyGenerationOptions"),
-                    emitter.GetField("proxyGenerationOptions")
-                )
-            );
+            getObjectData
+                .CodeBuilder
+                .AddStatement(
+                    new MethodInvocationExpression(
+                        info,
+                        SerializationInfoMethods.AddValue_Object,
+                        new LiteralStringExpression("__proxyGenerationOptions"),
+                        emitter.GetField("proxyGenerationOptions")
+                    )
+                );
 
-            getObjectData.CodeBuilder.AddStatement(
-                new MethodInvocationExpression(
-                    info,
-                    SerializationInfoMethods.AddValue_Object,
-                    new LiteralStringExpression("__proxyTypeId"),
-                    new LiteralStringExpression(proxyTypeId)
-                )
-            );
+            getObjectData
+                .CodeBuilder
+                .AddStatement(
+                    new MethodInvocationExpression(
+                        info,
+                        SerializationInfoMethods.AddValue_Object,
+                        new LiteralStringExpression("__proxyTypeId"),
+                        new LiteralStringExpression(proxyTypeId)
+                    )
+                );
 
             CustomizeGetObjectData(
                 getObjectData.CodeBuilder,
@@ -158,14 +178,16 @@ namespace Castle.DynamicProxy.Contributors
             FieldReference field
         )
         {
-            getObjectData.CodeBuilder.AddStatement(
-                new MethodInvocationExpression(
-                    serializationInfo,
-                    SerializationInfoMethods.AddValue_Object,
-                    new LiteralStringExpression(field.Reference.Name),
-                    field
-                )
-            );
+            getObjectData
+                .CodeBuilder
+                .AddStatement(
+                    new MethodInvocationExpression(
+                        serializationInfo,
+                        SerializationInfoMethods.AddValue_Object,
+                        new LiteralStringExpression(field.Reference.Name),
+                        field
+                    )
+                );
             return;
         }
 

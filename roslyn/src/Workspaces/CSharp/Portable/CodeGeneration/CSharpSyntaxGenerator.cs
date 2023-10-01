@@ -1830,10 +1830,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             // For such declarations, we want to return true. This is because we can be explicitly asked to put accessibility.
             // In such cases, we'll drop the modifier that prevents us from having accessibility.
             =>
-            CSharpAccessibilityFacts.Instance.CanHaveAccessibility(
-                declaration,
-                ignoreDeclarationModifiers: true
-            );
+            CSharpAccessibilityFacts
+                .Instance
+                .CanHaveAccessibility(declaration, ignoreDeclarationModifiers: true);
 
         public override Accessibility GetAccessibility(SyntaxNode declaration) =>
             CSharpAccessibilityFacts.Instance.GetAccessibility(declaration);
@@ -2323,12 +2322,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return method
                 .WithConstraintClauses(default)
                 .WithParameterList(
-                    method.ParameterList.WithTrailingTrivia(
-                        method.ParameterList
-                            .GetTrailingTrivia()
-                            .Add(SyntaxFactory.ElasticMarker)
-                            .AddRange(method.ConstraintClauses.Last().GetTrailingTrivia())
-                    )
+                    method
+                        .ParameterList
+                        .WithTrailingTrivia(
+                            method
+                                .ParameterList
+                                .GetTrailingTrivia()
+                                .Add(SyntaxFactory.ElasticMarker)
+                                .AddRange(method.ConstraintClauses.Last().GetTrailingTrivia())
+                        )
                 );
         }
 
@@ -2621,18 +2623,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     => ((IndexerDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.EventFieldDeclaration
                     => ((EventFieldDeclarationSyntax)declaration).WithDeclaration(
-                        ((EventFieldDeclarationSyntax)declaration).Declaration.WithType(
-                            (TypeSyntax)type
-                        )
+                        ((EventFieldDeclarationSyntax)declaration)
+                            .Declaration
+                            .WithType((TypeSyntax)type)
                     ),
                 SyntaxKind.EventDeclaration
                     => ((EventDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.Parameter => ((ParameterSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.LocalDeclarationStatement
                     => ((LocalDeclarationStatementSyntax)declaration).WithDeclaration(
-                        ((LocalDeclarationStatementSyntax)declaration).Declaration.WithType(
-                            (TypeSyntax)type
-                        )
+                        ((LocalDeclarationStatementSyntax)declaration)
+                            .Declaration
+                            .WithType((TypeSyntax)type)
                     ),
                 SyntaxKind.VariableDeclaration
                     => ((VariableDeclarationSyntax)declaration).WithType((TypeSyntax)type),
@@ -2827,10 +2829,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return switchStatement;
             }
 
-            var newSections = statement.Sections.InsertRange(
-                index,
-                switchSections.Cast<SwitchSectionSyntax>()
-            );
+            var newSections = statement
+                .Sections
+                .InsertRange(index, switchSections.Cast<SwitchSectionSyntax>());
             return AddMissingTokens(statement, recurse: false).WithSections(newSections);
         }
 
@@ -3457,7 +3458,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             var baseList = GetBaseList(declaration);
             if (baseList != null)
             {
-                return baseList.Types
+                return baseList
+                    .Types
                     .OfType<SimpleBaseTypeSyntax>()
                     .Select(bt => bt.Type)
                     .ToReadOnlyCollection();
@@ -3506,10 +3508,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return WithBaseList(
                     declaration,
                     baseList.WithTypes(
-                        baseList.Types.Insert(
-                            baseList.Types.Count,
-                            SyntaxFactory.SimpleBaseType((TypeSyntax)interfaceType)
-                        )
+                        baseList
+                            .Types
+                            .Insert(
+                                baseList.Types.Count,
+                                SyntaxFactory.SimpleBaseType((TypeSyntax)interfaceType)
+                            )
                     )
                 );
             }
@@ -4599,12 +4603,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxNode? initializer,
             bool isConst
         ) =>
-            CSharpSyntaxGeneratorInternal.Instance.LocalDeclarationStatement(
-                type,
-                name.ToIdentifierToken(),
-                initializer,
-                isConst
-            );
+            CSharpSyntaxGeneratorInternal
+                .Instance
+                .LocalDeclarationStatement(type, name.ToIdentifierToken(), initializer, isConst);
 
         public override SyntaxNode UsingStatement(
             SyntaxNode? type,

@@ -10,10 +10,13 @@ namespace System.Net.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties(
-                typeof(HttpRequestMessageExtensions),
-                TypeAssert.TypeProperties.IsStatic | TypeAssert.TypeProperties.IsPublicVisibleClass
-            );
+            Assert
+                .Type
+                .HasProperties(
+                    typeof(HttpRequestMessageExtensions),
+                    TypeAssert.TypeProperties.IsStatic
+                        | TypeAssert.TypeProperties.IsPublicVisibleClass
+                );
         }
 
         [Fact]

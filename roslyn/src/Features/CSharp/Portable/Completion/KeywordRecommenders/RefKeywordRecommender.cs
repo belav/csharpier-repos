@@ -101,13 +101,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsRefParameterModifierContext(int position, CSharpSyntaxContext context)
         {
             if (
-                context.SyntaxTree.IsParameterModifierContext(
-                    position,
-                    context.LeftToken,
-                    includeOperators: false,
-                    out var parameterIndex,
-                    out var previousModifier
-                )
+                context
+                    .SyntaxTree
+                    .IsParameterModifierContext(
+                        position,
+                        context.LeftToken,
+                        includeOperators: false,
+                        out var parameterIndex,
+                        out var previousModifier
+                    )
             )
             {
                 if (previousModifier is SyntaxKind.None or SyntaxKind.ScopedKeyword)

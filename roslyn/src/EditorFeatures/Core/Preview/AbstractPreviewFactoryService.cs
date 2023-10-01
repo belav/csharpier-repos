@@ -433,18 +433,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
         private bool ProjectReferencesChanged(ProjectChanges projectChanges)
         {
-            var oldProjectReferences = projectChanges.OldProject.ProjectReferences.ToDictionary(
-                r => r.ProjectId
-            );
-            var newProjectReferences = projectChanges.NewProject.ProjectReferences.ToDictionary(
-                r => r.ProjectId
-            );
+            var oldProjectReferences = projectChanges
+                .OldProject
+                .ProjectReferences
+                .ToDictionary(r => r.ProjectId);
+            var newProjectReferences = projectChanges
+                .NewProject
+                .ProjectReferences
+                .ToDictionary(r => r.ProjectId);
 
             // These are the set of project reference that remained in the project. We don't care
             // about project references that were added or removed.  Those will already be reported.
-            var preservedProjectIds = oldProjectReferences.Keys.Intersect(
-                newProjectReferences.Keys
-            );
+            var preservedProjectIds = oldProjectReferences
+                .Keys
+                .Intersect(newProjectReferences.Keys);
 
             foreach (var projectId in preservedProjectIds)
             {
@@ -1026,21 +1028,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         )
         {
             // Attach the spans to the buffer.
-            newBuffer.Properties.AddProperty(
-                PredefinedPreviewTaggerKeys.ConflictSpansKey,
-                new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, conflictSpans)
-            );
-            newBuffer.Properties.AddProperty(
-                PredefinedPreviewTaggerKeys.WarningSpansKey,
-                new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, warningSpans)
-            );
-            newBuffer.Properties.AddProperty(
-                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
-                new NormalizedSnapshotSpanCollection(
-                    newBuffer.CurrentSnapshot,
-                    suppressDiagnosticsSpans
-                )
-            );
+            newBuffer
+                .Properties
+                .AddProperty(
+                    PredefinedPreviewTaggerKeys.ConflictSpansKey,
+                    new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, conflictSpans)
+                );
+            newBuffer
+                .Properties
+                .AddProperty(
+                    PredefinedPreviewTaggerKeys.WarningSpansKey,
+                    new NormalizedSnapshotSpanCollection(newBuffer.CurrentSnapshot, warningSpans)
+                );
+            newBuffer
+                .Properties
+                .AddProperty(
+                    PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                    new NormalizedSnapshotSpanCollection(
+                        newBuffer.CurrentSnapshot,
+                        suppressDiagnosticsSpans
+                    )
+                );
         }
 
         private async ValueTask<ITextBuffer> CreateNewBufferAsync(
@@ -1143,9 +1151,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             };
 
             if (
-                _editorOptionsService.GlobalOptions.GetOption(
-                    SolutionCrawlerRegistrationService.EnableSolutionCrawler
-                )
+                _editorOptionsService
+                    .GlobalOptions
+                    .GetOption(SolutionCrawlerRegistrationService.EnableSolutionCrawler)
             )
             {
                 leftWorkspace?.EnableSolutionCrawler();
@@ -1238,7 +1246,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             // Defer to the editor to figure out what changes the client made.
             var diffService = _differenceSelectorService.GetTextDifferencingService(
-                oldDocument.Project.Services
+                oldDocument
+                    .Project
+                    .Services
                     .GetRequiredService<IContentTypeLanguageService>()
                     .GetDefaultContentType()
             );

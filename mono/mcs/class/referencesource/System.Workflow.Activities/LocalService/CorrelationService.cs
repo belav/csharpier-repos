@@ -105,12 +105,14 @@ namespace System.Workflow.Activities
                 if (eventListener != null)
                 {
                     queue.RegisterForQueueItemAvailable(eventListener, activity.QualifiedName);
-                    WorkflowActivityTrace.Activity.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "CorrelationService: activity '{0}' subscribing to QueueItemAvailable",
-                        activity.QualifiedName
-                    );
+                    WorkflowActivityTrace
+                        .Activity
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "CorrelationService: activity '{0}' subscribing to QueueItemAvailable",
+                            activity.QualifiedName
+                        );
                     return true;
                 }
                 return false;
@@ -309,10 +311,10 @@ namespace System.Workflow.Activities
                 // name, see if the current element in the initializerValues and followerValues enumerators have a matching name.
                 // If they do match, just fall thru because followerValue is already set to followerValues.Current.Value;
                 if (
-                    !initializerValues.Current.Name.Equals(
-                        followerValues.Current.Name,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !initializerValues
+                        .Current
+                        .Name
+                        .Equals(followerValues.Current.Name, StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     CorrelationProperty followerProperty = null;
@@ -323,10 +325,13 @@ namespace System.Workflow.Activities
                         // We don't need to be concerned with culture here because the names we are comparing
                         // are parameter names on methods in an interface.
                         if (
-                            initializerValues.Current.Name.Equals(
-                                followerEnumerator.Current.Name,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            initializerValues
+                                .Current
+                                .Name
+                                .Equals(
+                                    followerEnumerator.Current.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
                         )
                         {
                             // We found a matching Name in the follower collection.
@@ -434,13 +439,15 @@ namespace System.Workflow.Activities
             WorkflowQueuingService queueSvcs = (WorkflowQueuingService)
                 context.GetService(typeof(WorkflowQueuingService));
             FollowerQueueCreator follower = new FollowerQueueCreator(followermethodName);
-            WorkflowActivityTrace.Activity.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Creating follower {0} on initializer {1}",
-                interfaceType.Name + followermethodName,
-                interfaceType.Name + initializermethodName
-            );
+            WorkflowActivityTrace
+                .Activity
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Creating follower {0} on initializer {1}",
+                    interfaceType.Name + followermethodName,
+                    interfaceType.Name + initializermethodName
+                );
 
             ICollection<CorrelationProperty> corrValues =
                 CorrelationResolver.ResolveCorrelationValues(

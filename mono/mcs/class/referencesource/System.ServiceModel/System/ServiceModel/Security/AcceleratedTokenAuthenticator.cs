@@ -99,8 +99,9 @@ namespace System.ServiceModel.Security
         )
             where TChannel : class, IChannel
         {
-            SecurityCredentialsManager securityCredentials =
-                this.IssuerBindingContext.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager securityCredentials = this.IssuerBindingContext
+                .BindingParameters
+                .Find<SecurityCredentialsManager>();
             if (securityCredentials == null)
             {
                 securityCredentials = ServiceCredentials.CreateDefaultCredentials();
@@ -110,15 +111,18 @@ namespace System.ServiceModel.Security
                 context.GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (this.bootstrapSecurityBindingElement.ReaderQuotas == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
+                        )
+                    );
             }
 
-            TransportBindingElement transportBindingElement =
-                context.RemainingBindingElements.Find<TransportBindingElement>();
+            TransportBindingElement transportBindingElement = context
+                .RemainingBindingElements
+                .Find<TransportBindingElement>();
             if (transportBindingElement != null)
                 this.bootstrapSecurityBindingElement.MaxReceivedMessageSize =
                     transportBindingElement.MaxReceivedMessageSize;
@@ -140,22 +144,22 @@ namespace System.ServiceModel.Security
                     soapBindingFactory.RequireIntegrity =
                         true;
                 MessagePartSpecification bodyPart = new MessagePartSpecification(true);
-                soapBindingFactory.ProtectionRequirements.OutgoingSignatureParts.AddParts(
-                    bodyPart,
-                    RequestSecurityTokenResponseAction
-                );
-                soapBindingFactory.ProtectionRequirements.OutgoingEncryptionParts.AddParts(
-                    bodyPart,
-                    RequestSecurityTokenResponseAction
-                );
-                soapBindingFactory.ProtectionRequirements.IncomingSignatureParts.AddParts(
-                    bodyPart,
-                    RequestSecurityTokenAction
-                );
-                soapBindingFactory.ProtectionRequirements.IncomingEncryptionParts.AddParts(
-                    bodyPart,
-                    RequestSecurityTokenAction
-                );
+                soapBindingFactory
+                    .ProtectionRequirements
+                    .OutgoingSignatureParts
+                    .AddParts(bodyPart, RequestSecurityTokenResponseAction);
+                soapBindingFactory
+                    .ProtectionRequirements
+                    .OutgoingEncryptionParts
+                    .AddParts(bodyPart, RequestSecurityTokenResponseAction);
+                soapBindingFactory
+                    .ProtectionRequirements
+                    .IncomingSignatureParts
+                    .AddParts(bodyPart, RequestSecurityTokenAction);
+                soapBindingFactory
+                    .ProtectionRequirements
+                    .IncomingEncryptionParts
+                    .AddParts(bodyPart, RequestSecurityTokenAction);
             }
 
             SecurityChannelListener<TChannel> securityChannelListener =
@@ -251,14 +255,16 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.AddressingVersionNotSupported,
-                                    request.Version.Addressing
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.AddressingVersionNotSupported,
+                                        request.Version.Addressing
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 else
@@ -278,16 +284,18 @@ namespace System.ServiceModel.Security
                 byte[] issuerEntropy;
                 byte[] proofKey;
                 SecurityToken proofToken;
-                WSTrust.Driver.ProcessRstAndIssueKey(
-                    requestSecurityToken,
-                    null,
-                    this.KeyEntropyMode,
-                    this.SecurityAlgorithmSuite,
-                    out issuedKeySize,
-                    out issuerEntropy,
-                    out proofKey,
-                    out proofToken
-                );
+                WSTrust
+                    .Driver
+                    .ProcessRstAndIssueKey(
+                        requestSecurityToken,
+                        null,
+                        this.KeyEntropyMode,
+                        this.SecurityAlgorithmSuite,
+                        out issuedKeySize,
+                        out issuerEntropy,
+                        out proofKey,
+                        out proofToken
+                    );
                 UniqueId contextId = SecurityUtils.GenerateUniqueId();
                 string id = SecurityUtils.GenerateId();
                 DateTime effectiveTime = DateTime.UtcNow;
@@ -369,14 +377,16 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.AddressingVersionNotSupported,
-                                    request.Version.Addressing
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.AddressingVersionNotSupported,
+                                        request.Version.Addressing
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 rstr.MakeReadOnly();
@@ -402,9 +412,9 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
                 }
             }
             finally
@@ -486,9 +496,9 @@ namespace System.ServiceModel.Security
             {
                 return (T)
                     (object)
-                        authenticator.BootstrapSecurityBindingElement.GetProperty<ISecurityCapabilities>(
-                            context
-                        );
+                        authenticator
+                            .BootstrapSecurityBindingElement
+                            .GetProperty<ISecurityCapabilities>(context);
             }
 
             return context.GetInnerProperty<T>();

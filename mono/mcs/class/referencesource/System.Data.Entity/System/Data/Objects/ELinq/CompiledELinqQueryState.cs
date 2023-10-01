@@ -123,8 +123,9 @@ namespace System.Data.Objects.ELinq
             {
                 // This instance does not yet have a reference to a cache entry.
                 // First, attempt to retrieve an existing cache entry.
-                QueryCacheManager cacheManager =
-                    this.ObjectContext.MetadataWorkspace.GetQueryCacheManager();
+                QueryCacheManager cacheManager = this.ObjectContext
+                    .MetadataWorkspace
+                    .GetQueryCacheManager();
                 CompiledQueryCacheKey cacheKey = new CompiledQueryCacheKey(this._cacheToken);
 
                 if (cacheManager.TryCacheLookup(cacheKey, out cacheEntry))
@@ -319,7 +320,8 @@ namespace System.Data.Objects.ELinq
                 object[] parameterValues
             )
             {
-                Dictionary<ParameterExpression, object> parameterLookup = query.Parameters
+                Dictionary<ParameterExpression, object> parameterLookup = query
+                    .Parameters
                     .Skip(1)
                     .Zip(parameterValues)
                     .ToDictionary(pair => pair.Key, pair => pair.Value);

@@ -423,9 +423,10 @@ namespace Microsoft.CodeAnalysis.Remote
             catch
             {
                 // We're reading and interpreting arbitrary data from disk.  This may be invalid for any reason.
-                Internal.Log.Logger.Log(
-                    FunctionId.RemoteSemanticClassificationCacheService_ExceptionInCacheRead
-                );
+                Internal
+                    .Log
+                    .Logger
+                    .Log(FunctionId.RemoteSemanticClassificationCacheService_ExceptionInCacheRead);
                 return default;
             }
         }

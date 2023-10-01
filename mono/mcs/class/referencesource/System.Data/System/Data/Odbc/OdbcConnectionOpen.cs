@@ -37,10 +37,10 @@ namespace System.Data.Odbc
             }
             catch (System.Security.SecurityException)
             {
-                System.Diagnostics.Debug.Assert(
-                    false,
-                    "unexpected SecurityException for current codepath"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(false, "unexpected SecurityException for current codepath");
                 throw;
             }
 #endif

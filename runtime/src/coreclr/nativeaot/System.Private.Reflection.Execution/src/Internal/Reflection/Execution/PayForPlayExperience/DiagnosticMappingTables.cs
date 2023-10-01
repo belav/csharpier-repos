@@ -107,10 +107,9 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                     )
                         break; // Should have reached the root namespace first but this helper is for ToString() - better to
                     // return partial information than crash.
-                    namespaceReferenceHandle =
-                        namespaceReference.ParentScopeOrNamespace.ToNamespaceReferenceHandle(
-                            reader
-                        );
+                    namespaceReferenceHandle = namespaceReference
+                        .ParentScopeOrNamespace
+                        .ToNamespaceReferenceHandle(reader);
                 }
             }
             else
@@ -157,10 +156,9 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                     )
                         break; // Should have reached the root namespace first but this helper is for ToString() - better to
                     // return partial information than crash.
-                    namespaceHandle =
-                        namespaceDefinition.ParentScopeOrNamespace.ToNamespaceDefinitionHandle(
-                            reader
-                        );
+                    namespaceHandle = namespaceDefinition
+                        .ParentScopeOrNamespace
+                        .ToNamespaceDefinitionHandle(reader);
                 }
             }
             return s;

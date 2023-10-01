@@ -46,7 +46,12 @@ namespace System.ServiceModel.Routing
                     this.messageRpc.EventTraceActivity,
                     this.messageRpc.UniqueID,
                     message.Headers.Action,
-                    this.messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(),
+                    this.messageRpc
+                        .OperationContext
+                        .EndpointDispatcher
+                        .EndpointAddress
+                        .Uri
+                        .ToString(),
                     messageRpc.Transaction != null ? "True" : "False"
                 );
             }
@@ -62,14 +67,16 @@ namespace System.ServiceModel.Routing
             catch (MultipleFilterMatchesException matchesException)
             {
                 // Wrap this exception with one that is more meaningful to users of RoutingService:
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR.ReqReplyMulticastNotSupported(
-                            this.messageRpc.OperationContext.Channel.LocalAddress
-                        ),
-                        matchesException
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR.ReqReplyMulticastNotSupported(
+                                this.messageRpc.OperationContext.Channel.LocalAddress
+                            ),
+                            matchesException
+                        )
+                    );
             }
 
             while (this.StartProcessing()) { }
@@ -98,13 +105,15 @@ namespace System.ServiceModel.Routing
             {
                 if (messageRpc.Transaction != null && sendOperation.HasAlternate)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ConfigurationErrorsException(
-                            SR.ErrorHandlingNotSupportedReqReplyTxn(
-                                this.messageRpc.OperationContext.Channel.LocalAddress
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ConfigurationErrorsException(
+                                SR.ErrorHandlingNotSupportedReqReplyTxn(
+                                    this.messageRpc.OperationContext.Channel.LocalAddress
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 // We always work on cloned message when there are backup endpoints to handle exception cases

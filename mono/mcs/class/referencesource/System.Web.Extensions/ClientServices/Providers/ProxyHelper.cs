@@ -361,9 +361,10 @@ namespace System.Web.ClientServices.Providers
         {
             HttpRequestMessageProperty httpRequestProperty = null;
             if (
-                OperationContext.Current.OutgoingMessageProperties.ContainsKey(
-                    HttpRequestMessageProperty.Name
-                )
+                OperationContext
+                    .Current
+                    .OutgoingMessageProperties
+                    .ContainsKey(HttpRequestMessageProperty.Name)
             )
                 httpRequestProperty =
                     OperationContext.Current.OutgoingMessageProperties[
@@ -373,10 +374,10 @@ namespace System.Web.ClientServices.Providers
             if (httpRequestProperty == null)
             {
                 httpRequestProperty = new HttpRequestMessageProperty();
-                OperationContext.Current.OutgoingMessageProperties.Add(
-                    HttpRequestMessageProperty.Name,
-                    httpRequestProperty
-                );
+                OperationContext
+                    .Current
+                    .OutgoingMessageProperties
+                    .Add(HttpRequestMessageProperty.Name, httpRequestProperty);
             }
 
             httpRequestProperty.Headers.Add(HttpRequestHeader.Cookie, cookies);

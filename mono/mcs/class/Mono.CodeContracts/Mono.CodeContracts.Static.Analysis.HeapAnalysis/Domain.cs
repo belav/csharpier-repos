@@ -846,14 +846,16 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
             )
             {
                 var pathElement = (PathElement<Parameter>)head;
-                result = result1.Tail.Cons(
-                    new ParameterPathElement(
-                        pathElement.Element,
-                        pathElement.Description,
-                        pathElement.Func,
-                        MetaDataProvider
-                    )
-                );
+                result = result1
+                    .Tail
+                    .Cons(
+                        new ParameterPathElement(
+                            pathElement.Element,
+                            pathElement.Description,
+                            pathElement.Func,
+                            MetaDataProvider
+                        )
+                    );
                 return true;
             }
 
@@ -2042,9 +2044,9 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 SymValue symValue2 = tuple.Item2;
                 SymValue elem = tuple.Item3;
 
-                bool unmodifiedSinceEntryContains = domain.unmodifiedSinceEntry.ContainsSafe(
-                    symValue1
-                );
+                bool unmodifiedSinceEntryContains = domain
+                    .unmodifiedSinceEntry
+                    .ContainsSafe(symValue1);
                 bool modifiedAtCallContains = domain.ModifiedAtCall.ContainsSafe(symValue1);
 
                 if (unmodifiedSinceEntryContains)

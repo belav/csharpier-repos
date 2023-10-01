@@ -28,7 +28,9 @@ namespace System.Web.Razor.Generator
                 ns = ns.Substring(1);
             }
 
-            CodeNamespaceImport import = context.Namespace.Imports
+            CodeNamespaceImport import = context
+                .Namespace
+                .Imports
                 .OfType<CodeNamespaceImport>()
                 .Where(i => String.Equals(i.Namespace, ns.Trim(), StringComparison.Ordinal))
                 .FirstOrDefault();

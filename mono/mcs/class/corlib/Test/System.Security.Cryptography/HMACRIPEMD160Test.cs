@@ -307,9 +307,9 @@ namespace MonoTests.System.Security.Cryptography
                 0xf8,
                 0x81
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq");
 
             string testName = "HMACRIPEMD160 Key #1 Test #6";
             hmac.Key = key1;
@@ -348,9 +348,9 @@ namespace MonoTests.System.Security.Cryptography
                 0xae,
                 0x79
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
 
             string testName = "HMACRIPEMD160 Key #1 Test #7";
             hmac.Key = key1;
@@ -389,9 +389,11 @@ namespace MonoTests.System.Security.Cryptography
                 0x6e,
                 0x6c
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes(
+                    "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+                );
 
             string testName = "HMACRIPEMD160 Key #1 Test #8";
             hmac.Key = key1;
@@ -684,9 +686,9 @@ namespace MonoTests.System.Security.Cryptography
                 0x62,
                 0x9a
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq");
 
             string testName = "HMACRIPEMD160 Key #2 Test #6";
             hmac.Key = key2;
@@ -725,9 +727,9 @@ namespace MonoTests.System.Security.Cryptography
                 0x33,
                 0xe2
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
 
             string testName = "HMACRIPEMD160 Key #2 Test #7";
             hmac.Key = key2;
@@ -766,9 +768,11 @@ namespace MonoTests.System.Security.Cryptography
                 0x04,
                 0xf9
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes(
+                    "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+                );
 
             string testName = "HMACRIPEMD160 Key #2 Test #8";
             hmac.Key = key2;

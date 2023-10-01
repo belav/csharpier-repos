@@ -33,7 +33,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var sectionsList = entity.hallSections
+                    var sectionsList = entity
+                        .hallSections
                         .Select(
                             S =>
                                 new HallSectionModel()
@@ -62,7 +63,8 @@ namespace POS_Server.Controllers
                             if (section.isActive == 1)
                             {
                                 long cId = (int)section.sectionId;
-                                var tables = entity.tables
+                                var tables = entity
+                                    .tables
                                     .Where(x => x.sectionId == cId)
                                     .FirstOrDefault();
 
@@ -149,7 +151,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var location = entity.hallSections
+                    var location = entity
+                        .hallSections
                         .Where(u => u.sectionId == sectionId)
                         .Select(
                             L =>

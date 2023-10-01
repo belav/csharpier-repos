@@ -168,9 +168,11 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                    );
             }
             if (from == null)
             {
@@ -181,9 +183,11 @@ namespace System.ServiceModel.Configuration
         DictionaryTraceRecord CreateCanAddRecord(string extensionCollectionName)
         {
             Dictionary<string, string> values = new Dictionary<string, string>(2);
-            values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(
-                ThisType.AssemblyQualifiedName
-            );
+            values["ElementType"] = System
+                .Runtime
+                .Diagnostics
+                .DiagnosticTraceBase
+                .XmlEncode(ThisType.AssemblyQualifiedName);
             values["CollectionName"] =
                 ConfigurationStrings.ExtensionsSectionPath + "/" + extensionCollectionName;
             return new DictionaryTraceRecord(values);
@@ -258,29 +262,33 @@ namespace System.ServiceModel.Configuration
             {
                 if (String.IsNullOrEmpty(this.extensionCollectionName))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigNoExtensionCollectionAssociatedWithType,
-                                extensionSectionType.AssemblyQualifiedName
-                            ),
-                            this.ElementInformation.Source,
-                            this.ElementInformation.LineNumber
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigNoExtensionCollectionAssociatedWithType,
+                                    extensionSectionType.AssemblyQualifiedName
+                                ),
+                                this.ElementInformation.Source,
+                                this.ElementInformation.LineNumber
+                            )
+                        );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigExtensionCollectionNotFound,
-                                this.extensionCollectionName
-                            ),
-                            this.ElementInformation.Source,
-                            this.ElementInformation.LineNumber
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigExtensionCollectionNotFound,
+                                    this.extensionCollectionName
+                                ),
+                                this.ElementInformation.Source,
+                                this.ElementInformation.LineNumber
+                            )
+                        );
                 }
             }
 
@@ -290,10 +298,12 @@ namespace System.ServiceModel.Configuration
 
                 // Optimize for assembly qualified names.
                 if (
-                    collectionElement.Type.Equals(
-                        extensionSectionType.AssemblyQualifiedName,
-                        StringComparison.Ordinal
-                    )
+                    collectionElement
+                        .Type
+                        .Equals(
+                            extensionSectionType.AssemblyQualifiedName,
+                            StringComparison.Ordinal
+                        )
                 )
                 {
                     configurationElementName = collectionElement.Name;
@@ -315,17 +325,19 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(configurationElementName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigExtensionTypeNotRegisteredInCollection,
-                            extensionSectionType.AssemblyQualifiedName,
-                            this.extensionCollectionName
-                        ),
-                        this.ElementInformation.Source,
-                        this.ElementInformation.LineNumber
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigExtensionTypeNotRegisteredInCollection,
+                                extensionSectionType.AssemblyQualifiedName,
+                                this.extensionCollectionName
+                            ),
+                            this.ElementInformation.Source,
+                            this.ElementInformation.LineNumber
+                        )
+                    );
             }
 
             return configurationElementName;

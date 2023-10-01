@@ -303,16 +303,16 @@ namespace System.ServiceModel.Security
 
             if (requestSerializer == null)
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestSerializer"
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("requestSerializer");
             }
 
             if (responseSerializer == null)
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "responseSerializer"
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("responseSerializer");
             }
 
             if (trustVersion == null)
@@ -424,9 +424,11 @@ namespace System.ServiceModel.Security
                 && trustVersion != TrustVersion.WSTrustFeb2005
             )
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
+                    );
             }
 
             switch (requestType)
@@ -452,9 +454,13 @@ namespace System.ServiceModel.Security
                         : WSTrust13Constants.Actions.Validate;
 
                 default:
-                    throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.ID3141, requestType.ToString()))
-                    );
+                    throw IM.DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.ID3141, requestType.ToString())
+                            )
+                        );
             }
         }
 
@@ -477,9 +483,9 @@ namespace System.ServiceModel.Security
 
             if (!response.IsFinal)
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException(SR.GetString(SR.ID3270))
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID3270)));
             }
 
             if (response.RequestedSecurityToken == null)
@@ -494,9 +500,9 @@ namespace System.ServiceModel.Security
             {
                 if (response.RequestedSecurityToken.SecurityTokenXml == null)
                 {
-                    throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ID3138))
-                    );
+                    throw IM.DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3138)));
                 }
 
                 SecurityToken proofToken = GetProofKey(request, response);
@@ -552,9 +558,11 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3190, requestKeyType))
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.ID3190, requestKeyType))
+                    );
             }
         }
 
@@ -626,16 +634,16 @@ namespace System.ServiceModel.Security
         {
             if (response.Entropy == null)
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3193))
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID3193)));
             }
 
             if (request.Entropy == null)
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR.GetString(SR.ID3194))
-                );
+                throw IM.DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID3194)));
             }
 
             //
@@ -647,11 +655,15 @@ namespace System.ServiceModel.Security
                 keySize = response.KeySizeInBits.Value;
             }
 
-            byte[] keyMaterial = System.IdentityModel.CryptoHelper.KeyGenerator.ComputeCombinedKey(
-                request.Entropy.GetKeyBytes(),
-                response.Entropy.GetKeyBytes(),
-                keySize
-            );
+            byte[] keyMaterial = System
+                .IdentityModel
+                .CryptoHelper
+                .KeyGenerator
+                .ComputeCombinedKey(
+                    request.Entropy.GetKeyBytes(),
+                    response.Entropy.GetKeyBytes(),
+                    keySize
+                );
 
             return new BinarySecretSecurityToken(keyMaterial);
         }
@@ -712,14 +724,16 @@ namespace System.ServiceModel.Security
                     // If there is a RequestedProofToken there must either be a
                     // ProtectedKey or a ComputedKeyAlgorithm!
                     //
-                    throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.ID3192,
-                                response.RequestedProofToken.ComputedKeyAlgorithm
+                    throw IM.DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.ID3192,
+                                    response.RequestedProofToken.ComputedKeyAlgorithm
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else
@@ -744,9 +758,11 @@ namespace System.ServiceModel.Security
                             // also be an RSTR.RequestedProofToken containing a
                             // ComputedKey element.
                             //
-                            throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new NotSupportedException(SR.GetString(SR.ID3191))
-                            );
+                            throw IM.DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new NotSupportedException(SR.GetString(SR.ID3191))
+                                );
                         }
 
                         if (request.Entropy != null)
@@ -762,9 +778,11 @@ namespace System.ServiceModel.Security
                         return null;
 
                     default:
-                        throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.ID3139, request.KeyType))
-                        );
+                        throw IM.DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(SR.GetString(SR.ID3139, request.KeyType))
+                            );
                 }
             }
         }

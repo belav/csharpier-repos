@@ -65,9 +65,11 @@ namespace System.ServiceModel.Dispatcher
             }
             if (operation.Invoker == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.RuntimeRequiresInvoker0))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.RuntimeRequiresInvoker0))
+                    );
             }
 
             this.disposeParameters = (
@@ -115,11 +117,13 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.formatter == null && (deserializeRequest || serializeReply))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.DispatchRuntimeRequiresFormatter0, this.name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.DispatchRuntimeRequiresFormatter0, this.name)
+                        )
+                    );
             }
 
             if ((operation.Parent.InstanceProvider == null) && (operation.Parent.Type != null))
@@ -494,12 +498,14 @@ namespace System.ServiceModel.Dispatcher
 
                         if (this.parent.SecurityImpersonation != null)
                         {
-                            this.parent.SecurityImpersonation.StartImpersonation(
-                                ref rpc,
-                                out impersonationContext,
-                                out originalPrincipal,
-                                out isThreadPrincipalSet
-                            );
+                            this.parent
+                                .SecurityImpersonation
+                                .StartImpersonation(
+                                    ref rpc,
+                                    out impersonationContext,
+                                    out originalPrincipal,
+                                    out isThreadPrincipalSet
+                                );
                         }
                         IManualConcurrencyOperationInvoker manualInvoker =
                             this.Invoker as IManualConcurrencyOperationInvoker;
@@ -510,10 +516,12 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (this.bufferedReceiveEnabled)
                                 {
-                                    rpc.OperationContext.IncomingMessageProperties.Add(
-                                        BufferedReceiveMessageProperty.Name,
-                                        new BufferedReceiveMessageProperty(ref rpc)
-                                    );
+                                    rpc.OperationContext
+                                        .IncomingMessageProperties
+                                        .Add(
+                                            BufferedReceiveMessageProperty.Name,
+                                            new BufferedReceiveMessageProperty(ref rpc)
+                                        );
                                 }
                                 rpc.ReturnParameter = manualInvoker.Invoke(
                                     target,
@@ -545,10 +553,12 @@ namespace System.ServiceModel.Dispatcher
                                 // since IResumeMessageRpc implementation keeps reference of rpc.
                                 // This is to ensure consistent rpc whether or not InvokeBegin completed
                                 // synchronously or asynchronously.
-                                rpc.OperationContext.IncomingMessageProperties.Add(
-                                    BufferedReceiveMessageProperty.Name,
-                                    new BufferedReceiveMessageProperty(ref rpc)
-                                );
+                                rpc.OperationContext
+                                    .IncomingMessageProperties
+                                    .Add(
+                                        BufferedReceiveMessageProperty.Name,
+                                        new BufferedReceiveMessageProperty(ref rpc)
+                                    );
                             }
 
                             IResumeMessageRpc resumeRpc = rpc.Pause();
@@ -593,12 +603,14 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (this.parent.SecurityImpersonation != null)
                             {
-                                this.parent.SecurityImpersonation.StopImpersonation(
-                                    ref rpc,
-                                    impersonationContext,
-                                    originalPrincipal,
-                                    isThreadPrincipalSet
-                                );
+                                this.parent
+                                    .SecurityImpersonation
+                                    .StopImpersonation(
+                                        ref rpc,
+                                        impersonationContext,
+                                        originalPrincipal,
+                                        isThreadPrincipalSet
+                                    );
                             }
                         }
 #pragma warning suppress 56500 // covered by FxCOP
@@ -669,10 +681,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 object principal;
                 if (
-                    securityContext.AuthorizationContext.Properties.TryGetValue(
-                        AuthorizationPolicy.ClaimsPrincipalKey,
-                        out principal
-                    )
+                    securityContext
+                        .AuthorizationContext
+                        .Properties
+                        .TryGetValue(AuthorizationPolicy.ClaimsPrincipalKey, out principal)
                 )
                 {
                     ClaimsPrincipal claimsPrincipal = principal as ClaimsPrincipal;
@@ -685,11 +697,13 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)
+                                )
+                            );
                     }
                 }
             }
@@ -706,9 +720,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (resume == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SFxInvalidAsyncResultState0)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SFxInvalidAsyncResultState0));
             }
 
             resume.SignalConditionalResume(result);
@@ -741,12 +755,14 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.parent.SecurityImpersonation != null)
                         {
-                            this.parent.SecurityImpersonation.StartImpersonation(
-                                ref rpc,
-                                out impersonationContext,
-                                out originalPrincipal,
-                                out isThreadPrincipalSet
-                            );
+                            this.parent
+                                .SecurityImpersonation
+                                .StartImpersonation(
+                                    ref rpc,
+                                    out impersonationContext,
+                                    out originalPrincipal,
+                                    out isThreadPrincipalSet
+                                );
                         }
 
                         rpc.ReturnParameter = this.Invoker.InvokeEnd(
@@ -761,12 +777,14 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (this.parent.SecurityImpersonation != null)
                             {
-                                this.parent.SecurityImpersonation.StopImpersonation(
-                                    ref rpc,
-                                    impersonationContext,
-                                    originalPrincipal,
-                                    isThreadPrincipalSet
-                                );
+                                this.parent
+                                    .SecurityImpersonation
+                                    .StopImpersonation(
+                                        ref rpc,
+                                        impersonationContext,
+                                        originalPrincipal,
+                                        isThreadPrincipalSet
+                                    );
                             }
                         }
 #pragma warning suppress 56500 // covered by FxCOP
@@ -869,16 +887,18 @@ namespace System.ServiceModel.Dispatcher
                         && (!ProxyOperationRuntime.IsValidAction(reply, this.ReplyAction))
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxInvalidReplyAction,
-                                    this.Name,
-                                    reply.Headers.Action ?? "{NULL}",
-                                    this.ReplyAction
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxInvalidReplyAction,
+                                        this.Name,
+                                        reply.Headers.Action ?? "{NULL}",
+                                        this.ReplyAction
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -909,10 +929,12 @@ namespace System.ServiceModel.Dispatcher
                         && MessageState.Closed != rpc.OperationContext.IncomingMessage.State
                     )
                     {
-                        FxTrace.Trace.SetAndTraceTransfer(
-                            TraceUtility.GetReceivedActivityId(rpc.OperationContext),
-                            true
-                        );
+                        FxTrace
+                            .Trace
+                            .SetAndTraceTransfer(
+                                TraceUtility.GetReceivedActivityId(rpc.OperationContext),
+                                true
+                            );
                     }
                     else
                     {
@@ -931,15 +953,17 @@ namespace System.ServiceModel.Dispatcher
                 {
                     bool shouldImpersonate =
                         this.parent.SecurityImpersonation != null
-                        && this.parent.SecurityImpersonation.IsImpersonationEnabledOnCurrentOperation(
-                            ref rpc
-                        );
+                        && this.parent
+                            .SecurityImpersonation
+                            .IsImpersonationEnabledOnCurrentOperation(ref rpc);
                     if (shouldImpersonate)
                     {
-                        reply.Properties.Add(
-                            ImpersonateOnSerializingReplyMessageProperty.Name,
-                            new ImpersonateOnSerializingReplyMessageProperty(ref rpc)
-                        );
+                        reply
+                            .Properties
+                            .Add(
+                                ImpersonateOnSerializingReplyMessageProperty.Name,
+                                new ImpersonateOnSerializingReplyMessageProperty(ref rpc)
+                            );
                         reply = new ImpersonatingMessage(reply);
                     }
                 }
@@ -965,9 +989,9 @@ namespace System.ServiceModel.Dispatcher
                     method.DeclaringType.FullName
                 );
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(message)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(message));
             }
         }
 
@@ -978,12 +1002,14 @@ namespace System.ServiceModel.Dispatcher
                 rpc.NotUnderstoodHeaders = rpc.Request.Headers.GetHeadersNotUnderstood();
                 if (rpc.NotUnderstoodHeaders != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MustUnderstandSoapException(
-                            rpc.NotUnderstoodHeaders,
-                            rpc.Request.Version.Envelope
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MustUnderstandSoapException(
+                                rpc.NotUnderstoodHeaders,
+                                rpc.Request.Version.Envelope
+                            )
+                        );
                 }
             }
         }

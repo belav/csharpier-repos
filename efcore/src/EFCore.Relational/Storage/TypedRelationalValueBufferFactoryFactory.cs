@@ -161,15 +161,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 .Lambda<Func<DbDataReader, object[]>>(
                     Expression.NewArrayInit(
                         typeof(object),
-                        cacheKey.TypeMaterializationInfo.Select(
-                            (mi, i) =>
-                                CreateGetValueExpression(
-                                    DataReaderParameter,
-                                    i,
-                                    mi,
-                                    detailedErrorsEnabled
-                                )
-                        )
+                        cacheKey
+                            .TypeMaterializationInfo
+                            .Select(
+                                (mi, i) =>
+                                    CreateGetValueExpression(
+                                        DataReaderParameter,
+                                        i,
+                                        mi,
+                                        detailedErrorsEnabled
+                                    )
+                            )
                     ),
                     DataReaderParameter
                 )
@@ -251,9 +253,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 indexExpression
             );
 
-            valueExpression = materializationInfo.Mapping.CustomizeDataReaderExpression(
-                valueExpression
-            );
+            valueExpression = materializationInfo
+                .Mapping
+                .CustomizeDataReaderExpression(valueExpression);
 
             var converter = materializationInfo.Mapping.Converter;
 

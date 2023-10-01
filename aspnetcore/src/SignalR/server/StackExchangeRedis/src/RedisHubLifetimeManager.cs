@@ -696,10 +696,9 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                             {
                                 try
                                 {
-                                    connection.Protocol.WriteMessage(
-                                        completionMessage,
-                                        memoryBufferWriter
-                                    );
+                                    connection
+                                        .Protocol
+                                        .WriteMessage(completionMessage, memoryBufferWriter);
                                     message = RedisProtocol.WriteCompletionMessage(
                                         memoryBufferWriter,
                                         protocolName
@@ -724,22 +723,24 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
                 );
 
                 // TODO: this isn't great
-                tokenRegistration = connection.ConnectionAborted.UnsafeRegister(
-                    _ =>
-                    {
-                        var invocationInfo = _clientResultsManager.RemoveInvocation(
-                            invocation.InvocationId
-                        );
-                        invocationInfo?.Completion(
-                            null!,
-                            CompletionMessage.WithError(
-                                invocation.InvocationId,
-                                "Connection disconnected."
-                            )
-                        );
-                    },
-                    null
-                );
+                tokenRegistration = connection
+                    .ConnectionAborted
+                    .UnsafeRegister(
+                        _ =>
+                        {
+                            var invocationInfo = _clientResultsManager.RemoveInvocation(
+                                invocation.InvocationId
+                            );
+                            invocationInfo?.Completion(
+                                null!,
+                                CompletionMessage.WithError(
+                                    invocation.InvocationId,
+                                    "Connection disconnected."
+                                )
+                            );
+                        },
+                        null
+                    );
             }
 
             // Forward message from other server to client

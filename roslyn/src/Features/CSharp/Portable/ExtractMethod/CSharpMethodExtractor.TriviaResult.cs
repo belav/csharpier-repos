@@ -24,15 +24,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 CancellationToken cancellationToken
             )
             {
-                var preservationService =
-                    selectionResult.SemanticDocument.Document.Project.Services.GetService<ISyntaxTriviaService>();
+                var preservationService = selectionResult
+                    .SemanticDocument
+                    .Document
+                    .Project
+                    .Services
+                    .GetService<ISyntaxTriviaService>();
                 var root = selectionResult.SemanticDocument.Root;
                 var result = preservationService.SaveTriviaAroundSelection(
                     root,
                     selectionResult.FinalSpan
                 );
                 return new CSharpTriviaResult(
-                    await selectionResult.SemanticDocument
+                    await selectionResult
+                        .SemanticDocument
                         .WithSyntaxRootAsync(result.Root, cancellationToken)
                         .ConfigureAwait(false),
                     result
@@ -186,7 +191,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         ),
                     TriviaLocation.BeforeEndOfSpan
                         => FilterTriviaList(
-                            tokenPair.PreviousToken.TrailingTrivia
+                            tokenPair
+                                .PreviousToken
+                                .TrailingTrivia
                                 .Concat(list)
                                 .Concat(tokenPair.NextToken.LeadingTrivia)
                         ),
@@ -224,7 +231,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             )
             {
                 var allList = FilterTriviaList(
-                    tokenPair.PreviousToken.TrailingTrivia
+                    tokenPair
+                        .PreviousToken
+                        .TrailingTrivia
                         .Concat(list)
                         .Concat(AppendLeadingTrivia(tokenPair))
                 );

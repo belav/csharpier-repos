@@ -28,11 +28,13 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         internal static Script<object> script = CSharpScript.Create(
             "",
-            ScriptOptions.Default.WithReferences(
-                typeof(object).Assembly,
-                typeof(Enumerable).Assembly,
-                typeof(JObject).Assembly
-            )
+            ScriptOptions
+                .Default
+                .WithReferences(
+                    typeof(object).Assembly,
+                    typeof(Enumerable).Assembly,
+                    typeof(JObject).Assembly
+                )
         );
 
         private sealed class ExpressionSyntaxReplacer : CSharpSyntaxWalker

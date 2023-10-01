@@ -219,9 +219,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     (
                         options.GetOption(
                             CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.IgnoreAroundVariableDeclaration
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.IgnoreAroundVariableDeclaration)
                         )
                             ? SpacePlacement.IgnoreAroundVariableDeclaration
                             : 0
@@ -229,9 +229,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpacingAfterMethodDeclarationName,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.AfterMethodDeclarationName
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.AfterMethodDeclarationName)
                         )
                             ? SpacePlacement.AfterMethodDeclarationName
                             : 0
@@ -239,9 +239,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceBetweenEmptyMethodDeclarationParentheses,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.BetweenEmptyMethodDeclarationParentheses
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.BetweenEmptyMethodDeclarationParentheses)
                         )
                             ? SpacePlacement.BetweenEmptyMethodDeclarationParentheses
                             : 0
@@ -249,9 +249,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceWithinMethodDeclarationParenthesis,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.WithinMethodDeclarationParenthesis
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.WithinMethodDeclarationParenthesis)
                         )
                             ? SpacePlacement.WithinMethodDeclarationParenthesis
                             : 0
@@ -267,9 +267,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceBetweenEmptyMethodCallParentheses,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.BetweenEmptyMethodCallParentheses
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.BetweenEmptyMethodCallParentheses)
                         )
                             ? SpacePlacement.BetweenEmptyMethodCallParentheses
                             : 0
@@ -277,9 +277,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceWithinMethodCallParentheses,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.WithinMethodCallParentheses
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.WithinMethodCallParentheses)
                         )
                             ? SpacePlacement.WithinMethodCallParentheses
                             : 0
@@ -287,9 +287,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceAfterControlFlowStatementKeyword,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.AfterControlFlowStatementKeyword
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.AfterControlFlowStatementKeyword)
                         )
                             ? SpacePlacement.AfterControlFlowStatementKeyword
                             : 0
@@ -303,9 +303,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceBeforeSemicolonsInForStatement,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.BeforeSemicolonsInForStatement
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.BeforeSemicolonsInForStatement)
                         )
                             ? SpacePlacement.BeforeSemicolonsInForStatement
                             : 0
@@ -313,9 +313,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceAfterSemicolonsInForStatement,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.AfterSemicolonsInForStatement
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.AfterSemicolonsInForStatement)
                         )
                             ? SpacePlacement.AfterSemicolonsInForStatement
                             : 0
@@ -339,9 +339,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceBetweenEmptySquareBrackets,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.BetweenEmptySquareBrackets
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.BetweenEmptySquareBrackets)
                         )
                             ? SpacePlacement.BetweenEmptySquareBrackets
                             : 0
@@ -357,9 +357,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceAfterColonInBaseTypeDeclaration,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.AfterColonInBaseTypeDeclaration
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.AfterColonInBaseTypeDeclaration)
                         )
                             ? SpacePlacement.AfterColonInBaseTypeDeclaration
                             : 0
@@ -367,9 +367,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.SpaceBeforeColonInBaseTypeDeclaration,
-                            fallbackOptions.Spacing.HasFlag(
-                                SpacePlacement.BeforeColonInBaseTypeDeclaration
-                            )
+                            fallbackOptions
+                                .Spacing
+                                .HasFlag(SpacePlacement.BeforeColonInBaseTypeDeclaration)
                         )
                             ? SpacePlacement.BeforeColonInBaseTypeDeclaration
                             : 0
@@ -414,9 +414,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     (
                         options.GetOption(
                             CSharpFormattingOptions2.NewLineForMembersInObjectInit,
-                            fallbackOptions.NewLines.HasFlag(
-                                NewLinePlacement.BeforeMembersInObjectInitializers
-                            )
+                            fallbackOptions
+                                .NewLines
+                                .HasFlag(NewLinePlacement.BeforeMembersInObjectInitializers)
                         )
                             ? NewLinePlacement.BeforeMembersInObjectInitializers
                             : 0
@@ -424,9 +424,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.NewLineForMembersInAnonymousTypes,
-                            fallbackOptions.NewLines.HasFlag(
-                                NewLinePlacement.BeforeMembersInAnonymousTypes
-                            )
+                            fallbackOptions
+                                .NewLines
+                                .HasFlag(NewLinePlacement.BeforeMembersInAnonymousTypes)
                         )
                             ? NewLinePlacement.BeforeMembersInAnonymousTypes
                             : 0
@@ -464,9 +464,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.NewLineForClausesInQuery,
-                            fallbackOptions.NewLines.HasFlag(
-                                NewLinePlacement.BetweenQueryExpressionClauses
-                            )
+                            fallbackOptions
+                                .NewLines
+                                .HasFlag(NewLinePlacement.BetweenQueryExpressionClauses)
                         )
                             ? NewLinePlacement.BetweenQueryExpressionClauses
                             : 0
@@ -495,9 +495,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.IndentSwitchCaseSection,
-                            fallbackOptions.Indentation.HasFlag(
-                                IndentationPlacement.SwitchCaseContents
-                            )
+                            fallbackOptions
+                                .Indentation
+                                .HasFlag(IndentationPlacement.SwitchCaseContents)
                         )
                             ? IndentationPlacement.SwitchCaseContents
                             : 0
@@ -505,9 +505,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     | (
                         options.GetOption(
                             CSharpFormattingOptions2.IndentSwitchCaseSectionWhenBlock,
-                            fallbackOptions.Indentation.HasFlag(
-                                IndentationPlacement.SwitchCaseContentsWhenBlock
-                            )
+                            fallbackOptions
+                                .Indentation
+                                .HasFlag(IndentationPlacement.SwitchCaseContentsWhenBlock)
                         )
                             ? IndentationPlacement.SwitchCaseContentsWhenBlock
                             : 0

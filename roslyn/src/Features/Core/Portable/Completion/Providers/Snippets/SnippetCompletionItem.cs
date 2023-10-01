@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
             ImmutableArray<string> additionalFilterTexts
         )
         {
-            var props = ImmutableDictionary<string, string>.Empty
+            var props = ImmutableDictionary<string, string>
+                .Empty
                 .Add("Position", position.ToString())
                 .Add(SnippetIdentifierKey, snippetIdentifier);
 

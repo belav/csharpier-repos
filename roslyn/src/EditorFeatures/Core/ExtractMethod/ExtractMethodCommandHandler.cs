@@ -98,13 +98,14 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             // wait indicator for Extract Method
             if (_renameService.ActiveSession != null)
             {
-                _threadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        _renameService.ActiveSession.CommitAsync(
-                            previewChanges: false,
-                            CancellationToken.None
-                        )
-                );
+                _threadingContext
+                    .JoinableTaskFactory
+                    .Run(
+                        () =>
+                            _renameService
+                                .ActiveSession
+                                .CommitAsync(previewChanges: false, CancellationToken.None)
+                    );
             }
 
             if (!args.SubjectBuffer.SupportsRefactorings())
@@ -121,8 +122,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             var span = spans[0];
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document is null)
                 return false;
 
@@ -138,8 +140,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         )
         {
             _threadingContext.ThrowIfNotOnUIThread();
-            var indicatorFactory =
-                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var indicatorContext = indicatorFactory.Create(
                 view,
                 span,
@@ -164,7 +169,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             var cancellationToken = waitContext.UserCancellationToken;
 
-            var document = await textBuffer.CurrentSnapshot
+            var document = await textBuffer
+                .CurrentSnapshot
                 .GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(waitContext)
                 .ConfigureAwait(false);
             if (document is null)
@@ -197,16 +203,19 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     .ConfigureAwait(false);
                 if (newResult != null)
                 {
-                    var notificationService =
-                        document.Project.Solution.Services.GetService<INotificationService>();
+                    var notificationService = document
+                        .Project
+                        .Solution
+                        .Services
+                        .GetService<INotificationService>();
                     if (notificationService != null)
                     {
                         // We are about to show a modal UI dialog so we should take over the command execution
                         // wait context. That means the command system won't attempt to show its own wait dialog
                         // and also will take it into consideration when measuring command handling duration.
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationToken
-                        );
+                        await _threadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(cancellationToken);
 
                         if (
                             !notificationService.ConfirmMessageBox(
@@ -324,9 +333,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 if (notificationService != null)
                 {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+                    await _threadingContext
+                        .JoinableTaskFactory
+                        .SwitchToMainThreadAsync(cancellationToken);
                     notificationService.SendNotification(
                         EditorFeaturesResources.Extract_method_encountered_the_following_issues
                             + Environment.NewLine
@@ -345,9 +354,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             // okay, best effort is turned on, let user know it is an best effort
             if (notificationService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 if (
                     !notificationService.ConfirmMessageBox(
                         EditorFeaturesResources.Extract_method_encountered_the_following_issues
@@ -383,10 +392,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 return null;
 
             var reason = result.Reasons.FirstOrDefault();
-            var length =
-                FeaturesResources.Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket.IndexOf(
-                    ':'
-                );
+            var length = FeaturesResources
+                .Asynchronous_method_cannot_have_ref_out_parameters_colon_bracket_0_bracket
+                .IndexOf(':');
             if (
                 reason != null
                 && length > 0

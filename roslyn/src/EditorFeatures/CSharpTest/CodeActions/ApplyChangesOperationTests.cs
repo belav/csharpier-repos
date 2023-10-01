@@ -81,7 +81,8 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects
+                    var document1 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program1"));
@@ -92,7 +93,8 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution.Projects
+                    var document2 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program2"));
@@ -126,7 +128,8 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects
+                    var document1 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program1"));
@@ -137,7 +140,8 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution.Projects
+                    var document2 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program2"));
@@ -168,7 +172,8 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects
+                    var document1 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program1"));
@@ -179,7 +184,8 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document1 = solution.Projects
+                    var document1 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program1"));
@@ -212,7 +218,8 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects
+                    var document1 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program1"));
@@ -223,7 +230,8 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document1 = solution.Projects
+                    var document1 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program1"));
@@ -254,7 +262,8 @@ class Program2
 </Workspace>",
                 codeActionTransform: solution =>
                 {
-                    var document1 = solution.Projects
+                    var document1 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program1"));
@@ -262,7 +271,8 @@ class Program2
                 },
                 intermediaryTransform: solution =>
                 {
-                    var document2 = solution.Projects
+                    var document2 = solution
+                        .Projects
                         .Single()
                         .Documents
                         .Single(d => d.FilePath!.Contains("Program2"));

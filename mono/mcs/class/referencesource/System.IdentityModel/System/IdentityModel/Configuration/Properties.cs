@@ -376,10 +376,9 @@ namespace System.IdentityModel.Configuration
                             new System.IdentityModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.IdentityModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "24.20:31:23.6470000",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System
+                                    .TimeSpan
+                                    .Parse("24.20:31:23.6470000", CultureInfo.InvariantCulture)
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )
@@ -486,17 +485,18 @@ namespace System.IdentityModel.Configuration
                         new ConfigurationProperty(
                             "expirationPeriod",
                             typeof(System.TimeSpan),
-                            System.TimeSpan.Parse(
-                                "10675199.02:48:05.4775807",
-                                CultureInfo.InvariantCulture
-                            ),
+                            System
+                                .TimeSpan
+                                .Parse("10675199.02:48:05.4775807", CultureInfo.InvariantCulture),
                             new System.IdentityModel.Configuration.TimeSpanOrInfiniteConverter(),
                             new System.IdentityModel.Configuration.TimeSpanOrInfiniteValidator(
                                 System.TimeSpan.Parse("00:00:00", CultureInfo.InvariantCulture),
-                                System.TimeSpan.Parse(
-                                    "10675199.02:48:05.4775807",
-                                    CultureInfo.InvariantCulture
-                                )
+                                System
+                                    .TimeSpan
+                                    .Parse(
+                                        "10675199.02:48:05.4775807",
+                                        CultureInfo.InvariantCulture
+                                    )
                             ),
                             System.Configuration.ConfigurationPropertyOptions.None
                         )

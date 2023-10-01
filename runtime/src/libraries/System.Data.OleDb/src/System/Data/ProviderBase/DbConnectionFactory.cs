@@ -292,7 +292,9 @@ namespace System.Data.ProviderBase
                                 {
                                     if (retry.TrySetResult(task.Result))
                                     {
-                                        PerformanceCounters.NumberOfNonPooledConnections.Increment();
+                                        PerformanceCounters
+                                            .NumberOfNonPooledConnections
+                                            .Increment();
                                     }
                                     else
                                     {
@@ -592,7 +594,9 @@ namespace System.Data.ProviderBase
                             if (0 == poolsLeft)
                             {
                                 _poolGroupsToRelease.Remove(poolGroup);
-                                PerformanceCounters.NumberOfInactiveConnectionPoolGroups.Decrement();
+                                PerformanceCounters
+                                    .NumberOfInactiveConnectionPoolGroups
+                                    .Decrement();
                             }
                         }
                     }

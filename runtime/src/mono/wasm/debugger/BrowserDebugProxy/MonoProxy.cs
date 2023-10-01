@@ -736,13 +736,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             string dil = args["dil"]?.Value<string>();
             string dpdb = args["dpdb"]?.Value<string>();
             var moduleId = await context.SdbAgent.GetModuleId(moduleGUID, token);
-            var applyUpdates = await context.SdbAgent.ApplyUpdates(
-                moduleId,
-                dmeta,
-                dil,
-                dpdb,
-                token
-            );
+            var applyUpdates = await context
+                .SdbAgent
+                .ApplyUpdates(moduleId, dmeta, dil, dpdb, token);
             return applyUpdates;
         }
 
@@ -791,9 +787,12 @@ namespace Microsoft.WebAssembly.Diagnostics
                 // Maybe this is an async method, in which case the debug info is attached
                 // to the async method implementation, in class named:
                 //      `{type_name}.<method_name>::MoveNext`
-                methodInfo = assembly.TypesByName.Values
+                methodInfo = assembly
+                    .TypesByName
+                    .Values
                     .SingleOrDefault(t => t.FullName.StartsWith($"{typeName}.<{methodName}>"))
-                    ?.Methods.FirstOrDefault(mi => mi.Name == "MoveNext");
+                    ?.Methods
+                    .FirstOrDefault(mi => mi.Name == "MoveNext");
             }
 
             if (methodInfo == null)
@@ -801,7 +800,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                 return Result.Err($"Method '{typeName}:{methodName}' not found.");
             }
 
-            string src_url = methodInfo.Assembly.Sources
+            string src_url = methodInfo
+                .Assembly
+                .Sources
                 .Single(sf => sf.SourceId == methodInfo.SourceId)
                 .Url
                 .ToString();
@@ -829,10 +830,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             switch (objectId.Scheme)
             {
                 case "method":
-                    args["details"] = await context.SdbAgent.GetMethodProxy(
-                        objectId.ValueAsJson,
-                        token
-                    );
+                    args["details"] = await context
+                        .SdbAgent
+                        .GetMethodProxy(objectId.ValueAsJson, token);
                     break;
                 case "object":
                     args["details"] = await context.SdbAgent.GetObjectProxy(objectId.Value, token);
@@ -844,16 +844,14 @@ namespace Microsoft.WebAssembly.Diagnostics
                     args["details"] = await valueType.GetProxy(context.SdbAgent, token);
                     break;
                 case "pointer":
-                    args["details"] = await context.SdbAgent.GetPointerContent(
-                        objectId.Value,
-                        token
-                    );
+                    args["details"] = await context
+                        .SdbAgent
+                        .GetPointerContent(objectId.Value, token);
                     break;
                 case "array":
-                    args["details"] = await context.SdbAgent.GetArrayValuesProxy(
-                        objectId.Value,
-                        token
-                    );
+                    args["details"] = await context
+                        .SdbAgent
+                        .GetArrayValuesProxy(objectId.Value, token);
                     break;
                 case "cfo_res":
                     Result cfo_res = await SendMonoCommand(
@@ -899,11 +897,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                 );
                 var retDebuggerCmdReader = new MonoBinaryReader(newBytes);
                 retDebuggerCmdReader.ReadByte(); //number of objects returned.
-                var obj = await context.SdbAgent.ValueCreator.ReadAsVariableValue(
-                    retDebuggerCmdReader,
-                    "ret",
-                    token
-                );
+                var obj = await context
+                    .SdbAgent
+                    .ValueCreator
+                    .ReadAsVariableValue(retDebuggerCmdReader, "ret", token);
                 /*JTokenType? res_value_type = res.Value?["result"]?["value"]?.Type;*/
                 res = Result.OkFromObject(new { result = obj["value"] });
                 SendResponse(id, res, token);
@@ -932,13 +929,15 @@ namespace Microsoft.WebAssembly.Diagnostics
             var varToSetValue = varIds.FirstOrDefault(v => v.Name == varName);
             if (varToSetValue == null)
                 return false;
-            var res = await context.SdbAgent.SetVariableValue(
-                context.ThreadId,
-                scopeId,
-                varToSetValue.Index,
-                varValue["value"].Value<string>(),
-                token
-            );
+            var res = await context
+                .SdbAgent
+                .SetVariableValue(
+                    context.ThreadId,
+                    scopeId,
+                    varToSetValue.Index,
+                    varValue["value"].Value<string>(),
+                    token
+                );
             if (res)
                 SendResponse(id, Result.Ok(new JObject()), token);
             else
@@ -1301,11 +1300,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             commandParamsWriter.Write(thread_id);
             commandParamsWriter.Write(0);
             commandParamsWriter.Write(-1);
-            using var retDebuggerCmdReader = await context.SdbAgent.SendDebuggerAgentCommand(
-                CmdThread.GetFrameInfo,
-                commandParamsWriter,
-                token
-            );
+            using var retDebuggerCmdReader = await context
+                .SdbAgent
+                .SendDebuggerAgentCommand(CmdThread.GetFrameInfo, commandParamsWriter, token);
             var frame_count = retDebuggerCmdReader.ReadInt32();
             //Console.WriteLine("frame_count - " + frame_count);
             for (int j = 0; j < frame_count; j++)
@@ -1480,14 +1477,13 @@ namespace Microsoft.WebAssembly.Diagnostics
                             {
                                 type = "object",
                                 subtype = "error",
-                                className = await context.SdbAgent.GetClassNameFromObject(
-                                    object_id,
-                                    token
-                                ),
+                                className = await context
+                                    .SdbAgent
+                                    .GetClassNameFromObject(object_id, token),
                                 uncaught = caught == 0,
-                                description = exceptionObjectMessage["value"][
-                                    "value"
-                                ].Value<string>(),
+                                description = exceptionObjectMessage["value"]
+                                    ["value"]
+                                    .Value<string>(),
                                 objectId = $"dotnet:object:{object_id}"
                             }
                         );
@@ -1513,7 +1509,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                             context.PauseKind = "resumeLimit";
                         else if (event_kind == EventKind.Breakpoint)
                             context.PauseKind = "breakpoint";
-                        Breakpoint bp = context.BreakpointRequests.Values
+                        Breakpoint bp = context
+                            .BreakpointRequests
+                            .Values
                             .SelectMany(v => v.Locations)
                             .FirstOrDefault(b => b.RemoteId == request_id);
                         if (request_id == context.TempBreakpointForSetNextIP)
@@ -1798,7 +1796,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
                 var method = assembly.GetMethodByToken(methodToken);
                 if (method.StartLocation == null) //It's an async method and we need to get the MoveNext method to add the breakpoint
-                    method = assembly.Methods
+                    method = assembly
+                        .Methods
                         .FirstOrDefault(m => m.Value.KickOffMethod == methodToken)
                         .Value;
                 if (method == null)
@@ -1808,9 +1807,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                     );
                     return;
                 }
-                var sourceFile = assembly.Sources.FirstOrDefault(
-                    sf => sf.SourceId == method.SourceId
-                );
+                var sourceFile = assembly
+                    .Sources
+                    .FirstOrDefault(sf => sf.SourceId == method.SourceId);
                 if (sourceFile == null)
                 {
                     logger.LogDebug(
@@ -1921,18 +1920,21 @@ namespace Microsoft.WebAssembly.Diagnostics
                 if (scope == null)
                     throw new Exception($"Could not find scope with id #{scopeId}");
 
-                VarInfo[] varIds = scope.Method.Info.GetLiveVarsAt(
-                    scope.Location.IlLocation.Offset
-                );
+                VarInfo[] varIds = scope
+                    .Method
+                    .Info
+                    .GetLiveVarsAt(scope.Location.IlLocation.Offset);
 
-                var values = await context.SdbAgent.StackFrameGetValues(
-                    scope.Method,
-                    context.ThreadId,
-                    scopeId,
-                    varIds,
-                    scope.Location.IlLocation.Offset,
-                    token
-                );
+                var values = await context
+                    .SdbAgent
+                    .StackFrameGetValues(
+                        scope.Method,
+                        context.ThreadId,
+                        scopeId,
+                        varIds,
+                        scope.Location.IlLocation.Offset,
+                        token
+                    );
                 if (values != null)
                 {
                     if (values == null || values.Count == 0)
@@ -1968,17 +1970,13 @@ namespace Microsoft.WebAssembly.Diagnostics
             int il_offset = bp.Location.IlLocation.Offset;
 
             var assembly_id = await context.SdbAgent.GetAssemblyId(asm_name, token);
-            var methodId = await context.SdbAgent.GetMethodIdByToken(
-                assembly_id,
-                method_token,
-                token
-            );
+            var methodId = await context
+                .SdbAgent
+                .GetMethodIdByToken(assembly_id, method_token, token);
             //the breakpoint can be invalid because a race condition between the changes already applied on runtime and not applied yet on debugger side
-            var breakpoint_id = await context.SdbAgent.SetBreakpointNoThrow(
-                methodId,
-                il_offset,
-                token
-            );
+            var breakpoint_id = await context
+                .SdbAgent
+                .SetBreakpointNoThrow(methodId, il_offset, token);
 
             if (breakpoint_id > 0)
             {
@@ -2041,21 +2039,17 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var useDebuggerProtocol = false;
                     if (tryUseDebuggerProtocol)
                     {
-                        (int MajorVersion, int MinorVersion) = await context.SdbAgent.GetVMVersion(
-                            token
-                        );
+                        (int MajorVersion, int MinorVersion) = await context
+                            .SdbAgent
+                            .GetVMVersion(token);
                         if (MajorVersion == 2 && MinorVersion >= 61)
                             useDebuggerProtocol = true;
                     }
 
                     await foreach (
-                        SourceFile source in context.store.Load(
-                            sessionId,
-                            loaded_files,
-                            context,
-                            useDebuggerProtocol,
-                            token
-                        )
+                        SourceFile source in context
+                            .store
+                            .Load(sessionId, loaded_files, context, useDebuggerProtocol, token)
                     )
                     {
                         await OnSourceFileAdded(sessionId, source, context, token);
@@ -2116,11 +2110,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                     ) != null
                 )
                     return await context.ready.Task;
-                await context.SdbAgent.SendDebuggerAgentCommand(
-                    CmdEventRequest.ClearAllBreakpoints,
-                    null,
-                    token
-                );
+                await context
+                    .SdbAgent
+                    .SendDebuggerAgentCommand(CmdEventRequest.ClearAllBreakpoints, null, token);
 
                 if (
                     context.PauseOnExceptions != PauseOnExceptionsKind.None
@@ -2231,19 +2223,17 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             ExecutionContext context = GetContext(msg_id);
             if (
-                !context.BreakpointRequests.TryGetValue(
-                    bpid,
-                    out BreakpointRequest breakpointRequest
-                )
+                !context
+                    .BreakpointRequests
+                    .TryGetValue(bpid, out BreakpointRequest breakpointRequest)
             )
                 return;
 
             foreach (Breakpoint bp in breakpointRequest.Locations)
             {
-                var breakpoint_removed = await context.SdbAgent.RemoveBreakpoint(
-                    bp.RemoteId,
-                    token
-                );
+                var breakpoint_removed = await context
+                    .SdbAgent
+                    .RemoveBreakpoint(bp.RemoteId, token);
                 if (breakpoint_removed)
                 {
                     bp.RemoteId = -1;
@@ -2399,21 +2389,16 @@ namespace Microsoft.WebAssembly.Diagnostics
                 return false;
 
             var ilOffset = foundLocation.IlLocation;
-            var ret = await context.SdbAgent.SetNextIP(
-                scope.Method,
-                context.ThreadId,
-                ilOffset,
-                token
-            );
+            var ret = await context
+                .SdbAgent
+                .SetNextIP(scope.Method, context.ThreadId, ilOffset, token);
 
             if (!ret)
                 return false;
 
-            var breakpointId = await context.SdbAgent.SetBreakpointNoThrow(
-                scope.Method.DebugId,
-                ilOffset.Offset,
-                token
-            );
+            var breakpointId = await context
+                .SdbAgent
+                .SetBreakpointNoThrow(scope.Method.DebugId, ilOffset.Offset, token);
             if (breakpointId == -1)
                 return false;
 

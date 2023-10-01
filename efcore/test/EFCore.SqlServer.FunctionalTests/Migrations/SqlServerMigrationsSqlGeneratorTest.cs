@@ -1330,7 +1330,8 @@ ALTER TABLE [Person] ADD DEFAULT N'' FOR [Name];
         : base(
             SqlServerTestHelpers.Instance,
             new ServiceCollection().AddEntityFrameworkSqlServerNetTopologySuite(),
-            SqlServerTestHelpers.Instance
+            SqlServerTestHelpers
+                .Instance
                 .AddProviderOptions(
                     (
                         (IRelationalDbContextOptionsBuilderInfrastructure)

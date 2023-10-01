@@ -29,11 +29,16 @@ namespace System.Runtime.Serialization.Configuration
                 );
             if (section == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigDataContractSerializerSectionLoadError)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ConfigDataContractSerializerSectionLoadError)
+                        )
+                    );
             }
             return section;
         }

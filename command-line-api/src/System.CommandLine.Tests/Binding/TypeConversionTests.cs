@@ -59,7 +59,8 @@ namespace System.CommandLine.Tests.Binding
             var option = new Option<FileInfo>("--file");
             var result = option.Parse(new string[] { "--file", "" });
 
-            result.Errors
+            result
+                .Errors
                 .Should()
                 .ContainSingle()
                 .Which
@@ -821,7 +822,8 @@ namespace System.CommandLine.Tests.Binding
 
             var value = option.Parse("-x Notaday");
 
-            value.Errors
+            value
+                .Errors
                 .Should()
                 .ContainSingle()
                 .Which

@@ -475,7 +475,8 @@ namespace Microsoft.CodeAnalysis.Rename
                         .GroupBy(d => d.Project.Language)
                 )
                 {
-                    var syntaxFactsLanguageService = solution.Services
+                    var syntaxFactsLanguageService = solution
+                        .Services
                         .GetLanguageServices(documentsGroupedByLanguage.Key)
                         .GetService<ISyntaxFactsService>();
 

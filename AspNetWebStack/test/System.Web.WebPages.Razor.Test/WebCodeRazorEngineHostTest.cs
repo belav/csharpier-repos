@@ -105,7 +105,9 @@ namespace System.Web.WebPages.Razor.Test
             host.PostProcessGeneratedCode(context);
 
             // Assert
-            CodeMemberProperty appInstance = context.GeneratedClass.Members
+            CodeMemberProperty appInstance = context
+                .GeneratedClass
+                .Members
                 .OfType<CodeMemberProperty>()
                 .Where(p => p.Name.Equals("ApplicationInstance"))
                 .SingleOrDefault();

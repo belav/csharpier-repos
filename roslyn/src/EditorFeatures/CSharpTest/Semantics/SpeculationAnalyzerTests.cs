@@ -618,9 +618,11 @@ class Program
                 CompilationName,
                 new[] { tree },
                 References,
-                TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                    new[] { KeyValuePairUtil.Create("CS0219", ReportDiagnostic.Suppress) }
-                )
+                TestOptions
+                    .ReleaseDll
+                    .WithSpecificDiagnosticOptions(
+                        new[] { KeyValuePairUtil.Create("CS0219", ReportDiagnostic.Suppress) }
+                    )
             );
         }
 

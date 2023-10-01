@@ -34,9 +34,9 @@ namespace System.ServiceModel.Security
         {
             if (wrappedUserNameSecurityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedUserNameSecurityTokenHandler"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedUserNameSecurityTokenHandler");
             }
 
             if (exceptionMapper == null)
@@ -82,15 +82,17 @@ namespace System.ServiceModel.Security
             string password
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException(
-                    SR.GetString(
-                        SR.ID4008,
-                        "WrappedUserNameSecurityTokenAuthenticator",
-                        "ValidateUserNamePasswordCore"
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotImplementedException(
+                        SR.GetString(
+                            SR.ID4008,
+                            "WrappedUserNameSecurityTokenAuthenticator",
+                            "ValidateUserNamePasswordCore"
+                        )
                     )
-                )
-            );
+                );
         }
     }
 }

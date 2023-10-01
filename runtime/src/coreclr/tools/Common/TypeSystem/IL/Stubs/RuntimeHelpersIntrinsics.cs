@@ -27,7 +27,9 @@ namespace Internal.IL.Stubs
                 codeStream.Emit(
                     ILOpcode.ldflda,
                     emit.NewToken(
-                        method.Context.SystemModule
+                        method
+                            .Context
+                            .SystemModule
                             .GetKnownType("System.Runtime.CompilerServices", "RawData")
                             .GetField("Data")
                     )
@@ -103,7 +105,8 @@ namespace Internal.IL.Stubs
                             )
                             {
                                 // Value type that can use memcmp and that doesn't override object.Equals or implement IEquatable<T>.Equals.
-                                MethodDesc objectEquals = mdType.Context
+                                MethodDesc objectEquals = mdType
+                                    .Context
                                     .GetWellKnownType(WellKnownType.Object)
                                     .GetMethod("Equals", null);
                                 result =

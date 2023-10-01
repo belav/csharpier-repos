@@ -59,14 +59,12 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(
             -1,
             async
-                ? await context.Database.ExecuteSqlRawAsync(
-                    CustomerOrderHistoryWithGeneratedParameterSproc,
-                    "ALFKI"
-                )
-                : context.Database.ExecuteSqlRaw(
-                    CustomerOrderHistoryWithGeneratedParameterSproc,
-                    "ALFKI"
-                )
+                ? await context
+                    .Database
+                    .ExecuteSqlRawAsync(CustomerOrderHistoryWithGeneratedParameterSproc, "ALFKI")
+                : context
+                    .Database
+                    .ExecuteSqlRaw(CustomerOrderHistoryWithGeneratedParameterSproc, "ALFKI")
         );
     }
 
@@ -82,7 +80,8 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var blockingSemaphore = new SemaphoreSlim(0);
         var blockingTask = Task.Run(
             () =>
-                context.Customers
+                context
+                    .Customers
                     .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
                     .ToList()
         );
@@ -139,16 +138,20 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlRawAsync(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = {1}",
-                city,
-                contactTitle
-            )
-            : context.Database.ExecuteSqlRaw(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = {1}",
-                city,
-                contactTitle
-            );
+            ? await context
+                .Database
+                .ExecuteSqlRawAsync(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = {1}",
+                    city,
+                    contactTitle
+                )
+            : context
+                .Database
+                .ExecuteSqlRaw(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = {1}",
+                    city,
+                    contactTitle
+                );
 
         Assert.Equal(-1, actual);
     }
@@ -163,14 +166,15 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlRawAsync(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city",
-                city
-            )
-            : context.Database.ExecuteSqlRaw(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city",
-                city
-            );
+            ? await context
+                .Database
+                .ExecuteSqlRawAsync(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city",
+                    city
+                )
+            : context
+                .Database
+                .ExecuteSqlRaw(@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city", city);
 
         Assert.Equal(-1, actual);
     }
@@ -185,14 +189,15 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlRawAsync(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0}",
-                city
-            )
-            : context.Database.ExecuteSqlRaw(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0}",
-                city
-            );
+            ? await context
+                .Database
+                .ExecuteSqlRawAsync(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0}",
+                    city
+                )
+            : context
+                .Database
+                .ExecuteSqlRaw(@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0}", city);
 
         Assert.Equal(-1, actual);
     }
@@ -207,14 +212,15 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlRawAsync(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0}",
-                city
-            )
-            : context.Database.ExecuteSqlRaw(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0}",
-                city
-            );
+            ? await context
+                .Database
+                .ExecuteSqlRawAsync(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0}",
+                    city
+                )
+            : context
+                .Database
+                .ExecuteSqlRaw(@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0}", city);
 
         Assert.Equal(-1, actual);
     }
@@ -233,30 +239,38 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlRawAsync(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = @contactTitle",
-                city,
-                contactTitleParameter
-            )
-            : context.Database.ExecuteSqlRaw(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = @contactTitle",
-                city,
-                contactTitleParameter
-            );
+            ? await context
+                .Database
+                .ExecuteSqlRawAsync(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = @contactTitle",
+                    city,
+                    contactTitleParameter
+                )
+            : context
+                .Database
+                .ExecuteSqlRaw(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {0} AND ""ContactTitle"" = @contactTitle",
+                    city,
+                    contactTitleParameter
+                );
 
         Assert.Equal(-1, actual);
 
         actual = async
-            ? await context.Database.ExecuteSqlRawAsync(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = {1}",
-                cityParameter,
-                contactTitle
-            )
-            : context.Database.ExecuteSqlRaw(
-                @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = {1}",
-                cityParameter,
-                contactTitle
-            );
+            ? await context
+                .Database
+                .ExecuteSqlRawAsync(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = {1}",
+                    cityParameter,
+                    contactTitle
+                )
+            : context
+                .Database
+                .ExecuteSqlRaw(
+                    @"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = @city AND ""ContactTitle"" = {1}",
+                    cityParameter,
+                    contactTitle
+                );
 
         Assert.Equal(-1, actual);
     }
@@ -272,12 +286,16 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlInterpolatedAsync(
-                $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
-            )
-            : context.Database.ExecuteSqlInterpolated(
-                $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
-            );
+            ? await context
+                .Database
+                .ExecuteSqlInterpolatedAsync(
+                    $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
+                )
+            : context
+                .Database
+                .ExecuteSqlInterpolated(
+                    $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
+                );
 
         Assert.Equal(-1, actual);
     }
@@ -293,12 +311,16 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlInterpolatedAsync(
-                $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
-            )
-            : context.Database.ExecuteSqlInterpolated(
-                $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
-            );
+            ? await context
+                .Database
+                .ExecuteSqlInterpolatedAsync(
+                    $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
+                )
+            : context
+                .Database
+                .ExecuteSqlInterpolated(
+                    $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
+                );
 
         Assert.Equal(-1, actual);
     }
@@ -314,12 +336,16 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlAsync(
-                $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
-            )
-            : context.Database.ExecuteSql(
-                $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
-            );
+            ? await context
+                .Database
+                .ExecuteSqlAsync(
+                    $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
+                )
+            : context
+                .Database
+                .ExecuteSql(
+                    $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
+                );
 
         Assert.Equal(-1, actual);
     }
@@ -335,12 +361,16 @@ public abstract class SqlExecutorTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var actual = async
-            ? await context.Database.ExecuteSqlAsync(
-                $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
-            )
-            : context.Database.ExecuteSql(
-                $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
-            );
+            ? await context
+                .Database
+                .ExecuteSqlAsync(
+                    $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
+                )
+            : context
+                .Database
+                .ExecuteSql(
+                    $@"SELECT COUNT(*) FROM ""Customers"" WHERE ""City"" = {city} AND ""ContactTitle"" = {contactTitle}"
+                );
 
         Assert.Equal(-1, actual);
     }

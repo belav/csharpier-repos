@@ -20,7 +20,8 @@ internal static class InputRenderer
     }
 
     private static TComponent FindComponent<TComponent>(CapturedBatch batch) =>
-        batch.ReferenceFrames
+        batch
+            .ReferenceFrames
             .Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component)
             .OfType<TComponent>()

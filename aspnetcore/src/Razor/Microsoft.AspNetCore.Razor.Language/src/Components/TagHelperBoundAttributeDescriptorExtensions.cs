@@ -29,26 +29,26 @@ internal static class TagHelperBoundAttributeDescriptorExtensions
 
     public static bool IsGenericTypedProperty(this BoundAttributeDescriptor attribute)
     {
-        return attribute.Metadata.TryGetValue(
-                ComponentMetadata.Component.GenericTypedKey,
-                out var value
-            ) && string.Equals(value, bool.TrueString);
+        return attribute
+                .Metadata
+                .TryGetValue(ComponentMetadata.Component.GenericTypedKey, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 
     public static bool IsTypeParameterProperty(this BoundAttributeDescriptor attribute)
     {
-        return attribute.Metadata.TryGetValue(
-                ComponentMetadata.Component.TypeParameterKey,
-                out var value
-            ) && string.Equals(value, bool.TrueString);
+        return attribute
+                .Metadata
+                .TryGetValue(ComponentMetadata.Component.TypeParameterKey, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 
     public static bool IsCascadingTypeParameterProperty(this BoundAttributeDescriptor attribute)
     {
-        return attribute.Metadata.TryGetValue(
-                ComponentMetadata.Component.TypeParameterIsCascadingKey,
-                out var value
-            ) && string.Equals(value, bool.TrueString);
+        return attribute
+                .Metadata
+                .TryGetValue(ComponentMetadata.Component.TypeParameterIsCascadingKey, out var value)
+            && string.Equals(value, bool.TrueString);
     }
 
     public static bool IsWeaklyTyped(this BoundAttributeDescriptor attribute)

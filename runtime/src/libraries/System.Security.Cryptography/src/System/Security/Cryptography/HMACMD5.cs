@@ -158,12 +158,9 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(
-                HashAlgorithmNames.MD5,
-                key,
-                source,
-                destination
-            );
+            bytesWritten = HashProviderDispenser
+                .OneShotHashProvider
+                .MacData(HashAlgorithmNames.MD5, key, source, destination);
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;

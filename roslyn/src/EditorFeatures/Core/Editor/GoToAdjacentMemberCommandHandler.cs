@@ -65,8 +65,9 @@ namespace Microsoft.CodeAnalysis.Editor
                 return CommandState.Unspecified;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document?.SupportsSyntaxTree != true)
             {
                 return CommandState.Unspecified;
@@ -88,8 +89,9 @@ namespace Microsoft.CodeAnalysis.Editor
                 return false;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             var syntaxFactsService = document?.GetLanguageService<ISyntaxFactsService>();
             if (syntaxFactsService == null)
             {
@@ -98,10 +100,12 @@ namespace Microsoft.CodeAnalysis.Editor
 
             int? targetPosition = null;
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    description: EditorFeaturesResources.Navigating
-                )
+                context
+                    .OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        description: EditorFeaturesResources.Navigating
+                    )
             )
             {
                 var root = document.GetSyntaxRootSynchronously(

@@ -414,13 +414,19 @@ namespace System.Text.Json.SourceGeneration.Tests
                             "test"
                         );
                         property.Get = (o) =>
-                            System.Runtime.CompilerServices.Unsafe
+                            System
+                                .Runtime
+                                .CompilerServices
+                                .Unsafe
                                 .Unbox<TestPoco>(o)
                                 .IntProperty
                                 .ToString();
                         property.Set = (o, val) =>
                         {
-                            System.Runtime.CompilerServices.Unsafe
+                            System
+                                .Runtime
+                                .CompilerServices
+                                .Unsafe
                                 .Unbox<TestPoco>(o)
                                 .StringProperty = (string)val;
                             System.Runtime.CompilerServices.Unsafe.Unbox<TestPoco>(o).IntProperty =

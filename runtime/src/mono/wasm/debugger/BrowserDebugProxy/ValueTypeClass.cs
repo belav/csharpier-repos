@@ -91,14 +91,9 @@ namespace BrowserDebugProxy
 
             foreach (var field in writableFields)
             {
-                var fieldValue = await sdbAgent.ValueCreator.ReadAsVariableValue(
-                    cmdReader,
-                    field.Name,
-                    token,
-                    true,
-                    field.TypeId,
-                    false
-                );
+                var fieldValue = await sdbAgent
+                    .ValueCreator
+                    .ReadAsVariableValue(cmdReader, field.Name, token, true, field.TypeId, false);
                 fields.Add(GetFieldWithMetadata(field, fieldValue, isStatic: false));
             }
 
@@ -148,9 +143,9 @@ namespace BrowserDebugProxy
                     token
                 );
                 if (toString == null)
-                    sdbAgent.logger.LogDebug(
-                        $"Error while evaluating ToString method on typeId = {TypeId}"
-                    );
+                    sdbAgent
+                        .logger
+                        .LogDebug($"Error while evaluating ToString method on typeId = {TypeId}");
                 else
                     description = toString;
                 if (className.Equals("System.Guid"))

@@ -134,7 +134,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             MethodEntryPointTableNode otherMethodEntryPointTable = (MethodEntryPointTableNode)other;
-            return _module.Assembly
+            return _module
+                .Assembly
                 .GetName()
                 .Name
                 .CompareTo(otherMethodEntryPointTable._module.Assembly.GetName().Name);

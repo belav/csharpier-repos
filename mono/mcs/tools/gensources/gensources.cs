@@ -69,32 +69,44 @@ public static class Program
 
         if (showHelp)
         {
-            Console.Error.WriteLine(
-                "Usage: mcs/build/gensources.exe [options] (outputFileName|--stdout) libraryDirectoryAndName platformName profileName"
-            );
-            Console.Error.WriteLine(
-                "or     mcs/build/gensources.exe [options] (outputFileName|--stdout) (--baseDir:<dir>) sourcesFile exclusionsFile"
-            );
-            Console.Error.WriteLine(
-                "You can specify * for platformName and profileName to read all sources files"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "Usage: mcs/build/gensources.exe [options] (outputFileName|--stdout) libraryDirectoryAndName platformName profileName"
+                );
+            Console
+                .Error
+                .WriteLine(
+                    "or     mcs/build/gensources.exe [options] (outputFileName|--stdout) (--baseDir:<dir>) sourcesFile exclusionsFile"
+                );
+            Console
+                .Error
+                .WriteLine(
+                    "You can specify * for platformName and profileName to read all sources files"
+                );
             Console.Error.WriteLine("Available options:");
             Console.Error.WriteLine("--help -h -?");
             Console.Error.WriteLine("  Show command line info");
             Console.Error.WriteLine("--trace:n");
             Console.Error.WriteLine("  Enable diagnostic output, at tracing level n (1-4)");
             Console.Error.WriteLine("--stdout");
-            Console.Error.WriteLine(
-                "  Writes results to standard output (omit outputFileName if you use this)"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "  Writes results to standard output (omit outputFileName if you use this)"
+                );
             Console.Error.WriteLine("--strict");
-            Console.Error.WriteLine(
-                "  Produces an error exit code if files or directories are invalid/missing or other warnings occur"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "  Produces an error exit code if files or directories are invalid/missing or other warnings occur"
+                );
             Console.Error.WriteLine("--basedir:<dir>");
-            Console.Error.WriteLine(
-                "  Sets the base directory when reading a single sources/exclusions pair (default is the directory containing the sources file)"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "  Sets the base directory when reading a single sources/exclusions pair (default is the directory containing the sources file)"
+                );
             Console.Error.WriteLine("--platformsdir:<dir>");
             Console.Error.WriteLine("  Location of platforms directory with configurations");
 
@@ -112,9 +124,11 @@ public static class Program
         var profilesFolder = Path.Combine(platformsDir ?? executableDirectory, "profiles");
         if (!Directory.Exists(platformsFolder) || !Directory.Exists(profilesFolder))
         {
-            Console.Error.WriteLine(
-                $"// Platforms and/or profiles folders are missing: '{platformsFolder}' '{profilesFolder}'. Aborting."
-            );
+            Console
+                .Error
+                .WriteLine(
+                    $"// Platforms and/or profiles folders are missing: '{platformsFolder}' '{profilesFolder}'. Aborting."
+                );
             return 1;
         }
 
@@ -128,9 +142,11 @@ public static class Program
             var directory = Path.GetDirectoryName(sourcesFile);
             if ((Path.GetDirectoryName(excludesFile) != directory) && (baseDir == null))
             {
-                Console.Error.WriteLine(
-                    "// Sources and exclusions files are in different directories. Aborting."
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "// Sources and exclusions files are in different directories. Aborting."
+                    );
                 return 1;
             }
 
@@ -141,9 +157,11 @@ public static class Program
             result = parser.Parse(libraryDirectory, sourcesFile, excludesFile);
 
             if (SourcesParser.TraceLevel > 0)
-                Console.Error.WriteLine(
-                    $"// Writing sources from {sourcesFile} minus {excludesFile}, to {outFile}."
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        $"// Writing sources from {sourcesFile} minus {excludesFile}, to {outFile}."
+                    );
         }
         else if (args.Count == 4)
         {
@@ -158,9 +176,11 @@ public static class Program
             result = parser.Parse(libraryDirectory, libraryName, platformName, profileName);
 
             if (SourcesParser.TraceLevel > 0)
-                Console.Error.WriteLine(
-                    $"// Writing sources for platform {platformName} and profile {profileName}, relative to {libraryDirectory}, to {outFile}."
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        $"// Writing sources for platform {platformName} and profile {profileName}, relative to {libraryDirectory}, to {outFile}."
+                    );
         }
         else
         {
@@ -186,9 +206,11 @@ public static class Program
 
         if ((result.ErrorCount > 0) || unexpectedEmptyResult)
         {
-            Console.Error.WriteLine(
-                $"// gensources produced {result.ErrorCount} error(s) and a set of {files.Count} filename(s)"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    $"// gensources produced {result.ErrorCount} error(s) and a set of {files.Count} filename(s)"
+                );
             Console.Error.WriteLine($"// Invoked with '{Environment.CommandLine}'");
             Console.Error.WriteLine($"// Working directory was '{Environment.CurrentDirectory}'");
 
@@ -347,9 +369,11 @@ public class ParseResult
         }
         catch (Exception)
         {
-            Console.Error.WriteLine(
-                $"// Parse error when treating '{fullPath}' as a URI relative to directory '{relativeToDirectory}'"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    $"// Parse error when treating '{fullPath}' as a URI relative to directory '{relativeToDirectory}'"
+                );
             ErrorCount += 1;
             return fullPath;
         }
@@ -379,9 +403,11 @@ public class ParseResult
             if (SourcesParser.TraceLevel >= 4)
             {
                 if ((absolutePattern != entry.Pattern) || (absoluteDirectory != entry.Directory))
-                    Console.Error.WriteLine(
-                        $"// {entry.Directory} / {entry.Pattern} -> {absoluteDirectory} / {absolutePattern}"
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            $"// {entry.Directory} / {entry.Pattern} -> {absoluteDirectory} / {absolutePattern}"
+                        );
             }
 
             if (!Directory.Exists(absoluteDirectory))
@@ -394,15 +420,19 @@ public class ParseResult
 
                 if (forExclusionsList)
                 {
-                    Console.Error.WriteLine(
-                        $"(ignored) Directory does not exist: '{Path.GetFullPath(absoluteDirectory)}'"
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            $"(ignored) Directory does not exist: '{Path.GetFullPath(absoluteDirectory)}'"
+                        );
                 }
                 else
                 {
-                    Console.Error.WriteLine(
-                        $"Directory does not exist: '{Path.GetFullPath(absoluteDirectory)}'"
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            $"Directory does not exist: '{Path.GetFullPath(absoluteDirectory)}'"
+                        );
                     ErrorCount += 1;
                 }
                 continue;
@@ -755,9 +785,11 @@ public class SourcesParser
                 && !state.Result.ExclusionFiles.ContainsKey(path)
             )
             {
-                Console.Error.WriteLine(
-                    $"// The file '{path}' was found but not used by sources parsing. Did you mean hostPlatform_defaultprofile_{libraryName}?"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        $"// The file '{path}' was found but not used by sources parsing. Did you mean hostPlatform_defaultprofile_{libraryName}?"
+                    );
                 state.Result.ErrorCount += 1;
             }
         }
@@ -770,9 +802,11 @@ public class SourcesParser
     private void PrintSummary(State state, string testPath)
     {
         if (TraceLevel > 0)
-            Console.Error.WriteLine(
-                $"// Parsed {state.SourcesFilesParsed} sources file(s) and {state.ExclusionsFilesParsed} exclusions file(s) from path '{testPath}'."
-            );
+            Console
+                .Error
+                .WriteLine(
+                    $"// Parsed {state.SourcesFilesParsed} sources file(s) and {state.ExclusionsFilesParsed} exclusions file(s) from path '{testPath}'."
+                );
     }
 
     private void HandleMetaDirective(
@@ -864,17 +898,21 @@ public class SourcesParser
         {
             if (state.ExclusionsFileName == null && File.Exists(exclusionsFileName))
             {
-                Console.Error.WriteLine(
-                    $"// Exclusion file {exclusionsFileName} exists, but not {sourcesFileName} - {fallbackTarget != null} {fallbackTarget?.Exclusions}!"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        $"// Exclusion file {exclusionsFileName} exists, but not {sourcesFileName} - {fallbackTarget != null} {fallbackTarget?.Exclusions}!"
+                    );
                 state.ExclusionsFileName = exclusionsFileName;
             }
             if (fallbackTarget != null)
             {
                 if (TraceLevel >= 2)
-                    Console.Error.WriteLine(
-                        $"// Not found: {sourcesFileName}, falling back to {fallbackTarget}"
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            $"// Not found: {sourcesFileName}, falling back to {fallbackTarget}"
+                        );
                 tpr.Sources = fallbackTarget.Sources;
                 tpr.Exclusions = fallbackTarget.Exclusions;
                 tpr.IsFallback = true;
@@ -910,18 +948,20 @@ public class SourcesParser
         if (fileTable.ContainsKey(fileName))
         {
             if (TraceLevel >= 2)
-                Console.Error.WriteLine(
-                    $"// {new String(' ', ParseDepth * 2)}{fileName}  (already parsed)"
-                );
+                Console
+                    .Error
+                    .WriteLine($"// {new String(' ', ParseDepth * 2)}{fileName}  (already parsed)");
 
             return fileTable[fileName];
         }
         else
         {
             if (TraceLevel >= 2)
-                Console.Error.WriteLine(
-                    $"// {new String(' ', ParseDepth * 2)}{fileName}  [{state.HostPlatform ?? nullStr}] [{state.ProfileName ?? nullStr}]"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        $"// {new String(' ', ParseDepth * 2)}{fileName}  [{state.HostPlatform ?? nullStr}] [{state.ProfileName ?? nullStr}]"
+                    );
         }
 
         ParseDepth += 1;
@@ -974,14 +1014,16 @@ public class SourcesParser
 
                     foreach (var pattern in explicitExclusions)
                     {
-                        result.Exclusions.Add(
-                            new ParseEntry
-                            {
-                                Directory = pathDirectory,
-                                Pattern = Path.Combine(mainPatternDirectory, pattern),
-                                SplitNumber = state.CurrentSplitNumber
-                            }
-                        );
+                        result
+                            .Exclusions
+                            .Add(
+                                new ParseEntry
+                                {
+                                    Directory = pathDirectory,
+                                    Pattern = Path.Combine(mainPatternDirectory, pattern),
+                                    SplitNumber = state.CurrentSplitNumber
+                                }
+                            );
                     }
                 }
 

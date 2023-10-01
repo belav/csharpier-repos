@@ -285,13 +285,15 @@ public interface I1
             if (m is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule.Module.GetMethodDefPropsOrThrow(
-                    ((PEMethodSymbol)m1.OriginalDefinition).Handle,
-                    out _,
-                    out _,
-                    out _,
-                    out rva
-                );
+                peModule
+                    .Module
+                    .GetMethodDefPropsOrThrow(
+                        ((PEMethodSymbol)m1.OriginalDefinition).Handle,
+                        out _,
+                        out _,
+                        out _,
+                        out rva
+                    );
                 Assert.NotEqual(0, rva);
             }
 
@@ -2736,13 +2738,9 @@ class Test1 : I2
                     Assert.True(i1.IsMetadataAbstract);
 
                     int rva;
-                    ((PEModuleSymbol)m).Module.GetMethodDefPropsOrThrow(
-                        result.Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    ((PEModuleSymbol)m)
+                        .Module
+                        .GetMethodDefPropsOrThrow(result.Handle, out _, out _, out _, out rva);
                     Assert.NotEqual(0, rva);
 
                     var test1Result = m.GlobalNamespace.GetTypeMember("Test1");
@@ -3535,25 +3533,29 @@ class Test2 : I1
 
                 if (haveGet)
                 {
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)p1.GetMethod).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule
+                        .Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)p1.GetMethod).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
 
                 if (haveSet)
                 {
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)p1.SetMethod).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule
+                        .Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)p1.SetMethod).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
             }
@@ -8721,25 +8723,29 @@ class Test2 : I1
 
                 if (haveAdd)
                 {
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)addE1).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule
+                        .Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)addE1).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
 
                 if (haveRemove)
                 {
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)rmvE1).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule
+                        .Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)rmvE1).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
             }
@@ -23757,9 +23763,9 @@ set_P6
                     var compilation3 = CreateCompilation(
                         source2,
                         new[] { reference },
-                        options: TestOptions.DebugExe.WithMetadataImportOptions(
-                            metadataImportOptions
-                        ),
+                        options: TestOptions
+                            .DebugExe
+                            .WithMetadataImportOptions(metadataImportOptions),
                         parseOptions: TestOptions.Regular,
                         targetFramework: TargetFramework.NetCoreApp
                     );
@@ -24027,9 +24033,9 @@ set_P1",
                 var compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
-                    options: TestOptions.DebugExe.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    ),
+                    options: TestOptions
+                        .DebugExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
                     parseOptions: TestOptions.Regular9,
                     targetFramework: TargetFramework.NetCoreApp
                 );
@@ -24045,9 +24051,9 @@ set_P1",
                 compilation3 = CreateCompilation(
                     source2,
                     new[] { reference },
-                    options: TestOptions.DebugExe.WithMetadataImportOptions(
-                        MetadataImportOptions.All
-                    ),
+                    options: TestOptions
+                        .DebugExe
+                        .WithMetadataImportOptions(MetadataImportOptions.All),
                     parseOptions: TestOptions.Regular,
                     targetFramework: TargetFramework.NetCoreApp
                 );
@@ -41680,7 +41686,8 @@ I4.M1
             var test1 = m.GlobalNamespace.GetTypeMember("Test1");
             var i1 = test1.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             var i1i2m1 = i1.GetMember<MethodSymbol>(
-                i1.OriginalDefinition.AllInterfacesNoUseSiteDiagnostics
+                i1.OriginalDefinition
+                    .AllInterfacesNoUseSiteDiagnostics
                     .Where(i => i.Name == "I2")
                     .Single()
                     .ToDisplayString()
@@ -41688,7 +41695,8 @@ I4.M1
                     + name
             );
             var i1i4m1 = i1.GetMember<MethodSymbol>(
-                i1.OriginalDefinition.AllInterfacesNoUseSiteDiagnostics
+                i1.OriginalDefinition
+                    .AllInterfacesNoUseSiteDiagnostics
                     .Where(i => i.Name == "I4")
                     .Single()
                     .ToDisplayString()
@@ -41728,7 +41736,8 @@ I4.M1
             var i3 = i1.ContainingNamespace.GetTypeMember("I3");
             i1 = i3.InterfacesNoUseSiteDiagnostics().Where(i => i.Name == "I1").Single();
             i1i2m1 = i1.GetMember<MethodSymbol>(
-                i1.OriginalDefinition.AllInterfacesNoUseSiteDiagnostics
+                i1.OriginalDefinition
+                    .AllInterfacesNoUseSiteDiagnostics
                     .Where(i => i.Name == "I2")
                     .Single()
                     .ToDisplayString()
@@ -41736,7 +41745,8 @@ I4.M1
                     + name
             );
             i1i4m1 = i1.GetMember<MethodSymbol>(
-                i1.OriginalDefinition.AllInterfacesNoUseSiteDiagnostics
+                i1.OriginalDefinition
+                    .AllInterfacesNoUseSiteDiagnostics
                     .Where(i => i.Name == "I4")
                     .Single()
                     .ToDisplayString()
@@ -41776,13 +41786,15 @@ I4.M1
             if (m1.ContainingModule is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule.Module.GetMethodDefPropsOrThrow(
-                    ((PEMethodSymbol)m1.OriginalDefinition).Handle,
-                    out _,
-                    out _,
-                    out _,
-                    out rva
-                );
+                peModule
+                    .Module
+                    .GetMethodDefPropsOrThrow(
+                        ((PEMethodSymbol)m1.OriginalDefinition).Handle,
+                        out _,
+                        out _,
+                        out _,
+                        out rva
+                    );
                 Assert.NotEqual(0, rva);
             }
         }
@@ -42917,13 +42929,15 @@ class Test1 : I1
             if (m1.ContainingModule is PEModuleSymbol peModule)
             {
                 int rva;
-                peModule.Module.GetMethodDefPropsOrThrow(
-                    ((PEMethodSymbol)m1).Handle,
-                    out _,
-                    out _,
-                    out _,
-                    out rva
-                );
+                peModule
+                    .Module
+                    .GetMethodDefPropsOrThrow(
+                        ((PEMethodSymbol)m1).Handle,
+                        out _,
+                        out _,
+                        out _,
+                        out rva
+                    );
                 Assert.Equal(0, rva);
             }
         }
@@ -43055,13 +43069,15 @@ class Test1 : I1
                 if (m1.ContainingModule is PEModuleSymbol peModule)
                 {
                     int rva;
-                    peModule.Module.GetMethodDefPropsOrThrow(
-                        ((PEMethodSymbol)m1).Handle,
-                        out _,
-                        out _,
-                        out _,
-                        out rva
-                    );
+                    peModule
+                        .Module
+                        .GetMethodDefPropsOrThrow(
+                            ((PEMethodSymbol)m1).Handle,
+                            out _,
+                            out _,
+                            out _,
+                            out rva
+                        );
                     Assert.NotEqual(0, rva);
                 }
             }

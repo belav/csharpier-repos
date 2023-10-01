@@ -934,25 +934,31 @@ Newtonsoft.Json Error: 0 : Error!
             );
 
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(
-                    r =>
-                        r.Message
-                        == "Writing object reference Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path ''."
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(
+                        r =>
+                            r.Message
+                            == "Writing object reference Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path ''."
+                    )
             );
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(
-                    r =>
-                        r.Message
-                        == "Writing object reference Id '2' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other'."
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(
+                        r =>
+                            r.Message
+                            == "Writing object reference Id '2' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other'."
+                    )
             );
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(
-                    r =>
-                        r.Message
-                        == "Writing object reference to Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'self'."
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(
+                        r =>
+                            r.Message
+                            == "Writing object reference to Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'self'."
+                    )
             );
         }
 
@@ -987,26 +993,32 @@ Newtonsoft.Json Error: 0 : Error!
             );
 
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(
-                    r =>
-                        r.Message
-                        == "Read object reference Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other', line 3, position 10."
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(
+                        r =>
+                            r.Message
+                            == "Read object reference Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other', line 3, position 10."
+                    )
             );
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(
-                    r =>
-                        r.Message
-                        == "Read object reference Id '2' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other.blah', line 5, position 11."
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(
+                        r =>
+                            r.Message
+                            == "Read object reference Id '2' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other.blah', line 5, position 11."
+                    )
             );
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(
-                    r =>
-                        r.Message.StartsWith(
-                            "Resolved object reference '1' to Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'self'"
-                        )
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(
+                        r =>
+                            r.Message.StartsWith(
+                                "Resolved object reference '1' to Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'self'"
+                            )
+                    )
             );
         }
 

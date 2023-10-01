@@ -64,18 +64,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     (context) =>
                     {
                         if (
-                            context.Symbol.Name.StartsWith(
-                                _errorSymbolPrefix,
-                                StringComparison.Ordinal
-                            )
+                            context
+                                .Symbol
+                                .Name
+                                .StartsWith(_errorSymbolPrefix, StringComparison.Ordinal)
                         )
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(
-                                    s_rule,
-                                    context.Symbol.Locations.First(),
-                                    messageArgs: context.Symbol.Name
-                                )
+                                CodeAnalysis
+                                    .Diagnostic
+                                    .Create(
+                                        s_rule,
+                                        context.Symbol.Locations.First(),
+                                        messageArgs: context.Symbol.Name
+                                    )
                             );
                         }
                     },
@@ -106,11 +108,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                     (context) =>
                     {
                         context.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                s_rule,
-                                context.Symbol.Locations.First(),
-                                messageArgs: context.Symbol.Name
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    s_rule,
+                                    context.Symbol.Locations.First(),
+                                    messageArgs: context.Symbol.Name
+                                )
                         );
                     },
                     SymbolKind.NamedType
@@ -167,11 +171,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         (context) =>
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(
-                                    s_rule,
-                                    context.OwningSymbol.Locations.First(),
-                                    messageArgs: context.OwningSymbol.Name + ":end"
-                                )
+                                CodeAnalysis
+                                    .Diagnostic
+                                    .Create(
+                                        s_rule,
+                                        context.OwningSymbol.Locations.First(),
+                                        messageArgs: context.OwningSymbol.Name + ":end"
+                                    )
                             );
                         }
                     );
@@ -180,11 +186,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         (context) =>
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(
-                                    s_rule,
-                                    context.Node.GetLocation(),
-                                    messageArgs: context.Node.ToFullString()
-                                )
+                                CodeAnalysis
+                                    .Diagnostic
+                                    .Create(
+                                        s_rule,
+                                        context.Node.GetLocation(),
+                                        messageArgs: context.Node.ToFullString()
+                                    )
                             );
                         },
                         CSharp.SyntaxKind.InvocationExpression
@@ -202,11 +210,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         (context) =>
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(
-                                    s_rule,
-                                    context.OwningSymbol.Locations.First(),
-                                    messageArgs: context.OwningSymbol.Name + ":end"
-                                )
+                                CodeAnalysis
+                                    .Diagnostic
+                                    .Create(
+                                        s_rule,
+                                        context.OwningSymbol.Locations.First(),
+                                        messageArgs: context.OwningSymbol.Name + ":end"
+                                    )
                             );
                         }
                     );
@@ -215,11 +225,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         (context) =>
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(
-                                    s_rule,
-                                    context.Node.GetLocation(),
-                                    messageArgs: context.Node.ToFullString()
-                                )
+                                CodeAnalysis
+                                    .Diagnostic
+                                    .Create(
+                                        s_rule,
+                                        context.Node.GetLocation(),
+                                        messageArgs: context.Node.ToFullString()
+                                    )
                             );
                         },
                         VisualBasic.SyntaxKind.InvocationExpression
@@ -244,7 +256,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 analysisContext.RegisterSyntaxTreeAction(
                     (context) =>
                     {
-                        var comments = context.Tree
+                        var comments = context
+                            .Tree
                             .GetRoot()
                             .DescendantTrivia()
                             .Where(
@@ -257,11 +270,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         foreach (var comment in comments)
                         {
                             context.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(
-                                    s_rule,
-                                    comment.GetLocation(),
-                                    messageArgs: comment.ToFullString()
-                                )
+                                CodeAnalysis
+                                    .Diagnostic
+                                    .Create(
+                                        s_rule,
+                                        comment.GetLocation(),
+                                        messageArgs: comment.ToFullString()
+                                    )
                             );
                         }
                     }
@@ -301,11 +316,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                             )
                             {
                                 context.ReportDiagnostic(
-                                    CodeAnalysis.Diagnostic.Create(
-                                        s_rule,
-                                        nodeOrToken.GetLocation(),
-                                        messageArgs: nodeOrToken.ToString()
-                                    )
+                                    CodeAnalysis
+                                        .Diagnostic
+                                        .Create(
+                                            s_rule,
+                                            nodeOrToken.GetLocation(),
+                                            messageArgs: nodeOrToken.ToString()
+                                        )
                                 );
                             }
                         }

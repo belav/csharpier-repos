@@ -104,13 +104,15 @@ namespace ILCompiler.Dataflow
             // NativeAOT doesn't have a fully capable type name resolver yet
             // Once this is implemented don't forget to wire up marking of type forwards which are used in generic parameters
             if (
-                !DependencyAnalysis.ReflectionMethodBodyScanner.ResolveType(
-                    typeName,
-                    callingModule,
-                    diagnosticContext.Origin.MemberDefinition!.Context,
-                    out TypeDesc foundType,
-                    out ModuleDesc referenceModule
-                )
+                !DependencyAnalysis
+                    .ReflectionMethodBodyScanner
+                    .ResolveType(
+                        typeName,
+                        callingModule,
+                        diagnosticContext.Origin.MemberDefinition!.Context,
+                        out TypeDesc foundType,
+                        out ModuleDesc referenceModule
+                    )
             )
             {
                 type = default;
@@ -121,9 +123,9 @@ namespace ILCompiler.Dataflow
             {
                 // Also add module metadata in case this reference was through a type forward
                 if (
-                    Factory.MetadataManager.CanGenerateMetadata(
-                        referenceModule.GetGlobalModuleType()
-                    )
+                    Factory
+                        .MetadataManager
+                        .CanGenerateMetadata(referenceModule.GetGlobalModuleType())
                 )
                     _dependencies.Add(
                         Factory.ModuleMetadata(referenceModule),

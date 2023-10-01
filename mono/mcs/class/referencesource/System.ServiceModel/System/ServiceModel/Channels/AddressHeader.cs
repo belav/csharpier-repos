@@ -47,9 +47,9 @@ namespace System.ServiceModel.Channels
         )
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serializer"));
             return new XmlObjectSerializerAddressHeader(value, serializer);
         }
 
@@ -85,9 +85,9 @@ namespace System.ServiceModel.Channels
         )
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serializer"));
             return new XmlObjectSerializerAddressHeader(name, ns, value, serializer);
         }
 
@@ -147,17 +147,21 @@ namespace System.ServiceModel.Channels
         public T GetValue<T>(XmlObjectSerializer serializer)
         {
             if (serializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serializer"));
             using (XmlDictionaryReader reader = GetAddressHeaderReader())
             {
                 if (serializer.IsStartObject(reader))
                     return (T)serializer.ReadObject(reader);
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.ExpectedElementMissing, Name, Namespace))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(SR.ExpectedElementMissing, Name, Namespace)
+                            )
+                        );
             }
         }
 
@@ -211,9 +215,9 @@ namespace System.ServiceModel.Channels
         public void WriteAddressHeader(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
             WriteStartAddressHeader(writer);
             WriteAddressHeaderContents(writer);
             writer.WriteEndElement();
@@ -222,18 +226,18 @@ namespace System.ServiceModel.Channels
         public void WriteStartAddressHeader(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
             OnWriteStartAddressHeader(writer);
         }
 
         public void WriteAddressHeaderContents(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
             OnWriteAddressHeaderContents(writer);
         }
 
@@ -267,9 +271,9 @@ namespace System.ServiceModel.Channels
             )
             {
                 if (messageVersion == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("messageVersion")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("messageVersion"));
 
                 WriteStartHeader(writer, parameter, messageVersion.Addressing);
             }
@@ -339,9 +343,9 @@ namespace System.ServiceModel.Channels
             {
                 if ((null == name) || (name.Length == 0))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("name")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("name"));
                 }
 
                 this.serializer = serializer;

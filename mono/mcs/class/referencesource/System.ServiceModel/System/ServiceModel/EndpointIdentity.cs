@@ -133,14 +133,14 @@ namespace System.ServiceModel
         internal static EndpointIdentity CreateX509CertificateIdentity(X509Chain certificateChain)
         {
             if (certificateChain == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "certificateChain"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("certificateChain");
 
             if (certificateChain.ChainElements.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.X509ChainIsEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.X509ChainIsEmpty));
 
             // The first element in the cert chain is the leaf certificate
             // we want.
@@ -204,15 +204,17 @@ namespace System.ServiceModel
 
             reader.MoveToContent();
             if (reader.IsEmptyElement)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.UnexpectedEmptyElementExpectingClaim,
-                            XD.AddressingDictionary.Identity.Value,
-                            XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.UnexpectedEmptyElementExpectingClaim,
+                                XD.AddressingDictionary.Identity.Value,
+                                XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                            )
                         )
-                    )
-                );
+                    );
 
             reader.ReadStartElement(
                 XD.AddressingDictionary.Identity,
@@ -268,15 +270,17 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.UnrecognizedIdentityType,
-                                reader.Name,
-                                reader.NamespaceURI
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.UnrecognizedIdentityType,
+                                    reader.Name,
+                                    reader.NamespaceURI
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 reader.ReadEndElement();
             }
@@ -285,20 +289,26 @@ namespace System.ServiceModel
                 //
                 // Something unknown
                 //
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(SR.UnrecognizedIdentityType, reader.Name, reader.NamespaceURI)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.UnrecognizedIdentityType,
+                                reader.Name,
+                                reader.NamespaceURI
+                            )
+                        )
+                    );
             }
             else
             {
                 //
                 // EndpointIdentity element is empty or some other invalid xml
                 //
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.InvalidIdentityElement))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new XmlException(SR.GetString(SR.InvalidIdentityElement)));
             }
 
             reader.ReadEndElement();
@@ -323,14 +333,16 @@ namespace System.ServiceModel
 
         internal virtual void WriteContentsTo(XmlDictionaryWriter writer)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(
-                        SR.UnrecognizedIdentityPropertyType,
-                        this.IdentityClaim.GetType().ToString()
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.UnrecognizedIdentityPropertyType,
+                            this.IdentityClaim.GetType().ToString()
+                        )
                     )
-                )
-            );
+                );
         }
     }
 }

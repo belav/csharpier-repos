@@ -84,9 +84,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 VisualStudioCommandHandlerHelpers.AddCommand(
                     menuCommandService,
                     RunCodeAnalysisForSelectedProjectCommandId,
@@ -154,7 +154,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             }
 
             // Analyzers are only supported for C# and VB currently.
-            var projectsWithHierarchy = currentSolution.Projects
+            var projectsWithHierarchy = currentSolution
+                .Projects
                 .Where(p => p.Language is LanguageNames.CSharp or LanguageNames.VisualBasic)
                 .Where(p => _workspace.GetHierarchy(p.Id) == hierarchy);
 
@@ -246,16 +247,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             // The command is checked if RoslynPackage is loaded and the analysis scope for this command matches the
             // value saved for the solution.
-            var roslynPackage = _threadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return RoslynPackage
-                    .GetOrLoadAsync(
-                        _threadingContext,
-                        (IAsyncServiceProvider)_serviceProvider,
-                        _threadingContext.DisposalToken
-                    )
-                    .AsTask();
-            });
+            var roslynPackage = _threadingContext
+                .JoinableTaskFactory
+                .Run(() =>
+                {
+                    return RoslynPackage
+                        .GetOrLoadAsync(
+                            _threadingContext,
+                            (IAsyncServiceProvider)_serviceProvider,
+                            _threadingContext.DisposalToken
+                        )
+                        .AsTask();
+                });
 
             if (roslynPackage is not null)
             {
@@ -298,12 +301,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     LanguageNames.VisualBasic
                 );
 
-                var containsCSharpProject = solution.Projects.Any(
-                    static project => project.Language == LanguageNames.CSharp
-                );
-                var containsVisualBasicProject = solution.Projects.Any(
-                    static project => project.Language == LanguageNames.VisualBasic
-                );
+                var containsCSharpProject = solution
+                    .Projects
+                    .Any(static project => project.Language == LanguageNames.CSharp);
+                var containsVisualBasicProject = solution
+                    .Projects
+                    .Any(static project => project.Language == LanguageNames.VisualBasic);
                 if (containsCSharpProject && containsVisualBasicProject)
                 {
                     if (csharpAnalysisScope == visualBasicAnalysisScope)
@@ -350,16 +353,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 return;
             }
 
-            var roslynPackage = _threadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return RoslynPackage
-                    .GetOrLoadAsync(
-                        _threadingContext,
-                        (IAsyncServiceProvider)_serviceProvider,
-                        _threadingContext.DisposalToken
-                    )
-                    .AsTask();
-            });
+            var roslynPackage = _threadingContext
+                .JoinableTaskFactory
+                .Run(() =>
+                {
+                    return RoslynPackage
+                        .GetOrLoadAsync(
+                            _threadingContext,
+                            (IAsyncServiceProvider)_serviceProvider,
+                            _threadingContext.DisposalToken
+                        )
+                        .AsTask();
+                });
 
             Assumes.Present(roslynPackage);
 
@@ -433,7 +438,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             ImmutableArray<Project> otherProjectsForMultiTfmProject;
             if (project != null)
             {
-                otherProjectsForMultiTfmProject = solution.Projects
+                otherProjectsForMultiTfmProject = solution
+                    .Projects
                     .Where(
                         p =>
                             p != project
@@ -552,7 +558,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                     for (var index = 0; index < projectsWithDisabledAnalysis.Length; index++)
                     {
                         var project = projectsWithDisabledAnalysis[index];
-                        project = project.Solution
+                        project = project
+                            .Solution
                             .WithRunAnalyzers(project.Id, runAnalyzers: true)
                             .GetProject(project.Id)!;
                         tasks[index] = Task.Run(
@@ -582,8 +589,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         {
             if (hierarchy != null)
             {
-                var projectMap =
-                    _workspace.Services.GetRequiredService<IHierarchyItemToProjectIdMap>();
+                var projectMap = _workspace
+                    .Services
+                    .GetRequiredService<IHierarchyItemToProjectIdMap>();
                 var projectHierarchyItem = _vsHierarchyItemManager.GetHierarchyItem(
                     hierarchy,
                     VSConstants.VSITEMID_ROOT
@@ -688,39 +696,41 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             private void UpdateStatusCore()
             {
-                _threadingContext.JoinableTaskFactory.RunAsync(async () =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                _threadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(async () =>
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    string message;
-                    int fInProgress;
-                    var analyzedProjectCount = (uint)_analyzedProjectCount;
-                    if (analyzedProjectCount == _totalProjectCount)
-                    {
-                        message = _statusMesageOnCompleted;
-                        fInProgress = 0;
-                    }
-                    else if (_disposed)
-                    {
-                        message = _statusMesageOnTerminated;
-                        fInProgress = 0;
-                    }
-                    else
-                    {
-                        message = _statusMessageWhileRunning;
-                        fInProgress = 1;
-                    }
+                        string message;
+                        int fInProgress;
+                        var analyzedProjectCount = (uint)_analyzedProjectCount;
+                        if (analyzedProjectCount == _totalProjectCount)
+                        {
+                            message = _statusMesageOnCompleted;
+                            fInProgress = 0;
+                        }
+                        else if (_disposed)
+                        {
+                            message = _statusMesageOnTerminated;
+                            fInProgress = 0;
+                        }
+                        else
+                        {
+                            message = _statusMessageWhileRunning;
+                            fInProgress = 1;
+                        }
 
-                    // Update the status bar progress and text.
-                    _statusBar.Progress(
-                        ref _statusBarCookie,
-                        fInProgress,
-                        message,
-                        analyzedProjectCount,
-                        _totalProjectCount
-                    );
-                    _statusBar.SetText(message);
-                });
+                        // Update the status bar progress and text.
+                        _statusBar.Progress(
+                            ref _statusBarCookie,
+                            fInProgress,
+                            message,
+                            analyzedProjectCount,
+                            _totalProjectCount
+                        );
+                        _statusBar.SetText(message);
+                    });
             }
         }
     }

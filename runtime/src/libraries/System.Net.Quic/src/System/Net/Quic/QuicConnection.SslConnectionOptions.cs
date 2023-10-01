@@ -104,9 +104,10 @@ public partial class QuicConnection
                     if (chain.ChainPolicy.ApplicationPolicy.Count == 0)
                     {
                         // Authenticate the remote party: (e.g. when operating in server mode, authenticate the client).
-                        chain.ChainPolicy.ApplicationPolicy.Add(
-                            _isClient ? s_serverAuthOid : s_clientAuthOid
-                        );
+                        chain
+                            .ChainPolicy
+                            .ApplicationPolicy
+                            .Add(_isClient ? s_serverAuthOid : s_clientAuthOid);
                     }
 
                     if (MsQuicApi.UsesSChannelBackend)
@@ -134,9 +135,10 @@ public partial class QuicConnection
 
                 if (result is not null)
                 {
-                    bool checkCertName = !chain!.ChainPolicy!.VerificationFlags.HasFlag(
-                        X509VerificationFlags.IgnoreInvalidName
-                    );
+                    bool checkCertName = !chain!
+                        .ChainPolicy!
+                        .VerificationFlags
+                        .HasFlag(X509VerificationFlags.IgnoreInvalidName);
                     sslPolicyErrors |= CertificateValidation.BuildChainAndVerifyProperties(
                         chain!,
                         result,

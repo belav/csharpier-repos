@@ -219,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var count = documentAnalysisScope != null ? 1 : project.DocumentIds.Count + 1;
                 var forSpanAnalysis = documentAnalysisScope?.Span.HasValue ?? false;
 
-                var performanceInfo = analysisResult.AnalyzerTelemetryInfo
+                var performanceInfo = analysisResult
+                    .AnalyzerTelemetryInfo
                     .ToAnalyzerPerformanceInfo(AnalyzerInfoCache)
                     .ToImmutableArray();
 
@@ -267,11 +268,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var analyzers =
                 documentAnalysisScope?.Analyzers
-                ?? compilationWithAnalyzers.Analyzers.Where(
-                    a =>
-                        forceExecuteAllAnalyzers
-                        || !a.IsOpenFileOnly(ideOptions.CleanupOptions?.SimplifierOptions)
-                );
+                ?? compilationWithAnalyzers
+                    .Analyzers
+                    .Where(
+                        a =>
+                            forceExecuteAllAnalyzers
+                            || !a.IsOpenFileOnly(ideOptions.CleanupOptions?.SimplifierOptions)
+                    );
 
             analyzerMap.AppendAnalyzerMap(analyzers);
 
@@ -330,23 +333,29 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     : null;
 
             return new DiagnosticAnalysisResultMap<DiagnosticAnalyzer, DiagnosticAnalysisResult>(
-                result.Value.Diagnostics.ToImmutableDictionary(
-                    entry => analyzerMap[entry.analyzerId],
-                    entry =>
-                        DiagnosticAnalysisResult.Create(
-                            project,
-                            version,
-                            syntaxLocalMap: Hydrate(entry.diagnosticMap.Syntax, project),
-                            semanticLocalMap: Hydrate(entry.diagnosticMap.Semantic, project),
-                            nonLocalMap: Hydrate(entry.diagnosticMap.NonLocal, project),
-                            others: entry.diagnosticMap.Other,
-                            documentIds
-                        )
-                ),
-                result.Value.Telemetry.ToImmutableDictionary(
-                    entry => analyzerMap[entry.analyzerId],
-                    entry => entry.telemetry
-                )
+                result
+                    .Value
+                    .Diagnostics
+                    .ToImmutableDictionary(
+                        entry => analyzerMap[entry.analyzerId],
+                        entry =>
+                            DiagnosticAnalysisResult.Create(
+                                project,
+                                version,
+                                syntaxLocalMap: Hydrate(entry.diagnosticMap.Syntax, project),
+                                semanticLocalMap: Hydrate(entry.diagnosticMap.Semantic, project),
+                                nonLocalMap: Hydrate(entry.diagnosticMap.NonLocal, project),
+                                others: entry.diagnosticMap.Other,
+                                documentIds
+                            )
+                    ),
+                result
+                    .Value
+                    .Telemetry
+                    .ToImmutableDictionary(
+                        entry => analyzerMap[entry.analyzerId],
+                        entry => entry.telemetry
+                    )
             );
         }
 

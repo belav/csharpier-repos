@@ -61,8 +61,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                 _documentTrackingService = _registration.Services.GetRequiredService<IUnitTestingDocumentTrackingService>();
 #endif
-                _solutionCrawlerOptionsService =
-                    _registration.Services.GetService<Microsoft.CodeAnalysis.SolutionCrawler.ISolutionCrawlerOptionsService>();
+                _solutionCrawlerOptionsService = _registration
+                    .Services
+                    .GetService<Microsoft.CodeAnalysis.SolutionCrawler.ISolutionCrawlerOptionsService>();
 
                 // event and worker queues
                 _shutdownToken = _shutdownNotificationSource.Token;
@@ -970,13 +971,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         }
                     }
 
-                    _workCoordinator._documentAndProjectWorkerProcessor
+                    _workCoordinator
+                        ._documentAndProjectWorkerProcessor
                         .GetTestAccessor()
                         .WaitUntilCompletion(workers, list);
                 }
 
                 internal void WaitUntilCompletion() =>
-                    _workCoordinator._documentAndProjectWorkerProcessor
+                    _workCoordinator
+                        ._documentAndProjectWorkerProcessor
                         .GetTestAccessor()
                         .WaitUntilCompletion();
             }

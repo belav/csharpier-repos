@@ -68,11 +68,13 @@ namespace System.ServiceModel.Channels
                         || AuthenticationManager.CustomTargetNameDictionary[key] != value
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
+                                )
+                            );
                     }
                     targetNameCounter[key] = refCount + 1;
                 }
@@ -83,11 +85,13 @@ namespace System.ServiceModel.Channels
                         && AuthenticationManager.CustomTargetNameDictionary[key] != value
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
+                                )
+                            );
                     }
 
                     AuthenticationManager.CustomTargetNameDictionary[key] = value;
@@ -136,11 +140,13 @@ namespace System.ServiceModel.Channels
                         || AuthenticationManager.CustomTargetNameDictionary[key] != value
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.HttpTargetNameDictionaryConflict, key, value)
+                                )
+                            );
                     }
                 }
             }
@@ -244,16 +250,18 @@ namespace System.ServiceModel.Channels
             string certHashString = certificate.GetCertHashString();
             if (!thumbprint.Equals(certHashString))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityNegotiationException(
-                        SR.GetString(
-                            SR.HttpsServerCertThumbprintMismatch,
-                            certificate.Subject,
-                            certHashString,
-                            thumbprint
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(
+                                SR.HttpsServerCertThumbprintMismatch,
+                                certificate.Subject,
+                                certHashString,
+                                thumbprint
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
     }
@@ -627,11 +635,17 @@ namespace System.ServiceModel.Channels
             SecurityToken result = tokenProvider.GetToken(timeout);
             if ((result != null) && !(result is T))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.InvalidTokenProvided, tokenProvider.GetType(), typeof(T))
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.InvalidTokenProvided,
+                                tokenProvider.GetType(),
+                                typeof(T)
+                            )
+                        )
+                    );
             }
             return result as T;
         }
@@ -673,9 +687,11 @@ namespace System.ServiceModel.Channels
 
             if (result == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
+                    );
             }
 
             return result;
@@ -765,9 +781,11 @@ namespace System.ServiceModel.Channels
             {
                 if (tokenProvider == null || tokenProvider.TokenProvider == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
+                        );
                 }
 
                 this.tokenProvider = tokenProvider.TokenProvider;
@@ -790,9 +808,11 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.NoUserNameTokenProvided))
+                        );
                 }
             }
 

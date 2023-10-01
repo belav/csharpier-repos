@@ -107,11 +107,9 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
                         TVar variable;
                         var readAt = ContextProvider.MethodContext.CFG.Post(pc);
                         if (
-                            !ContextProvider.ValueContext.TryParameterValue(
-                                readAt,
-                                param,
-                                out variable
-                            )
+                            !ContextProvider
+                                .ValueContext
+                                .TryParameterValue(readAt, param, out variable)
                         )
                             continue;
 

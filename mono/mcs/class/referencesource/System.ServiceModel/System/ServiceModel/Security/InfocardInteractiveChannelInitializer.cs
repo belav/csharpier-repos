@@ -90,15 +90,17 @@ namespace System.ServiceModel.Security
                     InfoCardHelper.GetBindingSecurityVersionOrDefault(binding);
                 WSSecurityTokenSerializer tokenSerializer =
                     WSSecurityTokenSerializer.DefaultInstance;
-                result = credentials.GetInfoCardTokenCallback.BeginInvoke(
-                    requiresInfoCard,
-                    chain,
-                    tokenManager.CreateSecurityTokenSerializer(
-                        bindingSecurityVersion.SecurityTokenVersion
-                    ),
-                    callback,
-                    this
-                );
+                result = credentials
+                    .GetInfoCardTokenCallback
+                    .BeginInvoke(
+                        requiresInfoCard,
+                        chain,
+                        tokenManager.CreateSecurityTokenSerializer(
+                            bindingSecurityVersion.SecurityTokenVersion
+                        ),
+                        callback,
+                        this
+                    );
             }
             catch (Exception e)
             {

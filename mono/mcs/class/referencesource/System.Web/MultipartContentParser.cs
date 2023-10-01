@@ -172,30 +172,24 @@ namespace System.Web
         private String ExtractValueFromContentDispositionHeader(String l, int pos, String name)
         {
             String pattern = " " + name + "=";
-            int i1 = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                l,
-                pattern,
-                pos,
-                CompareOptions.IgnoreCase
-            );
+            int i1 = CultureInfo
+                .InvariantCulture
+                .CompareInfo
+                .IndexOf(l, pattern, pos, CompareOptions.IgnoreCase);
             if (i1 < 0)
             {
                 pattern = ";" + name + "=";
-                i1 = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                    l,
-                    pattern,
-                    pos,
-                    CompareOptions.IgnoreCase
-                );
+                i1 = CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .IndexOf(l, pattern, pos, CompareOptions.IgnoreCase);
                 if (i1 < 0)
                 {
                     pattern = name + "=";
-                    i1 = CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                        l,
-                        pattern,
-                        pos,
-                        CompareOptions.IgnoreCase
-                    );
+                    i1 = CultureInfo
+                        .InvariantCulture
+                        .CompareInfo
+                        .IndexOf(l, pattern, pos, CompareOptions.IgnoreCase);
                 }
             }
             if (i1 < 0)

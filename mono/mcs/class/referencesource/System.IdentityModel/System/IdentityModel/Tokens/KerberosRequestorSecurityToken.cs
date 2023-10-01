@@ -68,20 +68,22 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (servicePrincipalName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "servicePrincipalName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("servicePrincipalName");
             if (
                 tokenImpersonationLevel != TokenImpersonationLevel.Identification
                 && tokenImpersonationLevel != TokenImpersonationLevel.Impersonation
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "tokenImpersonationLevel",
-                        SR.GetString(SR.ImpersonationLevelNotSupported, tokenImpersonationLevel)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "tokenImpersonationLevel",
+                            SR.GetString(SR.ImpersonationLevelNotSupported, tokenImpersonationLevel)
+                        )
+                    );
             }
             if (id == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("id");
@@ -94,9 +96,11 @@ namespace System.IdentityModel.Tokens
             {
                 if (string.IsNullOrEmpty(networkCredential.UserName))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.ProvidedNetworkCredentialsForKerberosHasInvalidUserName)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(SR.ProvidedNetworkCredentialsForKerberosHasInvalidUserName)
+                        );
                 }
                 // Note: we don't check the domain, since Lsa accepts
                 // FQ userName.
@@ -113,21 +117,25 @@ namespace System.IdentityModel.Tokens
             }
             catch (Win32Exception e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenValidationException(
-                        SR.GetString(SR.UnableToCreateKerberosCredentials),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(SR.UnableToCreateKerberosCredentials),
+                            e
+                        )
+                    );
             }
             catch (SecurityTokenException ste)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenValidationException(
-                        SR.GetString(SR.UnableToCreateKerberosCredentials),
-                        ste
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(SR.UnableToCreateKerberosCredentials),
+                            ste
+                        )
+                    );
             }
         }
 
@@ -259,21 +267,25 @@ namespace System.IdentityModel.Tokens
                 {
                     if (statusCode == (int)SecurityStatus.ContinueNeeded)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.KerberosMultilegsNotSupported),
-                                new Win32Exception(statusCode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(SR.KerberosMultilegsNotSupported),
+                                    new Win32Exception(statusCode)
+                                )
+                            );
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.FailInitializeSecurityContext),
-                                new Win32Exception(statusCode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(SR.FailInitializeSecurityContext),
+                                    new Win32Exception(statusCode)
+                                )
+                            );
                     }
                 }
 

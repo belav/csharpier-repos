@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             var op = symbol.GetPredefinedOperator();
-            var tokens = state.Root
+            var tokens = state
+                .Root
                 .DescendantTokens(descendIntoTrivia: true)
                 .WhereAsArray(
                     static (token, tuple) =>

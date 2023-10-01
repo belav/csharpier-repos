@@ -50,12 +50,14 @@ class C
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "C.M").ImportRecordGroups.Verify(
-                        @"
+                    GetMethodDebugInfo(runtime, "C.M")
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System'
                 }"
-                    );
+                        );
                 }
             );
         }
@@ -85,8 +87,10 @@ namespace N1
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "N1.N2.N3.C.M").ImportRecordGroups.Verify(
-                        @"
+                    GetMethodDebugInfo(runtime, "N1.N2.N3.C.M")
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                 }
                 {
@@ -97,7 +101,7 @@ namespace N1
                 {
                     Namespace: string='System'
                 }"
-                    );
+                        );
                 }
             );
         }
@@ -147,12 +151,14 @@ class C
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004).ImportRecordGroups.Verify(
-                        @"
+                    GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004)
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System'
                 }"
-                    );
+                        );
                 }
             );
         }
@@ -182,8 +188,10 @@ namespace A
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "A.C.M").ImportRecordGroups.Verify(
-                        @"
+                    GetMethodDebugInfo(runtime, "A.C.M")
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -191,7 +199,7 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                    );
+                        );
                 }
             );
         }
@@ -221,8 +229,10 @@ namespace A
                 comp,
                 runtime =>
                 {
-                    GetMethodDebugInfo(runtime, "A.C.M1").ImportRecordGroups.Verify(
-                        @"
+                    GetMethodDebugInfo(runtime, "A.C.M1")
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -230,10 +240,12 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                    );
+                        );
 
-                    GetMethodDebugInfo(runtime, "A.C.M2").ImportRecordGroups.Verify(
-                        @"
+                    GetMethodDebugInfo(runtime, "A.C.M2")
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -241,7 +253,7 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                    );
+                        );
                 }
             );
         }
@@ -409,35 +421,39 @@ namespace D
                 {
                     var debugInfo1 = GetMethodDebugInfo(runtime, "B.C.M1");
 
-                    debugInfo1.ImportRecordGroups.Verify(
-                        @"
+                    debugInfo1
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System'
                 }
                 {
                     Assembly: alias='A'
                 }"
-                    );
+                        );
 
-                    debugInfo1.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    debugInfo1
+                        .ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
 
                     var debugInfo2 = GetMethodDebugInfo(runtime, "D.E.M2");
 
-                    debugInfo2.ImportRecordGroups.Verify(
-                        @"
+                    debugInfo2
+                        .ImportRecordGroups
+                        .Verify(
+                            @"
                 {
                     Namespace: string='System.Text'
                 }
                 {
                     Assembly: alias='A'
                 }"
-                    );
+                        );
 
-                    debugInfo2.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                    debugInfo2
+                        .ExternAliasRecords
+                        .Verify("A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'");
                 }
             );
         }
@@ -655,13 +671,14 @@ public class C
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
-                );
+                var methodHandle = metadataReader
+                    .MethodDefinitions
+                    .Single(
+                        h =>
+                            metadataReader
+                                .StringComparer
+                                .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(
@@ -715,13 +732,14 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
-                );
+                var methodHandle = metadataReader
+                    .MethodDefinitions
+                    .Single(
+                        h =>
+                            metadataReader
+                                .StringComparer
+                                .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(
@@ -772,13 +790,14 @@ namespace N
             using (var peReader = new PEReader(peImage))
             {
                 var metadataReader = peReader.GetMetadataReader();
-                var methodHandle = metadataReader.MethodDefinitions.Single(
-                    h =>
-                        metadataReader.StringComparer.Equals(
-                            metadataReader.GetMethodDefinition(h).Name,
-                            "Main"
-                        )
-                );
+                var methodHandle = metadataReader
+                    .MethodDefinitions
+                    .Single(
+                        h =>
+                            metadataReader
+                                .StringComparer
+                                .Equals(metadataReader.GetMethodDefinition(h).Name, "Main")
+                    );
                 var methodToken = metadataReader.GetToken(methodHandle);
 
                 symReader = new MockSymUnmanagedReader(

@@ -61,8 +61,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var document = context.GetRequiredDocument();
             var clientCapabilities = context.GetRequiredClientCapabilities();
 
-            var completionService =
-                document.Project.Services.GetRequiredService<CompletionService>();
+            var completionService = document
+                .Project
+                .Services
+                .GetRequiredService<CompletionService>();
 
             var cacheEntry = GetCompletionListCacheEntry(completionItem);
             if (cacheEntry == null)
@@ -106,17 +108,26 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 {
                     var vsCompletionItem = (LSP.VSInternalCompletionItem)completionItem;
                     vsCompletionItem.Description = new ClassifiedTextElement(
-                        description.TaggedParts.Select(
-                            tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
-                        )
+                        description
+                            .TaggedParts
+                            .Select(
+                                tp =>
+                                    new ClassifiedTextRun(
+                                        tp.Tag.ToClassificationTypeName(),
+                                        tp.Text
+                                    )
+                            )
                     );
                 }
                 else
                 {
                     var clientSupportsMarkdown =
-                        clientCapabilities.TextDocument?.Completion?.CompletionItem?.DocumentationFormat.Contains(
-                            LSP.MarkupKind.Markdown
-                        ) == true;
+                        clientCapabilities
+                            .TextDocument
+                            ?.Completion
+                            ?.CompletionItem
+                            ?.DocumentationFormat
+                            .Contains(LSP.MarkupKind.Markdown) == true;
                     completionItem.Documentation =
                         ProtocolConversions.GetDocumentationMarkupContent(
                             description.TaggedParts,
@@ -159,10 +170,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         )
         {
             if (
-                !lspCompletionItem.Label.StartsWith(
-                    completionItem.DisplayTextPrefix,
-                    StringComparison.Ordinal
-                )
+                !lspCompletionItem
+                    .Label
+                    .StartsWith(completionItem.DisplayTextPrefix, StringComparison.Ordinal)
             )
             {
                 return false;

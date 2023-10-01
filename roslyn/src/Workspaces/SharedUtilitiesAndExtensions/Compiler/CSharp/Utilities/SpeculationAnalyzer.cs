@@ -630,10 +630,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 )
                     return true;
 
-                var originalSwitchLabels = originalSwitchStatement.Sections
+                var originalSwitchLabels = originalSwitchStatement
+                    .Sections
                     .SelectMany(section => section.Labels)
                     .ToArray();
-                var newSwitchLabels = newSwitchStatement.Sections
+                var newSwitchLabels = newSwitchStatement
+                    .Sections
                     .SelectMany(section => section.Labels)
                     .ToArray();
 

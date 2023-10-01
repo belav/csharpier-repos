@@ -182,11 +182,14 @@ namespace System.Data.SqlClient.SqlGen
                     commandText.Append(GenerateMemberTSql(column)).Append(" ").Append(columnType);
                     Facet collationFacet;
                     if (
-                        column.TypeUsage.Facets.TryGetValue(
-                            DbProviderManifest.CollationFacetName,
-                            false,
-                            out collationFacet
-                        )
+                        column
+                            .TypeUsage
+                            .Facets
+                            .TryGetValue(
+                                DbProviderManifest.CollationFacetName,
+                                false,
+                                out collationFacet
+                            )
                     )
                     {
                         string collation = collationFacet.Value as string;
@@ -482,19 +485,25 @@ namespace System.Data.SqlClient.SqlGen
                         {
                             // there can be only one server generated key
                             throw EntityUtil.NotSupported(
-                                System.Data.Entity.Strings.Update_NotSupportedServerGenKey(
-                                    table.Name
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .Update_NotSupportedServerGenKey(table.Name)
                             );
                         }
 
                         if (!IsValidScopeIdentityColumnType(keyMember.TypeUsage))
                         {
                             throw EntityUtil.InvalidOperation(
-                                System.Data.Entity.Strings.Update_NotSupportedIdentityType(
-                                    keyMember.Name,
-                                    keyMember.TypeUsage.ToString()
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .Update_NotSupportedIdentityType(
+                                        keyMember.Name,
+                                        keyMember.TypeUsage.ToString()
+                                    )
                             );
                         }
 
@@ -535,11 +544,9 @@ namespace System.Data.SqlClient.SqlGen
             {
                 Facet scaleFacet;
                 return (
-                    typeUsage.Facets.TryGetValue(
-                        DbProviderManifest.ScaleFacetName,
-                        false,
-                        out scaleFacet
-                    )
+                    typeUsage
+                        .Facets
+                        .TryGetValue(DbProviderManifest.ScaleFacetName, false, out scaleFacet)
                     && Convert.ToInt32(scaleFacet.Value, CultureInfo.InvariantCulture) == 0
                 );
             }
@@ -716,11 +723,15 @@ namespace System.Data.SqlClient.SqlGen
                         missingCudElement = StorageMslConstructs.UpdateFunctionElement;
                     }
                     throw EntityUtil.Update(
-                        System.Data.Entity.Strings.Update_SqlEntitySetWithoutDmlFunctions(
-                            expression.Target.Name,
-                            missingCudElement,
-                            StorageMslConstructs.ModificationFunctionMappingElement
-                        ),
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Update_SqlEntitySetWithoutDmlFunctions(
+                                expression.Target.Name,
+                                missingCudElement,
+                                StorageMslConstructs.ModificationFunctionMappingElement
+                            ),
                         null
                     );
                 }

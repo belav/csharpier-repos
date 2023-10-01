@@ -44,13 +44,15 @@
         {
             protected override void Seed(TestContext testContext)
             {
-                testContext.Bases.Add(
-                    new Base()
-                    {
-                        Base1 = "base1",
-                        Sub = new Sub() { Sub1 = "sub1" }
-                    }
-                );
+                testContext
+                    .Bases
+                    .Add(
+                        new Base()
+                        {
+                            Base1 = "base1",
+                            Sub = new Sub() { Sub1 = "sub1" }
+                        }
+                    );
 
                 base.Seed(testContext);
             }
@@ -78,7 +80,8 @@
 
                 using (var context = new TestContext())
                 {
-                    var baseDTO = context.Bases
+                    var baseDTO = context
+                        .Bases
                         .Select(
                             b =>
                                 new BaseDTO

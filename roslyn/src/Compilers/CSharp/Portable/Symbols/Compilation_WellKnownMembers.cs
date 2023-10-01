@@ -140,9 +140,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(type.IsValid());
 
-            bool ignoreCorLibraryDuplicatedTypes = this.Options.TopLevelBinderFlags.Includes(
-                BinderFlags.IgnoreCorLibraryDuplicatedTypes
-            );
+            bool ignoreCorLibraryDuplicatedTypes = this.Options
+                .TopLevelBinderFlags
+                .Includes(BinderFlags.IgnoreCorLibraryDuplicatedTypes);
 
             int index = (int)type - (int)WellKnownType.First;
             if (_lazyWellKnownTypes == null || _lazyWellKnownTypes[index] is null)

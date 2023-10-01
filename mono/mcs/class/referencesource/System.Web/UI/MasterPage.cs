@@ -255,9 +255,9 @@ namespace System.Web.UI
                 foreach (String contentName in contentTemplateCollection.Keys)
                 {
                     if (
-                        !master.ContentPlaceHolders.Contains(
-                            contentName.ToLower(CultureInfo.InvariantCulture)
-                        )
+                        !master
+                            .ContentPlaceHolders
+                            .Contains(contentName.ToLower(CultureInfo.InvariantCulture))
                     )
                     {
                         throw new HttpException(
@@ -285,9 +285,10 @@ namespace System.Web.UI
             // Recursively apply master pages to the nested masterpages.
             if (master.Master != null)
             {
-                string pageFile = master._masterPageFile.VirtualPathString.ToLower(
-                    CultureInfo.InvariantCulture
-                );
+                string pageFile = master
+                    ._masterPageFile
+                    .VirtualPathString
+                    .ToLower(CultureInfo.InvariantCulture);
                 if (appliedMasterFilePaths.Contains(pageFile))
                 {
                     throw new InvalidOperationException(

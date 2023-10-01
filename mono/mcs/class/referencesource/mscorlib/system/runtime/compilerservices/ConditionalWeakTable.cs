@@ -312,10 +312,9 @@ namespace System.Runtime.CompilerServices
                     {
                         object thisKey,
                             thisValue;
-                        _entries[entriesIndex].depHnd.GetPrimaryAndSecondary(
-                            out thisKey,
-                            out thisValue
-                        );
+                        _entries[entriesIndex]
+                            .depHnd
+                            .GetPrimaryAndSecondary(out thisKey, out thisValue);
                         if (Object.Equals(thisKey, key))
                         {
                             value = (TValue)thisValue;
@@ -383,10 +382,9 @@ namespace System.Runtime.CompilerServices
                             Object primary = null;
                             Object secondary = null;
 
-                            _entries[entriesIndex].depHnd.GetPrimaryAndSecondary(
-                                out primary,
-                                out secondary
-                            );
+                            _entries[entriesIndex]
+                                .depHnd
+                                .GetPrimaryAndSecondary(out primary, out secondary);
 
                             // Now that we've secured a strong reference to the secondary, must check the primary again
                             // to ensure it didn't expire (otherwise, we open a ---- where TryGetValue misreports an
@@ -527,9 +525,10 @@ namespace System.Runtime.CompilerServices
 
             if (!hasExpiredEntries)
             {
-                newSize = System.Collections.HashHelpers.GetPrime(
-                    _buckets.Length == 0 ? _initialCapacity + 1 : _buckets.Length * 2
-                );
+                newSize = System
+                    .Collections
+                    .HashHelpers
+                    .GetPrime(_buckets.Length == 0 ? _initialCapacity + 1 : _buckets.Length * 2);
             }
 
             // Reallocate both buckets and entries and rebuild the bucket and freelists from scratch.

@@ -97,9 +97,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         {
             if (_lazyInstance is null)
             {
-                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var shell = (IVsShell7?)
                     await serviceProvider.GetServiceAsync(typeof(SVsShell)).ConfigureAwait(true);
@@ -337,7 +337,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             await LoadStackTraceExplorerMenusAsync(cancellationToken).ConfigureAwait(true);
 
             // Initialize keybinding reset detector
-            await ComponentModel.DefaultExportProvider
+            await ComponentModel
+                .DefaultExportProvider
                 .GetExportedValue<KeybindingReset.KeybindingResetDetector>()
                 .InitializeAsync()
                 .ConfigureAwait(true);

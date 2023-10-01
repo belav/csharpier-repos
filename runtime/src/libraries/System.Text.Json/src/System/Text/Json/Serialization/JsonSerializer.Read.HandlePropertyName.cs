@@ -37,11 +37,10 @@ namespace System.Text.Json
 
             useExtensionProperty = false;
 
-            JsonPropertyInfo jsonPropertyInfo = state.Current.JsonTypeInfo.GetProperty(
-                unescapedPropertyName,
-                ref state.Current,
-                out byte[] utf8PropertyName
-            );
+            JsonPropertyInfo jsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .GetProperty(unescapedPropertyName, ref state.Current, out byte[] utf8PropertyName);
 
             // Increment PropertyIndex so GetProperty() checks the next property first when called again.
             state.Current.PropertyIndex++;
@@ -133,10 +132,9 @@ namespace System.Text.Json
             {
                 // Create the appropriate dictionary type. We already verified the types.
 #if DEBUG
-                Type underlyingIDictionaryType =
-                    jsonPropertyInfo.PropertyType.GetCompatibleGenericInterface(
-                        typeof(IDictionary<,>)
-                    )!;
+                Type underlyingIDictionaryType = jsonPropertyInfo
+                    .PropertyType
+                    .GetCompatibleGenericInterface(typeof(IDictionary<,>))!;
                 Type[] genericArgs = underlyingIDictionaryType.GetGenericArguments();
 
                 Debug.Assert(underlyingIDictionaryType.IsGenericType);

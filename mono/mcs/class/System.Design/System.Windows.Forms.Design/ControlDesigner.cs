@@ -423,9 +423,9 @@ namespace System.Windows.Forms.Design
                             this.Control.Parent == ((Control)selectionServ.PrimarySelection).Parent
                         )
                         {
-                            location = this.Control.Parent.PointToClient(
-                                this.Control.PointToScreen(location)
-                            );
+                            location = this.Control
+                                .Parent
+                                .PointToClient(this.Control.PointToScreen(location));
                             Native.SendMessage(
                                 this.Control.Parent.Handle,
                                 (Native.Msg)m.Msg,

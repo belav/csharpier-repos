@@ -15,9 +15,9 @@ namespace System.Activities.Presentation
         public FlowSwitchLinkCasePropertyEditor()
         {
             this.InlineEditorTemplate = (DataTemplate)
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
-                    "FlowSwitchLinkCase_InlineEditorTemplate"
-                );
+                EditorCategoryTemplateDictionary
+                    .Instance
+                    .GetCategoryTemplate("FlowSwitchLinkCase_InlineEditorTemplate");
         }
     }
 }

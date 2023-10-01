@@ -931,10 +931,9 @@ namespace System.Net
                 }
                 finally
                 {
-                    NameResolutionTelemetry.Log.AfterResolution(
-                        startingTimestamp,
-                        successful: result is not null
-                    );
+                    NameResolutionTelemetry
+                        .Log
+                        .AfterResolution(startingTimestamp, successful: result is not null);
                 }
             }
         }

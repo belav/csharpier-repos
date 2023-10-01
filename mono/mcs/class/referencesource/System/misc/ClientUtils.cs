@@ -92,10 +92,13 @@ namespace System.Windows.Forms
             int maxNumberOfBitsOn
         )
         {
-            System.Diagnostics.Debug.Assert(
-                maxNumberOfBitsOn >= 0 && maxNumberOfBitsOn < 32,
-                "expect this to be greater than zero and less than 32"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    maxNumberOfBitsOn >= 0 && maxNumberOfBitsOn < 32,
+                    "expect this to be greater than zero and less than 32"
+                );
 
             bool valid = (value >= minValue) && (value <= maxValue);
             //Note: if it's 0, it'll have no bits on.  If it's a power of 2, it'll have 1.
@@ -154,10 +157,13 @@ namespace System.Windows.Forms
             params int[] enumValues
         )
         {
-            System.Diagnostics.Debug.Assert(
-                Enum.GetValues(enumValue.GetType()).Length == enumValues.Length,
-                "Not all the enum members were passed in."
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    Enum.GetValues(enumValue.GetType()).Length == enumValues.Length,
+                    "Not all the enum members were passed in."
+                );
             for (int i = 0; i < enumValues.Length; i++)
             {
                 if (enumValues[i] == value)
@@ -239,9 +245,12 @@ namespace System.Windows.Forms
             if (minVal != sequentialEnumInfo.MinValue)
             {
                 // put string allocation in the IF block so the common case doesnt build up the string.
-                System.Diagnostics.Debug.Fail(
-                    "Minimum passed in is not the actual minimum for the enum.  Consider changing the parameters or using a different function."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Fail(
+                        "Minimum passed in is not the actual minimum for the enum.  Consider changing the parameters or using a different function."
+                    );
             }
             if (maxVal != sequentialEnumInfo.MaxValue)
             {
@@ -295,37 +304,49 @@ namespace System.Windows.Forms
             if (minVal != actualMinimum)
             {
                 // put string allocation in the IF block so the common case doesnt build up the string.
-                System.Diagnostics.Debug.Fail(
-                    "Minimum passed in is not the actual minimum for the enum.  Consider changing the parameters or using a different function."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Fail(
+                        "Minimum passed in is not the actual minimum for the enum.  Consider changing the parameters or using a different function."
+                    );
             }
             if (maxVal != actualMaximum)
             {
                 // put string allocation in the IF block so the common case doesnt build up the string.
-                System.Diagnostics.Debug.Fail(
-                    "Maximum passed in is not the actual maximum for the enum.  Consider changing the parameters or using a different function."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Fail(
+                        "Maximum passed in is not the actual maximum for the enum.  Consider changing the parameters or using a different function."
+                    );
             }
 
             if (maxBitsFound != maxBitsOn)
             {
-                System.Diagnostics.Debug.Fail(
-                    "Incorrect usage of IsEnumValid function. The bits set to 1 in this enum was found to be: "
-                        + maxBitsFound.ToString(CultureInfo.InvariantCulture)
-                        + "this does not match what's passed in: "
-                        + maxBitsOn.ToString(CultureInfo.InvariantCulture)
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Fail(
+                        "Incorrect usage of IsEnumValid function. The bits set to 1 in this enum was found to be: "
+                            + maxBitsFound.ToString(CultureInfo.InvariantCulture)
+                            + "this does not match what's passed in: "
+                            + maxBitsOn.ToString(CultureInfo.InvariantCulture)
+                    );
             }
             if (foundValue != isValid)
             {
-                System.Diagnostics.Debug.Fail(
-                    String.Format(
-                        CultureInfo.InvariantCulture,
-                        "Returning {0} but we actually {1} found the value in the enum! Consider using a different overload to IsValidEnum.",
-                        isValid,
-                        ((foundValue) ? "have" : "have not")
-                    )
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Fail(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "Returning {0} but we actually {1} found the value in the enum! Consider using a different overload to IsValidEnum.",
+                            isValid,
+                            ((foundValue) ? "have" : "have not")
+                        )
+                    );
             }
         }
 #endif

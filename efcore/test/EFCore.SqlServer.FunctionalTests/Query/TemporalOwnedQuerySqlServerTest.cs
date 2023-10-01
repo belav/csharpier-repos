@@ -2183,26 +2183,34 @@ GROUP BY [o].[Id]
 
             foreach (var tableName in tableNames)
             {
-                context.Database.ExecuteSqlRaw(
-                    $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)"
-                );
-                context.Database.ExecuteSqlRaw(
-                    $"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME"
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw($"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)");
+                context
+                    .Database
+                    .ExecuteSqlRaw($"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME");
 
-                context.Database.ExecuteSqlRaw(
-                    $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
-                );
-                context.Database.ExecuteSqlRaw(
-                    $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
+                    );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
+                    );
 
-                context.Database.ExecuteSqlRaw(
-                    $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
-                );
-                context.Database.ExecuteSqlRaw(
-                    $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
-                );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
+                    );
+                context
+                    .Database
+                    .ExecuteSqlRaw(
+                        $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
+                    );
             }
         }
     }

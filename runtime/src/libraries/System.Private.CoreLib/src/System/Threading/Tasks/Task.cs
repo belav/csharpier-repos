@@ -1058,13 +1058,15 @@ namespace System.Threading.Tasks
                 {
                     Task? currentTask = Task.InternalCurrent;
                     Task? parentTask = m_contingentProperties?.m_parent;
-                    TplEventSource.Log.TaskScheduled(
-                        ts.Id,
-                        currentTask == null ? 0 : currentTask.Id,
-                        this.Id,
-                        parentTask == null ? 0 : parentTask.Id,
-                        (int)this.Options
-                    );
+                    TplEventSource
+                        .Log
+                        .TaskScheduled(
+                            ts.Id,
+                            currentTask == null ? 0 : currentTask.Id,
+                            this.Id,
+                            parentTask == null ? 0 : parentTask.Id,
+                            (int)this.Options
+                        );
                 }
             }
         }
@@ -2166,10 +2168,9 @@ namespace System.Threading.Tasks
 
                 // No need to lock around this, as other logic prevents the consumption of exceptions
                 // before they have been completely processed.
-                return m_contingentProperties.m_exceptionsHolder.CreateExceptionObject(
-                    false,
-                    canceledException
-                );
+                return m_contingentProperties
+                    .m_exceptionsHolder
+                    .CreateExceptionObject(false, canceledException);
             }
             else if (canceledException != null)
             {
@@ -2197,7 +2198,8 @@ namespace System.Threading.Tasks
             Debug.Assert(IsCanceled, "Must only be used when the task has canceled.");
             return Volatile
                 .Read(ref m_contingentProperties)
-                ?.m_exceptionsHolder?.GetCancellationExceptionDispatchInfo(); // may be null
+                ?.m_exceptionsHolder
+                ?.GetCancellationExceptionDispatchInfo(); // may be null
         }
 
         /// <summary>Marks any exceptions stored in the Task as having been handled.</summary>
@@ -2205,7 +2207,8 @@ namespace System.Threading.Tasks
         {
             Volatile
                 .Read(ref m_contingentProperties)
-                ?.m_exceptionsHolder?.MarkAsHandled(calledFromFinalizer: false);
+                ?.m_exceptionsHolder
+                ?.MarkAsHandled(calledFromFinalizer: false);
         }
 
         /// <summary>
@@ -4132,9 +4135,9 @@ namespace System.Threading.Tasks
         private static void LogFinishCompletionNotification()
         {
             if (TplEventSource.Log.IsEnabled())
-                TplEventSource.Log.TraceSynchronousWorkEnd(
-                    CausalitySynchronousWork.CompletionNotification
-                );
+                TplEventSource
+                    .Log
+                    .TraceSynchronousWorkEnd(CausalitySynchronousWork.CompletionNotification);
         }
 
         #region Continuation methods
@@ -6383,12 +6386,14 @@ namespace System.Threading.Tasks
                 return Task.FromCanceled(cancellationToken);
 
             // Kick off initial Task, which will call the user-supplied function and yield a Task.
-            Task<Task?> task1 = Task<Task?>.Factory.StartNew(
-                function,
-                cancellationToken,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<Task?> task1 = Task<Task?>
+                .Factory
+                .StartNew(
+                    function,
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
             // Create a promise-style Task to be used as a proxy for the operation
             // Set lookForOce == true so that unwrap logic can be on the lookout for OCEs thrown as faults from task1, to support in-delegate cancellation.
@@ -6439,12 +6444,14 @@ namespace System.Threading.Tasks
                 return Task.FromCanceled<TResult>(cancellationToken);
 
             // Kick off initial Task, which will call the user-supplied function and yield a Task.
-            Task<Task<TResult>?> task1 = Task<Task<TResult>?>.Factory.StartNew(
-                function,
-                cancellationToken,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            Task<Task<TResult>?> task1 = Task<Task<TResult>?>
+                .Factory
+                .StartNew(
+                    function,
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
             // Create a promise-style Task to be used as a proxy for the operation
             // Set lookForOce == true so that unwrap logic can be on the lookout for OCEs thrown as faults from task1, to support in-delegate cancellation.
@@ -6608,10 +6615,9 @@ namespace System.Threading.Tasks
                         RemoveFromActiveTasks(this);
 
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource
+                            .Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
                 }
             }
 
@@ -6920,10 +6926,9 @@ namespace System.Threading.Tasks
                     else
                     {
                         if (TplEventSource.Log.IsEnabled())
-                            TplEventSource.Log.TraceOperationEnd(
-                                this.Id,
-                                AsyncCausalityStatus.Completed
-                            );
+                            TplEventSource
+                                .Log
+                                .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
 
                         if (s_asyncDebuggingEnabled)
                             RemoveFromActiveTasks(this);
@@ -7197,10 +7202,9 @@ namespace System.Threading.Tasks
                     else
                     {
                         if (TplEventSource.Log.IsEnabled())
-                            TplEventSource.Log.TraceOperationEnd(
-                                this.Id,
-                                AsyncCausalityStatus.Completed
-                            );
+                            TplEventSource
+                                .Log
+                                .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
 
                         if (Task.s_asyncDebuggingEnabled)
                             RemoveFromActiveTasks(this);
@@ -7357,14 +7361,12 @@ namespace System.Threading.Tasks
 
                     if (TplEventSource.Log.IsEnabled())
                     {
-                        TplEventSource.Log.TraceOperationRelation(
-                            this.Id,
-                            CausalityRelation.Choice
-                        );
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource
+                            .Log
+                            .TraceOperationRelation(this.Id, CausalityRelation.Choice);
+                        TplEventSource
+                            .Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
                     }
 
                     if (s_asyncDebuggingEnabled)
@@ -8079,10 +8081,9 @@ namespace System.Threading.Tasks
 
                 case TaskStatus.RanToCompletion:
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(
-                            this.Id,
-                            AsyncCausalityStatus.Completed
-                        );
+                        TplEventSource
+                            .Log
+                            .TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
 
                     if (Task.s_asyncDebuggingEnabled)
                         RemoveFromActiveTasks(this);

@@ -764,10 +764,13 @@ namespace System.Data.Linq.SqlClient
                         }
                         else
                         {
-                            System.Diagnostics.Debug.Assert(
-                                false,
-                                "Don't know how to apply 'as' to " + target.NodeType
-                            );
+                            System
+                                .Diagnostics
+                                .Debug
+                                .Assert(
+                                    false,
+                                    "Don't know how to apply 'as' to " + target.NodeType
+                                );
                         }
                         return target;
                 }
@@ -1315,9 +1318,9 @@ namespace System.Data.Linq.SqlClient
                         {
                             return e;
                         }
-                        MetaDataMember mm = sn.MetaType.PersistentDataMembers.FirstOrDefault(
-                            p => p.Member == m.Member
-                        );
+                        MetaDataMember mm = sn.MetaType
+                            .PersistentDataMembers
+                            .FirstOrDefault(p => p.Member == m.Member);
                         if (!sn.SqlType.CanBeColumn && mm != null)
                         {
                             throw Error.MemberNotPartOfProjection(

@@ -44,7 +44,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             _automaticReferences = automaticReferences;
             foreach (
-                var traceData in traceProcess.TraceProcess.EventsInProcess.ByEventType<ModuleLoadUnloadTraceData>()
+                var traceData in traceProcess
+                    .TraceProcess
+                    .EventsInProcess
+                    .ByEventType<ModuleLoadUnloadTraceData>()
             )
             {
                 if (traceData.ModuleILPath != null)

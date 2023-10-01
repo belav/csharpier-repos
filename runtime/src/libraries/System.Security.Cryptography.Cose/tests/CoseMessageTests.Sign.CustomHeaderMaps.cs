@@ -1029,10 +1029,9 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseSignature counterSignedSignature = signatures[0];
             Assert.True(
-                counterSignedSignature.UnprotectedHeaders.TryGetValue(
-                    counterSignLabel,
-                    out CoseHeaderValue value
-                )
+                counterSignedSignature
+                    .UnprotectedHeaders
+                    .TryGetValue(counterSignLabel, out CoseHeaderValue value)
             );
 
             // verify counter signature

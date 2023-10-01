@@ -115,12 +115,15 @@ namespace System.ServiceModel.Description
                 dataContractFormatAttribute.Style
                 != TypeLoader.DefaultDataContractFormatAttribute.Style
             )
-                context.SyncMethod.CustomAttributes.Add(
-                    OperationGenerator.GenerateAttributeDeclaration(
-                        context.Contract.ServiceContractGenerator,
-                        dataContractFormatAttribute
-                    )
-                );
+                context
+                    .SyncMethod
+                    .CustomAttributes
+                    .Add(
+                        OperationGenerator.GenerateAttributeDeclaration(
+                            context.Contract.ServiceContractGenerator,
+                            dataContractFormatAttribute
+                        )
+                    );
             if (knownTypes != null)
             {
                 Dictionary<CodeTypeReference, object> operationKnownTypes = new Dictionary<
@@ -162,9 +165,13 @@ namespace System.ServiceModel.Description
                         CodeAttributeDeclaration knownTypeAttribute = new CodeAttributeDeclaration(
                             typeof(ServiceKnownTypeAttribute).FullName
                         );
-                        knownTypeAttribute.Arguments.Add(
-                            new CodeAttributeArgument(new CodeTypeOfExpression(knownTypeReference))
-                        );
+                        knownTypeAttribute
+                            .Arguments
+                            .Add(
+                                new CodeAttributeArgument(
+                                    new CodeTypeOfExpression(knownTypeReference)
+                                )
+                            );
                         context.SyncMethod.CustomAttributes.Add(knownTypeAttribute);
                     }
                 }
@@ -189,9 +196,9 @@ namespace System.ServiceModel.Description
                     CodeAttributeDeclaration assemblyCustomAttribute in codeCompileUnit.AssemblyCustomAttributes
                 )
                     if (
-                        !targetCompileUnit.AssemblyCustomAttributes.Contains(
-                            assemblyCustomAttribute
-                        )
+                        !targetCompileUnit
+                            .AssemblyCustomAttributes
+                            .Contains(assemblyCustomAttribute)
                     )
                         targetCompileUnit.AssemblyCustomAttributes.Add(assemblyCustomAttribute);
                 foreach (CodeDirective startDirective in codeCompileUnit.StartDirectives)
@@ -235,9 +242,9 @@ namespace System.ServiceModel.Description
             void ValidateForParameterMode(MessagePartDescription part)
             {
                 if (
-                    dataContractSerializerOperationGenerator.isNonNillableReferenceTypes.ContainsKey(
-                        part
-                    )
+                    dataContractSerializerOperationGenerator
+                        .isNonNillableReferenceTypes
+                        .ContainsKey(part)
                 )
                 {
                     ParameterModeException parameterModeException = new ParameterModeException(
@@ -249,9 +256,9 @@ namespace System.ServiceModel.Description
                     );
                     parameterModeException.MessageContractType =
                         MessageContractType.BareMessageContract;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        parameterModeException
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(parameterModeException);
                 }
             }
 
@@ -293,15 +300,17 @@ namespace System.ServiceModel.Description
                         )
                     );
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            String.Format(
-                                CultureInfo.InvariantCulture,
-                                "Cannot find DataContract attribute for  {0}",
-                                messageName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "Cannot find DataContract attribute for  {0}",
+                                    messageName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 bool nsAttrFound = false;
                 foreach (CodeAttributeArgument attrArg in dataContractAttributeDecl.Arguments)
@@ -311,23 +320,27 @@ namespace System.ServiceModel.Description
                         nsAttrFound = true;
                         string nsValue = ((CodePrimitiveExpression)attrArg.Value).Value.ToString();
                         if (nsValue != part.Namespace)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxWrapperTypeHasMultipleNamespaces,
-                                        messageName
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxWrapperTypeHasMultipleNamespaces,
+                                            messageName
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
                 }
                 if (!nsAttrFound)
-                    dataContractAttributeDecl.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "Namespace",
-                            new CodePrimitiveExpression(part.Namespace)
-                        )
-                    );
+                    dataContractAttributeDecl
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "Namespace",
+                                new CodePrimitiveExpression(part.Namespace)
+                            )
+                        );
 
                 DataMemberAttribute dataMemberAttribute = new DataMemberAttribute();
                 dataMemberAttribute.Order = memberCount++;
@@ -344,9 +357,9 @@ namespace System.ServiceModel.Description
             {
                 if (dataContractSerializerOperationGenerator.isNonNillableReferenceTypes == null)
                     return false;
-                return dataContractSerializerOperationGenerator.isNonNillableReferenceTypes.ContainsKey(
-                    part
-                );
+                return dataContractSerializerOperationGenerator
+                    .isNonNillableReferenceTypes
+                    .ContainsKey(part);
             }
 
             public void AddTypeAttributes(

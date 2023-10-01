@@ -405,12 +405,14 @@ Required:
 
         if (s_errors && !s_ignoreErrors)
         {
-            Console.Error.WriteLine(
-                "DacTableGen : fatal error : Failing due to above validation errors. "
-                    + "Do you have an #ifdef (or name) mismatch between the symbol definition and the entry specified? "
-                    + "Or perhaps the symbol referenced was optimized away as unused? "
-                    + "If you're stuck, send e-mail to 'ClrDac'.  Worst case, these errors can be temporarily ignored by passing the /ignoreerrors switch - but you may cause runtime failures instead."
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "DacTableGen : fatal error : Failing due to above validation errors. "
+                        + "Do you have an #ifdef (or name) mismatch between the symbol definition and the entry specified? "
+                        + "Or perhaps the symbol referenced was optimized away as unused? "
+                        + "If you're stuck, send e-mail to 'ClrDac'.  Worst case, these errors can be temporarily ignored by passing the /ignoreerrors switch - but you may cause runtime failures instead."
+                );
             return 1;
         }
 

@@ -120,7 +120,8 @@ namespace Microsoft.Build.Execution
         {
             get
             {
-                return ProjectInstance.Properties
+                return ProjectInstance
+                    .Properties
                     .Where(p => ProjectInstance.GlobalProperties.Any(i => i.Key == p.Name))
                     .ToArray();
             } // we can use == as it should be identical match there.

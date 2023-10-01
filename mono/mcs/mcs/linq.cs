@@ -986,32 +986,38 @@ namespace Mono.CSharp.Linq
             string reason
         )
         {
-            TopBlock.Report.Error(
-                1931,
-                variable.Location,
-                "A range variable `{0}' conflicts with a previous declaration of `{0}'",
-                name
-            );
+            TopBlock
+                .Report
+                .Error(
+                    1931,
+                    variable.Location,
+                    "A range variable `{0}' conflicts with a previous declaration of `{0}'",
+                    name
+                );
         }
 
         public override void Error_AlreadyDeclared(string name, INamedBlockVariable variable)
         {
-            TopBlock.Report.Error(
-                1930,
-                variable.Location,
-                "A range variable `{0}' has already been declared in this scope",
-                name
-            );
+            TopBlock
+                .Report
+                .Error(
+                    1930,
+                    variable.Location,
+                    "A range variable `{0}' has already been declared in this scope",
+                    name
+                );
         }
 
         public override void Error_AlreadyDeclaredTypeParameter(string name, Location loc)
         {
-            TopBlock.Report.Error(
-                1948,
-                loc,
-                "A range variable `{0}' conflicts with a method type parameter",
-                name
-            );
+            TopBlock
+                .Report
+                .Error(
+                    1948,
+                    loc,
+                    "A range variable `{0}' conflicts with a method type parameter",
+                    name
+                );
         }
 
         public void SetParameter(Parameter parameter)

@@ -386,10 +386,12 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 
                     // Option to select the default date
                     arr.Add(
-                        Control.VisibleDate.ToString(
-                            currentDateTimeInfo.ShortDatePattern,
-                            CultureInfo.CurrentCulture
-                        )
+                        Control
+                            .VisibleDate
+                            .ToString(
+                                currentDateTimeInfo.ShortDatePattern,
+                                CultureInfo.CurrentCulture
+                            )
                     );
 
                     // Option to another page that can enter a date by typing
@@ -449,10 +451,9 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                     _textBox.Numeric = true;
                     _textBox.Size = numericDateFormat.Length;
                     _textBox.MaxLength = numericDateFormat.Length;
-                    _textBox.Text = Control.VisibleDate.ToString(
-                        numericDateFormat,
-                        CultureInfo.CurrentCulture
-                    );
+                    _textBox.Text = Control
+                        .VisibleDate
+                        .ToString(numericDateFormat, CultureInfo.CurrentCulture);
                     _textBox.Visible = true;
                     _textBox.RenderControl(writer);
 
@@ -744,9 +745,9 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 
         private String GetAbbreviatedDayName(DateTime dateTime)
         {
-            return DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(
-                _threadCalendar.GetDayOfWeek(dateTime)
-            );
+            return DateTimeFormatInfo
+                .CurrentInfo
+                .GetAbbreviatedDayName(_threadCalendar.GetDayOfWeek(dateTime));
         }
 
         private String GetEra(DateTime dateTime)

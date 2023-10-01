@@ -65,9 +65,9 @@ namespace System.ServiceModel.Dispatcher
                         table = new UriTemplateTable(endpoint.Address.Uri);
                         tables.Add(info.Method, table);
                     }
-                    table.KeyValuePairs.Add(
-                        new TemplateTablePair(info.BuildUriTemplate(od, null), od)
-                    );
+                    table
+                        .KeyValuePairs
+                        .Add(new TemplateTablePair(info.BuildUriTemplate(od, null), od));
                 }
             }
         }

@@ -172,15 +172,17 @@ namespace System.ServiceModel.Dispatcher
                         TypeConverter stringConverter = GetStringConverter(parameterType);
                         if (stringConverter == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new NotSupportedException(
-                                    SR2.GetString(
-                                        SR2.TypeNotSupportedByQueryStringConverter,
-                                        parameterType.ToString(),
-                                        this.GetType().Name
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new NotSupportedException(
+                                        SR2.GetString(
+                                            SR2.TypeNotSupportedByQueryStringConverter,
+                                            parameterType.ToString(),
+                                            this.GetType().Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         return stringConverter.ConvertFromInvariantString(parameter);
                     }
@@ -277,15 +279,17 @@ namespace System.ServiceModel.Dispatcher
                         TypeConverter stringConverter = GetStringConverter(parameterType);
                         if (stringConverter == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new NotSupportedException(
-                                    SR2.GetString(
-                                        SR2.TypeNotSupportedByQueryStringConverter,
-                                        parameterType.ToString(),
-                                        this.GetType().Name
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new NotSupportedException(
+                                        SR2.GetString(
+                                            SR2.TypeNotSupportedByQueryStringConverter,
+                                            parameterType.ToString(),
+                                            this.GetType().Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         else
                         {
@@ -350,9 +354,9 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (Fx.IsFatal(handledException))
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        handledException
-                                    );
+                                    throw DiagnosticUtility
+                                        .ExceptionUtility
+                                        .ThrowHelperError(handledException);
                                 }
                                 DiagnosticUtility.TraceHandledException(
                                     handledException,

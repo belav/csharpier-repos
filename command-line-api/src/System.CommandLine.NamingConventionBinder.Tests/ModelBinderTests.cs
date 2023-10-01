@@ -468,9 +468,9 @@ public class ModelBinderTests
     public void Command_argument_is_bound_to_longest_constructor()
     {
         var rootCommand = new RootCommand();
-        rootCommand.Arguments.Add(
-            new Argument<int> { Name = nameof(ClassWithMultipleCtor.IntProperty) }
-        );
+        rootCommand
+            .Arguments
+            .Add(new Argument<int> { Name = nameof(ClassWithMultipleCtor.IntProperty) });
         var parser = new Parser(rootCommand);
 
         var bindingContext = new InvocationContext(parser.Parse("42")).BindingContext;

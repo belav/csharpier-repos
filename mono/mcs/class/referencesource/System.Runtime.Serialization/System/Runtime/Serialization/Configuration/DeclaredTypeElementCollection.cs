@@ -28,9 +28,12 @@ namespace System.Runtime.Serialization.Configuration
                 {
                     if (value == null)
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                            "value"
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgumentNull("value");
                     }
 
                     if (BaseGet(index) != null)
@@ -48,9 +51,12 @@ namespace System.Runtime.Serialization.Configuration
             {
                 if (String.IsNullOrEmpty(typeName))
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "typeName"
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("typeName");
                 }
                 DeclaredTypeElement retval = (DeclaredTypeElement)BaseGet(typeName);
                 return retval;
@@ -63,15 +69,21 @@ namespace System.Runtime.Serialization.Configuration
                 {
                     if (String.IsNullOrEmpty(typeName))
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                            "typeName"
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgumentNull("typeName");
                     }
                     if (value == null)
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                            "value"
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgumentNull("value");
                     }
                     if (BaseGet(typeName) != null)
                     {
@@ -79,11 +91,16 @@ namespace System.Runtime.Serialization.Configuration
                     }
                     else
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new IndexOutOfRangeException(
-                                SR.GetString(SR.ConfigIndexOutOfRange, typeName)
-                            )
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new IndexOutOfRangeException(
+                                    SR.GetString(SR.ConfigIndexOutOfRange, typeName)
+                                )
+                            );
                     }
                 }
                 Add(value);
@@ -98,9 +115,12 @@ namespace System.Runtime.Serialization.Configuration
             {
                 if (element == null)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "element"
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("element");
                 }
             }
             BaseAdd(element);
@@ -115,9 +135,12 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "typeName"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("typeName");
             }
             return this.BaseGet(typeName) != null;
         }
@@ -132,9 +155,12 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (element == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "element"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("element");
             }
             return ((DeclaredTypeElement)element).Type;
         }
@@ -143,9 +169,12 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (element == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "element"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("element");
             }
             return BaseIndexOf(element);
         }
@@ -158,9 +187,12 @@ namespace System.Runtime.Serialization.Configuration
             {
                 if (element == null)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "element"
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("element");
                 }
             }
             BaseRemove(this.GetElementKey(element));
@@ -174,9 +206,12 @@ namespace System.Runtime.Serialization.Configuration
             {
                 if (String.IsNullOrEmpty(typeName))
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "typeName"
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("typeName");
                 }
             }
             BaseRemove(typeName);

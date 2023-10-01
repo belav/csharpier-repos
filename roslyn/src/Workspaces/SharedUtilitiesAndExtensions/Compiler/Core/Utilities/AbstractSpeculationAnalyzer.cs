@@ -584,7 +584,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         methodSymbol.ReturnType,
                         newMethodSymbol.ReturnType
                     )
-                    && methodSymbol.Parameters
+                    && methodSymbol
+                        .Parameters
                         .Zip(newMethodSymbol.Parameters, (p1, p2) => (p1, p2))
                         .All(t => CompareAcrossSemanticModels(t.p1, t.p2));
             }

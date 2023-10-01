@@ -24,9 +24,9 @@ namespace System.ServiceModel.Security
         {
             if (string.IsNullOrEmpty(assertionId))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.AssertionIdCannotBeNullOrEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentException(SR.AssertionIdCannotBeNullOrEmpty));
             }
             this.assertionId = assertionId;
         }

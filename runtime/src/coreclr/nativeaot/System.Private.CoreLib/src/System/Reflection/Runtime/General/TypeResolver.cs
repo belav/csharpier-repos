@@ -42,7 +42,10 @@ namespace System.Reflection.Runtime.General
         {
             if (typeDefOrRefOrSpec.IsNativeFormatMetadataBased)
             {
-                return global::Internal.Metadata.NativeFormat.Handle
+                return global::Internal
+                    .Metadata
+                    .NativeFormat
+                    .Handle
                     .FromIntToken(typeDefOrRefOrSpec.Handle)
                     .TryResolve(
                         (global::Internal.Metadata.NativeFormat.MetadataReader)
@@ -57,7 +60,11 @@ namespace System.Reflection.Runtime.General
                 typeDefOrRefOrSpec.Reader
                 is global::System.Reflection.Metadata.MetadataReader ecmaReader
             )
-                return global::System.Reflection.Metadata.Ecma335.MetadataTokens
+                return global::System
+                    .Reflection
+                    .Metadata
+                    .Ecma335
+                    .MetadataTokens
                     .Handle(typeDefOrRefOrSpec.Handle)
                     .TryResolve(ecmaReader, typeContext, ref exception);
 #endif

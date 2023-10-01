@@ -195,9 +195,11 @@ namespace System.ServiceModel.Channels
                 if (this.associatedTx != null)
                 {
                     // Channel.Abort called within the associated transaction
-                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqSessionChannelAbort))
-                    );
+                    Exception e = DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.MsmqSessionChannelAbort))
+                        );
                     RollbackTransaction(e);
                 }
                 this.sessiongramReceiveContext.Abandon(TimeSpan.MaxValue);
@@ -209,9 +211,13 @@ namespace System.ServiceModel.Channels
                     // no need for rollback, it will happen automatically when this condition is hit in the Prepare() call
                     this.Fault();
                     this.sessiongramReceiveContext.Abandon(TimeSpan.MaxValue);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.MsmqSessionPrematureClose))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqSessionPrematureClose)
+                            )
+                        );
                 }
             }
         }
@@ -229,11 +235,13 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.MsmqSessionMessagesNotConsumed)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqSessionMessagesNotConsumed)
+                            )
+                        );
                 }
             }
         }
@@ -295,9 +303,11 @@ namespace System.ServiceModel.Channels
             // associate the session channel with this transaction
             if (Transaction.Current == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
+                    );
             }
 
             if (this.associatedTx == null)
@@ -318,17 +328,23 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqSameTransactionExpected)
+                            )
+                        );
                 }
 
                 if (TransactionStatus.Active != Transaction.Current.TransactionInformation.Status)
                 {
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
+                        );
                 }
             }
         }
@@ -341,18 +357,24 @@ namespace System.ServiceModel.Channels
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqSameTransactionExpected)
+                            )
+                        );
                 }
 
                 if (TransactionStatus.Active != Transaction.Current.TransactionInformation.Status)
                 {
                     RollbackTransaction(null);
                     this.Fault();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                        new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperCritical(
+                            new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
+                        );
                 }
             }
         }
@@ -567,11 +589,13 @@ namespace System.ServiceModel.Channels
                 // Note that we are not placing any restriction on the channel state
                 if (this.channel.TotalPendingItems > 0 || this.channel.sessiongramDoomed)
                 {
-                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.MsmqSessionChannelHasPendingItems)
-                        )
-                    );
+                    Exception e = DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqSessionChannelHasPendingItems)
+                            )
+                        );
                     this.sessiongramReceiveContext.Abandon(TimeSpan.MaxValue);
                     preparingEnlistment.ForceRollback(e);
                     this.channel.Fault();
@@ -639,11 +663,13 @@ namespace System.ServiceModel.Channels
                     && this.channel.InternalPendingItems > 0
                 )
                 {
-                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.MsmqSessionChannelsMustBeClosed)
-                        )
-                    );
+                    Exception e = DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.MsmqSessionChannelsMustBeClosed)
+                            )
+                        );
                     preparingEnlistment.ForceRollback(e);
                     this.channel.Fault();
                 }

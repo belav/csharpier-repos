@@ -38,12 +38,9 @@ namespace System.Threading
             if (handle.IsClosed || handle.IsInvalid)
                 throw new ArgumentException(SR.Argument_InvalidHandle, nameof(handle));
 
-            SafeThreadPoolIOHandle threadPoolHandle = Interop.Kernel32.CreateThreadpoolIo(
-                handle,
-                &OnNativeIOCompleted,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            SafeThreadPoolIOHandle threadPoolHandle = Interop
+                .Kernel32
+                .CreateThreadpoolIo(handle, &OnNativeIOCompleted, IntPtr.Zero, IntPtr.Zero);
             if (threadPoolHandle.IsInvalid)
             {
                 int errorCode = Marshal.GetLastWin32Error();

@@ -156,9 +156,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Streams need to read ahead when they hit objects or arrays that are assigned to JsonElement or object.
 
-            byte[] data = Encoding.UTF8.GetBytes(
-                @"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]}"
-            );
+            byte[] data = Encoding
+                .UTF8
+                .GetBytes(@"{""Data"":[1,true,{""City"":""MyCity""},null,""foo""]}");
             MemoryStream stream = new MemoryStream(data);
             JsonElement obj = JsonSerializer
                 .DeserializeAsync<JsonElement>(

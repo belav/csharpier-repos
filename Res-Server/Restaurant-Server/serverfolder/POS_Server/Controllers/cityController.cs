@@ -39,7 +39,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.cities
+                        var list = entity
+                            .cities
                             .Select(
                                 c =>
                                     new

@@ -101,7 +101,8 @@ public abstract class DiagnosticAnalyzerTestBase
             .Cast<MetadataReference>()
             .ToList();
 
-        var solution = new AdhocWorkspace().CurrentSolution
+        var solution = new AdhocWorkspace()
+            .CurrentSolution
             .AddProject(projectId, "TestProject", "TestProject", LanguageNames.CSharp)
             .AddMetadataReferences(projectId, metadataReferences)
             .AddDocument(documentId, fileName, SourceText.From(source));

@@ -26,11 +26,9 @@ namespace ILCompiler.DependencyAnalysis
             DependencyList dependencyList = null;
 
             // Ask the metadata manager if we have any dependencies due to reflectability.
-            factory.MetadataManager.GetDependenciesDueToReflectability(
-                ref dependencyList,
-                factory,
-                _type
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesDueToReflectability(ref dependencyList, factory, _type);
 
             return dependencyList;
         }

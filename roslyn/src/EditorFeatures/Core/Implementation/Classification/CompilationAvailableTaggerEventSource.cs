@@ -85,8 +85,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             // First, notify anyone listening to us that something definitely changed.
             this.Changed?.Invoke(this, args);
 
-            var document =
-                _subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = _subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return;
 

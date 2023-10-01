@@ -332,9 +332,13 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.New)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityMessageSerializationException(SR.GetString(SR.BadEncryptionState))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityMessageSerializationException(
+                            SR.GetString(SR.BadEncryptionState)
+                        )
+                    );
             }
         }
 
@@ -346,9 +350,13 @@ namespace System.ServiceModel.Security
             }
             else if (this.State == EncryptionState.New)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityMessageSerializationException(SR.GetString(SR.BadEncryptionState))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityMessageSerializationException(
+                            SR.GetString(SR.BadEncryptionState)
+                        )
+                    );
             }
         }
 
@@ -381,15 +389,17 @@ namespace System.ServiceModel.Security
                 this.algorithm = reader.GetAttribute(XD.XmlSignatureDictionary.Algorithm, null);
                 if (this.algorithm == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityMessageSerializationException(
-                            SR.GetString(
-                                SR.RequiredAttributeMissing,
-                                XD.XmlSignatureDictionary.Algorithm.Value,
-                                ElementName.Value
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityMessageSerializationException(
+                                SR.GetString(
+                                    SR.RequiredAttributeMissing,
+                                    XD.XmlSignatureDictionary.Algorithm.Value,
+                                    ElementName.Value
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 reader.Read();
                 if (!isEmptyElement)

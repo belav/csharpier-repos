@@ -260,17 +260,23 @@ namespace System.Runtime.Serialization.Json
                             if (newSize <= value)
                             {
                                 Fx.Assert("DataContract cache overflow");
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new SerializationException(
-                                        System.Runtime.Serialization.SR.GetString(
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new SerializationException(
                                             System
                                                 .Runtime
                                                 .Serialization
                                                 .SR
-                                                .DataContractCacheOverflow
+                                                .GetString(
+                                                    System
+                                                        .Runtime
+                                                        .Serialization
+                                                        .SR
+                                                        .DataContractCacheOverflow
+                                                )
                                         )
-                                    )
-                                );
+                                    );
                             }
                             Array.Resize<JsonDataContract>(ref dataContractCache, newSize);
                         }
@@ -285,10 +291,9 @@ namespace System.Runtime.Serialization.Json
                             {
                                 throw;
                             }
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(
-                                ex.Message,
-                                ex
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperFatal(ex.Message, ex);
                         }
                     }
                     return id.Value;
@@ -375,13 +380,15 @@ namespace System.Runtime.Serialization.Json
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                "traditionalDataContract",
-                                SR.GetString(
-                                    SR.JsonTypeNotSupportedByDataContractJsonSerializer,
-                                    traditionalDataContract.UnderlyingType
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperArgument(
+                                    "traditionalDataContract",
+                                    SR.GetString(
+                                        SR.JsonTypeNotSupportedByDataContractJsonSerializer,
+                                        traditionalDataContract.UnderlyingType
+                                    )
+                                );
                         }
                     }
                     return dataContract;
@@ -424,9 +431,13 @@ namespace System.Runtime.Serialization.Json
                                 )
                                 {
                                     DataContract itemDataContract = DataContract.GetDataContract(
-                                        Globals.TypeOfKeyValuePair.MakeGenericType(
-                                            collectionDataContract.ItemType.GetGenericArguments()
-                                        )
+                                        Globals
+                                            .TypeOfKeyValuePair
+                                            .MakeGenericType(
+                                                collectionDataContract
+                                                    .ItemType
+                                                    .GetGenericArguments()
+                                            )
                                     );
                                     if (
                                         !knownDataContracts.ContainsKey(itemDataContract.StableName)

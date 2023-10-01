@@ -198,7 +198,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 var newDocument = Document.WithSyntaxRoot(newRoot);
 
                 var indentationService = newDocument.GetLanguageService<IIndentationService>();
-                var originalLineNumber = SourceText.Lines
+                var originalLineNumber = SourceText
+                    .Lines
                     .GetLineFromPosition(CursorPosition)
                     .LineNumber;
 
@@ -213,9 +214,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                     .GetSyntaxRootSynchronously(CancellationToken)
                     .SyntaxTree
                     .GetText(CancellationToken);
-                var baseLine = newSourceText.Lines.GetLineFromPosition(
-                    desiredIndentation.BasePosition
-                );
+                var baseLine = newSourceText
+                    .Lines
+                    .GetLineFromPosition(desiredIndentation.BasePosition);
 
                 var baseOffsetInLineInPositions = desiredIndentation.BasePosition - baseLine.Start;
                 var baseOffsetInLineInColumns = baseLine.GetColumnFromLineOffset(

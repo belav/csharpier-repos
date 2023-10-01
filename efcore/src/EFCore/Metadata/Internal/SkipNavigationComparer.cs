@@ -36,9 +36,8 @@ public sealed class SkipNavigationComparer : IComparer<IReadOnlySkipNavigation>
             (not null, not null)
                 => StringComparer.Ordinal.Compare(x.Name, y.Name) is var compare && compare != 0
                     ? compare
-                    : EntityTypeFullNameComparer.Instance.Compare(
-                        x.DeclaringEntityType,
-                        y.DeclaringEntityType
-                    )
+                    : EntityTypeFullNameComparer
+                        .Instance
+                        .Compare(x.DeclaringEntityType, y.DeclaringEntityType)
         };
 }

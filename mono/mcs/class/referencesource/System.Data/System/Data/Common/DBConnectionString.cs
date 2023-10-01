@@ -382,7 +382,8 @@ namespace System.Data.Common
                         // All values in the Combined Set should also be in the Component Set
                         // Combined - Component == null
                         Debug.Assert(
-                            combinedSet._restrictionValues
+                            combinedSet
+                                ._restrictionValues
                                 .Except(componentSet._restrictionValues)
                                 .Count() == 0,
                             "Combined set allows values not allowed by component set"
@@ -412,7 +413,8 @@ namespace System.Data.Common
                         // There shouldn't be any of the values from the Component Set in the Combined Set
                         // Intersect(Component, Combined) == null
                         Debug.Assert(
-                            combinedSet._restrictionValues
+                            combinedSet
+                                ._restrictionValues
                                 .Intersect(componentSet._restrictionValues)
                                 .Count() == 0,
                             "Combined values allows values prevented by component set"
@@ -424,7 +426,8 @@ namespace System.Data.Common
                         // All values in the Component Set should also be in the Combined Set
                         // Component - Combined == null
                         Debug.Assert(
-                            componentSet._restrictionValues
+                            componentSet
+                                ._restrictionValues
                                 .Except(combinedSet._restrictionValues)
                                 .Count() == 0,
                             "Combined values does not prevent all of the values prevented by the component set"
@@ -681,10 +684,9 @@ namespace System.Data.Common
                     Debug.Assert(!ADP.IsEmpty(restrictionValues[i]), "empty restriction");
                     Debug.Assert(
                         0
-                            >= StringComparer.Ordinal.Compare(
-                                restrictionValues[i - 1],
-                                restrictionValues[i]
-                            )
+                            >= StringComparer
+                                .Ordinal
+                                .Compare(restrictionValues[i - 1], restrictionValues[i])
                     );
                 }
             }

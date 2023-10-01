@@ -37,7 +37,8 @@ namespace POS_Server.Controllers
             decimal val = 1;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var iulist = entity.itemsUnits
+                var iulist = entity
+                    .itemsUnits
                     .Where(I => I.itemId == itemId)
                     .Select(
                         I =>
@@ -79,7 +80,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var nextunit = entity.itemsUnits
+                    var nextunit = entity
+                        .itemsUnits
                         .Where(I => I.subUnitId == itemUnitId)
                         .Select(
                             x =>
@@ -120,7 +122,8 @@ namespace POS_Server.Controllers
                         vale = getupValues(itemUnitId, nextunit.itemUnitId, (long)nextunit.itemId);
                         amount = amount * vale;
 
-                        var itemunit = entity.itemsUnits
+                        var itemunit = entity
+                            .itemsUnits
                             .Where(x => x.itemUnitId == itemUnitId)
                             .Select(
                                 x =>
@@ -141,7 +144,8 @@ namespace POS_Server.Controllers
                             nextunitID = (long)itemunit.subUnitId;
                         }
 
-                        var nextUnit = entity.itemsUnits
+                        var nextUnit = entity
+                            .itemsUnits
                             .Where(x => x.itemId == itemId && x.unitId == nextunitID)
                             .Select(
                                 x =>
@@ -159,7 +163,8 @@ namespace POS_Server.Controllers
                         {
                             nextIUid = nextUnit.itemUnitId;
                         }
-                        var downUnit = entity.itemsUnits
+                        var downUnit = entity
+                            .itemsUnits
                             .Where(x => x.itemId == itemId && x.subUnitId == subUnit)
                             .Select(
                                 x =>
@@ -232,12 +237,14 @@ namespace POS_Server.Controllers
                 }
                 //amount  الكمية في الفرع لعنصر ووحدة قياس واحدة
                 // جلب معرف الوحدة ومعرف العنصر
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
                 //جلب الوحدة الاعلى معرف الوحدة الاعلى وقيمتها بالنسبة للوحدة الادنى
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(x => x.subUnitId == unit.unitId && x.itemId == unit.itemId)
                     .Select(x => new { x.unitValue, x.itemUnitId })
                     .FirstOrDefault();
@@ -1101,7 +1108,8 @@ namespace POS_Server.Controllers
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -2523,7 +2531,8 @@ else
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -2843,7 +2852,8 @@ else
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -3163,7 +3173,8 @@ else
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -3483,7 +3494,8 @@ else
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -4867,7 +4879,8 @@ else
                                 membershipId = I.membershipId,
                                 membershipsName = I.memberships.name,
                                 membershipsCode = I.memberships.code,
-                                invoiceClassDiscountList = entity.invoiceClassDiscount
+                                invoiceClassDiscountList = entity
+                                    .invoiceClassDiscount
                                     .Where(X => X.invoiceId == I.invoiceId)
                                     .Select(
                                         X =>
@@ -4886,7 +4899,8 @@ else
                                             }
                                     )
                                     .ToList(),
-                                CouponInvoiceList = entity.couponsInvoices
+                                CouponInvoiceList = entity
+                                    .couponsInvoices
                                     .Where(X => X.InvoiceId == I.invoiceId && X.forAgents == "pr")
                                     .Select(
                                         X =>
@@ -4907,7 +4921,8 @@ else
                                             }
                                     )
                                     .ToList(),
-                                itemsTransferList = entity.itemsTransfer
+                                itemsTransferList = entity
+                                    .itemsTransfer
                                     .Where(
                                         X =>
                                             X.invoiceId == I.invoiceId
@@ -4954,7 +4969,8 @@ else
                                 offerDiscount = 0,
                                 totalDiscount = 0,
                                 subscriptionType = I.memberships.subscriptionType,
-                                agentMembershipcashobjList = entity.agentMembershipCash
+                                agentMembershipcashobjList = entity
+                                    .agentMembershipCash
                                     .Where(
                                         x =>
                                             x.agentId == I.agentId
@@ -5347,11 +5363,13 @@ else
                                 ITEM.minUnitId,
                                 ITEM.maxUnitId,
                                 itemType = ITEM.type,
-                                minUnitName = entity.units
+                                minUnitName = entity
+                                    .units
                                     .Where(x => x.unitId == ITEM.minUnitId)
                                     .FirstOrDefault()
                                     .name,
-                                maxUnitName = entity.units
+                                maxUnitName = entity
+                                    .units
                                     .Where(x => x.unitId == ITEM.maxUnitId)
                                     .FirstOrDefault()
                                     .name,
@@ -5382,7 +5400,8 @@ else
                                 IU.storageCostId,
                                 //storageCostName = IU.storageCostId != null ? entity.storageCost.Where(X => X.storageCostId == IU.storageCostId).FirstOrDefault().name : "",
                                 storageCostValue = IU.storageCostId != null
-                                    ? entity.storageCost
+                                    ? entity
+                                        .storageCost
                                         .Where(X => X.storageCostId == IU.storageCostId)
                                         .FirstOrDefault()
                                         .cost
@@ -5875,7 +5894,8 @@ else
                                     || (
                                         (I.invType == "im" && I.invoiceMainId == null)
                                             ? (
-                                                entity.invoices
+                                                entity
+                                                    .invoices
                                                     .Where(
                                                         x =>
                                                             x.invoiceMainId == I.invoiceId
@@ -5885,7 +5905,8 @@ else
                                                     .Count > 0
                                             )
                                             : (I.invType == "im" && I.invoiceMainId != null)
-                                                ? entity.invoices
+                                                ? entity
+                                                    .invoices
                                                     .Where(
                                                         x =>
                                                             x.invoiceId == I.invoiceMainId
@@ -5995,11 +6016,13 @@ else
                                     : I.invType == "im"
                                         ? (I.invoiceMainId == null)
                                             ? (
-                                                entity.branches
+                                                entity
+                                                    .branches
                                                     .Where(
                                                         B =>
                                                             B.branchId
-                                                            == entity.invoices
+                                                            == entity
+                                                                .invoices
                                                                 .Where(
                                                                     x =>
                                                                         x.invoiceMainId
@@ -6012,12 +6035,14 @@ else
                                                     .name
                                             )
                                             : // I.invoiceMainId not null
-                                            entity.branches
+                                            entity
+                                                .branches
                                                 .Where(
                                                     b =>
                                                         b.branchId
                                                         == (
-                                                            entity.invoices
+                                                            entity
+                                                                .invoices
                                                                 .Where(
                                                                     i =>
                                                                         i.invoiceId
@@ -6035,11 +6060,13 @@ else
                                     : I.invType == "ex"
                                         ? (I.invoiceMainId == null)
                                             ? (
-                                                entity.branches
+                                                entity
+                                                    .branches
                                                     .Where(
                                                         B =>
                                                             B.branchId
-                                                            == entity.invoices
+                                                            == entity
+                                                                .invoices
                                                                 .Where(
                                                                     x =>
                                                                         x.invoiceMainId
@@ -6052,12 +6079,14 @@ else
                                                     .name
                                             )
                                             : // I.invoiceMainId not null
-                                            entity.branches
+                                            entity
+                                                .branches
                                                 .Where(
                                                     b =>
                                                         b.branchId
                                                         == (
-                                                            entity.invoices
+                                                            entity
+                                                                .invoices
                                                                 .Where(
                                                                     i =>
                                                                         i.invoiceId
@@ -6076,14 +6105,16 @@ else
                                     : I.invType == "im"
                                         ? (I.invoiceMainId == null)
                                             ? (
-                                                entity.invoices
+                                                entity
+                                                    .invoices
                                                     .Where(x => x.invoiceMainId == I.invoiceId)
                                                     .FirstOrDefault()
                                                     .branchId
                                             )
                                             : // I.invoiceMainId not null
                                             (
-                                                entity.invoices
+                                                entity
+                                                    .invoices
                                                     .Where(i => i.invoiceId == I.invoiceMainId)
                                                     .FirstOrDefault()
                                                     .branchId
@@ -6094,14 +6125,16 @@ else
                                     : I.invType == "ex"
                                         ? (I.invoiceMainId == null)
                                             ? (
-                                                entity.invoices
+                                                entity
+                                                    .invoices
                                                     .Where(x => x.invoiceMainId == I.invoiceId)
                                                     .FirstOrDefault()
                                                     .branchId
                                             )
                                             : // I.invoiceMainId not null
                                             (
-                                                entity.invoices
+                                                entity
+                                                    .invoices
                                                     .Where(i => i.invoiceId == I.invoiceMainId)
                                                     .FirstOrDefault()
                                                     .branchId
@@ -6194,7 +6227,8 @@ else
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -7444,14 +7478,16 @@ else
                                     && C.side == "p"
                                     && (
                                         C.transType == "d"
-                                            ? entity.cashTransfer
+                                            ? entity
+                                                .cashTransfer
                                                 .Where(
                                                     x2 =>
                                                         x2.cashTransId == (long)C.cashTransIdSource
                                                 )
                                                 .FirstOrDefault()
                                                 .isConfirm == 1
-                                            : entity.cashTransfer
+                                            : entity
+                                                .cashTransfer
                                                 .Where(
                                                     x2 =>
                                                         C.cashTransId == (long)x2.cashTransIdSource
@@ -7535,7 +7571,8 @@ else
                                     : (
                                         C.transType == "d"
                                             ? C.cashTransfer2.posId
-                                            : entity.cashTransfer
+                                            : entity
+                                                .cashTransfer
                                                 .Where(
                                                     x2 =>
                                                         C.cashTransId == (long)x2.cashTransIdSource
@@ -7548,7 +7585,8 @@ else
                                     : (
                                         C.transType == "d"
                                             ? C.cashTransfer2.pos.name
-                                            : entity.cashTransfer
+                                            : entity
+                                                .cashTransfer
                                                 .Where(
                                                     x2 =>
                                                         C.cashTransId == (long)x2.cashTransIdSource
@@ -7561,7 +7599,8 @@ else
                                     ? C.pos.branchId
                                     : C.transType == "d"
                                         ? C.cashTransfer2.pos.branchId
-                                        : entity.cashTransfer
+                                        : entity
+                                            .cashTransfer
                                             .Where(
                                                 x2 => C.cashTransId == (long)x2.cashTransIdSource
                                             )
@@ -7572,7 +7611,8 @@ else
                                     ? C.pos.branches.name
                                     : C.transType == "d"
                                         ? C.cashTransfer2.pos.branches.name
-                                        : entity.cashTransfer
+                                        : entity
+                                            .cashTransfer
                                             .Where(
                                                 x2 => C.cashTransId == (long)x2.cashTransIdSource
                                             )
@@ -7585,7 +7625,8 @@ else
                                     : (
                                         C.transType == "d"
                                             ? C.cashTransfer2.posId
-                                            : entity.cashTransfer
+                                            : entity
+                                                .cashTransfer
                                                 .Where(
                                                     x2 =>
                                                         C.cashTransId == (long)x2.cashTransIdSource
@@ -7598,7 +7639,8 @@ else
                                     : (
                                         C.transType == "d"
                                             ? C.cashTransfer2.pos.name
-                                            : entity.cashTransfer
+                                            : entity
+                                                .cashTransfer
                                                 .Where(
                                                     x2 =>
                                                         C.cashTransId == (long)x2.cashTransIdSource
@@ -7611,7 +7653,8 @@ else
                                     ? C.pos.branchId
                                     : C.transType == "d"
                                         ? C.cashTransfer2.pos.branchId
-                                        : entity.cashTransfer
+                                        : entity
+                                            .cashTransfer
                                             .Where(
                                                 x2 => C.cashTransId == (long)x2.cashTransIdSource
                                             )
@@ -7622,7 +7665,8 @@ else
                                     ? C.pos.branches.name
                                     : C.transType == "d"
                                         ? C.cashTransfer2.pos.branches.name
-                                        : entity.cashTransfer
+                                        : entity
+                                            .cashTransfer
                                             .Where(
                                                 x2 => C.cashTransId == (long)x2.cashTransIdSource
                                             )
@@ -8205,7 +8249,8 @@ else
             List<AgentModel> agentsList = new List<AgentModel>();
             using (incposdbEntities entity = new incposdbEntities())
             {
-                agentsList = entity.agents
+                agentsList = entity
+                    .agents
                     .Select(
                         p =>
                             new AgentModel
@@ -8244,7 +8289,8 @@ else
             List<UserModel> usersList = new List<UserModel>();
             using (incposdbEntities entity = new incposdbEntities())
             {
-                usersList = entity.users
+                usersList = entity
+                    .users
                     .Where(u => u.userId != 1)
                     .Select(
                         u =>
@@ -9580,7 +9626,8 @@ else
                             {
                                 //  Convert.ToDateTime()
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -9696,29 +9743,34 @@ else
 
                                 //  I.invoiceId,
                                 //    JBB.name
-                                processType = entity.cashTransfer
+                                processType = entity
+                                    .cashTransfer
                                     .Where(x => x.invId == I.invoiceId && x.processType != "inv")
                                     .ToList()
                                     .Count() > 0
-                                    ? entity.cashTransfer
+                                    ? entity
+                                        .cashTransfer
                                         .Where(
                                             x => x.invId == I.invoiceId && x.processType != "inv"
                                         )
                                         .ToList()
                                         .Count() > 1
                                         ? "multiple"
-                                        : entity.cashTransfer
+                                        : entity
+                                            .cashTransfer
                                             .Where(
                                                 x =>
                                                     x.invId == I.invoiceId && x.processType != "inv"
                                             )
                                             .FirstOrDefault()
                                             .processType == "card"
-                                            ? entity.cards
+                                            ? entity
+                                                .cards
                                                 .Where(
                                                     C =>
                                                         C.cardId
-                                                        == entity.cashTransfer
+                                                        == entity
+                                                            .cashTransfer
                                                             .Where(
                                                                 x =>
                                                                     x.invId == I.invoiceId
@@ -9729,7 +9781,8 @@ else
                                                 )
                                                 .FirstOrDefault()
                                                 .name
-                                            : entity.cashTransfer
+                                            : entity
+                                                .cashTransfer
                                                 .Where(
                                                     x =>
                                                         x.invId == I.invoiceId
@@ -9743,7 +9796,8 @@ else
                                 shippingCompanyName = I.shippingCompanies.name,
                                 shipUserName = I.users4.name,
                                 shipUserLastName = I.users4.lastname,
-                                cachTransferList = entity.cashTransfer
+                                cachTransferList = entity
+                                    .cashTransfer
                                     .Where(x => x.invId == I.invoiceId && x.processType != "inv")
                                     .Select(
                                         x =>
@@ -9892,7 +9946,8 @@ else
                             {
                                 //  Convert.ToDateTime()
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -10072,7 +10127,8 @@ else
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -10164,29 +10220,34 @@ else
                                 )
                                     ? "unknown"
                                     : JAA.company,
-                                processType = entity.cashTransfer
+                                processType = entity
+                                    .cashTransfer
                                     .Where(x => x.invId == I.invoiceId && x.processType != "inv")
                                     .ToList()
                                     .Count() > 0
-                                    ? entity.cashTransfer
+                                    ? entity
+                                        .cashTransfer
                                         .Where(
                                             x => x.invId == I.invoiceId && x.processType != "inv"
                                         )
                                         .ToList()
                                         .Count() > 1
                                         ? "multiple"
-                                        : entity.cashTransfer
+                                        : entity
+                                            .cashTransfer
                                             .Where(
                                                 x =>
                                                     x.invId == I.invoiceId && x.processType != "inv"
                                             )
                                             .FirstOrDefault()
                                             .processType == "card"
-                                            ? entity.cards
+                                            ? entity
+                                                .cards
                                                 .Where(
                                                     C =>
                                                         C.cardId
-                                                        == entity.cashTransfer
+                                                        == entity
+                                                            .cashTransfer
                                                             .Where(
                                                                 x =>
                                                                     x.invId == I.invoiceId
@@ -10197,7 +10258,8 @@ else
                                                 )
                                                 .FirstOrDefault()
                                                 .name
-                                            : entity.cashTransfer
+                                            : entity
+                                                .cashTransfer
                                                 .Where(
                                                     x =>
                                                         x.invId == I.invoiceId
@@ -10215,7 +10277,8 @@ else
 
                                 //  I.invoiceId,
                                 //    JBB.name
-                                cachTransferList = entity.cashTransfer
+                                cachTransferList = entity
+                                    .cashTransfer
                                     .Where(x => x.invId == I.invoiceId && x.processType != "inv")
                                     .Select(
                                         x =>
@@ -10333,7 +10396,8 @@ else
                                         && C.side == "p"
                                         && (
                                             C.transType == "d"
-                                                ? entity.cashTransfer
+                                                ? entity
+                                                    .cashTransfer
                                                     .Where(
                                                         x2 =>
                                                             x2.cashTransId
@@ -10341,7 +10405,8 @@ else
                                                     )
                                                     .FirstOrDefault()
                                                     .isConfirm == 1
-                                                : entity.cashTransfer
+                                                : entity
+                                                    .cashTransfer
                                                     .Where(
                                                         x2 =>
                                                             C.cashTransId
@@ -10514,7 +10579,8 @@ else
                                             && C.side == "p"
                                             && (
                                                 C.transType == "d"
-                                                    ? entity.cashTransfer
+                                                    ? entity
+                                                        .cashTransfer
                                                         .Where(
                                                             x2 =>
                                                                 x2.cashTransId
@@ -10522,7 +10588,8 @@ else
                                                         )
                                                         .FirstOrDefault()
                                                         .isConfirm == 1
-                                                    : entity.cashTransfer
+                                                    : entity
+                                                        .cashTransfer
                                                         .Where(
                                                             x2 =>
                                                                 C.cashTransId
@@ -11891,11 +11958,13 @@ else
             long unitValue = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -11995,7 +12064,8 @@ else
                                 (brIds.Contains((long)o.invoices.branchId))
                                 && (
                                     s.orderStatusId
-                                    == entity.orderPreparingStatus
+                                    == entity
+                                        .orderPreparingStatus
                                         .Where(x => x.orderPreparingId == o.orderPreparingId)
                                         .Max(x => x.orderStatusId)
                                 )
@@ -12022,7 +12092,8 @@ else
                                 invBarcode = o.invoices.invBarcode,
                                 tagId = i.itemsUnits.items.tagId,
                                 tagName = i.itemsUnits.items.tags.tagName,
-                                listedDate = entity.orderPreparingStatus
+                                listedDate = entity
+                                    .orderPreparingStatus
                                     .Where(X => X.orderPreparingId == o.orderPreparingId)
                                     .OrderBy(X => X.orderStatusId)
                                     .Select(X => X.createDate)
@@ -12144,7 +12215,8 @@ else
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -12396,7 +12468,8 @@ else
                             select new
                             {
                                 I.invoiceId,
-                                count = entity.itemsTransfer
+                                count = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
                                 I.invNumber,
@@ -12826,7 +12899,8 @@ else
                                 )
                                 && (
                                     o.orderPreparingId
-                                    == entity.orderPreparing
+                                    == entity
+                                        .orderPreparing
                                         .Where(x => x.invoiceId == I.invoiceId)
                                         .Max(x => x.orderPreparingId)
                                 )
@@ -12877,14 +12951,17 @@ else
                                     I.deserved == 0
                                         ? "payed"
                                         : (I.deserved == I.totalNet ? "unpayed" : "partpayed"),
-                                branchCreatorName = entity.branches
+                                branchCreatorName = entity
+                                    .branches
                                     .Where(X => X.branchId == I.branchCreatorId)
                                     .FirstOrDefault()
                                     .name,
-                                itemsCount = entity.itemsTransfer
+                                itemsCount = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
-                                mainInvNumber = entity.invoices
+                                mainInvNumber = entity
+                                    .invoices
                                     .Where(m => m.invoiceId == I.invoiceMainId)
                                     .Select(m => m.invNumber)
                                     .FirstOrDefault(),
@@ -12904,7 +12981,8 @@ else
 
 
                                 branchName = I.branches.name,
-                                orderStatusList = entity.orderPreparingStatus
+                                orderStatusList = entity
+                                    .orderPreparingStatus
                                     .Where(X => X.orderPreparingId == o.orderPreparingId)
                                     .Select(
                                         X =>
@@ -13025,7 +13103,8 @@ else
                                 )
                                 && (
                                     o.orderPreparingId
-                                    == entity.orderPreparing
+                                    == entity
+                                        .orderPreparing
                                         .Where(x => x.invoiceId == I.invoiceId)
                                         .Max(x => x.orderPreparingId)
                                 )
@@ -13076,14 +13155,17 @@ else
                                     I.deserved == 0
                                         ? "payed"
                                         : (I.deserved == I.totalNet ? "unpayed" : "partpayed"),
-                                branchCreatorName = entity.branches
+                                branchCreatorName = entity
+                                    .branches
                                     .Where(X => X.branchId == I.branchCreatorId)
                                     .FirstOrDefault()
                                     .name,
-                                itemsCount = entity.itemsTransfer
+                                itemsCount = entity
+                                    .itemsTransfer
                                     .Where(x => x.invoiceId == I.invoiceId)
                                     .Count(),
-                                mainInvNumber = entity.invoices
+                                mainInvNumber = entity
+                                    .invoices
                                     .Where(m => m.invoiceId == I.invoiceMainId)
                                     .Select(m => m.invNumber)
                                     .FirstOrDefault(),
@@ -13103,7 +13185,8 @@ else
 
 
                                 branchName = I.branches.name,
-                                orderStatusList = entity.orderPreparingStatus
+                                orderStatusList = entity
+                                    .orderPreparingStatus
                                     .Where(X => X.orderPreparingId == o.orderPreparingId)
                                     .Select(
                                         X =>

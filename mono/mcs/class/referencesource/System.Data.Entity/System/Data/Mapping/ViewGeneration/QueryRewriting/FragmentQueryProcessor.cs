@@ -112,8 +112,9 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             BoolExpression conditionUnderKB = condition.Create(
                 new AndExpr<BoolDomainConstraint>(_kb.KbExpression, condition.Tree)
             );
-            var context =
-                IdentifierService<BoolDomainConstraint>.Instance.CreateConversionContext();
+            var context = IdentifierService<BoolDomainConstraint>
+                .Instance
+                .CreateConversionContext();
             var converter = new Converter<BoolDomainConstraint>(conditionUnderKB.Tree, context);
             bool isSatisfiable = converter.Vertex.IsZero() == false;
             return isSatisfiable;

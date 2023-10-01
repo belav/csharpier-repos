@@ -267,10 +267,9 @@ namespace System.Workflow.ComponentModel
                 && lastCompensatableTarget.TargetActivity is ICompensatableActivity
             )
             {
-                lastCompensatableTarget.TargetActivity.RegisterForStatusChange(
-                    Activity.StatusChangedEvent,
-                    statusChangeHandler
-                );
+                lastCompensatableTarget
+                    .TargetActivity
+                    .RegisterForStatusChange(Activity.StatusChangedEvent, statusChangeHandler);
                 context.CompensateActivity(lastCompensatableTarget.TargetActivity);
                 return true;
             } //or get the last compensatable "completed" context
@@ -279,18 +278,16 @@ namespace System.Workflow.ComponentModel
                 && lastCompensatableTarget.TargetExecutionContextManager != null
             )
             {
-                ActivityExecutionContext revokedExecutionContext =
-                    lastCompensatableTarget.TargetExecutionContextManager.DiscardPersistedExecutionContext(
-                        lastCompensatableTarget.TargetExecutionInfo
-                    );
+                ActivityExecutionContext revokedExecutionContext = lastCompensatableTarget
+                    .TargetExecutionContextManager
+                    .DiscardPersistedExecutionContext(lastCompensatableTarget.TargetExecutionInfo);
 
                 //get the "first" compensatable child and compensate it
                 if (revokedExecutionContext.Activity is ICompensatableActivity)
                 {
-                    revokedExecutionContext.Activity.RegisterForStatusChange(
-                        Activity.StatusChangedEvent,
-                        statusChangeHandler
-                    );
+                    revokedExecutionContext
+                        .Activity
+                        .RegisterForStatusChange(Activity.StatusChangedEvent, statusChangeHandler);
                     revokedExecutionContext.CompensateActivity(revokedExecutionContext.Activity);
                     return true;
                 }
@@ -332,9 +329,9 @@ namespace System.Workflow.ComponentModel
                             Activity.StatusChangedEvent,
                             statusChangeHandler
                         );
-                        lastCompensatableTarget.TargetExecutionContext.CompensateActivity(
-                            compensatableChild
-                        );
+                        lastCompensatableTarget
+                            .TargetExecutionContext
+                            .CompensateActivity(compensatableChild);
                         return true;
                     }
                     else // recursively, walk the context tree and keep revoking the compensatable contexts

@@ -138,10 +138,10 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
-            helper.ViewData.ModelState.SetModelValue(
-                "foo",
-                HtmlHelperTest.GetValueProviderResult("false", "false")
-            );
+            helper
+                .ViewData
+                .ModelState
+                .SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("false", "false"));
 
             // Act
             MvcHtmlString html = helper.CheckBox("foo");
@@ -547,10 +547,11 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper<FooBarBazModel> helper = MvcHelper.GetHtmlHelper(GetCheckBoxViewData());
-            helper.ViewContext.ViewData.ModelState.SetModelValue(
-                "foo",
-                HtmlHelperTest.GetValueProviderResult("false", "false")
-            );
+            helper
+                .ViewContext
+                .ViewData
+                .ModelState
+                .SetModelValue("foo", HtmlHelperTest.GetValueProviderResult("false", "false"));
 
             // Act
             MvcHtmlString html = helper.CheckBoxFor(m => m.foo);
@@ -2242,10 +2243,13 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
-            helper.ViewData.ModelState.SetModelValue(
-                "foo",
-                HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
-            );
+            helper
+                .ViewData
+                .ModelState
+                .SetModelValue(
+                    "foo",
+                    HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
+                );
 
             // Act
             MvcHtmlString html = helper.RadioButton(
@@ -2750,10 +2754,13 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper<FooBarModel> helper = MvcHelper.GetHtmlHelper(GetRadioButtonViewData());
-            helper.ViewData.ModelState.SetModelValue(
-                "foo",
-                HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
-            );
+            helper
+                .ViewData
+                .ModelState
+                .SetModelValue(
+                    "foo",
+                    HtmlHelperTest.GetValueProviderResult("ModelStateFoo", "ModelStateFoo")
+                );
 
             // Act
             MvcHtmlString html = helper.RadioButtonFor(

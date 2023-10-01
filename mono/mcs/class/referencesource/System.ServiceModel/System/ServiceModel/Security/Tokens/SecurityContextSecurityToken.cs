@@ -198,10 +198,10 @@ namespace System.ServiceModel.Security.Tokens
 
         SecurityContextSecurityToken(SecurityContextSecurityToken from)
         {
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
-                System.IdentityModel.SecurityUtils.CloneAuthorizationPoliciesIfNecessary(
-                    from.authorizationPolicies
-                );
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = System
+                .IdentityModel
+                .SecurityUtils
+                .CloneAuthorizationPoliciesIfNecessary(from.authorizationPolicies);
             this.id = from.id;
             this.Initialize(
                 from.contextId,
@@ -364,10 +364,12 @@ namespace System.ServiceModel.Security.Tokens
             DateTime tokenExpirationTimeUtc = validTo.ToUniversalTime();
             if (tokenEffectiveTimeUtc > tokenExpirationTimeUtc)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "validFrom",
-                    SR.GetString(SR.EffectiveGreaterThanExpiration)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "validFrom",
+                        SR.GetString(SR.EffectiveGreaterThanExpiration)
+                    );
             }
             this.tokenEffectiveTime = tokenEffectiveTimeUtc;
             this.tokenExpirationTime = tokenExpirationTimeUtc;
@@ -376,19 +378,21 @@ namespace System.ServiceModel.Security.Tokens
             this.keyExpirationTime = keyExpirationTime.ToUniversalTime();
             if (this.keyEffectiveTime > this.keyExpirationTime)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "keyEffectiveTime",
-                    SR.GetString(SR.EffectiveGreaterThanExpiration)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "keyEffectiveTime",
+                        SR.GetString(SR.EffectiveGreaterThanExpiration)
+                    );
             }
             if (
                 (this.keyEffectiveTime < tokenEffectiveTimeUtc)
                 || (this.keyExpirationTime > tokenExpirationTimeUtc)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.KeyLifetimeNotWithinTokenLifetime)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.KeyLifetimeNotWithinTokenLifetime));
             }
 
             this.key = new byte[key.Length];
@@ -511,9 +515,10 @@ namespace System.ServiceModel.Security.Tokens
             if (!this.disposed)
             {
                 this.disposed = true;
-                System.IdentityModel.SecurityUtils.DisposeAuthorizationPoliciesIfNecessary(
-                    this.authorizationPolicies
-                );
+                System
+                    .IdentityModel
+                    .SecurityUtils
+                    .DisposeAuthorizationPoliciesIfNecessary(this.authorizationPolicies);
                 if (this.bootstrapMessageProperty != null)
                 {
                     this.bootstrapMessageProperty.Dispose();
@@ -525,9 +530,9 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }
     }

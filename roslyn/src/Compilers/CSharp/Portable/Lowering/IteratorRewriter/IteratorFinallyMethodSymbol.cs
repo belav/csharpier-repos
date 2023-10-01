@@ -256,10 +256,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
         {
-            return _stateMachineType.KickoffMethod.CalculateLocalSyntaxOffset(
-                localPosition,
-                localTree
-            );
+            return _stateMachineType
+                .KickoffMethod
+                .CalculateLocalSyntaxOffset(localPosition, localTree);
         }
 
         protected sealed override bool HasSetsRequiredMembersImpl =>

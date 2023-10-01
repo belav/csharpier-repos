@@ -62,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
                 var currentTreeNode = queue.Dequeue();
                 var currentTypeSymbol = currentTreeNode.Symbol;
 
-                currentTreeNode.BaseTypeNodes = currentTypeSymbol.Interfaces
+                currentTreeNode.BaseTypeNodes = currentTypeSymbol
+                    .Interfaces
                     .Concat(currentTypeSymbol.BaseType)
                     .Where(
                         baseType =>

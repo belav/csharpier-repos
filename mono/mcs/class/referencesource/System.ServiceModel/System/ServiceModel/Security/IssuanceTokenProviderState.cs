@@ -63,9 +63,11 @@ namespace System.ServiceModel.Security
         {
             if (this.IsNegotiationCompleted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.NegotiationIsCompleted))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.NegotiationIsCompleted))
+                    );
             }
             this.serviceToken = serviceToken;
             this.isNegotiationCompleted = true;
@@ -75,9 +77,11 @@ namespace System.ServiceModel.Security
         {
             if (!this.IsNegotiationCompleted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.NegotiationIsNotCompleted))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.NegotiationIsNotCompleted))
+                    );
             }
         }
     }

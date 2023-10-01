@@ -93,11 +93,13 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.formatter == null && (serializeRequest || deserializeReply))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ClientRuntimeRequiresFormatter0, this.name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ClientRuntimeRequiresFormatter0, this.name)
+                        )
+                    );
             }
         }
 
@@ -218,19 +220,22 @@ namespace System.ServiceModel.Dispatcher
 
                 if (parent.ValidateMustUnderstand)
                 {
-                    Collection<MessageHeaderInfo> headersNotUnderstood =
-                        reply.Headers.GetHeadersNotUnderstood();
+                    Collection<MessageHeaderInfo> headersNotUnderstood = reply
+                        .Headers
+                        .GetHeadersNotUnderstood();
                     if (headersNotUnderstood != null && headersNotUnderstood.Count > 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(
-                                    SR.SFxHeaderNotUnderstood,
-                                    headersNotUnderstood[0].Name,
-                                    headersNotUnderstood[0].Namespace
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(
+                                        SR.SFxHeaderNotUnderstood,
+                                        headersNotUnderstood[0].Name,
+                                        headersNotUnderstood[0].Namespace
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -290,25 +295,29 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (rpc.InputParameters[0] == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxProxyRuntimeMessageCannotBeNull, this.name)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxProxyRuntimeMessageCannotBeNull, this.name)
+                            )
+                        );
                 }
 
                 rpc.Request = (Message)rpc.InputParameters[0];
                 if (!IsValidAction(rpc.Request, Action))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxInvalidRequestAction,
-                                this.Name,
-                                rpc.Request.Headers.Action ?? "{NULL}",
-                                this.Action
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxInvalidRequestAction,
+                                    this.Name,
+                                    rpc.Request.Headers.Action ?? "{NULL}",
+                                    this.Action
+                                )
                             )
-                        )
-                    );
+                        );
             }
         }
 

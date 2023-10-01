@@ -251,7 +251,8 @@ namespace Mono.CodeContracts.Static.ControlFlow.Blocks
             var ensuresBlock = current as EnsuresBlock<Label>;
             if (ensuresBlock != null)
                 return ensuresBlock.PatchPriorBeginOld(endBlock, endOldIndex, out beginBlock);
-            IEnumerator<CFGBlock> enumerator = current.Subroutine
+            IEnumerator<CFGBlock> enumerator = current
+                .Subroutine
                 .PredecessorBlocks(current)
                 .GetEnumerator();
             if (!enumerator.MoveNext())

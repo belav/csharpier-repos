@@ -44,9 +44,9 @@ namespace System.IdentityModel
         {
             if (timespan <= TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID2082))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID2082)));
             }
             return Add(time, timespan);
         }

@@ -340,10 +340,9 @@ namespace System.Runtime.Remoting.Messaging
             CADObjRef objref = arg as CADObjRef;
             if (null != objref)
             {
-                ObjRef localRef = objref.objref.DeserializeInTheCurrentDomain(
-                    objref.SourceDomain,
-                    objref.TypeInfo
-                );
+                ObjRef localRef = objref
+                    .objref
+                    .DeserializeInTheCurrentDomain(objref.SourceDomain, objref.TypeInfo);
                 return RemotingServices.Unmarshal(localRef);
             }
 

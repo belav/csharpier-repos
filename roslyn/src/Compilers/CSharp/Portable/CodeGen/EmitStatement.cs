@@ -419,9 +419,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 _diagnostics.Add(
                     ErrorCode.ERR_InsufficientStack,
-                    BoundTreeVisitor.CancelledByStackGuardException.GetTooLongOrComplexExpressionErrorLocation(
-                        condition
-                    )
+                    BoundTreeVisitor
+                        .CancelledByStackGuardException
+                        .GetTooLongOrComplexExpressionErrorLocation(condition)
                 );
                 throw new EmitCancelledException();
             }
@@ -1228,7 +1228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
             EmitSwitchHeader(
                 dispatch.Expression,
-                dispatch.Cases
+                dispatch
+                    .Cases
                     .Select(p => new KeyValuePair<ConstantValue, object>(p.value, p.label))
                     .ToArray(),
                 dispatch.DefaultLabel
@@ -1468,9 +1469,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             else
             {
                 var stringEqualityMethod =
-                    _module.Compilation.GetSpecialTypeMember(
-                        SpecialMember.System_String__op_Equality
-                    ) as MethodSymbol;
+                    _module
+                        .Compilation
+                        .GetSpecialTypeMember(SpecialMember.System_String__op_Equality)
+                    as MethodSymbol;
                 Debug.Assert(stringEqualityMethod != null && !stringEqualityMethod.HasUseSiteError);
                 stringEqualityMethodRef = _module.Translate(
                     stringEqualityMethod,
@@ -1612,9 +1614,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 stringEqualityMethodRef
                     == _module.Translate(
                         (MethodSymbol)
-                            _module.Compilation.GetSpecialTypeMember(
-                                SpecialMember.System_String__op_Equality
-                            ),
+                            _module
+                                .Compilation
+                                .GetSpecialTypeMember(SpecialMember.System_String__op_Equality),
                         (CSharpSyntaxNode)syntaxNode,
                         assertDiagnostics
                     )
@@ -1768,20 +1770,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             LocalDebugId localId;
             var name = GetLocalDebugName(local, out localId);
 
-            var localDef = _builder.LocalSlotManager.DeclareLocal(
-                type: translatedType,
-                symbol: local,
-                name: name,
-                kind: local.SynthesizedKind,
-                id: localId,
-                pdbAttributes: local.SynthesizedKind.PdbAttributes(),
-                constraints: constraints,
-                dynamicTransformFlags: dynamicTransformFlags,
-                tupleElementNames: tupleElementNames,
-                isSlotReusable: local.SynthesizedKind.IsSlotReusable(
-                    _ilEmitStyle != ILEmitStyle.Release
-                )
-            );
+            var localDef = _builder
+                .LocalSlotManager
+                .DeclareLocal(
+                    type: translatedType,
+                    symbol: local,
+                    name: name,
+                    kind: local.SynthesizedKind,
+                    id: localId,
+                    pdbAttributes: local.SynthesizedKind.PdbAttributes(),
+                    constraints: constraints,
+                    dynamicTransformFlags: dynamicTransformFlags,
+                    tupleElementNames: tupleElementNames,
+                    isSlotReusable: local
+                        .SynthesizedKind
+                        .IsSlotReusable(_ilEmitStyle != ILEmitStyle.Release)
+                );
 
             // If named, add it to the local debug scope.
             if (
@@ -1877,10 +1881,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             LocalSlotConstraints slotConstraints = LocalSlotConstraints.None
         )
         {
-            return _builder.LocalSlotManager.AllocateSlot(
-                _module.Translate(type, syntaxNode, _diagnostics.DiagnosticBag),
-                slotConstraints
-            );
+            return _builder
+                .LocalSlotManager
+                .AllocateSlot(
+                    _module.Translate(type, syntaxNode, _diagnostics.DiagnosticBag),
+                    slotConstraints
+                );
         }
 
         /// <summary>

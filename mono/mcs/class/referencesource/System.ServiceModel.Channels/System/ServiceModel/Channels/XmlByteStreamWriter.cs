@@ -80,11 +80,15 @@ namespace System.ServiceModel.Channels
                 && this.state != ByteStreamWriterState.StartElement
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.XmlWriterMustBeInElement(ByteStreamWriterStateToWriteState(this.state))
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.XmlWriterMustBeInElement(
+                                ByteStreamWriterStateToWriteState(this.state)
+                            )
+                        )
+                    );
             }
         }
 
@@ -102,9 +106,9 @@ namespace System.ServiceModel.Channels
                 && this.state != ByteStreamWriterState.Content
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.XmlUnexpectedEndElement)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.XmlUnexpectedEndElement));
             }
             this.state = ByteStreamWriterState.EndElement;
         }
@@ -181,13 +185,15 @@ namespace System.ServiceModel.Channels
             {
                 this.writer = writer;
 
-                IAsyncResult result = writer.stream.BeginWrite(
-                    buffer,
-                    index,
-                    count,
-                    PrepareAsyncCompletion(HandleWriteBase64),
-                    this
-                );
+                IAsyncResult result = writer
+                    .stream
+                    .BeginWrite(
+                        buffer,
+                        index,
+                        count,
+                        PrepareAsyncCompletion(HandleWriteBase64),
+                        this
+                    );
                 bool completeSelf = SyncContinue(result);
 
                 if (completeSelf)
@@ -296,9 +302,11 @@ namespace System.ServiceModel.Channels
             ThrowIfClosed();
             if (this.state != ByteStreamWriterState.Start)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ByteStreamWriteStartElementAlreadyCalled)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.ByteStreamWriteStartElementAlreadyCalled)
+                    );
             }
 
             if (
@@ -307,14 +315,16 @@ namespace System.ServiceModel.Channels
                 || localName != ByteStreamMessageUtility.StreamElementName
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new XmlException(
-                        SR.XmlStartElementNameExpected(
-                            ByteStreamMessageUtility.StreamElementName,
-                            localName
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new XmlException(
+                            SR.XmlStartElementNameExpected(
+                                ByteStreamMessageUtility.StreamElementName,
+                                localName
+                            )
                         )
-                    )
-                );
+                    );
             }
             this.state = ByteStreamWriterState.StartElement;
         }

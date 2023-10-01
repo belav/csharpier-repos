@@ -92,7 +92,8 @@ public class OkOfTResultTests
         PopulateMetadata<Ok<Todo>>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata
+        var producesResponseTypeMetadata = builder
+            .Metadata
             .OfType<ProducesResponseTypeMetadata>()
             .Last();
         Assert.Equal(StatusCodes.Status200OK, producesResponseTypeMetadata.StatusCode);

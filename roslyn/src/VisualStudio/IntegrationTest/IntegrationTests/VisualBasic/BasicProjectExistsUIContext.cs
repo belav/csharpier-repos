@@ -30,33 +30,37 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         public void ProjectContextChanges()
         {
             Assert.False(
-                VisualStudio.Shell.IsUIContextActive(
-                    Guids.VisualBasicProjectExistsInWorkspaceUIContext
-                )
+                VisualStudio
+                    .Shell
+                    .IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext)
             );
 
-            VisualStudio.SolutionExplorer.AddProject(
-                new ProjectUtils.Project("TestVisualBasicProject"),
-                WellKnownProjectTemplates.ConsoleApplication,
-                LanguageNames.VisualBasic
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    new ProjectUtils.Project("TestVisualBasicProject"),
+                    WellKnownProjectTemplates.ConsoleApplication,
+                    LanguageNames.VisualBasic
+                );
 
             Assert.True(
-                VisualStudio.Shell.IsUIContextActive(
-                    Guids.VisualBasicProjectExistsInWorkspaceUIContext
-                )
+                VisualStudio
+                    .Shell
+                    .IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext)
             );
 
             VisualStudio.SolutionExplorer.CloseSolution();
-            VisualStudio.Workspace.WaitForAllAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAllAsyncOperations(
+                    Helper.HangMitigatingTimeout,
+                    FeatureAttribute.Workspace
+                );
 
             Assert.False(
-                VisualStudio.Shell.IsUIContextActive(
-                    Guids.VisualBasicProjectExistsInWorkspaceUIContext
-                )
+                VisualStudio
+                    .Shell
+                    .IsUIContextActive(Guids.VisualBasicProjectExistsInWorkspaceUIContext)
             );
         }
     }

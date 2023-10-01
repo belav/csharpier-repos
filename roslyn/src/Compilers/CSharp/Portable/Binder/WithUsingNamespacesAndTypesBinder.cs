@@ -429,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Interlocked.CompareExchange(
                         ref _lazyFullImports,
-                        _declaringSymbol.DeclaringCompilation
+                        _declaringSymbol
+                            .DeclaringCompilation
                             .GetPreviousSubmissionImports()
                             .Concat(
                                 _declaringSymbol.GetImports(_declarationSyntax, basesBeingResolved)

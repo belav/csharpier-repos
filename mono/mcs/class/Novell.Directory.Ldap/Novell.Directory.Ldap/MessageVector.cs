@@ -66,9 +66,10 @@ namespace Novell.Directory.Ldap
         /* package */
         internal MessageVector(int cap, int incr)
         {
-            _innerList = System.Collections.ArrayList.Synchronized(
-                new System.Collections.ArrayList(cap)
-            );
+            _innerList = System
+                .Collections
+                .ArrayList
+                .Synchronized(new System.Collections.ArrayList(cap));
             return;
         }
 

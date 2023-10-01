@@ -345,7 +345,8 @@ namespace System.Text.RegularExpressions.Generator
             CancellationToken cancellationToken
         )
         {
-            SyntaxNode? root = await compilation.SyntaxTrees
+            SyntaxNode? root = await compilation
+                .SyntaxTrees
                 .FirstOrDefault()
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);

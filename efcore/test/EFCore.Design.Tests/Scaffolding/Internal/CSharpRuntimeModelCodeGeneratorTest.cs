@@ -191,8 +191,10 @@ namespace TestNamespace
                 assertModel: model =>
                 {
                     var lazyConstructorEntity = model.FindEntityType(typeof(LazyConstructorEntity));
-                    var lazyParameterBinding =
-                        lazyConstructorEntity!.ConstructorBinding!.ParameterBindings.Single();
+                    var lazyParameterBinding = lazyConstructorEntity!
+                        .ConstructorBinding!
+                        .ParameterBindings
+                        .Single();
                     Assert.Equal(typeof(ILazyLoader), lazyParameterBinding.ParameterType);
 
                     var lazyPropertyEntity = model.FindEntityType(typeof(LazyPropertyEntity));
@@ -2375,7 +2377,9 @@ namespace TestNamespace
                     );
                     Assert.Same(
                         derivedSkipNavigation.Inverse,
-                        derivedSkipNavigation.Inverse.ForeignKey
+                        derivedSkipNavigation
+                            .Inverse
+                            .ForeignKey
                             .GetReferencingSkipNavigations()
                             .Single()
                     );
@@ -2609,7 +2613,8 @@ namespace TestNamespace
                     eb.Property<Point>("Point")
                         .HasColumnType("geometry")
                         .HasDefaultValue(
-                            NtsGeometryServices.Instance
+                            NtsGeometryServices
+                                .Instance
                                 .CreateGeometryFactory(srid: 0)
                                 .CreatePoint(new CoordinateZM(0, 0, 0, 0))
                         )
@@ -4114,7 +4119,9 @@ namespace TestNamespace
                     Assert.False(getDataParameterless.StoreFunction.IsBuiltIn);
                     Assert.Equal(
                         typeof(Data),
-                        getDataParameterless.StoreFunction.EntityTypeMappings
+                        getDataParameterless
+                            .StoreFunction
+                            .EntityTypeMappings
                             .Single()
                             .EntityType
                             .ClrType
@@ -5538,7 +5545,8 @@ namespace TestNamespace
             options.ModelNamespace ??= "TestNamespace";
             options.ContextType = context.GetType();
 
-            var generator = DesignTestHelpers.Instance
+            var generator = DesignTestHelpers
+                .Instance
                 .CreateDesignServiceProvider(
                     context.GetService<IDatabaseProvider>().Name,
                     additionalDesignTimeServices: additionalDesignTimeServices
@@ -5621,7 +5629,8 @@ namespace TestNamespace
                 new SqlServerDbContextOptionsBuilder(optionsBuilder).UseNetTopologySuite();
                 var newContext = new DbContext(optionsBuilder.Options);
 
-                newContext.Database
+                newContext
+                    .Database
                     .CreateExecutionStrategy()
                     .Execute(
                         newContext,

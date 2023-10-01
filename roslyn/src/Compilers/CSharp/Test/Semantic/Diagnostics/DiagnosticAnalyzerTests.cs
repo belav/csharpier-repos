@@ -59,11 +59,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 if (id.Identifier.ValueText.StartsWith("x", StringComparison.Ordinal))
                 {
                     context.ReportDiagnostic(
-                        CodeAnalysis.Diagnostic.Create(
-                            s_CA9999_UseOfVariableThatStartsWithX,
-                            id.Location,
-                            id.Identifier.ValueText
-                        )
+                        CodeAnalysis
+                            .Diagnostic
+                            .Create(
+                                s_CA9999_UseOfVariableThatStartsWithX,
+                                id.Location,
+                                id.Identifier.ValueText
+                            )
                     );
                 }
             }
@@ -160,15 +162,17 @@ public class C : NotFound
     }
 }";
             // TODO: Compilation create doesn't accept analyzers anymore.
-            var options = TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "CA9999_UseOfVariableThatStartsWithX",
-                        ReportDiagnostic.Suppress
-                    )
-                }
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithSpecificDiagnosticOptions(
+                    new[]
+                    {
+                        KeyValuePairUtil.Create(
+                            "CA9999_UseOfVariableThatStartsWithX",
+                            ReportDiagnostic.Suppress
+                        )
+                    }
+                );
 
             CreateCompilationWithMscorlib45(
                     source,
@@ -197,15 +201,17 @@ public class C : NotFound
     }
 }";
             // TODO: Compilation create doesn't accept analyzers anymore.
-            var options = TestOptions.ReleaseDll.WithSpecificDiagnosticOptions(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "CA9999_UseOfVariableThatStartsWithX",
-                        ReportDiagnostic.Error
-                    )
-                }
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithSpecificDiagnosticOptions(
+                    new[]
+                    {
+                        KeyValuePairUtil.Create(
+                            "CA9999_UseOfVariableThatStartsWithX",
+                            ReportDiagnostic.Error
+                        )
+                    }
+                );
 
             CreateCompilationWithMscorlib45(source, options: options)
                 .VerifyDiagnostics(
@@ -250,9 +256,9 @@ public class C : NotFound
         return x3 + 1;
     }
 }";
-            var options = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Error
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
 
             CreateCompilationWithMscorlib45(source, options: options)
                 .VerifyDiagnostics(
@@ -330,29 +336,23 @@ public class C
                 switch (context.Node.Kind())
                 {
                     case SyntaxKind.Attribute:
-                        var diag1 = CodeAnalysis.Diagnostic.Create(
-                            s_descriptor,
-                            context.Node.GetLocation(),
-                            "Attribute"
-                        );
+                        var diag1 = CodeAnalysis
+                            .Diagnostic
+                            .Create(s_descriptor, context.Node.GetLocation(), "Attribute");
                         context.ReportDiagnostic(diag1);
                         break;
 
                     case SyntaxKind.ClassDeclaration:
-                        var diag2 = CodeAnalysis.Diagnostic.Create(
-                            s_descriptor,
-                            context.Node.GetLocation(),
-                            "ClassDeclaration"
-                        );
+                        var diag2 = CodeAnalysis
+                            .Diagnostic
+                            .Create(s_descriptor, context.Node.GetLocation(), "ClassDeclaration");
                         context.ReportDiagnostic(diag2);
                         break;
 
                     case SyntaxKind.UsingDirective:
-                        var diag3 = CodeAnalysis.Diagnostic.Create(
-                            s_descriptor,
-                            context.Node.GetLocation(),
-                            "UsingDirective"
-                        );
+                        var diag3 = CodeAnalysis
+                            .Diagnostic
+                            .Create(s_descriptor, context.Node.GetLocation(), "UsingDirective");
                         context.ReportDiagnostic(diag3);
                         break;
                 }
@@ -360,11 +360,9 @@ public class C
 
             private void AnalyzeSymbol(SymbolAnalysisContext context)
             {
-                var diag1 = CodeAnalysis.Diagnostic.Create(
-                    s_descriptor,
-                    context.Symbol.Locations[0],
-                    "NamedType"
-                );
+                var diag1 = CodeAnalysis
+                    .Diagnostic
+                    .Create(s_descriptor, context.Symbol.Locations[0], "NamedType");
                 context.ReportDiagnostic(diag1);
             }
         }
@@ -379,9 +377,9 @@ using System;
 
 [Obsolete]
 public class C { }";
-            var options = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Error
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Error);
 
             CreateCompilationWithMscorlib45(source, options: options)
                 .VerifyDiagnostics()
@@ -556,28 +554,28 @@ public class C { }"
                 isEnabledByDefault: true
             );
 
-            var noneDiag = Microsoft.CodeAnalysis.Diagnostic.Create(
-                noneDiagDescriptor,
-                Location.None
-            );
-            var infoDiag = Microsoft.CodeAnalysis.Diagnostic.Create(
-                infoDiagDescriptor,
-                Location.None
-            );
-            var warningDiag = Microsoft.CodeAnalysis.Diagnostic.Create(
-                warningDiagDescriptor,
-                Location.None
-            );
-            var errorDiag = Microsoft.CodeAnalysis.Diagnostic.Create(
-                errorDiagDescriptor,
-                Location.None
-            );
+            var noneDiag = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(noneDiagDescriptor, Location.None);
+            var infoDiag = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(infoDiagDescriptor, Location.None);
+            var warningDiag = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(warningDiagDescriptor, Location.None);
+            var errorDiag = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(errorDiagDescriptor, Location.None);
 
             var diags = new[] { noneDiag, infoDiag, warningDiag, errorDiag };
 
-            var options = TestOptions.ReleaseDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Default
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Default);
             var comp = CreateCompilationWithMscorlib45("", options: options);
             var effectiveDiags = comp.GetEffectiveDiagnostics(diags).ToArray();
             Assert.Equal(4, effectiveDiags.Length);
@@ -637,10 +635,9 @@ public class C { }"
                 isEnabledByDefault: true
             );
 
-            var disabledDiag = CodeAnalysis.Diagnostic.Create(
-                disabledDiagDescriptor,
-                Location.None
-            );
+            var disabledDiag = CodeAnalysis
+                .Diagnostic
+                .Create(disabledDiagDescriptor, Location.None);
             var enabledDiag = CodeAnalysis.Diagnostic.Create(enabledDiagDescriptor, Location.None);
 
             var diags = new[] { disabledDiag, enabledDiag };
@@ -960,10 +957,9 @@ public class B
             private static void AnalyzeFieldDeclaration(SyntaxNodeAnalysisContext context)
             {
                 var fieldDeclaration = (FieldDeclarationSyntax)context.Node;
-                var diagnostic = CodeAnalysis.Diagnostic.Create(
-                    Rule,
-                    fieldDeclaration.GetLocation()
-                );
+                var diagnostic = CodeAnalysis
+                    .Diagnostic
+                    .Create(Rule, fieldDeclaration.GetLocation());
                 context.ReportDiagnostic(diagnostic);
             }
         }
@@ -1217,11 +1213,9 @@ public class B
                     {
                         var method = ((IMethodSymbol)ctxt.Symbol);
                         ctxt.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                Descriptor1,
-                                method.Locations[0],
-                                method.ToDisplayString()
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(Descriptor1, method.Locations[0], method.ToDisplayString())
                         );
                     },
                     SymbolKind.Method
@@ -2420,10 +2414,9 @@ class TypeInGeneratedFile { }
                         )
                         {
                             nodeContext.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(
-                                    ExpressionDescriptor,
-                                    nodeContext.Node.GetLocation()
-                                )
+                                CodeAnalysis
+                                    .Diagnostic
+                                    .Create(ExpressionDescriptor, nodeContext.Node.GetLocation())
                             );
                         }
                     },
@@ -3421,11 +3414,9 @@ public class Class
                 context.RegisterCompilationEndAction(endContext =>
                 {
                     // Summary diagnostic about received callbacks.
-                    var diagnostic = CodeAnalysis.Diagnostic.Create(
-                        Summary,
-                        Location.None,
-                        sortedCallbackEntityNames.Join(",")
-                    );
+                    var diagnostic = CodeAnalysis
+                        .Diagnostic
+                        .Create(Summary, Location.None, sortedCallbackEntityNames.Join(","));
                     endContext.ReportDiagnostic(diagnostic);
                 });
             }
@@ -3455,11 +3446,9 @@ public class Class
             )
             {
                 // warning diagnostic
-                var diagnostic = CodeAnalysis.Diagnostic.Create(
-                    Warning,
-                    location,
-                    messageArguments
-                );
+                var diagnostic = CodeAnalysis
+                    .Diagnostic
+                    .Create(Warning, location, messageArguments);
                 addDiagnostic(diagnostic);
             }
         }
@@ -4825,7 +4814,8 @@ class C
                     CancellationToken.None
                 );
             Assert.Equal(2, analyzer1.SymbolsStarted.Count);
-            var sortedSymbolNames = analyzer1.SymbolsStarted
+            var sortedSymbolNames = analyzer1
+                .SymbolsStarted
                 .Select(s => s.Name)
                 .ToImmutableSortedSet();
             Assert.Equal("_field1", sortedSymbolNames[0]);
@@ -4858,12 +4848,14 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify suppressed analyzer diagnostic and callback with suppression on second file.
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    tree2,
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
-                )
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        tree2,
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -4923,12 +4915,14 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify same callbacks even with suppression on second file when using GeneratedCodeAnalysisFlags.Analyze.
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    tree2,
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
-                )
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        tree2,
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -5003,12 +4997,14 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify same diagnostics and callbacks even with suppression on second file when using GeneratedCodeAnalysisFlags.Analyze.
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    tree2,
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
-                )
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        tree2,
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -5081,11 +5077,13 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify suppressed analyzer diagnostic for both files when specified globally
-            var options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
-                )
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress)
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -5113,12 +5111,14 @@ class C
             Assert.Equal("A, B", namedTypeAnalyzer.GetSortedSymbolCallbacksString());
 
             // Verify analyzer diagnostics and callbacks for a single file when suppressed globally and un-suppressed for a single file
-            options = TestOptions.DebugDll.WithSyntaxTreeOptionsProvider(
-                new TestSyntaxTreeOptionsProvider(
-                    (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress),
-                    (tree1, new[] { (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Default) })
-                )
-            );
+            options = TestOptions
+                .DebugDll
+                .WithSyntaxTreeOptionsProvider(
+                    new TestSyntaxTreeOptionsProvider(
+                        (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Suppress),
+                        (tree1, new[] { (NamedTypeAnalyzer.RuleId, ReportDiagnostic.Default) })
+                    )
+                );
             compilation = CreateCompilation(new[] { tree1, tree2 }, options: options);
             compilation.VerifyDiagnostics();
 
@@ -5538,10 +5538,9 @@ class C
                         var applicableDiagnostics = diagnostics.WhereAsArray(
                             d =>
                                 d.Id == analyzer.Descriptor.Id
-                                && PathUtilities.Comparer.Equals(
-                                    d.Location.GetLineSpan().Path,
-                                    additionalFile.Path
-                                )
+                                && PathUtilities
+                                    .Comparer
+                                    .Equals(d.Location.GetLineSpan().Path, additionalFile.Path)
                         );
                         if (additionalFile.Path == null)
                         {
@@ -5621,10 +5620,10 @@ class C
                 )
                 {
                     if (
-                        analysisResult.AdditionalFileDiagnostics.TryGetValue(
-                            additionalFile,
-                            out var diagnosticsMap
-                        ) && diagnosticsMap.TryGetValue(analyzer, out var diagnostics)
+                        analysisResult
+                            .AdditionalFileDiagnostics
+                            .TryGetValue(additionalFile, out var diagnosticsMap)
+                        && diagnosticsMap.TryGetValue(analyzer, out var diagnostics)
                     )
                     {
                         return diagnostics;

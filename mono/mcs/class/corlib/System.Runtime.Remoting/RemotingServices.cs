@@ -192,7 +192,8 @@ namespace System.Runtime.Remoting
                         returnArgs[n++] = null;
                 }
 
-                var latestCallContext = Thread.CurrentThread
+                var latestCallContext = Thread
+                    .CurrentThread
                     .GetMutableExecutionContext()
                     .LogicalCallContext;
                 result = new ReturnMessage(rval, returnArgs, n, latestCallContext, reqMsg);

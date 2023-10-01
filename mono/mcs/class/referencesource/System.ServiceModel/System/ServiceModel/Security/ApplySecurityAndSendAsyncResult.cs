@@ -71,9 +71,9 @@ namespace System.ServiceModel.Security
         {
             if (message == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("message")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("message"));
             }
             this.secureOutgoingMessageDone = true;
             IAsyncResult result = BeginSendCore(
@@ -113,9 +113,9 @@ namespace System.ServiceModel.Security
         {
             if (result == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("result")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("result"));
             }
             if (result.CompletedSynchronously)
             {
@@ -125,9 +125,11 @@ namespace System.ServiceModel.Security
                 result.AsyncState as ApplySecurityAndSendAsyncResult<MessageSenderType>;
             if (self == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.InvalidAsyncResult), "result")
+                    );
             }
 
             bool completeSelf = false;

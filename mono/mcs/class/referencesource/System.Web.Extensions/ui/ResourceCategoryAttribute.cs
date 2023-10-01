@@ -28,19 +28,21 @@ namespace System.Web.UI
             string localizedValue = base.GetLocalizedString(value);
             if (localizedValue == null)
             {
-                localizedValue = AtlasWeb.ResourceManager.GetString(
-                    "Category_" + value,
-                    AtlasWeb.Culture
-                );
+                localizedValue = AtlasWeb
+                    .ResourceManager
+                    .GetString("Category_" + value, AtlasWeb.Culture);
             }
             // This attribute is internal, and we should never have a missing resource string.
             //
-            System.Diagnostics.Debug.Assert(
-                localizedValue != null,
-                "All WebForms category attributes should have localized strings.  Category '"
-                    + value
-                    + "' not found."
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    localizedValue != null,
+                    "All WebForms category attributes should have localized strings.  Category '"
+                        + value
+                        + "' not found."
+                );
             return localizedValue;
         }
     }

@@ -280,10 +280,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                     // Map the symbol's selection range start SnapshotPoint to a SnapshotPoint in the current textview then set the
                     // active text view caret position to this SnapshotPoint.
                     activeTextView.TryMoveCaretToAndEnsureVisible(
-                        symbol.SelectionRangeSpan.Start.TranslateTo(
-                            activeTextView.TextSnapshot,
-                            PointTrackingMode.Negative
-                        )
+                        symbol
+                            .SelectionRangeSpan
+                            .Start
+                            .TranslateTo(activeTextView.TextSnapshot, PointTrackingMode.Negative)
                     );
                 }
                 finally

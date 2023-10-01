@@ -111,7 +111,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
                 return null;
 
             var referencingProjects = new HashSet<ProjectId>(
-                solution.Projects
+                solution
+                    .Projects
                     .Where(p => p.MetadataReferences.Contains(reference))
                     .Select(p => p.Id)
             );
@@ -192,7 +193,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
             // Add tasks to update the symboltree for all metadata references.  As these are all distinct, they can run
             // in parallel as we won't be trying to update the associated data for the same reference at the same time.
             foreach (
-                var reference in project.MetadataReferences
+                var reference in project
+                    .MetadataReferences
                     .OfType<PortableExecutableReference>()
                     .Distinct()
             )

@@ -168,10 +168,12 @@ public partial class NavigationExpandingExpressionVisitor
             if (targetType.IsOwned())
             {
                 if (
-                    entityReference.ForeignKeyExpansionMap.TryGetValue(
-                        (navigation.ForeignKey, navigation.IsOnDependent),
-                        out var ownedExpansion
-                    )
+                    entityReference
+                        .ForeignKeyExpansionMap
+                        .TryGetValue(
+                            (navigation.ForeignKey, navigation.IsOnDependent),
+                            out var ownedExpansion
+                        )
                 )
                 {
                     return ownedExpansion;
@@ -289,9 +291,9 @@ public partial class NavigationExpandingExpressionVisitor
                     if (includeTree != null)
                     {
                         // Value known to be non-null
-                        UnwrapEntityReference(innerSource.PendingSelector)!.IncludePaths.Merge(
-                            includeTree
-                        );
+                        UnwrapEntityReference(innerSource.PendingSelector)!
+                            .IncludePaths
+                            .Merge(includeTree);
                     }
 
                     var sourceElementType = primaryExpansion.Type.GetSequenceType();
@@ -360,9 +362,9 @@ public partial class NavigationExpandingExpressionVisitor
                     if (includeTree != null)
                     {
                         // Value known to be non-null
-                        UnwrapEntityReference(innerSource.PendingSelector)!.IncludePaths.Merge(
-                            includeTree
-                        );
+                        UnwrapEntityReference(innerSource.PendingSelector)!
+                            .IncludePaths
+                            .Merge(includeTree);
                     }
 
                     var sourceElementType = primaryExpansion.Type.GetSequenceType();
@@ -406,10 +408,9 @@ public partial class NavigationExpandingExpressionVisitor
                     );
 
                     secondaryExpansion = Expression.Call(
-                        QueryableMethods.SelectManyWithoutCollectionSelector.MakeGenericMethod(
-                            sourceElementType,
-                            innerSourceElementType
-                        ),
+                        QueryableMethods
+                            .SelectManyWithoutCollectionSelector
+                            .MakeGenericMethod(sourceElementType, innerSourceElementType),
                         primaryExpansion,
                         Expression.Quote(selector)
                     );
@@ -433,18 +434,16 @@ public partial class NavigationExpandingExpressionVisitor
                 ? foreignKey.DependentToPrincipal
                 : foreignKey.PrincipalToDependent;
             if (
-                entityReference.ForeignKeyExpansionMap.TryGetValue(
-                    (foreignKey, onDependent),
-                    out var expansion
-                )
+                entityReference
+                    .ForeignKeyExpansionMap
+                    .TryGetValue((foreignKey, onDependent), out var expansion)
             )
             {
                 if (
                     navigation != null
-                    && entityReference.IncludePaths.TryGetValue(
-                        navigation,
-                        out var pendingIncludeTree
-                    )
+                    && entityReference
+                        .IncludePaths
+                        .TryGetValue(navigation, out var pendingIncludeTree)
                 )
                 {
                     var cachedEntityReference = UnwrapEntityReference(expansion);
@@ -538,7 +537,8 @@ public partial class NavigationExpandingExpressionVisitor
                 // Since outerKey's reference could change if a reference navigation is expanded afterwards
                 var predicateBody = Expression.AndAlso(
                     outerKey is NewArrayExpression newArrayExpression
-                        ? newArrayExpression.Expressions
+                        ? newArrayExpression
+                            .Expressions
                             .Select(e =>
                             {
                                 var left = (e as UnaryExpression)?.Operand ?? e;
@@ -929,9 +929,9 @@ public partial class NavigationExpandingExpressionVisitor
                 var converted = false;
                 if (
                     entityReference.EntityType != navigationBase.DeclaringEntityType
-                    && entityReference.EntityType.IsAssignableFrom(
-                        navigationBase.DeclaringEntityType
-                    )
+                    && entityReference
+                        .EntityType
+                        .IsAssignableFrom(navigationBase.DeclaringEntityType)
                 )
                 {
                     converted = true;
@@ -1092,8 +1092,9 @@ public partial class NavigationExpandingExpressionVisitor
                                 )
                             );
 
-                            var joinTypeParameters =
-                                joinMethodCallExpression.Method.GetGenericArguments();
+                            var joinTypeParameters = joinMethodCallExpression
+                                .Method
+                                .GetGenericArguments();
                             joinTypeParameters[3] = resultType;
                             subquery = Expression.Call(
                                 QueryableMethods.Join.MakeGenericMethod(joinTypeParameters),
@@ -1132,10 +1133,9 @@ public partial class NavigationExpandingExpressionVisitor
                             );
 
                             subquery = Expression.Call(
-                                QueryableMethods.Select.MakeGenericMethod(
-                                    resultType,
-                                    targetParameter.Type
-                                ),
+                                QueryableMethods
+                                    .Select
+                                    .MakeGenericMethod(resultType, targetParameter.Type),
                                 subquery,
                                 selector
                             );
@@ -1196,7 +1196,8 @@ public partial class NavigationExpandingExpressionVisitor
             );
             var genericParameters = methodCallExpression.Method.GetGenericArguments();
             genericParameters[0] = transparentIdentifierParameter.Type;
-            var method = methodCallExpression.Method
+            var method = methodCallExpression
+                .Method
                 .GetGenericMethodDefinition()
                 .MakeGenericMethod(genericParameters);
 
@@ -1254,9 +1255,9 @@ public partial class NavigationExpandingExpressionVisitor
                     navigationExpansionExpression,
                     _extensibilityHelper
                 ).Expand(navigationExpansionExpression.PendingSelector, _applyIncludes);
-                pendingSelector = _visitor._subqueryMemberPushdownExpressionVisitor.Visit(
-                    pendingSelector
-                );
+                pendingSelector = _visitor
+                    ._subqueryMemberPushdownExpressionVisitor
+                    .Visit(pendingSelector);
                 pendingSelector = _visitor.Visit(pendingSelector);
                 pendingSelector = Visit(pendingSelector);
                 navigationExpansionExpression.ApplySelector(pendingSelector);
@@ -1299,10 +1300,12 @@ public partial class NavigationExpandingExpressionVisitor
                         );
 
                         result = Expression.Call(
-                            QueryableMethods.Select.MakeGenericMethod(
-                                navigationExpansionExpression.SourceElementType,
-                                selectorLambda.ReturnType
-                            ),
+                            QueryableMethods
+                                .Select
+                                .MakeGenericMethod(
+                                    navigationExpansionExpression.SourceElementType,
+                                    selectorLambda.ReturnType
+                                ),
                             source,
                             Expression.Quote(selectorLambda)
                         );
@@ -1312,15 +1315,15 @@ public partial class NavigationExpandingExpressionVisitor
                     {
                         var arguments = new List<Expression> { result };
                         arguments.AddRange(
-                            navigationExpansionExpression.CardinalityReducingMethodArguments.Select(
-                                x => Visit(x)
-                            )
+                            navigationExpansionExpression
+                                .CardinalityReducingMethodArguments
+                                .Select(x => Visit(x))
                         );
 
                         result = Expression.Call(
-                            navigationExpansionExpression.CardinalityReducingGenericMethodInfo.MakeGenericMethod(
-                                result.Type.GetSequenceType()
-                            ),
+                            navigationExpansionExpression
+                                .CardinalityReducingGenericMethodInfo
+                                .MakeGenericMethod(result.Type.GetSequenceType()),
                             arguments.ToArray()
                         );
                     }
@@ -1478,11 +1481,14 @@ public partial class NavigationExpandingExpressionVisitor
                 groupByNavigationExpansionExpression.GroupingEnumerable;
             _keyAccessExpression = Expression.MakeMemberAccess(
                 groupByNavigationExpansionExpression.CurrentParameter,
-                groupByNavigationExpansionExpression.CurrentParameter.Type
+                groupByNavigationExpansionExpression
+                    .CurrentParameter
+                    .Type
                     .GetTypeInfo()
                     .GetDeclaredProperty(nameof(IGrouping<int, int>.Key))!
             );
-            _keyMemberInfo = parameterExpression.Type
+            _keyMemberInfo = parameterExpression
+                .Type
                 .GetTypeInfo()
                 .GetDeclaredProperty(nameof(IGrouping<int, int>.Key))!;
             _cloningExpressionVisitor = new CloningExpressionVisitor();
@@ -1692,9 +1698,9 @@ public partial class NavigationExpandingExpressionVisitor
                         && navigationDataExpression.EntityType != null
                     )
                     {
-                        var navigation = navigationDataExpression.EntityType.FindNavigation(
-                            memberExpression.Member
-                        );
+                        var navigation = navigationDataExpression
+                            .EntityType
+                            .FindNavigation(memberExpression.Member);
                         if (navigation != null)
                         {
                             return new NavigationDataExpression(

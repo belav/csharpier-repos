@@ -401,7 +401,8 @@ public struct TypeMapPlanBuilder
     private Expression ConstructorMapping(ConstructorMap constructorMap)
     {
         var ctorArgs = constructorMap.CtorParams.Select(CreateConstructorParameterExpression);
-        var variables = constructorMap.Ctor
+        var variables = constructorMap
+            .Ctor
             .GetParameters()
             .Select(parameter => Variable(parameter.ParameterType, parameter.Name))
             .ToArray();
@@ -606,13 +607,15 @@ public struct TypeMapPlanBuilder
     )
     {
         var valueResolverFunc =
-            memberMap.Resolver?.GetExpression(
-                _configuration,
-                memberMap,
-                customSource,
-                _destination,
-                destValueExpr
-            ) ?? destValueExpr;
+            memberMap
+                .Resolver
+                ?.GetExpression(
+                    _configuration,
+                    memberMap,
+                    customSource,
+                    _destination,
+                    destValueExpr
+                ) ?? destValueExpr;
         if (memberMap.NullSubstitute != null)
         {
             valueResolverFunc = memberMap.NullSubstitute(valueResolverFunc);
@@ -853,7 +856,8 @@ public class ClassValueResolver : ValueResolverConfig, IValueResolver
         var iValueResolver = InterfaceType;
         if (iValueResolver.ContainsGenericParameters)
         {
-            var typeArgs = iValueResolver.GenericTypeArguments
+            var typeArgs = iValueResolver
+                .GenericTypeArguments
                 .Zip(
                     new[]
                     {

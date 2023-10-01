@@ -100,10 +100,9 @@ internal sealed partial class HubClientProxyGenerator
 
             // Check that the type parameter matches 2nd parameter type
             if (
-                !SymbolEqualityComparer.Default.Equals(
-                    symbol.TypeArguments[0],
-                    symbol.Parameters[1].Type
-                )
+                !SymbolEqualityComparer
+                    .Default
+                    .Equals(symbol.TypeArguments[0], symbol.Parameters[1].Type)
             )
             {
                 context.ReportDiagnostic(
@@ -191,7 +190,8 @@ internal sealed partial class HubClientProxyGenerator
             foreach (var attributeData in methodSymbol.GetAttributes())
             {
                 if (
-                    !attributeData.AttributeClass
+                    !attributeData
+                        .AttributeClass
                         .ToString()
                         .EndsWith("HubClientProxyAttribute", StringComparison.Ordinal)
                 )
@@ -285,8 +285,9 @@ internal sealed partial class HubClientProxyGenerator
             }
             sourceGenerationSpec.SetterMethodName = registerCallbackProviderMethodSymbol.Name;
             sourceGenerationSpec.SetterClassName = registerCallbackProviderClassSymbol.Name;
-            sourceGenerationSpec.SetterNamespace =
-                registerCallbackProviderClassSymbol.ContainingNamespace.ToString();
+            sourceGenerationSpec.SetterNamespace = registerCallbackProviderClassSymbol
+                .ContainingNamespace
+                .ToString();
             sourceGenerationSpec.SetterTypeParameterName = registerCallbackProviderMethodSymbol
                 .TypeParameters[0]
                 .Name;
@@ -349,12 +350,14 @@ internal sealed partial class HubClientProxyGenerator
                     .Where(member => member.Kind == SymbolKind.Method)
                     .Select(member => (IMethodSymbol)member)
                     .Union<IMethodSymbol>(
-                        providerSymbol.AllInterfaces.SelectMany(
-                            x =>
-                                x.GetMembers()
-                                    .Where(member => member.Kind == SymbolKind.Method)
-                                    .Select(member => (IMethodSymbol)member)
-                        ),
+                        providerSymbol
+                            .AllInterfaces
+                            .SelectMany(
+                                x =>
+                                    x.GetMembers()
+                                        .Where(member => member.Kind == SymbolKind.Method)
+                                        .Select(member => (IMethodSymbol)member)
+                            ),
                         SymbolEqualityComparer.Default
                     )
                     .ToList();

@@ -91,13 +91,15 @@ namespace System.ServiceModel.Dispatcher
         internal int IncrementLimit(int incrementBy)
         {
             if (incrementBy < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "incrementBy",
-                        incrementBy,
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "incrementBy",
+                            incrementBy,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             int newLimit;
             object[] released = null;
 
@@ -160,13 +162,15 @@ namespace System.ServiceModel.Dispatcher
         internal void SetLimit(int messageLimit)
         {
             if (messageLimit < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "messageLimit",
-                        messageLimit,
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "messageLimit",
+                            messageLimit,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
 
             object[] released = null;
 

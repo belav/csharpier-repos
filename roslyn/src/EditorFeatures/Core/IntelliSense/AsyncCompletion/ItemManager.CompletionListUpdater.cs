@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     ? initialTriggerLocation.Snapshot
                     : _snapshotData.Snapshot;
 
-                _document = snapshotForDocument?.TextBuffer
+                _document = snapshotForDocument
+                    ?.TextBuffer
                     .AsTextContainer()
                     .GetOpenDocumentInCurrentContext();
                 if (_document != null)
@@ -399,18 +400,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         selectedItemIndex = 0;
                         bestOrFirstMatchResult = matchResults[0];
 
-                        var longestCommonPrefixLength =
-                            bestOrFirstMatchResult.FilterTextUsed.GetCaseInsensitivePrefixLength(
-                                _filterText
-                            );
+                        var longestCommonPrefixLength = bestOrFirstMatchResult
+                            .FilterTextUsed
+                            .GetCaseInsensitivePrefixLength(_filterText);
 
                         for (var i = 1; i < matchResults.Count; ++i)
                         {
                             var matchResult = matchResults[i];
-                            var commonPrefixLength =
-                                matchResult.FilterTextUsed.GetCaseInsensitivePrefixLength(
-                                    _filterText
-                                );
+                            var commonPrefixLength = matchResult
+                                .FilterTextUsed
+                                .GetCaseInsensitivePrefixLength(_filterText);
 
                             if (commonPrefixLength > longestCommonPrefixLength)
                             {
@@ -597,10 +596,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     // This also preserves the behavior the VB had through Dev12.
                     hardSelect =
                         !_hasSuggestedItemOptions
-                        && bestMatchResult.Value.FilterTextUsed.StartsWith(
-                            _filterText,
-                            StringComparison.CurrentCultureIgnoreCase
-                        );
+                        && bestMatchResult
+                            .Value
+                            .FilterTextUsed
+                            .StartsWith(_filterText, StringComparison.CurrentCultureIgnoreCase);
                 }
 
                 // The best match we have selected is unique if `moreThanOneMatch` is false.
@@ -702,10 +701,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     {
                         // Since VS item's display text is created as Prefix + DisplayText + Suffix,
                         // we can calculate the highlighted span by adding an offset that is the length of the Prefix.
-                        return patternMatch.Value.MatchedSpans.SelectAsArray(
-                            GetOffsetSpan,
-                            matchResult.CompletionItem
-                        );
+                        return patternMatch
+                            .Value
+                            .MatchedSpans
+                            .SelectAsArray(GetOffsetSpan, matchResult.CompletionItem);
                     }
 
                     // If there's no match for Roslyn item's filter text which is identical to its display text,
@@ -773,12 +772,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
                 // When no items are available for a given filter, it becomes unavailable.
                 // Expanders always appear available as long as it's presented.
-                return _snapshotData.SelectedFilters.SelectAsArray(
-                    n =>
-                        n.WithAvailability(
-                            n.Filter is CompletionExpander || filters.Contains(n.Filter)
-                        )
-                );
+                return _snapshotData
+                    .SelectedFilters
+                    .SelectAsArray(
+                        n =>
+                            n.WithAvailability(
+                                n.Filter is CompletionExpander || filters.Contains(n.Filter)
+                            )
+                    );
             }
 
             /// <summary>

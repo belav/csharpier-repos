@@ -152,9 +152,9 @@ namespace System.Web.UI.DataVisualization.Charting.Data
                 series.xValuesZeros = false;
 
                 // Set series colors from palette
-                IChartType chartType = e.CommonElements.ChartTypeRegistry.GetChartType(
-                    series.ChartTypeName
-                );
+                IChartType chartType = e.CommonElements
+                    .ChartTypeRegistry
+                    .GetChartType(series.ChartTypeName);
                 bool paletteColorsInPoints = chartType.ApplyPaletteColorsToPoints;
                 // if the series palette is set the we can color all data points, even on column chart.
                 if (series.Palette != ChartColorPalette.None)

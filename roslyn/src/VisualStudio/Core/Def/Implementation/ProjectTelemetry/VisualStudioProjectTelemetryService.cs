@@ -178,9 +178,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
         {
             try
             {
-                var telemetryEvent = TelemetryHelper.TelemetryService.CreateEvent(
-                    TelemetryEventPath
-                );
+                var telemetryEvent = TelemetryHelper
+                    .TelemetryService
+                    .CreateEvent(TelemetryEventPath);
                 telemetryEvent.SetStringProperty(
                     TelemetryProjectIdName,
                     info.ProjectId.Id.ToString()
@@ -213,9 +213,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
                 // So, to be very careful, put this in a try/catch too.
                 try
                 {
-                    var exceptionEvent = TelemetryHelper.TelemetryService.CreateEvent(
-                        TelemetryExceptionEventPath
-                    );
+                    var exceptionEvent = TelemetryHelper
+                        .TelemetryService
+                        .CreateEvent(TelemetryExceptionEventPath);
                     exceptionEvent.SetStringProperty("Type", e.GetTypeDisplayName());
                     exceptionEvent.SetStringProperty("Message", e.Message);
                     exceptionEvent.SetStringProperty("StackTrace", e.StackTrace);

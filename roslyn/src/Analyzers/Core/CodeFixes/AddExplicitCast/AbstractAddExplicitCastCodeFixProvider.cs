@@ -183,10 +183,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                         castedExpression,
                         castType
                     );
-                    var secondConversion = semanticModel.Compilation.ClassifyCommonConversion(
-                        castType,
-                        conversionType
-                    );
+                    var secondConversion = semanticModel
+                        .Compilation
+                        .ClassifyCommonConversion(castType, conversionType);
 
                     if (
                         firstConversion

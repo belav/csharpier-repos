@@ -30,13 +30,13 @@ namespace System.ServiceModel
         public FaultCode(string name, string ns, FaultCode subCode)
         {
             if (name == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("name")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("name"));
             if (name.Length == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("name")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("name"));
 
             if (!string.IsNullOrEmpty(ns))
                 NamingHelper.CheckUriParameter(ns, "ns");
@@ -110,9 +110,9 @@ namespace System.ServiceModel
         public static FaultCode CreateReceiverFaultCode(FaultCode subCode)
         {
             if (subCode == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("subCode")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("subCode"));
             return new FaultCode("Receiver", subCode);
         }
 

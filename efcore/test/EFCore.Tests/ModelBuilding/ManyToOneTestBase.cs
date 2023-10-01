@@ -2198,7 +2198,8 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 "ShadowId",
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Beta))
                     .FindNavigation("FirstNav")
                     .ForeignKey
@@ -2236,7 +2237,8 @@ public abstract partial class ModelBuilderTest
 
             Assert.Equal(
                 "KappaId",
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(Omega))
                     .FindNavigation(nameof(Omega.Kappa))
                     .ForeignKey

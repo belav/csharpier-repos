@@ -317,8 +317,11 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
             if (canAddNullCheck)
             {
-                var globalOptions =
-                    document.Project.Solution.Services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
+                var globalOptions = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
                 var optionValue =
                     globalOptions.GetGenerateConstructorFromMembersOptionsAddNullChecks(
                         document.Project.Language

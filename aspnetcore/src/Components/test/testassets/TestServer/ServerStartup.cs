@@ -23,13 +23,17 @@ public class ServerStartup
         services.AddServerSideBlazor(options =>
         {
             options.RootComponents.MaxJSRootComponents = 5; // To make it easier to test
-            options.RootComponents.RegisterForJavaScript<BasicTestApp.DynamicallyAddedRootComponent>(
-                "my-dynamic-root-component"
-            );
-            options.RootComponents.RegisterForJavaScript<BasicTestApp.JavaScriptRootComponentParameterTypes>(
-                "component-with-many-parameters",
-                javaScriptInitializer: "myJsRootComponentInitializers.testInitializer"
-            );
+            options
+                .RootComponents
+                .RegisterForJavaScript<BasicTestApp.DynamicallyAddedRootComponent>(
+                    "my-dynamic-root-component"
+                );
+            options
+                .RootComponents
+                .RegisterForJavaScript<BasicTestApp.JavaScriptRootComponentParameterTypes>(
+                    "component-with-many-parameters",
+                    javaScriptInitializer: "myJsRootComponentInitializers.testInitializer"
+                );
         });
         services.AddSingleton<ResourceRequestLog>();
         services.AddTransient<BasicTestApp.FormsTest.ValidationComponentDI.SaladChef>();
@@ -64,10 +68,11 @@ public class ServerStartup
                     (context, next) =>
                     {
                         if (
-                            context.Request.Path.Value.EndsWith(
-                                "/images/blazor_logo_1000x.png",
-                                StringComparison.Ordinal
-                            )
+                            context
+                                .Request
+                                .Path
+                                .Value
+                                .EndsWith("/images/blazor_logo_1000x.png", StringComparison.Ordinal)
                         )
                         {
                             resourceRequestLog.AddRequest(context.Request);

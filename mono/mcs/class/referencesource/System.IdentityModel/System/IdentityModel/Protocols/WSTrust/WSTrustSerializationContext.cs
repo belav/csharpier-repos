@@ -61,23 +61,23 @@ namespace System.IdentityModel.Protocols.WSTrust
         {
             if (securityTokenHandlerCollectionManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenHandlerCollectionManager"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenHandlerCollectionManager");
             }
 
             if (securityTokenResolver == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenResolver"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenResolver");
             }
 
             if (useKeyTokenResolver == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "useKeyTokenResolver"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("useKeyTokenResolver");
             }
 
             this.securityTokenHandlerCollectionManager = securityTokenHandlerCollectionManager;

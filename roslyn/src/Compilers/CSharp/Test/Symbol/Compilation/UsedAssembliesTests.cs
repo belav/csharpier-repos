@@ -148,7 +148,8 @@ public class C2
                     )
                 )
                 {
-                    CompileAndVerify(comp2, verify: Verification.Skipped).Diagnostics
+                    CompileAndVerify(comp2, verify: Verification.Skipped)
+                        .Diagnostics
                         .Where(d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion)
                         .Verify(after);
 
@@ -164,7 +165,8 @@ public class C2
                             foreach (var reference in tryRemove)
                             {
                                 var comp3 = comp.RemoveReferences(reference);
-                                CompileAndVerify(comp3, verify: Verification.Skipped).Diagnostics
+                                CompileAndVerify(comp3, verify: Verification.Skipped)
+                                    .Diagnostics
                                     .Where(
                                         d => d.Code != (int)ErrorCode.WRN_NoRuntimeMetadataVersion
                                     )
@@ -337,11 +339,13 @@ public class C2
             {
                 if (output is null)
                 {
-                    System.Array.Copy(
-                        input,
-                        output = new DiagnosticDescription[input.Length],
-                        input.Length
-                    );
+                    System
+                        .Array
+                        .Copy(
+                            input,
+                            output = new DiagnosticDescription[input.Length],
+                            input.Length
+                        );
                 }
 
                 return output;
@@ -1449,9 +1453,9 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(
-                        DocumentationMode.Diagnose
-                    )
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
@@ -4550,9 +4554,9 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(
-                        DocumentationMode.Diagnose
-                    )
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
@@ -5362,9 +5366,9 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(
-                        DocumentationMode.Diagnose
-                    )
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, expected);
             }
@@ -5622,9 +5626,9 @@ class C2
                 Compilation comp4 = CreateCompilation(
                     source,
                     references: references,
-                    parseOptions: TestOptions.Regular.WithDocumentationMode(
-                        DocumentationMode.Diagnose
-                    )
+                    parseOptions: TestOptions
+                        .Regular
+                        .WithDocumentationMode(DocumentationMode.Diagnose)
                 );
                 AssertUsedAssemblyReferences(comp4, new[] { reference0 }, references);
             }

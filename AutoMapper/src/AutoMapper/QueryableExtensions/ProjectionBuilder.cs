@@ -149,7 +149,8 @@ public class ProjectionBuilder : IProjectionBuilder
         void ProjectProperties()
         {
             foreach (
-                var propertyMap in typeMap.PropertyMaps
+                var propertyMap in typeMap
+                    .PropertyMaps
                     .Where(
                         pm =>
                             pm.CanResolveValue
@@ -312,11 +313,13 @@ public class ProjectionBuilder : IProjectionBuilder
                 { ConstructorMap: { CanResolve: true } constructorMap }
                     => New(
                         constructorMap.Ctor,
-                        constructorMap.CtorParams.Select(
-                            map =>
-                                TryProjectMember(map, null, map.DefaultValue(null))
-                                ?? Default(map.DestinationType)
-                        )
+                        constructorMap
+                            .CtorParams
+                            .Select(
+                                map =>
+                                    TryProjectMember(map, null, map.DefaultValue(null))
+                                    ?? Default(map.DestinationType)
+                            )
                     ),
                 _ => New(typeMap.DestinationType)
             };
@@ -506,9 +509,9 @@ public class ProjectionBuilder : IProjectionBuilder
             {
                 var visitor = new GePropertiesVisitor(target);
                 visitor.Visit(expression);
-                return visitor.Members.Select(
-                    member => new PropertyDescription(member.Name, member.GetMemberType())
-                );
+                return visitor
+                    .Members
+                    .Select(member => new PropertyDescription(member.Name, member.GetMemberType()));
             }
         }
 

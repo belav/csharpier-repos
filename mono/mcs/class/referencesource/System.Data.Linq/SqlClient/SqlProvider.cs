@@ -698,7 +698,8 @@ namespace System.Data.Linq.SqlClient
                 {
                     if (!File.Exists(this.dbName))
                     {
-                        Type engineType = this.conManager.Connection
+                        Type engineType = this.conManager
+                            .Connection
                             .GetType()
                             .Module
                             .GetType("System.Data.SqlServerCe.SqlCeEngine");
@@ -931,9 +932,10 @@ namespace System.Data.Linq.SqlClient
             if (this.mode == ProviderMode.SqlCE)
             {
                 ((IProvider)this).ClearConnection();
-                System.Diagnostics.Debug.Assert(
-                    this.conManager.Connection.State == ConnectionState.Closed
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(this.conManager.Connection.State == ConnectionState.Closed);
                 File.Delete(this.dbName);
                 this.deleted = true;
             }

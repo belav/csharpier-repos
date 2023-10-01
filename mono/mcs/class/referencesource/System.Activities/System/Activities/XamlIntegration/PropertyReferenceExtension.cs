@@ -40,9 +40,11 @@ namespace System.Activities.XamlIntegration
                 }
             }
 
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(SR.PropertyReferenceNotFound(this.PropertyName))
-            );
+            throw FxTrace
+                .Exception
+                .AsError(
+                    new InvalidOperationException(SR.PropertyReferenceNotFound(this.PropertyName))
+                );
         }
     }
 }

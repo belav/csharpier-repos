@@ -237,10 +237,9 @@ namespace System.Configuration
                         _lockedElementsList.Add(key, ConfigurationValueFlags.Inherited); // Mark entry as from the parent - read only
                         if (collection != null)
                         {
-                            collection._lockedElementsList.Add(
-                                key,
-                                ConfigurationValueFlags.Inherited
-                            ); // add the local copy
+                            collection
+                                ._lockedElementsList
+                                .Add(key, ConfigurationValueFlags.Inherited); // add the local copy
                         }
                     }
                 }
@@ -1446,8 +1445,9 @@ namespace System.Configuration
                             if (!props.Contains(key)) // this is for optional provider models keys
                             {
                                 // _values[key] = value;
-                                ConfigurationValueFlags valueFlags =
-                                    sourceElement.Values.RetrieveFlags(key);
+                                ConfigurationValueFlags valueFlags = sourceElement
+                                    .Values
+                                    .RetrieveFlags(key);
                                 _values.SetValue(key, value, valueFlags, null);
 
                                 props.Add(prop);
@@ -1518,9 +1518,9 @@ namespace System.Configuration
 
                                     {
                                         bool modified = sourceElement.Values.IsModified(prop.Name);
-                                        bool inherited = sourceElement.Values.IsInherited(
-                                            prop.Name
-                                        );
+                                        bool inherited = sourceElement
+                                            .Values
+                                            .IsInherited(prop.Name);
 
                                         // update the value if the property is required, modified or it was not inherited
                                         // Also update properties that ARE inherited when we are resetting the object

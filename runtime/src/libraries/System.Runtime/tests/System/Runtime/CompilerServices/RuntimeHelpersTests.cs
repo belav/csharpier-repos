@@ -298,10 +298,9 @@ namespace System.Runtime.CompilerServices.Tests
                 }; // shared by generic instantiations
             }
 
-            Type comObjType = typeof(object).Assembly.GetType(
-                "System.__ComObject",
-                throwOnError: false
-            );
+            Type comObjType = typeof(object)
+                .Assembly
+                .GetType("System.__ComObject", throwOnError: false);
             if (comObjType != null)
             {
                 yield return new[] { comObjType, typeof(NotSupportedException) }; // COM type

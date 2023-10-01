@@ -196,8 +196,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var baseActiveStatements = await _baseActiveStatements
                 .GetValueAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var analyzer =
-                newDocument.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+            var analyzer = newDocument
+                .Project
+                .Services
+                .GetRequiredService<IEditAndContinueAnalyzer>();
             var oldActiveStatements = await baseActiveStatements
                 .GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken)
                 .ConfigureAwait(false);
@@ -283,8 +285,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 {
                     try
                     {
-                        var analyzer =
-                            document.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                        var analyzer = document
+                            .Project
+                            .Services
+                            .GetRequiredService<IEditAndContinueAnalyzer>();
                         return await analyzer
                             .AnalyzeDocumentAsync(
                                 baseProject,

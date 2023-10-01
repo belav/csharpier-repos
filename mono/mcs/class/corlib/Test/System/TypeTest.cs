@@ -304,11 +304,13 @@ namespace MonoTests.System
             AssemblyName assemblyName = new AssemblyName();
             assemblyName.Name = ASSEMBLY_NAME;
 #if !MONOTOUCH && !FULL_AOT_RUNTIME
-            var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                assemblyName,
-                AssemblyBuilderAccess.RunAndSave,
-                Path.GetTempPath()
-            );
+            var assembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    assemblyName,
+                    AssemblyBuilderAccess.RunAndSave,
+                    Path.GetTempPath()
+                );
             module = assembly.DefineDynamicModule("module1");
 #endif
         }

@@ -39,7 +39,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var servicesList = entity.servicesCosts
+                    var servicesList = entity
+                        .servicesCosts
                         .Where(S => S.itemId == itemId)
                         .Select(
                             S =>
@@ -111,7 +112,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpSerial = entity.servicesCosts
+                            var tmpSerial = entity
+                                .servicesCosts
                                 .Where(p => p.costId == newObject.costId)
                                 .FirstOrDefault();
                             tmpSerial.name = newObject.name;

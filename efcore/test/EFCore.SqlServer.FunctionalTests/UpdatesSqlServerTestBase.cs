@@ -194,9 +194,11 @@ LEFT JOIN [Person] AS [p2] ON [p1].[ParentId] = [p2].[PersonId]
     public override void Identifiers_are_generated_correctly()
     {
         using var context = CreateContext();
-        var entityType = context.Model.FindEntityType(
-            typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
-        )!;
+        var entityType = context
+            .Model
+            .FindEntityType(
+                typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
+            )!;
         Assert.Equal(
             "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorking~",
             entityType.GetTableName()
@@ -214,9 +216,11 @@ LEFT JOIN [Person] AS [p2] ON [p1].[ParentId] = [p2].[PersonId]
             entityType.GetIndexes().Single().GetDatabaseName()
         );
 
-        var entityType2 = context.Model.FindEntityType(
-            typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails)
-        )!;
+        var entityType2 = context
+            .Model
+            .FindEntityType(
+                typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails)
+            )!;
 
         Assert.Equal(
             "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkin~1",

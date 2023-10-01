@@ -135,9 +135,9 @@ public sealed class ParallelRunner
 
         processList.Sort(
             (a, b) =>
-                b.Parameters.CompilationCostHeuristic.CompareTo(
-                    a.Parameters.CompilationCostHeuristic
-                )
+                b.Parameters
+                    .CompilationCostHeuristic
+                    .CompareTo(a.Parameters.CompilationCostHeuristic)
         );
 
         int processCount = processList.Count;

@@ -53,7 +53,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     {typeName} Method({typeName} value, in {typeName} inValue, ref {typeName} refValue, out {typeName} outValue);
 }}"
             + TProvider.NativeInterfaceUsage()
@@ -73,7 +73,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     {typeName} Method({typeName} value, in {typeName} inValue, out {typeName} outValue);
 }}"
             + TProvider.NativeInterfaceUsage()
@@ -92,7 +92,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     void Method({typeName} value);
 }}"
             + TProvider.NativeInterfaceUsage()
@@ -114,7 +114,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     void Method({modifier} {typeName} value);
 }}"
             + TProvider.NativeInterfaceUsage()
@@ -132,7 +132,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     {typeName} Method();
 }}"
             + TProvider.NativeInterfaceUsage()
@@ -151,7 +151,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     [return: MarshalUsing(typeof({marshallerTypeName}))]
     {typeName} Method(
         [MarshalUsing(typeof({marshallerTypeName}))] {typeName} p,
@@ -173,7 +173,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     [return:MarshalUsing(ConstantElementCount=10)]
     {collectionType} Method(
         {collectionType} p,
@@ -199,7 +199,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     [return:MarshalUsing(typeof({marshallerType}), ConstantElementCount=10)]
     {collectionType} Method(
         [MarshalUsing(typeof({marshallerType}))] {collectionType} p,
@@ -226,7 +226,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     int Method(
         [MarshalUsing(typeof({marshallerType}), CountElementName = MarshalUsingAttribute.ReturnsCountValue)] out {collectionType} pOut
         );
@@ -249,7 +249,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     int Method(
         [MarshalUsing(ConstantElementCount = 10)] out {collectionType} pOut
         );
@@ -272,7 +272,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     [return:MarshalUsing(ConstantElementCount = 10)]
     {collectionType} Method();
 }}
@@ -295,7 +295,7 @@ using System.Runtime.InteropServices.Marshalling;
 readonly record struct NoCasting {{}}
 partial interface INativeAPI : IUnmanagedInterfaceType<INativeAPI, NoCasting>
 {{
-    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider.ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
+    [VirtualMethodIndex(0, ImplicitThisParameter = {TProvider .ImplicitThisParameter .ToString() .ToLowerInvariant()}, Direction = MarshalDirection.{TProvider.Direction})]
     [return:MarshalUsing(ConstantElementCount=10)]
     [return:MarshalUsing(typeof({elementMarshaller}), ElementIndirectionDepth = 1)]
     TestCollection<int> Method(

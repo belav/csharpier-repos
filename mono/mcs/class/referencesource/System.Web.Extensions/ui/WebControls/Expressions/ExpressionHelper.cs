@@ -29,11 +29,12 @@
 
         public static object BuildObjectValue(object value, Type type)
         {
-            return System.Web.UI.WebControls.DataSourceHelper.BuildObjectValue(
-                value,
-                type,
-                String.Empty
-            );
+            return System
+                .Web
+                .UI
+                .WebControls
+                .DataSourceHelper
+                .BuildObjectValue(value, type, String.Empty);
         }
 
         public static Expression CreatePropertyExpression(
@@ -83,9 +84,11 @@
             {
                 throw new ArgumentNullException("source");
             }
-            return source.Provider.CreateQuery(
-                Expression.Call(typeof(Queryable), queryMethod, genericArgs, arguments)
-            );
+            return source
+                .Provider
+                .CreateQuery(
+                    Expression.Call(typeof(Queryable), queryMethod, genericArgs, arguments)
+                );
         }
 
         public static IQueryable Call(
@@ -99,15 +102,17 @@
             {
                 throw new ArgumentNullException("source");
             }
-            return source.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable),
-                    queryableMethod,
-                    genericArgs,
-                    source.Expression,
-                    Expression.Quote(lambda)
-                )
-            );
+            return source
+                .Provider
+                .CreateQuery(
+                    Expression.Call(
+                        typeof(Queryable),
+                        queryableMethod,
+                        genericArgs,
+                        source.Expression,
+                        Expression.Quote(lambda)
+                    )
+                );
         }
 
         public static Expression Or(IEnumerable<Expression> expressions)

@@ -634,13 +634,15 @@ namespace Grpc.Shared.TestAssets
             try
             {
                 var probeCall = client.StreamingInputCall(CreateClientCompressionMetadata(false));
-                await probeCall.RequestStream.WriteAsync(
-                    new StreamingInputCallRequest
-                    {
-                        ExpectCompressed = new BoolValue { Value = true },
-                        Payload = CreateZerosPayload(27182)
-                    }
-                );
+                await probeCall
+                    .RequestStream
+                    .WriteAsync(
+                        new StreamingInputCallRequest
+                        {
+                            ExpectCompressed = new BoolValue { Value = true },
+                            Payload = CreateZerosPayload(27182)
+                        }
+                    );
 
                 // cannot use Assert.ThrowsAsync because it uses Task.Wait and would deadlock.
                 await probeCall;

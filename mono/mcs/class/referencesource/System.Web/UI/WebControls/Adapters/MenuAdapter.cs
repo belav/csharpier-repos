@@ -783,10 +783,9 @@ namespace System.Web.UI.WebControls.Adapters
                     }
                     // Check this item does have subitem
                     // (otherwise, it should just be selected, not opened)
-                    MenuItem item = Control.Items.FindItem(
-                        newPath.Split(TreeView.InternalPathSeparator),
-                        0
-                    );
+                    MenuItem item = Control
+                        .Items
+                        .FindItem(newPath.Split(TreeView.InternalPathSeparator), 0);
                     if (item != null)
                     {
                         if (item.ChildItems.Count > 0)
@@ -805,10 +804,9 @@ namespace System.Web.UI.WebControls.Adapters
                     if (_path != null)
                     {
                         // Find that item in the tree
-                        MenuItem item = Control.Items.FindItem(
-                            _path.Split(TreeView.InternalPathSeparator),
-                            0
-                        );
+                        MenuItem item = Control
+                            .Items
+                            .FindItem(_path.Split(TreeView.InternalPathSeparator), 0);
                         if (item != null)
                         {
                             MenuItem parentItem = item.Parent;

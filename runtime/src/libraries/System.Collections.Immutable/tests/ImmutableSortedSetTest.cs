@@ -100,7 +100,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ChangeSortComparer()
         {
-            var ordinalSet = ImmutableSortedSet<string>.Empty
+            var ordinalSet = ImmutableSortedSet<string>
+                .Empty
                 .WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
@@ -194,9 +195,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void IndexGetTest()
         {
-            var set = ImmutableSortedSet<int>.Empty.Union(
-                Enumerable.Range(1, 10).Select(n => n * 10)
-            ); // 10, 20, 30, ... 100
+            var set = ImmutableSortedSet<int>
+                .Empty
+                .Union(Enumerable.Range(1, 10).Select(n => n * 10)); // 10, 20, 30, ... 100
 
             int i = 0;
             foreach (var item in set)

@@ -100,9 +100,14 @@ namespace System.ServiceModel.Channels
                         Constants.WsaAnonymousUri
                     );
                     if (
-                        !owner.peers.Any(
-                            p => p.Address.EndpointAddress.Equals(connect.Address.EndpointAddress)
-                        )
+                        !owner
+                            .peers
+                            .Any(
+                                p =>
+                                    p.Address
+                                        .EndpointAddress
+                                        .Equals(connect.Address.EndpointAddress)
+                            )
                     )
                         owner.peers.Add(new RemotePeerConnection(connect.Address));
                     ch.Welcome(new WelcomeInfo() { NodeId = owner.node.NodeId });
@@ -279,15 +284,21 @@ namespace System.ServiceModel.Channels
                 // see [MC-PRCH] 3.2.4.1
                 if (message.Headers.MessageId == null)
                     message.Headers.MessageId = new UniqueId();
-                message.Headers.Add(
-                    MessageHeader.CreateHeader("PeerTo", Constants.NetPeer, RemoteAddress.Uri)
-                );
-                message.Headers.Add(
-                    MessageHeader.CreateHeader("PeerVia", Constants.NetPeer, RemoteAddress.Uri)
-                );
-                message.Headers.Add(
-                    MessageHeader.CreateHeader("FloodMessage", Constants.NetPeer, "PeerFlooder")
-                );
+                message
+                    .Headers
+                    .Add(
+                        MessageHeader.CreateHeader("PeerTo", Constants.NetPeer, RemoteAddress.Uri)
+                    );
+                message
+                    .Headers
+                    .Add(
+                        MessageHeader.CreateHeader("PeerVia", Constants.NetPeer, RemoteAddress.Uri)
+                    );
+                message
+                    .Headers
+                    .Add(
+                        MessageHeader.CreateHeader("FloodMessage", Constants.NetPeer, "PeerFlooder")
+                    );
                 pc.Channel.SendMessage(message);
             }
         }

@@ -240,9 +240,9 @@ namespace System.Web.UI
                 case DataSourceCacheExpiry.Absolute:
                     // The caching APIs for absolute expiry expect a duration of 0 to mean no expiry,
                     // but for us it means infinite so we use Int32.MaxValue instead.
-                    utcAbsoluteExpiryTime = DateTime.UtcNow.AddSeconds(
-                        Duration == 0 ? Int32.MaxValue : Duration
-                    );
+                    utcAbsoluteExpiryTime = DateTime
+                        .UtcNow
+                        .AddSeconds(Duration == 0 ? Int32.MaxValue : Duration);
                     break;
                 case DataSourceCacheExpiry.Sliding:
                     slidingExpiryTimeSpan = TimeSpan.FromSeconds(Duration);
@@ -267,16 +267,19 @@ namespace System.Web.UI
                 aggregateCacheDependency.Add(new CacheDependency[] { dependency });
             }
 
-            HttpRuntime.Cache.InternalCache.Insert(
-                key,
-                data,
-                new CacheInsertOptions()
-                {
-                    Dependencies = aggregateCacheDependency,
-                    AbsoluteExpiration = utcAbsoluteExpiryTime,
-                    SlidingExpiration = slidingExpiryTimeSpan
-                }
-            );
+            HttpRuntime
+                .Cache
+                .InternalCache
+                .Insert(
+                    key,
+                    data,
+                    new CacheInsertOptions()
+                    {
+                        Dependencies = aggregateCacheDependency,
+                        AbsoluteExpiration = utcAbsoluteExpiryTime,
+                        SlidingExpiration = slidingExpiryTimeSpan
+                    }
+                );
         }
 
         /// <devdoc>

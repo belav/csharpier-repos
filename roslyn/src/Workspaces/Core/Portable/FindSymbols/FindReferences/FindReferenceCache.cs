@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 return ImmutableArray<SyntaxToken>.Empty;
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await _semanticModel.SyntaxTree
+            var root = await _semanticModel
+                .SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 

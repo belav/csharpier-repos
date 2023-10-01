@@ -260,13 +260,9 @@ namespace System.Security.Cryptography
                 hashAlgorithm = Interop.Crypto.HashAlgorithmToEvp(padding.OaepHashAlgorithm.Name);
             }
 
-            int written = Interop.Crypto.RsaEncrypt(
-                key,
-                data,
-                padding.Mode,
-                hashAlgorithm,
-                destination
-            );
+            int written = Interop
+                .Crypto
+                .RsaEncrypt(key, data, padding.Mode, hashAlgorithm, destination);
 
             Debug.Assert(written == rsaSize);
             bytesWritten = written;
@@ -557,10 +553,12 @@ namespace System.Security.Cryptography
                 read = source.Length;
             }
 
-            SafeEvpPKeyHandle newKey = Interop.Crypto.DecodeSubjectPublicKeyInfo(
-                source.Slice(0, read),
-                Interop.Crypto.EvpAlgorithmId.RSA
-            );
+            SafeEvpPKeyHandle newKey = Interop
+                .Crypto
+                .DecodeSubjectPublicKeyInfo(
+                    source.Slice(0, read),
+                    Interop.Crypto.EvpAlgorithmId.RSA
+                );
 
             Debug.Assert(!newKey.IsInvalid);
             SetKey(newKey);
@@ -611,10 +609,9 @@ namespace System.Security.Cryptography
                 read = source.Length;
             }
 
-            SafeEvpPKeyHandle newKey = Interop.Crypto.DecodePkcs8PrivateKey(
-                source.Slice(0, read),
-                Interop.Crypto.EvpAlgorithmId.RSA
-            );
+            SafeEvpPKeyHandle newKey = Interop
+                .Crypto
+                .DecodePkcs8PrivateKey(source.Slice(0, read), Interop.Crypto.EvpAlgorithmId.RSA);
 
             Debug.Assert(!newKey.IsInvalid);
             SetKey(newKey);
@@ -839,13 +836,9 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            int written = Interop.Crypto.RsaSignHash(
-                key,
-                padding.Mode,
-                digestAlgorithm,
-                hash,
-                destination
-            );
+            int written = Interop
+                .Crypto
+                .RsaSignHash(key, padding.Mode, digestAlgorithm, hash, destination);
             Debug.Assert(written == bytesRequired);
             bytesWritten = written;
 
@@ -883,13 +876,9 @@ namespace System.Security.Cryptography
             IntPtr digestAlgorithm = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithm.Name);
             SafeEvpPKeyHandle key = GetKey();
 
-            return Interop.Crypto.RsaVerifyHash(
-                key,
-                padding.Mode,
-                digestAlgorithm,
-                hash,
-                signature
-            );
+            return Interop
+                .Crypto
+                .RsaVerifyHash(key, padding.Mode, digestAlgorithm, hash, signature);
         }
 
         private static ReadOnlyMemory<byte> VerifyPkcs8(ReadOnlyMemory<byte> pkcs8)

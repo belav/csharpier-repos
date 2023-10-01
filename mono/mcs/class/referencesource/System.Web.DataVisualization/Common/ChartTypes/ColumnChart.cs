@@ -298,7 +298,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             foreach (string seriesName in typeSeries)
             {
                 if (
-                    common.DataManager
+                    common
+                        .DataManager
                         .Series[seriesName]
                         .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                 )
@@ -449,9 +450,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Back Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPrePaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPrePaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 //************************************************************
@@ -648,9 +651,11 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // Call Paint event
                 if (!selection)
                 {
-                    common.Chart.CallOnPostPaint(
-                        new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                    );
+                    common
+                        .Chart
+                        .CallOnPostPaint(
+                            new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
+                        );
                 }
 
                 // Data series index
@@ -772,7 +777,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 foreach (string seriesName in typeSeries)
                 {
                     if (
-                        common.DataManager
+                        common
+                            .DataManager
                             .Series[seriesName]
                             .IsCustomPropertySet(CustomPropertyName.DrawSideBySide)
                     )
@@ -1033,14 +1039,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     //************************************************************
                     if (common.ProcessModeRegions && !labels)
                     {
-                        common.HotRegionsList.AddHotRegion(
-                            rectPath,
-                            false,
-                            graph,
-                            point,
-                            ser.Name,
-                            pointEx.index - 1
-                        );
+                        common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                rectPath,
+                                false,
+                                graph,
+                                point,
+                                ser.Name,
+                                pointEx.index - 1
+                            );
                     }
                     if (rectPath != null)
                     {
@@ -1338,31 +1346,35 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         circCoord[1] = markerPosition.Y;
                         circCoord[2] = relativeMarkerSize.Width / 2f;
 
-                        common.HotRegionsList.AddHotRegion(
-                            insertIndex,
-                            graph,
-                            circCoord[0],
-                            circCoord[1],
-                            circCoord[2],
-                            point,
-                            series.Name,
-                            pointIndex - 1
-                        );
+                        common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                insertIndex,
+                                graph,
+                                circCoord[0],
+                                circCoord[1],
+                                circCoord[2],
+                                point,
+                                series.Name,
+                                pointIndex - 1
+                            );
                     }
                     // All other markers represented as rectangles
                     else
                     {
-                        common.HotRegionsList.AddHotRegion(
-                            new RectangleF(
-                                markerPosition.X - relativeMarkerSize.Width / 2f,
-                                markerPosition.Y - relativeMarkerSize.Height / 2f,
-                                relativeMarkerSize.Width,
-                                relativeMarkerSize.Height
-                            ),
-                            point,
-                            series.Name,
-                            pointIndex - 1
-                        );
+                        common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                new RectangleF(
+                                    markerPosition.X - relativeMarkerSize.Width / 2f,
+                                    markerPosition.Y - relativeMarkerSize.Height / 2f,
+                                    relativeMarkerSize.Width,
+                                    relativeMarkerSize.Height
+                                ),
+                                point,
+                                series.Name,
+                                pointIndex - 1
+                            );
                     }
                 }
             }

@@ -16,16 +16,18 @@ namespace NetCoreServer
             {
                 int statusCode = int.Parse(statusCodeString);
                 context.Response.StatusCode = statusCode;
-                context.Response.SetStatusDescription(
-                    string.IsNullOrWhiteSpace(statusDescription) ? " " : statusDescription
-                );
+                context
+                    .Response
+                    .SetStatusDescription(
+                        string.IsNullOrWhiteSpace(statusDescription) ? " " : statusDescription
+                    );
             }
             catch (Exception)
             {
                 context.Response.StatusCode = 400;
-                context.Response.SetStatusDescription(
-                    "Error parsing statuscode: " + statusCodeString
-                );
+                context
+                    .Response
+                    .SetStatusDescription("Error parsing statuscode: " + statusCodeString);
             }
         }
     }

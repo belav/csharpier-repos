@@ -68,18 +68,17 @@ public class IndexAttributeConvention
     )
     {
         foreach (
-            var indexAttribute in entityType.ClrType.GetCustomAttributes<IndexAttribute>(
-                inherit: true
-            )
+            var indexAttribute in entityType
+                .ClrType
+                .GetCustomAttributes<IndexAttribute>(inherit: true)
         )
         {
             IConventionIndexBuilder? indexBuilder;
             if (
                 !shouldThrow
-                && !entityType.Builder.CanHaveIndex(
-                    indexAttribute.PropertyNames,
-                    fromDataAnnotation: true
-                )
+                && !entityType
+                    .Builder
+                    .CanHaveIndex(indexAttribute.PropertyNames, fromDataAnnotation: true)
             )
             {
                 continue;
@@ -89,15 +88,16 @@ public class IndexAttributeConvention
             {
                 indexBuilder =
                     indexAttribute.Name == null
-                        ? entityType.Builder.HasIndex(
-                            indexAttribute.PropertyNames,
-                            fromDataAnnotation: true
-                        )
-                        : entityType.Builder.HasIndex(
-                            indexAttribute.PropertyNames,
-                            indexAttribute.Name,
-                            fromDataAnnotation: true
-                        );
+                        ? entityType
+                            .Builder
+                            .HasIndex(indexAttribute.PropertyNames, fromDataAnnotation: true)
+                        : entityType
+                            .Builder
+                            .HasIndex(
+                                indexAttribute.PropertyNames,
+                                indexAttribute.Name,
+                                fromDataAnnotation: true
+                            );
             }
             catch (InvalidOperationException exception)
             {

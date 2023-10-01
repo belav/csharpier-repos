@@ -107,13 +107,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (declaration.ExpressionBody == null)
             {
                 if (
-                    declaration.Body?.TryConvertToArrowExpressionBody(
-                        declaration.Kind(),
-                        info.LanguageVersion,
-                        info.Options.PreferExpressionBodiedConstructors.Value,
-                        out var expressionBody,
-                        out var semicolonToken
-                    ) == true
+                    declaration
+                        .Body
+                        ?.TryConvertToArrowExpressionBody(
+                            declaration.Kind(),
+                            info.LanguageVersion,
+                            info.Options.PreferExpressionBodiedConstructors.Value,
+                            out var expressionBody,
+                            out var semicolonToken
+                        ) == true
                 )
                 {
                     return declaration

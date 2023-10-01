@@ -7660,7 +7660,8 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                         var derivedM4 = derived.GetMethod("M4");
 
                         Assert.True(
-                            baseM1.Parameters
+                            baseM1
+                                .Parameters
                                 .Single()
                                 .Type
                                 .Equals(
@@ -7669,13 +7670,13 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                                 )
                         );
                         Assert.True(
-                            baseM2.ReturnType.Equals(
-                                derivedM2.ReturnType,
-                                TypeCompareKind.ConsiderEverything
-                            )
+                            baseM2
+                                .ReturnType
+                                .Equals(derivedM2.ReturnType, TypeCompareKind.ConsiderEverything)
                         );
                         Assert.True(
-                            baseM3.Parameters
+                            baseM3
+                                .Parameters
                                 .Single()
                                 .Type
                                 .Equals(
@@ -7684,10 +7685,9 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
                                 )
                         );
                         Assert.True(
-                            baseM4.ReturnType.Equals(
-                                derivedM4.ReturnType,
-                                TypeCompareKind.ConsiderEverything
-                            )
+                            baseM4
+                                .ReturnType
+                                .Equals(derivedM4.ReturnType, TypeCompareKind.ConsiderEverything)
                         );
                     }
                 };

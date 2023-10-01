@@ -890,9 +890,10 @@ namespace System.Net
                                 Logging.PrintError(
                                     Logging.Web,
                                     "TimerThread#"
-                                        + Thread.CurrentThread.ManagedThreadId.ToString(
-                                            NumberFormatInfo.InvariantInfo
-                                        )
+                                        + Thread
+                                            .CurrentThread
+                                            .ManagedThreadId
+                                            .ToString(NumberFormatInfo.InvariantInfo)
                                         + "::ThreadProc() - Exception:"
                                         + exception.ToString()
                                 );

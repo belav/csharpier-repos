@@ -126,10 +126,9 @@ public class TestAnalyzer : DiagnosticAnalyzer
         {
             var vsVersion = Environment.GetEnvironmentVariable("VisualStudioVersion") ?? "14.0";
             using (
-                var key = Registry.LocalMachine.OpenSubKey(
-                    $@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\{vsVersion}",
-                    false
-                )
+                var key = Registry
+                    .LocalMachine
+                    .OpenSubKey($@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\{vsVersion}", false)
             )
             {
                 if (key != null)

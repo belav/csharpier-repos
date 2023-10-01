@@ -192,14 +192,16 @@ namespace System.Activities.Runtime
             ActivityWithResult activityWithResult = activity as ActivityWithResult;
             if (activityWithResult == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new ValidationException(
-                        SR.ActivityTypeMismatch(
-                            activity.DisplayName,
-                            typeof(ActivityWithResult).Name
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ValidationException(
+                            SR.ActivityTypeMismatch(
+                                activity.DisplayName,
+                                typeof(ActivityWithResult).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.expressionActivity = activityWithResult;

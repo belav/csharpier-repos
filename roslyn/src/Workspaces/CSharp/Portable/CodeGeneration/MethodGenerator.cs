@@ -227,13 +227,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (methodDeclaration.ExpressionBody == null)
             {
                 if (
-                    methodDeclaration.Body?.TryConvertToArrowExpressionBody(
-                        methodDeclaration.Kind(),
-                        info.LanguageVersion,
-                        info.Options.PreferExpressionBodiedMethods.Value,
-                        out var expressionBody,
-                        out var semicolonToken
-                    ) == true
+                    methodDeclaration
+                        .Body
+                        ?.TryConvertToArrowExpressionBody(
+                            methodDeclaration.Kind(),
+                            info.LanguageVersion,
+                            info.Options.PreferExpressionBodiedMethods.Value,
+                            out var expressionBody,
+                            out var semicolonToken
+                        ) == true
                 )
                 {
                     return methodDeclaration
@@ -254,13 +256,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (localFunctionDeclaration.ExpressionBody == null)
             {
                 if (
-                    localFunctionDeclaration.Body?.TryConvertToArrowExpressionBody(
-                        localFunctionDeclaration.Kind(),
-                        info.LanguageVersion,
-                        info.Options.PreferExpressionBodiedLocalFunctions.Value,
-                        out var expressionBody,
-                        out var semicolonToken
-                    ) == true
+                    localFunctionDeclaration
+                        .Body
+                        ?.TryConvertToArrowExpressionBody(
+                            localFunctionDeclaration.Kind(),
+                            info.LanguageVersion,
+                            info.Options.PreferExpressionBodiedLocalFunctions.Value,
+                            out var expressionBody,
+                            out var semicolonToken
+                        ) == true
                 )
                 {
                     return localFunctionDeclaration

@@ -32,9 +32,9 @@ namespace System.IdentityModel.Selectors
         )
         {
             if (supportingAuthenticators == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "supportingAuthenticators"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("supportingAuthenticators");
 
             this.supportingAuthenticators = new List<SecurityTokenAuthenticator>(
                 supportingAuthenticators.Count
@@ -79,36 +79,44 @@ namespace System.IdentityModel.Selectors
             SamlSecurityToken samlToken = token as SamlSecurityToken;
 
             if (samlToken == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SamlTokenAuthenticatorCanOnlyProcessSamlTokens,
-                            token.GetType().ToString()
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SamlTokenAuthenticatorCanOnlyProcessSamlTokens,
+                                token.GetType().ToString()
+                            )
                         )
-                    )
-                );
+                    );
 
             if (samlToken.Assertion.Signature == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SamlTokenMissingSignature))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SamlTokenMissingSignature))
+                    );
 
             if (!this.IsCurrentlyTimeEffective(samlToken))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SAMLTokenTimeInvalid,
-                            DateTime.UtcNow.ToUniversalTime(),
-                            samlToken.ValidFrom.ToString(),
-                            samlToken.ValidTo.ToString()
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SAMLTokenTimeInvalid,
+                                DateTime.UtcNow.ToUniversalTime(),
+                                samlToken.ValidFrom.ToString(),
+                                samlToken.ValidTo.ToString()
+                            )
                         )
-                    )
-                );
+                    );
 
             if (samlToken.Assertion.SigningToken == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SamlSigningTokenMissing))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SamlSigningTokenMissing))
+                    );
 
             // Build the Issuer ClaimSet for this Saml token.
             ClaimSet issuer = null;
@@ -122,9 +130,11 @@ namespace System.IdentityModel.Selectors
                     break;
             }
             if (!canBeValidated)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SamlInvalidSigningToken))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SamlInvalidSigningToken))
+                    );
             issuer = ResolveClaimSet(samlToken.Assertion.SigningToken) ?? ClaimSet.Anonymous;
 
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
@@ -148,9 +158,11 @@ namespace System.IdentityModel.Selectors
                 bool foundAudienceCondition = false;
                 if (this.allowedAudienceUris == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(SR.GetString(SR.SAMLAudienceUrisNotFound))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(SR.GetString(SR.SAMLAudienceUrisNotFound))
+                        );
                 }
 
                 for (int i = 0; i < samlToken.Assertion.Conditions.Conditions.Count; i++)
@@ -164,18 +176,24 @@ namespace System.IdentityModel.Selectors
                     foundAudienceCondition = true;
                     if (!ValidateAudienceRestriction(audienceCondition))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.SAMLAudienceUriValidationFailed)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(SR.SAMLAudienceUriValidationFailed)
+                                )
+                            );
                     }
                 }
 
                 if (!foundAudienceCondition)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(SR.GetString(SR.SAMLAudienceUriValidationFailed))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(SR.SAMLAudienceUriValidationFailed)
+                            )
+                        );
             }
 
             return policies.AsReadOnly();
@@ -193,10 +211,12 @@ namespace System.IdentityModel.Selectors
                 for (int j = 0; j < this.allowedAudienceUris.Count; j++)
                 {
                     if (
-                        StringComparer.Ordinal.Compare(
-                            audienceRestrictionCondition.Audiences[i].AbsoluteUri,
-                            this.allowedAudienceUris[j]
-                        ) == 0
+                        StringComparer
+                            .Ordinal
+                            .Compare(
+                                audienceRestrictionCondition.Audiences[i].AbsoluteUri,
+                                this.allowedAudienceUris[j]
+                            ) == 0
                     )
                         return true;
                     else if (

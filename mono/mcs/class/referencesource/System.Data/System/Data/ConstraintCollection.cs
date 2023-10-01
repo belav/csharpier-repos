@@ -141,9 +141,9 @@ namespace System.Data
                 ForeignKeyConstraint fk = (ForeignKeyConstraint)constraint;
                 if (addUniqueWhenAddingForeign)
                 {
-                    UniqueConstraint key = fk.RelatedTable.Constraints.FindKeyConstraint(
-                        fk.RelatedColumnsReference
-                    );
+                    UniqueConstraint key = fk.RelatedTable
+                        .Constraints
+                        .FindKeyConstraint(fk.RelatedColumnsReference);
                     if (key == null)
                     {
                         if (constraint.ConstraintName.Length == 0)

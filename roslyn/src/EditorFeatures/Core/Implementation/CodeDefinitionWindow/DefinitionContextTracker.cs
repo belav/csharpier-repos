@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeDefinitionWindow
 
             if (
                 reason == ConnectionReason.TextViewLifetime
-                || !textView.BufferGraph
+                || !textView
+                    .BufferGraph
                     .GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType))
                     .Any()
             )
@@ -125,10 +126,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeDefinitionWindow
             _currentUpdateCancellationToken?.Cancel();
 
             // See if we moved somewhere else in a projection that we care about
-            var pointInRoslynSnapshot = caretPosition.Point.GetPoint(
-                tb => tb.ContentType.IsOfType(ContentTypeNames.RoslynContentType),
-                caretPosition.Affinity
-            );
+            var pointInRoslynSnapshot = caretPosition
+                .Point
+                .GetPoint(
+                    tb => tb.ContentType.IsOfType(ContentTypeNames.RoslynContentType),
+                    caretPosition.Affinity
+                );
             if (pointInRoslynSnapshot == null)
             {
                 return;
@@ -167,8 +170,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeDefinitionWindow
                     return;
                 }
 
-                var document =
-                    pointInRoslynSnapshot.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document = pointInRoslynSnapshot
+                    .Snapshot
+                    .GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
                     return;
@@ -206,12 +210,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeDefinitionWindow
                 .ConfigureAwait(false);
             if (navigableItems?.Any() == true)
             {
-                var navigationService =
-                    workspace.Services.GetRequiredService<IDocumentNavigationService>();
+                var navigationService = workspace
+                    .Services
+                    .GetRequiredService<IDocumentNavigationService>();
 
-                using var _ = PooledObjects.ArrayBuilder<CodeDefinitionWindowLocation>.GetInstance(
-                    out var builder
-                );
+                using var _ = PooledObjects
+                    .ArrayBuilder<CodeDefinitionWindowLocation>
+                    .GetInstance(out var builder);
                 foreach (var item in navigableItems)
                 {
                     if (
@@ -258,8 +263,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeDefinitionWindow
                 return ImmutableArray<CodeDefinitionWindowLocation>.Empty;
             }
 
-            var symbolNavigationService =
-                workspace.Services.GetRequiredService<ISymbolNavigationService>();
+            var symbolNavigationService = workspace
+                .Services
+                .GetRequiredService<ISymbolNavigationService>();
             var definitionItem = symbol.ToNonClassifiedDefinitionItem(
                 document.Project.Solution,
                 includeHiddenLocations: false

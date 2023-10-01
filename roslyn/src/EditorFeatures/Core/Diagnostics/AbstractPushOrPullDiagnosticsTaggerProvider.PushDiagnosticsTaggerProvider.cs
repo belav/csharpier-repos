@@ -80,19 +80,23 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
             // attempt to locate a matching source generated document in the project.
             if (
                 document is null
-                && e.Workspace.Services
+                && e.Workspace
+                    .Services
                     .GetService<IWorkspaceConfigurationService>()
-                    ?.Options.EnableOpeningSourceGeneratedFiles == true
+                    ?.Options
+                    .EnableOpeningSourceGeneratedFiles == true
                 && e.Solution.GetProject(e.DocumentId.ProjectId) is { } project
             )
             {
                 var documentId = e.DocumentId;
-                document = ThreadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        project
-                            .GetSourceGeneratedDocumentAsync(documentId, CancellationToken.None)
-                            .AsTask()
-                );
+                document = ThreadingContext
+                    .JoinableTaskFactory
+                    .Run(
+                        () =>
+                            project
+                                .GetSourceGeneratedDocumentAsync(documentId, CancellationToken.None)
+                                .AsTask()
+                    );
             }
 
             // Open documents *should* always have their SourceText available, but we cannot guarantee
@@ -157,10 +161,12 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
             // is generating code that it doesn't want errors shown for.
             var buffer = snapshot.TextBuffer;
             var suppressedDiagnosticsSpans = (NormalizedSnapshotSpanCollection?)null;
-            buffer?.Properties.TryGetProperty(
-                PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
-                out suppressedDiagnosticsSpans
-            );
+            buffer
+                ?.Properties
+                .TryGetProperty(
+                    PredefinedPreviewTaggerKeys.SuppressDiagnosticsSpansKey,
+                    out suppressedDiagnosticsSpans
+                );
 
             var buckets = _diagnosticService.GetDiagnosticBuckets(
                 workspace,
@@ -299,7 +305,8 @@ internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag
                 SourceText sourceText
             )
             {
-                return diagnosticDataLocation.UnmappedFileSpan
+                return diagnosticDataLocation
+                    .UnmappedFileSpan
                     .GetClampedTextSpan(sourceText)
                     .ToSnapshotSpan(diagnosticSnapshot)
                     .TranslateTo(editorSnapshot, SpanTrackingMode.EdgeExclusive);

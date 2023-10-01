@@ -138,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Classification
             var lastSemanticVersion = (VersionStamp?)context.State;
             if (lastSemanticVersion != null)
             {
-                var currentSemanticVersion = await document.Project
+                var currentSemanticVersion = await document
+                    .Project
                     .GetDependentSemanticVersionAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (lastSemanticVersion.Value != currentSemanticVersion)
@@ -229,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Classification
                     foreach (var span in classifiedSpans)
                         context.AddTag(Convert(typeMap, snapshotSpan.Snapshot, span));
 
-                    var version = await document.Project
+                    var version = await document
+                        .Project
                         .GetDependentSemanticVersionAsync(cancellationToken)
                         .ConfigureAwait(false);
 

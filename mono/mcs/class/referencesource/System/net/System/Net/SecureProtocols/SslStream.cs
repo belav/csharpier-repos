@@ -817,13 +817,9 @@ namespace System.Net.Security
             object asyncState
         )
         {
-            return _SslState.SecureStream.BeginRead(
-                buffer,
-                offset,
-                count,
-                asyncCallback,
-                asyncState
-            );
+            return _SslState
+                .SecureStream
+                .BeginRead(buffer, offset, count, asyncCallback, asyncState);
         }
 
         //
@@ -842,13 +838,9 @@ namespace System.Net.Security
             object asyncState
         )
         {
-            return _SslState.SecureStream.BeginWrite(
-                buffer,
-                offset,
-                count,
-                asyncCallback,
-                asyncState
-            );
+            return _SslState
+                .SecureStream
+                .BeginWrite(buffer, offset, count, asyncCallback, asyncState);
         }
 
         //

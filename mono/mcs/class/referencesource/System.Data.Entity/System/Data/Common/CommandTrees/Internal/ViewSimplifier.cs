@@ -134,7 +134,9 @@ namespace System.Data.Common.CommandTrees.Internal
             // with either association end.
             //
             EntitySet targetSet = (EntitySet)this.extent;
-            var relSets = targetSet.EntityContainer.BaseEntitySets
+            var relSets = targetSet
+                .EntityContainer
+                .BaseEntitySets
                 .Where(es => es.BuiltInTypeKind == BuiltInTypeKind.AssociationSet)
                 .Cast<AssociationSet>()
                 .Where(
@@ -266,7 +268,8 @@ namespace System.Data.Common.CommandTrees.Internal
                 {
                     if (entityConstructor.HasRelatedEntityReferences)
                     {
-                        relatedRefs = entityConstructor.RelatedEntityReferences
+                        relatedRefs = entityConstructor
+                            .RelatedEntityReferences
                             .Concat(relatedRefs)
                             .ToList();
                     }
@@ -306,9 +309,11 @@ namespace System.Data.Common.CommandTrees.Internal
                         thens.Add(constructors[idx]);
                     }
 
-                    result = entityProject.Input.Project(
-                        DbExpressionBuilder.Case(whens, thens, constructors[conditions.Count])
-                    );
+                    result = entityProject
+                        .Input
+                        .Project(
+                            DbExpressionBuilder.Case(whens, thens, constructors[conditions.Count])
+                        );
                 }
                 else
                 {
@@ -346,12 +351,12 @@ namespace System.Data.Common.CommandTrees.Internal
             //    select new { PrincipalProperty = ft.PrincipalProperty.Name, Value = pv.Value };
             //
             var keyPropAndValue =
-                from pv in constructedEntityType.Properties.Select(
-                    (p, idx) => Tuple.Create(p, entityConstructor.Arguments[idx])
-                ) // new { DependentProperty = p, Value = entityConstructor.Arguments[idx] })
-                join ft in fkConstraint.FromProperties.Select(
-                    (fp, idx) => Tuple.Create(fp, fkConstraint.ToProperties[idx])
-                ) //new { PrincipalProperty = fp, DependentProperty = fkConstraint.ToProperties[idx] })
+                from pv in constructedEntityType
+                    .Properties
+                    .Select((p, idx) => Tuple.Create(p, entityConstructor.Arguments[idx])) // new { DependentProperty = p, Value = entityConstructor.Arguments[idx] })
+                join ft in fkConstraint
+                    .FromProperties
+                    .Select((fp, idx) => Tuple.Create(fp, fkConstraint.ToProperties[idx])) //new { PrincipalProperty = fp, DependentProperty = fkConstraint.ToProperties[idx] })
                     on pv.Item1 equals ft.Item2 //pv.DependentProperty equals ft.DependentProperty
                 select Tuple.Create(ft.Item1.Name, pv.Item2); // new { PrincipalProperty = ft.PrincipalProperty.Name, Value = pv.Value };
 
@@ -377,17 +382,17 @@ namespace System.Data.Common.CommandTrees.Internal
                     pav => pav.Item2,
                     StringComparer.Ordinal
                 );
-                principalKeyValues = principalEntityType.KeyMemberNames
+                principalKeyValues = principalEntityType
+                    .KeyMemberNames
                     .Select(memberName => keyValueMap[memberName])
                     .ToList();
             }
 
             // Create the ref to the principal entity based on the (now correctly ordered) key value expressions.
             //
-            DbRefExpression principalRef = principalSetEnd.EntitySet.CreateRef(
-                principalEntityType,
-                principalKeyValues
-            );
+            DbRefExpression principalRef = principalSetEnd
+                .EntitySet
+                .CreateRef(principalEntityType, principalKeyValues);
             DbRelatedEntityRef result = DbExpressionBuilder.CreateRelatedEntityRef(
                 fkConstraint.ToRole,
                 fkConstraint.FromRole,
@@ -832,9 +837,9 @@ namespace System.Data.Common.CommandTrees.Internal
             // set replacement value so that the expression replacer infrastructure can substitute
             // the collapsed projection in the expression tree
             // continue collapsing projection until the pattern no longer matches
-            DbProjectExpression replacementOuterProject = innerProject.Input.Project(
-                replacementOuterProjection
-            );
+            DbProjectExpression replacementOuterProject = innerProject
+                .Input
+                .Project(replacementOuterProjection);
             return replacementOuterProject;
         }
 

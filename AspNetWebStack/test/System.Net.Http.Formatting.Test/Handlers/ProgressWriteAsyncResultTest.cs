@@ -11,9 +11,9 @@ namespace System.Net.Http.Handlers
 {
     public class ProgressWriteAsyncResultTest
     {
-        static readonly byte[] sampleData = Encoding.UTF8.GetBytes(
-            "Hello World! Hello World! Hello World! Hello World! Hello World!"
-        );
+        static readonly byte[] sampleData = Encoding
+            .UTF8
+            .GetBytes("Hello World! Hello World! Hello World! Hello World! Hello World!");
 
         [Fact]
         public void Constructor_BeginWriteOnInnerStream()

@@ -91,11 +91,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     .DeclaringSyntaxReferences[0]
                     .GetSyntax(cancellationToken);
                 if (
-                    containingType.DeclaringSyntaxReferences.Any(
-                        static (r, arg) =>
-                            r.GetSyntax(arg.cancellationToken) == arg.constructorSyntax,
-                        (constructorSyntax, cancellationToken)
-                    )
+                    containingType
+                        .DeclaringSyntaxReferences
+                        .Any(
+                            static (r, arg) =>
+                                r.GetSyntax(arg.cancellationToken) == arg.constructorSyntax,
+                            (constructorSyntax, cancellationToken)
+                        )
                 )
                 {
                     // this was a primary constructor. see if we can map this parameter to a corresponding synthesized property

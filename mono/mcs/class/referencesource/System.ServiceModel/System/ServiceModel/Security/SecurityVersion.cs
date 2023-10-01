@@ -106,11 +106,9 @@ namespace System.ServiceModel.Security
 
         internal int FindIndexOfSecurityHeader(Message message, string[] actors)
         {
-            return message.Headers.FindHeader(
-                this.HeaderName.Value,
-                this.HeaderNamespace.Value,
-                actors
-            );
+            return message
+                .Headers
+                .FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value, actors);
         }
 
         internal virtual bool IsReaderAtSignatureConfirmation(XmlDictionaryReader reader)
@@ -122,9 +120,13 @@ namespace System.ServiceModel.Security
             XmlDictionaryReader reader
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.SignatureConfirmationNotSupported))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SignatureConfirmationNotSupported)
+                    )
+                );
         }
 
         // The security always look for Empty soap role.  If not found, we will also look for Ultimate actors (next incl).
@@ -137,18 +139,18 @@ namespace System.ServiceModel.Security
             MessageDirection direction
         )
         {
-            int headerIndex = message.Headers.FindHeader(
-                this.HeaderName.Value,
-                this.HeaderNamespace.Value,
-                actor
-            );
+            int headerIndex = message
+                .Headers
+                .FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value, actor);
             if (headerIndex < 0 && String.IsNullOrEmpty(actor))
             {
-                headerIndex = message.Headers.FindHeader(
-                    this.HeaderName.Value,
-                    this.HeaderNamespace.Value,
-                    message.Version.Envelope.UltimateDestinationActorValues
-                );
+                headerIndex = message
+                    .Headers
+                    .FindHeader(
+                        this.HeaderName.Value,
+                        this.HeaderNamespace.Value,
+                        message.Version.Envelope.UltimateDestinationActorValues
+                    );
             }
 
             if (headerIndex < 0)
@@ -174,9 +176,13 @@ namespace System.ServiceModel.Security
             byte[] signatureConfirmation
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.SignatureConfirmationNotSupported))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SignatureConfirmationNotSupported)
+                    )
+                );
         }
 
         internal void WriteStartHeader(XmlDictionaryWriter writer)

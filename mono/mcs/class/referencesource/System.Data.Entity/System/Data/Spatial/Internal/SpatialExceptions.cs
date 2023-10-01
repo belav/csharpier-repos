@@ -152,9 +152,11 @@ namespace System.Data.Spatial.Internal
         internal static Exception SqlSpatialServices_ProviderValueNotSqlType(Type requiredType)
         {
             return EntityUtil.Argument(
-                System.Data.Entity.Strings.SqlSpatialServices_ProviderValueNotSqlType(
-                    requiredType.AssemblyQualifiedName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .SqlSpatialServices_ProviderValueNotSqlType(requiredType.AssemblyQualifiedName),
                 "providerValue"
             );
         }

@@ -72,13 +72,15 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (string.IsNullOrEmpty(channelEndpointElement.Kind))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ConfigurationErrorsException(
-                            SR2.DiscoveryConfigAnnouncementEndpointMissingKind(
-                                typeof(AnnouncementEndpoint).FullName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ConfigurationErrorsException(
+                                SR2.DiscoveryConfigAnnouncementEndpointMissingKind(
+                                    typeof(AnnouncementEndpoint).FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 ServiceEndpoint serviceEndpoint = ConfigLoader.LookupEndpoint(
@@ -87,27 +89,31 @@ namespace System.ServiceModel.Discovery.Configuration
                 );
                 if (serviceEndpoint == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ConfigurationErrorsException(
-                            SR2.DiscoveryConfigInvalidEndpointConfiguration(
-                                channelEndpointElement.Kind
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ConfigurationErrorsException(
+                                SR2.DiscoveryConfigInvalidEndpointConfiguration(
+                                    channelEndpointElement.Kind
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 announcementEndpoint = serviceEndpoint as AnnouncementEndpoint;
                 if (announcementEndpoint == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR2.DiscoveryConfigInvalidAnnouncementEndpoint(
-                                channelEndpointElement.Kind,
-                                serviceEndpoint.GetType().FullName,
-                                typeof(AnnouncementEndpoint).FullName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.DiscoveryConfigInvalidAnnouncementEndpoint(
+                                    channelEndpointElement.Kind,
+                                    serviceEndpoint.GetType().FullName,
+                                    typeof(AnnouncementEndpoint).FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 serviceDiscoveryBehavior.AnnouncementEndpoints.Add(announcementEndpoint);

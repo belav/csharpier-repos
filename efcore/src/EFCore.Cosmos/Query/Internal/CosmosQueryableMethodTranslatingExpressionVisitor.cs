@@ -1171,9 +1171,9 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
                 is Expression partitionKeyValue
         )
         {
-            var partitionKeyProperty = entityShaperExpression.EntityType.GetProperty(
-                entityShaperExpression.EntityType.GetPartitionKeyPropertyName()
-            );
+            var partitionKeyProperty = entityShaperExpression
+                .EntityType
+                .GetProperty(entityShaperExpression.EntityType.GetPartitionKeyPropertyName());
             ((SelectExpression)source.QueryExpression).SetPartitionKey(
                 partitionKeyProperty,
                 partitionKeyValue
@@ -1264,10 +1264,12 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
                     valueExpression is ConstantExpression
                     || (
                         valueExpression is ParameterExpression valueParameterExpression
-                        && valueParameterExpression.Name?.StartsWith(
-                            QueryCompilationContext.QueryParameterPrefix,
-                            StringComparison.Ordinal
-                        ) == true
+                        && valueParameterExpression
+                            .Name
+                            ?.StartsWith(
+                                QueryCompilationContext.QueryParameterPrefix,
+                                StringComparison.Ordinal
+                            ) == true
                     )
                 )
                 {

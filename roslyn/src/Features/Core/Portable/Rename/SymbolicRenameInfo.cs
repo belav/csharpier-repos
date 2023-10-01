@@ -304,13 +304,15 @@ namespace Microsoft.CodeAnalysis.Rename
                         var projectIdOfLocation = sourceDocument.Project.Id;
 
                         if (
-                            solution.Projects.Any(
-                                p =>
-                                    p.IsSubmission
-                                    && p.ProjectReferences.Any(
-                                        r => r.ProjectId == projectIdOfLocation
-                                    )
-                            )
+                            solution
+                                .Projects
+                                .Any(
+                                    p =>
+                                        p.IsSubmission
+                                        && p.ProjectReferences.Any(
+                                            r => r.ProjectId == projectIdOfLocation
+                                        )
+                                )
                         )
                             return new SymbolicRenameInfo(
                                 FeaturesResources.You_cannot_rename_elements_from_previous_submissions

@@ -697,9 +697,9 @@ namespace System.Text.Tests
             {
                 Encoding encoding = Encoding.GetEncoding((int)mapping[0]);
 
-                Encoding codePageEncoding = CodePagesEncodingProvider.Instance.GetEncoding(
-                    (int)mapping[0]
-                );
+                Encoding codePageEncoding = CodePagesEncodingProvider
+                    .Instance
+                    .GetEncoding((int)mapping[0]);
                 Assert.Equal(encoding, codePageEncoding);
                 Assert.Equal(encoding.CodePage, (int)mapping[0]);
                 Assert.Equal(encoding.WebName, (string)mapping[1]);
@@ -850,7 +850,8 @@ namespace System.Text.Tests
             int[] expected
         )
         {
-            Decoder decoder = CodePagesEncodingProvider.Instance
+            Decoder decoder = CodePagesEncodingProvider
+                .Instance
                 .GetEncoding(codepageName)
                 .GetDecoder();
             char[] buffer = new char[expected.Length];

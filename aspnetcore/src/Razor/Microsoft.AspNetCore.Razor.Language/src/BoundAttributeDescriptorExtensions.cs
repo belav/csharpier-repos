@@ -68,10 +68,10 @@ public static class BoundAttributeDescriptorExtensions
             throw new ArgumentNullException(nameof(attribute));
         }
 
-        return attribute.Metadata.TryGetValue(
-                ComponentMetadata.Common.DirectiveAttribute,
-                out var value
-            ) && string.Equals(bool.TrueString, value);
+        return attribute
+                .Metadata
+                .TryGetValue(ComponentMetadata.Common.DirectiveAttribute, out var value)
+            && string.Equals(bool.TrueString, value);
     }
 
     public static bool IsDefaultKind(this BoundAttributeParameterDescriptor parameter)

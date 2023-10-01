@@ -131,8 +131,9 @@ namespace ComInterfaceGenerator.Tests
         {
             const int value = 42;
 
-            using NativeExportsNE.ImplicitThis.NativeObject obj =
-                NativeExportsNE.ImplicitThis.NewNativeObject();
+            using NativeExportsNE.ImplicitThis.NativeObject obj = NativeExportsNE
+                .ImplicitThis
+                .NewNativeObject();
 
             NativeExportsNE.ImplicitThis.INativeObject nativeObjInterface = obj;
 

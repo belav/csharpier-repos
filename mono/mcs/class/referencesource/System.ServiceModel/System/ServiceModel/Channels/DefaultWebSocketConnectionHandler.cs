@@ -125,15 +125,17 @@ namespace System.ServiceModel.Channels
 
                 if (negotiatedProtocol == null)
                 {
-                    FxTrace.Exception.AsWarning(
-                        new WebException(
-                            SR.GetString(
-                                SR.WebSocketInvalidProtocolNotInClientList,
-                                this.subProtocol,
-                                string.Join(", ", subprotocolParseResult.ParsedSubprotocols)
+                    FxTrace
+                        .Exception
+                        .AsWarning(
+                            new WebException(
+                                SR.GetString(
+                                    SR.WebSocketInvalidProtocolNotInClientList,
+                                    this.subProtocol,
+                                    string.Join(", ", subprotocolParseResult.ParsedSubprotocols)
+                                )
                             )
-                        )
-                    );
+                        );
 
                     return GetUpgradeRequiredResponseMessageWithSubProtocol(
                         request,
@@ -152,15 +154,17 @@ namespace System.ServiceModel.Channels
             {
                 if (!string.IsNullOrEmpty(this.subProtocol))
                 {
-                    FxTrace.Exception.AsWarning(
-                        new WebException(
-                            SR.GetString(
-                                SR.WebSocketInvalidProtocolNoHeader,
-                                this.subProtocol,
-                                WebSocketHelper.SecWebSocketProtocol
+                    FxTrace
+                        .Exception
+                        .AsWarning(
+                            new WebException(
+                                SR.GetString(
+                                    SR.WebSocketInvalidProtocolNoHeader,
+                                    this.subProtocol,
+                                    WebSocketHelper.SecWebSocketProtocol
+                                )
                             )
-                        )
-                    );
+                        );
 
                     return GetUpgradeRequiredResponseMessageWithSubProtocol(
                         request,
@@ -178,10 +182,9 @@ namespace System.ServiceModel.Channels
             IEnumerable<string> clientProtocols = null;
 
             if (
-                request.Headers.TryGetValues(
-                    WebSocketHelper.SecWebSocketProtocol,
-                    out clientProtocols
-                )
+                request
+                    .Headers
+                    .TryGetValues(WebSocketHelper.SecWebSocketProtocol, out clientProtocols)
             )
             {
                 List<string> tokenList = new List<string>();
@@ -294,16 +297,17 @@ namespace System.ServiceModel.Channels
         {
             Fx.Assert(this.needToCheckContentType, "needToCheckContentType should be true.");
             HttpResponseMessage response = GetBadRequestResponseMessage(request);
-            response.Headers.Add(
-                WebSocketTransportSettings.SoapContentTypeHeader,
-                this.encoder.ContentType
-            );
+            response
+                .Headers
+                .Add(WebSocketTransportSettings.SoapContentTypeHeader, this.encoder.ContentType);
             if (this.needToCheckTransferMode)
             {
-                response.Headers.Add(
-                    WebSocketTransportSettings.BinaryEncoderTransferModeHeader,
-                    this.transferMode.ToString()
-                );
+                response
+                    .Headers
+                    .Add(
+                        WebSocketTransportSettings.BinaryEncoderTransferModeHeader,
+                        this.transferMode.ToString()
+                    );
             }
 
             return response;

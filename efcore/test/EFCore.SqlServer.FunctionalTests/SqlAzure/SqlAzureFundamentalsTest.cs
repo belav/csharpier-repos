@@ -27,7 +27,8 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     public void CanAdd()
     {
         using var context = CreateContext();
-        context.Database
+        context
+            .Database
             .CreateExecutionStrategy()
             .Execute(
                 context,
@@ -54,7 +55,8 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     public void CanUpdate()
     {
         using var context = CreateContext();
-        context.Database
+        context
+            .Database
             .CreateExecutionStrategy()
             .Execute(
                 context,
@@ -78,7 +80,8 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
     public void IncludeQuery()
     {
         using var context = CreateContext();
-        var order = context.SalesOrders
+        var order = context
+            .SalesOrders
             .OrderBy(s => s.SalesOrderID)
             .Include(s => s.Customer)
             .First();

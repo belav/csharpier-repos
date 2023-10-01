@@ -338,10 +338,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (implementingMemberAndDiagnostics.Diagnostics.Diagnostics.Any())
                         {
                             diagnostics.AddRange(implementingMemberAndDiagnostics.Diagnostics);
-                            reportedAnError =
-                                implementingMemberAndDiagnostics.Diagnostics.Diagnostics.Any(
-                                    static d => d.Severity == DiagnosticSeverity.Error
-                                );
+                            reportedAnError = implementingMemberAndDiagnostics
+                                .Diagnostics
+                                .Diagnostics
+                                .Any(static d => d.Severity == DiagnosticSeverity.Error);
                         }
 
                         if (!reportedAnError)
@@ -349,10 +349,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             if (
                                 !wasImplementingMemberFound
                                 || (
-                                    !implementingMember.ContainingType.Equals(
-                                        this,
-                                        TypeCompareKind.ConsiderEverything
-                                    )
+                                    !implementingMember
+                                        .ContainingType
+                                        .Equals(this, TypeCompareKind.ConsiderEverything)
                                     && implementingMember
                                         .GetExplicitInterfaceImplementations()
                                         .Contains(
@@ -1483,11 +1482,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 var discardedUseSiteInfo =
                                     CompoundUseSiteInfo<AssemblySymbol>.Discarded;
                                 if (
-                                    DeclaringCompilation.Conversions.HasIdentityOrImplicitReferenceConversion(
-                                        overridingMethod.ReturnTypeWithAnnotations.Type,
-                                        overriddenMethod.ReturnTypeWithAnnotations.Type,
-                                        ref discardedUseSiteInfo
-                                    )
+                                    DeclaringCompilation
+                                        .Conversions
+                                        .HasIdentityOrImplicitReferenceConversion(
+                                            overridingMethod.ReturnTypeWithAnnotations.Type,
+                                            overriddenMethod.ReturnTypeWithAnnotations.Type,
+                                            ref discardedUseSiteInfo
+                                        )
                                 )
                                 {
                                     if (
@@ -1505,9 +1506,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         );
                                     }
                                     else if (
-                                        MessageID.IDS_FeatureCovariantReturnsForOverrides.GetFeatureAvailabilityDiagnosticInfo(
-                                            this.DeclaringCompilation
-                                        ) is
+                                        MessageID
+                                            .IDS_FeatureCovariantReturnsForOverrides
+                                            .GetFeatureAvailabilityDiagnosticInfo(
+                                                this.DeclaringCompilation
+                                            ) is
                                         { } diagnosticInfo
                                     )
                                     {
@@ -1615,11 +1618,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 CompoundUseSiteInfo<AssemblySymbol>.Discarded;
                             if (
                                 overridingProperty.SetMethod is null
-                                && DeclaringCompilation.Conversions.HasIdentityOrImplicitReferenceConversion(
-                                    overridingMemberType.Type,
-                                    overriddenMemberType.Type,
-                                    ref discardedUseSiteInfo
-                                )
+                                && DeclaringCompilation
+                                    .Conversions
+                                    .HasIdentityOrImplicitReferenceConversion(
+                                        overridingMemberType.Type,
+                                        overriddenMemberType.Type,
+                                        ref discardedUseSiteInfo
+                                    )
                             )
                             {
                                 if (
@@ -1638,8 +1643,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 }
                                 else
                                 {
-                                    var diagnosticInfo =
-                                        MessageID.IDS_FeatureCovariantReturnsForOverrides.GetFeatureAvailabilityDiagnosticInfo(
+                                    var diagnosticInfo = MessageID
+                                        .IDS_FeatureCovariantReturnsForOverrides
+                                        .GetFeatureAvailabilityDiagnosticInfo(
                                             this.DeclaringCompilation
                                         );
                                     Debug.Assert(diagnosticInfo is { });
@@ -1853,8 +1859,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     diagnostics,
                     ContainingAssembly
                 );
-                var result =
-                    DeclaringCompilation.Conversions.HasIdentityOrImplicitReferenceConversion(
+                var result = DeclaringCompilation
+                    .Conversions
+                    .HasIdentityOrImplicitReferenceConversion(
                         overridingReturnType.Type,
                         overriddenReturnType.Type,
                         ref useSiteInfo
@@ -2556,8 +2563,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // does not apply (at least, not straightforwardly), because CanUnifyWith is not
             // transitive and, thus, is not an equivalence relation.
 
-            NamedTypeSymbol[] interfaces =
-                this.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.Keys.ToArray();
+            NamedTypeSymbol[] interfaces = this.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics
+                .Keys
+                .ToArray();
 
             for (int i1 = 0; i1 < numInterfaces; i1++)
             {
@@ -2654,10 +2662,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             //explicit implementations are always respected by the CLR
             if (
-                implementingMethod.ExplicitInterfaceImplementations.Contains(
-                    interfaceMethod,
-                    ExplicitInterfaceImplementationTargetMemberEqualityComparer.Instance
-                )
+                implementingMethod
+                    .ExplicitInterfaceImplementations
+                    .Contains(
+                        interfaceMethod,
+                        ExplicitInterfaceImplementationTargetMemberEqualityComparer.Instance
+                    )
             )
             {
                 return default;
@@ -2675,10 +2685,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // match), then we can just twiddle the metadata virtual bit.  Otherwise, we need
                 // to create an explicit implementation that delegates to the real implementation.
                 if (
-                    MemberSignatureComparer.RuntimeImplicitImplementationComparer.Equals(
-                        implementingMethod,
-                        interfaceMethod
-                    )
+                    MemberSignatureComparer
+                        .RuntimeImplicitImplementationComparer
+                        .Equals(implementingMethod, interfaceMethod)
                     && IsOverrideOfPossibleImplementationUnderRuntimeRules(
                         implementingMethod,
                         @interfaceMethod.ContainingType
@@ -2737,10 +2746,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                 }
                 else if (
-                    MemberSignatureComparer.RuntimeExplicitImplementationSignatureComparer.Equals(
-                        implementingMethod,
-                        interfaceMethod
-                    )
+                    MemberSignatureComparer
+                        .RuntimeExplicitImplementationSignatureComparer
+                        .Equals(implementingMethod, interfaceMethod)
                 )
                 {
                     return (null, (implementingMethod, interfaceMethod));

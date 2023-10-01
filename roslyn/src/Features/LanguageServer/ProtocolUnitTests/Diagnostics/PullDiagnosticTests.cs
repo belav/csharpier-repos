@@ -295,10 +295,10 @@ class A {
             await OpenDocumentAsync(testLspServer, document);
 
             // Ensure we get no diagnostics when feature flag is off.
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                DiagnosticOptionsStorage.LspPullDiagnosticsFeatureFlag,
-                false
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticOptionsStorage.LspPullDiagnosticsFeatureFlag, false);
 
             await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(
                 async () =>
@@ -330,10 +330,10 @@ class A {
             var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
             await OpenDocumentAsync(testLspServer, document);
 
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                DiagnosticOptionsStorage.LspPullDiagnosticsFeatureFlag,
-                true
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticOptionsStorage.LspPullDiagnosticsFeatureFlag, true);
 
             var results = await RunGetDocumentPullDiagnosticsAsync(
                 testLspServer,
@@ -458,8 +458,10 @@ class A {
             var resultId = results.Single().ResultId;
 
             // Create a fake diagnostic to trigger a change in edit and continue, without a document change
-            var encDiagnosticsSource =
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<EditAndContinueDiagnosticUpdateSource>();
+            var encDiagnosticsSource = testLspServer
+                .TestWorkspace
+                .ExportProvider
+                .GetExportedValue<EditAndContinueDiagnosticUpdateSource>();
             var rudeEdits = ImmutableArray.Create(
                 (
                     document.Id,
@@ -1014,10 +1016,12 @@ class B {";
                     Location.Create(context.Compilation.SyntaxTrees.Single(), new TextSpan(0, 10))
             );
 
-            testLspServer.TestWorkspace.OnAnalyzerReferenceAdded(
-                document.Project.Id,
-                new TestGeneratorReference(generator)
-            );
+            testLspServer
+                .TestWorkspace
+                .OnAnalyzerReferenceAdded(
+                    document.Project.Id,
+                    new TestGeneratorReference(generator)
+                );
 
             await OpenDocumentAsync(testLspServer, document);
 
@@ -1047,11 +1051,10 @@ class A
                 useVSDiagnostics
             );
             var firstLocation = testLspServer.GetLocations("first").Single().Range;
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                FadingOptions.FadeOutUnusedImports,
-                LanguageNames.CSharp,
-                true
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(FadingOptions.FadeOutUnusedImports, LanguageNames.CSharp, true);
 
             var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
 
@@ -1103,11 +1106,10 @@ class A
                 useVSDiagnostics
             );
             var firstLocation = testLspServer.GetLocations("first").Single().Range;
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                FadingOptions.FadeOutUnusedImports,
-                LanguageNames.CSharp,
-                false
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(FadingOptions.FadeOutUnusedImports, LanguageNames.CSharp, false);
 
             var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
 
@@ -1297,15 +1299,18 @@ class A {
                 useVSDiagnostics: true
             );
 
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                TaskListOptionsStorage.Descriptors,
-                ImmutableArray.Create(
-                    "HACK:2",
-                    $"TODO:{priString}",
-                    "UNDONE:2",
-                    "UnresolvedMergeConflict:3"
-                )
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    TaskListOptionsStorage.Descriptors,
+                    ImmutableArray.Create(
+                        "HACK:2",
+                        $"TODO:{priString}",
+                        "UNDONE:2",
+                        "UnresolvedMergeConflict:3"
+                    )
+                );
 
             var results = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -1479,10 +1484,12 @@ class A {
                     Location.Create(context.Compilation.SyntaxTrees.Single(), new TextSpan(0, 10))
             );
 
-            testLspServer.TestWorkspace.OnAnalyzerReferenceAdded(
-                document.Project.Id,
-                new TestGeneratorReference(generator)
-            );
+            testLspServer
+                .TestWorkspace
+                .OnAnalyzerReferenceAdded(
+                    document.Project.Id,
+                    new TestGeneratorReference(generator)
+                );
 
             var results = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -1514,10 +1521,12 @@ class A {
                     Location.Create(context.Compilation.SyntaxTrees.Single(), new TextSpan(0, 10))
             );
 
-            testLspServer.TestWorkspace.OnAnalyzerReferenceAdded(
-                testLspServer.GetCurrentSolution().Projects.Single().Id,
-                new TestGeneratorReference(generator)
-            );
+            testLspServer
+                .TestWorkspace
+                .OnAnalyzerReferenceAdded(
+                    testLspServer.GetCurrentSolution().Projects.Single().Id,
+                    new TestGeneratorReference(generator)
+                );
 
             var results = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -1632,9 +1641,9 @@ class A {
             Assert.Empty(results[1].Diagnostics);
             Assert.Empty(results[2].Diagnostics);
 
-            testLspServer.TestWorkspace.OnDocumentRemoved(
-                testLspServer.TestWorkspace.Documents.First().Id
-            );
+            testLspServer
+                .TestWorkspace
+                .OnDocumentRemoved(testLspServer.TestWorkspace.Documents.First().Id);
 
             var results2 = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -1770,10 +1779,12 @@ class A {
 
             // Hacky, but we need to close the document manually since editing the text-buffer will open it in the
             // test-workspace.
-            testLspServer.TestWorkspace.OnDocumentClosed(
-                document.Id,
-                TextLoader.From(TextAndVersion.Create(text, VersionStamp.Create()))
-            );
+            testLspServer
+                .TestWorkspace
+                .OnDocumentClosed(
+                    document.Id,
+                    TextLoader.From(TextAndVersion.Create(text, VersionStamp.Create()))
+                );
 
             var results2 = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -1912,10 +1923,9 @@ class A {";
                     )
                 )
             );
-            await testLspServer.TestWorkspace.ChangeDocumentAsync(
-                csproj2Document.Id,
-                newCsProj2Document.Project.Solution
-            );
+            await testLspServer
+                .TestWorkspace
+                .ChangeDocumentAsync(csproj2Document.Id, newCsProj2Document.Project.Solution);
 
             // Get updated workspace diagnostics for the change.
             var previousResultIds = CreateDiagnosticParamsFromPreviousReports(results);
@@ -2017,7 +2027,8 @@ class A {";
                     )
                 )
             );
-            await testLspServer.TestWorkspace
+            await testLspServer
+                .TestWorkspace
                 .ChangeDocumentAsync(csproj3Document.Id, newCsProj3Document.Project.Solution)
                 .ConfigureAwait(false);
 
@@ -2114,10 +2125,9 @@ class A {";
                     )
                 )
             );
-            await testLspServer.TestWorkspace.ChangeDocumentAsync(
-                csproj2Document.Id,
-                newCsProj2Document.Project.Solution
-            );
+            await testLspServer
+                .TestWorkspace
+                .ChangeDocumentAsync(csproj2Document.Id, newCsProj2Document.Project.Solution);
 
             // Get updated workspace diagnostics for the change.
             var previousResultIds = CreateDiagnosticParamsFromPreviousReports(results);
@@ -2195,7 +2205,9 @@ class A {";
             Assert.Equal("CS1001", results[2].Diagnostics.Single().Code);
 
             // Change and reload the project via the workspace.
-            var projectInfo = testLspServer.TestWorkspace.Projects
+            var projectInfo = testLspServer
+                .TestWorkspace
+                .Projects
                 .Where(p => p.AssemblyName == "CSProj2")
                 .Single()
                 .ToProjectInfo();
@@ -2203,8 +2215,10 @@ class A {";
                 projectInfo.CompilationOptions!.WithPlatform(Platform.X64)
             );
             testLspServer.TestWorkspace.OnProjectReloaded(projectInfo);
-            var operations =
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = testLspServer
+                .TestWorkspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await operations.GetWaiter(FeatureAttribute.Workspace).ExpeditedWaitAsync();
 
             // Get updated workspace diagnostics for the change.
@@ -2276,13 +2290,17 @@ class A {";
             Assert.Equal("CS1001", results[2].Diagnostics.Single().Code);
 
             // Reload the project via the workspace.
-            var projectInfo = testLspServer.TestWorkspace.Projects
+            var projectInfo = testLspServer
+                .TestWorkspace
+                .Projects
                 .Where(p => p.AssemblyName == "CSProj2")
                 .Single()
                 .ToProjectInfo();
             testLspServer.TestWorkspace.OnProjectReloaded(projectInfo);
-            var operations =
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = testLspServer
+                .TestWorkspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await operations.GetWaiter(FeatureAttribute.Workspace).ExpeditedWaitAsync();
 
             // Get updated workspace diagnostics for the change.
@@ -2355,13 +2373,17 @@ class A {";
             Assert.Equal("CS0246", results[0].Diagnostics.Single().Code);
 
             // Reload the project via the workspace.
-            var projectInfo = testLspServer.TestWorkspace.Projects
+            var projectInfo = testLspServer
+                .TestWorkspace
+                .Projects
                 .Where(p => p.AssemblyName == "CSProj2")
                 .Single()
                 .ToProjectInfo();
             testLspServer.TestWorkspace.OnProjectReloaded(projectInfo);
-            var operations =
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = testLspServer
+                .TestWorkspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await operations.GetWaiter(FeatureAttribute.Workspace).ExpeditedWaitAsync();
 
             // Get updated workspace diagnostics for the change.

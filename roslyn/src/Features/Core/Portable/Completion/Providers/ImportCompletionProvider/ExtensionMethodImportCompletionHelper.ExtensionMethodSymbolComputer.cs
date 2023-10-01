@@ -307,9 +307,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (
                     !(
                         index.ContainsExtensionMethod
-                        && _originatingSemanticModel.Compilation.GetAssemblyOrModuleSymbol(
-                            peReference
-                        )
+                        && _originatingSemanticModel
+                            .Compilation
+                            .GetAssemblyOrModuleSymbol(peReference)
                             is IAssemblySymbol assembly
                     )
                 )
@@ -318,10 +318,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 }
 
                 var filter = CreateAggregatedFilter(index);
-                var internalsVisible =
-                    _originatingSemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        assembly
-                    );
+                var internalsVisible = _originatingSemanticModel
+                    .Compilation
+                    .Assembly
+                    .IsSameAssemblyOrHasFriendAccessTo(assembly);
 
                 var matchingMethodSymbols = GetPotentialMatchingSymbolsFromAssembly(
                     assembly,

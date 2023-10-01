@@ -285,12 +285,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     {
                         if (
                             aliasQualifiedName.Name is SimpleNameSyntax
-                            && !aliasQualifiedName.Name.Identifier.HasAnnotations(
-                                AliasAnnotation.Kind
-                            )
-                            && !aliasQualifiedName.Name.HasAnnotation(
-                                Simplifier.SpecialTypeAnnotation
-                            )
+                            && !aliasQualifiedName
+                                .Name
+                                .Identifier
+                                .HasAnnotations(AliasAnnotation.Kind)
+                            && !aliasQualifiedName
+                                .Name
+                                .HasAnnotation(Simplifier.SpecialTypeAnnotation)
                         )
                         {
                             nameHasNoAlias = true;
@@ -432,17 +433,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 switch (name.Kind())
                 {
                     case SyntaxKind.AliasQualifiedName:
-                        var simpleName = ((AliasQualifiedNameSyntax)name).Name.WithLeadingTrivia(
-                            name.GetLeadingTrivia()
-                        );
+                        var simpleName = ((AliasQualifiedNameSyntax)name)
+                            .Name
+                            .WithLeadingTrivia(name.GetLeadingTrivia());
 
                         simpleName = simpleName.ReplaceToken(
                             simpleName.Identifier,
-                            ((AliasQualifiedNameSyntax)name).Name.Identifier.CopyAnnotationsTo(
-                                simpleName.Identifier.WithLeadingTrivia(
-                                    ((AliasQualifiedNameSyntax)name).Alias.Identifier.LeadingTrivia
+                            ((AliasQualifiedNameSyntax)name)
+                                .Name
+                                .Identifier
+                                .CopyAnnotationsTo(
+                                    simpleName
+                                        .Identifier
+                                        .WithLeadingTrivia(
+                                            ((AliasQualifiedNameSyntax)name)
+                                                .Alias
+                                                .Identifier
+                                                .LeadingTrivia
+                                        )
                                 )
-                            )
                         );
 
                         replacementNode = simpleName;
@@ -452,9 +461,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         break;
 
                     case SyntaxKind.QualifiedName:
-                        replacementNode = ((QualifiedNameSyntax)name).Right.WithLeadingTrivia(
-                            name.GetLeadingTrivia()
-                        );
+                        replacementNode = ((QualifiedNameSyntax)name)
+                            .Right
+                            .WithLeadingTrivia(name.GetLeadingTrivia());
                         issueSpan = ((QualifiedNameSyntax)name).Left.Span;
 
                         break;
@@ -667,10 +676,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                     // an attribute that should keep it (unnecessary "Attribute" suffix should be annotated with a DontSimplifyAnnotation
                     if (
                         identifierToken.ValueText != AttributeName
-                        && identifierToken.ValueText.EndsWith(
-                            AttributeName,
-                            StringComparison.Ordinal
-                        )
+                        && identifierToken
+                            .ValueText
+                            .EndsWith(AttributeName, StringComparison.Ordinal)
                         && !identifierToken.HasAnnotation(
                             SimplificationHelpers.DontSimplifyAnnotation
                         )

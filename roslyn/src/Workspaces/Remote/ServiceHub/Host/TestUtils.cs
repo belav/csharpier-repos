@@ -185,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     set.AppendChecksums(projectChecksums);
 
                     foreach (
-                        var documentChecksum in projectChecksums.Documents
+                        var documentChecksum in projectChecksums
+                            .Documents
                             .Concat(projectChecksums.AdditionalDocuments)
                             .Concat(projectChecksums.AnalyzerConfigDocuments)
                     )
@@ -253,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             if (projectId == null)
             {
-                var solutionChecksums = await solution.State
+                var solutionChecksums = await solution
+                    .State
                     .GetStateChecksumsAsync(cancellationToken)
                     .ConfigureAwait(false);
                 await solutionChecksums
@@ -265,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Remote
             }
             else
             {
-                var solutionChecksums = await solution.State
+                var solutionChecksums = await solution
+                    .State
                     .GetStateChecksumsAsync(projectId, cancellationToken)
                     .ConfigureAwait(false);
                 await solutionChecksums
@@ -297,7 +300,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 return;
             }
 
-            var projectChecksums = await project.State
+            var projectChecksums = await project
+                .State
                 .GetStateChecksumsAsync(cancellationToken)
                 .ConfigureAwait(false);
             await projectChecksums
@@ -305,12 +309,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 .ConfigureAwait(false);
 
             foreach (
-                var document in project.Documents
+                var document in project
+                    .Documents
                     .Concat(project.AdditionalDocuments)
                     .Concat(project.AnalyzerConfigDocuments)
             )
             {
-                var documentChecksums = await document.State
+                var documentChecksums = await document
+                    .State
                     .GetStateChecksumsAsync(cancellationToken)
                     .ConfigureAwait(false);
                 await documentChecksums

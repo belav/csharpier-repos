@@ -25,8 +25,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         [WpfFact]
         public void Verify_Color_Of_Some_Tokens()
         {
-            VisualStudio.Editor.SetText(
-                @"Imports System
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"Imports System
 Imports MathAlias = System.Math
 Namespace Acme
     ''' <summary>innertext
@@ -40,7 +42,7 @@ Namespace Acme
         End Sub
     End Class
 End Namespace"
-            );
+                );
 
             VisualStudio.Editor.PlaceCaret("MathAlias");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "identifier");
@@ -57,9 +59,10 @@ End Namespace"
             VisualStudio.Editor.PlaceCaret("CDATA");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "xml doc comment - delimiter");
             VisualStudio.Editor.PlaceCaret("cdata");
-            VisualStudio.Editor.Verify.CurrentTokenType(
-                tokenType: "xml doc comment - cdata section"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentTokenType(tokenType: "xml doc comment - cdata section");
             VisualStudio.Editor.PlaceCaret("attribute");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "identifier");
             VisualStudio.Editor.PlaceCaret("Class");
@@ -75,13 +78,15 @@ End Namespace"
         [WpfFact]
         public void Semantic_Classification()
         {
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 Imports System
 Class Goo
     Inherits Attribute
 End Class"
-            );
+                );
             VisualStudio.Editor.PlaceCaret("Goo");
             VisualStudio.Editor.Verify.CurrentTokenType(tokenType: "class name");
             VisualStudio.Editor.PlaceCaret("Attribute");

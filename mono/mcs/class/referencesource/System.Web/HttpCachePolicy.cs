@@ -323,9 +323,11 @@ namespace System.Web
                 );
 
                 HttpCacheValidateHandler handler = _validationCallbackInfo[i].handler;
-                string targetTypeName = System.Web.UI.Util.GetAssemblyQualifiedTypeName(
-                    handler.Method.ReflectedType
-                );
+                string targetTypeName = System
+                    .Web
+                    .UI
+                    .Util
+                    .GetAssemblyQualifiedTypeName(handler.Method.ReflectedType);
                 string methodName = handler.Method.Name;
                 callbackInfos[2 * i] = targetTypeName;
                 callbackInfos[2 * i + 1] = methodName;

@@ -5,9 +5,9 @@ class Program
 {
     static int Main()
     {
-        System.Console.WriteLine(
-            System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
-        );
+        System
+            .Console
+            .WriteLine(System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
         CallC();
         CallB();
         CallC2();

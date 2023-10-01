@@ -112,7 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         public virtual async Task SelectComposed()
         {
             var sql = @"SELECT * FROM ""Products""";
-            var query = _context.Products
+            var query = _context
+                .Products
 #if OLD_FROM_SQL
                 .FromSql(sql)
 #else

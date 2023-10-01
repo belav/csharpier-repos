@@ -252,12 +252,16 @@ namespace MonoTests.System.Windows.Forms
 
             B1 = new Button();
             ImageList ImageList1 = new ImageList();
-            ImageList1.Images.Add(
-                Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
-            );
-            ImageList1.Images.Add(
-                Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
-            );
+            ImageList1
+                .Images
+                .Add(
+                    Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
+                );
+            ImageList1
+                .Images
+                .Add(
+                    Image.FromFile(TestResourceHelper.GetFullPathOfResource("Test/resources/M.gif"))
+                );
             Assert.AreEqual(2, ImageList1.Images.Count, "#3b");
             B1.ImageList = ImageList1;
             Assert.AreEqual(-1, B1.ImageIndex, "#3c");

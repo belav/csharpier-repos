@@ -162,14 +162,22 @@ namespace System
             catch
             {
                 System.Diagnostics.Log.Trace("Exception thrown in logging." + Environment.NewLine);
-                System.Diagnostics.Log.Trace(
-                    "Switch was: "
-                        + ((switchName == null) ? "<null>" : switchName)
-                        + Environment.NewLine
-                );
-                System.Diagnostics.Log.Trace(
-                    "Message was: " + ((message == null) ? "<null>" : message) + Environment.NewLine
-                );
+                System
+                    .Diagnostics
+                    .Log
+                    .Trace(
+                        "Switch was: "
+                            + ((switchName == null) ? "<null>" : switchName)
+                            + Environment.NewLine
+                    );
+                System
+                    .Diagnostics
+                    .Log
+                    .Trace(
+                        "Message was: "
+                            + ((message == null) ? "<null>" : message)
+                            + Environment.NewLine
+                    );
             }
         }
 
@@ -329,11 +337,14 @@ namespace System
                 }
                 sb.Append(s);
             }
-            System.Diagnostics.Log.LogMessage(
-                (LoggingLevels)((int)level),
-                logSwitch,
-                StringBuilderCache.GetStringAndRelease(sb)
-            );
+            System
+                .Diagnostics
+                .Log
+                .LogMessage(
+                    (LoggingLevels)((int)level),
+                    logSwitch,
+                    StringBuilderCache.GetStringAndRelease(sb)
+                );
         }
 
         // Note this overload doesn't take a format string.  You probably don't
@@ -378,11 +389,14 @@ namespace System
             }
 
             sb.Append(Environment.NewLine);
-            System.Diagnostics.Log.LogMessage(
-                LoggingLevels.TraceLevel0,
-                logSwitch,
-                StringBuilderCache.GetStringAndRelease(sb)
-            );
+            System
+                .Diagnostics
+                .Log
+                .LogMessage(
+                    LoggingLevels.TraceLevel0,
+                    logSwitch,
+                    StringBuilderCache.GetStringAndRelease(sb)
+                );
         }
 
         [Pure]
@@ -405,11 +419,14 @@ namespace System
             sb.AppendFormat(format, messages);
             sb.Append(Environment.NewLine);
 
-            System.Diagnostics.Log.LogMessage(
-                LoggingLevels.TraceLevel0,
-                logSwitch,
-                StringBuilderCache.GetStringAndRelease(sb)
-            );
+            System
+                .Diagnostics
+                .Log
+                .LogMessage(
+                    LoggingLevels.TraceLevel0,
+                    logSwitch,
+                    StringBuilderCache.GetStringAndRelease(sb)
+                );
         }
 
         [Conditional("_LOGGING")]
@@ -429,11 +446,10 @@ namespace System
             }
 
             StackTrace trace = new StackTrace();
-            System.Diagnostics.Log.LogMessage(
-                LoggingLevels.TraceLevel0,
-                logSwitch,
-                trace.ToString()
-            );
+            System
+                .Diagnostics
+                .Log
+                .LogMessage(LoggingLevels.TraceLevel0, logSwitch, trace.ToString());
         }
 
         // For logging errors related to the console - we often can't expect to
@@ -482,11 +498,14 @@ namespace System
             {
                 Log("PERF", "BCL Perf Warning: " + msg);
             }
-            System.Diagnostics.Assert.Check(
-                expr,
-                "BCL Perf Warning: Your perf may be less than perfect because...",
-                msg
-            );
+            System
+                .Diagnostics
+                .Assert
+                .Check(
+                    expr,
+                    "BCL Perf Warning: Your perf may be less than perfect because...",
+                    msg
+                );
         }
 
         // For correctness-related asserts.  On a debug build, set the registry key
@@ -516,11 +535,10 @@ namespace System
             {
                 Log("CORRECTNESS", "BCL Correctness Warning: " + msg);
             }
-            System.Diagnostics.Assert.Check(
-                expr,
-                "BCL Correctness Warning: Your program may not work because...",
-                msg
-            );
+            System
+                .Diagnostics
+                .Assert
+                .Check(expr, "BCL Correctness Warning: Your program may not work because...", msg);
 #endif
         }
 

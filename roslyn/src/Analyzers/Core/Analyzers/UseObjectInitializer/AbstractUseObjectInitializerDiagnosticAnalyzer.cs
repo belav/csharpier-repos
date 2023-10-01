@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
 
         protected AbstractUseObjectInitializerDiagnosticAnalyzer()
             : base(
-                ImmutableDictionary<DiagnosticDescriptor, IOption2>.Empty
+                ImmutableDictionary<DiagnosticDescriptor, IOption2>
+                    .Empty
                     .Add(s_descriptor, CodeStyleOptions2.PreferObjectInitializer)
                     .Add(s_unnecessaryCodeDescriptor, CodeStyleOptions2.PreferObjectInitializer)
             ) { }

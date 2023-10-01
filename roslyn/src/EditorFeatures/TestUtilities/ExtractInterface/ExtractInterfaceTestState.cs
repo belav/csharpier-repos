@@ -25,10 +25,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
 {
     internal class ExtractInterfaceTestState : IDisposable
     {
-        public static readonly TestComposition Composition =
-            EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(TestExtractInterfaceOptionsService)
-            );
+        public static readonly TestComposition Composition = EditorTestCompositions
+            .EditorFeatures
+            .AddParts(typeof(TestExtractInterfaceOptionsService));
 
         private readonly TestHostDocument _testDocument;
         public TestWorkspace Workspace { get; }
@@ -91,7 +90,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             get
             {
                 return (TestExtractInterfaceOptionsService)
-                    ExtractFromDocument.Project.Solution.Services.GetService<IExtractInterfaceOptionsService>();
+                    ExtractFromDocument
+                        .Project
+                        .Solution
+                        .Services
+                        .GetService<IExtractInterfaceOptionsService>();
             }
         }
 

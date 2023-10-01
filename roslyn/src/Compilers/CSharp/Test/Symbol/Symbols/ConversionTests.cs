@@ -2237,7 +2237,8 @@ public class Program
             var tuple = GetBindingNodeAndModel<ExpressionSyntax>(comp);
             Assert.Equal(
                 ConversionKind.Identity,
-                tuple.Item2
+                tuple
+                    .Item2
                     .ClassifyConversion(
                         tuple.Item1,
                         comp.GetSpecialType(SpecialType.System_Boolean)

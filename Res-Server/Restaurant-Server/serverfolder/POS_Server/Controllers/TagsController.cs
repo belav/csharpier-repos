@@ -51,7 +51,8 @@ namespace POS_Server.Controllers
                     if (categoryId != 0)
                         searchPredicate.And(x => x.categoryId == categoryId);
 
-                    var tagsList = entity.tags
+                    var tagsList = entity
+                        .tags
                         .Where(searchPredicate)
                         .Select(
                             S =>
@@ -79,7 +80,8 @@ namespace POS_Server.Controllers
                             if (item.isActive == 1)
                             {
                                 long cId = (long)item.tagId;
-                                var casht = entity.items
+                                var casht = entity
+                                    .items
                                     .Where(x => x.tagId == cId)
                                     .Select(x => new { x.tagId })
                                     .FirstOrDefault();
@@ -119,7 +121,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var card = entity.tags
+                    var card = entity
+                        .tags
                         .Where(S => S.tagId == cId)
                         .Select(
                             S =>
@@ -165,7 +168,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var card = entity.tags
+                    var card = entity
+                        .tags
                         .Where(S => S.isActive == isActive)
                         .Select(
                             S =>

@@ -298,9 +298,10 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
                     try
                     {
                         WebRequest request = WebRequest.Create(imageUri);
-                        image = System.Drawing.Image.FromStream(
-                            request.GetResponse().GetResponseStream()
-                        );
+                        image = System
+                            .Drawing
+                            .Image
+                            .FromStream(request.GetResponse().GetResponseStream());
                     }
                     catch (ArgumentException) { }
                     catch (NotSupportedException) { }

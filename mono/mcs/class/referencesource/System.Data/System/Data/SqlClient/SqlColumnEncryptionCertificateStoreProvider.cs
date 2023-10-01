@@ -565,12 +565,9 @@ namespace System.Data.SqlClient
                 certificateStore.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
 
                 // Search for the specified certificate
-                X509Certificate2Collection matchingCertificates =
-                    certificateStore.Certificates.Find(
-                        X509FindType.FindByThumbprint,
-                        thumbprint,
-                        false
-                    );
+                X509Certificate2Collection matchingCertificates = certificateStore
+                    .Certificates
+                    .Find(X509FindType.FindByThumbprint, thumbprint, false);
 
                 // Throw an exception if a cert with the specified thumbprint is not found
                 if (matchingCertificates == null || matchingCertificates.Count == 0)

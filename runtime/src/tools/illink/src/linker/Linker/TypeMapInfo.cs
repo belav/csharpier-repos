@@ -169,9 +169,9 @@ namespace Mono.Linker
             foreach (var interfaceImpl in type.GetInflatedInterfaces(context))
             {
                 foreach (
-                    MethodReference interfaceMethod in interfaceImpl.InflatedInterface.GetMethods(
-                        context
-                    )
+                    MethodReference interfaceMethod in interfaceImpl
+                        .InflatedInterface
+                        .GetMethods(context)
                 )
                 {
                     MethodDefinition? resolvedInterfaceMethod = context.TryResolve(interfaceMethod);

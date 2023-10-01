@@ -292,9 +292,9 @@ namespace MonoTests.System.Security.Cryptography
                 0xeb,
                 0x2b
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq");
 
             string testName = className + " 6";
             RIPEMD160_a(testName, hash, input, result);
@@ -333,9 +333,9 @@ namespace MonoTests.System.Security.Cryptography
                 0x51,
                 0x89
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
 
             string testName = className + " 6";
             RIPEMD160_a(testName, hash, input, result);
@@ -374,9 +374,11 @@ namespace MonoTests.System.Security.Cryptography
                 0x6b,
                 0xfb
             };
-            byte[] input = Encoding.Default.GetBytes(
-                "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
-            );
+            byte[] input = Encoding
+                .Default
+                .GetBytes(
+                    "12345678901234567890123456789012345678901234567890123456789012345678901234567890"
+                );
 
             string testName = className + " 7";
             RIPEMD160_a(testName, hash, input, result);

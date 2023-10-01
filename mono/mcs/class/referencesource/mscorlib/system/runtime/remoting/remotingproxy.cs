@@ -476,10 +476,9 @@ namespace System.Runtime.Remoting.Proxies
                     "RemotingProxy.Invoke: Calling AsyncProcessMsg on the envoy chain\n"
                 );
 
-                cc = idObj.EnvoyChain.AsyncProcessMessage(
-                    cpyMsg,
-                    ((callType & Message.OneWay) != 0) ? null : ar
-                );
+                cc = idObj
+                    .EnvoyChain
+                    .AsyncProcessMessage(cpyMsg, ((callType & Message.OneWay) != 0) ? null : ar);
             }
             else
             {
@@ -551,7 +550,8 @@ namespace System.Runtime.Remoting.Proxies
                         case Message.BeginAsync:
                         case Message.BeginAsync | Message.OneWay:
                             // pick up call context from the thread
-                            m.Properties[Message.CallContextKey] = Thread.CurrentThread
+                            m.Properties[Message.CallContextKey] = Thread
+                                .CurrentThread
                                 .GetMutableExecutionContext()
                                 .LogicalCallContext
                                 .Clone();

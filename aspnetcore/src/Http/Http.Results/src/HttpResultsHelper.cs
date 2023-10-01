@@ -35,11 +35,9 @@ internal static partial class HttpResultsHelper
 
             // In this case the polymorphism is not
             // relevant and we don't need to box.
-            return httpContext.Response.WriteAsJsonAsync(
-                value,
-                options: jsonSerializerOptions,
-                contentType: contentType
-            );
+            return httpContext
+                .Response
+                .WriteAsJsonAsync(value, options: jsonSerializerOptions, contentType: contentType);
         }
 
         var runtimeType = value.GetType();
@@ -50,12 +48,14 @@ internal static partial class HttpResultsHelper
         // and avoid source generators issues.
         // https://github.com/dotnet/aspnetcore/issues/43894
         // https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-polymorphism
-        return httpContext.Response.WriteAsJsonAsync(
-            value,
-            runtimeType,
-            options: jsonSerializerOptions,
-            contentType: contentType
-        );
+        return httpContext
+            .Response
+            .WriteAsJsonAsync(
+                value,
+                runtimeType,
+                options: jsonSerializerOptions,
+                contentType: contentType
+            );
     }
 
     public static Task WriteResultAsContentAsync(

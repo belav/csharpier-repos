@@ -123,10 +123,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             }
 
             var window = _vsInteractiveWindow.InteractiveWindow;
-            window.TextView.Options.SetOptionValue(
-                DefaultTextViewHostOptions.SuggestionMarginId,
-                true
-            );
+            window
+                .TextView
+                .Options
+                .SetOptionValue(DefaultTextViewHostOptions.SuggestionMarginId, true);
 
             void closeEventDelegate(object sender, EventArgs e)
             {

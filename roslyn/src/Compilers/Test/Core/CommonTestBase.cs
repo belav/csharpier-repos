@@ -441,7 +441,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (parseOptions == null)
             {
-                parseOptions = CSharp.CSharpParseOptions.Default
+                parseOptions = CSharp
+                    .CSharpParseOptions
+                    .Default
                     .WithLanguageVersion(CSharp.LanguageVersion.Default)
                     .WithDocumentationMode(DocumentationMode.None);
             }
@@ -470,17 +472,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             AddReferencedCompilations(referencedCompilations, references);
 
-            var tree = CSharp.SyntaxFactory.ParseSyntaxTree(
-                SourceText.From(code, encoding: null, SourceHashAlgorithms.Default),
-                options: parseOptions
-            );
+            var tree = CSharp
+                .SyntaxFactory
+                .ParseSyntaxTree(
+                    SourceText.From(code, encoding: null, SourceHashAlgorithms.Default),
+                    options: parseOptions
+                );
 
-            return CSharp.CSharpCompilation.Create(
-                assemblyName,
-                new[] { tree },
-                references,
-                compilationOptions
-            );
+            return CSharp
+                .CSharpCompilation
+                .Create(assemblyName, new[] { tree }, references, compilationOptions);
         }
 
         protected VisualBasic.VisualBasicCompilation CreateVisualBasicCompilation(
@@ -590,19 +591,18 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var trees = new SyntaxTree[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
-                trees[i] = VisualBasic.VisualBasicSyntaxTree.ParseText(
-                    SourceText.From(files[i], encoding, SourceHashAlgorithms.Default),
-                    options: parseOptions,
-                    path: sourceFileNames?[i]
-                );
+                trees[i] = VisualBasic
+                    .VisualBasicSyntaxTree
+                    .ParseText(
+                        SourceText.From(files[i], encoding, SourceHashAlgorithms.Default),
+                        options: parseOptions,
+                        path: sourceFileNames?[i]
+                    );
             }
 
-            return VisualBasic.VisualBasicCompilation.Create(
-                assemblyName,
-                trees,
-                references,
-                compilationOptions
-            );
+            return VisualBasic
+                .VisualBasicCompilation
+                .Create(assemblyName, trees, references, compilationOptions);
         }
 
         private void AddReferencedCompilations(

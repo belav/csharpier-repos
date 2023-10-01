@@ -445,7 +445,8 @@ namespace POS_Server.Models.VM
                     int count = entity.TokensTable.Count();
                     if (count > blackListSize)
                     {
-                        var lastN = entity.TokensTable
+                        var lastN = entity
+                            .TokensTable
                             .OrderBy(x => x.createDate)
                             .Take(count - blackListSize + blackListSize / 2);
                         try

@@ -698,9 +698,9 @@
                 if (snappedConnectionPoint != null)
                 {
                     foreach (
-                        ConnectionPoint connectionPoint in snappedConnectionPoint.AssociatedDesigner.GetConnectionPoints(
-                            DesignerEdges.All
-                        )
+                        ConnectionPoint connectionPoint in snappedConnectionPoint
+                            .AssociatedDesigner
+                            .GetConnectionPoints(DesignerEdges.All)
                     )
                     {
                         if (!snappableConnectionPoints.Contains(connectionPoint))

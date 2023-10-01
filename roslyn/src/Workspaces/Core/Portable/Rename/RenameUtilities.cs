@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Rename
             CancellationToken cancellationToken
         )
         {
-            var bindableToken = semanticModel.SyntaxTree
+            var bindableToken = semanticModel
+                .SyntaxTree
                 .GetRoot(cancellationToken)
                 .FindToken(position, findInsideTrivia: true);
             var semanticInfo = semanticModel.GetSemanticInfo(
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Rename
             }
             else
             {
-                var documentsOfRenameSymbolDeclaration = symbol.Locations
+                var documentsOfRenameSymbolDeclaration = symbol
+                    .Locations
                     .Where(l => l.IsInSource)
                     .Select(l => solution.GetRequiredDocument(l.SourceTree!));
                 var projectIdsOfRenameSymbolDeclaration = documentsOfRenameSymbolDeclaration

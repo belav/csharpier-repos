@@ -34,9 +34,10 @@ namespace System.Workflow.ComponentModel
             // Populate the child collection.
             IList<Activity> activeContexts =
                 (IList<Activity>)
-                    this.ownerContext.Activity.ContextActivity.GetValue(
-                        Activity.ActiveExecutionContextsProperty
-                    );
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .GetValue(Activity.ActiveExecutionContextsProperty);
             if (activeContexts != null)
             {
                 foreach (Activity activeContextActivity in activeContexts)
@@ -112,16 +113,17 @@ namespace System.Workflow.ComponentModel
             // get active context activities and add it to this one
             IList<Activity> activeContexts =
                 (IList<Activity>)
-                    this.ownerContext.Activity.ContextActivity.GetValue(
-                        Activity.ActiveExecutionContextsProperty
-                    );
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .GetValue(Activity.ActiveExecutionContextsProperty);
             if (activeContexts == null)
             {
                 activeContexts = new List<Activity>();
-                this.ownerContext.Activity.ContextActivity.SetValue(
-                    Activity.ActiveExecutionContextsProperty,
-                    activeContexts
-                );
+                this.ownerContext
+                    .Activity
+                    .ContextActivity
+                    .SetValue(Activity.ActiveExecutionContextsProperty, activeContexts);
             }
             activeContexts.Add(copiedActivity);
 
@@ -138,9 +140,10 @@ namespace System.Workflow.ComponentModel
             try
             {
                 // inform workflow runtime
-                this.ownerContext.Activity.WorkflowCoreRuntime.RegisterContextActivity(
-                    copiedActivity
-                );
+                this.ownerContext
+                    .Activity
+                    .WorkflowCoreRuntime
+                    .RegisterContextActivity(copiedActivity);
 
                 // return the new context
                 newExecutionContext = new ActivityExecutionContext(copiedActivity);
@@ -211,14 +214,17 @@ namespace System.Workflow.ComponentModel
 
             // make sure that this is in the active contexts collections
             ActivityExecutionContextInfo childContextInfo =
-                childContext.Activity.ContextActivity.GetValue(
-                    Activity.ActivityExecutionContextInfoProperty
-                ) as ActivityExecutionContextInfo;
+                childContext
+                    .Activity
+                    .ContextActivity
+                    .GetValue(Activity.ActivityExecutionContextInfoProperty)
+                as ActivityExecutionContextInfo;
             IList<Activity> activeContexts =
                 (IList<Activity>)
-                    this.ownerContext.Activity.ContextActivity.GetValue(
-                        Activity.ActiveExecutionContextsProperty
-                    );
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .GetValue(Activity.ActiveExecutionContextsProperty);
             if (
                 activeContexts == null
                 || !activeContexts.Contains(childContext.Activity.ContextActivity)
@@ -231,16 +237,18 @@ namespace System.Workflow.ComponentModel
             {
                 // add it to completed contexts
                 List<ActivityExecutionContextInfo> completedContexts =
-                    this.ownerContext.Activity.ContextActivity.GetValue(
-                        Activity.CompletedExecutionContextsProperty
-                    ) as List<ActivityExecutionContextInfo>;
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .GetValue(Activity.CompletedExecutionContextsProperty)
+                    as List<ActivityExecutionContextInfo>;
                 if (completedContexts == null)
                 {
                     completedContexts = new List<ActivityExecutionContextInfo>();
-                    this.ownerContext.Activity.ContextActivity.SetValue(
-                        Activity.CompletedExecutionContextsProperty,
-                        completedContexts
-                    );
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .SetValue(Activity.CompletedExecutionContextsProperty, completedContexts);
                 }
 
                 if (needsCompensation)
@@ -254,9 +262,10 @@ namespace System.Workflow.ComponentModel
                 completedContexts.Add(childContextInfo);
 
                 // ask runtime to save the context activity
-                this.ownerContext.Activity.WorkflowCoreRuntime.SaveContextActivity(
-                    childContext.Activity
-                );
+                this.ownerContext
+                    .Activity
+                    .WorkflowCoreRuntime
+                    .SaveContextActivity(childContext.Activity);
             }
 
             // remove it from active contexts
@@ -272,19 +281,24 @@ namespace System.Workflow.ComponentModel
                     != ActivityExecutionResult.Uninitialized
             )
             {
-                childContext.Activity.ContextActivity.Uninitialize(
-                    this.ownerContext.Activity.RootActivity.WorkflowCoreRuntime
-                );
-                childContext.Activity.ContextActivity.SetValue(
-                    Activity.ExecutionResultProperty,
-                    ActivityExecutionResult.Uninitialized
-                );
+                childContext
+                    .Activity
+                    .ContextActivity
+                    .Uninitialize(this.ownerContext.Activity.RootActivity.WorkflowCoreRuntime);
+                childContext
+                    .Activity
+                    .ContextActivity
+                    .SetValue(
+                        Activity.ExecutionResultProperty,
+                        ActivityExecutionResult.Uninitialized
+                    );
             }
 
             // unregister it from runtime
-            this.ownerContext.Activity.WorkflowCoreRuntime.UnregisterContextActivity(
-                childContext.Activity
-            );
+            this.ownerContext
+                .Activity
+                .WorkflowCoreRuntime
+                .UnregisterContextActivity(childContext.Activity);
 
             if (!(needsCompensation || forcePersist))
             {
@@ -330,9 +344,11 @@ namespace System.Workflow.ComponentModel
                     throw new ObjectDisposedException("ActivityExecutionContextManager");
 
                 List<ActivityExecutionContextInfo> completedContexts =
-                    this.ownerContext.Activity.ContextActivity.GetValue(
-                        Activity.CompletedExecutionContextsProperty
-                    ) as List<ActivityExecutionContextInfo>;
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .GetValue(Activity.CompletedExecutionContextsProperty)
+                    as List<ActivityExecutionContextInfo>;
                 completedContexts =
                     (completedContexts == null)
                         ? new List<ActivityExecutionContextInfo>()
@@ -354,9 +370,11 @@ namespace System.Workflow.ComponentModel
 
             // Check if child execution context exists.
             IList<ActivityExecutionContextInfo> completedContexts =
-                this.ownerContext.Activity.ContextActivity.GetValue(
-                    Activity.CompletedExecutionContextsProperty
-                ) as IList<ActivityExecutionContextInfo>;
+                this.ownerContext
+                    .Activity
+                    .ContextActivity
+                    .GetValue(Activity.CompletedExecutionContextsProperty)
+                as IList<ActivityExecutionContextInfo>;
             if (completedContexts == null)
                 throw new ArgumentException();
 
@@ -401,9 +419,11 @@ namespace System.Workflow.ComponentModel
             get
             {
                 List<ActivityExecutionContextInfo> completedContexts =
-                    this.ownerContext.Activity.ContextActivity.GetValue(
-                        Activity.CompletedExecutionContextsProperty
-                    ) as List<ActivityExecutionContextInfo>;
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .GetValue(Activity.CompletedExecutionContextsProperty)
+                    as List<ActivityExecutionContextInfo>;
                 completedContexts =
                     (completedContexts == null)
                         ? new List<ActivityExecutionContextInfo>()
@@ -421,19 +441,24 @@ namespace System.Workflow.ComponentModel
 
             // check if child execution context
             IList<ActivityExecutionContextInfo> completedContexts =
-                this.ownerContext.Activity.ContextActivity.GetValue(
-                    Activity.CompletedExecutionContextsProperty
-                ) as IList<ActivityExecutionContextInfo>;
+                this.ownerContext
+                    .Activity
+                    .ContextActivity
+                    .GetValue(Activity.CompletedExecutionContextsProperty)
+                as IList<ActivityExecutionContextInfo>;
             if (completedContexts == null || !completedContexts.Contains(contextInfo))
                 throw new ArgumentException();
 
             // revoke from persistence service
-            Activity revokedActivity = this.ownerContext.WorkflowCoreRuntime.LoadContextActivity(
-                contextInfo,
-                this.ownerContext.Activity.ContextActivity.GetActivityByName(
-                    contextInfo.ActivityQualifiedName
-                )
-            );
+            Activity revokedActivity = this.ownerContext
+                .WorkflowCoreRuntime
+                .LoadContextActivity(
+                    contextInfo,
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .GetActivityByName(contextInfo.ActivityQualifiedName)
+                );
             ((IDependencyObjectAccessor)revokedActivity).InitializeInstanceForRuntime(
                 this.ownerContext.Activity.WorkflowCoreRuntime
             );
@@ -441,32 +466,41 @@ namespace System.Workflow.ComponentModel
             // add it back to active contexts
             IList<Activity> activeContexts =
                 (IList<Activity>)
-                    this.ownerContext.Activity.ContextActivity.GetValue(
-                        Activity.ActiveExecutionContextsProperty
-                    );
+                    this.ownerContext
+                        .Activity
+                        .ContextActivity
+                        .GetValue(Activity.ActiveExecutionContextsProperty);
             if (activeContexts == null)
             {
                 activeContexts = new List<Activity>();
-                this.ownerContext.Activity.ContextActivity.SetValue(
-                    Activity.ActiveExecutionContextsProperty,
-                    activeContexts
-                );
+                this.ownerContext
+                    .Activity
+                    .ContextActivity
+                    .SetValue(Activity.ActiveExecutionContextsProperty, activeContexts);
             }
             activeContexts.Add(revokedActivity);
 
             // inform workflow runtime
-            this.ownerContext.Activity.WorkflowCoreRuntime.RegisterContextActivity(revokedActivity);
+            this.ownerContext
+                .Activity
+                .WorkflowCoreRuntime
+                .RegisterContextActivity(revokedActivity);
 
             // return the new context
             ActivityExecutionContext revokedContext = new ActivityExecutionContext(revokedActivity);
             this.executionContexts.Add(revokedContext);
-            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Revoking context {0}:{1}",
-                revokedContext.ContextId,
-                revokedContext.Activity.ContextActivity.QualifiedName
-            );
+            System
+                .Workflow
+                .Runtime
+                .WorkflowTrace
+                .Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Revoking context {0}:{1}",
+                    revokedContext.ContextId,
+                    revokedContext.Activity.ContextActivity.QualifiedName
+                );
 
             // remove it from completed contexts
             completedContexts.Remove(contextInfo);

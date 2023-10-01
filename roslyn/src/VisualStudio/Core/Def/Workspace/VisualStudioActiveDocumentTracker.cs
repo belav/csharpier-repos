@@ -57,9 +57,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
             ThreadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 var monitorSelectionService = (IVsMonitorSelection?)
                     await asyncServiceProvider
@@ -273,10 +273,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     if (docData is IVsTextBuffer bufferAdapter)
                     {
-                        TextBuffer =
-                            _documentTracker._editorAdaptersFactoryService.GetDocumentBuffer(
-                                bufferAdapter
-                            );
+                        TextBuffer = _documentTracker
+                            ._editorAdaptersFactoryService
+                            .GetDocumentBuffer(bufferAdapter);
 
                         if (
                             TextBuffer != null
@@ -293,10 +292,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 object sender,
                 TextContentChangedEventArgs e
             ) =>
-                _documentTracker.NonRoslynBufferTextChanged?.Invoke(
-                    _documentTracker,
-                    EventArgs.Empty
-                );
+                _documentTracker
+                    .NonRoslynBufferTextChanged
+                    ?.Invoke(_documentTracker, EventArgs.Empty);
 
             /// <summary>
             /// Returns the current DocumentId for this window frame. Care must be made with this value, since "current" could change asynchronously as the document

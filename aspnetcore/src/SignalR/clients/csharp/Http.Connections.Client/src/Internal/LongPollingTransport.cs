@@ -225,7 +225,8 @@ internal sealed partial class LongPollingTransport : ITransport
                 {
                     Log.ReceivedMessages(_logger);
 #if NETCOREAPP
-                    await response.Content
+                    await response
+                        .Content
                         .CopyToAsync(applicationStream, cancellationToken)
                         .ConfigureAwait(false);
 
@@ -233,7 +234,8 @@ internal sealed partial class LongPollingTransport : ITransport
                     await response.Content.CopyToAsync(applicationStream).ConfigureAwait(false);
 #endif
 
-                    var flushResult = await _application.Output
+                    var flushResult = await _application
+                        .Output
                         .FlushAsync(cancellationToken)
                         .ConfigureAwait(false);
 

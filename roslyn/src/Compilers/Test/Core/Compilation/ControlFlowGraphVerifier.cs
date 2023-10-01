@@ -815,7 +815,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             parent
                                 is VisualBasic.Syntax.ConditionalAccessExpressionSyntax conditional
                             && conditional.Expression == syntax
-                            && conditional.WhenNotNull
+                            && conditional
+                                .WhenNotNull
                                 .DescendantNodesAndSelf()
                                 .Any(
                                     n =>
@@ -1177,9 +1178,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         );
                     }
                     else if (
-                        block.EnclosingRegion.EnclosingRegion?.EnclosingRegion.CaptureIds.Contains(
-                            id
-                        ) ?? false
+                        block
+                            .EnclosingRegion
+                            .EnclosingRegion
+                            ?.EnclosingRegion
+                            .CaptureIds
+                            .Contains(id) ?? false
                     )
                     {
                         AssertTrueWithGraph(
@@ -1430,11 +1434,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                     caseStmt == referenceSyntax
                                     || caseStmt.Cases.Contains(referenceSyntax as CaseClauseSyntax)
                                 )
-                                && caseStmt.Cases.Contains(
-                                    applyParenthesizedIfAnyVB(
-                                        (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
-                                    ) as CaseClauseSyntax
-                                )
+                                && caseStmt
+                                    .Cases
+                                    .Contains(
+                                        applyParenthesizedIfAnyVB(
+                                            (VisualBasicSyntaxNode)binOp.RightOperand.Syntax
+                                        ) as CaseClauseSyntax
+                                    )
                             )
                             {
                                 return true;
@@ -1591,9 +1597,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                                 case CSharp.SyntaxKind.ObjectCreationExpression:
                                 case CSharp.SyntaxKind.ImplicitObjectCreationExpression:
                                     if (
-                                        (
-                                            (CSharp.Syntax.BaseObjectCreationExpressionSyntax)syntax
-                                        ).Initializer?.Expressions.Any() == true
+                                        ((CSharp.Syntax.BaseObjectCreationExpressionSyntax)syntax)
+                                            .Initializer
+                                            ?.Expressions
+                                            .Any() == true
                                     )
                                     {
                                         return true;
@@ -1892,7 +1899,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     if (block.BranchValue != null)
                     {
                         foreach (
-                            IFlowCaptureReferenceOperation reference in block.BranchValue
+                            IFlowCaptureReferenceOperation reference in block
+                                .BranchValue
                                 .DescendantsAndSelf()
                                 .OfType<IFlowCaptureReferenceOperation>()
                         )

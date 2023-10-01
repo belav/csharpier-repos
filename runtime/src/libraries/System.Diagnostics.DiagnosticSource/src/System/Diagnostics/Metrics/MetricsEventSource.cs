@@ -438,10 +438,9 @@ namespace System.Diagnostics.Metrics
                         );
                         double refreshIntervalSecs;
                         if (
-                            command.Arguments!.TryGetValue(
-                                "RefreshInterval",
-                                out string? refreshInterval
-                            )
+                            command
+                                .Arguments!
+                                .TryGetValue("RefreshInterval", out string? refreshInterval)
                         )
                         {
                             Parent.Message($"RefreshInterval argument received: {refreshInterval}");
@@ -471,10 +470,9 @@ namespace System.Diagnostics.Metrics
                         int defaultMaxTimeSeries = 1000;
                         int maxTimeSeries;
                         if (
-                            command.Arguments!.TryGetValue(
-                                "MaxTimeSeries",
-                                out string? maxTimeSeriesString
-                            )
+                            command
+                                .Arguments!
+                                .TryGetValue("MaxTimeSeries", out string? maxTimeSeriesString)
                         )
                         {
                             Parent.Message(
@@ -499,10 +497,9 @@ namespace System.Diagnostics.Metrics
                         int defaultMaxHistograms = 20;
                         int maxHistograms;
                         if (
-                            command.Arguments!.TryGetValue(
-                                "MaxHistograms",
-                                out string? maxHistogramsString
-                            )
+                            command
+                                .Arguments!
+                                .TryGetValue("MaxHistograms", out string? maxHistogramsString)
                         )
                         {
                             Parent.Message(

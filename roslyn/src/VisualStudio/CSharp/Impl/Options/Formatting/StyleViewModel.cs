@@ -2288,9 +2288,11 @@ class C2
         {
             var collectionView = (ListCollectionView)
                 CollectionViewSource.GetDefaultView(CodeStyleItems);
-            collectionView.GroupDescriptions.Add(
-                new PropertyGroupDescription(nameof(AbstractCodeStyleOptionViewModel.GroupName))
-            );
+            collectionView
+                .GroupDescriptions
+                .Add(
+                    new PropertyGroupDescription(nameof(AbstractCodeStyleOptionViewModel.GroupName))
+                );
 
             var qualifyGroupTitle = CSharpVSResources.this_preferences_colon;
             var predefinedTypesGroupTitle = CSharpVSResources.predefined_type_preferences_colon;

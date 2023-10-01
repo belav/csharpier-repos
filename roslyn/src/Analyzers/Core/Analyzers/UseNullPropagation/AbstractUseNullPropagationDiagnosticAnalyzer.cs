@@ -53,10 +53,9 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
         private static readonly ImmutableDictionary<
             string,
             string?
-        > s_whenPartIsNullableProperties = ImmutableDictionary<string, string?>.Empty.Add(
-            UseNullPropagationConstants.WhenPartIsNullable,
-            ""
-        );
+        > s_whenPartIsNullableProperties = ImmutableDictionary<string, string?>
+            .Empty
+            .Add(UseNullPropagationConstants.WhenPartIsNullable, "");
 
         protected AbstractUseNullPropagationDiagnosticAnalyzer()
             : base(

@@ -431,45 +431,43 @@ namespace System.Windows.Forms.Theming.Default
                     bounds.Width += (flatButtonSpacing - 2);
                     res = bounds.Width;
                     if (tab.Alignment == TabAlignment.Top || tab.Alignment == TabAlignment.Bottom)
-                        ThemeEngine.Current.CPDrawBorder3D(
-                            dc,
-                            bounds,
-                            Border3DStyle.Etched,
-                            Border3DSide.Right
-                        );
+                        ThemeEngine
+                            .Current
+                            .CPDrawBorder3D(dc, bounds, Border3DStyle.Etched, Border3DSide.Right);
                     else
-                        ThemeEngine.Current.CPDrawBorder3D(
-                            dc,
-                            bounds,
-                            Border3DStyle.Etched,
-                            Border3DSide.Top
-                        );
+                        ThemeEngine
+                            .Current
+                            .CPDrawBorder3D(dc, bounds, Border3DStyle.Etched, Border3DSide.Top);
                     bounds.Width = width;
                 }
 
                 if (is_selected)
                 {
-                    ThemeEngine.Current.CPDrawBorder3D(
-                        dc,
-                        bounds,
-                        Border3DStyle.Sunken,
-                        Border3DSide.Left
-                            | Border3DSide.Right
-                            | Border3DSide.Top
-                            | Border3DSide.Bottom
-                    );
+                    ThemeEngine
+                        .Current
+                        .CPDrawBorder3D(
+                            dc,
+                            bounds,
+                            Border3DStyle.Sunken,
+                            Border3DSide.Left
+                                | Border3DSide.Right
+                                | Border3DSide.Top
+                                | Border3DSide.Bottom
+                        );
                 }
                 else if (tab.Appearance != TabAppearance.FlatButtons)
                 {
-                    ThemeEngine.Current.CPDrawBorder3D(
-                        dc,
-                        bounds,
-                        Border3DStyle.Raised,
-                        Border3DSide.Left
-                            | Border3DSide.Right
-                            | Border3DSide.Top
-                            | Border3DSide.Bottom
-                    );
+                    ThemeEngine
+                        .Current
+                        .CPDrawBorder3D(
+                            dc,
+                            bounds,
+                            Border3DStyle.Raised,
+                            Border3DSide.Left
+                                | Border3DSide.Right
+                                | Border3DSide.Top
+                                | Border3DSide.Bottom
+                        );
                 }
             }
             else
@@ -781,12 +779,9 @@ namespace System.Windows.Forms.Theming.Default
             {
                 Rectangle focus_rect = bounds;
                 focus_rect.Inflate(-2, -2);
-                ThemeEngine.Current.CPDrawFocusRectangle(
-                    dc,
-                    focus_rect,
-                    tab.BackColor,
-                    tab.ForeColor
-                );
+                ThemeEngine
+                    .Current
+                    .CPDrawFocusRectangle(dc, focus_rect, tab.BackColor, tab.ForeColor);
             }
 
             return res;

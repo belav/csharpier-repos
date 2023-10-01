@@ -108,19 +108,22 @@ namespace System.Speech.Internal.SrgsCompiler
             //  For the string blobs, we must explicitly report I/O error since the blobs don't
             //  use the error log facility.
             //
-            System.Diagnostics.Debug.Assert(
-                streamBuffer.Stream.Position - startStreamPosition == header.pszWords
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pszWords);
             streamBuffer.WriteArrayChar(_words.SerializeData(), _words.SerializeSize());
 
-            System.Diagnostics.Debug.Assert(
-                streamBuffer.Stream.Position - startStreamPosition == header.pszSymbols
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pszSymbols);
             streamBuffer.WriteArrayChar(_symbols.SerializeData(), _symbols.SerializeSize());
 
-            System.Diagnostics.Debug.Assert(
-                streamBuffer.Stream.Position - startStreamPosition == header.pRules
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pRules);
             foreach (Rule rule in _rules)
             {
                 rule.Serialize(streamBuffer);
@@ -143,9 +146,10 @@ namespace System.Speech.Internal.SrgsCompiler
             //
             CfgArc dummyArc = new();
 
-            System.Diagnostics.Debug.Assert(
-                streamBuffer.Stream.Position - startStreamPosition == header.pArcs
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pArcs);
             streamBuffer.WriteStream(dummyArc);
 
             int ulWeightOffset = 1;
@@ -164,17 +168,19 @@ namespace System.Speech.Internal.SrgsCompiler
                 );
             }
 
-            System.Diagnostics.Debug.Assert(
-                streamBuffer.Stream.Position - startStreamPosition == header.pWeights
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(streamBuffer.Stream.Position - startStreamPosition == header.pWeights);
             if (_fNeedWeightTable)
             {
                 streamBuffer.WriteArray<float>(pWeights, cArcs);
             }
 
-            System.Diagnostics.Debug.Assert(
-                streamBuffer.Stream.Position - startStreamPosition == header.tags
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(streamBuffer.Stream.Position - startStreamPosition == header.tags);
             if (!semanticInterpretation)
             {
                 foreach (State state in sortedStates)
@@ -205,10 +211,13 @@ namespace System.Speech.Internal.SrgsCompiler
 
             // Write the script references and the IL write after the header so getting it for the grammar
             // Does not require a seek to the end of the file
-            System.Diagnostics.Debug.Assert(
-                header.pScripts == 0
-                    || streamBuffer.Stream.Position - startStreamPosition == header.pScripts
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    header.pScripts == 0
+                        || streamBuffer.Stream.Position - startStreamPosition == header.pScripts
+                );
             foreach (ScriptRef script in _scriptRefs)
             {
                 script.Serialize(_symbols, streamBuffer);
@@ -406,9 +415,10 @@ namespace System.Speech.Internal.SrgsCompiler
                 {
                     int dwSymbolOffset = _symbols.OffsetFromId(iWord);
 
-                    System.Diagnostics.Debug.Assert(
-                        dwSymbolOffset == 0 || _symbols[iWord] == sRule
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Assert(dwSymbolOffset == 0 || _symbols[iWord] == sRule);
 
                     rule =
                         dwSymbolOffset > 0

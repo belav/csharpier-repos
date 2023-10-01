@@ -95,9 +95,14 @@ namespace System.Data.Metadata.Edm
                     {
                         itemAttributes.SetReadOnly();
                     }
-                    System.Threading.Interlocked.CompareExchange<
-                        MetadataCollection<MetadataProperty>
-                    >(ref _itemAttributes, itemAttributes, null);
+                    System
+                        .Threading
+                        .Interlocked
+                        .CompareExchange<MetadataCollection<MetadataProperty>>(
+                            ref _itemAttributes,
+                            itemAttributes,
+                            null
+                        );
                 }
                 return _itemAttributes.AsReadOnlyMetadataCollection();
             }
@@ -283,10 +288,9 @@ namespace System.Data.Metadata.Edm
             if ((flag & MetadataFlags.Readonly) == MetadataFlags.Readonly)
             {
                 Debug.Assert(
-                    System.Convert.ToInt32(
-                        flag & ~MetadataFlags.Readonly,
-                        CultureInfo.InvariantCulture
-                    ) == 0,
+                    System
+                        .Convert
+                        .ToInt32(flag & ~MetadataFlags.Readonly, CultureInfo.InvariantCulture) == 0,
                     "SetFlag() invoked with Readonly and additional flags."
                 );
             }

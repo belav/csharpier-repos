@@ -27,9 +27,11 @@ public class SafeHandleIsClosed
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: Check IsClosed return true when SetHandleAsInvalid method is called  "
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest1: Check IsClosed return true when SetHandleAsInvalid method is called  "
+            );
         try
         {
             MySafeHandle msh = new MySafeHandle();
@@ -56,9 +58,11 @@ public class SafeHandleIsClosed
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest2: Check IsClosed return false when SetHandleAsInvalid method is not called and don't excute any close handle operation  "
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest2: Check IsClosed return false when SetHandleAsInvalid method is not called and don't excute any close handle operation  "
+            );
         try
         {
             MySafeHandle msh = new MySafeHandle();

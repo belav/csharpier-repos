@@ -102,8 +102,9 @@ namespace System.ServiceModel.Discovery
             TextMessageEncodingBindingElement textBE = new TextMessageEncodingBindingElement();
             textBE.MessageVersion = base.DiscoveryVersion.Implementation.MessageVersion;
 
-            UdpTransportBindingElement udpBE =
-                DiscoveryDefaults.Udp.CreateUdpTransportBindingElement();
+            UdpTransportBindingElement udpBE = DiscoveryDefaults
+                .Udp
+                .CreateUdpTransportBindingElement();
             this.udpTransportSettings = new UdpTransportSettings(udpBE);
 
             CustomBinding binding = new CustomBinding();

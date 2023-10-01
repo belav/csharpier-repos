@@ -194,9 +194,11 @@ public class Program
                         continue;
 
                     // The same entry was found with different values in multiple input files.
-                    Console.Error.WriteLine(
-                        $"Constant value mismatch for {entry.Item1}:\n\tOld: {found}\n\tNew: {value}"
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            $"Constant value mismatch for {entry.Item1}:\n\tOld: {found}\n\tNew: {value}"
+                        );
                     continue;
                 }
 

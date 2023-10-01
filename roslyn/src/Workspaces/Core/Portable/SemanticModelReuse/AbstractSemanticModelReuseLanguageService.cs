@@ -71,10 +71,12 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             if (!isEquivalentTo)
                 return null;
 
-            var previousRoot = await previousSemanticModel.SyntaxTree
+            var previousRoot = await previousSemanticModel
+                .SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var currentRoot = await currentBodyNode.SyntaxTree
+            var currentRoot = await currentBodyNode
+                .SyntaxTree
                 .GetRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var previousBodyNode = GetPreviousBodyNode(previousRoot, currentRoot, currentBodyNode);

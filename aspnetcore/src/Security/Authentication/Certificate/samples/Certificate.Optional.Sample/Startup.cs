@@ -57,9 +57,11 @@ public class Startup
                     "/auth",
                     context =>
                     {
-                        return context.Response.WriteAsync(
-                            $"Hello {context.User.Identity.Name} at {context.Request.Host}"
-                        );
+                        return context
+                            .Response
+                            .WriteAsync(
+                                $"Hello {context.User.Identity.Name} at {context.Request.Host}"
+                            );
                     }
                 )
                 .RequireAuthorization();
@@ -68,9 +70,11 @@ public class Startup
                 "{*url}",
                 context =>
                 {
-                    return context.Response.WriteAsync(
-                        $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
-                    );
+                    return context
+                        .Response
+                        .WriteAsync(
+                            $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
+                        );
                 }
             );
         });

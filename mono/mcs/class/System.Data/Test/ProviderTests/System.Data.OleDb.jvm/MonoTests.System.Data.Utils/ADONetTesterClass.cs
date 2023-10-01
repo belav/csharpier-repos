@@ -67,35 +67,70 @@ namespace MonoTests.System.Data.Utils
             oleDBda.InsertCommand.Connection = Conn;
             oleDBda.UpdateCommand.Connection = Conn;
 
-            oleDBda.DeleteCommand.Parameters.Add(
-                new Sys.Data.OleDb.OleDbParameter("EmployeeID", Sys.Data.OleDb.OleDbType.Integer)
-            );
+            oleDBda
+                .DeleteCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OleDb.OleDbParameter(
+                        "EmployeeID",
+                        Sys.Data.OleDb.OleDbType.Integer
+                    )
+                );
             oleDBda.DeleteCommand.Parameters["EmployeeID"].SourceVersion = DataRowVersion.Original;
             oleDBda.DeleteCommand.Parameters["EmployeeID"].SourceColumn = "EmployeeID";
 
-            oleDBda.InsertCommand.Parameters.Add(
-                new Sys.Data.OleDb.OleDbParameter("EmployeeID", Sys.Data.OleDb.OleDbType.Integer)
-            );
-            oleDBda.InsertCommand.Parameters.Add(
-                new Sys.Data.OleDb.OleDbParameter("LastName", Sys.Data.OleDb.OleDbType.VarWChar, 20)
-            );
-            oleDBda.InsertCommand.Parameters.Add(
-                new Sys.Data.OleDb.OleDbParameter(
-                    "FirstName",
-                    Sys.Data.OleDb.OleDbType.VarWChar,
-                    10
-                )
-            );
+            oleDBda
+                .InsertCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OleDb.OleDbParameter(
+                        "EmployeeID",
+                        Sys.Data.OleDb.OleDbType.Integer
+                    )
+                );
+            oleDBda
+                .InsertCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OleDb.OleDbParameter(
+                        "LastName",
+                        Sys.Data.OleDb.OleDbType.VarWChar,
+                        20
+                    )
+                );
+            oleDBda
+                .InsertCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OleDb.OleDbParameter(
+                        "FirstName",
+                        Sys.Data.OleDb.OleDbType.VarWChar,
+                        10
+                    )
+                );
             oleDBda.InsertCommand.Parameters["EmployeeID"].SourceColumn = "EmployeeID";
             oleDBda.InsertCommand.Parameters["LastName"].SourceColumn = "LastName";
             oleDBda.InsertCommand.Parameters["FirstName"].SourceColumn = "FirstName";
 
-            oleDBda.UpdateCommand.Parameters.Add(
-                new Sys.Data.OleDb.OleDbParameter("Title", Sys.Data.OleDb.OleDbType.VarWChar, 30)
-            );
-            oleDBda.UpdateCommand.Parameters.Add(
-                new Sys.Data.OleDb.OleDbParameter("EmployeeID", Sys.Data.OleDb.OleDbType.Integer)
-            );
+            oleDBda
+                .UpdateCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OleDb.OleDbParameter(
+                        "Title",
+                        Sys.Data.OleDb.OleDbType.VarWChar,
+                        30
+                    )
+                );
+            oleDBda
+                .UpdateCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.OleDb.OleDbParameter(
+                        "EmployeeID",
+                        Sys.Data.OleDb.OleDbType.Integer
+                    )
+                );
             oleDBda.UpdateCommand.Parameters["EmployeeID"].SourceColumn = "EmployeeID";
             oleDBda.UpdateCommand.Parameters["Title"].SourceColumn = "Title";
 
@@ -124,31 +159,45 @@ namespace MonoTests.System.Data.Utils
             Sqlda.InsertCommand.Connection = Conn;
             Sqlda.UpdateCommand.Connection = Conn;
 
-            Sqlda.DeleteCommand.Parameters.Add(
-                new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32)
-            );
+            Sqlda
+                .DeleteCommand
+                .Parameters
+                .Add(new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32));
             Sqlda.DeleteCommand.Parameters["@EmployeeID"].SourceVersion = DataRowVersion.Original;
             Sqlda.DeleteCommand.Parameters["@EmployeeID"].SourceColumn = "EmployeeID";
 
-            Sqlda.InsertCommand.Parameters.Add(
-                new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32)
-            );
-            Sqlda.InsertCommand.Parameters.Add(
-                new Sys.Data.SqlClient.SqlParameter("@LastName", Sys.Data.SqlDbType.VarChar, 20)
-            );
-            Sqlda.InsertCommand.Parameters.Add(
-                new Sys.Data.SqlClient.SqlParameter("@FirstName", Sys.Data.SqlDbType.VarChar, 10)
-            );
+            Sqlda
+                .InsertCommand
+                .Parameters
+                .Add(new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32));
+            Sqlda
+                .InsertCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.SqlClient.SqlParameter("@LastName", Sys.Data.SqlDbType.VarChar, 20)
+                );
+            Sqlda
+                .InsertCommand
+                .Parameters
+                .Add(
+                    new Sys.Data.SqlClient.SqlParameter(
+                        "@FirstName",
+                        Sys.Data.SqlDbType.VarChar,
+                        10
+                    )
+                );
             Sqlda.InsertCommand.Parameters["@EmployeeID"].SourceColumn = "EmployeeID";
             Sqlda.InsertCommand.Parameters["@LastName"].SourceColumn = "LastName";
             Sqlda.InsertCommand.Parameters["@FirstName"].SourceColumn = "FirstName";
 
-            Sqlda.UpdateCommand.Parameters.Add(
-                new Sys.Data.SqlClient.SqlParameter("@Title", Sys.Data.SqlDbType.VarChar, 30)
-            );
-            Sqlda.UpdateCommand.Parameters.Add(
-                new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32)
-            );
+            Sqlda
+                .UpdateCommand
+                .Parameters
+                .Add(new Sys.Data.SqlClient.SqlParameter("@Title", Sys.Data.SqlDbType.VarChar, 30));
+            Sqlda
+                .UpdateCommand
+                .Parameters
+                .Add(new Sys.Data.SqlClient.SqlParameter("@EmployeeID", DbType.Int32));
             Sqlda.UpdateCommand.Parameters["@EmployeeID"].SourceColumn = "EmployeeID";
             Sqlda.UpdateCommand.Parameters["@Title"].SourceColumn = "Title";
 

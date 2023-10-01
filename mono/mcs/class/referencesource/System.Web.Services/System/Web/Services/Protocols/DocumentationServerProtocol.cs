@@ -274,10 +274,12 @@ namespace System.Web.Services.Protocols
                         Context.Items.Add("wsdlsWithPost", serverType.ServiceDescriptionsWithPost);
                         Context.Items.Add("schemasWithPost", serverType.SchemasWithPost);
                     }
-                    Context.Items.Add(
-                        "conformanceWarnings",
-                        WebServicesSection.Current.EnabledConformanceWarnings
-                    );
+                    Context
+                        .Items
+                        .Add(
+                            "conformanceWarnings",
+                            WebServicesSection.Current.EnabledConformanceWarnings
+                        );
                     Response.ContentType = "text/html";
                     if (this.serverType.UriFixups == null)
                     {

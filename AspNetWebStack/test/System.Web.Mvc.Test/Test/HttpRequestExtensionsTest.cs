@@ -48,8 +48,11 @@ namespace System.Web.Mvc.Test
             );
 
             // Act
-            string methodOverride =
-                context.RequestContext.HttpContext.Request.GetHttpMethodOverride();
+            string methodOverride = context
+                .RequestContext
+                .HttpContext
+                .Request
+                .GetHttpMethodOverride();
 
             // Assert
             Assert.Equal(expectedMethod, methodOverride);

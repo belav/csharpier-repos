@@ -423,9 +423,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             string contractName = this.Translate(
                 reflectionExport.ContractName,
-                reflectionExport.Metadata.GetValue<int[]>(
-                    CompositionConstants.GenericExportParametersOrderMetadataName
-                )
+                reflectionExport
+                    .Metadata
+                    .GetValue<int[]>(CompositionConstants.GenericExportParametersOrderMetadataName)
             );
 
             LazyMemberInfo exportingMember = new LazyMemberInfo(
@@ -480,9 +480,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ContractBasedImportDefinition originalImport
         )
         {
-            int[] importParametersOrder = originalImport.Metadata.GetValue<int[]>(
-                CompositionConstants.GenericImportParametersOrderMetadataName
-            );
+            int[] importParametersOrder = originalImport
+                .Metadata
+                .GetValue<int[]>(CompositionConstants.GenericImportParametersOrderMetadataName);
             if (importParametersOrder != null)
             {
                 Dictionary<string, object> metadata = new Dictionary<string, object>(
@@ -518,16 +518,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 StringComparers.MetadataKeyNames
             );
 
-            string exportTypeIdentity = originalExport.Metadata.GetValue<string>(
-                CompositionConstants.ExportTypeIdentityMetadataName
-            );
+            string exportTypeIdentity = originalExport
+                .Metadata
+                .GetValue<string>(CompositionConstants.ExportTypeIdentityMetadataName);
             if (!string.IsNullOrEmpty(exportTypeIdentity))
             {
                 metadata[CompositionConstants.ExportTypeIdentityMetadataName] = this.Translate(
                     exportTypeIdentity,
-                    originalExport.Metadata.GetValue<int[]>(
-                        CompositionConstants.GenericExportParametersOrderMetadataName
-                    )
+                    originalExport
+                        .Metadata
+                        .GetValue<int[]>(
+                            CompositionConstants.GenericExportParametersOrderMetadataName
+                        )
                 );
             }
             metadata.Remove(CompositionConstants.GenericExportParametersOrderMetadataName);

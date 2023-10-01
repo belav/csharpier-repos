@@ -45,10 +45,9 @@ namespace Mono.Linker.Dataflow
             LinkContext context
         )
         {
-            bool diagnosticsEnabled =
-                !context.Annotations.ShouldSuppressAnalysisWarningsForRequiresUnreferencedCode(
-                    Origin.Provider
-                );
+            bool diagnosticsEnabled = !context
+                .Annotations
+                .ShouldSuppressAnalysisWarningsForRequiresUnreferencedCode(Origin.Provider);
             var diagnosticContext = new DiagnosticContext(Origin, diagnosticsEnabled, context);
 
             foreach (var sourceValue in Source)

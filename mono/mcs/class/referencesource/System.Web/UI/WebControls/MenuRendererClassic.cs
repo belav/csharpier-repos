@@ -150,11 +150,9 @@ namespace System.Web.UI.WebControls
                     // The menu script requires the general webforms script
                     Menu.Page.RegisterWebFormsScript();
                     // Register the external Menu javascript file.
-                    Menu.Page.ClientScript.RegisterClientScriptResource(
-                        Menu,
-                        typeof(Menu),
-                        "Menu.js"
-                    );
+                    Menu.Page
+                        .ClientScript
+                        .RegisterClientScriptResource(Menu, typeof(Menu), "Menu.js");
 
                     string clientDataObjectID = Menu.ClientDataObjectID;
 
@@ -261,10 +259,9 @@ namespace System.Web.UI.WebControls
                         createDataObjectScript.Append(".iframeUrl = '");
                         createDataObjectScript.Append(
                             Util.QuoteJScriptString(
-                                Menu.Page.ClientScript.GetWebResourceUrl(
-                                    typeof(Menu),
-                                    "SmartNav.htm"
-                                ),
+                                Menu.Page
+                                    .ClientScript
+                                    .GetWebResourceUrl(typeof(Menu), "SmartNav.htm"),
                                 false
                             )
                         );
@@ -272,13 +269,15 @@ namespace System.Web.UI.WebControls
                     }
 
                     // Register a startup script that creates a tree data object
-                    Menu.Page.ClientScript.RegisterStartupScript(
-                        Menu,
-                        GetType(),
-                        Menu.ClientID + "_CreateDataObject",
-                        createDataObjectScript.ToString(),
-                        true
-                    );
+                    Menu.Page
+                        .ClientScript
+                        .RegisterStartupScript(
+                            Menu,
+                            GetType(),
+                            Menu.ClientID + "_CreateDataObject",
+                            createDataObjectScript.ToString(),
+                            true
+                        );
                 }
             }
 

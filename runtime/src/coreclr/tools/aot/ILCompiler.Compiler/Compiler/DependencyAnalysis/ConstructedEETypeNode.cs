@@ -98,17 +98,17 @@ namespace ILCompiler.DependencyAnalysis
             }
 
             // Ask the metadata manager if we have any dependencies due to reflectability.
-            factory.MetadataManager.GetDependenciesDueToReflectability(
-                ref dependencyList,
-                factory,
-                _type
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesDueToReflectability(ref dependencyList, factory, _type);
 
-            factory.InteropStubManager.AddInterestingInteropConstructedTypeDependencies(
-                ref dependencyList,
-                factory,
-                _type
-            );
+            factory
+                .InteropStubManager
+                .AddInterestingInteropConstructedTypeDependencies(
+                    ref dependencyList,
+                    factory,
+                    _type
+                );
 
             // Keep track of the default constructor map dependency for this type if it has a default constructor
             // We only do this for reflection blocked types because dataflow analysis is responsible for

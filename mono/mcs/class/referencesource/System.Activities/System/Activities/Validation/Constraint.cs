@@ -50,11 +50,13 @@ namespace System.Activities.Validation
 
             if (validationErrorList == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.AddValidationErrorMustBeCalledFromConstraint(typeof(Constraint).Name)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.AddValidationErrorMustBeCalledFromConstraint(typeof(Constraint).Name)
+                        )
+                    );
             }
 
             validationErrorList.Add(error);
@@ -80,20 +82,27 @@ namespace System.Activities.Validation
 
             if (objectToValidate == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.CannotValidateNullObject(typeof(Constraint).Name, this.DisplayName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.CannotValidateNullObject(typeof(Constraint).Name, this.DisplayName)
+                        )
+                    );
             }
 
             if (objectToValidateContext == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.ValidationContextCannotBeNull(typeof(Constraint).Name, this.DisplayName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.ValidationContextCannotBeNull(
+                                typeof(Constraint).Name,
+                                this.DisplayName
+                            )
+                        )
+                    );
             }
 
             List<ValidationError> validationErrorList = new List<ValidationError>(1);

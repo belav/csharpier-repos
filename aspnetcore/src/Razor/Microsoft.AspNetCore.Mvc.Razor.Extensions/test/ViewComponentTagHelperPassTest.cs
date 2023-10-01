@@ -263,7 +263,8 @@ public class ViewComponentTagHelperPassTest
         // We also expect the default tag helper pass to run first.
         var documentNode = codeDocument.GetDocumentIntermediateNode();
 
-        var defaultTagHelperPass = projectEngine.EngineFeatures
+        var defaultTagHelperPass = projectEngine
+            .EngineFeatures
             .OfType<DefaultTagHelperOptimizationPass>()
             .Single();
         defaultTagHelperPass.Execute(codeDocument, documentNode);

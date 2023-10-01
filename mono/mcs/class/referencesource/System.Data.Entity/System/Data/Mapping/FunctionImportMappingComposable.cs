@@ -83,7 +83,8 @@ namespace System.Data.Mapping
             m_mappingItemCollection = mappingItemCollection;
             // We will use these parameters to target s-space function calls in the generated command tree.
             // Since enums don't exist in s-space we need to use the underlying type.
-            m_commandParameters = functionImport.Parameters
+            m_commandParameters = functionImport
+                .Parameters
                 .Select(
                     p => TypeHelpers.GetPrimitiveTypeUsageForScalar(p.TypeUsage).Parameter(p.Name)
                 )
@@ -370,9 +371,9 @@ namespace System.Data.Mapping
                     this.FunctionImport.Parameters.Contains(targetParameter.Name),
                     "this.FunctionImport.Parameters.Contains(targetParameter.Name)"
                 );
-                var functionImportParameter = this.FunctionImport.Parameters.Single(
-                    p => p.Name == targetParameter.Name
-                );
+                var functionImportParameter = this.FunctionImport
+                    .Parameters
+                    .Single(p => p.Name == targetParameter.Name);
                 yield return m_commandParameters[
                     this.FunctionImport.Parameters.IndexOf(functionImportParameter)
                 ];

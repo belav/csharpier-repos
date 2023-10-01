@@ -28,12 +28,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool IsValidContextForAccessor(CSharpSyntaxContext context)
         {
             if (
-                context.TargetToken.IsAccessorDeclarationContext<PropertyDeclarationSyntax>(
-                    context.Position
-                )
-                || context.TargetToken.IsAccessorDeclarationContext<IndexerDeclarationSyntax>(
-                    context.Position
-                )
+                context
+                    .TargetToken
+                    .IsAccessorDeclarationContext<PropertyDeclarationSyntax>(context.Position)
+                || context
+                    .TargetToken
+                    .IsAccessorDeclarationContext<IndexerDeclarationSyntax>(context.Position)
             )
             {
                 return CheckPreviousAccessibilityModifiers(context);

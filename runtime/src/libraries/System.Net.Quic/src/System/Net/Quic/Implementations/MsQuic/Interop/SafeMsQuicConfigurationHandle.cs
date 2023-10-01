@@ -207,15 +207,18 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             using var msquicBuffers = new MsQuicBuffers();
             msquicBuffers.Initialize(alpnProtocols, alpnProtocol => alpnProtocol.Protocol);
             ThrowIfFailure(
-                MsQuicApi.Api.ApiTable->ConfigurationOpen(
-                    MsQuicApi.Api.Registration.QuicHandle,
-                    msquicBuffers.Buffers,
-                    (uint)alpnProtocols.Count,
-                    &settings,
-                    (uint)sizeof(QUIC_SETTINGS),
-                    (void*)IntPtr.Zero,
-                    &handle
-                ),
+                MsQuicApi
+                    .Api
+                    .ApiTable
+                    ->ConfigurationOpen(
+                        MsQuicApi.Api.Registration.QuicHandle,
+                        msquicBuffers.Buffers,
+                        (uint)alpnProtocols.Count,
+                        &settings,
+                        (uint)sizeof(QUIC_SETTINGS),
+                        (void*)IntPtr.Zero,
+                        &handle
+                    ),
                 "ConfigurationOpen failed"
             );
             configurationHandle = new SafeMsQuicConfigurationHandle(handle);
@@ -244,10 +247,10 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                     {
                         config.Type = QUIC_CREDENTIAL_TYPE.CERTIFICATE_CONTEXT;
                         config.CertificateContext = (void*)certificate.Handle;
-                        status = MsQuicApi.Api.ApiTable->ConfigurationLoadCredential(
-                            configurationHandle.QuicHandle,
-                            &config
-                        );
+                        status = MsQuicApi
+                            .Api
+                            .ApiTable
+                            ->ConfigurationLoadCredential(configurationHandle.QuicHandle, &config);
                     }
                     else
                     {
@@ -281,20 +284,23 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
 
                             config.Type = QUIC_CREDENTIAL_TYPE.CERTIFICATE_PKCS12;
                             config.CertificatePkcs12 = &pkcs12Config;
-                            status = MsQuicApi.Api.ApiTable->ConfigurationLoadCredential(
-                                configurationHandle.QuicHandle,
-                                &config
-                            );
+                            status = MsQuicApi
+                                .Api
+                                .ApiTable
+                                ->ConfigurationLoadCredential(
+                                    configurationHandle.QuicHandle,
+                                    &config
+                                );
                         }
                     }
                 }
                 else
                 {
                     config.Type = QUIC_CREDENTIAL_TYPE.NONE;
-                    status = MsQuicApi.Api.ApiTable->ConfigurationLoadCredential(
-                        configurationHandle.QuicHandle,
-                        &config
-                    );
+                    status = MsQuicApi
+                        .Api
+                        .ApiTable
+                        ->ConfigurationLoadCredential(configurationHandle.QuicHandle, &config);
                 }
 
 #if TARGET_WINDOWS

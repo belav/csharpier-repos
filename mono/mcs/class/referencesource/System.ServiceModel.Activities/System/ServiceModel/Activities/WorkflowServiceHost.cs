@@ -77,10 +77,9 @@ namespace System.ServiceModel.Activities
                 Activity activity = serviceImplementation as Activity;
                 if (activity == null)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "serviceImplementation",
-                        SR.InvalidServiceImplementation
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument("serviceImplementation", SR.InvalidServiceImplementation);
                 }
                 InitializeFromConstructor(activity, baseAddresses);
             }
@@ -345,14 +344,16 @@ namespace System.ServiceModel.Activities
             }
             if (this.inferredContracts == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.ContractNotFoundInAddServiceEndpoint(
-                            serviceContractName.LocalName,
-                            serviceContractName.NamespaceName
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.ContractNotFoundInAddServiceEndpoint(
+                                serviceContractName.LocalName,
+                                serviceContractName.NamespaceName
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             ServiceEndpoint serviceEndpoint;
@@ -377,27 +378,31 @@ namespace System.ServiceModel.Activities
             {
                 if (!this.Description.Behaviors.Contains(mexBehaviorType))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.ServiceMetadataBehaviorNotFoundForServiceMetadataEndpoint(
-                                this.Description.Name
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ServiceMetadataBehaviorNotFoundForServiceMetadataEndpoint(
+                                    this.Description.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 serviceEndpoint = new ServiceMetadataEndpoint(binding, address);
             }
             else
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.ContractNotFoundInAddServiceEndpoint(
-                            serviceContractName.LocalName,
-                            serviceContractName.NamespaceName
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.ContractNotFoundInAddServiceEndpoint(
+                                serviceContractName.LocalName,
+                                serviceContractName.NamespaceName
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (listenUri != null)
@@ -464,11 +469,13 @@ namespace System.ServiceModel.Activities
         {
             if (!endpoint.IsSystemEndpoint)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.CannotUseAddServiceEndpointOverloadForWorkflowServices
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.CannotUseAddServiceEndpointOverloadForWorkflowServices
+                        )
+                    );
             }
 
             base.AddServiceEndpoint(endpoint);
@@ -524,9 +531,13 @@ namespace System.ServiceModel.Activities
                     {
                         if (result.ContainsKey(contract.ConfigurationName))
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(SR.DifferentContractsSameConfigName)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.DifferentContractsSameConfigName
+                                    )
+                                );
                         }
                         result.Add(contract.ConfigurationName, contract);
                     }
@@ -539,9 +550,9 @@ namespace System.ServiceModel.Activities
             this.correlationQueries = this.serviceDefinition.CorrelationQueries;
             ServiceDescription serviceDescription =
                 this.serviceDefinition.GetEmptyServiceDescription();
-            serviceDescription.Behaviors.Add(
-                new WorkflowServiceBehavior(this.workflowDefinitionProvider)
-            );
+            serviceDescription
+                .Behaviors
+                .Add(new WorkflowServiceBehavior(this.workflowDefinitionProvider));
             return serviceDescription;
         }
 
@@ -566,11 +577,13 @@ namespace System.ServiceModel.Activities
                         ContractValidationHelper.GetErrorMessageEndpointServiceContractName(
                             endpoint.ServiceContractName
                         );
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.MissingBindingInEndpoint(endpointName, contractName)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.MissingBindingInEndpoint(endpointName, contractName)
+                            )
+                        );
                 }
 
                 ServiceEndpoint serviceEndpoint = AddServiceEndpointCore(
@@ -752,23 +765,27 @@ namespace System.ServiceModel.Activities
                         }
                     }
                 }
-                serviceEndpoint.Behaviors.Add(
-                    new CorrelationQueryBehavior(uniqueQueries)
-                    {
-                        ServiceContractName = endpointContractName
-                    }
-                );
+                serviceEndpoint
+                    .Behaviors
+                    .Add(
+                        new CorrelationQueryBehavior(uniqueQueries)
+                        {
+                            ServiceContractName = endpointContractName
+                        }
+                    );
             }
             else if (CorrelationQueryBehavior.BindingHasDefaultQueries(serviceEndpoint.Binding))
             {
                 if (!serviceEndpoint.Behaviors.Contains(typeof(CorrelationQueryBehavior)))
                 {
-                    serviceEndpoint.Behaviors.Add(
-                        new CorrelationQueryBehavior(new Collection<CorrelationQuery>())
-                        {
-                            ServiceContractName = endpointContractName
-                        }
-                    );
+                    serviceEndpoint
+                        .Behaviors
+                        .Add(
+                            new CorrelationQueryBehavior(new Collection<CorrelationQuery>())
+                            {
+                                ServiceContractName = endpointContractName
+                            }
+                        );
                 }
             }
         }
@@ -874,13 +891,14 @@ namespace System.ServiceModel.Activities
             {
                 foreach (OperationDescription operation in serviceEndpoint.Contract.Operations)
                 {
-                    ReceiveContextEnabledAttribute behavior =
-                        operation.Behaviors.Find<ReceiveContextEnabledAttribute>();
+                    ReceiveContextEnabledAttribute behavior = operation
+                        .Behaviors
+                        .Find<ReceiveContextEnabledAttribute>();
                     if (behavior == null)
                     {
-                        operation.Behaviors.Add(
-                            new ReceiveContextEnabledAttribute() { ManualControl = true }
-                        );
+                        operation
+                            .Behaviors
+                            .Add(new ReceiveContextEnabledAttribute() { ManualControl = true });
                     }
                     else
                     {
@@ -893,14 +911,16 @@ namespace System.ServiceModel.Activities
         void ValidateBufferedReceiveProperty()
         {
             // Validate that the AttachedProperty is indeed being used when the behavior is also used
-            bool hasBehavior = this.Description.Behaviors.Contains(
-                bufferedReceiveServiceBehaviorType
-            );
+            bool hasBehavior = this.Description
+                .Behaviors
+                .Contains(bufferedReceiveServiceBehaviorType);
             if (hasBehavior && !this.serviceDefinition.AllowBufferedReceive)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BufferedReceiveBehaviorUsedWithoutProperty)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.BufferedReceiveBehaviorUsedWithoutProperty)
+                    );
             }
         }
 
@@ -949,11 +969,13 @@ namespace System.ServiceModel.Activities
             {
                 if (TypeHelper.AreTypesCompatible(type, SendReceiveExtensionType))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.ExtensionTypeNotSupported(SendReceiveExtensionType.FullName)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ExtensionTypeNotSupported(SendReceiveExtensionType.FullName)
+                            )
+                        );
                 }
             }
         }
@@ -987,11 +1009,13 @@ namespace System.ServiceModel.Activities
 
             bool CloseDurableInstanceManager()
             {
-                IAsyncResult result = this.host.durableInstanceManager.BeginClose(
-                    this.timeoutHelper.RemainingTime(),
-                    base.PrepareAsyncCompletion(handleDurableInstanceManagerEndClose),
-                    this
-                );
+                IAsyncResult result = this.host
+                    .durableInstanceManager
+                    .BeginClose(
+                        this.timeoutHelper.RemainingTime(),
+                        base.PrepareAsyncCompletion(handleDurableInstanceManagerEndClose),
+                        this
+                    );
                 return SyncContinue(result);
             }
 

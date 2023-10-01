@@ -1170,7 +1170,10 @@ public partial class HubConnection : IAsyncDisposable
 
         Log.SendingMessage(_logger, hubMessage);
 
-        await connectionState.Connection.Transport.Output
+        await connectionState
+            .Connection
+            .Transport
+            .Output
             .FlushAsync(cancellationToken)
             .ConfigureAwait(false);
         Log.MessageSent(_logger, hubMessage);
@@ -1496,7 +1499,10 @@ public partial class HubConnection : IAsyncDisposable
             startingConnectionState.Connection.Transport.Output
         );
 
-        var sendHandshakeResult = await startingConnectionState.Connection.Transport.Output
+        var sendHandshakeResult = await startingConnectionState
+            .Connection
+            .Transport
+            .Output
             .FlushAsync(CancellationToken.None)
             .ConfigureAwait(false);
 

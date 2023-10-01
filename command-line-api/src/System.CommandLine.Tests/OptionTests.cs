@@ -266,14 +266,17 @@ namespace System.CommandLine.Tests
         public void Option_T_default_value_is_validated()
         {
             var option = new Option<int>("-x", () => 123);
-            option.Validators.Add(
-                symbol =>
-                    symbol.ErrorMessage = symbol.Tokens
-                        .Select(t => t.Value)
-                        .Where(v => v == "123")
-                        .Select(_ => "ERR")
-                        .FirstOrDefault()
-            );
+            option
+                .Validators
+                .Add(
+                    symbol =>
+                        symbol.ErrorMessage = symbol
+                            .Tokens
+                            .Select(t => t.Value)
+                            .Where(v => v == "123")
+                            .Select(_ => "ERR")
+                            .FirstOrDefault()
+                );
 
             option
                 .Parse("-x 123")
@@ -337,7 +340,8 @@ namespace System.CommandLine.Tests
 
             var result = option.Parse("--color Fuschia");
 
-            result.Errors
+            result
+                .Errors
                 .Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(

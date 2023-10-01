@@ -84,7 +84,8 @@ namespace System.Xml
         private async Task FinishInitUriStringAsync()
         {
             Stream stream = (Stream)(
-                await laterInitParam.inputUriResolver
+                await laterInitParam
+                    .inputUriResolver
                     .GetEntityAsync(laterInitParam.inputbaseUri, string.Empty, typeof(Stream))
                     .ConfigureAwait(false)
             );

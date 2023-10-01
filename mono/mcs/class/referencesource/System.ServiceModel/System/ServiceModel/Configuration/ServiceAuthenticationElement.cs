@@ -57,15 +57,17 @@
                 Type type = Type.GetType(serviceAuthenticationManagerType, true);
                 if (!typeof(ServiceAuthenticationManager).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidServiceAuthenticationManagerType,
-                                serviceAuthenticationManagerType,
-                                typeof(ServiceAuthenticationManager)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidServiceAuthenticationManagerType,
+                                    serviceAuthenticationManagerType,
+                                    typeof(ServiceAuthenticationManager)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 behavior.ServiceAuthenticationManager = (ServiceAuthenticationManager)
                     Activator.CreateInstance(type);

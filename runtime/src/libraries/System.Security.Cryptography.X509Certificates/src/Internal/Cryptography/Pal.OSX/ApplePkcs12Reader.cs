@@ -21,14 +21,16 @@ namespace Internal.Cryptography.Pal
 
         protected override ICertificatePalCore ReadX509Der(ReadOnlyMemory<byte> data)
         {
-            SafeSecCertificateHandle certHandle = Interop.AppleCrypto.X509ImportCertificate(
-                data.Span,
-                X509ContentType.Cert,
-                SafePasswordHandle.InvalidHandle,
-                SafeTemporaryKeychainHandle.InvalidHandle,
-                exportable: true,
-                out SafeSecIdentityHandle identityHandle
-            );
+            SafeSecCertificateHandle certHandle = Interop
+                .AppleCrypto
+                .X509ImportCertificate(
+                    data.Span,
+                    X509ContentType.Cert,
+                    SafePasswordHandle.InvalidHandle,
+                    SafeTemporaryKeychainHandle.InvalidHandle,
+                    exportable: true,
+                    out SafeSecIdentityHandle identityHandle
+                );
 
             if (identityHandle.IsInvalid)
             {

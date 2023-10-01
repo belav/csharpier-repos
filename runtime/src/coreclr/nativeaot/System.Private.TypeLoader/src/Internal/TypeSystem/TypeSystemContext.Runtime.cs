@@ -413,17 +413,21 @@ namespace Internal.TypeSystem
                         // Instantiated Types always get their methods through GetMethodForInstantiatedType
                         if (key._owningType is InstantiatedType)
                         {
-                            MethodDesc typicalMethod = key._owningType.Context.ResolveRuntimeMethod(
-                                key._unboxingStub,
-                                (DefType)key._owningType.GetTypeDefinition(),
-                                key._methodNameAndSignature,
-                                IntPtr.Zero,
-                                false
-                            );
-                            return typicalMethod.Context.GetMethodForInstantiatedType(
-                                typicalMethod,
-                                (InstantiatedType)key._owningType
-                            );
+                            MethodDesc typicalMethod = key._owningType
+                                .Context
+                                .ResolveRuntimeMethod(
+                                    key._unboxingStub,
+                                    (DefType)key._owningType.GetTypeDefinition(),
+                                    key._methodNameAndSignature,
+                                    IntPtr.Zero,
+                                    false
+                                );
+                            return typicalMethod
+                                .Context
+                                .GetMethodForInstantiatedType(
+                                    typicalMethod,
+                                    (InstantiatedType)key._owningType
+                                );
                         }
 
                         // Otherwise, just check to see if there is a method discoverable via GetMethods

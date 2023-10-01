@@ -100,11 +100,16 @@ namespace System.ServiceModel.Dispatcher
         {
             if (binding is NetPeerTcpBinding && IsRequestReplyContract(contract))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.BindingDoesnTSupportRequestReplyButContract1, binding.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.BindingDoesnTSupportRequestReplyButContract1,
+                                binding.Name
+                            )
+                        )
+                    );
             }
         }
     }

@@ -61,10 +61,13 @@ namespace System.Workflow.Runtime
 
             lock (this.mutex)
             {
-                System.Diagnostics.Debug.Assert(
-                    this._state == WorkBatchState.Usable,
-                    "Trying to add to unusable batch."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        this._state == WorkBatchState.Usable,
+                        "Trying to add to unusable batch."
+                    );
 
                 _pendingWorkCollection.Add(
                     work,
@@ -250,13 +253,15 @@ namespace System.Workflow.Runtime
                     )
                 );
                 workItems.Add(orderId, workItem);
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "pending work hc {0} added workItem hc {1}",
-                    work.GetHashCode(),
-                    workItem.GetHashCode()
-                );
+                WorkflowTrace
+                    .Runtime
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "pending work hc {0} added workItem hc {1}",
+                        work.GetHashCode(),
+                        workItem.GetHashCode()
+                    );
             }
 
             //Commit All Pending Work
@@ -290,12 +295,14 @@ namespace System.Workflow.Runtime
                         }
                         else
                         {
-                            WorkflowTrace.Runtime.TraceEvent(
-                                TraceEventType.Warning,
-                                0,
-                                "Work Item {0} threw exception on complete notification",
-                                workItem.GetType()
-                            );
+                            WorkflowTrace
+                                .Runtime
+                                .TraceEvent(
+                                    TraceEventType.Warning,
+                                    0,
+                                    "Work Item {0} threw exception on complete notification",
+                                    workItem.GetType()
+                                );
                         }
                     }
                 }

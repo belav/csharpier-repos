@@ -62,7 +62,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var List = entity.groups
+                        var List = entity
+                            .groups
                             .Select(
                                 c =>
                                     new GroupModel
@@ -87,7 +88,8 @@ namespace POS_Server.Controllers
                                 {
                                     long groupId = (long)List[i].groupId;
                                     // var operationsL = entity.groupObject.Where(x => x.groupId == groupId).Select(b => new { b.id }).FirstOrDefault();
-                                    var operationsu = entity.users
+                                    var operationsu = entity
+                                        .users
                                         .Where(x => x.groupId == groupId)
                                         .Select(b => new { b.groupId })
                                         .FirstOrDefault();
@@ -248,7 +250,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.users
+                        var list = entity
+                            .users
                             .Where(c => c.groupId == groupId)
                             .Select(
                                 c =>
@@ -276,7 +279,8 @@ namespace POS_Server.Controllers
                                         c.image,
                                         c.balance,
                                         c.balanceType,
-                                        groupName = entity.groups
+                                        groupName = entity
+                                            .groups
                                             .Where(g => g.groupId == c.groupId)
                                             .FirstOrDefault()
                                             .name,
@@ -511,7 +515,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var tmps = entity.groups
+                                var tmps = entity
+                                    .groups
                                     .Where(p => p.groupId == newObject.groupId)
                                     .FirstOrDefault();
                                 tmps.groupId = newObject.groupId;
@@ -661,7 +666,8 @@ namespace POS_Server.Controllers
                         {
                             groups Deleterow = entity.groups.Find(groupId);
 
-                            List<groupObject> delGrObject = entity.groupObject
+                            List<groupObject> delGrObject = entity
+                                .groupObject
                                 .Where(x => x.groupId == groupId)
                                 .ToList();
                             entity.groupObject.RemoveRange(delGrObject);
@@ -811,7 +817,8 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         // reset old list
-                        List<users> oldList = entity.users
+                        List<users> oldList = entity
+                            .users
                             .Where(x => x.groupId == groupId)
                             .ToList();
                         if (oldList.Count > 0)

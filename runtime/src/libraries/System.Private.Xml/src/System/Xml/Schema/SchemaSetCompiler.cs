@@ -201,10 +201,9 @@ namespace System.Xml.Schema
             _schemaTypes.Insert(DatatypeImplementation.QnAnyType, XmlSchemaComplexType.AnyType);
             if (_schemaForSchema != null)
             { //Get our built-in types
-                _schemaForSchema.SchemaTypes.Replace(
-                    DatatypeImplementation.QnAnyType,
-                    XmlSchemaComplexType.AnyType
-                );
+                _schemaForSchema
+                    .SchemaTypes
+                    .Replace(DatatypeImplementation.QnAnyType, XmlSchemaComplexType.AnyType);
                 UpdateSForSSimpleTypes();
             }
 
@@ -2636,10 +2635,9 @@ namespace System.Xml.Schema
                             {
                                 if (attributeGroup.AttributeUses[attribute!.QualifiedName] == null)
                                 {
-                                    attributeGroup.AttributeUses.Add(
-                                        attribute.QualifiedName,
-                                        attribute
-                                    );
+                                    attributeGroup
+                                        .AttributeUses
+                                        .Add(attribute.QualifiedName, attribute);
                                 }
                                 else
                                 {
@@ -2748,10 +2746,9 @@ namespace System.Xml.Schema
                             {
                                 if (derivedType.AttributeUses[attribute.QualifiedName] == null)
                                 {
-                                    derivedType.AttributeUses.Add(
-                                        attribute.QualifiedName,
-                                        attribute
-                                    );
+                                    derivedType
+                                        .AttributeUses
+                                        .Add(attribute.QualifiedName, attribute);
                                 }
                                 else
                                 {
@@ -2803,10 +2800,9 @@ namespace System.Xml.Schema
                             derivedType.AttributeUses[attributeBase!.QualifiedName];
                         if (attribute == null)
                         {
-                            derivedType.AttributeUses.Add(
-                                attributeBase.QualifiedName,
-                                attributeBase
-                            );
+                            derivedType
+                                .AttributeUses
+                                .Add(attributeBase.QualifiedName, attributeBase);
                         }
                         else
                         {
@@ -2852,10 +2848,9 @@ namespace System.Xml.Schema
                             derivedType.AttributeUses[attributeBase!.QualifiedName];
                         if (attribute == null)
                         {
-                            derivedType.AttributeUses.Add(
-                                attributeBase.QualifiedName,
-                                attributeBase
-                            );
+                            derivedType
+                                .AttributeUses
+                                .Add(attributeBase.QualifiedName, attributeBase);
                         }
                         else
                         {
@@ -3523,8 +3518,10 @@ namespace System.Xml.Schema
                             }
                             else
                             { //Mixed with emptiable particle
-                                decl.DefaultValueTyped =
-                                    DatatypeImplementation.AnySimpleType.Datatype!.ParseValue(
+                                decl.DefaultValueTyped = DatatypeImplementation
+                                    .AnySimpleType
+                                    .Datatype!
+                                    .ParseValue(
                                         decl.DefaultValueRaw,
                                         NameTable,
                                         new SchemaNamespaceManager(xe)

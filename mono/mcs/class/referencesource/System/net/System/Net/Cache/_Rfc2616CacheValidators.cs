@@ -89,7 +89,9 @@ namespace System.Net.Cache
                 else if (ctx.Policy.Level == HttpRequestCacheLevel.Refresh)
                 {
                     //adjust request headers since retrieval validators will be suppressed upon return.
-                    ctx.Request.Headers.AddInternal(HttpKnownHeaderNames.CacheControl, "max-age=0");
+                    ctx.Request
+                        .Headers
+                        .AddInternal(HttpKnownHeaderNames.CacheControl, "max-age=0");
                     ctx.Request.Headers.AddInternal(HttpKnownHeaderNames.Pragma, "no-cache");
                     result = CacheValidationStatus.DoNotTakeFromCache;
                 }
@@ -98,24 +100,30 @@ namespace System.Net.Cache
                     //Transfer Policy into CacheControl directives
                     if (ctx.Policy.MinFresh > TimeSpan.Zero)
                     {
-                        ctx.Request.Headers.AddInternal(
-                            HttpKnownHeaderNames.CacheControl,
-                            "min-fresh=" + (int)ctx.Policy.MinFresh.TotalSeconds
-                        );
+                        ctx.Request
+                            .Headers
+                            .AddInternal(
+                                HttpKnownHeaderNames.CacheControl,
+                                "min-fresh=" + (int)ctx.Policy.MinFresh.TotalSeconds
+                            );
                     }
                     if (ctx.Policy.MaxAge != TimeSpan.MaxValue)
                     {
-                        ctx.Request.Headers.AddInternal(
-                            HttpKnownHeaderNames.CacheControl,
-                            "max-age=" + (int)ctx.Policy.MaxAge.TotalSeconds
-                        );
+                        ctx.Request
+                            .Headers
+                            .AddInternal(
+                                HttpKnownHeaderNames.CacheControl,
+                                "max-age=" + (int)ctx.Policy.MaxAge.TotalSeconds
+                            );
                     }
                     if (ctx.Policy.MaxStale > TimeSpan.Zero)
                     {
-                        ctx.Request.Headers.AddInternal(
-                            HttpKnownHeaderNames.CacheControl,
-                            "max-stale=" + (int)ctx.Policy.MaxStale.TotalSeconds
-                        );
+                        ctx.Request
+                            .Headers
+                            .AddInternal(
+                                HttpKnownHeaderNames.CacheControl,
+                                "max-stale=" + (int)ctx.Policy.MaxStale.TotalSeconds
+                            );
                     }
                 }
                 else if (
@@ -124,10 +132,9 @@ namespace System.Net.Cache
                 )
                 {
                     // In case other validators will not be called
-                    ctx.Request.Headers.AddInternal(
-                        HttpKnownHeaderNames.CacheControl,
-                        "only-if-cached"
-                    );
+                    ctx.Request
+                        .Headers
+                        .AddInternal(HttpKnownHeaderNames.CacheControl, "only-if-cached");
                 }
             }
             return result;
@@ -718,10 +725,9 @@ namespace System.Net.Cache
                                     ((int)age.TotalSeconds).ToString(
                                         NumberFormatInfo.InvariantInfo
                                     ),
-                                    ctx.CacheEntry.LastSynchronizedUtc.ToString(
-                                        "r",
-                                        CultureInfo.InvariantCulture
-                                    ),
+                                    ctx.CacheEntry
+                                        .LastSynchronizedUtc
+                                        .ToString("r", CultureInfo.InvariantCulture),
                                     ((int)ctx.CacheAge.TotalSeconds).ToString(
                                         NumberFormatInfo.InvariantInfo
                                     )
@@ -735,10 +741,9 @@ namespace System.Net.Cache
                                     ((int)age.TotalSeconds).ToString(
                                         NumberFormatInfo.InvariantInfo
                                     ),
-                                    ctx.CacheEntry.LastSynchronizedUtc.ToString(
-                                        "r",
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    ctx.CacheEntry
+                                        .LastSynchronizedUtc
+                                        .ToString("r", CultureInfo.InvariantCulture)
                                 )
                             );
                     }
@@ -1349,13 +1354,12 @@ namespace System.Net.Cache
                                 Logging.RequestCache,
                                 SR.GetString(
                                     SR.net_log_cache_policy_cache_sync_date,
-                                    ctx.Policy.InternalCacheSyncDateUtc.ToString(
-                                        "r",
-                                        CultureInfo.CurrentCulture
-                                    ),
-                                    ctx.CacheEntry.LastSynchronizedUtc.ToString(
-                                        CultureInfo.CurrentCulture
-                                    )
+                                    ctx.Policy
+                                        .InternalCacheSyncDateUtc
+                                        .ToString("r", CultureInfo.CurrentCulture),
+                                    ctx.CacheEntry
+                                        .LastSynchronizedUtc
+                                        .ToString(CultureInfo.CurrentCulture)
                                 )
                             );
                         if (
@@ -2412,10 +2416,9 @@ namespace System.Net.Cache
                 if (ctx.CacheEntry.LastModifiedUtc != DateTime.MinValue)
                 {
                     result = CacheValidationStatus.Continue;
-                    str = ctx.CacheEntry.LastModifiedUtc.ToString(
-                        "r",
-                        CultureInfo.InvariantCulture
-                    );
+                    str = ctx.CacheEntry
+                        .LastModifiedUtc
+                        .ToString("r", CultureInfo.InvariantCulture);
                     ctx.Request.Headers.ChangeInternal(HttpKnownHeaderNames.IfModifiedSince, str);
                     if (validator2)
                     {
@@ -2507,10 +2510,9 @@ namespace System.Net.Cache
 
                 if (ctx.CacheEntry.LastModifiedUtc != DateTime.MinValue)
                 {
-                    str = ctx.CacheEntry.LastModifiedUtc.ToString(
-                        "r",
-                        CultureInfo.InvariantCulture
-                    );
+                    str = ctx.CacheEntry
+                        .LastModifiedUtc
+                        .ToString("r", CultureInfo.InvariantCulture);
                     if (ctx.CacheHttpVersion.Major == 1 && ctx.CacheHttpVersion.Minor == 0)
                     {
                         // Well If-Unmodified-Since would require an additional request in case it WAS modified

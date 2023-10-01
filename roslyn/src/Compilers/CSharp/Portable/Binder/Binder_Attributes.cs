@@ -244,8 +244,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> boundConstructorArguments;
             if (attributeTypeForBinding.IsErrorType())
             {
-                boundConstructorArguments =
-                    analyzedArguments.ConstructorArguments.Arguments.SelectAsArray(
+                boundConstructorArguments = analyzedArguments
+                    .ConstructorArguments
+                    .Arguments
+                    .SelectAsArray(
                         static (arg, attributeArgumentBinder) =>
                             attributeArgumentBinder.BindToTypeForErrorRecovery(arg),
                         attributeArgumentBinder
@@ -302,8 +304,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         diagnostics,
                         attributedMember: attributedMember
                     );
-                    boundConstructorArguments =
-                        analyzedArguments.ConstructorArguments.Arguments.ToImmutable();
+                    boundConstructorArguments = analyzedArguments
+                        .ConstructorArguments
+                        .Arguments
+                        .ToImmutable();
                     ReportDiagnosticsIfObsolete(
                         diagnostics,
                         attributeConstructor,
@@ -327,8 +331,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(boundConstructorArguments.All(a => !a.NeedsToBeConverted()));
 
-            ImmutableArray<string?> boundConstructorArgumentNamesOpt =
-                analyzedArguments.ConstructorArguments.GetNames();
+            ImmutableArray<string?> boundConstructorArgumentNamesOpt = analyzedArguments
+                .ConstructorArguments
+                .GetNames();
             ImmutableArray<BoundAssignmentOperator> boundNamedArguments =
                 analyzedArguments.NamedArguments?.ToImmutableAndFree()
                 ?? ImmutableArray<BoundAssignmentOperator>.Empty;

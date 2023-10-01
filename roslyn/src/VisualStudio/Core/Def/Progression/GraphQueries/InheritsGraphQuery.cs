@@ -65,7 +65,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         )
                         {
                             foreach (
-                                var baseNode in namedType.OriginalDefinition.AllInterfaces.Distinct()
+                                var baseNode in namedType
+                                    .OriginalDefinition
+                                    .AllInterfaces
+                                    .Distinct()
                             )
                             {
                                 var baseTypeNode = await graphBuilder

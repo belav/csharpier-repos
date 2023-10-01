@@ -809,7 +809,10 @@ public class ILInliningVersioningTest<T>
         // unloading.
         public MyLoadContext()
             : base(
-                System.Runtime.Loader.AssemblyLoadContext
+                System
+                    .Runtime
+                    .Loader
+                    .AssemblyLoadContext
                     .GetLoadContext(Assembly.GetExecutingAssembly())
                     .IsCollectible
             ) { }

@@ -2631,10 +2631,13 @@ namespace System.Workflow.Activities.Rules
                     for (int i = 0; i < numResults; ++i)
                     {
                         MemberInfo member = results[i];
-                        System.Diagnostics.Debug.Assert(
-                            member.MemberType == MemberTypes.Property,
-                            "only properties can be overloaded"
-                        );
+                        System
+                            .Diagnostics
+                            .Debug
+                            .Assert(
+                                member.MemberType == MemberTypes.Property,
+                                "only properties can be overloaded"
+                            );
 
                         PropertyInfo pi = (PropertyInfo)member;
                         ParameterInfo[] parms = pi.GetIndexParameters();

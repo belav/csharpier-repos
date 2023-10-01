@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
             ImmutableArray.Create(IDEDiagnosticIds.UseThrowExpressionDiagnosticId);
 
         protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
-            !diagnostic.Descriptor
+            !diagnostic
+                .Descriptor
                 .ImmutableCustomTags()
                 .Contains(WellKnownDiagnosticTags.Unnecessary);
 

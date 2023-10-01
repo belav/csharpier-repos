@@ -155,9 +155,9 @@ namespace System.Net
                 )
                     return null;
 
-                SpnToken spn = httpWebRequest.CurrentAuthenticationState.GetComputeSpn(
-                    httpWebRequest
-                );
+                SpnToken spn = httpWebRequest
+                    .CurrentAuthenticationState
+                    .GetComputeSpn(httpWebRequest);
                 GlobalLog.Print(
                     "NtlmClient::Authenticate() ChallengedSpn:" + ValidationHelper.ToString(spn)
                 );
@@ -165,10 +165,10 @@ namespace System.Net
                 ChannelBinding binding = null;
                 if (httpWebRequest.CurrentAuthenticationState.TransportContext != null)
                 {
-                    binding =
-                        httpWebRequest.CurrentAuthenticationState.TransportContext.GetChannelBinding(
-                            ChannelBindingKind.Endpoint
-                        );
+                    binding = httpWebRequest
+                        .CurrentAuthenticationState
+                        .TransportContext
+                        .GetChannelBinding(ChannelBindingKind.Endpoint);
                 }
 
                 authSession = new NTAuthentication(AuthType, NC, spn, httpWebRequest, binding);
@@ -248,8 +248,9 @@ namespace System.Net
             //
             // try to retrieve the state of the ongoing handshake
             //
-            NTAuthentication authSession =
-                httpWebRequest.CurrentAuthenticationState.GetSecurityContext(this);
+            NTAuthentication authSession = httpWebRequest
+                .CurrentAuthenticationState
+                .GetSecurityContext(this);
             GlobalLog.Print(
                 "NtlmClient::Update() key:"
                     + ValidationHelper.HashString(httpWebRequest.CurrentAuthenticationState)
@@ -288,16 +289,15 @@ namespace System.Net
                     "NtlmClient::Update() releasing ConnectionGroup:"
                         + httpWebRequest.GetConnectionGroupLine()
                 );
-                httpWebRequest.ServicePoint.ReleaseConnectionGroup(
-                    httpWebRequest.GetConnectionGroupLine()
-                );
+                httpWebRequest
+                    .ServicePoint
+                    .ReleaseConnectionGroup(httpWebRequest.GetConnectionGroupLine());
             }
 
             // Extract the CBT we used and cache it for future requests that want to do preauth
-            httpWebRequest.ServicePoint.SetCachedChannelBinding(
-                httpWebRequest.ChallengedUri,
-                authSession.ChannelBinding
-            );
+            httpWebRequest
+                .ServicePoint
+                .SetCachedChannelBinding(httpWebRequest.ChallengedUri, authSession.ChannelBinding);
 
             GlobalLog.Print(
                 "NtlmClient::Update() session removed and ConnectionGorup released returning true"

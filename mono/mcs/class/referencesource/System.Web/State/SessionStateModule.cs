@@ -1819,9 +1819,9 @@ namespace System.Web.SessionState
                                         + "\n\t_rq.timeout="
                                         + _rqItem.Timeout.ToString(CultureInfo.InvariantCulture)
                                         + ", _rqSessionState.timeout="
-                                        + _rqSessionState.Timeout.ToString(
-                                            CultureInfo.InvariantCulture
-                                        )
+                                        + _rqSessionState
+                                            .Timeout
+                                            .ToString(CultureInfo.InvariantCulture)
                                 );
                             }
 #endif

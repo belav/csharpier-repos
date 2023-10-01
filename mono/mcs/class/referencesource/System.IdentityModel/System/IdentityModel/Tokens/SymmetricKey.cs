@@ -19,18 +19,20 @@ namespace System.IdentityModel.Tokens
         {
             if (symmetricKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("symmetricKey")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("symmetricKey"));
             }
 
             if (symmetricKey.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.SymmetricKeyLengthTooShort, symmetricKey.Length)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.SymmetricKeyLengthTooShort, symmetricKey.Length)
+                        )
+                    );
             }
             this.keySize = symmetricKey.Length * 8;
 

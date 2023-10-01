@@ -270,9 +270,10 @@ internal static partial class AnalyzerOptionsProviders
         this SemanticModelAnalysisContext context
     ) =>
         new(
-            context.Options.AnalyzerConfigOptionsProvider.GetOptions(
-                context.SemanticModel.SyntaxTree
-            ),
+            context
+                .Options
+                .AnalyzerConfigOptionsProvider
+                .GetOptions(context.SemanticModel.SyntaxTree),
             context.Options
         );
 
@@ -296,9 +297,10 @@ internal static partial class AnalyzerOptionsProviders
         this OperationAnalysisContext context
     ) =>
         new(
-            context.Options.AnalyzerConfigOptionsProvider.GetOptions(
-                context.Operation.Syntax.SyntaxTree
-            ),
+            context
+                .Options
+                .AnalyzerConfigOptionsProvider
+                .GetOptions(context.Operation.Syntax.SyntaxTree),
             context.Options
         );
 

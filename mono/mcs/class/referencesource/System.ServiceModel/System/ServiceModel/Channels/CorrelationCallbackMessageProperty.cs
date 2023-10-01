@@ -139,12 +139,14 @@ namespace System.ServiceModel.Channels
 
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
             }
 
             if (
@@ -179,12 +181,14 @@ namespace System.ServiceModel.Channels
 
             if (timeout < TimeSpan.Zero)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "timeout",
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "timeout",
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
             }
 
             if (

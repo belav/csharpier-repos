@@ -21,35 +21,52 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.BatchStream_MissingBoundary
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.BatchStream_MissingBoundary);
             }
         }
 
         internal static string BatchStream_ContentExpected(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_ContentExpected,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.BatchStream_ContentExpected, p0);
         }
 
         internal static string BatchStream_ContentUnexpected(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_ContentUnexpected,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.BatchStream_ContentUnexpected, p0);
         }
 
         internal static string BatchStream_GetMethodNotSupportedInChangeset
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.BatchStream_GetMethodNotSupportedInChangeset
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .BatchStream_GetMethodNotSupportedInChangeset
+                    );
             }
         }
 
@@ -57,58 +74,83 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.BatchStream_InvalidBatchFormat
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.BatchStream_InvalidBatchFormat);
             }
         }
 
         internal static string BatchStream_InvalidDelimiter(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_InvalidDelimiter,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.BatchStream_InvalidDelimiter, p0);
         }
 
         internal static string BatchStream_MissingEndChangesetDelimiter
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.BatchStream_MissingEndChangesetDelimiter
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.BatchStream_MissingEndChangesetDelimiter
+                    );
             }
         }
 
         internal static string BatchStream_InvalidHeaderValueSpecified(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_InvalidHeaderValueSpecified,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.BatchStream_InvalidHeaderValueSpecified,
+                    p0
+                );
         }
 
         internal static string BatchStream_InvalidContentLengthSpecified(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_InvalidContentLengthSpecified,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.BatchStream_InvalidContentLengthSpecified,
+                    p0
+                );
         }
 
         internal static string BatchStream_OnlyGETOperationsCanBeSpecifiedInBatch
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .BatchStream_OnlyGETOperationsCanBeSpecifiedInBatch
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .BatchStream_OnlyGETOperationsCanBeSpecifiedInBatch
+                    );
             }
         }
 
@@ -116,27 +158,47 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.BatchStream_InvalidOperationHeaderSpecified
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .BatchStream_InvalidOperationHeaderSpecified
+                    );
             }
         }
 
         internal static string BatchStream_InvalidHttpMethodName(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_InvalidHttpMethodName,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.BatchStream_InvalidHttpMethodName,
+                    p0
+                );
         }
 
         internal static string BatchStream_MoreDataAfterEndOfBatch
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.BatchStream_MoreDataAfterEndOfBatch
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.BatchStream_MoreDataAfterEndOfBatch
+                    );
             }
         }
 
@@ -144,27 +206,47 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.BatchStream_InternalBufferRequestTooSmall
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .BatchStream_InternalBufferRequestTooSmall
+                    );
             }
         }
 
         internal static string BatchStream_InvalidMethodHeaderSpecified(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_InvalidMethodHeaderSpecified,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.BatchStream_InvalidMethodHeaderSpecified,
+                    p0
+                );
         }
 
         internal static string BatchStream_InvalidHttpVersionSpecified(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_InvalidHttpVersionSpecified,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.BatchStream_InvalidHttpVersionSpecified,
+                    p0,
+                    p1
+                );
         }
 
         internal static string BatchStream_InvalidNumberOfHeadersAtOperationStart(
@@ -172,16 +254,21 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .BatchStream_InvalidNumberOfHeadersAtOperationStart,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .BatchStream_InvalidNumberOfHeadersAtOperationStart,
+                    p0,
+                    p1
+                );
         }
 
         internal static string BatchStream_MissingOrInvalidContentEncodingHeader(
@@ -189,16 +276,21 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .BatchStream_MissingOrInvalidContentEncodingHeader,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .BatchStream_MissingOrInvalidContentEncodingHeader,
+                    p0,
+                    p1
+                );
         }
 
         internal static string BatchStream_InvalidNumberOfHeadersAtChangeSetStart(
@@ -206,24 +298,34 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .BatchStream_InvalidNumberOfHeadersAtChangeSetStart,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .BatchStream_InvalidNumberOfHeadersAtChangeSetStart,
+                    p0,
+                    p1
+                );
         }
 
         internal static string BatchStream_MissingContentTypeHeader(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_MissingContentTypeHeader,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.BatchStream_MissingContentTypeHeader,
+                    p0
+                );
         }
 
         internal static string BatchStream_InvalidContentTypeSpecified(
@@ -233,74 +335,98 @@ namespace System.Data.Services.Client
             object p3
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.BatchStream_InvalidContentTypeSpecified,
-                p0,
-                p1,
-                p2,
-                p3
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.BatchStream_InvalidContentTypeSpecified,
+                    p0,
+                    p1,
+                    p2,
+                    p3
+                );
         }
 
         internal static string Batch_ExpectedContentType(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Batch_ExpectedContentType,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Batch_ExpectedContentType, p0);
         }
 
         internal static string Batch_ExpectedResponse(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Batch_ExpectedResponse,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Batch_ExpectedResponse, p0);
         }
 
         internal static string Batch_IncompleteResponseCount
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Batch_IncompleteResponseCount
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Batch_IncompleteResponseCount);
             }
         }
 
         internal static string Batch_UnexpectedContent(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Batch_UnexpectedContent,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Batch_UnexpectedContent, p0);
         }
 
         internal static string Context_BaseUri
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_BaseUri
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_BaseUri);
             }
         }
 
         internal static string Context_CannotConvertKey(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Context_CannotConvertKey,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Context_CannotConvertKey, p0);
         }
 
         internal static string Context_TrackingExpectsAbsoluteUri
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_TrackingExpectsAbsoluteUri
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_TrackingExpectsAbsoluteUri
+                    );
             }
         }
 
@@ -308,27 +434,37 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_LinkResourceInsertFailure
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_LinkResourceInsertFailure
+                    );
             }
         }
 
         internal static string Context_InternalError(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Context_InternalError,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Context_InternalError, p0);
         }
 
         internal static string Context_BatchExecuteError
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_BatchExecuteError
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_BatchExecuteError);
             }
         }
 
@@ -336,9 +472,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_EntitySetName
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_EntitySetName);
             }
         }
 
@@ -346,9 +485,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_MissingEditLinkInResponseBody
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_MissingEditLinkInResponseBody
+                    );
             }
         }
 
@@ -356,9 +500,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_MissingSelfLinkInResponseBody
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_MissingSelfLinkInResponseBody
+                    );
             }
         }
 
@@ -366,9 +515,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_MissingEditMediaLinkInResponseBody
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .Context_MissingEditMediaLinkInResponseBody
+                    );
             }
         }
 
@@ -376,9 +535,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Content_EntityWithoutKey
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Content_EntityWithoutKey);
             }
         }
 
@@ -386,9 +548,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Content_EntityIsNotEntityType
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Content_EntityIsNotEntityType);
             }
         }
 
@@ -396,9 +561,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_EntityNotContained
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_EntityNotContained);
             }
         }
 
@@ -406,9 +574,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_EntityAlreadyContained
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_EntityAlreadyContained);
             }
         }
 
@@ -416,9 +587,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_DifferentEntityAlreadyContained
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_DifferentEntityAlreadyContained
+                    );
             }
         }
 
@@ -426,9 +602,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_DidNotOriginateAsync
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_DidNotOriginateAsync);
             }
         }
 
@@ -436,9 +615,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_AsyncAlreadyDone
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_AsyncAlreadyDone);
             }
         }
 
@@ -446,9 +628,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_OperationCanceled
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_OperationCanceled);
             }
         }
 
@@ -456,9 +641,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_NoLoadWithInsertEnd
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_NoLoadWithInsertEnd);
             }
         }
 
@@ -466,9 +654,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_NoRelationWithInsertEnd
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_NoRelationWithInsertEnd);
             }
         }
 
@@ -476,9 +667,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_NoRelationWithDeleteEnd
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_NoRelationWithDeleteEnd);
             }
         }
 
@@ -486,9 +680,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_RelationAlreadyContained
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_RelationAlreadyContained
+                    );
             }
         }
 
@@ -496,9 +695,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_RelationNotRefOrCollection
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_RelationNotRefOrCollection
+                    );
             }
         }
 
@@ -506,9 +710,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_AddLinkCollectionOnly
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_AddLinkCollectionOnly);
             }
         }
 
@@ -516,9 +723,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_AddRelatedObjectCollectionOnly
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_AddRelatedObjectCollectionOnly
+                    );
             }
         }
 
@@ -526,9 +738,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_AddRelatedObjectSourceDeleted
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_AddRelatedObjectSourceDeleted
+                    );
             }
         }
 
@@ -536,28 +753,41 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_SetLinkReferenceOnly
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_SetLinkReferenceOnly);
             }
         }
 
         internal static string Context_NoContentTypeForMediaLink(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Context_NoContentTypeForMediaLink,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.Context_NoContentTypeForMediaLink,
+                    p0,
+                    p1
+                );
         }
 
         internal static string Context_BatchNotSupportedForMediaLink
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_BatchNotSupportedForMediaLink
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_BatchNotSupportedForMediaLink
+                    );
             }
         }
 
@@ -565,28 +795,37 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_UnexpectedZeroRawRead
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_UnexpectedZeroRawRead);
             }
         }
 
         internal static string Context_VersionNotSupported(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Context_VersionNotSupported,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Context_VersionNotSupported, p0, p1);
         }
 
         internal static string Context_SendingRequestEventArgsNotHttp
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_SendingRequestEventArgsNotHttp
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Context_SendingRequestEventArgsNotHttp
+                    );
             }
         }
 
@@ -594,9 +833,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_ChildResourceExists
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_ChildResourceExists);
             }
         }
 
@@ -604,163 +846,236 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_EntityNotMediaLinkEntry
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Context_EntityNotMediaLinkEntry);
             }
         }
 
         internal static string Context_MLEWithoutSaveStream(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Context_MLEWithoutSaveStream,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Context_MLEWithoutSaveStream, p0);
         }
 
         internal static string Context_SetSaveStreamOnMediaEntryProperty(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Context_SetSaveStreamOnMediaEntryProperty,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.Context_SetSaveStreamOnMediaEntryProperty,
+                    p0
+                );
         }
 
         internal static string Context_SetSaveStreamWithoutEditMediaLink
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Context_SetSaveStreamWithoutEditMediaLink
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .Context_SetSaveStreamWithoutEditMediaLink
+                    );
             }
         }
 
         internal static string Collection_NullCollectionReference(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Collection_NullCollectionReference,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.Collection_NullCollectionReference,
+                    p0,
+                    p1
+                );
         }
 
         internal static string ClientType_MissingOpenProperty(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_MissingOpenProperty,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ClientType_MissingOpenProperty,
+                    p0,
+                    p1
+                );
         }
 
         internal static string Clienttype_MultipleOpenProperty(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Clienttype_MultipleOpenProperty,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Clienttype_MultipleOpenProperty, p0);
         }
 
         internal static string ClientType_MissingProperty(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_MissingProperty,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ClientType_MissingProperty, p0, p1);
         }
 
         internal static string ClientType_KeysMustBeSimpleTypes(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_KeysMustBeSimpleTypes,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ClientType_KeysMustBeSimpleTypes,
+                    p0
+                );
         }
 
         internal static string ClientType_KeysOnDifferentDeclaredType(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_KeysOnDifferentDeclaredType,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ClientType_KeysOnDifferentDeclaredType,
+                    p0
+                );
         }
 
         internal static string ClientType_MissingMimeTypeProperty(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_MissingMimeTypeProperty,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ClientType_MissingMimeTypeProperty,
+                    p0,
+                    p1
+                );
         }
 
         internal static string ClientType_MissingMediaEntryProperty(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_MissingMediaEntryProperty,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ClientType_MissingMediaEntryProperty,
+                    p0
+                );
         }
 
         internal static string ClientType_NoSettableFields(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_NoSettableFields,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ClientType_NoSettableFields, p0);
         }
 
         internal static string ClientType_MultipleImplementationNotSupported
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .ClientType_MultipleImplementationNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .ClientType_MultipleImplementationNotSupported
+                    );
             }
         }
 
         internal static string ClientType_NullOpenProperties(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_NullOpenProperties,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ClientType_NullOpenProperties, p0);
         }
 
         internal static string ClientType_CollectionOfNonEntities
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ClientType_CollectionOfNonEntities
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ClientType_CollectionOfNonEntities
+                    );
             }
         }
 
         internal static string ClientType_Ambiguous(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ClientType_Ambiguous,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ClientType_Ambiguous, p0, p1);
         }
 
         internal static string DataServiceException_GeneralError
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.DataServiceException_GeneralError
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.DataServiceException_GeneralError
+                    );
             }
         }
 
@@ -768,9 +1083,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.DataServiceRequest_FailGetCount
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.DataServiceRequest_FailGetCount);
             }
         }
 
@@ -778,28 +1096,37 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Deserialize_GetEnumerator
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Deserialize_GetEnumerator);
             }
         }
 
         internal static string Deserialize_Current(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Deserialize_Current,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Deserialize_Current, p0, p1);
         }
 
         internal static string Deserialize_MixedTextWithComment
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Deserialize_MixedTextWithComment
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Deserialize_MixedTextWithComment
+                    );
             }
         }
 
@@ -807,9 +1134,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Deserialize_ExpectingSimpleValue
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Deserialize_ExpectingSimpleValue
+                    );
             }
         }
 
@@ -817,9 +1149,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Deserialize_NotApplicationXml
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Deserialize_NotApplicationXml);
             }
         }
 
@@ -827,58 +1162,83 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Deserialize_MismatchAtomLinkLocalSimple
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.Deserialize_MismatchAtomLinkLocalSimple
+                    );
             }
         }
 
         internal static string Deserialize_MismatchAtomLinkFeedPropertyNotCollection(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .Deserialize_MismatchAtomLinkFeedPropertyNotCollection,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .Deserialize_MismatchAtomLinkFeedPropertyNotCollection,
+                    p0
+                );
         }
 
         internal static string Deserialize_MismatchAtomLinkEntryPropertyIsCollection(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .Deserialize_MismatchAtomLinkEntryPropertyIsCollection,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .Deserialize_MismatchAtomLinkEntryPropertyIsCollection,
+                    p0
+                );
         }
 
         internal static string Deserialize_UnknownMimeTypeSpecified(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Deserialize_UnknownMimeTypeSpecified,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.Deserialize_UnknownMimeTypeSpecified,
+                    p0
+                );
         }
 
         internal static string Deserialize_ExpectedEmptyMediaLinkEntryContent
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .Deserialize_ExpectedEmptyMediaLinkEntryContent
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .Deserialize_ExpectedEmptyMediaLinkEntryContent
+                    );
             }
         }
 
@@ -886,9 +1246,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Deserialize_ContentPlusPropertiesNotAllowed
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .Deserialize_ContentPlusPropertiesNotAllowed
+                    );
             }
         }
 
@@ -896,53 +1266,73 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Deserialize_NoLocationHeader
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Deserialize_NoLocationHeader);
             }
         }
 
         internal static string Deserialize_ServerException(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Deserialize_ServerException,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.Deserialize_ServerException, p0);
         }
 
         internal static string Deserialize_MissingIdElement
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Deserialize_MissingIdElement
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Deserialize_MissingIdElement);
             }
         }
 
         internal static string EpmClientType_PropertyIsComplex(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.EpmClientType_PropertyIsComplex,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.EpmClientType_PropertyIsComplex, p0);
         }
 
         internal static string EpmClientType_PropertyIsPrimitive(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.EpmClientType_PropertyIsPrimitive,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.EpmClientType_PropertyIsPrimitive,
+                    p0
+                );
         }
 
         internal static string EpmSourceTree_InvalidSourcePath(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.EpmSourceTree_InvalidSourcePath,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.EpmSourceTree_InvalidSourcePath,
+                    p0,
+                    p1
+                );
         }
 
         internal static string EpmSourceTree_DuplicateEpmAttrsWithSameSourceName(
@@ -950,41 +1340,55 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .EpmSourceTree_DuplicateEpmAttrsWithSameSourceName,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .EpmSourceTree_DuplicateEpmAttrsWithSameSourceName,
+                    p0,
+                    p1
+                );
         }
 
         internal static string EpmSourceTree_InaccessiblePropertyOnType(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.EpmSourceTree_InaccessiblePropertyOnType,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.EpmSourceTree_InaccessiblePropertyOnType,
+                    p0,
+                    p1
+                );
         }
 
         internal static string EpmTargetTree_InvalidTargetPath(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.EpmTargetTree_InvalidTargetPath,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.EpmTargetTree_InvalidTargetPath, p0);
         }
 
         internal static string EpmTargetTree_AttributeInMiddle(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.EpmTargetTree_AttributeInMiddle,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.EpmTargetTree_AttributeInMiddle, p0);
         }
 
         internal static string EpmTargetTree_DuplicateEpmAttrsWithSameTargetName(
@@ -994,48 +1398,68 @@ namespace System.Data.Services.Client
             object p3
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .EpmTargetTree_DuplicateEpmAttrsWithSameTargetName,
-                p0,
-                p1,
-                p2,
-                p3
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .EpmTargetTree_DuplicateEpmAttrsWithSameTargetName,
+                    p0,
+                    p1,
+                    p2,
+                    p3
+                );
         }
 
         internal static string EntityPropertyMapping_EpmAttribute(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.EntityPropertyMapping_EpmAttribute,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.EntityPropertyMapping_EpmAttribute,
+                    p0
+                );
         }
 
         internal static string EntityPropertyMapping_TargetNamespaceUriNotValid(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .EntityPropertyMapping_TargetNamespaceUriNotValid,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .EntityPropertyMapping_TargetNamespaceUriNotValid,
+                    p0
+                );
         }
 
         internal static string HttpProcessUtility_ContentTypeMissing
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.HttpProcessUtility_ContentTypeMissing
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.HttpProcessUtility_ContentTypeMissing
+                    );
             }
         }
 
@@ -1043,9 +1467,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.HttpProcessUtility_MediaTypeMissingValue
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.HttpProcessUtility_MediaTypeMissingValue
+                    );
             }
         }
 
@@ -1053,14 +1482,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .HttpProcessUtility_MediaTypeRequiresSemicolonBeforeParameter
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .HttpProcessUtility_MediaTypeRequiresSemicolonBeforeParameter
+                    );
             }
         }
 
@@ -1068,9 +1502,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.HttpProcessUtility_MediaTypeRequiresSlash
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .HttpProcessUtility_MediaTypeRequiresSlash
+                    );
             }
         }
 
@@ -1078,9 +1522,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.HttpProcessUtility_MediaTypeRequiresSubType
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .HttpProcessUtility_MediaTypeRequiresSubType
+                    );
             }
         }
 
@@ -1088,51 +1542,81 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.HttpProcessUtility_MediaTypeUnspecified
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.HttpProcessUtility_MediaTypeUnspecified
+                    );
             }
         }
 
         internal static string HttpProcessUtility_EncodingNotSupported(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.HttpProcessUtility_EncodingNotSupported,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.HttpProcessUtility_EncodingNotSupported,
+                    p0
+                );
         }
 
         internal static string HttpProcessUtility_EscapeCharWithoutQuotes(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.HttpProcessUtility_EscapeCharWithoutQuotes,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.HttpProcessUtility_EscapeCharWithoutQuotes,
+                    p0
+                );
         }
 
         internal static string HttpProcessUtility_EscapeCharAtEnd(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.HttpProcessUtility_EscapeCharAtEnd,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.HttpProcessUtility_EscapeCharAtEnd,
+                    p0
+                );
         }
 
         internal static string HttpProcessUtility_ClosingQuoteNotFound(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.HttpProcessUtility_ClosingQuoteNotFound,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.HttpProcessUtility_ClosingQuoteNotFound,
+                    p0
+                );
         }
 
         internal static string MaterializeFromAtom_CountNotPresent
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.MaterializeFromAtom_CountNotPresent
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.MaterializeFromAtom_CountNotPresent
+                    );
             }
         }
 
@@ -1140,9 +1624,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.MaterializeFromAtom_CountFormatError
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.MaterializeFromAtom_CountFormatError
+                    );
             }
         }
 
@@ -1150,9 +1639,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.MaterializeFromAtom_TopLevelLinkNotAvailable
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .MaterializeFromAtom_TopLevelLinkNotAvailable
+                    );
             }
         }
 
@@ -1160,14 +1659,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .MaterializeFromAtom_CollectionKeyNotPresentInLinkTable
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .MaterializeFromAtom_CollectionKeyNotPresentInLinkTable
+                    );
             }
         }
 
@@ -1175,32 +1679,45 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .MaterializeFromAtom_GetNestLinkForFlatCollection
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .MaterializeFromAtom_GetNestLinkForFlatCollection
+                    );
             }
         }
 
         internal static string Serializer_NullKeysAreNotSupported(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.Serializer_NullKeysAreNotSupported,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.Serializer_NullKeysAreNotSupported,
+                    p0
+                );
         }
 
         internal static string Util_EmptyString
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Util_EmptyString
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Util_EmptyString);
             }
         }
 
@@ -1208,9 +1725,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Util_EmptyArray
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Util_EmptyArray);
             }
         }
 
@@ -1218,67 +1738,85 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.Util_NullArrayElement
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.Util_NullArrayElement);
             }
         }
 
         internal static string ALinq_UnsupportedExpression(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_UnsupportedExpression,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_UnsupportedExpression, p0);
         }
 
         internal static string ALinq_CouldNotConvert(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_CouldNotConvert,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_CouldNotConvert, p0);
         }
 
         internal static string ALinq_MethodNotSupported(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_MethodNotSupported,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_MethodNotSupported, p0);
         }
 
         internal static string ALinq_UnaryNotSupported(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_UnaryNotSupported,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_UnaryNotSupported, p0);
         }
 
         internal static string ALinq_BinaryNotSupported(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_BinaryNotSupported,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_BinaryNotSupported, p0);
         }
 
         internal static string ALinq_ConstantNotSupported(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_ConstantNotSupported,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_ConstantNotSupported, p0);
         }
 
         internal static string ALinq_TypeBinaryNotSupported
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_TypeBinaryNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_TypeBinaryNotSupported);
             }
         }
 
@@ -1286,9 +1824,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_ConditionalNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_ConditionalNotSupported);
             }
         }
 
@@ -1296,27 +1837,35 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_ParameterNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_ParameterNotSupported);
             }
         }
 
         internal static string ALinq_MemberAccessNotSupported(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_MemberAccessNotSupported,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_MemberAccessNotSupported, p0);
         }
 
         internal static string ALinq_LambdaNotSupported
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_LambdaNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_LambdaNotSupported);
             }
         }
 
@@ -1324,9 +1873,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_NewNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_NewNotSupported);
             }
         }
 
@@ -1334,9 +1886,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_MemberInitNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_MemberInitNotSupported);
             }
         }
 
@@ -1344,9 +1899,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_ListInitNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_ListInitNotSupported);
             }
         }
 
@@ -1354,9 +1912,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_NewArrayNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_NewArrayNotSupported);
             }
         }
 
@@ -1364,9 +1925,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_InvocationNotSupported
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_InvocationNotSupported);
             }
         }
 
@@ -1374,9 +1938,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_QueryOptionsOnlyAllowedOnLeafNodes
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_QueryOptionsOnlyAllowedOnLeafNodes
+                    );
             }
         }
 
@@ -1384,27 +1953,40 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CantExpand
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_CantExpand);
             }
         }
 
         internal static string ALinq_CantCastToUnsupportedPrimitive(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_CantCastToUnsupportedPrimitive,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ALinq_CantCastToUnsupportedPrimitive,
+                    p0
+                );
         }
 
         internal static string ALinq_CantNavigateWithoutKeyPredicate
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CantNavigateWithoutKeyPredicate
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_CantNavigateWithoutKeyPredicate
+                    );
             }
         }
 
@@ -1412,96 +1994,141 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CanOnlyApplyOneKeyPredicate
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_CanOnlyApplyOneKeyPredicate
+                    );
             }
         }
 
         internal static string ALinq_CantTranslateExpression(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_CantTranslateExpression,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_CantTranslateExpression, p0);
         }
 
         internal static string ALinq_TranslationError(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_TranslationError,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_TranslationError, p0);
         }
 
         internal static string ALinq_CantAddQueryOption
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CantAddQueryOption
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_CantAddQueryOption);
             }
         }
 
         internal static string ALinq_CantAddDuplicateQueryOption(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_CantAddDuplicateQueryOption,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ALinq_CantAddDuplicateQueryOption,
+                    p0
+                );
         }
 
         internal static string ALinq_CantAddAstoriaQueryOption(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_CantAddAstoriaQueryOption,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_CantAddAstoriaQueryOption, p0);
         }
 
         internal static string ALinq_CantAddQueryOptionStartingWithDollarSign(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_CantAddQueryOptionStartingWithDollarSign,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .ALinq_CantAddQueryOptionStartingWithDollarSign,
+                    p0
+                );
         }
 
         internal static string ALinq_CantReferToPublicField(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_CantReferToPublicField,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_CantReferToPublicField, p0);
         }
 
         internal static string ALinq_QueryOptionsOnlyAllowedOnSingletons
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_QueryOptionsOnlyAllowedOnSingletons
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .ALinq_QueryOptionsOnlyAllowedOnSingletons
+                    );
             }
         }
 
         internal static string ALinq_QueryOptionOutOfOrder(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_QueryOptionOutOfOrder,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(System.Data.Services.Client.TextRes.ALinq_QueryOptionOutOfOrder, p0, p1);
         }
 
         internal static string ALinq_CannotAddCountOption
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CannotAddCountOption
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_CannotAddCountOption);
             }
         }
 
@@ -1509,9 +2136,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CannotAddCountOptionConflict
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_CannotAddCountOptionConflict
+                    );
             }
         }
 
@@ -1519,9 +2151,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_ProjectionOnlyAllowedOnLeafNodes
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_ProjectionOnlyAllowedOnLeafNodes
+                    );
             }
         }
 
@@ -1529,9 +2166,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_ProjectionCanOnlyHaveOneProjection
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_ProjectionCanOnlyHaveOneProjection
+                    );
             }
         }
 
@@ -1541,12 +2183,17 @@ namespace System.Data.Services.Client
             object p2
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_ProjectionMemberAssignmentMismatch,
-                p0,
-                p1,
-                p2
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ALinq_ProjectionMemberAssignmentMismatch,
+                    p0,
+                    p1,
+                    p2
+                );
         }
 
         internal static string ALinq_ExpressionNotSupportedInProjectionToEntity(
@@ -1554,34 +2201,49 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .ALinq_ExpressionNotSupportedInProjectionToEntity,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .ALinq_ExpressionNotSupportedInProjectionToEntity,
+                    p0,
+                    p1
+                );
         }
 
         internal static string ALinq_ExpressionNotSupportedInProjection(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_ExpressionNotSupportedInProjection,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ALinq_ExpressionNotSupportedInProjection,
+                    p0,
+                    p1
+                );
         }
 
         internal static string ALinq_CannotConstructKnownEntityTypes
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CannotConstructKnownEntityTypes
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_CannotConstructKnownEntityTypes
+                    );
             }
         }
 
@@ -1589,28 +2251,41 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CannotCreateConstantEntity
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_CannotCreateConstantEntity
+                    );
             }
         }
 
         internal static string ALinq_PropertyNamesMustMatchInProjections(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.ALinq_PropertyNamesMustMatchInProjections,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.ALinq_PropertyNamesMustMatchInProjections,
+                    p0,
+                    p1
+                );
         }
 
         internal static string ALinq_CanOnlyProjectTheLeaf
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CanOnlyProjectTheLeaf
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.ALinq_CanOnlyProjectTheLeaf);
             }
         }
 
@@ -1618,9 +2293,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.ALinq_CannotProjectWithExplicitExpansion
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.ALinq_CannotProjectWithExplicitExpansion
+                    );
             }
         }
 
@@ -1628,14 +2308,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .DSKAttribute_MustSpecifyAtleastOnePropertyName
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .DSKAttribute_MustSpecifyAtleastOnePropertyName
+                    );
             }
         }
 
@@ -1643,14 +2328,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .DataServiceCollection_LoadRequiresTargetCollectionObserved
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .DataServiceCollection_LoadRequiresTargetCollectionObserved
+                    );
             }
         }
 
@@ -1658,14 +2348,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .DataServiceCollection_CannotStopTrackingChildCollection
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .DataServiceCollection_CannotStopTrackingChildCollection
+                    );
             }
         }
 
@@ -1673,14 +2368,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .DataServiceCollection_OperationForTrackedOnly
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .DataServiceCollection_OperationForTrackedOnly
+                    );
             }
         }
 
@@ -1688,14 +2388,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .DataServiceCollection_CannotDetermineContextFromItems
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .DataServiceCollection_CannotDetermineContextFromItems
+                    );
             }
         }
 
@@ -1703,14 +2408,19 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .DataServiceCollection_InsertIntoTrackedButNotLoadedCollection
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .DataServiceCollection_InsertIntoTrackedButNotLoadedCollection
+                    );
             }
         }
 
@@ -1718,15 +2428,20 @@ namespace System.Data.Services.Client
             object p0
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .DataBinding_DataServiceCollectionArgumentMustHaveEntityType,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .DataBinding_DataServiceCollectionArgumentMustHaveEntityType,
+                    p0
+                );
         }
 
         internal static string DataBinding_CollectionPropertySetterValueHasObserver(
@@ -1734,96 +2449,154 @@ namespace System.Data.Services.Client
             object p1
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .DataBinding_CollectionPropertySetterValueHasObserver,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .DataBinding_CollectionPropertySetterValueHasObserver,
+                    p0,
+                    p1
+                );
         }
 
         internal static string DataBinding_CollectionChangedUnknownAction(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.DataBinding_CollectionChangedUnknownAction,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.DataBinding_CollectionChangedUnknownAction,
+                    p0
+                );
         }
 
         internal static string DataBinding_BindingOperation_DetachedSource
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.DataBinding_BindingOperation_DetachedSource
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .DataBinding_BindingOperation_DetachedSource
+                    );
             }
         }
 
         internal static string DataBinding_BindingOperation_ArrayItemNull(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.DataBinding_BindingOperation_ArrayItemNull,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.DataBinding_BindingOperation_ArrayItemNull,
+                    p0
+                );
         }
 
         internal static string DataBinding_BindingOperation_ArrayItemNotEntity(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.DataBinding_BindingOperation_ArrayItemNotEntity,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .DataBinding_BindingOperation_ArrayItemNotEntity,
+                    p0
+                );
         }
 
         internal static string DataBinding_Util_UnknownEntitySetName(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.DataBinding_Util_UnknownEntitySetName,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.DataBinding_Util_UnknownEntitySetName,
+                    p0
+                );
         }
 
         internal static string DataBinding_EntityAlreadyInCollection(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.DataBinding_EntityAlreadyInCollection,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.DataBinding_EntityAlreadyInCollection,
+                    p0
+                );
         }
 
         internal static string DataBinding_NotifyPropertyChangedNotImpl(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.DataBinding_NotifyPropertyChangedNotImpl,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.DataBinding_NotifyPropertyChangedNotImpl,
+                    p0
+                );
         }
 
         internal static string DataBinding_ComplexObjectAssociatedWithMultipleEntities(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System
-                    .Data
-                    .Services
-                    .Client
-                    .TextRes
-                    .DataBinding_ComplexObjectAssociatedWithMultipleEntities,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .DataBinding_ComplexObjectAssociatedWithMultipleEntities,
+                    p0
+                );
         }
 
         internal static string AtomParser_FeedUnexpected
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.AtomParser_FeedUnexpected
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.AtomParser_FeedUnexpected);
             }
         }
 
@@ -1831,9 +2604,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.AtomParser_PagingLinkOutsideOfFeed
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.AtomParser_PagingLinkOutsideOfFeed
+                    );
             }
         }
 
@@ -1841,9 +2619,12 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.AtomParser_ManyFeedCounts
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(System.Data.Services.Client.TextRes.AtomParser_ManyFeedCounts);
             }
         }
 
@@ -1851,9 +2632,14 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.AtomParser_FeedCountNotUnderFeed
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.AtomParser_FeedCountNotUnderFeed
+                    );
             }
         }
 
@@ -1861,59 +2647,94 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System
-                        .Data
-                        .Services
-                        .Client
-                        .TextRes
-                        .AtomParser_UnexpectedContentUnderExpandedLink
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System
+                            .Data
+                            .Services
+                            .Client
+                            .TextRes
+                            .AtomParser_UnexpectedContentUnderExpandedLink
+                    );
             }
         }
 
         internal static string AtomMaterializer_CannotAssignNull(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.AtomMaterializer_CannotAssignNull,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.AtomMaterializer_CannotAssignNull,
+                    p0,
+                    p1
+                );
         }
 
         internal static string AtomMaterializer_DuplicatedNextLink
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.AtomMaterializer_DuplicatedNextLink
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.AtomMaterializer_DuplicatedNextLink
+                    );
             }
         }
 
         internal static string AtomMaterializer_EntryIntoCollectionMismatch(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.AtomMaterializer_EntryIntoCollectionMismatch,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System
+                        .Data
+                        .Services
+                        .Client
+                        .TextRes
+                        .AtomMaterializer_EntryIntoCollectionMismatch,
+                    p0,
+                    p1
+                );
         }
 
         internal static string AtomMaterializer_EntryToAccessIsNull(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.AtomMaterializer_EntryToAccessIsNull,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.AtomMaterializer_EntryToAccessIsNull,
+                    p0
+                );
         }
 
         internal static string AtomMaterializer_EntryToInitializeIsNull(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.AtomMaterializer_EntryToInitializeIsNull,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.AtomMaterializer_EntryToInitializeIsNull,
+                    p0
+                );
         }
 
         internal static string AtomMaterializer_ProjectEntityTypeMismatch(
@@ -1922,48 +2743,73 @@ namespace System.Data.Services.Client
             object p2
         )
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.AtomMaterializer_ProjectEntityTypeMismatch,
-                p0,
-                p1,
-                p2
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.AtomMaterializer_ProjectEntityTypeMismatch,
+                    p0,
+                    p1,
+                    p2
+                );
         }
 
         internal static string AtomMaterializer_LinksMissingHref
         {
             get
             {
-                return System.Data.Services.Client.TextRes.GetString(
-                    System.Data.Services.Client.TextRes.AtomMaterializer_LinksMissingHref
-                );
+                return System
+                    .Data
+                    .Services
+                    .Client
+                    .TextRes
+                    .GetString(
+                        System.Data.Services.Client.TextRes.AtomMaterializer_LinksMissingHref
+                    );
             }
         }
 
         internal static string AtomMaterializer_PropertyMissing(object p0)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.AtomMaterializer_PropertyMissing,
-                p0
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.AtomMaterializer_PropertyMissing,
+                    p0
+                );
         }
 
         internal static string AtomMaterializer_PropertyMissingFromEntry(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.AtomMaterializer_PropertyMissingFromEntry,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.AtomMaterializer_PropertyMissingFromEntry,
+                    p0,
+                    p1
+                );
         }
 
         internal static string AtomMaterializer_PropertyNotExpectedEntry(object p0, object p1)
         {
-            return System.Data.Services.Client.TextRes.GetString(
-                System.Data.Services.Client.TextRes.AtomMaterializer_PropertyNotExpectedEntry,
-                p0,
-                p1
-            );
+            return System
+                .Data
+                .Services
+                .Client
+                .TextRes
+                .GetString(
+                    System.Data.Services.Client.TextRes.AtomMaterializer_PropertyNotExpectedEntry,
+                    p0,
+                    p1
+                );
         }
     }
 

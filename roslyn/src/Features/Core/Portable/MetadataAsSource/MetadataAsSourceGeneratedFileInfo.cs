@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             _parseOptions =
                 sourceProject.Language == LanguageName
                     ? sourceProject.ParseOptions
-                    : sourceProject.Solution.Services
+                    : sourceProject
+                        .Solution
+                        .Services
                         .GetLanguageServices(LanguageName)
                         .GetRequiredService<ISyntaxTreeFactoryService>()
                         .GetDefaultParseOptionsWithLatestLanguageVersion();
@@ -78,7 +80,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             var projectId = ProjectId.CreateNewId();
 
             // Just say it's always a DLL since we probably won't have a Main method
-            var compilationOptions = workspace.Services
+            var compilationOptions = workspace
+                .Services
                 .GetLanguageServices(LanguageName)
                 .CompilationFactory!
                 .GetDefaultCompilationOptions()

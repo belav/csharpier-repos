@@ -33,7 +33,10 @@ namespace Microsoft.CodeAnalysis.Completion
 
         public static CompletionHelper GetHelper(Document document)
         {
-            return document.Project.Solution.Services
+            return document
+                .Project
+                .Solution
+                .Services
                 .GetRequiredService<ICompletionHelperService>()
                 .GetCompletionHelper(document);
         }
@@ -126,9 +129,9 @@ namespace Microsoft.CodeAnalysis.Completion
             // Now we escaping from the second check for English languages.
             // Maybe we can escape as well for more similar languages in case if we meet performance issues.
             if (
-                culture.ThreeLetterWindowsLanguageName.Equals(
-                    EnUSCultureInfo.ThreeLetterWindowsLanguageName
-                )
+                culture
+                    .ThreeLetterWindowsLanguageName
+                    .Equals(EnUSCultureInfo.ThreeLetterWindowsLanguageName)
             )
             {
                 return match;

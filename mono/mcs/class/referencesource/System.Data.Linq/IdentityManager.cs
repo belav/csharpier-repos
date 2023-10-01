@@ -153,8 +153,12 @@ namespace System.Data.Linq
                 {
                     this.accessor = accessor;
                     this.offset = offset;
-                    this.isKeyNullAssignable =
-                        System.Data.Linq.SqlClient.TypeSystem.IsNullAssignable(typeof(V));
+                    this.isKeyNullAssignable = System
+                        .Data
+                        .Linq
+                        .SqlClient
+                        .TypeSystem
+                        .IsNullAssignable(typeof(V));
                 }
 
                 internal override V CreateKeyFromInstance(T instance)
@@ -223,10 +227,13 @@ namespace System.Data.Linq
                     out MultiKey<V1, V2> k
                 )
                 {
-                    System.Diagnostics.Debug.Assert(
-                        this.offset < values.Length,
-                        "offset is outside the bounds of the values array"
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Assert(
+                            this.offset < values.Length,
+                            "offset is outside the bounds of the values array"
+                        );
 
                     object o = values[this.offset];
                     if (o == null && typeof(V1).IsValueType)

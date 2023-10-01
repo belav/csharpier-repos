@@ -211,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (
                 !fieldSymbol.IsStatic
-                && fieldSymbol.ContainingType
+                && fieldSymbol
+                    .ContainingType
                     .GetMembersUnordered()
                     .OfType<SynthesizedRecordConstructor>()
                     .SingleOrDefault()

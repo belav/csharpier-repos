@@ -287,8 +287,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         ) != 0;
 
                     Debug.Assert(_module == null);
-                    bool isCrossModuleInlinee =
-                        !factory.CompilationModuleGroup.VersionsWithMethodBody(inlinee);
+                    bool isCrossModuleInlinee = !factory
+                        .CompilationModuleGroup
+                        .VersionsWithMethodBody(inlinee);
                     Debug.Assert(
                         !isCrossModuleInlinee
                             || factory.CompilationModuleGroup.CrossModuleInlineable(inlinee)
@@ -303,10 +304,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             if (a == b)
                                 return 0;
 
-                            bool isCrossModuleInlinerA =
-                                !factory.CompilationModuleGroup.VersionsWithMethodBody(a);
-                            bool isCrossModuleInlinerB =
-                                !factory.CompilationModuleGroup.VersionsWithMethodBody(b);
+                            bool isCrossModuleInlinerA = !factory
+                                .CompilationModuleGroup
+                                .VersionsWithMethodBody(a);
+                            bool isCrossModuleInlinerB = !factory
+                                .CompilationModuleGroup
+                                .VersionsWithMethodBody(b);
                             if (isCrossModuleInlinerA != isCrossModuleInlinerB)
                             {
                                 if (isCrossModuleInlinerA)
@@ -433,9 +436,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                     sig.Append(
                                         new UnsignedConstant(
                                             (uint)
-                                                factory.ManifestMetadataTable.ModuleToIndex(
-                                                    inliner.Module
-                                                )
+                                                factory
+                                                    .ManifestMetadataTable
+                                                    .ModuleToIndex(inliner.Module)
                                         )
                                     );
                                 }
@@ -475,7 +478,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 return 1;
             }
-            return _module.Assembly
+            return _module
+                .Assembly
                 .GetName()
                 .Name
                 .CompareTo(otherInliningInfo._module.Assembly.GetName().Name);

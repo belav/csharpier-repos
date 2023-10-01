@@ -59,11 +59,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
                 context.RegisterSyntaxTreeAction(context =>
                 {
                     var root = context.Tree.GetCompilationUnitRoot(context.CancellationToken);
-                    var initialState = context.Tree.IsGeneratedCode(
-                        context.Options,
-                        CSharpSyntaxFacts.Instance,
-                        context.CancellationToken
-                    )
+                    var initialState = context
+                        .Tree
+                        .IsGeneratedCode(
+                            context.Options,
+                            CSharpSyntaxFacts.Instance,
+                            context.CancellationToken
+                        )
                         ? NullableContextOptions.Disable
                         : defaultNullableContext;
 

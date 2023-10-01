@@ -32,9 +32,9 @@ namespace ILCompiler.Dataflow
         )
         {
             var param = (EcmaGenericParameter)origin.GenericParameter;
-            var parent = param.Module.GetObject(
-                param.MetadataReader.GetGenericParameter(param.Handle).Parent
-            );
+            var parent = param
+                .Module
+                .GetObject(param.MetadataReader.GetGenericParameter(param.Handle).Parent);
             if (parent is MethodDesc m)
                 return m.GetDisplayName();
             else

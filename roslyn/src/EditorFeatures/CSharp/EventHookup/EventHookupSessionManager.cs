@@ -219,9 +219,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 CancelAndDismissExistingSessions();
             }
 
-            var snapshotSpan = CurrentSession.TrackingSpan.GetSpan(
-                CurrentSession.TextView.TextSnapshot
-            );
+            var snapshotSpan = CurrentSession
+                .TrackingSpan
+                .GetSpan(CurrentSession.TextView.TextSnapshot);
             if (
                 snapshotSpan.Snapshot != caretPoint.Value.Snapshot
                 || !snapshotSpan.Contains(caretPoint.Value)

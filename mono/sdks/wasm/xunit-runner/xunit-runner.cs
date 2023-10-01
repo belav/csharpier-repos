@@ -283,9 +283,9 @@ class WasmRunner : IMessageSink
 
                     Type discovererType = null;
                     if (args[1] == "xunit.core")
-                        discovererType = typeof(IXunitTestCollectionFactory).Assembly.GetType(
-                            args[0]
-                        );
+                        discovererType = typeof(IXunitTestCollectionFactory)
+                            .Assembly
+                            .GetType(args[0]);
                     if (discovererType == null)
                     {
                         Console.WriteLine("FAIL (discoverer): " + args[0] + " " + args[1]);
@@ -306,16 +306,17 @@ class WasmRunner : IMessageSink
                             object obj = null;
                             if (!method.IsStatic)
                             {
-                                var constructor = method.ReflectedType.GetConstructor(
-                                    Type.EmptyTypes
-                                );
+                                var constructor = method
+                                    .ReflectedType
+                                    .GetConstructor(Type.EmptyTypes);
                                 if (constructor != null)
                                     obj = constructor.Invoke(null);
                                 else
-                                    obj =
-                                        System.Runtime.Serialization.FormatterServices.GetUninitializedObject(
-                                            method.ReflectedType
-                                        );
+                                    obj = System
+                                        .Runtime
+                                        .Serialization
+                                        .FormatterServices
+                                        .GetUninitializedObject(method.ReflectedType);
                             }
 
                             var pars = method.GetParameters();
@@ -360,10 +361,11 @@ class WasmRunner : IMessageSink
                         if (constructor != null)
                             obj = constructor.Invoke(null);
                         else
-                            obj =
-                                System.Runtime.Serialization.FormatterServices.GetUninitializedObject(
-                                    method.ReflectedType
-                                );
+                            obj = System
+                                .Runtime
+                                .Serialization
+                                .FormatterServices
+                                .GetUninitializedObject(method.ReflectedType);
                     }
                     var args = tc.TestMethodArguments;
                     if (args != null)

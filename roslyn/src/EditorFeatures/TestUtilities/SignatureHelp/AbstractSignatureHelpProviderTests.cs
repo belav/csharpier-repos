@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             var document1 = workspaceFixture.Target.UpdateDocument(code, sourceCodeKind);
             if (experimental)
             {
-                document1 = document1.Project
+                document1 = document1
+                    .Project
                     .WithParseOptions(parseOptions)
                     .GetDocument(document1.Id);
             }
@@ -138,14 +139,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             // speculative semantic model
             if (await CanUseSpeculativeSemanticModelAsync(document1, cursorPosition))
             {
-                var document2 = workspaceFixture.Target.UpdateDocument(
-                    code,
-                    sourceCodeKind,
-                    cleanBeforeUpdate: false
-                );
+                var document2 = workspaceFixture
+                    .Target
+                    .UpdateDocument(code, sourceCodeKind, cleanBeforeUpdate: false);
                 if (experimental)
                 {
-                    document2 = document2.Project
+                    document2 = document2
+                        .Project
                         .WithParseOptions(parseOptions)
                         .GetDocument(document2.Id);
                 }
@@ -184,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var signatureHelpProviderType = GetSignatureHelpProviderType();
-            var signatureHelpProvider = workspaceFixture.Target
+            var signatureHelpProvider = workspaceFixture
+                .Target
                 .GetWorkspace()
                 .ExportProvider
                 .GetExportedValues<ISignatureHelpProvider>()
@@ -280,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             var document = workspaceFixture.Target.UpdateDocument(code, sourceCodeKind);
 
             var signatureHelpProviderType = GetSignatureHelpProviderType();
-            var signatureHelpProvider = workspaceFixture.Target
+            var signatureHelpProvider = workspaceFixture
+                .Target
                 .GetWorkspace()
                 .ExportProvider
                 .GetExportedValues<ISignatureHelpProvider>()
@@ -594,7 +596,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
         {
             using var testWorkspace = TestWorkspace.Create(xmlString);
 
-            var cursorPosition = testWorkspace.Documents
+            var cursorPosition = testWorkspace
+                .Documents
                 .First(d => d.Name == "SourceDocument")
                 .CursorPosition
                 .Value;
@@ -610,7 +613,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
 
             IList<TextSpan> textSpans = null;
 
-            var selectedSpans = testWorkspace.Documents
+            var selectedSpans = testWorkspace
+                .Documents
                 .First(d => d.Name == "SourceDocument")
                 .SelectedSpans;
             if (selectedSpans.Any())
@@ -647,7 +651,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
         )
         {
             var signatureHelpProviderType = GetSignatureHelpProviderType();
-            var signatureHelpProvider = workspace.ExportProvider
+            var signatureHelpProvider = workspace
+                .ExportProvider
                 .GetExportedValues<ISignatureHelpProvider>()
                 .Single(provider => provider.GetType() == signatureHelpProviderType);
             var triggerInfo = new SignatureHelpTriggerInfo(
@@ -767,11 +772,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
 
             using var testWorkspace = TestWorkspace.Create(xmlString);
 
-            var cursorPosition = testWorkspace.Documents
+            var cursorPosition = testWorkspace
+                .Documents
                 .Single(d => d.Name == "SourceDocument")
                 .CursorPosition
                 .Value;
-            var documentId = testWorkspace.Documents
+            var documentId = testWorkspace
+                .Documents
                 .Where(d => d.Name == "SourceDocument")
                 .Single()
                 .Id;
@@ -781,7 +788,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
 
             IList<TextSpan> textSpans = null;
 
-            var selectedSpans = testWorkspace.Documents
+            var selectedSpans = testWorkspace
+                .Documents
                 .Single(d => d.Name == "SourceDocument")
                 .SelectedSpans;
             if (selectedSpans.Any())

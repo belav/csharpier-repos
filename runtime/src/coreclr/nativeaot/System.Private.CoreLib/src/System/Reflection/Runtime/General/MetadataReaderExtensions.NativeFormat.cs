@@ -268,11 +268,9 @@ namespace System.Reflection.Runtime.General
             ConstantBoxedEnumValue record = handle.GetConstantBoxedEnumValue(reader);
 
             Exception? exception = null;
-            Type? enumType = record.Type.TryResolve(
-                reader,
-                new TypeContext(null, null),
-                ref exception
-            );
+            Type? enumType = record
+                .Type
+                .TryResolve(reader, new TypeContext(null, null), ref exception);
             if (enumType == null)
             {
                 value = null;
@@ -294,7 +292,8 @@ namespace System.Reflection.Runtime.General
                         if (underlyingType != typeof(byte))
                             throw new BadImageFormatException();
 
-                        byte v = record.Value
+                        byte v = record
+                            .Value
                             .ToConstantByteValueHandle(reader)
                             .GetConstantByteValue(reader)
                             .Value;
@@ -306,7 +305,8 @@ namespace System.Reflection.Runtime.General
                         if (underlyingType != typeof(sbyte))
                             throw new BadImageFormatException();
 
-                        sbyte v = record.Value
+                        sbyte v = record
+                            .Value
                             .ToConstantSByteValueHandle(reader)
                             .GetConstantSByteValue(reader)
                             .Value;
@@ -318,7 +318,8 @@ namespace System.Reflection.Runtime.General
                         if (underlyingType != typeof(short))
                             throw new BadImageFormatException();
 
-                        short v = record.Value
+                        short v = record
+                            .Value
                             .ToConstantInt16ValueHandle(reader)
                             .GetConstantInt16Value(reader)
                             .Value;
@@ -330,7 +331,8 @@ namespace System.Reflection.Runtime.General
                         if (underlyingType != typeof(ushort))
                             throw new BadImageFormatException();
 
-                        ushort v = record.Value
+                        ushort v = record
+                            .Value
                             .ToConstantUInt16ValueHandle(reader)
                             .GetConstantUInt16Value(reader)
                             .Value;
@@ -342,7 +344,8 @@ namespace System.Reflection.Runtime.General
                         if (underlyingType != typeof(int))
                             throw new BadImageFormatException();
 
-                        int v = record.Value
+                        int v = record
+                            .Value
                             .ToConstantInt32ValueHandle(reader)
                             .GetConstantInt32Value(reader)
                             .Value;
@@ -354,7 +357,8 @@ namespace System.Reflection.Runtime.General
                         if (underlyingType != typeof(uint))
                             throw new BadImageFormatException();
 
-                        uint v = record.Value
+                        uint v = record
+                            .Value
                             .ToConstantUInt32ValueHandle(reader)
                             .GetConstantUInt32Value(reader)
                             .Value;
@@ -366,7 +370,8 @@ namespace System.Reflection.Runtime.General
                         if (underlyingType != typeof(long))
                             throw new BadImageFormatException();
 
-                        long v = record.Value
+                        long v = record
+                            .Value
                             .ToConstantInt64ValueHandle(reader)
                             .GetConstantInt64Value(reader)
                             .Value;
@@ -378,7 +383,8 @@ namespace System.Reflection.Runtime.General
                         if (underlyingType != typeof(ulong))
                             throw new BadImageFormatException();
 
-                        ulong v = record.Value
+                        ulong v = record
+                            .Value
                             .ToConstantUInt64ValueHandle(reader)
                             .GetConstantUInt64Value(reader)
                             .Value;
@@ -684,67 +690,73 @@ namespace System.Reflection.Runtime.General
             exception = null;
 
             ConstantEnumArray enumArray = handle.GetConstantEnumArray(reader);
-            Type? elementType = enumArray.ElementType.TryResolve(
-                reader,
-                new TypeContext(null, null),
-                ref exception
-            );
+            Type? elementType = enumArray
+                .ElementType
+                .TryResolve(reader, new TypeContext(null, null), ref exception);
             if (exception != null)
                 return null;
 
             switch (enumArray.Value.HandleType)
             {
                 case HandleType.ConstantByteArray:
-                    return enumArray.Value
+                    return enumArray
+                        .Value
                         .ToConstantByteArrayHandle(reader)
                         .GetConstantByteArray(reader)
                         .Value
                         .ToArray(elementType);
 
                 case HandleType.ConstantSByteArray:
-                    return enumArray.Value
+                    return enumArray
+                        .Value
                         .ToConstantSByteArrayHandle(reader)
                         .GetConstantSByteArray(reader)
                         .Value
                         .ToArray(elementType);
 
                 case HandleType.ConstantInt16Array:
-                    return enumArray.Value
+                    return enumArray
+                        .Value
                         .ToConstantInt16ArrayHandle(reader)
                         .GetConstantInt16Array(reader)
                         .Value
                         .ToArray(elementType);
 
                 case HandleType.ConstantUInt16Array:
-                    return enumArray.Value
+                    return enumArray
+                        .Value
                         .ToConstantUInt16ArrayHandle(reader)
                         .GetConstantUInt16Array(reader)
                         .Value
                         .ToArray(elementType);
 
                 case HandleType.ConstantInt32Array:
-                    return enumArray.Value
+                    return enumArray
+                        .Value
                         .ToConstantInt32ArrayHandle(reader)
                         .GetConstantInt32Array(reader)
                         .Value
                         .ToArray(elementType);
 
                 case HandleType.ConstantUInt32Array:
-                    return enumArray.Value
+                    return enumArray
+                        .Value
                         .ToConstantUInt32ArrayHandle(reader)
                         .GetConstantUInt32Array(reader)
                         .Value
                         .ToArray(elementType);
 
                 case HandleType.ConstantInt64Array:
-                    return enumArray.Value
+                    return enumArray
+                        .Value
                         .ToConstantInt64ArrayHandle(reader)
                         .GetConstantInt64Array(reader)
                         .Value
                         .ToArray(elementType);
 
                 case HandleType.ConstantUInt64Array:
-                    return enumArray.Value
+                    return enumArray
+                        .Value
                         .ToConstantUInt64ArrayHandle(reader)
                         .GetConstantUInt64Array(reader)
                         .Value
@@ -763,12 +775,14 @@ namespace System.Reflection.Runtime.General
             HandleType constructorHandleType = customAttribute.Constructor.HandleType;
 
             if (constructorHandleType == HandleType.QualifiedMethod)
-                return customAttribute.Constructor
+                return customAttribute
+                    .Constructor
                     .ToQualifiedMethodHandle(reader)
                     .GetQualifiedMethod(reader)
                     .EnclosingType;
             else if (constructorHandleType == HandleType.MemberReference)
-                return customAttribute.Constructor
+                return customAttribute
+                    .Constructor
                     .ToMemberReferenceHandle(reader)
                     .GetMemberReference(reader)
                     .Parent;
@@ -813,15 +827,14 @@ namespace System.Reflection.Runtime.General
                     if (!namespaceDefinition.Name.StringOrNullEquals(namespacePart, reader))
                         return false;
                     if (
-                        !namespaceDefinition.ParentScopeOrNamespace.IsNamespaceDefinitionHandle(
-                            reader
-                        )
+                        !namespaceDefinition
+                            .ParentScopeOrNamespace
+                            .IsNamespaceDefinitionHandle(reader)
                     )
                         return false;
-                    nsHandle =
-                        namespaceDefinition.ParentScopeOrNamespace.ToNamespaceDefinitionHandle(
-                            reader
-                        );
+                    nsHandle = namespaceDefinition
+                        .ParentScopeOrNamespace
+                        .ToNamespaceDefinitionHandle(reader);
                 }
                 if (!nsHandle.GetNamespaceDefinition(reader).Name.StringOrNullEquals(null, reader))
                     return false;
@@ -836,8 +849,9 @@ namespace System.Reflection.Runtime.General
                     return false;
                 if (!typeReference.ParentNamespaceOrType.IsNamespaceReferenceHandle(reader))
                     return false;
-                NamespaceReferenceHandle nsHandle =
-                    typeReference.ParentNamespaceOrType.ToNamespaceReferenceHandle(reader);
+                NamespaceReferenceHandle nsHandle = typeReference
+                    .ParentNamespaceOrType
+                    .ToNamespaceReferenceHandle(reader);
                 int idx = namespaceParts.Length;
                 while (idx-- != 0)
                 {
@@ -846,14 +860,14 @@ namespace System.Reflection.Runtime.General
                     if (!namespaceReference.Name.StringOrNullEquals(namespacePart, reader))
                         return false;
                     if (
-                        !namespaceReference.ParentScopeOrNamespace.IsNamespaceReferenceHandle(
-                            reader
-                        )
+                        !namespaceReference
+                            .ParentScopeOrNamespace
+                            .IsNamespaceReferenceHandle(reader)
                     )
                         return false;
-                    nsHandle = namespaceReference.ParentScopeOrNamespace.ToNamespaceReferenceHandle(
-                        reader
-                    );
+                    nsHandle = namespaceReference
+                        .ParentScopeOrNamespace
+                        .ToNamespaceReferenceHandle(reader);
                 }
                 if (!nsHandle.GetNamespaceReference(reader).Name.StringOrNullEquals(null, reader))
                     return false;
@@ -1005,10 +1019,9 @@ namespace System.Reflection.Runtime.General
                 int index = fullName.Length;
                 fullName.Append(namespacePart);
                 ReverseStringInStringBuilder(fullName, index, namespacePart.Length);
-                namespaceReferenceHandle =
-                    namespaceReference.ParentScopeOrNamespace.ToExpectedNamespaceReferenceHandle(
-                        reader
-                    );
+                namespaceReferenceHandle = namespaceReference
+                    .ParentScopeOrNamespace
+                    .ToExpectedNamespaceReferenceHandle(reader);
             }
             ReverseStringInStringBuilder(fullName, 0, fullName.Length);
             fullName.Append(typeName);

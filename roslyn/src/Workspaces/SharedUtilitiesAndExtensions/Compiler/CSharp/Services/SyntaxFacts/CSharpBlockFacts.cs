@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 BlockSyntax block => block.Statements,
                 SwitchSectionSyntax switchSection => switchSection.Statements,
                 CompilationUnitSyntax compilationUnit
-                    => compilationUnit.Members
+                    => compilationUnit
+                        .Members
                         .OfType<GlobalStatementSyntax>()
                         .SelectAsArray(globalStatement => globalStatement.Statement),
                 _ => throw ExceptionUtilities.UnexpectedValue(node),

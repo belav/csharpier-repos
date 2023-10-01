@@ -462,11 +462,9 @@ namespace System.Data.Common
                 int index = columnMappings.IndexOf(sourceColumn);
                 if (-1 != index)
                 {
-                    return columnMappings._items![index].GetDataColumnBySchemaAction(
-                        dataTable,
-                        dataType,
-                        schemaAction
-                    );
+                    return columnMappings
+                        ._items![index]
+                        .GetDataColumnBySchemaAction(dataTable, dataType, schemaAction);
                 }
             }
             if (string.IsNullOrEmpty(sourceColumn))

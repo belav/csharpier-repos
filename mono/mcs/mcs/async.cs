@@ -1066,10 +1066,12 @@ namespace Mono.CSharp
             bool unsafe_version = false;
             if (Module.PredefinedTypes.ICriticalNotifyCompletion.Define())
             {
-                unsafe_version = awaiter.Type.ImplementsInterface(
-                    Module.PredefinedTypes.ICriticalNotifyCompletion.TypeSpec,
-                    false
-                );
+                unsafe_version = awaiter
+                    .Type
+                    .ImplementsInterface(
+                        Module.PredefinedTypes.ICriticalNotifyCompletion.TypeSpec,
+                        false
+                    );
             }
 
             EmitOnCompleted(ec, awaiter, unsafe_version);

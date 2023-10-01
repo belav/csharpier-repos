@@ -23,10 +23,9 @@ namespace Internal.Runtime.TypeLoader
             TypeReference trData1 = mr1.GetTypeReference(tr1);
             TypeReference trData2 = mr2.GetTypeReference(tr2);
             if (
-                !trData1.TypeName.StringEquals(
-                    trData2.TypeName.GetConstantStringValue(mr2).Value,
-                    mr1
-                )
+                !trData1
+                    .TypeName
+                    .StringEquals(trData2.TypeName.GetConstantStringValue(mr2).Value, mr1)
             )
                 return false;
 
@@ -105,10 +104,9 @@ namespace Internal.Runtime.TypeLoader
                 return false;
 
             if (
-                !srData1.Culture.StringEquals(
-                    srData2.Culture.GetConstantStringValue(mr2).Value,
-                    mr1
-                )
+                !srData1
+                    .Culture
+                    .StringEquals(srData2.Culture.GetConstantStringValue(mr2).Value, mr1)
             )
                 return false;
 
@@ -231,10 +229,9 @@ namespace Internal.Runtime.TypeLoader
                 return false;
 
             if (
-                !srData1.Culture.StringEquals(
-                    sdData2.Culture.GetConstantStringValue(mr2).Value,
-                    mr1
-                )
+                !srData1
+                    .Culture
+                    .StringEquals(sdData2.Culture.GetConstantStringValue(mr2).Value, mr1)
             )
                 return false;
 

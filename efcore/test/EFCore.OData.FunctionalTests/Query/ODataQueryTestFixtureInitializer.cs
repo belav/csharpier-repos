@@ -86,7 +86,8 @@ public class ODataQueryTestFixtureInitializer
 
         selfHostServer.Start();
 
-        var baseAddress = selfHostServer.Services
+        var baseAddress = selfHostServer
+            .Services
             .GetService<IServer>()
             .Features
             .Get<IServerAddressesFeature>()

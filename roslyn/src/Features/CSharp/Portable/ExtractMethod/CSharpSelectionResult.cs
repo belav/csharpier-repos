@@ -39,26 +39,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             var firstTokenAnnotation = new SyntaxAnnotation();
             var lastTokenAnnotation = new SyntaxAnnotation();
 
-            var root = await document.Document
+            var root = await document
+                .Document
                 .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newDocument = await SemanticDocument
                 .CreateAsync(
-                    document.Document.WithSyntaxRoot(
-                        root.AddAnnotations(
-                            new[]
-                            {
-                                Tuple.Create<SyntaxToken, SyntaxAnnotation>(
-                                    firstToken,
-                                    firstTokenAnnotation
-                                ),
-                                Tuple.Create<SyntaxToken, SyntaxAnnotation>(
-                                    lastToken,
-                                    lastTokenAnnotation
-                                )
-                            }
-                        )
-                    ),
+                    document
+                        .Document
+                        .WithSyntaxRoot(
+                            root.AddAnnotations(
+                                new[]
+                                {
+                                    Tuple.Create<SyntaxToken, SyntaxAnnotation>(
+                                        firstToken,
+                                        firstTokenAnnotation
+                                    ),
+                                    Tuple.Create<SyntaxToken, SyntaxAnnotation>(
+                                        lastToken,
+                                        lastTokenAnnotation
+                                    )
+                                }
+                            )
+                        ),
                     cancellationToken
                 )
                 .ConfigureAwait(false);
@@ -169,10 +172,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             Contract.ThrowIfNull(statement);
             var firstStatementUnderContainer = GetFirstStatementUnderContainer();
             Contract.ThrowIfFalse(
-                CSharpSyntaxFacts.Instance.AreStatementsInSameContainer(
-                    statement,
-                    firstStatementUnderContainer
-                )
+                CSharpSyntaxFacts
+                    .Instance
+                    .AreStatementsInSameContainer(statement, firstStatementUnderContainer)
             );
 
             return statement;

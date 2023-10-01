@@ -2680,7 +2680,8 @@ public class C<T>
                     "System.Runtime.CompilerServices.CallConvCdecl",
                     "System.Runtime.CompilerServices.CallConvStdcall"
                 },
-                funcPtrType.Signature
+                funcPtrType
+                    .Signature
                     .GetCallingConventionModifiers()
                     .Select(c => ((CSharpCustomModifier)c).ModifierSymbol.ToTestDisplayString())
             );

@@ -177,8 +177,9 @@ public class DynamicSchemeTests
                                     )
                                     {
                                         var name = remainder.Value.Substring(1);
-                                        var auth =
-                                            context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                                        var auth = context
+                                            .RequestServices
+                                            .GetRequiredService<IAuthenticationSchemeProvider>();
                                         var scheme = new AuthenticationScheme(
                                             name,
                                             name,
@@ -208,8 +209,9 @@ public class DynamicSchemeTests
                                     )
                                     {
                                         var name = remainder.Value.Substring(1);
-                                        var auth =
-                                            context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                                        var auth = context
+                                            .RequestServices
+                                            .GetRequiredService<IAuthenticationSchemeProvider>();
                                         auth.RemoveScheme(name);
                                     }
                                     else

@@ -78,13 +78,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             else
             {
                 // Is a solution node. Do we contain any C# projects?
-                visible = _workspace.CurrentSolution.Projects.Any(
-                    project =>
-                        project.Language.Equals(
-                            LanguageNames.CSharp,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                );
+                visible = _workspace
+                    .CurrentSolution
+                    .Projects
+                    .Any(
+                        project =>
+                            project
+                                .Language
+                                .Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase)
+                    );
             }
 
             var enabled = visible && !VisualStudioCommandHandlerHelpers.IsBuildActive();
@@ -117,13 +119,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             else
             {
                 // The solution node is selected, so collect all the C# projects for update.
-                var projects = _workspace.CurrentSolution.Projects
+                var projects = _workspace
+                    .CurrentSolution
+                    .Projects
                     .Where(
                         project =>
-                            project.Language.Equals(
-                                LanguageNames.CSharp,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            project
+                                .Language
+                                .Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase)
                     )
                     .ToImmutableArray();
 
@@ -138,13 +141,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             var projectFilePath = projectHierarchy.TryGetProjectFilePath();
 
             var solution = _workspace.CurrentSolution;
-            return solution.Projects
+            return solution
+                .Projects
                 .Where(
                     project =>
-                        project.FilePath?.Equals(
-                            projectFilePath,
-                            StringComparison.OrdinalIgnoreCase
-                        ) == true
+                        project
+                            .FilePath
+                            ?.Equals(projectFilePath, StringComparison.OrdinalIgnoreCase) == true
                 )
                 .ToImmutableArrayOrEmpty();
         }
@@ -166,13 +169,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
                 showProgress: true,
                 (operationContext) =>
                 {
-                    solution = ThreadHelper.JoinableTaskFactory.Run(
-                        () =>
-                            syncService.SyncNamespacesAsync(
-                                projects,
-                                operationContext.UserCancellationToken
-                            )
-                    );
+                    solution = ThreadHelper
+                        .JoinableTaskFactory
+                        .Run(
+                            () =>
+                                syncService.SyncNamespacesAsync(
+                                    projects,
+                                    operationContext.UserCancellationToken
+                                )
+                        );
                 }
             );
 

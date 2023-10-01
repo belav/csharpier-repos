@@ -314,14 +314,16 @@ namespace Mono.CSharp
 
             // TODO: CS1710, CS1712
 
-            mc.Compiler.Report.Warning(
-                1711,
-                2,
-                mc.Location,
-                "XML comment on `{0}' has a typeparam name `{1}' but there is no type parameter by that name",
-                mc.GetSignatureForError(),
-                tp_name
-            );
+            mc.Compiler
+                .Report
+                .Warning(
+                    1711,
+                    2,
+                    mc.Location,
+                    "XML comment on `{0}' has a typeparam name `{1}' but there is no type parameter by that name",
+                    mc.GetSignatureForError(),
+                    tp_name
+                );
         }
 
         //
@@ -345,14 +347,16 @@ namespace Mono.CSharp
                 member = member.Parent;
             } while (member != null);
 
-            mc.Compiler.Report.Warning(
-                1735,
-                2,
-                mc.Location,
-                "XML comment on `{0}' has a typeparamref name `{1}' that could not be resolved",
-                mc.GetSignatureForError(),
-                tp_name
-            );
+            mc.Compiler
+                .Report
+                .Warning(
+                    1735,
+                    2,
+                    mc.Location,
+                    "XML comment on `{0}' has a typeparamref name `{1}' that could not be resolved",
+                    mc.GetSignatureForError(),
+                    tp_name
+                );
         }
 
         FullNamedExpression ResolveMemberName(IMemberContext context, MemberName mn)
@@ -598,10 +602,9 @@ namespace Mono.CSharp
                                             i >= pm_params.Count
                                             || pparam == null
                                             || pparam.TypeSpec == null
-                                            || !TypeSpecComparer.Override.IsEqual(
-                                                pparam.TypeSpec,
-                                                pm_params.Types[i]
-                                            )
+                                            || !TypeSpecComparer
+                                                .Override
+                                                .IsEqual(pparam.TypeSpec, pm_params.Types[i])
                                             || (pparam.Modifier & Parameter.Modifier.RefOutMask)
                                                 != (
                                                     pm_params.FixedParameters[i].ModFlags

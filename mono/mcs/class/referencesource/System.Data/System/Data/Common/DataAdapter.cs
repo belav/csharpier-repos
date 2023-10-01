@@ -37,9 +37,10 @@ namespace System.Data.Common
         private DataTableMappingCollection _tableMappings;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
 #if DEBUG
         // if true, we are asserting that the caller has provided a select command

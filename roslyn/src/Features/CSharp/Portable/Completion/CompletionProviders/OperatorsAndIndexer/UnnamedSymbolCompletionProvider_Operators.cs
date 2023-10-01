@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
 
             var opCharacters = ImmutableArray.CreateRange(filterCharacters);
-            s_operatorRules = CompletionItemRules.Default
+            s_operatorRules = CompletionItemRules
+                .Default
                 .WithFilterCharacterRule(
                     CharacterSetModificationRule.Create(
                         CharacterSetModificationKind.Add,

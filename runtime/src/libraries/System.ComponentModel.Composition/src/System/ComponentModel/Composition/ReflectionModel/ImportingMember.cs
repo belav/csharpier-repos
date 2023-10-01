@@ -145,9 +145,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             if (collectionObject == null)
             {
-                ConstructorInfo? constructor = ImportType.ActualType.GetConstructor(
-                    Type.EmptyTypes
-                );
+                ConstructorInfo? constructor = ImportType
+                    .ActualType
+                    .GetConstructor(Type.EmptyTypes);
 
                 // If it contains a default public constructor create a new instance.
                 if (constructor != null)

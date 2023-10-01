@@ -97,9 +97,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 {
                     foreach (var linkedDocumentId in oldDocument.GetLinkedDocumentIds())
                     {
-                        var oldLinkedDocument = oldDocument.Project.Solution.GetDocument(
-                            linkedDocumentId
-                        );
+                        var oldLinkedDocument = oldDocument
+                            .Project
+                            .Solution
+                            .GetDocument(linkedDocumentId);
 
                         // Ensure that we account for document removal, i.e. updatedDocumentTextOpt == null.
                         var newLinkedDocumentIdOpt =

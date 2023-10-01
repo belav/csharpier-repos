@@ -99,10 +99,9 @@ namespace System.ServiceModel.Activation
             }
             else
             {
-                throw FxTrace.Exception.Argument(
-                    "tokenChecking",
-                    SR.Hosting_UnrecognizedTokenCheckingValue
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("tokenChecking", SR.Hosting_UnrecognizedTokenCheckingValue);
             }
 
             bool transportSelectedCondition1 = (flags == ExtendedProtectionFlags.None);
@@ -130,10 +129,9 @@ namespace System.ServiceModel.Activation
             // other nonsupported scenarios, throw NotSupportedException
             else
             {
-                throw FxTrace.Exception.Argument(
-                    "flags",
-                    SR.Hosting_ExtendedProtectionFlagsNotSupport(flags)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("flags", SR.Hosting_ExtendedProtectionFlagsNotSupport(flags));
             }
 
             // dotless spn check if dotlessspn is not allowed
@@ -153,25 +151,28 @@ namespace System.ServiceModel.Activation
                             );
                             if (position == -1)
                             {
-                                throw FxTrace.Exception.Argument(
-                                    "spn",
-                                    SR.Hosting_ExtendedProtectionDotlessSpnNotEnabled(spn)
-                                );
+                                throw FxTrace
+                                    .Exception
+                                    .Argument(
+                                        "spn",
+                                        SR.Hosting_ExtendedProtectionDotlessSpnNotEnabled(spn)
+                                    );
                             }
                             else if (position == 0 || position == parts[1].Length - 1)
                             {
-                                throw FxTrace.Exception.Argument(
-                                    "spn",
-                                    SR.Hosting_ExtendedProtectionSpnFormatError(spn)
-                                );
+                                throw FxTrace
+                                    .Exception
+                                    .Argument(
+                                        "spn",
+                                        SR.Hosting_ExtendedProtectionSpnFormatError(spn)
+                                    );
                             }
                         }
                         else
                         {
-                            throw FxTrace.Exception.Argument(
-                                "spn",
-                                SR.Hosting_ExtendedProtectionSpnFormatError(spn)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .Argument("spn", SR.Hosting_ExtendedProtectionSpnFormatError(spn));
                         }
                     }
                 }
@@ -339,20 +340,24 @@ namespace System.ServiceModel.Activation
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            new NotSupportedException(
-                                SR.Hosting_NotSupportedAuthScheme(providers[i])
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new NotSupportedException(
+                                    SR.Hosting_NotSupportedAuthScheme(providers[i])
+                                )
+                            );
                     }
                 }
             }
 
             if ((flags & AuthFlags.AuthPassport) != 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new NotSupportedException(SR.Hosting_NotSupportedAuthScheme("Passport"))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new NotSupportedException(SR.Hosting_NotSupportedAuthScheme("Passport"))
+                    );
             }
             return retValue;
         }
@@ -615,9 +620,9 @@ namespace System.ServiceModel.Activation
         {
             ExtendedProtectionPolicy extendedProtection = null;
             using (
-                RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(
-                    IISConstants.CBTRegistryHKLMPath
-                )
+                RegistryKey registryKey = Registry
+                    .LocalMachine
+                    .OpenSubKey(IISConstants.CBTRegistryHKLMPath)
             )
             {
                 if (registryKey != null)

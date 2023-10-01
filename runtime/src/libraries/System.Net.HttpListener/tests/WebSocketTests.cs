@@ -63,12 +63,14 @@ namespace System.Net.Tests
                 byte[] receiveBuffer = Encoding.UTF8.GetBytes(expected);
 
                 // Send binary data from server.
-                await wsContext.WebSocket.SendAsync(
-                    new ArraySegment<byte>(receiveBuffer),
-                    WebSocketMessageType.Binary,
-                    true,
-                    CancellationToken.None
-                );
+                await wsContext
+                    .WebSocket
+                    .SendAsync(
+                        new ArraySegment<byte>(receiveBuffer),
+                        WebSocketMessageType.Binary,
+                        true,
+                        CancellationToken.None
+                    );
 
                 // Receive binary data in client.
                 ArraySegment<byte> getBuffer = new ArraySegment<byte>(

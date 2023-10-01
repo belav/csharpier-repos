@@ -106,7 +106,12 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 var assemblyLocation = typeof(DotNetSdkMSBuildInstalled).Assembly.Location;
                 var solutionFolder = Directory
                     .GetParent(assemblyLocation)
-                    ?.Parent?.Parent?.Parent?.Parent?.Parent?.FullName;
+                    ?.Parent
+                    ?.Parent
+                    ?.Parent
+                    ?.Parent
+                    ?.Parent
+                    ?.FullName;
                 Assumes.NotNull(solutionFolder);
                 return solutionFolder;
             }

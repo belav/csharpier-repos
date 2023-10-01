@@ -198,14 +198,16 @@ public class OpaqueUpgradeTests
                 out var address,
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        _ =>
-                        {
-                            callbackCalled = true;
-                            return Task.FromResult(0);
-                        },
-                        null
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            _ =>
+                            {
+                                callbackCalled = true;
+                                return Task.FromResult(0);
+                            },
+                            null
+                        );
                     httpContext.Response.Headers["Upgrade"] = "websocket"; // Win8.1 blocks anything but WebSockets
                     var opaqueFeature = httpContext.Features.Get<IHttpUpgradeFeature>();
                     Assert.NotNull(opaqueFeature);

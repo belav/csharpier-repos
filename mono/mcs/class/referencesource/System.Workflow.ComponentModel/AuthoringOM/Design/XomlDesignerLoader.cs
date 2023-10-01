@@ -308,10 +308,9 @@ namespace System.Workflow.ComponentModel.Design
 
             errors = new ArrayList();
 
-            Stream stream = type.Module.Assembly.GetManifestResourceStream(
-                type,
-                manifestResourceName
-            );
+            Stream stream = type.Module
+                .Assembly
+                .GetManifestResourceStream(type, manifestResourceName);
             if (stream == null)
                 stream = type.Module.Assembly.GetManifestResourceStream(manifestResourceName);
 

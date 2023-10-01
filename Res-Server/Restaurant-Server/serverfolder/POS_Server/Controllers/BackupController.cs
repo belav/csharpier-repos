@@ -213,9 +213,11 @@ namespace POS_Server.Controllers
                     string destpath = "";
 
                     bool decres = false;
-                    string direpath = System.Web.Hosting.HostingEnvironment.MapPath(
-                        "~\\images\\temp\\"
-                    );
+                    string direpath = System
+                        .Web
+                        .Hosting
+                        .HostingEnvironment
+                        .MapPath("~\\images\\temp\\");
                     string destfile = "file" + DateTime.Now.ToFileTime() + ".bak";
 
                     sourcpath = Path.Combine(direpath, restoreFilename);

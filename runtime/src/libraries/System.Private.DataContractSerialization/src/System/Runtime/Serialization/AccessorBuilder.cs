@@ -116,15 +116,17 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.Format(
-                            SR.InvalidMember,
-                            DataContract.GetClrTypeFullName(memberInfo.DeclaringType!),
-                            memberInfo.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(
+                                SR.InvalidMember,
+                                DataContract.GetClrTypeFullName(memberInfo.DeclaringType!),
+                                memberInfo.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -187,15 +189,17 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.Format(
-                                SR.NoSetMethodForProperty,
-                                propInfo.DeclaringType,
-                                propInfo.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.Format(
+                                    SR.NoSetMethodForProperty,
+                                    propInfo.DeclaringType,
+                                    propInfo.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else if (memberInfo is FieldInfo fieldInfo)
@@ -207,15 +211,17 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.Format(
-                            SR.InvalidMember,
-                            DataContract.GetClrTypeFullName(memberInfo.DeclaringType!),
-                            memberInfo.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.Format(
+                                SR.InvalidMember,
+                                DataContract.GetClrTypeFullName(memberInfo.DeclaringType!),
+                                memberInfo.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -232,9 +238,9 @@ namespace System.Runtime.Serialization
         {
             if (typeof(DeclaringType).IsValueType)
             {
-                var getMethod = propInfo.GetMethod!.CreateDelegate<
-                    StructGetDelegate<DeclaringType, PropertyType>
-                >();
+                var getMethod = propInfo
+                    .GetMethod!
+                    .CreateDelegate<StructGetDelegate<DeclaringType, PropertyType>>();
 
                 return (obj) =>
                 {
@@ -244,9 +250,9 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                var getMethod = propInfo.GetMethod!.CreateDelegate<
-                    Func<DeclaringType, PropertyType>
-                >();
+                var getMethod = propInfo
+                    .GetMethod!
+                    .CreateDelegate<Func<DeclaringType, PropertyType>>();
 
                 return (obj) =>
                 {
@@ -261,9 +267,9 @@ namespace System.Runtime.Serialization
         {
             if (typeof(DeclaringType).IsValueType)
             {
-                var setMethod = propInfo.SetMethod!.CreateDelegate<
-                    StructSetDelegate<DeclaringType, PropertyType>
-                >();
+                var setMethod = propInfo
+                    .SetMethod!
+                    .CreateDelegate<StructSetDelegate<DeclaringType, PropertyType>>();
 
                 return (ref object obj, object? val) =>
                 {
@@ -274,9 +280,9 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                var setMethod = propInfo.SetMethod!.CreateDelegate<
-                    Action<DeclaringType, PropertyType>
-                >();
+                var setMethod = propInfo
+                    .SetMethod!
+                    .CreateDelegate<Action<DeclaringType, PropertyType>>();
 
                 return (ref object obj, object? val) =>
                 {

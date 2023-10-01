@@ -2129,10 +2129,9 @@ namespace System.Text
                     int curInChunk = Math.Max(startIndexInChunk, 0);
                     int endInChunk = Math.Min(chunk.m_ChunkLength, endIndexInChunk);
 
-                    Span<char> span = chunk.m_ChunkChars.AsSpan(
-                        curInChunk,
-                        endInChunk - curInChunk
-                    );
+                    Span<char> span = chunk
+                        .m_ChunkChars
+                        .AsSpan(curInChunk, endInChunk - curInChunk);
                     span.Replace(oldChar, newChar);
                 }
 

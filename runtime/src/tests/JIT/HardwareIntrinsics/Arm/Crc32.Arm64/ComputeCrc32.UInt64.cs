@@ -119,10 +119,12 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Crc32.Arm64.ComputeCrc32(
-                Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
-            );
+            var result = Crc32
+                .Arm64
+                .ComputeCrc32(
+                    Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data1)),
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
+                );
 
             ValidateResult(_data1, _data2, result);
         }
@@ -239,9 +241,11 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(Crc32.Arm64)}.{nameof(Crc32.Arm64.ComputeCrc32)}<UInt32>(UInt32, UInt64): ComputeCrc32 failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(Crc32.Arm64)}.{nameof(Crc32.Arm64.ComputeCrc32)}<UInt32>(UInt32, UInt64): ComputeCrc32 failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

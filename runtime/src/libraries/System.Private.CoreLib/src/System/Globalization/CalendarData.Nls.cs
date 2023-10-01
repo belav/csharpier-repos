@@ -33,15 +33,17 @@ namespace System.Globalization
             out int data
         )
         {
-            return Interop.Kernel32.GetCalendarInfoEx(
-                    localeName,
-                    (uint)calendar,
-                    IntPtr.Zero,
-                    calType | CAL_RETURN_NUMBER,
-                    IntPtr.Zero,
-                    0,
-                    out data
-                ) != 0;
+            return Interop
+                    .Kernel32
+                    .GetCalendarInfoEx(
+                        localeName,
+                        (uint)calendar,
+                        IntPtr.Zero,
+                        calType | CAL_RETURN_NUMBER,
+                        IntPtr.Zero,
+                        0,
+                        out data
+                    ) != 0;
         }
 
         private static unsafe bool CallGetCalendarInfoEx(
@@ -56,15 +58,17 @@ namespace System.Globalization
             // The maximum size for values returned from GetCalendarInfoEx is 80 characters.
             char* buffer = stackalloc char[BUFFER_LENGTH];
 
-            int ret = Interop.Kernel32.GetCalendarInfoEx(
-                localeName,
-                (uint)calendar,
-                IntPtr.Zero,
-                calType,
-                (IntPtr)buffer,
-                BUFFER_LENGTH,
-                IntPtr.Zero
-            );
+            int ret = Interop
+                .Kernel32
+                .GetCalendarInfoEx(
+                    localeName,
+                    (uint)calendar,
+                    IntPtr.Zero,
+                    calType,
+                    (IntPtr)buffer,
+                    BUFFER_LENGTH,
+                    IntPtr.Zero
+                );
             if (ret > 0)
             {
                 if (buffer[ret - 1] == '\0')

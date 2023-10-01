@@ -28,7 +28,8 @@ namespace Sockets.FunctionalTests
                         {
                             app.Run(context =>
                             {
-                                var socket = context.Features
+                                var socket = context
+                                    .Features
                                     .Get<IConnectionSocketFeature>()
                                     .Socket;
                                 Assert.NotNull(socket);

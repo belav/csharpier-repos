@@ -66,7 +66,12 @@ namespace System.ServiceModel.Routing
                         messageRpc.EventTraceActivity,
                         messageRpc.UniqueID,
                         messageRpc.Message.Headers.Action,
-                        messageRpc.OperationContext.EndpointDispatcher.EndpointAddress.Uri.ToString(),
+                        messageRpc
+                            .OperationContext
+                            .EndpointDispatcher
+                            .EndpointAddress
+                            .Uri
+                            .ToString(),
                         (messageRpc.Transaction != null).ToString()
                     );
                 }
@@ -184,13 +189,15 @@ namespace System.ServiceModel.Routing
             )
             {
                 // We can't do error handling for oneway Transactional unless there's RC.
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR.ErrorHandlingNotSupportedTxNoRC(
-                            messageRpc.OperationContext.Channel.LocalAddress
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR.ErrorHandlingNotSupportedTxNoRC(
+                                messageRpc.OperationContext.Channel.LocalAddress
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             RoutingEndpointTrait endpointTrait = sendOperation.CurrentEndpoint;
@@ -741,11 +748,13 @@ namespace System.ServiceModel.Routing
                     this.PrepareTransactionalCall(this.service.GetTransactionForSending(messageRpc))
                 )
                 {
-                    result = messageRpc.ReceiveContext.BeginComplete(
-                        this.timeoutHelper.RemainingTime(),
-                        this.PrepareAsyncCompletion(completeReceiveContextCallback),
-                        this
-                    );
+                    result = messageRpc
+                        .ReceiveContext
+                        .BeginComplete(
+                            this.timeoutHelper.RemainingTime(),
+                            this.PrepareAsyncCompletion(completeReceiveContextCallback),
+                            this
+                        );
                 }
                 if (this.CheckSyncContinue(result))
                 {
@@ -816,10 +825,9 @@ namespace System.ServiceModel.Routing
                     );
                 }
 
-                IAsyncResult result = this.service.RetryTransaction.BeginCommit(
-                    this.PrepareAsyncCompletion(commitTransactionCallback),
-                    this
-                );
+                IAsyncResult result = this.service
+                    .RetryTransaction
+                    .BeginCommit(this.PrepareAsyncCompletion(commitTransactionCallback), this);
                 if (this.CheckSyncContinue(result))
                 {
                     return this.CommitTransactionCompleted(result);

@@ -74,11 +74,13 @@ namespace POS_Server.Controllers
                             if (posList[i].isActive == 1)
                             {
                                 long posId = (long)posList[i].posId;
-                                var cashTransferL = entity.cashTransfer
+                                var cashTransferL = entity
+                                    .cashTransfer
                                     .Where(x => x.posId == posId)
                                     .Select(b => new { b.cashTransId })
                                     .FirstOrDefault();
-                                var posUsersL = entity.posUsers
+                                var posUsersL = entity
+                                    .posUsers
                                     .Where(x => x.posId == posId)
                                     .Select(x => new { x.posUserId })
                                     .FirstOrDefault();
@@ -250,7 +252,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpPos = entity.pos
+                            tmpPos = entity
+                                .pos
                                 .Where(p => p.posId == newObject.posId)
                                 .FirstOrDefault();
                             tmpPos.name = newObject.name;
@@ -308,7 +311,8 @@ namespace POS_Server.Controllers
                     pos.balance += balance;
                     entity.SaveChanges();
 
-                    var posModel = entity.pos
+                    var posModel = entity
+                        .pos
                         .Where(x => x.posId == posId)
                         .Select(
                             x =>
@@ -351,7 +355,8 @@ namespace POS_Server.Controllers
 
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var posSet = entity.posSetting
+                    var posSet = entity
+                        .posSetting
                         .Where(x => x.posDeviceCode == deviceCode)
                         .FirstOrDefault();
 
@@ -518,12 +523,14 @@ namespace POS_Server.Controllers
                     {
                         pos tmpPos = new pos();
                         var unitEntity = entity.Set<pos>();
-                        var validSerial = entity.posSerials
+                        var validSerial = entity
+                            .posSerials
                             .Where(x => x.posSerial == activationCode)
                             .FirstOrDefault();
                         if (validSerial != null) // activation code is correct
                         {
-                            var serialExist = entity.posSetting
+                            var serialExist = entity
+                                .posSetting
                                 .Where(x => x.posSerialId == validSerial.id)
                                 .FirstOrDefault();
                             if (serialExist == null) // activation code is available
@@ -543,7 +550,8 @@ namespace POS_Server.Controllers
                                 entity.posSetting.Add(posSett);
                                 #endregion
                                 #region region settings
-                                List<countriesCodes> objectlist = entity.countriesCodes
+                                List<countriesCodes> objectlist = entity
+                                    .countriesCodes
                                     .Where(x => x.isDefault == 1)
                                     .ToList();
                                 if (objectlist.Count > 0)
@@ -573,11 +581,13 @@ namespace POS_Server.Controllers
                                 #region company info
                                 foreach (setValuesModel v in newObject)
                                 {
-                                    var setId = entity.setting
+                                    var setId = entity
+                                        .setting
                                         .Where(x => x.name == v.name)
                                         .Select(x => x.settingId)
                                         .Single();
-                                    var setValue = entity.setValues
+                                    var setValue = entity
+                                        .setValues
                                         .Where(x => x.settingId == setId)
                                         .FirstOrDefault();
                                     setValue.value = v.value;
@@ -641,12 +651,14 @@ namespace POS_Server.Controllers
                     {
                         pos tmpPos = new pos();
                         var unitEntity = entity.Set<pos>();
-                        var validSerial = entity.posSerials
+                        var validSerial = entity
+                            .posSerials
                             .Where(x => x.posSerial == activationCode)
                             .FirstOrDefault();
                         if (validSerial != null) // activation code is correct
                         {
-                            var serialExist = entity.posSetting
+                            var serialExist = entity
+                                .posSetting
                                 .Where(x => x.posSerialId == validSerial.id)
                                 .FirstOrDefault();
                             if (serialExist == null) // activation code is available

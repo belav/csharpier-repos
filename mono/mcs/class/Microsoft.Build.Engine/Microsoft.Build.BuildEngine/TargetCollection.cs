@@ -52,10 +52,9 @@ namespace Microsoft.Build.BuildEngine
                     "The required attribute \"Name\" is missing from element <Target>."
                 );
 
-            XmlElement targetElement = parentProject.XmlDocument.CreateElement(
-                "Target",
-                Project.XmlNamespace
-            );
+            XmlElement targetElement = parentProject
+                .XmlDocument
+                .CreateElement("Target", Project.XmlNamespace);
             parentProject.XmlDocument.DocumentElement.AppendChild(targetElement);
             targetElement.SetAttribute("Name", targetName);
 

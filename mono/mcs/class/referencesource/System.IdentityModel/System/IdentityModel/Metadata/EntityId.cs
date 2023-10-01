@@ -41,10 +41,9 @@ namespace System.IdentityModel.Metadata
                 {
                     if (value.ToString().Length > MaximumLength)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            "value",
-                            SR.GetString(SR.ID3199)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument("value", SR.GetString(SR.ID3199));
                     }
                 }
 

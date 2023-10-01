@@ -436,11 +436,9 @@ namespace System.Runtime.InteropServices
 
         internal static Type? GetTypeFromCLSID(Guid clsid, string? server, bool throwOnError)
         {
-            return ReflectionAugments.ReflectionCoreCallbacks.GetTypeFromCLSID(
-                clsid,
-                server,
-                throwOnError
-            );
+            return ReflectionAugments
+                .ReflectionCoreCallbacks
+                .GetTypeFromCLSID(clsid, server, throwOnError);
         }
 
         [SupportedOSPlatform("windows")]

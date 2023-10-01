@@ -57,9 +57,9 @@ namespace System.ServiceModel
         {
             if (!OperationFormatStyleHelper.IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("value")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("value"));
             }
         }
 
@@ -67,9 +67,9 @@ namespace System.ServiceModel
         {
             if (!OperationFormatUseHelper.IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("value")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("value"));
             }
         }
     }

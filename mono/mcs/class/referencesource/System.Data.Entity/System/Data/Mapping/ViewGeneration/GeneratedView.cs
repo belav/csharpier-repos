@@ -140,10 +140,11 @@ namespace System.Data.Mapping.ViewGeneration
             )
             {
                 EdmSchemaError error = new EdmSchemaError(
-                    System.Data.Entity.Strings.Mapping_Invalid_QueryView2(
-                        setMapping.Set.Name,
-                        parserException.Message
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_Invalid_QueryView2(setMapping.Set.Name, parserException.Message),
                     (int)StorageMappingErrorCode.InvalidQueryView,
                     EdmSchemaErrorSeverity.Error,
                     setMapping.EntityContainerMapping.SourceLocation,
@@ -178,16 +179,19 @@ namespace System.Data.Mapping.ViewGeneration
                 if (
                     (queryResultType == null)
                     || (
-                        !setMapping.Set.ElementType.IsAssignableFrom(
-                            queryResultType.TypeUsage.EdmType
-                        )
+                        !setMapping
+                            .Set
+                            .ElementType
+                            .IsAssignableFrom(queryResultType.TypeUsage.EdmType)
                     )
                 )
                 {
                     EdmSchemaError error = new EdmSchemaError(
-                        System.Data.Entity.Strings.Mapping_Invalid_QueryView_Type(
-                            setMapping.Set.Name
-                        ),
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Mapping_Invalid_QueryView_Type(setMapping.Set.Name),
                         (int)StorageMappingErrorCode.InvalidQueryViewResultType,
                         EdmSchemaErrorSeverity.Error,
                         setMapping.EntityContainerMapping.SourceLocation,
@@ -301,10 +305,11 @@ namespace System.Data.Mapping.ViewGeneration
                 else
                 {
                     throw new MappingException(
-                        System.Data.Entity.Strings.Mapping_Invalid_QueryView(
-                            m_extent.Name,
-                            parserException.Message
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Mapping_Invalid_QueryView(m_extent.Name, parserException.Message)
                     );
                 }
             }

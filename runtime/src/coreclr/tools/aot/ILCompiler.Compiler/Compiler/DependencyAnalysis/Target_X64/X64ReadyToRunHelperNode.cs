@@ -73,8 +73,9 @@ namespace ILCompiler.DependencyAnalysis
 
                     {
                         MetadataType target = (MetadataType)Target;
-                        bool hasLazyStaticConstructor =
-                            factory.PreinitializationManager.HasLazyStaticConstructor(target);
+                        bool hasLazyStaticConstructor = factory
+                            .PreinitializationManager
+                            .HasLazyStaticConstructor(target);
                         encoder.EmitLEAQ(
                             encoder.TargetRegister.Result,
                             factory.TypeNonGCStaticsSymbol(target)

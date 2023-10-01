@@ -193,12 +193,14 @@ public class ForeignKeyAttributeConvention
 
         if (fkPropertyOnDependent != null && fkPropertyOnPrincipal != null)
         {
-            Dependencies.Logger.ForeignKeyAttributesOnBothPropertiesWarning(
-                foreignKey.PrincipalToDependent!,
-                foreignKey.DependentToPrincipal!,
-                fkPropertyOnPrincipal,
-                fkPropertyOnDependent
-            );
+            Dependencies
+                .Logger
+                .ForeignKeyAttributesOnBothPropertiesWarning(
+                    foreignKey.PrincipalToDependent!,
+                    foreignKey.DependentToPrincipal!,
+                    fkPropertyOnPrincipal,
+                    fkPropertyOnDependent
+                );
 
             var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
             if (newBuilder is null)
@@ -226,10 +228,12 @@ public class ForeignKeyAttributeConvention
             && fkPropertiesOnPrincipalToDependent != null
         )
         {
-            Dependencies.Logger.ForeignKeyAttributesOnBothNavigationsWarning(
-                relationshipBuilder.Metadata.DependentToPrincipal!,
-                relationshipBuilder.Metadata.PrincipalToDependent!
-            );
+            Dependencies
+                .Logger
+                .ForeignKeyAttributesOnBothNavigationsWarning(
+                    relationshipBuilder.Metadata.DependentToPrincipal!,
+                    relationshipBuilder.Metadata.PrincipalToDependent!
+                );
 
             var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
             if (newBuilder is null)
@@ -301,12 +305,14 @@ public class ForeignKeyAttributeConvention
                     || !Equals(fkPropertiesOnNavigation.First(), fkProperty!.GetSimpleMemberName())
                 )
                 {
-                    Dependencies.Logger.ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
-                        fkPropertiesOnDependentToPrincipal != null
-                            ? relationshipBuilder.Metadata.DependentToPrincipal!
-                            : relationshipBuilder.Metadata.PrincipalToDependent!,
-                        fkProperty!
-                    );
+                    Dependencies
+                        .Logger
+                        .ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
+                            fkPropertiesOnDependentToPrincipal != null
+                                ? relationshipBuilder.Metadata.DependentToPrincipal!
+                                : relationshipBuilder.Metadata.PrincipalToDependent!,
+                            fkProperty!
+                        );
 
                     var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
                     if (newBuilder is null)
@@ -364,12 +370,13 @@ public class ForeignKeyAttributeConvention
         }
         else
         {
-            var existingProperties = foreignKey.DeclaringEntityType.FindProperties(
-                fkPropertiesToSet
-            );
+            var existingProperties = foreignKey
+                .DeclaringEntityType
+                .FindProperties(fkPropertiesToSet);
             if (existingProperties != null)
             {
-                var conflictingFk = foreignKey.DeclaringEntityType
+                var conflictingFk = foreignKey
+                    .DeclaringEntityType
                     .FindForeignKeys(existingProperties)
                     .FirstOrDefault(
                         fk =>
@@ -427,12 +434,15 @@ public class ForeignKeyAttributeConvention
             )
                 is null
             ? null
-            : foreignKey.PrincipalEntityType.Builder.HasRelationship(
-                foreignKey.DeclaringEntityType,
-                principalToDependentNavigationName,
-                null,
-                fromDataAnnotation: true
-            ) == null
+            : foreignKey
+                .PrincipalEntityType
+                .Builder
+                .HasRelationship(
+                    foreignKey.DeclaringEntityType,
+                    principalToDependentNavigationName,
+                    null,
+                    fromDataAnnotation: true
+                ) == null
                 ? null
                 : relationshipBuilder;
     }
@@ -539,7 +549,8 @@ public class ForeignKeyAttributeConvention
         PropertyInfo propertyInfo,
         IConventionEntityType entityType
     ) =>
-        Dependencies.MemberClassifier
+        Dependencies
+            .MemberClassifier
             .GetNavigationCandidates(entityType)
             .TryGetValue(propertyInfo, out _);
 
@@ -571,11 +582,13 @@ public class ForeignKeyAttributeConvention
             );
         }
 
-        var navigationPropertyTargetType = navigation!.DeclaringEntityType
+        var navigationPropertyTargetType = navigation!
+            .DeclaringEntityType
             .GetRuntimeProperties()[navigation.Name]
             .PropertyType;
 
-        var otherNavigations = navigation.DeclaringEntityType
+        var otherNavigations = navigation
+            .DeclaringEntityType
             .GetRuntimeProperties()
             .Values
             .Where(

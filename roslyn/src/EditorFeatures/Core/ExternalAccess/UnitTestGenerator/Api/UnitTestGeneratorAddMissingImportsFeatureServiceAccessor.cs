@@ -39,8 +39,9 @@ internal class UnitTestGeneratorAddMissingImportsFeatureServiceAccessor
     )
     {
         var options = await GetOptionsAsync(document, cancellationToken).ConfigureAwait(false);
-        var service =
-            document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+        var service = document
+            .Project
+            .GetRequiredLanguageService<IAddMissingImportsFeatureService>();
         return await service
             .AddMissingImportsAsync(document, textSpan, options, cancellationToken)
             .ConfigureAwait(false);
@@ -53,8 +54,9 @@ internal class UnitTestGeneratorAddMissingImportsFeatureServiceAccessor
     )
     {
         var options = await GetOptionsAsync(document, cancellationToken).ConfigureAwait(false);
-        var service =
-            document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+        var service = document
+            .Project
+            .GetRequiredLanguageService<IAddMissingImportsFeatureService>();
         var result = await service
             .AnalyzeAsync(document, textSpan, options, cancellationToken)
             .ConfigureAwait(false);
@@ -70,8 +72,9 @@ internal class UnitTestGeneratorAddMissingImportsFeatureServiceAccessor
     )
     {
         var options = await GetOptionsAsync(document, cancellationToken).ConfigureAwait(false);
-        var service =
-            document.Project.GetRequiredLanguageService<IAddMissingImportsFeatureService>();
+        var service = document
+            .Project
+            .GetRequiredLanguageService<IAddMissingImportsFeatureService>();
         var unwrappedResult = new AddMissingImportsAnalysisResult(
             analysisResult.AddImportFixDatas.SelectAsArray(result => result.Underlying)
         );

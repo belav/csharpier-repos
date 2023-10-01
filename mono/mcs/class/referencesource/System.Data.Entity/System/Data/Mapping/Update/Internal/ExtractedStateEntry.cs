@@ -35,41 +35,47 @@ namespace System.Data.Mapping.Update.Internal
             switch (stateEntry.State)
             {
                 case EntityState.Deleted:
-                    this.Original =
-                        translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
+                    this.Original = translator
+                        .RecordConverter
+                        .ConvertOriginalValuesToPropagatorResult(
                             stateEntry,
                             ModifiedPropertiesBehavior.AllModified
                         );
                     this.Current = null;
                     break;
                 case EntityState.Unchanged:
-                    this.Original =
-                        translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
+                    this.Original = translator
+                        .RecordConverter
+                        .ConvertOriginalValuesToPropagatorResult(
                             stateEntry,
                             ModifiedPropertiesBehavior.NoneModified
                         );
-                    this.Current =
-                        translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
+                    this.Current = translator
+                        .RecordConverter
+                        .ConvertCurrentValuesToPropagatorResult(
                             stateEntry,
                             ModifiedPropertiesBehavior.NoneModified
                         );
                     break;
                 case EntityState.Modified:
-                    this.Original =
-                        translator.RecordConverter.ConvertOriginalValuesToPropagatorResult(
+                    this.Original = translator
+                        .RecordConverter
+                        .ConvertOriginalValuesToPropagatorResult(
                             stateEntry,
                             ModifiedPropertiesBehavior.SomeModified
                         );
-                    this.Current =
-                        translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
+                    this.Current = translator
+                        .RecordConverter
+                        .ConvertCurrentValuesToPropagatorResult(
                             stateEntry,
                             ModifiedPropertiesBehavior.SomeModified
                         );
                     break;
                 case EntityState.Added:
                     this.Original = null;
-                    this.Current =
-                        translator.RecordConverter.ConvertCurrentValuesToPropagatorResult(
+                    this.Current = translator
+                        .RecordConverter
+                        .ConvertCurrentValuesToPropagatorResult(
                             stateEntry,
                             ModifiedPropertiesBehavior.AllModified
                         );

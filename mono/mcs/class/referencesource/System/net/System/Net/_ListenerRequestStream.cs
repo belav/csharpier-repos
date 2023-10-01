@@ -130,15 +130,17 @@ namespace System.Net
 
             if (m_DataChunkIndex != -1)
             {
-                dataRead = UnsafeNclNativeMethods.HttpApi.GetChunks(
-                    m_HttpContext.Request.RequestBuffer,
-                    m_HttpContext.Request.OriginalBlobAddress,
-                    ref m_DataChunkIndex,
-                    ref m_DataChunkOffset,
-                    buffer,
-                    offset,
-                    size
-                );
+                dataRead = UnsafeNclNativeMethods
+                    .HttpApi
+                    .GetChunks(
+                        m_HttpContext.Request.RequestBuffer,
+                        m_HttpContext.Request.OriginalBlobAddress,
+                        ref m_DataChunkIndex,
+                        ref m_DataChunkOffset,
+                        buffer,
+                        offset,
+                        size
+                    );
             }
 
             if (m_DataChunkIndex == -1 && dataRead < size)
@@ -182,15 +184,17 @@ namespace System.Net
                                 .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                     }
 
-                    statusCode = UnsafeNclNativeMethods.HttpApi.HttpReceiveRequestEntityBody(
-                        m_HttpContext.RequestQueueHandle,
-                        m_HttpContext.RequestId,
-                        flags,
-                        (void*)(pBuffer + offset),
-                        (uint)size,
-                        out extraDataRead,
-                        null
-                    );
+                    statusCode = UnsafeNclNativeMethods
+                        .HttpApi
+                        .HttpReceiveRequestEntityBody(
+                            m_HttpContext.RequestQueueHandle,
+                            m_HttpContext.RequestId,
+                            flags,
+                            (void*)(pBuffer + offset),
+                            (uint)size,
+                            out extraDataRead,
+                            null
+                        );
 
                     dataRead += extraDataRead;
                     GlobalLog.Print(
@@ -302,15 +306,17 @@ namespace System.Net
             uint dataRead = 0;
             if (m_DataChunkIndex != -1)
             {
-                dataRead = UnsafeNclNativeMethods.HttpApi.GetChunks(
-                    m_HttpContext.Request.RequestBuffer,
-                    m_HttpContext.Request.OriginalBlobAddress,
-                    ref m_DataChunkIndex,
-                    ref m_DataChunkOffset,
-                    buffer,
-                    offset,
-                    size
-                );
+                dataRead = UnsafeNclNativeMethods
+                    .HttpApi
+                    .GetChunks(
+                        m_HttpContext.Request.RequestBuffer,
+                        m_HttpContext.Request.OriginalBlobAddress,
+                        ref m_DataChunkIndex,
+                        ref m_DataChunkOffset,
+                        buffer,
+                        offset,
+                        size
+                    );
                 if (m_DataChunkIndex != -1 && dataRead == size)
                 {
                     asyncResult = new HttpRequestStreamAsyncResult(
@@ -380,15 +386,17 @@ namespace System.Net
                                     .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY;
                         }
 
-                        statusCode = UnsafeNclNativeMethods.HttpApi.HttpReceiveRequestEntityBody(
-                            m_HttpContext.RequestQueueHandle,
-                            m_HttpContext.RequestId,
-                            flags,
-                            asyncResult.m_pPinnedBuffer,
-                            (uint)size,
-                            out bytesReturned,
-                            asyncResult.m_pOverlapped
-                        );
+                        statusCode = UnsafeNclNativeMethods
+                            .HttpApi
+                            .HttpReceiveRequestEntityBody(
+                                m_HttpContext.RequestQueueHandle,
+                                m_HttpContext.RequestId,
+                                flags,
+                                asyncResult.m_pPinnedBuffer,
+                                (uint)size,
+                                out bytesReturned,
+                                asyncResult.m_pOverlapped
+                            );
 
                         GlobalLog.Print(
                             "HttpRequestStream#"
@@ -566,15 +574,17 @@ namespace System.Net
         // is currenlty the only consumer of this API
         internal uint GetChunks(byte[] buffer, int offset, int size)
         {
-            return UnsafeNclNativeMethods.HttpApi.GetChunks(
-                m_HttpContext.Request.RequestBuffer,
-                m_HttpContext.Request.OriginalBlobAddress,
-                ref m_DataChunkIndex,
-                ref m_DataChunkOffset,
-                buffer,
-                offset,
-                size
-            );
+            return UnsafeNclNativeMethods
+                .HttpApi
+                .GetChunks(
+                    m_HttpContext.Request.RequestBuffer,
+                    m_HttpContext.Request.OriginalBlobAddress,
+                    ref m_DataChunkIndex,
+                    ref m_DataChunkOffset,
+                    buffer,
+                    offset,
+                    size
+                );
         }
 
         unsafe class HttpRequestStreamAsyncResult : LazyAsyncResult

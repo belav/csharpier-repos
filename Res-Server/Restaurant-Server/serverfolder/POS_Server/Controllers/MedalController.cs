@@ -34,7 +34,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var medalsList = entity.medals
+                    var medalsList = entity
+                        .medals
                         .Select(
                             c =>
                                 new MedalModel()
@@ -77,7 +78,8 @@ namespace POS_Server.Controllers
                             if (medalitem.isActive == 1)
                             {
                                 long cId = (long)medalitem.medalId;
-                                var casht = entity.medalAgent
+                                var casht = entity
+                                    .medalAgent
                                     .Where(x => x.medalId == cId)
                                     .Select(x => new { x.medalId })
                                     .FirstOrDefault();
@@ -123,7 +125,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var medal = entity.medals
+                    var medal = entity
+                        .medals
                         .Where(c => c.medalId == cId)
                         .Select(
                             c =>
@@ -175,7 +178,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var medal = entity.medals
+                    var medal = entity
+                        .medals
                         .Where(c => c.isActive == isActive)
                         .Select(
                             c =>
@@ -246,7 +250,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpmedal = entity.medals
+                            var tmpmedal = entity
+                                .medals
                                 .Where(p => p.medalId == Object.medalId)
                                 .FirstOrDefault();
 

@@ -36,14 +36,15 @@ public partial class ParserTests
             var parserResult = command.Parse(
                 Split($"\"{RootCommand.ExecutablePath}\" inner -x hello")
             );
-            parserResult.Errors
+            parserResult
+                .Errors
                 .Should()
                 .ContainSingle(
                     e =>
                         e.Message
-                        == LocalizationResources.Instance.UnrecognizedCommandOrArgument(
-                            RootCommand.ExecutablePath
-                        )
+                        == LocalizationResources
+                            .Instance
+                            .UnrecognizedCommandOrArgument(RootCommand.ExecutablePath)
                 );
         }
 

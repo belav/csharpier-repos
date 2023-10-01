@@ -207,11 +207,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
                                 )
                                     ? AreaAlignmentOrientations.Vertical
                                     : AreaAlignmentOrientations.Horizontal;
-                            this._chartArea.Common.ChartPicture.AlignChartAreasCursor(
-                                this._chartArea,
-                                orientation,
-                                false
-                            );
+                            this._chartArea
+                                .Common
+                                .ChartPicture
+                                .AlignChartAreasCursor(this._chartArea, orientation, false);
                         }
                     }
 
@@ -258,11 +257,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
                                 )
                                     ? AreaAlignmentOrientations.Vertical
                                     : AreaAlignmentOrientations.Horizontal;
-                            this._chartArea.Common.ChartPicture.AlignChartAreasCursor(
-                                this._chartArea,
-                                orientation,
-                                false
-                            );
+                            this._chartArea
+                                .Common
+                                .ChartPicture
+                                .AlignChartAreasCursor(this._chartArea, orientation, false);
                         }
                     }
 
@@ -309,11 +307,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
                                 )
                                     ? AreaAlignmentOrientations.Vertical
                                     : AreaAlignmentOrientations.Horizontal;
-                            this._chartArea.Common.ChartPicture.AlignChartAreasCursor(
-                                this._chartArea,
-                                orientation,
-                                false
-                            );
+                            this._chartArea
+                                .Common
+                                .ChartPicture
+                                .AlignChartAreasCursor(this._chartArea, orientation, false);
                         }
                     }
 
@@ -856,11 +853,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
                             )
                                 ? AreaAlignmentOrientations.Vertical
                                 : AreaAlignmentOrientations.Horizontal;
-                        this._chartArea.Common.ChartPicture.AlignChartAreasCursor(
-                            this._chartArea,
-                            orientation,
-                            true
-                        );
+                        this._chartArea
+                            .Common
+                            .ChartPicture
+                            .AlignChartAreasCursor(this._chartArea, orientation, true);
                     }
                 }
 
@@ -949,10 +945,14 @@ namespace System.Windows.Forms.DataVisualization.Charting
                     Series axisSeries = null;
                     if (_axis.axisType == AxisName.X || _axis.axisType == AxisName.X2)
                     {
-                        List<string> seriesArray = _axis.ChartArea.GetXAxesSeries(
-                            (_axis.axisType == AxisName.X) ? AxisType.Primary : AxisType.Secondary,
-                            _axis.SubAxisName
-                        );
+                        List<string> seriesArray = _axis
+                            .ChartArea
+                            .GetXAxesSeries(
+                                (_axis.axisType == AxisName.X)
+                                    ? AxisType.Primary
+                                    : AxisType.Secondary,
+                                _axis.SubAxisName
+                            );
                         if (seriesArray.Count > 0)
                         {
                             string seriesName = seriesArray[0] as string;
@@ -1193,13 +1193,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
                     // Zoom data scaleView
                     double start = Math.Min(this.SelectionStart, this.SelectionEnd);
                     double size = (double)Math.Max(this.SelectionStart, this.SelectionEnd) - start;
-                    bool zoomed = this._axis.ScaleView.Zoom(
-                        start,
-                        size,
-                        DateTimeIntervalType.Number,
-                        true,
-                        true
-                    );
+                    bool zoomed = this._axis
+                        .ScaleView
+                        .Zoom(start, size, DateTimeIntervalType.Number, true, true);
 
                     // Clear image buffer
                     if (this._chartArea.areaBufferBitmap != null && zoomed)
@@ -1232,11 +1228,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
                                 )
                                     ? AreaAlignmentOrientations.Vertical
                                     : AreaAlignmentOrientations.Horizontal;
-                            this._chartArea.Common.ChartPicture.AlignChartAreasZoomed(
-                                this._chartArea,
-                                orientation,
-                                zoomed
-                            );
+                            this._chartArea
+                                .Common
+                                .ChartPicture
+                                .AlignChartAreasZoomed(this._chartArea, orientation, zoomed);
                         }
                     }
                 }

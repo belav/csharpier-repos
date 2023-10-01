@@ -100,10 +100,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isEnumerable,
                 elementType
             );
-            compilationState.ModuleBuilderOpt.CompilationState.SetStateMachineType(
-                method,
-                stateMachineType
-            );
+            compilationState
+                .ModuleBuilderOpt
+                .CompilationState
+                .SetStateMachineType(method, stateMachineType);
             var rewriter = new IteratorRewriter(
                 body,
                 method,

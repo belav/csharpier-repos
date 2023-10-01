@@ -76,7 +76,8 @@ internal sealed partial class RequestDecompressionMiddleware
             var sizeLimit =
                 context
                     .GetEndpoint()
-                    ?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>()
+                    ?.Metadata
+                    ?.GetMetadata<IRequestSizeLimitMetadata>()
                     ?.MaxRequestBodySize
                 ?? context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize;
 
@@ -94,7 +95,8 @@ internal sealed partial class RequestDecompressionMiddleware
     {
         var sizeLimitMetadata = context
             .GetEndpoint()
-            ?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>();
+            ?.Metadata
+            ?.GetMetadata<IRequestSizeLimitMetadata>();
         if (sizeLimitMetadata == null)
         {
             Log.MetadataNotFound(_logger);

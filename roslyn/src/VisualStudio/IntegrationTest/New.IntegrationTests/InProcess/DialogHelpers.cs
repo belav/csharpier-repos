@@ -189,16 +189,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             var vsAutomationElement = Helper.Automation.ElementFromHandle(visualStudioHWnd);
 
-            var elementCondition = Helper.Automation.CreateAndConditionFromArray(
-                new[]
-                {
-                    Helper.Automation.CreatePropertyCondition(nameProperty.Id, propertyValue),
-                    Helper.Automation.CreatePropertyCondition(
-                        AutomationElementIdentifiers.ControlTypeProperty.Id,
-                        ControlType.Window.Id
-                    ),
-                }
-            );
+            var elementCondition = Helper
+                .Automation
+                .CreateAndConditionFromArray(
+                    new[]
+                    {
+                        Helper.Automation.CreatePropertyCondition(nameProperty.Id, propertyValue),
+                        Helper
+                            .Automation
+                            .CreatePropertyCondition(
+                                AutomationElementIdentifiers.ControlTypeProperty.Id,
+                                ControlType.Window.Id
+                            ),
+                    }
+                );
 
             return vsAutomationElement.FindFirst(TreeScope.TreeScope_Children, elementCondition);
         }

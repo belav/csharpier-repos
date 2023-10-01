@@ -109,8 +109,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 if (location == null)
                     return;
 
-                var service =
-                    project.Solution.Services.GetRequiredService<ILspSymbolInformationCreationService>();
+                var service = project
+                    .Solution
+                    .Services
+                    .GetRequiredService<ILspSymbolInformationCreationService>();
                 var symbolInfo = service.Create(
                     result.Name,
                     result.AdditionalInformation,

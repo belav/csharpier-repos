@@ -68,8 +68,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var completionService =
-                document.Project.Services.GetRequiredService<IXamlCompletionService>();
+            var completionService = document
+                .Project
+                .Services
+                .GetRequiredService<IXamlCompletionService>();
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var offset = text.Lines.GetPosition(
                 ProtocolConversions.PositionToLinePosition(request.Position)
@@ -93,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 new Dictionary<XamlCompletionKind, ImmutableArray<VSInternalCommitCharacter>>();
             return new VSInternalCompletionList
             {
-                Items = completionResult.Completions
+                Items = completionResult
+                    .Completions
                     .Select(
                         c =>
                             CreateCompletionItem(
@@ -196,7 +199,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
             var xamlCommitCharacters = completionItem.XamlCommitCharacters.Value;
 
-            var commitCharacters = xamlCommitCharacters.Characters
+            var commitCharacters = xamlCommitCharacters
+                .Characters
                 .Select(
                     c =>
                         new VSInternalCommitCharacter

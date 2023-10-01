@@ -68,27 +68,28 @@ namespace System.ServiceModel.Description
                         return;
                     if (!SchemaHelper.IsMatch(element, existingElement.Element))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.CannotHaveTwoOperationsWithTheSameElement5,
-                                    parentOperation.OperationMethod.DeclaringType,
-                                    parentOperation.OperationMethod.Name,
-                                    qname,
-                                    existingElement.Operation.OperationMethod.DeclaringType,
-                                    existingElement.Operation.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.CannotHaveTwoOperationsWithTheSameElement5,
+                                        parentOperation.OperationMethod.DeclaringType,
+                                        parentOperation.OperationMethod.Name,
+                                        qname,
+                                        existingElement.Operation.OperationMethod.DeclaringType,
+                                        existingElement.Operation.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     return;
                 }
                 else
                 {
-                    ExportedMessages.ElementTypes.Add(
-                        qname,
-                        new OperationElement(element, parentOperation)
-                    );
+                    ExportedMessages
+                        .ElementTypes
+                        .Add(qname, new OperationElement(element, parentOperation));
                 }
             }
             SchemaHelper.AddElementToSchema(
@@ -220,9 +221,9 @@ namespace System.ServiceModel.Description
             );
 
             if (
-                !schema.SchemaTypes.Contains(
-                    DataContractSerializerMessageContractImporter.GenericMessageTypeName
-                )
+                !schema
+                    .SchemaTypes
+                    .Contains(DataContractSerializerMessageContractImporter.GenericMessageTypeName)
             )
             {
                 XmlSchemaComplexType genericMessageType = new XmlSchemaComplexType();
@@ -269,9 +270,9 @@ namespace System.ServiceModel.Description
                 schemas
             );
             if (
-                !schema.SchemaTypes.Contains(
-                    DataContractSerializerMessageContractImporter.StreamBodyTypeName
-                )
+                !schema
+                    .SchemaTypes
+                    .Contains(DataContractSerializerMessageContractImporter.StreamBodyTypeName)
             )
             {
                 XmlSchemaSimpleType streamBodyType = new XmlSchemaSimpleType();
@@ -325,11 +326,9 @@ namespace System.ServiceModel.Description
 
             // create a wsdl:fault to put inside the wsdl:portType/wsdl:operation
             WsdlNS.OperationFault operationFault = contractContext.GetOperationFault(fault);
-            WsdlExporter.WSAddressingHelper.AddActionAttribute(
-                fault.Action,
-                operationFault,
-                this.exporter.PolicyVersion
-            );
+            WsdlExporter
+                .WSAddressingHelper
+                .AddActionAttribute(fault.Action, operationFault, this.exporter.PolicyVersion);
             operationFault.Message = new XmlQualifiedName(
                 faultMessage.Name,
                 faultMessage.ServiceDescription.TargetNamespace
@@ -350,15 +349,17 @@ namespace System.ServiceModel.Description
             {
                 elementName = DataContractExporter.GetRootElementName(fault.DetailType);
                 if (elementName == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxFaultTypeAnonymous,
-                                operation.Name,
-                                fault.DetailType.FullName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxFaultTypeAnonymous,
+                                    operation.Name,
+                                    fault.DetailType.FullName
+                                )
                             )
-                        )
-                    );
+                        );
             }
             else
                 elementName = new XmlQualifiedName(fault.ElementName.EncodedName, fault.Namespace);
@@ -380,10 +381,9 @@ namespace System.ServiceModel.Description
             {
                 object dataContractExporter;
                 if (
-                    !exporter.State.TryGetValue(
-                        typeof(XsdDataContractExporter),
-                        out dataContractExporter
-                    )
+                    !exporter
+                        .State
+                        .TryGetValue(typeof(XsdDataContractExporter), out dataContractExporter)
                 )
                 {
                     dataContractExporter = new XsdDataContractExporter(
@@ -404,11 +404,13 @@ namespace System.ServiceModel.Description
         {
             xsdType = null;
             if (type == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxExportMustHaveType, operationName, partName)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxExportMustHaveType, operationName, partName)
+                        )
+                    );
             if (type == typeof(void))
                 return null;
 
@@ -434,20 +436,24 @@ namespace System.ServiceModel.Description
             if (message.Parts[partName] != null)
             {
                 if (IsNullOrEmpty(elementName))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.SFxPartNameMustBeUniqueInRpc, partName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(SR.SFxPartNameMustBeUniqueInRpc, partName)
+                            )
+                        );
                 int i = 1;
                 while (message.Parts[partName + i] != null)
                 {
                     if (i == Int32.MaxValue)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(
-                                SR.GetString(SR.SFxTooManyPartsWithSameName, partName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(SR.SFxTooManyPartsWithSameName, partName)
+                                )
+                            );
                     i++;
                 }
                 partName = partName + i.ToString(CultureInfo.InvariantCulture);
@@ -650,15 +656,19 @@ namespace System.ServiceModel.Description
             bool isNewMessage = true;
 
             if (
-                ExportedMessages.WsdlMessages.ContainsKey(
-                    new MessageDescriptionDictionaryKey(contractContext.Contract, message)
-                )
-            )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.MultipleCallsToExportContractWithSameContract)
+                ExportedMessages
+                    .WsdlMessages
+                    .ContainsKey(
+                        new MessageDescriptionDictionaryKey(contractContext.Contract, message)
                     )
-                );
+            )
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.MultipleCallsToExportContractWithSameContract)
+                        )
+                    );
 
             TypedMessageKey typedMessageKey = null;
             OperationMessageKey messageKey = null;
@@ -699,10 +709,12 @@ namespace System.ServiceModel.Description
                 wsdlMessage.Name,
                 wsdlMessage.ServiceDescription.TargetNamespace
             );
-            this.ExportedMessages.WsdlMessages.Add(
-                new MessageDescriptionDictionaryKey(contractContext.Contract, message),
-                wsdlMessage
-            );
+            this.ExportedMessages
+                .WsdlMessages
+                .Add(
+                    new MessageDescriptionDictionaryKey(contractContext.Contract, message),
+                    wsdlMessage
+                );
 
             return isNewMessage;
         }
@@ -715,15 +727,19 @@ namespace System.ServiceModel.Description
             wsdlMessage = null;
 
             if (
-                ExportedMessages.WsdlHeaderMessages.ContainsKey(
-                    new MessageDescriptionDictionaryKey(contractContext.Contract, message)
-                )
-            )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.MultipleCallsToExportContractWithSameContract)
+                ExportedMessages
+                    .WsdlHeaderMessages
+                    .ContainsKey(
+                        new MessageDescriptionDictionaryKey(contractContext.Contract, message)
                     )
-                );
+            )
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.MultipleCallsToExportContractWithSameContract)
+                        )
+                    );
 
             TypedMessageKey typedMessageKey = null;
             if (message.IsTypedMessage)
@@ -734,16 +750,17 @@ namespace System.ServiceModel.Description
                     GetExtensionData()
                 );
                 if (
-                    ExportedMessages.TypedHeaderMessages.TryGetValue(
-                        typedMessageKey,
-                        out wsdlMessage
-                    )
+                    ExportedMessages
+                        .TypedHeaderMessages
+                        .TryGetValue(typedMessageKey, out wsdlMessage)
                 )
                 {
-                    this.ExportedMessages.WsdlHeaderMessages.Add(
-                        new MessageDescriptionDictionaryKey(contractContext.Contract, message),
-                        wsdlMessage
-                    );
+                    this.ExportedMessages
+                        .WsdlHeaderMessages
+                        .Add(
+                            new MessageDescriptionDictionaryKey(contractContext.Contract, message),
+                            wsdlMessage
+                        );
                     return false;
                 }
             }
@@ -755,10 +772,12 @@ namespace System.ServiceModel.Description
             if (message.IsTypedMessage)
                 ExportedMessages.TypedHeaderMessages.Add(typedMessageKey, wsdlMessage);
 
-            this.ExportedMessages.WsdlHeaderMessages.Add(
-                new MessageDescriptionDictionaryKey(contractContext.Contract, message),
-                wsdlMessage
-            );
+            this.ExportedMessages
+                .WsdlHeaderMessages
+                .Add(
+                    new MessageDescriptionDictionaryKey(contractContext.Contract, message),
+                    wsdlMessage
+                );
 
             return true;
         }
@@ -914,11 +933,17 @@ namespace System.ServiceModel.Description
             else
             {
                 if (String.IsNullOrEmpty(typeName.Name))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxAnonymousTypeNotSupported, message.Name, partName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxAnonymousTypeNotSupported,
+                                    message.Name,
+                                    partName
+                                )
+                            )
+                        );
 
                 wsdlPart = AddMessagePart(message, partName, XmlQualifiedName.Empty, typeName);
             }
@@ -1046,13 +1071,15 @@ namespace System.ServiceModel.Description
 
                     WsdlNS.Message headerMessage;
                     if (
-                        this.exportedMessages.WsdlHeaderMessages.TryGetValue(
-                            new MessageDescriptionDictionaryKey(
-                                this.endpointContext.Endpoint.Contract,
-                                message
-                            ),
-                            out headerMessage
-                        )
+                        this.exportedMessages
+                            .WsdlHeaderMessages
+                            .TryGetValue(
+                                new MessageDescriptionDictionaryKey(
+                                    this.endpointContext.Endpoint.Contract,
+                                    message
+                                ),
+                                out headerMessage
+                            )
                     )
                     {
                         XmlQualifiedName wsdlHeaderMessageName = new XmlQualifiedName(
@@ -1119,13 +1146,15 @@ namespace System.ServiceModel.Description
                 {
                     string ns;
                     if (
-                        !ExportedMessages.WrapperNamespaces.TryGetValue(
-                            new MessageDescriptionDictionaryKey(
-                                endpointContext.ContractConversionContext.Contract,
-                                messageDescription
-                            ),
-                            out ns
-                        )
+                        !ExportedMessages
+                            .WrapperNamespaces
+                            .TryGetValue(
+                                new MessageDescriptionDictionaryKey(
+                                    endpointContext.ContractConversionContext.Contract,
+                                    messageDescription
+                                ),
+                                out ns
+                            )
                     )
                         ns = messageDescription.Body.WrapperNamespace;
                     bodyBinding.Namespace = ns;
@@ -1199,8 +1228,9 @@ namespace System.ServiceModel.Description
                     || messageContractExporterType == null
                 )
                 {
-                    XmlSerializerOperationBehavior xmlSerializerBehavior =
-                        operation.Behaviors.Find<XmlSerializerOperationBehavior>();
+                    XmlSerializerOperationBehavior xmlSerializerBehavior = operation
+                        .Behaviors
+                        .Find<XmlSerializerOperationBehavior>();
                     if (xmlSerializerBehavior != null)
                     {
                         isRpc =
@@ -1768,11 +1798,9 @@ namespace System.ServiceModel.Description
 
             // create a wsdl:fault to put inside the wsdl:portType/wsdl:operation
             WsdlNS.OperationFault operationFault = contractContext.GetOperationFault(fault);
-            WsdlExporter.WSAddressingHelper.AddActionAttribute(
-                fault.Action,
-                operationFault,
-                this.exporter.PolicyVersion
-            );
+            WsdlExporter
+                .WSAddressingHelper
+                .AddActionAttribute(fault.Action, operationFault, this.exporter.PolicyVersion);
             operationFault.Message = new XmlQualifiedName(
                 faultMessage.Name,
                 faultMessage.ServiceDescription.TargetNamespace
@@ -1854,14 +1882,16 @@ namespace System.ServiceModel.Description
                 if (isHeader)
                 {
                     Fx.Assert("Header cannot be Document Wrapped");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            String.Format(
-                                CultureInfo.InvariantCulture,
-                                "Header cannot be Document Wrapped"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "Header cannot be Document Wrapped"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 AddMessagePart(
                     message,
@@ -1890,15 +1920,17 @@ namespace System.ServiceModel.Description
                 else
                 {
                     if (string.IsNullOrEmpty(member.TypeName))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.SFxAnonymousTypeNotSupported,
-                                    message.Name,
-                                    partName
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxAnonymousTypeNotSupported,
+                                        message.Name,
+                                        partName
+                                    )
                                 )
-                            )
-                        );
+                            );
 
                     AddMessagePart(
                         message,
@@ -1916,10 +1948,12 @@ namespace System.ServiceModel.Description
             {
                 object reflector;
                 if (
-                    !exporter.State.TryGetValue(
-                        typeof(XmlSerializerOperationBehavior.Reflector),
-                        out reflector
-                    )
+                    !exporter
+                        .State
+                        .TryGetValue(
+                            typeof(XmlSerializerOperationBehavior.Reflector),
+                            out reflector
+                        )
                 )
                 {
                     reflector = new XmlSerializerOperationBehavior.Reflector(

@@ -34,10 +34,20 @@ namespace System.Net.Quic.Tests
         public static SslApplicationProtocol ApplicationProtocol { get; } =
             new SslApplicationProtocol("quictest");
 
-        public readonly X509Certificate2 ServerCertificate =
-            System.Net.Test.Common.Configuration.Certificates.GetServerCertificate();
-        public readonly X509Certificate2 ClientCertificate =
-            System.Net.Test.Common.Configuration.Certificates.GetClientCertificate();
+        public readonly X509Certificate2 ServerCertificate = System
+            .Net
+            .Test
+            .Common
+            .Configuration
+            .Certificates
+            .GetServerCertificate();
+        public readonly X509Certificate2 ClientCertificate = System
+            .Net
+            .Test
+            .Common
+            .Configuration
+            .Certificates
+            .GetClientCertificate();
 
         public ITestOutputHelper _output;
         public const int PassingTestTimeoutMilliseconds = 4 * 60 * 1000;

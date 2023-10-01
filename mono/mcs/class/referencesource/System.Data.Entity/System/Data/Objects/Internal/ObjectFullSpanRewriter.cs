@@ -114,19 +114,22 @@ namespace System.Data.Objects.Internal
             // using the name of the current navigation property in the Include path.
             NavigationProperty nextNavProp = null;
             if (
-                !parentInfo.DeclaringType.NavigationProperties.TryGetValue(
-                    navPropNames[pos],
-                    true,
-                    out nextNavProp
-                )
+                !parentInfo
+                    .DeclaringType
+                    .NavigationProperties
+                    .TryGetValue(navPropNames[pos], true, out nextNavProp)
             )
             {
                 // The navigation property name is not valid for this Entity type
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.ObjectQuery_Span_NoNavProp(
-                        parentInfo.DeclaringType.FullName,
-                        navPropNames[pos]
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .ObjectQuery_Span_NoNavProp(
+                            parentInfo.DeclaringType.FullName,
+                            navPropNames[pos]
+                        )
                 );
             }
 
@@ -277,12 +280,14 @@ namespace System.Data.Objects.Internal
                     _currentSpanPath.Pop();
 
                     // Add a new column to the tracked columns using the rewritten column definition
-                    tracking.ColumnDefinitions.Add(
-                        new KeyValuePair<string, DbExpression>(
-                            tracking.ColumnNames.Next(),
-                            columnDef
-                        )
-                    );
+                    tracking
+                        .ColumnDefinitions
+                        .Add(
+                            new KeyValuePair<string, DbExpression>(
+                                tracking.ColumnNames.Next(),
+                                columnDef
+                            )
+                        );
                     AssociationEndMember targetEnd = GetNavigationPropertyTargetEnd(nextInfo.Key);
                     tracking.SpannedColumns[idx] = targetEnd;
 

@@ -366,9 +366,10 @@ namespace System.Web.Configuration.nBrowser
             System.Diagnostics.Trace.WriteLine(string.Join("+", new string[50]));
             for (int i = 0; i <= header.Count - 1; i++)
             {
-                System.Diagnostics.Trace.WriteLine(
-                    string.Format("{0}{1}", header.GetKey(i).PadRight(25), header[i])
-                );
+                System
+                    .Diagnostics
+                    .Trace
+                    .WriteLine(string.Format("{0}{1}", header.GetKey(i).PadRight(25), header[i]));
             }
             System.Diagnostics.Trace.WriteLine(string.Join("+", new string[50]));
 #endif

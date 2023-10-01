@@ -131,11 +131,13 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             )
             {
                 System.Security.Cryptography.Pkcs.Asn1.OtherKeyAttributeAsn tmpOther;
-                System.Security.Cryptography.Pkcs.Asn1.OtherKeyAttributeAsn.Decode(
-                    ref sequenceReader,
-                    rebind,
-                    out tmpOther
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Pkcs
+                    .Asn1
+                    .OtherKeyAttributeAsn
+                    .Decode(ref sequenceReader, rebind, out tmpOther);
                 decoded.Other = tmpOther;
             }
 

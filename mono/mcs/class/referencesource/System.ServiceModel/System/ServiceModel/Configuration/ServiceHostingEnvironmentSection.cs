@@ -36,11 +36,13 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (SecurityException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.Hosting_MemoryGatesCheckFailedUnderPartialTrust)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(SR.Hosting_MemoryGatesCheckFailedUnderPartialTrust)
+                            )
+                        );
                 }
             }
         }

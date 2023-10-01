@@ -351,11 +351,15 @@ namespace System
             // we'll avoid checking path lengths- we'll still fail at MAX_PATH later if we're !useAppBase when we call Path's
             // NormalizePath.
             if (!useAppBase)
-                path = System.Security.Util.URLString.PreProcessForExtendedPathRemoval(
-                    checkPathLength: false,
-                    url: path,
-                    isFileUrl: false
-                );
+                path = System
+                    .Security
+                    .Util
+                    .URLString
+                    .PreProcessForExtendedPathRemoval(
+                        checkPathLength: false,
+                        url: path,
+                        isFileUrl: false
+                    );
 
             int len = path.Length;
             if (len == 0)
@@ -619,10 +623,9 @@ namespace System
                 {
 #if !FEATURE_CORECLR
                     if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            "NetFx40_Legacy20SortingBehavior",
-                            str
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals("NetFx40_Legacy20SortingBehavior", str)
                     )
                     {
                         if (_AppDomainSortingSetupInfo == null)
@@ -633,10 +636,9 @@ namespace System
                     }
 
                     if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            "NetFx45_Legacy40SortingBehavior",
-                            str
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals("NetFx45_Legacy40SortingBehavior", str)
                     )
                     {
                         if (_AppDomainSortingSetupInfo == null)
@@ -649,10 +651,9 @@ namespace System
 
 #if FEATURE_RANDOMIZED_STRING_HASHING
                     if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            "UseRandomizedStringHashAlgorithm",
-                            str
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals("UseRandomizedStringHashAlgorithm", str)
                     )
                     {
                         _UseRandomizedStringHashing = true;

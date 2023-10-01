@@ -39,17 +39,17 @@ namespace System.ServiceModel.Diagnostics
         )
         {
             if (String.IsNullOrEmpty(categoryName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
-                    "categoryName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNullOrEmptyString("categoryName");
             if (String.IsNullOrEmpty(instanceName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
-                    "instanceName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNullOrEmptyString("instanceName");
             if (String.IsNullOrEmpty(fullInstanceName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
-                    "fullInstanceName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNullOrEmptyString("fullInstanceName");
 
             try
             {
@@ -74,17 +74,17 @@ namespace System.ServiceModel.Diagnostics
         )
         {
             if (String.IsNullOrEmpty(categoryName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
-                    "categoryName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNullOrEmptyString("categoryName");
             if (String.IsNullOrEmpty(instanceName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
-                    "instanceName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNullOrEmptyString("instanceName");
             if (String.IsNullOrEmpty(fullInstanceName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
-                    "fullInstanceName"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNullOrEmptyString("fullInstanceName");
 
             try
             {

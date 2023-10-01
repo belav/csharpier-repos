@@ -155,8 +155,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 )
                 .ConfigureAwait(false);
 
-            var buildOnlyDiagnosticsService =
-                document.Project.Solution.Services.GetRequiredService<IBuildOnlyDiagnosticsService>();
+            var buildOnlyDiagnosticsService = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IBuildOnlyDiagnosticsService>();
             allDiagnostics.AddRange(
                 buildOnlyDiagnosticsService.GetBuildOnlyDiagnostics(document.Id)
             );
@@ -266,8 +269,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 )
                 .ConfigureAwait(false);
 
-            var buildOnlyDiagnosticsService =
-                document.Project.Solution.Services.GetRequiredService<IBuildOnlyDiagnosticsService>();
+            var buildOnlyDiagnosticsService = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IBuildOnlyDiagnosticsService>();
             var buildOnlyDiagnostics = buildOnlyDiagnosticsService.GetBuildOnlyDiagnostics(
                 document.Id
             );
@@ -488,8 +494,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return document;
             }
 
-            var fixAllService =
-                document.Project.Solution.Services.GetRequiredService<IFixAllGetFixesService>();
+            var fixAllService = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IFixAllGetFixesService>();
 
             var solution = await fixAllService
                 .GetFixAllChangedSolutionAsync(
@@ -698,8 +707,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             if (TryGetWorkspaceFixersPriorityMap(document, out var fixersForLanguage))
                 allFixers = allFixers.Sort(new FixerComparer(allFixers, fixersForLanguage.Value));
 
-            var extensionManager =
-                document.Project.Solution.Services.GetService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Services
+                .GetService<IExtensionManager>();
 
             // Run each CodeFixProvider to gather individual CodeFixes for reported diagnostics.
             // Ensure that no diagnostic has registered code actions from different code fix providers with same equivalance key.
@@ -1057,8 +1069,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return null;
             }
 
-            var extensionManager =
-                textDocument.Project.Solution.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager = textDocument
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IExtensionManager>();
             var fixes = await extensionManager
                 .PerformFunctionAsync(
                     fixer,
@@ -1146,7 +1161,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
 
             // Explicitly looks for an AbstractSuppressionCodeFixProvider
-            var fixer = lazyConfigurationProviders.Value
+            var fixer = lazyConfigurationProviders
+                .Value
                 .OfType<AbstractSuppressionCodeFixProvider>()
                 .FirstOrDefault();
             if (fixer == null)
@@ -1394,8 +1410,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableArray<CodeFixProvider>
         > ComputeProjectFixers(TextDocument document)
         {
-            var extensionManager =
-                document.Project.Solution.Services.GetService<IExtensionManager>();
+            var extensionManager = document
+                .Project
+                .Solution
+                .Services
+                .GetService<IExtensionManager>();
 
             using var _ = PooledDictionary<DiagnosticId, ArrayBuilder<CodeFixProvider>>.GetInstance(
                 out var builder

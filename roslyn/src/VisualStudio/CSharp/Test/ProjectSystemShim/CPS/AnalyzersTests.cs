@@ -77,7 +77,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
 
             // We need to explicitly update the command line arguments so the new ruleset is used to update options.
             project.SetOptions(ImmutableArray.Create($"/ruleset:{ruleSetFile.Path}"));
-            var ca1012DiagnosticOption = environment.Workspace.CurrentSolution.Projects
+            var ca1012DiagnosticOption = environment
+                .Workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .CompilationOptions
                 .SpecificDiagnosticOptions["CA1012"];

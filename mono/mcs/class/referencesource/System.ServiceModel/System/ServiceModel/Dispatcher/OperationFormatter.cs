@@ -199,42 +199,48 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XmlException xe)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(
-                            SR.SFxErrorDeserializingReplyBodyMore,
-                            this.operationName,
-                            xe.Message
-                        ),
-                        xe
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SFxErrorDeserializingReplyBodyMore,
+                                this.operationName,
+                                xe.Message
+                            ),
+                            xe
+                        )
+                    );
             }
             catch (FormatException fe)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(
-                            SR.SFxErrorDeserializingReplyBodyMore,
-                            this.operationName,
-                            fe.Message
-                        ),
-                        fe
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SFxErrorDeserializingReplyBodyMore,
+                                this.operationName,
+                                fe.Message
+                            ),
+                            fe
+                        )
+                    );
             }
             catch (SerializationException se)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(
-                            SR.SFxErrorDeserializingReplyBodyMore,
-                            this.operationName,
-                            se.Message
-                        ),
-                        se
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SFxErrorDeserializingReplyBodyMore,
+                                this.operationName,
+                                se.Message
+                            ),
+                            se
+                        )
+                    );
             }
         }
 
@@ -258,15 +264,17 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (MissingMethodException mme)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxMessageContractRequiresDefaultConstructor,
-                            messageContractType.FullName
-                        ),
-                        mme
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxMessageContractRequiresDefaultConstructor,
+                                messageContractType.FullName
+                            ),
+                            mme
+                        )
+                    );
             }
         }
 
@@ -330,42 +338,48 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XmlException xe)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    OperationFormatter.CreateDeserializationFailedFault(
-                        SR.GetString(
-                            SR.SFxErrorDeserializingRequestBodyMore,
-                            this.operationName,
-                            xe.Message
-                        ),
-                        xe
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        OperationFormatter.CreateDeserializationFailedFault(
+                            SR.GetString(
+                                SR.SFxErrorDeserializingRequestBodyMore,
+                                this.operationName,
+                                xe.Message
+                            ),
+                            xe
+                        )
+                    );
             }
             catch (FormatException fe)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    OperationFormatter.CreateDeserializationFailedFault(
-                        SR.GetString(
-                            SR.SFxErrorDeserializingRequestBodyMore,
-                            this.operationName,
-                            fe.Message
-                        ),
-                        fe
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        OperationFormatter.CreateDeserializationFailedFault(
+                            SR.GetString(
+                                SR.SFxErrorDeserializingRequestBodyMore,
+                                this.operationName,
+                                fe.Message
+                            ),
+                            fe
+                        )
+                    );
             }
             catch (SerializationException se)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(
-                        SR.GetString(
-                            SR.SFxErrorDeserializingRequestBodyMore,
-                            this.operationName,
-                            se.Message
-                        ),
-                        se
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.SFxErrorDeserializingRequestBodyMore,
+                                this.operationName,
+                                se.Message
+                            ),
+                            se
+                        )
+                    );
             }
         }
 
@@ -771,11 +785,13 @@ namespace System.ServiceModel.Dispatcher
         {
             if (isEncoded && !isRpc)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxDocEncodedNotSupported, operation.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxDocEncodedNotSupported, operation.Name)
+                        )
+                    );
             }
 
             bool hasVoid = false;
@@ -789,14 +805,16 @@ namespace System.ServiceModel.Dispatcher
                     if (isRpc && operation.IsValidateRpcWrapperName)
                     {
                         if (!isEncoded)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.SFxTypedMessageCannotBeRpcLiteral,
-                                        operation.Name
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxTypedMessageCannotBeRpcLiteral,
+                                            operation.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                     }
                     hasTypedOrUntypedMessage = true;
                 }
@@ -806,23 +824,27 @@ namespace System.ServiceModel.Dispatcher
                     hasParameter = true;
             }
             if (hasParameter && hasTypedOrUntypedMessage)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxTypedOrUntypedMessageCannotBeMixedWithParameters,
-                            operation.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxTypedOrUntypedMessageCannotBeMixedWithParameters,
+                                operation.Name
+                            )
                         )
-                    )
-                );
+                    );
             if (isRpc && hasTypedOrUntypedMessage && hasVoid)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxTypedOrUntypedMessageCannotBeMixedWithVoidInRpc,
-                            operation.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxTypedOrUntypedMessageCannotBeMixedWithVoidInRpc,
+                                operation.Name
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         internal static void GetActions(
@@ -890,18 +912,20 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (description == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("description")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("description"));
                 }
 
                 if (instance == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException(
-                            SR.GetString(SR.SFxTypedMessageCannotBeNull, description.Action)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentNullException(
+                                SR.GetString(SR.SFxTypedMessageCannotBeNull, description.Action)
+                            )
+                        );
                 }
 
                 members = new MemberInfo[
@@ -1190,9 +1214,9 @@ namespace System.ServiceModel.Dispatcher
                     lock (ThisLock)
                     {
                         if (base.Closed)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                CreateBufferDisposedException()
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(CreateBufferDisposedException());
                         return new OperationFormatterMessage(
                             base.Headers,
                             base.Properties,

@@ -33,9 +33,9 @@ public static class XunitLoggerFactoryExtensions
         DateTimeOffset? logStart
     )
     {
-        builder.Services.AddSingleton<ILoggerProvider>(
-            new XunitLoggerProvider(output, minLevel, logStart)
-        );
+        builder
+            .Services
+            .AddSingleton<ILoggerProvider>(new XunitLoggerProvider(output, minLevel, logStart));
         return builder;
     }
 

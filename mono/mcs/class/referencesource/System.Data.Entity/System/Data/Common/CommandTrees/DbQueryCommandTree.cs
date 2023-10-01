@@ -50,7 +50,8 @@ namespace System.Data.Common.CommandTrees
                 DbExpressionValidator validator = new DbExpressionValidator(metadata, dataSpace);
                 validator.ValidateExpression(query, "query");
 
-                this._parameters = validator.Parameters
+                this._parameters = validator
+                    .Parameters
                     .Select(paramInfo => paramInfo.Value)
                     .ToList()
                     .AsReadOnly();

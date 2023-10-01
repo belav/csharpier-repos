@@ -82,8 +82,9 @@ namespace Internal.IntrinsicSupport
                 }
             }
 
-            bool success =
-                RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(
+            bool success = RuntimeAugments
+                .TypeLoaderCallbacks
+                .TryGetConstructedGenericTypeForComponents(
                     openComparerType,
                     new RuntimeTypeHandle[] { comparerTypeArgument },
                     out comparerType

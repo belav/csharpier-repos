@@ -61,7 +61,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.setValues
+                        var list = entity
+                            .setValues
                             .Select(
                                 c =>
                                     new
@@ -168,7 +169,8 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         setting sett = entity.setting.Where(s => s.name == name).FirstOrDefault();
-                        var list = entity.setValues
+                        var list = entity
+                            .setValues
                             .Where(x => sett.settingId == x.settingId)
                             .Select(
                                 X =>
@@ -297,7 +299,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    setting sett = entity.setting
+                    setting sett = entity
+                        .setting
                         .Where(s => s.name == settingName)
                         .FirstOrDefault();
 
@@ -337,7 +340,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    setting sett = entity.setting
+                    setting sett = entity
+                        .setting
                         .Where(s => s.name == settingName)
                         .FirstOrDefault();
 
@@ -402,7 +406,8 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         // setting sett = entity.setting.Where(s => s.name == name).FirstOrDefault();
-                        var list = entity.setValues
+                        var list = entity
+                            .setValues
                             .ToList()
                             .Where(x => x.notes == setvalnote)
                             .Select(
@@ -415,7 +420,8 @@ namespace POS_Server.Controllers
                                         X.isSystem,
                                         X.settingId,
                                         X.notes,
-                                        name = entity.setting
+                                        name = entity
+                                            .setting
                                             .ToList()
                                             .Where(s => s.settingId == X.settingId)
                                             .FirstOrDefault()
@@ -506,7 +512,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var item = entity.setValues
+                        var item = entity
+                            .setValues
                             .Where(c => c.valId == Id)
                             .Select(
                                 c =>
@@ -619,7 +626,8 @@ namespace POS_Server.Controllers
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             var sEntity = entity.Set<setValues>();
-                            setValues defItem = entity.setValues
+                            setValues defItem = entity
+                                .setValues
                                 .Where(p => p.settingId == newObject.settingId && p.isDefault == 1)
                                 .FirstOrDefault();
 
@@ -650,7 +658,8 @@ namespace POS_Server.Controllers
                                 {
                                     defItem.isDefault = 0; //reset the other default to 0 if exist
                                 }
-                                tmpObject = entity.setValues
+                                tmpObject = entity
+                                    .setValues
                                     .Where(p => p.valId == newObject.valId)
                                     .FirstOrDefault();
                                 tmpObject.valId = newObject.valId;
@@ -864,7 +873,8 @@ namespace POS_Server.Controllers
                             setValues defItem = new setValues();
                             var sEntity = entity.Set<setValues>();
 
-                            defItem = entity.setValues
+                            defItem = entity
+                                .setValues
                                 .Where(p => p.settingId == newObject.settingId)
                                 .FirstOrDefault();
 
@@ -1136,9 +1146,9 @@ namespace POS_Server.Controllers
                             ".tiff",
                             ".jfif"
                         };
-                        var ext = postedFile.FileName.Substring(
-                            postedFile.FileName.LastIndexOf('.')
-                        );
+                        var ext = postedFile
+                            .FileName
+                            .Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
@@ -1158,15 +1168,19 @@ namespace POS_Server.Controllers
                         {
                             //  check if image exist
                             var pathCheck = Path.Combine(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\setvalues"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\setvalues"),
                                 imageWithNoExt
                             );
                             var files = Directory.GetFiles(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\setvalues"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\setvalues"),
                                 imageWithNoExt + ".*"
                             );
                             if (files.Length > 0)
@@ -1176,9 +1190,11 @@ namespace POS_Server.Controllers
 
                             //Userimage myfolder name where i want to save my image
                             var filePath = Path.Combine(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\setvalues"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\setvalues"),
                                 imageName
                             );
                             postedFile.SaveAs(filePath);
@@ -1281,7 +1297,8 @@ namespace POS_Server.Controllers
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             var Entity = entity.Set<setValues>();
-                            Setvalue = entity.setValues
+                            Setvalue = entity
+                                .setValues
                                 .Where(p => p.valId == newObject.valId)
                                 .First();
                             Setvalue.value = newObject.value;
@@ -1323,7 +1340,8 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var sEntity = entity.Set<setValues>();
-                        setValues defItem = entity.setValues
+                        setValues defItem = entity
+                            .setValues
                             .Where(p => p.settingId == newObject.settingId && p.isDefault == 1)
                             .FirstOrDefault();
 
@@ -1357,7 +1375,8 @@ namespace POS_Server.Controllers
                             {
                                 defItem.isDefault = 0; //reset the other default to 0 if exist
                             }
-                            tmpObject = entity.setValues
+                            tmpObject = entity
+                                .setValues
                                 .Where(p => p.valId == newObject.valId)
                                 .FirstOrDefault();
                             tmpObject.valId = newObject.valId;

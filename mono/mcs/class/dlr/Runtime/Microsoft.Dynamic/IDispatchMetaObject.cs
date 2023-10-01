@@ -304,7 +304,8 @@ namespace Microsoft.Scripting
                 // Drop the event property set.
                 return new DynamicMetaObject(
                     Expression.Constant(null),
-                    value.Restrictions
+                    value
+                        .Restrictions
                         .Merge(IDispatchRestriction())
                         .Merge(
                             BindingRestrictions.GetTypeRestriction(

@@ -74,7 +74,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             newTab.OnClosed += Tab_Closed;
             if (result.HasValue)
             {
-                await newTab.Content.ViewModel
+                await newTab
+                    .Content
+                    .ViewModel
                     .SetStackTraceResultAsync(result.Value, originalText, cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -95,7 +97,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             {
                 // Paste in the SelectedTab instead of opening a new tab
                 // for cases where there are no contents in the current tab
-                await SelectedTab.Content.ViewModel
+                await SelectedTab
+                    .Content
+                    .ViewModel
                     .SetStackTraceResultAsync(result, text, cancellationToken)
                     .ConfigureAwait(false);
             }

@@ -56,9 +56,9 @@ public static class HubConnectionBuilderExtensions
         TimeSpan[] reconnectDelays
     )
     {
-        hubConnectionBuilder.Services.AddSingleton<IRetryPolicy>(
-            new DefaultRetryPolicy(reconnectDelays)
-        );
+        hubConnectionBuilder
+            .Services
+            .AddSingleton<IRetryPolicy>(new DefaultRetryPolicy(reconnectDelays));
         return hubConnectionBuilder;
     }
 

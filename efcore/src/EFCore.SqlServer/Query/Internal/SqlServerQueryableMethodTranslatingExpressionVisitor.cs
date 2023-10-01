@@ -59,9 +59,9 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor
     {
         if (extensionExpression is TemporalQueryRootExpression queryRootExpression)
         {
-            var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(
-                queryRootExpression.EntityType
-            );
+            var selectExpression = RelationalDependencies
+                .SqlExpressionFactory
+                .Select(queryRootExpression.EntityType);
             Func<TableExpression, TableExpressionBase> annotationApplyingFunc =
                 queryRootExpression switch
                 {

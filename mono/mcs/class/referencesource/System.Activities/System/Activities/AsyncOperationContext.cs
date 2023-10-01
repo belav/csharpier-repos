@@ -52,9 +52,9 @@ namespace System.Activities
 
             if (this.hasCompleted)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.OperationAlreadyCompleted)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.OperationAlreadyCompleted));
             }
 
             return true;

@@ -631,9 +631,9 @@ namespace System.Data.Linq
                             this.provider.Connection.Open();
                             openedConnection = true;
                         }
-                        transaction = this.provider.Connection.BeginTransaction(
-                            IsolationLevel.ReadCommitted
-                        );
+                        transaction = this.provider
+                            .Connection
+                            .BeginTransaction(IsolationLevel.ReadCommitted);
                         this.provider.Transaction = transaction;
                         new ChangeProcessor(this.services, this).SubmitChanges(failureMode);
                         this.AcceptChanges();
@@ -762,10 +762,9 @@ namespace System.Data.Linq
                     trackedObject.Type,
                     trackedObject.Original
                 );
-                object freshInstance = refreshContext.Services.GetObjectByKey(
-                    trackedObject.Type,
-                    keyValues
-                );
+                object freshInstance = refreshContext
+                    .Services
+                    .GetObjectByKey(trackedObject.Type, keyValues);
                 if (freshInstance == null)
                 {
                     throw Error.RefreshOfDeletedObject();

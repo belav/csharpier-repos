@@ -169,16 +169,16 @@ public class EndpointMetadataProviderTest
             Conventions = new Action<EndpointBuilder>[]
             {
                 builder =>
-                    builder.Metadata.Add(
-                        new CustomEndpointMetadata() { Source = MetadataSource.Caller }
-                    ),
+                    builder
+                        .Metadata
+                        .Add(new CustomEndpointMetadata() { Source = MetadataSource.Caller }),
             },
             FinallyConventions = new Action<EndpointBuilder>[]
             {
                 builder =>
-                    builder.Metadata.Add(
-                        new CustomEndpointMetadata() { Source = MetadataSource.Finally }
-                    ),
+                    builder
+                        .Metadata
+                        .Add(new CustomEndpointMetadata() { Source = MetadataSource.Finally }),
             },
         };
 
@@ -560,9 +560,9 @@ public class EndpointMetadataProviderTest
                 return;
             }
 
-            builder.Metadata.Add(
-                new RoutePatternMetadata { RoutePattern = reb.RoutePattern.RawText }
-            );
+            builder
+                .Metadata
+                .Add(new RoutePatternMetadata { RoutePattern = reb.RoutePattern.RawText });
         }
     }
 

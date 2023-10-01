@@ -1858,7 +1858,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
     public virtual async Task Where_navigation_contains(bool async)
     {
         using var context = CreateContext();
-        var customer = context.Customers
+        var customer = context
+            .Customers
             .Include(c => c.Orders)
             .Single(c => c.CustomerID == "ALFKI");
         var orderDetails = context.OrderDetails.Where(od => customer.Orders.Contains(od.Order));

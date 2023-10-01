@@ -252,8 +252,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         BoundExpression output = _tempAllocator.GetTemp(outputTemp);
                         CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
                             _localRewriter.GetNewCompoundUseSiteInfo();
-                        Conversion conversion =
-                            _factory.Compilation.Conversions.ClassifyBuiltInConversion(
+                        Conversion conversion = _factory
+                            .Compilation
+                            .Conversions
+                            .ClassifyBuiltInConversion(
                                 inputType,
                                 output.Type,
                                 isChecked: false,
@@ -630,10 +632,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     test is BoundDagTypeTest typeDecision
                     && evaluation is BoundDagTypeEvaluation typeEvaluation1
                     && typeDecision.Type.IsReferenceType
-                    && typeEvaluation1.Type.Equals(
-                        typeDecision.Type,
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    && typeEvaluation1
+                        .Type
+                        .Equals(typeDecision.Type, TypeCompareKind.AllIgnoreOptions)
                     && typeEvaluation1.Input == typeDecision.Input
                 )
                 {
@@ -654,12 +655,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (
                     test is BoundDagNonNullTest nonNullTest
                     && evaluation is BoundDagTypeEvaluation typeEvaluation2
-                    && _factory.Compilation.Conversions.ClassifyBuiltInConversion(
-                        test.Input.Type,
-                        typeEvaluation2.Type,
-                        isChecked: false,
-                        ref useSiteInfo
-                    )
+                    && _factory
+                        .Compilation
+                        .Conversions
+                        .ClassifyBuiltInConversion(
+                            test.Input.Type,
+                            typeEvaluation2.Type,
+                            isChecked: false,
+                            ref useSiteInfo
+                        )
                         is Conversion conv
                     && (
                         conv.IsIdentity
@@ -701,14 +705,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(loweredInput.Type is { });
 
                 // We share input variables if there is no when clause (because a when clause might mutate them).
-                bool anyWhenClause = decisionDag.TopologicallySortedNodes.Any(
-                    static node =>
-                        node
-                            is BoundWhenDecisionDagNode
-                            {
-                                WhenExpression: { ConstantValueOpt: null }
-                            }
-                );
+                bool anyWhenClause = decisionDag
+                    .TopologicallySortedNodes
+                    .Any(
+                        static node =>
+                            node
+                                is BoundWhenDecisionDagNode
+                                {
+                                    WhenExpression: { ConstantValueOpt: null }
+                                }
+                    );
 
                 var inputDagTemp = BoundDagTemp.ForOriginalInput(loweredInput);
                 if (
@@ -757,9 +763,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (
                     loweredInput.Type.IsTupleType
-                    && !loweredInput.Type.OriginalDefinition.Equals(
-                        _factory.Compilation.GetWellKnownType(WellKnownType.System_ValueTuple_TRest)
-                    )
+                    && !loweredInput
+                        .Type
+                        .OriginalDefinition
+                        .Equals(
+                            _factory
+                                .Compilation
+                                .GetWellKnownType(WellKnownType.System_ValueTuple_TRest)
+                        )
                     && loweredInput.Syntax.Kind() == SyntaxKind.TupleExpression
                     && loweredInput is BoundObjectCreationExpression expr
                     && !decisionDag.TopologicallySortedNodes.Any(static n => usesOriginalInput(n))

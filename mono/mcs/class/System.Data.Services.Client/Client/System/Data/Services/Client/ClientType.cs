@@ -200,9 +200,9 @@ namespace System.Data.Services.Client
                             {
                                 int shadow = this.IndexOfProperty(property.PropertyName);
                                 if (
-                                    !property.DeclaringType.IsAssignableFrom(
-                                        this.properties[shadow].DeclaringType
-                                    )
+                                    !property
+                                        .DeclaringType
+                                        .IsAssignableFrom(this.properties[shadow].DeclaringType)
                                 )
                                 {
                                     this.properties.RemoveAt(shadow);

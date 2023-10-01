@@ -24,7 +24,8 @@ public static class TestCompilation
     {
         var dependencyContext = DependencyContext.Load(assembly);
 
-        var metadataReferences = dependencyContext.CompileLibraries
+        var metadataReferences = dependencyContext
+            .CompileLibraries
             .SelectMany(l => ResolvePaths(l))
             .Select(assemblyPath => MetadataReference.CreateFromFile(assemblyPath))
             .ToArray();

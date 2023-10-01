@@ -35,11 +35,13 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             if (capacity <= 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                        )
+                    );
 
             this.count = 0;
             this.capacity = capacity;
@@ -57,11 +59,13 @@ namespace System.ServiceModel.Dispatcher
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxThrottleLimitMustBeGreaterThanZero0)
+                            )
+                        );
                 this.capacity = value;
             }
         }

@@ -35,11 +35,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TodoComment
     </Project>
 </Workspace>"
                 ),
-                composition: EditorTestCompositions.EditorFeatures.AddParts(
-                    typeof(NoCompilationContentTypeDefinitions),
-                    typeof(NoCompilationContentTypeLanguageService),
-                    typeof(NoCompilationTodoCommentService)
-                )
+                composition: EditorTestCompositions
+                    .EditorFeatures
+                    .AddParts(
+                        typeof(NoCompilationContentTypeDefinitions),
+                        typeof(NoCompilationContentTypeLanguageService),
+                        typeof(NoCompilationTodoCommentService)
+                    )
             );
 
             return workspace;

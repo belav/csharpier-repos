@@ -38,23 +38,23 @@ namespace System.ServiceModel.Configuration
                 }
                 if (callbackObject == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "callbackObject"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("callbackObject");
                 }
 
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "endpointConfigurationName"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("endpointConfigurationName");
                 }
 
                 if (configuration == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "configuration"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("configuration");
                 }
 
                 this.CheckAndAssignCallbackInstance(callbackObject);

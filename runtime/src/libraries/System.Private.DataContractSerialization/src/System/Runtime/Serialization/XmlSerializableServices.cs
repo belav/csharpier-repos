@@ -23,11 +23,16 @@ namespace System.Runtime.Serialization
                     {
                         XmlNode? node = doc.ReadNode(xmlReader);
                         if (node == null)
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                XmlObjectSerializer.CreateSerializationException(
-                                    SR.UnexpectedEndOfFile
-                                )
-                            );
+                            throw System
+                                .Runtime
+                                .Serialization
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    XmlObjectSerializer.CreateSerializationException(
+                                        SR.UnexpectedEndOfFile
+                                    )
+                                );
                         nodeList.Add(node);
                     }
                 } while (xmlReader.MoveToNextAttribute());
@@ -41,9 +46,16 @@ namespace System.Runtime.Serialization
                 {
                     XmlNode? node = doc.ReadNode(xmlReader);
                     if (node == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(SR.UnexpectedEndOfFile)
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                XmlObjectSerializer.CreateSerializationException(
+                                    SR.UnexpectedEndOfFile
+                                )
+                            );
                     nodeList.Add(node);
                 }
             }

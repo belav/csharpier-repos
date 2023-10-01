@@ -47,9 +47,9 @@ namespace Tracing.Tests
                         if (
                             (
                                 OperatingSystem.IsWindows()
-                                && listener.SeenProvidersAndEvents.Contains(
-                                    "Microsoft-Windows-DotNETRuntime/EVENTID(65)"
-                                )
+                                && listener
+                                    .SeenProvidersAndEvents
+                                    .Contains("Microsoft-Windows-DotNETRuntime/EVENTID(65)")
                             ) || (!OperatingSystem.IsWindows() && listener.EventCount > 0)
                         )
                         {
@@ -69,9 +69,9 @@ namespace Tracing.Tests
                     {
                         Assert.True(
                             "Saw the ThreadPoolIOPack event",
-                            listener.SeenProvidersAndEvents.Contains(
-                                "Microsoft-Windows-DotNETRuntime/EVENTID(65)"
-                            )
+                            listener
+                                .SeenProvidersAndEvents
+                                .Contains("Microsoft-Windows-DotNETRuntime/EVENTID(65)")
                         );
                     }
                 }

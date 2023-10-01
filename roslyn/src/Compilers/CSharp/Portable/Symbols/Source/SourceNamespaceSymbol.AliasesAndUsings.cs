@@ -873,9 +873,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 )
                             );
                             Debug.Assert(
-                                calculated.UsingNamespacesOrTypes.SequenceEqual(
-                                    result.UsingNamespacesOrTypes
-                                )
+                                calculated
+                                    .UsingNamespacesOrTypes
+                                    .SequenceEqual(result.UsingNamespacesOrTypes)
                             );
                             Debug.Assert(calculated.Diagnostics?.IsEmptyWithoutResolution ?? true);
 #endif
@@ -1182,7 +1182,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                                 new NamespaceOrTypeAndUsingDirective(
                                                     importedType,
                                                     usingDirective,
-                                                    directiveDiagnostics.DependenciesBag.ToImmutableArray()
+                                                    directiveDiagnostics
+                                                        .DependenciesBag
+                                                        .ToImmutableArray()
                                                 )
                                             );
                                     }
@@ -1422,9 +1424,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             continue;
                         }
 
-                        NamespaceOrTypeSymbol target = alias.Alias.GetAliasTarget(
-                            basesBeingResolved: null
-                        );
+                        NamespaceOrTypeSymbol target = alias
+                            .Alias
+                            .GetAliasTarget(basesBeingResolved: null);
 
                         diagnostics.Clear();
                         if (alias.Alias is AliasSymbolFromSyntax aliasFromSyntax)

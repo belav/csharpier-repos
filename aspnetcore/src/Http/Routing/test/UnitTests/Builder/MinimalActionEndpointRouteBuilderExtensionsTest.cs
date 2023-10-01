@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Builder
             var dataSource = Assert.Single(builder.DataSources);
             var endpoint = Assert.Single(dataSource.Endpoints);
 
-            var metadataArray = endpoint.Metadata
+            var metadataArray = endpoint
+                .Metadata
                 .Where(m => m is not CompilerGeneratedAttribute)
                 .ToArray();
 

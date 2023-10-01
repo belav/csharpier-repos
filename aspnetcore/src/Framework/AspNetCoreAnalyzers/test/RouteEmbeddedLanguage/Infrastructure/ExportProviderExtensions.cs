@@ -31,9 +31,9 @@ internal static class ExportProviderExtensions
 
         public override bool TryGetExport(CompositionContract contract, out object export)
         {
-            var importMany = contract.MetadataConstraints.Contains(
-                new KeyValuePair<string, object>("IsImportMany", true)
-            );
+            var importMany = contract
+                .MetadataConstraints
+                .Contains(new KeyValuePair<string, object>("IsImportMany", true));
             var (contractType, metadataType) = GetContractType(contract.ContractType, importMany);
 
             if (metadataType != null)

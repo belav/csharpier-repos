@@ -1598,9 +1598,9 @@ struct Program
 
             comp = CreateCompilation(
                 text,
-                options: TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ReportStructInitializationWarnings
-                ),
+                options: TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyDiagnostics(

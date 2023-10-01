@@ -259,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                     // move comments on the method to be on it's first statement.
                     if (methodDeclaration.Body.Statements.Count > 0)
                         statements.AddRange(
-                            methodDeclaration.Body
+                            methodDeclaration
+                                .Body
                                 .Statements[0]
                                 .WithPrependedLeadingTrivia(methodDeclaration.GetLeadingTrivia())
                         );
@@ -273,12 +274,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                         LocalFunctionStatement(
                                 attributeLists: default,
                                 modifiers: TokenList(
-                                    otherMethod.Modifiers.Where(
-                                        m =>
-                                            m.Kind()
-                                                is SyntaxKind.AsyncKeyword
-                                                    or SyntaxKind.UnsafeKeyword
-                                    )
+                                    otherMethod
+                                        .Modifiers
+                                        .Where(
+                                            m =>
+                                                m.Kind()
+                                                    is SyntaxKind.AsyncKeyword
+                                                        or SyntaxKind.UnsafeKeyword
+                                        )
                                 ),
                                 returnType: otherMethod.ReturnType,
                                 identifier: otherMethod.Identifier,

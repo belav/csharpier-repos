@@ -169,11 +169,13 @@ namespace Mono
             if (!method.HasCustomAttributes)
                 return null;
 
-            return method.CustomAttributes.FirstOrDefault(
-                l =>
-                    l.AttributeType.Name == "AsyncStateMachineAttribute"
-                    && l.AttributeType.Namespace == "System.Runtime.CompilerServices"
-            );
+            return method
+                .CustomAttributes
+                .FirstOrDefault(
+                    l =>
+                        l.AttributeType.Name == "AsyncStateMachineAttribute"
+                        && l.AttributeType.Namespace == "System.Runtime.CompilerServices"
+                );
         }
 
         static bool CompareName(MethodDefinition candidate, string expected)

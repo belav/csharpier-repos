@@ -75,7 +75,8 @@ namespace System.Collections.Immutable.Tests
             var builder = ImmutableSortedSet<int>.Empty.ToBuilder();
             Assert.Equal(~0, builder.IndexOf(5));
 
-            builder = ImmutableSortedSet<int>.Empty
+            builder = ImmutableSortedSet<int>
+                .Empty
                 .Union(Enumerable.Range(1, 10).Select(n => n * 10))
                 .ToBuilder();
             Assert.Equal(0, builder.IndexOf(10));

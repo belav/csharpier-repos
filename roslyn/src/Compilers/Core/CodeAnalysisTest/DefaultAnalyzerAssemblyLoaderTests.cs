@@ -116,10 +116,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         /// </summary>
         private static void InvokeTestCode(string typeName, string methodName)
         {
-            var type = typeof(DefaultAnalyzerAssemblyLoaderTests).Assembly.GetType(
-                typeName,
-                throwOnError: false
-            )!;
+            var type = typeof(DefaultAnalyzerAssemblyLoaderTests)
+                .Assembly
+                .GetType(typeName, throwOnError: false)!;
             var member = type.GetMethod(
                 methodName,
                 BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance
@@ -320,16 +319,19 @@ Delta: Gamma: Beta: Test B
         {
             Assert.Equal(
                 expected,
-                Roslyn.Utilities.EnumerableExtensions.Order(
-                    assemblies.Select(
-                        assembly =>
-                            (
-                                assembly.GetName().Name!,
-                                assembly.GetName().Version!.ToString(),
-                                assembly.Location
-                            )
+                Roslyn
+                    .Utilities
+                    .EnumerableExtensions
+                    .Order(
+                        assemblies.Select(
+                            assembly =>
+                                (
+                                    assembly.GetName().Name!,
+                                    assembly.GetName().Version!.ToString(),
+                                    assembly.Location
+                                )
+                        )
                     )
-                )
             );
         }
 
@@ -353,7 +355,8 @@ Delta: Gamma: Beta: Test B
 
             // The assemblies in the LoadFrom context are the assemblies loaded from
             // analyzer dependencies.
-            loadedAssemblies = AppDomain.CurrentDomain
+            loadedAssemblies = AppDomain
+                .CurrentDomain
                 .GetAssemblies()
                 .Where(x => isInLoadFromContext(loader, x));
 
@@ -551,9 +554,9 @@ Delta: Gamma: Beta: Test B
                     e.GetType().GetMethod("Write")!.Invoke(e, new object[] { sb, "Test E" });
 
 #if NETCOREAPP
-                    var alcs = DefaultAnalyzerAssemblyLoader.TestAccessor.GetOrderedLoadContexts(
-                        loader
-                    );
+                    var alcs = DefaultAnalyzerAssemblyLoader
+                        .TestAccessor
+                        .GetOrderedLoadContexts(loader);
                     Assert.Equal(2, alcs.Length);
 
                     VerifyAssemblies(
@@ -838,9 +841,9 @@ Delta: Epsilon: Test E
                     e.GetType().GetMethod("Write")!.Invoke(e, new object[] { sb, "Test E" });
 
 #if NETCOREAPP
-                    var alcs1 = DefaultAnalyzerAssemblyLoader.TestAccessor.GetOrderedLoadContexts(
-                        loader1
-                    );
+                    var alcs1 = DefaultAnalyzerAssemblyLoader
+                        .TestAccessor
+                        .GetOrderedLoadContexts(loader1);
                     Assert.Equal(1, alcs1.Length);
 
                     VerifyAssemblies(
@@ -849,9 +852,9 @@ Delta: Epsilon: Test E
                         ("Gamma", "0.0.0.0", testFixture.Gamma.Path)
                     );
 
-                    var alcs2 = DefaultAnalyzerAssemblyLoader.TestAccessor.GetOrderedLoadContexts(
-                        loader2
-                    );
+                    var alcs2 = DefaultAnalyzerAssemblyLoader
+                        .TestAccessor
+                        .GetOrderedLoadContexts(loader2);
                     Assert.Equal(1, alcs2.Length);
 
                     VerifyAssemblies(
@@ -1096,7 +1099,8 @@ Delta.2: Test D2
 
                     var copiedAssembly = loader.LoadFromPath(destFile.Path);
                     Assert.Single(
-                        AppDomain.CurrentDomain
+                        AppDomain
+                            .CurrentDomain
                             .GetAssemblies()
                             .Where(x => x.FullName == assembly.FullName)
                     );
@@ -1222,9 +1226,9 @@ Delta.2: Test D2
             }
 
             if (
-                !DefaultAnalyzerAssemblyLoader.CompilerAssemblySimpleNames.SetEquals(
-                    allReferenceSimpleNames
-                )
+                !DefaultAnalyzerAssemblyLoader
+                    .CompilerAssemblySimpleNames
+                    .SetEquals(allReferenceSimpleNames)
             )
             {
                 allReferenceSimpleNames.Sort();
@@ -1315,9 +1319,12 @@ Delta.2: Test D2
             // Load the V2 of Delta to default ALC, then create a separate ALC for compiler and load compiler assembly.
             // Next use compiler context to load and run `AssemblyLoadingInNonDefaultContextHelper2` below. We expect the analyzer running in
             // its own `DirectoryLoadContext` would load and use Delta V1 located in its directory instead of V2 already loaded in the default context.
-            _ = System.Runtime.Loader.AssemblyLoadContext.Default.LoadFromAssemblyPath(
-                testFixture.Delta2.Path
-            );
+            _ = System
+                .Runtime
+                .Loader
+                .AssemblyLoadContext
+                .Default
+                .LoadFromAssemblyPath(testFixture.Delta2.Path);
             var compilerContext = new System.Runtime.Loader.AssemblyLoadContext("compilerContext");
             _ = compilerContext.LoadFromAssemblyPath(
                 typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly.Location

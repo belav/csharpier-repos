@@ -30,7 +30,8 @@ namespace System.Composition.Hosting
 
             if (contract.MetadataConstraints != null)
             {
-                var subsetOfConstraints = contract.MetadataConstraints
+                var subsetOfConstraints = contract
+                    .MetadataConstraints
                     .Where(c => Metadata.ContainsKey(c.Key))
                     .ToDictionary(c => c.Key, c => Metadata[c.Key]);
                 var constrainedSubset = new CompositionContract(

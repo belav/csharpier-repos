@@ -215,11 +215,9 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
                         Method calledMethod;
                         bool isNewObj;
                         bool isVirtual;
-                        list.Head.From.IsMethodCallBlock(
-                            out calledMethod,
-                            out isNewObj,
-                            out isVirtual
-                        );
+                        list.Head
+                            .From
+                            .IsMethodCallBlock(out calledMethod, out isNewObj, out isVirtual);
                         int count = this.parent.MetaDataProvider.Parameters(calledMethod).Count;
                         loadStackOffset = count;
                         isLoadResult = false;
@@ -565,11 +563,15 @@ namespace Mono.CodeContracts.Static.Analysis.StackAnalysis
             if (isLdResult)
             {
                 if (
-                    this.parent.MetaDataProvider.IsStruct(
-                        this.parent.MetaDataProvider.DeclaringType(
-                            this.parent.MetaDataProvider.DeclaringMethod(argument)
+                    this.parent
+                        .MetaDataProvider
+                        .IsStruct(
+                            this.parent
+                                .MetaDataProvider
+                                .DeclaringType(
+                                    this.parent.MetaDataProvider.DeclaringMethod(argument)
+                                )
                         )
-                    )
                 )
                     return this.visitor.LoadStackAddress(
                         pc,

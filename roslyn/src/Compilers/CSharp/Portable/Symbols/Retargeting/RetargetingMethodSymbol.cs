@@ -216,9 +216,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             get
             {
-                return _retargetingModule.RetargetingTranslator.Retarget(
-                    _underlyingMethod.ReturnValueMarshallingInformation
-                );
+                return _retargetingModule
+                    .RetargetingTranslator
+                    .Retarget(_underlyingMethod.ReturnValueMarshallingInformation);
             }
         }
 

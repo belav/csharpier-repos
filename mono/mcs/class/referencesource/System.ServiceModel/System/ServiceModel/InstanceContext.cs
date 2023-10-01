@@ -72,9 +72,9 @@ namespace System.ServiceModel
         {
             if (host == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("host")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("host"));
             }
 
             this.host = host;
@@ -704,11 +704,13 @@ namespace System.ServiceModel
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
                 this.instanceContext = instanceContext;
-                IAsyncResult result = this.instanceContext.channels.BeginClose(
-                    this.timeoutHelper.RemainingTime(),
-                    PrepareAsyncCompletion(new AsyncCompletion(CloseChannelsCallback)),
-                    this
-                );
+                IAsyncResult result = this.instanceContext
+                    .channels
+                    .BeginClose(
+                        this.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(new AsyncCompletion(CloseChannelsCallback)),
+                        this
+                    );
                 if (result.CompletedSynchronously && CloseChannelsCallback(result))
                 {
                     base.Complete(true);

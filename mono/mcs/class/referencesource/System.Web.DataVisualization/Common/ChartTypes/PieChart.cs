@@ -859,14 +859,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Call Back Paint event
             if (!selection)
             {
-                common.Chart.CallOnPrePaint(
-                    new ChartPaintEventArgs(
-                        dataSeries[typeSeries[0]],
-                        graph,
-                        common,
-                        area.PlotAreaPosition
-                    )
-                );
+                common
+                    .Chart
+                    .CallOnPrePaint(
+                        new ChartPaintEventArgs(
+                            dataSeries[typeSeries[0]],
+                            graph,
+                            common,
+                            area.PlotAreaPosition
+                        )
+                    );
             }
 
             // The data points loop. Find Sum of data points.
@@ -1316,14 +1318,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Call Paint event
             if (!selection)
             {
-                common.Chart.CallOnPostPaint(
-                    new ChartPaintEventArgs(
-                        dataSeries[typeSeries[0]],
-                        graph,
-                        common,
-                        area.PlotAreaPosition
-                    )
-                );
+                common
+                    .Chart
+                    .CallOnPostPaint(
+                        new ChartPaintEventArgs(
+                            dataSeries[typeSeries[0]],
+                            graph,
+                            common,
+                            area.PlotAreaPosition
+                        )
+                    );
             }
         }
 
@@ -2417,36 +2421,33 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                 {
                     // Add point to the map area
-                    common.HotRegionsList.AddHotRegion(
-                        graph,
-                        path,
-                        false,
-                        point.ReplaceKeywords(point.ToolTip),
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            graph,
+                            path,
+                            false,
+                            point.ReplaceKeywords(point.ToolTip),
 #if Microsoft_CONTROL
-                        string.Empty,
-                        string.Empty,
-                        string.Empty,
+                            string.Empty,
+                            string.Empty,
+                            string.Empty,
 #else // Microsoft_CONTROL
-                        point.ReplaceKeywords(point.Url),
-                        point.ReplaceKeywords(point.MapAreaAttributes),
-                        point.ReplaceKeywords(point.PostBackValue),
+                            point.ReplaceKeywords(point.Url),
+                            point.ReplaceKeywords(point.MapAreaAttributes),
+                            point.ReplaceKeywords(point.PostBackValue),
 #endif // Microsoft_CONTROL
-                        point,
-                        ChartElementType.DataPoint
-                    );
+                            point,
+                            ChartElementType.DataPoint
+                        );
 
                     return;
                 }
 
                 // Add points to the map area
-                common.HotRegionsList.AddHotRegion(
-                    path,
-                    false,
-                    coord,
-                    point,
-                    point.series.Name,
-                    pointIndex
-                );
+                common
+                    .HotRegionsList
+                    .AddHotRegion(path, false, coord, point, point.series.Name, pointIndex);
             }
         }
 
@@ -3030,14 +3031,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Call Back Paint event
             if (!selection)
             {
-                common.Chart.CallOnPrePaint(
-                    new ChartPaintEventArgs(
-                        dataSeries[typeSeries[0]],
-                        graph,
-                        common,
-                        area.PlotAreaPosition
-                    )
-                );
+                common
+                    .Chart
+                    .CallOnPrePaint(
+                        new ChartPaintEventArgs(
+                            dataSeries[typeSeries[0]],
+                            graph,
+                            common,
+                            area.PlotAreaPosition
+                        )
+                    );
             }
 
             // The data points loop. Find Sum of data points.
@@ -3356,14 +3359,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Call Paint event
             if (!selection)
             {
-                common.Chart.CallOnPostPaint(
-                    new ChartPaintEventArgs(
-                        dataSeries[typeSeries[0]],
-                        graph,
-                        common,
-                        area.PlotAreaPosition
-                    )
-                );
+                common
+                    .Chart
+                    .CallOnPostPaint(
+                        new ChartPaintEventArgs(
+                            dataSeries[typeSeries[0]],
+                            graph,
+                            common,
+                            area.PlotAreaPosition
+                        )
+                    );
             }
         }
 

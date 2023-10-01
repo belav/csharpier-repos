@@ -458,9 +458,9 @@ namespace System.Text.RegularExpressions
                                 )
                                 {
                                     if (
-                                        value.Set.TryAddCharClass(
-                                            RegexCharClass.Parse(fixedSet.Set)
-                                        )
+                                        value
+                                            .Set
+                                            .TryAddCharClass(RegexCharClass.Parse(fixedSet.Set))
                                     )
                                     {
                                         value.Count++;

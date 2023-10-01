@@ -918,7 +918,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             _ = count;
-            ParallelQuery<int> query = labeled.Item
+            ParallelQuery<int> query = labeled
+                .Item
                 .WithDegreeOfParallelism(degree)
                 .OrderBy<int, int>(x =>
                 {
@@ -950,7 +951,8 @@ namespace System.Linq.Parallel.Tests
         {
             int countdown = Math.Min(count / 2, degree) + 1;
 
-            ParallelQuery<int> query = labeled.Item
+            ParallelQuery<int> query = labeled
+                .Item
                 .WithDegreeOfParallelism(degree)
                 .OrderBy(x =>
                 {
@@ -1091,7 +1093,8 @@ namespace System.Linq.Parallel.Tests
             int prevSecondary = 0;
             int seen = 0;
             foreach (
-                int i in labeled.Item
+                int i in labeled
+                    .Item
                     .OrderByDescending(x => x % GroupFactor)
                     .ThenByDescending(x => -x)
             )
@@ -1148,7 +1151,8 @@ namespace System.Linq.Parallel.Tests
             int prevSecondary = count - 1;
             int seen = 0;
             foreach (
-                int i in labeled.Item
+                int i in labeled
+                    .Item
                     .OrderByDescending(x => -x % GroupFactor)
                     .ThenByDescending(x => x)
             )
@@ -1323,7 +1327,8 @@ namespace System.Linq.Parallel.Tests
             int prevSecondary = 0;
             int seen = 0;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .OrderByDescending(x => x % GroupFactor)
                     .ThenByDescending(x => -x)
                     .ToList(),
@@ -1385,7 +1390,8 @@ namespace System.Linq.Parallel.Tests
             int prevSecondary = count - 1;
             int seen = 0;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .OrderByDescending(x => -x % GroupFactor)
                     .ThenByDescending(x => x)
                     .ToList(),
@@ -1444,7 +1450,8 @@ namespace System.Linq.Parallel.Tests
             int prevSecondary = count - 1;
             int seen = 0;
             foreach (
-                int i in labeled.Item
+                int i in labeled
+                    .Item
                     .OrderBy(x => x % GroupFactor)
                     .ThenBy(x => x, ReverseComparer.Instance)
             )
@@ -1504,7 +1511,8 @@ namespace System.Linq.Parallel.Tests
             int prevSecondary = 0;
             int seen = 0;
             foreach (
-                int i in labeled.Item
+                int i in labeled
+                    .Item
                     .OrderByDescending(x => x % GroupFactor)
                     .ThenByDescending(x => x, ReverseComparer.Instance)
             )
@@ -1564,7 +1572,8 @@ namespace System.Linq.Parallel.Tests
             int prevSecondary = count - 1;
             int seen = 0;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .OrderBy(x => x % GroupFactor)
                     .ThenBy(x => x, ReverseComparer.Instance)
                     .ToList(),
@@ -1626,7 +1635,8 @@ namespace System.Linq.Parallel.Tests
             int prevSecondary = 0;
             int seen = 0;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .OrderByDescending(x => x % GroupFactor)
                     .ThenByDescending(x => x, ReverseComparer.Instance)
                     .ToList(),
@@ -1704,7 +1714,8 @@ namespace System.Linq.Parallel.Tests
         {
             int prev = count - 1;
             foreach (
-                int i in labeled.Item
+                int i in labeled
+                    .Item
                     .OrderBy(x => 0)
                     .ThenByDescending(x => x, new ExtremeComparer<int>())
             )
@@ -1752,7 +1763,8 @@ namespace System.Linq.Parallel.Tests
         {
             int prev = count - 1;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .OrderBy(x => 0)
                     .ThenByDescending(x => x, new ExtremeComparer<int>())
                     .ToList(),
@@ -1780,7 +1792,8 @@ namespace System.Linq.Parallel.Tests
             var prev = KeyValuePair.Create(0, KeyValuePair.Create(0, 0));
             int seen = 0;
             foreach (
-                var pOuter in labeled.Item
+                var pOuter in labeled
+                    .Item
                     .Select(
                         x =>
                             KeyValuePair.Create(
@@ -1837,7 +1850,8 @@ namespace System.Linq.Parallel.Tests
             );
             int seen = 0;
             foreach (
-                var pOuter in labeled.Item
+                var pOuter in labeled
+                    .Item
                     .Select(
                         x =>
                             KeyValuePair.Create(
@@ -1894,7 +1908,8 @@ namespace System.Linq.Parallel.Tests
             var prev = KeyValuePair.Create(0, KeyValuePair.Create(0, 0));
             int seen = 0;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .Select(
                         x =>
                             KeyValuePair.Create(
@@ -1956,7 +1971,8 @@ namespace System.Linq.Parallel.Tests
             );
             int seen = 0;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .Select(
                         x =>
                             KeyValuePair.Create(
@@ -2010,7 +2026,8 @@ namespace System.Linq.Parallel.Tests
         public static void ThenBy_NotComparable(Labeled<ParallelQuery<int>> labeled, int count)
         {
             _ = count;
-            ParallelQuery<int> query = labeled.Item
+            ParallelQuery<int> query = labeled
+                .Item
                 .OrderBy(x => 0)
                 .ThenBy(x => new NotComparable(x));
             AssertThrows.Wrapped<ArgumentException>(() =>
@@ -2088,7 +2105,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             _ = count;
-            ParallelQuery<int> query = labeled.Item
+            ParallelQuery<int> query = labeled
+                .Item
                 .OrderBy(x => 0)
                 .ThenByDescending(x => new NotComparable(x));
             AssertThrows.Wrapped<ArgumentException>(() =>
@@ -2117,7 +2135,8 @@ namespace System.Linq.Parallel.Tests
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
             );
             foreach (
-                int i in labeled.Item
+                int i in labeled
+                    .Item
                     .OrderBy(x => 0)
                     .ThenByDescending(x => new NotComparable(-x), comparer)
             )
@@ -2145,7 +2164,8 @@ namespace System.Linq.Parallel.Tests
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
             );
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .OrderBy(x => 0)
                     .ThenByDescending(x => new NotComparable(-x), comparer)
                     .ToList(),
@@ -2231,7 +2251,8 @@ namespace System.Linq.Parallel.Tests
             var prev = KeyValuePair.Create(0, KeyValuePair.Create(0, 0));
             int seen = 0;
             foreach (
-                var pOuter in labeled.Item
+                var pOuter in labeled
+                    .Item
                     .Select(
                         (x, index) =>
                             KeyValuePair.Create(
@@ -2283,7 +2304,8 @@ namespace System.Linq.Parallel.Tests
             var prev = KeyValuePair.Create(0, KeyValuePair.Create(0, 0));
             int seen = 0;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .Select(
                         (x, index) =>
                             KeyValuePair.Create(
@@ -2340,7 +2362,8 @@ namespace System.Linq.Parallel.Tests
             var prev = KeyValuePair.Create(count, KeyValuePair.Create(count, count / GroupFactor));
             int seen = 0;
             foreach (
-                var pOuter in labeled.Item
+                var pOuter in labeled
+                    .Item
                     .Select(
                         (x, index) =>
                             KeyValuePair.Create(
@@ -2399,7 +2422,8 @@ namespace System.Linq.Parallel.Tests
             var prev = KeyValuePair.Create(count, KeyValuePair.Create(count, count / GroupFactor));
             int seen = 0;
             Assert.All(
-                labeled.Item
+                labeled
+                    .Item
                     .Select(
                         (x, index) =>
                             KeyValuePair.Create(

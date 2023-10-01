@@ -286,10 +286,9 @@ namespace System.ServiceModel.Activities
         {
             if (operation == null)
             {
-                throw FxTrace.Exception.ArgumentNull(
-                    "operation",
-                    "OperationDescription cannot be null"
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentNull("operation", "OperationDescription cannot be null");
             }
 
             bool contentIsParameter = false;
@@ -325,9 +324,11 @@ namespace System.ServiceModel.Activities
                     )
                     {
                         if (
-                            !message.Body.ReturnValue.Type.IsAssignableFrom(
-                                typeof(System.ServiceModel.Channels.Message)
-                            )
+                            !message
+                                .Body
+                                .ReturnValue
+                                .Type
+                                .IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))
                         )
                         {
                             contentIsParameter = true;
@@ -352,9 +353,11 @@ namespace System.ServiceModel.Activities
                                     break;
                                 }
                                 if (
-                                    !messagePart.Type.IsAssignableFrom(
-                                        typeof(System.ServiceModel.Channels.Message)
-                                    )
+                                    !messagePart
+                                        .Type
+                                        .IsAssignableFrom(
+                                            typeof(System.ServiceModel.Channels.Message)
+                                        )
                                 )
                                 {
                                     contentIsParameter = true;
@@ -380,10 +383,9 @@ namespace System.ServiceModel.Activities
                                 message.Body.ReturnValue.Type,
                                 ArgumentDirection.In
                             );
-                            content.Parameters.Add(
-                                message.Body.ReturnValue.Name,
-                                (InArgument)returnArgument
-                            );
+                            content
+                                .Parameters
+                                .Add(message.Body.ReturnValue.Name, (InArgument)returnArgument);
                         }
 
                         if (

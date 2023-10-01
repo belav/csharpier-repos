@@ -60,13 +60,15 @@ namespace Benchstone.BenchF
                     s = (h / 6) * (F(a) + 4 * half + 2 * s + F(b));
                     if (idbg != 0)
                     {
-                        System.Console.WriteLine(
-                            " integral from a = {0} to b = {1} for n = {2} is {3}\n",
-                            a,
-                            b,
-                            n,
-                            s
-                        );
+                        System
+                            .Console
+                            .WriteLine(
+                                " integral from a = {0} to b = {1} for n = {2} is {3}\n",
+                                a,
+                                b,
+                                n,
+                                s
+                            );
                     }
                 }
             }

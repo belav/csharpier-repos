@@ -101,8 +101,10 @@ namespace Microsoft.CodeAnalysis.SourceGeneratorTelemetry
                             AnalyzerNameForTelemetry.ComputeSha256Hash(
                                 telemetryKey.Identity.AssemblyName
                             );
-                        map[nameof(telemetryKey.Identity.AssemblyVersion)] =
-                            telemetryKey.Identity.AssemblyVersion.ToString();
+                        map[nameof(telemetryKey.Identity.AssemblyVersion)] = telemetryKey
+                            .Identity
+                            .AssemblyVersion
+                            .ToString();
                         map[nameof(telemetryKey.Identity.TypeName) + "Hashed"] =
                             AnalyzerNameForTelemetry.ComputeSha256Hash(
                                 telemetryKey.Identity.TypeName

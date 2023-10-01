@@ -1024,10 +1024,12 @@ label3:
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
             await AssertFormatAsync(
@@ -1118,10 +1120,9 @@ class D
                 { IndentSwitchCaseSection, false },
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.LambdaExpressionBody,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(NewLineBeforeOpenBracePlacement.LambdaExpressionBody, false)
                 },
                 { LabelPositioning, LabelPositionOptions.LeftMost }
             };
@@ -2288,10 +2289,9 @@ else
                 { NewLineForElse, false },
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ControlBlocks,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(NewLineBeforeOpenBracePlacement.ControlBlocks, false)
                 }
             };
 
@@ -6689,10 +6689,9 @@ class Program
             {
                 {
                     SpaceBetweenParentheses,
-                    SpaceBetweenParentheses.DefaultValue.WithFlagValue(
-                        SpacePlacementWithinParentheses.ControlFlowStatements,
-                        true
-                    )
+                    SpaceBetweenParentheses
+                        .DefaultValue
+                        .WithFlagValue(SpacePlacementWithinParentheses.ControlFlowStatements, true)
                 },
             };
 
@@ -7934,10 +7933,9 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ControlBlocks,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(NewLineBeforeOpenBracePlacement.ControlBlocks, false)
                 }
             };
 
@@ -7981,10 +7979,9 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ControlBlocks,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(NewLineBeforeOpenBracePlacement.ControlBlocks, false)
                 }
             };
 
@@ -9269,10 +9266,9 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ControlBlocks,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(NewLineBeforeOpenBracePlacement.ControlBlocks, false)
                 }
             };
             var code =
@@ -9448,10 +9444,9 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.Properties,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(NewLineBeforeOpenBracePlacement.Properties, false)
                 },
             };
             await AssertFormatAsync(
@@ -9497,10 +9492,9 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.Accessors,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(NewLineBeforeOpenBracePlacement.Accessors, false)
                 },
             };
             await AssertFormatAsync(
@@ -9546,7 +9540,8 @@ class Program
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.Properties, false)
                         .WithFlagValue(NewLineBeforeOpenBracePlacement.Accessors, false)
                 },
@@ -10728,10 +10723,12 @@ class A
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
             await AssertFormatAsync(
@@ -10797,10 +10794,12 @@ class C
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
             await AssertFormatAsync(
@@ -10920,10 +10919,12 @@ class A
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        false
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            false
+                        )
                 },
             };
             await AssertFormatAsync(
@@ -10964,10 +10965,12 @@ class A
             {
                 {
                     NewLineBeforeOpenBrace,
-                    NewLineBeforeOpenBrace.DefaultValue.WithFlagValue(
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
-                        option
-                    )
+                    NewLineBeforeOpenBrace
+                        .DefaultValue
+                        .WithFlagValue(
+                            NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                            option
+                        )
                 },
             };
             var code =

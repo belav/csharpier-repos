@@ -63,9 +63,9 @@ internal sealed class GrpcDataContractResolver : ISerializerDataContractResolver
                     dataFormat: null,
                     value =>
                     {
-                        var match = enumDescriptor.Values.SingleOrDefault(
-                            v => v.Number == (int)value
-                        );
+                        var match = enumDescriptor
+                            .Values
+                            .SingleOrDefault(v => v.Number == (int)value);
                         var name = match?.Name ?? value.ToString();
                         return @"""" + name + @"""";
                     }

@@ -36,7 +36,8 @@ namespace System.Reflection.Runtime.MethodInfos
             where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>,
                 IEquatable<TRuntimeMethodCommon>
         {
-            TypeContext typeContext = contextMethod.DeclaringType
+            TypeContext typeContext = contextMethod
+                .DeclaringType
                 .CastToRuntimeTypeInfo()
                 .TypeContext;
             typeContext = new TypeContext(typeContext.GenericTypeArguments, methodTypeArguments);

@@ -46,14 +46,9 @@ namespace System.DirectoryServices.AccountManagement
         {
             try
             {
-                int hr = Interop.Activeds.ADsOpenObject(
-                    path,
-                    userName,
-                    password,
-                    flags,
-                    ref iid,
-                    out IntPtr ppObjPtr
-                );
+                int hr = Interop
+                    .Activeds
+                    .ADsOpenObject(path, userName, password, flags, ref iid, out IntPtr ppObjPtr);
                 ppObject = Marshal.GetObjectForIUnknown(ppObjPtr);
                 return hr;
             }

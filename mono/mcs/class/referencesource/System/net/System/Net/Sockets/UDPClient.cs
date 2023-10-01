@@ -1167,26 +1167,31 @@ namespace System.Net.Sockets
         )]
         public Task<int> SendAsync(byte[] datagram, int bytes, string hostname, int port)
         {
-            return Task<int>.Factory.FromAsync(
-                (callback, state) => BeginSend(datagram, bytes, hostname, port, callback, state),
-                EndSend,
-                null
-            );
+            return Task<int>
+                .Factory
+                .FromAsync(
+                    (callback, state) =>
+                        BeginSend(datagram, bytes, hostname, port, callback, state),
+                    EndSend,
+                    null
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
         public Task<UdpReceiveResult> ReceiveAsync()
         {
-            return Task<UdpReceiveResult>.Factory.FromAsync(
-                (callback, state) => BeginReceive(callback, state),
-                (ar) =>
-                {
-                    IPEndPoint remoteEP = null;
-                    Byte[] buffer = EndReceive(ar, ref remoteEP);
-                    return new UdpReceiveResult(buffer, remoteEP);
-                },
-                null
-            );
+            return Task<UdpReceiveResult>
+                .Factory
+                .FromAsync(
+                    (callback, state) => BeginReceive(callback, state),
+                    (ar) =>
+                    {
+                        IPEndPoint remoteEP = null;
+                        Byte[] buffer = EndReceive(ar, ref remoteEP);
+                        return new UdpReceiveResult(buffer, remoteEP);
+                    },
+                    null
+                );
         }
 
         private void createClientSocket()

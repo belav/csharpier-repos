@@ -149,7 +149,8 @@
                 _sourceAsEnumerable.ValueUser.Count().ShouldBe(destination.ValueUser.Count());
                 for (int i = 0; i < _sourceAsEnumerable.ValueUser.Count(); i++)
                 {
-                    _sourceAsEnumerable.ValueUser
+                    _sourceAsEnumerable
+                        .ValueUser
                         .ElementAt(i)
                         .Name
                         .ShouldBe(destination.ValueUser.ElementAt(i).Name);
@@ -158,11 +159,13 @@
                 _sourceAsEnumerable.ValueIUser.Count().ShouldBe(destination.ValueIUser.Count());
                 for (int i = 0; i < _sourceAsEnumerable.ValueIUser.Count(); i++)
                 {
-                    _sourceAsEnumerable.ValueIUser
+                    _sourceAsEnumerable
+                        .ValueIUser
                         .ElementAt(i)
                         .Name
                         .ShouldBe(destination.ValueIUser.ElementAt(i).Name);
-                    _sourceAsEnumerable.ValueIUser
+                    _sourceAsEnumerable
+                        .ValueIUser
                         .ElementAt(i)
                         .Age
                         .ShouldBe(destination.ValueIUser.ElementAt(i).Age);
@@ -192,7 +195,8 @@
 
                 for (int i = 0; i < _sourceAsEnumerable.ValueUser.Count(); i++)
                 {
-                    _sourceAsEnumerable.ValueUser
+                    _sourceAsEnumerable
+                        .ValueUser
                         .ElementAt(i)
                         .Name
                         .ShouldBe(destination.ValueUser.ElementAt(i).Name);
@@ -201,11 +205,13 @@
                 _sourceAsEnumerable.ValueIUser.Count().ShouldBe(destination.ValueIUser.Count());
                 for (int i = 0; i < _sourceAsEnumerable.ValueIUser.Count(); i++)
                 {
-                    _sourceAsEnumerable.ValueIUser
+                    _sourceAsEnumerable
+                        .ValueIUser
                         .ElementAt(i)
                         .Name
                         .ShouldBe(destination.ValueIUser.ElementAt(i).Name);
-                    _sourceAsEnumerable.ValueIUser
+                    _sourceAsEnumerable
+                        .ValueIUser
                         .ElementAt(i)
                         .Age
                         .ShouldBe(destination.ValueIUser.ElementAt(i).Age);

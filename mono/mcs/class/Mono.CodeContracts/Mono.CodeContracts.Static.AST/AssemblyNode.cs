@@ -66,9 +66,9 @@ namespace Mono.CodeContracts.Static.AST
                 if (type != null)
                     return type;
             }
-            IEnumerable<TypeDefinition> enumerable = this.definition.Modules.SelectMany(
-                m => m.Types
-            );
+            IEnumerable<TypeDefinition> enumerable = this.definition
+                .Modules
+                .SelectMany(m => m.Types);
             TypeDefinition firstOrDefault = enumerable.FirstOrDefault(
                 t => t.Namespace == ns && t.Name == className
             );

@@ -203,7 +203,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var row = entity.branchesUsers
+                    var row = entity
+                        .branchesUsers
                         .Where(u => u.branchsUsersId == branchsUsersId)
                         .Select(
                             S =>
@@ -293,7 +294,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpObject = entity.branchesUsers
+                            var tmpObject = entity
+                                .branchesUsers
                                 .Where(p => p.branchsUsersId == newObject.branchsUsersId)
                                 .FirstOrDefault();
 

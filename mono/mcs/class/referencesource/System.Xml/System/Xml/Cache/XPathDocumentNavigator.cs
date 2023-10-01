@@ -783,9 +783,9 @@ namespace MS.Internal.Xml.Cache
                     {
                         // Virtualize collapsed text nodes
                         Debug.Assert(page[idx].HasCollapsedText);
-                        this.idxCurrent = page[idx].Document.GetCollapsedTextNode(
-                            out this.pageCurrent
-                        );
+                        this.idxCurrent = page[idx]
+                            .Document
+                            .GetCollapsedTextNode(out this.pageCurrent);
                         this.pageParent = page;
                         this.idxParent = idx;
                     }

@@ -172,7 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             }
 
             var solution = workspace.CurrentSolution;
-            var options = solution.Options
+            var options = solution
+                .Options
                 .WithChangedOption(NavigationOptions.PreferProvisionalTab, previewTab)
                 .WithChangedOption(NavigationOptions.ActivateTab, activate);
             return navigationService.TryNavigateToLineAndOffset(

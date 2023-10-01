@@ -26,16 +26,16 @@ namespace System.ServiceModel.Security
         {
             if (wrappedSaml11SecurityTokenAuthenticator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedSaml11SecurityTokenAuthenticator"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedSaml11SecurityTokenAuthenticator");
             }
 
             if (wrappedSaml2SecurityTokenAuthenticator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "wrappedSaml2SecurityTokenAuthenticator"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("wrappedSaml2SecurityTokenAuthenticator");
             }
 
             _wrappedSaml11SecurityTokenAuthenticator = wrappedSaml11SecurityTokenAuthenticator;
@@ -64,9 +64,11 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID4101, token.GetType().ToString()))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ID4101, token.GetType().ToString()))
+                    );
             }
         }
     }

@@ -96,12 +96,14 @@ namespace System.ServiceModel.Channels
                 if (charSet == supportedEncodings[i].WebName)
                     return;
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentException(
-                    SR.GetString(SR.MessageTextEncodingNotSupported, charSet),
-                    "encoding"
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.MessageTextEncodingNotSupported, charSet),
+                        "encoding"
+                    )
+                );
         }
 
         internal static string EncodingToCharSet(Encoding encoding)

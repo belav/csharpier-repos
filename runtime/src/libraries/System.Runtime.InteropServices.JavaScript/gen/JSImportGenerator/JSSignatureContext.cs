@@ -23,11 +23,13 @@ namespace Microsoft.Interop.JavaScript
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
             );
 
-        internal static readonly string GeneratorName = typeof(JSImportGenerator).Assembly
+        internal static readonly string GeneratorName = typeof(JSImportGenerator)
+            .Assembly
             .GetName()
             .Name;
 
-        internal static readonly string GeneratorVersion = typeof(JSImportGenerator).Assembly
+        internal static readonly string GeneratorVersion = typeof(JSImportGenerator)
+            .Assembly
             .GetName()
             .Version
             .ToString();
@@ -71,9 +73,9 @@ namespace Microsoft.Interop.JavaScript
                 typeof(JSImportGenerator).Assembly
             );
 
-            string stubTypeFullName = method.ContainingType.ToDisplayString(
-                TypeContainingTypesAndNamespacesStyle
-            );
+            string stubTypeFullName = method
+                .ContainingType
+                .ToDisplayString(TypeContainingTypesAndNamespacesStyle);
 
             // there could be multiple method signatures with the same name, get unique signature name
             uint hash = 17;
@@ -105,7 +107,8 @@ namespace Microsoft.Interop.JavaScript
         private static string GetFullyQualifiedMethodName(StubEnvironment env, IMethodSymbol method)
         {
             // Mono style nested class name format.
-            string typeName = method.ContainingType
+            string typeName = method
+                .ContainingType
                 .ToDisplayString(TypeAndContainingTypesStyle)
                 .Replace(".", "/");
 

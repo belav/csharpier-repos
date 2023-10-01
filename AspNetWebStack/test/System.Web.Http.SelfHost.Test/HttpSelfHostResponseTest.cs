@@ -197,11 +197,13 @@ namespace System.Web.Http.SelfHost
                 BaseAddress = _testPort.BaseUri;
 
                 config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-                config.Routes.MapHttpRoute(
-                    "Default",
-                    "{controller}/{action}",
-                    new { controller = "NullResponse" }
-                );
+                config
+                    .Routes
+                    .MapHttpRoute(
+                        "Default",
+                        "{controller}/{action}",
+                        new { controller = "NullResponse" }
+                    );
 
                 MessageHandler = new NullResponseMessageHandler();
                 config.MessageHandlers.Add(MessageHandler);

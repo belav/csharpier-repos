@@ -224,9 +224,9 @@ namespace ILCompiler
                 FieldDesc fieldToAdd = field;
                 if (!field.IsStatic)
                 {
-                    TypeDesc canonOwningType = field.OwningType.ConvertToCanonForm(
-                        CanonicalFormKind.Specific
-                    );
+                    TypeDesc canonOwningType = field
+                        .OwningType
+                        .ConvertToCanonForm(CanonicalFormKind.Specific);
                     if (canonOwningType != field.OwningType)
                     {
                         FieldDesc canonField = _typeSystemContext.GetFieldForInstantiatedType(

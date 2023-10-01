@@ -1419,10 +1419,9 @@ namespace ILLink.Shared.TrimAnalysis
                                                 case NullableValueWithDynamicallyAccessedMembers:
                                                 case NullableSystemTypeValue:
                                                 case SystemTypeValue maybeArrayValue
-                                                    when maybeArrayValue.RepresentedType.IsTypeOf(
-                                                        "System",
-                                                        "Array"
-                                                    ):
+                                                    when maybeArrayValue
+                                                        .RepresentedType
+                                                        .IsTypeOf("System", "Array"):
                                                     AddReturnValue(MultiValueLattice.Top);
                                                     break;
                                                 case SystemTypeValue systemTypeValue:
@@ -1536,25 +1535,25 @@ namespace ILLink.Shared.TrimAnalysis
                                     // PublicConstructors are not propagated to base type
 
                                     if (
-                                        valueWithDynamicallyAccessedMembers.DynamicallyAccessedMemberTypes.HasFlag(
-                                            DynamicallyAccessedMemberTypes.PublicEvents
-                                        )
+                                        valueWithDynamicallyAccessedMembers
+                                            .DynamicallyAccessedMemberTypes
+                                            .HasFlag(DynamicallyAccessedMemberTypes.PublicEvents)
                                     )
                                         propagatedMemberTypes |=
                                             DynamicallyAccessedMemberTypes.PublicEvents;
 
                                     if (
-                                        valueWithDynamicallyAccessedMembers.DynamicallyAccessedMemberTypes.HasFlag(
-                                            DynamicallyAccessedMemberTypes.PublicFields
-                                        )
+                                        valueWithDynamicallyAccessedMembers
+                                            .DynamicallyAccessedMemberTypes
+                                            .HasFlag(DynamicallyAccessedMemberTypes.PublicFields)
                                     )
                                         propagatedMemberTypes |=
                                             DynamicallyAccessedMemberTypes.PublicFields;
 
                                     if (
-                                        valueWithDynamicallyAccessedMembers.DynamicallyAccessedMemberTypes.HasFlag(
-                                            DynamicallyAccessedMemberTypes.PublicMethods
-                                        )
+                                        valueWithDynamicallyAccessedMembers
+                                            .DynamicallyAccessedMemberTypes
+                                            .HasFlag(DynamicallyAccessedMemberTypes.PublicMethods)
                                     )
                                         propagatedMemberTypes |=
                                             DynamicallyAccessedMemberTypes.PublicMethods;
@@ -1564,17 +1563,19 @@ namespace ILLink.Shared.TrimAnalysis
                                     // PublicParameterlessConstructor is not propagated to base type
 
                                     if (
-                                        valueWithDynamicallyAccessedMembers.DynamicallyAccessedMemberTypes.HasFlag(
-                                            DynamicallyAccessedMemberTypes.PublicProperties
-                                        )
+                                        valueWithDynamicallyAccessedMembers
+                                            .DynamicallyAccessedMemberTypes
+                                            .HasFlag(
+                                                DynamicallyAccessedMemberTypes.PublicProperties
+                                            )
                                     )
                                         propagatedMemberTypes |=
                                             DynamicallyAccessedMemberTypes.PublicProperties;
 
                                     if (
-                                        valueWithDynamicallyAccessedMembers.DynamicallyAccessedMemberTypes.HasFlag(
-                                            DynamicallyAccessedMemberTypes.Interfaces
-                                        )
+                                        valueWithDynamicallyAccessedMembers
+                                            .DynamicallyAccessedMemberTypes
+                                            .HasFlag(DynamicallyAccessedMemberTypes.Interfaces)
                                     )
                                         propagatedMemberTypes |=
                                             DynamicallyAccessedMemberTypes.Interfaces;
@@ -1644,21 +1645,21 @@ namespace ILLink.Shared.TrimAnalysis
                         int? ctorParameterCount = calledMethod.GetMetadataParametersCount() switch
                         {
                             1
-                                => (
-                                    argumentValues[0].AsSingleValue() as ArrayValue
-                                )?.Size.AsConstInt(),
+                                => (argumentValues[0].AsSingleValue() as ArrayValue)
+                                    ?.Size
+                                    .AsConstInt(),
                             2
-                                => (
-                                    argumentValues[1].AsSingleValue() as ArrayValue
-                                )?.Size.AsConstInt(),
+                                => (argumentValues[1].AsSingleValue() as ArrayValue)
+                                    ?.Size
+                                    .AsConstInt(),
                             4
-                                => (
-                                    argumentValues[2].AsSingleValue() as ArrayValue
-                                )?.Size.AsConstInt(),
+                                => (argumentValues[2].AsSingleValue() as ArrayValue)
+                                    ?.Size
+                                    .AsConstInt(),
                             5
-                                => (
-                                    argumentValues[3].AsSingleValue() as ArrayValue
-                                )?.Size.AsConstInt(),
+                                => (argumentValues[3].AsSingleValue() as ArrayValue)
+                                    ?.Size
+                                    .AsConstInt(),
                             _ => null,
                         };
 
@@ -1998,9 +1999,9 @@ namespace ILLink.Shared.TrimAnalysis
                     )
                     {
                         if (
-                            !methodReturnValueWithMemberTypes.DynamicallyAccessedMemberTypes.HasFlag(
-                                annotatedMethodReturnValue.DynamicallyAccessedMemberTypes
-                            )
+                            !methodReturnValueWithMemberTypes
+                                .DynamicallyAccessedMemberTypes
+                                .HasFlag(annotatedMethodReturnValue.DynamicallyAccessedMemberTypes)
                         )
                             throw new InvalidOperationException(
                                 $"Internal linker error: in {GetContainingSymbolDisplayName()} processing call to {calledMethod.GetDisplayName()} returned value which is not correctly annotated with the expected dynamic member access kinds."

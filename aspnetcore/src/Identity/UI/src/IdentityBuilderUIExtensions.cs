@@ -32,7 +32,8 @@ public static class IdentityBuilderUIExtensions
     public static IdentityBuilder AddDefaultUI(this IdentityBuilder builder)
     {
         builder.AddSignInManager();
-        builder.Services
+        builder
+            .Services
             .AddMvc()
             .ConfigureApplicationPartManager(apm =>
             {
@@ -60,9 +61,11 @@ public static class IdentityBuilderUIExtensions
                 apm.FeatureProviders.Add(new ViewVersionFeatureProvider(framework));
             });
 
-        builder.Services.ConfigureOptions(
-            typeof(IdentityDefaultUIConfigureOptions<>).MakeGenericType(builder.UserType)
-        );
+        builder
+            .Services
+            .ConfigureOptions(
+                typeof(IdentityDefaultUIConfigureOptions<>).MakeGenericType(builder.UserType)
+            );
         builder.Services.TryAddTransient<IEmailSender, EmailSender>();
 
         return builder;
@@ -71,7 +74,8 @@ public static class IdentityBuilderUIExtensions
     private static Assembly? GetApplicationAssembly(IdentityBuilder builder)
     {
         // This is the same logic that MVC follows to find the application assembly.
-        var environment = builder.Services
+        var environment = builder
+            .Services
             .Where(d => d.ServiceType == typeof(IWebHostEnvironment))
             .ToArray();
         var applicationName = (
@@ -141,10 +145,9 @@ public static class IdentityBuilderUIExtensions
                             else
                             {
                                 // Fix up paths to eliminate version subdir
-                                descriptor.RelativePath = descriptor.RelativePath.Replace(
-                                    "V4/",
-                                    ""
-                                );
+                                descriptor.RelativePath = descriptor
+                                    .RelativePath
+                                    .Replace("V4/", "");
                             }
                             break;
                         case UIFramework.Bootstrap5:
@@ -159,10 +162,9 @@ public static class IdentityBuilderUIExtensions
                             else
                             {
                                 // Fix up paths to eliminate version subdir
-                                descriptor.RelativePath = descriptor.RelativePath.Replace(
-                                    "V5/",
-                                    ""
-                                );
+                                descriptor.RelativePath = descriptor
+                                    .RelativePath
+                                    .Replace("V5/", "");
                             }
                             break;
                         default:

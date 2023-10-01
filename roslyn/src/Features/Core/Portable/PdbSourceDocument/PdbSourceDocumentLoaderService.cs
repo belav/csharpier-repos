@@ -202,11 +202,13 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             var relativePath = Path.GetFileName(sourceDocument.FilePath);
 
             var delay = Task.Delay(timeout, cancellationToken);
-            var sourceFileTask = _sourceLinkService.Value.GetSourceFilePathAsync(
-                sourceDocument.SourceLinkUrl,
-                relativePath,
-                cancellationToken
-            );
+            var sourceFileTask = _sourceLinkService
+                .Value
+                .GetSourceFilePathAsync(
+                    sourceDocument.SourceLinkUrl,
+                    relativePath,
+                    cancellationToken
+                );
 
             var winner = await Task.WhenAny(sourceFileTask, delay).ConfigureAwait(false);
 

@@ -20,12 +20,14 @@ namespace System.Security.Cryptography
             _ctxHandle = Interop.Crypto.EvpCipherCreatePartial(GetCipher(key.Length * 8));
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctxHandle);
-            Interop.Crypto.EvpCipherSetKeyAndIV(
-                _ctxHandle,
-                key,
-                Span<byte>.Empty,
-                Interop.Crypto.EvpCipherDirection.NoChange
-            );
+            Interop
+                .Crypto
+                .EvpCipherSetKeyAndIV(
+                    _ctxHandle,
+                    key,
+                    Span<byte>.Empty,
+                    Interop.Crypto.EvpCipherDirection.NoChange
+                );
             Interop.Crypto.CipherSetNonceLength(_ctxHandle, NonceSize);
         }
 
@@ -42,12 +44,14 @@ namespace System.Security.Cryptography
                 throw new CryptographicException();
             }
 
-            Interop.Crypto.EvpCipherSetKeyAndIV(
-                _ctxHandle,
-                Span<byte>.Empty,
-                nonce,
-                Interop.Crypto.EvpCipherDirection.Encrypt
-            );
+            Interop
+                .Crypto
+                .EvpCipherSetKeyAndIV(
+                    _ctxHandle,
+                    Span<byte>.Empty,
+                    nonce,
+                    Interop.Crypto.EvpCipherDirection.Encrypt
+                );
 
             if (associatedData.Length != 0)
             {
@@ -71,23 +75,27 @@ namespace System.Security.Cryptography
                 }
 
                 if (
-                    !Interop.Crypto.EvpCipherUpdate(
-                        _ctxHandle,
-                        ciphertextAndTag,
-                        out int ciphertextBytesWritten,
-                        plaintext
-                    )
+                    !Interop
+                        .Crypto
+                        .EvpCipherUpdate(
+                            _ctxHandle,
+                            ciphertextAndTag,
+                            out int ciphertextBytesWritten,
+                            plaintext
+                        )
                 )
                 {
                     throw new CryptographicException();
                 }
 
                 if (
-                    !Interop.Crypto.EvpCipherFinalEx(
-                        _ctxHandle,
-                        ciphertextAndTag.Slice(ciphertextBytesWritten),
-                        out int bytesWritten
-                    )
+                    !Interop
+                        .Crypto
+                        .EvpCipherFinalEx(
+                            _ctxHandle,
+                            ciphertextAndTag.Slice(ciphertextBytesWritten),
+                            out int bytesWritten
+                        )
                 )
                 {
                     throw new CryptographicException();
@@ -130,12 +138,14 @@ namespace System.Security.Cryptography
                 throw new CryptographicException();
             }
 
-            Interop.Crypto.EvpCipherSetKeyAndIV(
-                _ctxHandle,
-                ReadOnlySpan<byte>.Empty,
-                nonce,
-                Interop.Crypto.EvpCipherDirection.Decrypt
-            );
+            Interop
+                .Crypto
+                .EvpCipherSetKeyAndIV(
+                    _ctxHandle,
+                    ReadOnlySpan<byte>.Empty,
+                    nonce,
+                    Interop.Crypto.EvpCipherDirection.Decrypt
+                );
 
             if (associatedData.Length != 0)
             {
@@ -143,12 +153,14 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop.Crypto.EvpCipherUpdate(
-                    _ctxHandle,
-                    plaintext,
-                    out int plaintextBytesWritten,
-                    ciphertext
-                )
+                !Interop
+                    .Crypto
+                    .EvpCipherUpdate(
+                        _ctxHandle,
+                        plaintext,
+                        out int plaintextBytesWritten,
+                        ciphertext
+                    )
             )
             {
                 CryptographicOperations.ZeroMemory(plaintext);
@@ -156,12 +168,14 @@ namespace System.Security.Cryptography
             }
 
             if (
-                !Interop.Crypto.EvpCipherUpdate(
-                    _ctxHandle,
-                    plaintext.Slice(plaintextBytesWritten),
-                    out int bytesWritten,
-                    tag
-                )
+                !Interop
+                    .Crypto
+                    .EvpCipherUpdate(
+                        _ctxHandle,
+                        plaintext.Slice(plaintextBytesWritten),
+                        out int bytesWritten,
+                        tag
+                    )
             )
             {
                 CryptographicOperations.ZeroMemory(plaintext);
@@ -171,11 +185,13 @@ namespace System.Security.Cryptography
             plaintextBytesWritten += bytesWritten;
 
             if (
-                !Interop.Crypto.EvpCipherFinalEx(
-                    _ctxHandle,
-                    plaintext.Slice(plaintextBytesWritten),
-                    out bytesWritten
-                )
+                !Interop
+                    .Crypto
+                    .EvpCipherFinalEx(
+                        _ctxHandle,
+                        plaintext.Slice(plaintextBytesWritten),
+                        out bytesWritten
+                    )
             )
             {
                 CryptographicOperations.ZeroMemory(plaintext);

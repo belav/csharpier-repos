@@ -223,9 +223,9 @@ namespace Internal.IL
                                 return null;
 
                             TypeDesc underlyingType = elementType.UnderlyingType;
-                            TypeDesc returnType = method.Context.GetWellKnownType(
-                                WellKnownType.Int32
-                            );
+                            TypeDesc returnType = method
+                                .Context
+                                .GetWellKnownType(WellKnownType.Int32);
                             MethodDesc underlyingCompareToMethod = underlyingType.GetKnownMethod(
                                 "CompareTo",
                                 new MethodSignature(
@@ -327,10 +327,12 @@ namespace Internal.IL
                                 Debug.Assert(elementType.IsValueType);
 
                                 TypeSystemContext context = elementType.Context;
-                                MetadataType helperType = context.SystemModule.GetKnownType(
-                                    "Internal.IntrinsicSupport",
-                                    "EqualityComparerHelpers"
-                                );
+                                MetadataType helperType = context
+                                    .SystemModule
+                                    .GetKnownType(
+                                        "Internal.IntrinsicSupport",
+                                        "EqualityComparerHelpers"
+                                    );
 
                                 MethodDesc methodToCall;
                                 if (elementType.IsEnum)

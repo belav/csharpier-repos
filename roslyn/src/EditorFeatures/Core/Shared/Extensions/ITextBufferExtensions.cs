@@ -17,8 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         {
             if (buffer.TryGetWorkspace(out var workspace))
             {
-                var workspaceContextService =
-                    workspace.Services.GetRequiredService<IWorkspaceContextService>();
+                var workspaceContextService = workspace
+                    .Services
+                    .GetRequiredService<IWorkspaceContextService>();
                 return workspaceContextService.IsInLspEditorContext();
             }
 
@@ -74,10 +75,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static ITextSnapshot ApplyChange(this ITextBuffer buffer, TextChange change)
         {
             if (
-                buffer.Properties.TryGetProperty<IContainedDocument>(
-                    typeof(IContainedDocument),
-                    out var containedDocument
-                )
+                buffer
+                    .Properties
+                    .TryGetProperty<IContainedDocument>(
+                        typeof(IContainedDocument),
+                        out var containedDocument
+                    )
             )
             {
                 return containedDocument.ApplyChanges(new[] { change });
@@ -98,10 +101,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         )
         {
             if (
-                buffer.Properties.TryGetProperty<IContainedDocument>(
-                    typeof(IContainedDocument),
-                    out var containedDocument
-                )
+                buffer
+                    .Properties
+                    .TryGetProperty<IContainedDocument>(
+                        typeof(IContainedDocument),
+                        out var containedDocument
+                    )
             )
             {
                 return containedDocument.ApplyChanges(changes);

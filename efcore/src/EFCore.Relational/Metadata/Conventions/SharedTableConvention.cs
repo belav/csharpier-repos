@@ -298,12 +298,12 @@ public class SharedTableConvention : IModelFinalizingConvention
             if (
                 !usePrefix
                 || (
-                    !property.DeclaringEntityType.IsStrictlyDerivedFrom(
-                        otherProperty.DeclaringEntityType
-                    )
-                    && !otherProperty.DeclaringEntityType.IsStrictlyDerivedFrom(
-                        property.DeclaringEntityType
-                    )
+                    !property
+                        .DeclaringEntityType
+                        .IsStrictlyDerivedFrom(otherProperty.DeclaringEntityType)
+                    && !otherProperty
+                        .DeclaringEntityType
+                        .IsStrictlyDerivedFrom(property.DeclaringEntityType)
                 )
                 || property.DeclaringEntityType.FindRowInternalForeignKeys(storeObject).Any()
             )
@@ -326,12 +326,12 @@ public class SharedTableConvention : IModelFinalizingConvention
             if (
                 !usePrefix
                 || (
-                    !property.DeclaringEntityType.IsStrictlyDerivedFrom(
-                        otherProperty.DeclaringEntityType
-                    )
-                    && !otherProperty.DeclaringEntityType.IsStrictlyDerivedFrom(
-                        property.DeclaringEntityType
-                    )
+                    !property
+                        .DeclaringEntityType
+                        .IsStrictlyDerivedFrom(otherProperty.DeclaringEntityType)
+                    && !otherProperty
+                        .DeclaringEntityType
+                        .IsStrictlyDerivedFrom(property.DeclaringEntityType)
                 )
                 || otherProperty.DeclaringEntityType.FindRowInternalForeignKeys(storeObject).Any()
             )

@@ -38,8 +38,9 @@ namespace System.Runtime
                 pEETypePtr,
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
                 {
-                    IntPtr result =
-                        RuntimeAugments.TypeLoaderCallbacks.TryGetDefaultConstructorForType(
+                    IntPtr result = RuntimeAugments
+                        .TypeLoaderCallbacks
+                        .TryGetDefaultConstructorForType(
                             new RuntimeTypeHandle(new EETypePtr(context))
                         );
                     if (result == IntPtr.Zero)
@@ -133,10 +134,12 @@ namespace System.Runtime
                 (IntPtr)obj.GetMethodTable(),
                 *(IntPtr*)&slot,
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    RuntimeAugments.TypeLoaderCallbacks.ResolveGenericVirtualMethodTarget(
-                        new RuntimeTypeHandle(new EETypePtr(context)),
-                        *(RuntimeMethodHandle*)&signature
-                    )
+                    RuntimeAugments
+                        .TypeLoaderCallbacks
+                        .ResolveGenericVirtualMethodTarget(
+                            new RuntimeTypeHandle(new EETypePtr(context)),
+                            *(RuntimeMethodHandle*)&signature
+                        )
             );
             return entry.Result;
         }
@@ -149,10 +152,11 @@ namespace System.Runtime
                 (IntPtr)obj.GetMethodTable(),
                 openResolver,
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    Internal.Runtime.CompilerServices.OpenMethodResolver.ResolveMethodWorker(
-                        signature,
-                        contextObject
-                    ),
+                    Internal
+                        .Runtime
+                        .CompilerServices
+                        .OpenMethodResolver
+                        .ResolveMethodWorker(signature, contextObject),
                 obj
             );
             return entry.Result;
@@ -193,11 +197,9 @@ namespace System.Runtime
                 ctx,
                 sig,
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    RuntimeAugments.TypeLoaderCallbacks.GenericLookupFromContextAndSignature(
-                        context,
-                        signature,
-                        out auxResult
-                    )
+                    RuntimeAugments
+                        .TypeLoaderCallbacks
+                        .GenericLookupFromContextAndSignature(context, signature, out auxResult)
             );
         }
 

@@ -184,10 +184,12 @@ namespace System.ServiceModel.Security
                 && ReferenceEquals(this.ForwardProtocolFactory, this.ReverseProtocolFactory)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "ReverseProtocolFactory",
-                    SR.GetString(SR.SameProtocolFactoryCannotBeSetForBothDuplexDirections)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "ReverseProtocolFactory",
+                        SR.GetString(SR.SameProtocolFactoryCannotBeSetForBothDuplexDirections)
+                    );
             }
             if (this.forwardProtocolFactory != null)
             {

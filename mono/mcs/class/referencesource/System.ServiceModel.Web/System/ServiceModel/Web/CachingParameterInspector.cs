@@ -41,32 +41,39 @@ namespace System.ServiceModel.Web
         {
             if (string.IsNullOrEmpty(cacheProfileName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.CacheProfileNameNullOrEmpty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR2.CacheProfileNameNullOrEmpty)
+                    );
             }
 
             OutputCacheSettingsSection cacheSettings =
-                AspNetEnvironment.Current.UnsafeGetConfigurationSection(
-                    "system.web/caching/outputCacheSettings"
-                ) as OutputCacheSettingsSection;
+                AspNetEnvironment
+                    .Current
+                    .UnsafeGetConfigurationSection("system.web/caching/outputCacheSettings")
+                as OutputCacheSettingsSection;
             if (cacheSettings == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)
+                        )
+                    );
             }
 
             this.cacheProfile = cacheSettings.OutputCacheProfiles[cacheProfileName];
             if (this.cacheProfile == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)
+                        )
+                    );
             }
 
             // Validate the cacheProfile
@@ -75,27 +82,31 @@ namespace System.ServiceModel.Web
                 // Duration must be set; Duration default value is -1
                 if (this.cacheProfile.Duration == -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.CacheProfileValueMissing,
-                                this.cacheProfile.Name,
-                                "Duration"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.CacheProfileValueMissing,
+                                    this.cacheProfile.Name,
+                                    "Duration"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (this.cacheProfile.VaryByParam == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.CacheProfileValueMissing,
-                                this.cacheProfile.Name,
-                                "VaryByParam"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.CacheProfileValueMissing,
+                                    this.cacheProfile.Name,
+                                    "VaryByParam"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -107,9 +118,11 @@ namespace System.ServiceModel.Web
                 )
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR2.CommandNotificationSqlDependencyNotSupported)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR2.CommandNotificationSqlDependencyNotSupported)
+                    );
             }
 
             if (!string.IsNullOrEmpty(this.cacheProfile.SqlDependency))
@@ -225,16 +238,16 @@ namespace System.ServiceModel.Web
                         {
                             if (databaseName == null)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                    invalidSqlDependencyString
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperArgument(invalidSqlDependencyString);
                             }
                             subStringLength = currentIndex - startIndexForTableName;
                             if (subStringLength == 0)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                    invalidSqlDependencyString
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperArgument(invalidSqlDependencyString);
                             }
                             string tableName = sqlDependencyString.Substring(
                                 startIndexForTableName,
@@ -255,16 +268,16 @@ namespace System.ServiceModel.Web
                         {
                             if (databaseName != null)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                    invalidSqlDependencyString
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperArgument(invalidSqlDependencyString);
                             }
                             subStringLength = currentIndex - startIndexForDatabaseName;
                             if (subStringLength == 0)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                    invalidSqlDependencyString
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperArgument(invalidSqlDependencyString);
                             }
                             databaseName = sqlDependencyString.Substring(
                                 startIndexForDatabaseName,
@@ -277,19 +290,29 @@ namespace System.ServiceModel.Web
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.CacheProfileSqlDependencyIsInvalid, sqlDependencyString)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.CacheProfileSqlDependencyIsInvalid,
+                                sqlDependencyString
+                            )
+                        )
+                    );
             }
             if (dependencyList.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.CacheProfileSqlDependencyIsInvalid, sqlDependencyString)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.CacheProfileSqlDependencyIsInvalid,
+                                sqlDependencyString
+                            )
+                        )
+                    );
             }
             return dependencyList.ToArray();
         }
@@ -406,14 +429,16 @@ namespace System.ServiceModel.Web
                         cache.SetCacheability(HttpCacheability.ServerAndPrivate);
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(
-                                SR2.GetString(
-                                    SR2.CacheProfileLocationNotSupported,
-                                    this.cacheProfile.Location
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR2.GetString(
+                                        SR2.CacheProfileLocationNotSupported,
+                                        this.cacheProfile.Location
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
             }
 
@@ -431,9 +456,9 @@ namespace System.ServiceModel.Web
                     if (!string.IsNullOrEmpty(this.cacheProfile.VaryByContentEncoding))
                     {
                         foreach (
-                            string contentEncoding in this.cacheProfile.VaryByContentEncoding.Split(
-                                seperatorChar
-                            )
+                            string contentEncoding in this.cacheProfile
+                                .VaryByContentEncoding
+                                .Split(seperatorChar)
                         )
                         {
                             cache.VaryByContentEncodings[contentEncoding.Trim()] = true;
@@ -472,9 +497,10 @@ namespace System.ServiceModel.Web
                             CacheDependency cacheDependency = this.CreateSingleCacheDependency(
                                 cacheProfile.SqlDependency
                             );
-                            HttpContext.Current.Response.AddCacheDependency(
-                                new CacheDependency[] { cacheDependency }
-                            );
+                            HttpContext
+                                .Current
+                                .Response
+                                .AddCacheDependency(new CacheDependency[] { cacheDependency });
                         }
                     }
                 }

@@ -260,19 +260,19 @@ namespace R2RDump
                 foreach (string assemblyName in allComponentAssemblies.OrderBy(name => name))
                 {
                     if (
-                        !_leftDumper.Reader.ManifestReferenceAssemblies.TryGetValue(
-                            assemblyName,
-                            out int leftModuleIndex
-                        )
+                        !_leftDumper
+                            .Reader
+                            .ManifestReferenceAssemblies
+                            .TryGetValue(assemblyName, out int leftModuleIndex)
                     )
                     {
                         leftModuleIndex = InvalidModule;
                     }
                     if (
-                        !_rightDumper.Reader.ManifestReferenceAssemblies.TryGetValue(
-                            assemblyName,
-                            out int rightModuleIndex
-                        )
+                        !_rightDumper
+                            .Reader
+                            .ManifestReferenceAssemblies
+                            .TryGetValue(assemblyName, out int rightModuleIndex)
                     )
                     {
                         rightModuleIndex = InvalidModule;
@@ -584,18 +584,24 @@ namespace R2RDump
                                 }
                                 break;
                             }
-                            leftOffset += _leftDumper.Disassembler.GetInstruction(
-                                leftRuntimeFunction,
-                                _leftDumper.Reader.GetOffset(leftRuntimeFunction.StartAddress),
-                                leftOffset,
-                                out string leftInstruction
-                            );
-                            rightOffset += _rightDumper.Disassembler.GetInstruction(
-                                rightRuntimeFunction,
-                                _rightDumper.Reader.GetOffset(rightRuntimeFunction.StartAddress),
-                                rightOffset,
-                                out string rightInstruction
-                            );
+                            leftOffset += _leftDumper
+                                .Disassembler
+                                .GetInstruction(
+                                    leftRuntimeFunction,
+                                    _leftDumper.Reader.GetOffset(leftRuntimeFunction.StartAddress),
+                                    leftOffset,
+                                    out string leftInstruction
+                                );
+                            rightOffset += _rightDumper
+                                .Disassembler
+                                .GetInstruction(
+                                    rightRuntimeFunction,
+                                    _rightDumper
+                                        .Reader
+                                        .GetOffset(rightRuntimeFunction.StartAddress),
+                                    rightOffset,
+                                    out string rightInstruction
+                                );
                             if (leftInstruction != rightInstruction)
                             {
                                 match = false;

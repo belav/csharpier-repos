@@ -380,11 +380,9 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         IConventionModel model
     )
     {
-        var targetClrType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(
-            propertyInfo,
-            model,
-            out _
-        );
+        var targetClrType = Dependencies
+            .MemberClassifier
+            .FindCandidateNavigationPropertyType(propertyInfo, model, out _);
         return
             targetClrType != null
             && Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)
@@ -396,7 +394,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         PropertyInfo propertyInfo,
         IConventionEntityType entityType
     ) =>
-        Dependencies.MemberClassifier
+        Dependencies
+            .MemberClassifier
             .GetNavigationCandidates(entityType)
             .TryGetValue(propertyInfo, out var target)
         && Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)

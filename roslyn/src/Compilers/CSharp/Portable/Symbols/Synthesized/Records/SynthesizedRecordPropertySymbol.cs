@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             return parameter.ContainingSymbol is SynthesizedRecordConstructor
-                && parameter.ContainingType
+                && parameter
+                    .ContainingType
                     .GetMembersUnordered()
                     .Any(
                         (s, parameter) =>

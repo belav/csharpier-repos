@@ -82,7 +82,9 @@ public static class RelationalPropertyExtensions
                 else
                 {
                     foreach (
-                        var containingType in property.DeclaringEntityType.GetDerivedTypesInclusive()
+                        var containingType in property
+                            .DeclaringEntityType
+                            .GetDerivedTypesInclusive()
                     )
                     {
                         if (
@@ -146,7 +148,8 @@ public static class RelationalPropertyExtensions
                 }
                 else
                 {
-                    var fragments = property.DeclaringEntityType
+                    var fragments = property
+                        .DeclaringEntityType
                         .GetMappingFragments(storeObject.StoreObjectType)
                         .ToList();
                     if (fragments.Count > 0)
@@ -1687,7 +1690,8 @@ public static class RelationalPropertyExtensions
         {
             IReadOnlyProperty? linkedProperty = null;
             foreach (
-                var p in rootProperty.DeclaringEntityType
+                var p in rootProperty
+                    .DeclaringEntityType
                     .FindRowInternalForeignKeys(storeObject)
                     .SelectMany(fk => fk.PrincipalEntityType.GetProperties())
             )
@@ -1730,7 +1734,8 @@ public static class RelationalPropertyExtensions
             i++
         )
         {
-            var linkingRelationship = principalProperty.DeclaringEntityType
+            var linkingRelationship = principalProperty
+                .DeclaringEntityType
                 .FindRowInternalForeignKeys(storeObject)
                 .FirstOrDefault();
 
@@ -1766,7 +1771,8 @@ public static class RelationalPropertyExtensions
             i++
         )
         {
-            var linkingRelationship = principalProperty.DeclaringEntityType
+            var linkingRelationship = principalProperty
+                .DeclaringEntityType
                 .FindRowInternalForeignKeys(storeObject)
                 .FirstOrDefault();
             if (linkingRelationship == null)

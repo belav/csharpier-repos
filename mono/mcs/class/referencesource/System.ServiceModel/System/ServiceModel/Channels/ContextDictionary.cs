@@ -227,12 +227,14 @@ namespace System.ServiceModel.Channels
         {
             if (!TryValidateKeyValueSpace(key))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "key",
-                        SR.GetString(SR.InvalidCookieContent, key)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "key",
+                            SR.GetString(SR.InvalidCookieContent, key)
+                        )
+                    );
             }
         }
     }

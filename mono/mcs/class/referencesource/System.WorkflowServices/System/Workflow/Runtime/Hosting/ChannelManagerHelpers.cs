@@ -67,9 +67,9 @@ namespace System.Workflow.Runtime.Hosting
         {
             if (communicationObject == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "communicationObject"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("communicationObject");
             }
 
             bool flag = true;
@@ -134,10 +134,10 @@ namespace System.Workflow.Runtime.Hosting
                 else
                 {
                     channel =
-                        contractInfo.CreateChannelWithCustomAddressMethodInfo.Invoke(
-                            factory,
-                            new object[1] { new EndpointAddress(customAddress) }
-                        ) as IChannel;
+                        contractInfo
+                            .CreateChannelWithCustomAddressMethodInfo
+                            .Invoke(factory, new object[1] { new EndpointAddress(customAddress) })
+                        as IChannel;
                 }
 
                 if (!contractInfo.IsSessionless)
@@ -157,9 +157,9 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (exception.InnerException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        exception.InnerException
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(exception.InnerException);
                 }
 
                 throw;
@@ -231,9 +231,9 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (exception.InnerException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        exception.InnerException
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(exception.InnerException);
                 }
 
                 throw;

@@ -834,7 +834,8 @@ public abstract class NorthwindIncludeQueryTestBase<TFixture> : QueryTestBase<TF
                             ss => ss.Set<Customer>().Include(c => c.Orders).Where(c => c.IsLondon)
                         )
                 )
-            ).Message
+            )
+                .Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );

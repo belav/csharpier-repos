@@ -229,10 +229,9 @@ namespace System.Web.DynamicData
                     return false;
                 }
 
-                return Metadata.EditableAttribute.GetPropertyValue(
-                    a => a.AllowInitialValue,
-                    !IsReadOnly
-                );
+                return Metadata
+                    .EditableAttribute
+                    .GetPropertyValue(a => a.AllowInitialValue, !IsReadOnly);
             }
         }
 

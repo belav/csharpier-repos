@@ -36,24 +36,24 @@ namespace System.Security.Cryptography
             BCryptOpenAlgorithmProviderFlags algorithmFlags = BCryptOpenAlgorithmProviderFlags.None;
 
             // This is a shared handle, do not put this in a using.
-            SafeBCryptAlgorithmHandle algorithmHandle =
-                Interop.BCrypt.BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
-                    algorithm,
-                    algorithmFlags,
-                    out _hashSizeInBytes
-                );
+            SafeBCryptAlgorithmHandle algorithmHandle = Interop
+                .BCrypt
+                .BCryptAlgorithmCache
+                .GetCachedBCryptAlgorithmHandle(algorithm, algorithmFlags, out _hashSizeInBytes);
 
             SafeBCryptHashHandle hashHandle;
 
-            NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
-                algorithmHandle,
-                out hashHandle,
-                pbHashObject: IntPtr.Zero,
-                cbHashObject: 0,
-                secret: ReadOnlySpan<byte>.Empty,
-                cbSecret: 0,
-                BCryptCreateHashFlags.None
-            );
+            NTSTATUS ntStatus = Interop
+                .BCrypt
+                .BCryptCreateHash(
+                    algorithmHandle,
+                    out hashHandle,
+                    pbHashObject: IntPtr.Zero,
+                    cbHashObject: 0,
+                    secret: ReadOnlySpan<byte>.Empty,
+                    cbSecret: 0,
+                    BCryptCreateHashFlags.None
+                );
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -71,12 +71,9 @@ namespace System.Security.Cryptography
                 return;
             }
 
-            NTSTATUS ntStatus = Interop.BCrypt.BCryptHashData(
-                _hashHandle,
-                data,
-                data.Length,
-                dwFlags: 0
-            );
+            NTSTATUS ntStatus = Interop
+                .BCrypt
+                .BCryptHashData(_hashHandle, data, data.Length, dwFlags: 0);
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -88,12 +85,9 @@ namespace System.Security.Cryptography
         {
             Debug.Assert(destination.Length >= _hashSizeInBytes);
 
-            NTSTATUS ntStatus = Interop.BCrypt.BCryptFinishHash(
-                _hashHandle,
-                destination,
-                _hashSizeInBytes,
-                dwFlags: 0
-            );
+            NTSTATUS ntStatus = Interop
+                .BCrypt
+                .BCryptFinishHash(_hashHandle, destination, _hashSizeInBytes, dwFlags: 0);
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -122,24 +116,24 @@ namespace System.Security.Cryptography
                 BCryptOpenAlgorithmProviderFlags.BCRYPT_ALG_HANDLE_HMAC_FLAG;
 
             // This is a shared handle, do not put this in a using.
-            SafeBCryptAlgorithmHandle algorithmHandle =
-                Interop.BCrypt.BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
-                    algorithm,
-                    algorithmFlags,
-                    out _hashSizeInBytes
-                );
+            SafeBCryptAlgorithmHandle algorithmHandle = Interop
+                .BCrypt
+                .BCryptAlgorithmCache
+                .GetCachedBCryptAlgorithmHandle(algorithm, algorithmFlags, out _hashSizeInBytes);
 
             SafeBCryptHashHandle hashHandle;
 
-            NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
-                algorithmHandle,
-                out hashHandle,
-                pbHashObject: IntPtr.Zero,
-                cbHashObject: 0,
-                key,
-                key.Length,
-                BCryptCreateHashFlags.None
-            );
+            NTSTATUS ntStatus = Interop
+                .BCrypt
+                .BCryptCreateHash(
+                    algorithmHandle,
+                    out hashHandle,
+                    pbHashObject: IntPtr.Zero,
+                    cbHashObject: 0,
+                    key,
+                    key.Length,
+                    BCryptCreateHashFlags.None
+                );
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -157,12 +151,9 @@ namespace System.Security.Cryptography
                 return;
             }
 
-            NTSTATUS ntStatus = Interop.BCrypt.BCryptHashData(
-                _hashHandle,
-                data,
-                data.Length,
-                dwFlags: 0
-            );
+            NTSTATUS ntStatus = Interop
+                .BCrypt
+                .BCryptHashData(_hashHandle, data, data.Length, dwFlags: 0);
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -174,12 +165,9 @@ namespace System.Security.Cryptography
         {
             Debug.Assert(destination.Length >= _hashSizeInBytes);
 
-            NTSTATUS ntStatus = Interop.BCrypt.BCryptFinishHash(
-                _hashHandle,
-                destination,
-                _hashSizeInBytes,
-                dwFlags: 0
-            );
+            NTSTATUS ntStatus = Interop
+                .BCrypt
+                .BCryptFinishHash(_hashHandle, destination, _hashSizeInBytes, dwFlags: 0);
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {

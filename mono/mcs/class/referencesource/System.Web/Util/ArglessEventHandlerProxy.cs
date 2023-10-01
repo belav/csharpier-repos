@@ -196,10 +196,9 @@ namespace System.Web.Util
         static CalliHelper()
         {
             AssemblyName an = new AssemblyName("CalliHelper");
-            AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                an,
-                AssemblyBuilderAccess.Run
-            );
+            AssemblyBuilder ab = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(an, AssemblyBuilderAccess.Run);
             ModuleBuilder mb = ab.DefineDynamicModule("CalliHelper.dll");
 
             ConstructorInfo ci = typeof(CLSCompliantAttribute).GetConstructor(

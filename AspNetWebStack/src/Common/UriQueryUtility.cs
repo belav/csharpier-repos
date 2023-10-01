@@ -24,9 +24,9 @@ namespace System.Web.Http
             return WebUtility.UrlEncode(str);
 #else
             byte[] bytes = Encoding.UTF8.GetBytes(str);
-            return Encoding.ASCII.GetString(
-                UrlEncode(bytes, 0, bytes.Length, alwaysCreateNewReturnValue: false)
-            );
+            return Encoding
+                .ASCII
+                .GetString(UrlEncode(bytes, 0, bytes.Length, alwaysCreateNewReturnValue: false));
 #endif
         }
 

@@ -205,10 +205,9 @@ namespace System.Web.Compilation
 
             if (virtualDependencies != null)
             {
-                cacheDependency = result.VirtualPath.GetCacheDependency(
-                    virtualDependencies,
-                    utcStart
-                );
+                cacheDependency = result
+                    .VirtualPath
+                    .GetCacheDependency(virtualDependencies, utcStart);
 
                 // If we got a cache dependency, remember that in the BuildResult
                 if (cacheDependency != null)
@@ -246,11 +245,10 @@ namespace System.Web.Compilation
                         "Adding marker cache entry " + compiledResult.ResultAssembly
                     );
                     // VSWhidbey 500049 - add as NotRemovable to prevent the assembly from being prematurely deleted
-                    HttpRuntime.Cache.InternalCache.Insert(
-                        assemblyKey,
-                        compiledResult.ResultAssembly,
-                        null
-                    );
+                    HttpRuntime
+                        .Cache
+                        .InternalCache
+                        .Insert(assemblyKey, compiledResult.ResultAssembly, null);
                 }
                 else
                 {
@@ -304,18 +302,21 @@ namespace System.Web.Compilation
                 onRemoveCallback = _onRemoveCallback;
             }
 
-            HttpRuntime.Cache.InternalCache.Insert(
-                key,
-                result,
-                new CacheInsertOptions()
-                {
-                    Dependencies = cacheDependency,
-                    AbsoluteExpiration = result.MemoryCacheExpiration,
-                    SlidingExpiration = result.MemoryCacheSlidingExpiration,
-                    Priority = cachePriority,
-                    OnRemovedCallback = onRemoveCallback
-                }
-            );
+            HttpRuntime
+                .Cache
+                .InternalCache
+                .Insert(
+                    key,
+                    result,
+                    new CacheInsertOptions()
+                    {
+                        Dependencies = cacheDependency,
+                        AbsoluteExpiration = result.MemoryCacheExpiration,
+                        SlidingExpiration = result.MemoryCacheSlidingExpiration,
+                        Priority = cachePriority,
+                        OnRemovedCallback = onRemoveCallback
+                    }
+                );
         }
 
         // OnCacheItemRemoved can be invoked with user code on the stack, for example if someone

@@ -3050,10 +3050,12 @@ public class Test
             Assert.Equal((int)ErrorCode.ERR_ErrorDirective, error.Code);
             Assert.Equal(
                 "error CS1029: #error: '\u0444\u0430\u0439\u043B'",
-                CSharpDiagnosticFormatter.Instance.Format(
-                    error.WithLocation(Location.None),
-                    EnsureEnglishUICulture.PreferredOrNull
-                )
+                CSharpDiagnosticFormatter
+                    .Instance
+                    .Format(
+                        error.WithLocation(Location.None),
+                        EnsureEnglishUICulture.PreferredOrNull
+                    )
             );
         }
 
@@ -4580,7 +4582,9 @@ public class Test
                     .Single(node => node is AnonymousMethodExpressionSyntax);
             Assert.Equal(
                 SyntaxKind.InKeyword,
-                anonymousMethodExpression.ParameterList.Parameters
+                anonymousMethodExpression
+                    .ParameterList
+                    .Parameters
                     .Single()
                     .Modifiers
                     .Single()
@@ -7263,9 +7267,9 @@ partial class X
 ";
             CreateCompilation(
                     test,
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp2
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .VerifyDiagnostics(
                     // (4,5): error CS8023: Feature 'partial method' is not available in C# 2. Please use language version 3 or greater.
@@ -7849,18 +7853,18 @@ class C
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                        LanguageVersion.CSharp2
-                    )
+                    options: TestOptions
+                        .RegularWithDocumentationComments
+                        .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .GetDiagnostics()
                 .Verify();
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                        LanguageVersion.CSharp1
-                    )
+                    options: TestOptions
+                        .RegularWithDocumentationComments
+                        .WithLanguageVersion(LanguageVersion.CSharp1)
                 )
                 .GetDiagnostics()
                 .Verify(
@@ -7890,18 +7894,18 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                        LanguageVersion.CSharp2
-                    )
+                    options: TestOptions
+                        .RegularWithDocumentationComments
+                        .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .GetDiagnostics()
                 .Verify();
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                        LanguageVersion.CSharp1
-                    )
+                    options: TestOptions
+                        .RegularWithDocumentationComments
+                        .WithLanguageVersion(LanguageVersion.CSharp1)
                 )
                 .GetDiagnostics()
                 .Verify(
@@ -7942,18 +7946,18 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                        LanguageVersion.CSharp2
-                    )
+                    options: TestOptions
+                        .RegularWithDocumentationComments
+                        .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .GetDiagnostics()
                 .Verify();
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                        LanguageVersion.CSharp1
-                    )
+                    options: TestOptions
+                        .RegularWithDocumentationComments
+                        .WithLanguageVersion(LanguageVersion.CSharp1)
                 )
                 .GetDiagnostics()
                 .Verify(
@@ -7982,18 +7986,18 @@ class C { }
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                        LanguageVersion.CSharp2
-                    )
+                    options: TestOptions
+                        .RegularWithDocumentationComments
+                        .WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .GetDiagnostics()
                 .Verify();
             SyntaxFactory
                 .ParseSyntaxTree(
                     text,
-                    options: TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                        LanguageVersion.CSharp1
-                    )
+                    options: TestOptions
+                        .RegularWithDocumentationComments
+                        .WithLanguageVersion(LanguageVersion.CSharp1)
                 )
                 .GetDiagnostics()
                 .Verify();

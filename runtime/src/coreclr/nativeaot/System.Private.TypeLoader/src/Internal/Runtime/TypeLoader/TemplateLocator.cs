@@ -63,9 +63,9 @@ namespace Internal.Runtime.TypeLoader
                         externalFixupsTable.GetRuntimeTypeHandleFromIndex(
                             entryParser.GetUnsigned()
                         );
-                    TypeDesc candidateTemplate = concreteType.Context.ResolveRuntimeTypeHandle(
-                        candidateTemplateTypeHandle
-                    );
+                    TypeDesc candidateTemplate = concreteType
+                        .Context
+                        .ResolveRuntimeTypeHandle(candidateTemplateTypeHandle);
 
                     if (canonForm == candidateTemplate.ConvertToCanonForm(kind))
                     {

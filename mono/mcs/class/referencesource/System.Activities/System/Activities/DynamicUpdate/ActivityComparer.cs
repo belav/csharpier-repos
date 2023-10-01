@@ -655,12 +655,14 @@ namespace System.Activities.DynamicUpdate
                         }
                     }
 
-                    DynamicUpdateMapBuilder.Finalizer.FillEnvironmentMapMemberCounts(
-                        entry.EnvironmentUpdateMap,
-                        currentActivity,
-                        originalActivity,
-                        oldArguments
-                    );
+                    DynamicUpdateMapBuilder
+                        .Finalizer
+                        .FillEnvironmentMapMemberCounts(
+                            entry.EnvironmentUpdateMap,
+                            currentActivity,
+                            originalActivity,
+                            oldArguments
+                        );
                     this.argumentChangeDetected = true;
                 }
                 else if (

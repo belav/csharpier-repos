@@ -161,9 +161,9 @@ namespace System.Activities.XamlIntegration
                 {
                     if (this.locationHelper != null)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(SR.InvalidLocationExpression)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(new InvalidOperationException(SR.InvalidLocationExpression));
                     }
 
                     // look for "%[....]" escape pattern

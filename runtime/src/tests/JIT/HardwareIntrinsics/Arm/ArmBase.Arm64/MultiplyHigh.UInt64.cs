@@ -119,10 +119,12 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = ArmBase.Arm64.MultiplyHigh(
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
-            );
+            var result = ArmBase
+                .Arm64
+                .MultiplyHigh(
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
+                );
 
             ValidateResult(_data1, _data2, result);
         }
@@ -238,9 +240,11 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.MultiplyHigh)}<UInt64>(UInt64, UInt64): MultiplyHigh failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.MultiplyHigh)}<UInt64>(UInt64, UInt64): MultiplyHigh failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

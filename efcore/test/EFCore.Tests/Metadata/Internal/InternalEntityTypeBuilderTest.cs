@@ -1111,12 +1111,14 @@ public class InternalEntityTypeBuilderTest
 
         Assert.Equal(
             1,
-            dependentEntityBuilder.Metadata
+            dependentEntityBuilder
+                .Metadata
                 .GetProperties()
                 .Count(p => p.Name == shadowProperty.Metadata.Name)
         );
         Assert.Empty(
-            dependentEntityBuilder.Metadata
+            dependentEntityBuilder
+                .Metadata
                 .GetForeignKeys()
                 .Where(
                     foreignKey =>
@@ -1746,12 +1748,14 @@ public class InternalEntityTypeBuilderTest
 
         Assert.Equal(
             1,
-            entityBuilder.Metadata
+            entityBuilder
+                .Metadata
                 .GetProperties()
                 .Count(p => p.Name == shadowProperty.Metadata.Name)
         );
         Assert.Empty(
-            entityBuilder.Metadata
+            entityBuilder
+                .Metadata
                 .GetIndexes()
                 .Where(i => i.Properties.SequenceEqual(index.Metadata.Properties))
         );
@@ -2123,12 +2127,14 @@ public class InternalEntityTypeBuilderTest
 
         Assert.Equal(
             1,
-            entityBuilder.Metadata
+            entityBuilder
+                .Metadata
                 .GetProperties()
                 .Count(p => p.Name == shadowProperty.Metadata.Name)
         );
         Assert.Empty(
-            entityBuilder.Metadata
+            entityBuilder
+                .Metadata
                 .GetKeys()
                 .Where(foreignKey => foreignKey.Properties.SequenceEqual(key.Metadata.Properties))
         );
@@ -2595,7 +2601,8 @@ public class InternalEntityTypeBuilderTest
         Assert.Null(principalEntityBuilder.Metadata.FindPrimaryKey());
         Assert.NotEqual(
             nameof(Customer.Id),
-            dependentEntityBuilder.Metadata
+            dependentEntityBuilder
+                .Metadata
                 .GetForeignKeys()
                 .Single()
                 .PrincipalKey
@@ -3067,7 +3074,8 @@ public class InternalEntityTypeBuilderTest
 
         Assert.True(dependentEntityBuilder.ShouldReuniquifyTemporaryProperties(foreignKey));
 
-        var newFkProperties = foreignKey.Builder
+        var newFkProperties = foreignKey
+            .Builder
             .HasForeignKey((IReadOnlyList<Property>)null, ConfigurationSource.Convention)
             .Metadata
             .Properties;
@@ -3122,7 +3130,8 @@ public class InternalEntityTypeBuilderTest
 
         Assert.True(dependentEntityBuilder.ShouldReuniquifyTemporaryProperties(foreignKey));
 
-        var newFkProperties = foreignKey.Builder
+        var newFkProperties = foreignKey
+            .Builder
             .HasForeignKey((IReadOnlyList<Property>)null, ConfigurationSource.Convention)
             .Metadata
             .Properties;
@@ -3177,7 +3186,8 @@ public class InternalEntityTypeBuilderTest
 
         Assert.True(dependentEntityBuilder.ShouldReuniquifyTemporaryProperties(foreignKey));
 
-        var newFkProperties = foreignKey.Builder
+        var newFkProperties = foreignKey
+            .Builder
             .HasForeignKey((IReadOnlyList<Property>)null, ConfigurationSource.Convention)
             .Metadata
             .Properties;
@@ -3420,7 +3430,8 @@ public class InternalEntityTypeBuilderTest
             ConfigureOrdersHierarchy(modelBuilder);
         }
 
-        var modelValidator = InMemoryTestHelpers.Instance
+        var modelValidator = InMemoryTestHelpers
+            .Instance
             .CreateContextServices()
             .GetRequiredService<IModelValidator>();
 
@@ -3453,9 +3464,10 @@ public class InternalEntityTypeBuilderTest
             Assert.Equal(expectedAdded, findMember(addedEntityTypeBuilder));
             Assert.Equal(
                 expectedIgnored,
-                ignoredEntityTypeBuilder.Metadata.FindDeclaredIgnoredConfigurationSource(
-                    memberToIgnore
-                ) == ignoreConfigurationSource
+                ignoredEntityTypeBuilder
+                    .Metadata
+                    .FindDeclaredIgnoredConfigurationSource(memberToIgnore)
+                    == ignoreConfigurationSource
             );
         }
     }
@@ -3539,7 +3551,8 @@ public class InternalEntityTypeBuilderTest
         );
 
         Assert.Empty(
-            dependentEntityBuilder.Metadata
+            dependentEntityBuilder
+                .Metadata
                 .GetProperties()
                 .Where(p => p.Name == Order.CustomerIdProperty.Name)
         );
@@ -3563,7 +3576,8 @@ public class InternalEntityTypeBuilderTest
         );
 
         Assert.NotNull(
-            dependentEntityBuilder.Metadata
+            dependentEntityBuilder
+                .Metadata
                 .GetForeignKeys()
                 .Where(foreignKey => foreignKey != newFk)
         );
@@ -3604,7 +3618,8 @@ public class InternalEntityTypeBuilderTest
         );
 
         Assert.NotEmpty(
-            dependentEntityBuilder.Metadata
+            dependentEntityBuilder
+                .Metadata
                 .GetProperties()
                 .Where(p => p.Name == Order.CustomerIdProperty.Name)
         );
@@ -3673,7 +3688,8 @@ public class InternalEntityTypeBuilderTest
         var entityBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit)!;
 
         entityBuilder.HasRelationship(
-            entityBuilder.ModelBuilder
+            entityBuilder
+                .ModelBuilder
                 .Entity(typeof(Customer), ConfigurationSource.Explicit)!
                 .Metadata,
             Order.CustomerProperty,
@@ -3700,7 +3716,8 @@ public class InternalEntityTypeBuilderTest
         var entityBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit)!;
 
         entityBuilder.HasRelationship(
-            entityBuilder.ModelBuilder
+            entityBuilder
+                .ModelBuilder
                 .Entity(typeof(Customer), ConfigurationSource.Explicit)!
                 .Metadata,
             Order.CustomerProperty,
@@ -3733,7 +3750,8 @@ public class InternalEntityTypeBuilderTest
 
         entityBuilder.HasSkipNavigation(
             MemberIdentity.Create(Order.ProductsProperty),
-            entityBuilder.ModelBuilder
+            entityBuilder
+                .ModelBuilder
                 .Entity(typeof(Product), ConfigurationSource.Explicit)!
                 .Metadata,
             ConfigurationSource.DataAnnotation
@@ -3759,7 +3777,8 @@ public class InternalEntityTypeBuilderTest
 
         entityBuilder.HasSkipNavigation(
             MemberIdentity.Create(Order.ProductsProperty),
-            entityBuilder.ModelBuilder
+            entityBuilder
+                .ModelBuilder
                 .Entity(typeof(Product), ConfigurationSource.Explicit)!
                 .Metadata,
             ConfigurationSource.Explicit
@@ -3798,7 +3817,8 @@ public class InternalEntityTypeBuilderTest
         );
 
         Assert.NotEmpty(
-            entityBuilder.Metadata
+            entityBuilder
+                .Metadata
                 .GetProperties()
                 .Where(p => p.Name == Order.CustomerIdProperty.Name)
         );
@@ -3823,7 +3843,8 @@ public class InternalEntityTypeBuilderTest
         );
 
         Assert.Empty(
-            entityBuilder.Metadata
+            entityBuilder
+                .Metadata
                 .GetProperties()
                 .Where(p => p.Name == Order.CustomerIdProperty.Name)
         );
@@ -3880,7 +3901,8 @@ public class InternalEntityTypeBuilderTest
         );
 
         Assert.Empty(
-            principalEntityBuilder.Metadata
+            principalEntityBuilder
+                .Metadata
                 .GetProperties()
                 .Where(p => p.Name == Customer.UniqueProperty.Name)
         );
@@ -3923,7 +3945,8 @@ public class InternalEntityTypeBuilderTest
         );
 
         Assert.NotEmpty(
-            entityBuilder.Metadata
+            entityBuilder
+                .Metadata
                 .GetProperties()
                 .Where(p => p.Name == Order.CustomerIdProperty.Name)
         );
@@ -4516,9 +4539,9 @@ public class InternalEntityTypeBuilderTest
             }
         }
 
-        var leastDerivedType = firstEntityTypeBuilder.Metadata.LeastDerivedType(
-            secondEntityTypeBuilder.Metadata
-        );
+        var leastDerivedType = firstEntityTypeBuilder
+            .Metadata
+            .LeastDerivedType(secondEntityTypeBuilder.Metadata);
         var shouldSecondWin =
             secondSource.Overrides(firstSource)
             && (
@@ -4561,7 +4584,8 @@ public class InternalEntityTypeBuilderTest
                     ) != null;
             case MemberType.Navigation:
                 return entityTypeBuilder.HasRelationship(
-                        entityTypeBuilder.ModelBuilder
+                        entityTypeBuilder
+                            .ModelBuilder
                             .Entity(typeof(Product), ConfigurationSource.Explicit)
                             .Metadata,
                         Order.ProductsProperty,
@@ -4571,7 +4595,8 @@ public class InternalEntityTypeBuilderTest
             case MemberType.SkipNavigation:
                 return entityTypeBuilder.HasSkipNavigation(
                         MemberIdentity.Create(Order.ProductsProperty),
-                        entityTypeBuilder.ModelBuilder
+                        entityTypeBuilder
+                            .ModelBuilder
                             .Entity(typeof(Product), ConfigurationSource.Explicit)
                             .Metadata,
                         configurationSource
@@ -4613,19 +4638,23 @@ public class InternalEntityTypeBuilderTest
         switch (memberType)
         {
             case MemberType.Property:
-                return entityTypeBuilder.Metadata
+                return entityTypeBuilder
+                    .Metadata
                     .FindProperty(nameof(Order.Products))
                     ?.DeclaringEntityType;
             case MemberType.ServiceProperty:
-                return entityTypeBuilder.Metadata
+                return entityTypeBuilder
+                    .Metadata
                     .FindServiceProperty(nameof(Order.Products))
                     ?.DeclaringEntityType;
             case MemberType.Navigation:
-                return entityTypeBuilder.Metadata
+                return entityTypeBuilder
+                    .Metadata
                     .FindNavigation(nameof(Order.Products))
                     ?.DeclaringEntityType;
             case MemberType.SkipNavigation:
-                return entityTypeBuilder.Metadata
+                return entityTypeBuilder
+                    .Metadata
                     .FindSkipNavigation(nameof(Order.Products))
                     ?.DeclaringEntityType;
         }
@@ -4993,15 +5022,18 @@ public class InternalEntityTypeBuilderTest
         Assert.NotNull(fkRelationship);
         Assert.Same(
             fkRelationship.Metadata,
-            orderEntityBuilder.Metadata
+            orderEntityBuilder
+                .Metadata
                 .GetForeignKeys()
                 .Single(fk => fk.DependentToPrincipal == null && fk.PrincipalToDependent == null)
         );
-        var fk1 = orderEntityBuilder.Metadata
+        var fk1 = orderEntityBuilder
+            .Metadata
             .FindNavigation(Order.CustomerProperty.Name)
             .ForeignKey;
         Assert.NotSame(fkRelationship.Metadata, fk1);
-        var fk2 = customerEntityBuilder.Metadata
+        var fk2 = customerEntityBuilder
+            .Metadata
             .FindNavigation(Customer.NotCollectionOrdersProperty.Name)
             .ForeignKey;
         Assert.NotSame(fkRelationship.Metadata, fk2);
@@ -5069,10 +5101,9 @@ public class InternalEntityTypeBuilderTest
             typeof(SpecialOrder),
             ConfigurationSource.Convention
         );
-        derivedEntityBuilder.Metadata.SetBaseType(
-            entityBuilder.Metadata,
-            ConfigurationSource.Explicit
-        );
+        derivedEntityBuilder
+            .Metadata
+            .SetBaseType(entityBuilder.Metadata, ConfigurationSource.Explicit);
 
         Assert.Same(
             derivedEntityBuilder,

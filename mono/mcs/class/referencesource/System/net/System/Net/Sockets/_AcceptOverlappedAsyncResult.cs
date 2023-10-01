@@ -91,13 +91,15 @@ namespace System.Net.Sockets
 
                     IntPtr handle = m_ListenSocket.SafeHandle.DangerousGetHandle();
 
-                    errorCode = UnsafeNclNativeMethods.OSSOCK.setsockopt(
-                        m_AcceptSocket.SafeHandle,
-                        SocketOptionLevel.Socket,
-                        SocketOptionName.UpdateAcceptContext,
-                        ref handle,
-                        Marshal.SizeOf(handle)
-                    );
+                    errorCode = UnsafeNclNativeMethods
+                        .OSSOCK
+                        .setsockopt(
+                            m_AcceptSocket.SafeHandle,
+                            SocketOptionLevel.Socket,
+                            SocketOptionName.UpdateAcceptContext,
+                            ref handle,
+                            Marshal.SizeOf(handle)
+                        );
 
                     if (errorCode == SocketError.SocketError)
                         errorCode = (SocketError)Marshal.GetLastWin32Error();

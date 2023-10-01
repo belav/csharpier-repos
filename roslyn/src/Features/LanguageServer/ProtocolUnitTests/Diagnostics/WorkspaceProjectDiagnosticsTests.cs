@@ -103,13 +103,15 @@ public class WorkspaceProjectDiagnosticsTests : AbstractPullDiagnosticTestsBase
 
     private protected override TestAnalyzerReferenceByLanguage CreateTestAnalyzersReference() =>
         new(
-            ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>.Empty.Add(
-                LanguageNames.CSharp,
-                ImmutableArray.Create(
-                    DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp),
-                    new MockProjectDiagnosticAnalyzer()
+            ImmutableDictionary<string, ImmutableArray<DiagnosticAnalyzer>>
+                .Empty
+                .Add(
+                    LanguageNames.CSharp,
+                    ImmutableArray.Create(
+                        DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp),
+                        new MockProjectDiagnosticAnalyzer()
+                    )
                 )
-            )
         );
 
     [DiagnosticAnalyzer(LanguageNames.CSharp), PartNotDiscoverable]

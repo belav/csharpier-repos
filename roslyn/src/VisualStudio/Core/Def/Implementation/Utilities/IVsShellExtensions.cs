@@ -25,15 +25,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 var result = s_isInCommandLineMode;
                 if (result == 0)
                 {
-                    s_isInCommandLineMode = result =
-                        ThreadHelper.JoinableTaskFactory.Run(async () =>
+                    s_isInCommandLineMode = result = ThreadHelper
+                        .JoinableTaskFactory
+                        .Run(async () =>
                         {
                             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                            var shell = ServiceProvider.GlobalProvider.GetService<
-                                SVsShell,
-                                IVsShell
-                            >();
+                            var shell = ServiceProvider
+                                .GlobalProvider
+                                .GetService<SVsShell, IVsShell>();
                             return
                                 (shell != null)
                                 && ErrorHandler.Succeeded(

@@ -940,7 +940,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         var buildingValues = entry.CurrentValues;
         var clonedBuildingValues = buildingValues.Clone();
 
-        var property = context.Model
+        var property = context
+            .Model
             .FindEntityType(typeof(Whiteboard))
             .FindProperty(nameof(Whiteboard.AssetTag));
 
@@ -1063,10 +1064,12 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         var values = entry.CurrentValues;
         var clonedValues = values.Clone();
 
-        var shadowProperty = context.Model
+        var shadowProperty = context
+            .Model
             .FindEntityType(typeof(PastEmployee))
             .FindProperty("Shadow4");
-        var termProperty = context.Model
+        var termProperty = context
+            .Model
             .FindEntityType(typeof(PastEmployee))
             .FindProperty(nameof(PastEmployee.TerminationDate));
 

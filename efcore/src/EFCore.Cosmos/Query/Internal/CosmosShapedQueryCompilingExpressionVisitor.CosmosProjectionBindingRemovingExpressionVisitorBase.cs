@@ -363,10 +363,9 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                     innerShaper = AddIncludes(innerShaper);
 
                     var entities = Expression.Call(
-                        EnumerableMethods.SelectWithOrdinal.MakeGenericMethod(
-                            typeof(JObject),
-                            innerShaper.Type
-                        ),
+                        EnumerableMethods
+                            .SelectWithOrdinal
+                            .MakeGenericMethod(typeof(JObject), innerShaper.Type),
                         Expression.Call(
                             EnumerableMethods.Cast.MakeGenericMethod(typeof(JObject)),
                             jArray
@@ -483,9 +482,9 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                 : (Expression)Expression.Constant(null, typeof(InternalEntityEntry));
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
-            var concreteEntityTypeVariable = shaperBlock.Variables.Single(
-                v => v.Type == typeof(IEntityType)
-            );
+            var concreteEntityTypeVariable = shaperBlock
+                .Variables
+                .Single(v => v.Type == typeof(IEntityType));
             var inverseNavigation = navigation.Inverse;
             var fixup = GenerateFixup(
                 includingClrType,
@@ -798,9 +797,9 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                         if (_ownerMappings.TryGetValue(jObjectExpression, out var ownerInfo))
                         {
                             Check.DebugAssert(
-                                principalProperty.DeclaringEntityType.IsAssignableFrom(
-                                    ownerInfo.EntityType
-                                ),
+                                principalProperty
+                                    .DeclaringEntityType
+                                    .IsAssignableFrom(ownerInfo.EntityType),
                                 $"{principalProperty.DeclaringEntityType} is not assignable from {ownerInfo.EntityType}"
                             );
 

@@ -131,9 +131,10 @@ public static class RelationalForeignKeyExtensions
                         foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         foreignKey.GetConstraintName(storeObject, principalTable.Value),
                         foreignKey.PrincipalKey.Properties.FormatColumns(principalTable.Value),
-                        duplicateForeignKey.PrincipalKey.Properties.FormatColumns(
-                            principalTable.Value
-                        )
+                        duplicateForeignKey
+                            .PrincipalKey
+                            .Properties
+                            .FormatColumns(principalTable.Value)
                     )
                 );
             }
@@ -237,15 +238,17 @@ public static class RelationalForeignKeyExtensions
         }
 
         var propertyNames = foreignKey.Properties.GetColumnNames(storeObject);
-        var principalPropertyNames = foreignKey.PrincipalKey.Properties.GetColumnNames(
-            principalStoreObject
-        );
+        var principalPropertyNames = foreignKey
+            .PrincipalKey
+            .Properties
+            .GetColumnNames(principalStoreObject);
         if (propertyNames == null || principalPropertyNames == null)
         {
             if (logger != null)
             {
                 var principalTable = principalStoreObject;
-                var derivedTables = foreignKey.DeclaringEntityType
+                var derivedTables = foreignKey
+                    .DeclaringEntityType
                     .GetDerivedTypes()
                     .Select(t => StoreObjectIdentifier.Create(t, StoreObjectType.Table))
                     .Where(t => t != null);
@@ -271,7 +274,8 @@ public static class RelationalForeignKeyExtensions
         {
             IReadOnlyForeignKey? linkedForeignKey = null;
             foreach (
-                var otherForeignKey in rootForeignKey.DeclaringEntityType
+                var otherForeignKey in rootForeignKey
+                    .DeclaringEntityType
                     .FindRowInternalForeignKeys(storeObject)
                     .SelectMany(fk => fk.PrincipalEntityType.GetForeignKeys())
             )
@@ -283,10 +287,10 @@ public static class RelationalForeignKeyExtensions
                 )
                 {
                     var otherColumnNames = otherForeignKey.Properties.GetColumnNames(storeObject);
-                    var otherPrincipalColumnNames =
-                        otherForeignKey.PrincipalKey.Properties.GetColumnNames(
-                            principalStoreObject
-                        );
+                    var otherPrincipalColumnNames = otherForeignKey
+                        .PrincipalKey
+                        .Properties
+                        .GetColumnNames(principalStoreObject);
                     if (
                         otherColumnNames != null
                         && otherPrincipalColumnNames != null
@@ -319,7 +323,8 @@ public static class RelationalForeignKeyExtensions
         if (
             foreignKey.PrincipalEntityType.GetMappingStrategy()
                 == RelationalAnnotationNames.TpcMappingStrategy
-            && foreignKey.PrincipalEntityType
+            && foreignKey
+                .PrincipalEntityType
                 .GetDerivedTypes()
                 .Any(et => StoreObjectIdentifier.Create(et, StoreObjectType.Table) != null)
         )

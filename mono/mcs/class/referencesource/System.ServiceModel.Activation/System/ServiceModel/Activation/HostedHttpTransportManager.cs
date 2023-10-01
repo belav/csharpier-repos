@@ -190,9 +190,9 @@ namespace System.ServiceModel.Activation
                             SR.TraceCodeHttpChannelMessageReceiveFailed,
                             new StringTraceRecord(
                                 "IsRecycling",
-                                ServiceHostingEnvironment.IsRecycling.ToString(
-                                    CultureInfo.CurrentCulture
-                                )
+                                ServiceHostingEnvironment
+                                    .IsRecycling
+                                    .ToString(CultureInfo.CurrentCulture)
                             ),
                             this,
                             null
@@ -201,23 +201,27 @@ namespace System.ServiceModel.Activation
 
                     if (ServiceHostingEnvironment.IsRecycling)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new EndpointNotFoundException(
-                                SR.Hosting_ListenerNotFoundForActivationInRecycling(
-                                    result.RequestUri.ToString()
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new EndpointNotFoundException(
+                                    SR.Hosting_ListenerNotFoundForActivationInRecycling(
+                                        result.RequestUri.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            new EndpointNotFoundException(
-                                SR.Hosting_ListenerNotFoundForActivation(
-                                    result.RequestUri.ToString()
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new EndpointNotFoundException(
+                                    SR.Hosting_ListenerNotFoundForActivation(
+                                        result.RequestUri.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }

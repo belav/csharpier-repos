@@ -3850,10 +3850,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam.Type.Equals(
-                            ((BoundThisReference)expr).Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        thisParam
+                            .Type
+                            .Equals(
+                                ((BoundThisReference)expr).Type,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     return GetParameterRefEscape(thisParam);
 
@@ -4142,10 +4144,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam.Type.Equals(
-                            ((BoundThisReference)expr).Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        thisParam
+                            .Type
+                            .Equals(
+                                ((BoundThisReference)expr).Type,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     return CheckParameterRefEscape(
                         node,
@@ -4472,10 +4476,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam.Type.Equals(
-                            ((BoundThisReference)expr).Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        thisParam
+                            .Type
+                            .Equals(
+                                ((BoundThisReference)expr).Type,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     return GetParameterValEscape(thisParam);
                 case BoundKind.DefaultLiteral:
@@ -4979,10 +4985,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.ThisReference:
                     var thisParam = ((MethodSymbol)_symbol).ThisParameter;
                     Debug.Assert(
-                        thisParam.Type.Equals(
-                            ((BoundThisReference)expr).Type,
-                            TypeCompareKind.ConsiderEverything
-                        )
+                        thisParam
+                            .Type
+                            .Equals(
+                                ((BoundThisReference)expr).Type,
+                                TypeCompareKind.ConsiderEverything
+                            )
                     );
                     return CheckParameterValEscape(node, thisParam, escapeTo, diagnostics);
 

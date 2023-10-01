@@ -148,7 +148,8 @@ public static class RelationalKeyExtensions
             // Using a hashset is detrimental to the perf when there are no cycles
             for (var i = 0; i < RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
             {
-                var linkingFk = rootKey!.DeclaringEntityType
+                var linkingFk = rootKey!
+                    .DeclaringEntityType
                     .FindRowInternalForeignKeys(storeObject)
                     .FirstOrDefault();
                 if (linkingFk == null)
@@ -213,7 +214,8 @@ public static class RelationalKeyExtensions
             {
                 IReadOnlyKey? linkedKey = null;
                 foreach (
-                    var otherKey in rootKey.DeclaringEntityType
+                    var otherKey in rootKey
+                        .DeclaringEntityType
                         .FindRowInternalForeignKeys(storeObject)
                         .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
                 )

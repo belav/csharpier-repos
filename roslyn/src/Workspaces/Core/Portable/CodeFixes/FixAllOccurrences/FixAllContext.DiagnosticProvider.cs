@@ -119,7 +119,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                                     ImmutableArray<Diagnostic>
                                 >();
 
-                                var tasks = project.Solution.Projects
+                                var tasks = project
+                                    .Solution
+                                    .Projects
                                     .Select(
                                         async p =>
                                             new

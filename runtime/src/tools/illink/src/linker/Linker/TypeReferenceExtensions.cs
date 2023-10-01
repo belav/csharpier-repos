@@ -366,9 +366,15 @@ namespace Mono.Linker
 
             for (var i = 0; i < type.GenericArguments.Count; ++i)
             {
-                result.GenericArguments.Add(
-                    InflateGenericType(genericInstanceProvider, type.GenericArguments[i], resolver)
-                );
+                result
+                    .GenericArguments
+                    .Add(
+                        InflateGenericType(
+                            genericInstanceProvider,
+                            type.GenericArguments[i],
+                            resolver
+                        )
+                    );
             }
 
             return result;
@@ -416,13 +422,15 @@ namespace Mono.Linker
 
 #pragma warning disable RS0030 // MethodReference.Parameters is banned. It makes sense to use when needing to directly use Cecil's api.
             foreach (var parameter in methodDef.Parameters)
-                method.Parameters.Add(
-                    new ParameterDefinition(
-                        parameter.Name,
-                        parameter.Attributes,
-                        parameter.ParameterType
-                    )
-                );
+                method
+                    .Parameters
+                    .Add(
+                        new ParameterDefinition(
+                            parameter.Name,
+                            parameter.Attributes,
+                            parameter.ParameterType
+                        )
+                    );
 #pragma warning restore RS0030
 
             foreach (var gp in methodDef.GenericParameters)

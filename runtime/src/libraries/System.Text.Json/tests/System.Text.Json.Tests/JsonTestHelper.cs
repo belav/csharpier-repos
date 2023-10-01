@@ -895,10 +895,9 @@ namespace System.Text.Json
             @"
 ";
 
-        private static readonly bool s_replaceNewlines = !StringComparer.Ordinal.Equals(
-            CompiledNewline,
-            Environment.NewLine
-        );
+        private static readonly bool s_replaceNewlines = !StringComparer
+            .Ordinal
+            .Equals(CompiledNewline, Environment.NewLine);
 
         // Should be called only on compile-time strings
         // This is needed due to the fact that git might normalize line endings when checking-out files

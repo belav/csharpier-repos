@@ -421,7 +421,7 @@ public class RelationalTypeMapperTest : RelationalTypeMapperTestBase
     protected override ModelBuilder CreateModelBuilder(
         Action<ModelConfigurationBuilder> configureConventions = null
     ) =>
-        FakeRelationalTestHelpers.Instance.CreateConventionBuilder(
-            configureConventions: configureConventions
-        );
+        FakeRelationalTestHelpers
+            .Instance
+            .CreateConventionBuilder(configureConventions: configureConventions);
 }

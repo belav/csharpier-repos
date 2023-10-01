@@ -189,10 +189,9 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             return IsValidSetMethod(setMethod)
                 && setMethod.Parameters.Length == 1
                 && setMethod.Parameters[0].RefKind == RefKind.None
-                && SymbolEqualityComparer.IncludeNullability.Equals(
-                    setMethod.Parameters[0].Type,
-                    getMethod.ReturnType
-                )
+                && SymbolEqualityComparer
+                    .IncludeNullability
+                    .Equals(setMethod.Parameters[0].Type, getMethod.ReturnType)
                 && setMethod.IsAbstract == getMethod.IsAbstract;
         }
 
@@ -383,11 +382,13 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
                         // Warn the user that we can't properly replace this method with a property.
                         editor.ReplaceNode(
                             nameToken.Parent,
-                            nameToken.Parent.WithAdditionalAnnotations(
-                                ConflictAnnotation.Create(
-                                    FeaturesResources.Method_referenced_implicitly
+                            nameToken
+                                .Parent
+                                .WithAdditionalAnnotations(
+                                    ConflictAnnotation.Create(
+                                        FeaturesResources.Method_referenced_implicitly
+                                    )
                                 )
-                            )
                         );
                     }
                     else
@@ -432,11 +433,13 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
                         // Warn the user that we can't properly replace this method with a property.
                         editor.ReplaceNode(
                             nameToken.Parent,
-                            nameToken.Parent.WithAdditionalAnnotations(
-                                ConflictAnnotation.Create(
-                                    FeaturesResources.Method_referenced_implicitly
+                            nameToken
+                                .Parent
+                                .WithAdditionalAnnotations(
+                                    ConflictAnnotation.Create(
+                                        FeaturesResources.Method_referenced_implicitly
+                                    )
                                 )
-                            )
                         );
                     }
                     else
@@ -472,7 +475,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
                 )
                 .ConfigureAwait(false);
 
-            var documentIds = getDefinitionsByDocumentId.Keys
+            var documentIds = getDefinitionsByDocumentId
+                .Keys
                 .Concat(setDefinitionsByDocumentId.Keys)
                 .Distinct();
             foreach (var documentId in documentIds)
@@ -512,7 +516,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
         )
         {
             var updatedDocument = updatedSolution.GetRequiredDocument(documentId);
-            var compilation = await updatedDocument.Project
+            var compilation = await updatedDocument
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 

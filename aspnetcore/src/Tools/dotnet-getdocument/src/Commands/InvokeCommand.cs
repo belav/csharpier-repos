@@ -126,8 +126,9 @@ internal sealed class InvokeCommand : HelpCommandBase
                     }
                     else
                     {
-                        var runtimeFrameworkVersion =
-                            _projectOptions.RuntimeFrameworkVersion.Value();
+                        var runtimeFrameworkVersion = _projectOptions
+                            .RuntimeFrameworkVersion
+                            .Value();
                         if (!string.IsNullOrEmpty(runtimeFrameworkVersion))
                         {
                             args.Add("--fx-version");

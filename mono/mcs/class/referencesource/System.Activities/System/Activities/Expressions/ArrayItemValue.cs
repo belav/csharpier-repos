@@ -52,11 +52,13 @@ namespace System.Activities.Expressions
             TItem[] items = this.Array.Get(context);
             if (items == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)
+                        )
+                    );
             }
 
             int itemIndex = this.Index.Get(context);

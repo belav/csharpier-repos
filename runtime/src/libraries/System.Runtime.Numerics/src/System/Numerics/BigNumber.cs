@@ -949,9 +949,9 @@ namespace System.Numerics
                 {
                     int[]? arrayToReturn = arrayFromPoolForResultBuffer;
 
-                    arrayFromPoolForResultBuffer = ArrayPool<int>.Shared.Rent(
-                        checked(currentBufferSize * 2)
-                    );
+                    arrayFromPoolForResultBuffer = ArrayPool<int>
+                        .Shared
+                        .Rent(checked(currentBufferSize * 2));
                     Span<uint> newBuffer = MemoryMarshal.Cast<int, uint>(
                         arrayFromPoolForResultBuffer
                     );
@@ -1185,12 +1185,9 @@ namespace System.Numerics
 
                 if (targetSpan)
                 {
-                    spanSuccess = value._sign.TryFormat(
-                        destination,
-                        out charsWritten,
-                        formatSpan,
-                        info
-                    );
+                    spanSuccess = value
+                        ._sign
+                        .TryFormat(destination, out charsWritten, formatSpan, info);
                     return null;
                 }
                 else

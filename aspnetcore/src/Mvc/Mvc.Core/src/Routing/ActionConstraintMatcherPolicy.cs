@@ -242,7 +242,9 @@ internal sealed class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSe
 
                         var routeData = new RouteData(candidate.Values!);
 
-                        var dataTokens = candidate.Endpoint.Metadata
+                        var dataTokens = candidate
+                            .Endpoint
+                            .Metadata
                             .GetMetadata<IDataTokensMetadata>()
                             ?.DataTokens;
 

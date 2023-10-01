@@ -114,15 +114,17 @@ namespace System.ServiceModel.ComIntegration
                     this.isolationLevel = IsolationLevel.Serializable;
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        Error.ListenerInitFailed(
-                            SR.GetString(
-                                SR.InvalidIsolationLevelValue,
-                                this.clsid,
-                                adminIsolationLevel
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            Error.ListenerInitFailed(
+                                SR.GetString(
+                                    SR.InvalidIsolationLevelValue,
+                                    this.clsid,
+                                    adminIsolationLevel
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             // Threading Model
@@ -204,10 +206,12 @@ namespace System.ServiceModel.ComIntegration
                     {
                         Guid otherInterfaceID;
                         if (
-                            DiagnosticUtility.Utility.TryCreateGuid(
-                                (string)interfaceObject.GetValue("IID"),
-                                out otherInterfaceID
-                            )
+                            DiagnosticUtility
+                                .Utility
+                                .TryCreateGuid(
+                                    (string)interfaceObject.GetValue("IID"),
+                                    out otherInterfaceID
+                                )
                         )
                         {
                             if (otherInterfaceID == iid)
@@ -226,15 +230,17 @@ namespace System.ServiceModel.ComIntegration
 
                 if (contract == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        Error.ListenerInitFailed(
-                            SR.GetString(
-                                SR.EndpointNotAnIID,
-                                clsid.ToString("B").ToUpperInvariant(),
-                                endpoint.Contract
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            Error.ListenerInitFailed(
+                                SR.GetString(
+                                    SR.EndpointNotAnIID,
+                                    clsid.ToString("B").ToUpperInvariant(),
+                                    endpoint.Contract
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 this.contracts.Add(contract);
             }

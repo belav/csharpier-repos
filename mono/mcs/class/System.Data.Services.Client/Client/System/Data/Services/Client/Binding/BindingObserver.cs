@@ -842,9 +842,9 @@ namespace System.Data.Services.Client
         )
         {
             foreach (
-                var ed in this.Context.Entities.Where(
-                    x => x.ParentEntity == currentEntity && x.State == EntityStates.Added
-                )
+                var ed in this.Context
+                    .Entities
+                    .Where(x => x.ParentEntity == currentEntity && x.State == EntityStates.Added)
             )
             {
                 this.CollectUnTrackingInfo(

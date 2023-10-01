@@ -126,11 +126,13 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                         _expressions.Add(
                             Expression.Assign(
                                 variable,
-                                queryExpression.CurrentParameter.CreateValueBufferReadValueExpression(
-                                    projectionBindingExpression.Type,
-                                    projectionIndex,
-                                    property: null
-                                )
+                                queryExpression
+                                    .CurrentParameter
+                                    .CreateValueBufferReadValueExpression(
+                                        projectionBindingExpression.Type,
+                                        projectionIndex,
+                                        property: null
+                                    )
                             )
                         );
                         _mapping[key] = variable;

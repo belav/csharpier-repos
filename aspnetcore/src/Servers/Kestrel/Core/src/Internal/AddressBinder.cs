@@ -177,10 +177,9 @@ internal sealed class AddressBinder
             context.ServerOptions.ApplyEndpointDefaults(httpDefault);
             await httpDefault.BindAsync(context, cancellationToken).ConfigureAwait(false);
 
-            context.Logger.LogDebug(
-                CoreStrings.BindingToDefaultAddress,
-                Constants.DefaultServerAddress
-            );
+            context
+                .Logger
+                .LogDebug(CoreStrings.BindingToDefaultAddress, Constants.DefaultServerAddress);
         }
     }
 
@@ -195,11 +194,13 @@ internal sealed class AddressBinder
         )
         {
             var joined = string.Join(", ", _addresses);
-            context.Logger.LogInformation(
-                CoreStrings.OverridingWithPreferHostingUrls,
-                nameof(IServerAddressesFeature.PreferHostingUrls),
-                joined
-            );
+            context
+                .Logger
+                .LogInformation(
+                    CoreStrings.OverridingWithPreferHostingUrls,
+                    nameof(IServerAddressesFeature.PreferHostingUrls),
+                    joined
+                );
 
             return base.BindAsync(context, cancellationToken);
         }

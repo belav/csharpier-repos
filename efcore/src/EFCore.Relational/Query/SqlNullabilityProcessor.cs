@@ -2040,7 +2040,8 @@ public class SqlNullabilityProcessor
                         // for coalesce
                         // (a ?? b ?? c) == null -> a == null && b == null && c == null
                         // (a ?? b ?? c) != null -> a != null || b != null || c != null
-                        return sqlFunctionExpression.Arguments
+                        return sqlFunctionExpression
+                            .Arguments
                             .Select(
                                 a =>
                                     ProcessNullNotNull(

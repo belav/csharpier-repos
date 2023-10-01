@@ -52,10 +52,9 @@ namespace System.ServiceModel.Channels
 
             if (handlers.Length == 0)
             {
-                throw FxTrace.Exception.Argument(
-                    "handlers",
-                    SR.GetString(SR.InputTypeListEmptyError)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("handlers", SR.GetString(SR.InputTypeListEmptyError));
             }
 
             this.handlerCtors = new ConstructorInfo[handlers.Length];
@@ -64,39 +63,45 @@ namespace System.ServiceModel.Channels
                 Type handler = handlers[cnt];
                 if (handler == null)
                 {
-                    throw FxTrace.Exception.Argument(
-                        string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
-                        SR.GetString(
-                            SR.HttpMessageHandlerTypeNotSupported,
-                            "null",
-                            delegatingHandlerType.Name
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(
+                            string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
+                            SR.GetString(
+                                SR.HttpMessageHandlerTypeNotSupported,
+                                "null",
+                                delegatingHandlerType.Name
+                            )
+                        );
                 }
 
                 if (!delegatingHandlerType.IsAssignableFrom(handler) || handler.IsAbstract)
                 {
-                    throw FxTrace.Exception.Argument(
-                        string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
-                        SR.GetString(
-                            SR.HttpMessageHandlerTypeNotSupported,
-                            handler.Name,
-                            delegatingHandlerType.Name
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(
+                            string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
+                            SR.GetString(
+                                SR.HttpMessageHandlerTypeNotSupported,
+                                handler.Name,
+                                delegatingHandlerType.Name
+                            )
+                        );
                 }
 
                 ConstructorInfo ctorInfo = handler.GetConstructor(Type.EmptyTypes);
                 if (ctorInfo == null)
                 {
-                    throw FxTrace.Exception.Argument(
-                        string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
-                        SR.GetString(
-                            SR.HttpMessageHandlerTypeNotSupported,
-                            handler.Name,
-                            delegatingHandlerType.Name
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(
+                            string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
+                            SR.GetString(
+                                SR.HttpMessageHandlerTypeNotSupported,
+                                handler.Name,
+                                delegatingHandlerType.Name
+                            )
+                        );
                 }
 
                 this.handlerCtors[cnt] = ctorInfo;
@@ -160,16 +165,18 @@ namespace System.ServiceModel.Channels
             {
                 if (configElement.Handlers != null && configElement.Handlers.Count > 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList,
-                                ConfigurationStrings.MessageHandlerFactory,
-                                ConfigurationStrings.Type,
-                                ConfigurationStrings.Handlers
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList,
+                                    ConfigurationStrings.MessageHandlerFactory,
+                                    ConfigurationStrings.Type,
+                                    ConfigurationStrings.Handlers
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 Type factoryType = HttpChannelUtilities.GetTypeFromAssembliesInCurrentDomain(
@@ -177,11 +184,13 @@ namespace System.ServiceModel.Channels
                 );
                 if (factoryType == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.CanNotLoadTypeGotFromConfig, configElement.Type)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(SR.CanNotLoadTypeGotFromConfig, configElement.Type)
+                            )
+                        );
                 }
 
                 if (
@@ -189,16 +198,18 @@ namespace System.ServiceModel.Channels
                     || factoryType.IsAbstract
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.WebSocketElementConfigInvalidHttpMessageHandlerFactoryType,
-                                typeof(HttpMessageHandlerFactory).Name,
-                                factoryType,
-                                typeof(HttpMessageHandlerFactory).AssemblyQualifiedName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.WebSocketElementConfigInvalidHttpMessageHandlerFactoryType,
+                                    typeof(HttpMessageHandlerFactory).Name,
+                                    factoryType,
+                                    typeof(HttpMessageHandlerFactory).AssemblyQualifiedName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 return Activator.CreateInstance(factoryType) as HttpMessageHandlerFactory;
@@ -218,14 +229,16 @@ namespace System.ServiceModel.Channels
                     );
                     if (handlerType == null)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.CanNotLoadTypeGotFromConfig,
-                                    configElement.Handlers[i].Type
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.CanNotLoadTypeGotFromConfig,
+                                        configElement.Handlers[i].Type
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     handlerList[i] = handlerType;
@@ -237,9 +250,9 @@ namespace System.ServiceModel.Channels
                 }
                 catch (ArgumentException ex)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ConfigurationErrorsException(ex.Message, ex)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new ConfigurationErrorsException(ex.Message, ex));
                 }
             }
         }
@@ -248,15 +261,17 @@ namespace System.ServiceModel.Channels
         {
             if (this.handlerFunc != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.HttpMessageHandlerFactoryWithFuncCannotGenerateConfig,
-                            typeof(HttpMessageHandlerFactory).Name,
-                            typeof(Func<IEnumerable<DelegatingHandler>>).Name
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.HttpMessageHandlerFactoryWithFuncCannotGenerateConfig,
+                                typeof(HttpMessageHandlerFactory).Name,
+                                typeof(Func<IEnumerable<DelegatingHandler>>).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             Type thisType = this.GetType();
@@ -313,14 +328,16 @@ namespace System.ServiceModel.Channels
                         {
                             if (handler == null)
                             {
-                                throw FxTrace.Exception.Argument(
-                                    "handlers",
-                                    SR.GetString(
-                                        SR.DelegatingHandlerArrayFromFuncContainsNullItem,
-                                        delegatingHandlerType.Name,
-                                        GetFuncDetails(this.handlerFunc)
-                                    )
-                                );
+                                throw FxTrace
+                                    .Exception
+                                    .Argument(
+                                        "handlers",
+                                        SR.GetString(
+                                            SR.DelegatingHandlerArrayFromFuncContainsNullItem,
+                                            delegatingHandlerType.Name,
+                                            GetFuncDetails(this.handlerFunc)
+                                        )
+                                    );
                             }
                         }
                     }
@@ -350,15 +367,17 @@ namespace System.ServiceModel.Channels
                 {
                     if (handler.InnerHandler != null)
                     {
-                        throw FxTrace.Exception.Argument(
-                            "handlers",
-                            SR.GetString(
-                                SR.DelegatingHandlerArrayHasNonNullInnerHandler,
-                                delegatingHandlerType.Name,
-                                "InnerHandler",
-                                handler.GetType().Name
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .Argument(
+                                "handlers",
+                                SR.GetString(
+                                    SR.DelegatingHandlerArrayHasNonNullInnerHandler,
+                                    delegatingHandlerType.Name,
+                                    "InnerHandler",
+                                    handler.GetType().Name
+                                )
+                            );
                     }
 
                     handler.InnerHandler = pipeline;

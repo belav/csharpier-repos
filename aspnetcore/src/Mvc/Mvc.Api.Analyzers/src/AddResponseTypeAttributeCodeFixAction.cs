@@ -126,14 +126,16 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
             );
         }
 
-        var apiConventionMethodAttribute = context.Method
+        var apiConventionMethodAttribute = context
+            .Method
             .GetAttributes(context.SymbolCache.ApiConventionMethodAttribute)
             .FirstOrDefault();
 
         if (apiConventionMethodAttribute != null)
         {
             // Remove [ApiConventionMethodAttribute] declared on the method since it's no longer required
-            var attributeSyntax = await apiConventionMethodAttribute.ApplicationSyntaxReference
+            var attributeSyntax = await apiConventionMethodAttribute
+                .ApplicationSyntaxReference
                 .GetSyntaxAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -175,9 +177,9 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
         var methodSyntax = diagnosticNode.FirstAncestorOrSelf<MethodDeclarationSyntax>();
         var method = semanticModel.GetDeclaredSymbol(methodSyntax, cancellationToken);
 
-        var statusCodesType = semanticModel.Compilation.GetTypeByMetadataName(
-            ApiSymbolNames.HttpStatusCodes
-        );
+        var statusCodesType = semanticModel
+            .Compilation
+            .GetTypeByMetadataName(ApiSymbolNames.HttpStatusCodes);
         var statusCodeConstants = GetStatusCodeConstants(statusCodesType);
 
         if (!ApiControllerSymbolCache.TryCreate(semanticModel.Compilation, out var symbolCache))
@@ -252,10 +254,9 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
                     metadata,
                     result: out var declaredMetadata
                 )
-                && SymbolEqualityComparer.Default.Equals(
-                    declaredMetadata.AttributeSource,
-                    context.Method
-                )
+                && SymbolEqualityComparer
+                    .Default
+                    .Equals(declaredMetadata.AttributeSource, context.Method)
             )
             {
                 // A ProducesResponseType attribute is declared on the method for the current status code.

@@ -23,8 +23,9 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options
         )
         {
-            jsonTypeInfo.AddMethodDelegate =
-                JsonSerializerOptions.MemberAccessorStrategy.CreateAddMethodDelegate<TCollection>();
+            jsonTypeInfo.AddMethodDelegate = JsonSerializerOptions
+                .MemberAccessorStrategy
+                .CreateAddMethodDelegate<TCollection>();
         }
     }
 }

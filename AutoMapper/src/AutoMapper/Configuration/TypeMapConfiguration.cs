@@ -86,9 +86,9 @@ public abstract class TypeMapConfiguration
         ReverseMapExpression = reverseMap;
         if (_memberConfigurations != null)
         {
-            reverseMap.MemberConfigurations.AddRange(
-                _memberConfigurations.Select(m => m.Reverse()).Where(m => m != null)
-            );
+            reverseMap
+                .MemberConfigurations
+                .AddRange(_memberConfigurations.Select(m => m.Reverse()).Where(m => m != null));
         }
         _features?.ReverseTo(reverseMap.Features);
     }
@@ -162,14 +162,16 @@ public abstract class TypeMapConfiguration
                     return;
                 }
                 sourceMembers.Clear();
-                var canResolve = typeMap.Profile.MapDestinationPropertyToSource(
-                    typeMap.SourceTypeDetails,
-                    constructor.DeclaringType,
-                    parameter.ParameterType,
-                    name,
-                    sourceMembers,
-                    IsReverseMap
-                );
+                var canResolve = typeMap
+                    .Profile
+                    .MapDestinationPropertyToSource(
+                        typeMap.SourceTypeDetails,
+                        constructor.DeclaringType,
+                        parameter.ParameterType,
+                        name,
+                        sourceMembers,
+                        IsReverseMap
+                    );
                 if (!canResolve && !parameter.IsOptional && !IsConfigured(parameter))
                 {
                     canMapResolve = false;
@@ -211,9 +213,11 @@ public abstract class TypeMapConfiguration
     private void ReverseSourceMembers(TypeMap typeMap)
     {
         foreach (
-            var propertyMap in typeMap.PropertyMaps.Where(
-                p => p.SourceMembers.Length > 1 && !p.SourceMembers.Any(s => s is MethodInfo)
-            )
+            var propertyMap in typeMap
+                .PropertyMaps
+                .Where(
+                    p => p.SourceMembers.Length > 1 && !p.SourceMembers.Any(s => s is MethodInfo)
+                )
         )
         {
             var memberPath = new MemberPath(propertyMap.SourceMembers);
@@ -224,20 +228,22 @@ public abstract class TypeMapConfiguration
 
     private void ReverseSourceMembers(MemberPath memberPath, LambdaExpression customExpression)
     {
-        ReverseMapExpression.TypeMapActions.Add(reverseTypeMap =>
-        {
-            var newDestination = Parameter(reverseTypeMap.DestinationType, "destination");
-            var path = memberPath.Members.Chain(newDestination);
-            var forPathLambda = Lambda(path, newDestination);
+        ReverseMapExpression
+            .TypeMapActions
+            .Add(reverseTypeMap =>
+            {
+                var newDestination = Parameter(reverseTypeMap.DestinationType, "destination");
+                var path = memberPath.Members.Chain(newDestination);
+                var forPathLambda = Lambda(path, newDestination);
 
-            var pathMap = reverseTypeMap.FindOrCreatePathMapFor(
-                forPathLambda,
-                memberPath,
-                reverseTypeMap
-            );
+                var pathMap = reverseTypeMap.FindOrCreatePathMapFor(
+                    forPathLambda,
+                    memberPath,
+                    reverseTypeMap
+                );
 
-            pathMap.MapFrom(customExpression);
-        });
+                pathMap.MapFrom(customExpression);
+            });
     }
 
     protected void ForSourceMemberCore(

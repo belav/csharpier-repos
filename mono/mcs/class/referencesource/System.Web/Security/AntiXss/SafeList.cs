@@ -316,10 +316,9 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.Lower.IsFlagSet(
-                    codeCharts,
-                    LowerCodeCharts.C1ControlsAndLatin1Supplement
-                ),
+                CodeCharts
+                    .Lower
+                    .IsFlagSet(codeCharts, LowerCodeCharts.C1ControlsAndLatin1Supplement),
                 CodeCharts.Lower.Latin1Supplement()
             );
             PunchHolesIfNeeded(
@@ -508,10 +507,9 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.LowerMiddle.IsFlagSet(
-                    codeCharts,
-                    LowerMidCodeCharts.UnifiedCanadianAboriginalSyllabics
-                ),
+                CodeCharts
+                    .LowerMiddle
+                    .IsFlagSet(codeCharts, LowerMidCodeCharts.UnifiedCanadianAboriginalSyllabics),
                 CodeCharts.LowerMiddle.UnifiedCanadianAboriginalSyllabics()
             );
             PunchHolesIfNeeded(
@@ -556,10 +554,12 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.LowerMiddle.IsFlagSet(
-                    codeCharts,
-                    LowerMidCodeCharts.UnifiedCanadianAboriginalSyllabicsExtended
-                ),
+                CodeCharts
+                    .LowerMiddle
+                    .IsFlagSet(
+                        codeCharts,
+                        LowerMidCodeCharts.UnifiedCanadianAboriginalSyllabicsExtended
+                    ),
                 CodeCharts.LowerMiddle.UnifiedCanadianAboriginalSyllabicsExtended()
             );
             PunchHolesIfNeeded(
@@ -624,26 +624,23 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.LowerMiddle.IsFlagSet(
-                    codeCharts,
-                    LowerMidCodeCharts.PhoneticExtensionsSupplement
-                ),
+                CodeCharts
+                    .LowerMiddle
+                    .IsFlagSet(codeCharts, LowerMidCodeCharts.PhoneticExtensionsSupplement),
                 CodeCharts.LowerMiddle.PhoneticExtensionsSupplement()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.LowerMiddle.IsFlagSet(
-                    codeCharts,
-                    LowerMidCodeCharts.CombiningDiacriticalMarksSupplement
-                ),
+                CodeCharts
+                    .LowerMiddle
+                    .IsFlagSet(codeCharts, LowerMidCodeCharts.CombiningDiacriticalMarksSupplement),
                 CodeCharts.LowerMiddle.CombiningDiacriticalMarksSupplement()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.LowerMiddle.IsFlagSet(
-                    codeCharts,
-                    LowerMidCodeCharts.LatinExtendedAdditional
-                ),
+                CodeCharts
+                    .LowerMiddle
+                    .IsFlagSet(codeCharts, LowerMidCodeCharts.LatinExtendedAdditional),
                 CodeCharts.LowerMiddle.LatinExtendedAdditional()
             );
         }
@@ -677,10 +674,9 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.Middle.IsFlagSet(
-                    codeCharts,
-                    MidCodeCharts.CombiningDiacriticalMarksForSymbols
-                ),
+                CodeCharts
+                    .Middle
+                    .IsFlagSet(codeCharts, MidCodeCharts.CombiningDiacriticalMarksForSymbols),
                 CodeCharts.Middle.CombiningDiacriticalMarksForSymbols()
             );
             PunchHolesIfNeeded(
@@ -750,10 +746,9 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.Middle.IsFlagSet(
-                    codeCharts,
-                    MidCodeCharts.MiscellaneousMathematicalSymbolsA
-                ),
+                CodeCharts
+                    .Middle
+                    .IsFlagSet(codeCharts, MidCodeCharts.MiscellaneousMathematicalSymbolsA),
                 CodeCharts.Middle.MiscellaneousMathematicalSymbolsA()
             );
             PunchHolesIfNeeded(
@@ -773,26 +768,23 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.Middle.IsFlagSet(
-                    codeCharts,
-                    MidCodeCharts.MiscellaneousMathematicalSymbolsB
-                ),
+                CodeCharts
+                    .Middle
+                    .IsFlagSet(codeCharts, MidCodeCharts.MiscellaneousMathematicalSymbolsB),
                 CodeCharts.Middle.MiscellaneousMathematicalSymbolsB()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.Middle.IsFlagSet(
-                    codeCharts,
-                    MidCodeCharts.SupplementalMathematicalOperators
-                ),
+                CodeCharts
+                    .Middle
+                    .IsFlagSet(codeCharts, MidCodeCharts.SupplementalMathematicalOperators),
                 CodeCharts.Middle.SupplementalMathematicalOperators()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.Middle.IsFlagSet(
-                    codeCharts,
-                    MidCodeCharts.MiscellaneousSymbolsAndArrows
-                ),
+                CodeCharts
+                    .Middle
+                    .IsFlagSet(codeCharts, MidCodeCharts.MiscellaneousSymbolsAndArrows),
                 CodeCharts.Middle.MiscellaneousSymbolsAndArrows()
             );
             PunchHolesIfNeeded(
@@ -841,18 +833,16 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.SupplementalPunctuation
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.SupplementalPunctuation),
                 CodeCharts.UpperMiddle.SupplementalPunctuation()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.CjkRadicalsSupplement
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.CjkRadicalsSupplement),
                 CodeCharts.UpperMiddle.CjkRadicalsSupplement()
             );
             PunchHolesIfNeeded(
@@ -862,18 +852,16 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.IdeographicDescriptionCharacters
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.IdeographicDescriptionCharacters),
                 CodeCharts.UpperMiddle.IdeographicDescriptionCharacters()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.CjkSymbolsAndPunctuation
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.CjkSymbolsAndPunctuation),
                 CodeCharts.UpperMiddle.CjkSymbolsAndPunctuation()
             );
             PunchHolesIfNeeded(
@@ -893,10 +881,9 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.HangulCompatibilityJamo
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.HangulCompatibilityJamo),
                 CodeCharts.UpperMiddle.HangulCompatibilityJamo()
             );
             PunchHolesIfNeeded(
@@ -916,18 +903,16 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.KatakanaPhoneticExtensions
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.KatakanaPhoneticExtensions),
                 CodeCharts.UpperMiddle.KatakanaPhoneticExtensions()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.EnclosedCjkLettersAndMonths
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.EnclosedCjkLettersAndMonths),
                 CodeCharts.UpperMiddle.EnclosedCjkLettersAndMonths()
             );
             PunchHolesIfNeeded(
@@ -937,26 +922,23 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.CjkUnifiedIdeographsExtensionA
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.CjkUnifiedIdeographsExtensionA),
                 CodeCharts.UpperMiddle.CjkUnifiedIdeographsExtensionA()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.YijingHexagramSymbols
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.YijingHexagramSymbols),
                 CodeCharts.UpperMiddle.YijingHexagramSymbols()
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.CjkUnifiedIdeographs
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.CjkUnifiedIdeographs),
                 CodeCharts.UpperMiddle.CjkUnifiedIdeographs()
             );
             PunchHolesIfNeeded(
@@ -991,10 +973,9 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.ModifierToneLetters
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.ModifierToneLetters),
                 CodeCharts.UpperMiddle.ModifierToneLetters()
             );
             PunchHolesIfNeeded(
@@ -1009,10 +990,9 @@ namespace System.Web.Security.AntiXss
             );
             PunchHolesIfNeeded(
                 ref safeList,
-                CodeCharts.UpperMiddle.IsFlagSet(
-                    codeCharts,
-                    UpperMidCodeCharts.CommonIndicNumberForms
-                ),
+                CodeCharts
+                    .UpperMiddle
+                    .IsFlagSet(codeCharts, UpperMidCodeCharts.CommonIndicNumberForms),
                 CodeCharts.UpperMiddle.CommonIndicNumberForms()
             );
             PunchHolesIfNeeded(

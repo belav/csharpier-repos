@@ -234,22 +234,24 @@ namespace System.Web.UI.Design.MobileControls
             this._lblHeader.Anchor = (
                 System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left
             );
-            this._pnlHeader.Controls.AddRange(
-                new System.Windows.Forms.Control[] { this._lblHeader }
-            );
+            this._pnlHeader
+                .Controls
+                .AddRange(new System.Windows.Forms.Control[] { this._lblHeader });
             this._pnlHeader.Location = new System.Drawing.Point(6, 5);
             this._pnlHeader.Size = new System.Drawing.Size(434, 16);
             this._pnlHeader.Anchor = (
                 System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left
             );
-            this._pnlMain.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this._dialogButtons,
-                    this._pnlRight,
-                    this._filterList
-                }
-            );
+            this._pnlMain
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this._dialogButtons,
+                        this._pnlRight,
+                        this._filterList
+                    }
+                );
             this._pnlMain.Location = new System.Drawing.Point(6, 27);
             this._pnlMain.Size = new System.Drawing.Size(434, 253);
             this._pnlMain.Anchor = (
@@ -269,17 +271,19 @@ namespace System.Web.UI.Design.MobileControls
             this._txtMethod.Size = new System.Drawing.Size(211, 20);
             this._txtArgument.Location = new System.Drawing.Point(0, 64);
             this._txtArgument.Size = new System.Drawing.Size(211, 20);
-            this._pnlRight.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this._pnlCompare,
-                    this._pnlDelegate,
-                    this._glAttributes,
-                    this._glType,
-                    this._rbDelegate,
-                    this._rbCompare
-                }
-            );
+            this._pnlRight
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this._pnlCompare,
+                        this._pnlDelegate,
+                        this._glAttributes,
+                        this._glType,
+                        this._rbDelegate,
+                        this._rbCompare
+                    }
+                );
             this._pnlRight.Location = new System.Drawing.Point(215, 0);
             this._pnlRight.Size = new System.Drawing.Size(219, 226);
             this._lblMethod.Location = new System.Drawing.Point(0, 48);
@@ -289,15 +293,17 @@ namespace System.Web.UI.Design.MobileControls
             this._rbDelegate.Location = new System.Drawing.Point(8, 46);
             this._rbDelegate.Size = new System.Drawing.Size(211, 17);
             this._glType.Size = new System.Drawing.Size(216, 16);
-            this._pnlCompare.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this._txtArgument,
-                    this._lblArgument,
-                    this._cbCompare,
-                    this._lblCompare
-                }
-            );
+            this._pnlCompare
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this._txtArgument,
+                        this._lblArgument,
+                        this._cbCompare,
+                        this._lblCompare
+                    }
+                );
             this._pnlCompare.Location = new System.Drawing.Point(8, 90);
             this._pnlCompare.Size = new System.Drawing.Size(211, 136);
             this._cbCompare.DropDownWidth = 211;
@@ -306,15 +312,17 @@ namespace System.Web.UI.Design.MobileControls
             this._cbCompare.Sorted = true;
             this._lblArgument.Location = new System.Drawing.Point(0, 48);
             this._lblArgument.Size = new System.Drawing.Size(211, 16);
-            this._pnlDelegate.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this._txtType,
-                    this._txtMethod,
-                    this._lblMethod,
-                    this._lblType
-                }
-            );
+            this._pnlDelegate
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this._txtType,
+                        this._txtMethod,
+                        this._lblMethod,
+                        this._lblType
+                    }
+                );
             this._pnlDelegate.Location = new System.Drawing.Point(8, 90);
             this._pnlDelegate.Size = new System.Drawing.Size(211, 136);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

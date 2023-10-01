@@ -22,9 +22,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 bindingContext.ModelName,
                 "index"
             );
-            ValueProviderResult valueProviderResultIndex = bindingContext.ValueProvider.GetValue(
-                indexPropertyName
-            );
+            ValueProviderResult valueProviderResultIndex = bindingContext
+                .ValueProvider
+                .GetValue(indexPropertyName);
             IEnumerable<string> indexNames =
                 CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(
                     valueProviderResultIndex
@@ -72,9 +72,10 @@ namespace System.Web.Http.ModelBinding.Binders
                     boundValue = childBindingContext.Model;
 
                     // merge validation up
-                    bindingContext.ValidationNode.ChildNodes.Add(
-                        childBindingContext.ValidationNode
-                    );
+                    bindingContext
+                        .ValidationNode
+                        .ChildNodes
+                        .Add(childBindingContext.ValidationNode);
                 }
 
                 // infinite size collection stops on first bind failure
@@ -101,9 +102,9 @@ namespace System.Web.Http.ModelBinding.Binders
                 return false;
             }
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
-                bindingContext.ModelName
-            );
+            ValueProviderResult valueProviderResult = bindingContext
+                .ValueProvider
+                .GetValue(bindingContext.ModelName);
             List<TElement> boundCollection =
                 (valueProviderResult != null)
                     ? BindSimpleCollection(
@@ -158,9 +159,10 @@ namespace System.Web.Http.ModelBinding.Binders
                 if (actionContext.Bind(innerBindingContext))
                 {
                     boundValue = innerBindingContext.Model;
-                    bindingContext.ValidationNode.ChildNodes.Add(
-                        innerBindingContext.ValidationNode
-                    );
+                    bindingContext
+                        .ValidationNode
+                        .ChildNodes
+                        .Add(innerBindingContext.ValidationNode);
                 }
                 boundCollection.Add(ModelBindingHelper.CastOrDefault<TElement>(boundValue));
             }

@@ -48,9 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _session.ReplacementsComputed += OnReplacementsComputed;
             _session.ReferenceLocationsChanged += OnReferenceLocationsChanged;
             StartingSelection = selectionSpan;
-            InitialTrackingSpan = session.TriggerSpan.CreateTrackingSpan(
-                VisualStudio.Text.SpanTrackingMode.EdgeInclusive
-            );
+            InitialTrackingSpan = session
+                .TriggerSpan
+                .CreateTrackingSpan(VisualStudio.Text.SpanTrackingMode.EdgeInclusive);
 
             RegisterOleComponent();
         }

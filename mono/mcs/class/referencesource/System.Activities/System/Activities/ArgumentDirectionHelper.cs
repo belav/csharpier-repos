@@ -22,13 +22,15 @@ namespace System.Activities
         {
             if (!IsDefined(direction))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidEnumArgumentException(
-                        argumentName,
-                        (int)direction,
-                        typeof(ArgumentDirection)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidEnumArgumentException(
+                            argumentName,
+                            (int)direction,
+                            typeof(ArgumentDirection)
+                        )
+                    );
             }
         }
 

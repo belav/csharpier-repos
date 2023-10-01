@@ -38,26 +38,34 @@ namespace System.ServiceModel.Discovery
         {
             if (!address.Equals(DiscoveryClientBindingElement.DiscoveryEndpointAddress))
             {
-                throw FxTrace.Exception.Argument(
-                    "address",
-                    Discovery.SR.DiscoveryEndpointAddressIncorrect(
+                throw FxTrace
+                    .Exception
+                    .Argument(
                         "address",
-                        address.Uri,
-                        DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
-                    )
-                );
+                        Discovery
+                            .SR
+                            .DiscoveryEndpointAddressIncorrect(
+                                "address",
+                                address.Uri,
+                                DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
+                            )
+                    );
             }
 
             if (!via.Equals(DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri))
             {
-                throw FxTrace.Exception.Argument(
-                    "via",
-                    Discovery.SR.DiscoveryEndpointAddressIncorrect(
+                throw FxTrace
+                    .Exception
+                    .Argument(
                         "via",
-                        via,
-                        DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
-                    )
-                );
+                        Discovery
+                            .SR
+                            .DiscoveryEndpointAddressIncorrect(
+                                "via",
+                                via,
+                                DiscoveryClientBindingElement.DiscoveryEndpointAddress.Uri
+                            )
+                    );
             }
 
             if (typeof(TChannel) == typeof(IOutputChannel))
@@ -127,10 +135,14 @@ namespace System.ServiceModel.Discovery
                         );
             }
 
-            throw FxTrace.Exception.Argument(
-                "TChannel",
-                ServiceModel.SR.GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
-            );
+            throw FxTrace
+                .Exception
+                .Argument(
+                    "TChannel",
+                    ServiceModel
+                        .SR
+                        .GetString(ServiceModel.SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
         }
 
         public override T GetProperty<T>()

@@ -127,13 +127,15 @@ namespace System
             bool throwOnError,
             bool ignoreCase
         ) =>
-            RuntimeAugments.Callbacks.GetType(
-                typeName,
-                assemblyResolver,
-                typeResolver,
-                throwOnError: throwOnError,
-                ignoreCase: ignoreCase,
-                defaultAssembly: null
-            );
+            RuntimeAugments
+                .Callbacks
+                .GetType(
+                    typeName,
+                    assemblyResolver,
+                    typeResolver,
+                    throwOnError: throwOnError,
+                    ignoreCase: ignoreCase,
+                    defaultAssembly: null
+                );
     }
 }

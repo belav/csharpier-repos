@@ -70,9 +70,10 @@ public class FileStreamResult : FileResult
             throw new ArgumentNullException(nameof(context));
         }
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<
-            IActionResultExecutor<FileStreamResult>
-        >();
+        var executor = context
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<IActionResultExecutor<FileStreamResult>>();
         return executor.ExecuteAsync(context, this);
     }
 }

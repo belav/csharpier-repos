@@ -403,7 +403,8 @@ namespace System.Net.Http
                     && (completionOption & HttpCompletionOption.ResponseHeadersRead) == 0
                 )
                 {
-                    await response.Content
+                    await response
+                        .Content
                         .LoadIntoBufferAsync(MaxResponseContentBufferSize)
                         .ConfigureAwait(false);
                 }

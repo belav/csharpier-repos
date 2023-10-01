@@ -821,8 +821,11 @@ namespace System
                     if (!IsRunningOnWindows)
                         return null;
                     using (
-                        Microsoft.Win32.RegistryKey env =
-                            Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
+                        Microsoft.Win32.RegistryKey env = Microsoft
+                            .Win32
+                            .Registry
+                            .LocalMachine
+                            .OpenSubKey(
                                 @"SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
                             )
                     )
@@ -835,8 +838,11 @@ namespace System
                     if (!IsRunningOnWindows)
                         return null;
                     using (
-                        Microsoft.Win32.RegistryKey env =
-                            Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Environment", false)
+                        Microsoft.Win32.RegistryKey env = Microsoft
+                            .Win32
+                            .Registry
+                            .CurrentUser
+                            .OpenSubKey("Environment", false)
                     )
                     {
                         object regvalue = env.GetValue(variable);
@@ -860,8 +866,11 @@ namespace System
                     if (IsRunningOnWindows)
                     {
                         using (
-                            Microsoft.Win32.RegistryKey env =
-                                Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
+                            Microsoft.Win32.RegistryKey env = Microsoft
+                                .Win32
+                                .Registry
+                                .LocalMachine
+                                .OpenSubKey(
                                     @"SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
                                 )
                         )
@@ -877,8 +886,11 @@ namespace System
                     if (IsRunningOnWindows)
                     {
                         using (
-                            Microsoft.Win32.RegistryKey env =
-                                Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Environment")
+                            Microsoft.Win32.RegistryKey env = Microsoft
+                                .Win32
+                                .Registry
+                                .CurrentUser
+                                .OpenSubKey("Environment")
                         )
                         {
                             string[] value_names = env.GetValueNames();
@@ -930,8 +942,11 @@ namespace System
                     if (!IsRunningOnWindows)
                         return;
                     using (
-                        Microsoft.Win32.RegistryKey env =
-                            Microsoft.Win32.Registry.LocalMachine.OpenSubKey(
+                        Microsoft.Win32.RegistryKey env = Microsoft
+                            .Win32
+                            .Registry
+                            .LocalMachine
+                            .OpenSubKey(
                                 @"SYSTEM\CurrentControlSet\Control\Session Manager\Environment",
                                 true
                             )
@@ -948,8 +963,11 @@ namespace System
                     if (!IsRunningOnWindows)
                         return;
                     using (
-                        Microsoft.Win32.RegistryKey env =
-                            Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Environment", true)
+                        Microsoft.Win32.RegistryKey env = Microsoft
+                            .Win32
+                            .Registry
+                            .CurrentUser
+                            .OpenSubKey("Environment", true)
                     )
                     {
                         if (String.IsNullOrEmpty(value))

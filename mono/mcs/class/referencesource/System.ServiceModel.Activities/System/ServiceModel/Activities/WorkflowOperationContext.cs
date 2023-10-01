@@ -436,9 +436,11 @@ namespace System.ServiceModel.Activities
                     AspNetEnvironment.Current.DecrementBusyCount();
                     if (AspNetEnvironment.Current.TraceDecrementBusyCountIsEnabled())
                     {
-                        AspNetEnvironment.Current.TraceDecrementBusyCount(
-                            SR.BusyCountTraceFormatString(this.workflowInstance.Id)
-                        );
+                        AspNetEnvironment
+                            .Current
+                            .TraceDecrementBusyCount(
+                                SR.BusyCountTraceFormatString(this.workflowInstance.Id)
+                            );
                     }
                     this.hasDecrementedBusyCount = true;
                 }
@@ -450,9 +452,11 @@ namespace System.ServiceModel.Activities
             AspNetEnvironment.Current.IncrementBusyCount();
             if (AspNetEnvironment.Current.TraceIncrementBusyCountIsEnabled())
             {
-                AspNetEnvironment.Current.TraceIncrementBusyCount(
-                    SR.BusyCountTraceFormatString(this.workflowInstance.Id)
-                );
+                AspNetEnvironment
+                    .Current
+                    .TraceIncrementBusyCount(
+                        SR.BusyCountTraceFormatString(this.workflowInstance.Id)
+                    );
             }
         }
 
@@ -525,9 +529,11 @@ namespace System.ServiceModel.Activities
                 }
 
                 if (
-                    System.Runtime.Interop.UnsafeNativeMethods.QueryPerformanceCounter(
-                        out this.beginTime
-                    ) == 0
+                    System
+                        .Runtime
+                        .Interop
+                        .UnsafeNativeMethods
+                        .QueryPerformanceCounter(out this.beginTime) == 0
                 )
                 {
                     this.beginTime = -1;
@@ -617,9 +623,11 @@ namespace System.ServiceModel.Activities
                 && this.performanceCountersEnabled
                 && (this.beginTime >= 0)
                 && (
-                    System.Runtime.Interop.UnsafeNativeMethods.QueryPerformanceCounter(
-                        out currentTime
-                    ) != 0
+                    System
+                        .Runtime
+                        .Interop
+                        .UnsafeNativeMethods
+                        .QueryPerformanceCounter(out currentTime) != 0
                 )
             )
             {
@@ -783,20 +791,24 @@ namespace System.ServiceModel.Activities
             bool shouldAbandon = true;
             try
             {
-                BookmarkResumptionResult resumptionResult =
-                    thisPtr.workflowInstance.EndResumeProtocolBookmark(result);
+                BookmarkResumptionResult resumptionResult = thisPtr
+                    .workflowInstance
+                    .EndResumeProtocolBookmark(result);
                 if (resumptionResult != BookmarkResumptionResult.Success)
                 {
                     // Raise UnkownMessageReceivedEvent when we fail to resume bookmark
-                    thisPtr.OperationContext.Host.RaiseUnknownMessageReceived(
-                        thisPtr.OperationContext.IncomingMessage
-                    );
+                    thisPtr
+                        .OperationContext
+                        .Host
+                        .RaiseUnknownMessageReceived(thisPtr.OperationContext.IncomingMessage);
 
                     // Only delay-retry this operation once (and only if retries are supported). Future calls will ensure the bookmark is set.
                     if (thisPtr.workflowInstance.BufferedReceiveManager != null)
                     {
-                        bool bufferSuccess =
-                            thisPtr.workflowInstance.BufferedReceiveManager.BufferReceive(
+                        bool bufferSuccess = thisPtr
+                            .workflowInstance
+                            .BufferedReceiveManager
+                            .BufferReceive(
                                 thisPtr.OperationContext,
                                 thisPtr.receiveContext,
                                 thisPtr.bookmark.Name,
@@ -821,14 +833,16 @@ namespace System.ServiceModel.Activities
                     // The throw exception is intentional whether or not BufferedReceiveManager is set.
                     // This is to allow exception to bubble up the stack to WCF to cleanup various state (like Transaction).
                     // This is queue scenario and as far as the client is concerned, the client will not see any exception.
-                    throw FxTrace.Exception.AsError(
-                        new FaultException(
-                            OperationExecutionFault.CreateOperationNotAvailableFault(
-                                thisPtr.workflowInstance.Id,
-                                thisPtr.bookmark.Name
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new FaultException(
+                                OperationExecutionFault.CreateOperationNotAvailableFault(
+                                    thisPtr.workflowInstance.Id,
+                                    thisPtr.bookmark.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 lock (thisPtr.thisLock)

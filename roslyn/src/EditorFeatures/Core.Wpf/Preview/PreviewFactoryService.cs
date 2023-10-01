@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             if (mode == DifferenceViewMode.RightViewOnly)
             {
                 diffViewer.RightView.ZoomLevel *= zoomLevel;
-                diffViewer.RightHost
+                diffViewer
+                    .RightHost
                     .GetTextViewMargin(DiffOverviewMarginName)
                     .VisualElement
                     .Visibility = Visibility.Collapsed;
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             else if (mode == DifferenceViewMode.LeftViewOnly)
             {
                 diffViewer.LeftView.ZoomLevel *= zoomLevel;
-                diffViewer.LeftHost
+                diffViewer
+                    .LeftHost
                     .GetTextViewMargin(DiffOverviewMarginName)
                     .VisualElement
                     .Visibility = Visibility.Collapsed;
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             {
                 Contract.ThrowIfFalse(mode == DifferenceViewMode.Inline);
                 diffViewer.InlineView.ZoomLevel *= zoomLevel;
-                diffViewer.InlineHost
+                diffViewer
+                    .InlineHost
                     .GetTextViewMargin(DiffOverviewMarginName)
                     .VisualElement
                     .Visibility = Visibility.Collapsed;

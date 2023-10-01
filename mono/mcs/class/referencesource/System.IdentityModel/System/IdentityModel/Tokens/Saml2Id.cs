@@ -45,9 +45,9 @@ namespace System.IdentityModel.Tokens
             }
             catch (XmlException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID4128), "value", e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentException(SR.GetString(SR.ID4128), "value", e));
             }
         }
 

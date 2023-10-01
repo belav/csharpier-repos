@@ -430,11 +430,12 @@ namespace System.Data.Entity.Design
             double schemaVersion;
             DataSpace dataSpace;
             if (
-                System.Data.EntityModel.SchemaObjectModel.SchemaManager.TryGetSchemaVersion(
-                    reader,
-                    out schemaVersion,
-                    out dataSpace
-                )
+                System
+                    .Data
+                    .EntityModel
+                    .SchemaObjectModel
+                    .SchemaManager
+                    .TryGetSchemaVersion(reader, out schemaVersion, out dataSpace)
                 && dataSpace == DataSpace.CSpace
             )
             {
@@ -568,7 +569,8 @@ namespace System.Data.Entity.Design
                     ModelBuilderErrorCode errorCode =
                         ModelBuilderErrorCode.PreprocessTemplateTransformationError;
                     errors.AddRange(
-                        codeGenerator.Errors
+                        codeGenerator
+                            .Errors
                             .OfType<CompilerError>()
                             .Select(c => ConvertToEdmSchemaError(c, errorCode))
                     );
@@ -855,18 +857,20 @@ namespace System.Data.Entity.Design
             compilerParams.GenerateInMemory = true;
             compilerParams.GenerateExecutable = false;
             // grab the assemblies by location so that we don't compile against one that we didn't reference
-            compilerParams.ReferencedAssemblies.AddRange(
-                new string[]
-                {
-                    typeof(System.CodeDom.Compiler.CodeDomProvider).Assembly.Location, // System.dll
-                    typeof(System.Linq.Enumerable).Assembly.Location, // System.Core.dll
-                    typeof(System.Data.Objects.ObjectContext).Assembly.Location, // System.Data.Entity.dll
-                    typeof(System.Data.Entity.Design.EntityCodeGenerator).Assembly.Location, // System.Data.Entity.Design.dll
-                    typeof(System.Data.DbType).Assembly.Location, // System.Data.dll
-                    typeof(System.Xml.XmlAttribute).Assembly.Location, // System.Xml.dll
-                    typeof(System.Xml.Linq.XElement).Assembly.Location, // System.Xml.Linq.dll
-                }
-            );
+            compilerParams
+                .ReferencedAssemblies
+                .AddRange(
+                    new string[]
+                    {
+                        typeof(System.CodeDom.Compiler.CodeDomProvider).Assembly.Location, // System.dll
+                        typeof(System.Linq.Enumerable).Assembly.Location, // System.Core.dll
+                        typeof(System.Data.Objects.ObjectContext).Assembly.Location, // System.Data.Entity.dll
+                        typeof(System.Data.Entity.Design.EntityCodeGenerator).Assembly.Location, // System.Data.Entity.Design.dll
+                        typeof(System.Data.DbType).Assembly.Location, // System.Data.dll
+                        typeof(System.Xml.XmlAttribute).Assembly.Location, // System.Xml.dll
+                        typeof(System.Xml.Linq.XElement).Assembly.Location, // System.Xml.Linq.dll
+                    }
+                );
 
 #if !ENABLE_TEMPLATE_DEBUGGING
             CompilerResults results = compilerProvider.CompileAssemblyFromSource(
@@ -896,7 +900,8 @@ namespace System.Data.Entity.Design
 
             if (results.Errors.HasErrors)
             {
-                string message = results.Errors
+                string message = results
+                    .Errors
                     .OfType<CompilerError>()
                     .Aggregate(
                         string.Empty,

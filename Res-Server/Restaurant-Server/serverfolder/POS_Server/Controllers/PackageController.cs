@@ -391,7 +391,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var row = entity.packages
+                        var row = entity
+                            .packages
                             .Where(u => u.packageId == packageId)
                             .Select(
                                 S =>
@@ -536,7 +537,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var tmpObject = entity.packages
+                                var tmpObject = entity
+                                    .packages
                                     .Where(p => p.packageId == newObject.packageId)
                                     .FirstOrDefault();
 
@@ -819,7 +821,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.packages
+                        var list = entity
+                            .packages
                             .Where(u => u.parentIUId == parentIUId)
                             .Select(
                                 S =>

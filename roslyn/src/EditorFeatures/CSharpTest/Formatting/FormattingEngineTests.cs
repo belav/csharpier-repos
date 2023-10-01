@@ -2674,9 +2674,9 @@ class C
             AssertFormatWithView(
                 expected,
                 code,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 
@@ -2703,9 +2703,9 @@ class C
             AssertFormatWithView(
                 expected,
                 code,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 
@@ -2732,9 +2732,9 @@ class C
             AssertFormatWithView(
                 expected,
                 code,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 
@@ -2758,9 +2758,9 @@ interface I1
             AssertFormatAfterTypeChar(
                 code,
                 expected,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 
@@ -2784,9 +2784,9 @@ interface I1
             AssertFormatAfterTypeChar(
                 code,
                 expected,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 
@@ -2810,9 +2810,9 @@ interface I1<T> where T : I1<T>
             AssertFormatAfterTypeChar(
                 code,
                 expected,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                    LanguageVersion.Preview
-                )
+                parseOptions: CSharpParseOptions
+                    .Default
+                    .WithLanguageVersion(LanguageVersion.Preview)
             );
         }
 
@@ -2878,10 +2878,9 @@ interface I1
             var textView = subjectDocument.GetTextView();
 
             globalOptions?.SetGlobalOptions(workspace.GlobalOptions);
-            workspace.GlobalOptions.SetEditorOptions(
-                textView.Options.GlobalOptions,
-                subjectDocument.Project.Language
-            );
+            workspace
+                .GlobalOptions
+                .SetEditorOptions(textView.Options.GlobalOptions, subjectDocument.Project.Language);
 
             commandHandler.ExecuteCommand(
                 new TypeCharCommandArgs(textView, subjectDocument.GetTextBuffer(), typedChar[0]),

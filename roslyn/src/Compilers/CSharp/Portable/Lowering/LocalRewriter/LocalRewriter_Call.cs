@@ -153,11 +153,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var m in methods)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedMethodIfNeedTo(
-                            m.OriginalDefinition.GetCciAdapter(),
-                            syntaxNode,
-                            _diagnostics.DiagnosticBag
-                        );
+                        module
+                            .EmbeddedTypesManagerOpt
+                            .EmbedMethodIfNeedTo(
+                                m.OriginalDefinition.GetCciAdapter(),
+                                syntaxNode,
+                                _diagnostics.DiagnosticBag
+                            );
                     }
                 }
             }
@@ -180,11 +182,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     foreach (var p in properties)
                     {
-                        module.EmbeddedTypesManagerOpt.EmbedPropertyIfNeedTo(
-                            p.OriginalDefinition.GetCciAdapter(),
-                            syntaxNode,
-                            _diagnostics.DiagnosticBag
-                        );
+                        module
+                            .EmbeddedTypesManagerOpt
+                            .EmbedPropertyIfNeedTo(
+                                p.OriginalDefinition.GetCciAdapter(),
+                                syntaxNode,
+                                _diagnostics.DiagnosticBag
+                            );
                     }
                 }
             }

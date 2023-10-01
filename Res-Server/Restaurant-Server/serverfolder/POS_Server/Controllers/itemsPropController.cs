@@ -176,7 +176,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var tmpLocation = entity.itemsProp
+                                var tmpLocation = entity
+                                    .itemsProp
                                     .Where(p => p.itemPropId == newObject.itemPropId)
                                     .FirstOrDefault();
                                 tmpLocation.propertyItemId = newObject.propertyItemId;

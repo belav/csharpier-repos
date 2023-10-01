@@ -56,14 +56,16 @@ namespace Microsoft.CodeAnalysis.UnitTesting.ExternalAccess
                 return Empty;
             }
 
-            return callerMethods.Value.SelectAsArray(
-                m =>
-                    (
-                        MethodFullyQualifiedName: m.FullName,
-                        MethodFilePath: m.FilePath,
-                        MethodOutputFilePath: m.OutputFilePath
-                    )
-            );
+            return callerMethods
+                .Value
+                .SelectAsArray(
+                    m =>
+                        (
+                            MethodFullyQualifiedName: m.FullName,
+                            MethodFilePath: m.FilePath,
+                            MethodOutputFilePath: m.OutputFilePath
+                        )
+                );
         }
     }
 }

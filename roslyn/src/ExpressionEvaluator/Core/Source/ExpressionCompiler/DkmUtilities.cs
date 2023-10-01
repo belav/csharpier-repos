@@ -162,9 +162,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             var builder = ArrayBuilder<AssemblyReaders>.GetInstance();
             foreach (
-                DkmClrModuleInstance module in instructionAddress.RuntimeInstance.GetModulesInAppDomain(
-                    instructionAddress.ModuleInstance.AppDomain
-                )
+                DkmClrModuleInstance module in instructionAddress
+                    .RuntimeInstance
+                    .GetModulesInAppDomain(instructionAddress.ModuleInstance.AppDomain)
             )
             {
                 var symReader = module.GetSymReader();

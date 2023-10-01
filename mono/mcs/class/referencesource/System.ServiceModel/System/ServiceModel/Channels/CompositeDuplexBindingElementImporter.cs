@@ -36,10 +36,10 @@ namespace System.ServiceModel.Channels
 
             if (
                 compositeDuplexAssertion != null
-                || WsdlImporter.WSAddressingHelper.DetermineSupportedAddressingMode(
-                    importer,
-                    context
-                ) == SupportedAddressingMode.NonAnonymous
+                || WsdlImporter
+                    .WSAddressingHelper
+                    .DetermineSupportedAddressingMode(importer, context)
+                    == SupportedAddressingMode.NonAnonymous
             )
             {
                 context.BindingElements.Add(new CompositeDuplexBindingElement());

@@ -989,10 +989,11 @@ namespace System.Web.Configuration
                 }
             }
 
-            System.Web.Util.Debug.Trace(
-                "LoadAssembly",
-                "Successfully loaded assembly '" + assemblyName + "'"
-            );
+            System
+                .Web
+                .Util
+                .Debug
+                .Trace("LoadAssembly", "Successfully loaded assembly '" + assemblyName + "'");
 
             return retAssembly;
         }
@@ -1009,10 +1010,11 @@ namespace System.Web.Configuration
             if (!FileUtil.DirectoryExists(binPath))
             {
                 // This is expected to fail if there is no 'bin' dir
-                System.Web.Util.Debug.Trace(
-                    "Template",
-                    "Failed to access bin dir \"" + binPath + "\""
-                );
+                System
+                    .Web
+                    .Util
+                    .Debug
+                    .Trace("Template", "Failed to access bin dir \"" + binPath + "\"");
             }
             else
             {

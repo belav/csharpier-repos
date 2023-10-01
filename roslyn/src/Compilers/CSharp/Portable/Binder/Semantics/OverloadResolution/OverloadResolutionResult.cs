@@ -1856,15 +1856,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
             else if (
-                System.Linq.Enumerable.Any(
-                    ResultsBuilder,
-                    x =>
-                        (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
-                        || (
-                            x.Result.Kind
-                            == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
-                        )
-                )
+                System
+                    .Linq
+                    .Enumerable
+                    .Any(
+                        ResultsBuilder,
+                        x =>
+                            (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
+                            || (
+                                x.Result.Kind
+                                == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
+                            )
+                    )
             )
             {
                 sb.AppendLine(

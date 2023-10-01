@@ -141,10 +141,9 @@ public sealed class LazyAssemblyLoader
             var loadedAssembly =
                 pdb.Length == 0
                     ? AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(assembly))
-                    : AssemblyLoadContext.Default.LoadFromStream(
-                        new MemoryStream(assembly),
-                        new MemoryStream(pdb)
-                    );
+                    : AssemblyLoadContext
+                        .Default
+                        .LoadFromStream(new MemoryStream(assembly), new MemoryStream(pdb));
             loadedAssemblies.Add(loadedAssembly);
             _loadedAssemblyCache.Add(loadedAssembly.GetName().Name + ".dll");
         }

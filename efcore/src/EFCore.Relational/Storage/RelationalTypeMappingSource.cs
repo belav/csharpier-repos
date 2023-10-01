@@ -154,10 +154,9 @@ public abstract class RelationalTypeMappingSource
                     if (sourceType != null)
                     {
                         foreach (
-                            var converterInfo in Dependencies.ValueConverterSelector.Select(
-                                sourceType,
-                                providerType
-                            )
+                            var converterInfo in Dependencies
+                                .ValueConverterSelector
+                                .Select(sourceType, providerType)
                         )
                         {
                             var mappingInfoUsed = info.WithConverter(converterInfo);
@@ -166,9 +165,9 @@ public abstract class RelationalTypeMappingSource
                             if (mapping == null && providerType != null)
                             {
                                 foreach (
-                                    var secondConverterInfo in Dependencies.ValueConverterSelector.Select(
-                                        providerType
-                                    )
+                                    var secondConverterInfo in Dependencies
+                                        .ValueConverterSelector
+                                        .Select(providerType)
                                 )
                                 {
                                     mapping = FindMapping(

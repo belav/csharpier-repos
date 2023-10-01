@@ -233,17 +233,18 @@ namespace Microsoft.CodeAnalysis.Classification
                     // First, see if this is a string annotated with either a comment or [StringSyntax] attribute. If
                     // so, delegate to the first classifier we have registered for whatever language ID we find.
                     if (
-                        _service._detector.IsEmbeddedLanguageToken(
-                            token,
-                            _semanticModel,
-                            _cancellationToken,
-                            out var identifier,
-                            out _
-                        )
-                        && _service._identifierToClassifiers.TryGetValue(
-                            identifier,
-                            out var classifiers
-                        )
+                        _service
+                            ._detector
+                            .IsEmbeddedLanguageToken(
+                                token,
+                                _semanticModel,
+                                _cancellationToken,
+                                out var identifier,
+                                out _
+                            )
+                        && _service
+                            ._identifierToClassifiers
+                            .TryGetValue(identifier, out var classifiers)
                     )
                     {
                         foreach (var classifier in classifiers)

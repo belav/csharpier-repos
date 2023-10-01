@@ -32,8 +32,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var startupHookFixture = sharedTestState.StartupHookFixture.Copy();
             var startupHookDll = startupHookFixture.TestProject.AppDll;
 
-            var startupHookWithNonPublicMethodFixture =
-                sharedTestState.StartupHookWithNonPublicMethodFixture.Copy();
+            var startupHookWithNonPublicMethodFixture = sharedTestState
+                .StartupHookWithNonPublicMethodFixture
+                .Copy();
             var startupHookWithNonPublicMethodDll = startupHookWithNonPublicMethodFixture
                 .TestProject
                 .AppDll;
@@ -520,7 +521,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 "1.0.0"
             );
 
-            fixture.BuiltDotnet
+            fixture
+                .BuiltDotnet
                 .Exec(fixture.TestProject.AppDll)
                 .EnvironmentVariable(startupHookVarName, startupHookAssemblyName)
                 .CaptureStdOut()
@@ -596,8 +598,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var startupHookFixture = sharedTestState.StartupHookFixture.Copy();
             var startupHookDll = startupHookFixture.TestProject.AppDll;
 
-            var startupHookInvalidAssembly =
-                sharedTestState.StartupHookStartupHookInvalidAssemblyFixture.Copy();
+            var startupHookInvalidAssembly = sharedTestState
+                .StartupHookStartupHookInvalidAssemblyFixture
+                .Copy();
             var startupHookInvalidAssemblyDll = Path.Combine(
                 Path.GetDirectoryName(startupHookInvalidAssembly.TestProject.AppDll),
                 "StartupHookInvalidAssembly.dll"
@@ -643,8 +646,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var startupHookFixture = sharedTestState.StartupHookFixture.Copy();
             var startupHookDll = startupHookFixture.TestProject.AppDll;
 
-            var startupHookMissingTypeFixture =
-                sharedTestState.StartupHookWithoutStartupHookTypeFixture.Copy();
+            var startupHookMissingTypeFixture = sharedTestState
+                .StartupHookWithoutStartupHookTypeFixture
+                .Copy();
             var startupHookMissingTypeDll = startupHookMissingTypeFixture.TestProject.AppDll;
 
             // Missing type is detected
@@ -690,8 +694,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var startupHookFixture = sharedTestState.StartupHookFixture.Copy();
             var startupHookDll = startupHookFixture.TestProject.AppDll;
 
-            var startupHookMissingMethodFixture =
-                sharedTestState.StartupHookWithoutInitializeMethodFixture.Copy();
+            var startupHookMissingMethodFixture = sharedTestState
+                .StartupHookWithoutInitializeMethodFixture
+                .Copy();
             var startupHookMissingMethodDll = startupHookMissingMethodFixture.TestProject.AppDll;
 
             var expectedError =
@@ -740,8 +745,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 "System.ArgumentException: The signature of the startup hook 'StartupHook.Initialize' in assembly '{0}' was invalid. It must be 'public static void Initialize()'.";
 
             // Initialize is an instance method
-            var startupHookWithInstanceMethodFixture =
-                sharedTestState.StartupHookWithInstanceMethodFixture.Copy();
+            var startupHookWithInstanceMethodFixture = sharedTestState
+                .StartupHookWithInstanceMethodFixture
+                .Copy();
             var startupHookWithInstanceMethodDll = startupHookWithInstanceMethodFixture
                 .TestProject
                 .AppDll;
@@ -759,8 +765,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 );
 
             // Initialize method takes parameters
-            var startupHookWithParameterFixture =
-                sharedTestState.StartupHookWithParameterFixture.Copy();
+            var startupHookWithParameterFixture = sharedTestState
+                .StartupHookWithParameterFixture
+                .Copy();
             var startupHookWithParameterDll = startupHookWithParameterFixture.TestProject.AppDll;
             dotnet
                 .Exec(appDll)
@@ -774,8 +781,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .HaveStdErrContaining(string.Format(expectedError, startupHookWithParameterDll));
 
             // Initialize method has non-void return type
-            var startupHookWithReturnTypeFixture =
-                sharedTestState.StartupHookWithReturnTypeFixture.Copy();
+            var startupHookWithReturnTypeFixture = sharedTestState
+                .StartupHookWithReturnTypeFixture
+                .Copy();
             var startupHookWithReturnTypeDll = startupHookWithReturnTypeFixture.TestProject.AppDll;
             dotnet
                 .Exec(appDll)
@@ -789,8 +797,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .HaveStdErrContaining(string.Format(expectedError, startupHookWithReturnTypeDll));
 
             // Initialize method that has multiple methods with an incorrect signature
-            var startupHookWithMultipleIncorrectSignaturesFixture =
-                sharedTestState.StartupHookWithMultipleIncorrectSignaturesFixture.Copy();
+            var startupHookWithMultipleIncorrectSignaturesFixture = sharedTestState
+                .StartupHookWithMultipleIncorrectSignaturesFixture
+                .Copy();
             var startupHookWithMultipleIncorrectSignaturesDll =
                 startupHookWithMultipleIncorrectSignaturesFixture.TestProject.AppDll;
             dotnet
@@ -843,34 +852,38 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 context.Target,
                 context.CompilationOptions,
                 context.CompileLibraries,
-                context.RuntimeLibraries.Select(
-                    lib =>
-                        new RuntimeLibrary(
-                            lib.Type,
-                            lib.Name,
-                            lib.Version,
-                            lib.Hash,
-                            lib.RuntimeAssemblyGroups
-                                .Select(
-                                    assemblyGroup =>
-                                        new RuntimeAssetGroup(
-                                            assemblyGroup.Runtime,
-                                            assemblyGroup.RuntimeFiles.Where(
-                                                f => !f.Path.EndsWith("SharedLibrary.dll")
+                context
+                    .RuntimeLibraries
+                    .Select(
+                        lib =>
+                            new RuntimeLibrary(
+                                lib.Type,
+                                lib.Name,
+                                lib.Version,
+                                lib.Hash,
+                                lib.RuntimeAssemblyGroups
+                                    .Select(
+                                        assemblyGroup =>
+                                            new RuntimeAssetGroup(
+                                                assemblyGroup.Runtime,
+                                                assemblyGroup
+                                                    .RuntimeFiles
+                                                    .Where(
+                                                        f => !f.Path.EndsWith("SharedLibrary.dll")
+                                                    )
                                             )
-                                        )
-                                )
-                                .ToList()
-                                .AsReadOnly(),
-                            lib.NativeLibraryGroups,
-                            lib.ResourceAssemblies,
-                            lib.Dependencies,
-                            lib.Serviceable,
-                            lib.Path,
-                            lib.HashPath,
-                            lib.RuntimeStoreManifestName
-                        )
-                ),
+                                    )
+                                    .ToList()
+                                    .AsReadOnly(),
+                                lib.NativeLibraryGroups,
+                                lib.ResourceAssemblies,
+                                lib.Dependencies,
+                                lib.Serviceable,
+                                lib.Path,
+                                lib.HashPath,
+                                lib.RuntimeStoreManifestName
+                            )
+                    ),
                 context.RuntimeGraph
             );
 

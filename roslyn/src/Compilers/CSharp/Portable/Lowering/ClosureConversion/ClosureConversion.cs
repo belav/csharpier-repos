@@ -370,10 +370,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var frame = MakeFrame(scope, env);
                         env.SynthesizedEnvironment = frame;
 
-                        CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                            ContainingType,
-                            frame.GetCciAdapter()
-                        );
+                        CompilationState
+                            .ModuleBuilderOpt
+                            .AddSynthesizedDefinition(ContainingType, frame.GetCciAdapter());
                         if (frame.Constructor != null)
                         {
                             AddSynthesizedMethod(
@@ -437,10 +436,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         new CapturedToFrameSymbolReplacement(hoistedField, isReusable: false)
                     );
                     synthesizedEnv.AddHoistedField(hoistedField);
-                    CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                        synthesizedEnv,
-                        hoistedField.GetCciAdapter()
-                    );
+                    CompilationState
+                        .ModuleBuilderOpt
+                        .AddSynthesizedDefinition(synthesizedEnv, hoistedField.GetCciAdapter());
                 }
 
                 return synthesizedEnv;
@@ -616,10 +614,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var frame = _lazyStaticLambdaFrame;
 
                     // add frame type and cache field
-                    CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                        this.ContainingType,
-                        frame.GetCciAdapter()
-                    );
+                    CompilationState
+                        .ModuleBuilderOpt
+                        .AddSynthesizedDefinition(this.ContainingType, frame.GetCciAdapter());
 
                     // add its ctor (note Constructor can be null if TypeKind.Struct is passed in to LambdaFrame.ctor, but Class is passed in above)
                     AddSynthesizedMethod(
@@ -846,10 +843,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         Debug.Assert(capturedFrame.Type.IsReferenceType); // Make sure we're not accidentally capturing a struct by value
                         frame.AddHoistedField(capturedFrame);
-                        CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                            frame,
-                            capturedFrame.GetCciAdapter()
-                        );
+                        CompilationState
+                            .ModuleBuilderOpt
+                            .AddSynthesizedDefinition(frame, capturedFrame.GetCciAdapter());
                     }
 
                     proxies[_innermostFramePointer] = new CapturedToFrameSymbolReplacement(
@@ -1816,10 +1812,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 lambdaScope = null;
             }
 
-            CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                translatedLambdaContainer,
-                synthesizedMethod.GetCciAdapter()
-            );
+            CompilationState
+                .ModuleBuilderOpt
+                .AddSynthesizedDefinition(
+                    translatedLambdaContainer,
+                    synthesizedMethod.GetCciAdapter()
+                );
 
             foreach (var parameter in node.Symbol.Parameters)
             {
@@ -2004,7 +2002,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // Since the cache variable will be in a container with possibly alpha-rewritten generic parameters, we need to
                         // substitute the original type according to the type map for that container. That substituted type may be
                         // different from the local variable `type`, which has the node's type substituted for the current container.
-                        var cacheVariableType = containerAsFrame.TypeMap
+                        var cacheVariableType = containerAsFrame
+                            .TypeMap
                             .SubstituteType(node.Type)
                             .Type;
 
@@ -2034,10 +2033,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 isReadOnly: false,
                                 isStatic: closureKind == ClosureKind.Singleton
                             );
-                            CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                                translatedLambdaContainer,
-                                cacheField.GetCciAdapter()
-                            );
+                            CompilationState
+                                .ModuleBuilderOpt
+                                .AddSynthesizedDefinition(
+                                    translatedLambdaContainer,
+                                    cacheField.GetCciAdapter()
+                                );
                             cache = F.Field(receiver, cacheField.AsMember(constructedFrame)); //NOTE: the field was added to the unconstructed frame type.
                             result = F.Coalesce(cache, F.AssignmentExpression(cache, result));
                         }

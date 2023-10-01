@@ -75,11 +75,9 @@ public class ServicePropertyDiscoveryConvention
                     continue;
                 }
 
-                var factory =
-                    Dependencies.MemberClassifier.FindServicePropertyCandidateBindingFactory(
-                        memberInfo,
-                        model
-                    );
+                var factory = Dependencies
+                    .MemberClassifier
+                    .FindServicePropertyCandidateBindingFactory(memberInfo, model);
                 if (factory == null)
                 {
                     continue;

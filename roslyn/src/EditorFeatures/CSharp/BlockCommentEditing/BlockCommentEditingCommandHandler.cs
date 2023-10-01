@@ -70,10 +70,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
         )
         {
             if (
-                !_editorOptionsService.GlobalOptions.GetOption(
-                    FeatureOnOffOptions.AutoInsertBlockCommentStartString,
-                    LanguageNames.CSharp
-                )
+                !_editorOptionsService
+                    .GlobalOptions
+                    .GetOption(
+                        FeatureOnOffOptions.AutoInsertBlockCommentStartString,
+                        LanguageNames.CSharp
+                    )
             )
                 return false;
 

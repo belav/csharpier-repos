@@ -379,7 +379,25 @@ namespace System.Runtime.Serialization.DataContracts
                 }
                 // enforce that enum value was completely parsed
                 if (longValue != 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.InvalidEnumValueOnWrite,
+                                    value,
+                                    DataContract.GetClrTypeFullName(UnderlyingType)
+                                )
+                            )
+                        );
+
+                if (noneWritten && zeroIndex >= 0)
+                    writer.WriteString(ChildElementNames![zeroIndex].Value);
+            }
+            else
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
                         XmlObjectSerializer.CreateSerializationException(
                             SR.Format(
                                 SR.InvalidEnumValueOnWrite,
@@ -388,20 +406,6 @@ namespace System.Runtime.Serialization.DataContracts
                             )
                         )
                     );
-
-                if (noneWritten && zeroIndex >= 0)
-                    writer.WriteString(ChildElementNames![zeroIndex].Value);
-            }
-            else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.InvalidEnumValueOnWrite,
-                            value,
-                            DataContract.GetClrTypeFullName(UnderlyingType)
-                        )
-                    )
-                );
         }
 
         internal object ReadEnumValue(XmlReaderDelegator reader)
@@ -441,15 +445,17 @@ namespace System.Runtime.Serialization.DataContracts
             else
             {
                 if (stringValue.Length == 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.Format(
-                                SR.InvalidEnumValueOnRead,
-                                stringValue,
-                                DataContract.GetClrTypeFullName(UnderlyingType)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.InvalidEnumValueOnRead,
+                                    stringValue,
+                                    DataContract.GetClrTypeFullName(UnderlyingType)
+                                )
                             )
-                        )
-                    );
+                        );
                 longValue = ReadEnumValue(stringValue, 0, stringValue.Length);
             }
 
@@ -471,15 +477,17 @@ namespace System.Runtime.Serialization.DataContracts
                     return Values![i];
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                XmlObjectSerializer.CreateSerializationException(
-                    SR.Format(
-                        SR.InvalidEnumValueOnRead,
-                        value.Substring(index, count),
-                        DataContract.GetClrTypeFullName(UnderlyingType)
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.InvalidEnumValueOnRead,
+                            value.Substring(index, count),
+                            DataContract.GetClrTypeFullName(UnderlyingType)
+                        )
                     )
-                )
-            );
+                );
         }
 
         internal string GetStringFromEnumValue(long value)

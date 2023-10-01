@@ -1026,13 +1026,15 @@ namespace MonoTests.System.Data
             DataTable child = ds.Tables.Add("child");
             child.Columns.Add("idref", typeof(int));
             Constraint uniqueId = null;
-            parent.Constraints.Add(
-                uniqueId = new UniqueConstraint(
-                    "uniqueId",
-                    new DataColumn[] { parent.Columns["id"] },
-                    true
-                )
-            );
+            parent
+                .Constraints
+                .Add(
+                    uniqueId = new UniqueConstraint(
+                        "uniqueId",
+                        new DataColumn[] { parent.Columns["id"] },
+                        true
+                    )
+                );
             ForeignKeyConstraint fkc = new ForeignKeyConstraint(
                 "ParentChildConstraint",
                 new DataColumn[] { parent.Columns["id"] },

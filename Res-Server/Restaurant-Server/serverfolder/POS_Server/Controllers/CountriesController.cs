@@ -56,7 +56,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.countriesCodes
+                        var list = entity
+                            .countriesCodes
                             .Select(c => new { c.countryId, c.code, })
                             .ToList();
 
@@ -165,7 +166,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.countriesCodes
+                        var list = entity
+                            .countriesCodes
                             .Select(
                                 c =>
                                     new
@@ -257,7 +259,8 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         // reset all to 0
-                        List<countriesCodes> objectlist = entity.countriesCodes
+                        List<countriesCodes> objectlist = entity
+                            .countriesCodes
                             .Where(x => x.isDefault == 1)
                             .ToList();
                         if (objectlist.Count > 0)
@@ -389,7 +392,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.countriesCodes
+                        var list = entity
+                            .countriesCodes
                             .Where(c => c.countryId == Id)
                             .Select(
                                 c =>
@@ -490,7 +494,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.countriesCodes
+                        var list = entity
+                            .countriesCodes
                             .Where(c => c.isDefault == isDefault)
                             .Select(
                                 c =>
@@ -598,7 +603,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    CountryModel item = entity.countriesCodes
+                    CountryModel item = entity
+                        .countriesCodes
                         .Where(c => c.isDefault == 1)
                         .Select(
                             c =>

@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
         {
             var document = context.Document;
             var cancellationToken = context.CancellationToken;
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
@@ -246,9 +247,9 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
 
             foreach (var returnSyntax in returns)
             {
-                var returnExpression = generator.SyntaxFacts.GetExpressionOfReturnStatement(
-                    returnSyntax
-                );
+                var returnExpression = generator
+                    .SyntaxFacts
+                    .GetExpressionOfReturnStatement(returnSyntax);
                 if (returnExpression is null)
                 {
                     // Convert return; into return Task.CompletedTask;

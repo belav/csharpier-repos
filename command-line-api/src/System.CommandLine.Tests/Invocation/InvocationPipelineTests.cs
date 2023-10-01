@@ -153,7 +153,9 @@ namespace System.CommandLine.Tests.Invocation
                 .AddMiddleware(
                     async (context, next) =>
                     {
-                        var tokens = context.ParseResult.Tokens
+                        var tokens = context
+                            .ParseResult
+                            .Tokens
                             .Select(t => t.Value)
                             .Concat(new[] { "implicit-inner-command" })
                             .ToArray();

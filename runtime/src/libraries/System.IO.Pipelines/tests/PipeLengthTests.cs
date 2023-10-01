@@ -142,7 +142,8 @@ namespace System.IO.Pipelines.Tests
 
             ReadResult result = await _pipe.Reader.ReadAsync();
             // This gets the end of the first block
-            SequencePosition position = result.Buffer
+            SequencePosition position = result
+                .Buffer
                 .Slice(result.Buffer.Start, _pool.MaxBufferSize)
                 .End;
 
@@ -176,7 +177,8 @@ namespace System.IO.Pipelines.Tests
 
             ReadResult result = await _pipe.Reader.ReadAsync();
             // This gets the end of the first block
-            SequencePosition endOfFirstBlock = result.Buffer
+            SequencePosition endOfFirstBlock = result
+                .Buffer
                 .Slice(result.Buffer.Start, _pool.MaxBufferSize)
                 .End;
             // Start of the next block
@@ -215,7 +217,8 @@ namespace System.IO.Pipelines.Tests
 
             ReadResult result = await _pipe.Reader.ReadAsync();
             // This gets the end of the first block
-            SequencePosition position = result.Buffer
+            SequencePosition position = result
+                .Buffer
                 .Slice(result.Buffer.Start, _pool.MaxBufferSize)
                 .End;
 

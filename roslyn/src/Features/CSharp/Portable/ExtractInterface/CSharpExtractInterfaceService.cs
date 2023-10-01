@@ -74,9 +74,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
         internal override bool ShouldIncludeAccessibilityModifier(SyntaxNode typeNode)
         {
             var typeDeclaration = typeNode as TypeDeclarationSyntax;
-            return typeDeclaration.Modifiers.Any(
-                m => SyntaxFacts.IsAccessibilityModifier(m.Kind())
-            );
+            return typeDeclaration
+                .Modifiers
+                .Any(m => SyntaxFacts.IsAccessibilityModifier(m.Kind()));
         }
 
         protected override Task<Solution> UpdateMembersWithExplicitImplementationsAsync(

@@ -72,10 +72,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             }
 
             if (
-                !CodeAnalysis.Workspace.TryGetWorkspace(
-                    args.SubjectBuffer.AsTextContainer(),
-                    out var workspace
-                )
+                !CodeAnalysis
+                    .Workspace
+                    .TryGetWorkspace(args.SubjectBuffer.AsTextContainer(), out var workspace)
             )
             {
                 return CommandState.Unspecified;
@@ -95,10 +94,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
         )
         {
             if (
-                !textView.Properties.TryGetProperty(
-                    typeof(AbstractSnippetExpansionClient),
-                    out AbstractSnippetExpansionClient expansionClient
-                )
+                !textView
+                    .Properties
+                    .TryGetProperty(
+                        typeof(AbstractSnippetExpansionClient),
+                        out AbstractSnippetExpansionClient expansionClient
+                    )
             )
             {
                 expansionClient = new SnippetExpansionClient(
@@ -108,10 +109,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     ExpansionServiceProvider,
                     EditorOptionsService
                 );
-                textView.Properties.AddProperty(
-                    typeof(AbstractSnippetExpansionClient),
-                    expansionClient
-                );
+                textView
+                    .Properties
+                    .AddProperty(typeof(AbstractSnippetExpansionClient), expansionClient);
             }
 
             return expansionClient;

@@ -34,13 +34,15 @@ namespace System.Security.Cryptography
 
             BlockSizeInBytes = blockSizeInBytes;
             PaddingSizeInBytes = paddingSizeInBytes;
-            _ctx = Interop.Crypto.EvpCipherCreate(
-                algorithm,
-                ref MemoryMarshal.GetReference(key),
-                key.Length * 8,
-                ref MemoryMarshal.GetReference(iv),
-                encrypting ? 1 : 0
-            );
+            _ctx = Interop
+                .Crypto
+                .EvpCipherCreate(
+                    algorithm,
+                    ref MemoryMarshal.GetReference(key),
+                    key.Length * 8,
+                    ref MemoryMarshal.GetReference(iv),
+                    encrypting ? 1 : 0
+                );
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctx);
 

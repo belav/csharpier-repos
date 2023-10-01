@@ -198,9 +198,9 @@ namespace Microsoft.CodeAnalysis
                 if (
                     candidateIdentity is not null
                     && candidateIdentity.Version >= requestedIdentity.Version
-                    && candidateIdentity.PublicKeyToken.SequenceEqual(
-                        requestedIdentity.PublicKeyToken
-                    )
+                    && candidateIdentity
+                        .PublicKeyToken
+                        .SequenceEqual(requestedIdentity.PublicKeyToken)
                 )
                 {
                     if (

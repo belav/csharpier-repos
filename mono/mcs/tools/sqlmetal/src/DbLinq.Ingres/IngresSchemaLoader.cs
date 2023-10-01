@@ -66,9 +66,9 @@ namespace DbLinq.Ingres
                     keyColRow.TableName,
                     keyColRow.TableSchema
                 );
-                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(
-                    t => constraintFullDbName == t.Name
-                );
+                DbLinq.Schema.Dbml.Table table = schema
+                    .Tables
+                    .FirstOrDefault(t => constraintFullDbName == t.Name);
                 if (table == null)
                 {
                     WriteErrorLine(
@@ -84,9 +84,10 @@ namespace DbLinq.Ingres
                 {
                     //foreach (string pk_name in keyColRow.column_name_primaries)
                     //{
-                    DbLinq.Schema.Dbml.Column primaryKeyCol = table.Type.Columns.First(
-                        c => c.Name == keyColRow.ColumnName
-                    );
+                    DbLinq.Schema.Dbml.Column primaryKeyCol = table
+                        .Type
+                        .Columns
+                        .First(c => c.Name == keyColRow.ColumnName);
                     primaryKeyCol.IsPrimaryKey = true;
                     //}
                     continue;

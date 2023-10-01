@@ -82,10 +82,9 @@ namespace System.Reflection.Runtime.TypeInfos
                 {
                     RuntimeTypeHandle baseTypeHandle;
                     if (
-                        ReflectionCoreExecution.ExecutionEnvironment.TryGetBaseType(
-                            typeHandle,
-                            out baseTypeHandle
-                        )
+                        ReflectionCoreExecution
+                            .ExecutionEnvironment
+                            .TryGetBaseType(typeHandle, out baseTypeHandle)
                     )
                         return Type.GetTypeFromHandle(baseTypeHandle);
                 }
@@ -223,10 +222,9 @@ namespace System.Reflection.Runtime.TypeInfos
 
             RuntimeTypeHandle interfaceTypeHandle = interfaceType.TypeHandle;
 
-            ReflectionCoreExecution.ExecutionEnvironment.VerifyInterfaceIsImplemented(
-                TypeHandle,
-                interfaceTypeHandle
-            );
+            ReflectionCoreExecution
+                .ExecutionEnvironment
+                .VerifyInterfaceIsImplemented(TypeHandle, interfaceTypeHandle);
             Debug.Assert(interfaceType.IsInterface);
             Debug.Assert(!IsInterface);
 
@@ -235,12 +233,14 @@ namespace System.Reflection.Runtime.TypeInfos
             if (IsSZArray && interfaceType.IsGenericType)
                 throw new ArgumentException(SR.Argument_ArrayGetInterfaceMap);
 
-            ReflectionCoreExecution.ExecutionEnvironment.GetInterfaceMap(
-                this,
-                interfaceType,
-                out MethodInfo[] interfaceMethods,
-                out MethodInfo[] targetMethods
-            );
+            ReflectionCoreExecution
+                .ExecutionEnvironment
+                .GetInterfaceMap(
+                    this,
+                    interfaceType,
+                    out MethodInfo[] interfaceMethods,
+                    out MethodInfo[] targetMethods
+                );
 
             InterfaceMapping im;
             im.InterfaceType = interfaceType;
@@ -280,10 +280,9 @@ namespace System.Reflection.Runtime.TypeInfos
                 RuntimeTypeHandle typeHandle = InternalTypeHandleIfAvailable;
                 if (!typeHandle.IsNull())
                 {
-                    IEnumerable<RuntimeTypeHandle> implementedInterfaces =
-                        ReflectionCoreExecution.ExecutionEnvironment.TryGetImplementedInterfaces(
-                            typeHandle
-                        );
+                    IEnumerable<RuntimeTypeHandle> implementedInterfaces = ReflectionCoreExecution
+                        .ExecutionEnvironment
+                        .TryGetImplementedInterfaces(typeHandle);
                     if (implementedInterfaces != null)
                     {
                         done = true;
@@ -353,10 +352,9 @@ namespace System.Reflection.Runtime.TypeInfos
             {
                 // If both types have type handles, let MRT handle this. It's not dependent on metadata.
                 if (
-                    ReflectionCoreExecution.ExecutionEnvironment.IsAssignableFrom(
-                        toTypeHandle,
-                        fromTypeHandle
-                    )
+                    ReflectionCoreExecution
+                        .ExecutionEnvironment
+                        .IsAssignableFrom(toTypeHandle, fromTypeHandle)
                 )
                     return true;
 

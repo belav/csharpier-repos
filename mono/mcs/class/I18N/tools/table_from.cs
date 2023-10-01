@@ -127,13 +127,15 @@ public class table_from
                                     )
                                 )
                                 {
-                                    Console.Out.Write(
-                                        "0x"
-                                            + toHexString2(i0)
-                                            + toHexString2(i1)
-                                            + toHexString2(i2)
-                                            + "\t"
-                                    );
+                                    Console
+                                        .Out
+                                        .Write(
+                                            "0x"
+                                                + toHexString2(i0)
+                                                + toHexString2(i1)
+                                                + toHexString2(i2)
+                                                + "\t"
+                                        );
                                     printOutput(outp);
                                     Console.Out.WriteLine();
                                 }
@@ -159,14 +161,16 @@ public class table_from
                                             )
                                         )
                                         {
-                                            Console.Out.Write(
-                                                "0x"
-                                                    + toHexString2(i0)
-                                                    + toHexString2(i1)
-                                                    + toHexString2(i2)
-                                                    + toHexString2(i3)
-                                                    + "\t"
-                                            );
+                                            Console
+                                                .Out
+                                                .Write(
+                                                    "0x"
+                                                        + toHexString2(i0)
+                                                        + toHexString2(i1)
+                                                        + toHexString2(i2)
+                                                        + toHexString2(i3)
+                                                        + "\t"
+                                                );
                                             printOutput(outp);
                                             Console.Out.WriteLine();
                                         }

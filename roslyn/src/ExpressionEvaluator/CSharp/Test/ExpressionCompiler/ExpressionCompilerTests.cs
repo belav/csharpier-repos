@@ -459,9 +459,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             for (int offset = startOffset; offset <= endOffset; offset++)
             {
                 var scope = scopes.GetInnermostScope(offset);
-                var constraints = GetMetadataContext(
-                    previous
-                ).EvaluationContext.MethodContextReuseConstraints;
+                var constraints = GetMetadataContext(previous)
+                    .EvaluationContext
+                    .MethodContextReuseConstraints;
                 if (constraints.HasValue)
                 {
                     Assert.Equal(
@@ -532,14 +532,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             );
             Assert.NotEqual(context, GetMetadataContext(previous).EvaluationContext);
             Assert.True(
-                GetMetadataContext(
-                    previous
-                ).EvaluationContext.MethodContextReuseConstraints.Value.AreSatisfied(
-                    moduleVersionId,
-                    methodToken,
-                    methodVersion,
-                    endOffset
-                )
+                GetMetadataContext(previous)
+                    .EvaluationContext
+                    .MethodContextReuseConstraints
+                    .Value
+                    .AreSatisfied(moduleVersionId, methodToken, methodVersion, endOffset)
             );
             Assert.NotEqual(context.Compilation, GetMetadataContext(previous).Compilation);
             previous = appDomain.GetMetadataContext();
@@ -567,14 +564,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             );
             Assert.NotEqual(context, GetMetadataContext(previous).EvaluationContext);
             Assert.False(
-                GetMetadataContext(
-                    previous
-                ).EvaluationContext.MethodContextReuseConstraints.Value.AreSatisfied(
-                    moduleVersionId,
-                    methodToken,
-                    methodVersion,
-                    0
-                )
+                GetMetadataContext(previous)
+                    .EvaluationContext
+                    .MethodContextReuseConstraints
+                    .Value
+                    .AreSatisfied(moduleVersionId, methodToken, methodVersion, 0)
             );
             Assert.Equal(context.Compilation, GetMetadataContext(previous).Compilation);
 
@@ -5824,9 +5818,9 @@ struct S
                     var methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         "int?",
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnTypeWithAnnotations.ToDisplayString()
+                        ((MethodSymbol)methodData.Method)
+                            .ReturnTypeWithAnnotations
+                            .ToDisplayString()
                     );
                     methodData.VerifyIL(
                         @"{
@@ -5851,9 +5845,9 @@ struct S
                     methodData = testData.GetMethodData("<>x.<>m0");
                     Assert.Equal(
                         "int?",
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnTypeWithAnnotations.ToDisplayString()
+                        ((MethodSymbol)methodData.Method)
+                            .ReturnTypeWithAnnotations
+                            .ToDisplayString()
                     );
 
                     testData = new CompilationTestData();
@@ -6182,9 +6176,9 @@ class C
                 {
                     var context = CreateMethodContext(runtime, "C.M");
 
-                    var actionType = context.Compilation.GetWellKnownType(
-                        WellKnownType.System_Action
-                    );
+                    var actionType = context
+                        .Compilation
+                        .GetWellKnownType(WellKnownType.System_Action);
 
                     ResultProperties resultProperties;
                     string error;
@@ -6879,9 +6873,9 @@ public class C
         [Fact, WorkItem(1089688, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1089688")]
         public void UseSiteWarning()
         {
-            var signedDllOptions = TestOptions.SigningReleaseDll.WithCryptoKeyFile(
-                SigningTestHelpers.KeyPairFile
-            );
+            var signedDllOptions = TestOptions
+                .SigningReleaseDll
+                .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
 
             var libBTemplate =
                 @"
@@ -7989,14 +7983,18 @@ public delegate void D(in int p);",
                 symbolValidator: module =>
                 {
                     Assert.NotNull(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     Assert.NotNull(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.IsReadOnlyAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.IsReadOnlyAttribute.FullName
+                            )
                     );
                 }
             );
@@ -8018,14 +8016,18 @@ public class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.IsReadOnlyAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.IsReadOnlyAttribute.FullName
+                            )
                     );
                 }
             );
@@ -8058,14 +8060,18 @@ public delegate ref readonly int D();",
                 symbolValidator: module =>
                 {
                     Assert.NotNull(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     Assert.NotNull(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.IsReadOnlyAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.IsReadOnlyAttribute.FullName
+                            )
                     );
                 }
             );
@@ -8088,14 +8094,18 @@ public class Test
                 symbolValidator: module =>
                 {
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                            )
                     );
                     Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(
-                            AttributeDescription.IsReadOnlyAttribute.FullName
-                        )
+                        module
+                            .ContainingAssembly
+                            .GetTypeByMetadataName(
+                                AttributeDescription.IsReadOnlyAttribute.FullName
+                            )
                     );
                 }
             );

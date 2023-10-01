@@ -225,7 +225,9 @@ namespace System.Activities.Debugger
         {
             if (this.arguments == null || this.arguments.Length == 0)
             {
-                this.arguments = activityInstance.Activity.RuntimeArguments
+                this.arguments = activityInstance
+                    .Activity
+                    .RuntimeArguments
                     .Select(
                         argument =>
                             new LocalInfo
@@ -269,9 +271,10 @@ namespace System.Activities.Debugger
                         allDelegateArguments.AddRange(
                             RemoveHiddenDelegateArguments(
                                 existingNames,
-                                activity.HandlerOf.RuntimeDelegateArguments.Select(
-                                    delegateArgument => delegateArgument.BoundArgument
-                                )
+                                activity
+                                    .HandlerOf
+                                    .RuntimeDelegateArguments
+                                    .Select(delegateArgument => delegateArgument.BoundArgument)
                             )
                         );
                     }
@@ -784,9 +787,11 @@ namespace System.Activities.Debugger
                     return result;
                 }
 
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.VariableOrArgumentDoesNotExist(name))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.VariableOrArgumentDoesNotExist(name))
+                    );
             }
 
             public void RegisterName(string name, object scopedElement)

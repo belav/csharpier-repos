@@ -255,10 +255,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     && !Equals(typeInfo.ConvertedType, typeInfo.Type)
                 )
                 {
-                    var conversion = _semanticModel.Compilation.ClassifyConversion(
-                        typeInfo.Type,
-                        typeInfo.ConvertedType
-                    );
+                    var conversion = _semanticModel
+                        .Compilation
+                        .ClassifyConversion(typeInfo.Type, typeInfo.ConvertedType);
                     if (!conversion.IsIdentityOrImplicitReference())
                         return node.Cast(typeInfo.ConvertedType);
                 }
@@ -378,10 +377,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 if (
                     expressionConvertedType != null
-                    && !SymbolEqualityComparer.Default.Equals(
-                        expressionConvertedType,
-                        expressionType
-                    )
+                    && !SymbolEqualityComparer
+                        .Default
+                        .Equals(expressionConvertedType, expressionType)
                 )
                 {
                     return node.Update(

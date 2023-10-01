@@ -41,22 +41,26 @@ namespace System.ServiceModel.Web
         {
             if (!AspNetEnvironment.Current.AspNetCompatibilityEnabled)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR2.CacheProfileOnlySupportedInAspNetCompatibilityMode
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.CacheProfileOnlySupportedInAspNetCompatibilityMode
+                        )
+                    );
             }
 
             if (operationDescription.Behaviors.Find<WebGetAttribute>() == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.CacheProfileAttributeOnlyWithGet)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR2.CacheProfileAttributeOnlyWithGet)
+                    );
             }
-            dispatchOperation.ParameterInspectors.Add(
-                new CachingParameterInspector(this.cacheProfileName)
-            );
+            dispatchOperation
+                .ParameterInspectors
+                .Add(new CachingParameterInspector(this.cacheProfileName));
         }
 
         public void Validate(OperationDescription operationDescription)

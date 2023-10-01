@@ -244,18 +244,20 @@ public class RemoteRendererTest
             );
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-                renderer.RenderComponentAsync<AutoParameterTestComponent>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                            [nameof(AutoParameterTestComponent.Trigger)] = trigger
-                        }
+        await renderer
+            .Dispatcher
+            .InvokeAsync(
+                () =>
+                    renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                                [nameof(AutoParameterTestComponent.Trigger)] = trigger
+                            }
+                        )
                     )
-                )
-        );
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -329,18 +331,20 @@ public class RemoteRendererTest
             );
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-                renderer.RenderComponentAsync<AutoParameterTestComponent>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                            [nameof(AutoParameterTestComponent.Trigger)] = trigger
-                        }
+        await renderer
+            .Dispatcher
+            .InvokeAsync(
+                () =>
+                    renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                                [nameof(AutoParameterTestComponent.Trigger)] = trigger
+                            }
+                        )
                     )
-                )
-        );
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -414,18 +418,20 @@ public class RemoteRendererTest
         var trigger = new Trigger();
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-                renderer.RenderComponentAsync<AutoParameterTestComponent>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                            [nameof(AutoParameterTestComponent.Trigger)] = trigger
-                        }
+        await renderer
+            .Dispatcher
+            .InvokeAsync(
+                () =>
+                    renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                                [nameof(AutoParameterTestComponent.Trigger)] = trigger
+                            }
+                        )
                     )
-                )
-        );
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -493,18 +499,20 @@ public class RemoteRendererTest
         var trigger = new Trigger();
 
         // This produces the initial batch (id = 2)
-        await renderer.Dispatcher.InvokeAsync(
-            () =>
-                renderer.RenderComponentAsync<AutoParameterTestComponent>(
-                    ParameterView.FromDictionary(
-                        new Dictionary<string, object>
-                        {
-                            [nameof(AutoParameterTestComponent.Content)] = initialContent,
-                            [nameof(AutoParameterTestComponent.Trigger)] = trigger
-                        }
+        await renderer
+            .Dispatcher
+            .InvokeAsync(
+                () =>
+                    renderer.RenderComponentAsync<AutoParameterTestComponent>(
+                        ParameterView.FromDictionary(
+                            new Dictionary<string, object>
+                            {
+                                [nameof(AutoParameterTestComponent.Content)] = initialContent,
+                                [nameof(AutoParameterTestComponent.Trigger)] = trigger
+                            }
+                        )
                     )
-                )
-        );
+            );
         trigger.Component.Content = (builder) =>
         {
             builder.OpenElement(0, "offline element");
@@ -628,9 +636,9 @@ public class RemoteRendererTest
 
         public void TriggerRender()
         {
-            var task = _renderHandle.Dispatcher.InvokeAsync(
-                () => _renderHandle.Render(_renderFragment)
-            );
+            var task = _renderHandle
+                .Dispatcher
+                .InvokeAsync(() => _renderHandle.Render(_renderFragment));
             Assert.True(task.IsCompletedSuccessfully);
         }
     }

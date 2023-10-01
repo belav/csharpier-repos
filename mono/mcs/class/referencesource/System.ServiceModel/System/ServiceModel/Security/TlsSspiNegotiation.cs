@@ -220,9 +220,9 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception((int)SecurityStatus.InvalidHandle)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
                 }
                 if (this.remoteCertificate == null)
                 {
@@ -241,9 +241,9 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception((int)SecurityStatus.InvalidHandle)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
                 }
                 if (this.remoteCertificateChain == null)
                 {
@@ -283,9 +283,9 @@ namespace System.ServiceModel.Security
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception((int)SecurityStatus.InvalidHandle)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
                 }
                 if (this.connectionInfo == null)
                 {
@@ -350,9 +350,9 @@ namespace System.ServiceModel.Security
         public byte[] Decrypt(byte[] encryptedContent)
         {
             ThrowIfDisposed();
-            byte[] dataBuffer = DiagnosticUtility.Utility.AllocateByteArray(
-                encryptedContent.Length
-            );
+            byte[] dataBuffer = DiagnosticUtility
+                .Utility
+                .AllocateByteArray(encryptedContent.Length);
 
             Buffer.BlockCopy(encryptedContent, 0, dataBuffer, 0, encryptedContent.Length);
 
@@ -374,9 +374,11 @@ namespace System.ServiceModel.Security
         public byte[] Encrypt(byte[] input)
         {
             ThrowIfDisposed();
-            byte[] buffer = DiagnosticUtility.Utility.AllocateByteArray(
-                checked(input.Length + StreamSizes.header + StreamSizes.trailer)
-            );
+            byte[] buffer = DiagnosticUtility
+                .Utility
+                .AllocateByteArray(
+                    checked(input.Length + StreamSizes.header + StreamSizes.trailer)
+                );
 
             Buffer.BlockCopy(input, 0, buffer, StreamSizes.header, input.Length);
 
@@ -445,9 +447,9 @@ namespace System.ServiceModel.Security
             if ((statusCode & unchecked((int)0x80000000)) != 0)
             {
                 this.Dispose();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(statusCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(statusCode));
             }
 
             if (statusCode == (int)SecurityStatus.OK)
@@ -463,11 +465,13 @@ namespace System.ServiceModel.Security
                         );
                     if (connectionInfo == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityNegotiationException(
-                                SR.GetString(SR.CannotObtainSslConnectionInfo)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityNegotiationException(
+                                    SR.GetString(SR.CannotObtainSslConnectionInfo)
+                                )
+                            );
                     }
                     SecurityUtils.ValidateSslCipherStrength(connectionInfo.DataKeySize);
                 }
@@ -490,15 +494,20 @@ namespace System.ServiceModel.Security
                 this.Dispose();
                 if (statusCode == (int)SecurityStatus.InternalError)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(statusCode, SR.GetString(SR.LsaAuthorityNotContacted))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(
+                                statusCode,
+                                SR.GetString(SR.LsaAuthorityNotContacted)
+                            )
+                        );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(statusCode)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(statusCode));
                 }
             }
             return outgoingSecurity.token;
@@ -541,9 +550,9 @@ namespace System.ServiceModel.Security
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
 
             for (int i = 0; i < securityBuffer.Length; ++i)
@@ -605,9 +614,9 @@ namespace System.ServiceModel.Security
             int errorCode = SspiWrapper.EncryptMessage(this.securityContext, securityBuffer, 0);
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
 
             int trailerSize = 0;
@@ -641,29 +650,41 @@ namespace System.ServiceModel.Security
             }
             catch (SecurityException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.SslCertMayNotDoKeyExchange, certificate.SubjectName.Name),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.SslCertMayNotDoKeyExchange,
+                                certificate.SubjectName.Name
+                            ),
+                            e
+                        )
+                    );
             }
             catch (CryptographicException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.SslCertMayNotDoKeyExchange, certificate.SubjectName.Name),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.SslCertMayNotDoKeyExchange,
+                                certificate.SubjectName.Name
+                            ),
+                            e
+                        )
+                    );
             }
             if (!hasPrivateKey)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.SslCertMustHavePrivateKey, certificate.SubjectName.Name)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.SslCertMustHavePrivateKey, certificate.SubjectName.Name)
+                        )
+                    );
             }
         }
 
@@ -671,9 +692,9 @@ namespace System.ServiceModel.Security
         {
             if (this.serverCertificate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serverCertificate"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("serverCertificate");
             }
 
             ValidatePrivateKey(this.serverCertificate);
@@ -801,9 +822,9 @@ namespace System.ServiceModel.Security
         {
             if (!IsValidContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception((int)SecurityStatus.InvalidHandle)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
             }
 
             SafeCloseHandle token = null;
@@ -833,9 +854,9 @@ namespace System.ServiceModel.Security
 
         void OnBadData()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new MessageSecurityException(SR.GetString(SR.BadData))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadData)));
         }
 
         void ThrowIfDisposed()
@@ -844,9 +865,9 @@ namespace System.ServiceModel.Security
             {
                 if (this.disposed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(null)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(null));
                 }
             }
         }

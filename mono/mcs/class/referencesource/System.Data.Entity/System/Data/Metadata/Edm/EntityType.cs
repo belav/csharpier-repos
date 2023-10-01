@@ -272,10 +272,14 @@ namespace System.Data.Metadata.Edm
                 DataSpace.OSpace
             )
         {
-            System.Diagnostics.Debug.Assert(
-                !String.IsNullOrEmpty(cspaceNamespaceName) && !String.IsNullOrEmpty(cspaceTypeName),
-                "Mapping information must never be null"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    !String.IsNullOrEmpty(cspaceNamespaceName)
+                        && !String.IsNullOrEmpty(cspaceTypeName),
+                    "Mapping information must never be null"
+                );
 
             _type = type.TypeHandle;
             _cspaceNamespaceName = cspaceNamespaceName;
@@ -341,7 +345,11 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         private string BuildEntityTypeHash()
         {
-            var hash = System.Data.Common.Utils.MetadataHelper
+            var hash = System
+                .Data
+                .Common
+                .Utils
+                .MetadataHelper
                 .CreateSHA256HashAlgorithm()
                 .ComputeHash(Encoding.ASCII.GetBytes(BuildEntityTypeDescription()));
 

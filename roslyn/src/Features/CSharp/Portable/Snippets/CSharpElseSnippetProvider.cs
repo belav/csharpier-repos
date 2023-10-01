@@ -116,15 +116,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
         )
         {
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
-            var openBraceLine = parsedDocument.Text.Lines
+            var openBraceLine = parsedDocument
+                .Text
+                .Lines
                 .GetLineFromPosition(elseClauseSyntax.Statement.SpanStart)
                 .LineNumber;
 
             var indentationOptions = new IndentationOptions(syntaxFormattingOptions);
             var newLine = indentationOptions.FormattingOptions.NewLine;
 
-            var indentationService =
-                parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
+            var indentationService = parsedDocument
+                .LanguageServices
+                .GetRequiredService<IIndentationService>();
             var indentation = indentationService.GetIndentation(
                 parsedDocument,
                 openBraceLine + 1,
@@ -169,9 +172,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
             var blockStatement = (BlockSyntax)elseClauseSyntax.Statement;
             blockStatement = blockStatement.WithCloseBraceToken(
-                blockStatement.CloseBraceToken.WithPrependedLeadingTrivia(
-                    SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
-                )
+                blockStatement
+                    .CloseBraceToken
+                    .WithPrependedLeadingTrivia(
+                        SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
+                    )
             );
             var newElseClauseSyntax = elseClauseSyntax.ReplaceNode(
                 elseClauseSyntax.Statement,

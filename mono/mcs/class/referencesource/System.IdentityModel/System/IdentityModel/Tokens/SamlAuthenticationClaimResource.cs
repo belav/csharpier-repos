@@ -32,13 +32,13 @@ namespace System.IdentityModel.Tokens
         void OnDeserialized(StreamingContext ctx)
         {
             if (string.IsNullOrEmpty(authenticationMethod))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authenticationMethod"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("authenticationMethod");
             if (authorityBindings == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authorityBindings"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("authorityBindings");
         }
 
         public SamlAuthenticationClaimResource(
@@ -49,9 +49,9 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (string.IsNullOrEmpty(authenticationMethod))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authenticationMethod"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("authenticationMethod");
 
             this.authenticationInstant = authenticationInstant;
             this.authenticationMethod = authenticationMethod;
@@ -70,9 +70,9 @@ namespace System.IdentityModel.Tokens
             : this(authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
         {
             if (authorityBindings == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("authorityBindings")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("authorityBindings"));
 
             List<SamlAuthorityBinding> tempList = new List<SamlAuthorityBinding>();
             foreach (SamlAuthorityBinding authorityBinding in authorityBindings)
@@ -93,9 +93,9 @@ namespace System.IdentityModel.Tokens
             : this(authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
         {
             if (authorityBindings == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("authorityBindings")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("authorityBindings"));
 
             this.authorityBindings = authorityBindings;
         }

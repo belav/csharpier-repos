@@ -72,10 +72,15 @@ namespace System.Diagnostics.Tracing
                 Enable(); // Enable it unconditionally.
 #else
                 if (
-                    System.Threading.Tasks.TplEtwProvider.Log.IsEnabled(
-                        EventLevel.Informational,
-                        System.Threading.Tasks.TplEtwProvider.Keywords.TasksFlowActivityIds
-                    )
+                    System
+                        .Threading
+                        .Tasks
+                        .TplEtwProvider
+                        .Log
+                        .IsEnabled(
+                            EventLevel.Informational,
+                            System.Threading.Tasks.TplEtwProvider.Keywords.TasksFlowActivityIds
+                        )
                 )
                     Enable();
 #endif

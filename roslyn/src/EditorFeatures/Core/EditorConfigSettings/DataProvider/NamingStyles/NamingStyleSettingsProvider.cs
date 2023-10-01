@@ -49,9 +49,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Naming
                 (location.LocationKind != LocationKind.VisualStudio)
                     ? options.EditorConfigFileName
                     : null;
-            var namingRules = namingPreferences.NamingRules.Select(
-                r => r.GetRule(namingPreferences)
-            );
+            var namingRules = namingPreferences
+                .NamingRules
+                .Select(r => r.GetRule(namingPreferences));
             var allStyles = namingPreferences.NamingStyles.DistinctBy(s => s.Name).ToArray();
             var namingStyles = namingRules.Select(
                 namingRule =>

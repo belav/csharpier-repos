@@ -61,15 +61,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         )
         {
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Organizing_document
-                )
+                context
+                    .OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Organizing_document)
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
-                var document =
-                    args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                var document = args.SubjectBuffer
+                    .CurrentSnapshot
+                    .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                         context.OperationContext,
                         _threadingContext
                     );
@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         {
             if (IsCommandSupported(args, needsSemantics, out var workspace))
             {
-                var organizeImportsService = workspace.Services
+                var organizeImportsService = workspace
+                    .Services
                     .GetLanguageServices(args.SubjectBuffer)
                     .GetService<IOrganizeImportsService>();
                 return new CommandState(
@@ -153,10 +154,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         public bool ExecuteCommand(SortImportsCommandArgs args, CommandExecutionContext context)
         {
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Organizing_document
-                )
+                context
+                    .OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Organizing_document)
             )
             {
                 SortImports(args.SubjectBuffer, context.OperationContext);
@@ -171,10 +171,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         )
         {
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Organizing_document
-                )
+                context
+                    .OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Organizing_document)
             )
             {
                 this.SortAndRemoveUnusedImports(args.SubjectBuffer, context.OperationContext);
@@ -189,8 +188,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         )
         {
             var cancellationToken = operationContext.UserCancellationToken;
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document != null)
             {
                 var newDocument = Formatter
@@ -209,8 +209,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         )
         {
             var cancellationToken = operationContext.UserCancellationToken;
-            var document =
-                subjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
                     operationContext,
                     _threadingContext
                 );
@@ -231,9 +232,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
         }
 
         protected static void ApplyTextChange(Document oldDocument, Document newDocument) =>
-            oldDocument.Project.Solution.Workspace.ApplyDocumentChanges(
-                newDocument,
-                CancellationToken.None
-            );
+            oldDocument
+                .Project
+                .Solution
+                .Workspace
+                .ApplyDocumentChanges(newDocument, CancellationToken.None);
     }
 }

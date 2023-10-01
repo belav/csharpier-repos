@@ -758,10 +758,9 @@ namespace Mono.Linker
 
             MethodDefinition? owningMethod;
             while (
-                context.CompilerGeneratedState.TryGetOwningMethodForCompilerGeneratedMember(
-                    member,
-                    out owningMethod
-                )
+                context
+                    .CompilerGeneratedState
+                    .TryGetOwningMethodForCompilerGeneratedMember(member, out owningMethod)
             )
             {
                 Debug.Assert(owningMethod != member);
@@ -796,10 +795,9 @@ namespace Mono.Linker
                 )
                     return true;
             } while (
-                context.CompilerGeneratedState.TryGetOwningMethodForCompilerGeneratedMember(
-                    method,
-                    out method
-                )
+                context
+                    .CompilerGeneratedState
+                    .TryGetOwningMethodForCompilerGeneratedMember(method, out method)
             );
 
             attribute = null;

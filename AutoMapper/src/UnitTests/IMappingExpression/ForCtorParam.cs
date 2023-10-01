@@ -154,10 +154,12 @@ public class When_configuring__non_generic_ctor_param_members : AutoMapperSpecBa
             });
         configuration.ShouldThrowException<AutoMapperConfigurationException>(exception =>
         {
-            exception.Message.ShouldContain(
-                "does not have a matching constructor with a parameter named 'think'.",
-                Case.Sensitive
-            );
+            exception
+                .Message
+                .ShouldContain(
+                    "does not have a matching constructor with a parameter named 'think'.",
+                    Case.Sensitive
+                );
             exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
         });
     }
@@ -192,10 +194,12 @@ public class When_configuring__non_generic_ctor_param_members : AutoMapperSpecBa
 
         configuration.ShouldThrowException<AutoMapperConfigurationException>(exception =>
         {
-            exception.Message.ShouldContain(
-                "does not have a matching constructor with a parameter named 'think'.",
-                Case.Sensitive
-            );
+            exception
+                .Message
+                .ShouldContain(
+                    "does not have a matching constructor with a parameter named 'think'.",
+                    Case.Sensitive
+                );
             exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
         });
     }

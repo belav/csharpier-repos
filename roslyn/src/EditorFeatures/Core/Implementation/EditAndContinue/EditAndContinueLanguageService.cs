@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
         private Solution GetCurrentCompileTimeSolution()
         {
             var workspace = WorkspaceProvider.Value.Workspace;
-            return workspace.Services
+            return workspace
+                .Services
                 .GetRequiredService<ICompileTimeSolutionProvider>()
                 .GetCompileTimeSolution(workspace.CurrentSolution);
         }
@@ -85,7 +86,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
         }
 
         private IActiveStatementTrackingService GetActiveStatementTrackingService() =>
-            WorkspaceProvider.Value.Workspace.Services.GetRequiredService<IActiveStatementTrackingService>();
+            WorkspaceProvider
+                .Value
+                .Workspace
+                .Services
+                .GetRequiredService<IActiveStatementTrackingService>();
 
         internal void Disable() => _disabled = true;
 
@@ -371,15 +376,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                     .ConfigureAwait(false);
             _pendingUpdatedSolution = solution;
 
-            var updates = moduleUpdates.Updates.SelectAsArray(
-                update =>
-                    new ManagedHotReloadUpdate(
-                        update.Module,
-                        update.ILDelta,
-                        update.MetadataDelta,
-                        update.UpdatedTypes
-                    )
-            );
+            var updates = moduleUpdates
+                .Updates
+                .SelectAsArray(
+                    update =>
+                        new ManagedHotReloadUpdate(
+                            update.Module,
+                            update.ILDelta,
+                            update.MetadataDelta,
+                            update.UpdatedTypes
+                        )
+                );
 
             var diagnostics = await EmitSolutionUpdateResults
                 .GetHotReloadDiagnosticsAsync(

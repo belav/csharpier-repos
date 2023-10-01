@@ -107,10 +107,9 @@ namespace System.Text.Json
         {
             Debug.Assert(state.NewReferenceId == null);
 
-            string referenceId = state.ReferenceResolver.GetReference(
-                currentValue,
-                out bool alreadyExists
-            );
+            string referenceId = state
+                .ReferenceResolver
+                .GetReference(currentValue, out bool alreadyExists);
             Debug.Assert(referenceId != null);
 
             if (alreadyExists)

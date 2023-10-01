@@ -50,10 +50,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Many static predicates use the same state argument in this method
             var arg = (attributesToRemove, accessibleWithin);
 
-            var someParameterHasAttribute = property.Parameters.Any(
-                static (p, arg) => p.GetAttributes().Any(ShouldRemoveAttribute, arg),
-                arg
-            );
+            var someParameterHasAttribute = property
+                .Parameters
+                .Any(static (p, arg) => p.GetAttributes().Any(ShouldRemoveAttribute, arg), arg);
             if (!someParameterHasAttribute)
                 return property;
 
@@ -66,24 +65,26 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 property.RefKind,
                 property.ExplicitInterfaceImplementations,
                 property.Name,
-                property.Parameters.SelectAsArray(
-                    static (p, arg) =>
-                        CodeGenerationSymbolFactory.CreateParameterSymbol(
-                            p.GetAttributes()
-                                .WhereAsArray(
-                                    static (a, arg) => !ShouldRemoveAttribute(a, arg),
-                                    arg
-                                ),
-                            p.RefKind,
-                            p.IsParams,
-                            p.Type,
-                            p.Name,
-                            p.IsOptional,
-                            p.HasExplicitDefaultValue,
-                            p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
-                        ),
-                    arg
-                ),
+                property
+                    .Parameters
+                    .SelectAsArray(
+                        static (p, arg) =>
+                            CodeGenerationSymbolFactory.CreateParameterSymbol(
+                                p.GetAttributes()
+                                    .WhereAsArray(
+                                        static (a, arg) => !ShouldRemoveAttribute(a, arg),
+                                        arg
+                                    ),
+                                p.RefKind,
+                                p.IsParams,
+                                p.Type,
+                                p.Name,
+                                p.IsOptional,
+                                p.HasExplicitDefaultValue,
+                                p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
+                            ),
+                        arg
+                    ),
                 property.GetMethod,
                 property.SetMethod,
                 property.IsIndexer
@@ -101,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             property.SetMethod != null || ContainsBackingField(property);
 
         public static IFieldSymbol? GetBackingFieldIfAny(this IPropertySymbol property) =>
-            property.ContainingType
+            property
+                .ContainingType
                 .GetMembers()
                 .OfType<IFieldSymbol>()
                 .FirstOrDefault(f => property.Equals(f.AssociatedSymbol));

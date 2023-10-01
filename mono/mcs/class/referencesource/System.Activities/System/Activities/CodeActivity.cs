@@ -111,9 +111,9 @@ namespace System.Activities
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity)
-            );
+            throw FxTrace
+                .Exception
+                .AsError(new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity));
         }
 
         protected virtual void CacheMetadata(CodeActivityMetadata metadata)
@@ -248,9 +248,9 @@ namespace System.Activities
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity)
-            );
+            throw FxTrace
+                .Exception
+                .AsError(new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity));
         }
 
         protected virtual void CacheMetadata(CodeActivityMetadata metadata)

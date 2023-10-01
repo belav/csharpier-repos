@@ -164,7 +164,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
 
                             EntityFrameworkEventSource.Log.QueryExecuting();
 
-                            _enumerator = _cosmosQueryContext.CosmosClient
+                            _enumerator = _cosmosQueryContext
+                                .CosmosClient
                                 .ExecuteSqlQuery(
                                     _selectExpression.Container,
                                     _partitionKey,
@@ -265,7 +266,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
 
                             EntityFrameworkEventSource.Log.QueryExecuting();
 
-                            _enumerator = _cosmosQueryContext.CosmosClient
+                            _enumerator = _cosmosQueryContext
+                                .CosmosClient
                                 .ExecuteSqlQueryAsync(
                                     _selectExpression.Container,
                                     _partitionKey,

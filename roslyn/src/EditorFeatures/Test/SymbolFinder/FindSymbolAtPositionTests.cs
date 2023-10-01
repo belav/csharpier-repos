@@ -18,13 +18,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
     {
         private static Task<ISymbol> FindSymbolAtPositionAsync(TestWorkspace workspace)
         {
-            var position = workspace.Documents
+            var position = workspace
+                .Documents
                 .Single(d => d.CursorPosition.HasValue)
                 .CursorPosition!
                 .Value;
-            var document = workspace.CurrentSolution.GetRequiredDocument(
-                workspace.Documents.Single().Id
-            );
+            var document = workspace
+                .CurrentSolution
+                .GetRequiredDocument(workspace.Documents.Single().Id);
             return SymbolFinder.FindSymbolAtPositionAsync(document, position);
         }
 

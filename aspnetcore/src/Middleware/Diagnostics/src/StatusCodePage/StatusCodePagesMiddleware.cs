@@ -41,8 +41,9 @@ public class StatusCodePagesMiddleware
         var statusCodeFeature = new StatusCodePagesFeature();
         context.Features.Set<IStatusCodePagesFeature>(statusCodeFeature);
         var endpoint = context.GetEndpoint();
-        var skipStatusCodePageMetadata =
-            endpoint?.Metadata.GetMetadata<ISkipStatusCodePagesMetadata>();
+        var skipStatusCodePageMetadata = endpoint
+            ?.Metadata
+            .GetMetadata<ISkipStatusCodePagesMetadata>();
 
         if (skipStatusCodePageMetadata is not null)
         {

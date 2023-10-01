@@ -190,10 +190,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 _projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
                 {
-                    var documentIds =
-                        _projectSystemProjectFactory.Workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                            moniker
-                        );
+                    var documentIds = _projectSystemProjectFactory
+                        .Workspace
+                        .CurrentSolution
+                        .GetDocumentIdsWithFilePath(moniker);
                     if (documentIds.IsDefaultOrEmpty)
                     {
                         return;
@@ -226,9 +226,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     {
                         if (
                             !w.IsDocumentOpen(documentId)
-                            && !_projectSystemProjectFactory.DocumentsNotFromFiles.Contains(
-                                documentId
-                            )
+                            && !_projectSystemProjectFactory
+                                .DocumentsNotFromFiles
+                                .Contains(documentId)
                         )
                         {
                             var isCurrentContext = documentId.ProjectId == activeContextProjectId;
@@ -383,9 +383,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 _projectSystemProjectFactory.ApplyChangeToWorkspace(w =>
                 {
-                    var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                        moniker
-                    );
+                    var documentIds = _workspace
+                        .CurrentSolution
+                        .GetDocumentIdsWithFilePath(moniker);
                     if (documentIds.IsDefaultOrEmpty || documentIds.Length == 1)
                     {
                         return;
@@ -445,9 +445,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     {
                         if (
                             w.IsDocumentOpen(documentId)
-                            && !_projectSystemProjectFactory.DocumentsNotFromFiles.Contains(
-                                documentId
-                            )
+                            && !_projectSystemProjectFactory
+                                .DocumentsNotFromFiles
+                                .Contains(documentId)
                         )
                         {
                             var solution = w.CurrentSolution;
@@ -550,7 +550,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                     Task.Run(async () =>
                         {
-                            await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                            await _foregroundAffinitization
+                                .ThreadingContext
+                                .JoinableTaskFactory
+                                .SwitchToMainThreadAsync();
 
                             ProcessQueuedWorkOnUIThread();
                         })

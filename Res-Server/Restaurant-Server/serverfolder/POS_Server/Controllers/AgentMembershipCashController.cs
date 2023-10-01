@@ -417,7 +417,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var bank = entity.agentMembershipCash
+                    var bank = entity
+                        .agentMembershipCash
                         .Where(S => S.agentMembershipCashId == agentMembershipCashId)
                         .Select(
                             S =>
@@ -523,7 +524,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.agentMembershipCash
+                            tmpObject = entity
+                                .agentMembershipCash
                                 .Where(
                                     p => p.agentMembershipCashId == newObject.agentMembershipCashId
                                 )
@@ -600,9 +602,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            agentMembershipCash objDelete = entity.agentMembershipCash.Find(
-                                agentMembershipCashId
-                            );
+                            agentMembershipCash objDelete = entity
+                                .agentMembershipCash
+                                .Find(agentMembershipCashId);
                             entity.agentMembershipCash.Remove(objDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -619,9 +621,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            agentMembershipCash objDelete = entity.agentMembershipCash.Find(
-                                agentMembershipCashId
-                            );
+                            agentMembershipCash objDelete = entity
+                                .agentMembershipCash
+                                .Find(agentMembershipCashId);
                             objDelete.isActive = 0;
                             objDelete.updateUserId = userId;
                             objDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
@@ -680,7 +682,8 @@ namespace POS_Server.Controllers
                 // delete old invoice items
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    items = entity.agentMembershipCash
+                    items = entity
+                        .agentMembershipCash
                         .Where(x => x.membershipId == membershipId)
                         .ToList();
                     if (items != null)
@@ -1019,7 +1022,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        tmpObject = entity.agentMembershipCash
+                        tmpObject = entity
+                            .agentMembershipCash
                             .Where(p => p.agentMembershipCashId == newObject.agentMembershipCashId)
                             .FirstOrDefault();
 

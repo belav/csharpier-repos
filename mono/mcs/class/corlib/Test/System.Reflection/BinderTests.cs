@@ -1667,12 +1667,9 @@ namespace MonoTests.System.Reflection
         {
             var m = typeof(BinderTest).GetMethod("Bug325306_");
             BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
-            AssertingBinder.Instance.SelectMethod(
-                flags,
-                new MethodBase[] { m, m },
-                new Type[] { typeof(int) },
-                null
-            );
+            AssertingBinder
+                .Instance
+                .SelectMethod(flags, new MethodBase[] { m, m }, new Type[] { typeof(int) }, null);
         }
 
         [Test] //bug 325306
@@ -1683,12 +1680,9 @@ namespace MonoTests.System.Reflection
             var m1 = typeof(BinderTest).GetMethod("Bug325306_");
             BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
 
-            AssertingBinder.Instance.SelectMethod(
-                flags,
-                new MethodBase[] { m0, m1 },
-                new Type[] { typeof(int) },
-                null
-            );
+            AssertingBinder
+                .Instance
+                .SelectMethod(flags, new MethodBase[] { m0, m1 }, new Type[] { typeof(int) }, null);
         }
 
         public static string Bug636939(

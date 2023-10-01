@@ -417,11 +417,12 @@ namespace System.Runtime.Remoting.Channels
                 StackBuilderSink s = new StackBuilderSink(_serverObject);
                 Object returnValue = s.PrivateProcessMessage(
                     _asyncEnd.MethodHandle,
-                    System.Runtime.Remoting.Messaging.Message.CoerceArgs(
-                        _asyncEnd,
-                        parameters,
-                        paramList
-                    ),
+                    System
+                        .Runtime
+                        .Remoting
+                        .Messaging
+                        .Message
+                        .CoerceArgs(_asyncEnd, parameters, paramList),
                     _serverObject,
                     out outArgs
                 );

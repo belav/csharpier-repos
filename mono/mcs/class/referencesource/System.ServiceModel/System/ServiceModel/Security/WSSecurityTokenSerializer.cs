@@ -131,36 +131,42 @@ namespace System.ServiceModel.Security
         )
         {
             if (securityVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("securityVersion")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("securityVersion"));
 
             if (maximumKeyDerivationOffset < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "maximumKeyDerivationOffset",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maximumKeyDerivationOffset",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
             if (maximumKeyDerivationLabelLength < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "maximumKeyDerivationLabelLength",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maximumKeyDerivationLabelLength",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             }
             if (maximumKeyDerivationNonceLength <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "maximumKeyDerivationNonceLength",
-                        SR.GetString(SR.ValueMustBeGreaterThanZero)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maximumKeyDerivationNonceLength",
+                            SR.GetString(SR.ValueMustBeGreaterThanZero)
+                        )
+                    );
             }
 
             this.securityVersion = securityVersion;
@@ -195,9 +201,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             if (securityVersion == SecurityVersion.WSSecurity10)
@@ -210,12 +216,14 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "securityVersion",
-                        SR.GetString(SR.MessageSecurityVersionOutOfRange)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "securityVersion",
+                            SR.GetString(SR.MessageSecurityVersionOutOfRange)
+                        )
+                    );
             }
             this.serializerEntries.Add(this.secureConversation);
             IdentityModel.TrustDictionary trustDictionary;
@@ -235,9 +243,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new NotSupportedException());
             }
 
             this.tokenEntries = new List<TokenEntry>();
@@ -361,22 +369,26 @@ namespace System.ServiceModel.Security
                         {
                             throw;
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(SR.GetString(SR.ErrorDeserializingTokenXml), e)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(SR.GetString(SR.ErrorDeserializingTokenXml), e)
+                            );
                     }
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(
-                    SR.GetString(
-                        SR.CannotReadToken,
-                        reader.LocalName,
-                        reader.NamespaceURI,
-                        localReader.GetAttribute(XD.SecurityJan2004Dictionary.ValueType, null)
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.CannotReadToken,
+                            reader.LocalName,
+                            reader.NamespaceURI,
+                            localReader.GetAttribute(XD.SecurityJan2004Dictionary.ValueType, null)
+                        )
                     )
-                )
-            );
+                );
         }
 
         protected override bool CanWriteTokenCore(SecurityToken token)
@@ -414,9 +426,11 @@ namespace System.ServiceModel.Security
                         {
                             throw;
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(SR.GetString(SR.ErrorSerializingSecurityToken), e)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(SR.GetString(SR.ErrorSerializingSecurityToken), e)
+                            );
                     }
                     wroteToken = true;
                     break;
@@ -424,11 +438,13 @@ namespace System.ServiceModel.Security
             }
 
             if (!wroteToken)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.StandardsManagerCannotWriteObject, token.GetType())
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.StandardsManagerCannotWriteObject, token.GetType())
+                        )
+                    );
 
             localWriter.Flush();
         }
@@ -634,28 +650,34 @@ namespace System.ServiceModel.Security
                         {
                             throw;
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(
-                                SR.GetString(SR.ErrorDeserializingKeyIdentifierClauseFromTokenXml),
-                                e
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new XmlException(
+                                    SR.GetString(
+                                        SR.ErrorDeserializingKeyIdentifierClauseFromTokenXml
+                                    ),
+                                    e
+                                )
+                            );
                     }
                 }
             }
 
             // PreSharp Bug: Parameter 'element' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(
-                    SR.GetString(
-                        SR.CannotReadToken,
-                        element.LocalName,
-                        element.NamespaceURI,
-                        element.GetAttribute(SecurityJan2004Strings.ValueType, null)
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.CannotReadToken,
+                            element.LocalName,
+                            element.NamespaceURI,
+                            element.GetAttribute(SecurityJan2004Strings.ValueType, null)
+                        )
                     )
-                )
-            );
+                );
         }
 
         internal new abstract class TokenEntry
@@ -717,15 +739,17 @@ namespace System.ServiceModel.Security
                 string id = issuedTokenXml.GetAttribute(idAttributeLocalName, idAttributeNamespace);
                 if (id == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.RequiredAttributeMissing,
-                                idAttributeLocalName,
-                                issuedTokenXml.LocalName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.RequiredAttributeMissing,
+                                    idAttributeLocalName,
+                                    issuedTokenXml.LocalName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return new LocalIdKeyIdentifierClause(id, tokenType);
             }
@@ -781,9 +805,9 @@ namespace System.ServiceModel.Security
             public CollectionDictionary(List<XmlDictionaryString> dictionaryStrings)
             {
                 if (dictionaryStrings == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("dictionaryStrings")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("dictionaryStrings"));
 
                 this.dictionaryStrings = dictionaryStrings;
             }
@@ -791,9 +815,9 @@ namespace System.ServiceModel.Security
             public bool TryLookup(string value, out XmlDictionaryString result)
             {
                 if (value == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
 
                 for (int i = 0; i < this.dictionaryStrings.Count; ++i)
                 {
@@ -824,9 +848,9 @@ namespace System.ServiceModel.Security
             public bool TryLookup(XmlDictionaryString value, out XmlDictionaryString result)
             {
                 if (value == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
 
                 for (int i = 0; i < this.dictionaryStrings.Count; ++i)
                 {

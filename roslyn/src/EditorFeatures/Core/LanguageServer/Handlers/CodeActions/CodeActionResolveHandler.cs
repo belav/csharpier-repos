@@ -120,8 +120,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (applyChangesOperations.Any())
             {
                 var solution = document.Project.Solution;
-                var textDiffService =
-                    solution.Services.GetService<IDocumentTextDifferencingService>();
+                var textDiffService = solution
+                    .Services
+                    .GetService<IDocumentTextDifferencingService>();
 
                 using var _ = ArrayBuilder<TextDocumentEdit>.GetInstance(out var textDocumentEdits);
                 foreach (var applyChangesOperation in applyChangesOperations)

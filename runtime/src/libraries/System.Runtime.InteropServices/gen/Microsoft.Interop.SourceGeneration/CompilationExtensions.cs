@@ -21,7 +21,8 @@ namespace Microsoft.Interop
                 compilation,
                 targetFramework,
                 targetFrameworkVersion,
-                compilation.SourceModule
+                compilation
+                    .SourceModule
                     .GetAttributes()
                     .Any(
                         attr =>

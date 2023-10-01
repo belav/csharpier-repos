@@ -44,9 +44,13 @@ namespace System.ServiceModel.Dispatcher
             }
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.EndpointAddressCannotBeNull))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.EndpointAddressCannotBeNull)
+                        )
+                    );
             }
 #pragma warning disable 56506 // Microsoft, endpoint.Address.Uri is never null
             Uri baseUri = endpoint.Address.Uri;
@@ -84,7 +88,28 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.catchAllOperationName != "")
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR2.GetString(
+                                            SR2.MultipleOperationsInContractWithPathMethod,
+                                            endpoint.Contract.Name,
+                                            path,
+                                            method
+                                        )
+                                    )
+                                );
+                        }
+                        this.catchAllOperationName = od.Name;
+                    }
+                    UriTemplate ut = new UriTemplate(path);
+                    WCFKey wcfKey = new WCFKey(ut, method);
+                    if (alreadyHaves.ContainsKey(wcfKey))
+                    {
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
                                 new InvalidOperationException(
                                     SR2.GetString(
                                         SR2.MultipleOperationsInContractWithPathMethod,
@@ -94,23 +119,6 @@ namespace System.ServiceModel.Dispatcher
                                     )
                                 )
                             );
-                        }
-                        this.catchAllOperationName = od.Name;
-                    }
-                    UriTemplate ut = new UriTemplate(path);
-                    WCFKey wcfKey = new WCFKey(ut, method);
-                    if (alreadyHaves.ContainsKey(wcfKey))
-                    {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.MultipleOperationsInContractWithPathMethod,
-                                    endpoint.Contract.Name,
-                                    path,
-                                    method
-                                )
-                            )
-                        );
                     }
                     alreadyHaves.Add(wcfKey, od.Name);
 
@@ -121,9 +129,9 @@ namespace System.ServiceModel.Dispatcher
                         methodSpecificTables.Add(method, methodSpecificTable);
                     }
 
-                    methodSpecificTable.KeyValuePairs.Add(
-                        new KeyValuePair<UriTemplate, object>(ut, od.Name)
-                    );
+                    methodSpecificTable
+                        .KeyValuePairs
+                        .Add(new KeyValuePair<UriTemplate, object>(ut, od.Name));
                     this.templates.Add(od.Name, ut);
                 }
             }
@@ -267,13 +275,15 @@ namespace System.ServiceModel.Dispatcher
                     {
                         return HelpOperationInvoker.OperationName;
                     }
-                    message.Properties.Add(
-                        WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
-                        new WebHttpDispatchOperationSelectorData()
-                        {
-                            AllowedMethods = new List<string>() { WebHttpBehavior.GET }
-                        }
-                    );
+                    message
+                        .Properties
+                        .Add(
+                            WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
+                            new WebHttpDispatchOperationSelectorData()
+                            {
+                                AllowedMethods = new List<string>() { WebHttpBehavior.GET }
+                            }
+                        );
                     return this.catchAllOperationName;
                 }
             }
@@ -341,10 +351,15 @@ namespace System.ServiceModel.Dispatcher
             if (allowedMethods != null)
             {
                 uriMatched = true;
-                message.Properties.Add(
-                    WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
-                    new WebHttpDispatchOperationSelectorData() { AllowedMethods = allowedMethods }
-                );
+                message
+                    .Properties
+                    .Add(
+                        WebHttpDispatchOperationSelector.HttpOperationSelectorDataPropertyName,
+                        new WebHttpDispatchOperationSelectorData()
+                        {
+                            AllowedMethods = allowedMethods
+                        }
+                    );
             }
             return catchAllOperationName;
         }
@@ -377,10 +392,9 @@ namespace System.ServiceModel.Dispatcher
         )
         {
             match.SetBaseUri(match.BaseUri, requestProp);
-            message.Properties.Add(
-                IncomingWebRequestContext.UriTemplateMatchResultsPropertyName,
-                match
-            );
+            message
+                .Properties
+                .Add(IncomingWebRequestContext.UriTemplateMatchResultsPropertyName, match);
         }
 
         bool ShouldRedirectToUriWithSlashAtTheEnd(
@@ -452,8 +466,9 @@ namespace System.ServiceModel.Dispatcher
                     return hostName;
                 }
             }
-            IAspNetMessageProperty aspNetMessageProperty =
-                AspNetEnvironment.Current.GetHostingProperty(message);
+            IAspNetMessageProperty aspNetMessageProperty = AspNetEnvironment
+                .Current
+                .GetHostingProperty(message);
             if (aspNetMessageProperty != null)
             {
                 hostName = aspNetMessageProperty.OriginalRequestUri.Authority;

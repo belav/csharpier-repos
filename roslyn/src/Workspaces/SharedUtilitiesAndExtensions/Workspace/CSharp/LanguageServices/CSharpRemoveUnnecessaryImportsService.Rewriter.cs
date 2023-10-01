@@ -181,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // follows the usings.
                 if (finalTrivia.Count > 0)
                 {
-                    var nextToken = compilationUnit.Usings
+                    var nextToken = compilationUnit
+                        .Usings
                         .Last()
                         .GetLastToken()
                         .GetNextTokenOrEndOfFile();
@@ -248,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                 // follows the usings.
                 if (finalTrivia.Count > 0)
                 {
-                    var nextToken = namespaceDeclaration.Usings
+                    var nextToken = namespaceDeclaration
+                        .Usings
                         .Last()
                         .GetLastToken()
                         .GetNextToken();

@@ -26,14 +26,16 @@ public class EnumToUnderlyingType : IntegrationTest<EnumToUnderlyingType.Databas
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    ConsoleColor = ConsoleColor.Yellow
-                }
-            );
+            context
+                .Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = ConsoleColor.Yellow
+                    }
+                );
             base.Seed(context);
         }
     }
@@ -80,14 +82,16 @@ public class UnderlyingTypeToEnum : IntegrationTest<UnderlyingTypeToEnum.Databas
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    ConsoleColor = (int)ConsoleColor.Yellow
-                }
-            );
+            context
+                .Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = (int)ConsoleColor.Yellow
+                    }
+                );
             base.Seed(context);
         }
     }
@@ -134,14 +138,16 @@ public class EnumToEnum : IntegrationTest<EnumToEnum.DatabaseInitializer>
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(
-                new Customer
-                {
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    ConsoleColor = DayOfWeek.Saturday
-                }
-            );
+            context
+                .Customers
+                .Add(
+                    new Customer
+                    {
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = DayOfWeek.Saturday
+                    }
+                );
             base.Seed(context);
         }
     }

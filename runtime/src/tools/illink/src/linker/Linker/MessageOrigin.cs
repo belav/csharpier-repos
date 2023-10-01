@@ -87,7 +87,9 @@ namespace Mono.Linker
             if (Provider is MethodDefinition method && method.DebugInformation.HasSequencePoints)
             {
                 var offset = ILOffset ?? method.DebugInformation.SequencePoints[0].Offset;
-                SequencePoint? correspondingSequencePoint = method.DebugInformation.SequencePoints
+                SequencePoint? correspondingSequencePoint = method
+                    .DebugInformation
+                    .SequencePoints
                     .Where(s => s.Offset <= offset)
                     ?.Last();
 
@@ -95,7 +97,9 @@ namespace Mono.Linker
                 // search for any sequence point with non-hidden line number and report that as a best effort.
                 if (correspondingSequencePoint?.StartLine == HiddenLineNumber)
                 {
-                    correspondingSequencePoint = method.DebugInformation.SequencePoints
+                    correspondingSequencePoint = method
+                        .DebugInformation
+                        .SequencePoints
                         .Where(s => s.StartLine != HiddenLineNumber)
                         .FirstOrDefault();
                 }

@@ -24,16 +24,18 @@ namespace System.ServiceModel.Configuration
                 && configElement.Handlers.Count > 0
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList,
-                            ConfigurationStrings.MessageHandlerFactory,
-                            ConfigurationStrings.Type,
-                            ConfigurationStrings.Handlers
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList,
+                                ConfigurationStrings.MessageHandlerFactory,
+                                ConfigurationStrings.Type,
+                                ConfigurationStrings.Handlers
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
     }

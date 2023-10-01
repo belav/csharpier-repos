@@ -76,9 +76,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         {
             using (_gate.DisposableWait(cancellationToken))
             {
-                var projectPath = inputNode.Id.GetNestedValueByName<Uri>(
-                    CodeGraphNodeIdName.Assembly
-                );
+                var projectPath = inputNode
+                    .Id
+                    .GetNestedValueByName<Uri>(CodeGraphNodeIdName.Assembly);
                 var filePath = inputNode.Id.GetNestedValueByName<Uri>(CodeGraphNodeIdName.File);
 
                 if (projectPath == null || filePath == null)
@@ -86,14 +86,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     return;
                 }
 
-                var project = _solution.Projects.FirstOrDefault(
-                    p =>
-                        string.Equals(
-                            p.FilePath,
-                            projectPath.OriginalString,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                );
+                var project = _solution
+                    .Projects
+                    .FirstOrDefault(
+                        p =>
+                            string.Equals(
+                                p.FilePath,
+                                projectPath.OriginalString,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    );
                 if (project == null)
                 {
                     return;
@@ -101,14 +103,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
                 _nodeToContextProjectMap.Add(inputNode, project);
 
-                var document = project.Documents.FirstOrDefault(
-                    d =>
-                        string.Equals(
-                            d.FilePath,
-                            filePath.OriginalString,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                );
+                var document = project
+                    .Documents
+                    .FirstOrDefault(
+                        d =>
+                            string.Equals(
+                                d.FilePath,
+                                filePath.OriginalString,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    );
                 if (document == null)
                 {
                     return;
@@ -143,7 +147,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var symbolId = (SymbolKey?)inputNode[RoslynGraphProperties.SymbolId];
-                var symbol = symbolId.Value
+                var symbol = symbolId
+                    .Value
                     .Resolve(compilation, cancellationToken: cancellationToken)
                     .Symbol;
                 if (symbol != null)
@@ -242,7 +247,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     .FindSourceDefinitionAsync(symbol, contextProject.Solution, cancellationToken)
                     .ConfigureAwait(false);
                 if (newSymbol != null)
-                    preferredLocation = newSymbol.Locations
+                    preferredLocation = newSymbol
+                        .Locations
                         .Where(loc => loc.IsInSource)
                         .FirstOrDefault();
             }
@@ -461,7 +467,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         private static void UpdateLabelsForNode(ISymbol symbol, Solution solution, GraphNode node)
         {
-            var progressionLanguageService = solution.Workspace.Services
+            var progressionLanguageService = solution
+                .Workspace
+                .Services
                 .GetLanguageServices(symbol.Language)
                 .GetService<IProgressionLanguageService>();
 
@@ -534,23 +542,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var methodSymbol = (IMethodSymbol)symbol;
                     if (methodSymbol.MethodKind == MethodKind.Constructor)
                     {
-                        node.Label =
-                            CodeQualifiedIdentifierBuilder.SpecialNames.GetConstructorLabel(
-                                methodSymbol.ContainingSymbol.Name
-                            );
+                        node.Label = CodeQualifiedIdentifierBuilder
+                            .SpecialNames
+                            .GetConstructorLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else if (methodSymbol.MethodKind == MethodKind.StaticConstructor)
                     {
-                        node.Label =
-                            CodeQualifiedIdentifierBuilder.SpecialNames.GetStaticConstructorLabel(
-                                methodSymbol.ContainingSymbol.Name
-                            );
+                        node.Label = CodeQualifiedIdentifierBuilder
+                            .SpecialNames
+                            .GetStaticConstructorLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else if (methodSymbol.MethodKind == MethodKind.Destructor)
                     {
-                        node.Label = CodeQualifiedIdentifierBuilder.SpecialNames.GetFinalizerLabel(
-                            methodSymbol.ContainingSymbol.Name
-                        );
+                        node.Label = CodeQualifiedIdentifierBuilder
+                            .SpecialNames
+                            .GetFinalizerLabel(methodSymbol.ContainingSymbol.Name);
                     }
                     else
                     {

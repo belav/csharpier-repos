@@ -34,8 +34,9 @@ namespace Microsoft.CodeAnalysis.Host
         public ProjectCacheService(Workspace? workspace, bool createImplicitCache = false)
         {
             _workspace = workspace;
-            _configurationService =
-                workspace?.Services.GetService<IWorkspaceConfigurationService>();
+            _configurationService = workspace
+                ?.Services
+                .GetService<IWorkspaceConfigurationService>();
             _implicitCache = createImplicitCache ? new SimpleMRUCache() : null;
 
             // Also clear the cache when the solution is cleared or removed.

@@ -688,9 +688,16 @@ namespace System.Xml
                 {
                     foreach (SchemaNotation scNot in schInfo.Notations.Values)
                     {
-                        dtNode.Notations.SetNamedItem(
-                            new XmlNotation(scNot.Name.Name, scNot.Pubid, scNot.SystemLiteral, doc)
-                        );
+                        dtNode
+                            .Notations
+                            .SetNamedItem(
+                                new XmlNotation(
+                                    scNot.Name.Name,
+                                    scNot.Pubid,
+                                    scNot.SystemLiteral,
+                                    doc
+                                )
+                            );
                     }
                 }
 

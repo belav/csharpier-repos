@@ -48,10 +48,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 treeOptions != null
                 && analyzerOptions != null
                 && (
-                    !compilationOptions.SpecificDiagnosticOptions.TryGetValue(
-                        descriptor.Id,
-                        out var reportDiagnostic
-                    )
+                    !compilationOptions
+                        .SpecificDiagnosticOptions
+                        .TryGetValue(descriptor.Id, out var reportDiagnostic)
                     || reportDiagnostic == ReportDiagnostic.Default
                 )
             )

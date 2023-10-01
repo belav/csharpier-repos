@@ -176,14 +176,16 @@ namespace System.Net.Http
             uint resultSize = sizeof(uint);
 
             if (
-                !Interop.WinHttp.WinHttpQueryHeaders(
-                    requestHandle,
-                    infoLevel | Interop.WinHttp.WINHTTP_QUERY_FLAG_NUMBER,
-                    Interop.WinHttp.WINHTTP_HEADER_NAME_BY_INDEX,
-                    ref result,
-                    ref resultSize,
-                    IntPtr.Zero
-                )
+                !Interop
+                    .WinHttp
+                    .WinHttpQueryHeaders(
+                        requestHandle,
+                        infoLevel | Interop.WinHttp.WINHTTP_QUERY_FLAG_NUMBER,
+                        Interop.WinHttp.WINHTTP_HEADER_NAME_BY_INDEX,
+                        ref result,
+                        ref resultSize,
+                        IntPtr.Zero
+                    )
             )
             {
                 WinHttpException.ThrowExceptionUsingLastError(
@@ -365,14 +367,16 @@ namespace System.Net.Http
 
             // The WinHttpQueryHeaders buffer length is in bytes,
             // but the API actually returns Unicode characters.
-            bool result = Interop.WinHttp.WinHttpQueryHeaders(
-                requestHandle,
-                infoLevel,
-                Interop.WinHttp.WINHTTP_HEADER_NAME_BY_INDEX,
-                new IntPtr(buffer),
-                ref bufferLengthInBytes,
-                ref index
-            );
+            bool result = Interop
+                .WinHttp
+                .WinHttpQueryHeaders(
+                    requestHandle,
+                    infoLevel,
+                    Interop.WinHttp.WINHTTP_HEADER_NAME_BY_INDEX,
+                    new IntPtr(buffer),
+                    ref bufferLengthInBytes,
+                    ref index
+                );
 
             // Convert the byte buffer length back to the length in chars.
             bufferLength = (int)bufferLengthInBytes / sizeof(char);
@@ -485,12 +489,14 @@ namespace System.Net.Http
             uint dataSize = sizeof(uint);
 
             if (
-                Interop.WinHttp.WinHttpQueryOption(
-                    requestHandle,
-                    Interop.WinHttp.WINHTTP_OPTION_HTTP_PROTOCOL_USED,
-                    ref data,
-                    ref dataSize
-                )
+                Interop
+                    .WinHttp
+                    .WinHttpQueryOption(
+                        requestHandle,
+                        Interop.WinHttp.WINHTTP_OPTION_HTTP_PROTOCOL_USED,
+                        ref data,
+                        ref dataSize
+                    )
             )
             {
                 if ((data & Interop.WinHttp.WINHTTP_PROTOCOL_FLAG_HTTP2) != 0)

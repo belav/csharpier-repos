@@ -197,27 +197,31 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else if (objectType.Name != "EmptyParticle")
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.HelpExampleGeneratorHandlerNotFound,
-                                schemaObject.GetType().Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.HelpExampleGeneratorHandlerNotFound,
+                                    schemaObject.GetType().Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 --context.currentDepthLevel;
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.HelpExampleGeneratorMaxDepthLevelReached,
-                            schemaObject.GetType().Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.HelpExampleGeneratorMaxDepthLevelReached,
+                                schemaObject.GetType().Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -230,20 +234,24 @@ namespace System.ServiceModel.Dispatcher
             string content = GenerateContentForXmlSimpleType(attribute.AttributeSchemaType);
             if (String.IsNullOrEmpty(content))
             {
-                context.writer.WriteAttributeString(
-                    "i",
-                    XmlSchemaInstanceNil,
-                    XmlSchemaInstanceNamespace,
-                    "true"
-                );
+                context
+                    .writer
+                    .WriteAttributeString(
+                        "i",
+                        XmlSchemaInstanceNil,
+                        XmlSchemaInstanceNamespace,
+                        "true"
+                    );
             }
             else
             {
-                context.writer.WriteAttributeString(
-                    attribute.QualifiedName.Name,
-                    attribute.QualifiedName.Namespace,
-                    content
-                );
+                context
+                    .writer
+                    .WriteAttributeString(
+                        attribute.QualifiedName.Name,
+                        attribute.QualifiedName.Namespace,
+                        content
+                    );
             }
         }
 
@@ -277,14 +285,16 @@ namespace System.ServiceModel.Dispatcher
 
         static void ErrorHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR2.GetString(
-                        SR2.HelpExampleGeneratorSchemaObjectNotSupported,
-                        schemaObject.GetType().Name
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.HelpExampleGeneratorSchemaObjectNotSupported,
+                            schemaObject.GetType().Name
+                        )
                     )
-                )
-            );
+                );
         }
 
         static void EmptyHandler(
@@ -299,10 +309,9 @@ namespace System.ServiceModel.Dispatcher
         {
             XmlSchemaElement element = (XmlSchemaElement)schemaObject;
             XmlSchemaElement contentElement = GenerateValidElementsComment(element, context);
-            context.writer.WriteStartElement(
-                element.QualifiedName.Name,
-                element.QualifiedName.Namespace
-            );
+            context
+                .writer
+                .WriteStartElement(element.QualifiedName.Name, element.QualifiedName.Namespace);
             if (contentElement != element)
             {
                 string value = contentElement.QualifiedName.Name;
@@ -311,23 +320,25 @@ namespace System.ServiceModel.Dispatcher
                     && !String.IsNullOrEmpty(contentElement.QualifiedName.Namespace)
                 )
                 {
-                    string prefix = context.writer.LookupPrefix(
-                        contentElement.QualifiedName.Namespace
-                    );
+                    string prefix = context
+                        .writer
+                        .LookupPrefix(contentElement.QualifiedName.Namespace);
                     if (prefix == null)
                     {
                         prefix = string.Concat(
                             "d",
-                            context.currentDepthLevel.ToString(
-                                System.Globalization.NumberFormatInfo.InvariantInfo
-                            )
+                            context
+                                .currentDepthLevel
+                                .ToString(System.Globalization.NumberFormatInfo.InvariantInfo)
                         );
-                        context.writer.WriteAttributeString(
-                            XmlNamespacePrefix,
-                            prefix,
-                            null,
-                            contentElement.QualifiedName.Namespace
-                        );
+                        context
+                            .writer
+                            .WriteAttributeString(
+                                XmlNamespacePrefix,
+                                prefix,
+                                null,
+                                contentElement.QualifiedName.Namespace
+                            );
                     }
                     value = String.Format(
                         CultureInfo.InvariantCulture,
@@ -336,12 +347,14 @@ namespace System.ServiceModel.Dispatcher
                         contentElement.QualifiedName.Name
                     );
                 }
-                context.writer.WriteAttributeString(
-                    "i",
-                    XmlSchemaInstanceType,
-                    XmlSchemaInstanceNamespace,
-                    value
-                );
+                context
+                    .writer
+                    .WriteAttributeString(
+                        "i",
+                        XmlSchemaInstanceType,
+                        XmlSchemaInstanceNamespace,
+                        value
+                    );
             }
             foreach (XmlSchemaObject constraint in contentElement.Constraints)
             {
@@ -368,9 +381,9 @@ namespace System.ServiceModel.Dispatcher
             InvokeHandler(complexType.ContentTypeParticle, context);
             if (complexType.IsMixed)
             {
-                context.writer.WriteString(
-                    SR2.GetString(SR2.HelpExampleGeneratorThisElementContainsText)
-                );
+                context
+                    .writer
+                    .WriteString(SR2.GetString(SR2.HelpExampleGeneratorThisElementContainsText));
             }
         }
 
@@ -400,16 +413,20 @@ namespace System.ServiceModel.Dispatcher
                         }
                         else
                         {
-                            context.writer.WriteStartElement(
-                                element.QualifiedName.Name,
-                                element.QualifiedName.Namespace
-                            );
-                            context.writer.WriteAttributeString(
-                                "i",
-                                XmlSchemaInstanceNil,
-                                XmlSchemaInstanceNamespace,
-                                "true"
-                            );
+                            context
+                                .writer
+                                .WriteStartElement(
+                                    element.QualifiedName.Name,
+                                    element.QualifiedName.Namespace
+                                );
+                            context
+                                .writer
+                                .WriteAttributeString(
+                                    "i",
+                                    XmlSchemaInstanceNil,
+                                    XmlSchemaInstanceNamespace,
+                                    "true"
+                                );
                             context.writer.WriteEndElement();
                         }
                         --context.elementDepth[element];
@@ -451,12 +468,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!(simpleType.Content is XmlSchemaSimpleTypeList))
                 {
-                    context.writer.WriteAttributeString(
-                        "i",
-                        XmlSchemaInstanceNil,
-                        XmlSchemaInstanceNamespace,
-                        "true"
-                    );
+                    context
+                        .writer
+                        .WriteAttributeString(
+                            "i",
+                            XmlSchemaInstanceNil,
+                            XmlSchemaInstanceNamespace,
+                            "true"
+                        );
                 }
             }
             else
@@ -521,10 +540,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (IsArrayElementType(element))
             {
-                context.writer.WriteAttributeString(
-                    JsonGlobals.typeString,
-                    JsonGlobals.arrayString
-                );
+                context
+                    .writer
+                    .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.arrayString);
                 context.overrideElementName = JsonGlobals.itemString;
             }
             else if (IsObject(element))
@@ -535,26 +553,25 @@ namespace System.ServiceModel.Dispatcher
                     context.knownTypes.TryGetValue(contentElement.QualifiedName, out derivedType);
                     if (derivedType != null)
                     {
-                        context.writer.WriteStartAttribute(
-                            null,
-                            JsonGlobals.serverTypeString,
-                            null
-                        );
-                        context.writer.WriteString(
-                            String.Format(
-                                CultureInfo.InvariantCulture,
-                                "{0}:#{1}",
-                                derivedType.Name,
-                                derivedType.Namespace
-                            )
-                        );
+                        context
+                            .writer
+                            .WriteStartAttribute(null, JsonGlobals.serverTypeString, null);
+                        context
+                            .writer
+                            .WriteString(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "{0}:#{1}",
+                                    derivedType.Name,
+                                    derivedType.Namespace
+                                )
+                            );
                         context.writer.WriteEndAttribute();
                     }
                 }
-                context.writer.WriteAttributeString(
-                    JsonGlobals.typeString,
-                    JsonGlobals.objectString
-                );
+                context
+                    .writer
+                    .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.objectString);
             }
             InvokeHandler(contentElement.ElementSchemaType, context);
             context.overrideElementName = null;
@@ -603,10 +620,9 @@ namespace System.ServiceModel.Dispatcher
                         {
                             context.writer.WriteStartElement(element.QualifiedName.Name);
                         }
-                        context.writer.WriteAttributeString(
-                            JsonGlobals.typeString,
-                            JsonGlobals.nullString
-                        );
+                        context
+                            .writer
+                            .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.nullString);
                         context.writer.WriteEndElement();
                     }
                     --context.elementDepth[element];
@@ -644,12 +660,14 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (facet is XmlSchemaEnumerationFacet)
                         {
-                            context.writer.WriteAttributeString(
-                                string.Empty,
-                                JsonGlobals.typeString,
-                                string.Empty,
-                                JsonGlobals.numberString
-                            );
+                            context
+                                .writer
+                                .WriteAttributeString(
+                                    string.Empty,
+                                    JsonGlobals.typeString,
+                                    string.Empty,
+                                    JsonGlobals.numberString
+                                );
                             context.writer.WriteString("0");
                             return;
                         }
@@ -666,21 +684,25 @@ namespace System.ServiceModel.Dispatcher
             if (simpleType.QualifiedName.Name == "base64Binary")
             {
                 char[] base64stream = value.ToCharArray();
-                context.writer.WriteAttributeString(
-                    string.Empty,
-                    JsonGlobals.typeString,
-                    string.Empty,
-                    JsonGlobals.arrayString
-                );
-                for (int i = 0; i < base64stream.Length; i++)
-                {
-                    context.writer.WriteStartElement(JsonGlobals.itemString, string.Empty);
-                    context.writer.WriteAttributeString(
+                context
+                    .writer
+                    .WriteAttributeString(
                         string.Empty,
                         JsonGlobals.typeString,
                         string.Empty,
-                        JsonGlobals.numberString
+                        JsonGlobals.arrayString
                     );
+                for (int i = 0; i < base64stream.Length; i++)
+                {
+                    context.writer.WriteStartElement(JsonGlobals.itemString, string.Empty);
+                    context
+                        .writer
+                        .WriteAttributeString(
+                            string.Empty,
+                            JsonGlobals.typeString,
+                            string.Empty,
+                            JsonGlobals.numberString
+                        );
                     context.writer.WriteValue((int)base64stream[i]);
                     context.writer.WriteEndElement();
                 }
@@ -692,9 +714,11 @@ namespace System.ServiceModel.Dispatcher
                     CultureInfo.InvariantCulture
                 );
                 context.writer.WriteString(JsonGlobals.DateTimeStartGuardReader);
-                context.writer.WriteValue(
-                    (dateTime.ToUniversalTime().Ticks - JsonGlobals.unixEpochTicks) / 10000
-                );
+                context
+                    .writer
+                    .WriteValue(
+                        (dateTime.ToUniversalTime().Ticks - JsonGlobals.unixEpochTicks) / 10000
+                    );
 
                 switch (dateTime.Kind)
                 {
@@ -710,17 +734,21 @@ namespace System.ServiceModel.Dispatcher
                             context.writer.WriteString("+");
                         }
                         int hours = Math.Abs(ts.Hours);
-                        context.writer.WriteString(
-                            (hours < 10)
-                                ? "0" + hours
-                                : hours.ToString(CultureInfo.InvariantCulture)
-                        );
+                        context
+                            .writer
+                            .WriteString(
+                                (hours < 10)
+                                    ? "0" + hours
+                                    : hours.ToString(CultureInfo.InvariantCulture)
+                            );
                         int minutes = Math.Abs(ts.Minutes);
-                        context.writer.WriteString(
-                            (minutes < 10)
-                                ? "0" + minutes
-                                : minutes.ToString(CultureInfo.InvariantCulture)
-                        );
+                        context
+                            .writer
+                            .WriteString(
+                                (minutes < 10)
+                                    ? "0" + minutes
+                                    : minutes.ToString(CultureInfo.InvariantCulture)
+                            );
                         break;
                     case DateTimeKind.Utc:
                         break;
@@ -752,17 +780,15 @@ namespace System.ServiceModel.Dispatcher
                     || simpleType.QualifiedName.Name == "nonNegativeInteger"
                 )
                 {
-                    context.writer.WriteAttributeString(
-                        JsonGlobals.typeString,
-                        JsonGlobals.numberString
-                    );
+                    context
+                        .writer
+                        .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.numberString);
                 }
                 else if (simpleType.QualifiedName.Name == "boolean")
                 {
-                    context.writer.WriteAttributeString(
-                        JsonGlobals.typeString,
-                        JsonGlobals.booleanString
-                    );
+                    context
+                        .writer
+                        .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.booleanString);
                 }
                 context.writer.WriteString(value);
             }
@@ -770,10 +796,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!(simpleType.Content is XmlSchemaSimpleTypeList))
                 {
-                    context.writer.WriteAttributeString(
-                        JsonGlobals.typeString,
-                        JsonGlobals.nullString
-                    );
+                    context
+                        .writer
+                        .WriteAttributeString(JsonGlobals.typeString, JsonGlobals.nullString);
                 }
             }
         }
@@ -960,7 +985,10 @@ namespace System.ServiceModel.Dispatcher
             if (element.ElementSchemaType is XmlSchemaComplexType)
             {
                 foreach (
-                    XmlSchemaElement derivedElement in context.schemaSet.GlobalElements.Values
+                    XmlSchemaElement derivedElement in context
+                        .schemaSet
+                        .GlobalElements
+                        .Values
                         .OfType<XmlSchemaElement>()
                         .Where(
                             e =>

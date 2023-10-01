@@ -239,11 +239,13 @@ namespace System.Reflection.Runtime.General
         {
             RuntimeTypeHandle resolvedRuntimeTypeHandle;
             if (
-                ReflectionCoreExecution.ExecutionEnvironment.TryGetNamedTypeForTypeReference(
-                    reader,
-                    typeReferenceHandle,
-                    out resolvedRuntimeTypeHandle
-                )
+                ReflectionCoreExecution
+                    .ExecutionEnvironment
+                    .TryGetNamedTypeForTypeReference(
+                        reader,
+                        typeReferenceHandle,
+                        out resolvedRuntimeTypeHandle
+                    )
             )
                 return resolvedRuntimeTypeHandle.GetTypeForRuntimeTypeHandle();
 
@@ -274,11 +276,9 @@ namespace System.Reflection.Runtime.General
                 TypeInfo resolvedTypeInfo = outerTypeInfo.GetDeclaredNestedType(name);
                 if (resolvedTypeInfo == null)
                 {
-                    exception =
-                        ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(
-                            outerTypeInfo,
-                            name
-                        );
+                    exception = ReflectionCoreExecution
+                        .ExecutionDomain
+                        .CreateMissingMetadataException(outerTypeInfo, name);
                     return null;
                 }
                 return resolvedTypeInfo.CastToRuntimeTypeInfo();

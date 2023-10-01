@@ -37,9 +37,9 @@ namespace System.IdentityModel.Selectors
                 if (strings.Length != 2 || string.IsNullOrEmpty(strings[0]))
                 {
                     // Only support one slash and domain cannot be empty (consistent with windowslogon).
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.IncorrectUserNameFormat)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.IncorrectUserNameFormat));
                 }
 
                 // This is the downlevel case - domain\userName
@@ -64,12 +64,14 @@ namespace System.IdentityModel.Selectors
                 )
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenValidationException(
-                            SR.GetString(SR.FailLogonUser, userName),
-                            new Win32Exception(error)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenValidationException(
+                                SR.GetString(SR.FailLogonUser, userName),
+                                new Win32Exception(error)
+                            )
+                        );
                 }
 
                 WindowsIdentity windowsIdentity = new WindowsIdentity(

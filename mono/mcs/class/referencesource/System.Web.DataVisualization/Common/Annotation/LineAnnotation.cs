@@ -633,23 +633,25 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
 
                     // Add hot region
-                    this.Common.HotRegionsList.AddHotRegion(
-                        graphics,
-                        path,
-                        false,
-                        ReplaceKeywords(this.ToolTip),
+                    this.Common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            graphics,
+                            path,
+                            false,
+                            ReplaceKeywords(this.ToolTip),
 #if Microsoft_CONTROL
-                        String.Empty,
-                        String.Empty,
-                        String.Empty,
+                            String.Empty,
+                            String.Empty,
+                            String.Empty,
 #else // Microsoft_CONTROL
-                        ReplaceKeywords(this.Url),
-                        ReplaceKeywords(this.MapAreaAttributes),
-                        ReplaceKeywords(this.PostBackValue),
+                            ReplaceKeywords(this.Url),
+                            ReplaceKeywords(this.MapAreaAttributes),
+                            ReplaceKeywords(this.PostBackValue),
 #endif // Microsoft_CONTROL
-                        this,
-                        ChartElementType.Annotation
-                    );
+                            this,
+                            ChartElementType.Annotation
+                        );
                 }
             }
 

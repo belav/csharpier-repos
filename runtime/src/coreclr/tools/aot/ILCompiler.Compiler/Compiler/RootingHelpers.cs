@@ -101,8 +101,9 @@ namespace ILCompiler
                         else if (fallbackNonCanonicalOwningType != null)
                         {
                             // We have a fallback non-canonical type we can root a body on
-                            MethodDesc alternateMethod =
-                                method.Context.GetMethodForInstantiatedType(
+                            MethodDesc alternateMethod = method
+                                .Context
+                                .GetMethodForInstantiatedType(
                                     method.GetTypicalMethodDefinition(),
                                     fallbackNonCanonicalOwningType
                                 );
@@ -226,9 +227,9 @@ namespace ILCompiler
             // and instantiations that are not fully closed can be ignored.
             if (
                 method.OwningType.IsGenericDefinition
-                || method.OwningType.ContainsSignatureVariables(
-                    treatGenericParameterLikeSignatureVariable: true
-                )
+                || method
+                    .OwningType
+                    .ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable: true)
             )
             {
                 TypeDesc owningType = method.OwningType.GetTypeDefinition();
@@ -241,10 +242,12 @@ namespace ILCompiler
                     return false;
                 }
 
-                method = method.Context.GetMethodForInstantiatedType(
-                    method.GetTypicalMethodDefinition(),
-                    ((MetadataType)owningType).MakeInstantiatedType(inst)
-                );
+                method = method
+                    .Context
+                    .GetMethodForInstantiatedType(
+                        method.GetTypicalMethodDefinition(),
+                        ((MetadataType)owningType).MakeInstantiatedType(inst)
+                    );
             }
 
             if (
@@ -311,9 +314,9 @@ namespace ILCompiler
             // and instantiations that are not fully closed can be ignored.
             if (
                 field.OwningType.IsGenericDefinition
-                || field.OwningType.ContainsSignatureVariables(
-                    treatGenericParameterLikeSignatureVariable: true
-                )
+                || field
+                    .OwningType
+                    .ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable: true)
             )
             {
                 TypeDesc owningType = field.OwningType.GetTypeDefinition();
@@ -326,10 +329,12 @@ namespace ILCompiler
                     return false;
                 }
 
-                field = field.Context.GetFieldForInstantiatedType(
-                    field.GetTypicalFieldDefinition(),
-                    ((MetadataType)owningType).MakeInstantiatedType(inst)
-                );
+                field = field
+                    .Context
+                    .GetFieldForInstantiatedType(
+                        field.GetTypicalFieldDefinition(),
+                        ((MetadataType)owningType).MakeInstantiatedType(inst)
+                    );
             }
 
             dependencies.Add(factory.ReflectableField(field), reason);

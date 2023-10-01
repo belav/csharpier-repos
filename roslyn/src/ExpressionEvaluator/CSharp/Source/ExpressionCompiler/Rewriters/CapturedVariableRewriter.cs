@@ -112,11 +112,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             var rewrittenThis = GenerateThisReference(node);
             Debug.Assert(
-                rewrittenThis.Type.Equals(
-                    node.Type,
-                    TypeCompareKind.IgnoreDynamicAndTupleNames
-                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                rewrittenThis
+                    .Type
+                    .Equals(
+                        node.Type,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             );
             return rewrittenThis;
         }

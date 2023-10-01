@@ -674,9 +674,11 @@ namespace System.ServiceModel.Dispatcher
 
             if (i >= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new ArgumentException(SR.GetString(SR.QueryItemAlreadyExists))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new ArgumentException(SR.GetString(SR.QueryItemAlreadyExists))
+                    );
             }
 
             // If an item is not found, Search returns the bitwise negation of

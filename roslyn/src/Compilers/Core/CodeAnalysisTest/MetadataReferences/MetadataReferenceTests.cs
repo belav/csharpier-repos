@@ -31,10 +31,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CreateFromAssembly_NoMetadata()
         {
-            var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName { Name = "A" },
-                System.Reflection.Emit.AssemblyBuilderAccess.Run
-            );
+            var dynamicAssembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName { Name = "A" },
+                    System.Reflection.Emit.AssemblyBuilderAccess.Run
+                );
             Assert.Throws<NotSupportedException>(
                 () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
             );
@@ -68,10 +70,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     )
             );
 
-            var dynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                new AssemblyName { Name = "Goo" },
-                System.Reflection.Emit.AssemblyBuilderAccess.Run
-            );
+            var dynamicAssembly = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(
+                    new AssemblyName { Name = "Goo" },
+                    System.Reflection.Emit.AssemblyBuilderAccess.Run
+                );
             Assert.Throws<NotSupportedException>(
                 () => MetadataReference.CreateFromAssemblyInternal(dynamicAssembly)
             );

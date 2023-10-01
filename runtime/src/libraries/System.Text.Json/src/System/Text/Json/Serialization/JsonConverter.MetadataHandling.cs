@@ -126,9 +126,9 @@ namespace System.Text.Json.Serialization
                             )
                         )
                         {
-                            polymorphicConverter = state.Current.InitializePolymorphicReEntry(
-                                derivedJsonTypeInfo
-                            );
+                            polymorphicConverter = state
+                                .Current
+                                .InitializePolymorphicReEntry(derivedJsonTypeInfo);
 
                             if (typeDiscriminator is not null)
                             {
@@ -154,10 +154,9 @@ namespace System.Text.Json.Serialization
 
                         if (runtimeType != TypeToConvert)
                         {
-                            polymorphicConverter = state.Current.InitializePolymorphicReEntry(
-                                runtimeType,
-                                options
-                            );
+                            polymorphicConverter = state
+                                .Current
+                                .InitializePolymorphicReEntry(runtimeType, options);
                         }
                         else
                         {

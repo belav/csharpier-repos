@@ -41,16 +41,18 @@ namespace Microsoft.Interop.JavaScript
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             // Collect all methods adorned with JSExportAttribute
-            var attributedMethods = context.SyntaxProvider.ForAttributeWithMetadataName(
-                Constants.JSExportAttribute,
-                static (node, ct) => node is MethodDeclarationSyntax,
-                static (context, ct) =>
-                    new
-                    {
-                        Syntax = (MethodDeclarationSyntax)context.TargetNode,
-                        Symbol = (IMethodSymbol)context.TargetSymbol
-                    }
-            );
+            var attributedMethods = context
+                .SyntaxProvider
+                .ForAttributeWithMetadataName(
+                    Constants.JSExportAttribute,
+                    static (node, ct) => node is MethodDeclarationSyntax,
+                    static (context, ct) =>
+                        new
+                        {
+                            Syntax = (MethodDeclarationSyntax)context.TargetNode,
+                            Symbol = (IMethodSymbol)context.TargetSymbol
+                        }
+                );
 
             // Validate if attributed methods can have source generated
             var methodsWithDiagnostics = attributedMethods.Select(
@@ -86,10 +88,9 @@ namespace Microsoft.Interop.JavaScript
             );
 
             // Compute generator options
-            IncrementalValueProvider<JSGeneratorOptions> stubOptions =
-                context.AnalyzerConfigOptionsProvider.Select(
-                    static (options, ct) => new JSGeneratorOptions(options.GlobalOptions)
-                );
+            IncrementalValueProvider<JSGeneratorOptions> stubOptions = context
+                .AnalyzerConfigOptionsProvider
+                .Select(static (options, ct) => new JSGeneratorOptions(options.GlobalOptions));
 
             IncrementalValueProvider<StubEnvironment> stubEnvironment =
                 context.CreateStubEnvironmentProvider();

@@ -75,15 +75,18 @@ namespace POS_Server.Controllers
                             createUserId = I.createUserId,
                             updateUserId = I.updateUserId,
                             isNew = 0,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(m => m.itemId == I.parentId)
                                 .FirstOrDefault()
                                 .name,
-                            minUnitName = entity.units
+                            minUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
-                            maxUnitName = entity.units
+                            maxUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
@@ -129,10 +132,9 @@ namespace POS_Server.Controllers
                                     IO.isActiveOffer == 1
                                     && DateTime.Compare(((DateTime)IO.startDate).Date, datenow.Date)
                                         <= 0
-                                    && System.DateTime.Compare(
-                                        ((DateTime)IO.endDate).Date,
-                                        datenow.Date
-                                    ) >= 0
+                                    && System
+                                        .DateTime
+                                        .Compare(((DateTime)IO.endDate).Date, datenow.Date) >= 0
                                     && IO.defaultSale == 1
                                 )
                                 && (((DateTime)IO.startDate)).TimeOfDay <= datenow.TimeOfDay
@@ -179,11 +181,13 @@ namespace POS_Server.Controllers
                             if (itemsList[i].isActive == 1)
                             {
                                 long itemId = (long)itemsList[i].itemId;
-                                var childItemL = entity.items
+                                var childItemL = entity
+                                    .items
                                     .Where(x => x.parentId == itemId)
                                     .Select(b => new { b.itemId })
                                     .FirstOrDefault();
-                                var itemUnitsL = entity.itemsUnits
+                                var itemUnitsL = entity
+                                    .itemsUnits
                                     .Where(x => x.itemId == itemId)
                                     .Select(b => new { b.itemUnitId })
                                     .FirstOrDefault();
@@ -191,7 +195,8 @@ namespace POS_Server.Controllers
                                 long isInInvoice = 0;
                                 if (itemUnitsL != null)
                                 {
-                                    isInInvoice = entity.itemsTransfer
+                                    isInInvoice = entity
+                                        .itemsTransfer
                                         .Where(x => x.itemUnitId == itemUnitsL.itemUnitId)
                                         .Select(x => x.itemsTransId)
                                         .FirstOrDefault();
@@ -214,7 +219,8 @@ namespace POS_Server.Controllers
                                     // get unit name of item that has the offer
                                     using (incposdbEntities entitydb = new incposdbEntities())
                                     { // put it in item
-                                        var un = entitydb.units
+                                        var un = entitydb
+                                            .units
                                             .Where(a => a.unitId == itofflist.unitId)
                                             .Select(u => new { u.name, u.unitId })
                                             .FirstOrDefault();
@@ -271,9 +277,9 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var itemsList = (
-                        from I in entity.items.Where(
-                            x => purchaseTypes.Contains(x.type) && x.isActive == 1
-                        )
+                        from I in entity
+                            .items
+                            .Where(x => purchaseTypes.Contains(x.type) && x.isActive == 1)
                         select new ItemModel()
                         {
                             itemId = I.itemId,
@@ -295,15 +301,18 @@ namespace POS_Server.Controllers
                             createUserId = I.createUserId,
                             updateUserId = I.updateUserId,
                             isNew = 0,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(m => m.itemId == I.parentId)
                                 .FirstOrDefault()
                                 .name,
-                            minUnitName = entity.units
+                            minUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
-                            maxUnitName = entity.units
+                            maxUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
@@ -311,7 +320,8 @@ namespace POS_Server.Controllers
                             notes = I.notes,
                             categoryString = I.categoryString,
                             categoryName = I.categories.name,
-                            itemUnitId = entity.itemsUnits
+                            itemUnitId = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultPurchase == 1)
                                 .FirstOrDefault()
                                 .itemUnitId,
@@ -386,11 +396,13 @@ namespace POS_Server.Controllers
                             if (itemsList[i].isActive == 1)
                             {
                                 long itemId = (long)itemsList[i].itemId;
-                                var childItemL = entity.items
+                                var childItemL = entity
+                                    .items
                                     .Where(x => x.parentId == itemId)
                                     .Select(b => new { b.itemId })
                                     .FirstOrDefault();
-                                var itemUnitsL = entity.itemsUnits
+                                var itemUnitsL = entity
+                                    .itemsUnits
                                     .Where(x => x.itemId == itemId)
                                     .Select(b => new { b.itemUnitId })
                                     .FirstOrDefault();
@@ -398,7 +410,8 @@ namespace POS_Server.Controllers
                                 long isInInvoice = 0;
                                 if (itemUnitsL != null)
                                 {
-                                    isInInvoice = entity.itemsTransfer
+                                    isInInvoice = entity
+                                        .itemsTransfer
                                         .Where(x => x.itemUnitId == itemUnitsL.itemUnitId)
                                         .Select(x => x.itemsTransId)
                                         .FirstOrDefault();
@@ -421,7 +434,8 @@ namespace POS_Server.Controllers
                                     // get unit name of item that has the offer
                                     using (incposdbEntities entitydb = new incposdbEntities())
                                     { // put it in item
-                                        var un = entitydb.units
+                                        var un = entitydb
+                                            .units
                                             .Where(a => a.unitId == itofflist.unitId)
                                             .Select(u => new { u.name, u.unitId })
                                             .FirstOrDefault();
@@ -476,9 +490,9 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var itemsList = (
-                        from I in entity.items.Where(
-                            x => salesTypes.Contains(x.type) && x.isActive == 1
-                        )
+                        from I in entity
+                            .items
+                            .Where(x => salesTypes.Contains(x.type) && x.isActive == 1)
                         select new ItemModel()
                         {
                             itemId = I.itemId,
@@ -501,30 +515,36 @@ namespace POS_Server.Controllers
                             createUserId = I.createUserId,
                             updateUserId = I.updateUserId,
                             isNew = 0,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(m => m.itemId == I.parentId)
                                 .FirstOrDefault()
                                 .name,
-                            minUnitName = entity.units
+                            minUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
-                            maxUnitName = entity.units
+                            maxUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
                             avgPurchasePrice = I.avgPurchasePrice,
                             notes = I.notes,
                             categoryString = I.categoryString,
-                            itemUnitId = entity.itemsUnits
+                            itemUnitId = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .itemUnitId,
-                            price = entity.itemsUnits
+                            price = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .price,
-                            priceWithService = entity.itemsUnits
+                            priceWithService = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .priceWithService,
@@ -624,9 +644,9 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var itemsList = (
-                        from I in entity.items.Where(
-                            x => salesTypes.Contains(x.type) && x.isActive == 1
-                        )
+                        from I in entity
+                            .items
+                            .Where(x => salesTypes.Contains(x.type) && x.isActive == 1)
                         join IU in entity.itemsUnits on I.itemId equals IU.itemId
                         join ms in entity.menuSettings.Where(searchPredicate)
                             on IU.itemUnitId equals ms.itemUnitId
@@ -652,34 +672,41 @@ namespace POS_Server.Controllers
                             createUserId = I.createUserId,
                             updateUserId = I.updateUserId,
                             isNew = 0,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(m => m.itemId == I.parentId)
                                 .FirstOrDefault()
                                 .name,
-                            minUnitName = entity.units
+                            minUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
-                            maxUnitName = entity.units
+                            maxUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
                             avgPurchasePrice = I.avgPurchasePrice,
                             notes = I.notes,
                             categoryString = I.categoryString,
-                            itemUnitId = entity.itemsUnits
+                            itemUnitId = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .itemUnitId,
-                            price = entity.itemsUnits
+                            price = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .price,
-                            basicPrice = entity.itemsUnits
+                            basicPrice = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .price,
-                            priceWithService = entity.itemsUnits
+                            priceWithService = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .priceWithService,
@@ -724,9 +751,9 @@ namespace POS_Server.Controllers
 
                     var membershipOffers = (
                         from off in entity.offers
-                        join mo in entity.membershipsOffers.Where(
-                            x => x.membershipId == membershipId
-                        )
+                        join mo in entity
+                            .membershipsOffers
+                            .Where(x => x.membershipId == membershipId)
                             on off.offerId equals mo.offerId
 
                         join itof in entity.itemsOffers on off.offerId equals itof.offerId // itemsOffers and offers
@@ -788,7 +815,8 @@ namespace POS_Server.Controllers
                                 // get unit name of item that has the offer
                                 using (incposdbEntities entitydb = new incposdbEntities())
                                 { // put it in item
-                                    var un = entitydb.units
+                                    var un = entitydb
+                                        .units
                                         .Where(a => a.unitId == itofflist.unitId)
                                         .Select(u => new { u.name, u.unitId })
                                         .FirstOrDefault();
@@ -922,34 +950,41 @@ namespace POS_Server.Controllers
                             createUserId = I.createUserId,
                             updateUserId = I.updateUserId,
                             isNew = 0,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(m => m.itemId == I.parentId)
                                 .FirstOrDefault()
                                 .name,
-                            minUnitName = entity.units
+                            minUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
-                            maxUnitName = entity.units
+                            maxUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
                             avgPurchasePrice = I.avgPurchasePrice,
                             notes = I.notes,
                             categoryString = I.categoryString,
-                            itemUnitId = entity.itemsUnits
+                            itemUnitId = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .itemUnitId,
-                            price = entity.itemsUnits
+                            price = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .price,
-                            basicPrice = entity.itemsUnits
+                            basicPrice = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .price,
-                            priceWithService = entity.itemsUnits
+                            priceWithService = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId && m.defaultSale == 1)
                                 .FirstOrDefault()
                                 .priceWithService,
@@ -994,9 +1029,9 @@ namespace POS_Server.Controllers
 
                     var membershipOffers = (
                         from off in entity.offers
-                        join mo in entity.membershipsOffers.Where(
-                            x => x.membershipId == membershipId
-                        )
+                        join mo in entity
+                            .membershipsOffers
+                            .Where(x => x.membershipId == membershipId)
                             on off.offerId equals mo.offerId
 
                         join itof in entity.itemsOffers on off.offerId equals itof.offerId // itemsOffers and offers
@@ -1058,7 +1093,8 @@ namespace POS_Server.Controllers
                                 // get unit name of item that has the offer
                                 using (incposdbEntities entitydb = new incposdbEntities())
                                 { // put it in item
-                                    var un = entitydb.units
+                                    var un = entitydb
+                                        .units
                                         .Where(a => a.unitId == itofflist.unitId)
                                         .Select(u => new { u.name, u.unitId })
                                         .FirstOrDefault();
@@ -1156,12 +1192,14 @@ namespace POS_Server.Controllers
                     try
                     {
                         var itemsList = (
-                            from I in entity.items.Where(
-                                x =>
-                                    salesTypes.Contains(x.type)
-                                    && x.isActive == 1
-                                    && x.categories.name != "extraOrders"
-                            )
+                            from I in entity
+                                .items
+                                .Where(
+                                    x =>
+                                        salesTypes.Contains(x.type)
+                                        && x.isActive == 1
+                                        && x.categories.name != "extraOrders"
+                                )
                             join iu in entity.itemsUnits on I.itemId equals iu.itemId
                             join m in entity.menuSettings.Where(x => x.branchId == branchId)
                                 on iu.itemUnitId equals m.itemUnitId
@@ -1292,7 +1330,8 @@ namespace POS_Server.Controllers
                             createUserId = I.createUserId,
                             updateUserId = I.updateUserId,
                             isNew = 0,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(m => m.itemId == I.parentId)
                                 .FirstOrDefault()
                                 .name,
@@ -1300,11 +1339,13 @@ namespace POS_Server.Controllers
                             notes = I.notes,
                             categoryString = I.categoryString,
                             tagId = I.tagId,
-                            priceWithService = entity.itemsUnits
+                            priceWithService = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId)
                                 .FirstOrDefault()
                                 .priceWithService,
-                            price = entity.itemsUnits
+                            price = entity
+                                .itemsUnits
                                 .Where(m => m.itemId == I.itemId)
                                 .FirstOrDefault()
                                 .price,
@@ -1380,11 +1421,13 @@ namespace POS_Server.Controllers
                             if (itemsList[i].isActive == 1)
                             {
                                 long itemId = (long)itemsList[i].itemId;
-                                var childItemL = entity.items
+                                var childItemL = entity
+                                    .items
                                     .Where(x => x.parentId == itemId)
                                     .Select(b => new { b.itemId })
                                     .FirstOrDefault();
-                                var itemUnitsL = entity.itemsUnits
+                                var itemUnitsL = entity
+                                    .itemsUnits
                                     .Where(x => x.itemId == itemId)
                                     .Select(b => new { b.itemUnitId })
                                     .FirstOrDefault();
@@ -1392,7 +1435,8 @@ namespace POS_Server.Controllers
                                 long isInInvoice = 0;
                                 if (itemUnitsL != null)
                                 {
-                                    isInInvoice = entity.itemsTransfer
+                                    isInInvoice = entity
+                                        .itemsTransfer
                                         .Where(x => x.itemUnitId == itemUnitsL.itemUnitId)
                                         .Select(x => x.itemsTransId)
                                         .FirstOrDefault();
@@ -1415,7 +1459,8 @@ namespace POS_Server.Controllers
                                     // get unit name of item that has the offer
                                     using (incposdbEntities entitydb = new incposdbEntities())
                                     { // put it in item
-                                        var un = entitydb.units
+                                        var un = entitydb
+                                            .units
                                             .Where(a => a.unitId == itofflist.unitId)
                                             .Select(u => new { u.name, u.unitId })
                                             .FirstOrDefault();
@@ -1500,15 +1545,18 @@ namespace POS_Server.Controllers
                             createUserId = I.createUserId,
                             updateUserId = I.updateUserId,
                             isNew = 0,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(m => m.itemId == I.parentId)
                                 .FirstOrDefault()
                                 .name,
-                            minUnitName = entity.units
+                            minUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
-                            maxUnitName = entity.units
+                            maxUnitName = entity
+                                .units
                                 .Where(m => m.unitId == I.minUnitId)
                                 .FirstOrDefault()
                                 .name,
@@ -1554,10 +1602,9 @@ namespace POS_Server.Controllers
                                     IO.isActiveOffer == 1
                                     && DateTime.Compare(((DateTime)IO.startDate).Date, datenow.Date)
                                         <= 0
-                                    && System.DateTime.Compare(
-                                        ((DateTime)IO.endDate).Date,
-                                        datenow.Date
-                                    ) >= 0
+                                    && System
+                                        .DateTime
+                                        .Compare(((DateTime)IO.endDate).Date, datenow.Date) >= 0
                                     && IO.defaultSale == 1
                                 )
                                 && (((DateTime)IO.startDate)).TimeOfDay <= datenow.TimeOfDay
@@ -1601,11 +1648,13 @@ namespace POS_Server.Controllers
                             if (itemsList[i].isActive == 1)
                             {
                                 long itemId = (long)itemsList[i].itemId;
-                                var childItemL = entity.items
+                                var childItemL = entity
+                                    .items
                                     .Where(x => x.parentId == itemId)
                                     .Select(b => new { b.itemId })
                                     .FirstOrDefault();
-                                var itemUnitsL = entity.itemsUnits
+                                var itemUnitsL = entity
+                                    .itemsUnits
                                     .Where(x => x.itemId == itemId)
                                     .Select(b => new { b.itemUnitId })
                                     .FirstOrDefault();
@@ -1613,7 +1662,8 @@ namespace POS_Server.Controllers
                                 long isInInvoice = 0;
                                 if (itemUnitsL != null)
                                 {
-                                    isInInvoice = entity.itemsTransfer
+                                    isInInvoice = entity
+                                        .itemsTransfer
                                         .Where(x => x.itemUnitId == itemUnitsL.itemUnitId)
                                         .Select(x => x.itemsTransId)
                                         .FirstOrDefault();
@@ -1636,7 +1686,8 @@ namespace POS_Server.Controllers
                                     // get unit name of item that has the offer
                                     using (incposdbEntities entitydb = new incposdbEntities())
                                     { // put it in item
-                                        var un = entitydb.units
+                                        var un = entitydb
+                                            .units
                                             .Where(a => a.unitId == itofflist.unitId)
                                             .Select(u => new { u.name, u.unitId })
                                             .FirstOrDefault();
@@ -1698,7 +1749,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     // get all sub categories of categoryId
-                    List<categories> categoriesList = entity.categories
+                    List<categories> categoriesList = entity
+                        .categories
                         .ToList()
                         .Select(
                             p =>
@@ -1745,15 +1797,18 @@ namespace POS_Server.Controllers
                             parentId = itm.parentId,
                             isActive = itm.isActive,
                             taxes = itm.taxes,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(x => x.itemId == itm.parentId)
                                 .FirstOrDefault()
                                 .name,
-                            minUnitName = entity.units
+                            minUnitName = entity
+                                .units
                                 .Where(x => x.unitId == itm.minUnitId)
                                 .FirstOrDefault()
                                 .name,
-                            maxUnitName = entity.units
+                            maxUnitName = entity
+                                .units
                                 .Where(x => x.unitId == itm.minUnitId)
                                 .FirstOrDefault()
                                 .name,
@@ -1778,11 +1833,13 @@ namespace POS_Server.Controllers
                         if (item.isActive == 1)
                         {
                             long itemId = (long)item.itemId;
-                            var childItemL = entity.items
+                            var childItemL = entity
+                                .items
                                 .Where(x => x.parentId == itemId)
                                 .Select(b => new { b.itemId })
                                 .FirstOrDefault();
-                            var itemUnitsL = entity.itemsUnits
+                            var itemUnitsL = entity
+                                .itemsUnits
                                 .Where(x => x.itemId == itemId)
                                 .Select(b => new { b.itemUnitId })
                                 .FirstOrDefault();
@@ -1790,7 +1847,8 @@ namespace POS_Server.Controllers
                             long isInInvoice = 0;
                             if (itemUnitsL != null)
                             {
-                                isInInvoice = entity.itemsTransfer
+                                isInInvoice = entity
+                                    .itemsTransfer
                                     .Where(x => x.itemUnitId == itemUnitsL.itemUnitId)
                                     .Select(x => x.itemsTransId)
                                     .FirstOrDefault();
@@ -1911,12 +1969,14 @@ namespace POS_Server.Controllers
                     var itemsList = (
                         from I in entity.items.Where(searchPredicate)
                         join u in entity.itemsUnits on I.itemId equals u.itemId
-                        join l in entity.itemsLocations.Where(
-                            x =>
-                                x.locations.branchId == branchId
-                                && x.locations.isKitchen == 1
-                                && x.quantity > 0
-                        )
+                        join l in entity
+                            .itemsLocations
+                            .Where(
+                                x =>
+                                    x.locations.branchId == branchId
+                                    && x.locations.isKitchen == 1
+                                    && x.quantity > 0
+                            )
                             on u.itemUnitId equals l.itemUnitId
                         select new ItemModel()
                         {
@@ -1931,7 +1991,8 @@ namespace POS_Server.Controllers
                                 .Where(iu => iu.itemId == I.itemId && iu.defaultPurchase == 1)
                                 .Select(iu => iu.itemUnitId)
                                 .FirstOrDefault(),
-                            unitName = entity.units
+                            unitName = entity
+                                .units
                                 .Where(
                                     u =>
                                         u.unitId
@@ -2005,12 +2066,14 @@ namespace POS_Server.Controllers
                     var itemsList = (
                         from I in entity.items.Where(searchPredicate)
                         join u in entity.itemsUnits on I.itemId equals u.itemId
-                        join l in entity.itemsLocations.Where(
-                            x =>
-                                x.locations.branchId == branchId
-                                && x.locations.isKitchen == 1
-                                && x.quantity > 0
-                        )
+                        join l in entity
+                            .itemsLocations
+                            .Where(
+                                x =>
+                                    x.locations.branchId == branchId
+                                    && x.locations.isKitchen == 1
+                                    && x.quantity > 0
+                            )
                             on u.itemUnitId equals l.itemUnitId
                         select new ItemModel()
                         {
@@ -2056,7 +2119,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var itemsList = entity.items
+                    var itemsList = entity
+                        .items
                         .Where(I => I.categoryId == categoryId && I.isActive == 1)
                         .Select(
                             I =>
@@ -2117,7 +2181,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     // get all sub categories of categoryId
-                    List<categories> categoriesList = entity.categories
+                    List<categories> categoriesList = entity
+                        .categories
                         .ToList()
                         .Select(
                             p =>
@@ -2164,15 +2229,18 @@ namespace POS_Server.Controllers
                             parentId = itm.parentId,
                             isActive = itm.isActive,
                             taxes = itm.taxes,
-                            parentName = entity.items
+                            parentName = entity
+                                .items
                                 .Where(x => x.itemId == itm.parentId)
                                 .FirstOrDefault()
                                 .name,
-                            minUnitName = entity.units
+                            minUnitName = entity
+                                .units
                                 .Where(x => x.unitId == itm.minUnitId)
                                 .FirstOrDefault()
                                 .name,
-                            maxUnitName = entity.units
+                            maxUnitName = entity
+                                .units
                                 .Where(x => x.unitId == itm.minUnitId)
                                 .FirstOrDefault()
                                 .name,
@@ -2197,11 +2265,13 @@ namespace POS_Server.Controllers
                         if (item.isActive == 1)
                         {
                             long itemId = (long)item.itemId;
-                            var childItemL = entity.items
+                            var childItemL = entity
+                                .items
                                 .Where(x => x.parentId == itemId)
                                 .Select(b => new { b.itemId })
                                 .FirstOrDefault();
-                            var itemUnitsL = entity.itemsUnits
+                            var itemUnitsL = entity
+                                .itemsUnits
                                 .Where(x => x.itemId == itemId)
                                 .Select(b => new { b.itemUnitId })
                                 .FirstOrDefault();
@@ -2209,7 +2279,8 @@ namespace POS_Server.Controllers
                             long isInInvoice = 0;
                             if (itemUnitsL != null)
                             {
-                                isInInvoice = entity.itemsTransfer
+                                isInInvoice = entity
+                                    .itemsTransfer
                                     .Where(x => x.itemUnitId == itemUnitsL.itemUnitId)
                                     .Select(x => x.itemsTransId)
                                     .FirstOrDefault();
@@ -2257,7 +2328,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var items = entity.items
+                    var items = entity
+                        .items
                         .Where(I => I.type == type)
                         .Select(
                             I =>
@@ -2306,7 +2378,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var item = entity.items
+                    var item = entity
+                        .items
                         .Where(I => I.itemId == itemId)
                         .Select(
                             I =>
@@ -2411,7 +2484,8 @@ namespace POS_Server.Controllers
 
                         if (categoryId != 0)
                         {
-                            List<categories> categoriesList = entity.categories
+                            List<categories> categoriesList = entity
+                                .categories
                                 .ToList()
                                 .Select(
                                     p =>
@@ -2555,10 +2629,10 @@ namespace POS_Server.Controllers
                                                 ((DateTime)IO.startDate).Date,
                                                 datenow.Date
                                             ) <= 0
-                                            && System.DateTime.Compare(
-                                                ((DateTime)IO.endDate).Date,
-                                                datenow.Date
-                                            ) >= 0
+                                            && System
+                                                .DateTime
+                                                .Compare(((DateTime)IO.endDate).Date, datenow.Date)
+                                                >= 0
                                             && IO.defaultSale == 1
                                         )
                                         && (((DateTime)IO.startDate)).TimeOfDay <= datenow.TimeOfDay
@@ -2635,7 +2709,8 @@ namespace POS_Server.Controllers
                                         // get unit name of item that has the offer
                                         using (incposdbEntities entitydb = new incposdbEntities())
                                         { // put it in item
-                                            var un = entitydb.units
+                                            var un = entitydb
+                                                .units
                                                 .Where(a => a.unitId == itofflist.unitId)
                                                 .Select(u => new { u.name, u.unitId })
                                                 .FirstOrDefault();
@@ -2767,10 +2842,10 @@ namespace POS_Server.Controllers
                                                 ((DateTime)IO.startDate).Date,
                                                 datenow.Date
                                             ) <= 0
-                                            && System.DateTime.Compare(
-                                                ((DateTime)IO.endDate).Date,
-                                                datenow.Date
-                                            ) >= 0
+                                            && System
+                                                .DateTime
+                                                .Compare(((DateTime)IO.endDate).Date, datenow.Date)
+                                                >= 0
                                             && IO.defaultSale == 1
                                             && IO.itemCount > IO.used
                                         )
@@ -2848,7 +2923,8 @@ namespace POS_Server.Controllers
                                         // get unit name of item that has the offer
                                         using (incposdbEntities entitydb = new incposdbEntities())
                                         { // put it in item
-                                            var un = entitydb.units
+                                            var un = entitydb
+                                                .units
                                                 .Where(a => a.unitId == itofflist.unitId)
                                                 .Select(u => new { u.name, u.unitId })
                                                 .FirstOrDefault();
@@ -2961,7 +3037,8 @@ namespace POS_Server.Controllers
                                         // get unit name of item that has the offer
                                         using (incposdbEntities entitydb = new incposdbEntities())
                                         { // put it in item
-                                            var un = entitydb.units
+                                            var un = entitydb
+                                                .units
                                                 .Where(a => a.unitId == itofflist.unitId)
                                                 .Select(u => new { u.name, u.unitId })
                                                 .FirstOrDefault();
@@ -3101,11 +3178,13 @@ namespace POS_Server.Controllers
                     amount += (int)itemInLocs[i].quantity;
                 }
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId && x.itemId == unit.itemId && x.isActive == 1
@@ -3399,7 +3478,8 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            itemUnitId = entity.itemsUnits
+                            itemUnitId = entity
+                                .itemsUnits
                                 .Where(x => x.itemId == itemId)
                                 .Select(x => x.itemUnitId)
                                 .FirstOrDefault();
@@ -3502,7 +3582,8 @@ namespace POS_Server.Controllers
                         {
                             var tmpItem = entity.items.Where(I => I.itemId == itemId).First();
 
-                            var iuitems = entity.itemsUnits
+                            var iuitems = entity
+                                .itemsUnits
                                 .Where(x => x.itemId == tmpItem.itemId)
                                 .ToList();
                             // remove from itemunit table
@@ -3567,7 +3648,8 @@ namespace POS_Server.Controllers
                 {
                     if (itemId != 0)
                     {
-                        var itemsList = entity.items
+                        var itemsList = entity
+                            .items
                             .Where(c => c.parentId == itemId && c.isActive == 1)
                             .Select(
                                 I =>
@@ -3601,7 +3683,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var itemsList = entity.items
+                        var itemsList = entity
+                            .items
                             .Where(c => c.parentId == 0 && c.isActive == 1)
                             .Select(
                                 I =>
@@ -3666,9 +3749,9 @@ namespace POS_Server.Controllers
                             ".tiff",
                             ".jfif"
                         };
-                        var ext = postedFile.FileName.Substring(
-                            postedFile.FileName.LastIndexOf('.')
-                        );
+                        var ext = postedFile
+                            .FileName
+                            .Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
@@ -3862,10 +3945,9 @@ namespace POS_Server.Controllers
                                     IO.isActiveOffer == 1
                                     && DateTime.Compare(((DateTime)IO.startDate).Date, datenow.Date)
                                         <= 0
-                                    && System.DateTime.Compare(
-                                        ((DateTime)IO.endDate).Date,
-                                        datenow.Date
-                                    ) >= 0
+                                    && System
+                                        .DateTime
+                                        .Compare(((DateTime)IO.endDate).Date, datenow.Date) >= 0
                                     && IO.defaultSale == 1
                                 )
                                 && (((DateTime)IO.startDate)).TimeOfDay <= datenow.TimeOfDay
@@ -3936,7 +4018,8 @@ namespace POS_Server.Controllers
                                 // get unit name of item that has the offer
                                 using (incposdbEntities entitydb = new incposdbEntities())
                                 { // put it in item
-                                    var un = entitydb.units
+                                    var un = entitydb
+                                        .units
                                         .Where(a => a.unitId == itofflist.unitId)
                                         .Select(u => new { u.name, u.unitId })
                                         .FirstOrDefault();
@@ -4102,7 +4185,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     // get all sub categories of categoryId
-                    List<categories> categoriesList = entity.categories
+                    List<categories> categoriesList = entity
+                        .categories
                         .Where(c => c.isActive == 1)
                         .ToList()
                         .Select(
@@ -4255,7 +4339,8 @@ namespace POS_Server.Controllers
                                 // get unit name of item that has the offer
                                 using (incposdbEntities entitydb = new incposdbEntities())
                                 { // put it in item
-                                    var un = entitydb.units
+                                    var un = entitydb
+                                        .units
                                         .Where(a => a.unitId == itofflist.unitId)
                                         .Select(u => new { u.name, u.unitId })
                                         .FirstOrDefault();
@@ -4329,7 +4414,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     // get all sub categories of categoryId
-                    List<categories> categoriesList = entity.categories
+                    List<categories> categoriesList = entity
+                        .categories
                         .Where(c => c.isActive == 1)
                         .ToList()
                         .Select(

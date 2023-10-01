@@ -176,20 +176,22 @@ namespace System.Web.UI.Design.MobileControls
             this._pnlMain.Anchor = (
                 System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left
             );
-            this._pnlMain.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this._tbArgument,
-                    this._lblArgument,
-                    this._appliedFiltersList,
-                    this._cmdCancel,
-                    this._cmdOK,
-                    this._lblAvailableFilters,
-                    this._btnEditFilters,
-                    this._cbAvailableFilters,
-                    this._btnApplyFilter
-                }
-            );
+            this._pnlMain
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this._tbArgument,
+                        this._lblArgument,
+                        this._appliedFiltersList,
+                        this._cmdCancel,
+                        this._cmdOK,
+                        this._lblAvailableFilters,
+                        this._btnEditFilters,
+                        this._cbAvailableFilters,
+                        this._btnApplyFilter
+                    }
+                );
             this._pnlMain.Location = new System.Drawing.Point(6, 8);
             this._pnlMain.Name = "_pnlMain";
             this._pnlMain.Size = new System.Drawing.Size(276, 357);

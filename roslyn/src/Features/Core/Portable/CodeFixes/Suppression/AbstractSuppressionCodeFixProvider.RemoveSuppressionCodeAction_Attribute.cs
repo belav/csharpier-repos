@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     CancellationToken cancellationToken
                 )
                 {
-                    var attributeNode = await _attribute.ApplicationSyntaxReference
+                    var attributeNode = await _attribute
+                        .ApplicationSyntaxReference
                         .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     return Fixer.IsSingleAttributeInAttributeList(attributeNode)

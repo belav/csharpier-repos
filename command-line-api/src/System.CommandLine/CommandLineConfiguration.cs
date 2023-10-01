@@ -133,7 +133,8 @@ namespace System.CommandLine
             static void ThrowIfInvalid(Command command)
             {
                 if (
-                    command.Parents
+                    command
+                        .Parents
                         .FlattenBreadthFirst(c => c.Parents)
                         .Any(ancestor => ancestor == command)
                 )
@@ -154,10 +155,10 @@ namespace System.CommandLine
                         foreach (var symbol2Alias in symbol2AsIdentifier.Aliases)
                         {
                             if (
-                                symbol1AsIdentifier.Name.Equals(
-                                    symbol2Alias,
-                                    StringComparison.Ordinal
-                                ) || symbol1AsIdentifier.Aliases.Contains(symbol2Alias)
+                                symbol1AsIdentifier
+                                    .Name
+                                    .Equals(symbol2Alias, StringComparison.Ordinal)
+                                || symbol1AsIdentifier.Aliases.Contains(symbol2Alias)
                             )
                             {
                                 throw new CommandLineConfigurationException(

@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Shared.Helpers.RemoveUnnecessaryImports
     {
         public static SyntaxToken StripNewLines(ISyntaxFacts syntaxFacts, SyntaxToken token)
         {
-            var trimmedLeadingTrivia = token.LeadingTrivia
+            var trimmedLeadingTrivia = token
+                .LeadingTrivia
                 .SkipWhile(syntaxFacts.IsEndOfLineTrivia)
                 .ToList();
 

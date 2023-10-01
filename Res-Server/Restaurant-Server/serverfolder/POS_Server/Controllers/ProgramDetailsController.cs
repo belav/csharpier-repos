@@ -198,7 +198,8 @@ namespace POS_Server.Controllers
                 DateTime compairDate1 = compaireDate2.AddMonths(-1);
 
                 // get sales imvoice count between compaireDate1 and compairDate2
-                invCount = entity.invoices
+                invCount = entity
+                    .invoices
                     .Where(
                         x =>
                             (x.invType == "s" || x.invType == "ts" || x.invType == "ss")

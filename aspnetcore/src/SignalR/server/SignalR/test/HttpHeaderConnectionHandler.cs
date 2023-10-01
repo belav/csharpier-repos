@@ -20,7 +20,8 @@ public class HttpHeaderConnectionHandler : ConnectionHandler
 
         try
         {
-            var headers = connection.Features
+            var headers = connection
+                .Features
                 .Get<IHttpContextFeature>()
                 .HttpContext
                 .Request

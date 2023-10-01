@@ -456,7 +456,8 @@ internal class LspWorkspaceManager : IDocumentChangeTracker, ILspService
 
         public bool IsWorkspaceRegistered(Workspace workspace)
         {
-            return _manager._lspWorkspaceRegistrationService
+            return _manager
+                ._lspWorkspaceRegistrationService
                 .GetAllRegistrations()
                 .Contains(workspace);
         }

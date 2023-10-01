@@ -91,18 +91,22 @@ public static class JwtBearerExtensions
         Action<JwtBearerOptions> configureOptions
     )
     {
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IConfigureOptions<JwtBearerOptions>,
-                JwtBearerConfigureOptions
-            >()
-        );
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IPostConfigureOptions<JwtBearerOptions>,
-                JwtBearerPostConfigureOptions
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<JwtBearerOptions>,
+                    JwtBearerConfigureOptions
+                >()
+            );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IPostConfigureOptions<JwtBearerOptions>,
+                    JwtBearerPostConfigureOptions
+                >()
+            );
         return builder.AddScheme<JwtBearerOptions, JwtBearerHandler>(
             authenticationScheme,
             displayName,

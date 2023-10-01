@@ -78,14 +78,18 @@ End Class
 
             VisualStudio.Editor.SendKeys("Dim m=Method(1,");
             VisualStudio.Editor.InvokeSignatureHelp();
-            VisualStudio.Editor.Verify.CurrentSignature(
-                "C.Method(i As Integer, i2 As Integer) As C\r\nHello World 2.0!"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentSignature("C.Method(i As Integer, i2 As Integer) As C\r\nHello World 2.0!");
             VisualStudio.Editor.Verify.CurrentParameter("i2", "an integer, anything you like.");
-            VisualStudio.Editor.Verify.Parameters(
-                ("i", "an integer, preferably 42."),
-                ("i2", "an integer, anything you like.")
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .Parameters(
+                    ("i", "an integer, preferably 42."),
+                    ("i2", "an integer, anything you like.")
+                );
         }
 
         [WpfFact]
@@ -96,9 +100,10 @@ End Class
             VisualStudio.Editor.SendKeys("Dim gm = GenericMethod");
             VisualStudio.Editor.SendKeys(VirtualKey.Escape);
             VisualStudio.Editor.SendKeys("(");
-            VisualStudio.Editor.Verify.CurrentSignature(
-                "C.GenericMethod(Of T1)(i As T1) As C\r\nHello Generic World!"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentSignature("C.GenericMethod(Of T1)(i As T1) As C\r\nHello Generic World!");
             VisualStudio.Editor.Verify.CurrentParameter("i", "Param 1 of type T1");
             VisualStudio.Editor.Verify.Parameters(("i", "Param 1 of type T1"));
         }
@@ -140,9 +145,12 @@ End Class"
             VisualStudio.Editor.SendKeys("GenericMethod");
             VisualStudio.Editor.SendKeys(VirtualKey.Escape);
             VisualStudio.Editor.SendKeys("(Of ");
-            VisualStudio.Editor.Verify.CurrentSignature(
-                "C(Of T, R).GenericMethod(Of T1)(i As T1)\r\nGeneric Method with 1 Type Param"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentSignature(
+                    "C(Of T, R).GenericMethod(Of T1)(i As T1)\r\nGeneric Method with 1 Type Param"
+                );
             VisualStudio.Editor.Verify.CurrentParameter("T1", "Type Parameter");
             VisualStudio.Editor.Verify.Parameters(("T1", "Type Parameter"));
         }
@@ -169,9 +177,10 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeSignatureHelp();
-            VisualStudio.Editor.Verify.CurrentSignature(
-                "C.GenericMethod(Of T1, T2)(i As T1, i2 As T2) As C"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentSignature("C.GenericMethod(Of T1, T2)(i As T1, i2 As T2) As C");
             VisualStudio.Editor.Verify.CurrentParameter("T2", "");
             VisualStudio.Editor.Verify.Parameters(("T1", ""), ("T2", ""));
         }
@@ -216,11 +225,13 @@ End Class"
             VisualStudio.Editor.SendKeys("Goo(");
             VisualStudio.Editor.Verify.CurrentSignature("C.Goo()");
 
-            VisualStudio.Editor.SetText(
-                @"
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"
 Class C
     'Marker"
-            );
+                );
 
             Assert.False(VisualStudio.Editor.IsSignatureHelpActive());
         }
@@ -231,15 +242,21 @@ Class C
             SetUpEditor(Baseline);
 
             VisualStudio.Editor.SendKeys("Dim op = OutAndParam(");
-            VisualStudio.Editor.Verify.CurrentSignature(
-                "C.OutAndParam(ByRef strings As String()(,), ByRef outArr As String(), ParamArray d As Object)\r\nComplex Method Params"
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CurrentSignature(
+                    "C.OutAndParam(ByRef strings As String()(,), ByRef outArr As String(), ParamArray d As Object)\r\nComplex Method Params"
+                );
             VisualStudio.Editor.Verify.CurrentParameter("strings", "Jagged MultiDimensional Array");
-            VisualStudio.Editor.Verify.Parameters(
-                ("strings", "Jagged MultiDimensional Array"),
-                ("outArr", "Out Array"),
-                ("d", "Dynamic and Params param")
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .Parameters(
+                    ("strings", "Jagged MultiDimensional Array"),
+                    ("outArr", "Out Array"),
+                    ("d", "Dynamic and Params param")
+                );
         }
     }
 }

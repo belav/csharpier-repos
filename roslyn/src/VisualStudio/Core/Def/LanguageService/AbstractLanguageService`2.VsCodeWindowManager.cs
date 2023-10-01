@@ -49,8 +49,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 _languageService = languageService;
                 _codeWindow = codeWindow;
 
-                _globalOptions =
-                    languageService.Package.ComponentModel.GetService<IGlobalOptionService>();
+                _globalOptions = languageService
+                    .Package
+                    .ComponentModel
+                    .GetService<IGlobalOptionService>();
 
                 _sink = ComEventSink.Advise<IVsCodeWindowEvents>(codeWindow, this);
                 _globalOptions.OptionChanged += GlobalOptionChanged;
@@ -83,9 +85,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return;
                 }
 
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    buffer
-                );
+                var textBuffer = _languageService
+                    .EditorAdaptersFactoryService
+                    .GetDataBuffer(buffer);
                 var document = textBuffer
                     ?.AsTextContainer()
                     ?.GetRelatedDocuments()
@@ -191,11 +193,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     _languageService.SystemServiceProvider,
                     _languageService.Workspace
                 );
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    buffer
-                );
-                var controllerFactoryService =
-                    _languageService.Package.ComponentModel.GetService<INavigationBarControllerFactoryService>();
+                var textBuffer = _languageService
+                    .EditorAdaptersFactoryService
+                    .GetDataBuffer(buffer);
+                var controllerFactoryService = _languageService
+                    .Package
+                    .ComponentModel
+                    .GetService<INavigationBarControllerFactoryService>();
                 var newController = controllerFactoryService.CreateController(
                     navigationBarClient,
                     textBuffer
@@ -289,17 +293,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return VSConstants.S_OK;
                 }
 
-                var languageServiceBroker =
-                    _languageService.Package.ComponentModel.GetService<ILanguageServiceBroker2>();
-                var threadingContext =
-                    _languageService.Package.ComponentModel.GetService<IThreadingContext>();
-                var asyncListenerProvider =
-                    _languageService.Package.ComponentModel.GetService<IAsynchronousOperationListenerProvider>();
+                var languageServiceBroker = _languageService
+                    .Package
+                    .ComponentModel
+                    .GetService<ILanguageServiceBroker2>();
+                var threadingContext = _languageService
+                    .Package
+                    .ComponentModel
+                    .GetService<IThreadingContext>();
+                var asyncListenerProvider = _languageService
+                    .Package
+                    .ComponentModel
+                    .GetService<IAsynchronousOperationListenerProvider>();
                 var asyncListener = asyncListenerProvider.GetListener(
                     FeatureAttribute.DocumentOutline
                 );
-                var editorAdaptersFactoryService =
-                    _languageService.Package.ComponentModel.GetService<IVsEditorAdaptersFactoryService>();
+                var editorAdaptersFactoryService = _languageService
+                    .Package
+                    .ComponentModel
+                    .GetService<IVsEditorAdaptersFactoryService>();
 
                 threadingContext.ThrowIfNotOnUIThread();
 
@@ -331,8 +343,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             int IVsDocOutlineProvider.ReleaseOutline(IntPtr hwnd, IOleCommandTarget pCmdTarget)
             {
-                var threadingContext =
-                    _languageService.Package.ComponentModel.GetService<IThreadingContext>();
+                var threadingContext = _languageService
+                    .Package
+                    .ComponentModel
+                    .GetService<IThreadingContext>();
                 threadingContext.ThrowIfNotOnUIThread();
 
                 if (_documentOutlineControl is not null && _documentOutlineViewHost is not null)

@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
             );
 
             using var workspace = TestWorkspace.Create(xmlString);
-            var position = workspace.Documents
+            var position = workspace
+                .Documents
                 .Single(d => d.Name == "SourceDocument")
                 .CursorPosition
                 .Value;
@@ -334,7 +335,8 @@ using System.Linq;
         )
         {
             using var workspace = TestWorkspace.Create(xmlString);
-            var position = workspace.Documents
+            var position = workspace
+                .Documents
                 .First(d => d.Name == "SourceDocument")
                 .CursorPosition
                 .Value;

@@ -39,15 +39,17 @@ namespace System.ServiceModel.Configuration
                     // being manipulated (i.e. duplicate in same config file)
                     if (oldElement.ElementInformation.IsPresent)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ConfigurationErrorsException(
-                                SR.GetString(
-                                    SR.ConfigDuplicateKeyAtSameScope,
-                                    this.ElementName,
-                                    newElementKey
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ConfigurationErrorsException(
+                                    SR.GetString(
+                                        SR.ConfigDuplicateKeyAtSameScope,
+                                        this.ElementName,
+                                        newElementKey
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else if (DiagnosticUtility.ShouldTraceWarning)
                     {
@@ -57,16 +59,18 @@ namespace System.ServiceModel.Configuration
                         values.Add("OldElementLocation", oldElement.ElementInformation.Source);
                         values.Add(
                             "OldElementLineNumber",
-                            oldElement.ElementInformation.LineNumber.ToString(
-                                NumberFormatInfo.CurrentInfo
-                            )
+                            oldElement
+                                .ElementInformation
+                                .LineNumber
+                                .ToString(NumberFormatInfo.CurrentInfo)
                         );
                         values.Add("NewElementLocation", element.ElementInformation.Source);
                         values.Add(
                             "NewElementLineNumber",
-                            element.ElementInformation.LineNumber.ToString(
-                                NumberFormatInfo.CurrentInfo
-                            )
+                            element
+                                .ElementInformation
+                                .LineNumber
+                                .ToString(NumberFormatInfo.CurrentInfo)
                         );
 
                         DictionaryTraceRecord traceRecord = new DictionaryTraceRecord(values);

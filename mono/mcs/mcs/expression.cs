@@ -3918,13 +3918,15 @@ namespace Mono.CSharp
                     if (inequal_method == null)
                     {
                         if (left.BuiltinType == BuiltinTypeSpec.Type.String)
-                            inequal_method = ec.Module.PredefinedMembers.StringInequal.Resolve(
-                                b.loc
-                            );
+                            inequal_method = ec.Module
+                                .PredefinedMembers
+                                .StringInequal
+                                .Resolve(b.loc);
                         else if (left.BuiltinType == BuiltinTypeSpec.Type.Delegate)
-                            inequal_method = ec.Module.PredefinedMembers.DelegateInequal.Resolve(
-                                b.loc
-                            );
+                            inequal_method = ec.Module
+                                .PredefinedMembers
+                                .DelegateInequal
+                                .Resolve(b.loc);
                         else
                             throw new NotImplementedException(left.GetSignatureForError());
                     }
@@ -5968,10 +5970,11 @@ namespace Mono.CSharp
             }
 
             if (expr.Type.IsNullableType || liftType)
-                underlying_type = rc.Module.PredefinedTypes.Nullable.TypeSpec.MakeGenericType(
-                    rc.Module,
-                    new[] { underlying_type }
-                );
+                underlying_type = rc.Module
+                    .PredefinedTypes
+                    .Nullable
+                    .TypeSpec
+                    .MakeGenericType(rc.Module, new[] { underlying_type });
 
             if (expr.Type == underlying_type)
                 return expr;
@@ -6098,10 +6101,11 @@ namespace Mono.CSharp
                 }
 
                 if (expr is Nullable.LiftedBinaryOperator && !result_type.IsNullableType)
-                    result_type = rc.Module.PredefinedTypes.Nullable.TypeSpec.MakeGenericType(
-                        rc.Module,
-                        new[] { result_type }
-                    );
+                    result_type = rc.Module
+                        .PredefinedTypes
+                        .Nullable
+                        .TypeSpec
+                        .MakeGenericType(rc.Module, new[] { result_type });
             }
 
             return EmptyCast.Create(expr, result_type);
@@ -8567,8 +8571,10 @@ namespace Mono.CSharp
 
                 if (ec.IsVariableCapturingRequired)
                 {
-                    AnonymousMethodStorey storey =
-                        local_info.Block.Explicit.CreateAnonymousMethodStorey(ec);
+                    AnonymousMethodStorey storey = local_info
+                        .Block
+                        .Explicit
+                        .CreateAnonymousMethodStorey(ec);
                     storey.CaptureLocalVariable(ec, local_info);
                 }
             }
@@ -8806,9 +8812,9 @@ namespace Mono.CSharp
 
                 if (ec.IsVariableCapturingRequired && !pi.Block.ParametersBlock.IsExpressionTree)
                 {
-                    AnonymousMethodStorey storey = pi.Block.Explicit.CreateAnonymousMethodStorey(
-                        ec
-                    );
+                    AnonymousMethodStorey storey = pi.Block
+                        .Explicit
+                        .CreateAnonymousMethodStorey(ec);
                     storey.CaptureParameter(ec, pi, this);
                 }
             }
@@ -11781,12 +11787,15 @@ namespace Mono.CSharp
                 {
                     if (InflatedTypeSpec.ContainsTypeParameter(gt))
                     {
-                        rc.Module.Compiler.Report.Error(
-                            416,
-                            loc,
-                            "`{0}': an attribute argument cannot use type parameters",
-                            typearg.GetSignatureForError()
-                        );
+                        rc.Module
+                            .Compiler
+                            .Report
+                            .Error(
+                                416,
+                                loc,
+                                "`{0}': an attribute argument cannot use type parameters",
+                                typearg.GetSignatureForError()
+                            );
                         return;
                     }
 
@@ -12124,12 +12133,15 @@ namespace Mono.CSharp
         {
             if ((restrictions & MemberLookupRestrictions.InvocableOnly) != 0)
             {
-                rc.Module.Compiler.Report.Error(
-                    687,
-                    loc,
-                    "The namespace alias qualifier `::' cannot be used to invoke a method. Consider using `.' instead",
-                    GetSignatureForError()
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        687,
+                        loc,
+                        "The namespace alias qualifier `::' cannot be used to invoke a method. Consider using `.' instead",
+                        GetSignatureForError()
+                    );
 
                 return null;
             }
@@ -12573,24 +12585,30 @@ namespace Mono.CSharp
             TypeSpec expr_type = tnew_expr;
             if (TypeManager.IsGenericParameter(expr_type))
             {
-                rc.Module.Compiler.Report.Error(
-                    704,
-                    loc,
-                    "A nested type cannot be specified through a type parameter `{0}'",
-                    tnew_expr.GetSignatureForError()
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        704,
+                        loc,
+                        "A nested type cannot be specified through a type parameter `{0}'",
+                        tnew_expr.GetSignatureForError()
+                    );
                 return null;
             }
 
             var qam = this as QualifiedAliasMember;
             if (qam != null)
             {
-                rc.Module.Compiler.Report.Error(
-                    431,
-                    loc,
-                    "Alias `{0}' cannot be used with `::' since it denotes a type. Consider replacing `::' with `.'",
-                    qam.Alias
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        431,
+                        loc,
+                        "Alias `{0}' cannot be used with `::' since it denotes a type. Consider replacing `::' with `.'",
+                        qam.Alias
+                    );
             }
 
             TypeSpec nested = null;
@@ -12692,13 +12710,16 @@ namespace Mono.CSharp
                 return;
             }
 
-            rc.Module.Compiler.Report.Error(
-                426,
-                loc,
-                "The nested type `{0}' does not exist in the type `{1}'",
-                Name,
-                expr_type.GetSignatureForError()
-            );
+            rc.Module
+                .Compiler
+                .Report
+                .Error(
+                    426,
+                    loc,
+                    "The nested type `{0}' does not exist in the type `{1}'",
+                    Name,
+                    expr_type.GetSignatureForError()
+                );
         }
 
         protected override void Error_InvalidExpressionStatement(Report report, Location loc)
@@ -12720,11 +12741,9 @@ namespace Mono.CSharp
             {
                 ec.Report.SymbolRelatedToPreviousError(type);
 
-                var cand = ec.Module.GlobalRootNamespace.FindExtensionMethodNamespaces(
-                    ec,
-                    name,
-                    Arity
-                );
+                var cand = ec.Module
+                    .GlobalRootNamespace
+                    .FindExtensionMethodNamespaces(ec, name, Arity);
                 string missing;
                 // a using directive or an assembly reference
                 if (cand != null)
@@ -14318,22 +14337,28 @@ namespace Mono.CSharp
             {
                 if (type.IsSpecialRuntimeType || type.IsByRefLike)
                 {
-                    ec.Module.Compiler.Report.Error(
-                        611,
-                        loc,
-                        "Array elements cannot be of type `{0}'",
-                        type.GetSignatureForError()
-                    );
+                    ec.Module
+                        .Compiler
+                        .Report
+                        .Error(
+                            611,
+                            loc,
+                            "Array elements cannot be of type `{0}'",
+                            type.GetSignatureForError()
+                        );
                 }
                 else if (type.IsStatic)
                 {
                     ec.Module.Compiler.Report.SymbolRelatedToPreviousError(type);
-                    ec.Module.Compiler.Report.Error(
-                        719,
-                        loc,
-                        "Array elements cannot be of static type `{0}'",
-                        type.GetSignatureForError()
-                    );
+                    ec.Module
+                        .Compiler
+                        .Report
+                        .Error(
+                            719,
+                            loc,
+                            "Array elements cannot be of static type `{0}'",
+                            type.GetSignatureForError()
+                        );
                 }
                 else
                 {

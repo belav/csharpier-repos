@@ -116,9 +116,10 @@ namespace AppHost.Bundle.Tests
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants.ErrorCode.BundleExtractionFailure.ToString(
-                    "x"
-                );
+                string expectedErrorCode = Constants
+                    .ErrorCode
+                    .BundleExtractionFailure
+                    .ToString("x");
 
                 var dotnetBuilder = new DotNetBuilder(
                     dotnetWithMockHostFxr,

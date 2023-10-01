@@ -29,18 +29,24 @@ namespace System.ServiceModel.Discovery
                 ns = reader.LookupNamespace(prefix);
                 if (ns == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new XmlException(
-                            SR2.DiscoveryXmlQNamePrefixNotDefined(prefix, prefixedQName)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new XmlException(
+                                SR2.DiscoveryXmlQNamePrefixNotDefined(prefix, prefixedQName)
+                            )
+                        );
                 }
                 localname = prefixedQName.Substring(index + 1);
                 if (localname == string.Empty)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new XmlException(SR2.DiscoveryXmlQNameLocalnameNotDefined(prefixedQName))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new XmlException(
+                                SR2.DiscoveryXmlQNameLocalnameNotDefined(prefixedQName)
+                            )
+                        );
                 }
             }
             else
@@ -101,18 +107,25 @@ namespace System.ServiceModel.Discovery
                     {
                         if (uriKind == UriKind.Absolute)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new XmlException(
-                                    SR2.DiscoveryXmlAbsoluteUriFormatError(uriStrings[i]),
-                                    fe
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new XmlException(
+                                        SR2.DiscoveryXmlAbsoluteUriFormatError(uriStrings[i]),
+                                        fe
+                                    )
+                                );
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(
-                                new XmlException(SR2.DiscoveryXmlUriFormatError(uriStrings[i]), fe)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new XmlException(
+                                        SR2.DiscoveryXmlUriFormatError(uriStrings[i]),
+                                        fe
+                                    )
+                                );
                         }
                     }
                 }
@@ -274,9 +287,11 @@ namespace System.ServiceModel.Discovery
                 maxResults = reader.ReadContentAsInt();
                 if (maxResults <= 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new XmlException(SR2.DiscoveryXmlMaxResultsLessThanZero(maxResults))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new XmlException(SR2.DiscoveryXmlMaxResultsLessThanZero(maxResults))
+                        );
                 }
                 reader.ReadEndElement();
             }
@@ -300,9 +315,9 @@ namespace System.ServiceModel.Discovery
                 );
                 if (timeout <= TimeSpan.Zero)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new XmlException(SR2.DiscoveryXmlDurationLessThanZero(timeout))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new XmlException(SR2.DiscoveryXmlDurationLessThanZero(timeout)));
                     ;
                 }
                 reader.ReadEndElement();
@@ -416,12 +431,14 @@ namespace System.ServiceModel.Discovery
                         }
                         catch (FormatException fe)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new XmlException(
-                                    SR2.DiscoveryXmlUriFormatError(scopeMatchByStr),
-                                    fe
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new XmlException(
+                                        SR2.DiscoveryXmlUriFormatError(scopeMatchByStr),
+                                        fe
+                                    )
+                                );
                         }
                         break;
                     }
@@ -482,9 +499,13 @@ namespace System.ServiceModel.Discovery
 
             if (metadataVersion < 0)
             {
-                throw FxTrace.Exception.AsError(
-                    new XmlException(SR2.DiscoveryXmlMetadataVersionLessThanZero(metadataVersion))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new XmlException(
+                            SR2.DiscoveryXmlMetadataVersionLessThanZero(metadataVersion)
+                        )
+                    );
             }
 
             reader.ReadEndElement();
@@ -564,10 +585,9 @@ namespace System.ServiceModel.Discovery
                 );
                 if (scopeMatchBy != null)
                 {
-                    Uri versionDependentScopeMatchBy =
-                        discoveryVersion.Implementation.ToVersionDependentScopeMatchBy(
-                            scopeMatchBy
-                        );
+                    Uri versionDependentScopeMatchBy = discoveryVersion
+                        .Implementation
+                        .ToVersionDependentScopeMatchBy(scopeMatchBy);
                     writer.WriteAttributeString(
                         ProtocolStrings.SchemaNames.MatchByAttribute,
                         string.Empty,

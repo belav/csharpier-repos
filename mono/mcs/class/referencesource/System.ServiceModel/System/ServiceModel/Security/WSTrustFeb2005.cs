@@ -163,14 +163,16 @@ namespace System.ServiceModel.Security
                 }
                 catch (XmlException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.TrustDriverIsUnableToCreatedNecessaryAttachedOrUnattachedReferences,
-                                issuedTokenXml.ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.TrustDriverIsUnableToCreatedNecessaryAttachedOrUnattachedReferences,
+                                    issuedTokenXml.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -211,18 +213,16 @@ namespace System.ServiceModel.Security
                             child.LocalName == this.DriverDictionary.RenewTarget.Value
                             && child.NamespaceURI == this.DriverDictionary.Namespace.Value
                         )
-                            renewTarget =
-                                this.StandardsManager.SecurityTokenSerializer.ReadKeyIdentifierClause(
-                                    new XmlNodeReader(child.FirstChild)
-                                );
+                            renewTarget = this.StandardsManager
+                                .SecurityTokenSerializer
+                                .ReadKeyIdentifierClause(new XmlNodeReader(child.FirstChild));
                         else if (
                             child.LocalName == this.DriverDictionary.CloseTarget.Value
                             && child.NamespaceURI == this.DriverDictionary.Namespace.Value
                         )
-                            closeTarget =
-                                this.StandardsManager.SecurityTokenSerializer.ReadKeyIdentifierClause(
-                                    new XmlNodeReader(child.FirstChild)
-                                );
+                            closeTarget = this.StandardsManager
+                                .SecurityTokenSerializer
+                                .ReadKeyIdentifierClause(new XmlNodeReader(child.FirstChild));
                     }
                 }
             }
@@ -239,10 +239,9 @@ namespace System.ServiceModel.Security
                         this.DriverDictionary.RequestedAttachedReference,
                         this.DriverDictionary.Namespace
                     );
-                    this.StandardsManager.SecurityTokenSerializer.WriteKeyIdentifierClause(
-                        writer,
-                        rstr.RequestedAttachedReference
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteKeyIdentifierClause(writer, rstr.RequestedAttachedReference);
                     writer.WriteEndElement();
                 }
 
@@ -253,10 +252,9 @@ namespace System.ServiceModel.Security
                         this.DriverDictionary.RequestedUnattachedReference,
                         this.DriverDictionary.Namespace
                     );
-                    this.StandardsManager.SecurityTokenSerializer.WriteKeyIdentifierClause(
-                        writer,
-                        rstr.RequestedUnattachedReference
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteKeyIdentifierClause(writer, rstr.RequestedUnattachedReference);
                     writer.WriteEndElement();
                 }
             }
@@ -288,10 +286,9 @@ namespace System.ServiceModel.Security
                         this.DriverDictionary.RenewTarget,
                         this.DriverDictionary.Namespace
                     );
-                    this.StandardsManager.SecurityTokenSerializer.WriteKeyIdentifierClause(
-                        writer,
-                        rst.RenewTarget
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteKeyIdentifierClause(writer, rst.RenewTarget);
                     writer.WriteEndElement();
                 }
 
@@ -302,10 +299,9 @@ namespace System.ServiceModel.Security
                         this.DriverDictionary.CloseTarget,
                         this.DriverDictionary.Namespace
                     );
-                    this.StandardsManager.SecurityTokenSerializer.WriteKeyIdentifierClause(
-                        writer,
-                        rst.CloseTarget
-                    );
+                    this.StandardsManager
+                        .SecurityTokenSerializer
+                        .WriteKeyIdentifierClause(writer, rst.CloseTarget);
                     writer.WriteEndElement();
                 }
             }
@@ -318,9 +314,9 @@ namespace System.ServiceModel.Security
             )
             {
                 if (channelBehaviors == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "channelBehaviors"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("channelBehaviors");
 
                 ChannelFactory<IWsTrustFeb2005SecurityTokenService> result =
                     new ChannelFactory<IWsTrustFeb2005SecurityTokenService>(binding, address);

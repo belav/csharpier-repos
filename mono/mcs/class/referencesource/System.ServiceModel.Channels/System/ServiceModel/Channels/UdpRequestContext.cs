@@ -38,10 +38,12 @@ namespace System.ServiceModel.Channels
 
             RemoteEndpointMessageProperty remoteEndpointMessageProperty;
             if (
-                !requestMessage.Properties.TryGetValue(
-                    RemoteEndpointMessageProperty.Name,
-                    out remoteEndpointMessageProperty
-                )
+                !requestMessage
+                    .Properties
+                    .TryGetValue(
+                        RemoteEndpointMessageProperty.Name,
+                        out remoteEndpointMessageProperty
+                    )
             )
             {
                 Fx.Assert("requestMessage must always contain RemoteEndpointMessageProperty");

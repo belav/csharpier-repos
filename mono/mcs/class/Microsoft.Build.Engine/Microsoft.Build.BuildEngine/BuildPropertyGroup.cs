@@ -115,10 +115,9 @@ namespace Microsoft.Build.BuildEngine
             if (treatPropertyValueAsLiteral)
                 propertyValue = Utilities.Escape(propertyValue);
 
-            XmlElement element = propertyGroup.OwnerDocument.CreateElement(
-                propertyName,
-                Project.XmlNamespace
-            );
+            XmlElement element = propertyGroup
+                .OwnerDocument
+                .CreateElement(propertyName, Project.XmlNamespace);
             propertyGroup.AppendChild(element);
 
             BuildProperty property = new BuildProperty(parentProject, element);

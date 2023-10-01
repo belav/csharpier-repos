@@ -65,18 +65,24 @@ namespace System.ServiceModel.Dispatcher
                         && (dispatch.Type.IsAbstract || dispatch.Type.IsInterface)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxServiceTypeNotCreatable)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.SFxServiceTypeNotCreatable)
+                                )
+                            );
                     }
 
                     if (constructor == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.SFxNoDefaultConstructor)
+                                )
+                            );
                     }
                 }
 
@@ -233,9 +239,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.provider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxNoDefaultConstructor))
+                    );
             }
 
             return this.provider.GetInstance(instanceContext);

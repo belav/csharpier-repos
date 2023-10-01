@@ -50,8 +50,11 @@ namespace Microsoft.CodeAnalysis.InlineHints
         )
         {
             // TODO: https://github.com/dotnet/roslyn/issues/57283
-            var globalOptions =
-                document.Project.Solution.Services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
+            var globalOptions = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
             var displayAllOverride = globalOptions.InlineHintsOptionsDisplayAllOverride;
 
             var enabledForTypes = options.EnabledForTypes;

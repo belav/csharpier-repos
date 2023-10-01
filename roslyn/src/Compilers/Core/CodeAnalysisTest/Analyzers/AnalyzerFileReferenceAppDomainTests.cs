@@ -99,22 +99,24 @@ public class TestAnalyzer : DiagnosticAnalyzer
             var analyzer = dir.CopyFile(typeof(DiagnosticAnalyzer).Assembly.Location);
             dir.CopyFile(typeof(RemoteAnalyzerFileReferenceTest).Assembly.Location);
 
-            var analyzerCompilation = CSharp.CSharpCompilation.Create(
-                "MyAnalyzer",
-                new SyntaxTree[] { CSharp.SyntaxFactory.ParseSyntaxTree(analyzerSource) },
-                new MetadataReference[]
-                {
-                    NetStandard20.mscorlib,
-                    NetStandard20.netstandard,
-                    NetStandard20.SystemRuntime,
-                    MetadataReference.CreateFromFile(immutable.Path),
-                    MetadataReference.CreateFromFile(analyzer.Path)
-                },
-                new CSharp.CSharpCompilationOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
-                )
-            );
+            var analyzerCompilation = CSharp
+                .CSharpCompilation
+                .Create(
+                    "MyAnalyzer",
+                    new SyntaxTree[] { CSharp.SyntaxFactory.ParseSyntaxTree(analyzerSource) },
+                    new MetadataReference[]
+                    {
+                        NetStandard20.mscorlib,
+                        NetStandard20.netstandard,
+                        NetStandard20.SystemRuntime,
+                        MetadataReference.CreateFromFile(immutable.Path),
+                        MetadataReference.CreateFromFile(analyzer.Path)
+                    },
+                    new CSharp.CSharpCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary,
+                        warningLevel: CodeAnalysis.Diagnostic.MaxWarningLevel
+                    )
+                );
 
             var analyzerFile = dir.CreateFile("MyAnalyzer.dll")
                 .WriteAllBytes(analyzerCompilation.EmitToArray());

@@ -99,14 +99,16 @@ namespace Internal.Reflection.Execution
             LowLevelListWithIList<string> defaultAssemblies = new LowLevelListWithIList<string>();
             defaultAssemblies.Add(callingAssemblyName);
             defaultAssemblies.Add(AssemblyBinder.DefaultAssemblyNameForGetType);
-            return ReflectionCoreExecution.ExecutionDomain.GetType(
-                typeName,
-                assemblyResolver,
-                typeResolver,
-                throwOnError,
-                ignoreCase,
-                defaultAssemblies
-            );
+            return ReflectionCoreExecution
+                .ExecutionDomain
+                .GetType(
+                    typeName,
+                    assemblyResolver,
+                    typeResolver,
+                    throwOnError,
+                    ignoreCase,
+                    defaultAssemblies
+                );
         }
 
         public static bool TryGetMethodMetadataFromStartAddress(

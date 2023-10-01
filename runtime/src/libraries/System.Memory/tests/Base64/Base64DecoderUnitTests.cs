@@ -946,9 +946,9 @@ namespace System.Buffers.Text.Tests
             {
                 Span<byte> testBytes = new byte[numberOfBytes];
                 Base64TestHelper.InitializeDecodableBytes(testBytes);
-                string sourceString = Encoding.ASCII.GetString(
-                    testBytes.Slice(0, numberOfBytesToTest).ToArray()
-                );
+                string sourceString = Encoding
+                    .ASCII
+                    .GetString(testBytes.Slice(0, numberOfBytesToTest).ToArray());
                 Span<byte> expectedBytes = Convert.FromBase64String(sourceString);
 
                 Assert.Equal(

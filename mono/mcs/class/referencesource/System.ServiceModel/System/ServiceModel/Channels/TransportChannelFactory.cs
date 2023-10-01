@@ -41,14 +41,17 @@ namespace System.ServiceModel.Channels
             this.maxBufferPoolSize = bindingElement.MaxBufferPoolSize;
             this.maxReceivedMessageSize = bindingElement.MaxReceivedMessageSize;
 
-            Collection<MessageEncodingBindingElement> messageEncoderBindingElements =
-                context.BindingParameters.FindAll<MessageEncodingBindingElement>();
+            Collection<MessageEncodingBindingElement> messageEncoderBindingElements = context
+                .BindingParameters
+                .FindAll<MessageEncodingBindingElement>();
 
             if (messageEncoderBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.MultipleMebesInParameters))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.MultipleMebesInParameters))
+                    );
             }
             else if (messageEncoderBindingElements.Count == 1)
             {
@@ -179,10 +182,12 @@ namespace System.ServiceModel.Channels
                     string.Compare(via.Scheme, this.Scheme, StringComparison.OrdinalIgnoreCase) != 0
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "via",
-                        SR.GetString(SR.InvalidUriScheme, via.Scheme, this.Scheme)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            "via",
+                            SR.GetString(SR.InvalidUriScheme, via.Scheme, this.Scheme)
+                        );
                 }
             }
         }

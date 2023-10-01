@@ -335,7 +335,8 @@ namespace System.Activities.Core.Presentation
                 {
                     if (wrapper.Item != this.ModelItem)
                     {
-                        wrapper.Item
+                        wrapper
+                            .Item
                             .Properties[TriggerPropertyName]
                             .SetValue(this.ModelItem.Properties[TriggerPropertyName].Value);
                     }
@@ -382,7 +383,8 @@ namespace System.Activities.Core.Presentation
                             ].Item;
                             SwapItems(transitionsCollection, previousModelItem, movedModelItem);
                         }
-                        this.Context.Services
+                        this.Context
+                            .Services
                             .GetService<ModelTreeManager>()
                             .AddToCurrentEditingScope(new TransitionReorderChange());
                         scope.Complete();
@@ -472,7 +474,8 @@ namespace System.Activities.Core.Presentation
 
         void OnCopyCommandExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            this.Context.Services
+            this.Context
+                .Services
                 .GetService<DesignerPerfEventProvider>()
                 .WorkflowDesignerCopyStart();
             CutCopyPasteHelper.DoCopy(this.Context);

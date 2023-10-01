@@ -245,16 +245,16 @@ namespace System.Net.Quic.Implementations.Mock
             if (_isInitiator)
             {
                 _streamState._outboundWriteErrorCode = errorCode;
-                _streamState._inboundWritesCompletedTcs.TrySetException(
-                    new QuicStreamAbortedException(errorCode)
-                );
+                _streamState
+                    ._inboundWritesCompletedTcs
+                    .TrySetException(new QuicStreamAbortedException(errorCode));
             }
             else
             {
                 _streamState._inboundWriteErrorCode = errorCode;
-                _streamState._outboundWritesCompletedTcs.TrySetException(
-                    new QuicOperationAbortedException()
-                );
+                _streamState
+                    ._outboundWritesCompletedTcs
+                    .TrySetException(new QuicOperationAbortedException());
             }
 
             ReadStreamBuffer?.AbortRead();
@@ -265,16 +265,16 @@ namespace System.Net.Quic.Implementations.Mock
             if (_isInitiator)
             {
                 _streamState._outboundReadErrorCode = errorCode;
-                _streamState._outboundWritesCompletedTcs.TrySetException(
-                    new QuicStreamAbortedException(errorCode)
-                );
+                _streamState
+                    ._outboundWritesCompletedTcs
+                    .TrySetException(new QuicStreamAbortedException(errorCode));
             }
             else
             {
                 _streamState._inboundReadErrorCode = errorCode;
-                _streamState._inboundWritesCompletedTcs.TrySetException(
-                    new QuicOperationAbortedException()
-                );
+                _streamState
+                    ._inboundWritesCompletedTcs
+                    .TrySetException(new QuicOperationAbortedException());
             }
 
             WriteStreamBuffer?.EndWrite();

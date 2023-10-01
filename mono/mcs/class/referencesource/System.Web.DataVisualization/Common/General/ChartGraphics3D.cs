@@ -841,35 +841,39 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common.HotRegionsList.AddHotRegion(
-                            (ChartGraphics)this,
-                            path,
-                            false,
-                            point.ReplaceKeywords(point.ToolTip),
+                        common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                (ChartGraphics)this,
+                                path,
+                                false,
+                                point.ReplaceKeywords(point.ToolTip),
 #if Microsoft_CONTROL
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
 #else // Microsoft_CONTROL
-                            point.ReplaceKeywords(point.Url),
-                            point.ReplaceKeywords(point.MapAreaAttributes),
-                            point.ReplaceKeywords(point.PostBackValue),
+                                point.ReplaceKeywords(point.Url),
+                                point.ReplaceKeywords(point.MapAreaAttributes),
+                                point.ReplaceKeywords(point.PostBackValue),
 #endif // Microsoft_CONTROL
-                            point,
-                            ChartElementType.DataPoint
-                        );
+                                point,
+                                ChartElementType.DataPoint
+                            );
 
                         return;
                     }
 
-                    common.HotRegionsList.AddHotRegion(
-                        path,
-                        false,
-                        (ChartGraphics)this,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            path,
+                            false,
+                            (ChartGraphics)this,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                 }
             }
         }
@@ -1005,35 +1009,39 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common.HotRegionsList.AddHotRegion(
-                            (ChartGraphics)this,
-                            path,
-                            false,
-                            point.ReplaceKeywords(point.ToolTip),
+                        common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                (ChartGraphics)this,
+                                path,
+                                false,
+                                point.ReplaceKeywords(point.ToolTip),
 #if Microsoft_CONTROL
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
 #else // Microsoft_CONTROL
-                            point.ReplaceKeywords(point.Url),
-                            point.ReplaceKeywords(point.MapAreaAttributes),
-                            point.ReplaceKeywords(point.PostBackValue),
+                                point.ReplaceKeywords(point.Url),
+                                point.ReplaceKeywords(point.MapAreaAttributes),
+                                point.ReplaceKeywords(point.PostBackValue),
 #endif // Microsoft_CONTROL
-                            point,
-                            ChartElementType.DataPoint
-                        );
+                                point,
+                                ChartElementType.DataPoint
+                            );
 
                         return;
                     }
 
-                    common.HotRegionsList.AddHotRegion(
-                        path,
-                        false,
-                        (ChartGraphics)this,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            path,
+                            false,
+                            (ChartGraphics)this,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                 }
             }
         }
@@ -1196,36 +1204,40 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (point.IsCustomPropertySet("_COLLECTED_DATA_POINT"))
                     {
                         // Add point to the map area
-                        common.HotRegionsList.AddHotRegion(
-                            (ChartGraphics)this,
-                            path,
-                            false,
-                            point.ReplaceKeywords(point.ToolTip),
+                        common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                (ChartGraphics)this,
+                                path,
+                                false,
+                                point.ReplaceKeywords(point.ToolTip),
 #if Microsoft_CONTROL
-                            string.Empty,
-                            string.Empty,
-                            string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
 #else // Microsoft_CONTROL
-                            point.ReplaceKeywords(point.Url),
-                            point.ReplaceKeywords(point.MapAreaAttributes),
-                            point.ReplaceKeywords(point.PostBackValue),
+                                point.ReplaceKeywords(point.Url),
+                                point.ReplaceKeywords(point.MapAreaAttributes),
+                                point.ReplaceKeywords(point.PostBackValue),
 #endif // Microsoft_CONTROL
-                            point,
-                            ChartElementType.DataPoint
-                        );
+                                point,
+                                ChartElementType.DataPoint
+                            );
 
                         return;
                     }
 
                     // Add points to the map area
-                    common.HotRegionsList.AddHotRegion(
-                        path,
-                        false,
-                        (ChartGraphics)this,
-                        point,
-                        point.series.Name,
-                        pointIndex
-                    );
+                    common
+                        .HotRegionsList
+                        .AddHotRegion(
+                            path,
+                            false,
+                            (ChartGraphics)this,
+                            point,
+                            point.series.Name,
+                            pointIndex
+                        );
                 }
             }
         }

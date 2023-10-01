@@ -80,14 +80,16 @@ namespace Mono.ILASM
             if (location != null)
                 location_str = " (" + location.line + ", " + location.column + ") : ";
 
-            Console.Error.WriteLine(
-                String.Format(
-                    "{0}{1}Warning -- {2}",
-                    (file_path != null ? file_path : ""),
-                    location_str,
-                    message
-                )
-            );
+            Console
+                .Error
+                .WriteLine(
+                    String.Format(
+                        "{0}{1}Warning -- {2}",
+                        (file_path != null ? file_path : ""),
+                        location_str,
+                        message
+                    )
+                );
         }
 
         public static void Message(string message)

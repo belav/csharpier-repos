@@ -308,9 +308,9 @@ namespace System.ServiceModel.Security
         public byte[] Decrypt(byte[] encryptedContent)
         {
             if (encryptedContent == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "encryptedContent"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("encryptedContent");
             ThrowIfDisposed();
 
             SecurityBuffer[] securityBuffer = new SecurityBuffer[2];
@@ -329,9 +329,9 @@ namespace System.ServiceModel.Security
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
 
             for (int i = 0; i < securityBuffer.Length; ++i)
@@ -358,9 +358,9 @@ namespace System.ServiceModel.Security
             ThrowIfDisposed();
             SecurityBuffer[] securityBuffer = new SecurityBuffer[3];
 
-            byte[] tokenBuffer = DiagnosticUtility.Utility.AllocateByteArray(
-                SecuritySizes.SecurityTrailer
-            );
+            byte[] tokenBuffer = DiagnosticUtility
+                .Utility
+                .AllocateByteArray(SecuritySizes.SecurityTrailer);
             securityBuffer[0] = new SecurityBuffer(
                 tokenBuffer,
                 0,
@@ -375,9 +375,9 @@ namespace System.ServiceModel.Security
                 dataBuffer.Length,
                 BufferType.Data
             );
-            byte[] paddingBuffer = DiagnosticUtility.Utility.AllocateByteArray(
-                SecuritySizes.BlockSize
-            );
+            byte[] paddingBuffer = DiagnosticUtility
+                .Utility
+                .AllocateByteArray(SecuritySizes.BlockSize);
             securityBuffer[2] = new SecurityBuffer(
                 paddingBuffer,
                 0,
@@ -388,9 +388,9 @@ namespace System.ServiceModel.Security
             int errorCode = SspiWrapper.EncryptMessage(this.securityContext, securityBuffer, 0);
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
 
             int tokenLen = 0;
@@ -402,9 +402,9 @@ namespace System.ServiceModel.Security
                 else if (securityBuffer[i].type == BufferType.Padding)
                     paddingLen = securityBuffer[i].size;
             }
-            byte[] encryptedData = DiagnosticUtility.Utility.AllocateByteArray(
-                checked(tokenLen + dataBuffer.Length + paddingLen)
-            );
+            byte[] encryptedData = DiagnosticUtility
+                .Utility
+                .AllocateByteArray(checked(tokenLen + dataBuffer.Length + paddingLen));
 
             Buffer.BlockCopy(tokenBuffer, 0, encryptedData, 0, tokenLen);
             Buffer.BlockCopy(dataBuffer, 0, encryptedData, tokenLen, dataBuffer.Length);
@@ -471,9 +471,13 @@ namespace System.ServiceModel.Security
                     && policyHelper.ProtectionScenario != ProtectionScenario.TrustedProxy
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(SR.GetString(SR.SecurityChannelBindingMissing))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(SR.SecurityChannelBindingMissing)
+                            )
+                        );
                 }
 
                 if (policyHelper.PolicyEnforcement == PolicyEnforcement.WhenSupported)
@@ -592,12 +596,14 @@ namespace System.ServiceModel.Security
                     // If we have prompted enough number of times (DefaultMaxPromptAttempts) with wrong credentials, then we do not prompt again and throw.
                     if (MaxPromptAttempts >= DefaultMaxPromptAttempts)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception(
-                                statusCode,
-                                SR.GetString(SR.InvalidClientCredentials)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new Win32Exception(
+                                    statusCode,
+                                    SR.GetString(SR.InvalidClientCredentials)
+                                )
+                            );
                     }
 
                     IntPtr ppAuthIdentity = IntPtr.Zero;
@@ -653,12 +659,14 @@ namespace System.ServiceModel.Security
 
                         CloseContext();
                         this.isCompleted = true;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception(
-                                (int)errorCode,
-                                SR.GetString(SR.SspiErrorOrInvalidClientCredentials)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new Win32Exception(
+                                    (int)errorCode,
+                                    SR.GetString(SR.SspiErrorOrInvalidClientCredentials)
+                                )
+                            );
                     }
                 }
 
@@ -672,18 +680,25 @@ namespace System.ServiceModel.Security
                     )
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(
-                            statusCode,
-                            SR.GetString(SR.IncorrectSpnOrUpnSpecified, this.servicePrincipalName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(
+                                statusCode,
+                                SR.GetString(
+                                    SR.IncorrectSpnOrUpnSpecified,
+                                    this.servicePrincipalName
+                                )
+                            )
+                        );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(statusCode, SR.GetString(SR.InvalidSspiNegotiation))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(statusCode, SR.GetString(SR.InvalidSspiNegotiation))
+                        );
                 }
             }
 
@@ -758,9 +773,9 @@ namespace System.ServiceModel.Security
             ThrowIfDisposed();
             if (!IsValidContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception((int)SecurityStatus.InvalidHandle)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
             }
 
             SspiWrapper.ImpersonateSecurityContext(this.securityContext);
@@ -806,9 +821,9 @@ namespace System.ServiceModel.Security
         {
             if (!IsValidContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception((int)SecurityStatus.InvalidHandle)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception((int)SecurityStatus.InvalidHandle));
             }
 
             SafeCloseHandle token;
@@ -817,18 +832,18 @@ namespace System.ServiceModel.Security
             if (status != SecurityStatus.OK)
             {
                 Utility.CloseInvalidOutSafeHandle(token);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception((int)status)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception((int)status));
             }
             return token;
         }
 
         void OnBadData()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new MessageSecurityException(SR.GetString(SR.BadData))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new MessageSecurityException(SR.GetString(SR.BadData)));
         }
 
         void ThrowIfDisposed()
@@ -837,9 +852,9 @@ namespace System.ServiceModel.Security
             {
                 if (this.disposed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(null)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(null));
                 }
             }
         }

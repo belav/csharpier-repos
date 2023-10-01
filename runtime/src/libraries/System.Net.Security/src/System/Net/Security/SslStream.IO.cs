@@ -165,11 +165,13 @@ namespace System.Net.Security
                 bool connectionOpen =
                     Interlocked.CompareExchange(ref _connectionOpenedStatus, 1, 0) == 0;
 
-                NetSecurityTelemetry.Log.HandshakeCompleted(
-                    GetSslProtocolInternal(),
-                    startingTimestamp,
-                    connectionOpen
-                );
+                NetSecurityTelemetry
+                    .Log
+                    .HandshakeCompleted(
+                        GetSslProtocolInternal(),
+                        startingTimestamp,
+                        connectionOpen
+                    );
             }
             catch (Exception ex)
             {
@@ -437,16 +439,18 @@ namespace System.Net.Security
             }
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Log.SspiSelectedCipherSuite(
-                    nameof(ForceAuthenticationAsync),
-                    SslProtocol,
-                    CipherAlgorithm,
-                    CipherStrength,
-                    HashAlgorithm,
-                    HashStrength,
-                    KeyExchangeAlgorithm,
-                    KeyExchangeStrength
-                );
+                NetEventSource
+                    .Log
+                    .SspiSelectedCipherSuite(
+                        nameof(ForceAuthenticationAsync),
+                        SslProtocol,
+                        CipherAlgorithm,
+                        CipherStrength,
+                        HashAlgorithm,
+                        HashStrength,
+                        KeyExchangeAlgorithm,
+                        KeyExchangeStrength
+                    );
         }
 
         private async ValueTask<ProtocolToken> ReceiveBlobAsync<TIOAdapter>(

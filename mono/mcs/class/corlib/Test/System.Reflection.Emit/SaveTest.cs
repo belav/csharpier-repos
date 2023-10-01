@@ -651,11 +651,9 @@ namespace MonoTests.System.Reflection.Emit
             aname.CultureInfo = new CultureInfo("en");
             aname.Flags = AssemblyNameFlags.Retargetable;
             aname.HashAlgorithm = AssemblyHashAlgorithm.SHA256;
-            var ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                aname,
-                AssemblyBuilderAccess.RunAndSave,
-                tempDir
-            );
+            var ab = AppDomain
+                .CurrentDomain
+                .DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, tempDir);
 
             string strongfile = Path.Combine(tempDir, "strongname.snk");
             using (FileStream fs = File.OpenWrite(strongfile))

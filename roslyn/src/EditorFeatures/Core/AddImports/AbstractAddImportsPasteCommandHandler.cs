@@ -85,11 +85,14 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
 
             // Create a tracking span from the pre-paste caret position that will grow as text is inserted.
-            var trackingSpan = caretPosition.Value.Snapshot.CreateTrackingSpan(
-                caretPosition.Value.Position,
-                0,
-                SpanTrackingMode.EdgeInclusive
-            );
+            var trackingSpan = caretPosition
+                .Value
+                .Snapshot
+                .CreateTrackingSpan(
+                    caretPosition.Value.Position,
+                    0,
+                    SpanTrackingMode.EdgeInclusive
+                );
 
             // Perform the paste command before adding imports
             nextCommandHandler();
@@ -161,8 +164,11 @@ namespace Microsoft.CodeAnalysis.AddImport
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            var indicatorFactory =
-                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IBackgroundWorkIndicatorFactory>();
             using var backgroundWorkContext = indicatorFactory.Create(
                 textView,
                 snapshotSpan,

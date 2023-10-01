@@ -393,11 +393,9 @@ namespace System.Net
 
         public Task<HttpListenerContext> GetContextAsync()
         {
-            return Task<HttpListenerContext>.Factory.FromAsync(
-                BeginGetContext,
-                EndGetContext,
-                null
-            );
+            return Task<HttpListenerContext>
+                .Factory
+                .FromAsync(BeginGetContext, EndGetContext, null);
         }
 
         internal void CheckDisposed()

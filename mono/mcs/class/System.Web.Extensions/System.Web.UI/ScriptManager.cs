@@ -516,9 +516,9 @@ namespace System.Web.UI
                     CultureInfo culture = Thread.CurrentThread.CurrentCulture;
                     string script = String.Format(
                         "var __cultureInfo = '{0}';",
-                        JavaScriptSerializer.DefaultSerializer.Serialize(
-                            new CultureInfoSerializer(culture)
-                        )
+                        JavaScriptSerializer
+                            .DefaultSerializer
+                            .Serialize(new CultureInfoSerializer(culture))
                     );
                     RegisterClientScriptBlock(
                         this,
@@ -1906,10 +1906,10 @@ namespace System.Web.UI
                         if (attr.Encode)
                         {
                             StringWriter sw = new StringWriter();
-                            Newtonsoft.Json.JavaScriptUtils.WriteEscapedJavaScriptString(
-                                attr.Value,
-                                sw
-                            );
+                            Newtonsoft
+                                .Json
+                                .JavaScriptUtils
+                                .WriteEscapedJavaScriptString(attr.Value, sw);
                             value = sw.ToString();
                         }
                         else

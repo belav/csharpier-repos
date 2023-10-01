@@ -330,10 +330,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 }
             }
 
-            var newRoot = editor.OriginalRoot.ReplaceTokens(
-                tokenReplacementMap.Keys,
-                (token, _) => tokenReplacementMap[token]
-            );
+            var newRoot = editor
+                .OriginalRoot
+                .ReplaceTokens(tokenReplacementMap.Keys, (token, _) => tokenReplacementMap[token]);
             editor.ReplaceNode(editor.OriginalRoot, newRoot);
         }
 

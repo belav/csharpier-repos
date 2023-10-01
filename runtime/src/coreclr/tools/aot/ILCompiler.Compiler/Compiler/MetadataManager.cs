@@ -626,9 +626,9 @@ namespace ILCompiler
 
             if ((category & MetadataCategory.RuntimeMapping) != 0)
             {
-                TypeDesc owningCanonicalType = field.OwningType.ConvertToCanonForm(
-                    CanonicalFormKind.Specific
-                );
+                TypeDesc owningCanonicalType = field
+                    .OwningType
+                    .ConvertToCanonForm(CanonicalFormKind.Specific);
                 GenericTypesTemplateMap.GetTemplateTypeDependencies(
                     ref dependencies,
                     factory,

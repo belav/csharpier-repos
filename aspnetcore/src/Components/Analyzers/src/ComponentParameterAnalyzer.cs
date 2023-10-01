@@ -124,10 +124,12 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
                                 captureUnmatchedValuesParameters.Add(property);
 
                                 // Check the type, we need to be able to assign a Dictionary<string, object>
-                                var conversion = context.Compilation.ClassifyConversion(
-                                    symbols.ParameterCaptureUnmatchedValuesRuntimeType,
-                                    property.Type
-                                );
+                                var conversion = context
+                                    .Compilation
+                                    .ClassifyConversion(
+                                        symbols.ParameterCaptureUnmatchedValuesRuntimeType,
+                                        property.Type
+                                    );
                                 if (!conversion.Exists || conversion.IsExplicit)
                                 {
                                     context.ReportDiagnostic(
@@ -137,12 +139,16 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
                                             property.ToDisplayString(
                                                 SymbolDisplayFormat.CSharpErrorMessageFormat
                                             ),
-                                            property.Type.ToDisplayString(
-                                                SymbolDisplayFormat.CSharpErrorMessageFormat
-                                            ),
-                                            symbols.ParameterCaptureUnmatchedValuesRuntimeType.ToDisplayString(
-                                                SymbolDisplayFormat.CSharpErrorMessageFormat
-                                            )
+                                            property
+                                                .Type
+                                                .ToDisplayString(
+                                                    SymbolDisplayFormat.CSharpErrorMessageFormat
+                                                ),
+                                            symbols
+                                                .ParameterCaptureUnmatchedValuesRuntimeType
+                                                .ToDisplayString(
+                                                    SymbolDisplayFormat.CSharpErrorMessageFormat
+                                                )
                                         )
                                     );
                                 }
@@ -205,7 +211,8 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
     /// TODO: Remove this helper when https://github.com/dotnet/roslyn/issues/46682 is handled.
     /// </summary>
     private static bool IsAutoProperty(IPropertySymbol propertySymbol) =>
-        propertySymbol.ContainingType
+        propertySymbol
+            .ContainingType
             .GetMembers()
             .OfType<IFieldSymbol>()
             .Any(

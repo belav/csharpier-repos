@@ -54,12 +54,15 @@ namespace System.Data.Linq.SqlClient
                 base.VisitScalarSubSelect(ss);
                 if (ss.Select.Row.Columns.Count > 0)
                 {
-                    System.Diagnostics.Debug.Assert(
-                        ss != null
-                            && ss.Select != null
-                            && ss.Select.Row != null
-                            && ss.Select.Row.Columns.Count == 1
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Assert(
+                            ss != null
+                                && ss.Select != null
+                                && ss.Select.Row != null
+                                && ss.Select.Row.Columns.Count == 1
+                        );
                     // make sure these scalar subselects don't get redundantly named
                     ss.Select.Row.Columns[0].Name = "";
                 }

@@ -261,7 +261,8 @@ namespace System.Runtime.Remoting.Proxies
         )
         {
             MonoMethodMessage mMsg = (MonoMethodMessage)msg;
-            mMsg.LogicalCallContext = Thread.CurrentThread
+            mMsg.LogicalCallContext = Thread
+                .CurrentThread
                 .GetMutableExecutionContext()
                 .LogicalCallContext;
             CallType call_type = mMsg.CallType;
@@ -334,7 +335,8 @@ namespace System.Runtime.Remoting.Proxies
 
             if (res_msg.LogicalCallContext != null && res_msg.LogicalCallContext.HasInfo)
             {
-                Thread.CurrentThread
+                Thread
+                    .CurrentThread
                     .GetMutableExecutionContext()
                     .LogicalCallContext
                     .Merge(res_msg.LogicalCallContext);

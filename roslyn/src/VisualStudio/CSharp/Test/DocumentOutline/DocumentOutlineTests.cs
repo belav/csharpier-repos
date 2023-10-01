@@ -116,10 +116,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                     {
                         case SortOption.Name:
                             Assert.True(
-                                StringComparer.OrdinalIgnoreCase.Compare(
-                                    sortedSymbols[i].Name,
-                                    sortedSymbols[i + 1].Name
-                                ) <= 0
+                                StringComparer
+                                    .OrdinalIgnoreCase
+                                    .Compare(sortedSymbols[i].Name, sortedSymbols[i + 1].Name) <= 0
                             );
                             break;
                         case SortOption.Location:
@@ -135,10 +134,10 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                                 );
                             else
                                 Assert.True(
-                                    StringComparer.OrdinalIgnoreCase.Compare(
-                                        sortedSymbols[i].Name,
-                                        sortedSymbols[i + 1].Name
-                                    ) <= 0
+                                    StringComparer
+                                        .OrdinalIgnoreCase
+                                        .Compare(sortedSymbols[i].Name, sortedSymbols[i + 1].Name)
+                                        <= 0
                                 );
                             break;
                     }

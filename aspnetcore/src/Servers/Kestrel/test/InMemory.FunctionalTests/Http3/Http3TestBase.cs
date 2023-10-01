@@ -136,7 +136,8 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
         _echoPath = context =>
         {
             context.Response.Headers["path"] = context.Request.Path.ToString();
-            context.Response.Headers["rawtarget"] = context.Features
+            context.Response.Headers["rawtarget"] = context
+                .Features
                 .Get<IHttpRequestFeature>()
                 .RawTarget;
 

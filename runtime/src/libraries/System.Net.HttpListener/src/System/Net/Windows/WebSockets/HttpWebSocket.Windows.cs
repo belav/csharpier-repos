@@ -74,10 +74,12 @@ namespace System.Net.WebSockets
                 if (shouldSendSecWebSocketProtocolHeader)
                 {
                     secWebSocketProtocols.Add(outgoingSecWebSocketProtocolString);
-                    response.Headers.Add(
-                        HttpKnownHeaderNames.SecWebSocketProtocol,
-                        outgoingSecWebSocketProtocolString
-                    );
+                    response
+                        .Headers
+                        .Add(
+                            HttpKnownHeaderNames.SecWebSocketProtocol,
+                            outgoingSecWebSocketProtocolString
+                        );
                 }
 
                 // negotiate the websocket key return value

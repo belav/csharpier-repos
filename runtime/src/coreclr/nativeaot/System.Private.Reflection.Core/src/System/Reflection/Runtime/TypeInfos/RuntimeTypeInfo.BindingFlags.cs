@@ -284,11 +284,9 @@ namespace System.Reflection.Runtime.TypeInfos
                 }
 
                 if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                    return System.DefaultBinder.ExactPropertyBinding(
-                        candidates.ToArray(),
-                        returnType,
-                        types
-                    );
+                    return System
+                        .DefaultBinder
+                        .ExactPropertyBinding(candidates.ToArray(), returnType, types);
 
                 if (binder == null)
                     binder = DefaultBinder;

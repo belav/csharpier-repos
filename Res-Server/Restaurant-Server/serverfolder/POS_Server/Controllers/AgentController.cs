@@ -51,7 +51,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var agentsList = entity.agents
+                    var agentsList = entity
+                        .agents
                         .Where(p => p.type == type)
                         .Select(
                             p =>
@@ -93,11 +94,13 @@ namespace POS_Server.Controllers
                             if (agentsList[i].isActive == 1)
                             {
                                 long agentId = (long)agentsList[i].agentId;
-                                var invoicesL = entity.invoices
+                                var invoicesL = entity
+                                    .invoices
                                     .Where(x => x.agentId == agentId)
                                     .Select(b => new { b.invoiceId })
                                     .FirstOrDefault();
-                                var cachTransferL = entity.cashTransfer
+                                var cachTransferL = entity
+                                    .cashTransfer
                                     .Where(x => x.agentId == agentId)
                                     .Select(x => new { x.cashTransId })
                                     .FirstOrDefault();
@@ -129,7 +132,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var agentsList = entity.agents
+                        var agentsList = entity
+                            .agents
                             .Select(
                                 p =>
                                     new AgentModel
@@ -193,7 +197,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var agentsList = entity.agents
+                    var agentsList = entity
+                        .agents
                         .Where(p => p.type == type && p.isActive == 1)
                         .Select(
                             p =>
@@ -262,7 +267,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var agentsList = entity.agents
+                    var agentsList = entity
+                        .agents
                         .Where(
                             p =>
                                 p.type == type
@@ -332,7 +338,8 @@ namespace POS_Server.Controllers
                     }
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var agent = entity.agents
+                        var agent = entity
+                            .agents
                             .Where(p => p.agentId == agentId)
                             .Select(
                                 p =>
@@ -419,7 +426,8 @@ namespace POS_Server.Controllers
                             else if (agentObj.type == "v")
                                 agentMaxCount = programInfo.getVendorCount();
 
-                            int agentCount = entity.agents
+                            int agentCount = entity
+                                .agents
                                 .Where(x => x.type == agentObj.type)
                                 .Count();
                             if (agentCount >= agentMaxCount)
@@ -578,9 +586,9 @@ namespace POS_Server.Controllers
                             ".tiff",
                             ".jfif"
                         };
-                        var ext = postedFile.FileName.Substring(
-                            postedFile.FileName.LastIndexOf('.')
-                        );
+                        var ext = postedFile
+                            .FileName
+                            .Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
@@ -600,15 +608,19 @@ namespace POS_Server.Controllers
                         {
                             if (
                                 !Directory.Exists(
-                                    System.Web.Hosting.HostingEnvironment.MapPath(
-                                        "~\\images\\agent"
-                                    )
+                                    System
+                                        .Web
+                                        .Hosting
+                                        .HostingEnvironment
+                                        .MapPath("~\\images\\agent")
                                 )
                             )
                                 Directory.CreateDirectory(
-                                    System.Web.Hosting.HostingEnvironment.MapPath(
-                                        "~\\images\\agent"
-                                    )
+                                    System
+                                        .Web
+                                        .Hosting
+                                        .HostingEnvironment
+                                        .MapPath("~\\images\\agent")
                                 );
                             //  check if image exist
                             var pathCheck = Path.Combine(
@@ -814,7 +826,8 @@ namespace POS_Server.Controllers
                 int lastNum = 0;
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    numberList = entity.agents
+                    numberList = entity
+                        .agents
                         .Where(b => b.code.Contains(type + "-"))
                         .Select(b => b.code)
                         .ToList();

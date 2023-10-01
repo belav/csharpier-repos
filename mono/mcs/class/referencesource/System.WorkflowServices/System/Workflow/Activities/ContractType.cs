@@ -35,10 +35,12 @@ namespace System.Workflow.Activities
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "name",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "name",
+                        SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                    );
             }
 
             this.fullName = name;
@@ -139,9 +141,11 @@ namespace System.Workflow.Activities
             get
             {
 #pragma warning suppress 56503
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
+                    );
             }
         }
 
@@ -199,9 +203,9 @@ namespace System.Workflow.Activities
 
         public override int GetArrayRank()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                SR2.GetString(SR2.Error_CurrentTypeNotAnArray)
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperArgument(SR2.GetString(SR2.Error_CurrentTypeNotAnArray));
         }
 
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
@@ -299,10 +303,12 @@ namespace System.Workflow.Activities
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "name",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "name",
+                        SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                    );
             }
 
             if (string.Compare(this.name, name, StringComparison.Ordinal) == 0)
@@ -444,9 +450,11 @@ namespace System.Workflow.Activities
             string[] namedParams
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
+                );
         }
 
         public override bool IsAssignableFrom(Type type)
@@ -941,9 +949,9 @@ namespace System.Workflow.Activities
             {
                 if (maskSignature == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "maskSignature"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("maskSignature");
                 }
 
                 if (

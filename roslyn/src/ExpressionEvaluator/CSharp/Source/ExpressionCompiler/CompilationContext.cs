@@ -109,9 +109,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // Assert that the cheap check for "this" is equivalent to the expensive check for "this".
             Debug.Assert(
                 (GetThisProxy(_displayClassVariables) != null)
-                    == _displayClassVariables.Values.Any(
-                        v => v.Kind == DisplayClassVariableKind.This
-                    )
+                    == _displayClassVariables
+                        .Values
+                        .Any(v => v.Kind == DisplayClassVariableKind.This)
             );
         }
 
@@ -912,10 +912,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 flags |= DkmClrCompilationResultFlags.ReadOnlyResult;
                 Debug.Assert(expression.ConstantValueOpt == null);
-                resultProperties = expression.ExpressionSymbol.GetResultProperties(
-                    flags,
-                    isConstant: false
-                );
+                resultProperties = expression
+                    .ExpressionSymbol
+                    .GetResultProperties(flags, isConstant: false);
                 return new BoundExpressionStatement(syntax, expression)
                 {
                     WasCompilerGenerated = true
@@ -931,10 +930,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 flags |= DkmClrCompilationResultFlags.ReadOnlyResult;
             }
 
-            resultProperties = expression.ExpressionSymbol.GetResultProperties(
-                flags,
-                expression.ConstantValueOpt != null
-            );
+            resultProperties = expression
+                .ExpressionSymbol
+                .GetResultProperties(flags, expression.ConstantValueOpt != null);
             return new BoundReturnStatement(syntax, RefKind.None, expression, @checked: false)
             {
                 WasCompilerGenerated = true
@@ -2083,9 +2081,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ImmutableDictionary<string, DisplayClassVariable> displayClassVariables
         )
         {
-            return displayClassVariables.Values.FirstOrDefault(
-                v => v.Kind == DisplayClassVariableKind.This
-            );
+            return displayClassVariables
+                .Values
+                .FirstOrDefault(v => v.Kind == DisplayClassVariableKind.This);
         }
 
         private static NamedTypeSymbol GetNonDisplayClassContainer(NamedTypeSymbol type)
@@ -2185,7 +2183,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     )
                     {
                         candidateSubstitutedSourceType = containing;
-                        sourceMethodMustBeInstance = candidateSubstitutedSourceType.MemberNames
+                        sourceMethodMustBeInstance = candidateSubstitutedSourceType
+                            .MemberNames
                             .Select(GeneratedNameParser.GetKind)
                             .Contains(GeneratedNameKind.ThisProxyField);
                     }

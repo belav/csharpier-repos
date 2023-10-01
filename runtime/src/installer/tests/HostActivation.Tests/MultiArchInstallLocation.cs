@@ -414,10 +414,9 @@ namespace HostActivation.Tests
                         .NotHaveStdOutContaining($"[{unknownArchInstall.Path}]");
 
                     string pathOverride = OperatingSystem.IsWindows() // Host uses short form of base key for Windows
-                        ? registeredInstallLocationOverride.PathValueOverride.Replace(
-                            Microsoft.Win32.Registry.CurrentUser.Name,
-                            "HKCU"
-                        )
+                        ? registeredInstallLocationOverride
+                            .PathValueOverride
+                            .Replace(Microsoft.Win32.Registry.CurrentUser.Name, "HKCU")
                         : registeredInstallLocationOverride.PathValueOverride;
                     pathOverride = System.Text.RegularExpressions.Regex.Escape(pathOverride);
                     foreach ((string arch, string path) in installLocations)

@@ -221,7 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var differ = context.GetService<IMigrationsModelDiffer>();
             var snapshot = (ModelSnapshot)Activator.CreateInstance(snapshotType);
             var reporter = new TestOperationReporter();
-            var modelRuntimeInitializer = SqlServerTestHelpers.Instance
+            var modelRuntimeInitializer = SqlServerTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>();
             var processor = new SnapshotModelProcessor(reporter, modelRuntimeInitializer);
@@ -245,7 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var differ = context.GetService<IMigrationsModelDiffer>();
             var snapshot = (ModelSnapshot)Activator.CreateInstance(snapshotType);
             var reporter = new TestOperationReporter();
-            var setBuilder = SqlServerTestHelpers.Instance
+            var setBuilder = SqlServerTestHelpers
+                .Instance
                 .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>();
             var processor = new SnapshotModelProcessor(reporter, setBuilder);

@@ -248,7 +248,8 @@ public class AuthorizeViewTest
         // a single batch with the correct output.
         renderer.AssignRootComponentId(rootComponent);
         rootComponent.TriggerRender();
-        var authorizeViewComponentId = renderer.Batches
+        var authorizeViewComponentId = renderer
+            .Batches
             .Single()
             .GetComponentFrames<AuthorizeView>()
             .Single()

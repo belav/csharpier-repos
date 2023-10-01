@@ -342,11 +342,13 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XPathNavigatorException(
-                        SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XPathNavigatorException(
+                            SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)
+                        )
+                    );
             }
         }
 

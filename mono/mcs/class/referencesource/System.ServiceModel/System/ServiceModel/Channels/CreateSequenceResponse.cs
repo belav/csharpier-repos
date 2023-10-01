@@ -93,9 +93,9 @@ namespace System.ServiceModel.Channels
                         string reason = SR.GetString(
                             SR.CSResponseWithInvalidIncompleteSequenceBehavior
                         );
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new XmlException(reason)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new XmlException(reason));
                     }
 
                     // Otherwise ignore the value.

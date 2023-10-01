@@ -16,9 +16,9 @@ namespace Microsoft.Interop
             this IncrementalGeneratorInitializationContext context
         )
         {
-            return context.CompilationProvider.Select(
-                static (comp, ct) => comp.CreateStubEnvironment()
-            );
+            return context
+                .CompilationProvider
+                .Select(static (comp, ct) => comp.CreateStubEnvironment());
         }
 
         public static void RegisterDiagnostics(

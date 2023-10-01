@@ -49,11 +49,13 @@ namespace System.Activities
             {
                 if (value < 0 && value != Argument.UnspecifiedEvaluationOrder)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "EvaluationOrder",
-                        value,
-                        SR.InvalidEvaluationOrderValue
-                    );
+                    throw FxTrace
+                        .Exception
+                        .ArgumentOutOfRange(
+                            "EvaluationOrder",
+                            value,
+                            SR.InvalidEvaluationOrderValue
+                        );
                 }
                 this.evaluationOrder = value;
             }
@@ -368,9 +370,11 @@ namespace System.Activities
         {
             if (!this.IsInTree)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ArgumentNotInTree(this.ArgumentType))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.ArgumentNotInTree(this.ArgumentType))
+                    );
             }
         }
 

@@ -152,8 +152,9 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicViewsContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -179,8 +180,9 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicViewsContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -205,8 +207,9 @@ namespace BasicViews
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicViewsContext>()
                 )
                 {
                     var migrator = dbContext.GetService<IMigrator>();

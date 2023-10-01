@@ -46,7 +46,8 @@ class C
                 new VirtualizedStrongNameFileSystem(tempDir.Path)
             );
 
-            var options = TestOptions.DebugExe
+            var options = TestOptions
+                .DebugExe
                 .WithStrongNameProvider(provider)
                 .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
             var comp = CreateCompilation(src, options: options);
@@ -66,7 +67,8 @@ class C
                 ImmutableArray<string>.Empty,
                 new VirtualizedStrongNameFileSystem()
             );
-            var options = TestOptions.DebugExe
+            var options = TestOptions
+                .DebugExe
                 .WithStrongNameProvider(provider)
                 .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile);
             var comp = CreateCompilation(src, options: options);

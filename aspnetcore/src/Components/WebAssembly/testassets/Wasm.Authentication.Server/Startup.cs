@@ -40,13 +40,15 @@ public class Startup
             {
                 options.IdentityResources["openid"].UserClaims.Add("role");
                 options.ApiResources.Single().UserClaims.Add("role");
-                options.ApiResources.Add(
-                    new Duende.IdentityServer.Models.ApiResource
-                    {
-                        Name = "SecondAPI",
-                        Scopes = new string[] { "SecondAPI" }
-                    }
-                );
+                options
+                    .ApiResources
+                    .Add(
+                        new Duende.IdentityServer.Models.ApiResource
+                        {
+                            Name = "SecondAPI",
+                            Scopes = new string[] { "SecondAPI" }
+                        }
+                    );
                 var client = options.Clients.Single();
                 client.AllowedScopes.Add("SecondAPI");
             });

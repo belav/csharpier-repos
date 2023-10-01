@@ -108,13 +108,15 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             ThrowHelper.ThrowIfNull(callback);
 
-            entry.PostEvictionCallbacks.Add(
-                new PostEvictionCallbackRegistration()
-                {
-                    EvictionCallback = callback,
-                    State = state
-                }
-            );
+            entry
+                .PostEvictionCallbacks
+                .Add(
+                    new PostEvictionCallbackRegistration()
+                    {
+                        EvictionCallback = callback,
+                        State = state
+                    }
+                );
             return entry;
         }
 

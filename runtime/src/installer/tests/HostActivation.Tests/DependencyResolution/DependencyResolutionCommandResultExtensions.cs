@@ -25,7 +25,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             foreach (string value in values)
             {
-                Execute.Assertion
+                Execute
+                    .Assertion
                     .ForCondition(propertyValue != null && propertyValue.Contains(value))
                     .FailWith(
                         $"The property {propertyName} doesn't contain expected value: '{value}'{Environment.NewLine}"
@@ -47,7 +48,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             foreach (string value in values)
             {
-                Execute.Assertion
+                Execute
+                    .Assertion
                     .ForCondition(propertyValue != null && !propertyValue.Contains(value))
                     .FailWith(
                         $"The property {propertyName} contains unexpected value: '{value}'{Environment.NewLine}"
@@ -130,7 +132,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             foreach (string value in values)
             {
-                Execute.Assertion
+                Execute
+                    .Assertion
                     .ForCondition(propertyValue != null && propertyValue.Contains(value))
                     .FailWith(
                         $"The resolved {propertyName} doesn't contain expected value: '{value}'{Environment.NewLine}"
@@ -152,7 +155,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             foreach (string value in values)
             {
-                Execute.Assertion
+                Execute
+                    .Assertion
                     .ForCondition(propertyValue != null && !propertyValue.Contains(value))
                     .FailWith(
                         $"The resolved {propertyName} contains unexpected value: '{value}'{Environment.NewLine}"

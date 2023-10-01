@@ -104,10 +104,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.InvalidRoleInRelationshipConstraint,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidEndRoleInRelationshipConstraint(
-                        this.Name,
-                        relationship.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InvalidEndRoleInRelationshipConstraint(this.Name, relationship.Name)
                 );
 
                 return;
@@ -138,10 +139,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.InvalidPropertyInRelationshipConstraint,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidPropertyInRelationshipConstraint(
-                            property.Name,
-                            this.Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .InvalidPropertyInRelationshipConstraint(property.Name, this.Name)
                     );
                 }
             }

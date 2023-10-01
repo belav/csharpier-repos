@@ -546,22 +546,24 @@ namespace System.Web.UI.DataVisualization.Charting
             if (this.Common.ProcessModeRegions)
             {
                 // Add hot region
-                this.Common.HotRegionsList.AddHotRegion(
-                    rectanglePosition,
-                    ReplaceKeywords(this.ToolTip),
+                this.Common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        rectanglePosition,
+                        ReplaceKeywords(this.ToolTip),
 #if Microsoft_CONTROL
-                    String.Empty,
-                    String.Empty,
-                    String.Empty,
+                        String.Empty,
+                        String.Empty,
+                        String.Empty,
 #else // Microsoft_CONTROL
-                    ReplaceKeywords(this.Url),
-                    ReplaceKeywords(this.MapAreaAttributes),
-                    ReplaceKeywords(this.PostBackValue),
+                        ReplaceKeywords(this.Url),
+                        ReplaceKeywords(this.MapAreaAttributes),
+                        ReplaceKeywords(this.PostBackValue),
 #endif // Microsoft_CONTROL
-                    this,
-                    ChartElementType.Annotation,
-                    String.Empty
-                );
+                        this,
+                        ChartElementType.Annotation,
+                        String.Empty
+                    );
             }
 
             // Paint selection handles

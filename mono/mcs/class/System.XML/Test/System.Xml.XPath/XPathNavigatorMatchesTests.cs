@@ -88,8 +88,11 @@ namespace MonoTests.System.Xml
         {
             XmlDocument document = new XmlDocument();
             document.LoadXml("<foo><bar><baz/></bar></foo>");
-            XPathNavigator navigator =
-                document.DocumentElement.FirstChild.FirstChild.CreateNavigator();
+            XPathNavigator navigator = document
+                .DocumentElement
+                .FirstChild
+                .FirstChild
+                .CreateNavigator();
 
             Assert.IsTrue(navigator.Matches("foo//baz"));
         }
@@ -99,8 +102,11 @@ namespace MonoTests.System.Xml
         {
             XmlDocument document = new XmlDocument();
             document.LoadXml("<foo><bar><baz/></bar></foo>");
-            XPathNavigator navigator =
-                document.DocumentElement.FirstChild.FirstChild.CreateNavigator();
+            XPathNavigator navigator = document
+                .DocumentElement
+                .FirstChild
+                .FirstChild
+                .CreateNavigator();
 
             Assert.IsTrue(navigator.Matches("//baz"));
         }

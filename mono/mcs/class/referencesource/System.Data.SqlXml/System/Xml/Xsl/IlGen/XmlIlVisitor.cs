@@ -1822,9 +1822,9 @@ namespace System.Xml.Xsl.IlGen
                     );
                 else
                     this.helper.LoadInteger(
-                        this.helper.StaticData.DeclarePrefixMappings(
-                            new QilNode[] { ndParsedTagName.Right }
-                        )
+                        this.helper
+                            .StaticData
+                            .DeclarePrefixMappings(new QilNode[] { ndParsedTagName.Right })
                     );
 
                 // If QName prefix should be preserved, then don't create an XmlQualifiedName, which discards the prefix
@@ -4284,10 +4284,9 @@ namespace System.Xml.Xsl.IlGen
                     this.helper.LoadXsltLibrary();
                 else
                     this.helper.CallGetEarlyBoundObject(
-                        this.helper.StaticData.DeclareEarlyBound(
-                            ndName.NamespaceUri,
-                            extFunc.Method.DeclaringType
-                        ),
+                        this.helper
+                            .StaticData
+                            .DeclareEarlyBound(ndName.NamespaceUri, extFunc.Method.DeclaringType),
                         extFunc.Method.DeclaringType
                     );
             }

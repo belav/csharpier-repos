@@ -19,14 +19,17 @@ internal sealed class SRDescriptionAttribute : DescriptionAttribute
     {
         ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
         DescriptionValue = rm.GetString(description);
-        System.Diagnostics.Debug.Assert(
-            DescriptionValue != null,
-            string.Format(
-                CultureInfo.CurrentCulture,
-                "String resource {0} not found.",
-                new object[] { description }
-            )
-        );
+        System
+            .Diagnostics
+            .Debug
+            .Assert(
+                DescriptionValue != null,
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "String resource {0} not found.",
+                    new object[] { description }
+                )
+            );
     }
 }
 
@@ -50,14 +53,17 @@ internal sealed class SRCategoryAttribute : CategoryAttribute
         {
             ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
             String localizedString = rm.GetString(value);
-            System.Diagnostics.Debug.Assert(
-                localizedString != null,
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "String resource {0} not found.",
-                    new object[] { value }
-                )
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    localizedString != null,
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "String resource {0} not found.",
+                        new object[] { value }
+                    )
+                );
             return localizedString;
         }
         else
@@ -79,14 +85,17 @@ internal sealed class SRDisplayNameAttribute : DisplayNameAttribute
     {
         ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
         DisplayNameValue = rm.GetString(name);
-        System.Diagnostics.Debug.Assert(
-            DisplayNameValue != null,
-            string.Format(
-                CultureInfo.CurrentCulture,
-                "String resource {0} not found.",
-                new object[] { name }
-            )
-        );
+        System
+            .Diagnostics
+            .Debug
+            .Assert(
+                DisplayNameValue != null,
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "String resource {0} not found.",
+                    new object[] { name }
+                )
+            );
     }
 }
 
@@ -137,14 +146,17 @@ internal sealed class SR
         if (sys == null)
             return null;
         string res = sys.resources.GetString(name, culture);
-        System.Diagnostics.Debug.Assert(
-            res != null,
-            string.Format(
-                CultureInfo.CurrentCulture,
-                "String resource {0} not found.",
-                new object[] { name }
-            )
-        );
+        System
+            .Diagnostics
+            .Debug
+            .Assert(
+                res != null,
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "String resource {0} not found.",
+                    new object[] { name }
+                )
+            );
         if (args != null && args.Length > 0)
         {
             return string.Format(CultureInfo.CurrentCulture, res, args);
@@ -166,14 +178,17 @@ internal sealed class SR
         if (sys == null)
             return null;
         string res = sys.resources.GetString(name, culture);
-        System.Diagnostics.Debug.Assert(
-            res != null,
-            string.Format(
-                CultureInfo.CurrentCulture,
-                "String resource {0} not found.",
-                new object[] { name }
-            )
-        );
+        System
+            .Diagnostics
+            .Debug
+            .Assert(
+                res != null,
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "String resource {0} not found.",
+                    new object[] { name }
+                )
+            );
         return res;
     }
 

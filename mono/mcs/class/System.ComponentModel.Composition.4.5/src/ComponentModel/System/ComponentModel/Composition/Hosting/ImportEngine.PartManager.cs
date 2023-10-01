@@ -68,7 +68,8 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (this._importedContractNames == null)
                 {
-                    this._importedContractNames = this.Part.ImportDefinitions
+                    this._importedContractNames = this.Part
+                        .ImportDefinitions
                         .Select(import => import.ContractName ?? ImportDefinition.EmptyContractName)
                         .Distinct()
                         .ToArray();
@@ -211,8 +212,9 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (this._importedDisposableExports != null)
                 {
-                    IEnumerable<IDisposable> dependencies =
-                        this._importedDisposableExports.Values.SelectMany(exports => exports);
+                    IEnumerable<IDisposable> dependencies = this._importedDisposableExports
+                        .Values
+                        .SelectMany(exports => exports);
 
                     this._importedDisposableExports = null;
 

@@ -245,9 +245,9 @@ namespace System.Net.Http.Tests
             Assert.Equal(0, headers.WwwAuthenticate.Count);
 
             headers.WwwAuthenticate.Add(new AuthenticationHeaderValue("NTLM"));
-            headers.WwwAuthenticate.Add(
-                new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\"")
-            );
+            headers
+                .WwwAuthenticate
+                .Add(new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""));
 
             Assert.Equal(2, headers.WwwAuthenticate.Count);
             Assert.Equal(2, headers.GetValues("WWW-Authenticate").Count());
@@ -317,9 +317,9 @@ namespace System.Net.Http.Tests
             Assert.Equal(0, headers.ProxyAuthenticate.Count);
 
             headers.ProxyAuthenticate.Add(new AuthenticationHeaderValue("NTLM"));
-            headers.ProxyAuthenticate.Add(
-                new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\"")
-            );
+            headers
+                .ProxyAuthenticate
+                .Add(new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""));
 
             Assert.Equal(2, headers.ProxyAuthenticate.Count);
             Assert.Equal(2, headers.GetValues("Proxy-Authenticate").Count());
@@ -686,9 +686,9 @@ namespace System.Net.Http.Tests
         {
             Assert.Equal(0, headers.Warning.Count);
 
-            headers.Warning.Add(
-                new WarningHeaderValue(199, "microsoft.com", "\"Miscellaneous warning\"")
-            );
+            headers
+                .Warning
+                .Add(new WarningHeaderValue(199, "microsoft.com", "\"Miscellaneous warning\""));
 
             Assert.Equal(1, headers.Warning.Count);
 

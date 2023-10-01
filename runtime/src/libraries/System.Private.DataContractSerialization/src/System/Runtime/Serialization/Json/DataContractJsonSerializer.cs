@@ -680,9 +680,9 @@ namespace System.Runtime.Serialization.Json
                     && (itemType.GetGenericTypeDefinition() == Globals.TypeOfKeyValue)
                 )
                 {
-                    itemType = Globals.TypeOfKeyValuePair.MakeGenericType(
-                        itemType.GenericTypeArguments
-                    );
+                    itemType = Globals
+                        .TypeOfKeyValuePair
+                        .MakeGenericType(itemType.GenericTypeArguments);
                 }
                 this.knownTypeList!.Add(itemType);
                 typeToCheck = itemType;
@@ -768,15 +768,17 @@ namespace System.Runtime.Serialization.Json
         {
             if (dataContract.IsReference)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.Format(
-                            SR.JsonUnsupportedForIsReference,
-                            DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
-                            dataContract.IsReference
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.JsonUnsupportedForIsReference,
+                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
+                                dataContract.IsReference
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

@@ -21,8 +21,9 @@ namespace System.Text.Json.SourceGeneration
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations =
-                context.SyntaxProvider.ForAttributeWithMetadataName(
+            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = context
+                .SyntaxProvider
+                .ForAttributeWithMetadataName(
 #if !ROSLYN4_4_OR_GREATER
                     context,
 #endif
@@ -34,9 +35,9 @@ namespace System.Text.Json.SourceGeneration
             IncrementalValueProvider<(
                 Compilation,
                 ImmutableArray<ClassDeclarationSyntax>
-            )> compilationAndClasses = context.CompilationProvider.Combine(
-                classDeclarations.Collect()
-            );
+            )> compilationAndClasses = context
+                .CompilationProvider
+                .Combine(classDeclarations.Collect());
 
             context.RegisterSourceOutput(
                 compilationAndClasses,

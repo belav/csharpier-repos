@@ -378,11 +378,10 @@ namespace System.Collections.ObjectModel
                     }
                     else
                     {
-                        System.Threading.Interlocked.CompareExchange<Object>(
-                            ref m_syncRoot,
-                            new Object(),
-                            null
-                        );
+                        System
+                            .Threading
+                            .Interlocked
+                            .CompareExchange<Object>(ref m_syncRoot, new Object(), null);
                     }
                 }
                 return m_syncRoot;
@@ -569,11 +568,10 @@ namespace System.Collections.ObjectModel
                         }
                         else
                         {
-                            System.Threading.Interlocked.CompareExchange<Object>(
-                                ref m_syncRoot,
-                                new Object(),
-                                null
-                            );
+                            System
+                                .Threading
+                                .Interlocked
+                                .CompareExchange<Object>(ref m_syncRoot, new Object(), null);
                         }
                     }
                     return m_syncRoot;
@@ -698,11 +696,10 @@ namespace System.Collections.ObjectModel
                         }
                         else
                         {
-                            System.Threading.Interlocked.CompareExchange<Object>(
-                                ref m_syncRoot,
-                                new Object(),
-                                null
-                            );
+                            System
+                                .Threading
+                                .Interlocked
+                                .CompareExchange<Object>(ref m_syncRoot, new Object(), null);
                         }
                     }
                     return m_syncRoot;

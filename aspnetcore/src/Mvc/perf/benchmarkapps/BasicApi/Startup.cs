@@ -200,8 +200,9 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicApiContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -227,8 +228,9 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicApiContext>()
                 )
                 {
 #if GENERATE_SQL_SCRIPTS
@@ -253,8 +255,9 @@ namespace BasicApi
             )
             {
                 using (
-                    var dbContext =
-                        serviceScope.ServiceProvider.GetRequiredService<BasicApiContext>()
+                    var dbContext = serviceScope
+                        .ServiceProvider
+                        .GetRequiredService<BasicApiContext>()
                 )
                 {
                     var migrator = dbContext.GetService<IMigrator>();

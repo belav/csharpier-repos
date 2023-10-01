@@ -67,9 +67,9 @@ public sealed class ApiConventionResult
     {
         foreach (var attribute in apiConventionAttributes)
         {
-            var conventionMethods = attribute.ConventionType.GetMethods(
-                BindingFlags.Public | BindingFlags.Static
-            );
+            var conventionMethods = attribute
+                .ConventionType
+                .GetMethods(BindingFlags.Public | BindingFlags.Static);
             foreach (var conventionMethod in conventionMethods)
             {
                 if (ApiConventionMatcher.IsMatch(method, conventionMethod))

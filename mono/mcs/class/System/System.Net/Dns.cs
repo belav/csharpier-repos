@@ -575,32 +575,23 @@ namespace System.Net
 
         public static Task<IPAddress[]> GetHostAddressesAsync(string hostNameOrAddress)
         {
-            return Task<IPAddress[]>.Factory.FromAsync(
-                BeginGetHostAddresses,
-                EndGetHostAddresses,
-                hostNameOrAddress,
-                null
-            );
+            return Task<IPAddress[]>
+                .Factory
+                .FromAsync(BeginGetHostAddresses, EndGetHostAddresses, hostNameOrAddress, null);
         }
 
         public static Task<IPHostEntry> GetHostEntryAsync(IPAddress address)
         {
-            return Task<IPHostEntry>.Factory.FromAsync(
-                BeginGetHostEntry,
-                EndGetHostEntry,
-                address,
-                null
-            );
+            return Task<IPHostEntry>
+                .Factory
+                .FromAsync(BeginGetHostEntry, EndGetHostEntry, address, null);
         }
 
         public static Task<IPHostEntry> GetHostEntryAsync(string hostNameOrAddress)
         {
-            return Task<IPHostEntry>.Factory.FromAsync(
-                BeginGetHostEntry,
-                EndGetHostEntry,
-                hostNameOrAddress,
-                null
-            );
+            return Task<IPHostEntry>
+                .Factory
+                .FromAsync(BeginGetHostEntry, EndGetHostEntry, hostNameOrAddress, null);
         }
     }
 }

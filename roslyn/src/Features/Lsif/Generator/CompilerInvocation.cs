@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             var workspace = new AdhocWorkspace(await Composition.CreateHostServicesAsync());
 
             var languageName = GetLanguageName(invocationInfo);
-            var languageServices = workspace.Services
+            var languageServices = workspace
+                .Services
                 .GetLanguageServices(languageName)
                 .LanguageServices;
 
@@ -109,18 +110,20 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 parsedCommandLine.ParseOptions,
                 parsedCommandLine.SourceFiles.Select(s => CreateDocumentInfo(unmappedPath: s.Path)),
                 projectReferences: null,
-                metadataReferences: parsedCommandLine.MetadataReferences.Select(
-                    r => MetadataReference.CreateFromFile(mapPath(r.Reference), r.Properties)
-                ),
-                additionalDocuments: parsedCommandLine.AdditionalFiles.Select(
-                    f => CreateDocumentInfo(unmappedPath: f.Path)
-                ),
-                analyzerReferences: parsedCommandLine.AnalyzerReferences.Select(
-                    r => new AnalyzerFileReference(r.FilePath, analyzerLoader)
-                ),
-                analyzerConfigDocuments: parsedCommandLine.AnalyzerConfigPaths.Select(
-                    CreateDocumentInfo
-                ),
+                metadataReferences: parsedCommandLine
+                    .MetadataReferences
+                    .Select(
+                        r => MetadataReference.CreateFromFile(mapPath(r.Reference), r.Properties)
+                    ),
+                additionalDocuments: parsedCommandLine
+                    .AdditionalFiles
+                    .Select(f => CreateDocumentInfo(unmappedPath: f.Path)),
+                analyzerReferences: parsedCommandLine
+                    .AnalyzerReferences
+                    .Select(r => new AnalyzerFileReference(r.FilePath, analyzerLoader)),
+                analyzerConfigDocuments: parsedCommandLine
+                    .AnalyzerConfigPaths
+                    .Select(CreateDocumentInfo),
                 hostObjectType: null
             );
 

@@ -3022,10 +3022,10 @@ class C
             var analysis = CompileAndGetModelAndConstructorInitializer(
                 program,
                 (model, constructorInitializer) =>
-                    global::Microsoft.CodeAnalysis.ModelExtensions.AnalyzeDataFlow(
-                        model,
-                        constructorInitializer
-                    )
+                    global::Microsoft
+                        .CodeAnalysis
+                        .ModelExtensions
+                        .AnalyzeDataFlow(model, constructorInitializer)
             );
 
             Assert.Equal("x, y", GetSymbolNamesJoined(analysis.DataFlowsIn));
@@ -3169,10 +3169,10 @@ record C(int x, int y) /*<bind>*/ : Base(x + y) /*</bind>*/;
             var analysis = CompileAndGetModelAndPrimaryConstructorInitializer(
                 program,
                 (model, primaryConstructorInitializer) =>
-                    global::Microsoft.CodeAnalysis.ModelExtensions.AnalyzeDataFlow(
-                        model,
-                        primaryConstructorInitializer
-                    )
+                    global::Microsoft
+                        .CodeAnalysis
+                        .ModelExtensions
+                        .AnalyzeDataFlow(model, primaryConstructorInitializer)
             );
 
             Assert.Equal("x, y", GetSymbolNamesJoined(analysis.DataFlowsIn));

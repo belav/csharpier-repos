@@ -32,9 +32,11 @@ namespace R2RTest
 
             if (options.OutputDirectory.IsParentOf(options.InputDirectory))
             {
-                Console.Error.WriteLine(
-                    "Error: Input and output folders must be distinct, and the output directory (which gets deleted) better not be a parent of the input directory."
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "Error: Input and output folders must be distinct, and the output directory (which gets deleted) better not be a parent of the input directory."
+                    );
                 return 1;
             }
 
@@ -58,9 +60,9 @@ namespace R2RTest
             );
             if (folder == null)
             {
-                Console.Error.WriteLine(
-                    $"No managed app found in {options.InputDirectory.FullName}"
-                );
+                Console
+                    .Error
+                    .WriteLine($"No managed app found in {options.InputDirectory.FullName}");
             }
 
             BuildFolderSet folderSet = new BuildFolderSet(

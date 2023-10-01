@@ -373,9 +373,9 @@ namespace System.Windows.Forms
 
         internal virtual void SetAllowDrop(IntPtr handle, bool value)
         {
-            Console.Error.WriteLine(
-                "Drag and Drop is currently " + "not supported on this platform"
-            );
+            Console
+                .Error
+                .WriteLine("Drag and Drop is currently " + "not supported on this platform");
         }
 
         internal virtual DragDropEffects StartDrag(
@@ -384,9 +384,9 @@ namespace System.Windows.Forms
             DragDropEffects allowedEffects
         )
         {
-            Console.Error.WriteLine(
-                "Drag and Drop is currently " + "not supported on this platform"
-            );
+            Console
+                .Error
+                .WriteLine("Drag and Drop is currently " + "not supported on this platform");
             return DragDropEffects.None;
         }
 

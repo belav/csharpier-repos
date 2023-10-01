@@ -136,9 +136,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 .ToArray();
             var allReferences = references
                 .Concat(
-                    setupCompileInfo.References?.Select(
-                        p => MakeSupportingAssemblyReferencePathAbsolute(outputDirectory, p)
-                    ) ?? Array.Empty<NPath>()
+                    setupCompileInfo
+                        .References
+                        ?.Select(
+                            p => MakeSupportingAssemblyReferencePathAbsolute(outputDirectory, p)
+                        ) ?? Array.Empty<NPath>()
                 )
                 .ToArray();
             string[]? additionalArguments = string.IsNullOrEmpty(
@@ -387,9 +389,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     ? null
                     : options.OutputPath.ChangeExtension(".pdb").ToString();
 
-            var syntaxTrees = options.SourceFiles.Select(
-                p => CSharpSyntaxTree.ParseText(text: p.ReadAllText(), options: parseOptions)
-            );
+            var syntaxTrees = options
+                .SourceFiles
+                .Select(
+                    p => CSharpSyntaxTree.ParseText(text: p.ReadAllText(), options: parseOptions)
+                );
 
             var compilation = CSharpCompilation.Create(
                 assemblyName: options.OutputPath.FileNameWithoutExtension,
@@ -398,21 +402,23 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 options: compilationOptions
             );
 
-            var manifestResources = options.Resources.Select(r =>
-            {
-                var fullPath = r.ToString();
-                return new ResourceDescription(
-                    resourceName: Path.GetFileName(fullPath),
-                    dataProvider: () =>
-                        new FileStream(
-                            fullPath,
-                            FileMode.Open,
-                            FileAccess.Read,
-                            FileShare.ReadWrite
-                        ),
-                    isPublic: true
-                );
-            });
+            var manifestResources = options
+                .Resources
+                .Select(r =>
+                {
+                    var fullPath = r.ToString();
+                    return new ResourceDescription(
+                        resourceName: Path.GetFileName(fullPath),
+                        dataProvider: () =>
+                            new FileStream(
+                                fullPath,
+                                FileMode.Open,
+                                FileAccess.Read,
+                                FileShare.ReadWrite
+                            ),
+                        isPublic: true
+                    );
+                });
 
             EmitResult result;
             using (var outputStream = File.Create(options.OutputPath.ToString()))
@@ -529,10 +535,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
             if (options.AdditionalArguments != null && options.AdditionalArguments.Length > 0)
                 builder.Append(
-                    options.AdditionalArguments.Aggregate(
-                        string.Empty,
-                        (buff, arg) => $"{buff} {arg}"
-                    )
+                    options
+                        .AdditionalArguments
+                        .Aggregate(string.Empty, (buff, arg) => $"{buff} {arg}")
                 );
 
             builder.Append(

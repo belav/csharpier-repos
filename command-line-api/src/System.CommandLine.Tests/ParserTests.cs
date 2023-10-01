@@ -56,7 +56,8 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse(prefix);
 
-            result.Errors
+            result
+                .Errors
                 .Select(e => e.Message)
                 .Should()
                 .Contain(LocalizationResources.Instance.UnrecognizedCommandOrArgument(prefix));
@@ -128,7 +129,9 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("the-command -xyz");
 
-            result.CommandResult.Children
+            result
+                .CommandResult
+                .Children
                 .Select(o => o.Symbol.Name)
                 .Should()
                 .BeEquivalentTo("x", "y", "z");
@@ -366,12 +369,16 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse("outer --inner1 argument1 --inner2 argument2");
 
-            result.CommandResult.Children
+            result
+                .CommandResult
+                .Children
                 .Should()
                 .ContainSingle(
                     o => o.Symbol.Name == "inner1" && o.Tokens.Single().Value == "argument1"
                 );
-            result.CommandResult.Children
+            result
+                .CommandResult
+                .Children
                 .Should()
                 .ContainSingle(
                     o => o.Symbol.Name == "inner2" && o.Tokens.Single().Value == "argument2"
@@ -512,7 +519,9 @@ namespace System.CommandLine.Tests
 
             var optionResult = result.FindResultFor(option);
             optionResult.Tokens.Should().BeEmpty();
-            result.CommandResult.Tokens
+            result
+                .CommandResult
+                .Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("the-argument");
@@ -658,7 +667,9 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse(command);
 
-            result.CommandResult.Tokens
+            result
+                .CommandResult
+                .Tokens
                 .Select(t => t.Value)
                 .Should()
                 .OnlyContain(a => a == @"/temp/the file.txt");
@@ -673,7 +684,9 @@ namespace System.CommandLine.Tests
 
             ParseResult result = parser.Parse(command);
 
-            result.CommandResult.Tokens
+            result
+                .CommandResult
+                .Tokens
                 .Should()
                 .OnlyContain(a => a.Value == @"c:\temp\the file.txt\");
         }
@@ -765,7 +778,9 @@ namespace System.CommandLine.Tests
 
             ParseResult result = outer.Parse("outer inner -p:RandomThing=random");
 
-            result.CommandResult.Tokens
+            result
+                .CommandResult
+                .Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("-p:RandomThing=random");
@@ -882,7 +897,8 @@ namespace System.CommandLine.Tests
 
             result.Errors.Should().BeEmpty();
 
-            result.Tokens
+            result
+                .Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentSequenceTo(new[] { "subcommand", "--directory", @"c:\" });
@@ -1158,7 +1174,8 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("1");
 
-            result.Errors
+            result
+                .Errors
                 .Select(e => e.Message)
                 .Should()
                 .Contain(
@@ -1176,7 +1193,8 @@ namespace System.CommandLine.Tests
 
             ParseResult parseResult = command.Parse("1 2 3 4");
 
-            parseResult.Errors
+            parseResult
+                .Errors
                 .Select(e => e.Message)
                 .Should()
                 .Contain(LocalizationResources.Instance.UnrecognizedCommandOrArgument("4"));
@@ -1241,13 +1259,14 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("-x 1");
 
-            result.Errors
+            result
+                .Errors
                 .Select(e => e.Message)
                 .Should()
                 .Contain(
-                    LocalizationResources.Instance.RequiredArgumentMissing(
-                        result.CommandResult.FindResultFor(option)
-                    )
+                    LocalizationResources
+                        .Instance
+                        .RequiredArgumentMissing(result.CommandResult.FindResultFor(option))
                 );
         }
 
@@ -1276,7 +1295,8 @@ namespace System.CommandLine.Tests
                 "jdbc url \"jdbc:sqlserver://10.0.0.2;databaseName=main\""
             );
 
-            result.Tokens
+            result
+                .Tokens
                 .Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("url", "jdbc:sqlserver://10.0.0.2;databaseName=main");

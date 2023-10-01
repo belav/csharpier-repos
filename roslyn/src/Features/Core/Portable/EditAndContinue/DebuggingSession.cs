@@ -479,11 +479,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
             catch (Exception e)
             {
-                EditAndContinueWorkspaceService.Log.Write(
-                    "Failed to create baseline for '{0}': {1}",
-                    projectId,
-                    e.Message
-                );
+                EditAndContinueWorkspaceService
+                    .Log
+                    .Write("Failed to create baseline for '{0}': {1}", projectId, e.Message);
 
                 var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
                     EditAndContinueErrorCode.ErrorReadingFile
@@ -570,7 +568,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
-                var analysis = await EditSession.Analyses
+                var analysis = await EditSession
+                    .Analyses
                     .GetDocumentAnalysisAsync(
                         LastCommittedSolution,
                         oldDocument,
@@ -766,7 +765,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return default;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements
+                var baseActiveStatements = await EditSession
+                    .BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 using var _1 = PooledDictionary<string, ArrayBuilder<(ProjectId, int)>>.GetInstance(
@@ -827,8 +827,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     Debug.Assert(oldProject.SupportsEditAndContinue());
                     Debug.Assert(newProject.SupportsEditAndContinue());
 
-                    var analyzer =
-                        newProject.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                    var analyzer = newProject
+                        .Services
+                        .GetRequiredService<IEditAndContinueAnalyzer>();
 
                     await foreach (
                         var documentId in EditSession
@@ -995,14 +996,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<ActiveStatementSpan>.Empty;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements
+                var baseActiveStatements = await EditSession
+                    .BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (
-                    !baseActiveStatements.DocumentPathMap.TryGetValue(
-                        mappedDocument.FilePath,
-                        out var oldMappedDocumentActiveStatements
-                    )
+                    !baseActiveStatements
+                        .DocumentPathMap
+                        .TryGetValue(
+                            mappedDocument.FilePath,
+                            out var oldMappedDocumentActiveStatements
+                        )
                 )
                 {
                     // no active statements in this document
@@ -1057,7 +1061,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         continue;
                     }
 
-                    var analysis = await EditSession.Analyses
+                    var analysis = await EditSession
+                        .Analyses
                         .GetDocumentAnalysisAsync(
                             LastCommittedSolution,
                             oldUnmappedDocument,
@@ -1116,14 +1121,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return null;
                 }
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements
+                var baseActiveStatements = await EditSession
+                    .BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (
-                    !baseActiveStatements.InstructionMap.TryGetValue(
-                        instructionId,
-                        out var baseActiveStatement
-                    )
+                    !baseActiveStatements
+                        .InstructionMap
+                        .TryGetValue(instructionId, out var baseActiveStatement)
                 )
                 {
                     return null;
@@ -1161,7 +1166,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return null;
                 }
 
-                var analysis = await EditSession.Analyses
+                var analysis = await EditSession
+                    .Analyses
                     .GetDocumentAnalysisAsync(
                         LastCommittedSolution,
                         oldDocument,
@@ -1221,14 +1227,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // their exception regions will be needed. Hence it's not necessary to scope this query down to just the instruction
                 // the debugger is interested at this point while not calculating the others.
 
-                var baseActiveStatements = await EditSession.BaseActiveStatements
+                var baseActiveStatements = await EditSession
+                    .BaseActiveStatements
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (
-                    !baseActiveStatements.InstructionMap.TryGetValue(
-                        instructionId,
-                        out var baseActiveStatement
-                    )
+                    !baseActiveStatements
+                        .InstructionMap
+                        .TryGetValue(instructionId, out var baseActiveStatement)
                 )
                 {
                     return null;
@@ -1258,8 +1264,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return null;
                 }
 
-                var analyzer =
-                    newDocument.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                var analyzer = newDocument
+                    .Project
+                    .Services
+                    .GetRequiredService<IEditAndContinueAnalyzer>();
                 var oldDocumentActiveStatements = await baseActiveStatements
                     .GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken)
                     .ConfigureAwait(false);

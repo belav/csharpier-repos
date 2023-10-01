@@ -84,13 +84,15 @@ namespace System.Diagnostics
                     true
                 );
 
-                bool succeeded = Interop.Kernel32.EnumProcessModulesEx(
-                    processHandle,
-                    null,
-                    0,
-                    out int needed,
-                    Interop.Kernel32.LIST_MODULES_ALL
-                );
+                bool succeeded = Interop
+                    .Kernel32
+                    .EnumProcessModulesEx(
+                        processHandle,
+                        null,
+                        0,
+                        out int needed,
+                        Interop.Kernel32.LIST_MODULES_ALL
+                    );
 
                 // The API we need to use to enumerate process modules differs on two factors:
                 //   1) If our process is running in WOW64.
@@ -105,20 +107,21 @@ namespace System.Diagnostics
                 if (!succeeded)
                 {
                     if (
-                        !Interop.Kernel32.IsWow64Process(
-                            Interop.Kernel32.GetCurrentProcess(),
-                            out bool sourceProcessIsWow64
-                        )
+                        !Interop
+                            .Kernel32
+                            .IsWow64Process(
+                                Interop.Kernel32.GetCurrentProcess(),
+                                out bool sourceProcessIsWow64
+                            )
                     )
                     {
                         throw new Win32Exception();
                     }
 
                     if (
-                        !Interop.Kernel32.IsWow64Process(
-                            processHandle,
-                            out bool targetProcessIsWow64
-                        )
+                        !Interop
+                            .Kernel32
+                            .IsWow64Process(processHandle, out bool targetProcessIsWow64)
                     )
                     {
                         throw new Win32Exception();
@@ -193,11 +196,9 @@ namespace System.Diagnostics
                         IntPtr moduleHandle = moduleHandles[i];
                         Interop.Kernel32.NtModuleInfo ntModuleInfo;
                         if (
-                            !Interop.Kernel32.GetModuleInformation(
-                                processHandle,
-                                moduleHandle,
-                                out ntModuleInfo
-                            )
+                            !Interop
+                                .Kernel32
+                                .GetModuleInformation(processHandle, moduleHandle, out ntModuleInfo)
                         )
                         {
                             HandleLastWin32Error();
@@ -207,12 +208,14 @@ namespace System.Diagnostics
                         int length = 0;
                         while (
                             (
-                                length = Interop.Kernel32.GetModuleBaseName(
-                                    processHandle,
-                                    moduleHandle,
-                                    chars,
-                                    chars.Length
-                                )
+                                length = Interop
+                                    .Kernel32
+                                    .GetModuleBaseName(
+                                        processHandle,
+                                        moduleHandle,
+                                        chars,
+                                        chars.Length
+                                    )
                             ) == chars.Length
                         )
                         {
@@ -231,12 +234,14 @@ namespace System.Diagnostics
 
                         while (
                             (
-                                length = Interop.Kernel32.GetModuleFileNameEx(
-                                    processHandle,
-                                    moduleHandle,
-                                    chars,
-                                    chars.Length
-                                )
+                                length = Interop
+                                    .Kernel32
+                                    .GetModuleFileNameEx(
+                                        processHandle,
+                                        moduleHandle,
+                                        chars,
+                                        chars.Length
+                                    )
                             ) == chars.Length
                         )
                         {
@@ -299,13 +304,9 @@ namespace System.Diagnostics
             while (true)
             {
                 if (
-                    Interop.Kernel32.EnumProcessModulesEx(
-                        processHandle,
-                        modules,
-                        size,
-                        out needed,
-                        filterFlag
-                    )
+                    Interop
+                        .Kernel32
+                        .EnumProcessModulesEx(processHandle, modules, size, out needed, filterFlag)
                 )
                 {
                     return;
@@ -367,12 +368,14 @@ namespace System.Diagnostics
                 try
                 {
                     uint actualSize = 0;
-                    uint status = Interop.NtDll.NtQuerySystemInformation(
-                        Interop.NtDll.SystemProcessInformation,
-                        bufferPtr,
-                        bufferSize,
-                        &actualSize
-                    );
+                    uint status = Interop
+                        .NtDll
+                        .NtQuerySystemInformation(
+                            Interop.NtDll.SystemProcessInformation,
+                            bufferPtr,
+                            bufferSize,
+                            &actualSize
+                        );
 
                     if (status != Interop.NtDll.STATUS_INFO_LENGTH_MISMATCH)
                     {

@@ -33,7 +33,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = entity.invoicesClass
+                    var List = entity
+                        .invoicesClass
                         .Select(
                             S =>
                                 new invoicesClassModel
@@ -62,7 +63,8 @@ namespace POS_Server.Controllers
                             if (List[i].isActive == 1)
                             {
                                 int invClassId = (int)List[i].invClassId;
-                                var items5 = entity.invoicesClassMemberships
+                                var items5 = entity
+                                    .invoicesClassMemberships
                                     .Where(x => x.invClassId == invClassId)
                                     .Select(b => new { b.invClassMemberId })
                                     .FirstOrDefault();
@@ -104,7 +106,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var bank = entity.invoicesClass
+                    var bank = entity
+                        .invoicesClass
                         .Where(S => S.invClassId == invClassId)
                         .Select(
                             S =>
@@ -187,7 +190,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.invoicesClass
+                            tmpObject = entity
+                                .invoicesClass
                                 .Where(p => p.invClassId == newObject.invClassId)
                                 .FirstOrDefault();
 

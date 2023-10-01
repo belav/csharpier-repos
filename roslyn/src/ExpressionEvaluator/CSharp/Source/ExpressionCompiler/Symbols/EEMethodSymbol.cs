@@ -100,9 +100,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // it uninitialized.
 
             var sourceMethodTypeParameters = sourceMethod.TypeParameters;
-            var allSourceTypeParameters = container.SourceTypeParameters.Concat(
-                sourceMethodTypeParameters
-            );
+            var allSourceTypeParameters = container
+                .SourceTypeParameters
+                .Concat(sourceMethodTypeParameters);
 
             sourceMethod = new EECompilationContextMethod(DeclaringCompilation, sourceMethod);
 
@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     (TypeParameterSymbol)new EETypeParameterSymbol(this, tp, i, getTypeMap),
                 (object)null
             );
-            _allTypeParameters = container.TypeParameters
+            _allTypeParameters = container
+                .TypeParameters
                 .Concat(_typeParameters)
                 .Concat(_typeParameters);
             this.TypeMap = new TypeMap(

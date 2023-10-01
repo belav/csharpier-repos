@@ -637,10 +637,12 @@ namespace MonoTests.System.Net.Http
                 chandler.MaxAutomaticRedirections = 33;
                 chandler.MaxRequestContentBufferSize = 5555;
                 chandler.PreAuthenticate = true;
-                chandler.CookieContainer.Add(
-                    new Uri($"http://localhost:{port}/Send_Complete_ClientHandlerSettings/"),
-                    new Cookie("mycookie", "vv")
-                );
+                chandler
+                    .CookieContainer
+                    .Add(
+                        new Uri($"http://localhost:{port}/Send_Complete_ClientHandlerSettings/"),
+                        new Cookie("mycookie", "vv")
+                    );
                 chandler.UseCookies = true;
                 chandler.UseDefaultCredentials = true;
                 chandler.Proxy = new WebProxy("ee");

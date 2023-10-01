@@ -579,11 +579,13 @@ WHERE ([t].[Species] IS NOT NULL) AND ([t].[Species] LIKE N'F%')
     {
         var contextFactory = await InitializeAsync<Context27427>();
         using var context = contextFactory.CreateContext();
-        var query = context.DemoEntities
+        var query = context
+            .DemoEntities
             .FromSqlRaw("SELECT * FROM DemoEntities WHERE Id = {0}", new SqlParameter { Value = 1 })
             .Select(e => e.Id);
 
-        var query2 = context.DemoEntities
+        var query2 = context
+            .DemoEntities
             .Where(e => query.Contains(e.Id))
             .GroupBy(e => e.Id)
             .Select(g => new { g.Key, Aggregate = g.Count() });

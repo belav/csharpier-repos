@@ -453,14 +453,16 @@ namespace Microsoft.CodeAnalysis.Completion
             public ImmutableArray<CompletionProvider> GetImportedAndBuiltInProviders(
                 ImmutableHashSet<string> roles
             ) =>
-                _completionServiceWithProviders._providerManager
+                _completionServiceWithProviders
+                    ._providerManager
                     .GetTestAccessor()
                     .GetImportedAndBuiltInProviders(roles);
 
             public Task<ImmutableArray<CompletionProvider>> GetProjectProvidersAsync(
                 Project project
             ) =>
-                _completionServiceWithProviders._providerManager
+                _completionServiceWithProviders
+                    ._providerManager
                     .GetTestAccessor()
                     .GetProjectProvidersAsync(project);
 

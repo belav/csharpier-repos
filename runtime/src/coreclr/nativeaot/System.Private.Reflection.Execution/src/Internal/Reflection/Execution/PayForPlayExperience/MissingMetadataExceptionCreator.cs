@@ -128,8 +128,9 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
 
         internal static string ToDisplayStringIfAvailable(this Type type)
         {
-            RuntimeTypeHandle runtimeTypeHandle =
-                ReflectionCoreExecution.ExecutionDomain.GetTypeHandleIfAvailable(type);
+            RuntimeTypeHandle runtimeTypeHandle = ReflectionCoreExecution
+                .ExecutionDomain
+                .GetTypeHandleIfAvailable(type);
             bool hasRuntimeTypeHandle = !runtimeTypeHandle.Equals(default(RuntimeTypeHandle));
 
             if (type.HasElementType)

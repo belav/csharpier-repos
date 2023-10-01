@@ -95,39 +95,45 @@ namespace System.ServiceModel.Configuration
             BindingElementExtensionElement existingElement = null;
             if (!this.CanAddEncodingElement(element, ref existingElement))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigMessageEncodingAlreadyInBinding,
-                            existingElement.ConfigurationElementName,
-                            existingElement.GetType().AssemblyQualifiedName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigMessageEncodingAlreadyInBinding,
+                                existingElement.ConfigurationElementName,
+                                existingElement.GetType().AssemblyQualifiedName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else if (!this.CanAddStreamUpgradeElement(element, ref existingElement))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigStreamUpgradeElementAlreadyInBinding,
-                            existingElement.ConfigurationElementName,
-                            existingElement.GetType().AssemblyQualifiedName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigStreamUpgradeElementAlreadyInBinding,
+                                existingElement.ConfigurationElementName,
+                                existingElement.GetType().AssemblyQualifiedName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else if (!this.CanAddTransportElement(element, ref existingElement))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR.GetString(
-                            SR.ConfigTransportAlreadyInBinding,
-                            existingElement.ConfigurationElementName,
-                            existingElement.GetType().AssemblyQualifiedName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigTransportAlreadyInBinding,
+                                existingElement.ConfigurationElementName,
+                                existingElement.GetType().AssemblyQualifiedName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -143,13 +149,15 @@ namespace System.ServiceModel.Configuration
             }
             if (binding.GetType() != typeof(CustomBinding))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.ConfigInvalidTypeForBinding,
-                        typeof(CustomBinding).AssemblyQualifiedName,
-                        binding.GetType().AssemblyQualifiedName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.ConfigInvalidTypeForBinding,
+                            typeof(CustomBinding).AssemblyQualifiedName,
+                            binding.GetType().AssemblyQualifiedName
+                        )
+                    );
             }
 
             binding.CloseTimeout = this.CloseTimeout;

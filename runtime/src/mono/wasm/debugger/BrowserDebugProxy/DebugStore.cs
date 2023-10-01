@@ -1322,11 +1322,11 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             if (sourceLinkDebugInfo != null)
             {
-                var sourceLinkContent = System.Text.Encoding.UTF8.GetString(
-                    sourceLinkDebugInfo,
-                    0,
-                    sourceLinkDebugInfo.Length
-                );
+                var sourceLinkContent = System
+                    .Text
+                    .Encoding
+                    .UTF8
+                    .GetString(sourceLinkDebugInfo, 0, sourceLinkDebugInfo.Length);
 
                 if (sourceLinkContent != null)
                 {
@@ -1762,10 +1762,12 @@ namespace Microsoft.WebAssembly.Diagnostics
                             new DebugItem
                             {
                                 Url = file_name,
-                                Data = context.SdbAgent.GetBytesFromAssemblyAndPdb(
-                                    Path.GetFileName(unescapedFileName),
-                                    token
-                                )
+                                Data = context
+                                    .SdbAgent
+                                    .GetBytesFromAssemblyAndPdb(
+                                        Path.GetFileName(unescapedFileName),
+                                        token
+                                    )
                             }
                         );
                     }

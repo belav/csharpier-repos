@@ -1220,10 +1220,14 @@ namespace System.Data.SqlClient.SqlGen
                     default:
                         // all known scalar types should been handled already.
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.NoStoreTypeForEdmType(
-                                resultType.Identity,
-                                ((PrimitiveType)(resultType.EdmType)).PrimitiveTypeKind
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .NoStoreTypeForEdmType(
+                                    resultType.Identity,
+                                    ((PrimitiveType)(resultType.EdmType)).PrimitiveTypeKind
+                                )
                         );
                 }
             }
@@ -1310,27 +1314,39 @@ namespace System.Data.SqlClient.SqlGen
             if (double.IsNaN(value))
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.SqlGen_TypedNaNNotSupported(
-                        Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Double)
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_TypedNaNNotSupported(
+                            Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Double)
+                        )
                 );
             }
             else if (double.IsPositiveInfinity(value))
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.SqlGen_TypedPositiveInfinityNotSupported(
-                        Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Double),
-                        typeof(Double).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_TypedPositiveInfinityNotSupported(
+                            Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Double),
+                            typeof(Double).Name
+                        )
                 );
             }
             else if (double.IsNegativeInfinity(value))
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.SqlGen_TypedNegativeInfinityNotSupported(
-                        Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Double),
-                        typeof(Double).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_TypedNegativeInfinityNotSupported(
+                            Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Double),
+                            typeof(Double).Name
+                        )
                 );
             }
         }
@@ -1345,27 +1361,39 @@ namespace System.Data.SqlClient.SqlGen
             if (float.IsNaN(value))
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.SqlGen_TypedNaNNotSupported(
-                        Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Single)
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_TypedNaNNotSupported(
+                            Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Single)
+                        )
                 );
             }
             else if (float.IsPositiveInfinity(value))
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.SqlGen_TypedPositiveInfinityNotSupported(
-                        Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Single),
-                        typeof(Single).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_TypedPositiveInfinityNotSupported(
+                            Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Single),
+                            typeof(Single).Name
+                        )
                 );
             }
             else if (float.IsNegativeInfinity(value))
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.SqlGen_TypedNegativeInfinityNotSupported(
-                        Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Single),
-                        typeof(Single).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_TypedNegativeInfinityNotSupported(
+                            Enum.GetName(typeof(PrimitiveTypeKind), PrimitiveTypeKind.Single),
+                            typeof(Single).Name
+                        )
                 );
             }
         }
@@ -2623,13 +2651,15 @@ namespace System.Data.SqlClient.SqlGen
             if (newInstanceExpression != null)
             {
                 Dictionary<string, Symbol> newColumns;
-                result.Select.Append(
-                    VisitNewInstanceExpression(
-                        newInstanceExpression,
-                        aliasesNeedRenaming,
-                        out newColumns
-                    )
-                );
+                result
+                    .Select
+                    .Append(
+                        VisitNewInstanceExpression(
+                            newInstanceExpression,
+                            aliasesNeedRenaming,
+                            out newColumns
+                        )
+                    );
                 if (aliasesNeedRenaming)
                 {
                     result.OutputColumnsRenamed = true;
@@ -3716,10 +3746,9 @@ namespace System.Data.SqlClient.SqlGen
                 {
                     extents.Add(result.FromExtents[i]);
                 }
-                result.FromExtents.RemoveRange(
-                    fromSymbolStart,
-                    result.FromExtents.Count - fromSymbolStart
-                );
+                result
+                    .FromExtents
+                    .RemoveRange(fromSymbolStart, result.FromExtents.Count - fromSymbolStart);
                 fromSymbol = new JoinSymbol(input.VariableName, input.VariableType, extents);
                 result.FromExtents.Add(fromSymbol);
                 // this Join Symbol does not have its own select statement, so we
@@ -4379,9 +4408,9 @@ namespace System.Data.SqlClient.SqlGen
         {
             Debug.Assert(type.EdmType.DataSpace == DataSpace.CSpace, "Type must be in cSpace");
 
-            TypeUsage storeTypeUsage = this._storeItemCollection.StoreProviderManifest.GetStoreType(
-                type
-            );
+            TypeUsage storeTypeUsage = this._storeItemCollection
+                .StoreProviderManifest
+                .GetStoreType(type);
             return GenerateSqlForStoreType(this.sqlVersion, storeTypeUsage);
         }
 
@@ -5024,9 +5053,11 @@ namespace System.Data.SqlClient.SqlGen
             if (SqlVersionUtils.IsPreKatmai(sqlVersion))
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.SqlGen_PrimitiveTypeNotSupportedPriorSql10(
-                        primitiveTypeKind
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_PrimitiveTypeNotSupportedPriorSql10(primitiveTypeKind)
                 );
             }
         }
@@ -5040,9 +5071,11 @@ namespace System.Data.SqlClient.SqlGen
             if (this.IsPreKatmai)
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.SqlGen_CanonicalFunctionNotSupportedPriorSql10(
-                        e.Function.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .SqlGen_CanonicalFunctionNotSupportedPriorSql10(e.Function.Name)
                 );
             }
         }

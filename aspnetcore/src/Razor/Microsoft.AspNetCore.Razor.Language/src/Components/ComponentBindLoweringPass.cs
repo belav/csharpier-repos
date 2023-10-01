@@ -102,12 +102,15 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
                 )
                 {
                     // There is no corresponding bind node. Add a diagnostic and move on.
-                    parameterReference.Parent.Diagnostics.Add(
-                        ComponentDiagnosticFactory.CreateBindAttributeParameter_MissingBind(
-                            node.Source,
-                            node.AttributeName
-                        )
-                    );
+                    parameterReference
+                        .Parent
+                        .Diagnostics
+                        .Add(
+                            ComponentDiagnosticFactory.CreateBindAttributeParameter_MissingBind(
+                                node.Source,
+                                node.AttributeName
+                            )
+                        );
                 }
                 else if (node.BoundAttributeParameter.Name == "event")
                 {

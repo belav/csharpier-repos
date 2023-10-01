@@ -31,9 +31,9 @@ namespace System.ServiceModel
         {
             if (operationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "operationContext"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("operationContext");
             }
 
             // default to forward-chaining implementation

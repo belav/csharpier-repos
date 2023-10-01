@@ -168,10 +168,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
                     new[] { _notifyControllerTask, nextTask },
                     async tasks =>
                     {
-                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            alwaysYield: true,
-                            _stopCancellationToken
-                        );
+                        await ThreadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(alwaysYield: true, _stopCancellationToken);
 
                         if (tasks.All(t => t.Status == TaskStatus.RanToCompletion))
                         {

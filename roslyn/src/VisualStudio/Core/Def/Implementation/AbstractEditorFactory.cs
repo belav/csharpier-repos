@@ -336,15 +336,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         )
         {
             var threadingContext = _componentModel.GetService<IThreadingContext>();
-            threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    FormatDocumentCreatedFromTemplateAsync(
-                        hierarchy,
-                        itemid,
-                        filePath,
-                        cancellationToken
-                    )
-            );
+            threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        FormatDocumentCreatedFromTemplateAsync(
+                            hierarchy,
+                            itemid,
+                            filePath,
+                            cancellationToken
+                        )
+                );
         }
 
         // NOTE: This function has been created to hide IWinFormsEditorFactory type in non-WinForms scenarios (e.g. editing .cs or .vb file)
@@ -435,14 +437,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 filePath,
                 defaultEncoding: null
             );
-            var forkedSolution = projectToAddTo.Solution.AddDocument(
-                DocumentInfo.Create(
-                    documentId,
-                    name: filePath,
-                    loader: fileLoader,
-                    filePath: filePath
-                )
-            );
+            var forkedSolution = projectToAddTo
+                .Solution
+                .AddDocument(
+                    DocumentInfo.Create(
+                        documentId,
+                        name: filePath,
+                        loader: fileLoader,
+                        filePath: filePath
+                    )
+                );
 
             var addedDocument = forkedSolution.GetRequiredDocument(documentId);
 
@@ -492,20 +496,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             foreach (var originalLine in originalText.Lines)
             {
                 var originalNewLine = originalText.ToString(
-                    CodeAnalysis.Text.TextSpan.FromBounds(
-                        originalLine.End,
-                        originalLine.EndIncludingLineBreak
-                    )
+                    CodeAnalysis
+                        .Text
+                        .TextSpan
+                        .FromBounds(originalLine.End, originalLine.EndIncludingLineBreak)
                 );
 
                 // Check if we have a line ending, so we don't go adding one to the end if we don't need to.
                 if (originalNewLine.Length > 0 && originalNewLine != targetLineEnding)
                 {
                     var currentLine = formattedText.Lines[originalLine.LineNumber];
-                    var currentSpan = CodeAnalysis.Text.TextSpan.FromBounds(
-                        currentLine.End,
-                        currentLine.EndIncludingLineBreak
-                    );
+                    var currentSpan = CodeAnalysis
+                        .Text
+                        .TextSpan
+                        .FromBounds(currentLine.End, currentLine.EndIncludingLineBreak);
                     formattedText = formattedText.WithChanges(
                         new TextChange(currentSpan, targetLineEnding)
                     );

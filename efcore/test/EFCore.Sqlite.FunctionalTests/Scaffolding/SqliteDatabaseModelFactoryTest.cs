@@ -802,7 +802,8 @@ CREATE TABLE DependentTable (
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                var foreignKeys = dbModel.Tables
+                var foreignKeys = dbModel
+                    .Tables
                     .Single(t => t.Name == "DependentTable")
                     .ForeignKeys;
 

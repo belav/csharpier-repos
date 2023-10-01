@@ -41,16 +41,18 @@ namespace System.ServiceModel.Configuration
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.ConfigInvalidKeyType,
-                            "XPathMessageFilterElement",
-                            typeof(XPathMessageFilter).AssemblyQualifiedName,
-                            key.GetType().AssemblyQualifiedName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ConfigInvalidKeyType,
+                                "XPathMessageFilterElement",
+                                typeof(XPathMessageFilter).AssemblyQualifiedName,
+                                key.GetType().AssemblyQualifiedName
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return base.ContainsKey(newKey);
@@ -67,10 +69,9 @@ namespace System.ServiceModel.Configuration
 
             if (configElement.Filter == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "element",
-                    SR.GetString(SR.ConfigXPathFilterIsNull)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("element", SR.GetString(SR.ConfigXPathFilterIsNull));
             }
 
             return XPathMessageFilterElementComparer.ParseXPathString(configElement.Filter);
@@ -92,26 +93,33 @@ namespace System.ServiceModel.Configuration
 
                 if (!key.GetType().IsAssignableFrom(typeof(XPathMessageFilter)))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ConfigInvalidKeyType,
-                                "XPathMessageFilterElement",
-                                typeof(XPathMessageFilter).AssemblyQualifiedName,
-                                key.GetType().AssemblyQualifiedName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ConfigInvalidKeyType,
+                                    "XPathMessageFilterElement",
+                                    typeof(XPathMessageFilter).AssemblyQualifiedName,
+                                    key.GetType().AssemblyQualifiedName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 XPathMessageFilterElement retval = (XPathMessageFilterElement)this.BaseGet(key);
                 if (retval == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new System.Collections.Generic.KeyNotFoundException(
-                            SR.GetString(SR.ConfigKeyNotFoundInElementCollection, key.ToString())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new System.Collections.Generic.KeyNotFoundException(
+                                SR.GetString(
+                                    SR.ConfigKeyNotFoundInElementCollection,
+                                    key.ToString()
+                                )
+                            )
+                        );
                 }
                 return retval;
             }
@@ -134,16 +142,18 @@ namespace System.ServiceModel.Configuration
 
                 if (!key.GetType().IsAssignableFrom(typeof(XPathMessageFilter)))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ConfigInvalidKeyType,
-                                "XPathMessageFilterElement",
-                                typeof(XPathMessageFilter).AssemblyQualifiedName,
-                                key.GetType().AssemblyQualifiedName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ConfigInvalidKeyType,
+                                    "XPathMessageFilterElement",
+                                    typeof(XPathMessageFilter).AssemblyQualifiedName,
+                                    key.GetType().AssemblyQualifiedName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 string oldKey = XPathMessageFilterElementComparer.ParseXPathString(
@@ -161,13 +171,15 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.ConfigKeysDoNotMatch,
-                            this.GetElementKey(value).ToString(),
-                            key.ToString()
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.ConfigKeysDoNotMatch,
+                                this.GetElementKey(value).ToString(),
+                                key.ToString()
+                            )
+                        );
                 }
             }
         }

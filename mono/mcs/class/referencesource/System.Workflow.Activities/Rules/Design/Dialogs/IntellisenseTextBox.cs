@@ -171,15 +171,18 @@ namespace System.Workflow.Activities.Rules.Design
             );
             projectedValue.Append(currentValue.Substring(selectionStart + selectionLength));
 
-            System.Diagnostics.Trace.WriteLine(
-                string.Format(
-                    CultureInfo.CurrentCulture,
-                    "KeyCode:{0}, KeyData:{1}, KeyValue:{2}",
-                    e.KeyCode,
-                    e.KeyData,
-                    e.KeyValue
-                )
-            );
+            System
+                .Diagnostics
+                .Trace
+                .WriteLine(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "KeyCode:{0}, KeyData:{1}, KeyValue:{2}",
+                        e.KeyCode,
+                        e.KeyData,
+                        e.KeyValue
+                    )
+                );
             this.toolTip.Hide(this);
             if (e.KeyData == (Keys.Control | Keys.Space))
             {

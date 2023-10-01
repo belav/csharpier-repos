@@ -184,14 +184,16 @@ namespace System.Activities.Expressions
                         ) == false
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new InvalidOperationException(
-                                SR.WriteonlyPropertyCannotBeRead(
-                                    this.propertyInfo.DeclaringType,
-                                    this.propertyInfo.Name
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new InvalidOperationException(
+                                    SR.WriteonlyPropertyCannotBeRead(
+                                        this.propertyInfo.DeclaringType,
+                                        this.propertyInfo.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     return (TResult)this.propertyInfo.GetValue(this.ownerLocation.Value, null);

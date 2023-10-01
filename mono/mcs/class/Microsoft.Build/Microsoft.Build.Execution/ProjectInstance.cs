@@ -666,9 +666,9 @@ namespace Microsoft.Build.Execution
                 )
             )
                 return new ProjectPropertyInstance(name, true, extensions_path_override);
-            return properties.Values.FirstOrDefault(
-                p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-            );
+            return properties
+                .Values
+                .FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
         public string GetPropertyValue(string name)
@@ -686,9 +686,9 @@ namespace Microsoft.Build.Execution
 
         public bool RemoveProperty(string name)
         {
-            var removed = properties.Values.FirstOrDefault(
-                p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-            );
+            var removed = properties
+                .Values
+                .FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
             if (removed == null)
                 return false;
             properties.Remove(name);

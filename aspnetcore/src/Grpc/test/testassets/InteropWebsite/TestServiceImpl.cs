@@ -131,7 +131,8 @@ public class TestServiceImpl : TestService.TestServiceBase
         bool enableCompression = false
     )
     {
-        var echoInitialList = context.RequestHeaders
+        var echoInitialList = context
+            .RequestHeaders
             .Where((entry) => entry.Key == "x-grpc-test-echo-initial")
             .ToList();
 
@@ -147,7 +148,8 @@ public class TestServiceImpl : TestService.TestServiceBase
             await context.WriteResponseHeadersAsync(new Metadata { entry });
         }
 
-        var echoTrailingList = context.RequestHeaders
+        var echoTrailingList = context
+            .RequestHeaders
             .Where((entry) => entry.Key == "x-grpc-test-echo-trailing-bin")
             .ToList();
         if (echoTrailingList.Any())

@@ -147,9 +147,12 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                context.Processor.ResultSet.Add(
-                    new KeyValuePair<MessageQuery, XPathResult>((MessageQuery)this.item, result)
-                );
+                context
+                    .Processor
+                    .ResultSet
+                    .Add(
+                        new KeyValuePair<MessageQuery, XPathResult>((MessageQuery)this.item, result)
+                    );
             }
 
             return this.next;

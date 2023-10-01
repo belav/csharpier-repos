@@ -88,16 +88,18 @@ namespace Internal.Win32
             // Make sure that the name does not contain double slahes
             Debug.Assert(!name.Contains(@"\\"));
 
-            int ret = Interop.Advapi32.RegOpenKeyEx(
-                _hkey,
-                name,
-                0,
-                writable
-                    ? Interop.Advapi32.RegistryOperations.KEY_READ
-                        | Interop.Advapi32.RegistryOperations.KEY_WRITE
-                    : Interop.Advapi32.RegistryOperations.KEY_READ,
-                out SafeRegistryHandle result
-            );
+            int ret = Interop
+                .Advapi32
+                .RegOpenKeyEx(
+                    _hkey,
+                    name,
+                    0,
+                    writable
+                        ? Interop.Advapi32.RegistryOperations.KEY_READ
+                            | Interop.Advapi32.RegistryOperations.KEY_WRITE
+                        : Interop.Advapi32.RegistryOperations.KEY_READ,
+                    out SafeRegistryHandle result
+                );
 
             if (ret == 0 && !result.IsInvalid)
             {
@@ -130,16 +132,18 @@ namespace Internal.Win32
 
             while (
                 (
-                    result = Interop.Advapi32.RegEnumKeyEx(
-                        _hkey,
-                        names.Count,
-                        ref MemoryMarshal.GetReference(name),
-                        ref nameLength,
-                        null,
-                        null,
-                        null,
-                        null
-                    )
+                    result = Interop
+                        .Advapi32
+                        .RegEnumKeyEx(
+                            _hkey,
+                            names.Count,
+                            ref MemoryMarshal.GetReference(name),
+                            ref nameLength,
+                            null,
+                            null,
+                            null,
+                            null
+                        )
                 ) != Interop.Errors.ERROR_NO_MORE_ITEMS
             )
             {
@@ -180,16 +184,18 @@ namespace Internal.Win32
 
                 while (
                     (
-                        result = Interop.Advapi32.RegEnumValue(
-                            _hkey,
-                            names.Count,
-                            name,
-                            ref nameLength,
-                            IntPtr.Zero,
-                            null,
-                            null,
-                            null
-                        )
+                        result = Interop
+                            .Advapi32
+                            .RegEnumValue(
+                                _hkey,
+                                names.Count,
+                                name,
+                                ref nameLength,
+                                IntPtr.Zero,
+                                null,
+                                null,
+                                null
+                            )
                     ) != Interop.Errors.ERROR_NO_MORE_ITEMS
                 )
                 {
@@ -255,14 +261,9 @@ namespace Internal.Win32
 
                     fixed (byte* lpData = &MemoryMarshal.GetReference(span))
                     {
-                        result = Interop.Advapi32.RegQueryValueEx(
-                            _hkey,
-                            name,
-                            null,
-                            &type,
-                            lpData,
-                            (uint*)&dataLength
-                        );
+                        result = Interop
+                            .Advapi32
+                            .RegQueryValueEx(_hkey, name, null, &type, lpData, (uint*)&dataLength);
                         if (dataLength < 0)
                         {
                             // Greater than 2GB values aren't supported.
@@ -439,14 +440,16 @@ namespace Internal.Win32
             if (name != null && name.Length > MaxValueLength)
                 throw new ArgumentException(SR.Arg_RegValStrLenBug, nameof(name));
 
-            int ret = Interop.Advapi32.RegSetValueEx(
-                _hkey,
-                name,
-                0,
-                Interop.Advapi32.RegistryValues.REG_SZ,
-                value,
-                checked(value.Length * 2 + 2)
-            );
+            int ret = Interop
+                .Advapi32
+                .RegSetValueEx(
+                    _hkey,
+                    name,
+                    0,
+                    Interop.Advapi32.RegistryValues.REG_SZ,
+                    value,
+                    checked(value.Length * 2 + 2)
+                );
 
             if (ret != 0)
             {

@@ -22,13 +22,13 @@ internal class DefaultTagHelperDescriptorFactory
     private readonly INamedTypeSymbol _restrictChildrenAttributeSymbol;
     private readonly INamedTypeSymbol _editorBrowsableAttributeSymbol;
 
-    internal static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
-        SymbolDisplayFormat.FullyQualifiedFormat
-            .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
-            .WithMiscellaneousOptions(
-                SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
-                    & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
-            );
+    internal static readonly SymbolDisplayFormat FullNameTypeDisplayFormat = SymbolDisplayFormat
+        .FullyQualifiedFormat
+        .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
+        .WithMiscellaneousOptions(
+            SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
+                & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
+        );
 
     public DefaultTagHelperDescriptorFactory(
         Compilation compilation,
@@ -102,10 +102,9 @@ internal class DefaultTagHelperDescriptorFactory
         var targetElementAttributes = type.GetAttributes()
             .Where(
                 attribute =>
-                    SymbolEqualityComparer.Default.Equals(
-                        attribute.AttributeClass,
-                        _htmlTargetElementAttributeSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(attribute.AttributeClass, _htmlTargetElementAttributeSymbol)
             );
 
         // If there isn't an attribute specifying the tag name derive it from the name
@@ -170,10 +169,9 @@ internal class DefaultTagHelperDescriptorFactory
         var restrictChildrenAttribute = type.GetAttributes()
             .Where(
                 a =>
-                    SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        _restrictChildrenAttributeSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(a.AttributeClass, _restrictChildrenAttributeSymbol)
             )
             .FirstOrDefault();
         if (restrictChildrenAttribute == null)
@@ -219,10 +217,9 @@ internal class DefaultTagHelperDescriptorFactory
         var outputElementHintAttribute = type.GetAttributes()
             .Where(
                 a =>
-                    SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        _outputElementHintAttributeSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(a.AttributeClass, _outputElementHintAttributeSymbol)
             )
             .FirstOrDefault();
         if (outputElementHintAttribute != null)
@@ -242,10 +239,9 @@ internal class DefaultTagHelperDescriptorFactory
             .GetAttributes()
             .Where(
                 a =>
-                    SymbolEqualityComparer.Default.Equals(
-                        a.AttributeClass,
-                        _htmlAttributeNameAttributeSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(a.AttributeClass, _htmlAttributeNameAttributeSymbol)
             )
             .FirstOrDefault();
 
@@ -394,23 +390,30 @@ internal class DefaultTagHelperDescriptorFactory
     {
         INamedTypeSymbol dictionaryType;
         if (
-            SymbolEqualityComparer.Default.Equals(
-                (property.Type as INamedTypeSymbol)?.ConstructedFrom,
-                _iDictionarySymbol
-            )
+            SymbolEqualityComparer
+                .Default
+                .Equals((property.Type as INamedTypeSymbol)?.ConstructedFrom, _iDictionarySymbol)
         )
         {
             dictionaryType = (INamedTypeSymbol)property.Type;
         }
         else if (
-            property.Type.AllInterfaces.Any(
-                s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-            )
+            property
+                .Type
+                .AllInterfaces
+                .Any(
+                    s =>
+                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
+                )
         )
         {
-            dictionaryType = property.Type.AllInterfaces.First(
-                s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-            );
+            dictionaryType = property
+                .Type
+                .AllInterfaces
+                .First(
+                    s =>
+                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
+                );
         }
         else
         {
@@ -474,14 +477,21 @@ internal class DefaultTagHelperDescriptorFactory
     private bool IsPotentialDictionaryProperty(IPropertySymbol property)
     {
         return (
-                SymbolEqualityComparer.Default.Equals(
-                    (property.Type as INamedTypeSymbol)?.ConstructedFrom,
-                    _iDictionarySymbol
-                )
-                || property.Type.AllInterfaces.Any(
-                    s =>
-                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
-                )
+                SymbolEqualityComparer
+                    .Default
+                    .Equals(
+                        (property.Type as INamedTypeSymbol)?.ConstructedFrom,
+                        _iDictionarySymbol
+                    )
+                || property
+                    .Type
+                    .AllInterfaces
+                    .Any(
+                        s =>
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(s.ConstructedFrom, _iDictionarySymbol)
+                    )
             )
             && GetDictionaryArgumentTypes(property)?[0].SpecialType == SpecialType.System_String;
     }
@@ -504,10 +514,9 @@ internal class DefaultTagHelperDescriptorFactory
                         .GetAttributes()
                         .Where(
                             a =>
-                                SymbolEqualityComparer.Default.Equals(
-                                    a.AttributeClass,
-                                    _htmlAttributeNotBoundAttributeSymbol
-                                )
+                                SymbolEqualityComparer
+                                    .Default
+                                    .Equals(a.AttributeClass, _htmlAttributeNotBoundAttributeSymbol)
                         )
                         .FirstOrDefault() == null
                     && (
@@ -515,10 +524,9 @@ internal class DefaultTagHelperDescriptorFactory
                             .GetAttributes()
                             .Any(
                                 a =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        a.AttributeClass,
-                                        _htmlAttributeNameAttributeSymbol
-                                    )
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(a.AttributeClass, _htmlAttributeNameAttributeSymbol)
                             )
                         || property.SetMethod != null
                             && property.SetMethod.DeclaredAccessibility == Accessibility.Public
@@ -545,10 +553,9 @@ internal class DefaultTagHelperDescriptorFactory
                 .GetAttributes()
                 .Where(
                     a =>
-                        SymbolEqualityComparer.Default.Equals(
-                            a.AttributeClass,
-                            _editorBrowsableAttributeSymbol
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(a.AttributeClass, _editorBrowsableAttributeSymbol)
                 )
                 .FirstOrDefault();
 

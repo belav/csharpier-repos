@@ -33,7 +33,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var offersList = entity.offers
+                    var offersList = entity
+                        .offers
                         .Select(
                             L =>
                                 new OfferModel
@@ -63,7 +64,8 @@ namespace POS_Server.Controllers
                             if (offersList[i].isActive == 1)
                             {
                                 long offerId = (long)offersList[i].offerId;
-                                var offerItems = entity.itemsOffers
+                                var offerItems = entity
+                                    .itemsOffers
                                     .Where(x => x.offerId == offerId)
                                     .Select(b => new { b.offerId })
                                     .FirstOrDefault();
@@ -103,7 +105,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var offer = entity.offers
+                    var offer = entity
+                        .offers
                         .Where(u => u.offerId == offerId)
                         .Select(
                             L =>
@@ -190,7 +193,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            oldObject = entity.offers
+                            oldObject = entity
+                                .offers
                                 .Where(p => p.offerId == newObject.offerId)
                                 .FirstOrDefault();
                             oldObject.name = newObject.name;

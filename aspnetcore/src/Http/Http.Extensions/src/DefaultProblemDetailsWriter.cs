@@ -66,20 +66,24 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
         {
             // We can use the source generation in this case
             return new ValueTask(
-                httpContext.Response.WriteAsJsonAsync(
-                    context.ProblemDetails,
-                    ProblemDetailsJsonContext.Default.ProblemDetails,
-                    contentType: "application/problem+json"
-                )
+                httpContext
+                    .Response
+                    .WriteAsJsonAsync(
+                        context.ProblemDetails,
+                        ProblemDetailsJsonContext.Default.ProblemDetails,
+                        contentType: "application/problem+json"
+                    )
             );
         }
 
         return new ValueTask(
-            httpContext.Response.WriteAsJsonAsync(
-                context.ProblemDetails,
-                options: null,
-                contentType: "application/problem+json"
-            )
+            httpContext
+                .Response
+                .WriteAsJsonAsync(
+                    context.ProblemDetails,
+                    options: null,
+                    contentType: "application/problem+json"
+                )
         );
     }
 

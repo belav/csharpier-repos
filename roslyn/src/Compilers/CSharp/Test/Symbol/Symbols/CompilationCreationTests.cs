@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 SymbolKind.ErrorType,
-                asm1[1].GlobalNamespace
+                asm1[1]
+                    .GlobalNamespace
                     .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
@@ -233,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ).Count()
             );
 
-            var retval1 = asm2[1].GlobalNamespace
+            var retval1 = asm2[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -297,7 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ).Count()
             );
 
-            var retval2 = asm3[1].GlobalNamespace
+            var retval2 = asm3[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -415,7 +418,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ).Count()
             );
 
-            var retval6 = asm4[1].GlobalNamespace
+            var retval6 = asm4[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -755,7 +759,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             Assert.Equal(
                 SymbolKind.ErrorType,
-                asm1[1].GlobalNamespace
+                asm1[1]
+                    .GlobalNamespace
                     .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Foo")
@@ -791,7 +796,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ).Count()
             );
 
-            retval1 = asm2[1].GlobalNamespace
+            retval1 = asm2[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -844,7 +850,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ).Count()
             );
 
-            retval2 = asm3[1].GlobalNamespace
+            retval2 = asm3[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -950,7 +957,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 ).Count()
             );
 
-            retval6 = asm4[1].GlobalNamespace
+            retval6 = asm4[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -1292,7 +1300,8 @@ public class Class4
                 ).Count()
             );
 
-            var retval1 = asm2[1].GlobalNamespace
+            var retval1 = asm2[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -1430,7 +1439,8 @@ public class Class5
                 ).Count()
             );
 
-            var retval2 = asm3[1].GlobalNamespace
+            var retval2 = asm3[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -1641,7 +1651,8 @@ public class Class6
                 ).Count()
             );
 
-            var retval6 = asm4[1].GlobalNamespace
+            var retval6 = asm4[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -2022,7 +2033,8 @@ public class Class6
                 ).Count()
             );
 
-            retval1 = asm2[1].GlobalNamespace
+            retval1 = asm2[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -2083,7 +2095,8 @@ public class Class6
                 ).Count()
             );
 
-            retval2 = asm3[1].GlobalNamespace
+            retval2 = asm3[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -2193,7 +2206,8 @@ public class Class6
                 ).Count()
             );
 
-            retval6 = asm4[1].GlobalNamespace
+            retval6 = asm4[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -2515,7 +2529,8 @@ public class Class6
                 ).Count()
             );
 
-            var retval1 = asm2[1].GlobalNamespace
+            var retval1 = asm2[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -2525,7 +2540,8 @@ public class Class6
 
             Assert.Same(
                 retval1,
-                asm2[1].GlobalNamespace
+                asm2[1]
+                    .GlobalNamespace
                     .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Bar")
@@ -2630,7 +2646,8 @@ public class Class6
                 ).Count()
             );
 
-            var retval2 = asm3[1].GlobalNamespace
+            var retval2 = asm3[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -2640,7 +2657,8 @@ public class Class6
 
             Assert.Same(
                 retval2,
-                asm3[1].GlobalNamespace
+                asm3[1]
+                    .GlobalNamespace
                     .GetTypeMembers("Class4")
                     .Single()
                     .GetMembers("Bar")
@@ -2808,7 +2826,8 @@ public class Class6
                 ).Count()
             );
 
-            var retval6 = asm4[1].GlobalNamespace
+            var retval6 = asm4[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -3219,7 +3238,8 @@ public class Class6
                 ).Count()
             );
 
-            retval1 = asm2[1].GlobalNamespace
+            retval1 = asm2[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -3280,7 +3300,8 @@ public class Class6
                 ).Count()
             );
 
-            retval2 = asm3[1].GlobalNamespace
+            retval2 = asm3[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -3393,7 +3414,8 @@ public class Class6
                 ).Count()
             );
 
-            retval6 = asm4[1].GlobalNamespace
+            retval6 = asm4[1]
+                .GlobalNamespace
                 .GetTypeMembers("Class4")
                 .Single()
                 .GetMembers("Foo")
@@ -4414,9 +4436,9 @@ System.Diagnostics.Process.GetCurrentProcess();
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new Resolver(data, core, system)
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataReferenceResolver(new Resolver(data, core, system))
             );
 
             compilation.VerifyDiagnostics();
@@ -4456,9 +4478,9 @@ System.Diagnostics.Process.GetCurrentProcess();
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new Resolver(data, core, system)
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataReferenceResolver(new Resolver(data, core, system))
             );
 
             compilation.VerifyDiagnostics(
@@ -4523,9 +4545,9 @@ class C : Metadata.ICSPropImpl { }";
 
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { Parse(source, options: TestOptions.Script) },
-                options: TestOptions.ReleaseDll.WithMetadataReferenceResolver(
-                    new DummyReferenceResolver(csClasses01)
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataReferenceResolver(new DummyReferenceResolver(csClasses01))
             );
 
             compilation.VerifyDiagnostics();
@@ -4579,9 +4601,9 @@ class C
 
             var compilation = CreateCompilationWithMscorlib45(
                 trees,
-                options: TestOptions.ReleaseDll.WithUsings(
-                    ImmutableArray.Create("System.Console", "System")
-                )
+                options: TestOptions
+                    .ReleaseDll
+                    .WithUsings(ImmutableArray.Create("System.Console", "System"))
             );
 
             var diagnostics = compilation.GetDiagnostics().ToArray();

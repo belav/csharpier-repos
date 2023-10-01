@@ -417,7 +417,8 @@ public class DbContextOperations
     private Func<DbContext>? FindContextFactory(Type contextType)
     {
         var factoryInterface = typeof(IDesignTimeDbContextFactory<>).MakeGenericType(contextType);
-        var factory = contextType.Assembly
+        var factory = contextType
+            .Assembly
             .GetConstructibleTypes()
             .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));
         return factory == null

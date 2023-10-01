@@ -744,9 +744,11 @@ namespace System.Transactions
             enlistments._volatileEnlistmentCount++;
 
             // Make it's state active.
-            VolatileEnlistmentState.VolatileEnlistmentActive.EnterState(
-                enlistments._volatileEnlistments[enlistments._volatileEnlistmentCount - 1]
-            );
+            VolatileEnlistmentState
+                .VolatileEnlistmentActive
+                .EnterState(
+                    enlistments._volatileEnlistments[enlistments._volatileEnlistmentCount - 1]
+                );
         }
     }
 
@@ -766,10 +768,9 @@ namespace System.Transactions
         )
         {
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System.Delegate.Combine(
-                    tx._transactionCompletedDelegate,
-                    transactionCompletedDelegate
-                );
+                System
+                    .Delegate
+                    .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
     }
 
@@ -2284,10 +2285,9 @@ namespace System.Transactions
         {
             // Add this delegate to the list of delegates to be notified of the outcome.
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System.Delegate.Combine(
-                    tx._transactionCompletedDelegate,
-                    transactionCompletedDelegate
-                );
+                System
+                    .Delegate
+                    .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
 
         internal override void BeginCommit(
@@ -2649,9 +2649,9 @@ namespace System.Transactions
                 options.Timeout = newTimeout;
 
                 // Create a new distributed transaction.
-                distributedTx = TransactionManager.DistributedTransactionManager.CreateTransaction(
-                    options
-                );
+                distributedTx = TransactionManager
+                    .DistributedTransactionManager
+                    .CreateTransaction(options);
                 distributedTx.SavedLtmPromotedTransaction = tx._outcomeSource;
 
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
@@ -2750,10 +2750,9 @@ namespace System.Transactions
                 );
 
                 // Promote the enlistment.
-                tx._durableEnlistment.State.ChangeStatePromoted(
-                    tx._durableEnlistment,
-                    promotedEnlistment
-                );
+                tx._durableEnlistment
+                    .State
+                    .ChangeStatePromoted(tx._durableEnlistment, promotedEnlistment);
             }
 
             return true;
@@ -4103,10 +4102,9 @@ namespace System.Transactions
         {
             // Add this guy to the list of people to be notified of the outcome.
             tx._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                System.Delegate.Combine(
-                    tx._transactionCompletedDelegate,
-                    transactionCompletedDelegate
-                );
+                System
+                    .Delegate
+                    .Combine(tx._transactionCompletedDelegate, transactionCompletedDelegate);
         }
 
         // Start the commit processing by transitioning to TransactionStatePromotedNonMSDTCPhase0.
@@ -5447,9 +5445,9 @@ namespace System.Transactions
 
             try
             {
-                tx._durableEnlistment.PromotableSinglePhaseNotification.SinglePhaseCommit(
-                    tx._durableEnlistment.SinglePhaseEnlistment
-                );
+                tx._durableEnlistment
+                    .PromotableSinglePhaseNotification
+                    .SinglePhaseCommit(tx._durableEnlistment.SinglePhaseEnlistment);
             }
             finally
             {
@@ -5486,9 +5484,9 @@ namespace System.Transactions
                     );
                 }
 
-                tx._durableEnlistment.PromotableSinglePhaseNotification.Rollback(
-                    tx._durableEnlistment.SinglePhaseEnlistment
-                );
+                tx._durableEnlistment
+                    .PromotableSinglePhaseNotification
+                    .Rollback(tx._durableEnlistment.SinglePhaseEnlistment);
             }
             finally
             {

@@ -201,10 +201,10 @@ namespace System.Xml.Serialization
                 ExportedMappings.Add(mapping, mapping);
                 if (mapping.TypeDesc.IsMappedType)
                 {
-                    codeClass = mapping.TypeDesc.ExtendedType.ExportTypeDefinition(
-                        CodeNamespace,
-                        CodeCompileUnit
-                    );
+                    codeClass = mapping
+                        .TypeDesc
+                        .ExtendedType
+                        .ExportTypeDefinition(CodeNamespace, CodeCompileUnit);
                 }
                 else if (mapping is EnumMapping)
                 {
@@ -226,30 +226,36 @@ namespace System.Xml.Serialization
                         codeClass.CustomAttributes.Add(GeneratedCodeAttribute);
 
                         // Add [SerializableAttribute]
-                        codeClass.CustomAttributes.Add(
-                            new CodeAttributeDeclaration(typeof(SerializableAttribute).FullName)
-                        );
+                        codeClass
+                            .CustomAttributes
+                            .Add(
+                                new CodeAttributeDeclaration(typeof(SerializableAttribute).FullName)
+                            );
 
                         if (!codeClass.IsEnum)
                         {
                             // Add [DebuggerStepThrough]
-                            codeClass.CustomAttributes.Add(
-                                new CodeAttributeDeclaration(
-                                    typeof(DebuggerStepThroughAttribute).FullName
-                                )
-                            );
+                            codeClass
+                                .CustomAttributes
+                                .Add(
+                                    new CodeAttributeDeclaration(
+                                        typeof(DebuggerStepThroughAttribute).FullName
+                                    )
+                                );
                             // Add [DesignerCategory("code")]
-                            codeClass.CustomAttributes.Add(
-                                new CodeAttributeDeclaration(
-                                    typeof(DesignerCategoryAttribute).FullName,
-                                    new CodeAttributeArgument[]
-                                    {
-                                        new CodeAttributeArgument(
-                                            new CodePrimitiveExpression("code")
-                                        )
-                                    }
-                                )
-                            );
+                            codeClass
+                                .CustomAttributes
+                                .Add(
+                                    new CodeAttributeDeclaration(
+                                        typeof(DesignerCategoryAttribute).FullName,
+                                        new CodeAttributeArgument[]
+                                        {
+                                            new CodeAttributeArgument(
+                                                new CodePrimitiveExpression("code")
+                                            )
+                                        }
+                                    )
+                                );
                         }
                         AddTypeMetadata(
                             codeClass.CustomAttributes,
@@ -300,33 +306,37 @@ namespace System.Xml.Serialization
             CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(rootAttrName);
             if (typeMapping.TypeDesc.Name != name)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(new CodePrimitiveExpression(name))
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument(new CodePrimitiveExpression(name)));
             }
             if (ns != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns))
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns)));
             }
             if (typeMapping.TypeDesc != null && typeMapping.TypeDesc.IsAmbiguousDataType)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(
-                        "DataType",
-                        new CodePrimitiveExpression(typeMapping.TypeDesc.DataType.Name)
-                    )
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "DataType",
+                            new CodePrimitiveExpression(typeMapping.TypeDesc.DataType.Name)
+                        )
+                    );
             }
             if ((object)(rootElement.IsNullable) != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(
-                        "IsNullable",
-                        new CodePrimitiveExpression((bool)rootElement.IsNullable)
-                    )
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "IsNullable",
+                            new CodePrimitiveExpression((bool)rootElement.IsNullable)
+                        )
+                    );
             }
             metadata.Add(attribute);
         }
@@ -1252,11 +1262,13 @@ namespace System.Xml.Serialization
                     CodeAttributeDeclaration attribute = new CodeAttributeDeclaration(
                         typeof(XmlChoiceIdentifierAttribute).FullName
                     );
-                    attribute.Arguments.Add(
-                        new CodeAttributeArgument(
-                            new CodePrimitiveExpression(member.ChoiceIdentifier.MemberName)
-                        )
-                    );
+                    attribute
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                new CodePrimitiveExpression(member.ChoiceIdentifier.MemberName)
+                            )
+                        );
                     metadata.Add(attribute);
                 }
                 if (member.Ignore)
@@ -1357,15 +1369,17 @@ namespace System.Xml.Serialization
             );
             if (typeDesc != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(new CodeTypeOfExpression(typeDesc.FullName))
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument(new CodeTypeOfExpression(typeDesc.FullName)));
             }
             if (dataType != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("DataType", new CodePrimitiveExpression(dataType))
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument("DataType", new CodePrimitiveExpression(dataType))
+                    );
             }
             metadata.Add(attribute);
         }
@@ -1484,9 +1498,9 @@ namespace System.Xml.Serialization
             );
             if (name != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(new CodePrimitiveExpression(name))
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument(new CodePrimitiveExpression(name)));
             }
             if (typeDesc != null)
             {
@@ -1498,31 +1512,39 @@ namespace System.Xml.Serialization
                     && CodeProvider.Supports(GeneratorSupport.GenericTypeReference)
                 )
                 {
-                    attribute.Arguments.Add(
-                        new CodeAttributeArgument(
-                            new CodeTypeOfExpression("System.Nullable`1[" + typeDesc.FullName + "]")
-                        )
-                    );
+                    attribute
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                new CodeTypeOfExpression(
+                                    "System.Nullable`1[" + typeDesc.FullName + "]"
+                                )
+                            )
+                        );
                     isNullable = null;
                 }
                 else
                 {
-                    attribute.Arguments.Add(
-                        new CodeAttributeArgument(new CodeTypeOfExpression(typeDesc.FullName))
-                    );
+                    attribute
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(new CodeTypeOfExpression(typeDesc.FullName))
+                        );
                 }
             }
             if (form != XmlSchemaForm.None)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(
-                        "Form",
-                        new CodeFieldReferenceExpression(
-                            new CodeTypeReferenceExpression(typeof(XmlSchemaForm).FullName),
-                            Enum.Format(typeof(XmlSchemaForm), form, "G")
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "Form",
+                            new CodeFieldReferenceExpression(
+                                new CodeTypeReferenceExpression(typeof(XmlSchemaForm).FullName),
+                                Enum.Format(typeof(XmlSchemaForm), form, "G")
+                            )
                         )
-                    )
-                );
+                    );
 
                 if (form == XmlSchemaForm.Unqualified && ns != null && ns.Length == 0)
                 {
@@ -1531,9 +1553,9 @@ namespace System.Xml.Serialization
             }
             if (ns != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns))
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns)));
             }
             if (
                 dataTypeDesc != null
@@ -1541,36 +1563,44 @@ namespace System.Xml.Serialization
                 && !dataTypeDesc.IsMappedType
             )
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(
-                        "DataType",
-                        new CodePrimitiveExpression(dataTypeDesc.DataType.Name)
-                    )
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "DataType",
+                            new CodePrimitiveExpression(dataTypeDesc.DataType.Name)
+                        )
+                    );
             }
             if (isNullable != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(
-                        "IsNullable",
-                        new CodePrimitiveExpression((bool)isNullable)
-                    )
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "IsNullable",
+                            new CodePrimitiveExpression((bool)isNullable)
+                        )
+                    );
             }
             if (nestingLevel > 0)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument(
-                        "NestingLevel",
-                        new CodePrimitiveExpression(nestingLevel)
-                    )
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            "NestingLevel",
+                            new CodePrimitiveExpression(nestingLevel)
+                        )
+                    );
             }
             if (sequenceId >= 0)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("Order", new CodePrimitiveExpression(sequenceId))
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument("Order", new CodePrimitiveExpression(sequenceId))
+                    );
             }
             if (attribute.Arguments.Count == 0 && attributeType == typeof(XmlElementAttribute))
                 return;
@@ -1589,21 +1619,23 @@ namespace System.Xml.Serialization
             );
             if (name != null && name.Length > 0)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("Name", new CodePrimitiveExpression(name))
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument("Name", new CodePrimitiveExpression(name)));
             }
             if (ns != null)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns))
-                );
+                attribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns)));
             }
             if (sequenceId >= 0)
             {
-                attribute.Arguments.Add(
-                    new CodeAttributeArgument("Order", new CodePrimitiveExpression(sequenceId))
-                );
+                attribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument("Order", new CodePrimitiveExpression(sequenceId))
+                    );
             }
             metadata.Add(attribute);
         }

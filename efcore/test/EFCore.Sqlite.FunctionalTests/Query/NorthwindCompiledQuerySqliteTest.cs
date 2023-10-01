@@ -100,7 +100,8 @@ public class NorthwindCompiledQuerySqliteTest
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () => Enumerate(query(context, new[] { "ALFKI" }))
                     )
-                ).Message
+                )
+                    .Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );
@@ -120,7 +121,8 @@ public class NorthwindCompiledQuerySqliteTest
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () => Enumerate(query(context, new[] { "ANATR" }))
                     )
-                ).Message
+                )
+                    .Message
                     .Replace("\r", "")
                     .Replace("\n", "")
             );

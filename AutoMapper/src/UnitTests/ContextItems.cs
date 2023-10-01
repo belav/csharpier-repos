@@ -92,9 +92,11 @@
                 {
                     var inner = ex.InnerException;
                     inner.ShouldBeOfType<InvalidOperationException>();
-                    inner.Message.ShouldBe(
-                        "Context.Items are only available when using a Map overload that takes Action<IMappingOperationOptions>!"
-                    );
+                    inner
+                        .Message
+                        .ShouldBe(
+                            "Context.Items are only available when using a Map overload that takes Action<IMappingOperationOptions>!"
+                        );
                 });
             }
         }

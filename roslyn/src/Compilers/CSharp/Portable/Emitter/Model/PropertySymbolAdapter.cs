@@ -110,10 +110,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 CheckDefinitionInvariant();
 #if DEBUG
-                return AdaptedPropertySymbol.Parameters.SelectAsArray<
-                    ParameterSymbol,
-                    IParameterDefinition
-                >(p => p.GetCciAdapter());
+                return AdaptedPropertySymbol
+                    .Parameters
+                    .SelectAsArray<ParameterSymbol, IParameterDefinition>(p => p.GetCciAdapter());
 #else
                 return StaticCast<IParameterDefinition>.From(AdaptedPropertySymbol.Parameters);
 #endif
@@ -174,10 +173,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             CheckDefinitionInvariant();
 #if DEBUG
-            return AdaptedPropertySymbol.Parameters.SelectAsArray<
-                ParameterSymbol,
-                IParameterTypeInformation
-            >(p => p.GetCciAdapter());
+            return AdaptedPropertySymbol
+                .Parameters
+                .SelectAsArray<ParameterSymbol, IParameterTypeInformation>(p => p.GetCciAdapter());
 #else
             return StaticCast<IParameterTypeInformation>.From(AdaptedPropertySymbol.Parameters);
 #endif
@@ -188,7 +186,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 CheckDefinitionInvariantAllowEmbedded();
-                return AdaptedPropertySymbol.TypeWithAnnotations.CustomModifiers.As<ICustomModifier>();
+                return AdaptedPropertySymbol
+                    .TypeWithAnnotations
+                    .CustomModifiers
+                    .As<ICustomModifier>();
             }
         }
 

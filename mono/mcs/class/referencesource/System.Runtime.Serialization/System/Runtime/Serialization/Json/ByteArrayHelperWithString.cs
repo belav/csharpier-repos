@@ -70,9 +70,11 @@ namespace System.Runtime.Serialization.Json
 
         void ThrowConversionException(string value, string type)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(SR.GetString(SR.XmlInvalidConversion, value, type))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(SR.GetString(SR.XmlInvalidConversion, value, type))
+                );
         }
 
         byte ToByte(int value)

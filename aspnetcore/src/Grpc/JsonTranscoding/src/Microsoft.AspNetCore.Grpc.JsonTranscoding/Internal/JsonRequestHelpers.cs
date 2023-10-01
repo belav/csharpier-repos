@@ -380,14 +380,16 @@ internal static class JsonRequestHelpers
         var contentType = serverCallContext.HttpContext.Request.ContentType;
         if (contentType != null)
         {
-            httpBody.Descriptor
+            httpBody
+                .Descriptor
                 .Fields[HttpBody.ContentTypeFieldNumber]
                 .Accessor
                 .SetValue(httpBody, contentType);
         }
 
         var data = await ReadDataAsync(serverCallContext);
-        httpBody.Descriptor
+        httpBody
+            .Descriptor
             .Fields[HttpBody.DataFieldNumber]
             .Accessor
             .SetValue(httpBody, UnsafeByteOperations.UnsafeWrap(data));
@@ -434,18 +436,21 @@ internal static class JsonRequestHelpers
         string path
     )
     {
-        return serverCallContext.DescriptorInfo.PathDescriptorsCache.GetOrAdd(
-            path,
-            p =>
-            {
-                ServiceDescriptorHelpers.TryResolveDescriptors(
-                    requestMessage.Descriptor,
-                    p.Split('.'),
-                    out var pathDescriptors
-                );
-                return pathDescriptors;
-            }
-        );
+        return serverCallContext
+            .DescriptorInfo
+            .PathDescriptorsCache
+            .GetOrAdd(
+                path,
+                p =>
+                {
+                    ServiceDescriptorHelpers.TryResolveDescriptors(
+                        requestMessage.Descriptor,
+                        p.Split('.'),
+                        out var pathDescriptors
+                    );
+                    return pathDescriptors;
+                }
+            );
     }
 
     public static async ValueTask SendMessage<TResponse>(
@@ -469,10 +474,11 @@ internal static class JsonRequestHelpers
             {
                 // The spec says that response body must be on the top-level message.
                 // Recursive response body isn't supported.
-                responseBody =
-                    serverCallContext.DescriptorInfo.ResponseBodyDescriptor.Accessor.GetValue(
-                        (IMessage)message
-                    );
+                responseBody = serverCallContext
+                    .DescriptorInfo
+                    .ResponseBodyDescriptor
+                    .Accessor
+                    .GetValue((IMessage)message);
                 responseType = JsonConverterHelper.GetFieldType(
                     serverCallContext.DescriptorInfo.ResponseBodyDescriptor
                 );

@@ -463,9 +463,11 @@ namespace System.ServiceModel.Dispatcher
                     else
                     {
 #pragma warning suppress 56503 // Microsoft, property is more readable for this
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                            new QueryProcessingException(QueryProcessingError.Unexpected)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperCritical(
+                                new QueryProcessingException(QueryProcessingError.Unexpected)
+                            );
                     }
                     this.counter = this.contextNode as INodeCounter;
                     if (null == this.counter)

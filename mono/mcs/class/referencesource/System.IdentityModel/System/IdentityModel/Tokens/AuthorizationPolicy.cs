@@ -63,9 +63,9 @@ namespace System.IdentityModel.Tokens
         {
             if (identityCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "identityCollection"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("identityCollection");
             }
 
             List<ClaimsIdentity> collection = new List<ClaimsIdentity>();
@@ -98,9 +98,9 @@ namespace System.IdentityModel.Tokens
         {
             if (null == evaluationContext || null == evaluationContext.Properties)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "evaluationContext"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("evaluationContext");
             }
 
             if (0 == _identityCollection.Count)

@@ -68,12 +68,14 @@ namespace Internal.Runtime.TypeLoader
             {
                 if (value1.RuntimeTypeHandle.IsNull() || value2.RuntimeTypeHandle.IsNull())
                 {
-                    return value1.QualifiedTypeDefinition.Token.Equals(
-                            value2.QualifiedTypeDefinition.Token
-                        )
-                        && value1.QualifiedTypeDefinition.Reader.Equals(
-                            value2.QualifiedTypeDefinition.Reader
-                        );
+                    return value1
+                            .QualifiedTypeDefinition
+                            .Token
+                            .Equals(value2.QualifiedTypeDefinition.Token)
+                        && value1
+                            .QualifiedTypeDefinition
+                            .Reader
+                            .Equals(value2.QualifiedTypeDefinition.Reader);
                 }
                 return value1.RuntimeTypeHandle.Equals(value2.RuntimeTypeHandle);
             }
@@ -181,12 +183,14 @@ namespace Internal.Runtime.TypeLoader
                 NamedTypeLookupResult value2
             )
             {
-                return value1.QualifiedTypeDefinition.Token.Equals(
-                        value2.QualifiedTypeDefinition.Token
-                    )
-                    && value1.QualifiedTypeDefinition.Reader.Equals(
-                        value2.QualifiedTypeDefinition.Reader
-                    );
+                return value1
+                        .QualifiedTypeDefinition
+                        .Token
+                        .Equals(value2.QualifiedTypeDefinition.Token)
+                    && value1
+                        .QualifiedTypeDefinition
+                        .Reader
+                        .Equals(value2.QualifiedTypeDefinition.Reader);
             }
 
             protected override NamedTypeLookupResult CreateValueFromKey(QTypeDefinition key)
@@ -199,8 +203,9 @@ namespace Internal.Runtime.TypeLoader
                     TypeDefinitionHandle typeDefHandle = key.NativeFormatHandle;
                     int hashCode = typeDefHandle.ComputeHashCode(metadataReader);
 
-                    NativeFormatModuleInfo module =
-                        ModuleList.Instance.GetModuleInfoForMetadataReader(metadataReader);
+                    NativeFormatModuleInfo module = ModuleList
+                        .Instance
+                        .GetModuleInfoForMetadataReader(metadataReader);
 
                     NativeReader typeMapReader;
                     if (

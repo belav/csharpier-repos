@@ -40,10 +40,8 @@ public static class JSInteropMethods
         bool isInterceptedLink
     )
     {
-        return await WebAssemblyNavigationManager.Instance.HandleLocationChangingAsync(
-            uri,
-            state,
-            isInterceptedLink
-        );
+        return await WebAssemblyNavigationManager
+            .Instance
+            .HandleLocationChangingAsync(uri, state, isInterceptedLink);
     }
 }

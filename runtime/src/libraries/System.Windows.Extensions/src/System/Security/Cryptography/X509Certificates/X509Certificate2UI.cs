@@ -166,13 +166,15 @@ namespace System.Security.Cryptography.X509Certificates
         {
             int dwErrorCode = ERROR_SUCCESS;
 
-            SafeCertStoreHandle safeCertStoreHandle = Interop.Crypt32.CertOpenStore(
-                (IntPtr)Interop.Crypt32.CERT_STORE_PROV_MEMORY,
-                Interop.Crypt32.X509_ASN_ENCODING | Interop.Crypt32.PKCS_7_ASN_ENCODING,
-                IntPtr.Zero,
-                0,
-                IntPtr.Zero
-            );
+            SafeCertStoreHandle safeCertStoreHandle = Interop
+                .Crypt32
+                .CertOpenStore(
+                    (IntPtr)Interop.Crypt32.CERT_STORE_PROV_MEMORY,
+                    Interop.Crypt32.X509_ASN_ENCODING | Interop.Crypt32.PKCS_7_ASN_ENCODING,
+                    IntPtr.Zero,
+                    0,
+                    IntPtr.Zero
+                );
 
             if (safeCertStoreHandle == null || safeCertStoreHandle.IsInvalid)
             {
@@ -221,20 +223,23 @@ namespace System.Security.Cryptography.X509Certificates
             csc.rgPropSheetPages = IntPtr.Zero;
             csc.hSelectedCertStore = safeCertStoreHandle.DangerousGetHandle();
 
-            SafeCertContextHandle safeCertContextHandle =
-                Interop.CryptUI.CryptUIDlgSelectCertificateW(ref csc);
+            SafeCertContextHandle safeCertContextHandle = Interop
+                .CryptUI
+                .CryptUIDlgSelectCertificateW(ref csc);
 
             if (safeCertContextHandle != null && !safeCertContextHandle.IsInvalid)
             {
                 // Single select, so add it to our hCertStore
                 SafeCertContextHandle ppStoreContext = SafeCertContextHandle.InvalidHandle;
                 if (
-                    !Interop.Crypt32.CertAddCertificateLinkToStore(
-                        safeCertStoreHandle,
-                        safeCertContextHandle,
-                        Interop.Crypt32.CERT_STORE_ADD_ALWAYS,
-                        ppStoreContext
-                    )
+                    !Interop
+                        .Crypt32
+                        .CertAddCertificateLinkToStore(
+                            safeCertStoreHandle,
+                            safeCertContextHandle,
+                            Interop.Crypt32.CERT_STORE_ADD_ALWAYS,
+                            ppStoreContext
+                        )
                 )
                 {
                     dwErrorCode = Marshal.GetLastPInvokeError();

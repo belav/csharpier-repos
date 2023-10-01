@@ -111,7 +111,8 @@ namespace System.CommandLine.Tests
 
             console.Out.ToString().Should().NotContain(version);
 
-            console.Error
+            console
+                .Error
                 .ToString()
                 .Should()
                 .Contain("--version option cannot be combined with other arguments.");
@@ -130,7 +131,10 @@ namespace System.CommandLine.Tests
 
             var parser = new CommandLineBuilder(rootCommand).UseVersionOption().Build();
 
-            parser.Configuration.RootCommand.Subcommands
+            parser
+                .Configuration
+                .RootCommand
+                .Subcommands
                 .Single(c => c.Name == "subcommand")
                 .Options
                 .Should()
@@ -183,7 +187,8 @@ namespace System.CommandLine.Tests
 
             console.Out.ToString().Should().NotContain(version);
 
-            console.Error
+            console
+                .Error
                 .ToString()
                 .Should()
                 .Contain("-v option cannot be combined with other arguments.");

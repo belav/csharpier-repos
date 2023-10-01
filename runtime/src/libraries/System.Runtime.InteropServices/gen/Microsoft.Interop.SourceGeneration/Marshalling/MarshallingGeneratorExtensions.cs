@@ -205,16 +205,23 @@ namespace Microsoft.Interop
                             or SizeAndParamIndexInfo
                 )
                 {
-                    CustomTypeMarshallerData defaultMarshallerData =
-                        collectionMarshalling.Marshallers.GetModeOrDefault(MarshalMode.Default);
+                    CustomTypeMarshallerData defaultMarshallerData = collectionMarshalling
+                        .Marshallers
+                        .GetModeOrDefault(MarshalMode.Default);
                     if (
                         (
-                            defaultMarshallerData.MarshallerType.FullTypeName.StartsWith(
-                                $"{TypeNames.System_Runtime_InteropServices_ArrayMarshaller}<"
-                            )
-                            || defaultMarshallerData.MarshallerType.FullTypeName.StartsWith(
-                                $"{TypeNames.System_Runtime_InteropServices_PointerArrayMarshaller}<"
-                            )
+                            defaultMarshallerData
+                                .MarshallerType
+                                .FullTypeName
+                                .StartsWith(
+                                    $"{TypeNames.System_Runtime_InteropServices_ArrayMarshaller}<"
+                                )
+                            || defaultMarshallerData
+                                .MarshallerType
+                                .FullTypeName
+                                .StartsWith(
+                                    $"{TypeNames.System_Runtime_InteropServices_PointerArrayMarshaller}<"
+                                )
                         )
                         && defaultMarshallerData.CollectionElementMarshallingInfo
                             is NoMarshallingInfo

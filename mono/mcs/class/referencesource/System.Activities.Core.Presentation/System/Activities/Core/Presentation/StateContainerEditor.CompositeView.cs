@@ -125,7 +125,8 @@ namespace System.Activities.Core.Presentation
 
             HashSet<Connector> connectorsToDelete = new HashSet<Connector>();
             List<ModelItem> allStateModelItemsToDelete = new List<ModelItem>();
-            IEnumerable<ModelItem> selectedStateModelItems = this.Context.Items
+            IEnumerable<ModelItem> selectedStateModelItems = this.Context
+                .Items
                 .GetValue<Selection>()
                 .SelectedObjects
                 .Where<ModelItem>(
@@ -208,7 +209,8 @@ namespace System.Activities.Core.Presentation
                 if (itemsToPaste.Count == 1 && itemsToPaste.First() is Transition)
                 {
                     string errorMessage;
-                    IEnumerable<ModelItem> selectedStateModelItems = this.Context.Items
+                    IEnumerable<ModelItem> selectedStateModelItems = this.Context
+                        .Items
                         .GetValue<Selection>()
                         .SelectedObjects;
                     return selectedStateModelItems.All(
@@ -366,7 +368,8 @@ namespace System.Activities.Core.Presentation
 
                 this.PopulateVirtualizingContainer(destinationState);
 
-                ModelItem[] selectedItems = this.Context.Items
+                ModelItem[] selectedItems = this.Context
+                    .Items
                     .GetValue<Selection>()
                     .SelectedObjects
                     .ToArray();
@@ -399,7 +402,8 @@ namespace System.Activities.Core.Presentation
                             pastedTransition = (Transition)XamlServices.Load(reader);
                         }
 
-                        ModelItem transitionModelItem = this.Context.Services
+                        ModelItem transitionModelItem = this.Context
+                            .Services
                             .GetRequiredService<ModelTreeManager>()
                             .WrapAsModelItem(pastedTransition);
                         ModelItem sourceState = selectedItem;

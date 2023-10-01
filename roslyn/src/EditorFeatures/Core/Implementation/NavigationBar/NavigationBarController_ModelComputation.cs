@@ -29,9 +29,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         )
         {
             // Jump back to the UI thread to determine what snapshot the user is processing.
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
             var textSnapshot = _subjectBuffer.CurrentSnapshot;
 
             // Ensure we switch to the threadpool before calling GetDocumentWithFrozenPartialSemantics.  It ensures
@@ -100,9 +100,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         {
             // Switch to the UI so we can determine where the user is and determine the state the last time we updated
             // the UI.
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                cancellationToken
-            );
+            await this.ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(cancellationToken);
 
             var currentView = _presenter.TryGetCurrentView();
             var caretPosition = currentView?.GetCaretPoint(_subjectBuffer);

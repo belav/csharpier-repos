@@ -278,18 +278,21 @@ namespace Microsoft.Reflection
         {
             // Minimal implementation to cover only the cases we need
             System.Diagnostics.Debug.Assert((flags & BindingFlags.DeclaredOnly) != 0);
-            System.Diagnostics.Debug.Assert(
-                (
-                    flags
-                    & ~(
-                        BindingFlags.DeclaredOnly
-                        | BindingFlags.Instance
-                        | BindingFlags.Static
-                        | BindingFlags.Public
-                        | BindingFlags.NonPublic
-                    )
-                ) == 0
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    (
+                        flags
+                        & ~(
+                            BindingFlags.DeclaredOnly
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                            | BindingFlags.Public
+                            | BindingFlags.NonPublic
+                        )
+                    ) == 0
+                );
             Func<MethodInfo, bool> visFilter;
             Func<MethodInfo, bool> instFilter;
             switch (flags & (BindingFlags.Public | BindingFlags.NonPublic))
@@ -335,18 +338,21 @@ namespace Microsoft.Reflection
         {
             // Minimal implementation to cover only the cases we need
             System.Diagnostics.Debug.Assert((flags & BindingFlags.DeclaredOnly) != 0);
-            System.Diagnostics.Debug.Assert(
-                (
-                    flags
-                    & ~(
-                        BindingFlags.DeclaredOnly
-                        | BindingFlags.Instance
-                        | BindingFlags.Static
-                        | BindingFlags.Public
-                        | BindingFlags.NonPublic
-                    )
-                ) == 0
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    (
+                        flags
+                        & ~(
+                            BindingFlags.DeclaredOnly
+                            | BindingFlags.Instance
+                            | BindingFlags.Static
+                            | BindingFlags.Public
+                            | BindingFlags.NonPublic
+                        )
+                    ) == 0
+                );
             Func<FieldInfo, bool> visFilter;
             Func<FieldInfo, bool> instFilter;
             switch (flags & (BindingFlags.Public | BindingFlags.NonPublic))

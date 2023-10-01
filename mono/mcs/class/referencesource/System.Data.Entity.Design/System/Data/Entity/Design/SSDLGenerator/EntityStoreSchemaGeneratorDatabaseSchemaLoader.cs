@@ -51,7 +51,8 @@ namespace System.Data.Entity.Design.SsdlGenerator
             // The first version of the model that was shipped with EntityFrameworkVersions.Version1 and EntityFrameworkVersions.Version2 is the last one
             // we try, if it fails to load let the exception to propagate up to the caller.
             foreach (
-                var version in EntityFrameworkVersions.ValidVersions
+                var version in EntityFrameworkVersions
+                    .ValidVersions
                     .Where(v => v > EntityFrameworkVersions.Version2)
                     .OrderByDescending(v => v)
             )

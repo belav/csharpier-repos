@@ -102,28 +102,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // that all parts have the "partial" modifier, the results can be trimmed further here.
             return candidates?.Where(
                 symbol =>
-                    symbol.DeclaringSyntaxReferences.Any(
-                        static (reference, cancellationToken) =>
-                            IsPartialTypeDeclaration(reference.GetSyntax(cancellationToken)),
-                        cancellationToken
-                    )
+                    symbol
+                        .DeclaringSyntaxReferences
+                        .Any(
+                            static (reference, cancellationToken) =>
+                                IsPartialTypeDeclaration(reference.GetSyntax(cancellationToken)),
+                            cancellationToken
+                        )
             );
         }
 
         private static bool IsPartialTypeDeclaration(SyntaxNode syntax) =>
             syntax is BaseTypeDeclarationSyntax declarationSyntax
-            && declarationSyntax.Modifiers.Any(
-                modifier => modifier.IsKind(SyntaxKind.PartialKeyword)
-            );
+            && declarationSyntax
+                .Modifiers
+                .Any(modifier => modifier.IsKind(SyntaxKind.PartialKeyword));
 
         protected override ImmutableDictionary<string, string> GetProperties(
             INamedTypeSymbol symbol,
             CSharpSyntaxContext context
         ) =>
-            ImmutableDictionary<string, string>.Empty.Add(
-                InsertionTextOnLessThan,
-                symbol.Name.EscapeIdentifier()
-            );
+            ImmutableDictionary<string, string>
+                .Empty
+                .Add(InsertionTextOnLessThan, symbol.Name.EscapeIdentifier());
 
         public override async Task<TextChange?> GetTextChangeAsync(
             Document document,
@@ -135,10 +136,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (ch == '<')
             {
                 if (
-                    selectedItem.Properties.TryGetValue(
-                        InsertionTextOnLessThan,
-                        out var insertionText
-                    )
+                    selectedItem
+                        .Properties
+                        .TryGetValue(InsertionTextOnLessThan, out var insertionText)
                 )
                 {
                     return new TextChange(selectedItem.Span, insertionText);

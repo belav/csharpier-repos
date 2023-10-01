@@ -96,7 +96,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
             return new LinkedEditingRanges
             {
-                Ranges = result.Ranges
+                Ranges = result
+                    .Ranges
                     .Select(s => ProtocolConversions.TextSpanToRange(s, text))
                     .ToArray(),
                 WordPattern = result.WordPattern

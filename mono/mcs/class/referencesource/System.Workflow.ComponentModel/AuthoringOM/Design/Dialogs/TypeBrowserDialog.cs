@@ -249,9 +249,15 @@ namespace System.Workflow.ComponentModel.Design
             // artifactListView
             //
             this.artifactListView.AllowColumnReorder = true;
-            this.artifactListView.Columns.AddRange(
-                new System.Windows.Forms.ColumnHeader[] { this.typeName, this.fullyQualifiedName }
-            );
+            this.artifactListView
+                .Columns
+                .AddRange(
+                    new System.Windows.Forms.ColumnHeader[]
+                    {
+                        this.typeName,
+                        this.fullyQualifiedName
+                    }
+                );
             resources.ApplyResources(this.artifactListView, "artifactListView");
             this.artifactListView.Name = "artifactListView";
             this.artifactListView.UseCompatibleStateImageBehavior = false;
@@ -434,20 +440,14 @@ namespace System.Workflow.ComponentModel.Design
                 // add current project node
                 TreeNode currentProjectNode = null;
                 if (this.localTypeProvider == null)
-                    currentProjectNode = this.artifactTreeView.Nodes.Add(
-                        SR.CurrentProject,
-                        SR.GetString(SR.CurrentProject),
-                        2,
-                        2
-                    );
+                    currentProjectNode = this.artifactTreeView
+                        .Nodes
+                        .Add(SR.CurrentProject, SR.GetString(SR.CurrentProject), 2, 2);
 
                 // add references node
-                TreeNode assembliesNode = this.artifactTreeView.Nodes.Add(
-                    SR.ReferencedAssemblies,
-                    SR.GetString(SR.ReferencedAssemblies),
-                    2,
-                    2
-                );
+                TreeNode assembliesNode = this.artifactTreeView
+                    .Nodes
+                    .Add(SR.ReferencedAssemblies, SR.GetString(SR.ReferencedAssemblies), 2, 2);
 
                 ITypeProvider typeProvider = this.TypeProvider;
 
@@ -585,20 +585,24 @@ namespace System.Workflow.ComponentModel.Design
                 this.ClientRectangle.Width,
                 1
             );
-            paintArgs.Graphics.DrawLine(
-                SystemPens.ControlDark,
-                lineRectangle.Left,
-                lineRectangle.Bottom,
-                lineRectangle.Right,
-                lineRectangle.Bottom
-            );
-            paintArgs.Graphics.DrawLine(
-                SystemPens.ControlLightLight,
-                lineRectangle.Left,
-                lineRectangle.Bottom + 1,
-                lineRectangle.Right,
-                lineRectangle.Bottom + 1
-            );
+            paintArgs
+                .Graphics
+                .DrawLine(
+                    SystemPens.ControlDark,
+                    lineRectangle.Left,
+                    lineRectangle.Bottom,
+                    lineRectangle.Right,
+                    lineRectangle.Bottom
+                );
+            paintArgs
+                .Graphics
+                .DrawLine(
+                    SystemPens.ControlLightLight,
+                    lineRectangle.Left,
+                    lineRectangle.Bottom + 1,
+                    lineRectangle.Right,
+                    lineRectangle.Bottom + 1
+                );
 
             ///Draw the bottom devider line
             lineRectangle = new Rectangle(
@@ -614,50 +618,62 @@ namespace System.Workflow.ComponentModel.Design
                 this.ClientRectangle.Width,
                 1
             );
-            paintArgs.Graphics.DrawLine(
-                SystemPens.ControlDark,
-                lineRectangle.Left,
-                lineRectangle.Bottom,
-                lineRectangle.Right,
-                lineRectangle.Bottom
-            );
-            paintArgs.Graphics.DrawLine(
-                SystemPens.ControlLightLight,
-                lineRectangle.Left,
-                lineRectangle.Bottom + 1,
-                lineRectangle.Right,
-                lineRectangle.Bottom + 1
-            );
+            paintArgs
+                .Graphics
+                .DrawLine(
+                    SystemPens.ControlDark,
+                    lineRectangle.Left,
+                    lineRectangle.Bottom,
+                    lineRectangle.Right,
+                    lineRectangle.Bottom
+                );
+            paintArgs
+                .Graphics
+                .DrawLine(
+                    SystemPens.ControlLightLight,
+                    lineRectangle.Left,
+                    lineRectangle.Bottom + 1,
+                    lineRectangle.Right,
+                    lineRectangle.Bottom + 1
+                );
 
             //Draw help text border
-            paintArgs.Graphics.DrawLine(
-                SystemPens.WindowFrame,
-                this.helpTextHolder.Left - 1,
-                this.helpTextHolder.Top - 1,
-                this.helpTextHolder.Left - 1,
-                this.helpTextHolder.Bottom
-            );
-            paintArgs.Graphics.DrawLine(
-                SystemPens.WindowFrame,
-                this.helpTextHolder.Left - 1,
-                this.helpTextHolder.Bottom,
-                this.helpTextHolder.Right,
-                this.helpTextHolder.Bottom
-            );
-            paintArgs.Graphics.DrawLine(
-                SystemPens.WindowFrame,
-                this.helpTextHolder.Right,
-                this.helpTextHolder.Bottom,
-                this.helpTextHolder.Right,
-                this.helpTextHolder.Top - 1
-            );
-            paintArgs.Graphics.DrawLine(
-                SystemPens.WindowFrame,
-                this.helpTextHolder.Right,
-                this.helpTextHolder.Top - 1,
-                this.helpTextHolder.Left - 1,
-                this.helpTextHolder.Top - 1
-            );
+            paintArgs
+                .Graphics
+                .DrawLine(
+                    SystemPens.WindowFrame,
+                    this.helpTextHolder.Left - 1,
+                    this.helpTextHolder.Top - 1,
+                    this.helpTextHolder.Left - 1,
+                    this.helpTextHolder.Bottom
+                );
+            paintArgs
+                .Graphics
+                .DrawLine(
+                    SystemPens.WindowFrame,
+                    this.helpTextHolder.Left - 1,
+                    this.helpTextHolder.Bottom,
+                    this.helpTextHolder.Right,
+                    this.helpTextHolder.Bottom
+                );
+            paintArgs
+                .Graphics
+                .DrawLine(
+                    SystemPens.WindowFrame,
+                    this.helpTextHolder.Right,
+                    this.helpTextHolder.Bottom,
+                    this.helpTextHolder.Right,
+                    this.helpTextHolder.Top - 1
+                );
+            paintArgs
+                .Graphics
+                .DrawLine(
+                    SystemPens.WindowFrame,
+                    this.helpTextHolder.Right,
+                    this.helpTextHolder.Top - 1,
+                    this.helpTextHolder.Left - 1,
+                    this.helpTextHolder.Top - 1
+                );
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -970,9 +986,9 @@ namespace System.Workflow.ComponentModel.Design
             //Create imagelist for tree and list
             this.artifactImages = new ImageList();
             this.artifactImages.TransparentColor = Color.FromArgb(0, 255, 0);
-            this.artifactImages.Images.AddStrip(
-                (Image)TypeBrowserDialog.ResMgr.GetObject("IDB_ARTIFACTIMAGES")
-            );
+            this.artifactImages
+                .Images
+                .AddStrip((Image)TypeBrowserDialog.ResMgr.GetObject("IDB_ARTIFACTIMAGES"));
 
             //DO NOT CHANGE THE CREATION SEQUENCE OF FOLLOWING CONTROLS
 
@@ -1618,10 +1634,12 @@ namespace System.Workflow.ComponentModel.Design
                 if (
                     (type.IsByRef)
                     || (
-                        !System.Workflow.ComponentModel.Compiler.TypeProvider.IsAssignable(
-                            this.parameterType.BaseType,
-                            type
-                        )
+                        !System
+                            .Workflow
+                            .ComponentModel
+                            .Compiler
+                            .TypeProvider
+                            .IsAssignable(this.parameterType.BaseType, type)
                     )
                 )
                     validType = false;

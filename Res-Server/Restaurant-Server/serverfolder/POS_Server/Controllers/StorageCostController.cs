@@ -57,7 +57,8 @@ namespace POS_Server.Controllers
                             if (List[i].isActive == 1)
                             {
                                 long storageCostId = (long)List[i].storageCostId;
-                                var itemsI = entity.itemsUnits
+                                var itemsI = entity
+                                    .itemsUnits
                                     .Where(x => x.storageCostId == storageCostId)
                                     .Select(b => new { b.itemUnitId })
                                     .FirstOrDefault();
@@ -157,7 +158,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var row = entity.storageCost
+                    var row = entity
+                        .storageCost
                         .Where(u => u.storageCostId == storageCostId)
                         .Select(
                             S =>
@@ -239,7 +241,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpObject = entity.storageCost
+                            var tmpObject = entity
+                                .storageCost
                                 .Where(p => p.storageCostId == newObject.storageCostId)
                                 .FirstOrDefault();
 
@@ -303,7 +306,8 @@ namespace POS_Server.Controllers
                     DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var sotrageCostUnits = entity.itemsUnits
+                        var sotrageCostUnits = entity
+                            .itemsUnits
                             .Where(x => x.storageCostId == storageCostId)
                             .ToList();
                         foreach (itemsUnits iu in sotrageCostUnits)
@@ -313,7 +317,8 @@ namespace POS_Server.Controllers
                             iu.updateUserId = userId;
                         }
                         entity.SaveChanges();
-                        var itemsUnitsList = entity.itemsUnits
+                        var itemsUnitsList = entity
+                            .itemsUnits
                             .Where(x => itemsUnitsIds.Contains(x.itemUnitId))
                             .ToList();
                         itemsUnitsList.ForEach(x => x.storageCostId = storageCostId);

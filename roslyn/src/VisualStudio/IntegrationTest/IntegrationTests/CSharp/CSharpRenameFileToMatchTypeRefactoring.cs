@@ -31,10 +31,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             SetUpEditor(@"class $$MismatchedClassName { }");
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Rename file to MismatchedClassName.cs",
-                applyFix: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Rename file to MismatchedClassName.cs", applyFix: true);
 
             // Ensure the file is still open in the editor, and that the file name change was made & saved
             VisualStudio.Editor.Verify.TextContains("class MismatchedClassName { }");
@@ -54,19 +54,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             SetUpEditor(@"class $$MismatchedClassName { }");
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Rename file to MismatchedClassName.cs",
-                applyFix: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Rename file to MismatchedClassName.cs", applyFix: true);
 
             // Ensure the file is still open in the editor, and that the file name change was made & saved
             VisualStudio.Editor.Verify.TextContains("class MismatchedClassName { }");
             AssertEx.EqualOrDiff(
                 @"class MismatchedClassName { }",
-                VisualStudio.SolutionExplorer.GetFileContents(
-                    project,
-                    @"folder1\folder2\MismatchedClassName.cs"
-                )
+                VisualStudio
+                    .SolutionExplorer
+                    .GetFileContents(project, @"folder1\folder2\MismatchedClassName.cs")
             );
         }
 
@@ -79,10 +78,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             VisualStudio.Editor.SendKeys("public ");
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Rename file to MismatchedClassName.cs",
-                applyFix: true
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction("Rename file to MismatchedClassName.cs", applyFix: true);
 
             // Ensure the file is still open in the editor, and that the file name change was made & saved
             VisualStudio.Editor.Verify.CurrentLineText("public class MismatchedClassName { }");

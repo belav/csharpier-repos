@@ -52,22 +52,25 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
             }
 
-            applicationLifetime.ApplicationStarted.Register(() =>
-            {
-                string ipAddress = app.ServerFeatures
-                    .Get<IServerAddressesFeature>()
-                    ?.Addresses?.Where(
-                        a => a.StartsWith("http:", StringComparison.InvariantCultureIgnoreCase)
-                    )
-                    .Select(a => new Uri(a))
-                    .Select(uri => uri.ToString())
-                    .FirstOrDefault();
+            applicationLifetime
+                .ApplicationStarted
+                .Register(() =>
+                {
+                    string ipAddress = app.ServerFeatures
+                        .Get<IServerAddressesFeature>()
+                        ?.Addresses
+                        ?.Where(
+                            a => a.StartsWith("http:", StringComparison.InvariantCultureIgnoreCase)
+                        )
+                        .Select(a => new Uri(a))
+                        .Select(uri => uri.ToString())
+                        .FirstOrDefault();
 
-                if (!options.RunningForBlazor)
-                    Console.WriteLine(
-                        $"Debug proxy for chrome now listening on {ipAddress}. And expecting chrome at {options.DevToolsUrl}"
-                    );
-            });
+                    if (!options.RunningForBlazor)
+                        Console.WriteLine(
+                            $"Debug proxy for chrome now listening on {ipAddress}. And expecting chrome at {options.DevToolsUrl}"
+                        );
+                });
 
             app.UseDeveloperExceptionPage().UseWebSockets().UseDebugProxy(logger, options);
         }
@@ -153,8 +156,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                         HttpResponseMessage response = await s_httpClient.GetAsync(
                             GetEndpoint(context)
                         );
-                        context.Response.ContentType =
-                            response.Content.Headers.ContentType.ToString();
+                        context.Response.ContentType = response
+                            .Content
+                            .Headers
+                            .ContentType
+                            .ToString();
                         if ((response.Content.Headers.ContentLength ?? 0) > 0)
                             context.Response.ContentLength = response.Content.Headers.ContentLength;
                         byte[] bytes = await response.Content.ReadAsByteArrayAsync();
@@ -175,9 +181,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                             Dictionary<string, string>
                         >(GetEndpoint(context));
                         context.Response.ContentType = "application/json";
-                        await context.Response.WriteAsync(
-                            JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
-                        );
+                        await context
+                            .Response
+                            .WriteAsync(
+                                JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
+                            );
                     }
                     catch (HostConnectionException hce)
                     {
@@ -221,10 +229,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var endpoint = new Uri($"ws://{devToolsHost.Authority}{context.Request.Path}");
                     int runtimeId = 0;
                     if (
-                        context.Request.Query.TryGetValue(
-                            "RuntimeId",
-                            out StringValues runtimeIdValue
-                        ) && int.TryParse(runtimeIdValue.FirstOrDefault(), out int parsedId)
+                        context
+                            .Request
+                            .Query
+                            .TryGetValue("RuntimeId", out StringValues runtimeIdValue)
+                        && int.TryParse(runtimeIdValue.FirstOrDefault(), out int parsedId)
                     )
                     {
                         runtimeId = parsedId;
@@ -234,10 +243,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                     try
                     {
                         var loggerFactory = context.RequestServices.GetService<ILoggerFactory>();
-                        context.Request.Query.TryGetValue(
-                            "urlSymbolServer",
-                            out StringValues urlSymbolServerList
-                        );
+                        context
+                            .Request
+                            .Query
+                            .TryGetValue("urlSymbolServer", out StringValues urlSymbolServerList);
                         var proxy = new DebuggerProxy(
                             loggerFactory,
                             urlSymbolServerList.ToList(),
@@ -245,8 +254,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                             options: options
                         );
 
-                        System.Net.WebSockets.WebSocket ideSocket =
-                            await context.WebSockets.AcceptWebSocketAsync();
+                        System.Net.WebSockets.WebSocket ideSocket = await context
+                            .WebSockets
+                            .AcceptWebSocketAsync();
 
                         logger.LogInformation(
                             "Connection accepted from IDE. Starting debug proxy..."

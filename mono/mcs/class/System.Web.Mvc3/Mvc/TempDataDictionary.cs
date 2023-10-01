@@ -73,7 +73,8 @@
             string[] keysToKeep = _initialKeys
                 .Union(_retainedKeys, StringComparer.OrdinalIgnoreCase)
                 .ToArray();
-            string[] keysToRemove = _data.Keys
+            string[] keysToRemove = _data
+                .Keys
                 .Except(keysToKeep, StringComparer.OrdinalIgnoreCase)
                 .ToArray();
             foreach (string key in keysToRemove)

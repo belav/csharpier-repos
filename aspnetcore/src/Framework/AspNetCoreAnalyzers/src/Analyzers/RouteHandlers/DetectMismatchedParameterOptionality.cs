@@ -37,7 +37,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                     || parameter.NullableAnnotation != NullableAnnotation.NotAnnotated;
                 if (!argumentIsOptional && routeParameter.IsOptional)
                 {
-                    var location = parameter.DeclaringSyntaxReferences
+                    var location = parameter
+                        .DeclaringSyntaxReferences
                         .FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation();

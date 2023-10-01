@@ -140,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            return frame.TypeMap
+            return frame
+                .TypeMap
                 .SubstituteType(
                     (
                         (object)local != null

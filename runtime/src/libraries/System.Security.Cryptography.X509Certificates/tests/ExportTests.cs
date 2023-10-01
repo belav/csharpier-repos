@@ -285,11 +285,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 using (ImportedCollection toClean = new ImportedCollection(cuMy.Certificates))
                 {
-                    X509Certificate2Collection matches = toClean.Collection.Find(
-                        X509FindType.FindBySubjectName,
-                        commonName,
-                        validOnly: false
-                    );
+                    X509Certificate2Collection matches = toClean
+                        .Collection
+                        .Find(X509FindType.FindBySubjectName, commonName, validOnly: false);
 
                     Assert.Equal(1, matches.Count);
                     foundCert = matches[0];
@@ -301,11 +299,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 using (ImportedCollection toClean = new ImportedCollection(cuMy.Certificates))
                 {
-                    X509Certificate2Collection matches = toClean.Collection.Find(
-                        X509FindType.FindBySubjectName,
-                        commonName,
-                        validOnly: false
-                    );
+                    X509Certificate2Collection matches = toClean
+                        .Collection
+                        .Find(X509FindType.FindBySubjectName, commonName, validOnly: false);
 
                     Assert.Equal(1, matches.Count);
                     foundCert2 = matches[0];

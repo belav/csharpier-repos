@@ -164,11 +164,13 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             }
 
             context.RegisterRefactoring(
-                CodeAction.CodeActionWithNestedActions.Create(
-                    FeaturesResources.Generate_comparison_operators,
-                    nestedActions.ToImmutable(),
-                    isInlinable: false
-                )
+                CodeAction
+                    .CodeActionWithNestedActions
+                    .Create(
+                        FeaturesResources.Generate_comparison_operators,
+                        nestedActions.ToImmutable(),
+                        isInlinable: false
+                    )
             );
         }
 

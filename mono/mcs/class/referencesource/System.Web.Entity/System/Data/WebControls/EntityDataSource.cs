@@ -277,11 +277,15 @@ namespace System.Web.UI.WebControls
 
                 if (!String.IsNullOrEmpty(value) && System.Web.Hosting.HostingEnvironment.IsHosted)
                 {
-                    _contextType = System.Web.Compilation.BuildManager.GetType(
-                        value, /*throwOnError*/
-                        false, /*ignoreCase*/
-                        true
-                    );
+                    _contextType = System
+                        .Web
+                        .Compilation
+                        .BuildManager
+                        .GetType(
+                            value, /*throwOnError*/
+                            false, /*ignoreCase*/
+                            true
+                        );
                 }
                 else
                 {

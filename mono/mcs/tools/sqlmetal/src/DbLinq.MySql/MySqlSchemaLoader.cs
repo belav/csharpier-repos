@@ -104,15 +104,17 @@ namespace DbLinq.MySql
             {
                 //find my table:
                 string fullKeyDbName = GetFullDbName(keyColRow.TableName, keyColRow.TableSchema);
-                DbLinq.Schema.Dbml.Table table = schema.Tables.FirstOrDefault(
-                    t => fullKeyDbName == t.Name
-                );
+                DbLinq.Schema.Dbml.Table table = schema
+                    .Tables
+                    .FirstOrDefault(t => fullKeyDbName == t.Name);
                 if (table == null)
                 {
                     bool ignoreCase = true;
-                    table = schema.Tables.FirstOrDefault(
-                        t => 0 == string.Compare(fullKeyDbName, t.Name, ignoreCase)
-                    );
+                    table = schema
+                        .Tables
+                        .FirstOrDefault(
+                            t => 0 == string.Compare(fullKeyDbName, t.Name, ignoreCase)
+                        );
                     if (table == null)
                     {
                         WriteErrorLine(

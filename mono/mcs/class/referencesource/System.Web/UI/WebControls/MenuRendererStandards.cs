@@ -70,31 +70,27 @@ namespace System.Web.UI.WebControls
 
                 if (Menu.Page.ScriptManager != null)
                 {
-                    Menu.Page.ScriptManager.RegisterClientScriptResource(
-                        Menu.Page,
-                        typeof(Menu),
-                        "MenuStandards.js"
-                    );
-                    Menu.Page.ScriptManager.RegisterStartupScript(
-                        Menu,
-                        typeof(MenuRendererStandards),
-                        key,
-                        initScript,
-                        false
-                    );
+                    Menu.Page
+                        .ScriptManager
+                        .RegisterClientScriptResource(Menu.Page, typeof(Menu), "MenuStandards.js");
+                    Menu.Page
+                        .ScriptManager
+                        .RegisterStartupScript(
+                            Menu,
+                            typeof(MenuRendererStandards),
+                            key,
+                            initScript,
+                            false
+                        );
                 }
                 else
                 {
-                    Menu.Page.ClientScript.RegisterClientScriptResource(
-                        Menu.Page,
-                        typeof(Menu),
-                        "MenuStandards.js"
-                    );
-                    Menu.Page.ClientScript.RegisterStartupScript(
-                        typeof(MenuRendererStandards),
-                        key,
-                        initScript
-                    );
+                    Menu.Page
+                        .ClientScript
+                        .RegisterClientScriptResource(Menu.Page, typeof(Menu), "MenuStandards.js");
+                    Menu.Page
+                        .ClientScript
+                        .RegisterStartupScript(typeof(MenuRendererStandards), key, initScript);
                 }
             }
 
@@ -478,11 +474,9 @@ namespace System.Web.UI.WebControls
 
             protected virtual string GetPostBackEventReference(MenuItem item)
             {
-                return Menu.Page.ClientScript.GetPostBackEventReference(
-                    Menu,
-                    item.InternalValuePath,
-                    true
-                );
+                return Menu.Page
+                    .ClientScript
+                    .GetPostBackEventReference(Menu, item.InternalValuePath, true);
             }
 
             private bool IsChildPastMaximumDepth(MenuItem item)

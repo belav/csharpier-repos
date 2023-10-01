@@ -48,12 +48,10 @@ namespace System.Diagnostics.Metrics
             DiagNode<ListenerSubscription>? current = _subscriptions.First;
             while (current is not null)
             {
-                current.Value.Listener.NotifyMeasurement(
-                    this,
-                    measurement,
-                    tags,
-                    current.Value.State
-                );
+                current
+                    .Value
+                    .Listener
+                    .NotifyMeasurement(this, measurement, tags, current.Value.State);
                 current = current.Next;
             }
         }

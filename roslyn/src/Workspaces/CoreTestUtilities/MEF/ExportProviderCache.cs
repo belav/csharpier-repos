@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         );
 
         private static readonly TestComposition s_defaultHostExportProviderComposition =
-            TestComposition.Empty
+            TestComposition
+                .Empty
                 .AddAssemblies(MefHostServices.DefaultAssemblies)
                 .AddParts(typeof(TestSerializerService.Factory));
 
@@ -130,9 +131,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IEnumerable<Type> types
         )
         {
-            var parts = catalog.Parts.Where(
-                composablePartDefinition => !IsExcludedPart(composablePartDefinition)
-            );
+            var parts = catalog
+                .Parts
+                .Where(composablePartDefinition => !IsExcludedPart(composablePartDefinition));
             return ComposableCatalog.Create(Resolver.DefaultInstance).AddParts(parts);
 
             bool IsExcludedPart(ComposablePartDefinition part)

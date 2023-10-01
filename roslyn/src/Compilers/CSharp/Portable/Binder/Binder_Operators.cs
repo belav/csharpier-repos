@@ -94,8 +94,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         right.Syntax,
                         left.HasDynamicType() ? left.Type : right.Type
                     ).MakeCompilerGenerated();
-                    var finalDynamicConversion =
-                        this.Compilation.Conversions.ClassifyConversionFromExpression(
+                    var finalDynamicConversion = this.Compilation
+                        .Conversions
+                        .ClassifyConversionFromExpression(
                             placeholder,
                             left.Type,
                             isChecked: CheckOverflowAtRuntime,
@@ -732,9 +733,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (
                     result.Kind == BoundKind.TypeExpression
-                    && !((ParenthesizedExpressionSyntax)current).Expression.IsKind(
-                        SyntaxKind.ParenthesizedExpression
-                    )
+                    && !((ParenthesizedExpressionSyntax)current)
+                        .Expression
+                        .IsKind(SyntaxKind.ParenthesizedExpression)
                 )
                 {
                     Error(diagnostics, ErrorCode.ERR_PossibleBadNegCast, node);
@@ -875,9 +876,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return new BoundBinaryOperator(
                     node,
                     BinaryOperatorKind.StringConcatenation,
-                    BoundBinaryOperator.UncommonData.UnconvertedInterpolatedStringAddition(
-                        stringConstant
-                    ),
+                    BoundBinaryOperator
+                        .UncommonData
+                        .UnconvertedInterpolatedStringAddition(stringConstant),
                     LookupResultKind.Empty,
                     left,
                     right,
@@ -1383,7 +1384,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 return type is NamedTypeSymbol namedType
                     && Compilation.IsReadOnlySpanType(namedType)
-                    && namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                    && namedType
+                        .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
                         .Single()
                         .Type
                         .SpecialType is SpecialType.System_Byte;
@@ -1832,9 +1834,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     t.IsInterface
                     && (signature.Method.IsAbstract || signature.Method.IsVirtual)
                     && SourceUserDefinedOperatorSymbol.IsSelfConstrainedTypeParameter(
-                        (
-                            definition = signature.Method.OriginalDefinition
-                        ).ReturnType.StrippedType(),
+                        (definition = signature.Method.OriginalDefinition)
+                            .ReturnType
+                            .StrippedType(),
                         definition.ContainingType
                     )
                 );
@@ -3387,11 +3389,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureNullableReferenceTypes.CheckFeatureAvailability(
-                diagnostics,
-                node,
-                node.OperatorToken.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureNullableReferenceTypes
+                .CheckFeatureAvailability(diagnostics, node, node.OperatorToken.GetLocation());
 
             var expr = BindExpression(node.Operand, diagnostics);
             switch (expr.Kind)
@@ -5758,11 +5758,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureCoalesceAssignmentExpression.CheckFeatureAvailability(
-                diagnostics,
-                node,
-                node.OperatorToken.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureCoalesceAssignmentExpression
+                .CheckFeatureAvailability(diagnostics, node, node.OperatorToken.GetLocation());
 
             BoundExpression leftOperand = BindValue(
                 node.Left,

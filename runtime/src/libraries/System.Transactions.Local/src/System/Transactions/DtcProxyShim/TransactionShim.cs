@@ -35,22 +35,18 @@ internal sealed class TransactionShim
     {
         var voterNotifyShim = new VoterNotifyShim(_shimFactory, managedIdentifier);
         var voterShim = new VoterBallotShim(voterNotifyShim);
-        _shimFactory.VoterFactory.Create(
-            Transaction,
-            voterNotifyShim,
-            out ITransactionVoterBallotAsync2 voterBallot
-        );
+        _shimFactory
+            .VoterFactory
+            .Create(Transaction, voterNotifyShim, out ITransactionVoterBallotAsync2 voterBallot);
         voterShim.VoterBallotAsync2 = voterBallot;
         voterBallotShim = voterShim;
     }
 
     public void Export(byte[] whereabouts, out byte[] cookieBuffer)
     {
-        _shimFactory.ExportFactory.Create(
-            (uint)whereabouts.Length,
-            whereabouts,
-            out ITransactionExport export
-        );
+        _shimFactory
+            .ExportFactory
+            .Create((uint)whereabouts.Length, whereabouts, out ITransactionExport export);
 
         uint cookieSizeULong = 0;
 

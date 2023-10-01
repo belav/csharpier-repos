@@ -137,10 +137,9 @@ namespace System.Net.WebSockets
                         {
                             foreach (string key in options.RequestHeaders)
                             {
-                                request.Headers.TryAddWithoutValidation(
-                                    key,
-                                    options.RequestHeaders[key]
-                                );
+                                request
+                                    .Headers
+                                    .TryAddWithoutValidation(key, options.RequestHeaders[key]);
                             }
                         }
 
@@ -198,10 +197,12 @@ namespace System.Net.WebSockets
                 // already got one in a previous header), fail. Otherwise, track which one we got.
                 string? subprotocol = null;
                 if (
-                    response.Headers.TryGetValues(
-                        HttpKnownHeaderNames.SecWebSocketProtocol,
-                        out IEnumerable<string>? subprotocolEnumerableValues
-                    )
+                    response
+                        .Headers
+                        .TryGetValues(
+                            HttpKnownHeaderNames.SecWebSocketProtocol,
+                            out IEnumerable<string>? subprotocolEnumerableValues
+                        )
                 )
                 {
                     Debug.Assert(subprotocolEnumerableValues is string[]);
@@ -244,10 +245,12 @@ namespace System.Net.WebSockets
 
                 if (
                     options.DangerousDeflateOptions is not null
-                    && response.Headers.TryGetValues(
-                        HttpKnownHeaderNames.SecWebSocketExtensions,
-                        out IEnumerable<string>? extensions
-                    )
+                    && response
+                        .Headers
+                        .TryGetValues(
+                            HttpKnownHeaderNames.SecWebSocketExtensions,
+                            out IEnumerable<string>? extensions
+                        )
                 )
                 {
                     foreach (ReadOnlySpan<char> extension in extensions)
@@ -521,15 +524,19 @@ namespace System.Net.WebSockets
                 KeyValuePair<string, string> secKeyAndSecWebSocketAccept =
                     CreateSecKeyAndSecWebSocketAccept();
                 secValue = secKeyAndSecWebSocketAccept.Value;
-                request.Headers.TryAddWithoutValidation(
-                    HttpKnownHeaderNames.Connection,
-                    HttpKnownHeaderNames.Upgrade
-                );
+                request
+                    .Headers
+                    .TryAddWithoutValidation(
+                        HttpKnownHeaderNames.Connection,
+                        HttpKnownHeaderNames.Upgrade
+                    );
                 request.Headers.TryAddWithoutValidation(HttpKnownHeaderNames.Upgrade, "websocket");
-                request.Headers.TryAddWithoutValidation(
-                    HttpKnownHeaderNames.SecWebSocketKey,
-                    secKeyAndSecWebSocketAccept.Key
-                );
+                request
+                    .Headers
+                    .TryAddWithoutValidation(
+                        HttpKnownHeaderNames.SecWebSocketKey,
+                        secKeyAndSecWebSocketAccept.Key
+                    );
             }
             else if (request.Version == HttpVersion.Version20)
             {
@@ -540,17 +547,21 @@ namespace System.Net.WebSockets
 
             if (options._requestedSubProtocols?.Count > 0)
             {
-                request.Headers.TryAddWithoutValidation(
-                    HttpKnownHeaderNames.SecWebSocketProtocol,
-                    string.Join(", ", options.RequestedSubProtocols)
-                );
+                request
+                    .Headers
+                    .TryAddWithoutValidation(
+                        HttpKnownHeaderNames.SecWebSocketProtocol,
+                        string.Join(", ", options.RequestedSubProtocols)
+                    );
             }
             if (options.DangerousDeflateOptions is not null)
             {
-                request.Headers.TryAddWithoutValidation(
-                    HttpKnownHeaderNames.SecWebSocketExtensions,
-                    GetDeflateOptions(options.DangerousDeflateOptions)
-                );
+                request
+                    .Headers
+                    .TryAddWithoutValidation(
+                        HttpKnownHeaderNames.SecWebSocketExtensions,
+                        GetDeflateOptions(options.DangerousDeflateOptions)
+                    );
 
                 static string GetDeflateOptions(WebSocketDeflateOptions options)
                 {

@@ -228,9 +228,11 @@ namespace System.Web
             {
                 if (_actual_bin_directory == null)
                 {
-                    string[] parts = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath.Split(
-                        ';'
-                    );
+                    string[] parts = AppDomain
+                        .CurrentDomain
+                        .SetupInformation
+                        .PrivateBinPath
+                        .Split(';');
                     string mypath = AppDomainAppPath;
                     string tmp;
 

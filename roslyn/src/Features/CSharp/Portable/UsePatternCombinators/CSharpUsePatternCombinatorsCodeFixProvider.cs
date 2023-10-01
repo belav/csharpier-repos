@@ -109,10 +109,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             foreach (var diagnostic in diagnostics)
             {
                 var location = diagnostic.Location;
-                var expression = editor.OriginalRoot.FindNode(
-                    location.SourceSpan,
-                    getInnermostNodeForTie: true
-                );
+                var expression = editor
+                    .OriginalRoot
+                    .FindNode(location.SourceSpan, getInnermostNodeForTie: true);
                 var operation = semanticModel.GetOperation(expression, cancellationToken);
                 RoslynDebug.AssertNotNull(operation);
                 var pattern = CSharpUsePatternCombinatorsAnalyzer.Analyze(operation);

@@ -42,7 +42,9 @@ class Test {
 
             var nugetCompletionProvider = new DebugAssertTestCompletionProvider();
             var reference = new MockAnalyzerReference(nugetCompletionProvider);
-            var project = workspace.CurrentSolution.Projects
+            var project = workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .AddAnalyzerReference(reference);
             var completionService = project.Services.GetRequiredService<CompletionService>();
@@ -62,7 +64,8 @@ class Test {
             Assert.Empty(completions.ItemsList);
 
             // NuGet analyzers for the project will be loaded when this returns
-            var waiter = workspace.ExportProvider
+            var waiter = workspace
+                .ExportProvider
                 .GetExportedValue<AsynchronousOperationListenerProvider>()
                 .GetWaiter(FeatureAttribute.CompletionSet);
             await waiter.ExpeditedWaitAsync();
@@ -77,9 +80,12 @@ class Test {
             Assert.NotEmpty(completions.ItemsList);
 
             var item = Assert.Single(
-                completions.ItemsList.Where(
-                    item => item.ProviderName == typeof(DebugAssertTestCompletionProvider).FullName
-                )
+                completions
+                    .ItemsList
+                    .Where(
+                        item =>
+                            item.ProviderName == typeof(DebugAssertTestCompletionProvider).FullName
+                    )
             );
             Assert.Equal(nameof(DebugAssertTestCompletionProvider), item.DisplayText);
 

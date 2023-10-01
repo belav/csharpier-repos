@@ -439,13 +439,9 @@ namespace Mono.ILASM
             ret_param.Define(code_gen);
 
             if (classdef == null)
-                methoddef = code_gen.PEFile.AddMethod(
-                    meth_attr,
-                    impl_attr,
-                    name,
-                    ret_param.PeapiParam,
-                    param_array
-                );
+                methoddef = code_gen
+                    .PEFile
+                    .AddMethod(meth_attr, impl_attr, name, ret_param.PeapiParam, param_array);
             else
                 methoddef = classdef.AddMethod(
                     meth_attr,

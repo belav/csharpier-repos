@@ -96,7 +96,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var bank = entity.residentialSectorsUsers
+                    var bank = entity
+                        .residentialSectorsUsers
                         .Where(S => S.id == id)
                         .Select(
                             S =>
@@ -185,7 +186,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.residentialSectorsUsers
+                            tmpObject = entity
+                                .residentialSectorsUsers
                                 .Where(p => p.id == newObject.id)
                                 .FirstOrDefault();
 
@@ -251,9 +253,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            residentialSectorsUsers objDelete = entity.residentialSectorsUsers.Find(
-                                id
-                            );
+                            residentialSectorsUsers objDelete = entity
+                                .residentialSectorsUsers
+                                .Find(id);
                             entity.residentialSectorsUsers.Remove(objDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -270,9 +272,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            residentialSectorsUsers objDelete = entity.residentialSectorsUsers.Find(
-                                id
-                            );
+                            residentialSectorsUsers objDelete = entity
+                                .residentialSectorsUsers
+                                .Find(id);
 
                             objDelete.updateUserId = userId;
                             objDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);

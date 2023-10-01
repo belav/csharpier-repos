@@ -293,9 +293,9 @@ namespace System.Data.Metadata.Edm
         private PrimitiveType CreatePrimitiveType(Type clrType, PrimitiveTypeKind primitiveTypeKind)
         {
             // Figures out the base type
-            PrimitiveType baseType = MetadataItem.EdmProviderManifest.GetPrimitiveType(
-                primitiveTypeKind
-            );
+            PrimitiveType baseType = MetadataItem
+                .EdmProviderManifest
+                .GetPrimitiveType(primitiveTypeKind);
             PrimitiveType primitiveType = new PrimitiveType(clrType, baseType, this);
             primitiveType.SetReadOnly();
             return primitiveType;

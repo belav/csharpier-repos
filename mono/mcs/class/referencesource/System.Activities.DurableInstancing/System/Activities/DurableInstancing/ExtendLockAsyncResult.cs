@@ -58,22 +58,26 @@ namespace System.Activities.DurableInstancing
             long surrogateOwnerId = base.StoreLock.SurrogateLockOwnerId;
             double lockTimeout = base.Store.BufferedHostLockRenewalPeriod.TotalSeconds;
 
-            sqlCommand.Parameters.Add(
-                new SqlParameter
-                {
-                    ParameterName = "@surrogateLockOwnerId",
-                    SqlDbType = SqlDbType.BigInt,
-                    Value = surrogateOwnerId
-                }
-            );
-            sqlCommand.Parameters.Add(
-                new SqlParameter
-                {
-                    ParameterName = "@lockTimeout",
-                    SqlDbType = SqlDbType.Int,
-                    Value = lockTimeout
-                }
-            );
+            sqlCommand
+                .Parameters
+                .Add(
+                    new SqlParameter
+                    {
+                        ParameterName = "@surrogateLockOwnerId",
+                        SqlDbType = SqlDbType.BigInt,
+                        Value = surrogateOwnerId
+                    }
+                );
+            sqlCommand
+                .Parameters
+                .Add(
+                    new SqlParameter
+                    {
+                        ParameterName = "@lockTimeout",
+                        SqlDbType = SqlDbType.Int,
+                        Value = lockTimeout
+                    }
+                );
         }
 
         protected override string GetSqlCommandText()

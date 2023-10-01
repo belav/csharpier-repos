@@ -94,16 +94,18 @@ namespace System.Security.Cryptography
                     ulVersion = 0,
                 };
 
-                ErrorCode errorCode = Interop.NCrypt.NCryptImportKey(
-                    providerHandle,
-                    IntPtr.Zero,
-                    Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
-                    ref desc,
-                    out keyHandle,
-                    ref MemoryMarshal.GetReference(keyBlob),
-                    keyBlob.Length,
-                    0
-                );
+                ErrorCode errorCode = Interop
+                    .NCrypt
+                    .NCryptImportKey(
+                        providerHandle,
+                        IntPtr.Zero,
+                        Interop.NCrypt.NCRYPT_PKCS8_PRIVATE_KEY_BLOB,
+                        ref desc,
+                        out keyHandle,
+                        ref MemoryMarshal.GetReference(keyBlob),
+                        keyBlob.Length,
+                        0
+                    );
 
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                 {
@@ -148,16 +150,18 @@ namespace System.Security.Cryptography
 
                 if (curveName == null)
                 {
-                    errorCode = Interop.NCrypt.NCryptImportKey(
-                        providerHandle,
-                        IntPtr.Zero,
-                        format.Format,
-                        IntPtr.Zero,
-                        out keyHandle,
-                        ref MemoryMarshal.GetReference(keyBlob),
-                        keyBlob.Length,
-                        0
-                    );
+                    errorCode = Interop
+                        .NCrypt
+                        .NCryptImportKey(
+                            providerHandle,
+                            IntPtr.Zero,
+                            format.Format,
+                            IntPtr.Zero,
+                            out keyHandle,
+                            ref MemoryMarshal.GetReference(keyBlob),
+                            keyBlob.Length,
+                            0
+                        );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {

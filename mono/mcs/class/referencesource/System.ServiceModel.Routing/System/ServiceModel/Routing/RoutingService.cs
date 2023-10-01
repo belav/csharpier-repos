@@ -76,9 +76,9 @@ namespace System.ServiceModel.Routing
             this.ChannelExtension = channel.Extensions.Find<RoutingChannelExtension>();
             if (this.ChannelExtension == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(SR2.RoutingExtensionNotFound)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new ConfigurationErrorsException(SR2.RoutingExtensionNotFound));
             }
 
             this.RoutingConfig = host.Extensions.Find<RoutingExtension>().RoutingConfiguration;
@@ -200,11 +200,9 @@ namespace System.ServiceModel.Routing
             }
             else
             {
-                return this.ChannelExtension.SessionChannels.GetOrCreateClient<TContract>(
-                    endpointTrait,
-                    this,
-                    impersonating
-                );
+                return this.ChannelExtension
+                    .SessionChannels
+                    .GetOrCreateClient<TContract>(endpointTrait, this, impersonating);
             }
         }
 

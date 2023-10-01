@@ -842,9 +842,9 @@ namespace DebuggerTests
 
                     // Check the object at the bp
                     var frame_locals = await GetProperties(
-                        pause_location["callFrames"][0]["scopeChain"][0]["object"][
-                            "objectId"
-                        ].Value<string>()
+                        pause_location["callFrames"]
+                            [0]["scopeChain"][0]["object"]["objectId"]
+                            .Value<string>()
                     );
                     var obj = GetAndAssertObjectWithName(frame_locals, "big");
                     var obj_id = obj["value"]["objectId"].Value<string>();
@@ -967,9 +967,9 @@ namespace DebuggerTests
                     var pause_location = await ctx.insp.WaitFor(Inspector.PAUSE);
 
                     var frame_locals = await GetProperties(
-                        pause_location["callFrames"][0]["scopeChain"][0]["object"][
-                            "objectId"
-                        ].Value<string>()
+                        pause_location["callFrames"]
+                            [0]["scopeChain"][0]["object"]["objectId"]
+                            .Value<string>()
                     );
                     var obj = GetAndAssertObjectWithName(frame_locals, "big");
                     var big_obj_id = obj["value"]["objectId"].Value<string>();
@@ -1389,9 +1389,9 @@ namespace DebuggerTests
                     var pause_location = await ctx.insp.WaitFor(Inspector.PAUSE);
 
                     var frame_locals = await GetProperties(
-                        pause_location["callFrames"][0]["scopeChain"][0]["object"][
-                            "objectId"
-                        ].Value<string>()
+                        pause_location["callFrames"]
+                            [0]["scopeChain"][0]["object"]["objectId"]
+                            .Value<string>()
                     );
                     var ptd = GetAndAssertObjectWithName(frame_locals, "ptd");
                     var ptd_id = ptd["value"]["objectId"].Value<string>();
@@ -1446,9 +1446,9 @@ namespace DebuggerTests
                     var pause_location = await ctx.insp.WaitFor(Inspector.PAUSE);
 
                     var frame_locals = await GetProperties(
-                        pause_location["callFrames"][0]["scopeChain"][0]["object"][
-                            "objectId"
-                        ].Value<string>()
+                        pause_location["callFrames"]
+                            [0]["scopeChain"][0]["object"]["objectId"]
+                            .Value<string>()
                     );
                     var ptd = GetAndAssertObjectWithName(frame_locals, "ptd");
                     var ptd_id = ptd["value"]["objectId"].Value<string>();
@@ -1574,9 +1574,9 @@ namespace DebuggerTests
 
                     // Check the object at the bp
                     var frame_locals = await GetProperties(
-                        pause_location["callFrames"][0]["scopeChain"][0]["object"][
-                            "objectId"
-                        ].Value<string>()
+                        pause_location["callFrames"]
+                            [0]["scopeChain"][0]["object"]["objectId"]
+                            .Value<string>()
                     );
                     var obj = GetAndAssertObjectWithName(frame_locals, local_name);
                     var obj_id = obj["value"]["objectId"].Value<string>();

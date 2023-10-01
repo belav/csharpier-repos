@@ -32,8 +32,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                 GetCSharpUseLocalFunctionCodeFixProvider()
             );
 
-        private static readonly ParseOptions CSharp72ParseOptions =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp7_2);
 
         [Fact]
         public async Task TestMissingBeforeCSharp7()
@@ -57,9 +58,9 @@ class C
     }
 }",
                 parameters: new TestParameters(
-                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
-                        LanguageVersion.CSharp6
-                    )
+                    parseOptions: CSharpParseOptions
+                        .Default
+                        .WithLanguageVersion(LanguageVersion.CSharp6)
                 )
             );
         }

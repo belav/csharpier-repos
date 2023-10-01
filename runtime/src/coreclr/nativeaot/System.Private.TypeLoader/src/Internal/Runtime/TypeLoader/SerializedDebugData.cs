@@ -303,12 +303,12 @@ namespace Internal.Runtime.TypeLoader
             NativePrimitiveEncoder encoder = new NativePrimitiveEncoder();
             encoder.Init();
 
-            IntPtr gcStaticFieldData = TypeLoaderEnvironment.Instance.TryGetGcStaticFieldData(
-                typeBuilder.GetRuntimeTypeHandle(defType)
-            );
-            IntPtr nonGcStaticFieldData = TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(
-                typeBuilder.GetRuntimeTypeHandle(defType)
-            );
+            IntPtr gcStaticFieldData = TypeLoaderEnvironment
+                .Instance
+                .TryGetGcStaticFieldData(typeBuilder.GetRuntimeTypeHandle(defType));
+            IntPtr nonGcStaticFieldData = TypeLoaderEnvironment
+                .Instance
+                .TryGetNonGcStaticFieldData(typeBuilder.GetRuntimeTypeHandle(defType));
 
             bool isUniversalGenericType =
                 state.TemplateType != null
@@ -495,9 +495,9 @@ namespace Internal.Runtime.TypeLoader
                 nativeFormatTypeFlags
             );
 
-            TypeManagerHandle moduleHandle = ModuleList.Instance.GetModuleForMetadataReader(
-                nativeFormatType.MetadataReader
-            );
+            TypeManagerHandle moduleHandle = ModuleList
+                .Instance
+                .GetModuleForMetadataReader(nativeFormatType.MetadataReader);
 
             encoder.WriteUnsignedLong(
                 unchecked((ulong)typeBuilder.GetRuntimeTypeHandle(defType).ToIntPtr().ToInt64())

@@ -69,15 +69,17 @@ namespace System
                 fixed (char* lParam = "Environment")
                 {
                     IntPtr unused;
-                    IntPtr r = Interop.User32.SendMessageTimeout(
-                        new IntPtr(Interop.User32.HWND_BROADCAST),
-                        Interop.User32.WM_SETTINGCHANGE,
-                        IntPtr.Zero,
-                        (IntPtr)lParam,
-                        0,
-                        1000,
-                        &unused
-                    );
+                    IntPtr r = Interop
+                        .User32
+                        .SendMessageTimeout(
+                            new IntPtr(Interop.User32.HWND_BROADCAST),
+                            Interop.User32.WM_SETTINGCHANGE,
+                            IntPtr.Zero,
+                            (IntPtr)lParam,
+                            0,
+                            1000,
+                            &unused
+                        );
 
                     // SendMessageTimeout message is a empty stub on Windows Nano Server that fails with both result and last error 0.
                     Debug.Assert(
@@ -170,11 +172,13 @@ namespace System
         {
             uint size = 0;
             while (
-                Interop.Secur32.GetUserNameExW(
-                    Interop.Secur32.NameSamCompatible,
-                    ref builder.GetPinnableReference(),
-                    ref size
-                ) == Interop.BOOLEAN.FALSE
+                Interop
+                    .Secur32
+                    .GetUserNameExW(
+                        Interop.Secur32.NameSamCompatible,
+                        ref builder.GetPinnableReference(),
+                        ref size
+                    ) == Interop.BOOLEAN.FALSE
             )
             {
                 if (Marshal.GetLastPInvokeError() == Interop.Errors.ERROR_MORE_DATA)
@@ -222,15 +226,17 @@ namespace System
                 uint sidLength = 68;
 
                 while (
-                    !Interop.Advapi32.LookupAccountNameW(
-                        null,
-                        ref builder.GetPinnableReference(),
-                        ref MemoryMarshal.GetReference(sid),
-                        ref sidLength,
-                        ref domainBuilder.GetPinnableReference(),
-                        ref length,
-                        out _
-                    )
+                    !Interop
+                        .Advapi32
+                        .LookupAccountNameW(
+                            null,
+                            ref builder.GetPinnableReference(),
+                            ref MemoryMarshal.GetReference(sid),
+                            ref sidLength,
+                            ref domainBuilder.GetPinnableReference(),
+                            ref length,
+                            out _
+                        )
                 )
                 {
                     int error = Marshal.GetLastPInvokeError();
@@ -416,12 +422,9 @@ namespace System
         {
             Guid folderId = new Guid(folderGuid);
 
-            int hr = Interop.Shell32.SHGetKnownFolderPath(
-                folderId,
-                (uint)option,
-                IntPtr.Zero,
-                out string path
-            );
+            int hr = Interop
+                .Shell32
+                .SHGetKnownFolderPath(folderId, (uint)option, IntPtr.Zero, out string path);
             if (hr != 0) // Not S_OK
             {
                 return string.Empty;

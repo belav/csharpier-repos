@@ -239,10 +239,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                 anonymousFunction.IsParentKind(SyntaxKind.EqualsValueClause)
                 && anonymousFunction.Parent.IsParentKind(SyntaxKind.VariableDeclarator)
                 && anonymousFunction.Parent.Parent.IsParentKind(SyntaxKind.VariableDeclaration)
-                && anonymousFunction.Parent.Parent.Parent.IsParentKind(
-                    SyntaxKind.LocalDeclarationStatement,
-                    out localDeclaration
-                )
+                && anonymousFunction
+                    .Parent
+                    .Parent
+                    .Parent
+                    .IsParentKind(SyntaxKind.LocalDeclarationStatement, out localDeclaration)
             )
             {
                 if (!localDeclaration.Declaration.Type.IsVar)

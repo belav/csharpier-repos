@@ -31,14 +31,14 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (string.IsNullOrEmpty(attributeName))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLAttributeNameAttributeRequired)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeNameAttributeRequired));
 
             if (string.IsNullOrEmpty(attributeNamespace))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired));
 
             if (attributeValues == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("attributeValues");
@@ -52,17 +52,17 @@ namespace System.IdentityModel.Tokens
             foreach (string value in attributeValues)
             {
                 if (value == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SAMLAttributeValueCannotBeNull)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeValueCannotBeNull));
 
                 this.attributeValues.Add(value);
             }
 
             if (this.attributeValues.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLAttributeShouldHaveOneValue)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeShouldHaveOneValue));
         }
 
         public SamlAttribute(Claim claim)
@@ -71,14 +71,18 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("claim");
 
             if (!(claim.Resource is String))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SamlAttributeClaimResourceShouldBeAString)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.SamlAttributeClaimResourceShouldBeAString)
+                    );
 
             if (claim.Right != Rights.PossessProperty)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SamlAttributeClaimRightShouldBePossessProperty)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.SamlAttributeClaimRightShouldBePossessProperty)
+                    );
 
 #pragma warning suppress 56506 // claim.CalimType can never be null.
             int lastSlashIndex = claim.ClaimType.LastIndexOf('/');
@@ -97,10 +101,12 @@ namespace System.IdentityModel.Tokens
                     claim.ClaimType.Substring(0, lastSlashIndex)
                 );
                 this.name = StringUtil.OptimizeString(
-                    claim.ClaimType.Substring(
-                        lastSlashIndex + 1,
-                        claim.ClaimType.Length - (lastSlashIndex + 1)
-                    )
+                    claim
+                        .ClaimType
+                        .Substring(
+                            lastSlashIndex + 1,
+                            claim.ClaimType.Length - (lastSlashIndex + 1)
+                        )
                 );
             }
             this.claimType = claim.ClaimType;
@@ -113,14 +119,16 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SAMLAttributeNameAttributeRequired)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeNameAttributeRequired));
 
                 this.name = StringUtil.OptimizeString(value);
             }
@@ -132,14 +140,18 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired)
+                        );
 
                 this.nameSpace = StringUtil.OptimizeString(value);
             }
@@ -160,10 +172,9 @@ namespace System.IdentityModel.Tokens
             {
                 if (value == String.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID4251)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID4251));
                 }
 
                 this.originalIssuer = StringUtil.OptimizeString(value);
@@ -180,37 +191,33 @@ namespace System.IdentityModel.Tokens
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID4254)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 int indexOfHash = value.IndexOf('#');
                 if (indexOfHash == -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID4254)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 string prefix = value.Substring(0, indexOfHash);
                 if (prefix.Length == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID4254)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 string suffix = value.Substring(indexOfHash + 1);
                 if (suffix.Length == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID4254)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID4254));
                 }
 
                 attributeValueXsiType = value;
@@ -241,9 +248,9 @@ namespace System.IdentityModel.Tokens
                 for (int i = 0; i < this.attributeValues.Count; i++)
                 {
                     if (this.attributeValues[i] == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(SR.SAMLAttributeValueCannotBeNull)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeValueCannotBeNull));
 
                     tempClaims.Add(
                         new Claim(this.claimType, this.attributeValues[i], Rights.PossessProperty)
@@ -258,21 +265,29 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (string.IsNullOrEmpty(this.name))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLAttributeNameAttributeRequired))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAttributeNameAttributeRequired)
+                        )
+                    );
 
             if (string.IsNullOrEmpty(this.nameSpace))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAttributeNamespaceAttributeRequired)
+                        )
+                    );
 
             if (this.attributeValues.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLAttributeShouldHaveOneValue))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SAMLAttributeShouldHaveOneValue))
+                    );
         }
 
         public virtual void ReadXml(
@@ -283,33 +298,37 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reader")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
 
             this.name = reader.GetAttribute(dictionary.AttributeName, null);
             if (string.IsNullOrEmpty(this.name))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAttributeMissingNameAttributeOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAttributeMissingNameAttributeOnRead)
+                        )
+                    );
 
             this.nameSpace = reader.GetAttribute(dictionary.AttributeNamespace, null);
             if (string.IsNullOrEmpty(this.nameSpace))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAttributeMissingNamespaceAttributeOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAttributeMissingNamespaceAttributeOnRead)
+                        )
+                    );
 
             this.claimType = string.IsNullOrEmpty(this.nameSpace)
                 ? this.name
@@ -328,9 +347,11 @@ namespace System.IdentityModel.Tokens
             }
 
             if (this.attributeValues.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLAttributeShouldHaveOneValue))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SAMLAttributeShouldHaveOneValue))
+                    );
 
             reader.MoveToContent();
             reader.ReadEndElement();
@@ -345,14 +366,14 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
@@ -373,9 +394,9 @@ namespace System.IdentityModel.Tokens
             for (int i = 0; i < this.attributeValues.Count; i++)
             {
                 if (this.attributeValues[i] == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SAMLAttributeValueCannotBeNull)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.SAMLAttributeValueCannotBeNull));
 
                 writer.WriteElementString(
                     dictionary.PreferredPrefix.Value,

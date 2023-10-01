@@ -372,7 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         WellKnownMember.System_Runtime_CompilerServices_ExtensionAttribute__ctor,
                         out var useSiteInfo
                     );
-                    Location thisLocation = syntax.ParameterList
+                    Location thisLocation = syntax
+                        .ParameterList
                         .Parameters[0]
                         .Modifiers
                         .FirstOrDefault(SyntaxKind.ThisKeyword)
@@ -679,11 +680,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(syntax.TypeParameterList != null);
 
-            MessageID.IDS_FeatureGenerics.CheckFeatureAvailability(
-                diagnostics,
-                syntax.TypeParameterList,
-                syntax.TypeParameterList.LessThanToken.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureGenerics
+                .CheckFeatureAvailability(
+                    diagnostics,
+                    syntax.TypeParameterList,
+                    syntax.TypeParameterList.LessThanToken.GetLocation()
+                );
 
             OverriddenMethodTypeParameterMapBase typeMap = null;
             if (this.IsOverride)
@@ -844,10 +847,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     implementation.TypeParameters
                 )
             );
-            bool hasTypeDifferences = !constructedDefinition.ReturnTypeWithAnnotations.Equals(
-                implementation.ReturnTypeWithAnnotations,
-                TypeCompareKind.AllIgnoreOptions
-            );
+            bool hasTypeDifferences = !constructedDefinition
+                .ReturnTypeWithAnnotations
+                .Equals(implementation.ReturnTypeWithAnnotations, TypeCompareKind.AllIgnoreOptions);
             if (hasTypeDifferences)
             {
                 diagnostics.Add(
@@ -1022,10 +1024,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (
                 (
                     !hasTypeDifferences
-                    && !MemberSignatureComparer.PartialMethodsStrictComparer.Equals(
-                        definition,
-                        implementation
-                    )
+                    && !MemberSignatureComparer
+                        .PartialMethodsStrictComparer
+                        .Equals(definition, implementation)
                 ) || hasDifferencesInParameterOrTypeParameterName(definition, implementation)
             )
             {
@@ -1045,14 +1046,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceOrdinaryMethodSymbol implementation
             )
             {
-                return !definition.Parameters.SequenceEqual(
-                        implementation.Parameters,
-                        (a, b) => a.Name == b.Name
-                    )
-                    || !definition.TypeParameters.SequenceEqual(
-                        implementation.TypeParameters,
-                        (a, b) => a.Name == b.Name
-                    );
+                return !definition
+                        .Parameters
+                        .SequenceEqual(implementation.Parameters, (a, b) => a.Name == b.Name)
+                    || !definition
+                        .TypeParameters
+                        .SequenceEqual(implementation.TypeParameters, (a, b) => a.Name == b.Name);
             }
         }
 

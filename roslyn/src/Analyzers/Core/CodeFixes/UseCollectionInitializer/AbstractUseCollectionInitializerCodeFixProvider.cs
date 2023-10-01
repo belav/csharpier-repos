@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             ImmutableArray.Create(IDEDiagnosticIds.UseCollectionInitializerDiagnosticId);
 
         protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
-            !diagnostic.Descriptor
+            !diagnostic
+                .Descriptor
                 .ImmutableCustomTags()
                 .Contains(WellKnownDiagnosticTags.Unnecessary);
 

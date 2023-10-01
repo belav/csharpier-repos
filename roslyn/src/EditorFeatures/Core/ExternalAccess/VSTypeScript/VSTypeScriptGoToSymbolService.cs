@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             if (context.DefinitionItem == null)
                 return default;
 
-            var navigableLocation = await context.DefinitionItem
+            var navigableLocation = await context
+                .DefinitionItem
                 .GetNavigableLocationAsync(document.Project.Solution.Workspace, cancellationToken)
                 .ConfigureAwait(false);
 

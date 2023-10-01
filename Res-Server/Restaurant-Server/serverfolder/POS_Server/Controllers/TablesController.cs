@@ -56,7 +56,8 @@ namespace POS_Server.Controllers
                         searchPredicate.And(x => x.branchId == branchId);
                     if (sectionId != 0)
                         searchPredicate.And(x => x.sectionId == sectionId);
-                    var tablesList = entity.tables
+                    var tablesList = entity
+                        .tables
                         .Where(searchPredicate)
                         .Select(
                             S =>
@@ -89,10 +90,12 @@ namespace POS_Server.Controllers
                             if (item.isActive == 1)
                             {
                                 long cId = (long)item.tableId;
-                                var invTable = entity.invoiceTables
+                                var invTable = entity
+                                    .invoiceTables
                                     .Where(x => x.tableId == cId)
                                     .FirstOrDefault();
-                                var reservTable = entity.tablesReservations
+                                var reservTable = entity
+                                    .tablesReservations
                                     .Where(x => x.tableId == cId)
                                     .FirstOrDefault();
 
@@ -172,7 +175,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     #region get time staying
-                    var timeStayingSet = entity.setValues
+                    var timeStayingSet = entity
+                        .setValues
                         .Where(x => x.setting.name == "time_staying")
                         .Select(x => x.value)
                         .SingleOrDefault();
@@ -186,9 +190,9 @@ namespace POS_Server.Controllers
                     #endregion
 
                     var tablesList = (
-                        from t in entity.tables.Where(
-                            x => x.isActive == 1 && x.branchId == branchId
-                        )
+                        from t in entity
+                            .tables
+                            .Where(x => x.isActive == 1 && x.branchId == branchId)
                         select new TableModel()
                         {
                             tableId = t.tableId,
@@ -279,7 +283,8 @@ namespace POS_Server.Controllers
                             }
 
                             // check if table is open
-                            var invoice = entity.invoices
+                            var invoice = entity
+                                .invoices
                                 .Where(
                                     x =>
                                         x.reservationId == reserv.reservationId
@@ -390,7 +395,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     #region get time staying
-                    var timeStayingSet = entity.setValues
+                    var timeStayingSet = entity
+                        .setValues
                         .Where(x => x.setting.name == "time_staying")
                         .Select(x => x.value)
                         .SingleOrDefault();
@@ -404,9 +410,9 @@ namespace POS_Server.Controllers
                     #endregion
 
                     var tablesList = (
-                        from t in entity.tables.Where(
-                            x => x.isActive == 1 && x.branchId == branchId
-                        )
+                        from t in entity
+                            .tables
+                            .Where(x => x.isActive == 1 && x.branchId == branchId)
                         select new TableModel()
                         {
                             tableId = t.tableId,
@@ -468,7 +474,8 @@ namespace POS_Server.Controllers
                             }
 
                             // check if table is open
-                            var invoice = entity.invoices
+                            var invoice = entity
+                                .invoices
                                 .Where(
                                     x =>
                                         x.reservationId == reserv.reservationId
@@ -547,7 +554,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     #region get time staying
-                    var timeStayingSet = entity.setValues
+                    var timeStayingSet = entity
+                        .setValues
                         .Where(x => x.setting.name == "time_staying")
                         .Select(x => x.value)
                         .SingleOrDefault();
@@ -623,7 +631,8 @@ namespace POS_Server.Controllers
                             }
 
                             // check if table is open
-                            var invoice = entity.invoices
+                            var invoice = entity
+                                .invoices
                                 .Where(
                                     x =>
                                         x.reservationId == reserv.reservationId
@@ -766,7 +775,8 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     #region get time staying
-                    var timeStayingSet = entity.setValues
+                    var timeStayingSet = entity
+                        .setValues
                         .Where(x => x.setting.name == "time_staying")
                         .Select(x => x.value)
                         .SingleOrDefault();
@@ -929,15 +939,17 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var reservations = (
-                        from rs in entity.reservations.Where(
-                            x => x.branchId == branchId && !reservationClose.Contains(x.status)
-                        )
+                        from rs in entity
+                            .reservations
+                            .Where(
+                                x => x.branchId == branchId && !reservationClose.Contains(x.status)
+                            )
                         join cu in entity.agents on rs.customerId equals cu.agentId into cuj
                         from c in cuj.DefaultIfEmpty()
                         where
-                            !entity.invoices.Any(
-                                m => m.isActive == true && m.reservationId == rs.reservationId
-                            )
+                            !entity
+                                .invoices
+                                .Any(m => m.isActive == true && m.reservationId == rs.reservationId)
                         select new ReservationModel()
                         {
                             reservationId = rs.reservationId,
@@ -972,7 +984,8 @@ namespace POS_Server.Controllers
                         }
                     ).ToList().OrderBy(x => x.reservationDate).ThenBy(x => x.reservationTime);
                     DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
-                    var warningTimeForLate = entity.setValues
+                    var warningTimeForLate = entity
+                        .setValues
                         .Where(x => x.setting.name == "warningTimeForLateReservation")
                         .Select(x => x.value)
                         .FirstOrDefault();
@@ -1042,9 +1055,9 @@ namespace POS_Server.Controllers
                             tax = rs.tax,
                             membershipId = rs.membershipId,
                             tables = (
-                                from it in entity.invoiceTables.Where(
-                                    x => x.invoiceId == rs.invoiceId && x.isActive == 1
-                                )
+                                from it in entity
+                                    .invoiceTables
+                                    .Where(x => x.invoiceId == rs.invoiceId && x.isActive == 1)
                                 join ts in entity.tables on it.tableId equals ts.tableId
                                 select new TableModel()
                                 {
@@ -1140,7 +1153,8 @@ namespace POS_Server.Controllers
                         searchPredicate.And(x => x.branchId == branchId);
                     if (sectionId != 0)
                         searchPredicate.And(x => x.sectionId == sectionId);
-                    var tablesList = entity.tables
+                    var tablesList = entity
+                        .tables
                         .Where(x => x.isActive == 1)
                         .Select(
                             S =>
@@ -1366,7 +1380,8 @@ namespace POS_Server.Controllers
                         entity.SaveChanges();
                         long reservationId = Object.reservationId;
                         #region delete tables in old reservation
-                        var reservationTables = entity.tablesReservations
+                        var reservationTables = entity
+                            .tablesReservations
                             .Where(x => x.reservationId == reservationId)
                             .ToList();
                         entity.tablesReservations.RemoveRange(reservationTables);
@@ -1576,7 +1591,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var oldList = entity.tables
+                    var oldList = entity
+                        .tables
                         .Where(x => x.sectionId == sectionId)
                         .Select(x => new { x.tableId })
                         .ToList();
@@ -1681,7 +1697,8 @@ namespace POS_Server.Controllers
                 int lastNum = 0;
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    numberList = entity.reservations
+                    numberList = entity
+                        .reservations
                         .Where(b => b.code.Contains(reservCode + "-") && b.branchId == branchId)
                         .Select(b => b.code)
                         .ToList();

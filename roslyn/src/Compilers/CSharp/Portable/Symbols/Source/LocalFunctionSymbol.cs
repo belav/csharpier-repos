@@ -49,10 +49,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             _declarationModifiers =
                 DeclarationModifiers.Private
-                | syntax.Modifiers.ToDeclarationModifiers(
-                    isForTypeDeclaration: false,
-                    diagnostics: _declarationDiagnostics.DiagnosticBag
-                );
+                | syntax
+                    .Modifiers
+                    .ToDeclarationModifiers(
+                        isForTypeDeclaration: false,
+                        diagnostics: _declarationDiagnostics.DiagnosticBag
+                    );
 
             this.CheckUnsafeModifier(_declarationModifiers, _declarationDiagnostics);
 
@@ -441,8 +443,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            var diagnosticInfo =
-                MessageID.IDS_FeatureLocalFunctionAttributes.GetFeatureAvailabilityDiagnosticInfo(
+            var diagnosticInfo = MessageID
+                .IDS_FeatureLocalFunctionAttributes
+                .GetFeatureAvailabilityDiagnosticInfo(
                     (CSharpParseOptions)syntaxReferenceOpt.SyntaxTree.Options
                 );
             if (diagnosticInfo is object)

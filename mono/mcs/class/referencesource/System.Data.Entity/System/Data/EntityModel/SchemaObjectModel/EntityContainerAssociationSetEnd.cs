@@ -149,13 +149,17 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.FailedInference,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InferRelationshipEndFailedNoEntitySetMatch(
-                        set.Name,
-                        this.ParentElement.Name,
-                        ParentElement.Relationship.FQName,
-                        set.EntityType.FQName,
-                        this.ParentElement.ParentElement.FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InferRelationshipEndFailedNoEntitySetMatch(
+                            set.Name,
+                            this.ParentElement.Name,
+                            ParentElement.Relationship.FQName,
+                            set.EntityType.FQName,
+                            this.ParentElement.ParentElement.FQName
+                        )
                 );
             }
             else
@@ -164,13 +168,17 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.FailedInference,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InferRelationshipEndAmbiguous(
-                        set.Name,
-                        this.ParentElement.Name,
-                        ParentElement.Relationship.FQName,
-                        set.EntityType.FQName,
-                        this.ParentElement.ParentElement.FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InferRelationshipEndAmbiguous(
+                            set.Name,
+                            this.ParentElement.Name,
+                            ParentElement.Relationship.FQName,
+                            set.EntityType.FQName,
+                            this.ParentElement.ParentElement.FQName
+                        )
                 );
             }
 

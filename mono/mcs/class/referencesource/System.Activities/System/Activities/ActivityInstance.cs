@@ -610,21 +610,21 @@ namespace System.Activities
 
                 if (!currentInstance.HasNotExecuted)
                 {
-                    currentInstance.Activity.InternalAbort(
-                        currentInstance,
-                        executor,
-                        terminationReason
-                    );
+                    currentInstance
+                        .Activity
+                        .InternalAbort(currentInstance, executor, terminationReason);
                     executor.DebugActivityCompleted(currentInstance);
                 }
 
                 if (currentInstance.PropertyManager != null)
                 {
-                    currentInstance.PropertyManager.UnregisterProperties(
-                        currentInstance,
-                        currentInstance.Activity.MemberOf,
-                        true
-                    );
+                    currentInstance
+                        .PropertyManager
+                        .UnregisterProperties(
+                            currentInstance,
+                            currentInstance.Activity.MemberOf,
+                            true
+                        );
                 }
 
                 executor.TerminateSpecialExecutionBlocks(currentInstance, terminationReason);
@@ -673,9 +673,9 @@ namespace System.Activities
         {
             if (this.initializationIncomplete)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.InitializationIncomplete)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.InitializationIncomplete));
             }
 
             MarkExecuted();
@@ -731,9 +731,9 @@ namespace System.Activities
 
             if (this.Activity == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ActivityInstanceFixupFailed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.ActivityInstanceFixupFailed));
             }
 
             this.parent = parent;
@@ -1213,24 +1213,28 @@ namespace System.Activities
         {
             if (activity.GetType().Name != this.OwnerName)
             {
-                throw FxTrace.Exception.AsError(
-                    new ValidationException(
-                        SR.ActivityTypeMismatch(activity.DisplayName, this.OwnerName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ValidationException(
+                            SR.ActivityTypeMismatch(activity.DisplayName, this.OwnerName)
+                        )
+                    );
             }
 
             if (activity.ImplementationVersion != this.ImplementationVersion)
             {
-                throw FxTrace.Exception.AsError(
-                    new VersionMismatchException(
-                        SR.ImplementationVersionMismatch(
-                            this.ImplementationVersion,
-                            activity.ImplementationVersion,
-                            activity
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new VersionMismatchException(
+                            SR.ImplementationVersionMismatch(
+                                this.ImplementationVersion,
+                                activity.ImplementationVersion,
+                                activity
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.Activity = activity;

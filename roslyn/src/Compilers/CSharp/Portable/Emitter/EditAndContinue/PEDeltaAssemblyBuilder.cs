@@ -301,14 +301,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 }
 
                 if (
-                    !reader.StringComparer.StartsWith(
-                        def.Name,
-                        GeneratedNames.ActionDelegateNamePrefix
-                    )
-                    && !reader.StringComparer.StartsWith(
-                        def.Name,
-                        GeneratedNames.FuncDelegateNamePrefix
-                    )
+                    !reader
+                        .StringComparer
+                        .StartsWith(def.Name, GeneratedNames.ActionDelegateNamePrefix)
+                    && !reader
+                        .StringComparer
+                        .StartsWith(def.Name, GeneratedNames.FuncDelegateNamePrefix)
                 )
                 {
                     continue;
@@ -384,9 +382,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             var anonymousDelegates = this.Compilation.AnonymousTypeManager.GetAnonymousDelegates();
             // Should contain all entries in previous generation.
             Debug.Assert(
-                _previousGeneration.AnonymousDelegates.All(
-                    p => anonymousDelegates.ContainsKey(p.Key)
-                )
+                _previousGeneration
+                    .AnonymousDelegates
+                    .All(p => anonymousDelegates.ContainsKey(p.Key))
             );
             return anonymousDelegates;
         }
@@ -396,13 +394,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             AnonymousTypeValue
         > GetAnonymousDelegatesWithIndexedNames()
         {
-            var anonymousDelegates =
-                this.Compilation.AnonymousTypeManager.GetAnonymousDelegatesWithIndexedNames();
+            var anonymousDelegates = this.Compilation
+                .AnonymousTypeManager
+                .GetAnonymousDelegatesWithIndexedNames();
             // Should contain all entries in previous generation.
             Debug.Assert(
-                _previousGeneration.AnonymousDelegatesWithIndexedNames.All(
-                    p => anonymousDelegates.ContainsKey(p.Key)
-                )
+                _previousGeneration
+                    .AnonymousDelegatesWithIndexedNames
+                    .All(p => anonymousDelegates.ContainsKey(p.Key))
             );
             return anonymousDelegates;
         }

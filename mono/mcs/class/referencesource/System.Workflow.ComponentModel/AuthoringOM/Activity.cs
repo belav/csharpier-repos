@@ -1889,14 +1889,19 @@ namespace System.Workflow.ComponentModel
 
         internal void SetStatus(ActivityExecutionStatus newStatus, bool transacted)
         {
-            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "Activity Status Change - Activity: {0} Old:{1}; New:{2}",
-                this.QualifiedName,
-                ActivityExecutionStatusEnumToString(this.ExecutionStatus),
-                ActivityExecutionStatusEnumToString(newStatus)
-            );
+            System
+                .Workflow
+                .Runtime
+                .WorkflowTrace
+                .Runtime
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Activity Status Change - Activity: {0} Old:{1}; New:{2}",
+                    this.QualifiedName,
+                    ActivityExecutionStatusEnumToString(this.ExecutionStatus),
+                    ActivityExecutionStatusEnumToString(newStatus)
+                );
 
             // Set Was Executing
             if (
@@ -2120,11 +2125,12 @@ namespace System.Workflow.ComponentModel
                                 "Inner exception: {0}",
                                 new object[] { exception }
                             );
-                        System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                            TraceEventType.Critical,
-                            0,
-                            errorString
-                        );
+                        System
+                            .Workflow
+                            .Runtime
+                            .WorkflowTrace
+                            .Runtime
+                            .TraceEvent(TraceEventType.Critical, 0, errorString);
                         this.WorkflowCoreRuntime.TerminateInstance(exception);
                     }
                     else if (exception != null && this.parent != null)
@@ -2300,17 +2306,16 @@ namespace System.Workflow.ComponentModel
                             != null
                     )
                     {
-                        ActivityExecutionContext resurrectedContext =
-                            executionContext.ExecutionContextManager.DiscardPersistedExecutionContext(
-                                contextInfo
-                            );
+                        ActivityExecutionContext resurrectedContext = executionContext
+                            .ExecutionContextManager
+                            .DiscardPersistedExecutionContext(contextInfo);
                         UninitializeCompletedContext(
                             resurrectedContext.Activity,
                             resurrectedContext
                         );
-                        executionContext.ExecutionContextManager.CompleteExecutionContext(
-                            resurrectedContext
-                        );
+                        executionContext
+                            .ExecutionContextManager
+                            .CompleteExecutionContext(resurrectedContext);
                     }
                 }
             }

@@ -40,15 +40,17 @@ namespace System.Web.Caching
 
         public override object Add(string key, object entry, DateTime utcExpiry)
         {
-            return HttpRuntime.InternalCache.Add(
-                CACHE_PREFIX + key,
-                entry,
-                null,
-                utcExpiry.ToLocalTime(),
-                Cache.NoSlidingExpiration,
-                CacheItemPriority.Normal,
-                null
-            );
+            return HttpRuntime
+                .InternalCache
+                .Add(
+                    CACHE_PREFIX + key,
+                    entry,
+                    null,
+                    utcExpiry.ToLocalTime(),
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.Normal,
+                    null
+                );
         }
 
         public override object Get(string key)

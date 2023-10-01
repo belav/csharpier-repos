@@ -68,14 +68,14 @@ namespace System.Data.Services.Common
             switch (kind)
             {
                 case EpmSerializationKind.Attributes:
-                    segmentsToSerialize = targetSegment.SubSegments.Where(
-                        s => s.IsAttribute == true
-                    );
+                    segmentsToSerialize = targetSegment
+                        .SubSegments
+                        .Where(s => s.IsAttribute == true);
                     break;
                 case EpmSerializationKind.Elements:
-                    segmentsToSerialize = targetSegment.SubSegments.Where(
-                        s => s.IsAttribute == false
-                    );
+                    segmentsToSerialize = targetSegment
+                        .SubSegments
+                        .Where(s => s.IsAttribute == false);
                     break;
                 default:
                     Debug.Assert(kind == EpmSerializationKind.All, "Must serialize everything");

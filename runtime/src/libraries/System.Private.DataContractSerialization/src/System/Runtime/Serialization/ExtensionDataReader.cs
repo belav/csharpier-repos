@@ -551,11 +551,13 @@ namespace System.Runtime.Serialization
                     else
                     {
                         Fx.Assert("Encountered invalid data node when deserializing unknown data");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SerializationException(
-                                SR.Format(SR.InvalidStateInExtensionDataReader)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SerializationException(
+                                    SR.Format(SR.InvalidStateInExtensionDataReader)
+                                )
+                            );
                     }
                     break;
             }
@@ -730,11 +732,9 @@ namespace System.Runtime.Serialization
                     for (int i = 0; i < _element.attributeCount; i++)
                     {
                         AttributeData a = _element.attributes![i];
-                        XmlAttribute xmlAttr = dataNode.OwnerDocument.CreateAttribute(
-                            a.prefix,
-                            a.localName!,
-                            a.ns
-                        );
+                        XmlAttribute xmlAttr = dataNode
+                            .OwnerDocument
+                            .CreateAttribute(a.prefix, a.localName!, a.ns);
                         xmlAttr.Value = a.value;
                         wrapperElement.Attributes.Append(xmlAttr);
                     }
@@ -767,11 +767,16 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.Format(SR.InvalidDataNode, DataContract.GetClrTypeFullName(type))
-                        )
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.Format(SR.InvalidDataNode, DataContract.GetClrTypeFullName(type))
+                            )
+                        );
                 }
             }
         }

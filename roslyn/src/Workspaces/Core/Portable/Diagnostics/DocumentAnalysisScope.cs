@@ -52,9 +52,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Contract.ThrowIfFalse(TextDocument is AdditionalDocument);
 
             var filePath = TextDocument.FilePath ?? TextDocument.Name;
-            return TextDocument.Project.AnalyzerOptions.AdditionalFiles.First(
-                a => PathUtilities.Comparer.Equals(a.Path, filePath)
-            );
+            return TextDocument
+                .Project
+                .AnalyzerOptions
+                .AdditionalFiles
+                .First(a => PathUtilities.Comparer.Equals(a.Path, filePath));
         }
 
         public DocumentAnalysisScope WithSpan(TextSpan? span) =>

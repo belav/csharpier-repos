@@ -82,11 +82,9 @@ namespace System.Reflection.Runtime.General
             )
                 throw new ArgumentException(SR.Argument_InvalidHandle);
 
-            MethodBase methodBase = ReflectionCoreExecution.ExecutionDomain.GetMethod(
-                declaringTypeHandle,
-                methodHandle,
-                genericMethodTypeArgumentHandles
-            );
+            MethodBase methodBase = ReflectionCoreExecution
+                .ExecutionDomain
+                .GetMethod(declaringTypeHandle, methodHandle, genericMethodTypeArgumentHandles);
             if (methodBase.DeclaringType.IsConstructedGenericType) // For compat with desktop, insist that the caller pass us the declaring type to resolve members of generic types.
                 throw new ArgumentException(
                     SR.Format(SR.Argument_MethodDeclaringTypeGeneric, methodBase)
@@ -136,11 +134,9 @@ namespace System.Reflection.Runtime.General
                     );
             }
 
-            MethodBase methodBase = ReflectionCoreExecution.ExecutionDomain.GetMethod(
-                declaringTypeHandle,
-                methodHandle,
-                genericMethodTypeArgumentHandles
-            );
+            MethodBase methodBase = ReflectionCoreExecution
+                .ExecutionDomain
+                .GetMethod(declaringTypeHandle, methodHandle, genericMethodTypeArgumentHandles);
             return methodBase;
         }
 
@@ -237,8 +233,9 @@ namespace System.Reflection.Runtime.General
         )
         {
             RuntimeTypeInfo contextTypeInfo = declaringTypeHandle.GetTypeForRuntimeTypeHandle();
-            NativeFormatRuntimeNamedTypeInfo definingTypeInfo =
-                contextTypeInfo.AnchoringTypeDefinitionForDeclaredMembers.CastToNativeFormatRuntimeNamedTypeInfo();
+            NativeFormatRuntimeNamedTypeInfo definingTypeInfo = contextTypeInfo
+                .AnchoringTypeDefinitionForDeclaredMembers
+                .CastToNativeFormatRuntimeNamedTypeInfo();
 
             // RuntimeFieldHandles always yield FieldInfo's whose ReflectedType equals the DeclaringType.
             RuntimeTypeInfo reflectedType = contextTypeInfo;

@@ -387,12 +387,12 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         using var host = await CreateHost(options =>
         {
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(
-                new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException))
-            );
-            options.SecurityTokenValidators.Add(
-                new InvalidTokenValidator(typeof(SecurityTokenSignatureKeyNotFoundException))
-            );
+            options
+                .SecurityTokenValidators
+                .Add(new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException)));
+            options
+                .SecurityTokenValidators
+                .Add(new InvalidTokenValidator(typeof(SecurityTokenSignatureKeyNotFoundException)));
         });
 
         using var server = host.GetTestServer();
@@ -529,9 +529,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                 }
             };
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(
-                new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme)
-            );
+            options
+                .SecurityTokenValidators
+                .Add(new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme));
         });
 
         using var server = host.GetTestServer();
@@ -554,15 +554,17 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                 }
             };
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(
-                new BlobTokenValidator(
-                    "JWT",
-                    token =>
-                    {
-                        Assert.Equal("CustomToken", token);
-                    }
-                )
-            );
+            options
+                .SecurityTokenValidators
+                .Add(
+                    new BlobTokenValidator(
+                        "JWT",
+                        token =>
+                        {
+                            Assert.Equal("CustomToken", token);
+                        }
+                    )
+                );
         });
 
         using var server = host.GetTestServer();
@@ -1091,7 +1093,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         Assert.Equal(
             firstKey,
             Convert.ToBase64String(
-                jwtBearerOptions.TokenValidationParameters.IssuerSigningKeys
+                jwtBearerOptions
+                    .TokenValidationParameters
+                    .IssuerSigningKeys
                     .OfType<SymmetricSecurityKey>()
                     .FirstOrDefault()
                     ?.Key
@@ -1100,7 +1104,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         Assert.Equal(
             secondKey,
             Convert.ToBase64String(
-                jwtBearerOptions.TokenValidationParameters.IssuerSigningKeys
+                jwtBearerOptions
+                    .TokenValidationParameters
+                    .IssuerSigningKeys
                     .OfType<SymmetricSecurityKey>()
                     .LastOrDefault()
                     ?.Key
@@ -1321,9 +1327,9 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                             return;
                                         }
 
-                                        var identifier = context.User.FindFirst(
-                                            ClaimTypes.NameIdentifier
-                                        );
+                                        var identifier = context
+                                            .User
+                                            .FindFirst(ClaimTypes.NameIdentifier);
                                         if (identifier == null)
                                         {
                                             context.Response.StatusCode = 500;
@@ -1380,15 +1386,19 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                                         var authenticationResult = await context.AuthenticateAsync(
                                             JwtBearerDefaults.AuthenticationScheme
                                         );
-                                        await context.Response.WriteAsJsonAsync(
-                                            new
-                                            {
-                                                Expires = authenticationResult
-                                                    .Properties
-                                                    ?.ExpiresUtc,
-                                                Issued = authenticationResult.Properties?.IssuedUtc
-                                            }
-                                        );
+                                        await context
+                                            .Response
+                                            .WriteAsJsonAsync(
+                                                new
+                                                {
+                                                    Expires = authenticationResult
+                                                        .Properties
+                                                        ?.ExpiresUtc,
+                                                    Issued = authenticationResult
+                                                        .Properties
+                                                        ?.IssuedUtc
+                                                }
+                                            );
                                     }
                                     else
                                     {

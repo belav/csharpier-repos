@@ -157,9 +157,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public override void VisitVariableDeclaration(IVariableDeclarationOperation operation)
         {
             Assert.Equal(OperationKind.VariableDeclaration, operation.Kind);
-            IEnumerable<IOperation> children = operation.IgnoredDimensions.Concat(
-                operation.Declarators
-            );
+            IEnumerable<IOperation> children = operation
+                .IgnoredDimensions
+                .Concat(operation.Declarators);
             var initializer = operation.Initializer;
 
             if (initializer != null)
@@ -892,10 +892,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 if (symbol is IMethodSymbol method)
                 {
-                    VisualBasic.SymbolDisplay.ToDisplayString(
-                        method,
-                        SymbolDisplayFormat.TestFormat
-                    );
+                    VisualBasic
+                        .SymbolDisplay
+                        .ToDisplayString(method, SymbolDisplayFormat.TestFormat);
                     VisualBasic.SymbolDisplay.ToDisplayString(method);
                     CSharp.SymbolDisplay.ToDisplayString(method, SymbolDisplayFormat.TestFormat);
                     CSharp.SymbolDisplay.ToDisplayString(method);
@@ -905,19 +904,23 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                         switch (method.Parameters.Length)
                         {
                             case 1:
-                                semanticModel.Compilation.CreateBuiltinOperator(
-                                    symbol.Name,
-                                    method.ReturnType,
-                                    method.Parameters[0].Type
-                                );
+                                semanticModel
+                                    .Compilation
+                                    .CreateBuiltinOperator(
+                                        symbol.Name,
+                                        method.ReturnType,
+                                        method.Parameters[0].Type
+                                    );
                                 break;
                             case 2:
-                                semanticModel.Compilation.CreateBuiltinOperator(
-                                    symbol.Name,
-                                    method.ReturnType,
-                                    method.Parameters[0].Type,
-                                    method.Parameters[1].Type
-                                );
+                                semanticModel
+                                    .Compilation
+                                    .CreateBuiltinOperator(
+                                        symbol.Name,
+                                        method.ReturnType,
+                                        method.Parameters[0].Type,
+                                        method.Parameters[1].Type
+                                    );
                                 break;
                             default:
                                 AssertEx.Fail(
@@ -955,16 +958,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             switch (operation.Language)
             {
                 case LanguageNames.CSharp:
-                    CSharp.Conversion csharpConversion = CSharp.CSharpExtensions.GetConversion(
-                        operation
-                    );
+                    CSharp.Conversion csharpConversion = CSharp
+                        .CSharpExtensions
+                        .GetConversion(operation);
                     Assert.Throws<ArgumentException>(
                         () => VisualBasic.VisualBasicExtensions.GetConversion(operation)
                     );
                     break;
                 case LanguageNames.VisualBasic:
-                    VisualBasic.Conversion visualBasicConversion =
-                        VisualBasic.VisualBasicExtensions.GetConversion(operation);
+                    VisualBasic.Conversion visualBasicConversion = VisualBasic
+                        .VisualBasicExtensions
+                        .GetConversion(operation);
                     Assert.Throws<ArgumentException>(
                         () => CSharp.CSharpExtensions.GetConversion(operation)
                     );
@@ -978,15 +982,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (operatorMethod != null)
             {
-                VisualBasic.SymbolDisplay.ToDisplayString(
-                    operatorMethod,
-                    SymbolDisplayFormat.TestFormat
-                );
+                VisualBasic
+                    .SymbolDisplay
+                    .ToDisplayString(operatorMethod, SymbolDisplayFormat.TestFormat);
                 VisualBasic.SymbolDisplay.ToDisplayString(operatorMethod);
-                CSharp.SymbolDisplay.ToDisplayString(
-                    operatorMethod,
-                    SymbolDisplayFormat.TestFormat
-                );
+                CSharp
+                    .SymbolDisplay
+                    .ToDisplayString(operatorMethod, SymbolDisplayFormat.TestFormat);
                 CSharp.SymbolDisplay.ToDisplayString(operatorMethod);
             }
         }
@@ -1341,12 +1343,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     "compoundAssignment",
                     () => CSharp.CSharpExtensions.GetOutConversion(operation)
                 );
-                var inConversionInternal = VisualBasic.VisualBasicExtensions.GetInConversion(
-                    operation
-                );
-                var outConversionInternal = VisualBasic.VisualBasicExtensions.GetOutConversion(
-                    operation
-                );
+                var inConversionInternal = VisualBasic
+                    .VisualBasicExtensions
+                    .GetInConversion(operation);
+                var outConversionInternal = VisualBasic
+                    .VisualBasicExtensions
+                    .GetOutConversion(operation);
             }
 
             var isLifted = operation.IsLifted;
@@ -1749,8 +1751,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Assert.True(subpat is IPropertySubpatternOperation);
             }
 
-            IEnumerable<IOperation> children =
-                operation.DeconstructionSubpatterns.Cast<IOperation>();
+            IEnumerable<IOperation> children = operation
+                .DeconstructionSubpatterns
+                .Cast<IOperation>();
             children = children.Concat(operation.PropertySubpatterns);
 
             AssertEx.Equal(children, operation.ChildOperations);

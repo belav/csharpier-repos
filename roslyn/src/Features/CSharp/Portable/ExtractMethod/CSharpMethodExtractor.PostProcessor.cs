@@ -67,13 +67,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 // okay transfer asset attached to block to statements
                 var firstStatement = block.Statements.First();
                 var firstToken = firstStatement.GetFirstToken(includeZeroWidth: true);
-                var firstTokenWithAsset = block.OpenBraceToken
+                var firstTokenWithAsset = block
+                    .OpenBraceToken
                     .CopyAnnotationsTo(firstToken)
                     .WithPrependedLeadingTrivia(block.OpenBraceToken.GetAllTrivia());
 
                 var lastStatement = block.Statements.Last();
                 var lastToken = lastStatement.GetLastToken(includeZeroWidth: true);
-                var lastTokenWithAsset = block.CloseBraceToken
+                var lastTokenWithAsset = block
+                    .CloseBraceToken
                     .CopyAnnotationsTo(lastToken)
                     .WithAppendedTrailingTrivia(block.CloseBraceToken.GetAllTrivia());
 
@@ -362,16 +364,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     return statements;
                 }
 
-                var variable = declaration.Declaration
+                var variable = declaration
+                    .Declaration
                     .Variables[0]
                     .WithInitializer(SyntaxFactory.EqualsValueClause(assignmentExpression.Right));
                 using var _ = ArrayBuilder<StatementSyntax>.GetInstance(out var result);
 
                 result.Add(
                     declaration.WithDeclaration(
-                        declaration.Declaration.WithVariables(
-                            SyntaxFactory.SingletonSeparatedList(variable)
-                        )
+                        declaration
+                            .Declaration
+                            .WithVariables(SyntaxFactory.SingletonSeparatedList(variable))
                     )
                 );
                 result.AddRange(statements.Skip(2));

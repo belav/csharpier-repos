@@ -2122,9 +2122,10 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var declarator = (
-                (LocalDeclarationStatementSyntax)statement
-            ).Declaration.Variables.First();
+            var declarator = ((LocalDeclarationStatementSyntax)statement)
+                .Declaration
+                .Variables
+                .First();
             var local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("z", local.Name);
@@ -3119,9 +3120,10 @@ class C
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var declarator = (
-                (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
-            ).Declaration.Variables.First();
+            var declarator = ((LocalDeclarationStatementSyntax)blockStatement.Statements[0])
+                .Declaration
+                .Variables
+                .First();
             var local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("z", local.Name);
@@ -3139,9 +3141,10 @@ class C
             );
             Assert.True(success);
             Assert.NotNull(speculativeModel);
-            declarator = (
-                (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
-            ).Declaration.Variables.First();
+            declarator = ((LocalDeclarationStatementSyntax)blockStatement.Statements[0])
+                .Declaration
+                .Variables
+                .First();
             local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("y", local.Name);
@@ -3159,9 +3162,10 @@ class C
             );
             Assert.True(success);
             Assert.NotNull(speculativeModel);
-            declarator = (
-                (LocalDeclarationStatementSyntax)blockStatement.Statements[0]
-            ).Declaration.Variables.First();
+            declarator = ((LocalDeclarationStatementSyntax)blockStatement.Statements[0])
+                .Declaration
+                .Variables
+                .First();
             local = speculativeModel.GetDeclaredSymbol(declarator);
             Assert.NotNull(local);
             Assert.Equal("y", local.Name);
@@ -4796,7 +4800,8 @@ static class Program
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .Single();
-            var init0 = method.Body
+            var init0 = method
+                .Body
                 .Statements[0]
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
@@ -4813,7 +4818,8 @@ static class Program
 
             // The CodePlex bug indicates this should return a constant value of 5.  While 'case2' should
             // have that value it is not constant because of the nullable cast
-            var init1 = method.Body
+            var init1 = method
+                .Body
                 .Statements[2]
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()
@@ -4827,7 +4833,8 @@ static class Program
             Assert.False(value1.HasValue);
             Assert.True(typeInfo1.Type != null && typeInfo1.Type.Equals(type1));
 
-            var init2 = method.Body
+            var init2 = method
+                .Body
                 .Statements[4]
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>()

@@ -1018,9 +1018,9 @@ namespace System.Windows.Forms
                             );
                             while (
                                 keyboard_capture != null
-                                && !keyboard_capture.ClientRectangle.Contains(
-                                    keyboard_capture.PointToClient(c2_point)
-                                )
+                                && !keyboard_capture
+                                    .ClientRectangle
+                                    .Contains(keyboard_capture.PointToClient(c2_point))
                             )
                             {
                                 keyboard_capture.Dismiss();

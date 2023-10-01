@@ -1206,9 +1206,9 @@ using System;
                 Assert.Equal(0, memberNameSyntax.Arity);
 
                 var semanticModel = compilation.GetSemanticModel(syntaxTree);
-                var classDisposable = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>(
-                    "Disposable"
-                );
+                var classDisposable = compilation
+                    .GlobalNamespace
+                    .GetMember<INamedTypeSymbol>("Disposable");
                 Assert.Equal(TypeKind.Class, classDisposable.TypeKind);
                 Assert.Equal("Disposable", classDisposable.Name);
 

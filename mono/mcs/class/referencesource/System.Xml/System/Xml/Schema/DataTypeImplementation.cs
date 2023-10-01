@@ -1182,10 +1182,9 @@ namespace System.Xml.Schema
                     xmlType1 = atomicValues1[i].XmlType;
                     if (
                         xmlType1 != atomicValues2[i].XmlType
-                        || !xmlType1.Datatype.IsEqual(
-                            atomicValues1[i].TypedValue,
-                            atomicValues2[i].TypedValue
-                        )
+                        || !xmlType1
+                            .Datatype
+                            .IsEqual(atomicValues1[i].TypedValue, atomicValues2[i].TypedValue)
                     )
                     {
                         return -1;

@@ -359,7 +359,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                             .ClassifyAsync(documentSpan, cancellationToken)
                             .ConfigureAwait(false);
                     var classifiedSpans = classifiedSpansAndHighlightSpan.ClassifiedSpans;
-                    var docText = await documentSpan.Document
+                    var docText = await documentSpan
+                        .Document
                         .GetTextAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var classifiedTextRuns = GetClassifiedTextRuns(

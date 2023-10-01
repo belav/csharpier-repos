@@ -42,9 +42,11 @@ public class MutexWaitOne1
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: WaitOne returns true when current instance receives a signal"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest1: WaitOne returns true when current instance receives a signal"
+            );
 
         try
         {
@@ -56,10 +58,12 @@ public class MutexWaitOne1
 
                 if (m_Mutex.WaitOne() != true)
                 {
-                    TestLibrary.TestFramework.LogError(
-                        "001",
-                        "WaitOne returns false when current instance receives a signal."
-                    );
+                    TestLibrary
+                        .TestFramework
+                        .LogError(
+                            "001",
+                            "WaitOne returns false when current instance receives a signal."
+                        );
                     retVal = false;
 
                     break;
@@ -95,9 +99,11 @@ public class MutexWaitOne1
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "NegTest1: AbandonedMutexException should be thrown if a thread exited without releasing a mutex"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "NegTest1: AbandonedMutexException should be thrown if a thread exited without releasing a mutex"
+            );
 
         using (m_Mutex = new Mutex(false))
         {
@@ -109,10 +115,12 @@ public class MutexWaitOne1
                 thread.Join();
                 m_Mutex.WaitOne();
 
-                TestLibrary.TestFramework.LogError(
-                    "101",
-                    "AbandonedMutexException is not thrown if a thread exited without releasing a mutex"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "101",
+                        "AbandonedMutexException is not thrown if a thread exited without releasing a mutex"
+                    );
                 retVal = false;
             }
             catch (AbandonedMutexException) { }
@@ -132,9 +140,11 @@ public class MutexWaitOne1
         bool retVal = true;
         Thread thread = null;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "NegTest2: ObjectDisposedException should be thrown if current instance has already been disposed"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "NegTest2: ObjectDisposedException should be thrown if current instance has already been disposed"
+            );
 
         try
         {
@@ -146,10 +156,12 @@ public class MutexWaitOne1
             thread.Join();
             m_Mutex.WaitOne();
 
-            TestLibrary.TestFramework.LogError(
-                "103",
-                "ObjectDisposedException is not thrown if current instance has already been disposed"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError(
+                    "103",
+                    "ObjectDisposedException is not thrown if current instance has already been disposed"
+                );
             retVal = false;
         }
         catch (ObjectDisposedException) { }

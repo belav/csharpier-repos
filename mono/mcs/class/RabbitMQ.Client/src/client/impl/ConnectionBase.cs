@@ -941,23 +941,26 @@ namespace RabbitMQ.Client.Impl
 
         public static IDictionary DefaultClientProperties()
         {
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetAssembly(
-                typeof(ConnectionBase)
-            );
+            System.Reflection.Assembly assembly = System
+                .Reflection
+                .Assembly
+                .GetAssembly(typeof(ConnectionBase));
             string version = assembly.GetName().Version.ToString();
             //TODO: Get the rest of this data from the Assembly Attributes
             Hashtable table = new Hashtable();
             table["product"] = Encoding.UTF8.GetBytes("RabbitMQ");
             table["version"] = Encoding.UTF8.GetBytes(version);
             table["platform"] = Encoding.UTF8.GetBytes(".NET");
-            table["copyright"] = Encoding.UTF8.GetBytes(
-                "Copyright (C) 2007-2008 LShift Ltd., "
-                    + "Cohesive Financial Technologies LLC., "
-                    + "and Rabbit Technologies Ltd."
-            );
-            table["information"] = Encoding.UTF8.GetBytes(
-                "Licensed under the MPL.  " + "See http://www.rabbitmq.com/"
-            );
+            table["copyright"] = Encoding
+                .UTF8
+                .GetBytes(
+                    "Copyright (C) 2007-2008 LShift Ltd., "
+                        + "Cohesive Financial Technologies LLC., "
+                        + "and Rabbit Technologies Ltd."
+                );
+            table["information"] = Encoding
+                .UTF8
+                .GetBytes("Licensed under the MPL.  " + "See http://www.rabbitmq.com/");
             return table;
         }
 

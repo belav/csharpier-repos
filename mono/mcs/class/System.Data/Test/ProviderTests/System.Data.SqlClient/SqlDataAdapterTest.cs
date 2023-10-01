@@ -1088,10 +1088,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             table.Columns.Add("id_1");
             table.Columns.Add("type_bit_1");
             table.Columns.Add("type_int_1");
-            DataTableMapping tableMap = adapter.TableMappings.Add(
-                "numeric_family",
-                "numeric_family_1"
-            );
+            DataTableMapping tableMap = adapter
+                .TableMappings
+                .Add("numeric_family", "numeric_family_1");
             tableMap.ColumnMappings.Add("id", "id_1");
             tableMap.ColumnMappings.Add("type_bit", "type_bit_1");
             tableMap.ColumnMappings.Add("type_int", "type_int_1");

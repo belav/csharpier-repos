@@ -27,9 +27,9 @@ namespace System.Runtime.InteropServices.Tests
         public void StringToCoTaskMemUTF8_PtrToStringUTF8_Roundtrips(string s)
         {
             int nullIndex = s.IndexOf('\0');
-            byte[] expected = Encoding.UTF8.GetBytes(
-                nullIndex == -1 ? s : s.Substring(0, nullIndex)
-            );
+            byte[] expected = Encoding
+                .UTF8
+                .GetBytes(nullIndex == -1 ? s : s.Substring(0, nullIndex));
 
             IntPtr ptr = Marshal.StringToCoTaskMemUTF8(s);
             try

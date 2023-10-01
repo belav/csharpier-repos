@@ -523,10 +523,9 @@ namespace System.Workflow.Activities
                 );
                 if (customAttrs == null || customAttrs.Length == 0)
                 {
-                    customAttrs = eventInfo.EventHandlerType.GetCustomAttributes(
-                        typeof(CorrelationAliasAttribute),
-                        true
-                    );
+                    customAttrs = eventInfo
+                        .EventHandlerType
+                        .GetCustomAttributes(typeof(CorrelationAliasAttribute), true);
                 }
                 MethodInfo[] methInfo = eventInfo.EventHandlerType.GetMethods();
                 methodInfo = methInfo[0];

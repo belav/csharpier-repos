@@ -315,18 +315,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
 #endif
 
-                    MessageID.IDS_FeatureRefLocalsReturns.CheckFeatureAvailability(
-                        diagnostics,
-                        refType,
-                        refType.RefKeyword.GetLocation()
-                    );
-
-                    if (refType.ReadOnlyKeyword != default)
-                        MessageID.IDS_FeatureReadOnlyReferences.CheckFeatureAvailability(
+                    MessageID
+                        .IDS_FeatureRefLocalsReturns
+                        .CheckFeatureAvailability(
                             diagnostics,
                             refType,
-                            refType.ReadOnlyKeyword.GetLocation()
+                            refType.RefKeyword.GetLocation()
                         );
+
+                    if (refType.ReadOnlyKeyword != default)
+                        MessageID
+                            .IDS_FeatureReadOnlyReferences
+                            .CheckFeatureAvailability(
+                                diagnostics,
+                                refType,
+                                refType.ReadOnlyKeyword.GetLocation()
+                            );
                 }
 
                 return refType.Type;
@@ -378,11 +382,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return syntax;
             }
 
-            MessageID.IDS_FeatureRefLocalsReturns.CheckFeatureAvailability(
-                diagnostics,
-                refExpression,
-                refExpression.RefKeyword.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureRefLocalsReturns
+                .CheckFeatureAvailability(
+                    diagnostics,
+                    refExpression,
+                    refExpression.RefKeyword.GetLocation()
+                );
 
             refKind = RefKind.Ref;
             expression.CheckDeconstructionCompatibleArgument(diagnostics);

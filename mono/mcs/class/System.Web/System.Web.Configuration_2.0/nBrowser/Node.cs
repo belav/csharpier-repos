@@ -931,9 +931,12 @@ namespace System.Web.Configuration.nBrowser
             }
 
 #if trace
-            System.Diagnostics.Trace.WriteLine(
-                string.Format("{0}[{1}]", ("[" + this.Id + "]").PadRight(45), this.ParentId)
-            );
+            System
+                .Diagnostics
+                .Trace
+                .WriteLine(
+                    string.Format("{0}[{1}]", ("[" + this.Id + "]").PadRight(45), this.ParentId)
+                );
 #endif
             for (int i = 0; i <= Identification.Length - 1; i++)
             {
@@ -980,18 +983,32 @@ namespace System.Web.Configuration.nBrowser
                 if (Identification[i].IsMatchSuccessful(m) == false)
                 {
 #if trace
-                    System.Diagnostics.Trace.WriteLine(
-                        string.Format("{0}{1}", "Failed:".PadRight(45), Identification[i].Pattern)
-                    );
+                    System
+                        .Diagnostics
+                        .Trace
+                        .WriteLine(
+                            string.Format(
+                                "{0}{1}",
+                                "Failed:".PadRight(45),
+                                Identification[i].Pattern
+                            )
+                        );
 #endif
                     return false;
                 }
                 else
                 {
 #if trace
-                    System.Diagnostics.Trace.WriteLine(
-                        string.Format("{0}{1}", "Passed:".PadRight(45), Identification[i].Pattern)
-                    );
+                    System
+                        .Diagnostics
+                        .Trace
+                        .WriteLine(
+                            string.Format(
+                                "{0}{1}",
+                                "Passed:".PadRight(45),
+                                Identification[i].Pattern
+                            )
+                        );
 #endif
                     if (m.Groups.Count > 0)
                     {

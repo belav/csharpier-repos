@@ -515,9 +515,10 @@ namespace System.Net
                         ConnectStream connectStream = m_ConnectStream as ConnectStream;
                         if (connectStream != null && connectStream.Connection != null)
                         {
-                            connectStream.Connection.ServicePoint.CloseConnectionGroup(
-                                ConnectionGroupName
-                            );
+                            connectStream
+                                .Connection
+                                .ServicePoint
+                                .CloseConnectionGroup(ConnectionGroupName);
                         }
                     }
                 }

@@ -89,8 +89,9 @@ public class QueryCompilationContext
             dependencies.ShapedQueryCompilingExpressionVisitorFactory;
 
         _expressionPrinter = new ExpressionPrinter();
-        _queryExpressionInterceptor =
-            dependencies.Interceptors.Aggregate<IQueryExpressionInterceptor>();
+        _queryExpressionInterceptor = dependencies
+            .Interceptors
+            .Aggregate<IQueryExpressionInterceptor>();
     }
 
     /// <summary>

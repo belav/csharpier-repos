@@ -620,9 +620,9 @@ namespace MonoTests.System.Net
                 writer.Flush();
 
                 Socket data_cnc = data.Accept();
-                byte[] dontcare = Encoding.ASCII.GetBytes(
-                    "drwxr-xr-x    2 ftp      ftp          4096 Oct 27 20:17 tests"
-                );
+                byte[] dontcare = Encoding
+                    .ASCII
+                    .GetBytes("drwxr-xr-x    2 ftp      ftp          4096 Oct 27 20:17 tests");
                 data_cnc.Send(dontcare, 1, SocketFlags.None);
                 data_cnc.Close();
                 writer.WriteLine("226 Directory send Ok");

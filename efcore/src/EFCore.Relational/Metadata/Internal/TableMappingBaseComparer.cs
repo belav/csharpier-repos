@@ -89,9 +89,9 @@ public sealed class TableMappingBaseComparer
                 return -1;
             }
 
-            result = y.IsSplitEntityTypePrincipal.Value.CompareTo(
-                x.IsSplitEntityTypePrincipal.Value
-            );
+            result = y.IsSplitEntityTypePrincipal
+                .Value
+                .CompareTo(x.IsSplitEntityTypePrincipal.Value);
             if (result != 0)
             {
                 return result;
@@ -127,10 +127,9 @@ public sealed class TableMappingBaseComparer
                 y.ColumnMappings,
                 (xc, yc) =>
                 {
-                    var columnResult = StringComparer.Ordinal.Compare(
-                        xc.Property.Name,
-                        yc.Property.Name
-                    );
+                    var columnResult = StringComparer
+                        .Ordinal
+                        .Compare(xc.Property.Name, yc.Property.Name);
                     return columnResult != 0
                         ? columnResult
                         : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);

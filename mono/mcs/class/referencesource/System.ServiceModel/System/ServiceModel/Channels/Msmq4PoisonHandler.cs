@@ -34,15 +34,15 @@ namespace System.ServiceModel.Channels
             this.receiver = receiver;
             this.timer = new IOThreadTimer(new Action<object>(OnTimer), null, false);
             this.disposed = false;
-            this.mainQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(
-                this.ListenUri
-            );
-            this.poisonQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(
-                new Uri(this.ListenUri.AbsoluteUri + ";poison")
-            );
-            this.retryQueueName = this.ReceiveParameters.AddressTranslator.UriToFormatName(
-                new Uri(this.ListenUri.AbsoluteUri + ";retry")
-            );
+            this.mainQueueName = this.ReceiveParameters
+                .AddressTranslator
+                .UriToFormatName(this.ListenUri);
+            this.poisonQueueName = this.ReceiveParameters
+                .AddressTranslator
+                .UriToFormatName(new Uri(this.ListenUri.AbsoluteUri + ";poison"));
+            this.retryQueueName = this.ReceiveParameters
+                .AddressTranslator
+                .UriToFormatName(new Uri(this.ListenUri.AbsoluteUri + ";retry"));
         }
 
         MsmqReceiveParameters ReceiveParameters
@@ -105,12 +105,14 @@ namespace System.ServiceModel.Channels
             {
                 if (!handler.disposed)
                 {
-                    handler.retryQueueForPeek.BeginPeek(
-                        handler.retryQueueMessage,
-                        TimeSpan.MaxValue,
-                        onPeekCompleted,
-                        handler
-                    );
+                    handler
+                        .retryQueueForPeek
+                        .BeginPeek(
+                            handler.retryQueueMessage,
+                            TimeSpan.MaxValue,
+                            onPeekCompleted,
+                            handler
+                        );
                 }
             }
         }
@@ -162,9 +164,9 @@ namespace System.ServiceModel.Channels
             lock (this)
             {
                 if (this.disposed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(this.GetType().ToString())
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
 
                 // Check if the message has already completed its max recycle count (MaxRetryCycles)
                 // and the disposed the message first. Such a message was previously disposed using the ReceiveErrorHandling method
@@ -225,9 +227,9 @@ namespace System.ServiceModel.Channels
             lock (this)
             {
                 if (this.disposed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(this.GetType().ToString())
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
 
                 if (retryCycle >= this.ReceiveParameters.MaxRetryCycles)
                 {

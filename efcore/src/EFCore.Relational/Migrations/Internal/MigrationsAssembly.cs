@@ -114,7 +114,8 @@ public class MigrationsAssembly : IMigrationsAssembly
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual string? FindMigrationId(string nameOrId) =>
-        Migrations.Keys
+        Migrations
+            .Keys
             .Where(
                 _idGenerator.IsValidId(nameOrId)
                     // ReSharper disable once ImplicitlyCapturedClosure

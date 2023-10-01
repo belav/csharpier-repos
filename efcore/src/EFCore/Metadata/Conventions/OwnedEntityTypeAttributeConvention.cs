@@ -30,10 +30,9 @@ public class OwnedEntityTypeAttributeConvention : EntityTypeAttributeConventionB
         IConventionContext<IConventionEntityTypeBuilder> context
     )
     {
-        entityTypeBuilder.ModelBuilder.Owned(
-            entityTypeBuilder.Metadata.ClrType,
-            fromDataAnnotation: true
-        );
+        entityTypeBuilder
+            .ModelBuilder
+            .Owned(entityTypeBuilder.Metadata.ClrType, fromDataAnnotation: true);
         if (!entityTypeBuilder.Metadata.IsInModel)
         {
             context.StopProcessing();

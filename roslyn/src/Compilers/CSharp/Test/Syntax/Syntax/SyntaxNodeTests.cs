@@ -4012,13 +4012,15 @@ class Program
             var compilationUnit = tree.GetCompilationUnitRoot();
             var @class = (ClassDeclarationSyntax)compilationUnit.Members.Single();
             var method = (MethodDeclarationSyntax)@class.Members.Single();
-            var newModifiers = method.Modifiers.Add(
-                SyntaxFactory.Token(
-                    default(SyntaxTriviaList),
-                    SyntaxKind.UnsafeKeyword,
-                    SyntaxFactory.TriviaList(SyntaxFactory.Space)
-                )
-            );
+            var newModifiers = method
+                .Modifiers
+                .Add(
+                    SyntaxFactory.Token(
+                        default(SyntaxTriviaList),
+                        SyntaxKind.UnsafeKeyword,
+                        SyntaxFactory.TriviaList(SyntaxFactory.Space)
+                    )
+                );
             Assert.Equal("    static unsafe ", newModifiers.ToFullString());
             Assert.Equal(2, newModifiers.Count);
             Assert.Equal(SyntaxKind.StaticKeyword, newModifiers[0].Kind());
@@ -4200,9 +4202,9 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree.GetChanges(
-                SecondUsingClause.SyntaxTree
-            );
+            var ChangesForDifferentTrees = FirstUsingClause
+                .SyntaxTree
+                .GetChanges(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 
             // Do a transform to Replace and Existing Tree
@@ -4216,9 +4218,9 @@ namespace HelloWorld
             // Replace Node with a different Imports Clause
             root = root.ReplaceNode(ThirdUsingClause, newUsingClause);
 
-            var ChangesFromTransform = ThirdUsingClause.SyntaxTree.GetChanges(
-                newUsingClause.SyntaxTree
-            );
+            var ChangesFromTransform = ThirdUsingClause
+                .SyntaxTree
+                .GetChanges(newUsingClause.SyntaxTree);
             Assert.Equal(2, ChangesFromTransform.Count);
 
             // Using the Common Syntax Changes Method
@@ -4258,9 +4260,9 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree.GetChanges(
-                SecondUsingClause.SyntaxTree
-            );
+            var ChangesForDifferentTrees = FirstUsingClause
+                .SyntaxTree
+                .GetChanges(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 
             // With null tree
@@ -4296,9 +4298,9 @@ namespace HelloWorld
             var SecondUsingClause = root.Usings[1];
             var ThirdUsingClause = root.Usings[2];
 
-            var ChangesForDifferentTrees = FirstUsingClause.SyntaxTree.GetChangedSpans(
-                SecondUsingClause.SyntaxTree
-            );
+            var ChangesForDifferentTrees = FirstUsingClause
+                .SyntaxTree
+                .GetChangedSpans(SecondUsingClause.SyntaxTree);
             Assert.Equal(0, ChangesForDifferentTrees.Count);
 
             // With null tree

@@ -414,7 +414,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.posSetting
+                            tmpObject = entity
+                                .posSetting
                                 .Where(p => p.posSettingId == newObject.posSettingId)
                                 .FirstOrDefault();
 
@@ -531,7 +532,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                tmpObject = entity.posSetting
+                                tmpObject = entity
+                                    .posSetting
                                     .Where(p => p.posSettingId == newObject.posSettingId)
                                     .FirstOrDefault();
 

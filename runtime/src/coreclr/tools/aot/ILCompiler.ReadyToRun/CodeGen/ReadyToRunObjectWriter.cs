@@ -237,7 +237,9 @@ namespace ILCompiler.DependencyAnalysis
                     PEReader inputPeReader = (
                         _componentModule != null
                             ? _componentModule.PEReader
-                            : _nodeFactory.CompilationModuleGroup.CompilationModuleSet
+                            : _nodeFactory
+                                .CompilationModuleGroup
+                                .CompilationModuleSet
                                 .First()
                                 .PEReader
                     );

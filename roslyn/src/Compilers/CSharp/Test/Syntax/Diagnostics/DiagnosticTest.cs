@@ -479,9 +479,9 @@ class X
                 }
 
                 if (
-                    ErrorFacts.NullableWarnings.Contains(
-                        MessageProvider.Instance.GetIdForErrorCode((int)error)
-                    )
+                    ErrorFacts
+                        .NullableWarnings
+                        .Contains(MessageProvider.Instance.GetIdForErrorCode((int)error))
                 )
                 {
                     continue;
@@ -555,9 +555,9 @@ public class C
                 MessageProvider.Instance.GetIdForErrorCode(420),
                 ReportDiagnostic.Suppress
             );
-            CSharpCompilationOptions option = TestOptions.ReleaseExe.WithSpecificDiagnosticOptions(
-                warnings
-            );
+            CSharpCompilationOptions option = TestOptions
+                .ReleaseExe
+                .WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option).VerifyDiagnostics();
 
             option = TestOptions.ReleaseExe.WithGeneralDiagnosticOption(ReportDiagnostic.Error);
@@ -571,7 +571,8 @@ public class C
                 );
 
             warnings[MessageProvider.Instance.GetIdForErrorCode(420)] = ReportDiagnostic.Error;
-            option = TestOptions.ReleaseExe
+            option = TestOptions
+                .ReleaseExe
                 .WithGeneralDiagnosticOption(ReportDiagnostic.Default)
                 .WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option)
@@ -2506,9 +2507,9 @@ class Test
                 .VerifyDiagnostics(expected1);
             CreateCompilation(text1).VerifyDiagnostics(expected1);
 
-            var options = TestOptions.DebugDll.WithGeneralDiagnosticOption(
-                ReportDiagnostic.Suppress
-            );
+            var options = TestOptions
+                .DebugDll
+                .WithGeneralDiagnosticOption(ReportDiagnostic.Suppress);
 
             CreateCompilation(text1, parseOptions: TestOptions.Regular7_3, options: options)
                 .VerifyDiagnostics();
@@ -3427,7 +3428,8 @@ class Program
 
             var ca = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll
+                options: TestOptions
+                    .ReleaseDll
                     .WithStrongNameProvider(new DesktopStrongNameProvider())
                     .WithCryptoKeyContainer("bogus")
             );
@@ -3467,12 +3469,14 @@ class Program
         )
         {
             var pathmapArg = $"/pathmap:{sourceFrom}={sourceTo}";
-            var parsedArgs = CSharpCommandLineParser.Default.Parse(
-                new[] { pathmapArg, "a.cs" },
-                TempRoot.Root,
-                RuntimeEnvironment.GetRuntimeDirectory(),
-                null
-            );
+            var parsedArgs = CSharpCommandLineParser
+                .Default
+                .Parse(
+                    new[] { pathmapArg, "a.cs" },
+                    TempRoot.Root,
+                    RuntimeEnvironment.GetRuntimeDirectory(),
+                    null
+                );
             parsedArgs.Errors.Verify();
             var expected = new KeyValuePair<string, string>(expectedFrom, expectedTo);
             Assert.Equal(expected, parsedArgs.PathMap[0]);
@@ -3483,12 +3487,9 @@ class Program
         {
             CSharpCommandLineArguments parse(params string[] args)
             {
-                var parsedArgs = CSharpCommandLineParser.Default.Parse(
-                    args,
-                    TempRoot.Root,
-                    RuntimeEnvironment.GetRuntimeDirectory(),
-                    null
-                );
+                var parsedArgs = CSharpCommandLineParser
+                    .Default
+                    .Parse(args, TempRoot.Root, RuntimeEnvironment.GetRuntimeDirectory(), null);
                 parsedArgs.Errors.Verify();
                 return parsedArgs;
             }

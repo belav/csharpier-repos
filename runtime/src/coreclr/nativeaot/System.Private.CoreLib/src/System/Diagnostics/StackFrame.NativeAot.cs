@@ -59,12 +59,14 @@ namespace System.Diagnostics
 
                 if (needFileInfo)
                 {
-                    DeveloperExperience.Default.TryGetSourceLineInfo(
-                        _ipAddress,
-                        out _fileName,
-                        out _lineNumber,
-                        out _columnNumber
-                    );
+                    DeveloperExperience
+                        .Default
+                        .TryGetSourceLineInfo(
+                            _ipAddress,
+                            out _fileName,
+                            out _lineNumber,
+                            out _columnNumber
+                        );
                 }
             }
         }
@@ -109,10 +111,9 @@ namespace System.Diagnostics
         private bool AppendStackFrameWithoutMethodBase(StringBuilder builder)
         {
             builder.Append(
-                DeveloperExperience.Default.CreateStackTraceString(
-                    _ipAddress,
-                    includeFileInfo: false
-                )
+                DeveloperExperience
+                    .Default
+                    .CreateStackTraceString(_ipAddress, includeFileInfo: false)
             );
             return true;
         }

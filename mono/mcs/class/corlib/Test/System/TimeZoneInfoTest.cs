@@ -143,10 +143,12 @@ namespace MonoTests.System
                     BindingFlags.Static | BindingFlags.GetField | BindingFlags.NonPublic
                 );
 
-                localField = cachedDataField.FieldType.GetField(
-                    "_localTimeZone",
-                    BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic
-                );
+                localField = cachedDataField
+                    .FieldType
+                    .GetField(
+                        "_localTimeZone",
+                        BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic
+                    );
 #endif
             }
 
@@ -256,44 +258,46 @@ namespace MonoTests.System
             [ExpectedException(typeof(InvalidTimeZoneException))]
             public void AdjustmentRulesOverlap()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    3,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    10,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2000, 1, 1),
-                    new DateTime(2005, 1, 1),
-                    new TimeSpan(1, 0, 0),
-                    s1,
-                    e1
-                );
-                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    2,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    11,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2004, 1, 1),
-                    new DateTime(2007, 1, 1),
-                    new TimeSpan(1, 0, 0),
-                    s2,
-                    e2
-                );
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        10,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2000, 1, 1),
+                        new DateTime(2005, 1, 1),
+                        new TimeSpan(1, 0, 0),
+                        s1,
+                        e1
+                    );
+                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 2, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        11,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2004, 1, 1),
+                        new DateTime(2007, 1, 1),
+                        new TimeSpan(1, 0, 0),
+                        s2,
+                        e2
+                    );
                 TimeZoneInfo.CreateCustomTimeZone(
                     "mytimezone",
                     new TimeSpan(6, 0, 0),
@@ -308,44 +312,46 @@ namespace MonoTests.System
             [ExpectedException(typeof(InvalidTimeZoneException))]
             public void RulesNotOrdered()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    3,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    10,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2000, 1, 1),
-                    new DateTime(2005, 1, 1),
-                    new TimeSpan(1, 0, 0),
-                    s1,
-                    e1
-                );
-                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    2,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    11,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2006, 1, 1),
-                    new DateTime(2007, 1, 1),
-                    new TimeSpan(1, 0, 0),
-                    s2,
-                    e2
-                );
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        10,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2000, 1, 1),
+                        new DateTime(2005, 1, 1),
+                        new TimeSpan(1, 0, 0),
+                        s1,
+                        e1
+                    );
+                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 2, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        11,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2006, 1, 1),
+                        new DateTime(2007, 1, 1),
+                        new TimeSpan(1, 0, 0),
+                        s2,
+                        e2
+                    );
                 TimeZoneInfo.CreateCustomTimeZone(
                     "mytimezone",
                     new TimeSpan(6, 0, 0),
@@ -360,27 +366,26 @@ namespace MonoTests.System
             [ExpectedException(typeof(InvalidTimeZoneException))]
             public void OffsetOutOfRange()
             {
-                TimeZoneInfo.TransitionTime startTransition =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 4, 0, 0),
-                        3,
-                        2,
-                        DayOfWeek.Sunday
-                    );
-                TimeZoneInfo.TransitionTime endTransition =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
+                TimeZoneInfo.TransitionTime startTransition = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime endTransition = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 4, 0, 0),
                         10,
                         2,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2000, 1, 1),
-                    new DateTime(2005, 1, 1),
-                    new TimeSpan(3, 0, 0),
-                    startTransition,
-                    endTransition
-                );
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2000, 1, 1),
+                        new DateTime(2005, 1, 1),
+                        new TimeSpan(3, 0, 0),
+                        startTransition,
+                        endTransition
+                    );
                 TimeZoneInfo.CreateCustomTimeZone(
                     "mytimezone",
                     new TimeSpan(12, 0, 0),
@@ -409,44 +414,46 @@ namespace MonoTests.System
             [ExpectedException(typeof(InvalidTimeZoneException))]
             public void MultiplesRulesForDate()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    3,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    10,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2000, 1, 1),
-                    new DateTime(2005, 1, 1),
-                    new TimeSpan(1, 0, 0),
-                    s1,
-                    e1
-                );
-                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    2,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    11,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2005, 1, 1),
-                    new DateTime(2007, 1, 1),
-                    new TimeSpan(1, 0, 0),
-                    s2,
-                    e2
-                );
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        10,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2000, 1, 1),
+                        new DateTime(2005, 1, 1),
+                        new TimeSpan(1, 0, 0),
+                        s1,
+                        e1
+                    );
+                TimeZoneInfo.TransitionTime s2 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 2, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime e2 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        11,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                TimeZoneInfo.AdjustmentRule r2 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2005, 1, 1),
+                        new DateTime(2007, 1, 1),
+                        new TimeSpan(1, 0, 0),
+                        s2,
+                        e2
+                    );
                 TimeZoneInfo.CreateCustomTimeZone(
                     "mytimezone",
                     new TimeSpan(6, 0, 0),
@@ -460,25 +467,26 @@ namespace MonoTests.System
             [Test]
             public void SupportsDaylightSavingTime_NonEmptyAdjustmentRule()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    3,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    10,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2000, 1, 1),
-                    new DateTime(2005, 1, 1),
-                    new TimeSpan(1, 0, 0),
-                    s1,
-                    e1
-                );
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        10,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2000, 1, 1),
+                        new DateTime(2005, 1, 1),
+                        new TimeSpan(1, 0, 0),
+                        s1,
+                        e1
+                    );
                 TimeZoneInfo tz = TimeZoneInfo.CreateCustomTimeZone(
                     "mytimezone",
                     new TimeSpan(6, 0, 0),
@@ -507,25 +515,26 @@ namespace MonoTests.System
             [Test]
             public void SupportsDaylightSavingTime_NonEmptyAdjustmentRule_DisableDaylightSavingTime()
             {
-                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    3,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    10,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2000, 1, 1),
-                    new DateTime(2005, 1, 1),
-                    new TimeSpan(1, 0, 0),
-                    s1,
-                    e1
-                );
+                TimeZoneInfo.TransitionTime s1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 4, 0, 0), 3, 2, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime e1 = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        10,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                TimeZoneInfo.AdjustmentRule r1 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2000, 1, 1),
+                        new DateTime(2005, 1, 1),
+                        new TimeSpan(1, 0, 0),
+                        s1,
+                        e1
+                    );
                 TimeZoneInfo tz = TimeZoneInfo.CreateCustomTimeZone(
                     "mytimezone",
                     new TimeSpan(6, 0, 0),
@@ -563,27 +572,26 @@ namespace MonoTests.System
             [SetUp]
             public void CreateTimeZones()
             {
-                TimeZoneInfo.TransitionTime start =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 1, 0, 0),
-                        3,
-                        5,
-                        DayOfWeek.Sunday
-                    );
-                TimeZoneInfo.TransitionTime end =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    DateTime.MinValue.Date,
-                    DateTime.MaxValue.Date,
-                    new TimeSpan(1, 0, 0),
-                    start,
-                    end
-                );
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        DateTime.MinValue.Date,
+                        DateTime.MaxValue.Date,
+                        new TimeSpan(1, 0, 0),
+                        start,
+                        end
+                    );
                 london = TimeZoneInfo.CreateCustomTimeZone(
                     "Europe/London",
                     new TimeSpan(0),
@@ -694,25 +702,26 @@ namespace MonoTests.System
             {
                 // Construct a custom time zone where daylight saving time starts on the
                 // 2nd Sunday in March.
-                var transitionToDaylight = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    3,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                var transitionToStandard = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 2, 0, 0),
-                    11,
-                    1,
-                    DayOfWeek.Sunday
-                );
-                var adjustment = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    DateTime.MinValue.Date,
-                    DateTime.MaxValue.Date,
-                    new TimeSpan(1, 0, 0),
-                    transitionToDaylight,
-                    transitionToStandard
-                );
+                var transitionToDaylight = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 2, DayOfWeek.Sunday);
+                var transitionToStandard = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 2, 0, 0),
+                        11,
+                        1,
+                        DayOfWeek.Sunday
+                    );
+                var adjustment = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        DateTime.MinValue.Date,
+                        DateTime.MaxValue.Date,
+                        new TimeSpan(1, 0, 0),
+                        transitionToDaylight,
+                        transitionToStandard
+                    );
                 var timeZone = TimeZoneInfo.CreateCustomTimeZone(
                     "BugCheck",
                     new TimeSpan(-8, 0, 0),
@@ -1307,27 +1316,26 @@ namespace MonoTests.System
             [SetUp]
             public void CreateTimeZones()
             {
-                TimeZoneInfo.TransitionTime start =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 1, 0, 0),
-                        3,
-                        5,
-                        DayOfWeek.Sunday
-                    );
-                TimeZoneInfo.TransitionTime end =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    DateTime.MinValue.Date,
-                    DateTime.MaxValue.Date,
-                    new TimeSpan(1, 0, 0),
-                    start,
-                    end
-                );
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        DateTime.MinValue.Date,
+                        DateTime.MaxValue.Date,
+                        new TimeSpan(1, 0, 0),
+                        start,
+                        end
+                    );
                 london = TimeZoneInfo.CreateCustomTimeZone(
                     "Europe/London",
                     new TimeSpan(0),
@@ -1642,27 +1650,26 @@ namespace MonoTests.System
             [SetUp]
             public void CreateTimeZones()
             {
-                TimeZoneInfo.TransitionTime start =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 1, 0, 0),
-                        3,
-                        5,
-                        DayOfWeek.Sunday
-                    );
-                TimeZoneInfo.TransitionTime end =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    DateTime.MinValue.Date,
-                    DateTime.MaxValue.Date,
-                    new TimeSpan(1, 0, 0),
-                    start,
-                    end
-                );
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        DateTime.MinValue.Date,
+                        DateTime.MaxValue.Date,
+                        new TimeSpan(1, 0, 0),
+                        start,
+                        end
+                    );
                 london = TimeZoneInfo.CreateCustomTimeZone(
                     "Europe/London",
                     new TimeSpan(0),
@@ -1708,27 +1715,26 @@ namespace MonoTests.System
             [SetUp]
             public void CreateTimeZones()
             {
-                TimeZoneInfo.TransitionTime start =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 1, 0, 0),
-                        3,
-                        5,
-                        DayOfWeek.Sunday
-                    );
-                TimeZoneInfo.TransitionTime end =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    DateTime.MinValue.Date,
-                    DateTime.MaxValue.Date,
-                    new TimeSpan(1, 0, 0),
-                    start,
-                    end
-                );
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        DateTime.MinValue.Date,
+                        DateTime.MaxValue.Date,
+                        new TimeSpan(1, 0, 0),
+                        start,
+                        end
+                    );
                 london = TimeZoneInfo.CreateCustomTimeZone(
                     "Europe/London",
                     new TimeSpan(0),
@@ -1982,27 +1988,26 @@ namespace MonoTests.System
             [Test]
             public void BrusselsAdjustments()
             {
-                TimeZoneInfo.TransitionTime start =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 2, 0, 0),
-                        3,
-                        5,
-                        DayOfWeek.Sunday
-                    );
-                TimeZoneInfo.TransitionTime end =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 2, 0, 0), 3, 5, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 3, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    DateTime.MinValue.Date,
-                    DateTime.MaxValue.Date,
-                    new TimeSpan(1, 0, 0),
-                    start,
-                    end
-                );
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        DateTime.MinValue.Date,
+                        DateTime.MaxValue.Date,
+                        new TimeSpan(1, 0, 0),
+                        start,
+                        end
+                    );
                 TimeZoneInfo brussels = TimeZoneInfo.CreateCustomTimeZone(
                     "Europe/Brussels",
                     new TimeSpan(1, 0, 0),
@@ -2120,27 +2125,26 @@ namespace MonoTests.System
             [Test]
             public void Serialization_Deserialization()
             {
-                TimeZoneInfo.TransitionTime start =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                        new DateTime(1, 1, 1, 1, 0, 0),
-                        3,
-                        5,
-                        DayOfWeek.Sunday
-                    );
-                TimeZoneInfo.TransitionTime end =
-                    TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
+                TimeZoneInfo.TransitionTime start = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 1, 0, 0), 3, 5, DayOfWeek.Sunday);
+                TimeZoneInfo.TransitionTime end = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
                         new DateTime(1, 1, 1, 2, 0, 0),
                         10,
                         5,
                         DayOfWeek.Sunday
                     );
-                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    DateTime.MinValue.Date,
-                    DateTime.MaxValue.Date,
-                    new TimeSpan(1, 0, 0),
-                    start,
-                    end
-                );
+                TimeZoneInfo.AdjustmentRule rule = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        DateTime.MinValue.Date,
+                        DateTime.MaxValue.Date,
+                        new TimeSpan(1, 0, 0),
+                        start,
+                        end
+                    );
                 TimeZoneInfo london = TimeZoneInfo.CreateCustomTimeZone(
                     "Europe/London",
                     new TimeSpan(0),
@@ -2195,21 +2199,25 @@ namespace MonoTests.System
                 dstUtcOffset = new TimeSpan(3, 0, 0);
                 dstOffset = dstUtcOffset - baseUtcOffset;
 
-                var rule1 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2014, 1, 1),
-                    new DateTime(2014, 6, 30),
-                    dstOffset,
-                    CreateFixedDateRule(dst1Start),
-                    CreateFixedDateRule(dst1End)
-                );
+                var rule1 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 6, 30),
+                        dstOffset,
+                        CreateFixedDateRule(dst1Start),
+                        CreateFixedDateRule(dst1End)
+                    );
 
-                var rule2 = TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                    new DateTime(2014, 7, 1),
-                    new DateTime(2014, 12, 31),
-                    dstOffset,
-                    CreateFixedDateRule(dst2Start),
-                    CreateFixedDateRule(dst2End)
-                );
+                var rule2 = TimeZoneInfo
+                    .AdjustmentRule
+                    .CreateAdjustmentRule(
+                        new DateTime(2014, 7, 1),
+                        new DateTime(2014, 12, 31),
+                        dstOffset,
+                        CreateFixedDateRule(dst2Start),
+                        CreateFixedDateRule(dst2End)
+                    );
 
                 cairo = TimeZoneInfo.CreateCustomTimeZone(
                     "Africa/Cairo",
@@ -2224,11 +2232,9 @@ namespace MonoTests.System
             private static TimeZoneInfo.TransitionTime CreateFixedDateRule(DateTime dateTime)
             {
                 var time = new DateTime(dateTime.Ticks - dateTime.Date.Ticks);
-                return TimeZoneInfo.TransitionTime.CreateFixedDateRule(
-                    time,
-                    dateTime.Month,
-                    dateTime.Day
-                );
+                return TimeZoneInfo
+                    .TransitionTime
+                    .CreateFixedDateRule(time, dateTime.Month, dateTime.Day);
             }
 
             [Test]
@@ -2413,18 +2419,17 @@ namespace MonoTests.System
             {
                 TimeZoneInfo.TransitionTime startTransition,
                     endTransition;
-                startTransition = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 4, 0, 0),
-                    10,
-                    2,
-                    DayOfWeek.Sunday
-                );
-                endTransition = TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    new DateTime(1, 1, 1, 3, 0, 0),
-                    3,
-                    2,
-                    DayOfWeek.Sunday
-                );
+                startTransition = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(
+                        new DateTime(1, 1, 1, 4, 0, 0),
+                        10,
+                        2,
+                        DayOfWeek.Sunday
+                    );
+                endTransition = TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(new DateTime(1, 1, 1, 3, 0, 0), 3, 2, DayOfWeek.Sunday);
 
                 var ctz = TimeZoneInfo.CreateCustomTimeZone(
                     "test",
@@ -2434,13 +2439,15 @@ namespace MonoTests.System
                     "dst",
                     new[]
                     {
-                        TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                            DateTime.MinValue,
-                            DateTime.MaxValue.Date,
-                            TimeSpan.FromHours(-1),
-                            startTransition,
-                            endTransition
-                        )
+                        TimeZoneInfo
+                            .AdjustmentRule
+                            .CreateAdjustmentRule(
+                                DateTime.MinValue,
+                                DateTime.MaxValue.Date,
+                                TimeSpan.FromHours(-1),
+                                startTransition,
+                                endTransition
+                            )
                     }
                 );
 

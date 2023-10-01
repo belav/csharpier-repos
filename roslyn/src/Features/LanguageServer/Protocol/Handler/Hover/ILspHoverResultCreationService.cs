@@ -54,9 +54,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var tags = info.Sections
                 .SelectMany(
                     section =>
-                        section.TaggedParts.Add(
-                            new TaggedText(TextTags.LineBreak, Environment.NewLine)
-                        )
+                        section
+                            .TaggedParts
+                            .Add(new TaggedText(TextTags.LineBreak, Environment.NewLine))
                 )
                 .ToImmutableArray();
 

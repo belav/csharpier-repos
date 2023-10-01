@@ -37,7 +37,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var List = entity.objects
+                        var List = entity
+                            .objects
                             .Select(
                                 c =>
                                     new ObjectsModel
@@ -61,7 +62,8 @@ namespace POS_Server.Controllers
                                 if (List[i].isActive == 1)
                                 {
                                     long objectId = (long)List[i].objectId;
-                                    var operationsL = entity.groupObject
+                                    var operationsL = entity
+                                        .groupObject
                                         .Where(x => x.objectId == objectId)
                                         .Select(b => new { b.id })
                                         .FirstOrDefault();
@@ -112,7 +114,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.objects
+                        var list = entity
+                            .objects
                             .Where(c => c.objectId == Id)
                             .Select(
                                 c =>
@@ -190,7 +193,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var tmps = entity.objects
+                                var tmps = entity
+                                    .objects
                                     .Where(p => p.objectId == newObject.objectId)
                                     .FirstOrDefault();
 

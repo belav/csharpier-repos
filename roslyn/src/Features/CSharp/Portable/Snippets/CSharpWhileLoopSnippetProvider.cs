@@ -56,15 +56,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
         {
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
             var whileStatementSyntax = (WhileStatementSyntax)node;
-            var openBraceLine = parsedDocument.Text.Lines
+            var openBraceLine = parsedDocument
+                .Text
+                .Lines
                 .GetLineFromPosition(whileStatementSyntax.Statement.SpanStart)
                 .LineNumber;
 
             var indentationOptions = new IndentationOptions(syntaxFormattingOptions);
             var newLine = indentationOptions.FormattingOptions.NewLine;
 
-            var indentationService =
-                parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
+            var indentationService = parsedDocument
+                .LanguageServices
+                .GetRequiredService<IIndentationService>();
             var indentation = indentationService.GetIndentation(
                 parsedDocument,
                 openBraceLine + 1,
@@ -109,9 +112,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             var whileStatementSyntax = (WhileStatementSyntax)snippet;
             var blockStatement = (BlockSyntax)whileStatementSyntax.Statement;
             blockStatement = blockStatement.WithCloseBraceToken(
-                blockStatement.CloseBraceToken.WithPrependedLeadingTrivia(
-                    SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
-                )
+                blockStatement
+                    .CloseBraceToken
+                    .WithPrependedLeadingTrivia(
+                        SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
+                    )
             );
             var newWhileStatementSyntax = whileStatementSyntax.ReplaceNode(
                 whileStatementSyntax.Statement,

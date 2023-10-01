@@ -295,10 +295,9 @@ namespace System.Xml.Xsl.XsltOld
         internal void InsertExtensionNamespace()
         {
             InsertExtensionNamespace(
-                Input.Navigator.GetAttribute(
-                    Input.Atoms.ExtensionElementPrefixes,
-                    Input.Atoms.UriXsl
-                )
+                Input
+                    .Navigator
+                    .GetAttribute(Input.Atoms.ExtensionElementPrefixes, Input.Atoms.UriXsl)
             );
         }
 
@@ -1055,9 +1054,9 @@ namespace System.Xml.Xsl.XsltOld
 #pragma warning disable 618
                         compilParams.Evidence = evidence;
 #pragma warning restore 618
-                        compilParams.ReferencedAssemblies.Add(
-                            typeof(XPathNavigator).Module.FullyQualifiedName
-                        );
+                        compilParams
+                            .ReferencedAssemblies
+                            .Add(typeof(XPathNavigator).Module.FullyQualifiedName);
                         compilParams.ReferencedAssemblies.Add("System.dll");
 #if !FEATURE_PAL // visualbasic
                         if (lang == ScriptingLanguage.VisualBasic)
@@ -1094,10 +1093,9 @@ namespace System.Xml.Xsl.XsltOld
             {
                 string ns = (string)entry.Key;
                 CodeTypeDeclaration scriptClass = (CodeTypeDeclaration)entry.Value;
-                this.stylesheet.ScriptObjectTypes.Add(
-                    ns,
-                    assembly.GetType(nsName + "." + scriptClass.Name)
-                );
+                this.stylesheet
+                    .ScriptObjectTypes
+                    .Add(ns, assembly.GetType(nsName + "." + scriptClass.Name));
             }
         }
 #endif

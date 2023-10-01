@@ -107,14 +107,9 @@ namespace System.Text.Json.Serialization.Converters
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
-            typeInfo.CreateObjectWithArgs ??=
-                JsonSerializerOptions.MemberAccessorStrategy.CreateParameterizedConstructor<
-                    T,
-                    TArg0,
-                    TArg1,
-                    TArg2,
-                    TArg3
-                >(ConstructorInfo!);
+            typeInfo.CreateObjectWithArgs ??= JsonSerializerOptions
+                .MemberAccessorStrategy
+                .CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(ConstructorInfo!);
 
             var arguments = new Arguments<TArg0, TArg1, TArg2, TArg3>();
 

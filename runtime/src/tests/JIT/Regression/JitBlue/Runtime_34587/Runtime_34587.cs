@@ -73,18 +73,20 @@ public class Runtime_34587
         TestLibrary.TestFramework.LogInformation($"  Sha256.Arm64:  {Sha256.Arm64.IsSupported}");
 
         TestLibrary.TestFramework.LogInformation("Supported Cross Platform ISAs:");
-        TestLibrary.TestFramework.LogInformation(
-            $"  Vector<T>:     {Vector.IsHardwareAccelerated}; {Vector<byte>.Count}"
-        );
-        TestLibrary.TestFramework.LogInformation(
-            $"  Vector64<T>:   {Vector64.IsHardwareAccelerated}"
-        );
-        TestLibrary.TestFramework.LogInformation(
-            $"  Vector128<T>:  {Vector128.IsHardwareAccelerated}"
-        );
-        TestLibrary.TestFramework.LogInformation(
-            $"  Vector256<T>:  {Vector256.IsHardwareAccelerated}"
-        );
+        TestLibrary
+            .TestFramework
+            .LogInformation(
+                $"  Vector<T>:     {Vector.IsHardwareAccelerated}; {Vector<byte>.Count}"
+            );
+        TestLibrary
+            .TestFramework
+            .LogInformation($"  Vector64<T>:   {Vector64.IsHardwareAccelerated}");
+        TestLibrary
+            .TestFramework
+            .LogInformation($"  Vector128<T>:  {Vector128.IsHardwareAccelerated}");
+        TestLibrary
+            .TestFramework
+            .LogInformation($"  Vector256<T>:  {Vector256.IsHardwareAccelerated}");
 
         bool succeeded = true;
         bool testSucceeded;

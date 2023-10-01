@@ -520,9 +520,9 @@
                 {
                     Type updatedWorkflowType = null;
                     if (workflowType.Assembly == null && typeProvider.LocalAssembly != null)
-                        updatedWorkflowType = typeProvider.LocalAssembly.GetType(
-                            workflowType.FullName
-                        );
+                        updatedWorkflowType = typeProvider
+                            .LocalAssembly
+                            .GetType(workflowType.FullName);
                     else
                         updatedWorkflowType = typeProvider.GetType(workflowType.FullName);
 

@@ -85,10 +85,12 @@ namespace ILLink.Shared.TrimAnalysis
             var newValue = new ArrayValue(Size.DeepCopy(), ElementType);
             foreach (var kvp in IndexValues)
             {
-                newValue.IndexValues.Add(
-                    kvp.Key,
-                    new ValueBasicBlockPair(kvp.Value.Value.Clone(), kvp.Value.BasicBlockIndex)
-                );
+                newValue
+                    .IndexValues
+                    .Add(
+                        kvp.Key,
+                        new ValueBasicBlockPair(kvp.Value.Value.Clone(), kvp.Value.BasicBlockIndex)
+                    );
             }
 
             return newValue;

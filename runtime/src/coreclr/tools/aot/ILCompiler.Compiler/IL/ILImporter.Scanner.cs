@@ -206,22 +206,26 @@ namespace Internal.IL
 
             if (_canonMethod.RequiresInstMethodDescArg())
             {
-                return _compilation.NodeFactory.ReadyToRunHelperFromDictionaryLookup(
-                    lookup.HelperId,
-                    lookup.HelperObject,
-                    _canonMethod
-                );
+                return _compilation
+                    .NodeFactory
+                    .ReadyToRunHelperFromDictionaryLookup(
+                        lookup.HelperId,
+                        lookup.HelperObject,
+                        _canonMethod
+                    );
             }
             else
             {
                 Debug.Assert(
                     _canonMethod.RequiresInstArg() || _canonMethod.AcquiresInstMethodTableFromThis()
                 );
-                return _compilation.NodeFactory.ReadyToRunHelperFromTypeLookup(
-                    lookup.HelperId,
-                    lookup.HelperObject,
-                    _canonMethod.OwningType
-                );
+                return _compilation
+                    .NodeFactory
+                    .ReadyToRunHelperFromTypeLookup(
+                        lookup.HelperId,
+                        lookup.HelperObject,
+                        _canonMethod.OwningType
+                    );
             }
         }
 
@@ -329,12 +333,15 @@ namespace Internal.IL
             )
                 ThrowHelper.ThrowBadImageFormatException();
 
-            _compilation.NodeFactory.MetadataManager.GetDependenciesDueToAccess(
-                ref _dependencies,
-                _compilation.NodeFactory,
-                _canonMethodIL,
-                method
-            );
+            _compilation
+                .NodeFactory
+                .MetadataManager
+                .GetDependenciesDueToAccess(
+                    ref _dependencies,
+                    _compilation.NodeFactory,
+                    _canonMethodIL,
+                    method
+                );
 
             if (method.IsRawPInvoke())
             {
@@ -532,10 +539,9 @@ namespace Internal.IL
                 {
                     // Constrained calls to methods on enum methods resolve to System.Enum's methods. System.Enum is a reference
                     // type though, so we would fail to resolve and box. We have a special path for those to avoid boxing.
-                    directMethod = _compilation.TypeSystemContext.TryResolveConstrainedEnumMethod(
-                        constrained,
-                        method
-                    );
+                    directMethod = _compilation
+                        .TypeSystemContext
+                        .TryResolveConstrainedEnumMethod(constrained, method);
                 }
 
                 if (directMethod != null)
@@ -650,16 +656,19 @@ namespace Internal.IL
                 Debug.Assert(targetMethod.OwningType.IsValueType);
                 MethodDesc targetOfLookup;
                 if (_constrained.IsRuntimeDeterminedType)
-                    targetOfLookup =
-                        _compilation.TypeSystemContext.GetMethodForRuntimeDeterminedType(
+                    targetOfLookup = _compilation
+                        .TypeSystemContext
+                        .GetMethodForRuntimeDeterminedType(
                             targetMethod.GetTypicalMethodDefinition(),
                             (RuntimeDeterminedType)_constrained
                         );
                 else if (_constrained.HasInstantiation)
-                    targetOfLookup = _compilation.TypeSystemContext.GetMethodForInstantiatedType(
-                        targetMethod.GetTypicalMethodDefinition(),
-                        (InstantiatedType)_constrained
-                    );
+                    targetOfLookup = _compilation
+                        .TypeSystemContext
+                        .GetMethodForInstantiatedType(
+                            targetMethod.GetTypicalMethodDefinition(),
+                            (InstantiatedType)_constrained
+                        );
                 else
                     targetOfLookup = targetMethod.GetMethodDefinition();
                 if (targetOfLookup.HasInstantiation)
@@ -752,9 +761,9 @@ namespace Internal.IL
                             if (targetMethod.IsIntrinsic)
                             {
                                 if (
-                                    _factory.TypeSystemContext.IsSpecialUnboxingThunkTargetMethod(
-                                        targetMethod
-                                    )
+                                    _factory
+                                        .TypeSystemContext
+                                        .IsSpecialUnboxingThunkTargetMethod(targetMethod)
                                 )
                                     hasHiddenParameter = false;
                             }
@@ -849,9 +858,9 @@ namespace Internal.IL
 
                     if (targetMethod.RequiresInstMethodDescArg())
                     {
-                        instParam = _compilation.NodeFactory.MethodGenericDictionary(
-                            concreteMethod
-                        );
+                        instParam = _compilation
+                            .NodeFactory
+                            .MethodGenericDictionary(concreteMethod);
                     }
                     else if (
                         targetMethod.RequiresInstMethodTableArg()
@@ -859,9 +868,9 @@ namespace Internal.IL
                     )
                     {
                         // Ask for a constructed type symbol because we need the vtable to get to the dictionary
-                        instParam = _compilation.NodeFactory.ConstructedTypeSymbol(
-                            concreteMethod.OwningType
-                        );
+                        instParam = _compilation
+                            .NodeFactory
+                            .ConstructedTypeSymbol(concreteMethod.OwningType);
                     }
 
                     if (instParam != null)
@@ -896,9 +905,9 @@ namespace Internal.IL
                         // method, but that's more complex and doesn't seem worth it at this time.
                         Debug.Assert(targetMethod.AcquiresInstMethodTableFromThis());
                         _dependencies.Add(
-                            _compilation.NodeFactory.MaximallyConstructableType(
-                                concreteMethod.OwningType
-                            ),
+                            _compilation
+                                .NodeFactory
+                                .MaximallyConstructableType(concreteMethod.OwningType),
                             reason + " - inlining protection"
                         );
                     }
@@ -1023,9 +1032,9 @@ namespace Internal.IL
                     while (_dependencies.Count > numDependenciesBeforeTargetDetermination)
                         _dependencies.RemoveAt(_dependencies.Count - 1);
 
-                    TypeDesc canonDelegateType = ctorMethod.OwningType.ConvertToCanonForm(
-                        CanonicalFormKind.Specific
-                    );
+                    TypeDesc canonDelegateType = ctorMethod
+                        .OwningType
+                        .ConvertToCanonForm(CanonicalFormKind.Specific);
                     DelegateCreationInfo info = _compilation.GetDelegateCtor(
                         canonDelegateType,
                         targetForDelegate,
@@ -1070,10 +1079,9 @@ namespace Internal.IL
             if (_methodIL is Internal.IL.Stubs.PInvokeILStubMethodIL)
                 return;
 
-            MethodDesc stub = _compilation.PInvokeILProvider.GetCalliStub(
-                signature,
-                ((MetadataType)_methodIL.OwningMethod.OwningType).Module
-            );
+            MethodDesc stub = _compilation
+                .PInvokeILProvider
+                .GetCalliStub(signature, ((MetadataType)_methodIL.OwningMethod.OwningType).Module);
 
             _dependencies.Add(_factory.CanonicalEntrypoint(stub), "calli");
         }
@@ -1317,12 +1325,15 @@ namespace Internal.IL
             var field = (FieldDesc)_methodIL.GetObject(token);
             var canonField = (FieldDesc)_canonMethodIL.GetObject(token);
 
-            _compilation.NodeFactory.MetadataManager.GetDependenciesDueToAccess(
-                ref _dependencies,
-                _compilation.NodeFactory,
-                _canonMethodIL,
-                canonField
-            );
+            _compilation
+                .NodeFactory
+                .MetadataManager
+                .GetDependenciesDueToAccess(
+                    ref _dependencies,
+                    _compilation.NodeFactory,
+                    _canonMethodIL,
+                    canonField
+                );
 
             // Covers both ldsfld/ldsflda and ldfld/ldflda with a static field
             if (isStatic || field.IsStatic)

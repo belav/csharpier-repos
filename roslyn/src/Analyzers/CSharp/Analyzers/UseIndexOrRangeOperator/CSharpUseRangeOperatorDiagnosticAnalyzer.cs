@@ -104,12 +104,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 return;
 
             if (
-                CSharpSemanticFacts.Instance.IsInExpressionTree(
-                    semanticModel,
-                    operation.Syntax,
-                    infoCache.ExpressionOfTType,
-                    context.CancellationToken
-                )
+                CSharpSemanticFacts
+                    .Instance
+                    .IsInExpressionTree(
+                        semanticModel,
+                        operation.Syntax,
+                        infoCache.ExpressionOfTType,
+                        context.CancellationToken
+                    )
             )
                 return;
 
@@ -224,10 +226,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             var startOperation = invocation.Arguments[0].Value;
 
             if (
-                CSharpSyntaxFacts.Instance.AreEquivalent(
-                    startOperation.Syntax,
-                    subtraction.RightOperand.Syntax
-                )
+                CSharpSyntaxFacts
+                    .Instance
+                    .AreEquivalent(startOperation.Syntax, subtraction.RightOperand.Syntax)
             )
             {
                 return new Result(

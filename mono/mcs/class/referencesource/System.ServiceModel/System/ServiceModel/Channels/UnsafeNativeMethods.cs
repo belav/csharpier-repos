@@ -1301,10 +1301,10 @@ namespace System.ServiceModel.Channels
             IntPtr hModule = GetModuleHandle(moduleName);
             if (hModule == IntPtr.Zero)
             {
-                System.Diagnostics.Debug.Assert(
-                    hModule != IntPtr.Zero,
-                    "GetModuleHandle failed.  Dll isn't loaded?"
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(hModule != IntPtr.Zero, "GetModuleHandle failed.  Dll isn't loaded?");
                 return false;
             }
             IntPtr functionPointer = GetProcAddress(hModule, methodName);

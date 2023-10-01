@@ -141,7 +141,8 @@ S5();
     }
 }";
 
-            var solution = workspace.CurrentSolution
+            var solution = workspace
+                .CurrentSolution
                 .AddProject("proj", "proj", LanguageNames.CSharp)
                 .AddDocument("doc", SourceText.From(source, Encoding.UTF8), filePath: "a.cs")
                 .Project
@@ -225,7 +226,8 @@ S1();
     }
 }";
 
-            var solution = workspace.CurrentSolution
+            var solution = workspace
+                .CurrentSolution
                 .AddProject("proj", "proj", LanguageNames.CSharp)
                 .AddDocument("doc", SourceText.From(source, Encoding.UTF8), filePath: "a.cs")
                 .Project
@@ -298,7 +300,8 @@ class C
     }
 }";
 
-            var solution = workspace.CurrentSolution
+            var solution = workspace
+                .CurrentSolution
                 .AddProject("proj", "proj", LanguageNames.CSharp)
                 .AddDocument("doc", SourceText.From(source, Encoding.UTF8), filePath: "a.cs")
                 .Project
@@ -410,12 +413,14 @@ class C
             var remapping = ImmutableDictionary<
                 ManagedMethodId,
                 ImmutableArray<NonRemappableRegion>
-            >.Empty.Add(
-                debugInfos[0].ActiveInstruction.Method,
-                reverse
-                    ? ImmutableArray.Create(mapping1, mapping2)
-                    : ImmutableArray.Create(mapping2, mapping1)
-            );
+            >
+                .Empty
+                .Add(
+                    debugInfos[0].ActiveInstruction.Method,
+                    reverse
+                        ? ImmutableArray.Create(mapping1, mapping2)
+                        : ImmutableArray.Create(mapping2, mapping1)
+                );
 
             var map = ActiveStatementsMap.Create(debugInfos, remapping);
 
@@ -467,12 +472,14 @@ class C
             var remapping = ImmutableDictionary<
                 ManagedMethodId,
                 ImmutableArray<NonRemappableRegion>
-            >.Empty.Add(
-                debugInfos[0].ActiveInstruction.Method,
-                reverse
-                    ? ImmutableArray.Create(mapping1, mapping2)
-                    : ImmutableArray.Create(mapping2, mapping1)
-            );
+            >
+                .Empty
+                .Add(
+                    debugInfos[0].ActiveInstruction.Method,
+                    reverse
+                        ? ImmutableArray.Create(mapping1, mapping2)
+                        : ImmutableArray.Create(mapping2, mapping1)
+                );
 
             var map = ActiveStatementsMap.Create(debugInfos, remapping);
 

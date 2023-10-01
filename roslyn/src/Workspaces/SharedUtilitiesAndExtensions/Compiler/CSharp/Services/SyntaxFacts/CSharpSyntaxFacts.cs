@@ -899,9 +899,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             {
                 if (memberDeclaration.Kind() == SyntaxKind.ConversionOperatorDeclaration)
                 {
-                    name = (
-                        memberDeclaration as ConversionOperatorDeclarationSyntax
-                    )?.Type.ToString();
+                    name = (memberDeclaration as ConversionOperatorDeclarationSyntax)
+                        ?.Type
+                        .ToString();
                 }
                 else
                 {
@@ -1471,9 +1471,10 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             SyntaxNode localDeclarationStatement
         )
         {
-            return (
-                (LocalDeclarationStatementSyntax)localDeclarationStatement
-            ).Declaration.Variables.Contains((VariableDeclaratorSyntax)declarator);
+            return ((LocalDeclarationStatementSyntax)localDeclarationStatement)
+                .Declaration
+                .Variables
+                .Contains((VariableDeclaratorSyntax)declarator);
         }
 
         public bool AreEquivalent(SyntaxToken token1, SyntaxToken token2) =>
@@ -1712,9 +1713,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
 
         public bool IsVerbatimInterpolatedStringExpression(SyntaxNode node) =>
             node is InterpolatedStringExpressionSyntax interpolatedString
-            && interpolatedString.StringStartToken.IsKind(
-                SyntaxKind.InterpolatedVerbatimStringStartToken
-            );
+            && interpolatedString
+                .StringStartToken
+                .IsKind(SyntaxKind.InterpolatedVerbatimStringStartToken);
 
         public bool IsInInactiveRegion(
             SyntaxTree syntaxTree,

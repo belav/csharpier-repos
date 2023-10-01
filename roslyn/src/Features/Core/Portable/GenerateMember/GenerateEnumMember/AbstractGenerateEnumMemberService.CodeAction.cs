@@ -40,9 +40,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 CancellationToken cancellationToken
             )
             {
-                var languageServices = _document.Project.Solution.Services.GetLanguageServices(
-                    _state.TypeToGenerateIn.Language
-                );
+                var languageServices = _document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetLanguageServices(_state.TypeToGenerateIn.Language);
                 var codeGenerator = languageServices.GetService<ICodeGenerationService>();
                 var semanticFacts = languageServices.GetService<ISemanticFactsService>();
 

@@ -43,10 +43,13 @@ namespace System.Data.Objects
             _property = property;
             _isReadOnly = isReadOnly;
             _fieldType = DetermineClrType(_property.TypeUsage);
-            System.Diagnostics.Debug.Assert(
-                _fieldType != null,
-                "FieldDescriptor's CLR type has unexpected value of null."
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    _fieldType != null,
+                    "FieldDescriptor's CLR type has unexpected value of null."
+                );
         }
 
         /// <summary>
@@ -82,11 +85,9 @@ namespace System.Data.Objects
                     Facet nullable;
                     if (
                         result.IsValueType
-                        && typeUsage.Facets.TryGetValue(
-                            DbProviderManifest.NullableFacetName,
-                            false,
-                            out nullable
-                        )
+                        && typeUsage
+                            .Facets
+                            .TryGetValue(DbProviderManifest.NullableFacetName, false, out nullable)
                         && ((bool)nullable.Value)
                     )
                     {

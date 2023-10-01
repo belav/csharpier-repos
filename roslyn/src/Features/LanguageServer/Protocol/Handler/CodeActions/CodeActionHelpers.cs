@@ -72,9 +72,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     // Skip code actions that requires non-document changes.  We can't apply them in LSP currently.
                     // https://github.com/dotnet/roslyn/issues/48698
                     if (
-                        suggestedAction.OriginalCodeAction.Tags.Contains(
-                            CodeAction.RequiresNonDocumentChange
-                        )
+                        suggestedAction
+                            .OriginalCodeAction
+                            .Tags
+                            .Contains(CodeAction.RequiresNonDocumentChange)
                     )
                         continue;
 
@@ -213,9 +214,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 {
                     // Associate the diagnostics from the request that match the diagnostic fixed by the code action by ID.
                     // The request diagnostics are already restricted to the code fix location by the request.
-                    var diagnosticCodesFixedByAction = codeFixAction.CodeFix.Diagnostics.Select(
-                        d => d.Id
-                    );
+                    var diagnosticCodesFixedByAction = codeFixAction
+                        .CodeFix
+                        .Diagnostics
+                        .Select(d => d.Id);
                     using var _ = ArrayBuilder<LSP.Diagnostic>.GetInstance(
                         out var diagnosticsBuilder
                     );
@@ -310,12 +312,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 }
             }
 
-            return CodeAction.CodeActionWithNestedActions.Create(
-                codeAction.Title,
-                nestedActions.ToImmutable(),
-                codeAction.IsInlinable,
-                codeAction.Priority
-            );
+            return CodeAction
+                .CodeActionWithNestedActions
+                .Create(
+                    codeAction.Title,
+                    nestedActions.ToImmutable(),
+                    codeAction.IsInlinable,
+                    codeAction.Priority
+                );
         }
 
         private static async ValueTask<

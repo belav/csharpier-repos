@@ -6876,7 +6876,8 @@ interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<MethodSymbol>()
@@ -6923,7 +6924,8 @@ interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<MethodSymbol>()
@@ -7118,7 +7120,8 @@ partial interface I1
             void validate(ModuleSymbol module)
             {
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -7212,7 +7215,8 @@ partial interface I1
             void validate(ModuleSymbol module)
             {
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -7266,7 +7270,8 @@ interface I1<T> where T : I1<T>
             {
                 int count = 0;
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -7324,7 +7329,8 @@ interface I1<T> where T : I1<T>
             {
                 int count = 0;
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -7677,7 +7683,8 @@ interface I1<T> where T : I1<T>
             {
                 int count = 0;
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -7730,7 +7737,8 @@ interface I1<T> where T : I1<T>
             {
                 int count = 0;
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -7838,7 +7846,8 @@ interface I1
 
             void validate(ModuleSymbol module)
             {
-                var p01 = module.GlobalNamespace
+                var p01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
@@ -7852,7 +7861,8 @@ interface I1
 
                 int count = 0;
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -7901,7 +7911,8 @@ interface I1
 
             void validate(ModuleSymbol module)
             {
-                var p01 = module.GlobalNamespace
+                var p01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
@@ -7915,7 +7926,8 @@ interface I1
 
                 int count = 0;
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -8034,7 +8046,8 @@ interface I1
 
             void validate(ModuleSymbol module)
             {
-                var e01 = module.GlobalNamespace
+                var e01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
@@ -8048,7 +8061,8 @@ interface I1
 
                 int count = 0;
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -8098,7 +8112,8 @@ interface I1
 
             void validate(ModuleSymbol module)
             {
-                var e01 = module.GlobalNamespace
+                var e01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
@@ -8112,7 +8127,8 @@ interface I1
 
                 int count = 0;
                 foreach (
-                    var m01 in module.GlobalNamespace
+                    var m01 in module
+                        .GlobalNamespace
                         .GetTypeMember("I1")
                         .GetMembers()
                         .OfType<MethodSymbol>()
@@ -22156,29 +22172,34 @@ interface I8 : I1
                     .WithLocation(32, 26)
             );
 
-            var m01 = compilation1.GlobalNamespace
+            var m01 = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<MethodSymbol>()
                 .Single();
 
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I2")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I3")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I4")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I5")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -22190,12 +22211,14 @@ interface I8 : I1
             );
 
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I7")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I8")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -22280,7 +22303,8 @@ interface I8 : I1
                     .WithLocation(37, 29)
             );
 
-            var m01 = compilation1.GlobalNamespace
+            var m01 = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -22288,25 +22312,29 @@ interface I8 : I1
 
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I2")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I3")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I4")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I5")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -22319,7 +22347,8 @@ interface I8 : I1
 
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I7")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -22622,7 +22651,8 @@ public interface I1
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -22630,7 +22660,8 @@ public interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<MethodSymbol>()
@@ -22714,7 +22745,8 @@ public interface I1
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -22722,7 +22754,8 @@ public interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<MethodSymbol>()
@@ -23179,7 +23212,8 @@ class C2 : C1, I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<MethodSymbol>()
@@ -23641,7 +23675,8 @@ public class C1<T> : I1
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains("M01"))
@@ -23766,7 +23801,8 @@ public class C1<T> : I1<T>
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains("M01"))
@@ -23888,7 +23924,8 @@ public class C1<T> : I1
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains("M01"))
@@ -23998,7 +24035,8 @@ public class C1<T> : I1<T>
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains("M01"))
@@ -24113,7 +24151,8 @@ public class C11<T> : C1<T>, I1
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains("M01"))
@@ -24240,7 +24279,8 @@ public class C11<T> : C1<T>, I1<T>
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains("M01"))
@@ -24370,7 +24410,8 @@ public class C1<T>
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains("M01"))
@@ -24532,7 +24573,8 @@ public class C1<T>
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains("M01"))
@@ -25842,29 +25884,34 @@ interface I14 : I1
                     Diagnostic(badSignatureError, op).WithLocation(47, 23 + checkedKeyword.Length)
                 );
 
-            var m01 = compilation1.GlobalNamespace
+            var m01 = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<MethodSymbol>()
                 .Single();
 
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I2")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I3")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I4")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I5")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -25876,7 +25923,8 @@ interface I14 : I1
             );
 
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I7")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -25918,7 +25966,8 @@ interface I14 : I1
             );
 
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I14")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -26126,7 +26175,8 @@ interface I14 : I1
                         .WithLocation(67, 36 + checkedKeyword.Length)
                 );
 
-            var m01 = compilation1.GlobalNamespace
+            var m01 = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -26134,25 +26184,29 @@ interface I14 : I1
 
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I2")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I3")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I4")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I5")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -26165,7 +26219,8 @@ interface I14 : I1
 
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I7")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -26472,29 +26527,34 @@ interface I14 : I1
                 )
                 .Verify(expected);
 
-            var m01 = compilation1.GlobalNamespace
+            var m01 = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<MethodSymbol>()
                 .Single();
 
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I2")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I3")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I4")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I5")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -26506,7 +26566,8 @@ interface I14 : I1
             );
 
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I7")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -26548,7 +26609,8 @@ interface I14 : I1
             );
 
             Assert.Null(
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I14")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -26842,7 +26904,8 @@ interface I14 : I1
                 )
                 .Verify(expected);
 
-            var m01 = compilation1.GlobalNamespace
+            var m01 = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<MethodSymbol>()
@@ -26850,25 +26913,29 @@ interface I14 : I1
 
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I2")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I3")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I4")
                     .FindImplementationForInterfaceMember(m01)
             );
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I5")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -26881,7 +26948,8 @@ interface I14 : I1
 
             Assert.Same(
                 m01,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("I7")
                     .FindImplementationForInterfaceMember(m01)
             );
@@ -28064,7 +28132,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -28189,7 +28258,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -28347,7 +28417,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -28499,7 +28570,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -28507,7 +28579,8 @@ partial "
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers(opName)
                     .OfType<MethodSymbol>()
@@ -28642,7 +28715,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -28650,7 +28724,8 @@ partial "
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers(opName)
                     .OfType<MethodSymbol>()
@@ -28814,7 +28889,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -28822,7 +28898,8 @@ partial "
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers(opName)
                     .OfType<MethodSymbol>()
@@ -28963,7 +29040,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -31803,7 +31881,8 @@ public partial class C1<T, U>
             compilation1.VerifyDiagnostics();
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains(opName))
@@ -31999,7 +32078,8 @@ public partial class C1<T, U> : I1<C1<T, U>, U>
             compilation1.VerifyDiagnostics();
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains(opName))
@@ -32185,7 +32265,8 @@ public partial class C1<T, U>
             compilation1.VerifyDiagnostics();
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains(opName))
@@ -33293,38 +33374,45 @@ interface I8 : I1
             foreach (var m01 in compilation1.GlobalNamespace.GetTypeMember("I1").GetMembers())
             {
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I2")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I3")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I4")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I5")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I7")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I8")
                         .FindImplementationForInterfaceMember(m01)
                 );
             }
 
-            var m = compilation1.GlobalNamespace
+            var m = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<PropertySymbol>()
@@ -33430,37 +33518,43 @@ interface I8 : I1
 
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I2")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I3")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I4")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I5")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I7")
                         .FindImplementationForInterfaceMember(m01)
                 );
             }
 
-            var m = compilation1.GlobalNamespace
+            var m = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<PropertySymbol>()
@@ -33823,7 +33917,8 @@ public interface I1
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -33831,7 +33926,8 @@ public interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
@@ -33946,7 +34042,8 @@ public interface I1
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -33954,7 +34051,8 @@ public interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
@@ -34065,7 +34163,8 @@ public interface I1
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -34073,7 +34172,8 @@ public interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
@@ -35739,7 +35839,8 @@ class C2 : C1, I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
@@ -36488,7 +36589,8 @@ public class C1<T> : I1
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
@@ -36597,7 +36699,8 @@ public class C1<T> : I1<T>
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .OfType<PropertySymbol>()
@@ -37041,39 +37144,46 @@ interface I8 : I1
             foreach (var m01 in compilation1.GlobalNamespace.GetTypeMember("I1").GetMembers())
             {
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I2")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I3")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I4")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I5")
                         .FindImplementationForInterfaceMember(m01)
                 );
 
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I7")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Null(
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I8")
                         .FindImplementationForInterfaceMember(m01)
                 );
             }
 
-            var m = compilation1.GlobalNamespace
+            var m = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<EventSymbol>()
@@ -37177,37 +37287,43 @@ interface I8 : I1
             {
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I2")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I3")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I4")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I5")
                         .FindImplementationForInterfaceMember(m01)
                 );
                 Assert.Same(
                     m01,
-                    compilation1.GlobalNamespace
+                    compilation1
+                        .GlobalNamespace
                         .GetTypeMember("I7")
                         .FindImplementationForInterfaceMember(m01)
                 );
             }
 
-            var m = compilation1.GlobalNamespace
+            var m = compilation1
+                .GlobalNamespace
                 .GetTypeMember("I1")
                 .GetMembers()
                 .OfType<EventSymbol>()
@@ -37566,7 +37682,8 @@ public interface I1
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -37574,7 +37691,8 @@ public interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
@@ -37689,7 +37807,8 @@ public interface I1
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -37697,7 +37816,8 @@ public interface I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
@@ -39215,7 +39335,8 @@ class C2 : C1, I1
 
             void validate(ModuleSymbol module)
             {
-                var m01 = module.GlobalNamespace
+                var m01 = module
+                    .GlobalNamespace
                     .GetTypeMember("I1")
                     .GetMembers()
                     .OfType<EventSymbol>()
@@ -40181,7 +40302,8 @@ public class C1<T> : I1
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .OfType<EventSymbol>()
@@ -40290,7 +40412,8 @@ public class C1<T> : I1<T>
 
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .OfType<EventSymbol>()
@@ -41933,7 +42056,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -42136,7 +42260,8 @@ partial "
                     sourceSymbolValidator: validate,
                     symbolValidator: validate,
                     verify: Verification.Skipped,
-                    emitOptions: EmitOptions.Default
+                    emitOptions: EmitOptions
+                        .Default
                         .WithEmitMetadataOnly(true)
                         .WithIncludePrivateMembers(false)
                 )
@@ -43339,7 +43464,8 @@ public partial class C1<T, U> : I1<C1<T, U>, U>
             compilation1.VerifyDiagnostics();
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains(opName))
@@ -43519,7 +43645,8 @@ public partial class C1<T, U> : I1<C1<T, U>, U>
             compilation1.VerifyDiagnostics();
             Assert.Equal(
                 2,
-                compilation1.GlobalNamespace
+                compilation1
+                    .GlobalNamespace
                     .GetTypeMember("C1")
                     .GetMembers()
                     .Where(m => m.Name.Contains(opName))

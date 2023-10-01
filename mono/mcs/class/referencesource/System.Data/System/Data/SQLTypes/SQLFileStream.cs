@@ -29,9 +29,10 @@ namespace System.Data.SqlTypes
 
         // For BID tracing output
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int ObjectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         // from System.IO.FileStream implementation
         //   DefaultBufferSize = 4096;
@@ -1165,11 +1166,17 @@ namespace System.Data.SqlTypes
                 byte[] asciiName = ascii.GetBytes(EA_NAME_STRING);
 
                 // calculate offset at which to write the name/value pair
-                System.Diagnostics.Debug.Assert(
-                    Marshal
-                        .OffsetOf(typeof(UnsafeNativeMethods.FILE_FULL_EA_INFORMATION), "EaName")
-                        .ToInt64() <= (Int64)Int32.MaxValue
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        Marshal
+                            .OffsetOf(
+                                typeof(UnsafeNativeMethods.FILE_FULL_EA_INFORMATION),
+                                "EaName"
+                            )
+                            .ToInt64() <= (Int64)Int32.MaxValue
+                    );
                 int cbOffset = Marshal
                     .OffsetOf(typeof(UnsafeNativeMethods.FILE_FULL_EA_INFORMATION), "EaName")
                     .ToInt32();
@@ -1184,10 +1191,13 @@ namespace System.Data.SqlTypes
                 Marshal.WriteByte(ptr, cbOffset, 0);
                 cbOffset++;
 
-                System.Diagnostics.Debug.Assert(
-                    cbOffset < m_cbBuffer
-                        || transactionContext.Length == 0 && cbOffset == m_cbBuffer
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        cbOffset < m_cbBuffer
+                            || transactionContext.Length == 0 && cbOffset == m_cbBuffer
+                    );
 
                 // write transaction context ID
                 for (

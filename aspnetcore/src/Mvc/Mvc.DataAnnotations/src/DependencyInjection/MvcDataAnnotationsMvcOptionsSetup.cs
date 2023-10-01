@@ -53,20 +53,24 @@ internal sealed class MvcDataAnnotationsMvcOptionsSetup : IConfigureOptions<MvcO
             throw new ArgumentNullException(nameof(options));
         }
 
-        options.ModelMetadataDetailsProviders.Add(
-            new DataAnnotationsMetadataProvider(
-                options,
-                _dataAnnotationLocalizationOptions,
-                _stringLocalizerFactory
-            )
-        );
+        options
+            .ModelMetadataDetailsProviders
+            .Add(
+                new DataAnnotationsMetadataProvider(
+                    options,
+                    _dataAnnotationLocalizationOptions,
+                    _stringLocalizerFactory
+                )
+            );
 
-        options.ModelValidatorProviders.Add(
-            new DataAnnotationsModelValidatorProvider(
-                _validationAttributeAdapterProvider,
-                _dataAnnotationLocalizationOptions,
-                _stringLocalizerFactory
-            )
-        );
+        options
+            .ModelValidatorProviders
+            .Add(
+                new DataAnnotationsModelValidatorProvider(
+                    _validationAttributeAdapterProvider,
+                    _dataAnnotationLocalizationOptions,
+                    _stringLocalizerFactory
+                )
+            );
     }
 }

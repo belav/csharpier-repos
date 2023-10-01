@@ -742,12 +742,9 @@ namespace System.Windows.Forms
             clone.sub_items = new ListViewSubItemCollection(this, null);
 
             foreach (ListViewSubItem subItem in this.sub_items)
-                clone.sub_items.Add(
-                    subItem.Text,
-                    subItem.ForeColor,
-                    subItem.BackColor,
-                    subItem.Font
-                );
+                clone
+                    .sub_items
+                    .Add(subItem.Text, subItem.ForeColor, subItem.BackColor, subItem.Font);
             clone.tag = this.tag;
             clone.use_item_style = this.use_item_style;
             clone.owner = null;

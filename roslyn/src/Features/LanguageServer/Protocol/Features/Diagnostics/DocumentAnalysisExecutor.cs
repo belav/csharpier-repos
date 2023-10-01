@@ -55,8 +55,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _logPerformanceInfo = logPerformanceInfo;
             _onAnalysisException = onAnalysisException;
 
-            var compilationBasedAnalyzers =
-                compilationWithAnalyzers?.Analyzers.ToImmutableHashSet();
+            var compilationBasedAnalyzers = compilationWithAnalyzers
+                ?.Analyzers
+                .ToImmutableHashSet();
             _compilationBasedAnalyzersInAnalysisScope =
                 compilationBasedAnalyzers != null
                     ? analysisScope.Analyzers.WhereAsArray(compilationBasedAnalyzers.Contains)
@@ -94,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 "We only support syntactic analysis for non-source documents"
             );
 
-            var loadDiagnostic = await textDocument.State
+            var loadDiagnostic = await textDocument
+                .State
                 .GetLoadDiagnosticAsync(cancellationToken)
                 .ConfigureAwait(false);
 
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // We will count generator diagnostics as semantic diagnostics; some filtering to either syntax/semantic is necessary or else we'll report diagnostics twice.
                 if (kind == AnalysisKind.Semantic)
                 {
-                    var generatorDiagnostics = await textDocument.Project
+                    var generatorDiagnostics = await textDocument
+                        .Project
                         .GetSourceGeneratorDiagnosticsAsync(cancellationToken)
                         .ConfigureAwait(false);
                     return ConvertToLocalDiagnostics(generatorDiagnostics, textDocument, span);
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var isCompilerAnalyzer = analyzer.IsCompilerAnalyzer();
             if (kind != AnalysisKind.Syntax && isCompilerAnalyzer)
             {
-                var isEnabled = await textDocument.Project
+                var isEnabled = await textDocument
+                    .Project
                     .HasSuccessfullyLoadedAsync(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -543,8 +547,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             // Check if IWorkspaceVenusSpanMappingService is present for remapping.
-            var diagnosticSpanMappingService =
-                textDocument.Project.Solution.Services.GetService<IWorkspaceVenusSpanMappingService>();
+            var diagnosticSpanMappingService = textDocument
+                .Project
+                .Solution
+                .Services
+                .GetService<IWorkspaceVenusSpanMappingService>();
             if (diagnosticSpanMappingService == null)
             {
                 return diagnostics;

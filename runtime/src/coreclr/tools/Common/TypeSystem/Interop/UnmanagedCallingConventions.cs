@@ -312,10 +312,9 @@ namespace Internal.TypeSystem
                 {
                     index = MethodSignature.IndexOfCustomModifiersOnReturnType,
                     kind = EmbeddedSignatureDataKind.OptionalCustomModifier,
-                    type = context.SystemModule.GetKnownType(
-                        "System.Runtime.CompilerServices",
-                        name
-                    )
+                    type = context
+                        .SystemModule
+                        .GetKnownType("System.Runtime.CompilerServices", name)
                 };
         }
 

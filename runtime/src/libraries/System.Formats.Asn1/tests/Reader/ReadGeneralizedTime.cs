@@ -628,9 +628,9 @@ namespace System.Formats.Asn1.Tests.Reader
             //
             // 1001 content bytes + 10 bytes of structure.
             byte[] header = "A080048203E8".HexToByteArray();
-            byte[] contents0 = Text.Encoding.ASCII.GetBytes(
-                "20171207173522." + new string('0', 984) + "1"
-            );
+            byte[] contents0 = Text.Encoding
+                .ASCII
+                .GetBytes("20171207173522." + new string('0', 984) + "1");
             byte[] cdr = { 0x04, 0x01, (byte)'Z', 0x00, 0x00 };
             byte[] inputData = header.Concat(contents0).Concat(cdr).ToArray();
 

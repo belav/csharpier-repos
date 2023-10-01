@@ -834,10 +834,9 @@ namespace System.Runtime.CompilerServices
         Task<TResult> GetTaskForResult(TResult result)
         {
             Contract.Ensures(
-                EqualityComparer<TResult>.Default.Equals(
-                    result,
-                    Contract.Result<Task<TResult>>().Result
-                ),
+                EqualityComparer<TResult>
+                    .Default
+                    .Equals(result, Contract.Result<Task<TResult>>().Result),
                 "The returned task's Result must return the same value as the specified result value."
             );
 

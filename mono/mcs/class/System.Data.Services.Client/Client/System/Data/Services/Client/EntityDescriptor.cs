@@ -294,9 +294,9 @@ namespace System.Data.Services.Client
                             baseUriWithSlash,
                             new Uri(
                                 "$"
-                                    + this.parentDescriptor.ChangeOrder.ToString(
-                                        CultureInfo.InvariantCulture
-                                    ),
+                                    + this.parentDescriptor
+                                        .ChangeOrder
+                                        .ToString(CultureInfo.InvariantCulture),
                                 UriKind.Relative
                             )
                         ),

@@ -130,22 +130,26 @@ namespace System.ServiceModel.Discovery
             };
 
             var resolvePart = new XmlSchemaSequence();
-            resolvePart.Items.Add(
-                new XmlSchemaElement()
-                {
-                    RefName = new XmlQualifiedName("EndpointReference", addrNS),
-                    MinOccurs = 0
-                }
-            );
-            resolvePart.Items.Add(
-                new XmlSchemaAny()
-                {
-                    MinOccurs = 0,
-                    MaxOccursString = "unbounded",
-                    Namespace = "##other",
-                    ProcessContents = XmlSchemaContentProcessing.Lax
-                }
-            );
+            resolvePart
+                .Items
+                .Add(
+                    new XmlSchemaElement()
+                    {
+                        RefName = new XmlQualifiedName("EndpointReference", addrNS),
+                        MinOccurs = 0
+                    }
+                );
+            resolvePart
+                .Items
+                .Add(
+                    new XmlSchemaAny()
+                    {
+                        MinOccurs = 0,
+                        MaxOccursString = "unbounded",
+                        Namespace = "##other",
+                        ProcessContents = XmlSchemaContentProcessing.Lax
+                    }
+                );
             var ct = new XmlSchemaComplexType()
             {
                 Name = "ResolveType",

@@ -55,24 +55,28 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                            )
+                        );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.acknowledgementInterval = value;
@@ -94,24 +98,28 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                            )
+                        );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 this.inactivityTimeout = value;
@@ -125,13 +133,15 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value <= 0 || value > 16384)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeInRange, 0, 16384)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeInRange, 0, 16384)
+                            )
+                        );
                 this.maxPendingChannels = value;
             }
         }
@@ -143,13 +153,15 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 this.maxRetryCount = value;
             }
         }
@@ -161,13 +173,15 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (value <= 0 || value > 4096)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeInRange, 0, 4096)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeInRange, 0, 4096)
+                            )
+                        );
                 this.maxTransferWindowSize = value;
             }
         }
@@ -195,9 +209,9 @@ namespace System.ServiceModel.Channels
 
                 if (!ReliableMessagingVersion.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
 
                 this.reliableMessagingVersion = value;
@@ -522,10 +536,12 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                "TChannel",
-                SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
         }
 
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
@@ -570,9 +586,9 @@ namespace System.ServiceModel.Channels
             this.SetSecuritySettings(context);
 
 #pragma warning suppress 56506 // BindingContext guarantees BindingParameters is never null.
-            IMessageFilterTable<EndpointAddress> table = context.BindingParameters.Find<
-                IMessageFilterTable<EndpointAddress>
-            >();
+            IMessageFilterTable<EndpointAddress> table = context
+                .BindingParameters
+                .Find<IMessageFilterTable<EndpointAddress>>();
 
             InternalDuplexBindingElement.AddDuplexListenerSupport(
                 context,
@@ -645,10 +661,12 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                "TChannel",
-                SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
         }
 
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
@@ -722,8 +740,9 @@ namespace System.ServiceModel.Channels
 
         void SetSecuritySettings(BindingContext context)
         {
-            SecurityBindingElement element =
-                context.RemainingBindingElements.Find<SecurityBindingElement>();
+            SecurityBindingElement element = context
+                .RemainingBindingElements
+                .Find<SecurityBindingElement>();
 
             if (element != null)
             {
@@ -733,15 +752,18 @@ namespace System.ServiceModel.Channels
 
         void VerifyTransportMode(BindingContext context)
         {
-            TransportBindingElement transportElement =
-                context.RemainingBindingElements.Find<TransportBindingElement>();
+            TransportBindingElement transportElement = context
+                .RemainingBindingElements
+                .Find<TransportBindingElement>();
 
             // Verify ManualAdderssing is turned off.
             if ((transportElement != null) && (transportElement.ManualAddressing))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ManualAddressingNotSupported))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ManualAddressingNotSupported))
+                    );
             }
 
             ConnectionOrientedTransportBindingElement connectionElement =
@@ -768,15 +790,17 @@ namespace System.ServiceModel.Channels
 
             if (transportTransferMode != TransferMode.Buffered)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.TransferModeNotSupported,
-                            transportTransferMode,
-                            this.GetType().Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.TransferModeNotSupported,
+                                transportTransferMode,
+                                this.GetType().Name
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 

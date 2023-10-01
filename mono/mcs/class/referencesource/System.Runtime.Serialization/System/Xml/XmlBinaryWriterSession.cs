@@ -28,9 +28,12 @@ namespace System.Xml
         {
             IntArray keys;
             if (value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "value"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("value");
 
             if (maps.TryGetValue(value.Dictionary, out keys))
             {
@@ -39,9 +42,14 @@ namespace System.Xml
                 if (key != -1)
                 {
                     // If the key is already set, then something is wrong
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.XmlKeyAlreadyExists))
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.XmlKeyAlreadyExists))
+                        );
                 }
 
                 key = Add(value.Value);

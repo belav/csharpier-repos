@@ -101,10 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Location currentSmallestLocation = _smallestLocation;
                     if (
                         currentSmallestLocation != null
-                        && this.Manager.Compilation.CompareSourceLocations(
-                            currentSmallestLocation,
-                            location
-                        ) < 0
+                        && this.Manager
+                            .Compilation
+                            .CompareSourceLocations(currentSmallestLocation, location) < 0
                     )
                     {
                         // The template's smallest location do not need to be changed

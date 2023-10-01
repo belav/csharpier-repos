@@ -1886,7 +1886,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     public virtual async Task Filtered_collection_projection_is_tracked(bool async)
     {
         using var context = CreateContext();
-        var query = context.Customers
+        var query = context
+            .Customers
             .Where(c => c.CustomerID.StartsWith("A"))
             .Select(
                 c => new { Customer = c, FilteredOrders = c.Orders.Where(o => o.OrderID > 11000) }
@@ -1904,7 +1905,8 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
     public virtual async Task Filtered_collection_projection_with_to_list_is_tracked(bool async)
     {
         using var context = CreateContext();
-        var query = context.Customers
+        var query = context
+            .Customers
             .Where(c => c.CustomerID.StartsWith("A"))
             .Select(
                 c =>

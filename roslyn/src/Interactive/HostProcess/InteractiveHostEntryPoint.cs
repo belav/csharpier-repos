@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             try
             {
-                await InteractiveHost.Service
+                await InteractiveHost
+                    .Service
                     .RunServerAsync(args, invokeOnMainThread)
                     .ConfigureAwait(false);
                 return 0;

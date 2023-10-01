@@ -35,10 +35,9 @@ namespace System
 
         public static bool IsNetCore =>
             Environment.Version.Major >= 5
-            || RuntimeInformation.FrameworkDescription.StartsWith(
-                ".NET Core",
-                StringComparison.OrdinalIgnoreCase
-            );
+            || RuntimeInformation
+                .FrameworkDescription
+                .StartsWith(".NET Core", StringComparison.OrdinalIgnoreCase);
         public static bool IsMonoRuntime => Type.GetType("Mono.RuntimeStructs") != null;
         public static bool IsNotMonoRuntime => !IsMonoRuntime;
         public static bool IsMonoInterpreter => GetIsRunningOnMonoInterpreter();
@@ -297,10 +296,9 @@ namespace System
         }
 
         public static bool IsDomainJoinedMachine =>
-            !Environment.MachineName.Equals(
-                Environment.UserDomainName,
-                StringComparison.OrdinalIgnoreCase
-            );
+            !Environment
+                .MachineName
+                .Equals(Environment.UserDomainName, StringComparison.OrdinalIgnoreCase);
         public static bool IsNotDomainJoinedMachine => !IsDomainJoinedMachine;
 
         public static bool IsOpenSslSupported => IsLinux || IsFreeBSD || Isillumos || IsSolaris;
@@ -760,8 +758,9 @@ namespace System
 
         private static bool AssemblyConfigurationEquals(string configuration)
         {
-            AssemblyConfigurationAttribute assemblyConfigurationAttribute =
-                typeof(string).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>();
+            AssemblyConfigurationAttribute assemblyConfigurationAttribute = typeof(string)
+                .Assembly
+                .GetCustomAttribute<AssemblyConfigurationAttribute>();
 
             return assemblyConfigurationAttribute != null
                 && string.Equals(

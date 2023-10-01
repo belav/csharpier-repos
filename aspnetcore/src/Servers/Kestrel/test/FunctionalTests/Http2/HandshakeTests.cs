@@ -91,9 +91,11 @@ public class HandshakeTests : LoggedTest
                     var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
                     Assert.NotNull(tlsFeature);
                     Assert.True(
-                        SslApplicationProtocol.Http2.Protocol.Span.SequenceEqual(
-                            tlsFeature.ApplicationProtocol.Span
-                        ),
+                        SslApplicationProtocol
+                            .Http2
+                            .Protocol
+                            .Span
+                            .SequenceEqual(tlsFeature.ApplicationProtocol.Span),
                         "ALPN: " + tlsFeature.ApplicationProtocol.Length
                     );
 
@@ -132,9 +134,11 @@ public class HandshakeTests : LoggedTest
                     var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
                     Assert.NotNull(tlsFeature);
                     Assert.True(
-                        SslApplicationProtocol.Http2.Protocol.Span.SequenceEqual(
-                            tlsFeature.ApplicationProtocol.Span
-                        ),
+                        SslApplicationProtocol
+                            .Http2
+                            .Protocol
+                            .Span
+                            .SequenceEqual(tlsFeature.ApplicationProtocol.Span),
                         "ALPN: " + tlsFeature.ApplicationProtocol.Length
                     );
 

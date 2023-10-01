@@ -607,10 +607,9 @@ public class Bar
 
                 long attributeValue;
                 Assert.True(
-                    peModule.Module.TryExtractLongValueFromAttribute(
-                        attributeInfo.Handle,
-                        out attributeValue
-                    )
+                    peModule
+                        .Module
+                        .TryExtractLongValueFromAttribute(attributeInfo.Handle, out attributeValue)
                 );
                 Assert.Equal(-1L, attributeValue); // check the attribute is constructed with a -1
 
@@ -3054,7 +3053,8 @@ public class C
                     );
 
                     // MethodDef:
-                    MethodDefinitionHandle[] methodDefs = metadataReader.MethodDefinitions
+                    MethodDefinitionHandle[] methodDefs = metadataReader
+                        .MethodDefinitions
                         .AsEnumerable()
                         .ToArray();
                     Assert.Equal(2, methodDefs.Length); // M, ctor
@@ -10431,12 +10431,13 @@ class C2 : C1
 
             // WithSpecificDiagnosticOption for id TEST1
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Warn
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("TEST1", ReportDiagnostic.Warn)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10445,12 +10446,13 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Error
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("TEST1", ReportDiagnostic.Error)
+                    ),
                 // (6,9): error TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10460,12 +10462,13 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Hidden
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("TEST1", ReportDiagnostic.Hidden)
+                    ),
                 // (6,9): hidden TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10474,22 +10477,24 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "TEST1",
-                        ReportDiagnostic.Suppress
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("TEST1", ReportDiagnostic.Suppress)
                     )
-                )
             );
 
             // WithSpecificDiagnosticOption for id CS0618
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "CS0618",
-                        ReportDiagnostic.Error
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("CS0618", ReportDiagnostic.Error)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -10498,12 +10503,13 @@ class C2 : C1
             );
 
             verify(
-                TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        "CS0618",
-                        ReportDiagnostic.Suppress
-                    )
-                ),
+                TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add("CS0618", ReportDiagnostic.Suppress)
+                    ),
                 // (6,9): warning TEST1: 'C1.M1()' is obsolete
                 //         M1(); // 1
                 Diagnostic("TEST1", "M1()", isSuppressed: false)
@@ -11504,7 +11510,8 @@ public class C
 
             Action<ModuleSymbol> validator = module =>
             {
-                var method = module.GlobalNamespace
+                var method = module
+                    .GlobalNamespace
                     .GetMember<NamedTypeSymbol>("C")
                     .GetMember<MethodSymbol>("M");
                 var param = method.Parameters.Single();
@@ -15868,7 +15875,8 @@ first
 second",
                 symbolValidator: module =>
                 {
-                    var attribute = module.ContainingAssembly
+                    var attribute = module
+                        .ContainingAssembly
                         .GetTypeByMetadataName("Program")
                         .GetMethod("Test")
                         .Parameters

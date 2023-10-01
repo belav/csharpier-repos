@@ -327,22 +327,26 @@ namespace System.Web
 
             table.Rows.Add(AltRow("Request Details:"));
             table.Rows.Add(InfoRow2("Session Id:", session_id, "Request Type", request_type));
-            table.Rows.Add(
-                InfoRow2(
-                    "Time of Request:",
-                    request_time.ToString(),
-                    "State Code:",
-                    status_code.ToString()
-                )
-            );
-            table.Rows.Add(
-                InfoRow2(
-                    "Request Encoding:",
-                    request_encoding.EncodingName,
-                    "Response Encoding:",
-                    response_encoding.EncodingName
-                )
-            );
+            table
+                .Rows
+                .Add(
+                    InfoRow2(
+                        "Time of Request:",
+                        request_time.ToString(),
+                        "State Code:",
+                        status_code.ToString()
+                    )
+                );
+            table
+                .Rows
+                .Add(
+                    InfoRow2(
+                        "Request Encoding:",
+                        request_encoding.EncodingName,
+                        "Response Encoding:",
+                        response_encoding.EncodingName
+                    )
+                );
             table.RenderControl(output);
         }
 
@@ -379,18 +383,20 @@ namespace System.Web
 
             int page_vs_size = page == null ? 0 : GetViewStateSize(page, page.GetSavedViewState());
             table.Rows.Add(AltRow("Control Tree"));
-            table.Rows.Add(
-                SubHeadRow(
-                    "Control Id",
-                    "Type",
-                    "Render Size Bytes (including children)",
-                    String.Format(
-                        "ViewState Size (total: {0} bytes)(excluding children)",
-                        page_vs_size
-                    ),
-                    "ControlState Size (excluding children)"
-                )
-            );
+            table
+                .Rows
+                .Add(
+                    SubHeadRow(
+                        "Control Id",
+                        "Type",
+                        "Render Size Bytes (including children)",
+                        String.Format(
+                            "ViewState Size (total: {0} bytes)(excluding children)",
+                            page_vs_size
+                        ),
+                        "ControlState Size (excluding children)"
+                    )
+                );
 
             int pos = 0;
             foreach (ControlTraceData r in control_data)

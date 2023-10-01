@@ -2812,9 +2812,10 @@ namespace System.Data.SqlClient
             sdc.dbgpid = memMap.dbgpid;
             sdc.fOption = (memMap.fOption == 1) ? true : false;
             // xlate ansi byte[] -> managed strings
-            Encoding cp = System.Text.Encoding.GetEncoding(
-                TdsEnums.DEFAULT_ENGLISH_CODE_PAGE_VALUE
-            );
+            Encoding cp = System
+                .Text
+                .Encoding
+                .GetEncoding(TdsEnums.DEFAULT_ENGLISH_CODE_PAGE_VALUE);
             sdc.machineName = cp.GetString(memMap.rgbMachineName, 0, memMap.rgbMachineName.Length);
             sdc.sdiDllName = cp.GetString(memMap.rgbDllName, 0, memMap.rgbDllName.Length);
             // just get data reference
@@ -3218,9 +3219,10 @@ namespace System.Data.SqlClient
                 return false;
 
             // note that these are ansi strings
-            Encoding cp = System.Text.Encoding.GetEncoding(
-                TdsEnums.DEFAULT_ENGLISH_CODE_PAGE_VALUE
-            );
+            Encoding cp = System
+                .Text
+                .Encoding
+                .GetEncoding(TdsEnums.DEFAULT_ENGLISH_CODE_PAGE_VALUE);
             byte[] rgbMachineName = cp.GetBytes(pszMachineName);
             byte[] rgbSDIDLLName = cp.GetBytes(pszSDIDLLName);
 

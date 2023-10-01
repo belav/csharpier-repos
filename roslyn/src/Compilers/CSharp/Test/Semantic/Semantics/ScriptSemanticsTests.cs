@@ -1383,10 +1383,12 @@ goto Label;"
         public void Errors_01()
         {
             var code = "System.Console.WriteLine(1);";
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
-                code,
-                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-            );
+            var compilationUnit = CSharp
+                .SyntaxFactory
+                .ParseCompilationUnit(
+                    code,
+                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             var syntaxTree = compilationUnit.SyntaxTree;
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree, true);
@@ -1528,10 +1530,12 @@ goto Label;"
         [WorkItem(44418, "https://github.com/dotnet/roslyn/issues/44418")]
         public void Errors_02()
         {
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
-                "\nSystem.Console.WriteLine(1);",
-                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-            );
+            var compilationUnit = CSharp
+                .SyntaxFactory
+                .ParseCompilationUnit(
+                    "\nSystem.Console.WriteLine(1);",
+                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             var syntaxTree1 = compilationUnit.SyntaxTree;
             var syntaxTree2 = SyntaxFactory.ParseSyntaxTree(
                 "System.Console.WriteLine(2);",
@@ -1581,10 +1585,12 @@ goto Label;"
         public void Errors_03()
         {
             var code = "System.Console.WriteLine(out var x, x);";
-            var compilationUnit = CSharp.SyntaxFactory.ParseCompilationUnit(
-                code,
-                options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
-            );
+            var compilationUnit = CSharp
+                .SyntaxFactory
+                .ParseCompilationUnit(
+                    code,
+                    options: new CSharp.CSharpParseOptions(kind: SourceCodeKind.Script)
+                );
             var syntaxTree = compilationUnit.SyntaxTree;
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
             var semanticModel = compilation.GetSemanticModel(syntaxTree, true);

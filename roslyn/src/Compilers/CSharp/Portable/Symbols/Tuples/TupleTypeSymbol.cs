@@ -83,11 +83,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 // Complain about unembeddable types from linked assemblies.
-                Emit.NoPia.EmbeddedTypesManager.IsValidEmbeddableType(
-                    underlyingType,
-                    syntax,
-                    diagnostics.DiagnosticBag
-                );
+                Emit.NoPia
+                    .EmbeddedTypesManager
+                    .IsValidEmbeddableType(underlyingType, syntax, diagnostics.DiagnosticBag);
             }
 
             var locations = locationOpt is null

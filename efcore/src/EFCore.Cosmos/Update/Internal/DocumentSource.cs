@@ -117,10 +117,9 @@ public class DocumentSource
             {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                 // #16707
-                var dependentEntry = ((InternalEntityEntry)entry).StateManager.TryGetEntry(
-                    embeddedValue,
-                    fk.DeclaringEntityType
-                )!;
+                var dependentEntry = ((InternalEntityEntry)entry)
+                    .StateManager
+                    .TryGetEntry(embeddedValue, fk.DeclaringEntityType)!;
                 document[embeddedPropertyName] = _database
                     .GetDocumentSource(dependentEntry.EntityType)
                     .CreateDocument(dependentEntry);
@@ -232,10 +231,9 @@ public class DocumentSource
             {
 #pragma warning disable EF1001 // Internal EF Core API usage.
                 // #16707
-                var embeddedEntry = ((InternalEntityEntry)entry).StateManager.TryGetEntry(
-                    embeddedValue,
-                    fk.DeclaringEntityType
-                )!;
+                var embeddedEntry = ((InternalEntityEntry)entry)
+                    .StateManager
+                    .TryGetEntry(embeddedValue, fk.DeclaringEntityType)!;
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
                 var embeddedDocument = embeddedDocumentSource.GetCurrentDocument(embeddedEntry);

@@ -1655,7 +1655,8 @@ namespace Microsoft.CodeAnalysis
             )> GetControlFlowGraphs()
             {
                 Assert.True(_verifyGetControlFlowGraph);
-                return _controlFlowGraphMapOpt.Values
+                return _controlFlowGraphMapOpt
+                    .Values
                     .OrderBy(
                         flowGraphAndSymbol =>
                             flowGraphAndSymbol.Graph.OriginalOperation.Syntax.SpanStart
@@ -2747,15 +2748,17 @@ namespace Microsoft.CodeAnalysis
                         // Symbols Started: '{0}', Symbols Ended: '{1}', Analyzer: {2}
                         var symbolsStartedStr = string.Join(
                             ", ",
-                            Roslyn.Utilities.EnumerableExtensions.Order(
-                                SymbolsStarted.Select(s => s.ToDisplayString())
-                            )
+                            Roslyn
+                                .Utilities
+                                .EnumerableExtensions
+                                .Order(SymbolsStarted.Select(s => s.ToDisplayString()))
                         );
                         var symbolsEndedStr = string.Join(
                             ", ",
-                            Roslyn.Utilities.EnumerableExtensions.Order(
-                                symbolsEnded.Select(s => s.ToDisplayString())
-                            )
+                            Roslyn
+                                .Utilities
+                                .EnumerableExtensions
+                                .Order(symbolsEnded.Select(s => s.ToDisplayString()))
                         );
                         compilationEndContext.ReportDiagnostic(
                             Diagnostic.Create(
@@ -3236,9 +3239,10 @@ namespace Microsoft.CodeAnalysis
             public string GetSortedSymbolCallbacksString() =>
                 string.Join(
                     ", ",
-                    Roslyn.Utilities.EnumerableExtensions.Order(
-                        _symbolCallbacks.Select(s => s.Name)
-                    )
+                    Roslyn
+                        .Utilities
+                        .EnumerableExtensions
+                        .Order(_symbolCallbacks.Select(s => s.Name))
                 );
 
             public override void Initialize(AnalysisContext context)
@@ -3445,7 +3449,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     context.RegisterSyntaxTreeAction(context =>
                     {
-                        var fields = context.Tree
+                        var fields = context
+                            .Tree
                             .GetRoot()
                             .DescendantNodes()
                             .OfType<CSharp.Syntax.FieldDeclarationSyntax>();

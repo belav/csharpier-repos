@@ -19,9 +19,11 @@ namespace Microsoft.Interop.Analyzers
             int arity
         )
         {
-            return attribute.ArgumentList.Arguments.FirstOrDefault(
-                    arg => arg.NameColon?.Name.ToString() == name
-                ) ?? attribute.ArgumentList.Arguments[arity];
+            return attribute
+                    .ArgumentList
+                    .Arguments
+                    .FirstOrDefault(arg => arg.NameColon?.Name.ToString() == name)
+                ?? attribute.ArgumentList.Arguments[arity];
         }
 
         public static Location FindTypeExpressionOrNullLocation(
@@ -60,11 +62,13 @@ namespace Microsoft.Interop.Analyzers
                         // We don't care about the attributes in this case for the callers, so we'll just return null.
                         return null;
                     case SyntaxKind.AssemblyKeyword:
-                        return targetSymbol.ContainingAssembly
+                        return targetSymbol
+                            .ContainingAssembly
                             .GetAttributes()
                             .First(attributeSyntaxLocationMatches);
                     case SyntaxKind.ModuleKeyword:
-                        return targetSymbol.ContainingModule
+                        return targetSymbol
+                            .ContainingModule
                             .GetAttributes()
                             .First(attributeSyntaxLocationMatches);
                     default:

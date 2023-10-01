@@ -93,15 +93,15 @@ namespace System.ServiceModel.Syndication
         {
             if (readerOverUnparsedExtensions == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "readerOverUnparsedExtensions"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("readerOverUnparsedExtensions");
             }
             if (maxExtensionSize < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("maxExtensionSize")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("maxExtensionSize"));
             }
             XmlDictionaryReader r = XmlDictionaryReader.CreateDictionaryReader(
                 readerOverUnparsedExtensions

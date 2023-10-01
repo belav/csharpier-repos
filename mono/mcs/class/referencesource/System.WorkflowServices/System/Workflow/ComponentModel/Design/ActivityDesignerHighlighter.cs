@@ -48,9 +48,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (highlightedDesigners == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "hightlightedDesigners"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("hightlightedDesigners");
             }
 
             glyphProviderService =
@@ -212,9 +212,9 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (activityDesigner == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "activityDesigner"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("activityDesigner");
                 }
 
                 if (!activityDesigner.IsRootDesigner)

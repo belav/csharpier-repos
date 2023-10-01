@@ -42,9 +42,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (xmlSerializerFaultContractInfos == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "xmlSerializerFaultContractInfos"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("xmlSerializerFaultContractInfos");
             }
             this.xmlSerializerFaultContractInfos = xmlSerializerFaultContractInfos;
         }

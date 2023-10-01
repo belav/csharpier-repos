@@ -208,15 +208,17 @@ namespace System.Web.UI
             DateTime utcExpire = DateTime.UtcNow.AddSeconds(duration);
             provider.Set(cacheKey, text, utcExpire);
             ;
-            context.InternalCache.Insert(
-                cacheKey,
-                text,
-                dependency,
-                utcExpire.ToLocalTime(),
-                Cache.NoSlidingExpiration,
-                CacheItemPriority.Normal,
-                null
-            );
+            context
+                .InternalCache
+                .Insert(
+                    cacheKey,
+                    text,
+                    dependency,
+                    utcExpire.ToLocalTime(),
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.Normal,
+                    null
+                );
         }
 
         public ControlCachePolicy CachePolicy
@@ -274,10 +276,9 @@ namespace System.Web.UI
 
             if (varyby_custom != null)
             {
-                string val = context.ApplicationInstance.GetVaryByCustomString(
-                    context,
-                    varyby_custom
-                );
+                string val = context
+                    .ApplicationInstance
+                    .GetVaryByCustomString(context, varyby_custom);
                 builder.Append("VC:");
                 builder.Append(varyby_custom);
                 builder.Append('=');

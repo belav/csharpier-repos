@@ -809,11 +809,9 @@ namespace System.Runtime.Remoting.Contexts
             // i.e. a Synchronization domain should be locked etc ...
             Contract.Assert(IsSignaled(), "IsSignaled()");
 
-            Thread.CurrentThread.InternalCrossContextCallback(
-                _ctx,
-                _xctxDel,
-                new Object[] { this }
-            );
+            Thread
+                .CurrentThread
+                .InternalCrossContextCallback(_ctx, _xctxDel, new Object[] { this });
         }
 
         internal virtual IMessage ReplyMessage
@@ -1050,11 +1048,13 @@ namespace System.Runtime.Remoting.Contexts
                 {
                     // Remove the async lcid we had added to the call out list.
                     //DBGConsole.WriteLine(Thread.CurrentThread.GetHashCode()+"] NR: InterceptionSink::SyncPM Removing async call-out lcid: " + ((LogicalCallContext)reqMsg.Properties[Message.CallContextKey]).RemotingData.LogicalCallID);
-                    _property.AsyncCallOutLCIDList.Remove(
-                        ((LogicalCallContext)reqMsg.Properties[Message.CallContextKey])
-                            .RemotingData
-                            .LogicalCallID
-                    );
+                    _property
+                        .AsyncCallOutLCIDList
+                        .Remove(
+                            ((LogicalCallContext)reqMsg.Properties[Message.CallContextKey])
+                                .RemotingData
+                                .LogicalCallID
+                        );
                 }
 
                 // 3. Pick up retMsg from the WorkItem and return

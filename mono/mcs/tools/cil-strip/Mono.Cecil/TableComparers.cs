@@ -103,10 +103,12 @@ namespace Mono.Cecil
                 ConstantRow a = x as ConstantRow;
                 ConstantRow b = y as ConstantRow;
 
-                return Comparer.Default.Compare(
-                    Utilities.CompressMetadataToken(CodedIndex.HasConstant, a.Parent),
-                    Utilities.CompressMetadataToken(CodedIndex.HasConstant, b.Parent)
-                );
+                return Comparer
+                    .Default
+                    .Compare(
+                        Utilities.CompressMetadataToken(CodedIndex.HasConstant, a.Parent),
+                        Utilities.CompressMetadataToken(CodedIndex.HasConstant, b.Parent)
+                    );
             }
         }
 
@@ -122,10 +124,12 @@ namespace Mono.Cecil
                 int klass = Comparer.Default.Compare(a.Class, b.Class);
 
                 if (klass == 0)
-                    return Comparer.Default.Compare(
-                        Utilities.CompressMetadataToken(CodedIndex.TypeDefOrRef, a.Interface),
-                        Utilities.CompressMetadataToken(CodedIndex.TypeDefOrRef, b.Interface)
-                    );
+                    return Comparer
+                        .Default
+                        .Compare(
+                            Utilities.CompressMetadataToken(CodedIndex.TypeDefOrRef, a.Interface),
+                            Utilities.CompressMetadataToken(CodedIndex.TypeDefOrRef, b.Interface)
+                        );
 
                 return klass;
             }
@@ -140,10 +144,12 @@ namespace Mono.Cecil
                 MethodSemanticsRow a = x as MethodSemanticsRow;
                 MethodSemanticsRow b = y as MethodSemanticsRow;
 
-                return Comparer.Default.Compare(
-                    Utilities.CompressMetadataToken(CodedIndex.HasSemantics, a.Association),
-                    Utilities.CompressMetadataToken(CodedIndex.HasSemantics, b.Association)
-                );
+                return Comparer
+                    .Default
+                    .Compare(
+                        Utilities.CompressMetadataToken(CodedIndex.HasSemantics, a.Association),
+                        Utilities.CompressMetadataToken(CodedIndex.HasSemantics, b.Association)
+                    );
             }
         }
 
@@ -156,10 +162,12 @@ namespace Mono.Cecil
                 CustomAttributeRow a = x as CustomAttributeRow;
                 CustomAttributeRow b = y as CustomAttributeRow;
 
-                return Comparer.Default.Compare(
-                    Utilities.CompressMetadataToken(CodedIndex.HasCustomAttribute, a.Parent),
-                    Utilities.CompressMetadataToken(CodedIndex.HasCustomAttribute, b.Parent)
-                );
+                return Comparer
+                    .Default
+                    .Compare(
+                        Utilities.CompressMetadataToken(CodedIndex.HasCustomAttribute, a.Parent),
+                        Utilities.CompressMetadataToken(CodedIndex.HasCustomAttribute, b.Parent)
+                    );
             }
         }
 
@@ -172,10 +180,12 @@ namespace Mono.Cecil
                 DeclSecurityRow a = x as DeclSecurityRow;
                 DeclSecurityRow b = y as DeclSecurityRow;
 
-                return Comparer.Default.Compare(
-                    Utilities.CompressMetadataToken(CodedIndex.HasDeclSecurity, a.Parent),
-                    Utilities.CompressMetadataToken(CodedIndex.HasDeclSecurity, b.Parent)
-                );
+                return Comparer
+                    .Default
+                    .Compare(
+                        Utilities.CompressMetadataToken(CodedIndex.HasDeclSecurity, a.Parent),
+                        Utilities.CompressMetadataToken(CodedIndex.HasDeclSecurity, b.Parent)
+                    );
             }
         }
 
@@ -240,10 +250,12 @@ namespace Mono.Cecil
                 FieldMarshalRow a = x as FieldMarshalRow;
                 FieldMarshalRow b = y as FieldMarshalRow;
 
-                return Comparer.Default.Compare(
-                    Utilities.CompressMetadataToken(CodedIndex.HasFieldMarshal, a.Parent),
-                    Utilities.CompressMetadataToken(CodedIndex.HasFieldMarshal, b.Parent)
-                );
+                return Comparer
+                    .Default
+                    .Compare(
+                        Utilities.CompressMetadataToken(CodedIndex.HasFieldMarshal, a.Parent),
+                        Utilities.CompressMetadataToken(CodedIndex.HasFieldMarshal, b.Parent)
+                    );
             }
         }
 
@@ -269,16 +281,18 @@ namespace Mono.Cecil
                 GenericParameter a = x as GenericParameter;
                 GenericParameter b = y as GenericParameter;
 
-                int token = Comparer.Default.Compare(
-                    Utilities.CompressMetadataToken(
-                        CodedIndex.TypeOrMethodDef,
-                        a.Owner.MetadataToken
-                    ),
-                    Utilities.CompressMetadataToken(
-                        CodedIndex.TypeOrMethodDef,
-                        b.Owner.MetadataToken
-                    )
-                );
+                int token = Comparer
+                    .Default
+                    .Compare(
+                        Utilities.CompressMetadataToken(
+                            CodedIndex.TypeOrMethodDef,
+                            a.Owner.MetadataToken
+                        ),
+                        Utilities.CompressMetadataToken(
+                            CodedIndex.TypeOrMethodDef,
+                            b.Owner.MetadataToken
+                        )
+                    );
 
                 if (token == 0)
                     return Comparer.Default.Compare(a.Position, b.Position);

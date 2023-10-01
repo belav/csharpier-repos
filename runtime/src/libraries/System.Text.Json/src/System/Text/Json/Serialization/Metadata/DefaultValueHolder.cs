@@ -20,11 +20,17 @@ namespace System.Text.Json.Serialization.Metadata
             if (type.IsValueType && Nullable.GetUnderlyingType(type) == null)
             {
 #if NETCOREAPP
-                DefaultValue =
-                    System.Runtime.CompilerServices.RuntimeHelpers.GetUninitializedObject(type);
+                DefaultValue = System
+                    .Runtime
+                    .CompilerServices
+                    .RuntimeHelpers
+                    .GetUninitializedObject(type);
 #else
-                DefaultValue =
-                    System.Runtime.Serialization.FormatterServices.GetUninitializedObject(type);
+                DefaultValue = System
+                    .Runtime
+                    .Serialization
+                    .FormatterServices
+                    .GetUninitializedObject(type);
 #endif
             }
         }

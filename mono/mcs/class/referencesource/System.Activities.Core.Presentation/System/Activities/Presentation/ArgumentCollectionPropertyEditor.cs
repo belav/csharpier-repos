@@ -21,10 +21,9 @@ namespace System.Activities.Presentation
     {
         public ArgumentCollectionPropertyEditor()
         {
-            this.InlineEditorTemplate =
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
-                    "ArgumentCollection_InlineTemplate"
-                );
+            this.InlineEditorTemplate = EditorCategoryTemplateDictionary
+                .Instance
+                .GetCategoryTemplate("ArgumentCollection_InlineTemplate");
         }
 
         public override void ShowDialog(PropertyValue propertyValue, IInputElement commandSource)
@@ -60,7 +59,8 @@ namespace System.Activities.Presentation
             };
 
             using (
-                EditingScope scope = context.Services
+                EditingScope scope = context
+                    .Services
                     .GetRequiredService<ModelTreeManager>()
                     .CreateEditingScope(
                         StringResourceDictionary.Instance.GetString("InvokeMethodParameterEditing"),

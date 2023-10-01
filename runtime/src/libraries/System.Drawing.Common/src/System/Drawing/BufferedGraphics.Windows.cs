@@ -86,17 +86,19 @@ namespace System.Drawing
 
             try
             {
-                Interop.Gdi32.BitBlt(
-                    refTargetDC,
-                    _targetLoc.X,
-                    _targetLoc.Y,
-                    _virtualSize.Width,
-                    _virtualSize.Height,
-                    new HandleRef(Graphics, sourceDC),
-                    0,
-                    0,
-                    Interop.Gdi32.RasterOp.SRCCOPY
-                );
+                Interop
+                    .Gdi32
+                    .BitBlt(
+                        refTargetDC,
+                        _targetLoc.X,
+                        _targetLoc.Y,
+                        _virtualSize.Width,
+                        _virtualSize.Height,
+                        new HandleRef(Graphics, sourceDC),
+                        0,
+                        0,
+                        Interop.Gdi32.RasterOp.SRCCOPY
+                    );
             }
             finally
             {

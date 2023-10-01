@@ -25,20 +25,9 @@ namespace Internal.Cryptography
 #endif
             byte[] signature = new byte[estimatedSize];
             int numBytesNeeded;
-            ErrorCode errorCode = Interop.NCrypt.NCryptSignHash(
-                keyHandle,
-                pPaddingInfo,
-                hash,
-                hash.Length,
-                signature,
-                signature.Length,
-                out numBytesNeeded,
-                paddingMode
-            );
-
-            if (errorCode == ErrorCode.STATUS_UNSUCCESSFUL)
-            {
-                errorCode = Interop.NCrypt.NCryptSignHash(
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptSignHash(
                     keyHandle,
                     pPaddingInfo,
                     hash,
@@ -48,35 +37,54 @@ namespace Internal.Cryptography
                     out numBytesNeeded,
                     paddingMode
                 );
+
+            if (errorCode == ErrorCode.STATUS_UNSUCCESSFUL)
+            {
+                errorCode = Interop
+                    .NCrypt
+                    .NCryptSignHash(
+                        keyHandle,
+                        pPaddingInfo,
+                        hash,
+                        hash.Length,
+                        signature,
+                        signature.Length,
+                        out numBytesNeeded,
+                        paddingMode
+                    );
             }
 
             if (errorCode == ErrorCode.NTE_BUFFER_TOO_SMALL)
             {
                 signature = new byte[numBytesNeeded];
-                errorCode = Interop.NCrypt.NCryptSignHash(
-                    keyHandle,
-                    pPaddingInfo,
-                    hash,
-                    hash.Length,
-                    signature,
-                    signature.Length,
-                    out numBytesNeeded,
-                    paddingMode
-                );
+                errorCode = Interop
+                    .NCrypt
+                    .NCryptSignHash(
+                        keyHandle,
+                        pPaddingInfo,
+                        hash,
+                        hash.Length,
+                        signature,
+                        signature.Length,
+                        out numBytesNeeded,
+                        paddingMode
+                    );
             }
 
             if (errorCode == ErrorCode.STATUS_UNSUCCESSFUL)
             {
-                errorCode = Interop.NCrypt.NCryptSignHash(
-                    keyHandle,
-                    pPaddingInfo,
-                    hash,
-                    hash.Length,
-                    signature,
-                    signature.Length,
-                    out numBytesNeeded,
-                    paddingMode
-                );
+                errorCode = Interop
+                    .NCrypt
+                    .NCryptSignHash(
+                        keyHandle,
+                        pPaddingInfo,
+                        hash,
+                        hash.Length,
+                        signature,
+                        signature.Length,
+                        out numBytesNeeded,
+                        paddingMode
+                    );
             }
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -97,16 +105,18 @@ namespace Internal.Cryptography
         {
             for (int i = 0; i <= StatusUnsuccessfulRetryCount; i++)
             {
-                ErrorCode error = Interop.NCrypt.NCryptSignHash(
-                    keyHandle,
-                    pPaddingInfo,
-                    hash,
-                    hash.Length,
-                    signature,
-                    signature.Length,
-                    out int numBytesNeeded,
-                    paddingMode
-                );
+                ErrorCode error = Interop
+                    .NCrypt
+                    .NCryptSignHash(
+                        keyHandle,
+                        pPaddingInfo,
+                        hash,
+                        hash.Length,
+                        signature,
+                        signature.Length,
+                        out int numBytesNeeded,
+                        paddingMode
+                    );
 
                 switch (error)
                 {
@@ -138,19 +148,9 @@ namespace Internal.Cryptography
             void* pPaddingInfo
         )
         {
-            ErrorCode errorCode = Interop.NCrypt.NCryptVerifySignature(
-                keyHandle,
-                pPaddingInfo,
-                hash,
-                hash.Length,
-                signature,
-                signature.Length,
-                paddingMode
-            );
-
-            if (errorCode == ErrorCode.STATUS_UNSUCCESSFUL)
-            {
-                errorCode = Interop.NCrypt.NCryptVerifySignature(
+            ErrorCode errorCode = Interop
+                .NCrypt
+                .NCryptVerifySignature(
                     keyHandle,
                     pPaddingInfo,
                     hash,
@@ -159,6 +159,20 @@ namespace Internal.Cryptography
                     signature.Length,
                     paddingMode
                 );
+
+            if (errorCode == ErrorCode.STATUS_UNSUCCESSFUL)
+            {
+                errorCode = Interop
+                    .NCrypt
+                    .NCryptVerifySignature(
+                        keyHandle,
+                        pPaddingInfo,
+                        hash,
+                        hash.Length,
+                        signature,
+                        signature.Length,
+                        paddingMode
+                    );
             }
 
             return errorCode == ErrorCode.ERROR_SUCCESS; // For consistency with other AsymmetricAlgorithm-derived classes, return "false" for any error code rather than making the caller catch an exception.

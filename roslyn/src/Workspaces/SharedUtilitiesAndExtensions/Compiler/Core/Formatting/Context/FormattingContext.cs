@@ -240,9 +240,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                     FormattingContext,
                     IndentBlockOperation,
                     SyntaxToken
-                > effectiveBaseTokenGetter = operation.Option.IsOn(
-                    IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine
-                )
+                > effectiveBaseTokenGetter = operation
+                    .Option
+                    .IsOn(IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine)
                     ? static (self, operation) =>
                         self._tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
                     : static (self, operation) => operation.BaseToken;
@@ -271,10 +271,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                     self._tokenStream.GetCurrentColumn(effectiveBaseToken);
 
                 // set new indentation
-                var inseparableRegionStartingPosition = effectiveBaseTokenGetter(
-                    this,
-                    operation
-                ).FullSpan.Start;
+                var inseparableRegionStartingPosition = effectiveBaseTokenGetter(this, operation)
+                    .FullSpan
+                    .Start;
                 var relativeIndentationData = new RelativeIndentationData(
                     this,
                     inseparableRegionStartingPosition,

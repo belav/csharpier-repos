@@ -975,24 +975,30 @@ namespace System.Windows.Forms
                     {
                         parent_menu.SuspendLayout();
                         parent_menu.Items.Insert(0, new MdiControlStrip.SystemMenuItem(form));
-                        parent_menu.Items.Add(
-                            new MdiControlStrip.ControlBoxMenuItem(
-                                form,
-                                MdiControlStrip.ControlBoxType.Close
-                            )
-                        );
-                        parent_menu.Items.Add(
-                            new MdiControlStrip.ControlBoxMenuItem(
-                                form,
-                                MdiControlStrip.ControlBoxType.Max
-                            )
-                        );
-                        parent_menu.Items.Add(
-                            new MdiControlStrip.ControlBoxMenuItem(
-                                form,
-                                MdiControlStrip.ControlBoxType.Min
-                            )
-                        );
+                        parent_menu
+                            .Items
+                            .Add(
+                                new MdiControlStrip.ControlBoxMenuItem(
+                                    form,
+                                    MdiControlStrip.ControlBoxType.Close
+                                )
+                            );
+                        parent_menu
+                            .Items
+                            .Add(
+                                new MdiControlStrip.ControlBoxMenuItem(
+                                    form,
+                                    MdiControlStrip.ControlBoxType.Max
+                                )
+                            );
+                        parent_menu
+                            .Items
+                            .Add(
+                                new MdiControlStrip.ControlBoxMenuItem(
+                                    form,
+                                    MdiControlStrip.ControlBoxType.Min
+                                )
+                            );
                         parent_menu.ResumeLayout();
                     }
                 }

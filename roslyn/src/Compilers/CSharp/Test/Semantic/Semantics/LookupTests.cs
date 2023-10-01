@@ -615,7 +615,8 @@ class Test
             );
             Assert.Null(useSiteDiagnostics);
             Assert.True(lookupResult.IsMultiViable);
-            var actual_lookupSymbols_as_string = lookupResult.Symbols
+            var actual_lookupSymbols_as_string = lookupResult
+                .Symbols
                 .Select(e => e.ToTestDisplayString())
                 .ToArray();
             lookupResult.Free();

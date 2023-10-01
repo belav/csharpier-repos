@@ -55,12 +55,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         }
 
         protected override SymbolDisplayFormat DisplayFormat =>
-            SymbolDisplayFormat.TestFormatWithConstraints.WithMemberOptions(
-                SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeType
-                    | SymbolDisplayMemberOptions.IncludeRef
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
-            );
+            SymbolDisplayFormat
+                .TestFormatWithConstraints
+                .WithMemberOptions(
+                    SymbolDisplayMemberOptions.IncludeParameters
+                        | SymbolDisplayMemberOptions.IncludeType
+                        | SymbolDisplayMemberOptions.IncludeRef
+                        | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                );
 
         protected override void ReportSymbol(Symbol symbol)
         {

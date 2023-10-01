@@ -200,13 +200,17 @@ namespace System.Workflow.Activities
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
-            WorkflowServiceBehavior workflowServiceBehavior =
-                context.ServiceDescription.Behaviors.Find<WorkflowServiceBehavior>();
+            WorkflowServiceBehavior workflowServiceBehavior = context
+                .ServiceDescription
+                .Behaviors
+                .Find<WorkflowServiceBehavior>();
             if (workflowServiceBehavior == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.NoWorkflowServiceBehavior))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR2.GetString(SR2.NoWorkflowServiceBehavior))
+                    );
             }
 
             workflowServiceBehavior.AddressFilterMode = this.AddressFilterMode;

@@ -126,9 +126,9 @@ namespace Internal.Runtime
 
                 if (pThisEEType->IsParameterizedType && pOtherEEType->IsParameterizedType)
                 {
-                    return pThisEEType->RelatedParameterType->IsEquivalentTo(
-                            pOtherEEType->RelatedParameterType
-                        )
+                    return pThisEEType
+                            ->RelatedParameterType
+                            ->IsEquivalentTo(pOtherEEType->RelatedParameterType)
                         && pThisEEType->ParameterizedTypeShape
                             == pOtherEEType->ParameterizedTypeShape;
                 }

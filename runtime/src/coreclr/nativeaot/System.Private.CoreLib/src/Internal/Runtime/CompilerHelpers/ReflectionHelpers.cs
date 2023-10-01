@@ -43,14 +43,16 @@ namespace Internal.Runtime.CompilerHelpers
             bool ignoreCase
         )
         {
-            return RuntimeAugments.Callbacks.GetType(
-                typeName,
-                assemblyResolver,
-                typeResolver,
-                throwOnError,
-                ignoreCase,
-                callingAssemblyName
-            );
+            return RuntimeAugments
+                .Callbacks
+                .GetType(
+                    typeName,
+                    assemblyResolver,
+                    typeResolver,
+                    throwOnError,
+                    ignoreCase,
+                    callingAssemblyName
+                );
         }
 
         // This supports Assembly.GetExecutingAssembly() intrinsic expansion in the compiler

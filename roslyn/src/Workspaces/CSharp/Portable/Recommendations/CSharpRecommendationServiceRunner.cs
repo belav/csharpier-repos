@@ -58,7 +58,8 @@ internal partial class CSharpRecommendationService
                     var parameter = parameters[ordinalInLambda];
                     if (parameter.Type != null)
                     {
-                        explicitLambdaParameterType = _context.SemanticModel
+                        explicitLambdaParameterType = _context
+                            .SemanticModel
                             .GetTypeInfo(parameter.Type, _cancellationToken)
                             .Type;
                         return explicitLambdaParameterType != null;
@@ -81,10 +82,9 @@ internal partial class CSharpRecommendationService
             else if (
                 _context.IsAnyExpressionContext
                 || _context.IsStatementContext
-                || _context.SyntaxTree.IsDefiniteCastTypeContext(
-                    _context.Position,
-                    _context.LeftToken
-                )
+                || _context
+                    .SyntaxTree
+                    .IsDefiniteCastTypeContext(_context.Position, _context.LeftToken)
             )
             {
                 // GitHub #717: With automatic brace completion active, typing '(i' produces "(i)", which gets parsed as
@@ -106,10 +106,12 @@ internal partial class CSharpRecommendationService
             }
             else if (_context.IsDestructorTypeContext)
             {
-                var symbol = _context.SemanticModel.GetDeclaredSymbol(
-                    _context.ContainingTypeOrEnumDeclaration!,
-                    _cancellationToken
-                );
+                var symbol = _context
+                    .SemanticModel
+                    .GetDeclaredSymbol(
+                        _context.ContainingTypeOrEnumDeclaration!,
+                        _cancellationToken
+                    );
                 return symbol == null
                     ? ImmutableArray<ISymbol>.Empty
                     : ImmutableArray.Create<ISymbol>(symbol);
@@ -181,7 +183,8 @@ internal partial class CSharpRecommendationService
 
         private ImmutableArray<ISymbol> GetSymbolsForTypeArgumentOfConstraintClause()
         {
-            var enclosingSymbol = _context.LeftToken
+            var enclosingSymbol = _context
+                .LeftToken
                 .GetRequiredParent()
                 .AncestorsAndSelf()
                 .Select(n => _context.SemanticModel.GetDeclaredSymbol(n, _cancellationToken))
@@ -223,9 +226,9 @@ internal partial class CSharpRecommendationService
 
         private ImmutableArray<ISymbol> GetSymbolsForTypeOrNamespaceContext()
         {
-            var symbols = _context.SemanticModel.LookupNamespacesAndTypes(
-                _context.LeftToken.SpanStart
-            );
+            var symbols = _context
+                .SemanticModel
+                .LookupNamespacesAndTypes(_context.LeftToken.SpanStart);
 
             if (_context.TargetToken.IsUsingKeywordInUsingDirective())
             {
@@ -252,7 +255,8 @@ internal partial class CSharpRecommendationService
             // name).  If this is the case, we do not want to filter out inaccessible locals.
             var filterOutOfScopeLocals = _filterOutOfScopeLocals;
             if (filterOutOfScopeLocals)
-                filterOutOfScopeLocals = !_context.LeftToken
+                filterOutOfScopeLocals = !_context
+                    .LeftToken
                     .GetRequiredParent()
                     .IsFoundUnder<LocalDeclarationStatementSyntax>(d => d.Declaration.Type);
 
@@ -273,10 +277,9 @@ internal partial class CSharpRecommendationService
             // Filter out any extension methods that might be imported by a using static directive.
             // But include extension methods declared in the context's type or it's parents
             var contextOuterTypes = ComputeOuterTypes(_context, _cancellationToken);
-            var contextEnclosingNamedType = _context.SemanticModel.GetEnclosingNamedType(
-                _context.Position,
-                _cancellationToken
-            );
+            var contextEnclosingNamedType = _context
+                .SemanticModel
+                .GetEnclosingNamedType(_context.Position, _cancellationToken);
 
             symbols = symbols.WhereAsArray(
                 symbol =>
@@ -328,16 +331,14 @@ internal partial class CSharpRecommendationService
 
             if (_context.IsNameOfContext)
                 return new RecommendedSymbols(
-                    _context.SemanticModel.LookupSymbols(
-                        position: name.SpanStart,
-                        container: symbol
-                    )
+                    _context
+                        .SemanticModel
+                        .LookupSymbols(position: name.SpanStart, container: symbol)
                 );
 
-            var symbols = _context.SemanticModel.LookupNamespacesAndTypes(
-                position: name.SpanStart,
-                container: symbol
-            );
+            var symbols = _context
+                .SemanticModel
+                .LookupNamespacesAndTypes(position: name.SpanStart, container: symbol);
 
             if (_context.IsNamespaceDeclarationNameContext)
             {
@@ -378,10 +379,9 @@ internal partial class CSharpRecommendationService
                 ? awaitExpression.Expression.WalkDownParentheses()
                 : originalExpression.WalkDownParentheses();
 
-            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
-                expression,
-                _cancellationToken
-            );
+            var leftHandBinding = _context
+                .SemanticModel
+                .GetSymbolInfo(expression, _cancellationToken);
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
 
             var result = GetSymbolsOffOfBoundExpression(
@@ -401,11 +401,13 @@ internal partial class CSharpRecommendationService
                 )
             )
             {
-                var speculativeSymbolInfo = _context.SemanticModel.GetSpeculativeSymbolInfo(
-                    expression.SpanStart,
-                    expression,
-                    SpeculativeBindingOption.BindAsTypeOrNamespace
-                );
+                var speculativeSymbolInfo = _context
+                    .SemanticModel
+                    .GetSpeculativeSymbolInfo(
+                        expression.SpanStart,
+                        expression,
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    );
 
                 var typeMembers = GetSymbolsOffOfBoundExpression(
                     originalExpression,
@@ -430,10 +432,9 @@ internal partial class CSharpRecommendationService
         )
         {
             var expression = originalExpression.WalkDownParentheses();
-            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
-                expression,
-                _cancellationToken
-            );
+            var leftHandBinding = _context
+                .SemanticModel
+                .GetSymbolInfo(expression, _cancellationToken);
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
 
             return GetSymbolsOffOfBoundExpression(
@@ -455,10 +456,9 @@ internal partial class CSharpRecommendationService
             // type. This is not exposed via the binding information for the LHS, so repeat this work here.
 
             var expression = originalExpression.WalkDownParentheses();
-            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
-                expression,
-                _cancellationToken
-            );
+            var leftHandBinding = _context
+                .SemanticModel
+                .GetSymbolInfo(expression, _cancellationToken);
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
 
             // If the thing on the left is a type, namespace, or alias, we shouldn't show anything in
@@ -530,10 +530,9 @@ internal partial class CSharpRecommendationService
                 // If the thing on the left is an event that can't be used as a field, we shouldn't show anything
                 if (
                     symbol is IEventSymbol ev
-                    && !_context.SemanticModel.IsEventUsableAsField(
-                        originalExpression.SpanStart,
-                        ev
-                    )
+                    && !_context
+                        .SemanticModel
+                        .IsEventUsableAsField(originalExpression.SpanStart, ev)
                 )
                 {
                     return default;
@@ -676,10 +675,9 @@ internal partial class CSharpRecommendationService
 
         private void AddIndexers(ITypeSymbol container, ArrayBuilder<ISymbol> symbols)
         {
-            var containingType = _context.SemanticModel.GetEnclosingNamedType(
-                _context.Position,
-                _cancellationToken
-            );
+            var containingType = _context
+                .SemanticModel
+                .GetEnclosingNamedType(_context.Position, _cancellationToken);
             if (containingType == null)
                 return;
 

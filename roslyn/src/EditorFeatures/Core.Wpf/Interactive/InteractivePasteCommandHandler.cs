@@ -75,9 +75,11 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             // InteractiveWindow handles pasting by itself, which including checks for buffer types, etc.
             if (
-                !args.TextView.TextBuffer.ContentType.IsOfType(
-                    PredefinedInteractiveContentTypes.InteractiveContentTypeName
-                ) && RoslynClipboard.ContainsData(InteractiveClipboardFormat.Tag)
+                !args.TextView
+                    .TextBuffer
+                    .ContentType
+                    .IsOfType(PredefinedInteractiveContentTypes.InteractiveContentTypeName)
+                && RoslynClipboard.ContainsData(InteractiveClipboardFormat.Tag)
             )
             {
                 PasteInteractiveFormat(args.TextView);

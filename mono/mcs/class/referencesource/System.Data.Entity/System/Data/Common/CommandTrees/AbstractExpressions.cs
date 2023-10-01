@@ -429,9 +429,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (null == value)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Binary
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Binary);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value);
         }
@@ -450,9 +450,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Boolean
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Boolean);
             }
             return (
                 value.Value
@@ -475,9 +475,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Byte
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Byte);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -496,9 +496,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.DateTime
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.DateTime);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -517,9 +517,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.DateTimeOffset
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.DateTimeOffset);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -538,9 +538,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Decimal
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Decimal);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -559,9 +559,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Double
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Double);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -580,9 +580,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (value == null)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Geography
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Geography);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value);
         }
@@ -601,9 +601,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (value == null)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Geometry
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Geometry);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value);
         }
@@ -622,9 +622,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Guid
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Guid);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -643,9 +643,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Int16
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Int16);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -664,9 +664,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Int32
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Int32);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -685,9 +685,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Int64
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Int64);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -721,9 +721,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (!value.HasValue)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.Single
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.Single);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value.Value);
         }
@@ -742,9 +742,9 @@ namespace System.Data.Common.CommandTrees
         {
             if (null == value)
             {
-                return ExpressionBuilder.DbExpressionBuilder.CreatePrimitiveNullExpression(
-                    PrimitiveTypeKind.String
-                );
+                return ExpressionBuilder
+                    .DbExpressionBuilder
+                    .CreatePrimitiveNullExpression(PrimitiveTypeKind.String);
             }
             return ExpressionBuilder.DbExpressionBuilder.Constant(value);
         }

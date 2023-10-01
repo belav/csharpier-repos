@@ -54,9 +54,9 @@ namespace System.ServiceModel.Discovery
                 {
                     discoverySchema = schema;
                     if (
-                        schema.SchemaTypes.Contains(
-                            discoveryVersion.Implementation.QualifiedNames.ProbeMatchType
-                        )
+                        schema
+                            .SchemaTypes
+                            .Contains(discoveryVersion.Implementation.QualifiedNames.ProbeMatchType)
                     )
                     {
                         typesFound |= SchemaTypes.ProbeMatchType;
@@ -103,9 +103,9 @@ namespace System.ServiceModel.Discovery
                 {
                     discoverySchema = schema;
                     if (
-                        schema.SchemaTypes.Contains(
-                            discoveryVersion.Implementation.QualifiedNames.ProbeType
-                        )
+                        schema
+                            .SchemaTypes
+                            .Contains(discoveryVersion.Implementation.QualifiedNames.ProbeType)
                     )
                     {
                         typesFound |= SchemaTypes.ProbeType;
@@ -173,9 +173,9 @@ namespace System.ServiceModel.Discovery
                 {
                     discoverySchema = schema;
                     if (
-                        schema.SchemaTypes.Contains(
-                            discoveryVersion.Implementation.QualifiedNames.ResolveType
-                        )
+                        schema
+                            .SchemaTypes
+                            .Contains(discoveryVersion.Implementation.QualifiedNames.ResolveType)
                     )
                     {
                         typesFound |= SchemaTypes.ResolveType;
@@ -215,9 +215,11 @@ namespace System.ServiceModel.Discovery
                 {
                     discoverySchema = schema;
                     if (
-                        schema.SchemaTypes.Contains(
-                            discoveryVersion.Implementation.QualifiedNames.AppSequenceType
-                        )
+                        schema
+                            .SchemaTypes
+                            .Contains(
+                                discoveryVersion.Implementation.QualifiedNames.AppSequenceType
+                            )
                     )
                     {
                         add = false;
@@ -645,9 +647,9 @@ namespace System.ServiceModel.Discovery
             if (
                 ((elementsFound & SchemaElements.Types) != SchemaElements.Types)
                 && (
-                    schema.Elements.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.TypesElement
-                    )
+                    schema
+                        .Elements
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.TypesElement)
                 )
             )
             {
@@ -656,9 +658,9 @@ namespace System.ServiceModel.Discovery
             if (
                 ((elementsFound & SchemaElements.Scopes) != SchemaElements.Scopes)
                 && (
-                    schema.Elements.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.ScopesElement
-                    )
+                    schema
+                        .Elements
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.ScopesElement)
                 )
             )
             {
@@ -667,9 +669,9 @@ namespace System.ServiceModel.Discovery
             if (
                 ((elementsFound & SchemaElements.XAddrs) != SchemaElements.XAddrs)
                 && (
-                    schema.Elements.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.XAddrsElement
-                    )
+                    schema
+                        .Elements
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.XAddrsElement)
                 )
             )
             {
@@ -678,9 +680,11 @@ namespace System.ServiceModel.Discovery
             if (
                 ((elementsFound & SchemaElements.MetadataVersion) != SchemaElements.MetadataVersion)
                 && (
-                    schema.Elements.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.MetadataVersionElement
-                    )
+                    schema
+                        .Elements
+                        .Contains(
+                            discoveryVersion.Implementation.QualifiedNames.MetadataVersionElement
+                        )
                 )
             )
             {
@@ -697,9 +701,9 @@ namespace System.ServiceModel.Discovery
             if (
                 ((typesFound & SchemaTypes.QNameListType) != SchemaTypes.QNameListType)
                 && (
-                    schema.SchemaTypes.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.QNameListType
-                    )
+                    schema
+                        .SchemaTypes
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.QNameListType)
                 )
             )
             {
@@ -708,9 +712,9 @@ namespace System.ServiceModel.Discovery
             if (
                 ((typesFound & SchemaTypes.UriListType) != SchemaTypes.UriListType)
                 && (
-                    schema.SchemaTypes.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.UriListType
-                    )
+                    schema
+                        .SchemaTypes
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.UriListType)
                 )
             )
             {
@@ -719,9 +723,9 @@ namespace System.ServiceModel.Discovery
             if (
                 ((typesFound & SchemaTypes.ScopesType) != SchemaTypes.ScopesType)
                 && (
-                    schema.SchemaTypes.Contains(
-                        discoveryVersion.Implementation.QualifiedNames.ScopesType
-                    )
+                    schema
+                        .SchemaTypes
+                        .Contains(discoveryVersion.Implementation.QualifiedNames.ScopesType)
                 )
             )
             {

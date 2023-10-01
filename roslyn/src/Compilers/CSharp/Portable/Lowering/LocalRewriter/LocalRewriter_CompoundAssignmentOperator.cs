@@ -829,12 +829,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var implicitIndexerAccess = (BoundImplicitIndexerAccess)originalLHS;
                         Debug.Assert(
-                            implicitIndexerAccess.Argument.Type!.Equals(
-                                _compilation.GetWellKnownType(WellKnownType.System_Index)
-                            )
-                                || implicitIndexerAccess.Argument.Type!.Equals(
-                                    _compilation.GetWellKnownType(WellKnownType.System_Range)
-                                )
+                            implicitIndexerAccess
+                                .Argument
+                                .Type!
+                                .Equals(_compilation.GetWellKnownType(WellKnownType.System_Index))
+                                || implicitIndexerAccess
+                                    .Argument
+                                    .Type!
+                                    .Equals(
+                                        _compilation.GetWellKnownType(WellKnownType.System_Range)
+                                    )
                         );
 
                         if (implicitIndexerAccess.GetRefKind() == RefKind.None)

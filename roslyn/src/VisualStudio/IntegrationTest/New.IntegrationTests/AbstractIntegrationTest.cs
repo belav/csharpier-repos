@@ -28,14 +28,14 @@ namespace Roslyn.VisualStudio.IntegrationTests
             await base.InitializeAsync();
 
             if (
-                await TestServices.SolutionExplorer.IsSolutionOpenAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .SolutionExplorer
+                    .IsSolutionOpenAsync(HangMitigatingCancellationToken)
             )
             {
-                await TestServices.SolutionExplorer.CloseSolutionAsync(
-                    HangMitigatingCancellationToken
-                );
+                await TestServices
+                    .SolutionExplorer
+                    .CloseSolutionAsync(HangMitigatingCancellationToken);
             }
 
             await TestServices.StateReset.ResetGlobalOptionsAsync(HangMitigatingCancellationToken);

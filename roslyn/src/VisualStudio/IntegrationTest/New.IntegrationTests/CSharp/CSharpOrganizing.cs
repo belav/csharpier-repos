@@ -37,12 +37,16 @@ namespace B { public class CB { } }
 namespace C { public class CC { } }",
                 HangMitigatingCancellationToken
             );
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.RemoveAndSort,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(
+                    WellKnownCommands.Edit.RemoveAndSort,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"
 using A;
 using C;
 
@@ -54,8 +58,8 @@ class Test
 namespace A { public class CA { } }
 namespace B { public class CB { } }
 namespace C { public class CC { } }",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
     }
 }

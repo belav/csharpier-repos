@@ -65,9 +65,11 @@ namespace System.ServiceModel.Configuration
             }
             else if (!this.AllowCookies)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.BasicHttpContextBindingRequiresAllowCookie, this.Name, "")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.BasicHttpContextBindingRequiresAllowCookie, this.Name, "")
+                    );
             }
 
             ((BasicHttpContextBinding)binding).ContextManagementEnabled =

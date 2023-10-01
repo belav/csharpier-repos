@@ -129,12 +129,11 @@ namespace System.Web.Util
         )
         {
             //
-            System.Runtime.InteropServices.Marshal.Copy(
-                new IntPtr(src.ToInt64() + srcOffset),
-                dest,
-                destOffset,
-                size
-            );
+            System
+                .Runtime
+                .InteropServices
+                .Marshal
+                .Copy(new IntPtr(src.ToInt64() + srcOffset), dest, destOffset, size);
         }
 
         internal static unsafe void CopyMemory(
@@ -146,12 +145,11 @@ namespace System.Web.Util
         )
         {
             //
-            System.Runtime.InteropServices.Marshal.Copy(
-                src,
-                srcOffset,
-                new IntPtr(dest.ToInt64() + destOffset),
-                size
-            );
+            System
+                .Runtime
+                .InteropServices
+                .Marshal
+                .Copy(src, srcOffset, new IntPtr(dest.ToInt64() + destOffset), size);
         }
 
         internal static unsafe void CopyMemory(

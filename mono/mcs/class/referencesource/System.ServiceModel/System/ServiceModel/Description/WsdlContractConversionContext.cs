@@ -58,7 +58,9 @@ namespace System.ServiceModel.Description
             get
             {
                 foreach (
-                    IWsdlExportExtension extension in contract.Behaviors.FindAll<IWsdlExportExtension>()
+                    IWsdlExportExtension extension in contract
+                        .Behaviors
+                        .FindAll<IWsdlExportExtension>()
                 )
                 {
                     yield return extension;
@@ -74,8 +76,9 @@ namespace System.ServiceModel.Description
                     // In 3.0SP1, the DCSOB and XSOB were moved from before to after the custom behaviors.  For
                     // IWsdlExportExtension compat, run them in the pre-SP1 order.
                     // TEF QFE 367607
-                    Collection<IWsdlExportExtension> extensions =
-                        operation.Behaviors.FindAll<IWsdlExportExtension>();
+                    Collection<IWsdlExportExtension> extensions = operation
+                        .Behaviors
+                        .FindAll<IWsdlExportExtension>();
                     for (int i = 0; i < extensions.Count; )
                     {
                         if (WsdlExporter.IsBuiltInOperationBehavior(extensions[i]))
@@ -190,10 +193,10 @@ namespace System.ServiceModel.Description
                             )
                             {
                                 if (
-                                    WsdlImporter.Binding2DescriptionHelper.Match(
-                                        operationBinding,
-                                        operation
-                                    ) != WsdlImporter.Binding2DescriptionHelper.MatchResult.None
+                                    WsdlImporter
+                                        .Binding2DescriptionHelper
+                                        .Match(operationBinding, operation)
+                                    != WsdlImporter.Binding2DescriptionHelper.MatchResult.None
                                 )
                                 {
                                     bindings.Add(operationBinding);

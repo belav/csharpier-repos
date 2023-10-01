@@ -19,9 +19,9 @@ public class EntityMaterializerSourceTest
     [ConditionalFact]
     public void Throws_for_abstract_types()
     {
-        var entityType = CreateConventionalModelBuilder().Model.AddEntityType(
-            typeof(SomeAbstractEntity)
-        );
+        var entityType = CreateConventionalModelBuilder()
+            .Model
+            .AddEntityType(typeof(SomeAbstractEntity));
         var source = (IEntityMaterializerSource)
             new EntityMaterializerSource(
                 new EntityMaterializerSourceDependencies(Array.Empty<ISingletonInterceptor>())

@@ -166,12 +166,12 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
 
             // Change ThreeLineBreak series type to range column
-            series["OldXValueIndexed"] = series.IsXValueIndexed.ToString(
-                CultureInfo.InvariantCulture
-            );
-            series["OldYValuesPerPoint"] = series.YValuesPerPoint.ToString(
-                CultureInfo.InvariantCulture
-            );
+            series["OldXValueIndexed"] = series
+                .IsXValueIndexed
+                .ToString(CultureInfo.InvariantCulture);
+            series["OldYValuesPerPoint"] = series
+                .YValuesPerPoint
+                .ToString(CultureInfo.InvariantCulture);
             series.ChartType = SeriesChartType.RangeColumn;
             series.IsXValueIndexed = true;
             series.YValuesPerPoint = 2;

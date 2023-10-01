@@ -31,11 +31,9 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options
         )
         {
-            jsonTypeInfo.CreateObjectWithArgs =
-                JsonSerializerOptions.MemberAccessorStrategy.CreateImmutableEnumerableCreateRangeDelegate<
-                    TCollection,
-                    TElement
-                >();
+            jsonTypeInfo.CreateObjectWithArgs = JsonSerializerOptions
+                .MemberAccessorStrategy
+                .CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>();
         }
     }
 }

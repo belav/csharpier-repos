@@ -25,7 +25,8 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion(span, new Region(0, 0, 200, 1, false));
 
-            _terminal.Out
+            _terminal
+                .Out
                 .ToString()
                 .Should()
                 .Contain(
@@ -44,7 +45,8 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion(span, new Region(0, 0, 200, 1, false));
 
-            _terminal.Out
+            _terminal
+                .Out
                 .ToString()
                 .Should()
                 .Contain(
@@ -63,7 +65,8 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion(span, new Region(0, 0, 200, 1, false));
 
-            _terminal.Events
+            _terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new CursorPositionChanged(new Point(0, 0)),
@@ -93,7 +96,8 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion(span, new Region(0, 0, 200, 1, false));
 
-            _terminal.Events
+            _terminal
+                .Events
                 .Should()
                 .BeEquivalentSequenceTo(
                     new CursorPositionChanged(new Point(0, 0)),

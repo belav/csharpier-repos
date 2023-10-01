@@ -79,24 +79,28 @@ namespace System.Security.Cryptography
                     try
                     {
                         bool success = protect
-                            ? Interop.Crypt32.CryptProtectData(
-                                in userDataBlob,
-                                null,
-                                ref optionalEntropyBlob,
-                                IntPtr.Zero,
-                                IntPtr.Zero,
-                                flags,
-                                out outputBlob
-                            )
-                            : Interop.Crypt32.CryptUnprotectData(
-                                in userDataBlob,
-                                IntPtr.Zero,
-                                ref optionalEntropyBlob,
-                                IntPtr.Zero,
-                                IntPtr.Zero,
-                                flags,
-                                out outputBlob
-                            );
+                            ? Interop
+                                .Crypt32
+                                .CryptProtectData(
+                                    in userDataBlob,
+                                    null,
+                                    ref optionalEntropyBlob,
+                                    IntPtr.Zero,
+                                    IntPtr.Zero,
+                                    flags,
+                                    out outputBlob
+                                )
+                            : Interop
+                                .Crypt32
+                                .CryptUnprotectData(
+                                    in userDataBlob,
+                                    IntPtr.Zero,
+                                    ref optionalEntropyBlob,
+                                    IntPtr.Zero,
+                                    IntPtr.Zero,
+                                    flags,
+                                    out outputBlob
+                                );
                         if (!success)
                         {
                             int lastWin32Error = Marshal.GetLastPInvokeError();

@@ -82,11 +82,13 @@ namespace System.ServiceModel.Channels
                     {
                         if (cacheEntry.HostEntry == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new EndpointNotFoundException(
-                                    SR.GetString(SR.DnsResolveFailed, hostName)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new EndpointNotFoundException(
+                                        SR.GetString(SR.DnsResolveFailed, hostName)
+                                    )
+                                );
                         }
                         hostEntry = cacheEntry.HostEntry;
                     }
@@ -114,12 +116,14 @@ namespace System.ServiceModel.Channels
 
                 if (dnsException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new EndpointNotFoundException(
-                            SR.GetString(SR.DnsResolveFailed, hostName),
-                            dnsException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new EndpointNotFoundException(
+                                SR.GetString(SR.DnsResolveFailed, hostName),
+                                dnsException
+                            )
+                        );
                 }
             }
 

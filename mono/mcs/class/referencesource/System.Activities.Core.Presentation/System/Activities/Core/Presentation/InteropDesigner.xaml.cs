@@ -57,7 +57,8 @@ namespace System.Activities.Core.Presentation
                 {
                     // Construct the type name dynamically to avoid hardcoding the version number and public key token.
                     // The constructed type name should look like: "System.Activities.Statements.Interop, System.Workflow.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
-                    interopTypeAssemblyQualifiedName = typeof(Parallel).AssemblyQualifiedName
+                    interopTypeAssemblyQualifiedName = typeof(Parallel)
+                        .AssemblyQualifiedName
                         .Replace("Parallel", "Interop")
                         .Replace("System.Activities,", "System.Workflow.Runtime,");
                 }

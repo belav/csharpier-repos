@@ -676,10 +676,16 @@ namespace System.Workflow.Runtime.Tracking
                                 StringComparison.Ordinal
                             )
                         )
-                            point.MatchingLocation.Events.Add(
-                                (TrackingWorkflowEvent)
-                                    Enum.Parse(typeof(TrackingWorkflowEvent), reader.ReadString())
-                            );
+                            point
+                                .MatchingLocation
+                                .Events
+                                .Add(
+                                    (TrackingWorkflowEvent)
+                                        Enum.Parse(
+                                            typeof(TrackingWorkflowEvent),
+                                            reader.ReadString()
+                                        )
+                                );
                         //
                         // Xsd validation will catch unknown elements
                         break;

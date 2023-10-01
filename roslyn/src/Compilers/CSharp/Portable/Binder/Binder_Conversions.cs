@@ -196,10 +196,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // or that was explicitly written in code (so that GetSemanticInfo can find the syntax in the bound tree).
                     if (
                         !isCast
-                        && source.Type.Equals(
-                            destination,
-                            TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                        && source
+                            .Type
+                            .Equals(
+                                destination,
+                                TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
                     )
                     {
                         return source;
@@ -939,8 +941,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics: diagnostics
             );
 
-            TypeSymbol conversionParameterType =
-                conversion.BestUserDefinedConversionAnalysis.Operator.GetParameterType(0);
+            TypeSymbol conversionParameterType = conversion
+                .BestUserDefinedConversionAnalysis
+                .Operator
+                .GetParameterType(0);
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
                 diagnostics
             );

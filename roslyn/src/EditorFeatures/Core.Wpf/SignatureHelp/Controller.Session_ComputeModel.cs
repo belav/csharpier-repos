@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             {
                 this.Computation.ThreadingContext.ThrowIfNotOnUIThread();
 
-                var caretPosition = Controller.TextView
+                var caretPosition = Controller
+                    .TextView
                     .GetCaretPoint(Controller.SubjectBuffer)
                     .Value;
                 var disconnectedBufferGraph = new DisconnectedBufferGraph(
@@ -77,10 +78,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         this.Computation.ThreadingContext.ThrowIfNotOnBackgroundThread();
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var document = Controller.DocumentProvider.GetDocument(
-                            caretPosition.Snapshot,
-                            cancellationToken
-                        );
+                        var document = Controller
+                            .DocumentProvider
+                            .GetDocument(caretPosition.Snapshot, cancellationToken);
                         if (document == null)
                         {
                             return currentModel;
@@ -103,18 +103,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
                             if (
                                 triggerInfo.TriggerCharacter.HasValue
-                                && !currentModel.Provider.IsRetriggerCharacter(
-                                    triggerInfo.TriggerCharacter.Value
-                                )
+                                && !currentModel
+                                    .Provider
+                                    .IsRetriggerCharacter(triggerInfo.TriggerCharacter.Value)
                             )
                             {
                                 return currentModel;
                             }
                         }
 
-                        var options = Controller.GlobalOptions.GetSignatureHelpOptions(
-                            document.Project.Language
-                        );
+                        var options = Controller
+                            .GlobalOptions
+                            .GetSignatureHelpOptions(document.Project.Language);
 
                         // first try to query the providers that can trigger on the specified character
                         var (provider, items) = await ComputeItemsAsync(
@@ -221,9 +221,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     && currentModel.UserSelected
                 )
                 {
-                    var userSelectedItem = items.Items.FirstOrDefault(
-                        i => DisplayPartsMatch(i, currentModel.SelectedItem)
-                    );
+                    var userSelectedItem = items
+                        .Items
+                        .FirstOrDefault(i => DisplayPartsMatch(i, currentModel.SelectedItem));
                     if (userSelectedItem != null)
                     {
                         userSelected = true;
@@ -244,9 +244,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 {
                     // If the provider did not pick a default, and it's the same provider as the previous
                     // model we have, then try to return the same item that we had before.
-                    lastSelectionOrDefault = items.Items.FirstOrDefault(
-                        i => DisplayPartsMatch(i, currentModel.SelectedItem)
-                    );
+                    lastSelectionOrDefault = items
+                        .Items
+                        .FirstOrDefault(i => DisplayPartsMatch(i, currentModel.SelectedItem));
                 }
 
                 // Otherwise, just pick the first item we have.

@@ -87,8 +87,9 @@ namespace System.Activities.Core.Presentation
 
         protected override void OnModelItemChanged(object newItem)
         {
-            ViewStateService viewStateService =
-                this.Context.Services.GetService<ViewStateService>();
+            ViewStateService viewStateService = this.Context
+                .Services
+                .GetService<ViewStateService>();
             if (viewStateService != null)
             {
                 // Make StateMachine designer always collapsed by default, but only if the user didn't explicitly specify collapsed or expanded.

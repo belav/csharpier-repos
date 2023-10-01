@@ -334,10 +334,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var broker =
-                await TestServices.Shell.GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(
-                    cancellationToken
-                );
+            var broker = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(cancellationToken);
             var session = await broker.TriggerQuickInfoAsync(
                 await TestServices.Editor.GetActiveTextViewAsync(cancellationToken),
                 cancellationToken: cancellationToken
@@ -350,10 +349,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var view = await TestServices.Editor.GetActiveTextViewAsync(cancellationToken);
-            var broker =
-                await TestServices.Shell.GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(
-                    cancellationToken
-                );
+            var broker = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IAsyncQuickInfoBroker>(cancellationToken);
 
             var session = broker.GetSession(view);
 
@@ -380,8 +378,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 var selectionSpan = textView.Selection.StreamSelectionSpan.SnapshotSpan;
                 if (selectionSpan.Length == 0)
                 {
-                    var textStructureNavigatorSelectorService =
-                        await TestServices.Shell.GetComponentModelServiceAsync<ITextStructureNavigatorSelectorService>(
+                    var textStructureNavigatorSelectorService = await TestServices
+                        .Shell
+                        .GetComponentModelServiceAsync<ITextStructureNavigatorSelectorService>(
                             cancellationToken
                         );
                     selectionSpan = textStructureNavigatorSelectorService
@@ -390,8 +389,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                         .Span;
                 }
 
-                var classifierAggregatorService =
-                    await TestServices.Shell.GetComponentModelServiceAsync<IViewClassifierAggregatorService>(
+                var classifierAggregatorService = await TestServices
+                    .Shell
+                    .GetComponentModelServiceAsync<IViewClassifierAggregatorService>(
                         cancellationToken
                     );
                 classifier = classifierAggregatorService.GetClassifier(textView);
@@ -492,10 +492,12 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             if (await IsUseSuggestionModeOnAsync(forDebuggerTextView, cancellationToken) != value)
             {
-                await TestServices.Shell.ExecuteCommandAsync(
-                    VSConstants.VSStd2KCmdID.ToggleConsumeFirstCompletionMode,
-                    cancellationToken
-                );
+                await TestServices
+                    .Shell
+                    .ExecuteCommandAsync(
+                        VSConstants.VSStd2KCmdID.ToggleConsumeFirstCompletionMode,
+                        cancellationToken
+                    );
                 if (
                     await IsUseSuggestionModeOnAsync(forDebuggerTextView, cancellationToken)
                     != value
@@ -611,10 +613,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.NavigationBar,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -631,10 +632,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.NavigationBar,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -650,10 +650,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.NavigationBar,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -670,10 +669,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.NavigationBar,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -694,10 +692,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await TestServices.Input.SendAsync(VirtualKeyCode.RETURN, cancellationToken);
 
             // Navigation and/or code generation following selection is tracked under FeatureAttribute.NavigationBar
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.NavigationBar,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.NavigationBar, cancellationToken);
         }
 
         public async Task<int> GetNavigationBarItemIndexAsync(
@@ -896,10 +893,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
             await InvokeCodeActionListWithoutWaitingAsync(cancellationToken);
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.LightBulb,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 
         public async Task InvokeCodeActionListWithoutWaitingAsync(
@@ -913,10 +909,12 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             {
                 // Workaround for extremely unstable async lightbulb (can dismiss itself when SuggestedActionsChanged
                 // fires while expanding the light bulb).
-                await TestServices.Input.SendAsync(
-                    (VirtualKeyCode.OEM_PERIOD, VirtualKeyCode.CONTROL),
-                    cancellationToken
-                );
+                await TestServices
+                    .Input
+                    .SendAsync(
+                        (VirtualKeyCode.OEM_PERIOD, VirtualKeyCode.CONTROL),
+                        cancellationToken
+                    );
                 await Task.Delay(5000, cancellationToken);
 
                 await TestServices.Editor.DismissLightBulbSessionAsync(cancellationToken);
@@ -1348,39 +1346,37 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
         public async Task GoToDefinitionAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Shell.ExecuteCommandAsync(
-                VSConstants.VSStd97CmdID.GotoDefn,
-                cancellationToken
-            );
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[]
-                {
-                    FeatureAttribute.Workspace,
-                    FeatureAttribute.NavigateTo,
-                    FeatureAttribute.GoToDefinition
-                },
-                cancellationToken
-            );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(VSConstants.VSStd97CmdID.GotoDefn, cancellationToken);
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[]
+                    {
+                        FeatureAttribute.Workspace,
+                        FeatureAttribute.NavigateTo,
+                        FeatureAttribute.GoToDefinition
+                    },
+                    cancellationToken
+                );
         }
 
         public async Task GoToBaseAsync(CancellationToken cancellationToken)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices.Shell.ExecuteCommandAsync(
-                EditorConstants.EditorCommandID.GoToBase,
-                cancellationToken
-            );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(EditorConstants.EditorCommandID.GoToBase, cancellationToken);
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.Workspace,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.Workspace, cancellationToken);
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.GoToBase,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.GoToBase, cancellationToken);
             await TestServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
         }
 
@@ -1403,10 +1399,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 SComponentModel,
                 IComponentModel
             >(cancellationToken);
-            var commandHandlers = componentModelService.DefaultExportProvider.GetExports<
-                ICommandHandler,
-                NameMetadata
-            >();
+            var commandHandlers = componentModelService
+                .DefaultExportProvider
+                .GetExports<ICommandHandler, NameMetadata>();
             var goToImplementation = (GoToImplementationCommandHandler)
                 commandHandlers
                     .Single(
@@ -1428,24 +1423,27 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
         public async Task GoToImplementationAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Shell.ExecuteCommandAsync(
-                WellKnownCommands.Edit.GoToImplementation,
-                cancellationToken
-            );
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[] { FeatureAttribute.Workspace, FeatureAttribute.GoToImplementation },
-                cancellationToken
-            );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(WellKnownCommands.Edit.GoToImplementation, cancellationToken);
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[] { FeatureAttribute.Workspace, FeatureAttribute.GoToImplementation },
+                    cancellationToken
+                );
         }
 
         public async Task<ImmutableArray<(bool Collapsed, TextSpan Span)>> GetOutliningSpansAsync(
             CancellationToken cancellationToken
         )
         {
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[] { FeatureAttribute.Workspace, FeatureAttribute.Outlining },
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAllAsyncOperationsAsync(
+                    new[] { FeatureAttribute.Workspace, FeatureAttribute.Outlining },
+                    cancellationToken
+                );
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -1473,10 +1471,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
 
         private async Task WaitForCompletionSetAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.CompletionSet,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.CompletionSet, cancellationToken);
         }
     }
 }

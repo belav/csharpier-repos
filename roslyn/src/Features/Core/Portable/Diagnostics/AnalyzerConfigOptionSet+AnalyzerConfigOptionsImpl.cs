@@ -36,9 +36,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             public override IEnumerable<string> Keys =>
-                _options.Keys.Concat(
-                    _fallbackOptions.Keys.Where(key => !_options.TryGetValue(key, out _))
-                );
+                _options
+                    .Keys
+                    .Concat(_fallbackOptions.Keys.Where(key => !_options.TryGetValue(key, out _)));
         }
     }
 }

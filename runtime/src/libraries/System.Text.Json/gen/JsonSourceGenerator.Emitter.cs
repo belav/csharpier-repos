@@ -1079,10 +1079,9 @@ private static {JsonParameterInfoValuesTypeRef}[] {typeGenerationSpec.TypeInfoPr
 
                     // Add the property names to the context-wide cache; we'll generate the source to initialize them at the end of generation.
                     Debug.Assert(
-                        !_currentContext.RuntimePropertyNames.TryGetValue(
-                            runtimePropName,
-                            out string? existingName
-                        )
+                        !_currentContext
+                            .RuntimePropertyNames
+                            .TryGetValue(runtimePropName, out string? existingName)
                             || existingName == propVarName
                     );
                     _currentContext.RuntimePropertyNames.TryAdd(runtimePropName, propVarName);
@@ -1689,9 +1688,9 @@ private static readonly {JsonEncodedTextTypeRef} {name_varName_pair.Value} = {Js
                 {
                     // Roslyn gives us an instance of the underlying type, which is numerical.
 #if DEBUG
-                    Type? runtimeType = _generationSpec.MetadataLoadContext.Resolve(
-                        value.GetType()!
-                    );
+                    Type? runtimeType = _generationSpec
+                        .MetadataLoadContext
+                        .Resolve(value.GetType()!);
                     Debug.Assert(runtimeType != null);
                     Debug.Assert(_generationSpec.IsNumberType(runtimeType));
 #endif

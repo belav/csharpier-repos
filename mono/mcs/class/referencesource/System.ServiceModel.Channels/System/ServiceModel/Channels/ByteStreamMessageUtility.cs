@@ -23,37 +23,33 @@ namespace System.ServiceModel.Channels
             }
             if (index < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "index",
-                    index,
-                    SR.ArgumentOutOfMinRange(0)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange("index", index, SR.ArgumentOutOfMinRange(0));
             }
             // we explicitly allow the case for index = 0, buffer.Length = 0 and count = 0 when it is write
             // Note that we rely on the last check of count > buffer.Length - index to cover count > 0 && index == buffer.Length case
             if (index > buffer.Length || (isRead && index == buffer.Length))
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "index",
-                    index,
-                    SR.OffsetExceedsBufferSize(buffer.Length)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange("index", index, SR.OffsetExceedsBufferSize(buffer.Length));
             }
             if (count < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "count",
-                    count,
-                    SR.ArgumentOutOfMinRange(0)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange("count", count, SR.ArgumentOutOfMinRange(0));
             }
             if (count > buffer.Length - index)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "count",
-                    count,
-                    SR.SizeExceedsRemainingBufferSpace(buffer.Length - index)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
+                        "count",
+                        count,
+                        SR.SizeExceedsRemainingBufferSpace(buffer.Length - index)
+                    );
             }
         }
 

@@ -678,10 +678,14 @@ namespace System.Data.Objects.ELinq
                     if (TryGetAlternativeMethod(call.Method, out suggestedMethodInfo))
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_UnsupportedMethodSuggestedAlternative(
-                                call.Method,
-                                suggestedMethodInfo
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_UnsupportedMethodSuggestedAlternative(
+                                    call.Method,
+                                    suggestedMethodInfo
+                                )
                         );
                     }
                     //The default error message
@@ -822,9 +826,11 @@ namespace System.Data.Objects.ELinq
                     if (!function.IsComposableAttribute)
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.CannotCallNoncomposableFunction(
-                                function.FullName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .CannotCallNoncomposableFunction(function.FullName)
                         );
                     }
 
@@ -985,10 +991,14 @@ namespace System.Data.Objects.ELinq
                             if (!clrReturnType.IsGenericType)
                             {
                                 throw EntityUtil.NotSupported(
-                                    System.Data.Entity.Strings.ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
-                                        call.Method,
-                                        call.Method.DeclaringType
-                                    )
+                                    System
+                                        .Data
+                                        .Entity
+                                        .Strings
+                                        .ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
+                                            call.Method,
+                                            call.Method.DeclaringType
+                                        )
                                 );
                             }
                             Type genericType = clrReturnType.GetGenericTypeDefinition();
@@ -998,10 +1008,14 @@ namespace System.Data.Objects.ELinq
                             )
                             {
                                 throw EntityUtil.NotSupported(
-                                    System.Data.Entity.Strings.ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
-                                        call.Method,
-                                        call.Method.DeclaringType
-                                    )
+                                    System
+                                        .Data
+                                        .Entity
+                                        .Strings
+                                        .ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
+                                            call.Method,
+                                            call.Method.DeclaringType
+                                        )
                                 );
                             }
                             Type elementType = clrReturnType.GetGenericArguments()[0];
@@ -1020,10 +1034,14 @@ namespace System.Data.Objects.ELinq
                             if (clrReturnType != typeof(DbDataRecord))
                             {
                                 throw EntityUtil.NotSupported(
-                                    System.Data.Entity.Strings.ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
-                                        call.Method,
-                                        call.Method.DeclaringType
-                                    )
+                                    System
+                                        .Data
+                                        .Entity
+                                        .Strings
+                                        .ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
+                                            call.Method,
+                                            call.Method.DeclaringType
+                                        )
                                 );
                             }
                             break;
@@ -1033,10 +1051,14 @@ namespace System.Data.Objects.ELinq
                             if (clrReturnType != typeof(EntityKey))
                             {
                                 throw EntityUtil.NotSupported(
-                                    System.Data.Entity.Strings.ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
-                                        call.Method,
-                                        call.Method.DeclaringType
-                                    )
+                                    System
+                                        .Data
+                                        .Entity
+                                        .Strings
+                                        .ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
+                                            call.Method,
+                                            call.Method.DeclaringType
+                                        )
                                 );
                             }
                             break;
@@ -1056,10 +1078,14 @@ namespace System.Data.Objects.ELinq
                                 if (toType != null)
                                 {
                                     throw EntityUtil.NotSupported(
-                                        System.Data.Entity.Strings.ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
-                                            call.Method,
-                                            call.Method.DeclaringType
-                                        )
+                                        System
+                                            .Data
+                                            .Entity
+                                            .Strings
+                                            .ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
+                                                call.Method,
+                                                call.Method.DeclaringType
+                                            )
                                     );
                                 }
                             }
@@ -1070,10 +1096,14 @@ namespace System.Data.Objects.ELinq
                             if (!TypeSemantics.IsPromotableTo(actualReturnType, expectedReturnType))
                             {
                                 throw EntityUtil.NotSupported(
-                                    System.Data.Entity.Strings.ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
-                                        call.Method,
-                                        call.Method.DeclaringType
-                                    )
+                                    System
+                                        .Data
+                                        .Entity
+                                        .Strings
+                                        .ELinq_EdmFunctionAttributedFunctionWithWrongReturnType(
+                                            call.Method,
+                                            call.Method.DeclaringType
+                                        )
                                 );
                             }
 
@@ -1103,11 +1133,15 @@ namespace System.Data.Objects.ELinq
                     if (String.IsNullOrEmpty(parameterValue))
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_EdmFunctionAttributeParameterNameNotValid(
-                                call.Method,
-                                call.Method.DeclaringType,
-                                parameterName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_EdmFunctionAttributeParameterNameNotValid(
+                                    call.Method,
+                                    call.Method.DeclaringType,
+                                    parameterName
+                                )
                         );
                     }
                 }
@@ -1323,9 +1357,9 @@ namespace System.Data.Objects.ELinq
                 {
                     DbExpression argument = parent.TranslateExpression(call.Arguments[0]);
                     DbExpression recreatedArgument;
-                    TypeUsage updatedType = argument.ResultType.ShallowCopy(
-                        new FacetValues { Unicode = _isUnicode }
-                    );
+                    TypeUsage updatedType = argument
+                        .ResultType
+                        .ShallowCopy(new FacetValues { Unicode = _isUnicode });
 
                     switch (argument.ExpressionKind)
                     {
@@ -1346,9 +1380,11 @@ namespace System.Data.Objects.ELinq
                             break;
                         default:
                             throw EntityUtil.NotSupported(
-                                System.Data.Entity.Strings.ELinq_UnsupportedAsUnicodeAndAsNonUnicode(
-                                    call.Method
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .ELinq_UnsupportedAsUnicodeAndAsNonUnicode(call.Method)
                             );
                     }
                     return recreatedArgument;
@@ -1792,10 +1828,14 @@ namespace System.Data.Objects.ELinq
                         if (!IsNonNegativeIntegerConstant(arg2))
                         {
                             throw EntityUtil.NotSupported(
-                                System.Data.Entity.Strings.ELinq_UnsupportedStringRemoveCase(
-                                    call.Method,
-                                    call.Method.GetParameters()[1].Name
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .ELinq_UnsupportedStringRemoveCase(
+                                        call.Method,
+                                        call.Method.GetParameters()[1].Name
+                                    )
                             );
                         }
 
@@ -2057,9 +2097,11 @@ namespace System.Data.Objects.ELinq
 #endif
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_UnsupportedTrimStartTrimEndCase(
-                                call.Method
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_UnsupportedTrimStartTrimEndCase(call.Method)
                         );
                     }
 
@@ -2420,10 +2462,14 @@ namespace System.Data.Objects.ELinq
                     if (intervalLinqExpression == null)
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_UnsupportedVBDatePartNonConstantInterval(
-                                call.Method,
-                                call.Method.GetParameters()[0].Name
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_UnsupportedVBDatePartNonConstantInterval(
+                                    call.Method,
+                                    call.Method.GetParameters()[0].Name
+                                )
                         );
                     }
 
@@ -2431,11 +2477,15 @@ namespace System.Data.Objects.ELinq
                     if (!s_supportedIntervals.Contains(intervalValue))
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_UnsupportedVBDatePartInvalidInterval(
-                                call.Method,
-                                call.Method.GetParameters()[0].Name,
-                                intervalValue
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_UnsupportedVBDatePartInvalidInterval(
+                                    call.Method,
+                                    call.Method.GetParameters()[0].Name,
+                                    intervalValue
+                                )
                         );
                     }
 
@@ -2608,9 +2658,11 @@ namespace System.Data.Objects.ELinq
                     )
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_UnsupportedKeySelector(
-                                call.Method.Name
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_UnsupportedKeySelector(call.Method.Name)
                         );
                     }
 
@@ -2658,22 +2710,22 @@ namespace System.Data.Objects.ELinq
                     DbExpressionBinding joinBinding = join.BindAs(parent.AliasGenerator.Next());
 
                     // create property expressions for the inner and outer
-                    DbPropertyExpression joinOuter = joinBinding.Variable.Property(
-                        outerBinding.VariableName
-                    );
-                    DbPropertyExpression joinInner = joinBinding.Variable.Property(
-                        innerBinding.VariableName
-                    );
+                    DbPropertyExpression joinOuter = joinBinding
+                        .Variable
+                        .Property(outerBinding.VariableName);
+                    DbPropertyExpression joinInner = joinBinding
+                        .Variable
+                        .Property(innerBinding.VariableName);
 
                     // push outer and inner join parts into the binding scope (the order
                     // is irrelevant because the binding context matches based on parameter
                     // reference rather than ordinal)
-                    parent._bindingContext.PushBindingScope(
-                        new Binding(selectorLambda.Parameters[0], joinOuter)
-                    );
-                    parent._bindingContext.PushBindingScope(
-                        new Binding(selectorLambda.Parameters[1], joinInner)
-                    );
+                    parent
+                        ._bindingContext
+                        .PushBindingScope(new Binding(selectorLambda.Parameters[0], joinOuter));
+                    parent
+                        ._bindingContext
+                        .PushBindingScope(new Binding(selectorLambda.Parameters[1], joinInner));
 
                     // translate join selector
                     CqtExpression selector = parent.TranslateExpression(selectorLambda.Body);
@@ -3232,10 +3284,14 @@ namespace System.Data.Objects.ELinq
                     else
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_UnsupportedPassthrough(
-                                call.Method.Name,
-                                operand.ResultType.EdmType.Name
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_UnsupportedPassthrough(
+                                    call.Method.Name,
+                                    operand.ResultType.EdmType.Name
+                                )
                         );
                     }
                 }
@@ -3267,9 +3323,11 @@ namespace System.Data.Objects.ELinq
                     )
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_InvalidOfTypeResult(
-                                DescribeClrType(clrType)
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_InvalidOfTypeResult(DescribeClrType(clrType))
                         );
                     }
 
@@ -3472,9 +3530,9 @@ namespace System.Data.Objects.ELinq
                         true
                     );
                     DbExpressionBinding joinBinding = join.BindAs(parent.AliasGenerator.Next());
-                    DbExpression projection = joinBinding.Variable.Property(
-                        rightBinding.VariableName
-                    );
+                    DbExpression projection = joinBinding
+                        .Variable
+                        .Property(rightBinding.VariableName);
 
                     // Use a case statement on the sentinel flag to drop the default value in where required
                     if (requireSentinel)
@@ -3541,10 +3599,12 @@ namespace System.Data.Objects.ELinq
                             )
                     );
                     var expressions = new List<DbExpression>(predicates);
-                    var cqt = System.Data.Common.Utils.Helpers.BuildBalancedTreeInPlace(
-                        expressions,
-                        (prev, next) => prev.Or(next)
-                    );
+                    var cqt = System
+                        .Data
+                        .Common
+                        .Utils
+                        .Helpers
+                        .BuildBalancedTreeInPlace(expressions, (prev, next) => prev.Or(next));
                     return cqt;
                 }
 
@@ -3995,7 +4055,8 @@ namespace System.Data.Objects.ELinq
                             //  - name inputs as specified in the resultSelector
                             //  - return the apply.
                             var newInput = applyInput.Expression.BindAs(outerBindingName);
-                            var newApply = newInput.Variable
+                            var newApply = newInput
+                                .Variable
                                 .Property(lojRightInput.Name)
                                 .BindAs(innerBindingName);
 
@@ -4028,7 +4089,8 @@ namespace System.Data.Objects.ELinq
                             // It is just #1 as described above,
                             // so produce the outer apply and let the logic below generate projection using the resultSelector.
                             apply = applyInput.OuterApply(
-                                applyInput.Variable
+                                applyInput
+                                    .Variable
                                     .Property(lojRightInput)
                                     .BindAs(parent.AliasGenerator.Next())
                             );
@@ -4037,24 +4099,28 @@ namespace System.Data.Objects.ELinq
 
                     DbExpressionBinding applyBinding = apply.BindAs(parent.AliasGenerator.Next());
                     RowType applyRowType = (RowType)(applyBinding.Variable.ResultType.EdmType);
-                    CqtExpression projectRight = applyBinding.Variable.Property(
-                        applyRowType.Properties[1]
-                    );
+                    CqtExpression projectRight = applyBinding
+                        .Variable
+                        .Property(applyRowType.Properties[1]);
 
                     CqtExpression resultProjection;
                     if (resultSelector != null)
                     {
-                        CqtExpression projectLeft = applyBinding.Variable.Property(
-                            applyRowType.Properties[0]
-                        );
+                        CqtExpression projectLeft = applyBinding
+                            .Variable
+                            .Property(applyRowType.Properties[0]);
 
                         // add the left and right projection terms to the binding context
-                        parent._bindingContext.PushBindingScope(
-                            new Binding(resultSelector.Parameters[0], projectLeft)
-                        );
-                        parent._bindingContext.PushBindingScope(
-                            new Binding(resultSelector.Parameters[1], projectRight)
-                        );
+                        parent
+                            ._bindingContext
+                            .PushBindingScope(
+                                new Binding(resultSelector.Parameters[0], projectLeft)
+                            );
+                        parent
+                            ._bindingContext
+                            .PushBindingScope(
+                                new Binding(resultSelector.Parameters[1], projectRight)
+                            );
 
                         // translate the result selector
                         resultProjection = parent.TranslateSet(resultSelector.Body);
@@ -4193,9 +4259,9 @@ namespace System.Data.Objects.ELinq
                     {
                         return false;
                     }
-                    var lojRightValueSource = crossApplyInputRowType.Properties.SingleOrDefault(
-                        p => p.Name == lojRight.Property.Name
-                    );
+                    var lojRightValueSource = crossApplyInputRowType
+                        .Properties
+                        .SingleOrDefault(p => p.Name == lojRight.Property.Name);
                     if (lojRightValueSource == null)
                     {
                         return false;
@@ -4285,9 +4351,11 @@ namespace System.Data.Objects.ELinq
                         // to avoid confusing error message about the "distinct" type, pre-emptively raise an exception
                         // about the group by key selector
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_UnsupportedKeySelector(
-                                call.Method.Name
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_UnsupportedKeySelector(call.Method.Name)
                         );
                     }
 
@@ -4388,16 +4456,28 @@ namespace System.Data.Objects.ELinq
                         DbExpressionBinding topLevelProjectBinding = topLevelProject.BindAs(
                             parent.AliasGenerator.Next()
                         );
-                        DbPropertyExpression keyExpression =
-                            topLevelProjectBinding.Variable.Property(KeyColumnName);
-                        DbPropertyExpression groupExpression =
-                            topLevelProjectBinding.Variable.Property(GroupColumnName);
-                        parent._bindingContext.PushBindingScope(
-                            new Binding(resultSelectorLinqExpression.Parameters[0], keyExpression)
-                        );
-                        parent._bindingContext.PushBindingScope(
-                            new Binding(resultSelectorLinqExpression.Parameters[1], groupExpression)
-                        );
+                        DbPropertyExpression keyExpression = topLevelProjectBinding
+                            .Variable
+                            .Property(KeyColumnName);
+                        DbPropertyExpression groupExpression = topLevelProjectBinding
+                            .Variable
+                            .Property(GroupColumnName);
+                        parent
+                            ._bindingContext
+                            .PushBindingScope(
+                                new Binding(
+                                    resultSelectorLinqExpression.Parameters[0],
+                                    keyExpression
+                                )
+                            );
+                        parent
+                            ._bindingContext
+                            .PushBindingScope(
+                                new Binding(
+                                    resultSelectorLinqExpression.Parameters[1],
+                                    groupExpression
+                                )
+                            );
 
                         // translate selector
                         CqtExpression resultSelector = parent.TranslateExpression(
@@ -4465,9 +4545,11 @@ namespace System.Data.Objects.ELinq
                     )
                     {
                         throw EntityUtil.NotSupported(
-                            System.Data.Entity.Strings.ELinq_UnsupportedKeySelector(
-                                call.Method.Name
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ELinq_UnsupportedKeySelector(call.Method.Name)
                         );
                     }
                     CqtExpression nestedCollection = parent.Filter(
@@ -4506,12 +4588,12 @@ namespace System.Data.Objects.ELinq
 
                     // push the inner and the outer terms into the binding scope
                     LambdaExpression linqSelector = parent.GetLambdaExpression(call, 4);
-                    parent._bindingContext.PushBindingScope(
-                        new Binding(linqSelector.Parameters[0], outerProperty)
-                    );
-                    parent._bindingContext.PushBindingScope(
-                        new Binding(linqSelector.Parameters[1], innerProperty)
-                    );
+                    parent
+                        ._bindingContext
+                        .PushBindingScope(new Binding(linqSelector.Parameters[0], outerProperty));
+                    parent
+                        ._bindingContext
+                        .PushBindingScope(new Binding(linqSelector.Parameters[1], innerProperty));
 
                     // translate the selector
                     CqtExpression selectorProject = parent.TranslateExpression(linqSelector.Body);
@@ -4674,9 +4756,9 @@ namespace System.Data.Objects.ELinq
                     ParameterExpression parameter = lambdaExpression.Parameters[0];
 
                     // push-down the binding scope information and translate the new sort key
-                    parent._bindingContext.PushBindingScope(
-                        new Binding(parameter, binding.Variable)
-                    );
+                    parent
+                        ._bindingContext
+                        .PushBindingScope(new Binding(parameter, binding.Variable));
                     CqtExpression lambda = parent.TranslateExpression(lambdaExpression.Body);
                     parent._bindingContext.PopBindingScope();
 

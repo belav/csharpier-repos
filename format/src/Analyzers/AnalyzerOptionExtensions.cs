@@ -51,10 +51,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             // If user has explicitly configured severity for this diagnostic ID, that should be respected.
             if (
-                compilation.Options.SpecificDiagnosticOptions.TryGetValue(
-                    diagnosticId,
-                    out severity
-                )
+                compilation
+                    .Options
+                    .SpecificDiagnosticOptions
+                    .TryGetValue(diagnosticId, out severity)
             )
             {
                 return true;
@@ -63,12 +63,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // If user has explicitly configured severity for this diagnostic ID, that should be respected.
             // For example, 'dotnet_diagnostic.CA1000.severity = error'
             if (
-                compilation.Options.SyntaxTreeOptionsProvider?.TryGetDiagnosticValue(
-                    tree,
-                    diagnosticId,
-                    CancellationToken.None,
-                    out severity
-                ) == true
+                compilation
+                    .Options
+                    .SyntaxTreeOptionsProvider
+                    ?.TryGetDiagnosticValue(
+                        tree,
+                        diagnosticId,
+                        CancellationToken.None,
+                        out severity
+                    ) == true
             )
             {
                 return true;
@@ -81,20 +84,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (
                 analyzerOptions == null
                 || !descriptor.IsEnabledByDefault
-                || descriptor.CustomTags.Any(
-                    tag =>
-                        tag == WellKnownDiagnosticTags.Compiler
-                        || tag == WellKnownDiagnosticTags.NotConfigurable
-                )
+                || descriptor
+                    .CustomTags
+                    .Any(
+                        tag =>
+                            tag == WellKnownDiagnosticTags.Compiler
+                            || tag == WellKnownDiagnosticTags.NotConfigurable
+                    )
             )
             {
                 severity = default;
                 return false;
             }
 
-            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                tree
-            );
+            var analyzerConfigOptions = analyzerOptions
+                .AnalyzerConfigOptionsProvider
+                .GetOptions(tree);
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'

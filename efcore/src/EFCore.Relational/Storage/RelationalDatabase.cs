@@ -56,10 +56,12 @@ public class RelationalDatabase : Database
     /// <param name="entries">Entries representing the changes to be persisted.</param>
     /// <returns>The number of state entries persisted to the database.</returns>
     public override int SaveChanges(IList<IUpdateEntry> entries) =>
-        RelationalDependencies.BatchExecutor.Execute(
-            RelationalDependencies.BatchPreparer.BatchCommands(entries, UpdateAdapter),
-            RelationalDependencies.Connection
-        );
+        RelationalDependencies
+            .BatchExecutor
+            .Execute(
+                RelationalDependencies.BatchPreparer.BatchCommands(entries, UpdateAdapter),
+                RelationalDependencies.Connection
+            );
 
     /// <summary>
     ///     Asynchronously persists changes from the supplied entries to the database.
@@ -75,9 +77,11 @@ public class RelationalDatabase : Database
         IList<IUpdateEntry> entries,
         CancellationToken cancellationToken = default
     ) =>
-        RelationalDependencies.BatchExecutor.ExecuteAsync(
-            RelationalDependencies.BatchPreparer.BatchCommands(entries, UpdateAdapter),
-            RelationalDependencies.Connection,
-            cancellationToken
-        );
+        RelationalDependencies
+            .BatchExecutor
+            .ExecuteAsync(
+                RelationalDependencies.BatchPreparer.BatchCommands(entries, UpdateAdapter),
+                RelationalDependencies.Connection,
+                cancellationToken
+            );
 }

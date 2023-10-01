@@ -51,10 +51,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SuggestionTags
         )> GetTagSpansAndSelectionAsync(string content, bool pull)
         {
             using var workspace = TestWorkspace.CreateCSharp(content);
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>()
             {

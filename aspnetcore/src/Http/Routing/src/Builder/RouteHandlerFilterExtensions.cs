@@ -23,9 +23,9 @@ public static class RouteHandlerFilterExtensions
         IRouteHandlerFilter filter
     )
     {
-        builder.RouteHandlerFilterFactories.Add(
-            (routeHandlerContext, next) => (context) => filter.InvokeAsync(context, next)
-        );
+        builder
+            .RouteHandlerFilterFactories
+            .Add((routeHandlerContext, next) => (context) => filter.InvokeAsync(context, next));
         return builder;
     }
 
@@ -55,18 +55,23 @@ public static class RouteHandlerFilterExtensions
             filterFactory = ActivatorUtilities.CreateFactory(typeof(TFilterType), Type.EmptyTypes);
         }
 
-        builder.RouteHandlerFilterFactories.Add(
-            (routeHandlerContext, next) =>
-            {
-                var invokeArguments = new[] { routeHandlerContext };
-                return (context) =>
+        builder
+            .RouteHandlerFilterFactories
+            .Add(
+                (routeHandlerContext, next) =>
                 {
-                    var filter = (IRouteHandlerFilter)
-                        filterFactory.Invoke(context.HttpContext.RequestServices, invokeArguments);
-                    return filter.InvokeAsync(context, next);
-                };
-            }
-        );
+                    var invokeArguments = new[] { routeHandlerContext };
+                    return (context) =>
+                    {
+                        var filter = (IRouteHandlerFilter)
+                            filterFactory.Invoke(
+                                context.HttpContext.RequestServices,
+                                invokeArguments
+                            );
+                        return filter.InvokeAsync(context, next);
+                    };
+                }
+            );
         return builder;
     }
 
@@ -85,9 +90,9 @@ public static class RouteHandlerFilterExtensions
         > routeHandlerFilter
     )
     {
-        builder.RouteHandlerFilterFactories.Add(
-            (routeHandlerContext, next) => (context) => routeHandlerFilter(context, next)
-        );
+        builder
+            .RouteHandlerFilterFactories
+            .Add((routeHandlerContext, next) => (context) => routeHandlerFilter(context, next));
         return builder;
     }
 

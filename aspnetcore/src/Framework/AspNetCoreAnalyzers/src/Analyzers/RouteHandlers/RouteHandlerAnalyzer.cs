@@ -123,15 +123,16 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                         var foundMethodReferenceBody = false;
                         if (!methodReference.Method.DeclaringSyntaxReferences.IsEmpty)
                         {
-                            var syntaxReference =
-                                methodReference.Method.DeclaringSyntaxReferences.Single();
+                            var syntaxReference = methodReference
+                                .Method
+                                .DeclaringSyntaxReferences
+                                .Single();
                             var syntaxNode = syntaxReference.GetSyntax(context.CancellationToken);
                             var methodOperation =
                                 syntaxNode.SyntaxTree == invocation.SemanticModel!.SyntaxTree
-                                    ? invocation.SemanticModel.GetOperation(
-                                        syntaxNode,
-                                        context.CancellationToken
-                                    )
+                                    ? invocation
+                                        .SemanticModel
+                                        .GetOperation(syntaxNode, context.CancellationToken)
                                     : null;
                             if (
                                 methodOperation is ILocalFunctionOperation
@@ -216,17 +217,21 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     )
     {
         return targetMethod.Name.StartsWith("Map", StringComparison.Ordinal)
-            && SymbolEqualityComparer.Default.Equals(
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions
-                ),
-                targetMethod.ContainingType
-            )
+            && SymbolEqualityComparer
+                .Default
+                .Equals(
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions
+                    ),
+                    targetMethod.ContainingType
+                )
             && invocation.Arguments.Length == 3
             && targetMethod.Parameters.Length == 3
-            && SymbolEqualityComparer.Default.Equals(
-                wellKnownTypes.Get(WellKnownType.System_Delegate),
-                targetMethod.Parameters[DelegateParameterOrdinal].Type
-            );
+            && SymbolEqualityComparer
+                .Default
+                .Equals(
+                    wellKnownTypes.Get(WellKnownType.System_Delegate),
+                    targetMethod.Parameters[DelegateParameterOrdinal].Type
+                );
     }
 }

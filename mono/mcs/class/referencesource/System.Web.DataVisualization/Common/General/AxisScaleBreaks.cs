@@ -465,9 +465,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
 
                 // Get chart type interface
-                IChartType chartType = this.axis.ChartArea.Common.ChartTypeRegistry.GetChartType(
-                    series.ChartTypeName
-                );
+                IChartType chartType = this.axis
+                    .ChartArea
+                    .Common
+                    .ChartTypeRegistry
+                    .GetChartType(series.ChartTypeName);
                 if (chartType == null)
                 {
                     return false;
@@ -1030,9 +1032,11 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 // Get number of Y values to process
                 int maxYValueCount = 1;
-                IChartType chartType = this.axis.ChartArea.Common.ChartTypeRegistry.GetChartType(
-                    series.ChartTypeName
-                );
+                IChartType chartType = this.axis
+                    .ChartArea
+                    .Common
+                    .ChartTypeRegistry
+                    .GetChartType(series.ChartTypeName);
                 if (chartType != null)
                 {
                     if (chartType.ExtraYValuesConnectedToYAxis && chartType.YValuesPerPoint > 1)

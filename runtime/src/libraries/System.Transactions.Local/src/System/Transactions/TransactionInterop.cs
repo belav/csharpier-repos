@@ -158,13 +158,16 @@ namespace System.Transactions
             try
             {
                 outcomeEnlistment = new OutcomeEnlistment();
-                oletxTm.DtcTransactionManager.ProxyShimFactory.Import(
-                    cookie,
-                    outcomeEnlistment,
-                    out txIdentifier,
-                    out oletxIsoLevel,
-                    out transactionShim
-                );
+                oletxTm
+                    .DtcTransactionManager
+                    .ProxyShimFactory
+                    .Import(
+                        cookie,
+                        outcomeEnlistment,
+                        out txIdentifier,
+                        out oletxIsoLevel,
+                        out transactionShim
+                    );
             }
             catch (COMException comException)
             {
@@ -249,8 +252,10 @@ namespace System.Transactions
 
             try
             {
-                propagationToken =
-                    oletxTx.RealOletxTransaction.TransactionShim.GetPropagationToken();
+                propagationToken = oletxTx
+                    .RealOletxTransaction
+                    .TransactionShim
+                    .GetPropagationToken();
             }
             catch (COMException comException)
             {
@@ -338,9 +343,10 @@ namespace System.Transactions
 
             try
             {
-                oletxTx.RealOletxTransaction.TransactionShim.GetITransactionNative(
-                    out transactionNative
-                );
+                oletxTx
+                    .RealOletxTransaction
+                    .TransactionShim
+                    .GetITransactionNative(out transactionNative);
             }
             catch (COMException comException)
             {
@@ -428,13 +434,16 @@ namespace System.Transactions
                 try
                 {
                     outcomeEnlistment = new OutcomeEnlistment();
-                    oletxTm.DtcTransactionManager.ProxyShimFactory.CreateTransactionShim(
-                        transactionNative,
-                        outcomeEnlistment,
-                        out txIdentifier,
-                        out oletxIsoLevel,
-                        out transactionShim
-                    );
+                    oletxTm
+                        .DtcTransactionManager
+                        .ProxyShimFactory
+                        .CreateTransactionShim(
+                            transactionNative,
+                            outcomeEnlistment,
+                            out txIdentifier,
+                            out oletxIsoLevel,
+                            out transactionShim
+                        );
                 }
                 catch (COMException comException)
                 {
@@ -565,13 +574,16 @@ namespace System.Transactions
             try
             {
                 outcomeEnlistment = new OutcomeEnlistment();
-                oletxTm.DtcTransactionManager.ProxyShimFactory.ReceiveTransaction(
-                    propagationToken,
-                    outcomeEnlistment,
-                    out identifier,
-                    out oletxIsoLevel,
-                    out transactionShim
-                );
+                oletxTm
+                    .DtcTransactionManager
+                    .ProxyShimFactory
+                    .ReceiveTransaction(
+                        propagationToken,
+                        outcomeEnlistment,
+                        out identifier,
+                        out oletxIsoLevel,
+                        out transactionShim
+                    );
             }
             catch (COMException comException)
             {

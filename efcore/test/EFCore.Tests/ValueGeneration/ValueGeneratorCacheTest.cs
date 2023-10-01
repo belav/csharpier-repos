@@ -12,7 +12,8 @@ public class ValueGeneratorCacheTest
         var entityType = model.FindEntityType("Led");
         var property1 = entityType.FindProperty("Zeppelin");
         var property2 = entityType.FindProperty("Stairway");
-        var cache = InMemoryTestHelpers.Instance
+        var cache = InMemoryTestHelpers
+            .Instance
             .CreateContextServices(model)
             .GetRequiredService<IValueGeneratorCache>();
 

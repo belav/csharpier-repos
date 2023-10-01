@@ -78,14 +78,16 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             SafeSecIdentityHandle identityHandle;
-            SafeSecCertificateHandle certHandle = Interop.AppleCrypto.X509ImportCertificate(
-                rawData,
-                contentType,
-                SafePasswordHandle.InvalidHandle,
-                SafeTemporaryKeychainHandle.InvalidHandle,
-                exportable: true,
-                out identityHandle
-            );
+            SafeSecCertificateHandle certHandle = Interop
+                .AppleCrypto
+                .X509ImportCertificate(
+                    rawData,
+                    contentType,
+                    SafePasswordHandle.InvalidHandle,
+                    SafeTemporaryKeychainHandle.InvalidHandle,
+                    exportable: true,
+                    out identityHandle
+                );
 
             if (identityHandle.IsInvalid)
             {
@@ -110,9 +112,9 @@ namespace System.Security.Cryptography.X509Certificates
             Debug.Assert(_identityHandle != null);
 
             using (
-                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
-                    _identityHandle
-                )
+                SafeSecKeyRefHandle key = Interop
+                    .AppleCrypto
+                    .X509GetPrivateKeyFromIdentity(_identityHandle)
             )
             {
                 return ExportPkcs8(key, password);
@@ -125,16 +127,14 @@ namespace System.Security.Cryptography.X509Certificates
         )
         {
             using (
-                SafeCFDataHandle data = Interop.AppleCrypto.SecKeyExportData(
-                    key,
-                    exportPrivate: true,
-                    password
-                )
+                SafeCFDataHandle data = Interop
+                    .AppleCrypto
+                    .SecKeyExportData(key, exportPrivate: true, password)
             )
             {
-                ReadOnlySpan<byte> systemExport = Interop.CoreFoundation.CFDataDangerousGetSpan(
-                    data
-                );
+                ReadOnlySpan<byte> systemExport = Interop
+                    .CoreFoundation
+                    .CFDataDangerousGetSpan(data);
 
                 fixed (byte* ptr = systemExport)
                 {
@@ -168,11 +168,9 @@ namespace System.Security.Cryptography.X509Certificates
             SafeSecKeyRefHandle? privateKey
         )
         {
-            SafeSecIdentityHandle? identity = Interop.AppleCrypto.X509MoveToKeychain(
-                _certHandle,
-                keychain,
-                privateKey
-            );
+            SafeSecIdentityHandle? identity = Interop
+                .AppleCrypto
+                .X509MoveToKeychain(_certHandle, keychain, privateKey);
 
             if (identity != null)
             {

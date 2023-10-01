@@ -1277,28 +1277,27 @@ namespace System.Web.Hosting
                                 {
                                     // NOTE: we don't know what HostingEnvironmentParameters were passed to our previous application instance
                                     // so we pass null (default for HTTP activation). We could have cached it in ApplicationContext if needed
-                                    ProcessHost.DefaultHost.PreloadApplicationIfRequired(
-                                        appId,
-                                        null,
-                                        null,
-                                        ac
-                                    );
+                                    ProcessHost
+                                        .DefaultHost
+                                        .PreloadApplicationIfRequired(appId, null, null, ac);
                                 }
                                 catch (Exception e)
                                 {
-                                    ProcessHost.DefaultHost.ReportApplicationPreloadFailureWithAssert(
-                                        ac.PreloadContext,
-                                        HResults.E_FAIL,
-                                        Misc.FormatExceptionMessage(
-                                            e,
-                                            new string[]
-                                            {
-                                                SR.GetString(
-                                                    SR.Failure_Preload_Application_Initialization
-                                                )
-                                            }
-                                        )
-                                    );
+                                    ProcessHost
+                                        .DefaultHost
+                                        .ReportApplicationPreloadFailureWithAssert(
+                                            ac.PreloadContext,
+                                            HResults.E_FAIL,
+                                            Misc.FormatExceptionMessage(
+                                                e,
+                                                new string[]
+                                                {
+                                                    SR.GetString(
+                                                        SR.Failure_Preload_Application_Initialization
+                                                    )
+                                                }
+                                            )
+                                        );
                                 }
                             }
                         }

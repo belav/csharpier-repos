@@ -41,7 +41,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var list = entity.userSetValues
+                        var list = entity
+                            .userSetValues
                             .Select(
                                 c =>
                                     new
@@ -142,7 +143,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var item = entity.userSetValues
+                        var item = entity
+                            .userSetValues
                             .Where(c => c.valId == Id)
                             .Select(
                                 c =>
@@ -275,7 +277,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                tmpObject = entity.userSetValues
+                                tmpObject = entity
+                                    .userSetValues
                                     .Where(p => p.id == newObject.id)
                                     .FirstOrDefault();
 

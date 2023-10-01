@@ -46,8 +46,9 @@ namespace System.Text.RegularExpressions.Generator
         {
             // To avoid invalidating every regex's output when anything from the compilation changes,
             // we extract from it the only things we care about.
-            IncrementalValueProvider<CompilationData> compilationDataProvider =
-                context.CompilationProvider.Select(
+            IncrementalValueProvider<CompilationData> compilationDataProvider = context
+                .CompilationProvider
+                .Select(
                     (x, _) =>
                         x.Options is CSharpCompilationOptions options
                             ? new CompilationData(options.AllowUnsafe, options.CheckOverflow)
@@ -58,7 +59,8 @@ namespace System.Text.RegularExpressions.Generator
             // - Diagnostic in the case of a failure that should end the compilation
             // - (RegexMethod regexMethod, string runnerFactoryImplementation, Dictionary<string, string[]> requiredHelpers) in the case of valid regex
             // - (RegexMethod regexMethod, string reason, Diagnostic diagnostic) in the case of a limited-support regex
-            IncrementalValueProvider<ImmutableArray<object>> results = context.SyntaxProvider
+            IncrementalValueProvider<ImmutableArray<object>> results = context
+                .SyntaxProvider
                 // Find all MethodDeclarationSyntax nodes attributed with GeneratedRegex and gather the required information.
                 .ForAttributeWithMetadataName(
                     GeneratedRegexAttributeName,

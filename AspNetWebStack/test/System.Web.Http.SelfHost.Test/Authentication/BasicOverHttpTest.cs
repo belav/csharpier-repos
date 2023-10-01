@@ -57,11 +57,13 @@ namespace System.Web.Http
                 // Arrange
                 HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(port.BaseUri);
                 config.HostNameComparisonMode = HostNameComparisonMode.Exact;
-                config.Routes.MapHttpRoute(
-                    "Default",
-                    "{controller}" + routeSuffix,
-                    new { controller = controllerName }
-                );
+                config
+                    .Routes
+                    .MapHttpRoute(
+                        "Default",
+                        "{controller}" + routeSuffix,
+                        new { controller = controllerName }
+                    );
                 config.UserNamePasswordValidator = new CustomUsernamePasswordValidator();
                 config.MessageHandlers.Add(new CustomMessageHandler());
                 HttpSelfHostServer server = new HttpSelfHostServer(config);

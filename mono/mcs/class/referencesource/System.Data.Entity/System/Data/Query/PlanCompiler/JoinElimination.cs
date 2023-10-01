@@ -154,9 +154,9 @@ namespace System.Data.Query.PlanCompiler
                     // Figure out if we are using SQL CE by asking the store provider manifest for its namespace name.
                     PlanCompiler.Assert(m_compilerState != null, "Plan compiler cannot be null");
                     var sspace = (StoreItemCollection)
-                        m_compilerState.MetadataWorkspace.GetItemCollection(
-                            Metadata.Edm.DataSpace.SSpace
-                        );
+                        m_compilerState
+                            .MetadataWorkspace
+                            .GetItemCollection(Metadata.Edm.DataSpace.SSpace);
                     if (sspace != null)
                     {
                         m_isSqlCe =

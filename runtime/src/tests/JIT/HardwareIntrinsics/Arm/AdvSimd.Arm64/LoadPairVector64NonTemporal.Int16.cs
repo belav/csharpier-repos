@@ -125,9 +125,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(LoadPairVector64NonTemporal_Int16 testClass)
             {
-                _fld = AdvSimd.Arm64.LoadPairVector64NonTemporal(
-                    (Int16*)(testClass._dataTable.inArrayPtr)
-                );
+                _fld = AdvSimd
+                    .Arm64
+                    .LoadPairVector64NonTemporal((Int16*)(testClass._dataTable.inArrayPtr));
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, _fld);
                 testClass.ValidateResult(
@@ -287,12 +287,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.LoadPairVector64NonTemporal)}<Int16>(Vector64<Int16>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.LoadPairVector64NonTemporal)}<Int16>(Vector64<Int16>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($" result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

@@ -742,12 +742,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             // Process selection regions
             if (this.Common.ProcessModeRegions)
             {
-                this.Common.HotRegionsList.AddHotRegion(
-                    graph.GetRelativeRectangle(markerBounds),
-                    point,
-                    point.series.Name,
-                    pointIndex
-                );
+                this.Common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        graph.GetRelativeRectangle(markerBounds),
+                        point,
+                        point.series.Name,
+                        pointIndex
+                    );
             }
         }
 

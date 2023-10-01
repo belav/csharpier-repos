@@ -672,9 +672,9 @@ using System.Runtime.InteropServices.Marshalling;
             var ms = new MemoryStream();
             Assert.True(assemblyComp.Emit(ms).Success);
 
-            string testSource = CodeSnippets.ValidateDisableRuntimeMarshalling.TypeUsage(
-                string.Empty
-            );
+            string testSource = CodeSnippets
+                .ValidateDisableRuntimeMarshalling
+                .TypeUsage(string.Empty);
 
             Compilation testComp = await TestUtils.CreateCompilation(
                 testSource,

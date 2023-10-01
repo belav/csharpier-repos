@@ -72,17 +72,23 @@ namespace System.Data.Common.CommandTrees.Internal
                 }
 
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_Copier_EntitySetNotFound(
-                        entitySet.EntityContainer.Name,
-                        entitySet.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_Copier_EntitySetNotFound(
+                            entitySet.EntityContainer.Name,
+                            entitySet.Name
+                        )
                 );
             }
 
             throw EntityUtil.Argument(
-                System.Data.Entity.Strings.Cqt_Copier_EntityContainerNotFound(
-                    entitySet.EntityContainer.Name
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .Cqt_Copier_EntityContainerNotFound(entitySet.EntityContainer.Name)
             );
         }
 
@@ -147,9 +153,11 @@ namespace System.Data.Common.CommandTrees.Internal
             }
 
             throw EntityUtil.Argument(
-                System.Data.Entity.Strings.Cqt_Copier_FunctionNotFound(
-                    TypeHelpers.GetFullName(function)
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .Cqt_Copier_FunctionNotFound(TypeHelpers.GetFullName(function))
             );
         }
 
@@ -188,13 +196,15 @@ namespace System.Data.Common.CommandTrees.Internal
                         if (mappedPropInfo == null)
                         {
                             mappedPropInfo = new List<KeyValuePair<string, TypeUsage>>(
-                                rowType.Properties.Select(
-                                    prop =>
-                                        new KeyValuePair<string, TypeUsage>(
-                                            prop.Name,
-                                            prop.TypeUsage
-                                        )
-                                )
+                                rowType
+                                    .Properties
+                                    .Select(
+                                        prop =>
+                                            new KeyValuePair<string, TypeUsage>(
+                                                prop.Name,
+                                                prop.TypeUsage
+                                            )
+                                    )
                             );
                         }
                         mappedPropInfo[idx] = new KeyValuePair<string, TypeUsage>(
@@ -224,9 +234,11 @@ namespace System.Data.Common.CommandTrees.Internal
                 )
                 {
                     throw EntityUtil.Argument(
-                        System.Data.Entity.Strings.Cqt_Copier_TypeNotFound(
-                            TypeHelpers.GetFullName(type)
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Cqt_Copier_TypeNotFound(TypeHelpers.GetFullName(type))
                     );
                 }
             }
@@ -298,10 +310,14 @@ namespace System.Data.Common.CommandTrees.Internal
                     if (!TryGetMember(newInstance, expression.Property.Name, out endMember))
                     {
                         throw EntityUtil.Argument(
-                            System.Data.Entity.Strings.Cqt_Copier_EndNotFound(
-                                expression.Property.Name,
-                                TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Cqt_Copier_EndNotFound(
+                                    expression.Property.Name,
+                                    TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
+                                )
                         );
                     }
                     result = DbExpressionBuilder.Property(newInstance, endMember);
@@ -312,10 +328,14 @@ namespace System.Data.Common.CommandTrees.Internal
                     if (!TryGetMember(newInstance, expression.Property.Name, out navProp))
                     {
                         throw EntityUtil.Argument(
-                            System.Data.Entity.Strings.Cqt_Copier_NavPropertyNotFound(
-                                expression.Property.Name,
-                                TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Cqt_Copier_NavPropertyNotFound(
+                                    expression.Property.Name,
+                                    TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
+                                )
                         );
                     }
                     result = DbExpressionBuilder.Property(newInstance, navProp);
@@ -326,10 +346,14 @@ namespace System.Data.Common.CommandTrees.Internal
                     if (!TryGetMember(newInstance, expression.Property.Name, out prop))
                     {
                         throw EntityUtil.Argument(
-                            System.Data.Entity.Strings.Cqt_Copier_PropertyNotFound(
-                                expression.Property.Name,
-                                TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Cqt_Copier_PropertyNotFound(
+                                    expression.Property.Name,
+                                    TypeHelpers.GetFullName(newInstance.ResultType.EdmType)
+                                )
                         );
                     }
                     result = DbExpressionBuilder.Property(newInstance, prop);

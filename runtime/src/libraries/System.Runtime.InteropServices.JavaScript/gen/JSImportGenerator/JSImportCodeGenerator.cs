@@ -72,10 +72,10 @@ namespace Microsoft.Interop.JavaScript
                 marshallingNotSupportedCallback(failure.Info, failure.Exception);
             }
             if (
-                _marshallers.ManagedReturnMarshaller.Generator.UsesNativeIdentifier(
-                    _marshallers.ManagedReturnMarshaller.TypeInfo,
-                    null
-                )
+                _marshallers
+                    .ManagedReturnMarshaller
+                    .Generator
+                    .UsesNativeIdentifier(_marshallers.ManagedReturnMarshaller.TypeInfo, null)
             )
             {
                 // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.
@@ -95,9 +95,14 @@ namespace Microsoft.Interop.JavaScript
                 (_, JSTaskTypeInfo)
             )
             {
-                BoundGenerator spanArg = _marshallers.SignatureMarshallers.FirstOrDefault(
-                    m => m.TypeInfo.MarshallingAttributeInfo is JSMarshallingInfo(_, JSSpanTypeInfo)
-                );
+                BoundGenerator spanArg = _marshallers
+                    .SignatureMarshallers
+                    .FirstOrDefault(
+                        m =>
+                            m.TypeInfo.MarshallingAttributeInfo
+                                is JSMarshallingInfo
+                                (_, JSSpanTypeInfo)
+                    );
                 if (spanArg != default)
                 {
                     marshallingNotSupportedCallback(
@@ -267,13 +272,15 @@ namespace Microsoft.Interop.JavaScript
             var types = ((IJSMarshallingGenerator)_marshallers.ManagedReturnMarshaller.Generator)
                 .GenerateBind(_marshallers.ManagedReturnMarshaller.TypeInfo, _context)
                 .Concat(
-                    _marshallers.NativeParameterMarshallers.SelectMany(
-                        p =>
-                            ((IJSMarshallingGenerator)p.Generator).GenerateBind(
-                                p.TypeInfo,
-                                _context
-                            )
-                    )
+                    _marshallers
+                        .NativeParameterMarshallers
+                        .SelectMany(
+                            p =>
+                                ((IJSMarshallingGenerator)p.Generator).GenerateBind(
+                                    p.TypeInfo,
+                                    _context
+                                )
+                        )
                 );
 
             return Argument(

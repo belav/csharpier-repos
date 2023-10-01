@@ -190,7 +190,8 @@ namespace NS
     }
 ";
             var compilation = CreateEmptyCompilation(text, new[] { MscorlibRef });
-            var srcSym = compilation.GlobalNamespace
+            var srcSym = compilation
+                .GlobalNamespace
                 .GetTypeMembers("BaseTypeSpecifierClass")
                 .Single();
 

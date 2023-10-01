@@ -904,10 +904,12 @@ namespace System.Threading
                                     {
                                         if (m_executingCallback.TargetSyncContext != null)
                                         {
-                                            m_executingCallback.TargetSyncContext.Send(
-                                                CancellationCallbackCoreWork_OnSyncContext,
-                                                args
-                                            );
+                                            m_executingCallback
+                                                .TargetSyncContext
+                                                .Send(
+                                                    CancellationCallbackCoreWork_OnSyncContext,
+                                                    args
+                                                );
                                             // CancellationCallbackCoreWork_OnSyncContext may have altered ThreadIDExecutingCallbacks, so reset it.
                                             ThreadIDExecutingCallbacks = Thread
                                                 .CurrentThread

@@ -199,7 +199,9 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                 Debug.Assert(
                     !flowCaptureReference.GetValueUsageInfo(Method).HasFlag(ValueUsageInfo.Read)
                 );
-                var capturedReference = state.Current.CapturedReferences
+                var capturedReference = state
+                    .Current
+                    .CapturedReferences
                     .Get(flowCaptureReference.Id)
                     .Reference;
                 targetOperation = capturedReference;
@@ -390,10 +392,9 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                 // (for example, the object instance of a property reference) and avoid re-computing it when
                 // assigning to the FlowCaptureReference.
                 var currentState = state.Current;
-                currentState.CapturedReferences.Set(
-                    operation.Id,
-                    new CapturedReferenceValue(operation.Value)
-                );
+                currentState
+                    .CapturedReferences
+                    .Set(operation.Id, new CapturedReferenceValue(operation.Value));
                 state.Current = currentState;
             }
 

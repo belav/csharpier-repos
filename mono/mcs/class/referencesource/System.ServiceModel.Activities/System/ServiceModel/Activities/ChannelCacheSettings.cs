@@ -36,11 +36,9 @@ namespace System.ServiceModel.Activities
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "IdleTimeout",
-                        value,
-                        SR.ValueTooLarge("IdleTimeout")
-                    );
+                    throw FxTrace
+                        .Exception
+                        .ArgumentOutOfRange("IdleTimeout", value, SR.ValueTooLarge("IdleTimeout"));
                 }
 
                 this.idleTimeout = value;
@@ -57,11 +55,13 @@ namespace System.ServiceModel.Activities
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "LeaseTimeout",
-                        value,
-                        SR.ValueTooLarge("LeaseTimeout")
-                    );
+                    throw FxTrace
+                        .Exception
+                        .ArgumentOutOfRange(
+                            "LeaseTimeout",
+                            value,
+                            SR.ValueTooLarge("LeaseTimeout")
+                        );
                 }
 
                 this.leaseTimeout = value;
@@ -75,11 +75,13 @@ namespace System.ServiceModel.Activities
             {
                 if (value < 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "MaxItemsInCache",
-                        value,
-                        SR.ValueCannotBeNegative("MaxItemsInCache")
-                    );
+                    throw FxTrace
+                        .Exception
+                        .ArgumentOutOfRange(
+                            "MaxItemsInCache",
+                            value,
+                            SR.ValueCannotBeNegative("MaxItemsInCache")
+                        );
                 }
 
                 this.maxItemsInCache = value;

@@ -21,8 +21,9 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
 
     internal static class ArgumentValidation
     {
-        private static TypeUsage _booleanType =
-            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Boolean);
+        private static TypeUsage _booleanType = EdmProviderManifest
+            .Instance
+            .GetCanonicalModelTypeUsage(PrimitiveTypeKind.Boolean);
 
         // The Metadata ReadOnlyCollection class conflicts with System.Collections.ObjectModel.ReadOnlyCollection...
         internal static System.Collections.ObjectModel.ReadOnlyCollection<TElement> NewReadOnlyCollection<TElement>(
@@ -42,9 +43,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             if (!TypeSemantics.IsPolymorphicType(type))
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_General_PolymorphicTypeRequired(
-                        TypeHelpers.GetFullName(type)
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_General_PolymorphicTypeRequired(TypeHelpers.GetFullName(type)),
                     "type"
                 );
             }
@@ -89,10 +92,14 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                 }
 
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_ExpressionLink_TypeMismatch(
-                        TypeHelpers.GetFullName(expression.ResultType),
-                        TypeHelpers.GetFullName(requiredResultType)
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_ExpressionLink_TypeMismatch(
+                            TypeHelpers.GetFullName(expression.ResultType),
+                            TypeHelpers.GetFullName(requiredResultType)
+                        ),
                     argumentName
                 );
             }
@@ -132,14 +139,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                 }
 
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_ExpressionLink_TypeMismatch(
-                        (
-                            valueIsPrimitive
-                                ? Enum.GetName(typeof(PrimitiveTypeKind), valueTypeKind)
-                                : TypeHelpers.GetFullName(expression.ResultType)
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_ExpressionLink_TypeMismatch(
+                            (
+                                valueIsPrimitive
+                                    ? Enum.GetName(typeof(PrimitiveTypeKind), valueTypeKind)
+                                    : TypeHelpers.GetFullName(expression.ResultType)
+                            ),
+                            Enum.GetName(typeof(PrimitiveTypeKind), requiredResultType)
                         ),
-                        Enum.GetName(typeof(PrimitiveTypeKind), requiredResultType)
-                    ),
                     argumentName
                 );
             }
@@ -179,9 +190,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                 if (TypeHelpers.GetCommonTypeUsage(endType, from.ResultType) == null)
                 {
                     throw EntityUtil.Argument(
-                        System.Data.Entity.Strings.Cqt_RelNav_WrongSourceType(
-                            TypeHelpers.GetFullName(endType)
-                        ),
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Cqt_RelNav_WrongSourceType(TypeHelpers.GetFullName(endType)),
                         "from"
                     );
                 }
@@ -194,9 +207,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             )
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_RelNav_WrongSourceType(
-                        TypeHelpers.GetFullName(endType)
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_RelNav_WrongSourceType(TypeHelpers.GetFullName(endType)),
                     "from"
                 );
             }
@@ -212,9 +227,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             if (!TypeSemantics.IsCollectionType(argument.ResultType))
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_Unary_CollectionRequired(
-                        typeof(TExpressionType).Name
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_Unary_CollectionRequired(typeof(TExpressionType).Name),
                     "argument"
                 );
             }
@@ -236,9 +253,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             )
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_Binary_CollectionsRequired(
-                        typeof(TExpressionType).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_Binary_CollectionsRequired(typeof(TExpressionType).Name)
                 );
             }
 
@@ -249,9 +268,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             if (null == commonType)
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_Binary_CollectionsRequired(
-                        typeof(TExpressionType).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_Binary_CollectionsRequired(typeof(TExpressionType).Name)
                 );
             }
 
@@ -270,10 +291,14 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             )
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_InvalidTypeForSetOperation(
-                        TypeHelpers.GetElementTypeUsage(left.ResultType).Identity,
-                        typeof(TExpressionType).Name
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_InvalidTypeForSetOperation(
+                            TypeHelpers.GetElementTypeUsage(left.ResultType).Identity,
+                            typeof(TExpressionType).Name
+                        ),
                     "left"
                 );
             }
@@ -285,10 +310,14 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             )
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_InvalidTypeForSetOperation(
-                        TypeHelpers.GetElementTypeUsage(right.ResultType).Identity,
-                        typeof(TExpressionType).Name
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_InvalidTypeForSetOperation(
+                            TypeHelpers.GetElementTypeUsage(right.ResultType).Identity,
+                            typeof(TExpressionType).Name
+                        ),
                     "right"
                 );
             }
@@ -505,7 +534,8 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                 function != null,
                 "Ensure function is non-null before calling GetExpectedParameters"
             );
-            return function.Parameters
+            return function
+                .Parameters
                 .Where(p => p.Mode == ParameterMode.In || p.Mode == ParameterMode.InOut)
                 .ToArray();
         }
@@ -733,11 +763,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                 if (bindingNames.TryGetValue(input.VariableName, out nameIndex))
                 {
                     throw EntityUtil.Argument(
-                        System.Data.Entity.Strings.Cqt_CrossJoin_DuplicateVariableNames(
-                            nameIndex,
-                            iPos,
-                            input.VariableName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Cqt_CrossJoin_DuplicateVariableNames(
+                                nameIndex,
+                                iPos,
+                                input.VariableName
+                            )
                     );
                 }
 
@@ -855,9 +889,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                     if (!TypeHelpers.IsValidGroupKeyType(keyInfo.Value.ResultType))
                     {
                         throw EntityUtil.Argument(
-                            System.Data.Entity.Strings.Cqt_GroupBy_KeyNotEqualityComparable(
-                                keyInfo.Key
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Cqt_GroupBy_KeyNotEqualityComparable(keyInfo.Key)
                         );
                     }
 
@@ -888,9 +924,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                     if (keyNames.Contains(aggInfo.Key))
                     {
                         throw EntityUtil.Argument(
-                            System.Data.Entity.Strings.Cqt_GroupBy_AggregateColumnExistsAsGroupColumn(
-                                aggInfo.Key
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Cqt_GroupBy_AggregateColumnExistsAsGroupColumn(aggInfo.Key)
                         );
                     }
 
@@ -1085,11 +1123,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                 )
                 {
                     throw EntityUtil.Argument(
-                        System.Data.Entity.Strings.Cqt_Constant_ClrEnumTypeDoesNotMatchEdmEnumType(
-                            value.GetType().Name,
-                            edmEnumType.Name,
-                            clrEnumUnderlyingType.Name
-                        ),
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Cqt_Constant_ClrEnumTypeDoesNotMatchEdmEnumType(
+                                value.GetType().Name,
+                                edmEnumType.Name,
+                                clrEnumUnderlyingType.Name
+                            ),
                         "value"
                     );
                 }
@@ -1100,9 +1142,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                 if (!TypeHelpers.TryGetEdmType<PrimitiveType>(constantType, out primitiveType))
                 {
                     throw EntityUtil.Argument(
-                        System.Data.Entity.Strings.Cqt_Constant_InvalidConstantType(
-                            constantType.ToString()
-                        ),
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Cqt_Constant_InvalidConstantType(constantType.ToString()),
                         "constantType"
                     );
                 }
@@ -1127,9 +1171,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                     )
                     {
                         throw EntityUtil.Argument(
-                            System.Data.Entity.Strings.Cqt_Constant_InvalidValueForType(
-                                constantType.ToString()
-                            ),
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Cqt_Constant_InvalidValueForType(constantType.ToString()),
                             "value"
                         );
                     }
@@ -1258,9 +1304,13 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
                 else
                 {
                     throw EntityUtil.Argument(
-                        System.Data.Entity.Strings.Cqt_Arithmetic_InvalidUnsignedTypeForUnaryMinus(
-                            argument.ResultType.EdmType.FullName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .Cqt_Arithmetic_InvalidUnsignedTypeForUnaryMinus(
+                                argument.ResultType.EdmType.FullName
+                            )
                     );
                 }
             }
@@ -1402,10 +1452,14 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             if (!TypeSemantics.IsCastAllowed(argument.ResultType, toType))
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_Cast_InvalidCast(
-                        TypeHelpers.GetFullName(argument.ResultType),
-                        TypeHelpers.GetFullName(toType)
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_Cast_InvalidCast(
+                            TypeHelpers.GetFullName(argument.ResultType),
+                            TypeHelpers.GetFullName(toType)
+                        )
                 );
             }
         }
@@ -1425,9 +1479,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             if (!TypeSemantics.IsValidPolymorphicCast(argument.ResultType, asType))
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_General_PolymorphicArgRequired(
-                        typeof(DbTreatExpression).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_General_PolymorphicArgRequired(typeof(DbTreatExpression).Name)
                 );
             }
         }
@@ -1457,9 +1513,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             )
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_General_PolymorphicArgRequired(
-                        typeof(DbOfTypeExpression).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_General_PolymorphicArgRequired(typeof(DbOfTypeExpression).Name)
                 );
             }
 
@@ -1485,9 +1543,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             if (!TypeSemantics.IsValidPolymorphicCast(argument.ResultType, type))
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_General_PolymorphicArgRequired(
-                        typeof(DbIsOfExpression).Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_General_PolymorphicArgRequired(typeof(DbIsOfExpression).Name)
                 );
             }
 
@@ -2246,9 +2306,13 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             if (structType.Abstract)
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_NewInstance_CannotInstantiateAbstractType(
-                        TypeHelpers.GetFullName(instanceType)
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_NewInstance_CannotInstantiateAbstractType(
+                            TypeHelpers.GetFullName(instanceType)
+                        ),
                     "instanceType"
                 );
             }
@@ -2257,9 +2321,13 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             if (members == null || members.Count < 1)
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Cqt_NewInstance_CannotInstantiateMemberlessType(
-                        TypeHelpers.GetFullName(instanceType)
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Cqt_NewInstance_CannotInstantiateMemberlessType(
+                            TypeHelpers.GetFullName(instanceType)
+                        ),
                     "instanceType"
                 );
             }
@@ -2413,10 +2481,14 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             }
 
             throw EntityUtil.ArgumentOutOfRange(
-                System.Data.Entity.Strings.Cqt_Factory_NoSuchProperty(
-                    propertyName,
-                    TypeHelpers.GetFullName(instance.ResultType)
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .Cqt_Factory_NoSuchProperty(
+                        propertyName,
+                        TypeHelpers.GetFullName(instance.ResultType)
+                    ),
                 "propertyName"
             );
         }
@@ -2824,10 +2896,9 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             out PrimitiveTypeKind primitiveTypeKind
         )
         {
-            return ClrProviderManifest.Instance.TryGetPrimitiveTypeKind(
-                clrType,
-                out primitiveTypeKind
-            );
+            return ClrProviderManifest
+                .Instance
+                .TryGetPrimitiveTypeKind(clrType, out primitiveTypeKind);
         }
 
         /// <summary>
@@ -2884,13 +2955,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
 
                 if (
                     !clrEnumType.GetEnumNames().Contains(edmEnumTypeMember.Name)
-                    || !edmEnumTypeMember.Value.Equals(
-                        Convert.ChangeType(
-                            Enum.Parse(clrEnumType, edmEnumTypeMember.Name),
-                            clrEnumType.GetEnumUnderlyingType(),
-                            CultureInfo.InvariantCulture
+                    || !edmEnumTypeMember
+                        .Value
+                        .Equals(
+                            Convert.ChangeType(
+                                Enum.Parse(clrEnumType, edmEnumTypeMember.Name),
+                                clrEnumType.GetEnumUnderlyingType(),
+                                CultureInfo.InvariantCulture
+                            )
                         )
-                    )
                 )
                 {
                     return false;

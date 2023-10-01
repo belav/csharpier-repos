@@ -151,34 +151,38 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         )
         {
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Navigating_to_definition
-                )
+                context
+                    .OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Navigating_to_definition
+                    )
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
                 if (asyncService != null)
                 {
-                    return _threadingContext.JoinableTaskFactory.Run(async () =>
-                    {
-                        // determine the location first.
-                        var (location, _) = await asyncService
-                            .FindDefinitionLocationAsync(
-                                document,
-                                position,
-                                includeType: true,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
-                        return await location
-                            .TryNavigateToAsync(
-                                _threadingContext,
-                                NavigationOptions.Default,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
-                    });
+                    return _threadingContext
+                        .JoinableTaskFactory
+                        .Run(async () =>
+                        {
+                            // determine the location first.
+                            var (location, _) = await asyncService
+                                .FindDefinitionLocationAsync(
+                                    document,
+                                    position,
+                                    includeType: true,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
+                            return await location
+                                .TryNavigateToAsync(
+                                    _threadingContext,
+                                    NavigationOptions.Default,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
+                        });
                 }
                 else if (service != null)
                 {
@@ -193,8 +197,11 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
         private static void ReportFailure(Document document)
         {
-            var notificationService =
-                document.Project.Solution.Services.GetRequiredService<INotificationService>();
+            var notificationService = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<INotificationService>();
             notificationService.SendNotification(
                 FeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret,
                 EditorFeaturesResources.Go_to_Definition,
@@ -211,8 +218,11 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         {
             bool succeeded;
 
-            var indicatorFactory =
-                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredService<IBackgroundWorkIndicatorFactory>();
 
             // TODO: prior logic was to get a tracking span of length 1 here.  Preserving that, though it's unclear if
             // that is necessary for the BWI to work properly.
@@ -260,9 +270,9 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
             if (!succeeded)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    CancellationToken.None
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(CancellationToken.None);
                 ReportFailure(document);
             }
         }

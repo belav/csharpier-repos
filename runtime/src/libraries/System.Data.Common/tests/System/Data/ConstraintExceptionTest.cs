@@ -92,9 +92,13 @@ namespace System.Data.Tests
             // UniqueConstraint Exception - Column type = String, Enable CaseSensitive = true;
             Assert.Throws<ConstraintException>(() => ds.CaseSensitive = false);
 
-            dtChild.Constraints.Add(
-                new UniqueConstraint(new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] })
-            );
+            dtChild
+                .Constraints
+                .Add(
+                    new UniqueConstraint(
+                        new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] }
+                    )
+                );
             ds.EnforceConstraints = false;
             dtChild.Rows.Add(dtChild.Rows[0].ItemArray);
 

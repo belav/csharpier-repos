@@ -38,14 +38,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             foreach (
-                var property in modelBuilder.Metadata
+                var property in modelBuilder
+                    .Metadata
                     .GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredProperties())
             )
             {
-                property.Builder.HasTypeMapping(
-                    Dependencies.TypeMappingSource.FindMapping((IProperty)property)
-                );
+                property
+                    .Builder
+                    .HasTypeMapping(
+                        Dependencies.TypeMappingSource.FindMapping((IProperty)property)
+                    );
             }
         }
     }

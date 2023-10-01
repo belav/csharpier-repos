@@ -180,7 +180,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var item = entity.sysEmails
+                        var item = entity
+                            .sysEmails
                             .Where(u => u.emailId == emailId)
                             .Select(
                                 S =>
@@ -303,7 +304,8 @@ namespace POS_Server.Controllers
                     {
                         //  return email with same branch and side or
                         // return email with same side and isMajor
-                        var row = entity.sysEmails
+                        var row = entity
+                            .sysEmails
                             .Where(u => u.branchId == branchId && u.side == side)
                             .Select(
                                 S =>
@@ -331,7 +333,8 @@ namespace POS_Server.Controllers
 
                         if (row == null)
                         {
-                            var row2 = entity.sysEmails
+                            var row2 = entity
+                                .sysEmails
                                 .Where(u => u.side == side && u.isMajor == true)
                                 .Select(
                                     S =>
@@ -427,7 +430,8 @@ namespace POS_Server.Controllers
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             // check if there is other same side in same branch
-                            var sidebranch = entity.sysEmails
+                            var sidebranch = entity
+                                .sysEmails
                                 .Where(
                                     e =>
                                         e.branchId == newObject.branchId
@@ -452,7 +456,8 @@ namespace POS_Server.Controllers
                                 }
                                 else
                                 {
-                                    tmpObject = entity.sysEmails
+                                    tmpObject = entity
+                                        .sysEmails
                                         .Where(p => p.emailId == newObject.emailId)
                                         .FirstOrDefault();
 

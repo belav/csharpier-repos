@@ -102,9 +102,9 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
         var mayBeMemberInitExpression = innerExpression.UnwrapTypeConversion(out _);
         if (
             mayBeMemberInitExpression is MemberInitExpression memberInitExpression
-            && memberInitExpression.Bindings.SingleOrDefault(
-                mb => mb.Member.IsSameAs(memberExpression.Member)
-            )
+            && memberInitExpression
+                .Bindings
+                .SingleOrDefault(mb => mb.Member.IsSameAs(memberExpression.Member))
                 is MemberAssignment memberAssignment
         )
         {
@@ -137,9 +137,9 @@ public class ReplacingExpressionVisitor : ExpressionVisitor
             var mayBeMemberInitExpression = newEntityExpression.UnwrapTypeConversion(out _);
             if (
                 mayBeMemberInitExpression is MemberInitExpression memberInitExpression
-                && memberInitExpression.Bindings.SingleOrDefault(
-                    mb => mb.Member.Name == propertyName
-                )
+                && memberInitExpression
+                    .Bindings
+                    .SingleOrDefault(mb => mb.Member.Name == propertyName)
                     is MemberAssignment memberAssignment
             )
             {

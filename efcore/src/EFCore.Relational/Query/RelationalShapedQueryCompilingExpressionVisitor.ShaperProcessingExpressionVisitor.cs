@@ -638,7 +638,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                                 == RelationalAnnotationNames.TpcMappingStrategy
                             )
                             {
-                                var concreteTypes = entityShaperExpression.EntityType
+                                var concreteTypes = entityShaperExpression
+                                    .EntityType
                                     .GetDerivedTypesInclusive()
                                     .Where(e => !e.IsAbstract())
                                     .ToArray();
@@ -697,7 +698,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                         == RelationalAnnotationNames.TpcMappingStrategy
                     )
                     {
-                        var concreteTypes = entityShaperExpression.EntityType
+                        var concreteTypes = entityShaperExpression
+                            .EntityType
                             .GetDerivedTypesInclusive()
                             .Where(e => !e.IsAbstract())
                             .ToArray();
@@ -1640,9 +1642,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                         fixup
                     );
 
-                    return navigation.DeclaringEntityType.ClrType.IsAssignableFrom(
-                        parentEntityExpression.Type
-                    )
+                    return navigation
+                        .DeclaringEntityType
+                        .ClrType
+                        .IsAssignableFrom(parentEntityExpression.Type)
                         ? includeJsonEntityCollectionMethodCall
                         : Expression.IfThen(
                             Expression.TypeIs(
@@ -1666,9 +1669,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                     fixup
                 );
 
-                return navigation.DeclaringEntityType.ClrType.IsAssignableFrom(
-                    parentEntityExpression.Type
-                )
+                return navigation
+                    .DeclaringEntityType
+                    .ClrType
+                    .IsAssignableFrom(parentEntityExpression.Type)
                     ? includeJsonEntityReferenceMethodCall
                     : Expression.IfThen(
                         Expression.TypeIs(
@@ -1726,7 +1730,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             )
             {
                 // if we already cached JsonElement then key values are guaranteed to have been cached also, as they go in tandem
-                var fullPathCacheKey = jsonProjectionInfo.AdditionalPath
+                var fullPathCacheKey = jsonProjectionInfo
+                    .AdditionalPath
                     .Select(x => (x.ConstantArrayIndex, x.NonConstantArrayIndex))
                     .ToArray();
                 var finalKeyValuesVariable = _existingKeyValuesMap[

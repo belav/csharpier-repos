@@ -176,15 +176,17 @@ namespace System.ServiceModel.Channels
                 }
                 if (string.IsNullOrEmpty(protectionLevelString))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.ExpectedElementMissing,
-                                TransportPolicyConstants.ProtectionLevelName,
-                                TransportPolicyConstants.DotNetFramingNamespace
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.ExpectedElementMissing,
+                                    TransportPolicyConstants.ProtectionLevelName,
+                                    TransportPolicyConstants.DotNetFramingNamespace
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 windowsBindingElement.ProtectionLevel = (ProtectionLevel)
                     Enum.Parse(typeof(ProtectionLevel), protectionLevelString);

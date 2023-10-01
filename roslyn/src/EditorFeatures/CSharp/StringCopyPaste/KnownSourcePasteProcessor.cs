@@ -223,8 +223,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             var snapshotAfterTrivialEdit = edit.Apply();
 
             textAfterBasicPaste = snapshotAfterTrivialEdit.AsText();
-            contentSpansAfterBasicPaste =
-                StringExpressionBeforePasteInfo.ContentSpans.SelectAsArray(
+            contentSpansAfterBasicPaste = StringExpressionBeforePasteInfo
+                .ContentSpans
+                .SelectAsArray(
                     ts => MapSpan(ts, snapshotBeforeTrivialEdit, snapshotAfterTrivialEdit)
                 );
         }
@@ -378,7 +379,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                     );
                     if (
                         line
-                        == TextBeforePaste.Lines
+                        == TextBeforePaste
+                            .Lines
                             .GetLineFromPosition(StringExpressionBeforePaste.SpanStart)
                             .LineNumber
                     )
@@ -466,7 +468,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
                     if (
                         line
-                        == TextBeforePaste.Lines
+                        == TextBeforePaste
+                            .Lines
                             .GetLineFromPosition(StringExpressionBeforePaste.Span.End)
                             .LineNumber
                     )

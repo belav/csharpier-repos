@@ -98,10 +98,12 @@ namespace Mono.Linker.Steps
                 if (_resource != null)
                 {
                     if (stripResource)
-                        _context.Annotations.AddResourceToRemove(
-                            _resource.Value.Assembly,
-                            _resource.Value.Resource
-                        );
+                        _context
+                            .Annotations
+                            .AddResourceToRemove(
+                                _resource.Value.Assembly,
+                                _resource.Value.Resource
+                            );
                     if (ignoreResource)
                         return;
                 }
@@ -869,7 +871,8 @@ namespace Mono.Linker.Steps
                         && typeDefinition.IsEnum
                     )
                     {
-                        var enumField = typeDefinition.Fields
+                        var enumField = typeDefinition
+                            .Fields
                             .Where(f => f.IsStatic && f.Name == value)
                             .FirstOrDefault();
                         if (enumField != null)

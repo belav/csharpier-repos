@@ -142,9 +142,9 @@ namespace System.Net.Http.HPack
                     return "511"u8;
 
                 default:
-                    return Encoding.ASCII.GetBytes(
-                        statusCode.ToString(CultureInfo.InvariantCulture)
-                    );
+                    return Encoding
+                        .ASCII
+                        .GetBytes(statusCode.ToString(CultureInfo.InvariantCulture));
             }
         }
     }

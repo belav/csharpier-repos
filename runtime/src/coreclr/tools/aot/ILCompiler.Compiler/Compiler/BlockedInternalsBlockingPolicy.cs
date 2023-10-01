@@ -197,16 +197,12 @@ namespace ILCompiler
         {
             _blockedTypes = new BlockedTypeHashtable(_blockedModules);
 
-            ArrayOfTType = context.SystemModule.GetType(
-                "System",
-                "Array`1",
-                throwIfNotFound: false
-            );
-            AttributeType = context.SystemModule.GetType(
-                "System",
-                "Attribute",
-                throwIfNotFound: false
-            );
+            ArrayOfTType = context
+                .SystemModule
+                .GetType("System", "Array`1", throwIfNotFound: false);
+            AttributeType = context
+                .SystemModule
+                .GetType("System", "Attribute", throwIfNotFound: false);
         }
 
         public override bool IsBlocked(MetadataType type)

@@ -205,9 +205,11 @@ namespace System.Windows.Forms
                     ? this.Image
                     : ToolStripRenderer.CreateDisabledImage(this.Image);
 
-                this.Owner.Renderer.DrawLabelBackground(
-                    new System.Windows.Forms.ToolStripItemRenderEventArgs(e.Graphics, this)
-                );
+                this.Owner
+                    .Renderer
+                    .DrawLabelBackground(
+                        new System.Windows.Forms.ToolStripItemRenderEventArgs(e.Graphics, this)
+                    );
 
                 Rectangle text_layout_rect;
                 Rectangle image_layout_rect;
@@ -235,14 +237,16 @@ namespace System.Windows.Forms
                 }
 
                 if (image_layout_rect != Rectangle.Empty)
-                    this.Owner.Renderer.DrawItemImage(
-                        new System.Windows.Forms.ToolStripItemImageRenderEventArgs(
-                            e.Graphics,
-                            this,
-                            draw_image,
-                            image_layout_rect
-                        )
-                    );
+                    this.Owner
+                        .Renderer
+                        .DrawItemImage(
+                            new System.Windows.Forms.ToolStripItemImageRenderEventArgs(
+                                e.Graphics,
+                                this,
+                                draw_image,
+                                image_layout_rect
+                            )
+                        );
                 if (text_layout_rect != Rectangle.Empty)
                     if (this.is_link)
                     {
@@ -253,30 +257,34 @@ namespace System.Windows.Forms
                                 case LinkBehavior.SystemDefault:
                                 case LinkBehavior.AlwaysUnderline:
                                 case LinkBehavior.HoverUnderline:
-                                    this.Owner.Renderer.DrawItemText(
-                                        new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                            e.Graphics,
-                                            this,
-                                            this.Text,
-                                            text_layout_rect,
-                                            this.active_link_color,
-                                            new Font(this.Font, FontStyle.Underline),
-                                            this.TextAlign
-                                        )
-                                    );
+                                    this.Owner
+                                        .Renderer
+                                        .DrawItemText(
+                                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                                e.Graphics,
+                                                this,
+                                                this.Text,
+                                                text_layout_rect,
+                                                this.active_link_color,
+                                                new Font(this.Font, FontStyle.Underline),
+                                                this.TextAlign
+                                            )
+                                        );
                                     break;
                                 case LinkBehavior.NeverUnderline:
-                                    this.Owner.Renderer.DrawItemText(
-                                        new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                            e.Graphics,
-                                            this,
-                                            this.Text,
-                                            text_layout_rect,
-                                            this.active_link_color,
-                                            this.Font,
-                                            this.TextAlign
-                                        )
-                                    );
+                                    this.Owner
+                                        .Renderer
+                                        .DrawItemText(
+                                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                                e.Graphics,
+                                                this,
+                                                this.Text,
+                                                text_layout_rect,
+                                                this.active_link_color,
+                                                this.Font,
+                                                this.TextAlign
+                                            )
+                                        );
                                     break;
                             }
                         }
@@ -287,30 +295,34 @@ namespace System.Windows.Forms
                                 case LinkBehavior.SystemDefault:
                                 case LinkBehavior.AlwaysUnderline:
                                 case LinkBehavior.HoverUnderline:
-                                    this.Owner.Renderer.DrawItemText(
-                                        new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                            e.Graphics,
-                                            this,
-                                            this.Text,
-                                            text_layout_rect,
-                                            this.link_color,
-                                            new Font(this.Font, FontStyle.Underline),
-                                            this.TextAlign
-                                        )
-                                    );
+                                    this.Owner
+                                        .Renderer
+                                        .DrawItemText(
+                                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                                e.Graphics,
+                                                this,
+                                                this.Text,
+                                                text_layout_rect,
+                                                this.link_color,
+                                                new Font(this.Font, FontStyle.Underline),
+                                                this.TextAlign
+                                            )
+                                        );
                                     break;
                                 case LinkBehavior.NeverUnderline:
-                                    this.Owner.Renderer.DrawItemText(
-                                        new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                            e.Graphics,
-                                            this,
-                                            this.Text,
-                                            text_layout_rect,
-                                            this.link_color,
-                                            this.Font,
-                                            this.TextAlign
-                                        )
-                                    );
+                                    this.Owner
+                                        .Renderer
+                                        .DrawItemText(
+                                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                                e.Graphics,
+                                                this,
+                                                this.Text,
+                                                text_layout_rect,
+                                                this.link_color,
+                                                this.Font,
+                                                this.TextAlign
+                                            )
+                                        );
                                     break;
                             }
                         }
@@ -322,31 +334,35 @@ namespace System.Windows.Forms
                                 {
                                     case LinkBehavior.SystemDefault:
                                     case LinkBehavior.AlwaysUnderline:
-                                        this.Owner.Renderer.DrawItemText(
-                                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                                e.Graphics,
-                                                this,
-                                                this.Text,
-                                                text_layout_rect,
-                                                this.visited_link_color,
-                                                new Font(this.Font, FontStyle.Underline),
-                                                this.TextAlign
-                                            )
-                                        );
+                                        this.Owner
+                                            .Renderer
+                                            .DrawItemText(
+                                                new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                                    e.Graphics,
+                                                    this,
+                                                    this.Text,
+                                                    text_layout_rect,
+                                                    this.visited_link_color,
+                                                    new Font(this.Font, FontStyle.Underline),
+                                                    this.TextAlign
+                                                )
+                                            );
                                         break;
                                     case LinkBehavior.NeverUnderline:
                                     case LinkBehavior.HoverUnderline:
-                                        this.Owner.Renderer.DrawItemText(
-                                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                                e.Graphics,
-                                                this,
-                                                this.Text,
-                                                text_layout_rect,
-                                                this.visited_link_color,
-                                                this.Font,
-                                                this.TextAlign
-                                            )
-                                        );
+                                        this.Owner
+                                            .Renderer
+                                            .DrawItemText(
+                                                new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                                    e.Graphics,
+                                                    this,
+                                                    this.Text,
+                                                    text_layout_rect,
+                                                    this.visited_link_color,
+                                                    this.Font,
+                                                    this.TextAlign
+                                                )
+                                            );
                                         break;
                                 }
                             }
@@ -356,48 +372,54 @@ namespace System.Windows.Forms
                                 {
                                     case LinkBehavior.SystemDefault:
                                     case LinkBehavior.AlwaysUnderline:
-                                        this.Owner.Renderer.DrawItemText(
-                                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                                e.Graphics,
-                                                this,
-                                                this.Text,
-                                                text_layout_rect,
-                                                this.link_color,
-                                                new Font(this.Font, FontStyle.Underline),
-                                                this.TextAlign
-                                            )
-                                        );
+                                        this.Owner
+                                            .Renderer
+                                            .DrawItemText(
+                                                new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                                    e.Graphics,
+                                                    this,
+                                                    this.Text,
+                                                    text_layout_rect,
+                                                    this.link_color,
+                                                    new Font(this.Font, FontStyle.Underline),
+                                                    this.TextAlign
+                                                )
+                                            );
                                         break;
                                     case LinkBehavior.NeverUnderline:
                                     case LinkBehavior.HoverUnderline:
-                                        this.Owner.Renderer.DrawItemText(
-                                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                                e.Graphics,
-                                                this,
-                                                this.Text,
-                                                text_layout_rect,
-                                                this.link_color,
-                                                this.Font,
-                                                this.TextAlign
-                                            )
-                                        );
+                                        this.Owner
+                                            .Renderer
+                                            .DrawItemText(
+                                                new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                                    e.Graphics,
+                                                    this,
+                                                    this.Text,
+                                                    text_layout_rect,
+                                                    this.link_color,
+                                                    this.Font,
+                                                    this.TextAlign
+                                                )
+                                            );
                                         break;
                                 }
                             }
                         }
                     }
                     else
-                        this.Owner.Renderer.DrawItemText(
-                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                                e.Graphics,
-                                this,
-                                this.Text,
-                                text_layout_rect,
-                                font_color,
-                                this.Font,
-                                this.TextAlign
-                            )
-                        );
+                        this.Owner
+                            .Renderer
+                            .DrawItemText(
+                                new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                    e.Graphics,
+                                    this,
+                                    this.Text,
+                                    text_layout_rect,
+                                    font_color,
+                                    this.Font,
+                                    this.TextAlign
+                                )
+                            );
             }
 
             // call Paint handlers last.

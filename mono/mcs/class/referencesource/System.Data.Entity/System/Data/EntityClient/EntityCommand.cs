@@ -787,17 +787,18 @@ namespace System.Data.EntityClient
             // Always check the CQT metadata against the connection metadata (internally, CQT already
             // validates metadata consistency)
             if (
-                !_preparedCommandTree.MetadataWorkspace.IsMetadataWorkspaceCSCompatible(
-                    this.Connection.GetMetadataWorkspace()
-                )
+                !_preparedCommandTree
+                    .MetadataWorkspace
+                    .IsMetadataWorkspaceCSCompatible(this.Connection.GetMetadataWorkspace())
             )
             {
                 throw EntityUtil.InvalidOperation(
                     System.Data.Entity.Strings.EntityClient_CommandTreeMetadataIncompatible
                 );
             }
-            EntityCommandDefinition result =
-                EntityProviderServices.Instance.CreateCommandDefinition(
+            EntityCommandDefinition result = EntityProviderServices
+                .Instance
+                .CreateCommandDefinition(
                     this._connection.StoreProviderFactory,
                     this._preparedCommandTree
                 );
@@ -838,8 +839,11 @@ namespace System.Data.EntityClient
                 || (this._connection.State == ConnectionState.Broken)
             )
             {
-                string message =
-                    System.Data.Entity.Strings.EntityClient_ExecutingOnClosedConnection(
+                string message = System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityClient_ExecutingOnClosedConnection(
                         this._connection.State == ConnectionState.Closed
                             ? System.Data.Entity.Strings.EntityClient_ConnectionStateClosed
                             : System.Data.Entity.Strings.EntityClient_ConnectionStateBroken
@@ -893,9 +897,11 @@ namespace System.Data.EntityClient
                 )
                 {
                     throw EntityUtil.InvalidOperation(
-                        System.Data.Entity.Strings.EntityClient_InvalidParameterDirection(
-                            parameter.ParameterName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .EntityClient_InvalidParameterDirection(parameter.ParameterName)
                     );
                 }
 
@@ -924,9 +930,11 @@ namespace System.Data.EntityClient
                 catch (ArgumentException e)
                 {
                     throw EntityUtil.InvalidOperation(
-                        System.Data.Entity.Strings.EntityClient_DuplicateParameterNames(
-                            parameter.ParameterName
-                        ),
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .EntityClient_DuplicateParameterNames(parameter.ParameterName),
                         e
                     );
                 }

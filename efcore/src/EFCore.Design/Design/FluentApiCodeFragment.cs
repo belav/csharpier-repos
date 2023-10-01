@@ -117,7 +117,8 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
             }
 
             foreach (
-                var argumentNamespace in current.Arguments
+                var argumentNamespace in current
+                    .Arguments
                     .Where(
                         a =>
                             a

@@ -187,7 +187,8 @@ namespace System.Net.Quic.Implementations.Mock
 
             while (!streamLimit.Unidirectional.TryIncrement())
             {
-                await streamLimit.Unidirectional
+                await streamLimit
+                    .Unidirectional
                     .WaitForAvailableStreams(cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -214,7 +215,8 @@ namespace System.Net.Quic.Implementations.Mock
 
             while (!streamLimit.Bidirectional.TryIncrement())
             {
-                await streamLimit.Bidirectional
+                await streamLimit
+                    .Bidirectional
                     .WaitForAvailableStreams(cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -294,7 +296,8 @@ namespace System.Net.Quic.Implementations.Mock
 
             try
             {
-                MockStream.StreamState streamState = await streamChannel.Reader
+                MockStream.StreamState streamState = await streamChannel
+                    .Reader
                     .ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return new MockStream(this, streamState, false);
@@ -338,12 +341,12 @@ namespace System.Net.Quic.Implementations.Mock
 
                 foreach (KeyValuePair<long, MockStream.StreamState> kvp in state._streams)
                 {
-                    kvp.Value._outboundWritesCompletedTcs.TrySetException(
-                        new QuicConnectionAbortedException(errorCode)
-                    );
-                    kvp.Value._inboundWritesCompletedTcs.TrySetException(
-                        new QuicConnectionAbortedException(errorCode)
-                    );
+                    kvp.Value
+                        ._outboundWritesCompletedTcs
+                        .TrySetException(new QuicConnectionAbortedException(errorCode));
+                    kvp.Value
+                        ._inboundWritesCompletedTcs
+                        .TrySetException(new QuicConnectionAbortedException(errorCode));
                 }
             }
 
@@ -368,9 +371,10 @@ namespace System.Net.Quic.Implementations.Mock
                 // TODO: We really only need to do the complete and drain once, but it doesn't really hurt to do it twice.
                 state._clientInitiatedStreamChannel.Writer.TryComplete();
                 while (
-                    state._clientInitiatedStreamChannel.Reader.TryRead(
-                        out MockStream.StreamState? streamState
-                    )
+                    state
+                        ._clientInitiatedStreamChannel
+                        .Reader
+                        .TryRead(out MockStream.StreamState? streamState)
                 )
                 {
                     streamState._outboundReadErrorCode = streamState._outboundWriteErrorCode =
@@ -381,9 +385,10 @@ namespace System.Net.Quic.Implementations.Mock
 
                 state._serverInitiatedStreamChannel.Writer.TryComplete();
                 while (
-                    state._serverInitiatedStreamChannel.Reader.TryRead(
-                        out MockStream.StreamState? streamState
-                    )
+                    state
+                        ._serverInitiatedStreamChannel
+                        .Reader
+                        .TryRead(out MockStream.StreamState? streamState)
                 )
                 {
                     streamState._inboundReadErrorCode = streamState._inboundWriteErrorCode =

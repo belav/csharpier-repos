@@ -34,7 +34,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var propertiesList = entity.propertiesItems
+                    var propertiesList = entity
+                        .propertiesItems
                         .Select(
                             p =>
                                 new PropertiesItemModel
@@ -60,7 +61,8 @@ namespace POS_Server.Controllers
                             if (propertiesList[i].isActive == 1)
                             {
                                 long propertyItemId = (long)propertiesList[i].propertyItemId;
-                                var Itemsprop = entity.itemsProp
+                                var Itemsprop = entity
+                                    .itemsProp
                                     .Where(x => x.propertyItemId == propertyItemId)
                                     .Select(b => new { b.itemPropId, b.itemId })
                                     .ToList();
@@ -103,7 +105,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var propertiesList = entity.propertiesItems
+                    var propertiesList = entity
+                        .propertiesItems
                         .Where(p => p.propertyId == propertyId)
                         .Select(
                             p =>
@@ -130,7 +133,8 @@ namespace POS_Server.Controllers
                             if (propertiesList[i].isActive == 1)
                             {
                                 long propertyItemId = (long)propertiesList[i].propertyItemId;
-                                var Itemsprop = entity.itemsProp
+                                var Itemsprop = entity
+                                    .itemsProp
                                     .Where(x => x.propertyItemId == propertyItemId)
                                     .Select(b => new { b.itemPropId })
                                     .FirstOrDefault();
@@ -164,7 +168,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var propertyItems = entity.propertiesItems
+                    var propertyItems = entity
+                        .propertiesItems
                         .Where(p => p.propertyItemId == propItemId)
                         .Select(
                             p =>
@@ -247,7 +252,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpPropertyItem = entity.propertiesItems
+                            tmpPropertyItem = entity
+                                .propertiesItems
                                 .Where(p => p.propertyItemId == propertyItemObject.propertyItemId)
                                 .FirstOrDefault();
                             tmpPropertyItem.name = propertyItemObject.name;
@@ -308,9 +314,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            propertiesItems PropertDelete = entity.propertiesItems.Find(
-                                propertyItemId
-                            );
+                            propertiesItems PropertDelete = entity
+                                .propertiesItems
+                                .Find(propertyItemId);
                             entity.propertiesItems.Remove(PropertDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -328,9 +334,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            propertiesItems PropertDelete = entity.propertiesItems.Find(
-                                propertyItemId
-                            );
+                            propertiesItems PropertDelete = entity
+                                .propertiesItems
+                                .Find(propertyItemId);
                             PropertDelete.isActive = 0;
                             PropertDelete.updateUserId = userId;
                             PropertDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);

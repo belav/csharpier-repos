@@ -557,10 +557,10 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             }
 
             if (
-                CultureInfo.CurrentUICulture.Name.StartsWith(
-                    "en",
-                    StringComparison.OrdinalIgnoreCase
-                )
+                CultureInfo
+                    .CurrentUICulture
+                    .Name
+                    .StartsWith("en", StringComparison.OrdinalIgnoreCase)
             )
             {
                 Assert.Equal(expectedDiags, actualDiags);

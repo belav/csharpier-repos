@@ -95,10 +95,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var replacementText = singleTrackingSpanTouched.GetText();
             UpdateCurrentState(replacementText, selection, singleTrackingSpanTouched);
 
-            this.InlineRenameService.ActiveSession.ApplyReplacementText(
-                replacementText,
-                propagateEditImmediately: false
-            );
+            this.InlineRenameService
+                .ActiveSession
+                .ApplyReplacementText(replacementText, propagateEditImmediately: false);
         }
 
         public void UpdateSelection(
@@ -125,10 +124,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 this.RedoStack.Push(this.currentState);
                 this.currentState = this.UndoStack.Pop();
-                this.InlineRenameService.ActiveSession.ApplyReplacementText(
-                    this.currentState.ReplacementText,
-                    propagateEditImmediately: true
-                );
+                this.InlineRenameService
+                    .ActiveSession
+                    .ApplyReplacementText(
+                        this.currentState.ReplacementText,
+                        propagateEditImmediately: true
+                    );
             }
             else
             {
@@ -142,10 +143,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 this.UndoStack.Push(this.currentState);
                 this.currentState = this.RedoStack.Pop();
-                this.InlineRenameService.ActiveSession.ApplyReplacementText(
-                    this.currentState.ReplacementText,
-                    propagateEditImmediately: true
-                );
+                this.InlineRenameService
+                    .ActiveSession
+                    .ApplyReplacementText(
+                        this.currentState.ReplacementText,
+                        propagateEditImmediately: true
+                    );
             }
         }
 

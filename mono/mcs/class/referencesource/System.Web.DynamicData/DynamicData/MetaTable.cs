@@ -1139,10 +1139,12 @@ namespace System.Web.DynamicData
                 throw new ArgumentNullException("entityType");
             }
 
-            return System.Web.DynamicData.MetaModel.MetaModelManager.TryGetTable(
-                entityType,
-                out table
-            );
+            return System
+                .Web
+                .DynamicData
+                .MetaModel
+                .MetaModelManager
+                .TryGetTable(entityType, out table);
         }
 
         #region IMetaTable Members

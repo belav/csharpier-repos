@@ -224,7 +224,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Validate(modelBuilder);
 
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(AbstractBaseEntity1))
                 .FindProperty("BaseClassProperty")
         );
@@ -235,17 +236,20 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             modelBuilder.Model.FindEntityType(typeof(Unit1)).FindProperty("BaseClassProperty")
         );
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(AbstractBaseEntity1))
                 .FindProperty("VirtualBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(BaseEntity1))
                 .FindProperty("VirtualBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Unit1))
                 .FindProperty("VirtualBaseClassProperty")
         );
@@ -290,17 +294,20 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Validate(modelBuilder);
 
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(AbstractBaseEntity2))
                 .FindProperty("VirtualBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(BaseEntity2))
                 .FindProperty("VirtualBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Unit2))
                 .FindProperty("VirtualBaseClassProperty")
         );
@@ -345,13 +352,15 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Validate(modelBuilder);
 
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(AbstractBaseEntity3))
                 .FindProperty("AbstractBaseClassProperty")
         );
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity3)));
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Unit3))
                 .FindProperty("AbstractBaseClassProperty")
         );
@@ -366,7 +375,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         modelBuilder.Entity<BaseEntity3>();
 
         Assert.NotNull(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Unit3))
                 .FindProperty("VirtualBaseClassProperty")
         );
@@ -388,7 +398,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity3)));
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity3)));
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Unit3))
                 .FindProperty("VirtualBaseClassProperty")
         );
@@ -434,17 +445,20 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Validate(modelBuilder);
 
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(AbstractBaseEntity3))
                 .FindProperty("AbstractBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(BaseEntity3))
                 .FindProperty("AbstractBaseClassProperty")
         );
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Unit3))
                 .FindProperty("AbstractBaseClassProperty")
         );
@@ -463,7 +477,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity2)));
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity2)));
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Unit2))
                 .FindProperty("VirtualBaseClassProperty")
         );
@@ -483,7 +498,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(AbstractBaseEntity1)));
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity1)));
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Unit1))
                 .FindProperty("VirtualBaseClassProperty")
         );
@@ -502,7 +518,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(BaseEntity5)));
         Assert.Null(modelBuilder.Model.FindEntityType(typeof(Unit5)));
         Assert.Null(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(DifferentUnit5))
                 .FindProperty("VirtualBaseClassProperty")
         );

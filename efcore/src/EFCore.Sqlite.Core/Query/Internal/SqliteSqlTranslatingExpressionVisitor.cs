@@ -108,13 +108,15 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
         )
         {
             return Visit(unaryExpression.Operand) is SqlExpression sqlExpression
-                ? Dependencies.SqlExpressionFactory.Function(
-                    "length",
-                    new[] { sqlExpression },
-                    nullable: true,
-                    argumentsPropagateNullability: new[] { true },
-                    typeof(int)
-                )
+                ? Dependencies
+                    .SqlExpressionFactory
+                    .Function(
+                        "length",
+                        new[] { sqlExpression },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { true },
+                        typeof(int)
+                    )
                 : QueryCompilationContext.NotTranslatedExpression;
         }
 
@@ -132,13 +134,15 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             var operandType = GetProviderType(sqlUnary.Operand);
             if (operandType == typeof(decimal))
             {
-                return Dependencies.SqlExpressionFactory.Function(
-                    name: "ef_negate",
-                    new[] { sqlUnary.Operand },
-                    nullable: true,
-                    new[] { true },
-                    visitedExpression.Type
-                );
+                return Dependencies
+                    .SqlExpressionFactory
+                    .Function(
+                        name: "ef_negate",
+                        new[] { sqlUnary.Operand },
+                        nullable: true,
+                        new[] { true },
+                        visitedExpression.Type
+                    );
             }
 
             if (operandType == typeof(TimeOnly) || operandType == typeof(TimeSpan))
@@ -207,14 +211,16 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                 )
             )
             {
-                return Dependencies.SqlExpressionFactory.Function(
-                    "ef_mod",
-                    new[] { sqlBinary.Left, sqlBinary.Right },
-                    nullable: true,
-                    argumentsPropagateNullability: new[] { true, true },
-                    visitedExpression.Type,
-                    visitedExpression.TypeMapping
-                );
+                return Dependencies
+                    .SqlExpressionFactory
+                    .Function(
+                        "ef_mod",
+                        new[] { sqlBinary.Left, sqlBinary.Right },
+                        nullable: true,
+                        argumentsPropagateNullability: new[] { true, true },
+                        visitedExpression.Type,
+                        visitedExpression.TypeMapping
+                    );
             }
 
             if (AttemptDecimalCompare(sqlBinary))
@@ -285,13 +291,15 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
         SqlExpression right
     )
     {
-        var actual = Dependencies.SqlExpressionFactory.Function(
-            name: "ef_compare",
-            new[] { left, right },
-            nullable: true,
-            new[] { true, true },
-            typeof(int)
-        );
+        var actual = Dependencies
+            .SqlExpressionFactory
+            .Function(
+                name: "ef_compare",
+                new[] { left, right },
+                nullable: true,
+                new[] { true, true },
+                typeof(int)
+            );
         var oracle = Dependencies.SqlExpressionFactory.Constant(value: 0);
 
         return op switch
@@ -299,10 +307,9 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             ExpressionType.GreaterThan
                 => Dependencies.SqlExpressionFactory.GreaterThan(left: actual, right: oracle),
             ExpressionType.GreaterThanOrEqual
-                => Dependencies.SqlExpressionFactory.GreaterThanOrEqual(
-                    left: actual,
-                    right: oracle
-                ),
+                => Dependencies
+                    .SqlExpressionFactory
+                    .GreaterThanOrEqual(left: actual, right: oracle),
             ExpressionType.LessThan
                 => Dependencies.SqlExpressionFactory.LessThan(left: actual, right: oracle),
             ExpressionType.LessThanOrEqual
@@ -367,23 +374,27 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             SqlExpression left,
             SqlExpression right
         ) =>
-            Dependencies.SqlExpressionFactory.Function(
-                name,
-                new[] { left, right },
-                nullable: true,
-                new[] { true, true },
-                visitedExpression.Type
-            );
+            Dependencies
+                .SqlExpressionFactory
+                .Function(
+                    name,
+                    new[] { left, right },
+                    nullable: true,
+                    new[] { true, true },
+                    visitedExpression.Type
+                );
 
         Expression DecimalSubtractExpressionFactoryMethod(SqlExpression left, SqlExpression right)
         {
-            var subtrahend = Dependencies.SqlExpressionFactory.Function(
-                "ef_negate",
-                new[] { right },
-                nullable: true,
-                new[] { true },
-                visitedExpression.Type
-            );
+            var subtrahend = Dependencies
+                .SqlExpressionFactory
+                .Function(
+                    "ef_negate",
+                    new[] { right },
+                    nullable: true,
+                    new[] { true },
+                    visitedExpression.Type
+                );
 
             return DecimalArithmeticExpressionFactoryMethod(
                 ResolveFunctionNameFromExpressionType(op),

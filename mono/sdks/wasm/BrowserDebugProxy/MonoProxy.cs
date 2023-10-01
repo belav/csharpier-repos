@@ -432,11 +432,14 @@ namespace Microsoft.WebAssembly.Diagnostics
                         // Maybe this is an async method, in which case the debug info is attached
                         // to the async method implementation, in class named:
                         //      `{type_name}/<method_name>::MoveNext`
-                        methodInfo = assembly.TypesByName.Values
+                        methodInfo = assembly
+                            .TypesByName
+                            .Values
                             .SingleOrDefault(
                                 t => t.FullName.StartsWith($"{typeName}/<{methodName}>")
                             )
-                            ?.Methods.FirstOrDefault(mi => mi.Name == "MoveNext");
+                            ?.Methods
+                            .FirstOrDefault(mi => mi.Name == "MoveNext");
                     }
 
                     if (methodInfo == null)
@@ -449,7 +452,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                         return true;
                     }
 
-                    var src_url = methodInfo.Assembly.Sources
+                    var src_url = methodInfo
+                        .Assembly
+                        .Sources
                         .Single(sf => sf.SourceId == methodInfo.SourceId)
                         .Url;
                     SendResponse(
@@ -578,7 +583,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                 return false;
             }
 
-            var bp = context.BreakpointRequests.Values
+            var bp = context
+                .BreakpointRequests
+                .Values
                 .SelectMany(v => v.Locations)
                 .FirstOrDefault(b => b.RemoteId == bp_id.Value);
 
@@ -942,7 +949,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
 
                 await foreach (
-                    var source in context.store
+                    var source in context
+                        .store
                         .Load(sessionId, loaded_files, token)
                         .WithCancellation(token)
                 )

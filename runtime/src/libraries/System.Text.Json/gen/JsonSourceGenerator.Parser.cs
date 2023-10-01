@@ -423,8 +423,9 @@ namespace System.Text.Json.SourceGeneration
                             AttributeListSyntax attributeListSyntax in classDeclarationSyntax.AttributeLists
                         )
                         {
-                            AttributeSyntax attributeSyntax =
-                                attributeListSyntax.Attributes.First();
+                            AttributeSyntax attributeSyntax = attributeListSyntax
+                                .Attributes
+                                .First();
                             if (
                                 compilationSemanticModel
                                     .GetSymbolInfo(attributeSyntax, cancellationToken)
@@ -558,9 +559,9 @@ namespace System.Text.Json.SourceGeneration
                             );
                         }
 
-                        contextGenSpec.ImplicitlyRegisteredTypes.UnionWith(
-                            _implicitlyRegisteredTypes
-                        );
+                        contextGenSpec
+                            .ImplicitlyRegisteredTypes
+                            .UnionWith(_implicitlyRegisteredTypes);
 
                         contextGenSpecList ??= new List<ContextGenerationSpec>();
                         contextGenSpecList.Add(contextGenSpec);
@@ -1623,10 +1624,12 @@ namespace System.Text.Json.SourceGeneration
                 paramGenSpecArray != null
                 && paramGenSpecArray.Any(
                     paramSpec =>
-                        propSpec.ClrName.Equals(
-                            paramSpec.ParameterInfo.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
+                        propSpec
+                            .ClrName
+                            .Equals(
+                                paramSpec.ParameterInfo.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
                 );
 
             private static bool PropertyIsOverriddenAndIgnored(

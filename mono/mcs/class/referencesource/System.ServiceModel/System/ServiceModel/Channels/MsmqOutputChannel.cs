@@ -32,10 +32,12 @@ namespace System.ServiceModel.Channels
                 factory.MessageEncoderFactory.Encoder.ContentType
             );
 
-            this.preamble = DiagnosticUtility.Utility.AllocateByteArray(
-                modeBytes.Length
-                    + ClientSingletonSizedEncoder.CalcStartSize(encodedVia, encodedContentType)
-            );
+            this.preamble = DiagnosticUtility
+                .Utility
+                .AllocateByteArray(
+                    modeBytes.Length
+                        + ClientSingletonSizedEncoder.CalcStartSize(encodedVia, encodedContentType)
+                );
 
             Buffer.BlockCopy(modeBytes, 0, this.preamble, 0, modeBytes.Length);
             ClientSingletonSizedEncoder.EncodeStart(
@@ -172,13 +174,10 @@ namespace System.ServiceModel.Channels
         protected override void OnSend(Message message, TimeSpan timeout)
         {
             // serialize the indigo message to byte array and copy the .NET framing preamble
-            ArraySegment<byte> messageData =
-                this.factory.MessageEncoderFactory.Encoder.WriteMessage(
-                    message,
-                    int.MaxValue,
-                    this.factory.BufferManager,
-                    preamble.Length
-                );
+            ArraySegment<byte> messageData = this.factory
+                .MessageEncoderFactory
+                .Encoder
+                .WriteMessage(message, int.MaxValue, this.factory.BufferManager, preamble.Length);
             Buffer.BlockCopy(
                 preamble,
                 0,

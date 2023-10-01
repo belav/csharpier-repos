@@ -49,7 +49,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
                         FieldDeclarationSyntax fieldDeclaration
                             => fieldDeclaration.Declaration.Variables.AsImmutable<SyntaxNode>(),
                         EventFieldDeclarationSyntax eventFieldDeclaration
-                            => eventFieldDeclaration.Declaration.Variables.AsImmutable<SyntaxNode>(),
+                            => eventFieldDeclaration
+                                .Declaration
+                                .Variables
+                                .AsImmutable<SyntaxNode>(),
                         IncompleteMemberSyntax
                         or GlobalStatementSyntax
                             => ImmutableArray<SyntaxNode>.Empty,
@@ -66,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
                 var tree = await document
                     .GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var members = await CSharpSelectedMembers.Instance
+                var members = await CSharpSelectedMembers
+                    .Instance
                     .GetSelectedMembersAsync(
                         tree,
                         span,

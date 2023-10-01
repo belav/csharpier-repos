@@ -156,12 +156,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             foreach (var parameter in this.Parameters)
             {
-                parameter.Type.CheckAllConstraints(
-                    compilation,
-                    conversions,
-                    parameter.Locations[0],
-                    diagnostics
-                );
+                parameter
+                    .Type
+                    .CheckAllConstraints(
+                        compilation,
+                        conversions,
+                        parameter.Locations[0],
+                        diagnostics
+                    );
             }
         }
 
@@ -359,13 +361,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return (null, null);
                     }
 
-                    var (attributeData, boundAttribute) = arguments.Binder.GetAttribute(
-                        arguments.AttributeSyntax,
-                        arguments.AttributeType,
-                        beforeAttributePartBound: null,
-                        afterAttributePartBound: null,
-                        out bool hasAnyDiagnostics
-                    );
+                    var (attributeData, boundAttribute) = arguments
+                        .Binder
+                        .GetAttribute(
+                            arguments.AttributeSyntax,
+                            arguments.AttributeType,
+                            beforeAttributePartBound: null,
+                            afterAttributePartBound: null,
+                            out bool hasAnyDiagnostics
+                        );
 
                     if (!hasAnyDiagnostics)
                     {

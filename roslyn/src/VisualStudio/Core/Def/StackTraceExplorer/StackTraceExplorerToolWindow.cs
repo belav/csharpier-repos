@@ -43,17 +43,19 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             Caption = ServicesVSResources.Stack_Trace_Explorer;
             var dockPanel = new DockPanel { LastChildFill = true };
 
-            dockPanel.CommandBindings.Add(
-                new CommandBinding(
-                    ApplicationCommands.Paste,
-                    (s, e) =>
-                    {
-                        Root?.ViewModel
-                            .DoPasteAsync(default)
-                            .FileAndForget("StackTraceExplorerPaste");
-                    }
-                )
-            );
+            dockPanel
+                .CommandBindings
+                .Add(
+                    new CommandBinding(
+                        ApplicationCommands.Paste,
+                        (s, e) =>
+                        {
+                            Root?.ViewModel
+                                .DoPasteAsync(default)
+                                .FileAndForget("StackTraceExplorerPaste");
+                        }
+                    )
+                );
 
             Content = dockPanel;
         }
@@ -120,9 +122,10 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             // where the window shows on code that parses as a stack frame but may not be. The explorer
             // should still handle those cases if explicitly pasted in, but can lead to false positives
             // when automatically opening.
-            return firstNodeOrToken.Token.LeadingTrivia.Any(
-                static t => t.Kind == StackFrameKind.AtTrivia
-            );
+            return firstNodeOrToken
+                .Token
+                .LeadingTrivia
+                .Any(static t => t.Kind == StackFrameKind.AtTrivia);
         }
 
         public void InitializeIfNeeded(RoslynPackage roslynPackage)
@@ -133,8 +136,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             var workspace = roslynPackage.ComponentModel.GetService<VisualStudioWorkspace>();
-            var formatMapService =
-                roslynPackage.ComponentModel.GetService<IClassificationFormatMapService>();
+            var formatMapService = roslynPackage
+                .ComponentModel
+                .GetService<IClassificationFormatMapService>();
             var formatMap = formatMapService.GetClassificationFormatMap(
                 StandardContentTypeNames.Text
             );

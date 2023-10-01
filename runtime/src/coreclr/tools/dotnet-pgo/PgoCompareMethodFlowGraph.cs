@@ -53,9 +53,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             double overlap = BasicBlocks.Sum(
                 bb =>
-                    bb.Edges.Values.Sum(
-                        e => Math.Min(e.Count1 / (double)total1, e.Count2 / (double)total2)
-                    )
+                    bb.Edges
+                        .Values
+                        .Sum(e => Math.Min(e.Count1 / (double)total1, e.Count2 / (double)total2))
             );
             return overlap;
         }

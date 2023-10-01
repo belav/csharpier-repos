@@ -40,10 +40,9 @@ namespace Internal.IL.Stubs
                 {
                     TypeSystemContext context = _owningType.Context;
                     TypeDesc int32Type = context.GetWellKnownType(WellKnownType.Int32);
-                    TypeDesc eeTypePtrType = context.SystemModule.GetKnownType(
-                        "System",
-                        "EETypePtr"
-                    );
+                    TypeDesc eeTypePtrType = context
+                        .SystemModule
+                        .GetKnownType("System", "EETypePtr");
 
                     _signature = new MethodSignature(
                         0,

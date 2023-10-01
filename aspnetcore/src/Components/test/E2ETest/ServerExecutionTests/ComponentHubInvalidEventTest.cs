@@ -49,11 +49,9 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
         // Act
         await Client.ExpectCircuitError(
             () =>
-                Client.HubConnection.SendAsync(
-                    "DispatchBrowserEvent",
-                    eventDescriptor,
-                    default(JsonElement)
-                )
+                Client
+                    .HubConnection
+                    .SendAsync("DispatchBrowserEvent", eventDescriptor, default(JsonElement))
         );
 
         // Assert
@@ -93,11 +91,9 @@ public class ComponentHubInvalidEventTest : IgnitorTest<ServerStartup>
         // Act
         await Client.ExpectCircuitError(
             () =>
-                Client.HubConnection.SendAsync(
-                    "DispatchBrowserEvent",
-                    eventDescriptor,
-                    Serialize(eventArgs)
-                )
+                Client
+                    .HubConnection
+                    .SendAsync("DispatchBrowserEvent", eventDescriptor, Serialize(eventArgs))
         );
 
         // Assert

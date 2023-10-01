@@ -133,12 +133,14 @@ namespace System.Runtime.Serialization
             get
             {
                 if (dictionaryEnumeratorCtor == null)
-                    dictionaryEnumeratorCtor = Globals.TypeOfDictionaryEnumerator.GetConstructor(
-                        Globals.ScanAllMembers,
-                        null,
-                        new Type[] { Globals.TypeOfIDictionaryEnumerator },
-                        null
-                    );
+                    dictionaryEnumeratorCtor = Globals
+                        .TypeOfDictionaryEnumerator
+                        .GetConstructor(
+                            Globals.ScanAllMembers,
+                            null,
+                            new Type[] { Globals.TypeOfIDictionaryEnumerator },
+                            null
+                        );
                 return dictionaryEnumeratorCtor;
             }
         }
@@ -330,12 +332,9 @@ namespace System.Runtime.Serialization
             get
             {
                 if (hashtableCtor == null)
-                    hashtableCtor = Globals.TypeOfHashtable.GetConstructor(
-                        Globals.ScanAllMembers,
-                        null,
-                        Globals.EmptyTypeArray,
-                        null
-                    );
+                    hashtableCtor = Globals
+                        .TypeOfHashtable
+                        .GetConstructor(Globals.ScanAllMembers, null, Globals.EmptyTypeArray, null);
                 return hashtableCtor;
             }
         }

@@ -29,10 +29,12 @@ namespace System.Data.Common
             if (hr == OleDbHResult.S_OK)
             {
                 ppIErrorInfo = (UnsafeNativeMethods.IErrorInfo)
-                    OleDbComWrappers.Instance.GetOrCreateObjectForComInstance(
-                        pErrorInfo,
-                        CreateObjectFlags.UniqueInstance
-                    );
+                    OleDbComWrappers
+                        .Instance
+                        .GetOrCreateObjectForComInstance(
+                            pErrorInfo,
+                            CreateObjectFlags.UniqueInstance
+                        );
             }
 
             return hr;

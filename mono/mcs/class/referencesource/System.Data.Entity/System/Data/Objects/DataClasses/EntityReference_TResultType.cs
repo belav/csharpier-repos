@@ -355,9 +355,9 @@ namespace System.Data.Objects.DataClasses
                         // before we add a new relationship to this key entry, make sure it's not already related to something else
                         // We have to explicitly do this here because there are no other checks to make sure a key entry in a 1-to-1 doesn't end up in two of the same relationship
                         foreach (
-                            RelationshipEntry relationshipEntry in this.ObjectContext.ObjectStateManager.FindRelationshipsByKey(
-                                DetachedEntityKey
-                            )
+                            RelationshipEntry relationshipEntry in this.ObjectContext
+                                .ObjectStateManager
+                                .FindRelationshipsByKey(DetachedEntityKey)
                         )
                         {
                             // only care about relationships in the same AssociationSet and where the key is playing the same role that it plays in this EntityReference
@@ -388,10 +388,9 @@ namespace System.Data.Objects.DataClasses
                     }
 
                     // We know the target end of this relationship is 1..1 or 0..1 since it is a reference, so if the source end is also not Many, we have a 1-to-1
-                    RelatedEnd relatedEnd = wrappedTarget.RelationshipManager.GetRelatedEndInternal(
-                        RelationshipName,
-                        RelationshipNavigation.From
-                    );
+                    RelatedEnd relatedEnd = wrappedTarget
+                        .RelationshipManager
+                        .GetRelatedEndInternal(RelationshipName, RelationshipNavigation.From);
                     if (
                         FromEndProperty.RelationshipMultiplicity != RelationshipMultiplicity.Many
                         && !relatedEnd.IsEmpty()
@@ -533,8 +532,9 @@ namespace System.Data.Objects.DataClasses
         {
             EntityKey ownerKey = WrappedOwner.EntityKey;
 
-            RelationshipEntry relationshipEntry =
-                this.ObjectContext.ObjectStateManager.FindRelationship(
+            RelationshipEntry relationshipEntry = this.ObjectContext
+                .ObjectStateManager
+                .FindRelationship(
                     RelationshipSet,
                     new KeyValuePair<string, EntityKey>(RelationshipNavigation.From, ownerKey),
                     new KeyValuePair<string, EntityKey>(
@@ -603,9 +603,10 @@ namespace System.Data.Objects.DataClasses
                 // we need to search relationships on the Owner entity to see if this is true, and if so remove the relationship entry
                 if (WrappedOwner.Entity != null && WrappedOwner.Context != null && !UsingNoTracking)
                 {
-                    EntityEntry ownerEntry = WrappedOwner.Context.ObjectStateManager.GetEntityEntry(
-                        WrappedOwner.Entity
-                    );
+                    EntityEntry ownerEntry = WrappedOwner
+                        .Context
+                        .ObjectStateManager
+                        .GetEntityEntry(WrappedOwner.Entity);
                     ownerEntry.DeleteRelationshipsThatReferenceKeys(
                         this.RelationshipSet,
                         this.ToEndMember
@@ -772,11 +773,13 @@ namespace System.Data.Objects.DataClasses
                         }
                         visited.Add(_wrappedCachedValue);
 
-                        _wrappedCachedValue.RelationshipManager.RetrieveReferentialConstraintProperties(
-                            out retrievedProperties,
-                            visited,
-                            includeOwnValues: true
-                        );
+                        _wrappedCachedValue
+                            .RelationshipManager
+                            .RetrieveReferentialConstraintProperties(
+                                out retrievedProperties,
+                                visited,
+                                includeOwnValues: true
+                            );
 
                         Debug.Assert(retrievedProperties != null);
                         Debug.Assert(

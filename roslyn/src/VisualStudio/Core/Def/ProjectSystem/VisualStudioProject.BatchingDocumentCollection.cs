@@ -142,10 +142,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _orderedDocumentsInBatch = _orderedDocumentsInBatch?.Add(documentId);
 
                     _documentPathsToDocumentIds.Add(fullPath, documentId);
-                    _project._documentFileWatchingTokens.Add(
-                        documentId,
-                        _project._documentFileChangeContext.EnqueueWatchingFile(fullPath)
-                    );
+                    _project
+                        ._documentFileWatchingTokens
+                        .Add(
+                            documentId,
+                            _project._documentFileChangeContext.EnqueueWatchingFile(fullPath)
+                        );
 
                     if (_project._activeBatchScopes > 0)
                     {
@@ -153,12 +155,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     }
                     else
                     {
-                        _project._workspace.ApplyChangeToWorkspace(
-                            w => _documentAddAction(w, documentInfo)
-                        );
-                        _project._workspace.QueueCheckForFilesBeingOpen(
-                            ImmutableArray.Create(fullPath)
-                        );
+                        _project
+                            ._workspace
+                            .ApplyChangeToWorkspace(w => _documentAddAction(w, documentInfo));
+                        _project
+                            ._workspace
+                            .QueueCheckForFilesBeingOpen(ImmutableArray.Create(fullPath));
                     }
                 }
 
@@ -226,14 +228,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     }
                     else
                     {
-                        _project._workspace.ApplyChangeToWorkspace(w =>
-                        {
-                            _project._workspace.AddDocumentToDocumentsNotFromFiles_NoLock(
-                                documentInfo.Id
-                            );
-                            _documentAddAction(w, documentInfo);
-                            w.OnDocumentOpened(documentInfo.Id, textContainer);
-                        });
+                        _project
+                            ._workspace
+                            .ApplyChangeToWorkspace(w =>
+                            {
+                                _project
+                                    ._workspace
+                                    .AddDocumentToDocumentsNotFromFiles_NoLock(documentInfo.Id);
+                                _documentAddAction(w, documentInfo);
+                                w.OnDocumentOpened(documentInfo.Id, textContainer);
+                            });
                     }
                 }
 
@@ -283,9 +287,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 else
                 {
                     // right now, assumption is dynamically generated file can never be opened in editor
-                    _project._workspace.ApplyChangeToWorkspace(
-                        w => _documentAddAction(w, documentInfo)
-                    );
+                    _project
+                        ._workspace
+                        .ApplyChangeToWorkspace(w => _documentAddAction(w, documentInfo));
                 }
             }
 
@@ -340,9 +344,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         );
                     }
 
-                    _project._documentFileChangeContext.StopWatchingFile(
-                        _project._documentFileWatchingTokens[documentId]
-                    );
+                    _project
+                        ._documentFileChangeContext
+                        .StopWatchingFile(_project._documentFileWatchingTokens[documentId]);
                     _project._documentFileWatchingTokens.Remove(documentId);
 
                     RemoveFileInternal(documentId, fullPath);
@@ -367,9 +371,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     }
                     else
                     {
-                        _project._workspace.ApplyChangeToWorkspace(
-                            w => _documentRemoveAction(w, documentId)
-                        );
+                        _project
+                            ._workspace
+                            .ApplyChangeToWorkspace(w => _documentRemoveAction(w, documentId));
                     }
                 }
                 else
@@ -431,21 +435,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         }
                         else
                         {
-                            _project._workspace.ApplyChangeToWorkspace(w =>
-                            {
-                                // Just pass null for the filePath, since this document is immediately being removed
-                                // anyways -- whatever we set won't really be read since the next change will
-                                // come through.
-                                // TODO: Can't we just remove the document without closing it?
-                                w.OnDocumentClosed(
-                                    documentId,
-                                    new SourceTextLoader(textContainer, filePath: null)
-                                );
-                                _documentRemoveAction(w, documentId);
-                                _project._workspace.RemoveDocumentToDocumentsNotFromFiles_NoLock(
-                                    documentId
-                                );
-                            });
+                            _project
+                                ._workspace
+                                .ApplyChangeToWorkspace(w =>
+                                {
+                                    // Just pass null for the filePath, since this document is immediately being removed
+                                    // anyways -- whatever we set won't really be read since the next change will
+                                    // come through.
+                                    // TODO: Can't we just remove the document without closing it?
+                                    w.OnDocumentClosed(
+                                        documentId,
+                                        new SourceTextLoader(textContainer, filePath: null)
+                                    );
+                                    _documentRemoveAction(w, documentId);
+                                    _project
+                                        ._workspace
+                                        .RemoveDocumentToDocumentsNotFromFiles_NoLock(documentId);
+                                });
                         }
                     }
                     else
@@ -521,7 +527,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         return;
                     }
 
-                    await _project._workspace
+                    await _project
+                        ._workspace
                         .ApplyBatchChangeToWorkspaceAsync(solutionChanges =>
                         {
                             foreach (var (documentId, textLoader) in documentsToChange)
@@ -588,42 +595,44 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             )
                         );
 
-                        _project._workspace.ApplyChangeToWorkspace(w =>
-                        {
-                            if (w.IsDocumentOpen(documentId))
+                        _project
+                            ._workspace
+                            .ApplyChangeToWorkspace(w =>
                             {
-                                return;
-                            }
+                                if (w.IsDocumentOpen(documentId))
+                                {
+                                    return;
+                                }
 
-                            // we do not expect JTF to be used around this code path. and contract of fileInfoProvider is it being real free-threaded
-                            // meaning it can't use JTF to go back to UI thread.
-                            // so, it is okay for us to call regular ".Result" on a task here.
-                            var fileInfo = fileInfoProvider
-                                .GetDynamicFileInfoAsync(
-                                    _project.Id,
-                                    _project._filePath,
-                                    projectSystemFilePath,
-                                    CancellationToken.None
-                                )
-                                .WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
+                                // we do not expect JTF to be used around this code path. and contract of fileInfoProvider is it being real free-threaded
+                                // meaning it can't use JTF to go back to UI thread.
+                                // so, it is okay for us to call regular ".Result" on a task here.
+                                var fileInfo = fileInfoProvider
+                                    .GetDynamicFileInfoAsync(
+                                        _project.Id,
+                                        _project._filePath,
+                                        projectSystemFilePath,
+                                        CancellationToken.None
+                                    )
+                                    .WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
 
-                            // Right now we're only supporting dynamic files as actual source files, so it's OK to call GetDocument here
-                            var document = w.CurrentSolution.GetRequiredDocument(documentId);
+                                // Right now we're only supporting dynamic files as actual source files, so it's OK to call GetDocument here
+                                var document = w.CurrentSolution.GetRequiredDocument(documentId);
 
-                            var documentInfo = DocumentInfo.Create(
-                                document.Id,
-                                document.Name,
-                                document.Folders,
-                                document.SourceCodeKind,
-                                loader: fileInfo.TextLoader,
-                                document.FilePath,
-                                document.State.Attributes.IsGenerated,
-                                document.State.Attributes.DesignTimeOnly,
-                                documentServiceProvider: fileInfo.DocumentServiceProvider
-                            );
+                                var documentInfo = DocumentInfo.Create(
+                                    document.Id,
+                                    document.Name,
+                                    document.Folders,
+                                    document.SourceCodeKind,
+                                    loader: fileInfo.TextLoader,
+                                    document.FilePath,
+                                    document.State.Attributes.IsGenerated,
+                                    document.State.Attributes.DesignTimeOnly,
+                                    documentServiceProvider: fileInfo.DocumentServiceProvider
+                                );
 
-                            w.OnDocumentReloaded(documentInfo);
-                        });
+                                w.OnDocumentReloaded(documentInfo);
+                            });
                     }
                 }
             }
@@ -670,14 +679,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     }
                     else
                     {
-                        _project._workspace.ApplyChangeToWorkspace(
-                            _project.Id,
-                            solution =>
-                                solution.WithProjectDocumentsOrder(
-                                    _project.Id,
-                                    documentIds.ToImmutable()
-                                )
-                        );
+                        _project
+                            ._workspace
+                            .ApplyChangeToWorkspace(
+                                _project.Id,
+                                solution =>
+                                    solution.WithProjectDocumentsOrder(
+                                        _project.Id,
+                                        documentIds.ToImmutable()
+                                    )
+                            );
                     }
                 }
             }
@@ -740,10 +751,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     solutionChanges.UpdateSolutionForProjectAction(
                         _project.Id,
-                        solutionChanges.Solution.WithProjectDocumentsOrder(
-                            _project.Id,
-                            _orderedDocumentsInBatch
-                        )
+                        solutionChanges
+                            .Solution
+                            .WithProjectDocumentsOrder(_project.Id, _orderedDocumentsInBatch)
                     );
                     _orderedDocumentsInBatch = null;
                 }

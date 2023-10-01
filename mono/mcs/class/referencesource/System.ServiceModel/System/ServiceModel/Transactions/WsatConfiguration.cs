@@ -108,22 +108,26 @@ namespace System.ServiceModel.Transactions
             catch (UriFormatException e)
             {
                 // UriBuilder.Uri can throw this if the URI is ultimately invalid
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(
-                        SR.GetString(SR.WsatUriCreationFailed),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionManagerConfigurationException(
+                            SR.GetString(SR.WsatUriCreationFailed),
+                            e
+                        )
+                    );
             }
             catch (ArgumentOutOfRangeException e)
             {
                 // UriBuilder constructor can throw this if port < 0
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(
-                        SR.GetString(SR.WsatUriCreationFailed),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionManagerConfigurationException(
+                            SR.GetString(SR.WsatUriCreationFailed),
+                            e
+                        )
+                    );
             }
         }
 
@@ -158,9 +162,11 @@ namespace System.ServiceModel.Transactions
                     return this.protocolService11Enabled;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                        );
             }
         }
 
@@ -175,9 +181,11 @@ namespace System.ServiceModel.Transactions
                     return this.localActivationService11;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                        );
             }
         }
 
@@ -192,9 +200,11 @@ namespace System.ServiceModel.Transactions
                     return this.remoteActivationService11;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                        );
             }
         }
 
@@ -212,9 +222,11 @@ namespace System.ServiceModel.Transactions
                     return new EndpointAddress(this.registrationServiceAddress11, refParam);
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                        );
             }
         }
 
@@ -233,9 +245,11 @@ namespace System.ServiceModel.Transactions
                 case ProtocolVersion.Version11:
                     return endpoint.Uri == this.registrationServiceAddress11;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.InvalidWsatProtocolVersion))
+                        );
             }
         }
 
@@ -256,12 +270,14 @@ namespace System.ServiceModel.Transactions
             }
             catch (SerializationException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(
-                        SR.GetString(SR.WhereaboutsReadFailed),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionManagerConfigurationException(
+                            SR.GetString(SR.WhereaboutsReadFailed),
+                            e
+                        )
+                    );
             }
             // If GetWhereabouts throws TransactionException, let it propagate
         }
@@ -483,21 +499,25 @@ namespace System.ServiceModel.Transactions
             }
             catch (SecurityException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(
-                        SR.GetString(SR.WsatRegistryValueReadError, value),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionManagerConfigurationException(
+                            SR.GetString(SR.WsatRegistryValueReadError, value),
+                            e
+                        )
+                    );
             }
             catch (IOException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionManagerConfigurationException(
-                        SR.GetString(SR.WsatRegistryValueReadError, value),
-                        e
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TransactionManagerConfigurationException(
+                            SR.GetString(SR.WsatRegistryValueReadError, value),
+                            e
+                        )
+                    );
             }
         }
 

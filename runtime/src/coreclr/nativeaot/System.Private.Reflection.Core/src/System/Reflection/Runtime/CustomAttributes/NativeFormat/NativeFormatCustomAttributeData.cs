@@ -65,7 +65,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
 
                 if (constructorHandleType == HandleType.QualifiedMethod)
                 {
-                    QualifiedMethod qualifiedMethod = _customAttribute.Constructor
+                    QualifiedMethod qualifiedMethod = _customAttribute
+                        .Constructor
                         .ToQualifiedMethodHandle(reader)
                         .GetQualifiedMethod(reader);
                     TypeDefinitionHandle declaringType = qualifiedMethod.EnclosingType;
@@ -82,7 +83,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 }
                 else if (constructorHandleType == HandleType.MemberReference)
                 {
-                    MemberReference memberReference = _customAttribute.Constructor
+                    MemberReference memberReference = _customAttribute
+                        .Constructor
                         .ToMemberReferenceHandle(reader)
                         .GetMemberReference(reader);
 
@@ -91,10 +93,9 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                         Array.Empty<RuntimeTypeInfo>(),
                         Array.Empty<RuntimeTypeInfo>()
                     );
-                    RuntimeTypeInfo attributeType = memberReference.Parent.Resolve(
-                        reader,
-                        typeContext
-                    );
+                    RuntimeTypeInfo attributeType = memberReference
+                        .Parent
+                        .Resolve(reader, typeContext);
                     MethodSignature sig = memberReference.Signature.ParseMethodSignature(reader);
                     HandleCollection parameters = sig.Parameters;
                     int numParameters = parameters.Count;
@@ -145,7 +146,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
             switch (handleType)
             {
                 case HandleType.QualifiedMethod:
-                    parameterTypeSignatureHandles = _customAttribute.Constructor
+                    parameterTypeSignatureHandles = _customAttribute
+                        .Constructor
                         .ToQualifiedMethodHandle(_reader)
                         .GetQualifiedMethod(_reader)
                         .Method
@@ -156,7 +158,8 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                     break;
 
                 case HandleType.MemberReference:
-                    parameterTypeSignatureHandles = _customAttribute.Constructor
+                    parameterTypeSignatureHandles = _customAttribute
+                        .Constructor
                         .ToMemberReferenceHandle(_reader)
                         .GetMemberReference(_reader)
                         .Signature
@@ -227,11 +230,9 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 bool isField = (namedArgument.Flags == NamedArgumentMemberKind.Field);
 
                 Exception exception = null;
-                RuntimeTypeInfo argumentType = namedArgument.Type.TryResolve(
-                    _reader,
-                    new TypeContext(null, null),
-                    ref exception
-                );
+                RuntimeTypeInfo argumentType = namedArgument
+                    .Type
+                    .TryResolve(_reader, new TypeContext(null, null), ref exception);
                 if (argumentType == null)
                 {
                     if (throwIfMissingMetadata)
@@ -292,9 +293,9 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 );
 
             if (memberInfo == null)
-                throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(
-                    attributeType
-                );
+                throw ReflectionCoreExecution
+                    .ExecutionDomain
+                    .CreateMissingMetadataException(attributeType);
 
             return new CustomAttributeNamedArgument(memberInfo, typedValue);
         }

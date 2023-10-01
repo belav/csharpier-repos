@@ -29,10 +29,9 @@ namespace System.Web.DynamicData.ModelProviders
             ContextType = _context.GetType();
 
             // get a "container" (a scope at the instance level)
-            EntityContainer container = _context.MetadataWorkspace.GetEntityContainer(
-                _context.DefaultContainerName,
-                DataSpace.CSpace
-            );
+            EntityContainer container = _context
+                .MetadataWorkspace
+                .GetEntityContainer(_context.DefaultContainerName, DataSpace.CSpace);
             // load object space metadata
             _context.MetadataWorkspace.LoadFromAssembly(ContextType.Assembly);
             _objectSpaceItems = (ObjectItemCollection)
@@ -41,12 +40,14 @@ namespace System.Web.DynamicData.ModelProviders
             var tables = new List<TableProvider>();
 
             // Create a dictionary from entity type to entity set. The entity type should be at the root of any inheritance chain.
-            IDictionary<EntityType, EntitySet> entitySetLookup = container.BaseEntitySets
+            IDictionary<EntityType, EntitySet> entitySetLookup = container
+                .BaseEntitySets
                 .OfType<EntitySet>()
                 .ToDictionary(e => e.ElementType);
 
             // Create a lookup from parent entity to entity
-            ILookup<EntityType, EntityType> derivedTypesLookup = _context.MetadataWorkspace
+            ILookup<EntityType, EntityType> derivedTypesLookup = _context
+                .MetadataWorkspace
                 .GetItems<EntityType>(DataSpace.CSpace)
                 .ToLookup(e => (EntityType)e.BaseType);
 

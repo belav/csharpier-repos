@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis
                 return;
             }
 
-            var totalAnalyzerExecutionTime = analyzerDriver.AnalyzerExecutionTimes.Sum(
-                kvp => kvp.Value.TotalSeconds
-            );
+            var totalAnalyzerExecutionTime = analyzerDriver
+                .AnalyzerExecutionTimes
+                .Sum(kvp => kvp.Value.TotalSeconds);
             consoleOutput.WriteLine(
                 string.Format(
                     CodeAnalysisResources.AnalyzerTotalExecutionTime,
@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis
             );
 
             // Table rows grouped by assembly.
-            var analyzersByAssembly = analyzerDriver.AnalyzerExecutionTimes
+            var analyzersByAssembly = analyzerDriver
+                .AnalyzerExecutionTimes
                 .GroupBy(kvp => kvp.Key.GetType().Assembly)
                 .OrderByDescending(kvp => kvp.Sum(entry => entry.Value.Ticks));
             foreach (var analyzerGroup in analyzersByAssembly)
@@ -157,7 +158,8 @@ namespace Microsoft.CodeAnalysis
             );
 
             // Table rows grouped by assembly.
-            var generatorsByAssembly = driverTimingInfo.GeneratorTimes
+            var generatorsByAssembly = driverTimingInfo
+                .GeneratorTimes
                 .GroupBy(t => t.Generator.GetGeneratorType().Assembly)
                 .OrderByDescending(kvp => kvp.Sum(entry => entry.ElapsedTime.Ticks));
 

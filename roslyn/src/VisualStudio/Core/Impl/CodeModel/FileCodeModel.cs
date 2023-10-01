@@ -152,13 +152,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 // We don't want to block up file removal on the UI thread since we want that path to stay asynchronous.
                 CodeModelService.DetachFormatTrackingToBuffer(_invisibleEditor.TextBuffer);
 
-                State.ProjectCodeModelFactory.ScheduleDeferredCleanupTask(cancellationToken =>
-                {
-                    // Ignore cancellationToken: we always need to call Dispose since it triggers the file save.
-                    _ = cancellationToken;
+                State
+                    .ProjectCodeModelFactory
+                    .ScheduleDeferredCleanupTask(cancellationToken =>
+                    {
+                        // Ignore cancellationToken: we always need to call Dispose since it triggers the file save.
+                        _ = cancellationToken;
 
-                    _invisibleEditor.Dispose();
-                });
+                        _invisibleEditor.Dispose();
+                    });
             }
 
             base.Shutdown();
@@ -186,7 +188,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 return false;
             }
 
-            documentId = project.Solution
+            documentId = project
+                .Solution
                 .GetDocumentIdsWithFilePath(_incomingFilePath)
                 .FirstOrDefault(d => d.ProjectId == project.Id);
             if (documentId == null)
@@ -379,30 +382,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
                 var result = action(document);
 
-                var formatted = State.ThreadingContext.JoinableTaskFactory.Run(async () =>
-                {
-                    var formattingOptions = await result
-                        .GetSyntaxFormattingOptionsAsync(GlobalOptions, CancellationToken.None)
-                        .ConfigureAwait(false);
-                    var formatted = await Formatter
-                        .FormatAsync(
-                            result,
-                            Formatter.Annotation,
-                            formattingOptions,
-                            CancellationToken.None
-                        )
-                        .ConfigureAwait(true);
-                    formatted = await Formatter
-                        .FormatAsync(
-                            formatted,
-                            SyntaxAnnotation.ElasticAnnotation,
-                            formattingOptions,
-                            CancellationToken.None
-                        )
-                        .ConfigureAwait(true);
+                var formatted = State
+                    .ThreadingContext
+                    .JoinableTaskFactory
+                    .Run(async () =>
+                    {
+                        var formattingOptions = await result
+                            .GetSyntaxFormattingOptionsAsync(GlobalOptions, CancellationToken.None)
+                            .ConfigureAwait(false);
+                        var formatted = await Formatter
+                            .FormatAsync(
+                                result,
+                                Formatter.Annotation,
+                                formattingOptions,
+                                CancellationToken.None
+                            )
+                            .ConfigureAwait(true);
+                        formatted = await Formatter
+                            .FormatAsync(
+                                formatted,
+                                SyntaxAnnotation.ElasticAnnotation,
+                                formattingOptions,
+                                CancellationToken.None
+                            )
+                            .ConfigureAwait(true);
 
-                    return formatted;
-                });
+                        return formatted;
+                    });
 
                 ApplyChanges(workspace, formatted);
             });
@@ -469,15 +475,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
             else if (_isSourceGeneratedOutput)
             {
-                document = State.ThreadingContext.JoinableTaskFactory.Run(
-                    () =>
-                        Workspace.CurrentSolution
-                            .GetSourceGeneratedDocumentAsync(
-                                GetDocumentId(),
-                                CancellationToken.None
-                            )
-                            .AsTask()
-                );
+                document = State
+                    .ThreadingContext
+                    .JoinableTaskFactory
+                    .Run(
+                        () =>
+                            Workspace
+                                .CurrentSolution
+                                .GetSourceGeneratedDocumentAsync(
+                                    GetDocumentId(),
+                                    CancellationToken.None
+                                )
+                                .AsTask()
+                    );
             }
             else
             {
@@ -509,24 +519,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         internal SemanticModel GetSemanticModel() =>
-            State.ThreadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return GetDocument().GetRequiredSemanticModelAsync(CancellationToken.None).AsTask();
-            });
+            State
+                .ThreadingContext
+                .JoinableTaskFactory
+                .Run(() =>
+                {
+                    return GetDocument()
+                        .GetRequiredSemanticModelAsync(CancellationToken.None)
+                        .AsTask();
+                });
 
         internal CodeGenerationOptions GetDocumentOptions() =>
-            State.ThreadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return GetDocument()
-                    .GetCodeGenerationOptionsAsync(GlobalOptions, CancellationToken.None)
-                    .AsTask();
-            });
+            State
+                .ThreadingContext
+                .JoinableTaskFactory
+                .Run(() =>
+                {
+                    return GetDocument()
+                        .GetCodeGenerationOptionsAsync(GlobalOptions, CancellationToken.None)
+                        .AsTask();
+                });
 
         internal Compilation GetCompilation() =>
-            State.ThreadingContext.JoinableTaskFactory.Run(() =>
-            {
-                return GetDocument().Project.GetRequiredCompilationAsync(CancellationToken.None);
-            });
+            State
+                .ThreadingContext
+                .JoinableTaskFactory
+                .Run(() =>
+                {
+                    return GetDocument()
+                        .Project
+                        .GetRequiredCompilationAsync(CancellationToken.None);
+                });
 
         internal ProjectId GetProjectId() => GetDocumentId().ProjectId;
 
@@ -848,24 +871,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     if (_batchDocument != null)
                     {
                         // perform expensive operations at once
-                        var newDocument = State.ThreadingContext.JoinableTaskFactory.Run(async () =>
-                        {
-                            var simplifierOptions = await _batchDocument
-                                .GetSimplifierOptionsAsync(GlobalOptions, CancellationToken.None)
-                                .ConfigureAwait(false);
-                            return await Simplifier
-                                .ReduceAsync(
-                                    _batchDocument,
-                                    Simplifier.Annotation,
-                                    simplifierOptions,
-                                    CancellationToken.None
-                                )
-                                .ConfigureAwait(false);
-                        });
+                        var newDocument = State
+                            .ThreadingContext
+                            .JoinableTaskFactory
+                            .Run(async () =>
+                            {
+                                var simplifierOptions = await _batchDocument
+                                    .GetSimplifierOptionsAsync(
+                                        GlobalOptions,
+                                        CancellationToken.None
+                                    )
+                                    .ConfigureAwait(false);
+                                return await Simplifier
+                                    .ReduceAsync(
+                                        _batchDocument,
+                                        Simplifier.Annotation,
+                                        simplifierOptions,
+                                        CancellationToken.None
+                                    )
+                                    .ConfigureAwait(false);
+                            });
 
-                        _batchDocument.Project.Solution.Workspace.TryApplyChanges(
-                            newDocument.Project.Solution
-                        );
+                        _batchDocument
+                            .Project
+                            .Solution
+                            .Workspace
+                            .TryApplyChanges(newDocument.Project.Solution);
 
                         // done using batch document
                         _batchDocument = null;
@@ -886,10 +917,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                                 )
                             )
                             {
-                                elementAndPath.Item1.ReacquireNodeKey(
-                                    elementAndPath.Item2,
-                                    CancellationToken.None
-                                );
+                                elementAndPath
+                                    .Item1
+                                    .ReacquireNodeKey(elementAndPath.Item2, CancellationToken.None);
                             }
 
                             // make sure existing element doesn't go away (weak reference) in the middle of

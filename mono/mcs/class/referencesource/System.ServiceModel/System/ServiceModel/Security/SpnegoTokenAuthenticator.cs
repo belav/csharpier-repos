@@ -124,9 +124,11 @@ namespace System.ServiceModel.Security
             WindowsSspiNegotiation windowsNegotiation = (WindowsSspiNegotiation)sspiNegotiation;
             if (windowsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
+                    );
             }
             SecurityTraceRecordHelper.TraceServiceSpnego(windowsNegotiation);
             if (this.IsClientAnonymous)

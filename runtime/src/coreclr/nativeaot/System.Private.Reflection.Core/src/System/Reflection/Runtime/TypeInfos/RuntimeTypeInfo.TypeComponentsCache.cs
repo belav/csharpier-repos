@@ -91,10 +91,10 @@ namespace System.Reflection.Runtime.TypeInfos
             public EnumInfo EnumInfo =>
                 _lazyEnumInfo
                 ?? (
-                    _lazyEnumInfo =
-                        ReflectionCoreExecution.ExecutionDomain.ExecutionEnvironment.GetEnumInfo(
-                            _type.TypeHandle
-                        )
+                    _lazyEnumInfo = ReflectionCoreExecution
+                        .ExecutionDomain
+                        .ExecutionEnvironment
+                        .GetEnumInfo(_type.TypeHandle)
                 );
 
             private static object[] CreatePerNameQueryCaches(RuntimeTypeInfo type, bool ignoreCase)

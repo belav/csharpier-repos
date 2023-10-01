@@ -45,35 +45,41 @@ namespace ILCompiler.Metadata
 
             if (adderHasMetadata)
             {
-                result.MethodSemantics.Add(
-                    new MethodSemantics
-                    {
-                        Attributes = MethodSemanticsAttributes.AddOn,
-                        Method = HandleMethodDefinition(adderMethod),
-                    }
-                );
+                result
+                    .MethodSemantics
+                    .Add(
+                        new MethodSemantics
+                        {
+                            Attributes = MethodSemanticsAttributes.AddOn,
+                            Method = HandleMethodDefinition(adderMethod),
+                        }
+                    );
             }
 
             if (raiserHasMetadata)
             {
-                result.MethodSemantics.Add(
-                    new MethodSemantics
-                    {
-                        Attributes = MethodSemanticsAttributes.Fire,
-                        Method = HandleMethodDefinition(raiserMethod),
-                    }
-                );
+                result
+                    .MethodSemantics
+                    .Add(
+                        new MethodSemantics
+                        {
+                            Attributes = MethodSemanticsAttributes.Fire,
+                            Method = HandleMethodDefinition(raiserMethod),
+                        }
+                    );
             }
 
             if (removerHasMetadata)
             {
-                result.MethodSemantics.Add(
-                    new MethodSemantics
-                    {
-                        Attributes = MethodSemanticsAttributes.RemoveOn,
-                        Method = HandleMethodDefinition(removerMethod),
-                    }
-                );
+                result
+                    .MethodSemantics
+                    .Add(
+                        new MethodSemantics
+                        {
+                            Attributes = MethodSemanticsAttributes.RemoveOn,
+                            Method = HandleMethodDefinition(removerMethod),
+                        }
+                    );
             }
 
             Ecma.CustomAttributeHandleCollection customAttributes = eventDef.GetCustomAttributes();

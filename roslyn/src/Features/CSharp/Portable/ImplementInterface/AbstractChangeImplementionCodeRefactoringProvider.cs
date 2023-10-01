@@ -172,11 +172,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             }
 
             context.RegisterRefactoring(
-                CodeAction.CodeActionWithNestedActions.Create(
-                    Implement,
-                    nestedActions.ToImmutableAndFree(),
-                    isInlinable: true
-                )
+                CodeAction
+                    .CodeActionWithNestedActions
+                    .Create(Implement, nestedActions.ToImmutableAndFree(), isInlinable: true)
             );
         }
 

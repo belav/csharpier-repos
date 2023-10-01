@@ -114,9 +114,9 @@ namespace System.Workflow.Runtime
             // runtime gets a reference to the correct object
             clonedRootActivity.SetValue(
                 WorkflowExecutor.TrackingListenerBrokerProperty,
-                workflowExecutor.RootActivity.GetValue(
-                    WorkflowExecutor.TrackingListenerBrokerProperty
-                )
+                workflowExecutor
+                    .RootActivity
+                    .GetValue(WorkflowExecutor.TrackingListenerBrokerProperty)
             );
 
             // create the new workflowExecutor
@@ -170,11 +170,13 @@ namespace System.Workflow.Runtime
 
             // replace with the WorkflowRuntime
             Debug.Assert(this.workflowExecutor.IsInstanceValid);
-            this.workflowExecutor.WorkflowRuntime.ReplaceWorkflowExecutor(
-                this.workflowExecutor.InstanceId,
-                this.workflowExecutor,
-                newWorkflowExecutor
-            );
+            this.workflowExecutor
+                .WorkflowRuntime
+                .ReplaceWorkflowExecutor(
+                    this.workflowExecutor.InstanceId,
+                    this.workflowExecutor,
+                    newWorkflowExecutor
+                );
 
             // now resume or suspend the scheduler as needed
             if (!this.suspendOnRevert)

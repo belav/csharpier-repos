@@ -212,13 +212,15 @@ namespace System.Web.Configuration
                         isRootApp = (vPath == appPathVirtualPath);
                     }
 
-                    configFileMap.VirtualDirectories.Add(
-                        vPathString,
-                        new VirtualDirectoryMapping(
-                            Path.GetDirectoryName(physicalFilePath),
-                            isRootApp
-                        )
-                    );
+                    configFileMap
+                        .VirtualDirectories
+                        .Add(
+                            vPathString,
+                            new VirtualDirectoryMapping(
+                                Path.GetDirectoryName(physicalFilePath),
+                                isRootApp
+                            )
+                        );
                 }
             }
 

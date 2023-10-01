@@ -11,12 +11,14 @@ namespace System.IO.Strategies
         internal override void Lock(long position, long length)
         {
             CheckFileCall(
-                Interop.Sys.LockFileRegion(
-                    _fileHandle,
-                    position,
-                    length,
-                    CanWrite ? Interop.Sys.LockType.F_WRLCK : Interop.Sys.LockType.F_RDLCK
-                )
+                Interop
+                    .Sys
+                    .LockFileRegion(
+                        _fileHandle,
+                        position,
+                        length,
+                        CanWrite ? Interop.Sys.LockType.F_WRLCK : Interop.Sys.LockType.F_RDLCK
+                    )
             );
         }
 
@@ -26,12 +28,9 @@ namespace System.IO.Strategies
         internal override void Unlock(long position, long length)
         {
             CheckFileCall(
-                Interop.Sys.LockFileRegion(
-                    _fileHandle,
-                    position,
-                    length,
-                    Interop.Sys.LockType.F_UNLCK
-                )
+                Interop
+                    .Sys
+                    .LockFileRegion(_fileHandle, position, length, Interop.Sys.LockType.F_UNLCK)
             );
         }
     }

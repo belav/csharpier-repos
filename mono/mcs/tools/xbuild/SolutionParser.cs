@@ -580,10 +580,9 @@ namespace Mono.XBuild.CommandLine
                 // hack, what are they doing here?
                 if (projPlat == "Any CPU")
                     projPlat = "AnyCPU";
-                projectInfo.TargetMap.Add(
-                    new TargetInfo(solConf, solPlat),
-                    new TargetInfo(projConf, projPlat)
-                );
+                projectInfo
+                    .TargetMap
+                    .Add(new TargetInfo(solConf, solPlat), new TargetInfo(projConf, projPlat));
                 projectConfigurationPlatform = projectConfigurationPlatform.NextMatch();
             }
             Match projectConfigurationPlatformBuild = projectConfigurationBuildRegex.Match(section);
@@ -1128,7 +1127,9 @@ namespace Mono.XBuild.CommandLine
                     if (project.Dependencies.Count > 0)
                         target.DependsOnTargets = String.Join(
                             ";",
-                            project.Dependencies.Values
+                            project
+                                .Dependencies
+                                .Values
                                 .Select(di => GetTargetNameForProject(di.Name, buildTarget))
                                 .ToArray()
                         );

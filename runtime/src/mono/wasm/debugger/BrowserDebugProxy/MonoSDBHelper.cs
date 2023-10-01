@@ -592,10 +592,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             else if (objectId.Scheme == "valuetype")
             {
                 if (
-                    SdbHelper.ValueCreator.TryGetValueTypeById(
-                        objectId.Value,
-                        out ValueTypeClass vt
-                    )
+                    SdbHelper
+                        .ValueCreator
+                        .TryGetValueTypeById(objectId.Value, out ValueTypeClass vt)
                 )
                     Write(vt.Buffer);
                 else
@@ -872,11 +871,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                 string displayVarName = varName;
                 if (int.TryParse(varName, out _))
                     displayVarName = $"[{varName}]";
-                _value = await sdbHelper.ValueCreator.ReadAsVariableValue(
-                    retDebuggerCmdReader,
-                    "*" + displayVarName,
-                    token
-                );
+                _value = await sdbHelper
+                    .ValueCreator
+                    .ReadAsVariableValue(retDebuggerCmdReader, "*" + displayVarName, token);
             }
 
             return _value;
@@ -2421,8 +2418,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var typeInfo = await GetTypeInfo(typeId, token);
                     if (typeInfo == null || typeInfo.Name == "object")
                         continue;
-                    Microsoft.WebAssembly.Diagnostics.MethodInfo methodInfo =
-                        typeInfo.Info.Methods.FirstOrDefault(m => m.Name == "ToString");
+                    Microsoft.WebAssembly.Diagnostics.MethodInfo methodInfo = typeInfo
+                        .Info
+                        .Methods
+                        .FirstOrDefault(m => m.Name == "ToString");
                     if (isEnum != true && methodInfo == null)
                         continue;
                     int[] methodIds = await GetMethodIdsByName(
@@ -2601,10 +2600,12 @@ namespace Microsoft.WebAssembly.Diagnostics
                     if (match.Success)
                     {
                         if (
-                            !method.Info.ContainsAsyncScope(
-                                Convert.ToInt32(match.Groups["scopeId"].Value),
-                                offset
-                            )
+                            !method
+                                .Info
+                                .ContainsAsyncScope(
+                                    Convert.ToInt32(match.Groups["scopeId"].Value),
+                                    offset
+                                )
                         )
                             continue;
                         asyncLocal["name"] = match.Groups["varName"].Value;
@@ -2621,10 +2622,12 @@ namespace Microsoft.WebAssembly.Diagnostics
                     if (match.Success)
                     {
                         if (
-                            !method.Info.ContainsAsyncScope(
-                                Convert.ToInt32(match.Groups["scopeId"].Value) + 1,
-                                offset
-                            )
+                            !method
+                                .Info
+                                .ContainsAsyncScope(
+                                    Convert.ToInt32(match.Groups["scopeId"].Value) + 1,
+                                    offset
+                                )
                         )
                             continue;
                         asyncLocal["name"] = match.Groups["varName"].Value;

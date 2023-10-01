@@ -529,14 +529,16 @@ namespace System.Web.UI.WebControls
 
             if (firstButtonIndex != 0)
             {
-                container.Controls.Add(
-                    CreateNextPrevButton(
-                        PreviousPageText,
-                        DataControlCommands.PreviousPageCommandArgument,
-                        fieldIndex.ToString(CultureInfo.InvariantCulture),
-                        PreviousPageImageUrl
-                    )
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateNextPrevButton(
+                            PreviousPageText,
+                            DataControlCommands.PreviousPageCommandArgument,
+                            fieldIndex.ToString(CultureInfo.InvariantCulture),
+                            PreviousPageImageUrl
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
 
@@ -560,13 +562,15 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    container.Controls.Add(
-                        CreateNumericButton(
-                            (i + firstButtonIndex + 1).ToString(CultureInfo.InvariantCulture),
-                            fieldIndex.ToString(CultureInfo.InvariantCulture),
-                            (i + firstButtonIndex).ToString(CultureInfo.InvariantCulture)
-                        )
-                    );
+                    container
+                        .Controls
+                        .Add(
+                            CreateNumericButton(
+                                (i + firstButtonIndex + 1).ToString(CultureInfo.InvariantCulture),
+                                fieldIndex.ToString(CultureInfo.InvariantCulture),
+                                (i + firstButtonIndex).ToString(CultureInfo.InvariantCulture)
+                            )
+                        );
                 }
                 AddNonBreakingSpace(container);
             }
@@ -574,14 +578,16 @@ namespace System.Web.UI.WebControls
             if (lastRecordIndex < _totalRowCount - 1)
             {
                 AddNonBreakingSpace(container);
-                container.Controls.Add(
-                    CreateNextPrevButton(
-                        NextPageText,
-                        DataControlCommands.NextPageCommandArgument,
-                        fieldIndex.ToString(CultureInfo.InvariantCulture),
-                        NextPageImageUrl
-                    )
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateNextPrevButton(
+                            NextPageText,
+                            DataControlCommands.NextPageCommandArgument,
+                            fieldIndex.ToString(CultureInfo.InvariantCulture),
+                            NextPageImageUrl
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
         }
@@ -597,9 +603,15 @@ namespace System.Web.UI.WebControls
 
             if (firstButtonIndex != 0)
             {
-                container.Controls.Add(
-                    CreateNextPrevLink(PreviousPageText, firstButtonIndex - 1, PreviousPageImageUrl)
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateNextPrevLink(
+                            PreviousPageText,
+                            firstButtonIndex - 1,
+                            PreviousPageImageUrl
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
 
@@ -631,13 +643,15 @@ namespace System.Web.UI.WebControls
             if (lastRecordIndex < _totalRowCount - 1)
             {
                 AddNonBreakingSpace(container);
-                container.Controls.Add(
-                    CreateNextPrevLink(
-                        NextPageText,
-                        firstButtonIndex + ButtonCount,
-                        NextPageImageUrl
-                    )
-                );
+                container
+                    .Controls
+                    .Add(
+                        CreateNextPrevLink(
+                            NextPageText,
+                            firstButtonIndex + ButtonCount,
+                            NextPageImageUrl
+                        )
+                    );
                 AddNonBreakingSpace(container);
             }
         }

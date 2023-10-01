@@ -978,20 +978,24 @@ namespace System.Text.Json.Serialization.Tests
         public static void NestedClassWithJsonElementExtensionDataProperty()
         {
             var child = new ChildClassWithJsonElement { Number = 4 };
-            child.ExtensionData.Add(
-                "SpecialInformation",
-                JsonDocument
-                    .Parse(JsonSerializer.SerializeToUtf8Bytes("I am child class"))
-                    .RootElement
-            );
+            child
+                .ExtensionData
+                .Add(
+                    "SpecialInformation",
+                    JsonDocument
+                        .Parse(JsonSerializer.SerializeToUtf8Bytes("I am child class"))
+                        .RootElement
+                );
 
             var parent = new ParentClassWithJsonElement { Text = "Hello World" };
-            parent.ExtensionData.Add(
-                "SpecialInformation",
-                JsonDocument
-                    .Parse(JsonSerializer.SerializeToUtf8Bytes("I am parent class"))
-                    .RootElement
-            );
+            parent
+                .ExtensionData
+                .Add(
+                    "SpecialInformation",
+                    JsonDocument
+                        .Parse(JsonSerializer.SerializeToUtf8Bytes("I am parent class"))
+                        .RootElement
+                );
             parent.Children.Add(child);
 
             Verify();

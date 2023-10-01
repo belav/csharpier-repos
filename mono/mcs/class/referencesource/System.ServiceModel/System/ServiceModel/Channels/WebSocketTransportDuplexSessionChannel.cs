@@ -285,7 +285,9 @@ namespace System.ServiceModel.Channels
                         // Any rethrown exception would just be ----ed, because nobody awaits the
                         // Task returned from ContinueWith in this case.
 
-                        FxTrace.Exception.TraceHandledException(error, TraceEventType.Information);
+                        FxTrace
+                            .Exception
+                            .TraceHandledException(error, TraceEventType.Information);
                         this.pendingWritingMessageException = error;
                     }
                     finally
@@ -565,10 +567,12 @@ namespace System.ServiceModel.Channels
                 WebSocketDefaults.DefaultWebSocketMessageType;
             WebSocketMessageProperty webSocketMessageProperty;
             if (
-                message.Properties.TryGetValue<WebSocketMessageProperty>(
-                    WebSocketMessageProperty.Name,
-                    out webSocketMessageProperty
-                )
+                message
+                    .Properties
+                    .TryGetValue<WebSocketMessageProperty>(
+                        WebSocketMessageProperty.Name,
+                        out webSocketMessageProperty
+                    )
             )
             {
                 outgoingMessageType = webSocketMessageProperty.MessageType;
@@ -746,10 +750,12 @@ namespace System.ServiceModel.Channels
                 {
                     this.asyncReceiveTimeout = timeout;
                     this.receiveTimer.Set(timeout);
-                    this.receiveTask.Task.ContinueWith(t =>
-                    {
-                        callback.Invoke(state);
-                    });
+                    this.receiveTask
+                        .Task
+                        .ContinueWith(t =>
+                        {
+                            callback.Invoke(state);
+                        });
 
                     return AsyncReceiveResult.Pending;
                 }
@@ -759,13 +765,15 @@ namespace System.ServiceModel.Channels
             {
                 if (this.asyncReceiveState == AsyncReceiveState.Cancelled)
                 {
-                    throw FxTrace.Exception.AsError(
-                        WebSocketHelper.GetTimeoutException(
-                            null,
-                            this.asyncReceiveTimeout,
-                            WebSocketHelper.ReceiveOperation
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            WebSocketHelper.GetTimeoutException(
+                                null,
+                                this.asyncReceiveTimeout,
+                                WebSocketHelper.ReceiveOperation
+                            )
+                        );
                 }
                 else
                 {
@@ -796,12 +804,14 @@ namespace System.ServiceModel.Channels
 
                 if (!waitingResult)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new TimeoutException(
-                            SR.GetString(SR.WaitForMessageTimedOut, timeout),
-                            ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new TimeoutException(
+                                SR.GetString(SR.WaitForMessageTimedOut, timeout),
+                                ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
+                            )
+                        );
                 }
 
                 Message message = this.GetPendingMessage();
@@ -866,14 +876,16 @@ namespace System.ServiceModel.Channels
                             {
                                 if (internalBuffer.Length >= this.maxBufferSize)
                                 {
-                                    this.pendingException = FxTrace.Exception.AsError(
-                                        new QuotaExceededException(
-                                            SR.GetString(
-                                                SR.MaxReceivedMessageSizeExceeded,
-                                                this.maxBufferSize
+                                    this.pendingException = FxTrace
+                                        .Exception
+                                        .AsError(
+                                            new QuotaExceededException(
+                                                SR.GetString(
+                                                    SR.MaxReceivedMessageSizeExceeded,
+                                                    this.maxBufferSize
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
                                     return;
                                 }
 
@@ -1394,9 +1406,9 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
                 }
             }
 
@@ -1404,15 +1416,15 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
                 }
                 set
                 {
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(SR.GetString(SR.SeekNotSupported))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new NotSupportedException(SR.GetString(SR.SeekNotSupported)));
                 }
             }
 
@@ -1460,13 +1472,15 @@ namespace System.ServiceModel.Channels
 
                 if (this.ReadTimeout <= 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        WebSocketHelper.GetTimeoutException(
-                            null,
-                            TimeoutHelper.FromMilliseconds(this.ReadTimeout),
-                            WebSocketHelper.ReceiveOperation
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            WebSocketHelper.GetTimeoutException(
+                                null,
+                                TimeoutHelper.FromMilliseconds(this.ReadTimeout),
+                                WebSocketHelper.ReceiveOperation
+                            )
+                        );
                 }
 
                 TimeoutHelper helper = new TimeoutHelper(
@@ -1567,13 +1581,15 @@ namespace System.ServiceModel.Channels
 
                 if (this.ReadTimeout <= 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        WebSocketHelper.GetTimeoutException(
-                            null,
-                            TimeoutHelper.FromMilliseconds(this.ReadTimeout),
-                            WebSocketHelper.ReceiveOperation
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            WebSocketHelper.GetTimeoutException(
+                                null,
+                                TimeoutHelper.FromMilliseconds(this.ReadTimeout),
+                                WebSocketHelper.ReceiveOperation
+                            )
+                        );
                 }
 
                 TimeoutHelper helper = new TimeoutHelper(
@@ -1656,22 +1672,26 @@ namespace System.ServiceModel.Channels
             {
                 if (this.endOfMessageWritten == WebSocketHelper.OperationFinished)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.WebSocketStreamWriteCalledAfterEOMSent)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.WebSocketStreamWriteCalledAfterEOMSent)
+                            )
+                        );
                 }
 
                 if (this.WriteTimeout <= 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        WebSocketHelper.GetTimeoutException(
-                            null,
-                            TimeoutHelper.FromMilliseconds(this.WriteTimeout),
-                            WebSocketHelper.SendOperation
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            WebSocketHelper.GetTimeoutException(
+                                null,
+                                TimeoutHelper.FromMilliseconds(this.WriteTimeout),
+                                WebSocketHelper.SendOperation
+                            )
+                        );
                 }
 
                 if (TD.WebSocketAsyncWriteStartIsEnabled())
@@ -1715,22 +1735,26 @@ namespace System.ServiceModel.Channels
             {
                 if (this.endOfMessageWritten == WebSocketHelper.OperationFinished)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.WebSocketStreamWriteCalledAfterEOMSent)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.WebSocketStreamWriteCalledAfterEOMSent)
+                            )
+                        );
                 }
 
                 if (this.WriteTimeout <= 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        WebSocketHelper.GetTimeoutException(
-                            null,
-                            TimeoutHelper.FromMilliseconds(this.WriteTimeout),
-                            WebSocketHelper.SendOperation
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            WebSocketHelper.GetTimeoutException(
+                                null,
+                                TimeoutHelper.FromMilliseconds(this.WriteTimeout),
+                                WebSocketHelper.SendOperation
+                            )
+                        );
                 }
 
                 if (TD.WebSocketAsyncWriteStartIsEnabled())
@@ -1899,9 +1923,13 @@ namespace System.ServiceModel.Channels
                 messageSource.CheckCloseStatus(result);
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new ProtocolException(SR.GetString(SR.WebSocketUnexpectedCloseMessageError))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ProtocolException(
+                                SR.GetString(SR.WebSocketUnexpectedCloseMessageError)
+                            )
+                        );
                 }
             }
 

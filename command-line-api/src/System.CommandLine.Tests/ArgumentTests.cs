@@ -571,7 +571,8 @@ namespace System.CommandLine.Tests
 
                 var parseResult = command.Parse("1 2 3 4 5 6 7 8");
 
-                parseResult.UnmatchedTokens
+                parseResult
+                    .UnmatchedTokens
                     .Should()
                     .BeEquivalentTo(
                         new[] { "4", "5", "6", "7", "8" },
@@ -771,7 +772,8 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("set-color Fuschia");
 
-            result.Errors
+            result
+                .Errors
                 .Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(

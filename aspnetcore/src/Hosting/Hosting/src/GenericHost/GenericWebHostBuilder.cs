@@ -525,11 +525,13 @@ internal sealed class GenericWebHostBuilder
                 Configuration = context.Configuration,
                 HostingEnvironment = new HostingEnvironment(),
             };
-            webHostBuilderContext.HostingEnvironment.Initialize(
-                context.HostingEnvironment.ContentRootPath,
-                options,
-                baseEnvironment: context.HostingEnvironment
-            );
+            webHostBuilderContext
+                .HostingEnvironment
+                .Initialize(
+                    context.HostingEnvironment.ContentRootPath,
+                    options,
+                    baseEnvironment: context.HostingEnvironment
+                );
             context.Properties[typeof(WebHostBuilderContext)] = webHostBuilderContext;
             context.Properties[typeof(WebHostOptions)] = options;
             return webHostBuilderContext;

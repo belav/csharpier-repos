@@ -71,9 +71,9 @@ namespace System.ServiceModel.Channels
         public bool Contains(Type bindingElementType)
         {
             if (bindingElementType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "bindingElementType"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("bindingElementType");
 
             for (int i = 0; i < this.Count; i++)
             {

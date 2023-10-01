@@ -105,9 +105,9 @@ namespace Microsoft.VisualStudio.LanguageServices
             Project project,
             CancellationToken cancellationToken
         ) =>
-            _threadingContext.JoinableTaskFactory.Run(
-                () => TryGoToDefinitionAsync(symbol, project, cancellationToken)
-            );
+            _threadingContext
+                .JoinableTaskFactory
+                .Run(() => TryGoToDefinitionAsync(symbol, project, cancellationToken));
 
         public override async Task<bool> TryGoToDefinitionAsync(
             ISymbol symbol,

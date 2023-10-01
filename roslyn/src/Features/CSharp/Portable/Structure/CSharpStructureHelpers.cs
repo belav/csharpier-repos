@@ -45,8 +45,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
 
             if (firstToken.HasTrailingTrivia)
             {
-                var lastTrailingCommentOrWhitespaceTrivia =
-                    firstToken.TrailingTrivia.GetLastCommentOrWhitespace();
+                var lastTrailingCommentOrWhitespaceTrivia = firstToken
+                    .TrailingTrivia
+                    .GetLastCommentOrWhitespace();
                 if (lastTrailingCommentOrWhitespaceTrivia != null)
                 {
                     start = lastTrailingCommentOrWhitespaceTrivia.Value.Span.End;
@@ -291,11 +292,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                     return false;
                 }
 
-                var firstComment = startToken.LeadingTrivia.FirstOrNull(
-                    t =>
-                        t.IsKind(SyntaxKind.SingleLineCommentTrivia)
-                        || t.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia)
-                );
+                var firstComment = startToken
+                    .LeadingTrivia
+                    .FirstOrNull(
+                        t =>
+                            t.IsKind(SyntaxKind.SingleLineCommentTrivia)
+                            || t.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia)
+                    );
 
                 var startPosition = firstComment.HasValue
                     ? firstComment.Value.FullSpan.Start

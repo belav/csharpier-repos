@@ -597,14 +597,16 @@ namespace System.Runtime.Serialization
                                 )
                             )
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidDataContractException(
-                                        SR.GetString(
-                                            SR.GetOnlyCollectionMustHaveAddMethod,
-                                            DataContract.GetClrTypeFullName(this.UnderlyingType)
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidDataContractException(
+                                            SR.GetString(
+                                                SR.GetOnlyCollectionMustHaveAddMethod,
+                                                DataContract.GetClrTypeFullName(this.UnderlyingType)
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                             if (this.IsReadOnlyContract)
                             {
@@ -714,14 +716,16 @@ namespace System.Runtime.Serialization
                                 collectionContractAttribute.ItemName == null
                                 || collectionContractAttribute.ItemName.Length == 0
                             )
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidDataContractException(
-                                        SR.GetString(
-                                            SR.InvalidCollectionContractItemName,
-                                            DataContract.GetClrTypeFullName(UnderlyingType)
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidDataContractException(
+                                            SR.GetString(
+                                                SR.InvalidCollectionContractItemName,
+                                                DataContract.GetClrTypeFullName(UnderlyingType)
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             itemName = DataContract.EncodeLocalName(
                                 collectionContractAttribute.ItemName
                             );
@@ -733,24 +737,28 @@ namespace System.Runtime.Serialization
                                 collectionContractAttribute.KeyName == null
                                 || collectionContractAttribute.KeyName.Length == 0
                             )
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidDataContractException(
-                                        SR.GetString(
-                                            SR.InvalidCollectionContractKeyName,
-                                            DataContract.GetClrTypeFullName(UnderlyingType)
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidDataContractException(
+                                            SR.GetString(
+                                                SR.InvalidCollectionContractKeyName,
+                                                DataContract.GetClrTypeFullName(UnderlyingType)
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             if (!isDictionary)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidDataContractException(
-                                        SR.GetString(
-                                            SR.InvalidCollectionContractKeyNoDictionary,
-                                            DataContract.GetClrTypeFullName(UnderlyingType),
-                                            collectionContractAttribute.KeyName
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidDataContractException(
+                                            SR.GetString(
+                                                SR.InvalidCollectionContractKeyNoDictionary,
+                                                DataContract.GetClrTypeFullName(UnderlyingType),
+                                                collectionContractAttribute.KeyName
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             keyName = DataContract.EncodeLocalName(
                                 collectionContractAttribute.KeyName
                             );
@@ -761,24 +769,28 @@ namespace System.Runtime.Serialization
                                 collectionContractAttribute.ValueName == null
                                 || collectionContractAttribute.ValueName.Length == 0
                             )
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidDataContractException(
-                                        SR.GetString(
-                                            SR.InvalidCollectionContractValueName,
-                                            DataContract.GetClrTypeFullName(UnderlyingType)
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidDataContractException(
+                                            SR.GetString(
+                                                SR.InvalidCollectionContractValueName,
+                                                DataContract.GetClrTypeFullName(UnderlyingType)
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             if (!isDictionary)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new InvalidDataContractException(
-                                        SR.GetString(
-                                            SR.InvalidCollectionContractValueNoDictionary,
-                                            DataContract.GetClrTypeFullName(UnderlyingType),
-                                            collectionContractAttribute.ValueName
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new InvalidDataContractException(
+                                            SR.GetString(
+                                                SR.InvalidCollectionContractValueNoDictionary,
+                                                DataContract.GetClrTypeFullName(UnderlyingType),
+                                                collectionContractAttribute.ValueName
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             valueName = DataContract.EncodeLocalName(
                                 collectionContractAttribute.ValueName
                             );
@@ -821,11 +833,16 @@ namespace System.Runtime.Serialization
                 if (type == Globals.TypeOfArray)
                     type = Globals.TypeOfObjectArray;
                 if (type.GetArrayRank() > 1)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.SupportForMultidimensionalArraysNotPresent)
-                        )
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.SupportForMultidimensionalArraysNotPresent)
+                            )
+                        );
                 this.StableName = DataContract.GetStableName(type);
                 Init(CollectionKind.Array, type.GetElementType(), null);
             }
@@ -835,11 +852,16 @@ namespace System.Runtime.Serialization
                 : base(type)
             {
                 if (type.GetArrayRank() > 1)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.SupportForMultidimensionalArraysNotPresent)
-                        )
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(SR.SupportForMultidimensionalArraysNotPresent)
+                            )
+                        );
                 this.StableName = CreateQualifiedName(
                     Globals.ArrayPrefix + itemContract.StableName.Name,
                     itemContract.StableName.Namespace
@@ -860,23 +882,33 @@ namespace System.Runtime.Serialization
                 : base(type)
             {
                 if (getEnumeratorMethod == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.CollectionMustHaveGetEnumeratorMethod,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.CollectionMustHaveGetEnumeratorMethod,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 if (itemType == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.CollectionMustHaveItemType,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.CollectionMustHaveItemType,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
 
                 CollectionDataContractAttribute collectionContractAttribute;
                 this.StableName = DataContract.GetCollectionStableName(
@@ -903,14 +935,19 @@ namespace System.Runtime.Serialization
                 : this(type, kind, itemType, getEnumeratorMethod, (string)null, (string)null)
             {
                 if (addMethod == null && !type.IsInterface)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.CollectionMustHaveAddMethod,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.CollectionMustHaveAddMethod,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 this.addMethod = addMethod;
                 this.constructor = constructor;
             }
@@ -1354,7 +1391,8 @@ namespace System.Runtime.Serialization
                             {
                                 itemType = Globals.TypeOfKeyValue.MakeGenericType(genericArgs);
                                 addMethod = type.GetMethod(Globals.AddMethodName);
-                                getEnumeratorMethod = Globals.TypeOfIEnumerableGeneric
+                                getEnumeratorMethod = Globals
+                                    .TypeOfIEnumerableGeneric
                                     .MakeGenericType(
                                         Globals.TypeOfKeyValuePair.MakeGenericType(genericArgs)
                                     )
@@ -1368,11 +1406,13 @@ namespace System.Runtime.Serialization
                                     || interfaceTypeToCheck == Globals.TypeOfIListGeneric
                                 )
                                 {
-                                    addMethod = Globals.TypeOfICollectionGeneric
+                                    addMethod = Globals
+                                        .TypeOfICollectionGeneric
                                         .MakeGenericType(itemType)
                                         .GetMethod(Globals.AddMethodName);
                                 }
-                                getEnumeratorMethod = Globals.TypeOfIEnumerableGeneric
+                                getEnumeratorMethod = Globals
+                                    .TypeOfIEnumerableGeneric
                                     .MakeGenericType(itemType)
                                     .GetMethod(Globals.GetEnumeratorMethodName);
                             }
@@ -1389,14 +1429,14 @@ namespace System.Runtime.Serialization
                                 itemType = Globals.TypeOfObject;
                                 if (interfaceTypeToCheck == Globals.TypeOfIList)
                                 {
-                                    addMethod = Globals.TypeOfIList.GetMethod(
-                                        Globals.AddMethodName
-                                    );
+                                    addMethod = Globals
+                                        .TypeOfIList
+                                        .GetMethod(Globals.AddMethodName);
                                 }
                             }
-                            getEnumeratorMethod = Globals.TypeOfIEnumerable.GetMethod(
-                                Globals.GetEnumeratorMethodName
-                            );
+                            getEnumeratorMethod = Globals
+                                .TypeOfIEnumerable
+                                .GetMethod(Globals.GetEnumeratorMethodName);
                         }
                         if (tryCreate)
                             dataContract = new CollectionDataContract(
@@ -1667,18 +1707,23 @@ namespace System.Runtime.Serialization
             if (hasCollectionDataContract)
             {
                 if (tryCreate)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            GetInvalidCollectionMessage(
-                                message,
-                                SR.GetString(
-                                    SR.InvalidCollectionDataContract,
-                                    DataContract.GetClrTypeFullName(type)
-                                ),
-                                param
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                GetInvalidCollectionMessage(
+                                    message,
+                                    SR.GetString(
+                                        SR.InvalidCollectionDataContract,
+                                        DataContract.GetClrTypeFullName(type)
+                                    ),
+                                    param
+                                )
                             )
-                        )
-                    );
+                        );
                 return true;
             }
 
@@ -1926,9 +1971,14 @@ namespace System.Runtime.Serialization
         void ThrowIfInvalid()
         {
             if (InvalidCollectionInSharedContractMessage != null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(InvalidCollectionInSharedContractMessage)
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(InvalidCollectionInSharedContractMessage)
+                    );
         }
 
         internal override DataContract GetValidContract()
@@ -1949,14 +1999,19 @@ namespace System.Runtime.Serialization
         {
             if (this.Constructor == null)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.GetString(
-                            SR.CollectionTypeDoesNotHaveDefaultCtor,
-                            DataContract.GetClrTypeFullName(this.UnderlyingType)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(
+                                SR.CollectionTypeDoesNotHaveDefaultCtor,
+                                DataContract.GetClrTypeFullName(this.UnderlyingType)
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {
@@ -1983,15 +2038,17 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(
-                                SR.PartialTrustCollectionContractTypeNotPublic,
-                                DataContract.GetClrTypeFullName(UnderlyingType)
-                            ),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustCollectionContractTypeNotPublic,
+                                    DataContract.GetClrTypeFullName(UnderlyingType)
+                                ),
+                                securityException
+                            )
+                        );
                 }
                 return true;
             }
@@ -1999,15 +2056,17 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(
-                                SR.PartialTrustCollectionContractTypeNotPublic,
-                                DataContract.GetClrTypeFullName(ItemType)
-                            ),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustCollectionContractTypeNotPublic,
+                                    DataContract.GetClrTypeFullName(ItemType)
+                                ),
+                                securityException
+                            )
+                        );
                 }
                 return true;
             }
@@ -2015,15 +2074,17 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(
-                                SR.PartialTrustCollectionContractNoPublicConstructor,
-                                DataContract.GetClrTypeFullName(UnderlyingType)
-                            ),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustCollectionContractNoPublicConstructor,
+                                    DataContract.GetClrTypeFullName(UnderlyingType)
+                                ),
+                                securityException
+                            )
+                        );
                 }
                 return true;
             }
@@ -2031,16 +2092,18 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(
-                                SR.PartialTrustCollectionContractAddMethodNotPublic,
-                                DataContract.GetClrTypeFullName(UnderlyingType),
-                                this.AddMethod.Name
-                            ),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustCollectionContractAddMethodNotPublic,
+                                    DataContract.GetClrTypeFullName(UnderlyingType),
+                                    this.AddMethod.Name
+                                ),
+                                securityException
+                            )
+                        );
                 }
                 return true;
             }
@@ -2059,15 +2122,17 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(
-                                SR.PartialTrustCollectionContractTypeNotPublic,
-                                DataContract.GetClrTypeFullName(UnderlyingType)
-                            ),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustCollectionContractTypeNotPublic,
+                                    DataContract.GetClrTypeFullName(UnderlyingType)
+                                ),
+                                securityException
+                            )
+                        );
                 }
                 return true;
             }
@@ -2075,15 +2140,17 @@ namespace System.Runtime.Serialization
             {
                 if (securityException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(
-                                SR.PartialTrustCollectionContractTypeNotPublic,
-                                DataContract.GetClrTypeFullName(ItemType)
-                            ),
-                            securityException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.PartialTrustCollectionContractTypeNotPublic,
+                                    DataContract.GetClrTypeFullName(ItemType)
+                                ),
+                                securityException
+                            )
+                        );
                 }
                 return true;
             }

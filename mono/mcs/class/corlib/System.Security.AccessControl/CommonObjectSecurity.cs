@@ -112,46 +112,54 @@ namespace System.Security.AccessControl
                 switch (modification)
                 {
                     case AccessControlModification.Add:
-                        descriptor.DiscretionaryAcl.AddAccess(
-                            rule.AccessControlType,
-                            SidFromIR(rule.IdentityReference),
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags
-                        );
+                        descriptor
+                            .DiscretionaryAcl
+                            .AddAccess(
+                                rule.AccessControlType,
+                                SidFromIR(rule.IdentityReference),
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags
+                            );
                         break;
                     case AccessControlModification.Set:
-                        descriptor.DiscretionaryAcl.SetAccess(
-                            rule.AccessControlType,
-                            SidFromIR(rule.IdentityReference),
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags
-                        );
+                        descriptor
+                            .DiscretionaryAcl
+                            .SetAccess(
+                                rule.AccessControlType,
+                                SidFromIR(rule.IdentityReference),
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags
+                            );
                         break;
                     case AccessControlModification.Reset:
                         PurgeAccessRules(rule.IdentityReference);
                         goto case AccessControlModification.Add;
                     case AccessControlModification.Remove:
-                        modified = descriptor.DiscretionaryAcl.RemoveAccess(
-                            rule.AccessControlType,
-                            SidFromIR(rule.IdentityReference),
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags
-                        );
+                        modified = descriptor
+                            .DiscretionaryAcl
+                            .RemoveAccess(
+                                rule.AccessControlType,
+                                SidFromIR(rule.IdentityReference),
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags
+                            );
                         break;
                     case AccessControlModification.RemoveAll:
                         PurgeAccessRules(rule.IdentityReference);
                         break;
                     case AccessControlModification.RemoveSpecific:
-                        descriptor.DiscretionaryAcl.RemoveAccessSpecific(
-                            rule.AccessControlType,
-                            SidFromIR(rule.IdentityReference),
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags
-                        );
+                        descriptor
+                            .DiscretionaryAcl
+                            .RemoveAccessSpecific(
+                                rule.AccessControlType,
+                                SidFromIR(rule.IdentityReference),
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags
+                            );
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("modification");
@@ -218,25 +226,29 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             descriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, 1);
 
-                        descriptor.SystemAcl.AddAudit(
-                            rule.AuditFlags,
-                            SidFromIR(rule.IdentityReference),
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags
-                        );
+                        descriptor
+                            .SystemAcl
+                            .AddAudit(
+                                rule.AuditFlags,
+                                SidFromIR(rule.IdentityReference),
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags
+                            );
                         break;
                     case AccessControlModification.Set:
                         if (null == descriptor.SystemAcl)
                             descriptor.SystemAcl = new SystemAcl(IsContainer, IsDS, 1);
 
-                        descriptor.SystemAcl.SetAudit(
-                            rule.AuditFlags,
-                            SidFromIR(rule.IdentityReference),
-                            rule.AccessMask,
-                            rule.InheritanceFlags,
-                            rule.PropagationFlags
-                        );
+                        descriptor
+                            .SystemAcl
+                            .SetAudit(
+                                rule.AuditFlags,
+                                SidFromIR(rule.IdentityReference),
+                                rule.AccessMask,
+                                rule.InheritanceFlags,
+                                rule.PropagationFlags
+                            );
                         break;
                     case AccessControlModification.Reset:
                         break;
@@ -244,26 +256,30 @@ namespace System.Security.AccessControl
                         if (null == descriptor.SystemAcl)
                             modified = false;
                         else
-                            modified = descriptor.SystemAcl.RemoveAudit(
-                                rule.AuditFlags,
-                                SidFromIR(rule.IdentityReference),
-                                rule.AccessMask,
-                                rule.InheritanceFlags,
-                                rule.PropagationFlags
-                            );
+                            modified = descriptor
+                                .SystemAcl
+                                .RemoveAudit(
+                                    rule.AuditFlags,
+                                    SidFromIR(rule.IdentityReference),
+                                    rule.AccessMask,
+                                    rule.InheritanceFlags,
+                                    rule.PropagationFlags
+                                );
                         break;
                     case AccessControlModification.RemoveAll:
                         PurgeAuditRules(rule.IdentityReference);
                         break;
                     case AccessControlModification.RemoveSpecific:
                         if (null != descriptor.SystemAcl)
-                            descriptor.SystemAcl.RemoveAuditSpecific(
-                                rule.AuditFlags,
-                                SidFromIR(rule.IdentityReference),
-                                rule.AccessMask,
-                                rule.InheritanceFlags,
-                                rule.PropagationFlags
-                            );
+                            descriptor
+                                .SystemAcl
+                                .RemoveAuditSpecific(
+                                    rule.AuditFlags,
+                                    SidFromIR(rule.IdentityReference),
+                                    rule.AccessMask,
+                                    rule.InheritanceFlags,
+                                    rule.PropagationFlags
+                                );
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("modification");

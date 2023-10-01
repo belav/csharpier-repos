@@ -91,7 +91,8 @@ namespace Microsoft.CodeAnalysis.PreferFrameworkType
 
             // check we have a symbol so that the fixer can generate the right type syntax from it.
             if (
-                context.SemanticModel
+                context
+                    .SemanticModel
                     .GetSymbolInfo(predefinedTypeNode, context.CancellationToken)
                     .Symbol
                 is not ITypeSymbol

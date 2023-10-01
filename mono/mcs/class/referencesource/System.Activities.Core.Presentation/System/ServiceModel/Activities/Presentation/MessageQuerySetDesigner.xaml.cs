@@ -259,9 +259,9 @@ namespace System.ServiceModel.Activities.Presentation
             //throw if activity is not valid messaging activity type
             if (null != activity && !activity.IsMessagingActivity())
             {
-                throw FxTrace.Exception.AsError(
-                    new NotSupportedException(activity.ItemType.FullName)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new NotSupportedException(activity.ItemType.FullName));
             }
             ((MessageQuerySetDesigner)sender).OnActivityChanged();
         }
@@ -276,14 +276,14 @@ namespace System.ServiceModel.Activities.Presentation
             //throw if query set container is not derived from correlation initializer or doesn't have required property
             if (null != container)
             {
-                var property = container.Properties.FirstOrDefault(
-                    p => typeof(MessageQuerySet).IsAssignableFrom(p.PropertyType)
-                );
+                var property = container
+                    .Properties
+                    .FirstOrDefault(p => typeof(MessageQuerySet).IsAssignableFrom(p.PropertyType));
                 if (!container.IsAssignableFrom<CorrelationInitializer>() && null == property)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(container.ItemType.FullName)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new NotSupportedException(container.ItemType.FullName));
                 }
                 control.querySetPropertyName = null != property ? property.Name : string.Empty;
             }
@@ -348,7 +348,8 @@ namespace System.ServiceModel.Activities.Presentation
                             ),
                         PropertySetter = (instance, value) =>
                         {
-                            ((MessageQueryEntry)instance).ReflectedObject
+                            ((MessageQueryEntry)instance)
+                                .ReflectedObject
                                 .Properties[ValueProperty]
                                 .SetValue(value);
                         },

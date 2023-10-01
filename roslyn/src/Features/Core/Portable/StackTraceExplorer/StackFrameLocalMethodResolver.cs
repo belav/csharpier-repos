@@ -36,8 +36,10 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                 return null;
             }
 
-            var containingMethodName =
-                localMethodNameNode.EncapsulatingMethod.Identifier.ToString();
+            var containingMethodName = localMethodNameNode
+                .EncapsulatingMethod
+                .Identifier
+                .ToString();
             var semanticFacts = project.GetRequiredLanguageService<ISemanticFactsService>();
             var candidateFunctions = type.GetMembers()
                 .Where(member => member.Name == containingMethodName)

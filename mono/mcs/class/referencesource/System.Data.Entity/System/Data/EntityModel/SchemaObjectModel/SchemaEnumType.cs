@@ -201,9 +201,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
             // if the underlying type was not specified in the CSDL we use int by default
             if (_unresolvedUnderlyingTypeName == null)
             {
-                _underlyingType = Schema.SchemaManager.SchemaTypes.Single(
-                    t => t is ScalarType && ((ScalarType)t).TypeKind == PrimitiveTypeKind.Int32
-                );
+                _underlyingType = Schema
+                    .SchemaManager
+                    .SchemaTypes
+                    .Single(
+                        t => t is ScalarType && ((ScalarType)t).TypeKind == PrimitiveTypeKind.Int32
+                    );
             }
             else
             {
@@ -250,11 +253,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     invalidEnumMember.AddError(
                         ErrorCode.EnumMemberValueOutOfItsUnderylingTypeRange,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.EnumMemberValueOutOfItsUnderylingTypeRange(
-                            invalidEnumMember.Value,
-                            invalidEnumMember.Name,
-                            UnderlyingType.Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .EnumMemberValueOutOfItsUnderylingTypeRange(
+                                invalidEnumMember.Value,
+                                invalidEnumMember.Name,
+                                UnderlyingType.Name
+                            )
                     );
                 }
             }

@@ -57,10 +57,12 @@ public class IISFunctionalTestBase : FunctionalTestsBase
         string expectedResponse = "The app is offline."
     )
     {
-        var response = await deploymentResult.HttpClient.RetryRequestAsync(
-            "HelloWorld",
-            r => r.StatusCode == HttpStatusCode.ServiceUnavailable
-        );
+        var response = await deploymentResult
+            .HttpClient
+            .RetryRequestAsync(
+                "HelloWorld",
+                r => r.StatusCode == HttpStatusCode.ServiceUnavailable
+            );
         Assert.Equal(expectedResponse, await response.Content.ReadAsStringAsync());
     }
 
@@ -75,10 +77,9 @@ public class IISFunctionalTestBase : FunctionalTestsBase
 
     public static async Task AssertRunning(IISDeploymentResult deploymentResult)
     {
-        var response = await deploymentResult.HttpClient.RetryRequestAsync(
-            "HelloWorld",
-            r => r.IsSuccessStatusCode
-        );
+        var response = await deploymentResult
+            .HttpClient
+            .RetryRequestAsync("HelloWorld", r => r.IsSuccessStatusCode);
         var responseText = await response.Content.ReadAsStringAsync();
         Assert.Equal("Hello World", responseText);
     }

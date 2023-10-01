@@ -121,12 +121,15 @@ namespace System.Net.Quic.Implementations.MsQuic
                 QUIC_HANDLE* handle;
                 Debug.Assert(!Monitor.IsEntered(_state), "!Monitor.IsEntered(_state)");
                 ThrowIfFailure(
-                    MsQuicApi.Api.ApiTable->ListenerOpen(
-                        MsQuicApi.Api.Registration.QuicHandle,
-                        &NativeCallback,
-                        (void*)GCHandle.ToIntPtr(_stateHandle),
-                        &handle
-                    ),
+                    MsQuicApi
+                        .Api
+                        .ApiTable
+                        ->ListenerOpen(
+                            MsQuicApi.Api.Registration.QuicHandle,
+                            &NativeCallback,
+                            (void*)GCHandle.ToIntPtr(_stateHandle),
+                            &handle
+                        ),
                     "ListenerOpen failed"
                 );
                 _state.Handle = new SafeMsQuicListenerHandle(handle);
@@ -163,7 +166,9 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             try
             {
-                return await _state.AcceptConnectionQueue.Reader
+                return await _state
+                    .AcceptConnectionQueue
+                    .Reader
                     .ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -235,12 +240,15 @@ namespace System.Net.Quic.Implementations.MsQuic
                 }
 
                 ThrowIfFailure(
-                    MsQuicApi.Api.ApiTable->ListenerStart(
-                        _state.Handle.QuicHandle,
-                        msquicBuffers.Buffers,
-                        (uint)applicationProtocols.Count,
-                        &address
-                    ),
+                    MsQuicApi
+                        .Api
+                        .ApiTable
+                        ->ListenerStart(
+                            _state.Handle.QuicHandle,
+                            msquicBuffers.Buffers,
+                            (uint)applicationProtocols.Count,
+                            &address
+                        ),
                     "ListenerStart failed"
                 );
             }
@@ -371,10 +379,13 @@ namespace System.Net.Quic.Implementations.MsQuic
                 );
 
                 Debug.Assert(!Monitor.IsEntered(state), "!Monitor.IsEntered(state)");
-                int status = MsQuicApi.Api.ApiTable->ConnectionSetConfiguration(
-                    connectionHandle.QuicHandle,
-                    connectionConfiguration.QuicHandle
-                );
+                int status = MsQuicApi
+                    .Api
+                    .ApiTable
+                    ->ConnectionSetConfiguration(
+                        connectionHandle.QuicHandle,
+                        connectionConfiguration.QuicHandle
+                    );
                 if (StatusSucceeded(status))
                 {
                     msQuicConnection = new MsQuicConnection(
@@ -392,10 +403,9 @@ namespace System.Net.Quic.Implementations.MsQuic
                     );
 
                     if (
-                        !state.PendingConnections.TryAdd(
-                            connectionHandle.DangerousGetHandle(),
-                            msQuicConnection
-                        )
+                        !state
+                            .PendingConnections
+                            .TryAdd(connectionHandle.DangerousGetHandle(), msQuicConnection)
                     )
                     {
                         msQuicConnection.Dispose();

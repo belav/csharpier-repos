@@ -180,7 +180,9 @@ namespace System.CommandLine.Help
 
         private void WriteSubcommands(HelpContext context)
         {
-            var subcommands = context.Command.Subcommands
+            var subcommands = context
+                .Command
+                .Subcommands
                 .Where(x => !x.IsHidden)
                 .Select(x => GetTwoColumnRow(x, context))
                 .ToArray();

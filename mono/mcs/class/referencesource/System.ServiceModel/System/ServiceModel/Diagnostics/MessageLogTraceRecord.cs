@@ -53,11 +53,11 @@ namespace System.ServiceModel.Diagnostics
             : this(source)
         {
             this.type = null;
-            this.messageString = System.Text.Encoding.UTF8.GetString(
-                buffer.Array,
-                buffer.Offset,
-                buffer.Count
-            );
+            this.messageString = System
+                .Text
+                .Encoding
+                .UTF8
+                .GetString(buffer.Array, buffer.Offset, buffer.Count);
         }
 
         internal MessageLogTraceRecord(string message, MessageLoggingSource source)

@@ -931,9 +931,10 @@ namespace MonoTests.System.Windows.Forms
                         changed = true;
                         break;
                     default: // No touchee!
-                        global::System.Diagnostics.Debug.Assert(
-                            _checkState == CheckState.Indeterminate
-                        );
+                        global::System
+                            .Diagnostics
+                            .Debug
+                            .Assert(_checkState == CheckState.Indeterminate);
                         break;
                 }
 #if false // logging

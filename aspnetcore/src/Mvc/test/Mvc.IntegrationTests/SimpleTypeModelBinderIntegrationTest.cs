@@ -403,9 +403,11 @@ public class SimpleTypeModelBinderIntegrationTest
             .BindingDetails(binding =>
             {
                 // A real details provider could customize message based on BindingMetadataProviderContext.
-                binding.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
-                    (value) => $"Hmm, '{value}' is not a valid value."
-                );
+                binding
+                    .ModelBindingMessageProvider
+                    .SetNonPropertyAttemptedValueIsInvalidAccessor(
+                        (value) => $"Hmm, '{value}' is not a valid value."
+                    );
             });
 
         var testContext = ModelBindingTestHelper.GetTestContext(
@@ -511,9 +513,9 @@ public class SimpleTypeModelBinderIntegrationTest
             .BindingDetails(binding =>
             {
                 // A real details provider could customize message based on BindingMetadataProviderContext.
-                binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-                    value => $"Hurts when '{value}' is provided."
-                );
+                binding
+                    .ModelBindingMessageProvider
+                    .SetValueMustNotBeNullAccessor(value => $"Hurts when '{value}' is provided.");
             });
 
         var testContext = ModelBindingTestHelper.GetTestContext(

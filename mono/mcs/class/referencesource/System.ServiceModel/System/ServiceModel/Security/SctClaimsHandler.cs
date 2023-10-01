@@ -28,16 +28,16 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenHandlerCollection"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenHandlerCollection");
             }
 
             if (endpointId == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
-                    "endpointId"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNullOrEmptyString("endpointId");
             }
 
             _securityTokenHandlerCollection = securityTokenHandlerCollection;

@@ -131,10 +131,9 @@ namespace System.Security.Claims
             foreach (Mapping mapping in mappingTable)
             {
                 if (
-                    StringComparer.Ordinal.Equals(
-                        normalizedAuthenticationMethod,
-                        mapping.Normalized
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(normalizedAuthenticationMethod, mapping.Normalized)
                 )
                     return mapping.Unnormalized;
             }
@@ -156,10 +155,9 @@ namespace System.Security.Claims
             foreach (Mapping mapping in mappingTable)
             {
                 if (
-                    StringComparer.Ordinal.Equals(
-                        unnormalizedAuthenticationMethod,
-                        mapping.Unnormalized
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(unnormalizedAuthenticationMethod, mapping.Unnormalized)
                 )
                     return mapping.Normalized;
             }

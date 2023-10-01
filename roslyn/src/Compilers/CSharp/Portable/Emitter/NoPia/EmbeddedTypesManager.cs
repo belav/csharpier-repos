@@ -78,9 +78,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         {
             if ((object)_lazySystemStringType == (object)ErrorTypeSymbol.UnknownResultType)
             {
-                var typeSymbol = ModuleBeingBuilt.Compilation.GetSpecialType(
-                    SpecialType.System_String
-                );
+                var typeSymbol = ModuleBeingBuilt
+                    .Compilation
+                    .GetSpecialType(SpecialType.System_String);
 
                 UseSiteInfo<AssemblySymbol> info = typeSymbol.GetUseSiteInfo();
 
@@ -679,9 +679,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
                             diagnostics,
                             ErrorCode.ERR_InteropMethodWithBody,
                             syntaxNodeOpt,
-                            method.AdaptedMethodSymbol.ToDisplayString(
-                                SymbolDisplayFormat.MinimallyQualifiedFormat
-                            )
+                            method
+                                .AdaptedMethodSymbol
+                                .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
                         );
                     }
                     break;

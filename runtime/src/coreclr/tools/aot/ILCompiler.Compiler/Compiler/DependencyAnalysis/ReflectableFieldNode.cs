@@ -37,11 +37,9 @@ namespace ILCompiler.DependencyAnalysis
             );
 
             DependencyList dependencies = new DependencyList();
-            factory.MetadataManager.GetDependenciesDueToReflectability(
-                ref dependencies,
-                factory,
-                _field
-            );
+            factory
+                .MetadataManager
+                .GetDependenciesDueToReflectability(ref dependencies, factory, _field);
 
             // No runtime artifacts needed if this is a generic definition or literal field
             if (_field.OwningType.IsGenericDefinition || _field.IsLiteral)
@@ -71,8 +69,9 @@ namespace ILCompiler.DependencyAnalysis
             if (_field.IsStatic && !_field.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any))
             {
                 // Infrastructure around static constructors is stashed in the NonGC static base
-                bool needsNonGcStaticBase =
-                    factory.PreinitializationManager.HasLazyStaticConstructor(Field.OwningType);
+                bool needsNonGcStaticBase = factory
+                    .PreinitializationManager
+                    .HasLazyStaticConstructor(Field.OwningType);
 
                 if (_field.HasRva)
                 {

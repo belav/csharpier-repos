@@ -90,9 +90,9 @@ namespace SslStress.Utils
 
             int i = 0;
             foreach (
-                ErrorType failure in _failureTypes.Values.OrderByDescending(
-                    x => x.Occurrences.Count
-                )
+                ErrorType failure in _failureTypes
+                    .Values
+                    .OrderByDescending(x => x.Occurrences.Count)
             )
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -102,10 +102,9 @@ namespace SslStress.Utils
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 foreach (
-                    IGrouping<
-                        string?,
-                        (DateTime timestamp, string? metadata)
-                    > grouping in failure.Occurrences.GroupBy(o => o.metadata)
+                    IGrouping<string?, (DateTime timestamp, string? metadata)> grouping in failure
+                        .Occurrences
+                        .GroupBy(o => o.metadata)
                 )
                 {
                     Console.ForegroundColor = ConsoleColor.Cyan;

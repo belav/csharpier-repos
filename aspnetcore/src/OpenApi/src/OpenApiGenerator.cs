@@ -522,9 +522,9 @@ internal sealed class OpenApiGenerator
             return (true, null, null);
         }
         else if (
-            parameter.CustomAttributes.Any(
-                a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
-            )
+            parameter
+                .CustomAttributes
+                .Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType))
             || parameter.ParameterType == typeof(HttpContext)
             || parameter.ParameterType == typeof(HttpRequest)
             || parameter.ParameterType == typeof(HttpResponse)

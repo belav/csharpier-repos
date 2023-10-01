@@ -362,9 +362,9 @@ namespace System.Activities.XamlIntegration
                     )
                     {
                         Type activityType = xamlType.TypeArguments[0].UnderlyingType;
-                        activityXamlType = Writer.SchemaContext.GetXamlType(
-                            typeof(Activity<>).MakeGenericType(activityType)
-                        );
+                        activityXamlType = Writer
+                            .SchemaContext
+                            .GetXamlType(typeof(Activity<>).MakeGenericType(activityType));
                     }
 
                     Writer.SetActivityType(activityXamlType, xamlType);
@@ -624,9 +624,15 @@ namespace System.Activities.XamlIntegration
                                 {
                                     deferredPropertyNodes = new XamlNodeQueue(Writer.SchemaContext);
                                 }
-                                deferredPropertyNodes.Writer.WriteStartMember(
-                                    new XamlMember(defaultValueNode.Key, this.xClassXamlType, true)
-                                );
+                                deferredPropertyNodes
+                                    .Writer
+                                    .WriteStartMember(
+                                        new XamlMember(
+                                            defaultValueNode.Key,
+                                            this.xClassXamlType,
+                                            true
+                                        )
+                                    );
                                 deferredPropertyNodes.Writer.WriteNode(reader);
                                 XamlServices.Transform(
                                     defaultValueNode.Value.Reader,
@@ -704,11 +710,15 @@ namespace System.Activities.XamlIntegration
                             xamlMember = Writer.activityXamlType.GetMember(xamlMember.Name);
                             if (xamlMember == null)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SR.MemberNotSupportedByActivityXamlServices(xamlMember.Name)
-                                    )
-                                );
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SR.MemberNotSupportedByActivityXamlServices(
+                                                xamlMember.Name
+                                            )
+                                        )
+                                    );
                             }
 
                             if (xamlMember.Name == "Implementation")
@@ -1293,9 +1303,9 @@ namespace System.Activities.XamlIntegration
                         typeof(PropertyReferenceExtension<>).MakeGenericType(
                             targetProperty.Type.UnderlyingType ?? typeof(object)
                         );
-                    XamlType propertyReferenceXamlType = parentWriter.SchemaContext.GetXamlType(
-                        propertyReferenceType
-                    );
+                    XamlType propertyReferenceXamlType = parentWriter
+                        .SchemaContext
+                        .GetXamlType(propertyReferenceType);
                     parentWriter.WriteStartObject(propertyReferenceXamlType);
 
                     if (sourceProperty != null)
@@ -1446,9 +1456,9 @@ namespace System.Activities.XamlIntegration
                 {
                     // can't transform to <Foo.></Foo.>, dump original nodes <ActivityBuilder.PropertyReference(s) .../>
                     this.parent.HasUntransformedChildren = true;
-                    this.parent.UntransformedNodesWriter.WriteStartObject(
-                        Writer.activityPropertyReferenceXamlType
-                    );
+                    this.parent
+                        .UntransformedNodesWriter
+                        .WriteStartObject(Writer.activityPropertyReferenceXamlType);
                     XamlServices.Transform(
                         this.propertyReferenceNodes.Reader,
                         this.parent.UntransformedNodesWriter,

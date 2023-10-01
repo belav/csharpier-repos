@@ -57,9 +57,9 @@ namespace POS_Server.Controllers
             using (incposdbEntities entity = new incposdbEntities())
             {
                 var transferList = (
-                    from t in entity.itemsTransfer.Where(
-                        x => x.invoiceId == invoiceId && x.mainCourseId == null
-                    )
+                    from t in entity
+                        .itemsTransfer
+                        .Where(x => x.invoiceId == invoiceId && x.mainCourseId == null)
                     join u in entity.itemsUnits on t.itemUnitId equals u.itemUnitId
                     join i in entity.items on u.itemId equals i.itemId
                     join un in entity.units on u.unitId equals un.unitId
@@ -70,7 +70,8 @@ namespace POS_Server.Controllers
                         itemId = i.itemId,
                         itemName = i.name,
                         quantity = t.quantity,
-                        invoiceId = entity.invoiceOrder
+                        invoiceId = entity
+                            .invoiceOrder
                             .Where(x => x.itemsTransferId == t.itemsTransId)
                             .Select(x => x.orderId)
                             .FirstOrDefault(),
@@ -94,7 +95,8 @@ namespace POS_Server.Controllers
 
                 foreach (var item in transferList)
                 {
-                    item.itemsIngredients = entity.itemsTransferIngredients
+                    item.itemsIngredients = entity
+                        .itemsTransferIngredients
                         .Where(x => x.itemsTransId == item.itemsTransId)
                         .Select(
                             x =>
@@ -112,9 +114,9 @@ namespace POS_Server.Controllers
                         .ToList();
 
                     item.itemExtras = (
-                        from t in entity.itemsTransfer.Where(
-                            x => x.mainCourseId == item.itemsTransId
-                        )
+                        from t in entity
+                            .itemsTransfer
+                            .Where(x => x.mainCourseId == item.itemsTransId)
                         join u in entity.itemsUnits on t.itemUnitId equals u.itemUnitId
                         join i in entity.items on u.itemId equals i.itemId
                         join un in entity.units on u.unitId equals un.unitId
@@ -125,7 +127,8 @@ namespace POS_Server.Controllers
                             itemId = i.itemId,
                             itemName = i.name,
                             quantity = t.quantity,
-                            invoiceId = entity.invoiceOrder
+                            invoiceId = entity
+                                .invoiceOrder
                                 .Where(x => x.itemsTransferId == t.itemsTransId)
                                 .Select(x => x.orderId)
                                 .FirstOrDefault(),
@@ -217,13 +220,15 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    List<invoiceOrder> iol = entity.invoiceOrder
+                    List<invoiceOrder> iol = entity
+                        .invoiceOrder
                         .Where(x => x.invoiceId == invoiceId)
                         .ToList();
                     entity.invoiceOrder.RemoveRange(iol);
                     entity.SaveChanges();
 
-                    List<itemsTransfer> items = entity.itemsTransfer
+                    List<itemsTransfer> items = entity
+                        .itemsTransfer
                         .Where(x => x.invoiceId == invoiceId)
                         .ToList();
                     entity.itemsTransfer.RemoveRange(items);
@@ -277,7 +282,8 @@ namespace POS_Server.Controllers
                         {
                             long offerId = (int)newObject[i].offerId;
                             long itemUnitId = (int)newObject[i].itemUnitId;
-                            var offer = entity.itemsOffers
+                            var offer = entity
+                                .itemsOffers
                                 .Where(x => x.iuId == itemUnitId && x.offerId == offerId)
                                 .FirstOrDefault();
 
@@ -306,25 +312,29 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    List<itemsTransfer> items = entity.itemsTransfer
+                    List<itemsTransfer> items = entity
+                        .itemsTransfer
                         .Where(x => x.invoiceId == invoiceId)
                         .ToList();
 
                     foreach (var item in items)
                     {
-                        var orderItem = entity.itemOrderPreparing
+                        var orderItem = entity
+                            .itemOrderPreparing
                             .Where(x => x.itemsTransId == item.itemsTransId)
                             .FirstOrDefault();
                         if (orderItem == null)
                         {
                             // remove transfer ingredients
-                            var itemIngredients = entity.itemsTransferIngredients
+                            var itemIngredients = entity
+                                .itemsTransferIngredients
                                 .Where(x => x.itemsTransId == item.itemsTransId)
                                 .ToList();
                             entity.itemsTransferIngredients.RemoveRange(itemIngredients);
 
                             //remove item transfer extra
-                            var extras = entity.itemsTransfer
+                            var extras = entity
+                                .itemsTransfer
                                 .Where(x => x.mainCourseId == item.itemsTransId)
                                 .ToList();
                             entity.itemsTransferIngredients.RemoveRange(itemIngredients);
@@ -345,11 +355,13 @@ namespace POS_Server.Controllers
                         long itemUnitId = (long)newObject[i].itemUnitId;
 
                         #region get avg price for item
-                        var avgPrice = entity.items
+                        var avgPrice = entity
+                            .items
                             .Where(
                                 m =>
                                     m.itemId
-                                    == entity.itemsUnits
+                                    == entity
+                                        .itemsUnits
                                         .Where(x => x.itemUnitId == itemUnitId)
                                         .Select(x => x.itemId)
                                         .FirstOrDefault()
@@ -362,7 +374,8 @@ namespace POS_Server.Controllers
                         if (newObject[i].itemsTransId != 0)
                         {
                             long id = newObject[i].itemsTransId;
-                            orderItem = entity.itemOrderPreparing
+                            orderItem = entity
+                                .itemOrderPreparing
                                 .Where(x => x.itemsTransId == id)
                                 .FirstOrDefault();
                         }
@@ -472,7 +485,8 @@ namespace POS_Server.Controllers
                         {
                             long offerId = (int)newObject[i].offerId;
 
-                            var offer = entity.itemsOffers
+                            var offer = entity
+                                .itemsOffers
                                 .Where(x => x.iuId == itemUnitId && x.offerId == offerId)
                                 .FirstOrDefault();
 
@@ -496,10 +510,12 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity2 = new incposdbEntities())
             {
-                List<itemsTransfer> items = entity2.itemsTransfer
+                List<itemsTransfer> items = entity2
+                    .itemsTransfer
                     .Where(x => x.invoiceId == invoiceId)
                     .ToList();
-                List<itemsTransfer> expItems = entity2.itemsTransfer
+                List<itemsTransfer> expItems = entity2
+                    .itemsTransfer
                     .Where(x => x.invoiceId == exportInvId)
                     .ToList();
                 entity2.itemsTransfer.RemoveRange(items);
@@ -575,12 +591,14 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         List<ItemTransferModel> requiredTransfers = new List<ItemTransferModel>();
-                        var itemsTransfer = entity.itemsTransfer
+                        var itemsTransfer = entity
+                            .itemsTransfer
                             .Where(x => x.invoiceId == invoiceId)
                             .ToList();
                         foreach (itemsTransfer tr in itemsTransfer)
                         {
-                            var lockedQuantity = entity.itemsLocations
+                            var lockedQuantity = entity
+                                .itemsLocations
                                 .Where(
                                     x => x.invoiceId == invoiceId && x.itemUnitId == tr.itemUnitId
                                 )
@@ -665,7 +683,8 @@ namespace POS_Server.Controllers
                         new List<itemsTransferIngredientsModel>();
                     if (itemTransferId != 0)
                     {
-                        List = entity.itemsTransferIngredients
+                        List = entity
+                            .itemsTransferIngredients
                             .Where(S => S.itemsTransId == itemTransferId)
                             .Select(
                                 S =>
@@ -685,7 +704,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        List = entity.dishIngredients
+                        List = entity
+                            .dishIngredients
                             .Where(x => x.itemUnitId == itemUnitId && x.isActive == 1)
                             .Select(
                                 S =>

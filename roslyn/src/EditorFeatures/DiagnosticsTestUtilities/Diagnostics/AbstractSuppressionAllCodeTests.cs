@@ -163,7 +163,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                         .GetResult();
 
                     var applyChangesOperation = operations.OfType<ApplyChangesOperation>().Single();
-                    var newDocument = applyChangesOperation.ChangedSolution.Projects
+                    var newDocument = applyChangesOperation
+                        .ChangedSolution
+                        .Projects
                         .Single()
                         .Documents
                         .Single();

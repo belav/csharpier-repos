@@ -213,11 +213,10 @@ namespace System.Xml.Schema
                     SendValidationEvent(SR.Sch_ContentInNill, elementName.ToString());
                     return null;
                 }
-                particle = context.ElementDecl!.ContentValidator!.ValidateElement(
-                    elementName,
-                    context,
-                    out errorCode
-                );
+                particle = context
+                    .ElementDecl!
+                    .ContentValidator!
+                    .ValidateElement(elementName, context, out errorCode);
                 if (particle == null)
                 {
                     _processContents = context.ProcessContents = XmlSchemaContentProcessing.Skip;
@@ -1122,10 +1121,9 @@ namespace System.Xml.Schema
                 {
                     // check selector from here
                     if (
-                        constraints[j].axisSelector.MoveToStartElement(
-                            reader.LocalName,
-                            reader.NamespaceURI
-                        )
+                        constraints[j]
+                            .axisSelector
+                            .MoveToStartElement(reader.LocalName, reader.NamespaceURI)
                     )
                     {
                         // selector selects new node, activate a new set of fields
@@ -1134,10 +1132,9 @@ namespace System.Xml.Schema
                             $"Name: {reader.LocalName}\t|\tURI: {reader.NamespaceURI}\n"
                         );
                         // in which axisFields got updated
-                        constraints[j].axisSelector.PushKS(
-                            PositionInfo.LineNumber,
-                            PositionInfo.LinePosition
-                        );
+                        constraints[j]
+                            .axisSelector
+                            .PushKS(PositionInfo.LineNumber, PositionInfo.LinePosition);
                     }
 
                     // axisFields is not null, but may be empty
@@ -1297,10 +1294,9 @@ namespace System.Xml.Schema
                     }
 
                     if (
-                        constraints[i].axisSelector.EndElement(
-                            reader.LocalName,
-                            reader.NamespaceURI
-                        )
+                        constraints[i]
+                            .axisSelector
+                            .EndElement(reader.LocalName, reader.NamespaceURI)
                     )
                     {
                         // insert key sequence into hash (+ located active axis tuple leave for later)

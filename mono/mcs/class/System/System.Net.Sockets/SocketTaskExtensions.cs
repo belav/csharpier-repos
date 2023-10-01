@@ -12,24 +12,28 @@ namespace System.Net.Sockets
     {
         public static Task<Socket> AcceptAsync(this Socket socket)
         {
-            return Task<Socket>.Factory.FromAsync(
-                (callback, state) => ((Socket)state).BeginAccept(callback, state),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndAccept(asyncResult),
-                state: socket
-            );
+            return Task<Socket>
+                .Factory
+                .FromAsync(
+                    (callback, state) => ((Socket)state).BeginAccept(callback, state),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndAccept(asyncResult),
+                    state: socket
+                );
         }
 
         public static Task<Socket> AcceptAsync(this Socket socket, Socket acceptSocket)
         {
             const int ReceiveSize = 0;
-            return Task<Socket>.Factory.FromAsync(
-                (socketForAccept, receiveSize, callback, state) =>
-                    ((Socket)state).BeginAccept(socketForAccept, receiveSize, callback, state),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndAccept(asyncResult),
-                acceptSocket,
-                ReceiveSize,
-                state: socket
-            );
+            return Task<Socket>
+                .Factory
+                .FromAsync(
+                    (socketForAccept, receiveSize, callback, state) =>
+                        ((Socket)state).BeginAccept(socketForAccept, receiveSize, callback, state),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndAccept(asyncResult),
+                    acceptSocket,
+                    ReceiveSize,
+                    state: socket
+                );
         }
 
         public static Task ConnectAsync(this Socket socket, EndPoint remoteEP)
@@ -85,21 +89,23 @@ namespace System.Net.Sockets
             SocketFlags socketFlags
         )
         {
-            return Task<int>.Factory.FromAsync(
-                (targetBuffer, flags, callback, state) =>
-                    ((Socket)state).BeginReceive(
-                        targetBuffer.Array,
-                        targetBuffer.Offset,
-                        targetBuffer.Count,
-                        flags,
-                        callback,
-                        state
-                    ),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndReceive(asyncResult),
-                buffer,
-                socketFlags,
-                state: socket
-            );
+            return Task<int>
+                .Factory
+                .FromAsync(
+                    (targetBuffer, flags, callback, state) =>
+                        ((Socket)state).BeginReceive(
+                            targetBuffer.Array,
+                            targetBuffer.Offset,
+                            targetBuffer.Count,
+                            flags,
+                            callback,
+                            state
+                        ),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndReceive(asyncResult),
+                    buffer,
+                    socketFlags,
+                    state: socket
+                );
         }
 
         public static Task<int> ReceiveAsync(
@@ -108,14 +114,16 @@ namespace System.Net.Sockets
             SocketFlags socketFlags
         )
         {
-            return Task<int>.Factory.FromAsync(
-                (targetBuffers, flags, callback, state) =>
-                    ((Socket)state).BeginReceive(targetBuffers, flags, callback, state),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndReceive(asyncResult),
-                buffers,
-                socketFlags,
-                state: socket
-            );
+            return Task<int>
+                .Factory
+                .FromAsync(
+                    (targetBuffers, flags, callback, state) =>
+                        ((Socket)state).BeginReceive(targetBuffers, flags, callback, state),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndReceive(asyncResult),
+                    buffers,
+                    socketFlags,
+                    state: socket
+                );
         }
 
         public static Task<SocketReceiveFromResult> ReceiveFromAsync(
@@ -127,44 +135,46 @@ namespace System.Net.Sockets
         {
             object[] packedArguments = new object[] { socket, remoteEndPoint };
 
-            return Task<SocketReceiveFromResult>.Factory.FromAsync(
-                (targetBuffer, flags, callback, state) =>
-                {
-                    var arguments = (object[])state;
-                    var s = (Socket)arguments[0];
-                    var e = (EndPoint)arguments[1];
-
-                    IAsyncResult result = s.BeginReceiveFrom(
-                        targetBuffer.Array,
-                        targetBuffer.Offset,
-                        targetBuffer.Count,
-                        flags,
-                        ref e,
-                        callback,
-                        state
-                    );
-
-                    arguments[1] = e;
-                    return result;
-                },
-                asyncResult =>
-                {
-                    var arguments = (object[])asyncResult.AsyncState;
-                    var s = (Socket)arguments[0];
-                    var e = (EndPoint)arguments[1];
-
-                    int bytesReceived = s.EndReceiveFrom(asyncResult, ref e);
-
-                    return new SocketReceiveFromResult()
+            return Task<SocketReceiveFromResult>
+                .Factory
+                .FromAsync(
+                    (targetBuffer, flags, callback, state) =>
                     {
-                        ReceivedBytes = bytesReceived,
-                        RemoteEndPoint = e
-                    };
-                },
-                buffer,
-                socketFlags,
-                state: packedArguments
-            );
+                        var arguments = (object[])state;
+                        var s = (Socket)arguments[0];
+                        var e = (EndPoint)arguments[1];
+
+                        IAsyncResult result = s.BeginReceiveFrom(
+                            targetBuffer.Array,
+                            targetBuffer.Offset,
+                            targetBuffer.Count,
+                            flags,
+                            ref e,
+                            callback,
+                            state
+                        );
+
+                        arguments[1] = e;
+                        return result;
+                    },
+                    asyncResult =>
+                    {
+                        var arguments = (object[])asyncResult.AsyncState;
+                        var s = (Socket)arguments[0];
+                        var e = (EndPoint)arguments[1];
+
+                        int bytesReceived = s.EndReceiveFrom(asyncResult, ref e);
+
+                        return new SocketReceiveFromResult()
+                        {
+                            ReceivedBytes = bytesReceived,
+                            RemoteEndPoint = e
+                        };
+                    },
+                    buffer,
+                    socketFlags,
+                    state: packedArguments
+                );
         }
 
         public static Task<SocketReceiveMessageFromResult> ReceiveMessageFromAsync(
@@ -176,53 +186,55 @@ namespace System.Net.Sockets
         {
             object[] packedArguments = new object[] { socket, socketFlags, remoteEndPoint };
 
-            return Task<SocketReceiveMessageFromResult>.Factory.FromAsync(
-                (targetBuffer, callback, state) =>
-                {
-                    var arguments = (object[])state;
-                    var s = (Socket)arguments[0];
-                    var f = (SocketFlags)arguments[1];
-                    var e = (EndPoint)arguments[2];
-
-                    IAsyncResult result = s.BeginReceiveMessageFrom(
-                        targetBuffer.Array,
-                        targetBuffer.Offset,
-                        targetBuffer.Count,
-                        f,
-                        ref e,
-                        callback,
-                        state
-                    );
-
-                    arguments[2] = e;
-                    return result;
-                },
-                asyncResult =>
-                {
-                    var arguments = (object[])asyncResult.AsyncState;
-                    var s = (Socket)arguments[0];
-                    var f = (SocketFlags)arguments[1];
-                    var e = (EndPoint)arguments[2];
-                    IPPacketInformation ipPacket;
-
-                    int bytesReceived = s.EndReceiveMessageFrom(
-                        asyncResult,
-                        ref f,
-                        ref e,
-                        out ipPacket
-                    );
-
-                    return new SocketReceiveMessageFromResult()
+            return Task<SocketReceiveMessageFromResult>
+                .Factory
+                .FromAsync(
+                    (targetBuffer, callback, state) =>
                     {
-                        PacketInformation = ipPacket,
-                        ReceivedBytes = bytesReceived,
-                        RemoteEndPoint = e,
-                        SocketFlags = f
-                    };
-                },
-                buffer,
-                state: packedArguments
-            );
+                        var arguments = (object[])state;
+                        var s = (Socket)arguments[0];
+                        var f = (SocketFlags)arguments[1];
+                        var e = (EndPoint)arguments[2];
+
+                        IAsyncResult result = s.BeginReceiveMessageFrom(
+                            targetBuffer.Array,
+                            targetBuffer.Offset,
+                            targetBuffer.Count,
+                            f,
+                            ref e,
+                            callback,
+                            state
+                        );
+
+                        arguments[2] = e;
+                        return result;
+                    },
+                    asyncResult =>
+                    {
+                        var arguments = (object[])asyncResult.AsyncState;
+                        var s = (Socket)arguments[0];
+                        var f = (SocketFlags)arguments[1];
+                        var e = (EndPoint)arguments[2];
+                        IPPacketInformation ipPacket;
+
+                        int bytesReceived = s.EndReceiveMessageFrom(
+                            asyncResult,
+                            ref f,
+                            ref e,
+                            out ipPacket
+                        );
+
+                        return new SocketReceiveMessageFromResult()
+                        {
+                            PacketInformation = ipPacket,
+                            ReceivedBytes = bytesReceived,
+                            RemoteEndPoint = e,
+                            SocketFlags = f
+                        };
+                    },
+                    buffer,
+                    state: packedArguments
+                );
         }
 
         public static Task<int> SendAsync(
@@ -231,21 +243,23 @@ namespace System.Net.Sockets
             SocketFlags socketFlags
         )
         {
-            return Task<int>.Factory.FromAsync(
-                (targetBuffer, flags, callback, state) =>
-                    ((Socket)state).BeginSend(
-                        targetBuffer.Array,
-                        targetBuffer.Offset,
-                        targetBuffer.Count,
-                        flags,
-                        callback,
-                        state
-                    ),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndSend(asyncResult),
-                buffer,
-                socketFlags,
-                state: socket
-            );
+            return Task<int>
+                .Factory
+                .FromAsync(
+                    (targetBuffer, flags, callback, state) =>
+                        ((Socket)state).BeginSend(
+                            targetBuffer.Array,
+                            targetBuffer.Offset,
+                            targetBuffer.Count,
+                            flags,
+                            callback,
+                            state
+                        ),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndSend(asyncResult),
+                    buffer,
+                    socketFlags,
+                    state: socket
+                );
         }
 
         public static Task<int> SendAsync(
@@ -254,14 +268,16 @@ namespace System.Net.Sockets
             SocketFlags socketFlags
         )
         {
-            return Task<int>.Factory.FromAsync(
-                (targetBuffers, flags, callback, state) =>
-                    ((Socket)state).BeginSend(targetBuffers, flags, callback, state),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndSend(asyncResult),
-                buffers,
-                socketFlags,
-                state: socket
-            );
+            return Task<int>
+                .Factory
+                .FromAsync(
+                    (targetBuffers, flags, callback, state) =>
+                        ((Socket)state).BeginSend(targetBuffers, flags, callback, state),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndSend(asyncResult),
+                    buffers,
+                    socketFlags,
+                    state: socket
+                );
         }
 
         public static Task<int> SendToAsync(
@@ -271,23 +287,25 @@ namespace System.Net.Sockets
             EndPoint remoteEP
         )
         {
-            return Task<int>.Factory.FromAsync(
-                (targetBuffer, flags, endPoint, callback, state) =>
-                    ((Socket)state).BeginSendTo(
-                        targetBuffer.Array,
-                        targetBuffer.Offset,
-                        targetBuffer.Count,
-                        flags,
-                        endPoint,
-                        callback,
-                        state
-                    ),
-                asyncResult => ((Socket)asyncResult.AsyncState).EndSendTo(asyncResult),
-                buffer,
-                socketFlags,
-                remoteEP,
-                state: socket
-            );
+            return Task<int>
+                .Factory
+                .FromAsync(
+                    (targetBuffer, flags, endPoint, callback, state) =>
+                        ((Socket)state).BeginSendTo(
+                            targetBuffer.Array,
+                            targetBuffer.Offset,
+                            targetBuffer.Count,
+                            flags,
+                            endPoint,
+                            callback,
+                            state
+                        ),
+                    asyncResult => ((Socket)asyncResult.AsyncState).EndSendTo(asyncResult),
+                    buffer,
+                    socketFlags,
+                    remoteEP,
+                    state: socket
+                );
         }
 
         public static ValueTask<int> SendAsync(

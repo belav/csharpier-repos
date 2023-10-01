@@ -414,11 +414,9 @@ namespace Mono.Unix
         {
             AssertNotDisposed();
 
-            int r = Native.Syscall.fchown(
-                fileDescriptor,
-                Convert.ToInt32(user),
-                Convert.ToInt32(group)
-            );
+            int r = Native
+                .Syscall
+                .fchown(fileDescriptor, Convert.ToInt32(user), Convert.ToInt32(group));
             UnixMarshal.ThrowExceptionForLastErrorIf(r);
         }
 

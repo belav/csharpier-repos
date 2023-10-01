@@ -165,10 +165,11 @@ namespace System.Data.Mapping.Update.Internal
                 }
 
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.Update_UnsupportedExtentType(
-                        extent.Name,
-                        extent.GetType().Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Update_UnsupportedExtentType(extent.Name, extent.GetType().Name)
                 );
             }
 

@@ -1293,21 +1293,13 @@ namespace System
 
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
-                return MangoArraySortHelper<T>.Default.BinarySearch(
-                    array,
-                    index,
-                    length,
-                    value,
-                    comparer
-                );
+                return MangoArraySortHelper<T>
+                    .Default
+                    .BinarySearch(array, index, length, value, comparer);
             else
-                return ArraySortHelper<T>.Default.BinarySearch(
-                    array,
-                    index,
-                    length,
-                    value,
-                    comparer
-                );
+                return ArraySortHelper<T>
+                    .Default
+                    .BinarySearch(array, index, length, value, comparer);
 #else
             return ArraySortHelper<T>.Default.BinarySearch(array, index, length, value, comparer);
 #endif
@@ -2412,21 +2404,13 @@ namespace System
 
 #if FEATURE_LEGACYNETCF
                 if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
-                    MangoArraySortHelper<TKey>.Default.Sort<TValue>(
-                        keys,
-                        items,
-                        index,
-                        length,
-                        comparer
-                    );
+                    MangoArraySortHelper<TKey>
+                        .Default
+                        .Sort<TValue>(keys, items, index, length, comparer);
                 else
-                    ArraySortHelper<TKey, TValue>.Default.Sort(
-                        keys,
-                        items,
-                        index,
-                        length,
-                        comparer
-                    );
+                    ArraySortHelper<TKey, TValue>
+                        .Default
+                        .Sort(keys, items, index, length, comparer);
 #else
                 ArraySortHelper<TKey, TValue>.Default.Sort(keys, items, index, length, comparer);
 #endif

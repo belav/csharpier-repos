@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             if (!AppDomain.CurrentDomain.IsDefaultAppDomain())
                 throw new InvalidOperationException();
 
-            var xunitUtilities = AppDomain.CurrentDomain
+            var xunitUtilities = AppDomain
+                .CurrentDomain
                 .GetAssemblies()
                 .Where(
                     static assembly => assembly.GetName().Name.StartsWith("xunit.runner.utility")

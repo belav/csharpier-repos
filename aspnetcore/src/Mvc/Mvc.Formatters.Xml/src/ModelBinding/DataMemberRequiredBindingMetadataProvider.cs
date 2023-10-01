@@ -32,7 +32,8 @@ public class DataMemberRequiredBindingMetadataProvider : IBindingMetadataProvide
             return;
         }
 
-        var dataMemberAttribute = context.PropertyAttributes!
+        var dataMemberAttribute = context
+            .PropertyAttributes!
             .OfType<DataMemberAttribute>()
             .FirstOrDefault();
         if (dataMemberAttribute == null || !dataMemberAttribute.IsRequired)

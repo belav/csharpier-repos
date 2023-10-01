@@ -388,7 +388,8 @@ namespace Mono.CSharp
                 if (!ec.ConditionalAccess.Statement)
                 {
                     if (ec.ConditionalAccess.Type.IsNullableType)
-                        Nullable.LiftedNull
+                        Nullable
+                            .LiftedNull
                             .Create(ec.ConditionalAccess.Type, Location.Null)
                             .Emit(ec);
                     else

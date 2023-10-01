@@ -138,10 +138,9 @@ namespace System.ServiceModel.Channels
         {
             HttpRequestMessage httpRequestMessage = null;
 
-            HttpRequestMessageProperty property =
-                message.Properties.GetValue<HttpRequestMessageProperty>(
-                    HttpRequestMessageProperty.Name
-                );
+            HttpRequestMessageProperty property = message
+                .Properties
+                .GetValue<HttpRequestMessageProperty>(HttpRequestMessageProperty.Name);
             if (property != null)
             {
                 httpRequestMessage = property.HttpRequestMessage;

@@ -167,11 +167,13 @@ public class HeaderModelBinder : IModelBinder
         }
         else
         {
-            bindingContext.ModelState.SetModelValue(
-                bindingContext.ModelName,
-                request.Headers.GetCommaSeparatedValues(headerName),
-                request.Headers[headerName]
-            );
+            bindingContext
+                .ModelState
+                .SetModelValue(
+                    bindingContext.ModelName,
+                    request.Headers.GetCommaSeparatedValues(headerName),
+                    request.Headers[headerName]
+                );
 
             bindingContext.Result = ModelBindingResult.Success(model);
         }

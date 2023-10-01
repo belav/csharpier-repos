@@ -130,9 +130,11 @@ namespace Microsoft.CodeAnalysis
             if (projectInfoFixed.CompilationOptions != null)
             {
                 projectInfoFixed = projectInfoFixed.WithCompilationOptions(
-                    projectInfoFixed.CompilationOptions.WithSyntaxTreeOptionsProvider(
-                        new ProjectSyntaxTreeOptionsProvider(_lazyAnalyzerConfigOptions)
-                    )
+                    projectInfoFixed
+                        .CompilationOptions
+                        .WithSyntaxTreeOptionsProvider(
+                            new ProjectSyntaxTreeOptionsProvider(_lazyAnalyzerConfigOptions)
+                        )
                 );
             }
 
@@ -428,7 +430,8 @@ namespace Microsoft.CodeAnalysis
                 CancellationToken cancellationToken
             )
             {
-                var cache = await _projectState._lazyAnalyzerConfigOptions
+                var cache = await _projectState
+                    ._lazyAnalyzerConfigOptions
                     .GetValueAsync(cancellationToken)
                     .ConfigureAwait(false);
                 return GetOptions(cache, documentState);
@@ -622,9 +625,10 @@ namespace Microsoft.CodeAnalysis
             return new AsyncLazy<AnalyzerConfigOptionsCache>(
                 asynchronousComputeFunction: async cancellationToken =>
                 {
-                    var tasks = analyzerConfigDocumentStates.States.Values.Select(
-                        a => a.GetAnalyzerConfigAsync(cancellationToken)
-                    );
+                    var tasks = analyzerConfigDocumentStates
+                        .States
+                        .Values
+                        .Select(a => a.GetAnalyzerConfigAsync(cancellationToken));
                     var analyzerConfigs = await Task.WhenAll(tasks).ConfigureAwait(false);
 
                     cancellationToken.ThrowIfCancellationRequested();
@@ -926,10 +930,9 @@ namespace Microsoft.CodeAnalysis
 
             var onlyPreprocessorDirectiveChange =
                 ParseOptions != null
-                && _languageServices.SyntaxTreeFactory!.OptionsDifferOnlyByPreprocessorDirectives(
-                    options,
-                    ParseOptions
-                );
+                && _languageServices
+                    .SyntaxTreeFactory!
+                    .OptionsDifferOnlyByPreprocessorDirectives(options, ParseOptions);
 
             return With(
                 projectInfo: ProjectInfo

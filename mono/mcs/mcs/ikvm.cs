@@ -648,11 +648,13 @@ namespace Mono.CSharp
                                 {
                                     compiler.Report.SymbolRelatedToPreviousError(entry.Item2);
                                     compiler.Report.SymbolRelatedToPreviousError(fileName);
-                                    compiler.Report.Error(
-                                        1704,
-                                        "An assembly with the same name `{0}' has already been imported. Consider removing one of the references or sign the assembly",
-                                        an.Name
-                                    );
+                                    compiler
+                                        .Report
+                                        .Error(
+                                            1704,
+                                            "An assembly with the same name `{0}' has already been imported. Consider removing one of the references or sign the assembly",
+                                            an.Name
+                                        );
                                     return null;
                                 }
 
@@ -678,15 +680,17 @@ namespace Mono.CSharp
                                     {
                                         case AssemblyComparisonResult.EquivalentFXUnified:
                                         case AssemblyComparisonResult.EquivalentUnified:
-                                            compiler.Report.SymbolRelatedToPreviousError(
-                                                entry.Item2
-                                            );
+                                            compiler
+                                                .Report
+                                                .SymbolRelatedToPreviousError(entry.Item2);
                                             compiler.Report.SymbolRelatedToPreviousError(fileName);
-                                            compiler.Report.Error(
-                                                1703,
-                                                "An assembly `{0}' with the same identity has already been imported. Consider removing one of the references",
-                                                an.Name
-                                            );
+                                            compiler
+                                                .Report
+                                                .Error(
+                                                    1703,
+                                                    "An assembly `{0}' with the same identity has already been imported. Consider removing one of the references",
+                                                    an.Name
+                                                );
                                             return null;
                                     }
                                 }

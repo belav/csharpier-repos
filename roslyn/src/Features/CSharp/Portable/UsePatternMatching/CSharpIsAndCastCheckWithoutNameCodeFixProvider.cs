@@ -79,8 +79,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 .ConfigureAwait(false);
             var expressionTypeOpt = semanticModel.Compilation.ExpressionOfTType();
 
-            var (matches, localName) =
-                CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer.Instance.AnalyzeExpression(
+            var (matches, localName) = CSharpIsAndCastCheckWithoutNameDiagnosticAnalyzer
+                .Instance
+                .AnalyzeExpression(
                     semanticModel,
                     isExpression,
                     expressionTypeOpt,

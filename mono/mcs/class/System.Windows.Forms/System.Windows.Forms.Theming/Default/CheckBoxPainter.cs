@@ -430,13 +430,15 @@ namespace System.Windows.Forms.Theming.Default
             );
 
             // draw sunken effect
-            ThemeEngine.Current.CPDrawBorder3D(
-                g,
-                checkbox_rectangle,
-                Border3DStyle.SunkenInner,
-                Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom,
-                backColor
-            );
+            ThemeEngine
+                .Current
+                .CPDrawBorder3D(
+                    g,
+                    checkbox_rectangle,
+                    Border3DStyle.SunkenInner,
+                    Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom,
+                    backColor
+                );
 
             bounds.Offset(-1, 0);
 
@@ -474,13 +476,15 @@ namespace System.Windows.Forms.Theming.Default
             g.FillRectangle(ResPool.GetSolidBrush(backColor), fill_rectangle);
 
             // draw sunken effect
-            ThemeEngine.Current.CPDrawBorder3D(
-                g,
-                checkbox_rectangle,
-                Border3DStyle.SunkenInner,
-                Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom,
-                backColor
-            );
+            ThemeEngine
+                .Current
+                .CPDrawBorder3D(
+                    g,
+                    checkbox_rectangle,
+                    Border3DStyle.SunkenInner,
+                    Border3DSide.Left | Border3DSide.Right | Border3DSide.Top | Border3DSide.Bottom,
+                    backColor
+                );
 
             bounds.Offset(-1, 0);
 

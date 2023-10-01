@@ -22,9 +22,10 @@ public class Startup
             .AddMessagePackProtocol()
             .AddStackExchangeRedis(options =>
             {
-                options.Configuration.EndPoints.Add(
-                    Environment.GetEnvironmentVariable("REDIS_CONNECTION")
-                );
+                options
+                    .Configuration
+                    .EndPoints
+                    .Add(Environment.GetEnvironmentVariable("REDIS_CONNECTION"));
             });
 
         services.AddSingleton<IUserIdProvider, UserNameIdProvider>();

@@ -110,10 +110,12 @@ namespace System.IdentityModel.Claims
                     }
                     // SelfSigned?
                     else if (
-                        StringComparer.OrdinalIgnoreCase.Equals(
-                            this.certificate.SubjectName.Name,
-                            this.certificate.IssuerName.Name
-                        )
+                        StringComparer
+                            .OrdinalIgnoreCase
+                            .Equals(
+                                this.certificate.SubjectName.Name,
+                                this.certificate.IssuerName.Name
+                            )
                     )
                         this.issuer = this;
                     else
@@ -359,9 +361,9 @@ namespace System.IdentityModel.Claims
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }
 
@@ -372,9 +374,9 @@ namespace System.IdentityModel.Claims
             public X500DistinguishedNameClaimSet(X500DistinguishedName x500DistinguishedName)
             {
                 if (x500DistinguishedName == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "x500DistinguishedName"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("x500DistinguishedName");
 
                 this.identity = new X509Identity(x500DistinguishedName);
                 List<Claim> claims = new List<Claim>(2);
@@ -625,9 +627,9 @@ namespace System.IdentityModel.Claims
         {
             if (this.disposed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
         }
     }

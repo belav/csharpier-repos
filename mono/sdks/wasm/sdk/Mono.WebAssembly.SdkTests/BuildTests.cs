@@ -31,7 +31,8 @@ namespace Mono.WebAssembly.SdkTests
         public void IsWasmProject()
         {
             var path = GetTempFile("HelloWasm");
-            ProjectCreator.Templates
+            ProjectCreator
+                .Templates
                 .WasmProject(new string[0], path)
                 .Save()
                 .TryGetPropertyValue("_IsMonoWasmProject", out string isWasmProject);

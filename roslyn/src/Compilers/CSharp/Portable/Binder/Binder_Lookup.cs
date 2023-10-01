@@ -2137,9 +2137,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            var symbolFileIdentifier = (
-                (NamedTypeSymbol)symbol
-            ).AssociatedFileIdentifier.GetValueOrDefault();
+            var symbolFileIdentifier = ((NamedTypeSymbol)symbol)
+                .AssociatedFileIdentifier
+                .GetValueOrDefault();
             if (symbolFileIdentifier.FilePathChecksumOpt.IsDefault)
             {
                 // the containing file of the file-local type has an ill-formed path.
@@ -2148,9 +2148,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var binderFileIdentifier = getFileIdentifierForFileTypes();
             return !binderFileIdentifier.FilePathChecksumOpt.IsDefault
-                && binderFileIdentifier.FilePathChecksumOpt.SequenceEqual(
-                    symbolFileIdentifier.FilePathChecksumOpt
-                );
+                && binderFileIdentifier
+                    .FilePathChecksumOpt
+                    .SequenceEqual(symbolFileIdentifier.FilePathChecksumOpt);
 
             FileIdentifier getFileIdentifierForFileTypes()
             {
@@ -2377,9 +2377,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         return false;
                     }
-                    var keys = unwrappedSymbol.ContainingAssembly.GetInternalsVisibleToPublicKeys(
-                        assemblyName
-                    );
+                    var keys = unwrappedSymbol
+                        .ContainingAssembly
+                        .GetInternalsVisibleToPublicKeys(assemblyName);
                     if (!keys.Any())
                     {
                         return false;

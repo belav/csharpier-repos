@@ -47,9 +47,12 @@ namespace System.Data.Entity.Design.Common
             if (serviceProvider == null)
             {
                 throw MetadataUtil.ProviderIncompatible(
-                    System.Data.Entity.Design.Strings.EntityClient_DoesNotImplementIServiceProvider(
-                        factory.GetType().ToString()
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Design
+                        .Strings
+                        .EntityClient_DoesNotImplementIServiceProvider(factory.GetType().ToString())
                 );
             }
 
@@ -58,10 +61,15 @@ namespace System.Data.Entity.Design.Common
             if (providerServices == null)
             {
                 throw MetadataUtil.ProviderIncompatible(
-                    System.Data.Entity.Design.Strings.EntityClient_ReturnedNullOnProviderMethod(
-                        "GetService",
-                        factory.GetType().ToString()
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Design
+                        .Strings
+                        .EntityClient_ReturnedNullOnProviderMethod(
+                            "GetService",
+                            factory.GetType().ToString()
+                        )
                 );
             }
             return providerServices;

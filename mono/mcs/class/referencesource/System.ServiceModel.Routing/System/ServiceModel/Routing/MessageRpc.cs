@@ -78,9 +78,9 @@ namespace System.ServiceModel.Routing
                         Win32Exception errorDetail = new Win32Exception(
                             ERROR_BAD_IMPERSONATION_LEVEL
                         );
-                        throw FxTrace.Exception.AsError(
-                            new SecurityNegotiationException(errorDetail.Message)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(new SecurityNegotiationException(errorDetail.Message));
                     }
                     finally
                     {

@@ -70,8 +70,9 @@ public class StateManager : IStateManager
         UpdateLogger = dependencies.UpdateLogger;
         _changeTrackingLogger = dependencies.ChangeTrackingLogger;
 
-        _resolutionInterceptor =
-            dependencies.Interceptors.Aggregate<IIdentityResolutionInterceptor>();
+        _resolutionInterceptor = dependencies
+            .Interceptors
+            .Aggregate<IIdentityResolutionInterceptor>();
     }
 
     /// <summary>
@@ -1490,11 +1491,13 @@ public class StateManager : IStateManager
     public virtual int SaveChanges(bool acceptAllChangesOnSuccess) =>
         Context.Database.AutoTransactionBehavior == AutoTransactionBehavior.Never
             ? SaveChanges(this, acceptAllChangesOnSuccess)
-            : Dependencies.ExecutionStrategy.Execute(
-                (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
-                static (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
-                null
-            );
+            : Dependencies
+                .ExecutionStrategy
+                .Execute(
+                    (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
+                    static (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
+                    null
+                );
 
     private static int SaveChanges(StateManager stateManager, bool acceptAllChangesOnSuccess)
     {
@@ -1548,17 +1551,19 @@ public class StateManager : IStateManager
     ) =>
         Context.Database.AutoTransactionBehavior == AutoTransactionBehavior.Never
             ? SaveChangesAsync(this, acceptAllChangesOnSuccess, cancellationToken)
-            : Dependencies.ExecutionStrategy.ExecuteAsync(
-                (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
-                static (_, t, cancellationToken) =>
-                    SaveChangesAsync(
-                        t.StateManager,
-                        t.AcceptAllChangesOnSuccess,
-                        cancellationToken
-                    ),
-                null,
-                cancellationToken
-            );
+            : Dependencies
+                .ExecutionStrategy
+                .ExecuteAsync(
+                    (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
+                    static (_, t, cancellationToken) =>
+                        SaveChangesAsync(
+                            t.StateManager,
+                            t.AcceptAllChangesOnSuccess,
+                            cancellationToken
+                        ),
+                    null,
+                    cancellationToken
+                );
 
     private static async Task<int> SaveChangesAsync(
         StateManager stateManager,

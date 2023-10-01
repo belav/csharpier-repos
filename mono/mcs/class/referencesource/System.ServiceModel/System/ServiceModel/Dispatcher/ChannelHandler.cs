@@ -216,15 +216,18 @@ namespace System.ServiceModel.Dispatcher
                 && channelDispatcher.MaxTransactedBatchSize > 0
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.IncompatibleBehaviors))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.IncompatibleBehaviors))
+                    );
             }
 
             if (this.binder.HasSession)
             {
-                this.sessionOpenNotification =
-                    this.binder.Channel.GetProperty<SessionOpenNotification>();
+                this.sessionOpenNotification = this.binder
+                    .Channel
+                    .GetProperty<SessionOpenNotification>();
                 this.needToCreateSessionOpenNotificationMessage =
                     this.sessionOpenNotification != null && this.sessionOpenNotification.IsEnabled;
             }
@@ -474,10 +477,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     object previousBuffer = null;
                     if (
-                        request.RequestMessage.Properties.TryGetValue(
-                            MessageBufferPropertyName,
-                            out previousBuffer
-                        )
+                        request
+                            .RequestMessage
+                            .Properties
+                            .TryGetValue(MessageBufferPropertyName, out previousBuffer)
                     )
                     {
                         buffer = (MessageBuffer)previousBuffer;
@@ -499,14 +502,16 @@ namespace System.ServiceModel.Dispatcher
                 if (operation == null)
                 {
                     Fx.Assert("ChannelHandler.Dispatch (operation == null)");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            String.Format(
-                                CultureInfo.InvariantCulture,
-                                "No DispatchOperationRuntime found to process message."
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                String.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "No DispatchOperationRuntime found to process message."
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (
@@ -514,15 +519,17 @@ namespace System.ServiceModel.Dispatcher
                     && message.Headers.Action == OperationDescription.SessionOpenedAction
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxNoEndpointMatchingAddressForConnectionOpeningMessage,
-                                message.Headers.Action,
-                                "Open"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxNoEndpointMatchingAddressForConnectionOpeningMessage,
+                                    message.Headers.Action,
+                                    "Open"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 if (MessageLogger.LoggingEnabled)
@@ -561,10 +568,9 @@ namespace System.ServiceModel.Dispatcher
 
                 if (dispatchBehavior.PreserveMessage)
                 {
-                    currentOperationContext.IncomingMessageProperties.Add(
-                        MessageBufferPropertyName,
-                        buffer
-                    );
+                    currentOperationContext
+                        .IncomingMessageProperties
+                        .Add(MessageBufferPropertyName, buffer);
                 }
 
                 if (currentOperationContext.EndpointDispatcher == null && this.listener != null)
@@ -917,24 +923,24 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.listener != null)
             {
-                this.listener.ChannelDispatcher.ProvideFault(
-                    e,
-                    this.requestInfo.Channel == null
-                        ? this.binder.Channel.GetProperty<FaultConverter>()
-                        : this.requestInfo.Channel.GetProperty<FaultConverter>(),
-                    ref faultInfo
-                );
+                this.listener
+                    .ChannelDispatcher
+                    .ProvideFault(
+                        e,
+                        this.requestInfo.Channel == null
+                            ? this.binder.Channel.GetProperty<FaultConverter>()
+                            : this.requestInfo.Channel.GetProperty<FaultConverter>(),
+                        ref faultInfo
+                    );
             }
             else if (this.channel != null)
             {
                 DispatchRuntime dispatchBehavior = this.channel
                     .ClientRuntime
                     .CallbackDispatchRuntime;
-                dispatchBehavior.ChannelDispatcher.ProvideFault(
-                    e,
-                    this.channel.GetProperty<FaultConverter>(),
-                    ref faultInfo
-                );
+                dispatchBehavior
+                    .ChannelDispatcher
+                    .ProvideFault(e, this.channel.GetProperty<FaultConverter>(), ref faultInfo);
             }
         }
 
@@ -949,11 +955,13 @@ namespace System.ServiceModel.Dispatcher
             if (e == null)
             {
                 Fx.Assert(SR.GetString(SR.GetString(SR.SFxNonExceptionThrown)));
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.GetString(SR.SFxNonExceptionThrown))
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.GetString(SR.SFxNonExceptionThrown))
+                        )
+                    );
             }
             if (this.listener != null)
             {
@@ -961,10 +969,11 @@ namespace System.ServiceModel.Dispatcher
             }
             else if (this.channel != null)
             {
-                return this.channel.ClientRuntime.CallbackDispatchRuntime.ChannelDispatcher.HandleError(
-                    e,
-                    ref faultInfo
-                );
+                return this.channel
+                    .ClientRuntime
+                    .CallbackDispatchRuntime
+                    .ChannelDispatcher
+                    .HandleError(e, ref faultInfo);
             }
             else
             {
@@ -1382,13 +1391,15 @@ namespace System.ServiceModel.Dispatcher
                 && request.RequestMessage.Headers.Action == null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageHeaderException(
-                        SR.GetString(SR.SFxMissingActionHeader, addressingVersion.Namespace),
-                        AddressingStrings.Action,
-                        addressingVersion.Namespace
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageHeaderException(
+                            SR.GetString(SR.SFxMissingActionHeader, addressingVersion.Namespace),
+                            AddressingStrings.Action,
+                            addressingVersion.Namespace
+                        )
+                    );
             }
             else
             {
@@ -1600,20 +1611,21 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (!object.ReferenceEquals(requestID, null) && !this.isManualAddressing)
                 {
-                    System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(
-                        reply,
-                        requestID
-                    );
+                    System
+                        .ServiceModel
+                        .Channels
+                        .RequestReplyCorrelator
+                        .PrepareReply(reply, requestID);
                 }
                 if (!this.hasSession && !this.isManualAddressing)
                 {
                     try
                     {
-                        canSendReply =
-                            System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(
-                                reply,
-                                requestMessage
-                            );
+                        canSendReply = System
+                            .ServiceModel
+                            .Channels
+                            .RequestReplyCorrelator
+                            .AddressReply(reply, requestMessage);
                     }
                     catch (MessageHeaderException)
                     {
@@ -1665,13 +1677,15 @@ namespace System.ServiceModel.Dispatcher
 
             try
             {
-                state.ChannelHandler.HandleErrorContinuation(
-                    state.Exception,
-                    state.Request,
-                    state.Channel,
-                    ref state.FaultInfo,
-                    true
-                );
+                state
+                    .ChannelHandler
+                    .HandleErrorContinuation(
+                        state.Exception,
+                        state.Request,
+                        state.Channel,
+                        ref state.FaultInfo,
+                        true
+                    );
             }
             catch (Exception e)
             {
@@ -2158,11 +2172,10 @@ namespace System.ServiceModel.Dispatcher
                         this.requestInfo.Channel.Proxy as IContextChannel;
                     try
                     {
-                        this.requestInfo.ExistingInstanceContext =
-                            this.requestInfo.DispatchRuntime.InstanceContextProvider.GetExistingInstanceContext(
-                                request.RequestMessage,
-                                transparentProxy
-                            );
+                        this.requestInfo.ExistingInstanceContext = this.requestInfo
+                            .DispatchRuntime
+                            .InstanceContextProvider
+                            .GetExistingInstanceContext(request.RequestMessage, transparentProxy);
                         releasePump = false;
                     }
                     catch (Exception e)

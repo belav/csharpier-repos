@@ -158,12 +158,14 @@ namespace System.Globalization
 
             unsafe
             {
-                Interop.Kernel32.EnumSystemLocalesEx(
-                    &EnumSystemLocalesProc,
-                    Interop.Kernel32.LOCALE_SPECIFICDATA | Interop.Kernel32.LOCALE_SUPPLEMENTAL,
-                    &context,
-                    IntPtr.Zero
-                );
+                Interop
+                    .Kernel32
+                    .EnumSystemLocalesEx(
+                        &EnumSystemLocalesProc,
+                        Interop.Kernel32.LOCALE_SPECIFICDATA | Interop.Kernel32.LOCALE_SUPPLEMENTAL,
+                        &context,
+                        IntPtr.Zero
+                    );
             }
 
             if (context.cultureName != null)
@@ -520,10 +522,9 @@ namespace System.Globalization
         {
             Debug.Assert(!GlobalizationMode.Invariant);
 
-            return Interop.Kernel32.LocaleNameToLCID(
-                cultureName,
-                Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES
-            );
+            return Interop
+                .Kernel32
+                .LocaleNameToLCID(cultureName, Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES);
         }
 
         private string NlsGetThreeLetterWindowsLanguageName(string cultureName)
@@ -580,12 +581,9 @@ namespace System.Globalization
 
             unsafe
             {
-                Interop.Kernel32.EnumSystemLocalesEx(
-                    &EnumAllSystemLocalesProc,
-                    flags,
-                    &context,
-                    IntPtr.Zero
-                );
+                Interop
+                    .Kernel32
+                    .EnumSystemLocalesEx(&EnumAllSystemLocalesProc, flags, &context, IntPtr.Zero);
             }
 
             CultureInfo[] cultures = new CultureInfo[context.strings.Count];
@@ -613,12 +611,14 @@ namespace System.Globalization
 
                 unsafe
                 {
-                    Interop.Kernel32.EnumSystemLocalesEx(
-                        &EnumAllSystemLocalesProc,
-                        Interop.Kernel32.LOCALE_REPLACEMENT,
-                        &context,
-                        IntPtr.Zero
-                    );
+                    Interop
+                        .Kernel32
+                        .EnumSystemLocalesEx(
+                            &EnumAllSystemLocalesProc,
+                            Interop.Kernel32.LOCALE_REPLACEMENT,
+                            &context,
+                            IntPtr.Zero
+                        );
                 }
 
                 for (int i = 0; i < context.strings.Count; i++)

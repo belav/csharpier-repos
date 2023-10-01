@@ -406,24 +406,28 @@ namespace System.Web
 
                         if (_context.WorkerRequest is IIS7WorkerRequest)
                         {
-                            handler = _context.ApplicationInstance.MapIntegratedHttpHandler(
-                                _context,
-                                request.RequestType,
-                                filePath,
-                                physPath,
-                                useAppConfig,
-                                true /*convertNativeStaticFileModule*/
-                            );
+                            handler = _context
+                                .ApplicationInstance
+                                .MapIntegratedHttpHandler(
+                                    _context,
+                                    request.RequestType,
+                                    filePath,
+                                    physPath,
+                                    useAppConfig,
+                                    true /*convertNativeStaticFileModule*/
+                                );
                         }
                         else
                         {
-                            handler = _context.ApplicationInstance.MapHttpHandler(
-                                _context,
-                                request.RequestType,
-                                filePath,
-                                physPath,
-                                useAppConfig
-                            );
+                            handler = _context
+                                .ApplicationInstance
+                                .MapHttpHandler(
+                                    _context,
+                                    request.RequestType,
+                                    filePath,
+                                    physPath,
+                                    useAppConfig
+                                );
                         }
                     }
                     finally
@@ -1035,9 +1039,9 @@ namespace System.Web
             {
                 if (errorFormatterGenerator != null)
                 {
-                    context.Response.SetOverrideErrorFormatter(
-                        errorFormatterGenerator.GetErrorFormatter(e)
-                    );
+                    context
+                        .Response
+                        .SetOverrideErrorFormatter(errorFormatterGenerator.GetErrorFormatter(e));
                 }
 
                 context.Response.ReportRuntimeError(e, false, true);
@@ -1622,12 +1626,14 @@ namespace System.Web
             if (str == null)
                 return null;
             byte[] bytes = e.GetBytes(str);
-            return HttpEncoder.Current.UrlEncode(
-                bytes,
-                0,
-                bytes.Length,
-                false /* alwaysCreateNewReturnValue */
-            );
+            return HttpEncoder
+                .Current
+                .UrlEncode(
+                    bytes,
+                    0,
+                    bytes.Length,
+                    false /* alwaysCreateNewReturnValue */
+                );
         }
 
         /// <devdoc>
@@ -1645,12 +1651,14 @@ namespace System.Web
         /// </devdoc>
         public static byte[] UrlEncodeToBytes(byte[] bytes, int offset, int count)
         {
-            return HttpEncoder.Current.UrlEncode(
-                bytes,
-                offset,
-                count,
-                true /* alwaysCreateNewReturnValue */
-            );
+            return HttpEncoder
+                .Current
+                .UrlEncode(
+                    bytes,
+                    offset,
+                    count,
+                    true /* alwaysCreateNewReturnValue */
+                );
         }
 
         /// <devdoc>
@@ -1661,10 +1669,12 @@ namespace System.Web
         )]
         public static string UrlEncodeUnicode(string str)
         {
-            return HttpEncoder.Current.UrlEncodeUnicode(
-                str,
-                false /* ignoreAscii */
-            );
+            return HttpEncoder
+                .Current
+                .UrlEncodeUnicode(
+                    str,
+                    false /* ignoreAscii */
+                );
         }
 
         /// <devdoc>

@@ -68,9 +68,9 @@ namespace System.ServiceModel.Discovery
         public void AddressDuplexResponseMessage(OperationContext responseOperationContext)
         {
             EnsureOutgoingMessageHeaders();
-            responseOperationContext.OutgoingMessageHeaders.CopyHeadersFrom(
-                this.outgoingMessageHeaders
-            );
+            responseOperationContext
+                .OutgoingMessageHeaders
+                .CopyHeadersFrom(this.outgoingMessageHeaders);
             responseOperationContext.OutgoingMessageHeaders.MessageId = new UniqueId();
             this.AddDiscoveryMessageProperty(responseOperationContext);
         }
@@ -85,8 +85,9 @@ namespace System.ServiceModel.Discovery
             OperationContext operationContext
         )
         {
-            DiscoveryOperationContextExtension operationContextExtension =
-                operationContext.Extensions.Find<DiscoveryOperationContextExtension>();
+            DiscoveryOperationContextExtension operationContextExtension = operationContext
+                .Extensions
+                .Find<DiscoveryOperationContextExtension>();
 
             if (operationContextExtension == null)
             {
@@ -102,10 +103,9 @@ namespace System.ServiceModel.Discovery
         {
             object messageProperty;
             if (
-                operationContext.IncomingMessageProperties.TryGetValue(
-                    DiscoveryMessageProperty.Name,
-                    out messageProperty
-                )
+                operationContext
+                    .IncomingMessageProperties
+                    .TryGetValue(DiscoveryMessageProperty.Name, out messageProperty)
             )
             {
                 return messageProperty as DiscoveryMessageProperty;
@@ -141,10 +141,9 @@ namespace System.ServiceModel.Discovery
         {
             if (this.messageProperty != null)
             {
-                responseOperationContext.OutgoingMessageProperties.Add(
-                    DiscoveryMessageProperty.Name,
-                    this.messageProperty
-                );
+                responseOperationContext
+                    .OutgoingMessageProperties
+                    .Add(DiscoveryMessageProperty.Name, this.messageProperty);
             }
         }
 

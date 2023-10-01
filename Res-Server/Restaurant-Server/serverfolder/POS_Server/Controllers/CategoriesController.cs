@@ -54,7 +54,8 @@ namespace POS_Server.Controllers
                         searchPredicate = searchPredicate.And(x => true);
                     else
                         searchPredicate = searchPredicate.And(x => x.type == type);
-                    var categoriesList = entity.categories
+                    var categoriesList = entity
+                        .categories
                         .Where(searchPredicate)
                         .Select(
                             p =>
@@ -85,7 +86,8 @@ namespace POS_Server.Controllers
                             if (categoriesList[i].isActive == 1)
                             {
                                 long categoryId = (long)categoriesList[i].categoryId;
-                                var items = entity.items
+                                var items = entity
+                                    .items
                                     .Where(x => x.categoryId == categoryId)
                                     .Select(b => new { b.itemId })
                                     .FirstOrDefault();
@@ -155,7 +157,8 @@ namespace POS_Server.Controllers
                             if (categoriesList[i].isActive == 1)
                             {
                                 long categoryId = (long)categoriesList[i].categoryId;
-                                var items = entity.items
+                                var items = entity
+                                    .items
                                     .Where(x => x.categoryId == categoryId)
                                     .Select(b => new { b.itemId })
                                     .FirstOrDefault();
@@ -285,7 +288,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var category = entity.categories
+                    var category = entity
+                        .categories
                         .Where(c => c.categoryId == categoryId)
                         .Select(
                             p =>
@@ -341,7 +345,8 @@ namespace POS_Server.Controllers
                     while (parentid > 0)
                     {
                         categories tempcate = new categories();
-                        var category = entity.categories
+                        var category = entity
+                            .categories
                             .Where(c => c.categoryId == parentid)
                             .Select(
                                 p =>
@@ -553,7 +558,8 @@ namespace POS_Server.Controllers
                             long? updateuser = tmpCategory.updateUserId;
 
                             // disactive items related to selected category and subs
-                            var catitems = entity.items
+                            var catitems = entity
+                                .items
                                 .Where(U => U.categoryId == categoryId)
                                 .ToList();
                             if (catitems.Count > 0)
@@ -644,7 +650,8 @@ namespace POS_Server.Controllers
                             entity.categories.AddOrUpdate(tmpCategory);
                             entity.SaveChanges();
 
-                            var catitems = entity.items
+                            var catitems = entity
+                                .items
                                 .Where(U => U.categoryId == categoryId)
                                 .ToList();
                             if (catitems.Count > 0)
@@ -705,7 +712,8 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var agentEntity = entity.Set<agents>();
-                        category = entity.categories
+                        category = entity
+                            .categories
                             .Where(p => p.categoryId == catObj.categoryId)
                             .First();
                         category.image = catObj.image;
@@ -751,9 +759,9 @@ namespace POS_Server.Controllers
                             ".tiff",
                             ".jfif"
                         };
-                        var ext = postedFile.FileName.Substring(
-                            postedFile.FileName.LastIndexOf('.')
-                        );
+                        var ext = postedFile
+                            .FileName
+                            .Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
@@ -773,27 +781,35 @@ namespace POS_Server.Controllers
                         {
                             if (
                                 !Directory.Exists(
-                                    System.Web.Hosting.HostingEnvironment.MapPath(
-                                        "~\\images\\category"
-                                    )
+                                    System
+                                        .Web
+                                        .Hosting
+                                        .HostingEnvironment
+                                        .MapPath("~\\images\\category")
                                 )
                             )
                                 Directory.CreateDirectory(
-                                    System.Web.Hosting.HostingEnvironment.MapPath(
-                                        "~\\images\\category"
-                                    )
+                                    System
+                                        .Web
+                                        .Hosting
+                                        .HostingEnvironment
+                                        .MapPath("~\\images\\category")
                                 );
                             //  check if image exist
                             var pathCheck = Path.Combine(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\category"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\category"),
                                 imageWithNoExt
                             );
                             var files = Directory.GetFiles(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\category"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\category"),
                                 imageWithNoExt + ".*"
                             );
                             if (files.Length > 0)
@@ -803,9 +819,11 @@ namespace POS_Server.Controllers
 
                             //Userimage myfolder name where i want to save my image
                             var filePath = Path.Combine(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\category"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\category"),
                                 imageName
                             );
                             postedFile.SaveAs(filePath);

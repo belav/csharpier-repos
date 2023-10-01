@@ -125,33 +125,38 @@ namespace DllImportGenerator.UnitTests
 
             Assert.Equal(
                 2,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.CalculateStubInformation
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.CalculateStubInformation)
             );
             Assert.Equal(
                 1,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.GenerateSingleStub
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.GenerateSingleStub)
             );
             Assert.Equal(
                 1,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.NormalizeWhitespace
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.NormalizeWhitespace)
             );
             Assert.Equal(
                 1,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.ConcatenateStubs
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.ConcatenateStubs)
             );
             Assert.Equal(
                 1,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.OutputSourceFile
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.OutputSourceFile)
             );
         }
 
@@ -186,33 +191,38 @@ namespace DllImportGenerator.UnitTests
 
             Assert.Equal(
                 2,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.CalculateStubInformation
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.CalculateStubInformation)
             );
             Assert.Equal(
                 1,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.GenerateSingleStub
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.GenerateSingleStub)
             );
             Assert.Equal(
                 1,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.NormalizeWhitespace
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.NormalizeWhitespace)
             );
             Assert.Equal(
                 1,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.ConcatenateStubs
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.ConcatenateStubs)
             );
             Assert.Equal(
                 1,
-                generator.IncrementalTracker.ExecutedSteps.Count(
-                    s => s.Step == IncrementalityTracker.StepName.OutputSourceFile
-                )
+                generator
+                    .IncrementalTracker
+                    .ExecutedSteps
+                    .Count(s => s.Step == IncrementalityTracker.StepName.OutputSourceFile)
             );
         }
 

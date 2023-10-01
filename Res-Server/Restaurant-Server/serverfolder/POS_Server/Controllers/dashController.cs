@@ -308,7 +308,8 @@ namespace POS_Server.Controllers
                         }).ToList();
                         */
 
-                        var listPosinbranch = entity.pos
+                        var listPosinbranch = entity
+                            .pos
                             .Select(
                                 s =>
                                     new
@@ -1032,11 +1033,13 @@ namespace POS_Server.Controllers
                                 newrow.itemId = entity1.itemsUnits.Find(row.itemUnitId).itemId;
                                 newrow.unitId = entity1.itemsUnits.Find(row.itemUnitId).unitId;
                                 ;
-                                newrow.itemName = entity1.itemsUnits
+                                newrow.itemName = entity1
+                                    .itemsUnits
                                     .Find(row.itemUnitId)
                                     .items
                                     .name;
-                                newrow.unitName = entity1.itemsUnits
+                                newrow.unitName = entity1
+                                    .itemsUnits
                                     .Find(row.itemUnitId)
                                     .units
                                     .name;

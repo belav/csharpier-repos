@@ -67,7 +67,11 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         {
             var extractClassService =
                 _service
-                ?? _document.Project.Solution.Services.GetRequiredService<IExtractClassOptionsService>();
+                ?? _document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<IExtractClassOptionsService>();
             return extractClassService
                 .GetExtractClassOptionsAsync(
                     _document,

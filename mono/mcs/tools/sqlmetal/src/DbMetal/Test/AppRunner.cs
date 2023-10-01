@@ -112,17 +112,19 @@ namespace DbMetal_Test_Sqlite
             var testdir = Path.Combine(bd, Path.Combine("..", "tests"));
             var expectedDir = Path.Combine(testdir, "expected");
 
-            DbMetal.Program.Main(
-                new[]
-                {
-                    "/conn:Data Source=" + Path.Combine(testdir, "Northwind.db3"),
-                    "--with-dbconnection=" + DbConnectionProvider,
-                    "--with-schema-loader=" + DbLinqSchemaLoader,
-                    "--with-sql-dialect=" + SqlDialect,
-                }
-                    .Concat(args)
-                    .ToArray()
-            );
+            DbMetal
+                .Program
+                .Main(
+                    new[]
+                    {
+                        "/conn:Data Source=" + Path.Combine(testdir, "Northwind.db3"),
+                        "--with-dbconnection=" + DbConnectionProvider,
+                        "--with-schema-loader=" + DbLinqSchemaLoader,
+                        "--with-sql-dialect=" + SqlDialect,
+                    }
+                        .Concat(args)
+                        .ToArray()
+                );
 
             FileAssert.AreEqual(
                 Path.Combine(expectedDir, string.Format(expectedFile, Program)),

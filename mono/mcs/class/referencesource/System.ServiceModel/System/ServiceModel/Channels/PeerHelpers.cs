@@ -543,13 +543,15 @@ namespace System.ServiceModel.Channels
                 || IPAddress.IsLoopback(address)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.PeerListenIPAddressInvalid, address),
-                        "address",
-                        null
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.PeerListenIPAddressInvalid, address),
+                            "address",
+                            null
+                        )
+                    );
             }
         }
 
@@ -562,9 +564,9 @@ namespace System.ServiceModel.Channels
                     PeerTransportConstants.MinMessageSize,
                     long.MaxValue
                 );
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("value", value, message)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("value", value, message));
             }
         }
 
@@ -577,9 +579,9 @@ namespace System.ServiceModel.Channels
                     PeerTransportConstants.MinPort,
                     PeerTransportConstants.MaxPort
                 );
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("value", value, message)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("value", value, message));
             }
         }
 
@@ -693,123 +695,145 @@ namespace System.ServiceModel.Channels
             Exception innerException
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.InsufficientCryptoSupport),
-                    innerException
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.InsufficientCryptoSupport),
+                        innerException
+                    )
+                );
         }
 
         internal static void ThrowArgument_InsufficientCredentials(string property)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentException(SR.GetString(SR.InsufficientCredentials, property))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.InsufficientCredentials, property))
+                );
         }
 
         internal static void ThrowArgumentOutOfRange_InvalidTransportCredentialType(int value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentOutOfRangeException(
-                    "CredentialType",
-                    value,
-                    SR.GetString(
-                        SR.ValueMustBeInRange,
-                        PeerTransportCredentialType.Password,
-                        PeerTransportCredentialType.Certificate
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "CredentialType",
+                        value,
+                        SR.GetString(
+                            SR.ValueMustBeInRange,
+                            PeerTransportCredentialType.Password,
+                            PeerTransportCredentialType.Certificate
+                        )
                     )
-                )
-            );
+                );
         }
 
         internal static void ThrowArgumentOutOfRange_InvalidSecurityMode(int value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentOutOfRangeException(
-                    "Mode",
-                    value,
-                    SR.GetString(
-                        SR.ValueMustBeInRange,
-                        SecurityMode.None,
-                        SecurityMode.TransportWithMessageCredential
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "Mode",
+                        value,
+                        SR.GetString(
+                            SR.ValueMustBeInRange,
+                            SecurityMode.None,
+                            SecurityMode.TransportWithMessageCredential
+                        )
                     )
-                )
-            );
+                );
         }
 
         internal static void ThrowInvalidOperation_UnexpectedSecurityTokensDuringHandshake()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.UnexpectedSecurityTokensDuringHandshake)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnexpectedSecurityTokensDuringHandshake)
+                    )
+                );
         }
 
         internal static void ThrowArgument_PnrpAddressesExceedLimit()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentException(SR.GetString(SR.PnrpAddressesExceedLimit))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new ArgumentException(SR.GetString(SR.PnrpAddressesExceedLimit)));
         }
 
         internal static void ThrowInvalidOperation_PnrpNoClouds()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.PnrpNoClouds))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PnrpNoClouds)));
         }
 
         internal static void ThrowInvalidOperation_PnrpAddressesUnsupported()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.PnrpAddressesUnsupported))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.PnrpAddressesUnsupported))
+                );
         }
 
         internal static void ThrowArgument_InsufficientResolverSettings()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentException(SR.GetString(SR.InsufficientResolverSettings))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.InsufficientResolverSettings))
+                );
         }
 
         internal static void ThrowArgument_MustOverrideInitialize()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentException(SR.GetString(SR.MustOverrideInitialize))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new ArgumentException(SR.GetString(SR.MustOverrideInitialize)));
         }
 
         internal static void ThrowArgument_InvalidResolverMode(PeerResolverMode mode)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new ArgumentException(SR.GetString(SR.InvalidResolverMode, mode))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.InvalidResolverMode, mode))
+                );
         }
 
         internal static void ThrowInvalidOperation_NotValidWhenOpen(string operation)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.NotValidWhenOpen, operation))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.NotValidWhenOpen, operation))
+                );
         }
 
         internal static void ThrowInvalidOperation_NotValidWhenClosed(string operation)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.NotValidWhenClosed, operation))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.NotValidWhenClosed, operation))
+                );
         }
 
         internal static void ThrowInvalidOperation_DuplicatePeerRegistration(string servicepath)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.DuplicatePeerRegistration, servicepath)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.DuplicatePeerRegistration, servicepath)
+                    )
+                );
         }
 
         internal static void ThrowPnrpError(int errorCode, string cloud)
@@ -819,37 +843,51 @@ namespace System.ServiceModel.Channels
 
         internal static void ThrowPnrpError(int errorCode, string cloud, bool trace)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                new System.ServiceModel.Channels.PnrpPeerResolver.PnrpException(errorCode, cloud),
-                trace ? TraceEventType.Error : TraceEventType.Information
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelper(
+                    new System.ServiceModel.Channels.PnrpPeerResolver.PnrpException(
+                        errorCode,
+                        cloud
+                    ),
+                    trace ? TraceEventType.Error : TraceEventType.Information
+                );
         }
 
         internal static void ThrowInvalidOperation_PeerConflictingPeerNodeSettings(
             string propertyName
         )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.PeerConflictingPeerNodeSettings, propertyName)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.PeerConflictingPeerNodeSettings, propertyName)
+                    )
+                );
         }
 
         internal static void ThrowInvalidOperation_PeerCertGenFailure(Exception innerException)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.PeerCertGenFailure), innerException)
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.PeerCertGenFailure),
+                        innerException
+                    )
+                );
         }
 
         internal static void ThrowInvalidOperation_ConflictingHeader(string headerName)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.PeerConflictingHeader, headerName, PeerStrings.Namespace)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.PeerConflictingHeader, headerName, PeerStrings.Namespace)
+                    )
+                );
         }
 
         public static Exception GetLastException()
@@ -903,10 +941,9 @@ namespace System.ServiceModel.Channels
 
         public static void TurnOffSecurityHeader(Message message)
         {
-            int i = message.Headers.FindHeader(
-                SecurityJan2004Strings.Security,
-                SecurityJan2004Strings.Namespace
-            );
+            int i = message
+                .Headers
+                .FindHeader(SecurityJan2004Strings.Security, SecurityJan2004Strings.Namespace);
             if (i >= 0)
             {
                 message.Headers.AddUnderstood(i);

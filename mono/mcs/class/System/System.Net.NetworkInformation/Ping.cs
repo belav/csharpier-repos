@@ -706,10 +706,9 @@ namespace System.Net.NetworkInformation
 
             cts = new CancellationTokenSource();
 
-            var task = Task<PingReply>.Factory.StartNew(
-                () => Send(address, timeout, buffer, options),
-                cts.Token
-            );
+            var task = Task<PingReply>
+                .Factory
+                .StartNew(() => Send(address, timeout, buffer, options), cts.Token);
 
             task.ContinueWith(
                 (t) =>

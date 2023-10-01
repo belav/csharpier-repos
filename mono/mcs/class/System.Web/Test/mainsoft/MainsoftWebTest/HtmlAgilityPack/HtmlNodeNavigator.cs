@@ -115,20 +115,23 @@ namespace HtmlAgilityPack
                         break;
                 }
             }
-            System.Diagnostics.Trace.WriteLine(
-                "oid="
-                    + GetHashCode()
-                    + ",n="
-                    + nodename
-                    + ",a="
-                    + _attindex
-                    + ","
-                    + ",v="
-                    + nodevalue
-                    + ","
-                    + Value,
-                "N!" + name
-            );
+            System
+                .Diagnostics
+                .Trace
+                .WriteLine(
+                    "oid="
+                        + GetHashCode()
+                        + ",n="
+                        + nodename
+                        + ",a="
+                        + _attindex
+                        + ","
+                        + ",v="
+                        + nodevalue
+                        + ","
+                        + Value,
+                    "N!" + name
+                );
         }
 
         internal HtmlNodeNavigator(HtmlDocument doc, HtmlNode currentNode)

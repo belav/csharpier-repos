@@ -87,9 +87,9 @@ public class DecimalModelBinder : IModelBinder
             {
                 modelState.TryAddModelError(
                     modelName,
-                    metadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                        valueProviderResult.ToString()
-                    )
+                    metadata
+                        .ModelBindingMessageProvider
+                        .ValueMustNotBeNullAccessor(valueProviderResult.ToString())
                 );
             }
             else

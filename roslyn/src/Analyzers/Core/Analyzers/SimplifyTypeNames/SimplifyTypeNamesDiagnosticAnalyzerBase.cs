@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
 
         protected SimplifyTypeNamesDiagnosticAnalyzerBase()
             : base(
-                ImmutableDictionary<DiagnosticDescriptor, ImmutableHashSet<IOption2>>.Empty
+                ImmutableDictionary<DiagnosticDescriptor, ImmutableHashSet<IOption2>>
+                    .Empty
                     .Add(s_descriptorSimplifyNames, ImmutableHashSet<IOption2>.Empty)
                     .Add(s_descriptorSimplifyMemberAccess, ImmutableHashSet<IOption2>.Empty)
                     .Add(

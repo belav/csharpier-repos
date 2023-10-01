@@ -148,10 +148,9 @@ namespace System.Text.Json.Reflection
         {
             if (
                 !type.IsGenericType
-                || !type.Assembly.FullName!.StartsWith(
-                    "System.Collections.Immutable",
-                    StringComparison.Ordinal
-                )
+                || !type.Assembly
+                    .FullName!
+                    .StartsWith("System.Collections.Immutable", StringComparison.Ordinal)
             )
             {
                 return false;
@@ -172,10 +171,9 @@ namespace System.Text.Json.Reflection
         {
             if (
                 !type.IsGenericType
-                || !type.Assembly.FullName!.StartsWith(
-                    "System.Collections.Immutable",
-                    StringComparison.Ordinal
-                )
+                || !type.Assembly
+                    .FullName!
+                    .StartsWith("System.Collections.Immutable", StringComparison.Ordinal)
             )
             {
                 return false;

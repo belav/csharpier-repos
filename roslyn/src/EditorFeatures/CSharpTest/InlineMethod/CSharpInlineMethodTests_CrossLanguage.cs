@@ -21,9 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
             Workspace workspace,
             TestParameters parameters
         ) =>
-            (
-                (TestWorkspace)workspace
-            ).ExportProvider.GetExportedValue<CSharpInlineMethodRefactoringProvider>();
+            ((TestWorkspace)workspace)
+                .ExportProvider
+                .GetExportedValue<CSharpInlineMethodRefactoringProvider>();
 
         private async Task TestNoActionIsProvided(string initialMarkup)
         {

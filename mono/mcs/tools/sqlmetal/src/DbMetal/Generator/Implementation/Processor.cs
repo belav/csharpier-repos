@@ -118,7 +118,9 @@ namespace DbMetal.Generator.Implementation
             }
             catch (Exception ex)
             {
-                string assemblyName = System.Reflection.Assembly
+                string assemblyName = System
+                    .Reflection
+                    .Assembly
                     .GetExecutingAssembly()
                     .GetName()
                     .Name;
@@ -145,9 +147,9 @@ namespace DbMetal.Generator.Implementation
             foreach (var association in table.Type.Associations)
             {
                 var otherType = database.Tables.Single(t => t.Type.Name == association.Type).Type;
-                var otherAssociation = otherType.Associations.Single(
-                    a => a.Type == table.Type.Name && a.ThisKey == association.OtherKey
-                );
+                var otherAssociation = otherType
+                    .Associations
+                    .Single(a => a.Type == table.Type.Name && a.ThisKey == association.OtherKey);
                 var otherColumn = otherType.Columns.Single(c => c.Member == association.OtherKey);
 
                 if (
@@ -213,9 +215,9 @@ namespace DbMetal.Generator.Implementation
         public virtual IEnumerable<ICodeGenerator> EnumerateCodeGenerators()
         {
             foreach (
-                var codeGeneratorType in ObjectFactory.Current.GetImplementations(
-                    typeof(ICodeGenerator)
-                )
+                var codeGeneratorType in ObjectFactory
+                    .Current
+                    .GetImplementations(typeof(ICodeGenerator))
             )
             {
                 yield return (ICodeGenerator)ObjectFactory.Current.Get(codeGeneratorType);
@@ -296,16 +298,19 @@ namespace DbMetal.Generator.Implementation
                     parameters.Namespace
                 );
                 dbSchema.Provider = parameters.Provider;
-                dbSchema.Tables.Sort(
-                    new LambdaComparer<Table>((x, y) => (x.Type.Name.CompareTo(y.Type.Name)))
-                );
-                foreach (var table in dbSchema.Tables)
-                    table.Type.Columns.Sort(
-                        new LambdaComparer<Column>((x, y) => (x.Member.CompareTo(y.Member)))
+                dbSchema
+                    .Tables
+                    .Sort(
+                        new LambdaComparer<Table>((x, y) => (x.Type.Name.CompareTo(y.Type.Name)))
                     );
-                dbSchema.Functions.Sort(
-                    new LambdaComparer<Function>((x, y) => (x.Method.CompareTo(y.Method)))
-                );
+                foreach (var table in dbSchema.Tables)
+                    table
+                        .Type
+                        .Columns
+                        .Sort(new LambdaComparer<Column>((x, y) => (x.Member.CompareTo(y.Member))));
+                dbSchema
+                    .Functions
+                    .Sort(new LambdaComparer<Function>((x, y) => (x.Method.CompareTo(y.Method))));
                 //SchemaPostprocess.PostProcess_DB(dbSchema);
             }
             else // load DBML

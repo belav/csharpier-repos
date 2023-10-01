@@ -85,9 +85,9 @@ namespace System.ServiceModel.XamlIntegration
             string ns = resolver.GetNamespace(prefix);
             if (ns == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new FormatException(SRCore.CouldNotResolveNamespacePrefix(prefix))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new FormatException(SRCore.CouldNotResolveNamespacePrefix(prefix)));
             }
 
             return XName.Get(localName, ns);

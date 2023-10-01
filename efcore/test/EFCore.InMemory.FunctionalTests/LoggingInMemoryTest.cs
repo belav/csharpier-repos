@@ -23,7 +23,8 @@ public class LoggingInMemoryTest : LoggingTestBase
     protected override string ProviderName => "Microsoft.EntityFrameworkCore.InMemory";
 
     protected override string ProviderVersion =>
-        typeof(InMemoryOptionsExtension).Assembly
+        typeof(InMemoryOptionsExtension)
+            .Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             ?.InformationalVersion;
 

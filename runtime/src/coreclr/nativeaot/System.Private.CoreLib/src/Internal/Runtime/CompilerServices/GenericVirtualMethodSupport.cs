@@ -34,17 +34,19 @@ namespace Internal.Runtime.CompilerServices
                 string methodName = methodNameAndSignature.Name;
                 RuntimeSignature methodSignature = methodNameAndSignature.Signature;
                 if (
-                    RuntimeAugments.TypeLoaderCallbacks.TryGetGenericVirtualTargetForTypeAndSlot(
-                        handle,
-                        ref declaringType,
-                        genericArguments,
-                        ref methodName,
-                        ref methodSignature,
-                        lookForDefaultImplementations,
-                        out functionPointer,
-                        out genericDictionary,
-                        out slotChanged
-                    )
+                    RuntimeAugments
+                        .TypeLoaderCallbacks
+                        .TryGetGenericVirtualTargetForTypeAndSlot(
+                            handle,
+                            ref declaringType,
+                            genericArguments,
+                            ref methodName,
+                            ref methodSignature,
+                            lookForDefaultImplementations,
+                            out functionPointer,
+                            out genericDictionary,
+                            out slotChanged
+                        )
                 )
                 {
                     methodNameAndSignature = new MethodNameAndSignature(
@@ -119,12 +121,14 @@ namespace Internal.Runtime.CompilerServices
             MethodNameAndSignature nameAndSignature;
             RuntimeTypeHandle[] genericMethodArgs;
             if (
-                !RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
-                    slot,
-                    out declaringTypeHandle,
-                    out nameAndSignature,
-                    out genericMethodArgs
-                )
+                !RuntimeAugments
+                    .TypeLoaderCallbacks
+                    .GetRuntimeMethodHandleComponents(
+                        slot,
+                        out declaringTypeHandle,
+                        out nameAndSignature,
+                        out genericMethodArgs
+                    )
             )
             {
                 System.Diagnostics.Debug.Assert(false);

@@ -100,8 +100,9 @@ namespace ComInterfaceGenerator.Tests
             int x = 7;
             int y = 56;
 
-            NativeExportsNE.NoImplicitThis.IStaticMethodTable staticMethodTable =
-                NativeExportsNE.NoImplicitThis.GetStaticFunctionTable();
+            NativeExportsNE.NoImplicitThis.IStaticMethodTable staticMethodTable = NativeExportsNE
+                .NoImplicitThis
+                .GetStaticFunctionTable();
 
             Assert.Equal(x + y, staticMethodTable.Add(x, y));
             Assert.Equal(x * y, staticMethodTable.Multiply(x, y));

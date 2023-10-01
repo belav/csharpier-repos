@@ -144,9 +144,9 @@ namespace MonoTests.System.IO
                     BindingFlags.Instance | BindingFlags.NonPublic
                 );
                 Assert.IsNotNull(watcherHandleField);
-                var proxyType = typeof(FileSystemWatcher).Assembly.GetType(
-                    "System.IO.CoreFXFileSystemWatcherProxy"
-                );
+                var proxyType = typeof(FileSystemWatcher)
+                    .Assembly
+                    .GetType("System.IO.CoreFXFileSystemWatcherProxy");
                 Assert.IsNotNull(proxyType);
                 // the "internal_map" maps watcher handles to backend CoreFX FSW instances
                 var proxyTypeInternalMapField = proxyType.GetField(

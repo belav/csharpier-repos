@@ -1905,8 +1905,11 @@ public class C
                 Assert.True(setter.IsInitOnly);
                 Assert.True(setter.GetPublicSymbol().IsInitOnly);
                 var setterAttributes = property.SetMethod.GetAttributes().Select(a => a.ToString());
-                var modifier =
-                    property.SetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single();
+                var modifier = property
+                    .SetMethod
+                    .ReturnTypeWithAnnotations
+                    .CustomModifiers
+                    .Single();
                 Assert.Equal(
                     "System.Runtime.CompilerServices.IsExternalInit",
                     modifier.Modifier.ToTestDisplayString()
@@ -3968,7 +3971,8 @@ class C : R
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var p = speculativeModel.SyntaxTree
+            var p = speculativeModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
@@ -4944,7 +4948,9 @@ public class D
             Assert.Empty(property0.RefCustomModifiers);
             Assert.Equal(
                 "System.Runtime.CompilerServices.IsExternalInit",
-                property0.TypeWithAnnotations.CustomModifiers
+                property0
+                    .TypeWithAnnotations
+                    .CustomModifiers
                     .Single()
                     .Modifier
                     .ToTestDisplayString()
@@ -5891,9 +5897,9 @@ public class C
                         libWithIsExternalInitRef,
                         libWithIsExternalInitRef2
                     },
-                    options: TestOptions.DebugDll.WithTopLevelBinderFlags(
-                        BinderFlags.IgnoreCorLibraryDuplicatedTypes
-                    )
+                    options: TestOptions
+                        .DebugDll
+                        .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics(
                     // (4,32): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported
@@ -5934,9 +5940,9 @@ public class C
                         libWithIsExternalInitRef,
                         libWithIsExternalInitRef2
                     },
-                    options: TestOptions.DebugDll.WithTopLevelBinderFlags(
-                        BinderFlags.IgnoreCorLibraryDuplicatedTypes
-                    )
+                    options: TestOptions
+                        .DebugDll
+                        .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics(
                     // (4,32): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported
@@ -5972,9 +5978,9 @@ public class C
                 var comp = CreateEmptyCompilation(
                     source,
                     references: new[] { corlibWithIsExternalInitRef, libWithIsExternalInitRef },
-                    options: TestOptions.DebugDll.WithTopLevelBinderFlags(
-                        BinderFlags.IgnoreCorLibraryDuplicatedTypes
-                    )
+                    options: TestOptions
+                        .DebugDll
+                        .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
                 );
                 comp.VerifyEmitDiagnostics();
                 Assert.Equal(
@@ -5995,9 +6001,11 @@ public class C
 
             static void verify(CSharpCompilation comp, string expectedAssemblyName)
             {
-                var modifier = (
-                    (SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property")
-                ).SetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single();
+                var modifier = ((SourcePropertySymbol)comp.GlobalNamespace.GetMember("C.Property"))
+                    .SetMethod
+                    .ReturnTypeWithAnnotations
+                    .CustomModifiers
+                    .Single();
                 Assert.Equal(expectedAssemblyName, modifier.Modifier.ContainingAssembly.Name);
 
                 Assert.Equal(

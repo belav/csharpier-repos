@@ -51,15 +51,17 @@ namespace System.Net.Sockets
             socket = new SafeSocketHandle();
             Marshal.InitHandle(
                 socket,
-                Interop.Winsock.WSASocketW(
-                    addressFamily,
-                    socketType,
-                    protocolType,
-                    IntPtr.Zero,
-                    0,
-                    Interop.Winsock.SocketConstructorFlags.WSA_FLAG_OVERLAPPED
-                        | Interop.Winsock.SocketConstructorFlags.WSA_FLAG_NO_HANDLE_INHERIT
-                )
+                Interop
+                    .Winsock
+                    .WSASocketW(
+                        addressFamily,
+                        socketType,
+                        protocolType,
+                        IntPtr.Zero,
+                        0,
+                        Interop.Winsock.SocketConstructorFlags.WSA_FLAG_OVERLAPPED
+                            | Interop.Winsock.SocketConstructorFlags.WSA_FLAG_NO_HANDLE_INHERIT
+                    )
             );
 
             if (socket.IsInvalid)
@@ -110,15 +112,17 @@ namespace System.Net.Sockets
                 // Inheritance is being disabled with SetHandleInformation(...) after the WSASocketW call.
                 Marshal.InitHandle(
                     socket,
-                    Interop.Winsock.WSASocketW(
-                        (AddressFamily)(-1),
-                        (SocketType)(-1),
-                        (ProtocolType)(-1),
-                        (IntPtr)protocolInfoBytes,
-                        0,
-                        Interop.Winsock.SocketConstructorFlags.WSA_FLAG_OVERLAPPED
-                            | Interop.Winsock.SocketConstructorFlags.WSA_FLAG_NO_HANDLE_INHERIT
-                    )
+                    Interop
+                        .Winsock
+                        .WSASocketW(
+                            (AddressFamily)(-1),
+                            (SocketType)(-1),
+                            (ProtocolType)(-1),
+                            (IntPtr)protocolInfoBytes,
+                            0,
+                            Interop.Winsock.SocketConstructorFlags.WSA_FLAG_OVERLAPPED
+                                | Interop.Winsock.SocketConstructorFlags.WSA_FLAG_NO_HANDLE_INHERIT
+                        )
                 );
 
                 if (socket.IsInvalid)
@@ -131,11 +135,13 @@ namespace System.Net.Sockets
                 }
 
                 if (
-                    !Interop.Kernel32.SetHandleInformation(
-                        socket,
-                        Interop.Kernel32.HandleFlags.HANDLE_FLAG_INHERIT,
-                        0
-                    )
+                    !Interop
+                        .Kernel32
+                        .SetHandleInformation(
+                            socket,
+                            Interop.Kernel32.HandleFlags.HANDLE_FLAG_INHERIT,
+                            0
+                        )
                 )
                 {
                     // Returning SocketError for consistency, since the call site can deal with conversion, and
@@ -173,11 +179,9 @@ namespace System.Net.Sockets
             int intBlocking = shouldBlock ? 0 : -1;
 
             SocketError errorCode;
-            errorCode = Interop.Winsock.ioctlsocket(
-                handle,
-                Interop.Winsock.IoctlSocketConstants.FIONBIO,
-                ref intBlocking
-            );
+            errorCode = Interop
+                .Winsock
+                .ioctlsocket(handle, Interop.Winsock.IoctlSocketConstants.FIONBIO, ref intBlocking);
 
             if (errorCode == SocketError.SocketError)
             {
@@ -203,11 +207,9 @@ namespace System.Net.Sockets
         public static SocketError GetAvailable(SafeSocketHandle handle, out int available)
         {
             int value = 0;
-            SocketError errorCode = Interop.Winsock.ioctlsocket(
-                handle,
-                Interop.Winsock.IoctlSocketConstants.FIONREAD,
-                ref value
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .ioctlsocket(handle, Interop.Winsock.IoctlSocketConstants.FIONREAD, ref value);
             available = value;
             return errorCode == SocketError.SocketError
                 ? GetLastSocketError()
@@ -276,15 +278,17 @@ namespace System.Net.Sockets
             int peerAddressLen
         )
         {
-            SocketError errorCode = Interop.Winsock.WSAConnect(
-                handle,
-                peerAddress,
-                peerAddressLen,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .WSAConnect(
+                    handle,
+                    peerAddress,
+                    peerAddressLen,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
             return errorCode == SocketError.SocketError
                 ? GetLastSocketError()
                 : SocketError.Success;
@@ -334,15 +338,17 @@ namespace System.Net.Sockets
 
                 unsafe
                 {
-                    SocketError errorCode = Interop.Winsock.WSASend(
-                        handle,
-                        WSABuffers,
-                        count,
-                        out bytesTransferred,
-                        socketFlags,
-                        null,
-                        IntPtr.Zero
-                    );
+                    SocketError errorCode = Interop
+                        .Winsock
+                        .WSASend(
+                            handle,
+                            WSABuffers,
+                            count,
+                            out bytesTransferred,
+                            socketFlags,
+                            null,
+                            IntPtr.Zero
+                        );
 
                     if (errorCode == SocketError.SocketError)
                     {
@@ -463,14 +469,16 @@ namespace System.Net.Sockets
             int bytesSent;
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer))
             {
-                bytesSent = Interop.Winsock.sendto(
-                    handle,
-                    bufferPtr,
-                    buffer.Length,
-                    socketFlags,
-                    peerAddress,
-                    peerAddressSize
-                );
+                bytesSent = Interop
+                    .Winsock
+                    .sendto(
+                        handle,
+                        bufferPtr,
+                        buffer.Length,
+                        socketFlags,
+                        peerAddress,
+                        peerAddressSize
+                    );
             }
 
             if (bytesSent == (int)SocketError.SocketError)
@@ -527,15 +535,17 @@ namespace System.Net.Sockets
 
                 unsafe
                 {
-                    SocketError errorCode = Interop.Winsock.WSARecv(
-                        handle,
-                        WSABuffers,
-                        count,
-                        out bytesTransferred,
-                        ref socketFlags,
-                        null,
-                        IntPtr.Zero
-                    );
+                    SocketError errorCode = Interop
+                        .Winsock
+                        .WSARecv(
+                            handle,
+                            WSABuffers,
+                            count,
+                            out bytesTransferred,
+                            ref socketFlags,
+                            null,
+                            IntPtr.Zero
+                        );
 
                     if (errorCode == SocketError.SocketError)
                     {
@@ -781,14 +791,16 @@ namespace System.Net.Sockets
 
             fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer))
             {
-                bytesReceived = Interop.Winsock.recvfrom(
-                    handle,
-                    bufferPtr,
-                    buffer.Length,
-                    socketFlags,
-                    socketAddress,
-                    ref addressLength
-                );
+                bytesReceived = Interop
+                    .Winsock
+                    .recvfrom(
+                        handle,
+                        bufferPtr,
+                        buffer.Length,
+                        socketFlags,
+                        socketAddress,
+                        ref addressLength
+                    );
             }
 
             if (bytesReceived == (int)SocketError.SocketError)
@@ -814,17 +826,19 @@ namespace System.Net.Sockets
                 throw new InvalidOperationException(SR.net_sockets_useblocking);
             }
 
-            SocketError errorCode = Interop.Winsock.WSAIoctl_Blocking(
-                handle,
-                ioControlCode,
-                optionInValue,
-                optionInValue != null ? optionInValue.Length : 0,
-                optionOutValue,
-                optionOutValue != null ? optionOutValue.Length : 0,
-                out optionLength,
-                IntPtr.Zero,
-                IntPtr.Zero
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .WSAIoctl_Blocking(
+                    handle,
+                    ioControlCode,
+                    optionInValue,
+                    optionInValue != null ? optionInValue.Length : 0,
+                    optionOutValue,
+                    optionOutValue != null ? optionOutValue.Length : 0,
+                    out optionLength,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
             return errorCode == SocketError.SocketError
                 ? GetLastSocketError()
                 : SocketError.Success;
@@ -851,13 +865,9 @@ namespace System.Net.Sockets
             }
             else
             {
-                errorCode = Interop.Winsock.setsockopt(
-                    handle,
-                    optionLevel,
-                    optionName,
-                    ref optionValue,
-                    sizeof(int)
-                );
+                errorCode = Interop
+                    .Winsock
+                    .setsockopt(handle, optionLevel, optionName, ref optionValue, sizeof(int));
             }
             return errorCode == SocketError.SocketError
                 ? GetLastSocketError()
@@ -886,13 +896,15 @@ namespace System.Net.Sockets
 
             fixed (byte* optionValuePtr = optionValue)
             {
-                errorCode = Interop.Winsock.setsockopt(
-                    handle,
-                    optionLevel,
-                    optionName,
-                    optionValuePtr,
-                    optionValue != null ? optionValue.Length : 0
-                );
+                errorCode = Interop
+                    .Winsock
+                    .setsockopt(
+                        handle,
+                        optionLevel,
+                        optionName,
+                        optionValuePtr,
+                        optionValue != null ? optionValue.Length : 0
+                    );
                 return errorCode == SocketError.SocketError
                     ? GetLastSocketError()
                     : SocketError.Success;
@@ -908,13 +920,15 @@ namespace System.Net.Sockets
         {
             fixed (byte* optionValuePtr = optionValue)
             {
-                SocketError errorCode = Interop.Winsock.setsockopt(
-                    handle,
-                    (SocketOptionLevel)optionLevel,
-                    (SocketOptionName)optionName,
-                    optionValuePtr,
-                    optionValue.Length
-                );
+                SocketError errorCode = Interop
+                    .Winsock
+                    .setsockopt(
+                        handle,
+                        (SocketOptionLevel)optionLevel,
+                        (SocketOptionName)optionName,
+                        optionValuePtr,
+                        optionValue.Length
+                    );
                 return errorCode == SocketError.SocketError
                     ? GetLastSocketError()
                     : SocketError.Success;
@@ -960,13 +974,15 @@ namespace System.Net.Sockets
 #endif
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = Interop.Winsock.setsockopt(
-                handle,
-                SocketOptionLevel.IP,
-                optionName,
-                ref ipmr,
-                Interop.Winsock.IPMulticastRequest.Size
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .setsockopt(
+                    handle,
+                    SocketOptionLevel.IP,
+                    optionName,
+                    ref ipmr,
+                    Interop.Winsock.IPMulticastRequest.Size
+                );
             return errorCode == SocketError.SocketError
                 ? GetLastSocketError()
                 : SocketError.Success;
@@ -984,13 +1000,15 @@ namespace System.Net.Sockets
             ipmr.InterfaceIndex = unchecked((int)optionValue.InterfaceIndex);
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = Interop.Winsock.setsockopt(
-                handle,
-                SocketOptionLevel.IPv6,
-                optionName,
-                ipmr,
-                Interop.Winsock.IPv6MulticastRequest.Size
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .setsockopt(
+                    handle,
+                    SocketOptionLevel.IPv6,
+                    optionName,
+                    ipmr,
+                    Interop.Winsock.IPv6MulticastRequest.Size
+                );
             return errorCode == SocketError.SocketError
                 ? GetLastSocketError()
                 : SocketError.Success;
@@ -1003,13 +1021,15 @@ namespace System.Net.Sockets
             lngopt.Time = (ushort)optionValue.LingerTime;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = Interop.Winsock.setsockopt(
-                handle,
-                SocketOptionLevel.Socket,
-                SocketOptionName.Linger,
-                ref lngopt,
-                4
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .setsockopt(
+                    handle,
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.Linger,
+                    ref lngopt,
+                    4
+                );
             return errorCode == SocketError.SocketError
                 ? GetLastSocketError()
                 : SocketError.Success;
@@ -1050,13 +1070,15 @@ namespace System.Net.Sockets
 
             int optionLength = sizeof(int);
             int tmpOptionValue = 0;
-            SocketError errorCode = Interop.Winsock.getsockopt(
-                handle,
-                optionLevel,
-                optionName,
-                (byte*)&tmpOptionValue,
-                ref optionLength
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .getsockopt(
+                    handle,
+                    optionLevel,
+                    optionName,
+                    (byte*)&tmpOptionValue,
+                    ref optionLength
+                );
 
             optionValue = tmpOptionValue;
             return errorCode == SocketError.SocketError
@@ -1086,13 +1108,9 @@ namespace System.Net.Sockets
 
             fixed (byte* optionValuePtr = optionValue)
             {
-                SocketError errorCode = Interop.Winsock.getsockopt(
-                    handle,
-                    optionLevel,
-                    optionName,
-                    optionValuePtr,
-                    ref optionLength
-                );
+                SocketError errorCode = Interop
+                    .Winsock
+                    .getsockopt(handle, optionLevel, optionName, optionValuePtr, ref optionLength);
                 return errorCode == SocketError.SocketError
                     ? GetLastSocketError()
                     : SocketError.Success;
@@ -1112,13 +1130,15 @@ namespace System.Net.Sockets
             SocketError errorCode;
             fixed (byte* optionValuePtr = optionValue)
             {
-                errorCode = Interop.Winsock.getsockopt(
-                    handle,
-                    (SocketOptionLevel)optionLevel,
-                    (SocketOptionName)optionName,
-                    optionValuePtr,
-                    ref optionLength
-                );
+                errorCode = Interop
+                    .Winsock
+                    .getsockopt(
+                        handle,
+                        (SocketOptionLevel)optionLevel,
+                        (SocketOptionName)optionName,
+                        optionValuePtr,
+                        ref optionLength
+                    );
                 return errorCode == SocketError.SocketError
                     ? GetLastSocketError()
                     : SocketError.Success;
@@ -1135,13 +1155,9 @@ namespace System.Net.Sockets
             int optlen = Interop.Winsock.IPMulticastRequest.Size;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = Interop.Winsock.getsockopt(
-                handle,
-                SocketOptionLevel.IP,
-                optionName,
-                out ipmr,
-                ref optlen
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .getsockopt(handle, SocketOptionLevel.IP, optionName, out ipmr, ref optlen);
 
             if (errorCode == SocketError.SocketError)
             {
@@ -1170,13 +1186,15 @@ namespace System.Net.Sockets
             int optlen = Interop.Winsock.IPv6MulticastRequest.Size;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = Interop.Winsock.getsockopt(
-                handle,
-                SocketOptionLevel.IP,
-                optionName,
-                out Interop.Winsock.IPv6MulticastRequest ipmr,
-                ref optlen
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .getsockopt(
+                    handle,
+                    SocketOptionLevel.IP,
+                    optionName,
+                    out Interop.Winsock.IPv6MulticastRequest ipmr,
+                    ref optlen
+                );
 
             if (errorCode == SocketError.SocketError)
             {
@@ -1199,13 +1217,15 @@ namespace System.Net.Sockets
             int optlen = 4;
 
             // This can throw ObjectDisposedException.
-            SocketError errorCode = Interop.Winsock.getsockopt(
-                handle,
-                SocketOptionLevel.Socket,
-                SocketOptionName.Linger,
-                out Interop.Winsock.Linger lngopt,
-                ref optlen
-            );
+            SocketError errorCode = Interop
+                .Winsock
+                .getsockopt(
+                    handle,
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.Linger,
+                    out Interop.Winsock.Linger lngopt,
+                    ref optlen
+                );
 
             if (errorCode == SocketError.SocketError)
             {
@@ -1238,23 +1258,27 @@ namespace System.Net.Sockets
                 if (microseconds != -1)
                 {
                     MicrosecondsToTimeValue((long)(uint)microseconds, ref timeout);
-                    socketCount = Interop.Winsock.select(
-                        0,
-                        mode == SelectMode.SelectRead ? fileDescriptorSet : null,
-                        mode == SelectMode.SelectWrite ? fileDescriptorSet : null,
-                        mode == SelectMode.SelectError ? fileDescriptorSet : null,
-                        ref timeout
-                    );
+                    socketCount = Interop
+                        .Winsock
+                        .select(
+                            0,
+                            mode == SelectMode.SelectRead ? fileDescriptorSet : null,
+                            mode == SelectMode.SelectWrite ? fileDescriptorSet : null,
+                            mode == SelectMode.SelectError ? fileDescriptorSet : null,
+                            ref timeout
+                        );
                 }
                 else
                 {
-                    socketCount = Interop.Winsock.select(
-                        0,
-                        mode == SelectMode.SelectRead ? fileDescriptorSet : null,
-                        mode == SelectMode.SelectWrite ? fileDescriptorSet : null,
-                        mode == SelectMode.SelectError ? fileDescriptorSet : null,
-                        IntPtr.Zero
-                    );
+                    socketCount = Interop
+                        .Winsock
+                        .select(
+                            0,
+                            mode == SelectMode.SelectRead ? fileDescriptorSet : null,
+                            mode == SelectMode.SelectWrite ? fileDescriptorSet : null,
+                            mode == SelectMode.SelectError ? fileDescriptorSet : null,
+                            IntPtr.Zero
+                        );
                 }
 
                 if ((SocketError)socketCount == SocketError.SocketError)
@@ -1371,23 +1395,27 @@ namespace System.Net.Sockets
                         Interop.Winsock.TimeValue timeout = default;
                         MicrosecondsToTimeValue((long)(uint)microseconds, ref timeout);
 
-                        socketCount = Interop.Winsock.select(
-                            0, // ignored value
-                            readPtr,
-                            writePtr,
-                            errPtr,
-                            ref timeout
-                        );
+                        socketCount = Interop
+                            .Winsock
+                            .select(
+                                0, // ignored value
+                                readPtr,
+                                writePtr,
+                                errPtr,
+                                ref timeout
+                            );
                     }
                     else
                     {
-                        socketCount = Interop.Winsock.select(
-                            0, // ignored value
-                            readPtr,
-                            writePtr,
-                            errPtr,
-                            IntPtr.Zero
-                        );
+                        socketCount = Interop
+                            .Winsock
+                            .select(
+                                0, // ignored value
+                                readPtr,
+                                writePtr,
+                                errPtr,
+                                IntPtr.Zero
+                            );
                     }
                 }
                 if (NetEventSource.Log.IsEnabled())
@@ -1485,15 +1513,17 @@ namespace System.Net.Sockets
                     fileHandlePtr = fileHandle.DangerousGetHandle();
                 }
 
-                return Interop.Mswsock.TransmitFile(
-                    socket,
-                    fileHandlePtr,
-                    0,
-                    0,
-                    overlapped,
-                    needTransmitFileBuffers ? &transmitFileBuffers : null,
-                    flags
-                );
+                return Interop
+                    .Mswsock
+                    .TransmitFile(
+                        socket,
+                        fileHandlePtr,
+                        0,
+                        0,
+                        overlapped,
+                        needTransmitFileBuffers ? &transmitFileBuffers : null,
+                        flags
+                    );
             }
             finally
             {
@@ -1548,11 +1578,9 @@ namespace System.Net.Sockets
             {
                 Interop.Winsock.WSAPROTOCOL_INFOW* lpProtocolInfo =
                     (Interop.Winsock.WSAPROTOCOL_INFOW*)protocolInfoBytes;
-                int result = Interop.Winsock.WSADuplicateSocket(
-                    handle,
-                    (uint)targetProcessId,
-                    lpProtocolInfo
-                );
+                int result = Interop
+                    .Winsock
+                    .WSADuplicateSocket(handle, (uint)targetProcessId, lpProtocolInfo);
                 return result == 0 ? SocketError.Success : GetLastSocketError();
             }
         }

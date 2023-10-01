@@ -332,9 +332,10 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                                 if (MetaDataProvider.IsAutoPropertyMember(method))
                                 {
                                     foreach (
-                                        Field f in this.parent.StackContextProvider.MethodContext.Modifies(
-                                            method
-                                        )
+                                        Field f in this.parent
+                                            .StackContextProvider
+                                            .MethodContext
+                                            .Modifies(method)
                                     )
                                     {
                                         TypeNode fieldAddressType;
@@ -349,9 +350,10 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                                 else
                                     data.HavocFields(
                                         obj,
-                                        this.parent.StackContextProvider.MethodContext.Modifies(
-                                            method
-                                        ),
+                                        this.parent
+                                            .StackContextProvider
+                                            .MethodContext
+                                            .Modifies(method),
                                         ref data.ModifiedAtCall
                                     );
                             }

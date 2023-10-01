@@ -61,7 +61,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
 
             modelBuilder.FinalizeModel();
 
-            var property = modelBuilder.Model
+            var property = modelBuilder
+                .Model
                 .FindEntityType(typeof(DoubleProperty))!
                 .GetProperty("Property");
             Assert.EndsWith(

@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders;
 
 internal class FileKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
 {
-    private static readonly ISet<SyntaxKind> s_validModifiers = SyntaxKindSet.AllMemberModifiers
+    private static readonly ISet<SyntaxKind> s_validModifiers = SyntaxKindSet
+        .AllMemberModifiers
         .Where(s => s != SyntaxKind.FileKeyword && !SyntaxFacts.IsAccessibilityModifier(s))
         .ToSet();
 

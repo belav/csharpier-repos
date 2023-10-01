@@ -232,7 +232,8 @@ namespace System.Net
                                 indexOfNextCopy += 4;
                             }
 
-                            state.uriPrefix
+                            state
+                                .uriPrefix
                                 .AsSpan(state.j)
                                 .CopyTo(destination.Slice(indexOfNextCopy));
                         }

@@ -171,13 +171,15 @@ namespace System.ServiceModel.Channels
                 if (this.retransmitSettings.Enabled == true)
                 {
                     // we should only get here if some channel above us starts producing messages that don't match the encoder's message version.
-                    throw FxTrace.Exception.AsError(
-                        new ProtocolException(
-                            SR.RetransmissionRequiresAddressingOnMessage(
-                                message.Version.Addressing.ToString()
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new ProtocolException(
+                                SR.RetransmissionRequiresAddressingOnMessage(
+                                    message.Version.Addressing.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -230,9 +232,9 @@ namespace System.ServiceModel.Channels
 
             if (timeoutHelper.RemainingTime() <= TimeSpan.Zero)
             {
-                throw FxTrace.Exception.AsError(
-                    new TimeoutException(SR.SendTimedOut(remoteEndPoint, timeout))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new TimeoutException(SR.SendTimedOut(remoteEndPoint, timeout)));
             }
 
             bool returnBuffer = false;
@@ -411,11 +413,13 @@ namespace System.ServiceModel.Channels
                 {
                     // someone is sending a message with the same MessageId
                     // while a retransmission is still in progress for that ID.
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.RecycledMessageIdDuringRetransmission(messageId)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.RecycledMessageIdDuringRetransmission(messageId)
+                            )
+                        );
                 }
                 else
                 {
@@ -476,11 +480,13 @@ namespace System.ServiceModel.Channels
             {
                 if (timeoutHelper.RemainingTime() <= TimeSpan.Zero)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new TimeoutException(
-                            SR.SendTimedOut(remoteEndpoint, timeoutHelper.OriginalTimeout)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new TimeoutException(
+                                SR.SendTimedOut(remoteEndpoint, timeoutHelper.OriginalTimeout)
+                            )
+                        );
                 }
 
                 sockets[i].SendTo(
@@ -527,9 +533,9 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.retransmissionDoneWaitHandle.Wait(timeout))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new TimeoutException(SR.TimeoutOnOperation(timeout))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new TimeoutException(SR.TimeoutOnOperation(timeout)));
                 }
 
                 lock (this.ThisLock)
@@ -973,11 +979,13 @@ namespace System.ServiceModel.Channels
             {
                 if (this.timeoutHelper.RemainingTime() <= TimeSpan.Zero)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new TimeoutException(
-                            SR.TimeoutOnOperation(this.timeoutHelper.OriginalTimeout)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new TimeoutException(
+                                SR.TimeoutOnOperation(this.timeoutHelper.OriginalTimeout)
+                            )
+                        );
                 }
             }
 
@@ -1054,11 +1062,13 @@ namespace System.ServiceModel.Channels
                         exception.GetType() == typeof(TimeoutException),
                         "Exception on callback should always be TimeoutException"
                     );
-                    throw FxTrace.Exception.AsError(
-                        new TimeoutException(
-                            SR.TimeoutOnOperation(thisPtr.timeoutHelper.OriginalTimeout)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new TimeoutException(
+                                SR.TimeoutOnOperation(thisPtr.timeoutHelper.OriginalTimeout)
+                            )
+                        );
                 }
 
                 try
@@ -1123,11 +1133,13 @@ namespace System.ServiceModel.Channels
                     // we're guaranteed by CommunicationObject that at most ONE of Close or BeginClose will be called once.
                     // we don't null out retransmissionDoneEvent in the abort case; should be safe to use here.
                     return !needToWait
-                        || this.channel.retransmissionDoneWaitHandle.WaitAsync(
-                            completeCleanupCallback,
-                            this,
-                            this.timeoutHelper.RemainingTime()
-                        );
+                        || this.channel
+                            .retransmissionDoneWaitHandle
+                            .WaitAsync(
+                                completeCleanupCallback,
+                                this,
+                                this.timeoutHelper.RemainingTime()
+                            );
                 }
             }
         }

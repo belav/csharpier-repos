@@ -92,7 +92,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var list = entity.Inventory
+                    var list = entity
+                        .Inventory
                         .Where(c => c.inventoryId == cId)
                         .Select(
                             c =>
@@ -145,7 +146,8 @@ namespace POS_Server.Controllers
                 int lastNum = 0;
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    numberList = entity.Inventory
+                    numberList = entity
+                        .Inventory
                         .Where(b => b.num.Contains(invCode + "-") && b.branchId == branchId)
                         .Select(b => b.num)
                         .ToList();
@@ -194,7 +196,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = entity.Inventory
+                    var List = entity
+                        .Inventory
                         .Where(
                             c =>
                                 c.inventoryType.Contains(inventoryType)
@@ -251,7 +254,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = entity.Inventory
+                    var List = entity
+                        .Inventory
                         .Where(
                             c =>
                                 c.inventoryType.Contains(inventoryType)
@@ -306,12 +310,14 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var List = (
-                        from c in entity.inventoryItemLocation.Where(
-                            c =>
-                                c.realAmount - c.amount > 0
-                                && c.inventoryId == inventoryId
-                                && c.isFalls == false
-                        )
+                        from c in entity
+                            .inventoryItemLocation
+                            .Where(
+                                c =>
+                                    c.realAmount - c.amount > 0
+                                    && c.inventoryId == inventoryId
+                                    && c.isFalls == false
+                            )
                         select new InventoryItemLocationModel() { id = c.id, }
                     ).ToList();
                     bool result = false;
@@ -392,7 +398,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmps = entity.Inventory
+                            var tmps = entity
+                                .Inventory
                                 .Where(p => p.inventoryId == Object.inventoryId)
                                 .FirstOrDefault();
                             tmps.inventoryId = Object.inventoryId;
@@ -431,7 +438,8 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var numberList = entity.Inventory
+                var numberList = entity
+                    .Inventory
                     .Where(b => b.num.Contains(invoiceCode + "-") && b.branchId == branchId)
                     .Select(b => b.num)
                     .ToList();
@@ -570,7 +578,8 @@ namespace POS_Server.Controllers
 
                     #region check if there is draft inventory
 
-                    var List = entity.Inventory
+                    var List = entity
+                        .Inventory
                         .Where(
                             c => c.inventoryType == "d" && c.branchId == branchId && c.isActive == 1
                         )
@@ -585,7 +594,8 @@ namespace POS_Server.Controllers
 
                     #region check if there is draft inventory
 
-                    var List2 = entity.Inventory
+                    var List2 = entity
+                        .Inventory
                         .Where(
                             c => c.inventoryType == "n" && c.branchId == branchId && c.isActive == 1
                         )

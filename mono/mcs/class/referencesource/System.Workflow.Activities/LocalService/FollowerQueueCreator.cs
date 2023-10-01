@@ -51,13 +51,15 @@ namespace System.Workflow.Activities
 
                 // create the queue after extracting the correlation values from the message
                 EventQueueName staticId = (EventQueueName)queue.QueueName;
-                WorkflowActivityTrace.Activity.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "FollowerQueueCreator: initialized on operation {0} for follower {1}",
-                    staticId.InterfaceType.Name + staticId.MethodName,
-                    this.followerOperation
-                );
+                WorkflowActivityTrace
+                    .Activity
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "FollowerQueueCreator: initialized on operation {0} for follower {1}",
+                        staticId.InterfaceType.Name + staticId.MethodName,
+                        this.followerOperation
+                    );
 
                 IMethodMessage message = queue.Peek() as IMethodMessage;
 
@@ -76,12 +78,14 @@ namespace System.Workflow.Activities
                 );
                 if (!queue.QueuingService.Exists(queueName))
                 {
-                    WorkflowActivityTrace.Activity.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "FollowerQueueCreator::CreateQueue creating q {0}",
-                        queueName.GetHashCode()
-                    );
+                    WorkflowActivityTrace
+                        .Activity
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "FollowerQueueCreator::CreateQueue creating q {0}",
+                            queueName.GetHashCode()
+                        );
                     queue.QueuingService.CreateWorkflowQueue(queueName, true);
                 }
             }

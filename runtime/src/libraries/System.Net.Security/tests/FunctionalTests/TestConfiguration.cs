@@ -51,8 +51,13 @@ namespace System.Net.Security.Tests
             }
         }
 
-        public static readonly X509Certificate2 ServerCertificate =
-            System.Net.Test.Common.Configuration.Certificates.GetServerCertificate();
+        public static readonly X509Certificate2 ServerCertificate = System
+            .Net
+            .Test
+            .Common
+            .Configuration
+            .Certificates
+            .GetServerCertificate();
 
         public static Task WhenAllOrAnyFailedWithTimeout(params Task[] tasks) =>
             tasks.WhenAllOrAnyFailed(PassingTestTimeoutMilliseconds);

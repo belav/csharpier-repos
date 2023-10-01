@@ -19,11 +19,9 @@ namespace System.Runtime.InteropServices
 
             if (((uint)flags & 0xFFFFFF00) != 0)
             {
-                hmod = Interop.Kernel32.LoadLibraryEx(
-                    libraryName,
-                    IntPtr.Zero,
-                    (int)((uint)flags & 0xFFFFFF00)
-                );
+                hmod = Interop
+                    .Kernel32
+                    .LoadLibraryEx(libraryName, IntPtr.Zero, (int)((uint)flags & 0xFFFFFF00));
                 if (hmod != IntPtr.Zero)
                 {
                     return hmod;

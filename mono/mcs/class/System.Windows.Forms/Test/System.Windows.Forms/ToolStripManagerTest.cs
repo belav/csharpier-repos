@@ -820,15 +820,17 @@ namespace MonoTests.System.Windows.Forms
                 menuStrip1.SuspendLayout();
                 SuspendLayout();
 
-                menuStrip1.Items.AddRange(
-                    new ToolStripItem[]
-                    {
-                        fileToolStripMenuItem,
-                        editToolStripMenuItem,
-                        toolsToolStripMenuItem,
-                        helpToolStripMenuItem
-                    }
-                );
+                menuStrip1
+                    .Items
+                    .AddRange(
+                        new ToolStripItem[]
+                        {
+                            fileToolStripMenuItem,
+                            editToolStripMenuItem,
+                            toolsToolStripMenuItem,
+                            helpToolStripMenuItem
+                        }
+                    );
                 menuStrip1.Location = new Point(0, 0);
                 menuStrip1.Name = "menuStrip1";
                 menuStrip1.RenderMode = ToolStripRenderMode.System;
@@ -837,9 +839,9 @@ namespace MonoTests.System.Windows.Forms
                 menuStrip1.Text = "menuStrip1";
                 menuStrip1.Visible = false;
 
-                fileToolStripMenuItem.DropDownItems.AddRange(
-                    new ToolStripItem[] { toolStripSeparator, printToolStripMenuItem }
-                );
+                fileToolStripMenuItem
+                    .DropDownItems
+                    .AddRange(new ToolStripItem[] { toolStripSeparator, printToolStripMenuItem });
                 fileToolStripMenuItem.MergeAction = MergeAction.MatchOnly;
                 fileToolStripMenuItem.Name = "fileToolStripMenuItem";
                 fileToolStripMenuItem.Size = new Size(35, 20);
@@ -854,15 +856,17 @@ namespace MonoTests.System.Windows.Forms
                 printToolStripMenuItem.ShortcutKeys = ((Keys)((Keys.Control | Keys.P)));
                 printToolStripMenuItem.Size = new Size(152, 22);
                 printToolStripMenuItem.Text = "&Print";
-                editToolStripMenuItem.DropDownItems.AddRange(
-                    new ToolStripItem[]
-                    {
-                        toolStripSeparator3,
-                        copyToolStripMenuItem,
-                        toolStripSeparator4,
-                        selectAllToolStripMenuItem
-                    }
-                );
+                editToolStripMenuItem
+                    .DropDownItems
+                    .AddRange(
+                        new ToolStripItem[]
+                        {
+                            toolStripSeparator3,
+                            copyToolStripMenuItem,
+                            toolStripSeparator4,
+                            selectAllToolStripMenuItem
+                        }
+                    );
                 editToolStripMenuItem.MergeAction = MergeAction.Insert;
                 editToolStripMenuItem.MergeIndex = 1;
                 editToolStripMenuItem.Name = "editToolStripMenuItem";
@@ -879,14 +883,16 @@ namespace MonoTests.System.Windows.Forms
                 selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
                 selectAllToolStripMenuItem.Size = new Size(160, 22);
                 selectAllToolStripMenuItem.Text = "selectAllToolStripMenuItem";
-                toolsToolStripMenuItem.DropDownItems.AddRange(
-                    new ToolStripItem[]
-                    {
-                        addToolStripMenuItem,
-                        deleteToolStripMenuItem,
-                        filterToolStripMenuItem
-                    }
-                );
+                toolsToolStripMenuItem
+                    .DropDownItems
+                    .AddRange(
+                        new ToolStripItem[]
+                        {
+                            addToolStripMenuItem,
+                            deleteToolStripMenuItem,
+                            filterToolStripMenuItem
+                        }
+                    );
                 toolsToolStripMenuItem.MergeAction = MergeAction.Insert;
                 toolsToolStripMenuItem.MergeIndex = 2;
                 toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
@@ -905,9 +911,9 @@ namespace MonoTests.System.Windows.Forms
                 filterToolStripMenuItem.ShortcutKeys = Keys.F11;
                 filterToolStripMenuItem.Size = new Size(160, 22);
                 filterToolStripMenuItem.Text = "Tingimus";
-                helpToolStripMenuItem.DropDownItems.AddRange(
-                    new ToolStripItem[] { searchToolStripMenuItem }
-                );
+                helpToolStripMenuItem
+                    .DropDownItems
+                    .AddRange(new ToolStripItem[] { searchToolStripMenuItem });
                 helpToolStripMenuItem.MergeAction = MergeAction.MatchOnly;
                 helpToolStripMenuItem.Name = "helpToolStripMenuItem";
                 helpToolStripMenuItem.Size = new Size(34, 20);

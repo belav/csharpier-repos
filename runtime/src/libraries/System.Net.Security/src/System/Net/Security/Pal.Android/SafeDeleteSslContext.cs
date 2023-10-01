@@ -244,15 +244,17 @@ namespace System.Net
                 !isServer && !string.IsNullOrEmpty(authOptions.TargetHost)
                     ? authOptions.TargetHost
                     : null;
-            Interop.AndroidCrypto.SSLStreamInitialize(
-                handle,
-                isServer,
-                managedContextHandle,
-                &ReadFromConnection,
-                &WriteToConnection,
-                InitialBufferSize,
-                peerHost
-            );
+            Interop
+                .AndroidCrypto
+                .SSLStreamInitialize(
+                    handle,
+                    isServer,
+                    managedContextHandle,
+                    &ReadFromConnection,
+                    &WriteToConnection,
+                    InitialBufferSize,
+                    peerHost
+                );
 
             if (authOptions.EnabledSslProtocols != SslProtocols.None)
             {
@@ -271,10 +273,12 @@ namespace System.Net
                 (int minIndex, int maxIndex) = protocolsToEnable.ValidateContiguous(
                     s_orderedSslProtocols
                 );
-                Interop.AndroidCrypto.SSLStreamSetEnabledProtocols(
-                    handle,
-                    s_orderedSslProtocols.AsSpan(minIndex, maxIndex - minIndex + 1)
-                );
+                Interop
+                    .AndroidCrypto
+                    .SSLStreamSetEnabledProtocols(
+                        handle,
+                        s_orderedSslProtocols.AsSpan(minIndex, maxIndex - minIndex + 1)
+                    );
             }
 
             if (
@@ -284,10 +288,9 @@ namespace System.Net
             )
             {
                 // Set application protocols if the platform supports it. Otherwise, we will silently ignore the option.
-                Interop.AndroidCrypto.SSLStreamSetApplicationProtocols(
-                    handle,
-                    authOptions.ApplicationProtocols
-                );
+                Interop
+                    .AndroidCrypto
+                    .SSLStreamSetApplicationProtocols(handle, authOptions.ApplicationProtocols);
             }
 
             if (isServer && authOptions.RemoteCertRequired)

@@ -52,16 +52,16 @@ namespace System.ServiceModel.Dispatcher
 
             if (workflowDurableInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "workflowDurableInstance"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("workflowDurableInstance");
             }
 
             if (workflowOperationInvoker == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "workflowOperationInvoker"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("workflowOperationInvoker");
             }
 
             string queueName;
@@ -228,11 +228,13 @@ namespace System.ServiceModel.Dispatcher
                         callbackState.SynchronizationContext;
                     callbackState.SynchronizationContext = null;
 
-                    SynchronizationContextWorkflowSchedulerService.SynchronizationContextPostHelper.Post(
-                        synchronizationContext,
-                        WorkflowOperationAsyncResult.sendOrPostCallback,
-                        callbackState
-                    );
+                    SynchronizationContextWorkflowSchedulerService
+                        .SynchronizationContextPostHelper
+                        .Post(
+                            synchronizationContext,
+                            WorkflowOperationAsyncResult.sendOrPostCallback,
+                            callbackState
+                        );
                 }
                 else //We are in correct thread to do the work.
                 {
@@ -243,17 +245,19 @@ namespace System.ServiceModel.Dispatcher
 
                         if (callbackState.WorkflowInstanceLifeTimeManager != null)
                         {
-                            callbackState.WorkflowInstanceLifeTimeManager.NotifyMessageArrived(
-                                callbackState.WorkflowInstance.InstanceId
-                            );
+                            callbackState
+                                .WorkflowInstanceLifeTimeManager
+                                .NotifyMessageArrived(callbackState.WorkflowInstance.InstanceId);
                         }
 
-                        callbackState.WorkflowInstance.EnqueueItemOnIdle(
-                            callbackState.QueueName,
-                            callbackState.WorkflowRequestContext,
-                            null,
-                            null
-                        );
+                        callbackState
+                            .WorkflowInstance
+                            .EnqueueItemOnIdle(
+                                callbackState.QueueName,
+                                callbackState.WorkflowRequestContext,
+                                null,
+                                null
+                            );
                     }
                 }
             }
@@ -265,14 +269,13 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (callbackState.WorkflowInstanceLifeTimeManager != null)
                     {
-                        callbackState.WorkflowInstanceLifeTimeManager.ScheduleTimer(
-                            callbackState.WorkflowInstance.InstanceId
-                        );
+                        callbackState
+                            .WorkflowInstanceLifeTimeManager
+                            .ScheduleTimer(callbackState.WorkflowInstance.InstanceId);
                     }
-                    callbackState.WorkflowRequestContext.SendFault(
-                        new FaultException(operationFault),
-                        null
-                    );
+                    callbackState
+                        .WorkflowRequestContext
+                        .SendFault(new FaultException(operationFault), null);
                 }
                 catch (Exception unhandled)
                 {
@@ -294,9 +297,9 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (callbackState.WorkflowInstanceLifeTimeManager != null)
                     {
-                        callbackState.WorkflowInstanceLifeTimeManager.ScheduleTimer(
-                            callbackState.WorkflowInstance.InstanceId
-                        );
+                        callbackState
+                            .WorkflowInstanceLifeTimeManager
+                            .ScheduleTimer(callbackState.WorkflowInstance.InstanceId);
                     }
                     //We should field only user code exception; Everything else should go abort path.
                     callbackState.WorkflowRequestContext.GetAsyncResult().SendFault(e, null);

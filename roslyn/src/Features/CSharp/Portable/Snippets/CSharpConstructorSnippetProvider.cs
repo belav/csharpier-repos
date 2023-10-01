@@ -98,15 +98,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
         {
             var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
             var constructorDeclaration = (ConstructorDeclarationSyntax)node;
-            var openBraceLine = parsedDocument.Text.Lines
+            var openBraceLine = parsedDocument
+                .Text
+                .Lines
                 .GetLineFromPosition(constructorDeclaration.Body!.SpanStart)
                 .LineNumber;
 
             var indentationOptions = new IndentationOptions(syntaxFormattingOptions);
             var newLine = indentationOptions.FormattingOptions.NewLine;
 
-            var indentationService =
-                parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
+            var indentationService = parsedDocument
+                .LanguageServices
+                .GetRequiredService<IIndentationService>();
             var indentation = indentationService.GetIndentation(
                 parsedDocument,
                 openBraceLine + 1,
@@ -151,9 +154,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             var constructorDeclaration = (ConstructorDeclarationSyntax)snippet;
             var blockStatement = constructorDeclaration.Body;
             blockStatement = blockStatement!.WithCloseBraceToken(
-                blockStatement.CloseBraceToken.WithPrependedLeadingTrivia(
-                    SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
-                )
+                blockStatement
+                    .CloseBraceToken
+                    .WithPrependedLeadingTrivia(
+                        SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
+                    )
             );
             var newConstructorDeclaration = constructorDeclaration.ReplaceNode(
                 constructorDeclaration.Body!,

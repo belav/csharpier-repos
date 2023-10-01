@@ -125,11 +125,13 @@ namespace System.Deployment.Internal.Isolation.Manifest
         {
             if (activationContext1 == null || activationContext2 == null)
                 return activationContext1 == activationContext2;
-            return IsolationInterop.AppIdAuthority.AreDefinitionsEqual(
-                0,
-                activationContext1.Identity.Identity,
-                activationContext2.Identity.Identity
-            );
+            return IsolationInterop
+                .AppIdAuthority
+                .AreDefinitionsEqual(
+                    0,
+                    activationContext1.Identity.Identity,
+                    activationContext2.Identity.Identity
+                );
         }
 
         internal static bool CompareIdentities(
@@ -156,11 +158,13 @@ namespace System.Deployment.Internal.Isolation.Manifest
                         "versionMatch"
                     );
             }
-            return IsolationInterop.AppIdAuthority.AreDefinitionsEqual(
-                flags,
-                applicationIdentity1.Identity,
-                applicationIdentity2.Identity
-            );
+            return IsolationInterop
+                .AppIdAuthority
+                .AreDefinitionsEqual(
+                    flags,
+                    applicationIdentity1.Identity,
+                    applicationIdentity2.Identity
+                );
         }
 
         internal static string GetFriendlyName(ActivationContext activationContext)

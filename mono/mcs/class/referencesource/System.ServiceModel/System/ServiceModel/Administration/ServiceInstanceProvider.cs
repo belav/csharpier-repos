@@ -338,7 +338,10 @@ namespace System.ServiceModel.Administration
                             CultureInfo.InvariantCulture,
                             "{0}: {1}",
                             AdministrationStrings.ValidationMode,
-                            specificBehavior.UserNameAuthentication.UserNamePasswordValidationMode.ToString()
+                            specificBehavior
+                                .UserNameAuthentication
+                                .UserNamePasswordValidationMode
+                                .ToString()
                         )
                     );
                 }
@@ -589,13 +592,15 @@ namespace System.ServiceModel.Administration
 
         void FillMetadataExporterInfo(IWmiInstance instance, MetadataExporter exporter)
         {
-            DiagnosticUtility.EventLog.LogEvent(
-                TraceEventType.Information,
-                (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
-                (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOn,
-                true,
-                "metadata exporter called"
-            );
+            DiagnosticUtility
+                .EventLog
+                .LogEvent(
+                    TraceEventType.Information,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Wmi,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.MessageLoggingOn,
+                    true,
+                    "metadata exporter called"
+                );
             Fx.Assert(null != instance, "");
             Fx.Assert(null != exporter, "");
             IWmiInstance metadataExporterInstance = instance.NewInstance(

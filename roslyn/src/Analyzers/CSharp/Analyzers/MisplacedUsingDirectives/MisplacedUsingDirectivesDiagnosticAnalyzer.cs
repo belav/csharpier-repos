@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
         public MisplacedUsingDirectivesDiagnosticAnalyzer()
             : base(
-                ImmutableDictionary<DiagnosticDescriptor, IOption2>.Empty
+                ImmutableDictionary<DiagnosticDescriptor, IOption2>
+                    .Empty
                     .Add(
                         s_outsideDiagnosticDescriptor,
                         CSharpCodeStyleOptions.PreferredUsingDirectivePlacement

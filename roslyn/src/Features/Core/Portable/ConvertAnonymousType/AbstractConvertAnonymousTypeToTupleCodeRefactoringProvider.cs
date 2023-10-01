@@ -75,36 +75,38 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             )
             {
                 context.RegisterRefactoring(
-                    CodeAction.CodeActionWithNestedActions.Create(
-                        FeaturesResources.Convert_to_tuple,
-                        ImmutableArray.Create(
-                            CodeAction.Create(
-                                FeaturesResources.just_this_anonymous_type,
-                                c =>
-                                    FixInCurrentMemberAsync(
-                                        document,
-                                        anonymousNode,
-                                        anonymousType,
-                                        allAnonymousTypes: false,
-                                        c
-                                    ),
-                                nameof(FeaturesResources.just_this_anonymous_type)
+                    CodeAction
+                        .CodeActionWithNestedActions
+                        .Create(
+                            FeaturesResources.Convert_to_tuple,
+                            ImmutableArray.Create(
+                                CodeAction.Create(
+                                    FeaturesResources.just_this_anonymous_type,
+                                    c =>
+                                        FixInCurrentMemberAsync(
+                                            document,
+                                            anonymousNode,
+                                            anonymousType,
+                                            allAnonymousTypes: false,
+                                            c
+                                        ),
+                                    nameof(FeaturesResources.just_this_anonymous_type)
+                                ),
+                                CodeAction.Create(
+                                    FeaturesResources.all_anonymous_types_in_container,
+                                    c =>
+                                        FixInCurrentMemberAsync(
+                                            document,
+                                            anonymousNode,
+                                            anonymousType,
+                                            allAnonymousTypes: true,
+                                            c
+                                        ),
+                                    nameof(FeaturesResources.all_anonymous_types_in_container)
+                                )
                             ),
-                            CodeAction.Create(
-                                FeaturesResources.all_anonymous_types_in_container,
-                                c =>
-                                    FixInCurrentMemberAsync(
-                                        document,
-                                        anonymousNode,
-                                        anonymousType,
-                                        allAnonymousTypes: true,
-                                        c
-                                    ),
-                                nameof(FeaturesResources.all_anonymous_types_in_container)
-                            )
+                            isInlinable: false
                         ),
-                        isInlinable: false
-                    ),
                     span
                 );
             }

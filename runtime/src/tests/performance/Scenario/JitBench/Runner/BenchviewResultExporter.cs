@@ -24,11 +24,13 @@ namespace JitBench
             foreach (Metric m in metrics.ToArray())
             {
                 if (
-                    runResult.Benchmark.TryGetBenchviewCustomMetricReporting(
-                        m,
-                        out Metric newMetric,
-                        out string newScenarioModelName
-                    )
+                    runResult
+                        .Benchmark
+                        .TryGetBenchviewCustomMetricReporting(
+                            m,
+                            out Metric newMetric,
+                            out string newScenarioModelName
+                        )
                 )
                 {
                     metrics.Remove(m);
@@ -71,20 +73,24 @@ namespace JitBench
             testModel.Performance.IterationModels = new List<IterationModel>();
             foreach (var iterationResult in runResult.IterationResults)
             {
-                testModel.Performance.IterationModels.Add(
-                    ConvertIterationResult(iterationResult, metricMapping)
-                );
+                testModel
+                    .Performance
+                    .IterationModels
+                    .Add(ConvertIterationResult(iterationResult, metricMapping));
             }
             foreach (var metric in metrics)
             {
-                testModel.Performance.Metrics.Add(
-                    new MetricModel()
-                    {
-                        DisplayName = metric.Name,
-                        Name = metric.Name,
-                        Unit = metric.Unit
-                    }
-                );
+                testModel
+                    .Performance
+                    .Metrics
+                    .Add(
+                        new MetricModel()
+                        {
+                            DisplayName = metric.Name,
+                            Name = metric.Name,
+                            Unit = metric.Unit
+                        }
+                    );
             }
             return testModel;
         }

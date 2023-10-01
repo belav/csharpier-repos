@@ -52,13 +52,15 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.MsmqNonNegativeArgumentExpected)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.MsmqNonNegativeArgumentExpected)
+                            )
+                        );
                 }
                 this.maxPoolSize = value;
             }
@@ -70,9 +72,9 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (!QueueTransferProtocolHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.queueTransferProtocol = value;
             }
         }
@@ -141,10 +143,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
         }
 
@@ -178,10 +182,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
             AspNetEnvironment.Current.ApplyHostedContext(msmqListener, context);
 

@@ -174,11 +174,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             if (syntax is PropertyDeclarationSyntax { Initializer: { } initializer })
-                MessageID.IDS_FeatureAutoPropertyInitializer.CheckFeatureAvailability(
-                    diagnostics,
-                    syntax,
-                    initializer.EqualsToken.GetLocation()
-                );
+                MessageID
+                    .IDS_FeatureAutoPropertyInitializer
+                    .CheckFeatureAvailability(
+                        diagnostics,
+                        syntax,
+                        initializer.EqualsToken.GetLocation()
+                    );
         }
 
         private TypeSyntax GetTypeSyntax(SyntaxNode syntax) =>

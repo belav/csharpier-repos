@@ -146,12 +146,14 @@ public class RelationalDatabaseFacadeExtensionsTest
         bool async
     )
     {
-        var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddScoped<
-                IDbContextTransactionManager,
-                FakeDbContextTransactionManager
-            >()
-        );
+        var context = InMemoryTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddScoped<
+                    IDbContextTransactionManager,
+                    FakeDbContextTransactionManager
+                >()
+            );
 
         var transactionManager = (FakeDbContextTransactionManager)
             context.GetService<IDbContextTransactionManager>();
@@ -240,9 +242,11 @@ public class RelationalDatabaseFacadeExtensionsTest
             Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo))
         };
 
-        var db = FakeRelationalTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
-        );
+        var db = FakeRelationalTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection().AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+            );
 
         Assert.Equal(migrations, db.Database.GetMigrations());
     }
@@ -271,9 +275,9 @@ public class RelationalDatabaseFacadeExtensionsTest
             AppliedMigrations = migrations.Select(id => new HistoryRow(id, "1.1.0")).ToList()
         };
 
-        var context = FakeRelationalTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IHistoryRepository>(repository)
-        );
+        var context = FakeRelationalTestHelpers
+            .Instance
+            .CreateContext(new ServiceCollection().AddSingleton<IHistoryRepository>(repository));
 
         Assert.Equal(
             migrations,
@@ -339,11 +343,13 @@ public class RelationalDatabaseFacadeExtensionsTest
             AppliedMigrations = appliedMigrations.Select(id => new HistoryRow(id, "1.1.0")).ToList()
         };
 
-        var context = FakeRelationalTestHelpers.Instance.CreateContext(
-            new ServiceCollection()
-                .AddSingleton<IHistoryRepository>(repository)
-                .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
-        );
+        var context = FakeRelationalTestHelpers
+            .Instance
+            .CreateContext(
+                new ServiceCollection()
+                    .AddSingleton<IHistoryRepository>(repository)
+                    .AddSingleton<IMigrationsAssembly>(migrationsAssembly)
+            );
 
         Assert.Equal(
             new[] { "00000000000003_Three" },

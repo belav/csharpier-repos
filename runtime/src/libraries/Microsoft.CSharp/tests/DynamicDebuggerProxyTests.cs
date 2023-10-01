@@ -85,10 +85,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private static Type GetType(string typeName)
         {
-            return typeof(Binder).Assembly.GetType(
-                "Microsoft.CSharp.RuntimeBinder." + typeName,
-                throwOnError: true
-            );
+            return typeof(Binder)
+                .Assembly
+                .GetType("Microsoft.CSharp.RuntimeBinder." + typeName, throwOnError: true);
         }
 
         private static object CreateDebugView(object arg)

@@ -45,9 +45,9 @@ namespace System.IO.Pipes
             {
                 _result = 0;
                 _memoryHandle = memory.Pin();
-                _overlapped = _pipeStream._threadPoolBinding!.AllocateNativeOverlapped(
-                    _preallocatedOverlapped
-                );
+                _overlapped = _pipeStream
+                    ._threadPoolBinding!
+                    .AllocateNativeOverlapped(_preallocatedOverlapped);
             }
 
             public ValueTaskSourceStatus GetStatus(short token) => _source.GetStatus(token);

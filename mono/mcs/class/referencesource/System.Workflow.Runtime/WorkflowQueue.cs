@@ -40,13 +40,15 @@ namespace System.Workflow.Runtime
                             qService.CallingActivity
                         );
                     qState.AsynchronousListeners.Add(subscriber);
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "WorkflowQueue:QueueItemAvailable subscribe for activity '{0}' with context Id {1}",
-                        subscriber.ActivityQualifiedName,
-                        subscriber.ContextId
-                    );
+                    WorkflowTrace
+                        .Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "WorkflowQueue:QueueItemAvailable subscribe for activity '{0}' with context Id {1}",
+                            subscriber.ActivityQualifiedName,
+                            subscriber.ContextId
+                        );
 
                     if (qState.AsynchronousListeners.Count == 1)
                         qService.NotifyAsynchronousSubscribers(
@@ -71,13 +73,15 @@ namespace System.Workflow.Runtime
                         .Remove(subscriber);
                     if (!removed)
                     {
-                        WorkflowTrace.Runtime.TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "WorkflowQueue:QueueItemAvailable unsubscribe failed for activity '{0}' with context Id {1} ",
-                            subscriber.ActivityQualifiedName,
-                            subscriber.ContextId
-                        );
+                        WorkflowTrace
+                            .Runtime
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                0,
+                                "WorkflowQueue:QueueItemAvailable unsubscribe failed for activity '{0}' with context Id {1} ",
+                                subscriber.ActivityQualifiedName,
+                                subscriber.ContextId
+                            );
                     }
                 }
             }
@@ -111,13 +115,15 @@ namespace System.Workflow.Runtime
                     subscriber.SubscribedActivityQualifiedName = subscriberQualifiedName;
                 }
                 qState.AsynchronousListeners.Add(subscriber);
-                WorkflowTrace.Runtime.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "WorkflowQueue:QueueItemAvailable subscribe for activity '{0}' with context Id {1}",
-                    subscriber.ActivityQualifiedName,
-                    subscriber.ContextId
-                );
+                WorkflowTrace
+                    .Runtime
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "WorkflowQueue:QueueItemAvailable subscribe for activity '{0}' with context Id {1}",
+                        subscriber.ActivityQualifiedName,
+                        subscriber.ContextId
+                    );
 
                 if (qState.AsynchronousListeners.Count == 1)
                     qService.NotifyAsynchronousSubscribers(
@@ -148,13 +154,15 @@ namespace System.Workflow.Runtime
                     .Remove(subscriber);
                 if (!removed)
                 {
-                    WorkflowTrace.Runtime.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "WorkflowQueue:QueueItemAvailable unsubscribe failed for activity '{0}' with context Id {1}",
-                        subscriber.ActivityQualifiedName,
-                        subscriber.ContextId
-                    );
+                    WorkflowTrace
+                        .Runtime
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "WorkflowQueue:QueueItemAvailable unsubscribe failed for activity '{0}' with context Id {1}",
+                            subscriber.ActivityQualifiedName,
+                            subscriber.ContextId
+                        );
                 }
             }
         }

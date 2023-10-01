@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis.Host
                         break;
                 }
 
-                return MefHostServices.DefaultAssemblies.Concat(
-                    MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames)
-                );
+                return MefHostServices
+                    .DefaultAssemblies
+                    .Concat(MefHostServicesHelpers.LoadNearbyAssemblies(assemblyNames));
             }
 
             IEnumerable<Lazy<TExtension>> IMefHostExportProvider.GetExports<TExtension>() =>

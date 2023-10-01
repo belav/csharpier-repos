@@ -103,9 +103,9 @@ namespace System.Reflection.Runtime.MethodInfos
             // there are "weird" cases (e.g. String) where the constructor must do both the allocation and initialization.
             // Reflection.Core does not hardcode these special cases. It's up to the ExecutionEnvironment to steer
             // us the right way by coordinating the implementation of NewObject and MethodInvoker.
-            object newObject = ReflectionCoreExecution.ExecutionEnvironment.NewObject(
-                this.DeclaringType.TypeHandle
-            );
+            object newObject = ReflectionCoreExecution
+                .ExecutionEnvironment
+                .NewObject(this.DeclaringType.TypeHandle);
             object ctorAllocatedObject = this.MethodInvoker.Invoke(
                 newObject,
                 parameters,

@@ -181,8 +181,9 @@ namespace Internal.Reflection.Core.Execution
             if (methodHandle.IsNativeFormatMetadataBased)
             {
                 MethodHandle nativeFormatMethodHandle = methodHandle.NativeFormatHandle;
-                NativeFormatRuntimeNamedTypeInfo definingTypeInfo =
-                    contextTypeInfo.AnchoringTypeDefinitionForDeclaredMembers.CastToNativeFormatRuntimeNamedTypeInfo();
+                NativeFormatRuntimeNamedTypeInfo definingTypeInfo = contextTypeInfo
+                    .AnchoringTypeDefinitionForDeclaredMembers
+                    .CastToNativeFormatRuntimeNamedTypeInfo();
                 MetadataReader reader = definingTypeInfo.Reader;
                 if (nativeFormatMethodHandle.IsConstructor(reader))
                 {
@@ -214,8 +215,9 @@ namespace Internal.Reflection.Core.Execution
             {
                 System.Reflection.Metadata.MethodDefinitionHandle ecmaFormatMethodHandle =
                     methodHandle.EcmaFormatHandle;
-                EcmaFormatRuntimeNamedTypeInfo definingEcmaTypeInfo =
-                    contextTypeInfo.AnchoringTypeDefinitionForDeclaredMembers.CastToEcmaFormatRuntimeNamedTypeInfo();
+                EcmaFormatRuntimeNamedTypeInfo definingEcmaTypeInfo = contextTypeInfo
+                    .AnchoringTypeDefinitionForDeclaredMembers
+                    .CastToEcmaFormatRuntimeNamedTypeInfo();
                 System.Reflection.Metadata.MetadataReader reader = definingEcmaTypeInfo.Reader;
                 if (ecmaFormatMethodHandle.IsConstructor(reader))
                 {
@@ -283,19 +285,24 @@ namespace Internal.Reflection.Core.Execution
                 if (qTypeDefinition.IsNativeFormatMetadataBased)
 #endif
                 {
-                    return qTypeDefinition.NativeFormatHandle.GetNamedType(
-                        qTypeDefinition.NativeFormatReader,
-                        typeHandle
-                    );
+                    return qTypeDefinition
+                        .NativeFormatHandle
+                        .GetNamedType(qTypeDefinition.NativeFormatReader, typeHandle);
                 }
 #if ECMA_METADATA_SUPPORT
                 else
                 {
-                    return System.Reflection.Runtime.TypeInfos.EcmaFormat.EcmaFormatRuntimeNamedTypeInfo.GetRuntimeNamedTypeInfo(
-                        qTypeDefinition.EcmaFormatReader,
-                        qTypeDefinition.EcmaFormatHandle,
-                        typeHandle
-                    );
+                    return System
+                        .Reflection
+                        .Runtime
+                        .TypeInfos
+                        .EcmaFormat
+                        .EcmaFormatRuntimeNamedTypeInfo
+                        .GetRuntimeNamedTypeInfo(
+                            qTypeDefinition.EcmaFormatReader,
+                            qTypeDefinition.EcmaFormatHandle,
+                            typeHandle
+                        );
                 }
 #endif
             }

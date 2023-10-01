@@ -94,9 +94,9 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
             );
         }
 
-        builder.Services.Configure<RazorPagesOptions>(
-            options => options.RootDirectory = rootDirectory
-        );
+        builder
+            .Services
+            .Configure<RazorPagesOptions>(options => options.RootDirectory = rootDirectory);
         return builder;
     }
 

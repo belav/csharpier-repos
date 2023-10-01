@@ -37,12 +37,14 @@ internal static class PropertyInfoExtensions
     }
 
     public static PropertyInfo? FindGetterProperty(this PropertyInfo propertyInfo) =>
-        propertyInfo.DeclaringType!
+        propertyInfo
+            .DeclaringType!
             .GetPropertiesInHierarchy(propertyInfo.GetSimpleMemberName())
             .FirstOrDefault(p => p.GetMethod != null);
 
     public static PropertyInfo? FindSetterProperty(this PropertyInfo propertyInfo) =>
-        propertyInfo.DeclaringType!
+        propertyInfo
+            .DeclaringType!
             .GetPropertiesInHierarchy(propertyInfo.GetSimpleMemberName())
             .FirstOrDefault(p => p.SetMethod != null);
 }

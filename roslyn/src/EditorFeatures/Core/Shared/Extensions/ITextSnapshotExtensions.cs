@@ -97,8 +97,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 )
             )
             {
-                var service =
-                    document.Project.Solution.Services.GetService<IWorkspaceStatusService>();
+                var service = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetService<IWorkspaceStatusService>();
                 if (service != null)
                 {
                     // TODO: decide for prototype, we don't do anything complex and just ask workspace whether it is fully loaded
@@ -126,12 +129,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             // make sure this is only called from UI thread
             threadingContext.ThrowIfNotOnUIThread();
 
-            return threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
-                        operationContext
-                    )
-            );
+            return threadingContext
+                .JoinableTaskFactory
+                .Run(
+                    () =>
+                        snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
+                            operationContext
+                        )
+                );
         }
     }
 }

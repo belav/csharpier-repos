@@ -24,7 +24,8 @@ internal static class IncrementalGeneratorInitializationContextExtensions
     )
         where T : SyntaxNode
     {
-        return context.SyntaxProvider
+        return context
+            .SyntaxProvider
             .ForAttributeWithSimpleName(simpleName, (node, _) => node is T)
             .SelectMany((t, _) => t.matches.Cast<T>())
             .WithTrackingName("result_ForAttribute");
@@ -36,11 +37,13 @@ internal static class IncrementalGeneratorInitializationContextExtensions
     )
         where T : SyntaxNode
     {
-        return context.SyntaxProvider.ForAttributeWithMetadataName(
-            fullyQualifiedMetadataName,
-            (node, _) => node is T,
-            (context, cancellationToken) => (T)context.TargetNode
-        );
+        return context
+            .SyntaxProvider
+            .ForAttributeWithMetadataName(
+                fullyQualifiedMetadataName,
+                (node, _) => node is T,
+                (context, cancellationToken) => (T)context.TargetNode
+            );
     }
 }
 
@@ -2472,7 +2475,8 @@ class C { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2604,7 +2608,8 @@ class C2 { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2740,7 +2745,8 @@ class C2 { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2875,7 +2881,8 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.First(),
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -3013,7 +3020,8 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.First(),
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(

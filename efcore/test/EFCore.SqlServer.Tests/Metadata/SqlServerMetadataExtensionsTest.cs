@@ -413,9 +413,9 @@ public class SqlServerMetadataExtensionsTest
             .Metadata;
 
         modelBuilder.Model.AddSequence("DaneelOlivaw");
-        modelBuilder.Model.SetValueGenerationStrategy(
-            SqlServerValueGenerationStrategy.SequenceHiLo
-        );
+        modelBuilder
+            .Model
+            .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
         property.SetHiLoSequenceName("DaneelOlivaw");
 
         Assert.Equal("DaneelOlivaw", property.FindHiLoSequence().Name);
@@ -451,9 +451,9 @@ public class SqlServerMetadataExtensionsTest
             .Metadata;
 
         modelBuilder.Model.AddSequence("DaneelOlivaw");
-        modelBuilder.Model.SetValueGenerationStrategy(
-            SqlServerValueGenerationStrategy.SequenceHiLo
-        );
+        modelBuilder
+            .Model
+            .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
         modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
 
         Assert.Equal("DaneelOlivaw", property.FindHiLoSequence().Name);
@@ -491,9 +491,9 @@ public class SqlServerMetadataExtensionsTest
             .Metadata;
 
         modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
-        modelBuilder.Model.SetValueGenerationStrategy(
-            SqlServerValueGenerationStrategy.SequenceHiLo
-        );
+        modelBuilder
+            .Model
+            .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
         property.SetHiLoSequenceName("DaneelOlivaw");
         property.SetHiLoSequenceSchema("R");
 
@@ -533,9 +533,9 @@ public class SqlServerMetadataExtensionsTest
             .Metadata;
 
         modelBuilder.Model.AddSequence("DaneelOlivaw", "R");
-        modelBuilder.Model.SetValueGenerationStrategy(
-            SqlServerValueGenerationStrategy.SequenceHiLo
-        );
+        modelBuilder
+            .Model
+            .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.SequenceHiLo);
         modelBuilder.Model.SetHiLoSequenceName("DaneelOlivaw");
         modelBuilder.Model.SetHiLoSequenceSchema("R");
 

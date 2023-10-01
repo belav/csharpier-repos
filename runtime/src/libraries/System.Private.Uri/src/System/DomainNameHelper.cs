@@ -86,7 +86,8 @@ namespace System
                     (str, start),
                     static (buffer, state) =>
                     {
-                        int newLength = state.str
+                        int newLength = state
+                            .str
                             .AsSpan(state.start, buffer.Length)
                             .ToLowerInvariant(buffer);
                         Debug.Assert(newLength == buffer.Length);

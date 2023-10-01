@@ -161,9 +161,16 @@ namespace Mono.Tools.CertView
             //
             // tabControl1
             //
-            this.tabControl1.Controls.AddRange(
-                new System.Windows.Forms.Control[] { this.tabPage1, this.tabPage2, this.tabPage3 }
-            );
+            this.tabControl1
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this.tabPage1,
+                        this.tabPage2,
+                        this.tabPage3
+                    }
+                );
             this.tabControl1.Location = new System.Drawing.Point(8, 8);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -172,9 +179,11 @@ namespace Mono.Tools.CertView
             //
             // tabPage1
             //
-            this.tabPage1.Controls.AddRange(
-                new System.Windows.Forms.Control[] { this.issuerStatementButton, this.panel1 }
-            );
+            this.tabPage1
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[] { this.issuerStatementButton, this.panel1 }
+                );
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(376, 382);
@@ -194,29 +203,31 @@ namespace Mono.Tools.CertView
             //
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this.badPictureBox,
-                    this.goodPictureBox,
-                    this.label1,
-                    this.subjectAltNameLinkLabel,
-                    this.keyUsageRichTextBox,
-                    this.issuedByTextBox,
-                    this.issuedToTextBox,
-                    this.issuedByLinkLabel,
-                    this.panel4,
-                    this.panel2,
-                    this.privateKeyLabel,
-                    this.notAfterLabel,
-                    this.label6,
-                    this.notBeforeLabel,
-                    this.label4,
-                    this.label3,
-                    this.label2,
-                    this.certificateLabel
-                }
-            );
+            this.panel1
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this.badPictureBox,
+                        this.goodPictureBox,
+                        this.label1,
+                        this.subjectAltNameLinkLabel,
+                        this.keyUsageRichTextBox,
+                        this.issuedByTextBox,
+                        this.issuedToTextBox,
+                        this.issuedByLinkLabel,
+                        this.panel4,
+                        this.panel2,
+                        this.privateKeyLabel,
+                        this.notAfterLabel,
+                        this.label6,
+                        this.notBeforeLabel,
+                        this.label4,
+                        this.label3,
+                        this.label2,
+                        this.certificateLabel
+                    }
+                );
             this.panel1.Location = new System.Drawing.Point(8, 8);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(360, 328);
@@ -480,15 +491,17 @@ namespace Mono.Tools.CertView
             //
             // tabPage2
             //
-            this.tabPage2.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this.label8,
-                    this.showComboBox,
-                    this.detailsTextBox,
-                    this.fieldListView
-                }
-            );
+            this.tabPage2
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this.label8,
+                        this.showComboBox,
+                        this.detailsTextBox,
+                        this.fieldListView
+                    }
+                );
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Size = new System.Drawing.Size(376, 382);
@@ -506,16 +519,18 @@ namespace Mono.Tools.CertView
             // showComboBox
             //
             this.showComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.showComboBox.Items.AddRange(
-                new object[]
-                {
-                    "<All>",
-                    "Version 1 Fields Only",
-                    "Extensions Only",
-                    "Critical Extensions Only",
-                    "Properties Only"
-                }
-            );
+            this.showComboBox
+                .Items
+                .AddRange(
+                    new object[]
+                    {
+                        "<All>",
+                        "Version 1 Fields Only",
+                        "Extensions Only",
+                        "Critical Extensions Only",
+                        "Properties Only"
+                    }
+                );
             this.showComboBox.Location = new System.Drawing.Point(48, 8);
             this.showComboBox.MaxDropDownItems = 5;
             this.showComboBox.Name = "showComboBox";
@@ -540,13 +555,15 @@ namespace Mono.Tools.CertView
             //
             // fieldListView
             //
-            this.fieldListView.Columns.AddRange(
-                new System.Windows.Forms.ColumnHeader[]
-                {
-                    this.fieldColumnHeader,
-                    this.valueColumnHeader
-                }
-            );
+            this.fieldListView
+                .Columns
+                .AddRange(
+                    new System.Windows.Forms.ColumnHeader[]
+                    {
+                        this.fieldColumnHeader,
+                        this.valueColumnHeader
+                    }
+                );
             this.fieldListView.FullRowSelect = true;
             this.fieldListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.fieldListView.HideSelection = false;
@@ -584,14 +601,16 @@ namespace Mono.Tools.CertView
             //
             // tabPage3
             //
-            this.tabPage3.Controls.AddRange(
-                new System.Windows.Forms.Control[]
-                {
-                    this.label9,
-                    this.certStatusTextBox,
-                    this.certPathTreeView
-                }
-            );
+            this.tabPage3
+                .Controls
+                .AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this.label9,
+                        this.certStatusTextBox,
+                        this.certPathTreeView
+                    }
+                );
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(376, 382);
@@ -867,18 +886,20 @@ namespace Mono.Tools.CertView
                 fieldListView.Items.Add(itemVersion);
 
             if (filter < 2)
-                fieldListView.Items.AddRange(
-                    new ListViewItem[]
-                    {
-                        itemSerial,
-                        itemSignatureAlgorithm,
-                        itemIssuer,
-                        itemValidFrom,
-                        itemValidUntil,
-                        itemSubject,
-                        itemPublicKey
-                    }
-                );
+                fieldListView
+                    .Items
+                    .AddRange(
+                        new ListViewItem[]
+                        {
+                            itemSerial,
+                            itemSignatureAlgorithm,
+                            itemIssuer,
+                            itemValidFrom,
+                            itemValidUntil,
+                            itemSubject,
+                            itemPublicKey
+                        }
+                    );
 
             if ((filter != 1) && (filter != 4))
             {

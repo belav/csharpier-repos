@@ -223,10 +223,9 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                     collection.Add(postEventArgumentID, queryString.Get(i));
                 }
                 else if (
-                    Constants.UniqueFilePathSuffixVariable.StartsWith(
-                        name,
-                        StringComparison.Ordinal
-                    )
+                    Constants
+                        .UniqueFilePathSuffixVariable
+                        .StartsWith(name, StringComparison.Ordinal)
                 )
                 {
                     // At this point we know that the rest of them is

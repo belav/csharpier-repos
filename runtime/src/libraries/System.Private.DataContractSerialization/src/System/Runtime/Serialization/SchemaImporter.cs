@@ -68,14 +68,19 @@ namespace System.Runtime.Serialization
                     null
                 );
                 if (schema == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.Format(
-                                SR.CouldNotReadSerializationSchema,
-                                Globals.SerializationNamespace
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.Format(
+                                    SR.CouldNotReadSerializationSchema,
+                                    Globals.SerializationNamespace
+                                )
                             )
-                        )
-                    );
+                        );
                 _schemaSet.Add(schema);
             }
 
@@ -88,9 +93,14 @@ namespace System.Runtime.Serialization
             {
                 if (Fx.IsFatal(ex))
                     throw;
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.Format(SR.CannotImportInvalidSchemas), ex)
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.Format(SR.CannotImportInvalidSchemas), ex)
+                    );
             }
 
             if (_typeNames == null)
@@ -99,9 +109,14 @@ namespace System.Runtime.Serialization
                 foreach (object schemaObj in schemaList)
                 {
                     if (schemaObj == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(SR.Format(SR.CannotImportNullSchema))
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(SR.Format(SR.CannotImportNullSchema))
+                            );
 
                     XmlSchema schema = (XmlSchema)schemaObj;
                     if (
@@ -130,9 +145,16 @@ namespace System.Runtime.Serialization
                 foreach (XmlQualifiedName typeName in _typeNames)
                 {
                     if (typeName == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(SR.Format(SR.CannotImportNullDataContractName))
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(
+                                    SR.Format(SR.CannotImportNullDataContractName)
+                                )
+                            );
                     ImportType(typeName);
                 }
 
@@ -451,11 +473,13 @@ namespace System.Runtime.Serialization
                     if (SchemaHelper.GetSchemaType(SchemaObjects, typeQName) == null)
                         break;
                     if (i == int.MaxValue)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.Format(SR.CannotComputeUniqueName, element.Name)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.Format(SR.CannotComputeUniqueName, element.Name)
+                                )
+                            );
                 }
             }
             if (element.SchemaType == null)
@@ -480,15 +504,20 @@ namespace System.Runtime.Serialization
             {
                 XmlSchemaType? type = SchemaHelper.GetSchemaType(SchemaObjects, typeName);
                 if (type == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.Format(
-                                SR.SpecifiedTypeNotFoundInSchema,
-                                typeName.Name,
-                                typeName.Namespace
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.Format(
+                                    SR.SpecifiedTypeNotFoundInSchema,
+                                    typeName.Name,
+                                    typeName.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 dataContract = ImportType(type);
             }
             if (IsObjectContract(dataContract))
@@ -1427,16 +1456,21 @@ namespace System.Runtime.Serialization
             if (!memberTypeContract.IsValueType && !memberIsNullable)
             {
                 if (emitDefaultValueFromAnnotation != null && emitDefaultValueFromAnnotation.Value)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.Format(
-                                SR.InvalidEmitDefaultAnnotation,
-                                memberName,
-                                typeName.Name,
-                                typeName.Namespace
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.Format(
+                                    SR.InvalidEmitDefaultAnnotation,
+                                    memberName,
+                                    typeName.Name,
+                                    typeName.Namespace
+                                )
                             )
-                        )
-                    );
+                        );
                 memberEmitDefaultValue = false;
             }
             else
@@ -1462,10 +1496,10 @@ namespace System.Runtime.Serialization
                     memberEmitDefaultValue,
                     memberOrder
                 );
-                int compare = ClassDataContract.DataMemberComparer.Singleton.Compare(
-                    prevMember,
-                    currentMember
-                );
+                int compare = ClassDataContract
+                    .DataMemberComparer
+                    .Singleton
+                    .Compare(prevMember, currentMember);
                 if (compare == 0)
                     ThrowTypeCannotBeImportedException(
                         typeName.Name,
@@ -1509,21 +1543,26 @@ namespace System.Runtime.Serialization
             );
             if (defaultValueElement == null)
                 return null;
-            XmlNode? emitDefaultValueAttribute = defaultValueElement.Attributes.GetNamedItem(
-                Globals.EmitDefaultValueAttribute
-            );
+            XmlNode? emitDefaultValueAttribute = defaultValueElement
+                .Attributes
+                .GetNamedItem(Globals.EmitDefaultValueAttribute);
             if (emitDefaultValueAttribute?.Value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.Format(
-                            SR.AnnotationAttributeNotFound,
-                            SchemaExporter.DefaultValueAnnotation.Name,
-                            typeName.Name,
-                            typeName.Namespace,
-                            Globals.EmitDefaultValueAttribute
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.Format(
+                                SR.AnnotationAttributeNotFound,
+                                SchemaExporter.DefaultValueAnnotation.Name,
+                                typeName.Name,
+                                typeName.Namespace,
+                                Globals.EmitDefaultValueAttribute
+                            )
                         )
-                    )
-                );
+                    );
             return XmlConvert.ToBoolean(emitDefaultValueAttribute.Value);
         }
 
@@ -1540,36 +1579,46 @@ namespace System.Runtime.Serialization
             if (actualTypeElement == null)
                 return defaultTypeName;
 
-            XmlNode? nameAttribute = actualTypeElement.Attributes.GetNamedItem(
-                Globals.ActualTypeNameAttribute
-            );
+            XmlNode? nameAttribute = actualTypeElement
+                .Attributes
+                .GetNamedItem(Globals.ActualTypeNameAttribute);
             if (nameAttribute?.Value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.Format(
-                            SR.AnnotationAttributeNotFound,
-                            SchemaExporter.ActualTypeAnnotationName.Name,
-                            typeName.Name,
-                            typeName.Namespace,
-                            Globals.ActualTypeNameAttribute
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.Format(
+                                SR.AnnotationAttributeNotFound,
+                                SchemaExporter.ActualTypeAnnotationName.Name,
+                                typeName.Name,
+                                typeName.Namespace,
+                                Globals.ActualTypeNameAttribute
+                            )
                         )
-                    )
-                );
-            XmlNode? nsAttribute = actualTypeElement.Attributes.GetNamedItem(
-                Globals.ActualTypeNamespaceAttribute
-            );
+                    );
+            XmlNode? nsAttribute = actualTypeElement
+                .Attributes
+                .GetNamedItem(Globals.ActualTypeNamespaceAttribute);
             if (nsAttribute?.Value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.Format(
-                            SR.AnnotationAttributeNotFound,
-                            SchemaExporter.ActualTypeAnnotationName.Name,
-                            typeName.Name,
-                            typeName.Namespace,
-                            Globals.ActualTypeNamespaceAttribute
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.Format(
+                                SR.AnnotationAttributeNotFound,
+                                SchemaExporter.ActualTypeAnnotationName.Name,
+                                typeName.Name,
+                                typeName.Namespace,
+                                Globals.ActualTypeNamespaceAttribute
+                            )
                         )
-                    )
-                );
+                    );
             return new XmlQualifiedName(nameAttribute.Value, nsAttribute.Value);
         }
 
@@ -1964,28 +2013,39 @@ namespace System.Runtime.Serialization
         {
             string? name = typeElement.Attributes.GetNamedItem(Globals.GenericNameAttribute)?.Value;
             if (name == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.Format(
-                            SR.GenericAnnotationAttributeNotFound,
-                            type.Name,
-                            Globals.GenericNameAttribute
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.Format(
+                                SR.GenericAnnotationAttributeNotFound,
+                                type.Name,
+                                Globals.GenericNameAttribute
+                            )
                         )
-                    )
-                );
-            string? ns = typeElement.Attributes
+                    );
+            string? ns = typeElement
+                .Attributes
                 .GetNamedItem(Globals.GenericNamespaceAttribute)
                 ?.Value;
             if (ns == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.Format(
-                            SR.GenericAnnotationAttributeNotFound,
-                            type.Name,
-                            Globals.GenericNamespaceAttribute
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.Format(
+                                SR.GenericAnnotationAttributeNotFound,
+                                type.Name,
+                                Globals.GenericNamespaceAttribute
+                            )
                         )
-                    )
-                );
+                    );
             if (typeElement.ChildNodes.Count > 0) //Generic Type
                 name = DataContract.EncodeLocalName(name);
 
@@ -1999,74 +2059,94 @@ namespace System.Runtime.Serialization
                         argumentElement.LocalName != Globals.GenericParameterLocalName
                         || argumentElement.NamespaceURI != Globals.SerializationNamespace
                     )
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.Format(
-                                    SR.GenericAnnotationHasInvalidElement,
-                                    argumentElement.LocalName,
-                                    argumentElement.NamespaceURI,
-                                    type.Name
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.Format(
+                                        SR.GenericAnnotationHasInvalidElement,
+                                        argumentElement.LocalName,
+                                        argumentElement.NamespaceURI,
+                                        type.Name
+                                    )
                                 )
-                            )
-                        );
-                    XmlNode? nestedLevelAttribute = argumentElement.Attributes.GetNamedItem(
-                        Globals.GenericParameterNestedLevelAttribute
-                    );
+                            );
+                    XmlNode? nestedLevelAttribute = argumentElement
+                        .Attributes
+                        .GetNamedItem(Globals.GenericParameterNestedLevelAttribute);
                     int argumentLevel = 0;
                     if (nestedLevelAttribute != null)
                     {
                         if (!int.TryParse(nestedLevelAttribute.Value, out argumentLevel))
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            throw System
+                                .Runtime
+                                .Serialization
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidDataContractException(
+                                        SR.Format(
+                                            SR.GenericAnnotationHasInvalidAttributeValue,
+                                            argumentElement.LocalName,
+                                            argumentElement.NamespaceURI,
+                                            type.Name,
+                                            nestedLevelAttribute.Value,
+                                            nestedLevelAttribute.LocalName,
+                                            Globals.TypeOfInt.Name
+                                        )
+                                    )
+                                );
+                    }
+                    if (argumentLevel < currentLevel)
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
                                 new InvalidDataContractException(
                                     SR.Format(
-                                        SR.GenericAnnotationHasInvalidAttributeValue,
+                                        SR.GenericAnnotationForNestedLevelMustBeIncreasing,
                                         argumentElement.LocalName,
                                         argumentElement.NamespaceURI,
-                                        type.Name,
-                                        nestedLevelAttribute.Value,
-                                        nestedLevelAttribute.LocalName,
-                                        Globals.TypeOfInt.Name
+                                        type.Name
                                     )
                                 )
                             );
-                    }
-                    if (argumentLevel < currentLevel)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.Format(
-                                    SR.GenericAnnotationForNestedLevelMustBeIncreasing,
-                                    argumentElement.LocalName,
-                                    argumentElement.NamespaceURI,
-                                    type.Name
-                                )
-                            )
-                        );
                     genInfo.Add(ImportGenericInfo(argumentElement, type));
                     genInfo.AddToLevel(argumentLevel, 1);
                     currentLevel = argumentLevel;
                 }
             }
 
-            XmlNode? typeNestedLevelsAttribute = typeElement.Attributes.GetNamedItem(
-                Globals.GenericParameterNestedLevelAttribute
-            );
+            XmlNode? typeNestedLevelsAttribute = typeElement
+                .Attributes
+                .GetNamedItem(Globals.GenericParameterNestedLevelAttribute);
             if (typeNestedLevelsAttribute != null)
             {
                 int nestedLevels;
                 if (!int.TryParse(typeNestedLevelsAttribute.Value, out nestedLevels))
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.Format(
-                                SR.GenericAnnotationHasInvalidAttributeValue,
-                                typeElement.LocalName,
-                                typeElement.NamespaceURI,
-                                type.Name,
-                                typeNestedLevelsAttribute.Value,
-                                typeNestedLevelsAttribute.LocalName,
-                                Globals.TypeOfInt.Name
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.Format(
+                                    SR.GenericAnnotationHasInvalidAttributeValue,
+                                    typeElement.LocalName,
+                                    typeElement.NamespaceURI,
+                                    type.Name,
+                                    typeNestedLevelsAttribute.Value,
+                                    typeNestedLevelsAttribute.LocalName,
+                                    Globals.TypeOfInt.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 if ((nestedLevels - 1) > currentLevel)
                     genInfo.AddToLevel(nestedLevels - 1, 0);
             }
@@ -2344,11 +2424,16 @@ namespace System.Runtime.Serialization
         [DoesNotReturn]
         private static void ThrowTypeCannotBeImportedException(string message)
         {
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidDataContractException(
-                    SR.Format(SR.TypeCannotBeImportedHowToFix, message)
-                )
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.Format(SR.TypeCannotBeImportedHowToFix, message)
+                    )
+                );
         }
     }
 }

@@ -170,9 +170,14 @@ namespace System.Activities.DurableInstancing
             instanceLockTracking.TrackStoreLock(instanceId, lockVersion, null);
             thisPtr.InstancePersistenceContext.InstanceHandle.Free();
 
-            throw FxTrace.Exception.AsError(
-                new InstanceLockLostException(thisPtr.InstancePersistenceCommand.Name, instanceId)
-            );
+            throw FxTrace
+                .Exception
+                .AsError(
+                    new InstanceLockLostException(
+                        thisPtr.InstancePersistenceCommand.Name,
+                        instanceId
+                    )
+                );
         }
 
         static bool SqlCommandAsyncResultCallback(IAsyncResult result)
@@ -218,13 +223,14 @@ namespace System.Activities.DurableInstancing
 
                 if (!thisPtr.InstancePersistenceContext.InstanceView.IsBoundToInstance)
                 {
-                    thisPtr.InstancePersistenceContext.BindInstance(
-                        alreadyLockedException.InstanceId
-                    );
+                    thisPtr
+                        .InstancePersistenceContext
+                        .BindInstance(alreadyLockedException.InstanceId);
                 }
 
-                IAsyncResult bindReclaimedAsyncResult =
-                    thisPtr.InstancePersistenceContext.BeginBindReclaimedLock(
+                IAsyncResult bindReclaimedAsyncResult = thisPtr
+                    .InstancePersistenceContext
+                    .BeginBindReclaimedLock(
                         reclaimLockAtVersion,
                         thisPtr.TimeoutHelper.RemainingTime(),
                         thisPtr.PrepareAsyncCompletion(

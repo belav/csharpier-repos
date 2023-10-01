@@ -2870,11 +2870,10 @@ namespace System.Data.Common
         {
             return (
                 0
-                == CultureInfo.InvariantCulture.CompareInfo.Compare(
-                    strvalue,
-                    strconst,
-                    CompareOptions.IgnoreCase
-                )
+                == CultureInfo
+                    .InvariantCulture
+                    .CompareInfo
+                    .Compare(strvalue, strconst, CompareOptions.IgnoreCase)
             );
         }
 
@@ -3276,8 +3275,11 @@ namespace System.Data.Common
             Stream XmlStream;
             const string config = "config\\";
             // get location of config directory
-            string rootPath =
-                System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
+            string rootPath = System
+                .Runtime
+                .InteropServices
+                .RuntimeEnvironment
+                .GetRuntimeDirectory();
             if (rootPath == null)
             {
                 throw ADP.ConfigUnableToLoadXmlMetaDataFile(errorString);

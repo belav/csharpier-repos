@@ -46,8 +46,9 @@ namespace System.Runtime.CompilerServices
             if (type.IsNull)
                 throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized);
 
-            IntPtr pStaticClassConstructionContext =
-                RuntimeAugments.Callbacks.TryGetStaticClassConstructionContext(type);
+            IntPtr pStaticClassConstructionContext = RuntimeAugments
+                .Callbacks
+                .TryGetStaticClassConstructionContext(type);
             if (pStaticClassConstructionContext == IntPtr.Zero)
                 return;
 
@@ -64,9 +65,9 @@ namespace System.Runtime.CompilerServices
             if (module.AssociatedModule == null)
                 throw new ArgumentException(SR.InvalidOperation_HandleIsNotInitialized);
 
-            ReflectionAugments.ReflectionCoreCallbacks.RunModuleConstructor(
-                module.AssociatedModule
-            );
+            ReflectionAugments
+                .ReflectionCoreCallbacks
+                .RunModuleConstructor(module.AssociatedModule);
         }
 
         public static object GetObjectValue(object? obj)

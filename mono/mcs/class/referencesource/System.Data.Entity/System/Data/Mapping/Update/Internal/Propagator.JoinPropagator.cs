@@ -329,7 +329,8 @@ namespace System.Data.Mapping.Update.Internal
                 JoinDictionary leftInserts = ProcessKeys(m_left.Inserted, m_leftKeySelectors);
                 JoinDictionary rightDeletes = ProcessKeys(m_right.Deleted, m_rightKeySelectors);
                 JoinDictionary rightInserts = ProcessKeys(m_right.Inserted, m_rightKeySelectors);
-                var allKeys = leftDeletes.Keys
+                var allKeys = leftDeletes
+                    .Keys
                     .Concat(leftInserts.Keys)
                     .Concat(rightDeletes.Keys)
                     .Concat(rightInserts.Keys)

@@ -54,15 +54,17 @@ namespace System.ServiceModel.Channels
         {
             if (
                 listenAddress != null
-                && listenAddress.Headers.FindHeader(
-                    ContextMessageHeader.ContextHeaderName,
-                    ContextMessageHeader.ContextHeaderNamespace
-                ) != null
+                && listenAddress
+                    .Headers
+                    .FindHeader(
+                        ContextMessageHeader.ContextHeaderName,
+                        ContextMessageHeader.ContextHeaderNamespace
+                    ) != null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.ListenAddressAlreadyContainsContext)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.ListenAddressAlreadyContainsContext));
             }
             this.listenAddress = listenAddress;
             this.context = context;
@@ -222,11 +224,13 @@ namespace System.ServiceModel.Channels
                 {
                     if (contextHeader != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(SR.MultipleContextHeadersFoundInCallbackAddress)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(SR.MultipleContextHeadersFoundInCallbackAddress)
+                                )
+                            );
                     }
                     contextHeader = builder.Headers[i];
                     contextHeaderIndex = i;

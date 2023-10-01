@@ -319,14 +319,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Assert.Equal(4, specialCustomerTable.Columns.Count());
 
                 Assert.Null(
-                    specialCustomerTable.EntityTypeMappings
+                    specialCustomerTable
+                        .EntityTypeMappings
                         .Single(m => m.EntityType == specialCustomerType)
                         .IsSharedTablePrincipal
                 );
 
-                var specialtyColumn = specialCustomerTable.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Specialty)
-                );
+                var specialtyColumn = specialCustomerTable
+                    .Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
                 Assert.False(specialtyColumn.IsNullable);
 
                 Assert.Null(customerType.FindDiscriminatorProperty());
@@ -339,9 +340,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 var specialCustomerTableMapping = specialCustomerType.GetDefaultMappings().Single();
                 Assert.Null(specialCustomerTableMapping.IsSplitEntityTypePrincipal);
                 var specialCustomerTable = specialCustomerTableMapping.Table;
-                var specialtyColumn = specialCustomerTable.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Specialty)
-                );
+                var specialtyColumn = specialCustomerTable
+                    .Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
                 if (mapping == Mapping.TPH)
                 {
                     var baseTable = abstractBaseType.GetDefaultMappings().Single().Table;
@@ -443,9 +444,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var abstractCustomerType = model.Model.FindEntityType(typeof(AbstractCustomer));
             var customerType = model.Model.FindEntityType(typeof(Customer))!;
             var specialCustomerType = model.Model.FindEntityType(typeof(SpecialCustomer))!;
-            var extraSpecialCustomerType = model.Model.FindEntityType(
-                typeof(ExtraSpecialCustomer)
-            )!;
+            var extraSpecialCustomerType = model
+                .Model
+                .FindEntityType(typeof(ExtraSpecialCustomer))!;
             var orderDetailsOwnership = orderType.FindNavigation(nameof(Order.Details)).ForeignKey;
             var orderDetailsType = orderDetailsOwnership.DeclaringEntityType;
             Assert.Same(ordersView, orderDetailsType.GetViewMappings().Single().View);
@@ -638,14 +639,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Assert.Equal(7, specialCustomerView.Columns.Count());
 
                 Assert.True(
-                    specialCustomerView.EntityTypeMappings
+                    specialCustomerView
+                        .EntityTypeMappings
                         .Single(m => m.EntityType == specialCustomerType)
                         .IsSharedTablePrincipal
                 );
 
-                var specialtyColumn = specialCustomerView.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Specialty)
-                );
+                var specialtyColumn = specialCustomerView
+                    .Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
                 Assert.False(specialtyColumn.IsNullable);
 
                 Assert.Null(customerType.FindDiscriminatorProperty());
@@ -658,9 +660,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 var specialCustomerViewMapping = specialCustomerType.GetViewMappings().Single();
                 Assert.Null(specialCustomerViewMapping.IsSplitEntityTypePrincipal);
                 var specialCustomerView = specialCustomerViewMapping.View;
-                var specialtyColumn = specialCustomerView.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Specialty)
-                );
+                var specialtyColumn = specialCustomerView
+                    .Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
 
                 var extraSpecialCustomerViewMapping = extraSpecialCustomerType
                     .GetViewMappings()
@@ -717,7 +719,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         extraSpecialCustomerView.EntityTypeMappings.First().IsSharedTablePrincipal
                     );
                     Assert.Null(
-                        extraSpecialCustomerView.EntityTypeMappings
+                        extraSpecialCustomerView
+                            .EntityTypeMappings
                             .First()
                             .IsSplitEntityTypePrincipal
                     );
@@ -725,7 +728,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         extraSpecialCustomerView.EntityTypeMappings.Last().IsSharedTablePrincipal
                     );
                     Assert.Null(
-                        extraSpecialCustomerView.EntityTypeMappings
+                        extraSpecialCustomerView
+                            .EntityTypeMappings
                             .Last()
                             .IsSplitEntityTypePrincipal
                     );
@@ -1086,21 +1090,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Assert.Equal(7, specialCustomerTable.Columns.Count());
 
                 Assert.True(
-                    specialCustomerTable.EntityTypeMappings
+                    specialCustomerTable
+                        .EntityTypeMappings
                         .Single(m => m.EntityType == specialCustomerType)
                         .IsSharedTablePrincipal
                 );
 
-                var specialtyColumn = specialCustomerTable.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Specialty)
-                );
+                var specialtyColumn = specialCustomerTable
+                    .Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
                 Assert.False(specialtyColumn.IsNullable);
 
-                var addressColumn = specialCustomerTable.Columns.Single(
-                    c =>
-                        c.Name
-                        == nameof(SpecialCustomer.Details) + "_" + nameof(CustomerDetails.Address)
-                );
+                var addressColumn = specialCustomerTable
+                    .Columns
+                    .Single(
+                        c =>
+                            c.Name
+                            == nameof(SpecialCustomer.Details)
+                                + "_"
+                                + nameof(CustomerDetails.Address)
+                    );
                 Assert.False(addressColumn.IsNullable);
                 var specialtyProperty = specialtyColumn.PropertyMappings.First().Property;
 
@@ -1123,9 +1132,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         .Message
                 );
 
-                var abstractStringColumn = specialCustomerTable.Columns.Single(
-                    c => c.Name == nameof(AbstractCustomer.AbstractString)
-                );
+                var abstractStringColumn = specialCustomerTable
+                    .Columns
+                    .Single(c => c.Name == nameof(AbstractCustomer.AbstractString));
                 Assert.False(specialtyColumn.IsNullable);
                 Assert.Equal(2, specialtyColumn.PropertyMappings.Count);
 
@@ -1218,9 +1227,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     )
                 );
 
-                var specialCustomerUniqueConstraint = baseTable.UniqueConstraints.Single(
-                    c => !c.GetIsPrimaryKey()
-                );
+                var specialCustomerUniqueConstraint = baseTable
+                    .UniqueConstraints
+                    .Single(c => !c.GetIsPrimaryKey());
                 Assert.Equal("AK_AbstractBase_SpecialtyAk", specialCustomerUniqueConstraint.Name);
                 Assert.NotNull(specialCustomerUniqueConstraint.MappedKeys.Single());
 
@@ -1289,14 +1298,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 var specialCustomerTypeMapping = specialCustomerType.GetTableMappings().Single();
                 Assert.Null(specialCustomerTypeMapping.IsSplitEntityTypePrincipal);
 
-                var specialtyColumn = specialCustomerTable.Columns.Single(
-                    c => c.Name == nameof(SpecialCustomer.Specialty)
-                );
+                var specialtyColumn = specialCustomerTable
+                    .Columns
+                    .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
 
                 var specialCustomerPkConstraint = specialCustomerTable.PrimaryKey;
-                var specialCustomerUniqueConstraint = specialCustomerTable.UniqueConstraints.Single(
-                    c => !c.GetIsPrimaryKey()
-                );
+                var specialCustomerUniqueConstraint = specialCustomerTable
+                    .UniqueConstraints
+                    .Single(c => !c.GetIsPrimaryKey());
                 var specialCustomerDbIndex = specialCustomerTable.Indexes.Last();
                 var anotherSpecialCustomerDbIndex = specialCustomerTable.Indexes.First();
 
@@ -1324,24 +1333,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                     Assert.Equal(12, specialCustomerTable.Columns.Count());
 
-                    var addressColumn = specialCustomerTable.Columns.Single(
-                        c =>
-                            c.Name
-                            == nameof(SpecialCustomer.Details)
-                                + "_"
-                                + nameof(CustomerDetails.Address)
-                    );
+                    var addressColumn = specialCustomerTable
+                        .Columns
+                        .Single(
+                            c =>
+                                c.Name
+                                == nameof(SpecialCustomer.Details)
+                                    + "_"
+                                    + nameof(CustomerDetails.Address)
+                        );
 
                     Assert.True(specialtyColumn.IsNullable);
                     Assert.True(addressColumn.IsNullable);
 
-                    var abstractStringColumn = specialCustomerTable.Columns.Single(
-                        c => c.Name == nameof(AbstractCustomer.AbstractString)
-                    );
+                    var abstractStringColumn = specialCustomerTable
+                        .Columns
+                        .Single(c => c.Name == nameof(AbstractCustomer.AbstractString));
                     Assert.True(abstractStringColumn.IsNullable);
                     Assert.Equal(3, abstractStringColumn.PropertyMappings.Count);
 
-                    var abstractStringProperty = abstractStringColumn.PropertyMappings
+                    var abstractStringProperty = abstractStringColumn
+                        .PropertyMappings
                         .First()
                         .Property;
                     Assert.Equal(3, abstractStringProperty.GetTableColumnMappings().Count());
@@ -1418,16 +1430,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         specialCustomerUniqueConstraint.Name
                     );
 
-                    var specialCustomerFkConstraint =
-                        specialCustomerTable.ForeignKeyConstraints.Last();
+                    var specialCustomerFkConstraint = specialCustomerTable
+                        .ForeignKeyConstraints
+                        .Last();
                     Assert.Equal(
                         "FK_AbstractBase_AbstractBase_RelatedCustomerSpecialty",
                         specialCustomerFkConstraint.Name
                     );
                     Assert.NotNull(specialCustomerFkConstraint.MappedForeignKeys.Single());
 
-                    var anotherSpecialCustomerFkConstraint =
-                        specialCustomerTable.ForeignKeyConstraints.First();
+                    var anotherSpecialCustomerFkConstraint = specialCustomerTable
+                        .ForeignKeyConstraints
+                        .First();
                     Assert.Equal(
                         "FK_AbstractBase_AbstractBase_AnotherRelatedCustomerId",
                         anotherSpecialCustomerFkConstraint.Name
@@ -1471,9 +1485,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                     Assert.Single(specialCustomerTable.EntityTypeMappings);
 
-                    var abstractStringColumn = specialCustomerTable.Columns.Single(
-                        c => c.Name == nameof(AbstractCustomer.AbstractString)
-                    );
+                    var abstractStringColumn = specialCustomerTable
+                        .Columns
+                        .Single(c => c.Name == nameof(AbstractCustomer.AbstractString));
                     Assert.False(specialtyColumn.IsNullable);
 
                     var extraSpecialCustomerTable = extraSpecialCustomerType
@@ -1483,16 +1497,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                     Assert.Equal(2, extraSpecialCustomerTable.EntityTypeMappings.Count());
 
-                    var addressColumn = extraSpecialCustomerTable.Columns.Single(
-                        c =>
-                            c.Name
-                            == nameof(SpecialCustomer.Details)
-                                + "_"
-                                + nameof(CustomerDetails.Address)
-                    );
+                    var addressColumn = extraSpecialCustomerTable
+                        .Columns
+                        .Single(
+                            c =>
+                                c.Name
+                                == nameof(SpecialCustomer.Details)
+                                    + "_"
+                                    + nameof(CustomerDetails.Address)
+                        );
                     Assert.False(addressColumn.IsNullable);
 
-                    var abstractStringProperty = abstractStringColumn.PropertyMappings
+                    var abstractStringProperty = abstractStringColumn
+                        .PropertyMappings
                         .Single()
                         .Property;
                     Assert.Equal(2, abstractStringProperty.GetTableColumnMappings().Count());
@@ -2113,14 +2130,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 Assert.Equal(4, specialCustomerInsertSproc.Parameters.Count());
 
                 Assert.Null(
-                    specialCustomerInsertSproc.EntityTypeMappings
+                    specialCustomerInsertSproc
+                        .EntityTypeMappings
                         .Single(m => m.EntityType == specialCustomerType)
                         .IsSharedTablePrincipal
                 );
 
-                var specialtyInsertParameter = specialCustomerInsertSproc.Parameters.Single(
-                    c => c.Name == nameof(SpecialCustomer.Specialty)
-                );
+                var specialtyInsertParameter = specialCustomerInsertSproc
+                    .Parameters
+                    .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
 
                 Assert.False(specialtyInsertParameter.IsNullable);
 
@@ -2145,13 +2163,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         .Message
                 );
 
-                var abstractStringParameter = specialCustomerInsertSproc.Parameters.Single(
-                    c => c.Name == nameof(AbstractCustomer.AbstractString)
-                );
+                var abstractStringParameter = specialCustomerInsertSproc
+                    .Parameters
+                    .Single(c => c.Name == nameof(AbstractCustomer.AbstractString));
                 Assert.False(abstractStringParameter.IsNullable);
                 Assert.Equal(2, abstractStringParameter.PropertyMappings.Count);
 
-                var abstractStringProperty = abstractStringParameter.PropertyMappings
+                var abstractStringProperty = abstractStringParameter
+                    .PropertyMappings
                     .First()
                     .Property;
                 Assert.Equal(
@@ -2332,9 +2351,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     .Single();
                 Assert.Null(specialCustomerInsertMapping.IsSplitEntityTypePrincipal);
 
-                var specialtyParameter = specialCustomerInsertSproc.Parameters.Single(
-                    c => c.Name == nameof(SpecialCustomer.Specialty)
-                );
+                var specialtyParameter = specialCustomerInsertSproc
+                    .Parameters
+                    .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
 
                 if (mapping == Mapping.TPH)
                 {
@@ -2597,13 +2616,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                     Assert.True(specialtyParameter.IsNullable);
 
-                    var abstractStringColumn = specialCustomerInsertSproc.Parameters.Single(
-                        c => c.Name == nameof(AbstractCustomer.AbstractString)
-                    );
+                    var abstractStringColumn = specialCustomerInsertSproc
+                        .Parameters
+                        .Single(c => c.Name == nameof(AbstractCustomer.AbstractString));
                     Assert.True(specialtyParameter.IsNullable);
                     Assert.Equal(2, specialtyParameter.PropertyMappings.Count);
 
-                    var abstractStringProperty = abstractStringColumn.PropertyMappings
+                    var abstractStringProperty = abstractStringColumn
+                        .PropertyMappings
                         .First()
                         .Property;
                     Assert.Equal(
@@ -2768,9 +2788,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     Assert.Null(customerInsertSproc.Schema);
                     Assert.Equal(
                         new[] { nameof(Customer) },
-                        customerInsertSproc.EntityTypeMappings.Select(
-                            m => m.EntityType.DisplayName()
-                        )
+                        customerInsertSproc
+                            .EntityTypeMappings
+                            .Select(m => m.EntityType.DisplayName())
                     );
                     Assert.Null(
                         customerInsertSproc.EntityTypeMappings.Single().IsSharedTablePrincipal
@@ -2806,9 +2826,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     Assert.Null(customerUpdateSproc.Schema);
                     Assert.Equal(
                         new[] { nameof(Customer) },
-                        customerUpdateSproc.EntityTypeMappings.Select(
-                            m => m.EntityType.DisplayName()
-                        )
+                        customerUpdateSproc
+                            .EntityTypeMappings
+                            .Select(m => m.EntityType.DisplayName())
                     );
                     Assert.Null(
                         customerUpdateSproc.EntityTypeMappings.Single().IsSharedTablePrincipal
@@ -2843,9 +2863,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     Assert.Null(customerDeleteSproc.Schema);
                     Assert.Equal(
                         new[] { nameof(Customer) },
-                        customerDeleteSproc.EntityTypeMappings.Select(
-                            m => m.EntityType.DisplayName()
-                        )
+                        customerDeleteSproc
+                            .EntityTypeMappings
+                            .Select(m => m.EntityType.DisplayName())
                     );
                     Assert.Null(
                         customerDeleteSproc.EntityTypeMappings.Single().IsSharedTablePrincipal
@@ -2863,10 +2883,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                     Assert.Single(specialCustomerInsertSproc.EntityTypeMappings);
 
-                    var abstractStringInsertParameter =
-                        specialCustomerInsertSproc.Parameters.Single(
-                            c => c.Name == nameof(AbstractCustomer.AbstractString)
-                        );
+                    var abstractStringInsertParameter = specialCustomerInsertSproc
+                        .Parameters
+                        .Single(c => c.Name == nameof(AbstractCustomer.AbstractString));
                     Assert.False(specialtyParameter.IsNullable);
 
                     var extraSpecialCustomerInsertSproc = extraSpecialCustomerType
@@ -4204,9 +4223,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.True(specialCustomerView.EntityTypeMappings.First().IsSharedTablePrincipal);
             Assert.False(specialCustomerView.EntityTypeMappings.Last().IsSharedTablePrincipal);
 
-            var specialtyColumn = specialCustomerView.Columns.Single(
-                c => c.Name == nameof(SpecialCustomer.Specialty)
-            );
+            var specialtyColumn = specialCustomerView
+                .Columns
+                .Single(c => c.Name == nameof(SpecialCustomer.Specialty));
             Assert.True(specialtyColumn.IsNullable);
         }
 
@@ -4472,15 +4491,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             modelBuilder.FinalizeModel(designTime: true).GetRelationalModel();
 
         protected virtual TestHelpers.TestModelBuilder CreateConventionModelBuilder() =>
-            FakeRelationalTestHelpers.Instance.CreateConventionBuilder(
-                configureContext: b =>
-                    b.ConfigureWarnings(
-                        w =>
-                            w.Default(WarningBehavior.Throw)
-                                .Ignore(RelationalEventId.ForeignKeyTpcPrincipalWarning)
-                                .Ignore(RelationalEventId.AllIndexPropertiesNotToMappedToAnyTable)
-                    )
-            );
+            FakeRelationalTestHelpers
+                .Instance
+                .CreateConventionBuilder(
+                    configureContext: b =>
+                        b.ConfigureWarnings(
+                            w =>
+                                w.Default(WarningBehavior.Throw)
+                                    .Ignore(RelationalEventId.ForeignKeyTpcPrincipalWarning)
+                                    .Ignore(
+                                        RelationalEventId.AllIndexPropertiesNotToMappedToAnyTable
+                                    )
+                        )
+                );
 
         public enum Mapping
         {

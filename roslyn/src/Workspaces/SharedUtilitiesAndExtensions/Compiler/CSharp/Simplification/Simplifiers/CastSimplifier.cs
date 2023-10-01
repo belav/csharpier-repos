@@ -632,7 +632,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 if (
                     castedExpressionType != null
                     && isType != null
-                    && originalSemanticModel.Compilation
+                    && originalSemanticModel
+                        .Compilation
                         .ClassifyConversion(castedExpressionType, isType)
                         .Exists
                 )
@@ -888,10 +889,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 // if we have `a ? (int?)b : default` then we can't remove the nullable cast as it changes the
                 // meaning of `default`.
                 if (
-                    originalConditionalExpression.WhenTrue
+                    originalConditionalExpression
+                        .WhenTrue
                         .WalkDownParentheses()
                         .IsKind(SyntaxKind.DefaultLiteralExpression)
-                    || originalConditionalExpression.WhenFalse
+                    || originalConditionalExpression
+                        .WhenFalse
                         .WalkDownParentheses()
                         .IsKind(SyntaxKind.DefaultLiteralExpression)
                 )
@@ -928,10 +931,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             // type of `a ? b : c` to be the same as what `a ? (T)b : c` is converted to.
 
             if (
-                !originalConditionalTypeInfo.ConvertedType!.Equals(
-                    rewrittenConditionalTypeInfo.ConvertedType,
-                    SymbolEqualityComparer.IncludeNullability
-                )
+                !originalConditionalTypeInfo
+                    .ConvertedType!
+                    .Equals(
+                        rewrittenConditionalTypeInfo.ConvertedType,
+                        SymbolEqualityComparer.IncludeNullability
+                    )
             )
                 return false;
 
@@ -1668,9 +1673,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                         var originalParameter = originalParameters[i];
                         var rewrittenParameter = rewrittenParameters[i];
 
-                        var argument = invocationOperation.Arguments.FirstOrDefault(
-                            a => Equals(originalParameter, a.Parameter)
-                        );
+                        var argument = invocationOperation
+                            .Arguments
+                            .FirstOrDefault(a => Equals(originalParameter, a.Parameter));
                         var argumentSyntax = argument?.Syntax as ArgumentSyntax;
 
                         if (

@@ -134,11 +134,13 @@ namespace Mac
                     }
                     catch (Exception e)
                     {
-                        Console.Error.WriteLine(
-                            "Error while processing {0} (Details: {1})",
-                            res,
-                            e.GetType()
-                        );
+                        Console
+                            .Error
+                            .WriteLine(
+                                "Error while processing {0} (Details: {1})",
+                                res,
+                                e.GetType()
+                            );
                     }
                 }
             }
@@ -394,10 +396,12 @@ namespace Mac
                                 }
                                 catch
                                 {
-                                    Console.Error.WriteLine(
-                                        "Could not recognize option {0} as the mode",
-                                        value
-                                    );
+                                    Console
+                                        .Error
+                                        .WriteLine(
+                                            "Could not recognize option {0} as the mode",
+                                            value
+                                        );
                                 }
                                 break;
                         }

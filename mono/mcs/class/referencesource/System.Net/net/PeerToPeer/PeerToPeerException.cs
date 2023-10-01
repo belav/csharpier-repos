@@ -125,13 +125,15 @@ namespace System.Net.PeerToPeer
             }
             catch (Exception ex)
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Warning,
-                    0,
-                    "Could not get the error message for error code {0} - Exception {1}",
-                    hr,
-                    ex
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Warning,
+                        0,
+                        "Could not get the error message for error code {0} - Exception {1}",
+                        hr,
+                        ex
+                    );
                 if (
                     ex is ThreadAbortException
                     || ex is StackOverflowException
@@ -150,12 +152,14 @@ namespace System.Net.PeerToPeer
             }
             if (p2pEx == null)
             {
-                Logging.P2PTraceSource.TraceEvent(
-                    TraceEventType.Warning,
-                    0,
-                    "Could not get the error message for error code {0}",
-                    hr
-                );
+                Logging
+                    .P2PTraceSource
+                    .TraceEvent(
+                        TraceEventType.Warning,
+                        0,
+                        "Could not get the error message for error code {0}",
+                        hr
+                    );
                 p2pEx = new PeerToPeerException(message + "Underlying native error " + hr);
             }
             Logging.P2PTraceSource.TraceEvent(TraceEventType.Error, 0, "Exception: {0}", p2pEx);

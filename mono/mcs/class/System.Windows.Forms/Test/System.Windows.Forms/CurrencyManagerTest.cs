@@ -571,11 +571,9 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
             dataset.Tables.Add(sports);
             dataset.Tables.Add(athletes);
-            dataset.Relations.Add(
-                "AthletesSports",
-                sports.Columns["SportID"],
-                athletes.Columns["Sport"]
-            );
+            dataset
+                .Relations
+                .Add("AthletesSports", sports.Columns["SportID"], athletes.Columns["Sport"]);
 
             BindingContext bc = new BindingContext();
             CurrencyManager cm = bc[dataset, "Sports.AthletesSports"] as CurrencyManager;
@@ -1137,21 +1135,15 @@ namespace MonoTests.System.Windows.Forms.DataBinding
             dataset.Tables.Add(dt1);
             dataset.Tables.Add(dt2);
             dataset.Tables.Add(dt3);
-            dataset.Relations.Add(
-                "Customer_Orders",
-                dt1.Columns["CustomerID"],
-                dt2.Columns["CustomerID"]
-            );
-            dataset.Relations.Add(
-                "Customer_Addresses",
-                dt1.Columns["CustomerID"],
-                dt3.Columns["CustomerID"]
-            );
-            dataset.Relations.Add(
-                "Address_Orders",
-                dt3.Columns["AddressID"],
-                dt2.Columns["AddressID"]
-            );
+            dataset
+                .Relations
+                .Add("Customer_Orders", dt1.Columns["CustomerID"], dt2.Columns["CustomerID"]);
+            dataset
+                .Relations
+                .Add("Customer_Addresses", dt1.Columns["CustomerID"], dt3.Columns["CustomerID"]);
+            dataset
+                .Relations
+                .Add("Address_Orders", dt3.Columns["AddressID"], dt2.Columns["AddressID"]);
 
             return dataset;
         }

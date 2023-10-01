@@ -22,9 +22,11 @@ public class Program
             {
                 if (context.WebSockets.IsWebSocketRequest)
                 {
-                    var webSocket = await context.WebSockets.AcceptWebSocketAsync(
-                        new WebSocketAcceptContext() { DangerousEnableCompression = true }
-                    );
+                    var webSocket = await context
+                        .WebSockets
+                        .AcceptWebSocketAsync(
+                            new WebSocketAcceptContext() { DangerousEnableCompression = true }
+                        );
                     await Echo(context, webSocket, app.Logger);
                     return;
                 }

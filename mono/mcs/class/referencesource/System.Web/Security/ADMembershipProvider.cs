@@ -986,10 +986,9 @@ namespace System.Web.Security
                     //
                     // we set the username as the cn
                     //
-                    userEntry = containerEntry.Children.Add(
-                        GetEscapedRdn("CN=" + username),
-                        "user"
-                    );
+                    userEntry = containerEntry
+                        .Children
+                        .Add(GetEscapedRdn("CN=" + username), "user");
 
                     //
                     // if we are talking to Active Directory
@@ -4575,11 +4574,9 @@ namespace System.Web.Security
 
             byte[] bAll = DecryptPassword(bEncryptedData);
 
-            return Encoding.Unicode.GetString(
-                bAll,
-                AD_SALT_SIZE_IN_BYTES,
-                bAll.Length - AD_SALT_SIZE_IN_BYTES
-            );
+            return Encoding
+                .Unicode
+                .GetString(bAll, AD_SALT_SIZE_IN_BYTES, bAll.Length - AD_SALT_SIZE_IN_BYTES);
         }
     }
 

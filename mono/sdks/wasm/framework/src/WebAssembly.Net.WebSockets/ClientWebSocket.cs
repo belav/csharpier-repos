@@ -519,11 +519,9 @@ namespace WebAssembly.Net.WebSockets
                     }
                     else if (messageType == WebSocketMessageType.Text)
                     {
-                        var strBuffer = Encoding.UTF8.GetString(
-                            buffer.Array,
-                            buffer.Offset,
-                            buffer.Count
-                        );
+                        var strBuffer = Encoding
+                            .UTF8
+                            .GetString(buffer.Array, buffer.Offset, buffer.Count);
                         innerWebSocket.Invoke("send", strBuffer);
                         tcsSend.SetResult(true);
                     }

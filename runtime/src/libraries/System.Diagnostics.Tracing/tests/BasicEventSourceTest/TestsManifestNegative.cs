@@ -42,11 +42,9 @@ namespace BasicEventSourceTests
             BindingFlags flags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
             if (!PlatformDetection.IsNetFramework)
             {
-                Type sr = typeof(EventSource).Assembly.GetType(
-                    "System.SR",
-                    throwOnError: true,
-                    ignoreCase: false
-                );
+                Type sr = typeof(EventSource)
+                    .Assembly
+                    .GetType("System.SR", throwOnError: true, ignoreCase: false);
                 PropertyInfo resourceProp = sr.GetProperty(key, flags);
                 return (string)resourceProp.GetValue(null);
             }

@@ -125,9 +125,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(LoadPairScalarVector64_Int32 testClass)
             {
-                _fld = AdvSimd.Arm64.LoadPairScalarVector64(
-                    (Int32*)(testClass._dataTable.inArrayPtr)
-                );
+                _fld = AdvSimd
+                    .Arm64
+                    .LoadPairScalarVector64((Int32*)(testClass._dataTable.inArrayPtr));
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, _fld);
                 testClass.ValidateResult(
@@ -287,12 +287,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.LoadPairScalarVector64)}<Int32>(Vector64<Int32>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.LoadPairScalarVector64)}<Int32>(Vector64<Int32>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($" result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

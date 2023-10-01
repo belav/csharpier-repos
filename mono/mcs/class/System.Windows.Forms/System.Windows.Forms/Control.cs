@@ -803,10 +803,9 @@ namespace System.Windows.Forms
 
                 for (int i = 0; i < list.Count; i++)
                     if (
-                        ((Control)list[i]).Name.Equals(
-                            key,
-                            StringComparison.CurrentCultureIgnoreCase
-                        )
+                        ((Control)list[i])
+                            .Name
+                            .Equals(key, StringComparison.CurrentCultureIgnoreCase)
                     )
                         return i;
 
@@ -6183,9 +6182,11 @@ namespace System.Windows.Forms
                 }
                 // If using OptimizedDoubleBuffer, ensure the clip region gets set
                 if (GetStyle(ControlStyles.OptimizedDoubleBuffer))
-                    paint_event.Graphics.SetClip(
-                        Rectangle.Intersect(paint_event.ClipRectangle, this.ClientRectangle)
-                    );
+                    paint_event
+                        .Graphics
+                        .SetClip(
+                            Rectangle.Intersect(paint_event.ClipRectangle, this.ClientRectangle)
+                        );
 
                 if (!GetStyle(ControlStyles.Opaque))
                 {

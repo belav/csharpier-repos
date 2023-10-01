@@ -335,10 +335,12 @@ namespace Microsoft.VSDesigner.WCFModel
 
         private void ValidateMapFile(MapFile mapFile)
         {
-            var metadataFileNames = mapFile.MetadataList
+            var metadataFileNames = mapFile
+                .MetadataList
                 .Select(p => p.FileName)
                 .Where(p => !string.IsNullOrEmpty(p));
-            var extensionFileNames = mapFile.Extensions
+            var extensionFileNames = mapFile
+                .Extensions
                 .Select(p => p.FileName)
                 .Where(p => !string.IsNullOrEmpty(p));
 

@@ -32,9 +32,11 @@ namespace System.IdentityModel
         protected override void ClearItems()
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
 
             base.ClearItems();
         }
@@ -42,9 +44,11 @@ namespace System.IdentityModel
         protected override void InsertItem(int index, T item)
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
 
             base.InsertItem(index, item);
         }
@@ -52,9 +56,11 @@ namespace System.IdentityModel
         protected override void RemoveItem(int index)
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
 
             base.RemoveItem(index);
         }
@@ -62,9 +68,11 @@ namespace System.IdentityModel
         protected override void SetItem(int index, T item)
         {
             if (this.isReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
 
             base.SetItem(index, item);
         }

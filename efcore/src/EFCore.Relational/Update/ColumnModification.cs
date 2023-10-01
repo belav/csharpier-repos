@@ -215,9 +215,9 @@ public class ColumnModification : IColumnModification
                             Entry.EntityType.FindPrimaryKey()!.Properties
                         ),
                         Entry.BuildCurrentValuesString(new[] { Property }),
-                        modification.Entry.BuildCurrentValuesString(
-                            new[] { modification.Property }
-                        ),
+                        modification
+                            .Entry
+                            .BuildCurrentValuesString(new[] { modification.Property }),
                         ColumnName
                     )
                 );
@@ -244,9 +244,10 @@ public class ColumnModification : IColumnModification
                         : Entry.SharedIdentityEntry.GetOriginalProviderValue(Property),
                     modification.Entry.SharedIdentityEntry == null
                         ? modification.Entry.GetOriginalProviderValue(modification.Property)
-                        : modification.Entry.SharedIdentityEntry.GetOriginalProviderValue(
-                            modification.Property
-                        )
+                        : modification
+                            .Entry
+                            .SharedIdentityEntry
+                            .GetOriginalProviderValue(modification.Property)
                 )
         )
         {
@@ -282,9 +283,9 @@ public class ColumnModification : IColumnModification
                                 Entry.EntityType.FindPrimaryKey()!.Properties
                             ),
                             Entry.BuildOriginalValuesString(new[] { Property }),
-                            modification.Entry.BuildOriginalValuesString(
-                                new[] { modification.Property }
-                            ),
+                            modification
+                                .Entry
+                                .BuildOriginalValuesString(new[] { modification.Property }),
                             ColumnName
                         )
                     );

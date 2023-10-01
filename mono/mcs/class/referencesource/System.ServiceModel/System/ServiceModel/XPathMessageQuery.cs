@@ -99,10 +99,12 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TResult",
-                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TResult",
+                        SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
+                    );
             }
         }
 
@@ -129,10 +131,12 @@ namespace System.ServiceModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TResult",
-                    SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TResult",
+                        SR.GetString(SR.UnsupportedMessageQueryResultType, typeof(TResult))
+                    );
             }
         }
 

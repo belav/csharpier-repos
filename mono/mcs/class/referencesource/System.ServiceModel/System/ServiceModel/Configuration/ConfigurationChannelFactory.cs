@@ -34,15 +34,15 @@ namespace System.ServiceModel.Configuration
                 }
                 if (endpointConfigurationName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "endpointConfigurationName"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("endpointConfigurationName");
                 }
                 if (configuration == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "configuration"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("configuration");
                 }
 
                 this.InitializeEndpoint(endpointConfigurationName, remoteAddress, configuration);

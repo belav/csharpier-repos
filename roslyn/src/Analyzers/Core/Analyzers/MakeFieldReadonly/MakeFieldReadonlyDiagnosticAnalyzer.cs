@@ -53,10 +53,12 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                 var fieldStateMap =
                     new ConcurrentDictionary<IFieldSymbol, (bool isCandidate, bool written)>();
 
-                var threadStaticAttribute =
-                    compilationStartContext.Compilation.ThreadStaticAttributeType();
-                var dataContractAttribute =
-                    compilationStartContext.Compilation.DataContractAttribute();
+                var threadStaticAttribute = compilationStartContext
+                    .Compilation
+                    .ThreadStaticAttributeType();
+                var dataContractAttribute = compilationStartContext
+                    .Compilation
+                    .DataContractAttribute();
                 var dataMemberAttribute = compilationStartContext.Compilation.DataMemberAttribute();
 
                 // We register following actions in the compilation:
@@ -160,10 +162,9 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                         .GetAttributes()
                         .Any(
                             static (a, threadStaticAttribute) =>
-                                SymbolEqualityComparer.Default.Equals(
-                                    a.AttributeClass,
-                                    threadStaticAttribute
-                                ),
+                                SymbolEqualityComparer
+                                    .Default
+                                    .Equals(a.AttributeClass, threadStaticAttribute),
                             threadStaticAttribute
                         )
                     && !IsDataContractSerializable(
@@ -185,20 +186,19 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                             .GetAttributes()
                             .Any(
                                 static (x, dataMemberAttribute) =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        x.AttributeClass,
-                                        dataMemberAttribute
-                                    ),
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(x.AttributeClass, dataMemberAttribute),
                                 dataMemberAttribute
                             )
-                        && symbol.ContainingType
+                        && symbol
+                            .ContainingType
                             .GetAttributes()
                             .Any(
                                 static (x, dataContractAttribute) =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        x.AttributeClass,
-                                        dataContractAttribute
-                                    ),
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(x.AttributeClass, dataContractAttribute),
                                 dataContractAttribute
                             );
                 }

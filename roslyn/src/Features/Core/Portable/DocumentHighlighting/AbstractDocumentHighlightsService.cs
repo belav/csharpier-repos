@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                     return ImmutableArray<DocumentHighlights>.Empty;
                 }
 
-                return await result.Value
+                return await result
+                    .Value
                     .SelectAsArrayAsync(h => h.RehydrateAsync(solution))
                     .ConfigureAwait(false);
             }
@@ -171,14 +172,16 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
             );
             foreach (var service in embeddedHighlightsServices)
             {
-                var result = service.Value.GetDocumentHighlights(
-                    document,
-                    semanticModel,
-                    token,
-                    position,
-                    options,
-                    cancellationToken
-                );
+                var result = service
+                    .Value
+                    .GetDocumentHighlights(
+                        document,
+                        semanticModel,
+                        token,
+                        position,
+                        options,
+                        cancellationToken
+                    );
                 if (!result.IsDefaultOrEmpty)
                     return result;
             }

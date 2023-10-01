@@ -321,8 +321,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 // If we're in a type context then we shouldn't offer to generate a field or
                 // property.
-                var syntaxFacts =
-                    semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISyntaxFactsService>();
                 if (syntaxFacts.IsInNamespaceOrTypeContext(SimpleNameOrMemberAccessExpressionOpt))
                 {
                     return false;
@@ -380,8 +381,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 DetermineFieldType(semanticDocument, cancellationToken);
 
-                var semanticFacts =
-                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+                var semanticFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISemanticFactsService>();
                 IsInRefContext = semanticFacts.IsInRefContext(
                     semanticModel,
                     SimpleNameOrMemberAccessExpressionOpt,
@@ -441,8 +443,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 //
                 // Also, because users often like to keep members/assignments in the same order
                 // we can pick a good place for the new member based on the surrounding assignments.
-                var syntaxFacts =
-                    semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISyntaxFactsService>();
                 var simpleName = SimpleNameOrMemberAccessExpressionOpt;
 
                 if (syntaxFacts.IsLeftSideOfAssignment(simpleName))
@@ -487,8 +490,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                                     || FieldIsReadOnly(nextAssignedSymbol);
                             }
 
-                            AfterThisLocation ??=
-                                previousAssignedSymbol?.Locations.FirstOrDefault();
+                            AfterThisLocation ??= previousAssignedSymbol
+                                ?.Locations
+                                .FirstOrDefault();
                             BeforeThisLocation ??= nextAssignedSymbol?.Locations.FirstOrDefault();
                         }
                     }
@@ -503,8 +507,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 CancellationToken cancellationToken
             )
             {
-                var syntaxFacts =
-                    semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISyntaxFactsService>();
                 if (index >= 0 && index < children.Count)
                 {
                     var sibling = children[index];
@@ -519,7 +524,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                                 out _
                             );
 
-                            var symbol = semanticDocument.SemanticModel
+                            var symbol = semanticDocument
+                                .SemanticModel
                                 .GetSymbolInfo(left, cancellationToken)
                                 .Symbol;
                             if (
@@ -580,8 +586,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 CancellationToken cancellationToken
             )
             {
-                var typeInference =
-                    semanticDocument.Document.GetLanguageService<ITypeInferenceService>();
+                var typeInference = semanticDocument
+                    .Document
+                    .GetLanguageService<ITypeInferenceService>();
                 var inferredType = typeInference.InferType(
                     semanticDocument.SemanticModel,
                     SimpleNameOrMemberAccessExpressionOpt,
@@ -605,7 +612,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 {
                     var namedDelegateType = inferredType
                         .GetDelegateType(compilation)
-                        ?.DelegateInvokeMethod?.ConvertToType(compilation);
+                        ?.DelegateInvokeMethod
+                        ?.ConvertToType(compilation);
                     if (namedDelegateType != null)
                     {
                         inferredType = namedDelegateType;
@@ -628,8 +636,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     availableTypeParameters
                 );
 
-                var enclosingMethodSymbol =
-                    semanticDocument.SemanticModel.GetEnclosingSymbol<IMethodSymbol>(
+                var enclosingMethodSymbol = semanticDocument
+                    .SemanticModel
+                    .GetEnclosingSymbol<IMethodSymbol>(
                         SimpleNameOrMemberAccessExpressionOpt.SpanStart,
                         cancellationToken
                     );
@@ -665,8 +674,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 // If we're in an lambda/local function we're not actually 'in' the constructor.
                 // i.e. we can't actually write to read-only fields here.
-                var syntaxFacts =
-                    semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = semanticDocument
+                    .Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (simpleName.AncestorsAndSelf().Any(syntaxFacts.IsAnonymousOrLocalFunction))
                     return false;
 

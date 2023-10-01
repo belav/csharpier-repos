@@ -188,16 +188,21 @@ namespace System.Data.EntityModel.Emitters
                     )
                     {
                         Generator.AddError(
-                            System.Data.Entity.Design.Strings.EntityTypeAndSetAccessibilityConflict(
-                                set.ElementType.Name,
-                                GetAccessibilityCsdlStringFromMemberAttribute(
-                                    GetEntityTypeAccessibility(set.ElementType)
+                            System
+                                .Data
+                                .Entity
+                                .Design
+                                .Strings
+                                .EntityTypeAndSetAccessibilityConflict(
+                                    set.ElementType.Name,
+                                    GetAccessibilityCsdlStringFromMemberAttribute(
+                                        GetEntityTypeAccessibility(set.ElementType)
+                                    ),
+                                    set.Name,
+                                    GetAccessibilityCsdlStringFromMemberAttribute(
+                                        GetEntitySetPropertyAccessibility(set)
+                                    )
                                 ),
-                                set.Name,
-                                GetAccessibilityCsdlStringFromMemberAttribute(
-                                    GetEntitySetPropertyAccessibility(set)
-                                )
-                            ),
                             ModelBuilderErrorCode.EntityTypeAndSetAccessibilityConflict,
                             EdmSchemaErrorSeverity.Error
                         );
@@ -259,9 +264,9 @@ namespace System.Data.EntityModel.Emitters
             CodeParameterDeclarationExpression connectionStringParam =
                 new CodeParameterDeclarationExpression(TypeReference.String, "connectionString");
             connectionStringCtor.Parameters.Add(connectionStringParam);
-            connectionStringCtor.BaseConstructorArgs.Add(
-                new CodeArgumentReferenceExpression(connectionStringParam.Name)
-            );
+            connectionStringCtor
+                .BaseConstructorArgs
+                .Add(new CodeArgumentReferenceExpression(connectionStringParam.Name));
             connectionStringCtor.BaseConstructorArgs.Add(new CodePrimitiveExpression(Item.Name));
             CommentEmitter.EmitSummaryComments(
                 Strings.CtorSummaryComment(Item.Name),
@@ -287,9 +292,9 @@ namespace System.Data.EntityModel.Emitters
                     "connection"
                 );
             connectionWorkspaceCtor.Parameters.Add(connectionParam);
-            connectionWorkspaceCtor.BaseConstructorArgs.Add(
-                new CodeArgumentReferenceExpression(connectionParam.Name)
-            );
+            connectionWorkspaceCtor
+                .BaseConstructorArgs
+                .Add(new CodeArgumentReferenceExpression(connectionParam.Name));
             connectionWorkspaceCtor.BaseConstructorArgs.Add(new CodePrimitiveExpression(Item.Name));
             CommentEmitter.EmitSummaryComments(
                 Strings.CtorSummaryComment(Item.Name),
@@ -312,12 +317,14 @@ namespace System.Data.EntityModel.Emitters
                 MemberAttributes.Abstract | MemberAttributes.Public;
             typeDecl.Members.Add(onContextCreatedPartialMethod);
 
-            Generator.FixUps.Add(
-                new FixUp(
-                    Item.Name + "." + _onContextCreatedString,
-                    FixUpType.MarkAbstractMethodAsPartial
-                )
-            );
+            Generator
+                .FixUps
+                .Add(
+                    new FixUp(
+                        Item.Name + "." + _onContextCreatedString,
+                        FixUpType.MarkAbstractMethodAsPartial
+                    )
+                );
         }
 
         private CodeMemberField CreateEntitySetField(EntitySet set)
@@ -443,26 +450,34 @@ namespace System.Data.EntityModel.Emitters
                 }
             }
 
-            codeProperty.GetStatements.Add(
-                new CodeConditionStatement(
-                    EmitExpressionEqualsNull(new CodeFieldReferenceExpression(ThisRef, fieldName)),
-                    new CodeAssignStatement(
-                        new CodeFieldReferenceExpression(ThisRef, fieldName),
-                        new CodeMethodInvokeExpression(
-                            new CodeMethodReferenceExpression(
-                                new CodeBaseReferenceExpression(),
-                                createMethodName,
-                                new CodeTypeReference[] { genericParameter }
-                            ),
-                            new CodePrimitiveExpression(createMethodArgument)
+            codeProperty
+                .GetStatements
+                .Add(
+                    new CodeConditionStatement(
+                        EmitExpressionEqualsNull(
+                            new CodeFieldReferenceExpression(ThisRef, fieldName)
+                        ),
+                        new CodeAssignStatement(
+                            new CodeFieldReferenceExpression(ThisRef, fieldName),
+                            new CodeMethodInvokeExpression(
+                                new CodeMethodReferenceExpression(
+                                    new CodeBaseReferenceExpression(),
+                                    createMethodName,
+                                    new CodeTypeReference[] { genericParameter }
+                                ),
+                                new CodePrimitiveExpression(createMethodArgument)
+                            )
                         )
                     )
-                )
-            );
+                );
 
-            codeProperty.GetStatements.Add(
-                new CodeMethodReturnStatement(new CodeFieldReferenceExpression(ThisRef, fieldName))
-            );
+            codeProperty
+                .GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeFieldReferenceExpression(ThisRef, fieldName)
+                    )
+                );
 
             // property summary
             CommentEmitter.EmitSummaryComments(set, codeProperty.Comments);
@@ -500,14 +515,16 @@ namespace System.Data.EntityModel.Emitters
 
             codeMethod.ReturnType = new CodeTypeReference(typeof(void));
 
-            codeMethod.Statements.Add(
-                new CodeMethodInvokeExpression(
-                    new CodeBaseReferenceExpression(),
-                    "AddObject",
-                    new CodePrimitiveExpression(set.Name),
-                    new CodeFieldReferenceExpression(null, parameter.Name)
-                )
-            );
+            codeMethod
+                .Statements
+                .Add(
+                    new CodeMethodInvokeExpression(
+                        new CodeBaseReferenceExpression(),
+                        "AddObject",
+                        new CodePrimitiveExpression(set.Name),
+                        new CodeFieldReferenceExpression(null, parameter.Name)
+                    )
+                );
 
             // method summary
             CommentEmitter.EmitSummaryComments(set, codeMethod.Comments);
@@ -626,14 +643,16 @@ namespace System.Data.EntityModel.Emitters
                 "ExecuteFunction",
                 new CodeTypeReference[] { elementType }
             );
-            method.Statements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeMethodInvokeExpression(
-                        executeFunctionMethod,
-                        executeArguments.ToArray()
+            method
+                .Statements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeMethodInvokeExpression(
+                            executeFunctionMethod,
+                            executeArguments.ToArray()
+                        )
                     )
-                )
-            );
+                );
 
             // invoke the ExecuteFunction method passing in parameters
             return method;
@@ -668,12 +687,14 @@ namespace System.Data.EntityModel.Emitters
             // {
             //     variableName = new ObjectParameter("parameterName", typeof(parameterType));
             // }
-            method.Statements.Add(
-                new CodeVariableDeclarationStatement(
-                    TypeReference.ForType(typeof(ObjectParameter)),
-                    variableName
-                )
-            );
+            method
+                .Statements
+                .Add(
+                    new CodeVariableDeclarationStatement(
+                        TypeReference.ForType(typeof(ObjectParameter)),
+                        variableName
+                    )
+                );
             CodeExpression variableReference = new CodeVariableReferenceExpression(variableName);
             CodeExpression parameterReference = new CodeVariableReferenceExpression(
                 adjustedParameterName
@@ -716,13 +737,15 @@ namespace System.Data.EntityModel.Emitters
                     NullExpression
                 );
             }
-            method.Statements.Add(
-                new CodeConditionStatement(
-                    notNullCondition,
-                    new CodeStatement[] { valueConstructor, },
-                    new CodeStatement[] { nullConstructor, }
-                )
-            );
+            method
+                .Statements
+                .Add(
+                    new CodeConditionStatement(
+                        notNullCondition,
+                        new CodeStatement[] { valueConstructor, },
+                        new CodeStatement[] { nullConstructor, }
+                    )
+                );
             return variableReference;
         }
 

@@ -47,11 +47,10 @@ public class UsePathBaseMiddleware
         }
 
         if (
-            context.Request.Path.StartsWithSegments(
-                _pathBase,
-                out var matchedPath,
-                out var remainingPath
-            )
+            context
+                .Request
+                .Path
+                .StartsWithSegments(_pathBase, out var matchedPath, out var remainingPath)
         )
         {
             return InvokeCore(context, matchedPath, remainingPath);

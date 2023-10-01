@@ -221,7 +221,8 @@ public partial class HubConnectionHandlerTests
             await client.Connected.OrThrowIfOtherFails(connectionHandlerTask).DefaultTimeout();
 
             var context = serviceProvider.GetRequiredService<IHubContext<MethodHub>>();
-            var resultTask = context.Clients
+            var resultTask = context
+                .Clients
                 .Client(client.Connection.ConnectionId)
                 .InvokeAsync<int>("GetClientResult", 1, cancellationToken: default);
 
@@ -557,7 +558,8 @@ public partial class HubConnectionHandlerTests
             var context = serviceProvider.GetRequiredService<IHubContext<HubT, ITest>>();
 
             var cts = new CancellationTokenSource();
-            var resultTask = context.Clients
+            var resultTask = context
+                .Clients
                 .Client(connectionId)
                 .GetClientResultWithCancellation(1, cts.Token);
 
@@ -609,7 +611,8 @@ public partial class HubConnectionHandlerTests
             var context = serviceProvider.GetRequiredService<IHubContext<MethodHub>>();
 
             var cts = new CancellationTokenSource();
-            var resultTask = context.Clients
+            var resultTask = context
+                .Clients
                 .Client(connectionId)
                 .InvokeAsync<int>(nameof(MethodHub.GetClientResult), 1, cts.Token);
 

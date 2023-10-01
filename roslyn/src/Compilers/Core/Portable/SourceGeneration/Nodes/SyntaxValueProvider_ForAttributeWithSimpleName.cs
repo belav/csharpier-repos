@@ -70,7 +70,8 @@ public partial struct SyntaxValueProvider
         // using SyntaxTrees is purely syntax and will not update the incremental node for a tree when another tree is
         // changed. CreateSyntaxProvider will have to rerun all incremental nodes since it passes along the
         // SemanticModel, and that model is updated whenever any tree changes (since it is tied to the compilation).
-        var syntaxTreesProvider = _context.CompilationProvider
+        var syntaxTreesProvider = _context
+            .CompilationProvider
             .SelectMany(
                 (compilation, cancellationToken) =>
                     GetSourceGeneratorInfo(syntaxHelper, compilation, cancellationToken)
@@ -104,7 +105,8 @@ public partial struct SyntaxValueProvider
 
         // Regenerate our data if the compilation options changed.  VB can supply global aliases with compilation options,
         // so we have to reanalyze everything if those changed.
-        var compilationGlobalAliases = _context.CompilationOptionsProvider
+        var compilationGlobalAliases = _context
+            .CompilationOptionsProvider
             .Select(
                 (o, _) =>
                 {

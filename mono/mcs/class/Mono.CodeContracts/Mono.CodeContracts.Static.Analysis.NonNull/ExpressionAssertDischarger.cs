@@ -56,11 +56,13 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
         #region Implementation of IExpressionILVisitor<Expression,Expression,Variable,bool,ProofOutcome>
         private FlatDomain<bool> Recurse(bool polarity, E expr)
         {
-            return this.ContextProvider.ExpressionContext.Decode<
-                bool,
-                FlatDomain<bool>,
-                ExpressionAssertDischarger<E, V>
-            >(expr, this, polarity);
+            return this.ContextProvider
+                .ExpressionContext
+                .Decode<bool, FlatDomain<bool>, ExpressionAssertDischarger<E, V>>(
+                    expr,
+                    this,
+                    polarity
+                );
         }
 
         public FlatDomain<bool> Binary(

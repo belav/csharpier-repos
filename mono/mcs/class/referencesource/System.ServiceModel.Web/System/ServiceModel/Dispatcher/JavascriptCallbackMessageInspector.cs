@@ -46,9 +46,11 @@ namespace System.ServiceModel.Dispatcher
                 && HttpContext.Current.User.Identity.IsAuthenticated
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(SR2.CrossDomainJavascriptAuthNotSupported)
+                    );
             }
             return null;
         }
@@ -59,19 +61,23 @@ namespace System.ServiceModel.Dispatcher
             JavascriptCallbackResponseMessageProperty javascriptCallbackResponseMessageProperty =
                 null;
             if (
-                reply.Properties.TryGetValue<WebBodyFormatMessageProperty>(
-                    WebBodyFormatMessageProperty.Name,
-                    out formatProperty
-                )
+                reply
+                    .Properties
+                    .TryGetValue<WebBodyFormatMessageProperty>(
+                        WebBodyFormatMessageProperty.Name,
+                        out formatProperty
+                    )
                 && formatProperty != null
                 && formatProperty.Format == WebContentFormat.Json
             )
             {
                 if (
-                    !reply.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                        JavascriptCallbackResponseMessageProperty.Name,
-                        out javascriptCallbackResponseMessageProperty
-                    )
+                    !reply
+                        .Properties
+                        .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                            JavascriptCallbackResponseMessageProperty.Name,
+                            out javascriptCallbackResponseMessageProperty
+                        )
                     || javascriptCallbackResponseMessageProperty == null
                 )
                 {
@@ -79,20 +85,24 @@ namespace System.ServiceModel.Dispatcher
                         WebHttpBehavior.TrySetupJavascriptCallback(this.CallbackParameterName);
                     if (javascriptCallbackResponseMessageProperty != null)
                     {
-                        reply.Properties.Add(
-                            JavascriptCallbackResponseMessageProperty.Name,
-                            javascriptCallbackResponseMessageProperty
-                        );
+                        reply
+                            .Properties
+                            .Add(
+                                JavascriptCallbackResponseMessageProperty.Name,
+                                javascriptCallbackResponseMessageProperty
+                            );
                     }
                 }
                 if (javascriptCallbackResponseMessageProperty != null)
                 {
                     HttpResponseMessageProperty property;
                     if (
-                        reply.Properties.TryGetValue<HttpResponseMessageProperty>(
-                            HttpResponseMessageProperty.Name,
-                            out property
-                        )
+                        reply
+                            .Properties
+                            .TryGetValue<HttpResponseMessageProperty>(
+                                HttpResponseMessageProperty.Name,
+                                out property
+                            )
                         && property != null
                     )
                     {
@@ -108,8 +118,9 @@ namespace System.ServiceModel.Dispatcher
                         if (property.SuppressEntityBody)
                         {
                             property.SuppressEntityBody = false;
-                            Message nullJsonMessage =
-                                WebOperationContext.Current.CreateJsonResponse<object>(null);
+                            Message nullJsonMessage = WebOperationContext
+                                .Current
+                                .CreateJsonResponse<object>(null);
                             nullJsonMessage.Properties.CopyProperties(reply.Properties);
                             reply = nullJsonMessage;
                         }

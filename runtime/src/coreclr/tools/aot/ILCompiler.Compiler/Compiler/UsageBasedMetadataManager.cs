@@ -306,9 +306,9 @@ namespace ILCompiler
             {
                 foreach (var resourceHandle in ecmaModule.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = ecmaModule.MetadataReader.GetManifestResource(
-                        resourceHandle
-                    );
+                    ManifestResource resource = ecmaModule
+                        .MetadataReader
+                        .GetManifestResource(resourceHandle);
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)
@@ -965,10 +965,9 @@ namespace ILCompiler
                 != 0;
             if (
                 scanReflection
-                && Dataflow.ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
-                    FlowAnnotations,
-                    writtenField
-                )
+                && Dataflow
+                    .ReflectionMethodBodyScanner
+                    .RequiresReflectionMethodBodyScannerForAccess(FlowAnnotations, writtenField)
             )
             {
                 AddDataflowDependency(
@@ -1031,10 +1030,12 @@ namespace ILCompiler
                     TypeDesc fieldOwningTypeNormalized = fieldOwningType.NormalizeInstantiation();
                     if (fieldOwningType != fieldOwningTypeNormalized)
                     {
-                        fieldToReport = factory.TypeSystemContext.GetFieldForInstantiatedType(
-                            writtenField.GetTypicalFieldDefinition(),
-                            (InstantiatedType)fieldOwningTypeNormalized
-                        );
+                        fieldToReport = factory
+                            .TypeSystemContext
+                            .GetFieldForInstantiatedType(
+                                writtenField.GetTypicalFieldDefinition(),
+                                (InstantiatedType)fieldOwningTypeNormalized
+                            );
                     }
                 }
 
@@ -1064,10 +1065,9 @@ namespace ILCompiler
                 != 0;
             if (
                 scanReflection
-                && Dataflow.ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForCallSite(
-                    FlowAnnotations,
-                    calledMethod
-                )
+                && Dataflow
+                    .ReflectionMethodBodyScanner
+                    .RequiresReflectionMethodBodyScannerForCallSite(FlowAnnotations, calledMethod)
             )
             {
                 AddDataflowDependency(
@@ -1414,10 +1414,12 @@ namespace ILCompiler
         {
             MethodIL methodILDefinition = methodIL.GetMethodILDefinition();
             if (
-                FlowAnnotations.CompilerGeneratedState.TryGetUserMethodForCompilerGeneratedMember(
-                    methodILDefinition.OwningMethod,
-                    out var userMethod
-                )
+                FlowAnnotations
+                    .CompilerGeneratedState
+                    .TryGetUserMethodForCompilerGeneratedMember(
+                        methodILDefinition.OwningMethod,
+                        out var userMethod
+                    )
             )
             {
                 Debug.Assert(userMethod != methodILDefinition.OwningMethod);
@@ -1578,15 +1580,22 @@ namespace ILCompiler
                 Module = module;
                 RemovedAttributes = new HashSet<TypeDesc>();
 
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
-                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
-                );
+                PEMemoryBlock resourceDirectory = module
+                    .PEReader
+                    .GetSectionData(
+                        module
+                            .PEReader
+                            .PEHeaders
+                            .CorHeader
+                            .ResourcesDirectory
+                            .RelativeVirtualAddress
+                    );
 
                 foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = module.MetadataReader.GetManifestResource(
-                        resourceHandle
-                    );
+                    ManifestResource resource = module
+                        .MetadataReader
+                        .GetManifestResource(resourceHandle);
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)

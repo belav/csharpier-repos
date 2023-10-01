@@ -1942,13 +1942,9 @@ namespace System.Runtime.Remoting
             );
 
             return (ObjRef)
-                Thread.CurrentThread.InternalCrossContextCallback(
-                    null,
-                    defCtxID,
-                    appDomainId,
-                    xctxDel,
-                    null
-                );
+                Thread
+                    .CurrentThread
+                    .InternalCrossContextCallback(null, defCtxID, appDomainId, xctxDel, null);
         } // CreateDataForDomain
 
         [System.Security.SecurityCritical] // auto-generated_required

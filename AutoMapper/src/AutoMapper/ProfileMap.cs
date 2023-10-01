@@ -42,7 +42,8 @@ public class ProfileMap
             profile.ShouldMapMethod ?? configuration?.ShouldMapMethod ?? (p => !p.IsSpecialName);
         ShouldUseConstructor =
             profile.ShouldUseConstructor ?? configuration?.ShouldUseConstructor ?? (c => true);
-        ValueTransformers = profile.ValueTransformers
+        ValueTransformers = profile
+            .ValueTransformers
             .Concat(configuration?.ValueTransformers)
             .ToArray();
         var profileInternal = (IProfileExpressionInternal)profile;
@@ -53,13 +54,16 @@ public class ProfileMap
             globalIgnores == Array.Empty<string>()
                 ? EmptyHashSet
                 : new HashSet<string>(globalIgnores);
-        SourceExtensionMethods = profile.SourceExtensionMethods
+        SourceExtensionMethods = profile
+            .SourceExtensionMethods
             .Concat(globalProfile?.SourceExtensionMethods)
             .ToArray();
-        AllPropertyMapActions = profile.AllPropertyMapActions
+        AllPropertyMapActions = profile
+            .AllPropertyMapActions
             .Concat(globalProfile?.AllPropertyMapActions)
             .ToArray();
-        AllTypeMapActions = profile.AllTypeMapActions
+        AllTypeMapActions = profile
+            .AllTypeMapActions
             .Concat(globalProfile?.AllTypeMapActions)
             .ToArray();
         profileInternal.MemberConfiguration.Seal();
@@ -137,11 +141,9 @@ public class ProfileMap
     {
         if (_typeDetails == null)
         {
-            return _runtimeTypeDetails.Value.GetOrAdd(
-                type,
-                (type, profile) => new(type, profile),
-                this
-            );
+            return _runtimeTypeDetails
+                .Value
+                .GetOrAdd(type, (type, profile) => new(type, profile), this);
         }
         if (_typeDetails.TryGetValue(type, out var typeDetails))
         {

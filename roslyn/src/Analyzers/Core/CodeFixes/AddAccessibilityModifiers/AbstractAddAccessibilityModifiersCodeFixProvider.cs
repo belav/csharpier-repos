@@ -33,9 +33,9 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
                     ? CodeActionPriority.Low
                     : CodeActionPriority.Medium;
 
-            var (title, key) = diagnostic.Properties.ContainsKey(
-                AddAccessibilityModifiersConstants.ModifiersAdded
-            )
+            var (title, key) = diagnostic
+                .Properties
+                .ContainsKey(AddAccessibilityModifiersConstants.ModifiersAdded)
                 ? (
                     AnalyzersResources.Add_accessibility_modifiers,
                     nameof(AnalyzersResources.Add_accessibility_modifiers)

@@ -566,7 +566,8 @@ namespace System.Net
                     $"{ME} INIT READ ASYNC LOOP: {state} {position} - {buffer.Offset}/{buffer.Size}"
                 );
 
-                var nread = await RequestStream.InnerStream
+                var nread = await RequestStream
+                    .InnerStream
                     .ReadAsync(buffer.Buffer, buffer.Offset, buffer.Size, cancellationToken)
                     .ConfigureAwait(false);
 

@@ -62,9 +62,9 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
 
         _connectionString = string.IsNullOrWhiteSpace(relationalOptions.ConnectionString)
             ? null
-            : dependencies.ConnectionStringResolver.ResolveConnectionString(
-                relationalOptions.ConnectionString
-            );
+            : dependencies
+                .ConnectionStringResolver
+                .ResolveConnectionString(relationalOptions.ConnectionString);
 
         if (relationalOptions.Connection != null)
         {
@@ -341,24 +341,17 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         var startTime = DateTimeOffset.UtcNow;
         _stopwatch.Restart();
 
-        var interceptionResult = Dependencies.TransactionLogger.TransactionStarting(
-            this,
-            isolationLevel,
-            transactionId,
-            startTime
-        );
+        var interceptionResult = Dependencies
+            .TransactionLogger
+            .TransactionStarting(this, isolationLevel, transactionId, startTime);
 
         var dbTransaction = interceptionResult.HasResult
             ? interceptionResult.Result
             : ConnectionBeginTransaction(isolationLevel);
 
-        dbTransaction = Dependencies.TransactionLogger.TransactionStarted(
-            this,
-            dbTransaction,
-            transactionId,
-            startTime,
-            _stopwatch.Elapsed
-        );
+        dbTransaction = Dependencies
+            .TransactionLogger
+            .TransactionStarted(this, dbTransaction, transactionId, startTime, _stopwatch.Elapsed);
 
         return CreateRelationalTransaction(dbTransaction, transactionId, true);
     }
@@ -395,7 +388,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         var startTime = DateTimeOffset.UtcNow;
         _stopwatch.Restart();
 
-        var interceptionResult = await Dependencies.TransactionLogger
+        var interceptionResult = await Dependencies
+            .TransactionLogger
             .TransactionStartingAsync(
                 this,
                 isolationLevel,
@@ -410,7 +404,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
             : await ConnectionBeginTransactionAsync(isolationLevel, cancellationToken)
                 .ConfigureAwait(false);
 
-        dbTransaction = await Dependencies.TransactionLogger
+        dbTransaction = await Dependencies
+            .TransactionLogger
             .TransactionStartedAsync(
                 this,
                 dbTransaction,
@@ -465,13 +460,15 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         Guid transactionId,
         bool transactionOwned
     ) =>
-        CurrentTransaction = Dependencies.RelationalTransactionFactory.Create(
-            this,
-            transaction,
-            transactionId,
-            Dependencies.TransactionLogger,
-            transactionOwned: transactionOwned
-        );
+        CurrentTransaction = Dependencies
+            .RelationalTransactionFactory
+            .Create(
+                this,
+                transaction,
+                transactionId,
+                Dependencies.TransactionLogger,
+                transactionOwned: transactionOwned
+            );
 
     /// <summary>
     ///     Specifies an existing <see cref="DbTransaction" /> to be used for database operations.
@@ -500,12 +497,9 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         {
             Open();
 
-            transaction = Dependencies.TransactionLogger.TransactionUsed(
-                this,
-                transaction,
-                transactionId,
-                DateTimeOffset.UtcNow
-            );
+            transaction = Dependencies
+                .TransactionLogger
+                .TransactionUsed(this, transaction, transactionId, DateTimeOffset.UtcNow);
 
             CurrentTransaction = CreateRelationalTransaction(
                 transaction,
@@ -547,7 +541,8 @@ public abstract class RelationalConnection : IRelationalConnection, ITransaction
         {
             await OpenAsync(cancellationToken).ConfigureAwait(false);
 
-            transaction = await Dependencies.TransactionLogger
+            transaction = await Dependencies
+                .TransactionLogger
                 .TransactionUsedAsync(
                     this,
                     transaction,

@@ -145,9 +145,9 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
                 // Clear out the default reference assemblies. We explicitly add references from the live ref pack,
                 // so we don't want the Roslyn test infrastructure to resolve/add any default reference assemblies
                 ReferenceAssemblies = new ReferenceAssemblies(string.Empty);
-                TestState.AdditionalReferences.AddRange(
-                    SourceGenerators.Tests.LiveReferencePack.GetMetadataReferences()
-                );
+                TestState
+                    .AdditionalReferences
+                    .AddRange(SourceGenerators.Tests.LiveReferencePack.GetMetadataReferences());
                 TestState.AdditionalReferences.Add(TestUtils.GetAncillaryReference());
 
                 SolutionTransforms.Add(
@@ -155,10 +155,9 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
                     {
                         var project = solution.GetProject(projectId)!;
                         var compilationOptions = project.CompilationOptions!;
-                        var diagnosticOptions =
-                            compilationOptions.SpecificDiagnosticOptions.SetItems(
-                                CSharpVerifierHelper.NullableWarnings
-                            );
+                        var diagnosticOptions = compilationOptions
+                            .SpecificDiagnosticOptions
+                            .SetItems(CSharpVerifierHelper.NullableWarnings);
 
                         // Explicitly enable diagnostics that are not enabled by default
                         var enableAnalyzersOptions = new System.Collections.Generic.Dictionary<
@@ -188,7 +187,8 @@ namespace LibraryImportGenerator.UnitTests.Verifiers
                         }
 
                         compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                            compilationOptions.SpecificDiagnosticOptions
+                            compilationOptions
+                                .SpecificDiagnosticOptions
                                 .SetItems(CSharpVerifierHelper.NullableWarnings)
                                 .AddRange(enableAnalyzersOptions)
                                 .AddRange(TestUtils.BindingRedirectWarnings)

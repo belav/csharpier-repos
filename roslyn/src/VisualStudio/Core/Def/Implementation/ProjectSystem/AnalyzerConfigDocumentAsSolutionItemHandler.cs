@@ -161,9 +161,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     kind: InfoBarUI.UIKind.Button,
                     action: () =>
                         _workspace.TryApplyChanges(
-                            _workspace.CurrentSolution.WithOptions(
-                                _workspace.Options.WithChangedOption(NeverShowAgain, true)
-                            )
+                            _workspace
+                                .CurrentSolution
+                                .WithOptions(
+                                    _workspace.Options.WithChangedOption(NeverShowAgain, true)
+                                )
                         ),
                     closeAfterAction: true
                 );
@@ -171,8 +173,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             void AddEditorconfigSolutionItem()
             {
-                var addSolutionItemService =
-                    _workspace.Services.GetRequiredService<IAddSolutionItemService>();
+                var addSolutionItemService = _workspace
+                    .Services
+                    .GetRequiredService<IAddSolutionItemService>();
                 addSolutionItemService
                     .AddSolutionItemAsync(analyzerConfigDocumentFilePath, CancellationToken.None)
                     .Wait();

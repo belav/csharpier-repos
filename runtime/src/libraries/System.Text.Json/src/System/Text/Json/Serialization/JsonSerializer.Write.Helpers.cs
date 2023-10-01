@@ -43,18 +43,12 @@ namespace System.Text.Json
                 state.Initialize(polymorphicTypeInfo);
 
                 bool success = state.IsPolymorphicRootValue
-                    ? polymorphicTypeInfo.Converter.WriteCoreAsObject(
-                        writer,
-                        value,
-                        jsonTypeInfo.Options,
-                        ref state
-                    )
-                    : jsonTypeInfo.EffectiveConverter.WriteCore(
-                        writer,
-                        value,
-                        jsonTypeInfo.Options,
-                        ref state
-                    );
+                    ? polymorphicTypeInfo
+                        .Converter
+                        .WriteCoreAsObject(writer, value, jsonTypeInfo.Options, ref state)
+                    : jsonTypeInfo
+                        .EffectiveConverter
+                        .WriteCore(writer, value, jsonTypeInfo.Options, ref state);
 
                 Debug.Assert(success);
             }
@@ -79,12 +73,9 @@ namespace System.Text.Json
             );
             state.Initialize(polymorphicTypeInfo);
 
-            bool success = polymorphicTypeInfo.Converter.WriteCoreAsObject(
-                writer,
-                value,
-                jsonTypeInfo.Options,
-                ref state
-            );
+            bool success = polymorphicTypeInfo
+                .Converter
+                .WriteCoreAsObject(writer, value, jsonTypeInfo.Options, ref state);
             Debug.Assert(success);
             writer.Flush();
         }
@@ -104,22 +95,16 @@ namespace System.Text.Json
             bool isFinalBlock;
             if (jsonTypeInfo is JsonTypeInfo<TValue> typedInfo)
             {
-                isFinalBlock = typedInfo.EffectiveConverter.WriteCore(
-                    writer,
-                    value,
-                    jsonTypeInfo.Options,
-                    ref state
-                );
+                isFinalBlock = typedInfo
+                    .EffectiveConverter
+                    .WriteCore(writer, value, jsonTypeInfo.Options, ref state);
             }
             else
             {
                 // The non-generic API was called.
-                isFinalBlock = jsonTypeInfo.Converter.WriteCoreAsObject(
-                    writer,
-                    value,
-                    jsonTypeInfo.Options,
-                    ref state
-                );
+                isFinalBlock = jsonTypeInfo
+                    .Converter
+                    .WriteCoreAsObject(writer, value, jsonTypeInfo.Options, ref state);
             }
 
             writer.Flush();

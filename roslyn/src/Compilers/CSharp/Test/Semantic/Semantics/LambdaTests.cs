@@ -605,11 +605,13 @@ Public Module M
 End Module
 ";
 
-            var vbProject = VisualBasic.VisualBasicCompilation.Create(
-                "VBProject",
-                references: new[] { MscorlibRef },
-                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
-            );
+            var vbProject = VisualBasic
+                .VisualBasicCompilation
+                .Create(
+                    "VBProject",
+                    references: new[] { MscorlibRef },
+                    syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+                );
 
             var csSource =
                 @"
@@ -662,11 +664,13 @@ Public Module M
 End Module
 ";
 
-            var vbProject = VisualBasic.VisualBasicCompilation.Create(
-                "VBProject",
-                references: new[] { MscorlibRef },
-                syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
-            );
+            var vbProject = VisualBasic
+                .VisualBasicCompilation
+                .Create(
+                    "VBProject",
+                    references: new[] { MscorlibRef },
+                    syntaxTrees: new[] { VisualBasic.VisualBasicSyntaxTree.ParseText(vbSource) }
+                );
 
             var csSource =
                 @"
@@ -2786,7 +2790,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2837,7 +2842,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2888,7 +2894,8 @@ public static class XThing
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2926,7 +2933,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -2964,7 +2972,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();
@@ -3006,7 +3015,8 @@ class Program
                 var lambda in tree.GetRoot().DescendantNodes().OfType<LambdaExpressionSyntax>()
             )
             {
-                var reference = lambda.Body
+                var reference = lambda
+                    .Body
                     .DescendantNodesAndSelf()
                     .OfType<IdentifierNameSyntax>()
                     .First();

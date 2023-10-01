@@ -36,7 +36,8 @@ namespace System.ServiceModel
             {
                 if (
                     endpoint.Binding != null
-                    && endpoint.Binding
+                    && endpoint
+                        .Binding
                         .CreateBindingElements()
                         .Find<WebMessageEncodingBindingElement>() != null
                 )

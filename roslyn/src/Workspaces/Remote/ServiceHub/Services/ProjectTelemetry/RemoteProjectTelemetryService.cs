@@ -42,8 +42,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 cancellationToken =>
                 {
                     var workspace = GetWorkspace();
-                    var registrationService =
-                        workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+                    var registrationService = workspace
+                        .Services
+                        .GetRequiredService<ISolutionCrawlerRegistrationService>();
                     var analyzerProvider = new RemoteProjectTelemetryIncrementalAnalyzerProvider(
                         _callback,
                         callbackId

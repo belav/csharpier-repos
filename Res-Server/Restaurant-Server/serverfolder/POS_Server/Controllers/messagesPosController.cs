@@ -36,7 +36,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var itemList = entity.messagesPos
+                    var itemList = entity
+                        .messagesPos
                         .Select(
                             S =>
                                 new messagesPosModel()
@@ -88,7 +89,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var item = entity.messagesPos
+                    var item = entity
+                        .messagesPos
                         .Where(S => S.msgPosId == Id)
                         .Select(
                             S =>
@@ -160,7 +162,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.messagesPos
+                            tmpObject = entity
+                                .messagesPos
                                 .Where(p => p.msgPosId == newObject.msgPosId)
                                 .FirstOrDefault();
                             tmpObject.msgPosId = newObject.msgPosId;
@@ -508,7 +511,8 @@ namespace POS_Server.Controllers
                         List<messagesPos> newlist = new List<messagesPos>();
                         if (msgPosIdList.Count() > 0)
                         {
-                            newlist = entity.messagesPos
+                            newlist = entity
+                                .messagesPos
                                 .Where(m => msgPosIdList.Contains(m.msgPosId))
                                 .ToList();
 
@@ -592,7 +596,8 @@ namespace POS_Server.Controllers
                     DateTime datenow = cc.AddOffsetTodate(DateTime.Now);
                     entity.SaveChanges();
                     datenow = cc.AddOffsetTodate(DateTime.Now);
-                    var row = entity.messagesPos
+                    var row = entity
+                        .messagesPos
                         .Where(m => m.msgPosId == msgPosId)
                         .FirstOrDefault();
                     row.isReaded = true;

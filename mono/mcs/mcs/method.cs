@@ -853,11 +853,10 @@ namespace Mono.CSharp
             }
             else if (ReturnType.HasDynamicElement)
             {
-                Module.PredefinedAttributes.Dynamic.EmitAttribute(
-                    CreateReturnBuilder().Builder,
-                    ReturnType,
-                    Location
-                );
+                Module
+                    .PredefinedAttributes
+                    .Dynamic
+                    .EmitAttribute(CreateReturnBuilder().Builder, ReturnType, Location);
             }
             else if (ReturnType is ReadOnlyReferenceContainer)
             {
@@ -866,11 +865,10 @@ namespace Mono.CSharp
 
             if (ReturnType.HasNamedTupleElement)
             {
-                Module.PredefinedAttributes.TupleElementNames.EmitAttribute(
-                    CreateReturnBuilder().Builder,
-                    ReturnType,
-                    Location
-                );
+                Module
+                    .PredefinedAttributes
+                    .TupleElementNames
+                    .EmitAttribute(CreateReturnBuilder().Builder, ReturnType, Location);
             }
 
             if (OptAttributes != null)
@@ -1327,10 +1325,12 @@ namespace Mono.CSharp
                     INamedBlockVariable variable = null;
                     block.GetLocalName(type_argument_name, block, ref variable);
                     if (variable != null)
-                        variable.Block.Error_AlreadyDeclaredTypeParameter(
-                            type_argument_name,
-                            variable.Location
-                        );
+                        variable
+                            .Block
+                            .Error_AlreadyDeclaredTypeParameter(
+                                type_argument_name,
+                                variable.Location
+                            );
                 }
 
                 if (parent_tparams != null)
@@ -1538,15 +1538,18 @@ namespace Mono.CSharp
                     // Using container location because the interface can be implemented
                     // by base class
                     var tp = (tparams[i].MemberDefinition as MemberCore) ?? container;
-                    container.Compiler.Report.Error(
-                        425,
-                        tp.Location,
-                        "The constraints for type parameter `{0}' of method `{1}' must match the constraints for type parameter `{2}' of interface method `{3}'. Consider using an explicit interface implementation instead",
-                        tparams[i].GetSignatureForError(),
-                        method.GetSignatureForError(),
-                        base_tparams[i].GetSignatureForError(),
-                        baseMethod.GetSignatureForError()
-                    );
+                    container
+                        .Compiler
+                        .Report
+                        .Error(
+                            425,
+                            tp.Location,
+                            "The constraints for type parameter `{0}' of method `{1}' must match the constraints for type parameter `{2}' of interface method `{3}'. Consider using an explicit interface implementation instead",
+                            tparams[i].GetSignatureForError(),
+                            method.GetSignatureForError(),
+                            base_tparams[i].GetSignatureForError(),
+                            baseMethod.GetSignatureForError()
+                        );
 
                     return false;
                 }
@@ -2209,11 +2212,9 @@ namespace Mono.CSharp
                 | MethodAttributes.RTSpecialName
                 | MethodAttributes.SpecialName;
 
-            ConstructorBuilder = Parent.TypeBuilder.DefineConstructor(
-                ca,
-                CallingConventions,
-                parameters.GetMetaInfo()
-            );
+            ConstructorBuilder = Parent
+                .TypeBuilder
+                .DefineConstructor(ca, CallingConventions, parameters.GetMetaInfo());
 
             spec = new MethodSpec(
                 MemberKind.Constructor,
@@ -2536,39 +2537,48 @@ namespace Mono.CSharp
                     {
                         if (member is PropertyBase)
                         {
-                            container.Compiler.Report.Error(
-                                550,
-                                method.Location,
-                                "`{0}' is an accessor not found in interface member `{1}{2}'",
-                                method.GetSignatureForError(),
-                                member.InterfaceType.GetSignatureForError(),
-                                member
-                                    .GetSignatureForError()
-                                    .Substring(member.GetSignatureForError().LastIndexOf('.'))
-                            );
+                            container
+                                .Compiler
+                                .Report
+                                .Error(
+                                    550,
+                                    method.Location,
+                                    "`{0}' is an accessor not found in interface member `{1}{2}'",
+                                    method.GetSignatureForError(),
+                                    member.InterfaceType.GetSignatureForError(),
+                                    member
+                                        .GetSignatureForError()
+                                        .Substring(member.GetSignatureForError().LastIndexOf('.'))
+                                );
                         }
                         else
                         {
-                            container.Compiler.Report.Error(
-                                539,
-                                method.Location,
-                                "`{0}.{1}' in explicit interface declaration is not a member of interface",
-                                member.InterfaceType.GetSignatureForError(),
-                                member.ShortName
-                            );
+                            container
+                                .Compiler
+                                .Report
+                                .Error(
+                                    539,
+                                    method.Location,
+                                    "`{0}.{1}' in explicit interface declaration is not a member of interface",
+                                    member.InterfaceType.GetSignatureForError(),
+                                    member.ShortName
+                                );
                         }
                         return false;
                     }
                     if (implementing.IsAccessor && !method.IsAccessor)
                     {
                         container.Compiler.Report.SymbolRelatedToPreviousError(implementing);
-                        container.Compiler.Report.Error(
-                            683,
-                            method.Location,
-                            "`{0}' explicit method implementation cannot implement `{1}' because it is an accessor",
-                            member.GetSignatureForError(),
-                            implementing.GetSignatureForError()
-                        );
+                        container
+                            .Compiler
+                            .Report
+                            .Error(
+                                683,
+                                method.Location,
+                                "`{0}' explicit method implementation cannot implement `{1}' because it is an accessor",
+                                member.GetSignatureForError(),
+                                implementing.GetSignatureForError()
+                            );
                         return false;
                     }
                 }
@@ -2580,33 +2590,41 @@ namespace Mono.CSharp
                         {
                             if (implementing.IsAccessor)
                             {
-                                container.Compiler.Report.SymbolRelatedToPreviousError(
-                                    implementing
-                                );
-                                container.Compiler.Report.Error(
-                                    470,
-                                    method.Location,
-                                    "Method `{0}' cannot implement interface accessor `{1}'",
-                                    method.GetSignatureForError(),
-                                    TypeManager.CSharpSignature(implementing)
-                                );
+                                container
+                                    .Compiler
+                                    .Report
+                                    .SymbolRelatedToPreviousError(implementing);
+                                container
+                                    .Compiler
+                                    .Report
+                                    .Error(
+                                        470,
+                                        method.Location,
+                                        "Method `{0}' cannot implement interface accessor `{1}'",
+                                        method.GetSignatureForError(),
+                                        TypeManager.CSharpSignature(implementing)
+                                    );
                             }
                         }
                         else if (implementing.DeclaringType.IsInterface)
                         {
                             if (!implementing.IsAccessor)
                             {
-                                container.Compiler.Report.SymbolRelatedToPreviousError(
-                                    implementing
-                                );
-                                container.Compiler.Report.Error(
-                                    686,
-                                    method.Location,
-                                    "Accessor `{0}' cannot implement interface member `{1}' for type `{2}'. Use an explicit interface implementation",
-                                    method.GetSignatureForError(),
-                                    TypeManager.CSharpSignature(implementing),
-                                    container.GetSignatureForError()
-                                );
+                                container
+                                    .Compiler
+                                    .Report
+                                    .SymbolRelatedToPreviousError(implementing);
+                                container
+                                    .Compiler
+                                    .Report
+                                    .Error(
+                                        686,
+                                        method.Location,
+                                        "Accessor `{0}' cannot implement interface member `{1}' for type `{2}'. Use an explicit interface implementation",
+                                        method.GetSignatureForError(),
+                                        TypeManager.CSharpSignature(implementing),
+                                        container.GetSignatureForError()
+                                    );
                             }
                             else
                             {
@@ -2618,16 +2636,20 @@ namespace Mono.CSharp
                                     && (pm.ModFlags & Modifiers.PUBLIC) == 0
                                 )
                                 {
-                                    container.Compiler.Report.SymbolRelatedToPreviousError(
-                                        implementing
-                                    );
-                                    container.Compiler.Report.Error(
-                                        277,
-                                        method.Location,
-                                        "Accessor `{0}' must be declared public to implement interface member `{1}'",
-                                        method.GetSignatureForError(),
-                                        implementing.GetSignatureForError()
-                                    );
+                                    container
+                                        .Compiler
+                                        .Report
+                                        .SymbolRelatedToPreviousError(implementing);
+                                    container
+                                        .Compiler
+                                        .Report
+                                        .Error(
+                                            277,
+                                            method.Location,
+                                            "Accessor `{0}' must be declared public to implement interface member `{1}'",
+                                            method.GetSignatureForError(),
+                                            implementing.GetSignatureForError()
+                                        );
                                 }
                             }
                         }
@@ -2639,13 +2661,16 @@ namespace Mono.CSharp
                             )
                         )
                         {
-                            container.Compiler.Report.Error(
-                                8141,
-                                method.Location,
-                                "The tuple element names in the signature type of member `{0}' must match the tuple element names of interface member `{1}''",
-                                member.GetSignatureForError(),
-                                implementing.GetSignatureForError()
-                            );
+                            container
+                                .Compiler
+                                .Report
+                                .Error(
+                                    8141,
+                                    method.Location,
+                                    "The tuple element names in the signature type of member `{0}' must match the tuple element names of interface member `{1}''",
+                                    member.GetSignatureForError(),
+                                    implementing.GetSignatureForError()
+                                );
                         }
 
                         var p_member = method as IParametersMember;
@@ -2656,13 +2681,16 @@ namespace Mono.CSharp
                             && !NamedTupleSpec.CheckOverrideName(p_member, p_implementing)
                         )
                         {
-                            container.Compiler.Report.Error(
-                                8141,
-                                method.Location,
-                                "The tuple element names in the signature type of member `{0}' must match the tuple element names of interface member `{1}''",
-                                member.GetSignatureForError(),
-                                implementing.GetSignatureForError()
-                            );
+                            container
+                                .Compiler
+                                .Report
+                                .Error(
+                                    8141,
+                                    method.Location,
+                                    "The tuple element names in the signature type of member `{0}' must match the tuple element names of interface member `{1}''",
+                                    member.GetSignatureForError(),
+                                    implementing.GetSignatureForError()
+                                );
                         }
                     }
                 }
@@ -2683,25 +2711,31 @@ namespace Mono.CSharp
                     if (method.ParameterInfo.HasParams && !implementing.Parameters.HasParams)
                     {
                         container.Compiler.Report.SymbolRelatedToPreviousError(implementing);
-                        container.Compiler.Report.Error(
-                            466,
-                            method.Location,
-                            "`{0}': the explicit interface implementation cannot introduce the params modifier",
-                            method.GetSignatureForError()
-                        );
+                        container
+                            .Compiler
+                            .Report
+                            .Error(
+                                466,
+                                method.Location,
+                                "`{0}': the explicit interface implementation cannot introduce the params modifier",
+                                method.GetSignatureForError()
+                            );
                     }
 
                     if (ambig_iface_method != null)
                     {
                         container.Compiler.Report.SymbolRelatedToPreviousError(ambig_iface_method);
                         container.Compiler.Report.SymbolRelatedToPreviousError(implementing);
-                        container.Compiler.Report.Warning(
-                            473,
-                            2,
-                            method.Location,
-                            "Explicit interface implementation `{0}' matches more than one interface member. Consider using a non-explicit implementation instead",
-                            method.GetSignatureForError()
-                        );
+                        container
+                            .Compiler
+                            .Report
+                            .Warning(
+                                473,
+                                2,
+                                method.Location,
+                                "Explicit interface implementation `{0}' matches more than one interface member. Consider using a non-explicit implementation instead",
+                                method.GetSignatureForError()
+                            );
                     }
                 }
                 else
@@ -2724,9 +2758,10 @@ namespace Mono.CSharp
                             optional
                             && (
                                 container.Interfaces == null
-                                || !container.Definition.Interfaces.Contains(
-                                    implementing.DeclaringType
-                                )
+                                || !container
+                                    .Definition
+                                    .Interfaces
+                                    .Contains(implementing.DeclaringType)
                             )
                         )
                         {
@@ -2820,10 +2855,9 @@ namespace Mono.CSharp
             if (!member.IsExplicitImpl)
                 return;
 
-            container.TypeBuilder.DefineMethodOverride(
-                builder,
-                (MethodInfo)implementing.GetMetaInfo()
-            );
+            container
+                .TypeBuilder
+                .DefineMethodOverride(builder, (MethodInfo)implementing.GetMetaInfo());
         }
 
         //
@@ -2835,11 +2869,9 @@ namespace Mono.CSharp
             if (builder != null)
                 throw new InternalErrorException();
 
-            builder = container.TypeBuilder.DefineMethod(
-                full_name,
-                flags,
-                method.CallingConventions
-            );
+            builder = container
+                .TypeBuilder
+                .DefineMethod(full_name, flags, method.CallingConventions);
             return builder;
         }
 
@@ -3142,10 +3174,9 @@ namespace Mono.CSharp
 
             if (a.Target == AttributeTargets.Method)
             {
-                method_data.MethodBuilder.SetCustomAttribute(
-                    (ConstructorInfo)ctor.GetMetaInfo(),
-                    cdata
-                );
+                method_data
+                    .MethodBuilder
+                    .SetCustomAttribute((ConstructorInfo)ctor.GetMetaInfo(), cdata);
                 return;
             }
 
@@ -3194,9 +3225,10 @@ namespace Mono.CSharp
             method_data.Emit(parent);
 
             if ((ModFlags & Modifiers.COMPILER_GENERATED) != 0 && !Parent.IsCompilerGenerated)
-                Module.PredefinedAttributes.CompilerGenerated.EmitAttribute(
-                    method_data.MethodBuilder
-                );
+                Module
+                    .PredefinedAttributes
+                    .CompilerGenerated
+                    .EmitAttribute(method_data.MethodBuilder);
             if (((ModFlags & Modifiers.DEBUGGER_HIDDEN) != 0))
                 Module.PredefinedAttributes.DebuggerHidden.EmitAttribute(method_data.MethodBuilder);
 
@@ -3206,11 +3238,10 @@ namespace Mono.CSharp
             }
             else if (ReturnType.HasDynamicElement)
             {
-                Module.PredefinedAttributes.Dynamic.EmitAttribute(
-                    CreateReturnBuilder().Builder,
-                    ReturnType,
-                    Location
-                );
+                Module
+                    .PredefinedAttributes
+                    .Dynamic
+                    .EmitAttribute(CreateReturnBuilder().Builder, ReturnType, Location);
             }
             else if (ReturnType is ReadOnlyReferenceContainer)
             {
@@ -3219,11 +3250,10 @@ namespace Mono.CSharp
 
             if (ReturnType.HasNamedTupleElement)
             {
-                Module.PredefinedAttributes.TupleElementNames.EmitAttribute(
-                    CreateReturnBuilder().Builder,
-                    ReturnType,
-                    Location
-                );
+                Module
+                    .PredefinedAttributes
+                    .TupleElementNames
+                    .EmitAttribute(CreateReturnBuilder().Builder, ReturnType, Location);
             }
 
             if (OptAttributes != null)
@@ -3467,17 +3497,21 @@ namespace Mono.CSharp
 
             // imlicit and explicit operator of same types are not allowed
             if (OperatorType == OpType.Explicit)
-                Parent.MemberCache.CheckExistingMembersOverloads(
-                    this,
-                    GetMetadataName(OpType.Implicit),
-                    parameters
-                );
+                Parent
+                    .MemberCache
+                    .CheckExistingMembersOverloads(
+                        this,
+                        GetMetadataName(OpType.Implicit),
+                        parameters
+                    );
             else if (OperatorType == OpType.Implicit)
-                Parent.MemberCache.CheckExistingMembersOverloads(
-                    this,
-                    GetMetadataName(OpType.Explicit),
-                    parameters
-                );
+                Parent
+                    .MemberCache
+                    .CheckExistingMembersOverloads(
+                        this,
+                        GetMetadataName(OpType.Explicit),
+                        parameters
+                    );
 
             TypeSpec declaring_type = Parent.PartialContainer.CurrentType;
             TypeSpec return_type = MemberType;

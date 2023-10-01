@@ -30,15 +30,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Formatting
             var defaultOptions = CodeCleanupOptions.GetDefault(document.Project.Services);
             var fallbackOptions = defaultOptions with
             {
-                FormattingOptions = defaultOptions.FormattingOptions.With(
-                    new LineFormattingOptions
-                    {
-                        IndentationSize = fallbackLineFormattingOptions.IndentationSize,
-                        TabSize = fallbackLineFormattingOptions.TabSize,
-                        UseTabs = fallbackLineFormattingOptions.UseTabs,
-                        NewLine = fallbackLineFormattingOptions.NewLine,
-                    }
-                )
+                FormattingOptions = defaultOptions
+                    .FormattingOptions
+                    .With(
+                        new LineFormattingOptions
+                        {
+                            IndentationSize = fallbackLineFormattingOptions.IndentationSize,
+                            TabSize = fallbackLineFormattingOptions.TabSize,
+                            UseTabs = fallbackLineFormattingOptions.UseTabs,
+                            NewLine = fallbackLineFormattingOptions.NewLine,
+                        }
+                    )
             };
 
             var cleanupOptions = await document

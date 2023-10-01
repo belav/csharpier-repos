@@ -24,10 +24,9 @@ namespace System.Workflow.Runtime
 
             if (!activityType.IsAssignableFrom(workflowType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "workflowType",
-                    SR2.GetString(SR2.NotAnActivityType)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("workflowType", SR2.GetString(SR2.NotAnActivityType));
             }
 
             this.workflowType = workflowType;

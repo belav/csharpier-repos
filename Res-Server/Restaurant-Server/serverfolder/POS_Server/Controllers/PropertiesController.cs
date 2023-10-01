@@ -34,7 +34,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var propertiesList = entity.properties
+                    var propertiesList = entity
+                        .properties
                         .Select(
                             p =>
                                 new PropertyModel
@@ -58,7 +59,8 @@ namespace POS_Server.Controllers
                             canDelete = false;
 
                             long propertyId = (long)propertiesList[i].propertyId;
-                            var propItems = entity.propertiesItems
+                            var propItems = entity
+                                .propertiesItems
                                 .Where(x => x.propertyId == propertyId)
                                 .Select(b => new { b.name, b.propertyId })
                                 .ToList();
@@ -168,7 +170,8 @@ namespace POS_Server.Controllers
                             if (propertiesList[i].isActive == 1)
                             {
                                 long propertyItemId = (long)propertiesList[i].propertyItemId;
-                                var Itemsprop = entity.itemsProp
+                                var Itemsprop = entity
+                                    .itemsProp
                                     .Where(x => x.propertyItemId == propertyItemId)
                                     .Select(b => new { b.itemPropId })
                                     .FirstOrDefault();
@@ -209,7 +212,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var property = entity.properties
+                    var property = entity
+                        .properties
                         .Where(p => p.propertyId == propertyId)
                         .Select(
                             p =>
@@ -289,7 +293,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpProperty = entity.properties
+                            tmpProperty = entity
+                                .properties
                                 .Where(p => p.propertyId == propertiesObject.propertyId)
                                 .FirstOrDefault();
                             tmpProperty.name = propertiesObject.name;

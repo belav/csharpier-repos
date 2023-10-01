@@ -297,24 +297,28 @@ namespace MonoTests.System.Web.UI.WebControls
         public void InstantiateIn(Control container)
         {
             if (HasHeaderPlaceHolder)
-                container.Controls.Add(
-                    MakePlaceHolder(HeaderPlaceHolderType, Wizard.HeaderPlaceholderId)
-                );
+                container
+                    .Controls
+                    .Add(MakePlaceHolder(HeaderPlaceHolderType, Wizard.HeaderPlaceholderId));
 
             if (HasSideBarPlaceHolder)
-                container.Controls.Add(
-                    MakePlaceHolder(SideBarPlaceHolderType, Wizard.SideBarPlaceholderId)
-                );
+                container
+                    .Controls
+                    .Add(MakePlaceHolder(SideBarPlaceHolderType, Wizard.SideBarPlaceholderId));
 
             if (HasNavigationPlaceHolder)
-                container.Controls.Add(
-                    MakePlaceHolder(NavigationPlaceHolderType, Wizard.NavigationPlaceholderId)
-                );
+                container
+                    .Controls
+                    .Add(
+                        MakePlaceHolder(NavigationPlaceHolderType, Wizard.NavigationPlaceholderId)
+                    );
 
             if (HasWizardStepPlaceHolder)
-                container.Controls.Add(
-                    MakePlaceHolder(WizardStepPlaceHolderType, Wizard.WizardStepPlaceholderId)
-                );
+                container
+                    .Controls
+                    .Add(
+                        MakePlaceHolder(WizardStepPlaceHolderType, Wizard.WizardStepPlaceholderId)
+                    );
         }
 
         Control MakePlaceHolder(Type type, string id)

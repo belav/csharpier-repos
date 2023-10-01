@@ -31,12 +31,11 @@ namespace System.Runtime.InteropServices
             int wideCharLen
         )
         {
-            return System.Text.Encoding.UTF8.GetChars(
-                multiByteStr,
-                multiByteLen,
-                wideCharStr,
-                wideCharLen
-            );
+            return System
+                .Text
+                .Encoding
+                .UTF8
+                .GetChars(multiByteStr, multiByteLen, wideCharStr, wideCharLen);
         }
 
         public static unsafe int ConvertWideCharToMultiByte(
@@ -48,12 +47,11 @@ namespace System.Runtime.InteropServices
             bool throwOnUnmappableChar
         )
         {
-            return System.Text.Encoding.UTF8.GetBytes(
-                wideCharStr,
-                wideCharLen,
-                multiByteStr,
-                multiByteLen
-            );
+            return System
+                .Text
+                .Encoding
+                .UTF8
+                .GetBytes(wideCharStr, wideCharLen, multiByteStr, multiByteLen);
         }
 
         public static unsafe int ConvertWideCharToMultiByte(
@@ -63,12 +61,11 @@ namespace System.Runtime.InteropServices
             int multiByteLen
         )
         {
-            return System.Text.Encoding.UTF8.GetBytes(
-                wideCharStr,
-                wideCharLen,
-                multiByteStr,
-                multiByteLen
-            );
+            return System
+                .Text
+                .Encoding
+                .UTF8
+                .GetBytes(wideCharStr, wideCharLen, multiByteStr, multiByteLen);
         }
 
         public static unsafe int GetByteCount(char* wideCharStr, int wideCharLen)

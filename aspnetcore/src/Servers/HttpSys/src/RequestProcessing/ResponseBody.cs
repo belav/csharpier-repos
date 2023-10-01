@@ -136,13 +136,9 @@ internal sealed partial class ResponseBody : Stream
             BuildDataChunks(ref allocator, endOfRequest, data, out dataChunks, out pinnedBuffers);
             if (!started)
             {
-                statusCode = _requestContext.Response.SendHeaders(
-                    ref allocator,
-                    dataChunks,
-                    null,
-                    flags,
-                    false
-                );
+                statusCode = _requestContext
+                    .Response
+                    .SendHeaders(ref allocator, dataChunks, null, flags, false);
             }
             else
             {
@@ -285,10 +281,9 @@ internal sealed partial class ResponseBody : Stream
 
         if (addTrailers)
         {
-            _requestContext.Response.SerializeTrailers(
-                ref allocator,
-                out dataChunks[currentChunk++]
-            );
+            _requestContext
+                .Response
+                .SerializeTrailers(ref allocator, out dataChunks[currentChunk++]);
         }
         else if (endOfRequest)
         {
@@ -387,13 +382,9 @@ internal sealed partial class ResponseBody : Stream
         {
             if (!started)
             {
-                statusCode = _requestContext.Response.SendHeaders(
-                    ref allocator,
-                    null,
-                    asyncResult,
-                    flags,
-                    false
-                );
+                statusCode = _requestContext
+                    .Response
+                    .SendHeaders(ref allocator, null, asyncResult, flags, false);
                 bytesSent = asyncResult.BytesSent;
             }
             else
@@ -748,13 +739,9 @@ internal sealed partial class ResponseBody : Stream
         {
             if (!started)
             {
-                statusCode = _requestContext.Response.SendHeaders(
-                    ref allocator,
-                    null,
-                    asyncResult,
-                    flags,
-                    false
-                );
+                statusCode = _requestContext
+                    .Response
+                    .SendHeaders(ref allocator, null, asyncResult, flags, false);
                 bytesSent = asyncResult.BytesSent;
             }
             else

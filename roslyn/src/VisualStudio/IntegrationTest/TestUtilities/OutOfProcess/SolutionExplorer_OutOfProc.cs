@@ -43,10 +43,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.AddProject(projectName.Name, projectTemplate, languageName);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void AddProjectReference(
@@ -55,10 +54,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.AddProjectReference(fromProjectName.Name, toProjectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void AddMetadataReference(
@@ -67,10 +65,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         )
         {
             _inProc.AddMetadataReference(fullyQualifiedAssemblyName.Name, projectName.Name);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void CleanUpOpenSolution() => _inProc.CleanUpOpenSolution();
@@ -100,10 +97,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         {
             // Wireup to open files can happen asynchronously in the case we're being notified of changes on background threads.
             _inProc.OpenFile(project.Name, fileName);
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         public void CloseDesignerFile(
@@ -126,10 +122,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc.SaveAll();
 
             // Wait for async save operations to complete before proceeding
-            _instance.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.Workspace
-            );
+            _instance
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.Workspace);
         }
 
         /// <summary>

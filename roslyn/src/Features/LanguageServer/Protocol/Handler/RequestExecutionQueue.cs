@@ -316,7 +316,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             {
                 while (!_queue._queue.IsEmpty)
                 {
-                    var (_, cancellationToken) = await _queue._queue
+                    var (_, cancellationToken) = await _queue
+                        ._queue
                         .DequeueAsync()
                         .ConfigureAwait(false);
                     if (!cancellationToken.IsCancellationRequested)

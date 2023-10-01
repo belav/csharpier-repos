@@ -70,29 +70,33 @@ namespace System.DirectoryServices.AccountManagement
                 );
 
                 // Create a resource manager
-                f = Interop.Authz.AuthzInitializeResourceManager(
-                    Interop.Authz.AUTHZ_RM_FLAG_NO_AUDIT,
-                    IntPtr.Zero,
-                    IntPtr.Zero,
-                    IntPtr.Zero,
-                    null,
-                    out pResManager
-                );
+                f = Interop
+                    .Authz
+                    .AuthzInitializeResourceManager(
+                        Interop.Authz.AUTHZ_RM_FLAG_NO_AUDIT,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        null,
+                        out pResManager
+                    );
 
                 if (f)
                 {
                     GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthZSet", "Getting ctx from SID");
 
                     // Construct a context for the user based on the user's SID
-                    f = Interop.Authz.AuthzInitializeContextFromSid(
-                        0, // default flags
-                        _psUserSid.DangerousGetHandle(),
-                        pResManager,
-                        IntPtr.Zero,
-                        luid,
-                        IntPtr.Zero,
-                        out pClientContext
-                    );
+                    f = Interop
+                        .Authz
+                        .AuthzInitializeContextFromSid(
+                            0, // default flags
+                            _psUserSid.DangerousGetHandle(),
+                            pResManager,
+                            IntPtr.Zero,
+                            luid,
+                            IntPtr.Zero,
+                            out pClientContext
+                        );
 
                     if (f)
                     {
@@ -105,13 +109,15 @@ namespace System.DirectoryServices.AccountManagement
                         );
 
                         // Extract the group SIDs from the user's context.  Determine the size of the buffer we need.
-                        f = Interop.Authz.AuthzGetInformationFromContext(
-                            pClientContext,
-                            2, // AuthzContextInfoGroupsSids
-                            0,
-                            out bufferSize,
-                            IntPtr.Zero
-                        );
+                        f = Interop
+                            .Authz
+                            .AuthzGetInformationFromContext(
+                                pClientContext,
+                                2, // AuthzContextInfoGroupsSids
+                                0,
+                                out bufferSize,
+                                IntPtr.Zero
+                            );
                         if (
                             !f
                             && (bufferSize > 0)
@@ -131,13 +137,15 @@ namespace System.DirectoryServices.AccountManagement
                             pBuffer = Marshal.AllocHGlobal(bufferSize);
 
                             // Extract the group SIDs from the user's context, into our buffer.0
-                            f = Interop.Authz.AuthzGetInformationFromContext(
-                                pClientContext,
-                                2, // AuthzContextInfoGroupsSids
-                                bufferSize,
-                                out bufferSize,
-                                pBuffer
-                            );
+                            f = Interop
+                                .Authz
+                                .AuthzGetInformationFromContext(
+                                    pClientContext,
+                                    2, // AuthzContextInfoGroupsSids
+                                    bufferSize,
+                                    out bufferSize,
+                                    pBuffer
+                                );
 
                             if (f)
                             {
@@ -346,11 +354,9 @@ namespace System.DirectoryServices.AccountManagement
                     // Is the SID from the same domain as the user?
                     bool sameDomain = false;
 
-                    bool success = Interop.Advapi32.EqualDomainSid(
-                        _psUserSid.DangerousGetHandle(),
-                        pSid,
-                        ref sameDomain
-                    );
+                    bool success = Interop
+                        .Advapi32
+                        .EqualDomainSid(_psUserSid.DangerousGetHandle(), pSid, ref sameDomain);
 
                     // if failed, psUserSid must not be a domain sid
                     if (!success)
@@ -413,11 +419,13 @@ namespace System.DirectoryServices.AccountManagement
                     // groups for domain users.
                     bool inMachineDomain = false;
                     if (
-                        Interop.Advapi32.EqualDomainSid(
-                            _psMachineSid.DangerousGetHandle(),
-                            pSid,
-                            ref inMachineDomain
-                        )
+                        Interop
+                            .Advapi32
+                            .EqualDomainSid(
+                                _psMachineSid.DangerousGetHandle(),
+                                pSid,
+                                ref inMachineDomain
+                            )
                     )
                         if (inMachineDomain)
                         {
@@ -452,11 +460,13 @@ namespace System.DirectoryServices.AccountManagement
                     // or (2) it's a domain user that's a member of a group on the local machine.  Pass the default machine context options
                     // If we initially targeted AD then those options will not be valid for the machine store.
 
-                    PrincipalContext ctx = SDSCache.LocalMachine.GetContext(
-                        sidIssuerName,
-                        _credentials,
-                        DefaultContextOptions.MachineDefaultContextOption
-                    );
+                    PrincipalContext ctx = SDSCache
+                        .LocalMachine
+                        .GetContext(
+                            sidIssuerName,
+                            _credentials,
+                            DefaultContextOptions.MachineDefaultContextOption
+                        );
                     SecurityIdentifier sidObj = new SecurityIdentifier(sid, 0);
                     group = GroupPrincipal.FindByIdentity(ctx, IdentityType.Sid, sidObj.ToString());
                 }
@@ -473,11 +483,9 @@ namespace System.DirectoryServices.AccountManagement
 
                     // It's a domain group, because it's a domain user and the SID issuer isn't the local machine
 
-                    PrincipalContext ctx = SDSCache.Domain.GetContext(
-                        sidIssuerName,
-                        _credentials,
-                        _contextOptions
-                    );
+                    PrincipalContext ctx = SDSCache
+                        .Domain
+                        .GetContext(sidIssuerName, _credentials, _contextOptions);
 
                     // Retrieve the group.  We'd normally just do a Group.FindByIdentity here, but
                     // because the AZMan API can return "old" SIDs, we also need to check the SID
@@ -545,11 +553,9 @@ namespace System.DirectoryServices.AccountManagement
                     bool sameDomain = false;
                     if (
                         Utils.ClassifySID(pSid) == SidType.RealObject
-                        && Interop.Advapi32.EqualDomainSid(
-                            _psUserSid.DangerousGetHandle(),
-                            pSid,
-                            ref sameDomain
-                        )
+                        && Interop
+                            .Advapi32
+                            .EqualDomainSid(_psUserSid.DangerousGetHandle(), pSid, ref sameDomain)
                     )
                     {
                         if (sameDomain)

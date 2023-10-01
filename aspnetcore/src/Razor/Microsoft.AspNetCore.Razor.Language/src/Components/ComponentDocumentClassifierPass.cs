@@ -79,12 +79,14 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
         if (char.IsLower(computedClass, 0))
         {
             // We don't allow component names to start with a lowercase character.
-            documentNode.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_ComponentNamesCannotStartWithLowerCase(
-                    computedClass,
-                    documentNode.Source
-                )
-            );
+            documentNode
+                .Diagnostics
+                .Add(
+                    ComponentDiagnosticFactory.Create_ComponentNamesCannotStartWithLowerCase(
+                        computedClass,
+                        documentNode.Source
+                    )
+                );
         }
 
         if (MangleClassNames)
@@ -131,13 +133,15 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
                     continue;
                 }
 
-                @class.TypeParameters.Add(
-                    new TypeParameter()
-                    {
-                        ParameterName = typeParamNode.Tokens.First().Content,
-                        Constraints = typeParamNode.Tokens.Skip(1).FirstOrDefault()?.Content
-                    }
-                );
+                @class
+                    .TypeParameters
+                    .Add(
+                        new TypeParameter()
+                        {
+                            ParameterName = typeParamNode.Tokens.First().Content,
+                            Constraints = typeParamNode.Tokens.Skip(1).FirstOrDefault()?.Content
+                        }
+                    );
             }
 
             method.ReturnType = "void";
@@ -147,13 +151,15 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
             method.Modifiers.Add("override");
 
             method.Parameters.Clear();
-            method.Parameters.Add(
-                new MethodParameter()
-                {
-                    ParameterName = ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                    TypeName = ComponentsApi.RenderTreeBuilder.FullTypeName,
-                }
-            );
+            method
+                .Parameters
+                .Add(
+                    new MethodParameter()
+                    {
+                        ParameterName = ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                        TypeName = ComponentsApi.RenderTreeBuilder.FullTypeName,
+                    }
+                );
         }
     }
 

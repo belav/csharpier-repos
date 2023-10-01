@@ -481,16 +481,19 @@ namespace System.Web.SessionState
             finally
             {
                 // protected from ThreadAbortEx
-                object existingEntry = HttpRuntime.Cache.InternalCache.Add(
-                    key,
-                    state,
-                    new CacheInsertOptions()
-                    {
-                        SlidingExpiration = new TimeSpan(0, timeout, 0),
-                        Priority = CacheItemPriority.NotRemovable,
-                        OnRemovedCallback = _callback
-                    }
-                );
+                object existingEntry = HttpRuntime
+                    .Cache
+                    .InternalCache
+                    .Add(
+                        key,
+                        state,
+                        new CacheInsertOptions()
+                        {
+                            SlidingExpiration = new TimeSpan(0, timeout, 0),
+                            Priority = CacheItemPriority.NotRemovable,
+                            OnRemovedCallback = _callback
+                        }
+                    );
                 if (existingEntry == null)
                 {
                     PerfCounters.IncrementCounter(AppPerfCounter.SESSIONS_TOTAL);

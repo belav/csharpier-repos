@@ -3755,10 +3755,9 @@ class Program{
             editorOptions.SetOptionValue(DefaultOptions.ConvertTabsToSpacesOptionId, !useTabs);
 
             var commandHandler = workspace.GetService<FormatCommandHandler>();
-            var typedChar = textBuffer.CurrentSnapshot.GetText(
-                subjectDocument.CursorPosition.Value - 1,
-                1
-            );
+            var typedChar = textBuffer
+                .CurrentSnapshot
+                .GetText(subjectDocument.CursorPosition.Value - 1, 1);
             commandHandler.ExecuteCommand(
                 new TypeCharCommandArgs(subjectDocument.GetTextView(), textBuffer, typedChar[0]),
                 () => { },
@@ -3862,9 +3861,9 @@ class Program{
             Assert.Equal(tokenKind, endToken.Kind());
 
             var options = new IndentationOptions(
-                CSharpSyntaxFormattingOptions.Default.With(
-                    new LineFormattingOptions { UseTabs = useTabs }
-                )
+                CSharpSyntaxFormattingOptions
+                    .Default
+                    .With(new LineFormattingOptions { UseTabs = useTabs })
             );
 
             var formatter = new CSharpSmartTokenFormatter(

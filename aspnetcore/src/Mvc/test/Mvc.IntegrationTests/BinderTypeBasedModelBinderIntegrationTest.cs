@@ -314,11 +314,13 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
             var address = new Address() { Street = "SomeStreet" };
 
-            bindingContext.ModelState.SetModelValue(
-                ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
-                new string[] { address.Street },
-                address.Street
-            );
+            bindingContext
+                .ModelState
+                .SetModelValue(
+                    ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
+                    new string[] { address.Street },
+                    address.Street
+                );
 
             bindingContext.Result = ModelBindingResult.Success(address);
             return Task.CompletedTask;
@@ -343,11 +345,13 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
             var address = new Address3 { Street = "SomeStreet" };
 
-            bindingContext.ModelState.SetModelValue(
-                ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
-                new string[] { address.Street },
-                address.Street
-            );
+            bindingContext
+                .ModelState
+                .SetModelValue(
+                    ModelNames.CreatePropertyModelName(bindingContext.ModelName, "Street"),
+                    new string[] { address.Street },
+                    address.Street
+                );
 
             bindingContext.Result = ModelBindingResult.Success(address);
             return Task.CompletedTask;
@@ -365,11 +369,9 @@ public class BinderTypeBasedModelBinderIntegrationTest
             Debug.Assert(bindingContext.Result == ModelBindingResult.Failed());
 
             var model = "Success";
-            bindingContext.ModelState.SetModelValue(
-                bindingContext.ModelName,
-                new string[] { model },
-                model
-            );
+            bindingContext
+                .ModelState
+                .SetModelValue(bindingContext.ModelName, new string[] { model }, model);
 
             bindingContext.Result = ModelBindingResult.Success(model);
             return Task.CompletedTask;

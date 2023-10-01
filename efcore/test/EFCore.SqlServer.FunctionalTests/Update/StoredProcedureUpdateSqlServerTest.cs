@@ -439,9 +439,9 @@ END
 
 SET NOCOUNT ON;
 EXEC [Entity_Update] @p0, @p1 OUTPUT, @p2, @p3 OUTPUT;",
-            TestSqlLoggerFactory.Sql.Substring(
-                TestSqlLoggerFactory.Sql.IndexOf("@p2", StringComparison.Ordinal)
-            ),
+            TestSqlLoggerFactory
+                .Sql
+                .Substring(TestSqlLoggerFactory.Sql.IndexOf("@p2", StringComparison.Ordinal)),
             ignoreLineEndingDifferences: true
         );
     }
@@ -467,9 +467,9 @@ END
 
 SET NOCOUNT ON;
 EXEC [Entity_Update] @p0, @p1, @p2, @p3 OUTPUT, @p4 OUTPUT;",
-            TestSqlLoggerFactory.Sql.Substring(
-                TestSqlLoggerFactory.Sql.IndexOf("@p2", StringComparison.Ordinal)
-            ),
+            TestSqlLoggerFactory
+                .Sql
+                .Substring(TestSqlLoggerFactory.Sql.IndexOf("@p2", StringComparison.Ordinal)),
             ignoreLineEndingDifferences: true
         );
     }

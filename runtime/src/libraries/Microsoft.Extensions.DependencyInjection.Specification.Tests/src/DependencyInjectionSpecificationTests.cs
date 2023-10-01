@@ -151,28 +151,36 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             using (var scope1 = provider.CreateScope())
             {
-                var serviceWithProvider =
-                    scope1.ServiceProvider.GetRequiredService<ClassWithServiceProvider>();
-                fakeServiceFromScope1 =
-                    serviceWithProvider.ServiceProvider.GetRequiredService<IFakeService>();
+                var serviceWithProvider = scope1
+                    .ServiceProvider
+                    .GetRequiredService<ClassWithServiceProvider>();
+                fakeServiceFromScope1 = serviceWithProvider
+                    .ServiceProvider
+                    .GetRequiredService<IFakeService>();
 
-                serviceWithProvider =
-                    scope1.ServiceProvider.GetRequiredService<ClassWithServiceProvider>();
-                otherFakeServiceFromScope1 =
-                    serviceWithProvider.ServiceProvider.GetRequiredService<IFakeService>();
+                serviceWithProvider = scope1
+                    .ServiceProvider
+                    .GetRequiredService<ClassWithServiceProvider>();
+                otherFakeServiceFromScope1 = serviceWithProvider
+                    .ServiceProvider
+                    .GetRequiredService<IFakeService>();
             }
 
             using (var scope2 = provider.CreateScope())
             {
-                var serviceWithProvider =
-                    scope2.ServiceProvider.GetRequiredService<ClassWithServiceProvider>();
-                fakeServiceFromScope2 =
-                    serviceWithProvider.ServiceProvider.GetRequiredService<IFakeService>();
+                var serviceWithProvider = scope2
+                    .ServiceProvider
+                    .GetRequiredService<ClassWithServiceProvider>();
+                fakeServiceFromScope2 = serviceWithProvider
+                    .ServiceProvider
+                    .GetRequiredService<IFakeService>();
 
-                serviceWithProvider =
-                    scope2.ServiceProvider.GetRequiredService<ClassWithServiceProvider>();
-                otherFakeServiceFromScope2 =
-                    serviceWithProvider.ServiceProvider.GetRequiredService<IFakeService>();
+                serviceWithProvider = scope2
+                    .ServiceProvider
+                    .GetRequiredService<ClassWithServiceProvider>();
+                otherFakeServiceFromScope2 = serviceWithProvider
+                    .ServiceProvider
+                    .GetRequiredService<IFakeService>();
             }
 
             // Assert
@@ -465,10 +473,12 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService =
-                    outerScope.ServiceProvider.GetService<IFakeScopedService>();
-                var innerScopedService =
-                    innerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var outerScopedService = outerScope
+                    .ServiceProvider
+                    .GetService<IFakeScopedService>();
+                var innerScopedService = innerScope
+                    .ServiceProvider
+                    .GetService<IFakeScopedService>();
 
                 // Assert
                 Assert.NotNull(outerScopedService);
@@ -658,10 +668,12 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService =
-                    outerScope.ServiceProvider.GetService<IFakeScopedService>();
-                var innerScopedService =
-                    innerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var outerScopedService = outerScope
+                    .ServiceProvider
+                    .GetService<IFakeScopedService>();
+                var innerScopedService = innerScope
+                    .ServiceProvider
+                    .GetService<IFakeScopedService>();
 
                 // Assert
                 Assert.NotSame(outerScopedService, innerScopedService);

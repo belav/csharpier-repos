@@ -108,8 +108,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                     using (var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) })
                     {
                         var response = await httpClient.GetAsync(GetEndpoint(context));
-                        context.Response.ContentType =
-                            response.Content.Headers.ContentType.ToString();
+                        context.Response.ContentType = response
+                            .Content
+                            .Headers
+                            .ContentType
+                            .ToString();
                         if ((response.Content.Headers.ContentLength ?? 0) > 0)
                             context.Response.ContentLength = response.Content.Headers.ContentLength;
                         var bytes = await response.Content.ReadAsByteArrayAsync();
@@ -123,9 +126,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                         GetEndpoint(context)
                     );
                     context.Response.ContentType = "application/json";
-                    await context.Response.WriteAsync(
-                        JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
-                    );
+                    await context
+                        .Response
+                        .WriteAsync(
+                            JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
+                        );
                 }
 
                 async Task RewriteArray(HttpContext context)

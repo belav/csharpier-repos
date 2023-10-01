@@ -262,11 +262,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || visited.HasErrors
                     || ReferenceEquals(visited.Type, node.Type)
                     || visited.Type is { }
-                        && visited.Type.Equals(
-                            node.Type,
-                            TypeCompareKind.IgnoreDynamicAndTupleNames
-                                | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                        )
+                        && visited
+                            .Type
+                            .Equals(
+                                node.Type,
+                                TypeCompareKind.IgnoreDynamicAndTupleNames
+                                    | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                            )
                     || IsUnusedDeconstruction(node)
             );
 
@@ -368,9 +370,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 if (
-                    _factory.CompilationState.Compilation.ShouldEmitNullableAttributes(
-                        localFunction
-                    )
+                    _factory
+                        .CompilationState
+                        .Compilation
+                        .ShouldEmitNullableAttributes(localFunction)
                 )
                 {
                     bool constraintsNeedNullableAttribute = typeParameters.Any(

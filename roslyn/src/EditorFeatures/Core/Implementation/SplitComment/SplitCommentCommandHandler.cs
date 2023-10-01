@@ -95,10 +95,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SplitComment
                 return false;
 
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Split_comment
-                )
+                context
+                    .OperationContext
+                    .AddScope(allowCancellation: true, EditorFeaturesResources.Split_comment)
             )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;

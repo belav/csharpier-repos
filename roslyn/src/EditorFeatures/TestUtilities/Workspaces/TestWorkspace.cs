@@ -572,7 +572,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     var snapshotSpan = span.ToSnapshotSpan(
                         document.GetTextBuffer().CurrentSnapshot
                     );
-                    var mappedSpan = projectionBuffer.CurrentSnapshot
+                    var mappedSpan = projectionBuffer
+                        .CurrentSnapshot
                         .MapFromSourceSnapshot(snapshotSpan)
                         .Single();
                     mappedSpans[string.Empty] = mappedSpans[string.Empty].Add(
@@ -598,7 +599,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         var snapshotSpan = span.ToSnapshotSpan(
                             document.GetTextBuffer().CurrentSnapshot
                         );
-                        var mappedSpan = projectionBuffer.CurrentSnapshot
+                        var mappedSpan = projectionBuffer
+                            .CurrentSnapshot
                             .MapFromSourceSnapshot(snapshotSpan)
                             .Cast<Span?>()
                             .SingleOrDefault();

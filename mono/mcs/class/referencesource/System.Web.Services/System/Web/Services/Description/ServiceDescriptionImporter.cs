@@ -355,12 +355,14 @@ namespace System.Web.Services.Description
                 importer.CodeGenerationOptions = options.CodeGenerationOptions;
                 foreach (string extensionType in options.SchemaImporterExtensions)
                 {
-                    importer.Extensions.Add(
-                        Type.GetType(
-                            extensionType,
-                            true /*throwOnError*/
-                        )
-                    );
+                    importer
+                        .Extensions
+                        .Add(
+                            Type.GetType(
+                                extensionType,
+                                true /*throwOnError*/
+                            )
+                        );
                 }
                 ImportContext context = Context(
                     webReference.ProxyCode,
@@ -441,9 +443,14 @@ namespace System.Web.Services.Description
                     foreach (OperationMessage message in operation.Messages)
                     {
                         if (
-                            message.Message.Equals(
-                                new XmlQualifiedName(part.Message.Name, description.TargetNamespace)
-                            )
+                            message
+                                .Message
+                                .Equals(
+                                    new XmlQualifiedName(
+                                        part.Message.Name,
+                                        description.TargetNamespace
+                                    )
+                                )
                         )
                         {
                             associatedOperation = operation;

@@ -203,7 +203,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var list = entity.branchStore
+                    var list = entity
+                        .branchStore
                         .Where(c => c.id == cId)
                         .Select(
                             c =>
@@ -295,7 +296,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmps = entity.branchStore
+                            var tmps = entity
+                                .branchStore
                                 .Where(p => p.id == Object.id)
                                 .FirstOrDefault();
 
@@ -369,7 +371,8 @@ namespace POS_Server.Controllers
                     // delete old invoice items
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        List<branchStore> items = entity.branchStore
+                        List<branchStore> items = entity
+                            .branchStore
                             .Where(x => x.branchId == branchId)
                             .ToList();
                         entity.branchStore.RemoveRange(items);

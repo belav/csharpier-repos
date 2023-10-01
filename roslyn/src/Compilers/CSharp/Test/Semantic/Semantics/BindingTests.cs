@@ -2418,12 +2418,13 @@ partial class C
 ";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace
+                    var method = module
+                        .GlobalNamespace
                         .GetMember<TypeSymbol>("C")
                         .GetMember<MethodSymbol>("F");
                     Assert.Equal("i", method.Parameters[0].Name);
@@ -2449,12 +2450,13 @@ partial class C
 ";
             CompileAndVerify(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
-                    MetadataImportOptions.All
-                ),
+                options: TestOptions
+                    .ReleaseDll
+                    .WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.GlobalNamespace
+                    var method = module
+                        .GlobalNamespace
                         .GetMember<TypeSymbol>("C")
                         .GetMember<MethodSymbol>("F");
                     Assert.Equal("i", method.Parameters[0].Name);

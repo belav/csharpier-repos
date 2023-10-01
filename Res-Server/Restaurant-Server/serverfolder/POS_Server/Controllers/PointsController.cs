@@ -102,7 +102,8 @@ isActive
                             if (List[i].isActive == 1)
                             {
                                 long pointId = (long)List[i].pointId;
-                                var itemsI = entity.agents
+                                var itemsI = entity
+                                    .agents
                                     .Where(x => x.pointId == pointId)
                                     .Select(b => new { b.agentId })
                                     .FirstOrDefault();
@@ -143,7 +144,8 @@ isActive
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var row = entity.Points
+                    var row = entity
+                        .Points
                         .Where(u => u.pointId == pointId)
                         .Select(
                             S =>
@@ -235,7 +237,8 @@ isActive
                         }
                         else
                         {
-                            var tmpObject = entity.Points
+                            var tmpObject = entity
+                                .Points
                                 .Where(p => p.pointId == newObject.pointId)
                                 .FirstOrDefault();
 

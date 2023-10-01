@@ -123,10 +123,10 @@ namespace System.Net.Test.Common
                     )
                     {
                         response.Content.Headers.Remove("Content-Type");
-                        response.Content.Headers.TryAddWithoutValidation(
-                            "Content-Type",
-                            header.Value
-                        );
+                        response
+                            .Content
+                            .Headers
+                            .TryAddWithoutValidation("Content-Type", header.Value);
                     }
                     else
                     {

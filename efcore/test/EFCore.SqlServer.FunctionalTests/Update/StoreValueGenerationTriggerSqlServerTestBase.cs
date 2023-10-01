@@ -67,12 +67,9 @@ public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture>
         await using var context = CreateContext();
 
         var instances = new StoreValueGenerationData[] { new(), new(), new(), new() };
-        context.WithSomeDatabaseGenerated.AddRange(
-            instances[0],
-            instances[1],
-            instances[2],
-            instances[3]
-        );
+        context
+            .WithSomeDatabaseGenerated
+            .AddRange(instances[0], instances[1], instances[2], instances[3]);
 
         Fixture.ListLoggerFactory.Clear();
 

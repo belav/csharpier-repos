@@ -1962,7 +1962,8 @@ class C { }
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.Last(),
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .Last()
                     .WithChangedText(
                         SourceText.From(
@@ -2066,7 +2067,8 @@ class C { }
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.Last(),
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .Last()
                     .WithChangedText(
                         SourceText.From(
@@ -2188,7 +2190,8 @@ class C { }
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.First(),
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2470,7 +2473,8 @@ class C { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2574,7 +2578,8 @@ class C { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2691,7 +2696,8 @@ class C { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2801,7 +2807,8 @@ class C { }
 
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .First()
                     .WithChangedText(
                         SourceText.From(
@@ -2925,7 +2932,8 @@ class C { }
         driver = driver.RunGenerators(
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.Last(),
-                compilation.SyntaxTrees
+                compilation
+                    .SyntaxTrees
                     .Last()
                     .WithChangedText(
                         SourceText.From(

@@ -294,10 +294,12 @@ namespace Internal.TypeSystem.NoMetadata
 
             return (clone == null)
                 ? this
-                : _genericTypeDefinitionAsDefType.Context.ResolveGenericInstantiation(
-                    _genericTypeDefinitionAsDefType,
-                    new Instantiation(clone)
-                );
+                : _genericTypeDefinitionAsDefType
+                    .Context
+                    .ResolveGenericInstantiation(
+                        _genericTypeDefinitionAsDefType,
+                        new Instantiation(clone)
+                    );
         }
 
         public override Instantiation Instantiation
@@ -339,10 +341,9 @@ namespace Internal.TypeSystem.NoMetadata
 
             // Try to get the name from metadata
             if (
-                TypeLoaderEnvironment.Instance.TryGetMetadataForNamedType(
-                    genericDefinitionHandle,
-                    out qTypeDefinition
-                )
+                TypeLoaderEnvironment
+                    .Instance
+                    .TryGetMetadataForNamedType(genericDefinitionHandle, out qTypeDefinition)
             )
             {
                 TypeDefinitionHandle typeDefHandle = qTypeDefinition.NativeFormatHandle;

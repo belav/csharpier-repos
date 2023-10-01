@@ -681,7 +681,8 @@ namespace POS_Server.Controllers
                             foreach (PosSerialSend newrow in linkdpos)
                             {
                                 long? posId = newrow.posId == null ? 0 : newrow.posId;
-                                var posdb = entity.posSetting
+                                var posdb = entity
+                                    .posSetting
                                     .Where(x => x.posId == posId)
                                     .FirstOrDefault();
                                 posdb.posSerialId = unlimitedserialId;

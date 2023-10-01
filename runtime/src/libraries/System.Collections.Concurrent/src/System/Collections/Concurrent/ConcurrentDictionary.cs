@@ -383,10 +383,9 @@ namespace System.Collections.Concurrent
                         {
                             if (matchValue)
                             {
-                                bool valuesMatch = EqualityComparer<TValue>.Default.Equals(
-                                    oldValue,
-                                    curr._value
-                                );
+                                bool valuesMatch = EqualityComparer<TValue>
+                                    .Default
+                                    .Equals(oldValue, curr._value);
                                 if (!valuesMatch)
                                 {
                                     value = default;
@@ -2209,9 +2208,9 @@ namespace System.Collections.Concurrent
         {
             if (CDSCollectionETWBCLProvider.Log.IsEnabled())
             {
-                CDSCollectionETWBCLProvider.Log.ConcurrentDictionary_AcquiringAllLocks(
-                    _tables._buckets.Length
-                );
+                CDSCollectionETWBCLProvider
+                    .Log
+                    .ConcurrentDictionary_AcquiringAllLocks(_tables._buckets.Length);
             }
 
             // First, acquire lock 0

@@ -80,7 +80,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var row = entity.error
+                    var row = entity
+                        .error
                         .Where(u => u.errorId == errorId)
                         .Select(
                             S =>
@@ -167,7 +168,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpObject = entity.error
+                            var tmpObject = entity
+                                .error
                                 .Where(p => p.errorId == newObject.errorId)
                                 .FirstOrDefault();
 

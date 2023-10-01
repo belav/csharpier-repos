@@ -60,7 +60,8 @@ public class OwnedNavigationBuilder<
         Expression<Func<TDependentEntity, object?>> keyExpression
     ) =>
         new(
-            DependentEntityType.Builder
+            DependentEntityType
+                .Builder
                 .PrimaryKey(
                     Check.NotNull(keyExpression, nameof(keyExpression)).GetMemberAccessList(),
                     ConfigurationSource.Explicit
@@ -75,7 +76,8 @@ public class OwnedNavigationBuilder<
     /// <returns>An object that can be used to configure the primary key.</returns>
     public new virtual KeyBuilder<TDependentEntity> HasKey(params string[] propertyNames) =>
         new(
-            DependentEntityType.Builder
+            DependentEntityType
+                .Builder
                 .PrimaryKey(
                     Check.NotEmpty(propertyNames, nameof(propertyNames)),
                     ConfigurationSource.Explicit
@@ -106,7 +108,8 @@ public class OwnedNavigationBuilder<
         UpdateBuilder(
             () =>
                 new PropertyBuilder<TProperty>(
-                    DependentEntityType.Builder
+                    DependentEntityType
+                        .Builder
                         .Property(
                             Check
                                 .NotNull(propertyExpression, nameof(propertyExpression))
@@ -133,9 +136,13 @@ public class OwnedNavigationBuilder<
     )
         where TNavigation : class =>
         new(
-            DependentEntityType.Builder.Navigation(
-                Check.NotNull(navigationExpression, nameof(navigationExpression)).GetMemberAccess()
-            )
+            DependentEntityType
+                .Builder
+                .Navigation(
+                    Check
+                        .NotNull(navigationExpression, nameof(navigationExpression))
+                        .GetMemberAccess()
+                )
         );
 
     /// <summary>
@@ -154,9 +161,13 @@ public class OwnedNavigationBuilder<
     )
         where TNavigation : class =>
         new(
-            DependentEntityType.Builder.Navigation(
-                Check.NotNull(navigationExpression, nameof(navigationExpression)).GetMemberAccess()
-            )
+            DependentEntityType
+                .Builder
+                .Navigation(
+                    Check
+                        .NotNull(navigationExpression, nameof(navigationExpression))
+                        .GetMemberAccess()
+                )
         );
 
     /// <summary>
@@ -206,7 +217,8 @@ public class OwnedNavigationBuilder<
         Expression<Func<TDependentEntity, object?>> indexExpression
     ) =>
         new(
-            DependentEntityType.Builder
+            DependentEntityType
+                .Builder
                 .HasIndex(
                     Check.NotNull(indexExpression, nameof(indexExpression)).GetMemberAccessList(),
                     ConfigurationSource.Explicit
@@ -222,7 +234,8 @@ public class OwnedNavigationBuilder<
     /// <returns>An object that can be used to configure the index.</returns>
     public new virtual IndexBuilder<TDependentEntity> HasIndex(params string[] propertyNames) =>
         new(
-            DependentEntityType.Builder
+            DependentEntityType
+                .Builder
                 .HasIndex(
                     Check.NotEmpty(propertyNames, nameof(propertyNames)),
                     ConfigurationSource.Explicit
@@ -738,11 +751,9 @@ public class OwnedNavigationBuilder<
         InternalForeignKeyBuilder relationship;
         using (var batch = DependentEntityType.Model.DelayConventions())
         {
-            relationship = DependentEntityType.Builder.HasOwnership(
-                ownedType,
-                navigation,
-                ConfigurationSource.Explicit
-            )!;
+            relationship = DependentEntityType
+                .Builder
+                .HasOwnership(ownedType, navigation, ConfigurationSource.Explicit)!;
             relationship.IsUnique(true, ConfigurationSource.Explicit);
             relationship = (InternalForeignKeyBuilder)batch.Run(relationship.Metadata)!.Builder;
         }
@@ -1200,11 +1211,9 @@ public class OwnedNavigationBuilder<
         InternalForeignKeyBuilder relationship;
         using (var batch = DependentEntityType.Model.DelayConventions())
         {
-            relationship = DependentEntityType.Builder.HasOwnership(
-                ownedType,
-                navigation,
-                ConfigurationSource.Explicit
-            )!;
+            relationship = DependentEntityType
+                .Builder
+                .HasOwnership(ownedType, navigation, ConfigurationSource.Explicit)!;
             relationship.IsUnique(false, ConfigurationSource.Explicit);
             relationship = (InternalForeignKeyBuilder)batch.Run(relationship.Metadata)!.Builder;
         }
@@ -1251,7 +1260,8 @@ public class OwnedNavigationBuilder<
             DependentEntityType,
             relatedEntityType,
             navigationName,
-            DependentEntityType.Builder
+            DependentEntityType
+                .Builder
                 .HasRelationship(
                     relatedEntityType,
                     navigationName,
@@ -1305,7 +1315,8 @@ public class OwnedNavigationBuilder<
             DependentEntityType,
             relatedEntityType,
             navigation,
-            DependentEntityType.Builder
+            DependentEntityType
+                .Builder
                 .HasRelationship(
                     relatedEntityType,
                     navigation,

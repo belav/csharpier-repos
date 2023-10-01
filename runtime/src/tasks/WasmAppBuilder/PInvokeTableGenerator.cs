@@ -140,12 +140,13 @@ internal sealed class PInvokeTableGenerator
         {
             if ((method.Attributes & MethodAttributes.PinvokeImpl) != 0)
             {
-                var dllimport = method.CustomAttributes.First(
-                    attr => attr.AttributeType.Name == "DllImportAttribute"
-                );
+                var dllimport = method
+                    .CustomAttributes
+                    .First(attr => attr.AttributeType.Name == "DllImportAttribute");
                 var module = (string)dllimport.ConstructorArguments[0].Value!;
                 var entrypoint = (string)
-                    dllimport.NamedArguments
+                    dllimport
+                        .NamedArguments
                         .First(arg => arg.MemberName == "EntryPoint")
                         .TypedValue
                         .Value!;

@@ -266,20 +266,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureIterators.CheckFeatureAvailability(
-                diagnostics,
-                statement,
-                statement.YieldKeyword.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureIterators
+                .CheckFeatureAvailability(
+                    diagnostics,
+                    statement,
+                    statement.YieldKeyword.GetLocation()
+                );
 
             var method = (MethodSymbol)this.ContainingMemberOrLambda;
             if (method.IsAsync)
             {
-                MessageID.IDS_FeatureAsyncStreams.CheckFeatureAvailability(
-                    diagnostics,
-                    method.DeclaringCompilation,
-                    method.Locations[0]
-                );
+                MessageID
+                    .IDS_FeatureAsyncStreams
+                    .CheckFeatureAvailability(
+                        diagnostics,
+                        method.DeclaringCompilation,
+                        method.Locations[0]
+                    );
             }
         }
 
@@ -633,13 +637,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (binder != null)
             {
                 result.Clear();
-                binder.Next.LookupSymbolsWithFallback(
-                    result,
-                    node.Identifier.ValueText,
-                    arity: 0,
-                    useSiteInfo: ref useSiteInfo,
-                    options: LookupOptions.LabelsOnly
-                );
+                binder
+                    .Next
+                    .LookupSymbolsWithFallback(
+                        result,
+                        node.Identifier.ValueText,
+                        arity: 0,
+                        useSiteInfo: ref useSiteInfo,
+                        options: LookupOptions.LabelsOnly
+                    );
                 if (result.IsMultiViable)
                 {
                     // The label '{0}' shadows another label by the same name in a contained scope
@@ -716,19 +722,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureLocalFunctions.CheckFeatureAvailability(
-                diagnostics,
-                node,
-                node.Identifier.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureLocalFunctions
+                .CheckFeatureAvailability(diagnostics, node, node.Identifier.GetLocation());
 
             // already defined symbol in containing block
             var localSymbol = this.LookupLocalFunction(node.Identifier);
 
-            var hasErrors = localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                localSymbol,
-                diagnostics
-            );
+            var hasErrors = localSymbol
+                .ScopeBinder
+                .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
             BoundBlock blockBody = null;
             BoundBlock expressionBody = null;
@@ -789,17 +792,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var modifier in node.Modifiers)
             {
                 if (modifier.IsKind(SyntaxKind.StaticKeyword))
-                    MessageID.IDS_FeatureStaticLocalFunctions.CheckFeatureAvailability(
-                        diagnostics,
-                        node,
-                        modifier.GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeatureStaticLocalFunctions
+                        .CheckFeatureAvailability(diagnostics, node, modifier.GetLocation());
                 else if (modifier.IsKind(SyntaxKind.ExternKeyword))
-                    MessageID.IDS_FeatureExternLocalFunctions.CheckFeatureAvailability(
-                        diagnostics,
-                        node,
-                        modifier.GetLocation()
-                    );
+                    MessageID
+                        .IDS_FeatureExternLocalFunctions
+                        .CheckFeatureAvailability(diagnostics, node, modifier.GetLocation());
             }
 
             return new BoundLocalFunctionStatement(
@@ -1288,10 +1287,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             RefKind expressionRefKind = RefKind.None;
-            value = initializer?.Value.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out expressionRefKind
-            );
+            value = initializer
+                ?.Value
+                .CheckAndUnwrapRefExpression(diagnostics, out expressionRefKind);
             if (variableRefKind == RefKind.None)
             {
                 valueKind = BindValueKind.RValue;
@@ -1378,10 +1376,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Check for variable declaration errors.
             // Use the binder that owns the scope for the local because this (the current) binder
             // might own nested scope.
-            bool nameConflict = localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                localSymbol,
-                diagnostics
-            );
+            bool nameConflict = localSymbol
+                .ScopeBinder
+                .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
             bool hasErrors = false;
 
             if (localSymbol.RefKind != RefKind.None)
@@ -2015,11 +2012,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             var lhsKind = isRef ? BindValueKind.RefAssignable : BindValueKind.Assignable;
 
             if (isRef)
-                MessageID.IDS_FeatureRefReassignment.CheckFeatureAvailability(
-                    diagnostics,
-                    node.Right,
-                    node.Right.GetFirstToken().GetLocation()
-                );
+                MessageID
+                    .IDS_FeatureRefReassignment
+                    .CheckFeatureAvailability(
+                        diagnostics,
+                        node.Right,
+                        node.Right.GetFirstToken().GetLocation()
+                    );
 
             var op1 = BindValue(node.Left, diagnostics, lhsKind);
             ReportSuppressionIfNeeded(op1, diagnostics);
@@ -2415,10 +2414,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (
                 !propertySymbol.IsDefinition
-                && propertySymbol.ContainingType.Equals(
-                    propertySymbol.ContainingType.OriginalDefinition,
-                    TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
-                )
+                && propertySymbol
+                    .ContainingType
+                    .Equals(
+                        propertySymbol.ContainingType.OriginalDefinition,
+                        TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
             )
             {
                 propertySymbol = propertySymbol.OriginalDefinition;
@@ -4039,10 +4040,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             var refKind = RefKind.None;
-            var expressionSyntax = syntax.Expression?.CheckAndUnwrapRefExpression(
-                diagnostics,
-                out refKind
-            );
+            var expressionSyntax = syntax
+                .Expression
+                ?.CheckAndUnwrapRefExpression(diagnostics, out refKind);
             BoundExpression arg = null;
             if (expressionSyntax != null)
             {
@@ -4561,11 +4561,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureExceptionFilter.CheckFeatureAvailability(
-                diagnostics,
-                filter,
-                filter.WhenKeyword.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureExceptionFilter
+                .CheckFeatureAvailability(diagnostics, filter, filter.WhenKeyword.GetLocation());
 
             BoundExpression boundFilter = this.BindBooleanExpression(
                 filter.FilterExpression,
@@ -4911,8 +4909,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 RefKind refKind;
-                ExpressionSyntax expressionSyntax =
-                    expressionBody.Expression.CheckAndUnwrapRefExpression(diagnostics, out refKind);
+                ExpressionSyntax expressionSyntax = expressionBody
+                    .Expression
+                    .CheckAndUnwrapRefExpression(diagnostics, out refKind);
                 BindValueKind requiredValueKind = bodyBinder.GetRequiredReturnValueKind(refKind);
                 BoundExpression expression = bodyBinder.BindValue(
                     expressionSyntax,
@@ -5056,10 +5055,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (first)
                     {
                         first = false;
-                        MessageID.IDS_TopLevelStatements.CheckFeatureAvailability(
-                            diagnostics,
-                            topLevelStatement
-                        );
+                        MessageID
+                            .IDS_TopLevelStatements
+                            .CheckFeatureAvailability(diagnostics, topLevelStatement);
                     }
 
                     var boundStatement = BindStatement(topLevelStatement.Statement, diagnostics);

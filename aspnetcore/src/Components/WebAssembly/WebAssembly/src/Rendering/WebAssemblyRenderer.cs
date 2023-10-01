@@ -53,12 +53,14 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
 
     protected override void AttachRootComponentToBrowser(int componentId, string domElementSelector)
     {
-        DefaultWebAssemblyJSRuntime.Instance.InvokeVoid(
-            "Blazor._internal.attachRootComponentToElement",
-            domElementSelector,
-            componentId,
-            RendererId
-        );
+        DefaultWebAssemblyJSRuntime
+            .Instance
+            .InvokeVoid(
+                "Blazor._internal.attachRootComponentToElement",
+                domElementSelector,
+                componentId,
+                RendererId
+            );
     }
 
     /// <inheritdoc />
@@ -101,11 +103,13 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
     protected override Task UpdateDisplayAsync(in RenderBatch batch)
     {
 #pragma warning disable CS0618 // Type or member is obsolete
-        DefaultWebAssemblyJSRuntime.Instance.InvokeUnmarshalled<int, RenderBatch, object>(
-            "Blazor._internal.renderBatch",
-            RendererId,
-            batch
-        );
+        DefaultWebAssemblyJSRuntime
+            .Instance
+            .InvokeUnmarshalled<int, RenderBatch, object>(
+                "Blazor._internal.renderBatch",
+                RendererId,
+                batch
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
         if (WebAssemblyCallQueue.HasUnstartedWork)

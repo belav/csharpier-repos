@@ -38,11 +38,14 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate Equals(object)...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction(
+                    "Generate Equals(object)...",
+                    applyFix: true,
+                    blockUntilComplete: false
+                );
             VerifyDialog(isOpen: true);
             Dialog_ClickCancel();
             var actualText = VisualStudio.Editor.GetText();
@@ -75,17 +78,19 @@ End Class"
             );
 
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction(
-                "Generate Equals(object)...",
-                applyFix: true,
-                blockUntilComplete: false
-            );
+            VisualStudio
+                .Editor
+                .Verify
+                .CodeAction(
+                    "Generate Equals(object)...",
+                    applyFix: true,
+                    blockUntilComplete: false
+                );
             VerifyDialog(isOpen: true);
             Dialog_ClickOk();
-            VisualStudio.Workspace.WaitForAsyncOperations(
-                Helper.HangMitigatingTimeout,
-                FeatureAttribute.LightBulb
-            );
+            VisualStudio
+                .Workspace
+                .WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
             var actualText = VisualStudio.Editor.GetText();
             var expectedText =
                 @"

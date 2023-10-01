@@ -587,10 +587,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     if (tier == ExpressionTier.Clr)
                     {
                         parsed = RegisterParameter(
-                            System.Linq.Expressions.Expression.Call(
-                                method,
-                                inputParameterToParse.Expression
-                            ),
+                            System
+                                .Linq
+                                .Expressions
+                                .Expression
+                                .Call(method, inputParameterToParse.Expression),
                             inputParameterToParse.Alias,
                             builderContext
                         );
@@ -906,10 +907,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     RegisterWhere(anyClause, projectionQueryBuilderContext);
                 }
 
-                projectionQueryBuilderContext.CurrentSelect =
-                    projectionQueryBuilderContext.CurrentSelect.ChangeOperands(
-                        new SpecialExpression(specialExpressionType, tableExpression)
-                    );
+                projectionQueryBuilderContext.CurrentSelect = projectionQueryBuilderContext
+                    .CurrentSelect
+                    .ChangeOperands(new SpecialExpression(specialExpressionType, tableExpression));
 
                 // we now switch back to current context, and compare the result with 0
                 return projectionQueryBuilderContext.CurrentSelect;
@@ -1895,9 +1895,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             // TODO (later...): see if some vendors support native All operator and avoid this substitution
             var whereExpression = Expression.Not(allClause);
             RegisterWhere(whereExpression, allBuilderContext);
-            allBuilderContext.CurrentSelect = allBuilderContext.CurrentSelect.ChangeOperands(
-                new SpecialExpression(SpecialExpressionType.Count, tableExpression)
-            );
+            allBuilderContext.CurrentSelect = allBuilderContext
+                .CurrentSelect
+                .ChangeOperands(
+                    new SpecialExpression(SpecialExpressionType.Count, tableExpression)
+                );
             // TODO: see if we need to register the tablePiece here (we probably don't)
 
             // we now switch back to current context, and compare the result with 0
@@ -2009,9 +2011,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     var anyClause = Analyze(parameters[1], tableExpression, anyBuilderContext);
                     RegisterWhere(anyClause, anyBuilderContext);
                 }
-                anyBuilderContext.CurrentSelect = anyBuilderContext.CurrentSelect.ChangeOperands(
-                    new SpecialExpression(SpecialExpressionType.Count, tableExpression)
-                );
+                anyBuilderContext.CurrentSelect = anyBuilderContext
+                    .CurrentSelect
+                    .ChangeOperands(
+                        new SpecialExpression(SpecialExpressionType.Count, tableExpression)
+                    );
                 // TODO: see if we need to register the tablePiece here (we probably don't)
 
                 // we now switch back to current context, and compare the result with 0

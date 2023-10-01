@@ -135,10 +135,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 SimpleNameOrMemberAccessExpression = simpleNameOrMemberAccessExpression;
 
                 var semanticModel = semanticDocument.SemanticModel;
-                var semanticFacts =
-                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
-                var syntaxFacts =
-                    semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var semanticFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISemanticFactsService>();
+                var syntaxFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISyntaxFactsService>();
                 if (
                     semanticFacts.IsWrittenTo(
                         semanticModel,

@@ -41,7 +41,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var serialsList = entity.serials
+                    var serialsList = entity
+                        .serials
                         .Where(S => S.itemId == itemId)
                         .Select(
                             S =>
@@ -112,7 +113,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpSerial = entity.serials
+                            tmpSerial = entity
+                                .serials
                                 .Where(p => p.serialId == newObject.serialId)
                                 .FirstOrDefault();
                             tmpSerial.itemId = newObject.itemId;

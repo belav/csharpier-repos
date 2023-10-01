@@ -125,11 +125,13 @@ namespace ILCompiler.DependencyAnalysis
             if (!factory.MetadataManager.WillUseMetadataTokenToReferenceMethod(method))
             {
                 dependencies.Add(
-                    factory.NativeLayout.PlacedSignatureVertex(
-                        factory.NativeLayout.MethodNameAndSignatureVertex(
-                            method.GetTypicalMethodDefinition()
-                        )
-                    ),
+                    factory
+                        .NativeLayout
+                        .PlacedSignatureVertex(
+                            factory
+                                .NativeLayout
+                                .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition())
+                        ),
                     "Non metadata-local method reference"
                 );
             }
@@ -139,9 +141,11 @@ namespace ILCompiler.DependencyAnalysis
                 if (method.IsCanonicalMethod(CanonicalFormKind.Universal))
                 {
                     dependencies.Add(
-                        factory.NativeLayout.PlacedSignatureVertex(
-                            factory.NativeLayout.MethodNameAndSignatureVertex(method)
-                        ),
+                        factory
+                            .NativeLayout
+                            .PlacedSignatureVertex(
+                                factory.NativeLayout.MethodNameAndSignatureVertex(method)
+                            ),
                         "UniversalCanon signature of method"
                     );
                 }
@@ -249,11 +253,13 @@ namespace ILCompiler.DependencyAnalysis
                 }
                 else
                 {
-                    var nameAndSig = factory.NativeLayout.PlacedSignatureVertex(
-                        factory.NativeLayout.MethodNameAndSignatureVertex(
-                            method.GetTypicalMethodDefinition()
-                        )
-                    );
+                    var nameAndSig = factory
+                        .NativeLayout
+                        .PlacedSignatureVertex(
+                            factory
+                                .NativeLayout
+                                .MethodNameAndSignatureVertex(method.GetTypicalMethodDefinition())
+                        );
                     vertex = writer.GetTuple(
                         vertex,
                         writer.GetUnsignedConstant((uint)nameAndSig.SavedVertex.VertexOffset)
@@ -298,9 +304,11 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     if ((flags & InvokeTableFlags.IsUniversalCanonicalEntry) != 0)
                     {
-                        var nameAndSigGenericMethod = factory.NativeLayout.PlacedSignatureVertex(
-                            factory.NativeLayout.MethodNameAndSignatureVertex(method)
-                        );
+                        var nameAndSigGenericMethod = factory
+                            .NativeLayout
+                            .PlacedSignatureVertex(
+                                factory.NativeLayout.MethodNameAndSignatureVertex(method)
+                            );
                         vertex = writer.GetTuple(
                             vertex,
                             writer.GetUnsignedConstant(

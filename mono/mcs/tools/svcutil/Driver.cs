@@ -208,19 +208,23 @@ namespace Mono.ServiceContractTool
             {
                 if (o is WSServiceDescrition)
                 {
-                    metadata.MetadataSections.Add(
-                        new MetadataSection(
-                            MetadataSection.ServiceDescriptionDialect,
-                            "",
-                            (WSServiceDescrition)o
-                        )
-                    );
+                    metadata
+                        .MetadataSections
+                        .Add(
+                            new MetadataSection(
+                                MetadataSection.ServiceDescriptionDialect,
+                                "",
+                                (WSServiceDescrition)o
+                            )
+                        );
                 }
                 if (o is XmlSchema)
                 {
-                    metadata.MetadataSections.Add(
-                        new MetadataSection(MetadataSection.XmlSchemaDialect, "", (XmlSchema)o)
-                    );
+                    metadata
+                        .MetadataSections
+                        .Add(
+                            new MetadataSection(MetadataSection.XmlSchemaDialect, "", (XmlSchema)o)
+                        );
                 }
             }
 

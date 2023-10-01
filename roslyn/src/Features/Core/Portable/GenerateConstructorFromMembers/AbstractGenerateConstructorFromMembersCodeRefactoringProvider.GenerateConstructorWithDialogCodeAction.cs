@@ -60,7 +60,11 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
             {
                 var service =
                     _service._pickMembersService_forTesting
-                    ?? _document.Project.Solution.Services.GetRequiredService<IPickMembersService>();
+                    ?? _document
+                        .Project
+                        .Solution
+                        .Services
+                        .GetRequiredService<IPickMembersService>();
 
                 return service.PickMembers(
                     FeaturesResources.Pick_members_to_be_used_as_constructor_parameters,
@@ -80,16 +84,19 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
                 }
 
-                var addNullChecksOption = result.Options.FirstOrDefault(
-                    o => o.Id == AddNullChecksId
-                );
+                var addNullChecksOption = result
+                    .Options
+                    .FirstOrDefault(o => o.Id == AddNullChecksId);
                 if (addNullChecksOption != null)
                 {
                     // If we presented the 'Add null check' option, then persist whatever value
                     // the user chose.  That way we'll keep that as the default for the next time
                     // the user opens the dialog.
-                    var globalOptions =
-                        _document.Project.Solution.Services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
+                    var globalOptions = _document
+                        .Project
+                        .Solution
+                        .Services
+                        .GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
                     globalOptions.SetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(
                         _document.Project.Language,
                         addNullChecksOption.Value
@@ -141,9 +148,10 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                         .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var constructorTree = constructorSyntax.SyntaxTree;
-                    var constructorDocument = _document.Project.Solution.GetRequiredDocument(
-                        constructorTree
-                    );
+                    var constructorDocument = _document
+                        .Project
+                        .Solution
+                        .GetRequiredDocument(constructorTree);
                     return ImmutableArray.Create<CodeActionOperation>(
                         new DocumentNavigationOperation(
                             constructorDocument.Id,

@@ -429,7 +429,9 @@ namespace Mono.ILASM
 
             private void Version()
             {
-                string version = System.Reflection.Assembly
+                string version = System
+                    .Reflection
+                    .Assembly
                     .GetExecutingAssembly()
                     .GetName()
                     .Version

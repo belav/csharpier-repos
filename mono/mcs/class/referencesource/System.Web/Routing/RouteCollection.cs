@@ -341,10 +341,11 @@
         )]
         private string NormalizeVirtualPath(RequestContext requestContext, string virtualPath)
         {
-            string url = System.Web.UI.Util.GetUrlWithApplicationPath(
-                requestContext.HttpContext,
-                virtualPath
-            );
+            string url = System
+                .Web
+                .UI
+                .Util
+                .GetUrlWithApplicationPath(requestContext.HttpContext, virtualPath);
 
             if (LowercaseUrls || AppendTrailingSlash)
             {

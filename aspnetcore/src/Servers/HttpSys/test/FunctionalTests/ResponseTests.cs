@@ -169,24 +169,28 @@ public class ResponseTests
                 out var address,
                 httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        state =>
-                        {
-                            Assert.Same(state, httpContext);
-                            onStartingCalled.SetResult();
-                            return Task.CompletedTask;
-                        },
-                        httpContext
-                    );
-                    httpContext.Response.OnCompleted(
-                        state =>
-                        {
-                            Assert.Same(state, httpContext);
-                            onCompletedCalled.SetResult();
-                            return Task.CompletedTask;
-                        },
-                        httpContext
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            state =>
+                            {
+                                Assert.Same(state, httpContext);
+                                onStartingCalled.SetResult();
+                                return Task.CompletedTask;
+                            },
+                            httpContext
+                        );
+                    httpContext
+                        .Response
+                        .OnCompleted(
+                            state =>
+                            {
+                                Assert.Same(state, httpContext);
+                                onCompletedCalled.SetResult();
+                                return Task.CompletedTask;
+                            },
+                            httpContext
+                        );
                     return Task.CompletedTask;
                 }
             )
@@ -214,23 +218,27 @@ public class ResponseTests
                 out var address,
                 httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        state =>
-                        {
-                            onStartingCalled.SetResult();
-                            throw new Exception("Failed OnStarting");
-                        },
-                        httpContext
-                    );
-                    httpContext.Response.OnCompleted(
-                        state =>
-                        {
-                            Assert.Same(state, httpContext);
-                            onCompletedCalled.SetResult();
-                            return Task.CompletedTask;
-                        },
-                        httpContext
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            state =>
+                            {
+                                onStartingCalled.SetResult();
+                                throw new Exception("Failed OnStarting");
+                            },
+                            httpContext
+                        );
+                    httpContext
+                        .Response
+                        .OnCompleted(
+                            state =>
+                            {
+                                Assert.Same(state, httpContext);
+                                onCompletedCalled.SetResult();
+                                return Task.CompletedTask;
+                            },
+                            httpContext
+                        );
                     return Task.CompletedTask;
                 }
             )
@@ -258,23 +266,27 @@ public class ResponseTests
                 out var address,
                 httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        state =>
-                        {
-                            onStartingCalled.SetResult();
-                            throw new InvalidTimeZoneException("Failed OnStarting");
-                        },
-                        httpContext
-                    );
-                    httpContext.Response.OnCompleted(
-                        state =>
-                        {
-                            Assert.Same(state, httpContext);
-                            onCompletedCalled.SetResult();
-                            return Task.CompletedTask;
-                        },
-                        httpContext
-                    );
+                    httpContext
+                        .Response
+                        .OnStarting(
+                            state =>
+                            {
+                                onStartingCalled.SetResult();
+                                throw new InvalidTimeZoneException("Failed OnStarting");
+                            },
+                            httpContext
+                        );
+                    httpContext
+                        .Response
+                        .OnCompleted(
+                            state =>
+                            {
+                                Assert.Same(state, httpContext);
+                                onCompletedCalled.SetResult();
+                                return Task.CompletedTask;
+                            },
+                            httpContext
+                        );
                     Assert.Throws<InvalidTimeZoneException>(
                         () => httpContext.Response.Body.Write(new byte[10], 0, 10)
                     );

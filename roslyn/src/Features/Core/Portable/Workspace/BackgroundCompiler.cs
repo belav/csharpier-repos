@@ -36,8 +36,9 @@ namespace Microsoft.CodeAnalysis.Host
             _workspace = workspace;
 
             // make a scheduler that runs on the thread pool
-            var listenerProvider =
-                workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var listenerProvider = workspace
+                .Services
+                .GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
 
             _workQueue = new AsyncBatchingWorkQueue(
                 DelayTimeSpan.NearImmediate,

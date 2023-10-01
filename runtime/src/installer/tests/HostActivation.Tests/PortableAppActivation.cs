@@ -78,10 +78,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var dotnet = fixture.BuiltDotnet;
-            var appDll = fixture.TestProject.AppDll.Replace(
-                Path.DirectorySeparatorChar,
-                Path.AltDirectorySeparatorChar
-            );
+            var appDll = fixture
+                .TestProject
+                .AppDll
+                .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
             dotnet
                 .Exec(appDll)
@@ -750,9 +750,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString(
-                    "x"
-                );
+                string expectedErrorCode = Constants
+                    .ErrorCode
+                    .FrameworkMissingFailure
+                    .ToString("x");
 
                 var dotnetBuilder = new DotNetBuilder(
                     dotnetWithMockHostFxr,

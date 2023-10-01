@@ -27,10 +27,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.True(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.Equal(expectedEncoding, selectedEncoding);
         Assert.True(httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader));
@@ -54,10 +54,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.False(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.False(
             httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader)
@@ -85,10 +85,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.True(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.Equal(expectedEncoding, selectedEncoding);
         Assert.True(httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader));
@@ -113,10 +113,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.True(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.Equal(expectedEncoding, selectedEncoding);
         Assert.True(httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader));
@@ -144,10 +144,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.True(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.Equal(expectedEncoding, selectedEncoding);
         Assert.True(httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader));
@@ -172,10 +172,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.True(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.Equal(expectedEncoding, selectedEncoding);
         Assert.True(httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader));
@@ -203,10 +203,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.True(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.Equal(expectedEncoding, selectedEncoding);
         Assert.True(httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader));
@@ -233,10 +233,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.False(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.False(
             httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader)
@@ -261,10 +261,10 @@ public class ContentEncodingNegotiatorTests
 
         Assert.Equal(expectedPath, httpContext.Request.Path);
         Assert.True(
-            httpContext.Response.Headers.TryGetValue(
-                HeaderNames.ContentEncoding,
-                out var selectedEncoding
-            )
+            httpContext
+                .Response
+                .Headers
+                .TryGetValue(HeaderNames.ContentEncoding, out var selectedEncoding)
         );
         Assert.Equal(expectedEncoding, selectedEncoding);
         Assert.True(httpContext.Response.Headers.TryGetValue(HeaderNames.Vary, out var varyHeader));

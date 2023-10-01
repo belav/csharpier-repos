@@ -521,9 +521,9 @@ namespace Microsoft.CodeAnalysis
 
                 // Fire and forget that the workspace is changing.
                 // We raise 2 events for source document opened.
-                var token = _taskQueue.Listener.BeginAsyncOperation(
-                    nameof(OnSourceGeneratedDocumentOpened)
-                );
+                var token = _taskQueue
+                    .Listener
+                    .BeginAsyncOperation(nameof(OnSourceGeneratedDocumentOpened));
                 _ = RaiseDocumentOpenedEventAsync(document).CompletesAsyncOperation(token);
                 token = _taskQueue.Listener.BeginAsyncOperation(TextDocumentOpenedEventName);
                 _ = RaiseTextDocumentOpenedEventAsync(document).CompletesAsyncOperation(token);
@@ -543,9 +543,9 @@ namespace Microsoft.CodeAnalysis
 
                 // Fire and forget that the workspace is changing.
                 // We raise 2 events for source document closed.
-                var token = _taskQueue.Listener.BeginAsyncOperation(
-                    nameof(OnSourceGeneratedDocumentClosed)
-                );
+                var token = _taskQueue
+                    .Listener
+                    .BeginAsyncOperation(nameof(OnSourceGeneratedDocumentClosed));
                 _ = RaiseDocumentClosedEventAsync(document).CompletesAsyncOperation(token);
                 token = _taskQueue.Listener.BeginAsyncOperation(TextDocumentClosedEventName);
                 _ = RaiseTextDocumentClosedEventAsync(document).CompletesAsyncOperation(token);

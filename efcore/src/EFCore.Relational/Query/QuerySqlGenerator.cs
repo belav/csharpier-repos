@@ -177,7 +177,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         && selectExpression.Tables.Count == 1
         && selectExpression.Tables[0] is SetOperationBase setOperation
         && selectExpression.Projection.Count == setOperation.Source1.Projection.Count
-        && selectExpression.Projection
+        && selectExpression
+            .Projection
             .Select(
                 (pe, index) =>
                     pe.Expression is ColumnExpression column
@@ -476,9 +477,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                     }
                     else if (value is SqlConstantExpression sqlConstantExpression)
                     {
-                        substitutions[i] = sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(
-                            sqlConstantExpression.Value
-                        );
+                        substitutions[i] = sqlConstantExpression
+                            .TypeMapping!
+                            .GenerateSqlLiteral(sqlConstantExpression.Value);
                     }
                 }
 
@@ -650,18 +651,20 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         // data twice.
         // Note that if the type mapping differs, we do send the same data twice (e.g. the same string may be sent once as Unicode, once as
         // non-Unicode).
-        var parameter = _relationalCommandBuilder.Parameters.FirstOrDefault(
-            p =>
-                p.InvariantName == parameterName
-                && p is TypeMappedRelationalParameter typeMappedRelationalParameter
-                && string.Equals(
-                    typeMappedRelationalParameter.RelationalTypeMapping.StoreType,
-                    sqlParameterExpression.TypeMapping!.StoreType,
-                    StringComparison.OrdinalIgnoreCase
-                )
-                && typeMappedRelationalParameter.RelationalTypeMapping.Converter
-                    == sqlParameterExpression.TypeMapping!.Converter
-        );
+        var parameter = _relationalCommandBuilder
+            .Parameters
+            .FirstOrDefault(
+                p =>
+                    p.InvariantName == parameterName
+                    && p is TypeMappedRelationalParameter typeMappedRelationalParameter
+                    && string.Equals(
+                        typeMappedRelationalParameter.RelationalTypeMapping.StoreType,
+                        sqlParameterExpression.TypeMapping!.StoreType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && typeMappedRelationalParameter.RelationalTypeMapping.Converter
+                        == sqlParameterExpression.TypeMapping!.Converter
+            );
 
         if (parameter is null)
         {

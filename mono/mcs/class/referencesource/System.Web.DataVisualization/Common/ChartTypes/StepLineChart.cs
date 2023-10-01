@@ -173,14 +173,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     coord[2 * i + 1] = pointNew.Y;
                 }
 
-                common.HotRegionsList.AddHotRegion(
-                    path,
-                    false,
-                    coord,
-                    point,
-                    series.Name,
-                    pointIndex
-                );
+                common
+                    .HotRegionsList
+                    .AddHotRegion(path, false, coord, point, series.Name, pointIndex);
                 path.Dispose();
                 // Create grapics path object for the line
                 path = new GraphicsPath();
@@ -206,14 +201,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     coord[2 * i + 1] = pointNew.Y;
                 }
 
-                common.HotRegionsList.AddHotRegion(
-                    path,
-                    false,
-                    coord,
-                    series.Points[pointIndex - 1],
-                    series.Name,
-                    pointIndex - 1
-                );
+                common
+                    .HotRegionsList
+                    .AddHotRegion(
+                        path,
+                        false,
+                        coord,
+                        series.Points[pointIndex - 1],
+                        series.Name,
+                        pointIndex - 1
+                    );
                 path.Dispose();
             }
         }
@@ -483,14 +480,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 {
                     if (resultPathLine1 != null && resultPathLine1.PointCount > 0)
                     {
-                        area.Common.HotRegionsList.AddHotRegion(
-                            resultPathLine1,
-                            false,
-                            graph,
-                            prevDataPointEx.dataPoint,
-                            prevDataPointEx.dataPoint.series.Name,
-                            prevDataPointEx.index - 1
-                        );
+                        area.Common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                resultPathLine1,
+                                false,
+                                graph,
+                                prevDataPointEx.dataPoint,
+                                prevDataPointEx.dataPoint.series.Name,
+                                prevDataPointEx.index - 1
+                            );
                     }
                 }
 

@@ -1466,9 +1466,9 @@ namespace System.Threading.Threads.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    AppDomain.CurrentDomain.SetPrincipalPolicy(
-                        PrincipalPolicy.UnauthenticatedPrincipal
-                    );
+                    AppDomain
+                        .CurrentDomain
+                        .SetPrincipalPolicy(PrincipalPolicy.UnauthenticatedPrincipal);
                     Assert.Equal(string.Empty, Thread.CurrentPrincipal.Identity.Name);
                 })
                 .Dispose();

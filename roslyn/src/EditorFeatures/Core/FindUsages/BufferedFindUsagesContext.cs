@@ -117,10 +117,12 @@ internal sealed class BufferedFindUsagesContext : IFindUsagesContext, IStreaming
 
         // Push all values we've buffered into the new presenter context.
 
-        await presenterContext.ProgressTracker
+        await presenterContext
+            .ProgressTracker
             .AddItemsAsync(_state.TotalItemCount, cancellationToken)
             .ConfigureAwait(false);
-        await presenterContext.ProgressTracker
+        await presenterContext
+            .ProgressTracker
             .ItemsCompletedAsync(_state.ItemsCompleted, cancellationToken)
             .ConfigureAwait(false);
 
@@ -161,7 +163,8 @@ internal sealed class BufferedFindUsagesContext : IFindUsagesContext, IStreaming
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         if (IsSwapped)
         {
-            await _streamingPresenterContext.ProgressTracker
+            await _streamingPresenterContext
+                .ProgressTracker
                 .AddItemsAsync(count, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -179,7 +182,8 @@ internal sealed class BufferedFindUsagesContext : IFindUsagesContext, IStreaming
         using var _ = await _gate.DisposableWaitAsync(cancellationToken).ConfigureAwait(false);
         if (IsSwapped)
         {
-            await _streamingPresenterContext.ProgressTracker
+            await _streamingPresenterContext
+                .ProgressTracker
                 .ItemsCompletedAsync(count, cancellationToken)
                 .ConfigureAwait(false);
         }

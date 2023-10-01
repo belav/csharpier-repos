@@ -186,10 +186,9 @@ public sealed class WebApplicationBuilder
         {
             // If this is set, someone called UseRouting() when a global route builder was already set
             if (
-                !_builtApplication.Properties.TryGetValue(
-                    EndpointRouteBuilderKey,
-                    out var localRouteBuilder
-                )
+                !_builtApplication
+                    .Properties
+                    .TryGetValue(EndpointRouteBuilderKey, out var localRouteBuilder)
             )
             {
                 app.UseRouting();
@@ -205,8 +204,9 @@ public sealed class WebApplicationBuilder
 
         // Process authorization and authentication middlewares independently to avoid
         // registering middlewares for services that do not exist
-        var serviceProviderIsService =
-            _builtApplication.Services.GetService<IServiceProviderIsService>();
+        var serviceProviderIsService = _builtApplication
+            .Services
+            .GetService<IServiceProviderIsService>();
         if (serviceProviderIsService?.IsService(typeof(IAuthenticationSchemeProvider)) is true)
         {
             // Don't add more than one instance of the middleware

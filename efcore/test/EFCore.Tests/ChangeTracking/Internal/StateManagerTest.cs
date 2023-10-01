@@ -913,7 +913,8 @@ public class StateManagerTest
 
         Assert.Equal(
             new[] { 77, 78 },
-            stateManager.Entries
+            stateManager
+                .Entries
                 .Select(e => e.Entity)
                 .OfType<Category>()
                 .Select(e => e.Id)
@@ -923,7 +924,8 @@ public class StateManagerTest
 
         Assert.Equal(
             new[] { productId2, productId1 },
-            stateManager.Entries
+            stateManager
+                .Entries
                 .Select(e => e.Entity)
                 .OfType<Product>()
                 .Select(e => e.Id)
@@ -1133,7 +1135,8 @@ public class StateManagerTest
     }
 
     private static IStateManager CreateStateManager(IModel model) =>
-        InMemoryTestHelpers.Instance
+        InMemoryTestHelpers
+            .Instance
             .CreateContextServices(model)
             .GetRequiredService<IStateManager>();
 

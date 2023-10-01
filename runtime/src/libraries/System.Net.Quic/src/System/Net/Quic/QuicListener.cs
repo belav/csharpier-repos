@@ -118,12 +118,14 @@ public sealed partial class QuicListener : IAsyncDisposable
         {
             QUIC_HANDLE* handle;
             ThrowHelper.ThrowIfMsQuicError(
-                MsQuicApi.Api.ListenerOpen(
-                    MsQuicApi.Api.Registration,
-                    &NativeCallback,
-                    (void*)GCHandle.ToIntPtr(context),
-                    &handle
-                ),
+                MsQuicApi
+                    .Api
+                    .ListenerOpen(
+                        MsQuicApi.Api.Registration,
+                        &NativeCallback,
+                        (void*)GCHandle.ToIntPtr(context),
+                        &handle
+                    ),
                 "ListenerOpen failed"
             );
             _handle = new MsQuicContextSafeHandle(handle, context, SafeHandleType.Listener);
@@ -155,12 +157,9 @@ public sealed partial class QuicListener : IAsyncDisposable
             address.Family = QUIC_ADDRESS_FAMILY_UNSPEC;
         }
         ThrowHelper.ThrowIfMsQuicError(
-            MsQuicApi.Api.ListenerStart(
-                _handle,
-                alpnBuffers.Buffers,
-                (uint)alpnBuffers.Count,
-                &address
-            ),
+            MsQuicApi
+                .Api
+                .ListenerStart(_handle, alpnBuffers.Buffers, (uint)alpnBuffers.Count, &address),
             "ListenerStart failed"
         );
 
@@ -190,7 +189,8 @@ public sealed partial class QuicListener : IAsyncDisposable
         GCHandle keepObject = GCHandle.Alloc(this);
         try
         {
-            PendingConnection pendingConnection = await _acceptQueue.Reader
+            PendingConnection pendingConnection = await _acceptQueue
+                .Reader
                 .ReadAsync(cancellationToken)
                 .ConfigureAwait(false);
             await using (pendingConnection.ConfigureAwait(false))
@@ -323,9 +323,13 @@ public sealed partial class QuicListener : IAsyncDisposable
         _handle.Dispose();
 
         // Flush the queue and dispose all remaining connections.
-        _acceptQueue.Writer.TryComplete(
-            ExceptionDispatchInfo.SetCurrentStackTrace(ThrowHelper.GetOperationAbortedException())
-        );
+        _acceptQueue
+            .Writer
+            .TryComplete(
+                ExceptionDispatchInfo.SetCurrentStackTrace(
+                    ThrowHelper.GetOperationAbortedException()
+                )
+            );
         while (_acceptQueue.Reader.TryRead(out PendingConnection? pendingConnection))
         {
             await pendingConnection.DisposeAsync().ConfigureAwait(false);

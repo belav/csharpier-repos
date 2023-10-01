@@ -77,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             var solution = _workspace.CurrentSolution;
-            var analyzerConfigDocument = solution.Projects
+            var analyzerConfigDocument = solution
+                .Projects
                 .Select(p => p.TryGetExistingAnalyzerConfigDocumentAtPath(_filepath))
                 .FirstOrDefault();
             if (analyzerConfigDocument is null)
@@ -85,20 +86,22 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 return;
             }
 
-            _threadingContext.JoinableTaskFactory.Run(async () =>
-            {
-                var originalText = await analyzerConfigDocument
-                    .GetTextAsync(default)
-                    .ConfigureAwait(false);
-                var updatedText = originalText;
-                foreach (var view in _views)
+            _threadingContext
+                .JoinableTaskFactory
+                .Run(async () =>
                 {
-                    updatedText = await view.UpdateEditorConfigAsync(updatedText)
+                    var originalText = await analyzerConfigDocument
+                        .GetTextAsync(default)
                         .ConfigureAwait(false);
-                }
+                    var updatedText = originalText;
+                    foreach (var view in _views)
+                    {
+                        updatedText = await view.UpdateEditorConfigAsync(updatedText)
+                            .ConfigureAwait(false);
+                    }
 
-                _textUpdater.UpdateText(updatedText.GetTextChanges(originalText));
-            });
+                    _textUpdater.UpdateText(updatedText.GetTextChanges(originalText));
+                });
         }
 
         internal IWpfTableControl[] GetTableControls() => _tableControls;

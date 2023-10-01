@@ -119,9 +119,9 @@ public class NonNullableReferencePropertyConventionTest
     private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
     {
         var conventionSet = new ConventionSet();
-        conventionSet.EntityTypeAddedConventions.Add(
-            new PropertyDiscoveryConvention(CreateDependencies())
-        );
+        conventionSet
+            .EntityTypeAddedConventions
+            .Add(new PropertyDiscoveryConvention(CreateDependencies()));
 
         var modelBuilder = new InternalModelBuilder(new Model(conventionSet));
 
@@ -129,7 +129,8 @@ public class NonNullableReferencePropertyConventionTest
     }
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
-        InMemoryTestHelpers.Instance
+        InMemoryTestHelpers
+            .Instance
             .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 

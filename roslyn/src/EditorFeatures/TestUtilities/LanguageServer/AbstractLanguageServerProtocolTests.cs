@@ -55,10 +55,10 @@ namespace Roslyn.Test.Utilities
                     : NoOpLspLogger.Instance;
         }
 
-        private static readonly TestComposition s_composition =
-            EditorTestCompositions.LanguageServerProtocolEditorFeatures
-                .AddParts(typeof(TestDocumentTrackingService))
-                .AddParts(typeof(TestWorkspaceRegistrationService));
+        private static readonly TestComposition s_composition = EditorTestCompositions
+            .LanguageServerProtocolEditorFeatures
+            .AddParts(typeof(TestDocumentTrackingService))
+            .AddParts(typeof(TestWorkspaceRegistrationService));
 
         private class TestSpanMapperProvider : IDocumentServiceProvider
         {
@@ -482,9 +482,9 @@ namespace Roslyn.Test.Utilities
 
             workspace.InitializeDocuments(XElement.Parse(xmlContent), openDocuments: false);
             workspace.TryApplyChanges(
-                workspace.CurrentSolution.WithAnalyzerReferences(
-                    new[] { CreateTestAnalyzersReference() }
-                )
+                workspace
+                    .CurrentSolution
+                    .WithAnalyzerReferences(new[] { CreateTestAnalyzersReference() })
             );
 
             // Important: We must wait for workspace creation operations to finish.
@@ -530,8 +530,9 @@ namespace Roslyn.Test.Utilities
 
         private static IAsynchronousOperationWaiter GetWorkspaceWaiter(TestWorkspace workspace)
         {
-            var operations =
-                workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = workspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             return operations.GetWaiter(FeatureAttribute.Workspace);
         }
 
@@ -792,10 +793,12 @@ namespace Roslyn.Test.Utilities
                 ILspServiceLogger logger
             )
             {
-                var capabilitiesProvider =
-                    workspace.ExportProvider.GetExportedValue<ExperimentalCapabilitiesProvider>();
-                var servicesProvider =
-                    workspace.ExportProvider.GetExportedValue<CSharpVisualBasicLspServiceProvider>();
+                var capabilitiesProvider = workspace
+                    .ExportProvider
+                    .GetExportedValue<ExperimentalCapabilitiesProvider>();
+                var servicesProvider = workspace
+                    .ExportProvider
+                    .GetExportedValue<CSharpVisualBasicLspServiceProvider>();
 
                 var jsonRpc = new JsonRpc(
                     new HeaderDelimitedMessageHandler(
@@ -846,7 +849,8 @@ namespace Roslyn.Test.Utilities
                 {
                     // LSP open files don't care about the project context, just the file contents with the URI.
                     // So pick any of the linked documents to get the text from.
-                    var sourceText = await TestWorkspace.CurrentSolution
+                    var sourceText = await TestWorkspace
+                        .CurrentSolution
                         .GetDocuments(documentUri)
                         .First()
                         .GetTextAsync(CancellationToken.None)
@@ -1012,7 +1016,9 @@ namespace Roslyn.Test.Utilities
                     .Deregister(GetManagerAccessor().GetLspMiscellaneousFilesWorkspace());
 
                 var solutionCrawlerRegistrationService = (SolutionCrawlerRegistrationService)
-                    TestWorkspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+                    TestWorkspace
+                        .Services
+                        .GetRequiredService<ISolutionCrawlerRegistrationService>();
                 solutionCrawlerRegistrationService.Unregister(TestWorkspace);
 
                 // Some tests will manually call shutdown and exit, so attempting to call this during dispose

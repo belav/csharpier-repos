@@ -916,9 +916,11 @@ namespace Microsoft.CodeAnalysis.Emit
                 // in a way that we can use
                 var handle = GetMethodDefinitionHandle(methodDef);
                 if (
-                    _previousGeneration.OriginalMetadata.MetadataReader.GetTableRowCount(
-                        TableIndex.MethodDef
-                    ) >= MetadataTokens.GetRowNumber(handle)
+                    _previousGeneration
+                        .OriginalMetadata
+                        .MetadataReader
+                        .GetTableRowCount(TableIndex.MethodDef)
+                    >= MetadataTokens.GetRowNumber(handle)
                 )
                 {
                     EmitParametersFromOriginalMetadata(methodDef, handle);
@@ -946,9 +948,10 @@ namespace Microsoft.CodeAnalysis.Emit
             MethodDefinitionHandle handle
         )
         {
-            var def = _previousGeneration.OriginalMetadata.MetadataReader.GetMethodDefinition(
-                handle
-            );
+            var def = _previousGeneration
+                .OriginalMetadata
+                .MetadataReader
+                .GetMethodDefinition(handle);
 
             var parameters = def.GetParameters();
             var paramDefinitions = this.GetParametersToEmit(methodDef);
@@ -1022,14 +1025,16 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             if (symbol != null && _changes.IsAdded(symbol.GetISymbol()))
             {
-                Context.Diagnostics.Add(
-                    messageProvider.CreateDiagnostic(
-                        messageProvider.ERR_EncReferenceToAddedMember,
-                        GetSymbolLocation(symbol),
-                        symbol.Name,
-                        symbol.ContainingAssembly.Name
-                    )
-                );
+                Context
+                    .Diagnostics
+                    .Add(
+                        messageProvider.CreateDiagnostic(
+                            messageProvider.ERR_EncReferenceToAddedMember,
+                            GetSymbolLocation(symbol),
+                            symbol.Name,
+                            symbol.ContainingAssembly.Name
+                        )
+                    );
             }
         }
 
@@ -1319,12 +1324,14 @@ namespace Microsoft.CodeAnalysis.Emit
 
             // The data in _previousGeneration.CustomAttributesAdded is not nicely sorted, or even necessarily contiguous
             // so we need to map each target onto the rows its attributes occupy so we know which rows to update
-            var lastRowId = _previousGeneration.OriginalMetadata.MetadataReader.GetTableRowCount(
-                TableIndex.CustomAttribute
-            );
+            var lastRowId = _previousGeneration
+                .OriginalMetadata
+                .MetadataReader
+                .GetTableRowCount(TableIndex.CustomAttribute);
             if (_previousGeneration.CustomAttributesAdded.Count > 0)
             {
-                lastRowId = _previousGeneration.CustomAttributesAdded
+                lastRowId = _previousGeneration
+                    .CustomAttributesAdded
                     .SelectMany(s => s.Value)
                     .Max();
             }
@@ -1342,8 +1349,10 @@ namespace Microsoft.CodeAnalysis.Emit
                 // GetCustomAttributes does a binary search, so is fast. We presume that the number of rows in the original metadata
                 // greatly outnumbers the amount of parents emitted in this delta so even with repeated searches this is still
                 // quicker than iterating the entire original table, even once.
-                var existingCustomAttributes =
-                    _previousGeneration.OriginalMetadata.MetadataReader.GetCustomAttributes(parent);
+                var existingCustomAttributes = _previousGeneration
+                    .OriginalMetadata
+                    .MetadataReader
+                    .GetCustomAttributes(parent);
                 foreach (var attributeHandle in existingCustomAttributes)
                 {
                     int rowId = MetadataTokens.GetRowNumber(attributeHandle);

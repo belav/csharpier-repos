@@ -129,7 +129,8 @@ namespace B
             using var workspace = new TestWorkspace(
                 composition: EditorTestCompositions.EditorFeatures
             );
-            var document = workspace.CurrentSolution
+            var document = workspace
+                .CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", code);
 
@@ -164,7 +165,8 @@ namespace B
                 composition: EditorTestCompositions.EditorFeatures
             );
 
-            var additionalDocument = workspace.CurrentSolution
+            var additionalDocument = workspace
+                .CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("test.cs", "", filePath: "test.cs")
                 .Project
@@ -293,23 +295,24 @@ namespace B
                 composition: EditorTestCompositions.EditorFeatures
             );
 
-            var firstDocument = workspace.CurrentSolution
+            var firstDocument = workspace
+                .CurrentSolution
                 .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("test.cs", "class C1 { }", filePath: "test.cs");
             Document secondDocument;
             if (testDifferentProject)
             {
-                secondDocument = firstDocument.Project.Solution
+                secondDocument = firstDocument
+                    .Project
+                    .Solution
                     .AddProject("TestProject2", "TestProject2", LanguageNames.CSharp)
                     .AddDocument("test2.cs", "class C2 { }", filePath: "test2.cs");
             }
             else
             {
-                secondDocument = firstDocument.Project.AddDocument(
-                    "test2.cs",
-                    "class C2 { }",
-                    filePath: "test2.cs"
-                );
+                secondDocument = firstDocument
+                    .Project
+                    .AddDocument("test2.cs", "class C2 { }", filePath: "test2.cs");
             }
 
             firstDocument = secondDocument.Project.Solution.GetRequiredDocument(firstDocument.Id);
@@ -345,7 +348,9 @@ namespace B
 
             if (testRemovedDocument)
             {
-                firstDocument = firstDocument.Project.Solution
+                firstDocument = firstDocument
+                    .Project
+                    .Solution
                     .RemoveDocument(secondDocument.Id)
                     .GetRequiredDocument(firstDocument.Id);
             }

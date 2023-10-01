@@ -87,7 +87,8 @@ public abstract class EventIdTestBase
 
                 var category = isExtensionMethod
                     ? loggerParameters[0].ParameterType.GenericTypeArguments[0]
-                    : loggerMethod.DeclaringType!
+                    : loggerMethod
+                        .DeclaringType!
                         .GetInterfaces()
                         .Single(
                             i =>

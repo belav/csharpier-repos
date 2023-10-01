@@ -55,9 +55,11 @@ namespace System.ServiceModel.Channels
             {
                 if (this.owner.State != CommunicationState.Created)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ChannelIsOpen))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ChannelIsOpen))
+                        );
                 }
                 this.contextManagementEnabled = value;
             }
@@ -67,9 +69,11 @@ namespace System.ServiceModel.Channels
         {
             if (!this.contextManagementEnabled)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ContextManagementNotEnabled))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ContextManagementNotEnabled))
+                    );
             }
             return new Dictionary<string, string>(this.GetCurrentContext().Context);
         }
@@ -105,22 +109,26 @@ namespace System.ServiceModel.Channels
 
             // verify that the callback context was not sent on an incoming message
             if (
-                message.Headers.FindHeader(
-                    CallbackContextMessageHeader.CallbackContextHeaderName,
-                    CallbackContextMessageHeader.CallbackContextHeaderNamespace
-                ) != -1
+                message
+                    .Headers
+                    .FindHeader(
+                        CallbackContextMessageHeader.CallbackContextHeaderName,
+                        CallbackContextMessageHeader.CallbackContextHeaderNamespace
+                    ) != -1
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new ProtocolException(
-                        SR.GetString(
-                            SR.CallbackContextNotExpectedOnIncomingMessageAtClient,
-                            message.Headers.Action,
-                            CallbackContextMessageHeader.CallbackContextHeaderName,
-                            CallbackContextMessageHeader.CallbackContextHeaderNamespace
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new ProtocolException(
+                            SR.GetString(
+                                SR.CallbackContextNotExpectedOnIncomingMessageAtClient,
+                                message.Headers.Action,
+                                CallbackContextMessageHeader.CallbackContextHeaderName,
+                                CallbackContextMessageHeader.CallbackContextHeaderNamespace
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -137,9 +145,11 @@ namespace System.ServiceModel.Channels
             {
                 if (this.contextManagementEnabled)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.InvalidMessageContext))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.InvalidMessageContext))
+                        );
                 }
             }
 
@@ -183,18 +193,22 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.ContextExchangeMechanism != ContextExchangeMechanism.ContextSoapHeader)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.CallbackContextOnlySupportedInSoap)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.CallbackContextOnlySupportedInSoap)
+                                )
+                            );
+                    }
+                    message
+                        .Headers
+                        .Add(
+                            new CallbackContextMessageHeader(
+                                callbackAddress,
+                                message.Version.Addressing
                             )
                         );
-                    }
-                    message.Headers.Add(
-                        new CallbackContextMessageHeader(
-                            callbackAddress,
-                            message.Version.Addressing
-                        )
-                    );
                 }
             }
         }
@@ -230,9 +244,11 @@ namespace System.ServiceModel.Channels
             //Cannot SetContext when ContextManagement not enabled.
             if (!this.contextManagementEnabled)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ContextManagementNotEnabled))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ContextManagementNotEnabled))
+                    );
             }
 
             //Cannot reset context after initialized in server case.
@@ -257,15 +273,19 @@ namespace System.ServiceModel.Channels
 
             if (isServerIssued)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.InvalidContextReceived))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(SR.GetString(SR.InvalidContextReceived))
+                    );
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.CachedContextIsImmutable))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.CachedContextIsImmutable))
+                    );
             }
         }
 

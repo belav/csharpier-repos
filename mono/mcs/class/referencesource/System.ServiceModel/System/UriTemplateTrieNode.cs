@@ -482,15 +482,17 @@ namespace System
                     {
                         if (!allowDuplicateEquivalentUriTemplates && (pesLists[i].Count > 1))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.UTTDuplicate,
-                                        pesLists[i][0].Items[0].Key.ToString(),
-                                        pesLists[i][1].Items[0].Key.ToString()
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.UTTDuplicate,
+                                            pesLists[i][0].Items[0].Key.ToString(),
+                                            pesLists[i][1].Items[0].Key.ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         for (int j = 0; j < pesLists[i].Count; j++)
                         {
@@ -542,15 +544,17 @@ namespace System
                             // a potential multiple match here; for now we are throwing.
                             UriTemplate firstTemplate = FindAnyUriTemplate(locations[i][0].node);
                             UriTemplate secondTemplate = FindAnyUriTemplate(locations[i][1].node);
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(
-                                        SR.UTTDuplicate,
-                                        firstTemplate.ToString(),
-                                        secondTemplate.ToString()
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.UTTDuplicate,
+                                            firstTemplate.ToString(),
+                                            secondTemplate.ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         for (int j = 0; j < locations[i].Count; j++)
                         {

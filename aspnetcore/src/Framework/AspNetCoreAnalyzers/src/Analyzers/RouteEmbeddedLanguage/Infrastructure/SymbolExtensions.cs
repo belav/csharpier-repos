@@ -71,10 +71,9 @@ internal static class SymbolExtensions
         string typeName,
         SemanticModel semanticModel
     ) =>
-        SymbolEqualityComparer.Default.Equals(
-            type,
-            semanticModel.Compilation.GetTypeByMetadataName(typeName)
-        );
+        SymbolEqualityComparer
+            .Default
+            .Equals(type, semanticModel.Compilation.GetTypeByMetadataName(typeName));
 
     public static bool IsType(this INamedTypeSymbol type, INamedTypeSymbol otherType) =>
         SymbolEqualityComparer.Default.Equals(type, otherType);

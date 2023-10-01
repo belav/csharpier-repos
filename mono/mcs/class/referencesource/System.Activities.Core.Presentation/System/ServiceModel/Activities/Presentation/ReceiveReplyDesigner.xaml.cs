@@ -45,9 +45,9 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             var categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
-                    CorrelationsCategoryLabelKey
-                )
+                EditorCategoryTemplateDictionary
+                    .Instance
+                    .GetCategoryTitle(CorrelationsCategoryLabelKey)
             );
 
             builder.AddCustomAttributes(
@@ -59,9 +59,9 @@ namespace System.ServiceModel.Activities.Presentation
             );
 
             categoryAttribute = new CategoryAttribute(
-                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
-                    MiscellaneousCategoryLabelKey
-                )
+                EditorCategoryTemplateDictionary
+                    .Instance
+                    .GetCategoryTitle(MiscellaneousCategoryLabelKey)
             );
 
             builder.AddCustomAttributes(
@@ -161,7 +161,8 @@ namespace System.ServiceModel.Activities.Presentation
         void OnDefineButtonClicked(object sender, RoutedEventArgs args)
         {
             using (
-                EditingScope scope = this.Context.Services
+                EditingScope scope = this.Context
+                    .Services
                     .GetRequiredService<ModelTreeManager>()
                     .CreateEditingScope(
                         StringResourceDictionary.Instance.GetString("editReceiveContent"),

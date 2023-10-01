@@ -34,7 +34,9 @@ public class NavigationEagerLoadingConvention : IForeignKeyOwnershipChangedConve
         IConventionForeignKeyBuilder relationshipBuilder,
         IConventionContext<bool?> context
     ) =>
-        relationshipBuilder.Metadata.PrincipalToDependent?.Builder.AutoInclude(
-            relationshipBuilder.Metadata.IsOwnership
-        );
+        relationshipBuilder
+            .Metadata
+            .PrincipalToDependent
+            ?.Builder
+            .AutoInclude(relationshipBuilder.Metadata.IsOwnership);
 }

@@ -24,8 +24,10 @@ namespace System.Net.Security.Tests
             bool leaveOpen = false
         )
         {
-            using X509Certificate2 cert =
-                Test.Common.Configuration.Certificates.GetServerCertificate();
+            using X509Certificate2 cert = Test.Common
+                .Configuration
+                .Certificates
+                .GetServerCertificate();
             var ssl1 = new SslStream(
                 wrapped.Stream1,
                 leaveOpen,

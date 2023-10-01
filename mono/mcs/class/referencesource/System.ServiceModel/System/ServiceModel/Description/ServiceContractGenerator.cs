@@ -151,11 +151,13 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpoint");
 
             if (configuration == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxServiceContractGeneratorConfigRequired)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxServiceContractGeneratorConfigRequired)
+                        )
+                    );
 
             CodeTypeReference retVal;
             string typeName;
@@ -189,9 +191,9 @@ namespace System.ServiceModel.Description
         )
         {
             if (contractDescription == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "contractDescription"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("contractDescription");
 
             Type existingType;
             if (referencedTypes.TryGetValue(contractDescription, out existingType))
@@ -314,12 +316,12 @@ namespace System.ServiceModel.Description
                 this.parent = parent;
                 this.typeFactory = typeFactory;
 
-                this.asyncMethods = parent.OptionsInternal.IsSet(
-                    ServiceContractGenerationOptions.AsynchronousMethods
-                );
-                this.taskMethod = parent.OptionsInternal.IsSet(
-                    ServiceContractGenerationOptions.TaskBasedAsynchronousMethod
-                );
+                this.asyncMethods = parent
+                    .OptionsInternal
+                    .IsSet(ServiceContractGenerationOptions.AsynchronousMethods);
+                this.taskMethod = parent
+                    .OptionsInternal
+                    .IsSet(ServiceContractGenerationOptions.TaskBasedAsynchronousMethod);
             }
 
             public ServiceContractGenerationContext CreateContext(
@@ -421,35 +423,43 @@ namespace System.ServiceModel.Description
                 {
                     beginMethod = new CodeMemberMethod();
                     beginMethod.Name = ServiceReflector.BeginMethodNamePrefix + syncMethodName;
-                    beginMethod.Parameters.Add(
-                        new CodeParameterDeclarationExpression(
-                            context.ServiceContractGenerator.GetCodeTypeReference(
-                                typeof(AsyncCallback)
-                            ),
-                            Strings.AsyncCallbackArgName
-                        )
-                    );
-                    beginMethod.Parameters.Add(
-                        new CodeParameterDeclarationExpression(
-                            context.ServiceContractGenerator.GetCodeTypeReference(typeof(object)),
-                            Strings.AsyncStateArgName
-                        )
-                    );
-                    beginMethod.ReturnType = context.ServiceContractGenerator.GetCodeTypeReference(
-                        typeof(IAsyncResult)
-                    );
+                    beginMethod
+                        .Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(
+                                context
+                                    .ServiceContractGenerator
+                                    .GetCodeTypeReference(typeof(AsyncCallback)),
+                                Strings.AsyncCallbackArgName
+                            )
+                        );
+                    beginMethod
+                        .Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(
+                                context
+                                    .ServiceContractGenerator
+                                    .GetCodeTypeReference(typeof(object)),
+                                Strings.AsyncStateArgName
+                            )
+                        );
+                    beginMethod.ReturnType = context
+                        .ServiceContractGenerator
+                        .GetCodeTypeReference(typeof(IAsyncResult));
                     declaringType.Members.Add(beginMethod);
 
                     endMethod = new CodeMemberMethod();
                     endMethod.Name = ServiceReflector.EndMethodNamePrefix + syncMethodName;
-                    endMethod.Parameters.Add(
-                        new CodeParameterDeclarationExpression(
-                            context.ServiceContractGenerator.GetCodeTypeReference(
-                                typeof(IAsyncResult)
-                            ),
-                            Strings.AsyncResultArgName
-                        )
-                    );
+                    endMethod
+                        .Parameters
+                        .Add(
+                            new CodeParameterDeclarationExpression(
+                                context
+                                    .ServiceContractGenerator
+                                    .GetCodeTypeReference(typeof(IAsyncResult)),
+                                Strings.AsyncResultArgName
+                            )
+                        );
                     declaringType.Members.Add(endMethod);
 
                     operationContext = new OperationContractGenerationContext(
@@ -546,9 +556,9 @@ namespace System.ServiceModel.Description
             void AddServiceContractAttribute(ServiceContractGenerationContext context)
             {
                 CodeAttributeDeclaration serviceContractAttr = new CodeAttributeDeclaration(
-                    context.ServiceContractGenerator.GetCodeTypeReference(
-                        typeof(ServiceContractAttribute)
-                    )
+                    context
+                        .ServiceContractGenerator
+                        .GetCodeTypeReference(typeof(ServiceContractAttribute))
                 );
 
                 if (context.ContractType.Name != context.Contract.CodeName)
@@ -559,64 +569,79 @@ namespace System.ServiceModel.Description
                         NamingHelper.XmlName(context.Contract.CodeName) == context.Contract.Name
                             ? context.Contract.CodeName
                             : context.Contract.Name;
-                    serviceContractAttr.Arguments.Add(
-                        new CodeAttributeArgument("Name", new CodePrimitiveExpression(friendlyName))
-                    );
+                    serviceContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "Name",
+                                new CodePrimitiveExpression(friendlyName)
+                            )
+                        );
                 }
 
                 if (NamingHelper.DefaultNamespace != context.Contract.Namespace)
-                    serviceContractAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "Namespace",
-                            new CodePrimitiveExpression(context.Contract.Namespace)
-                        )
-                    );
+                    serviceContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "Namespace",
+                                new CodePrimitiveExpression(context.Contract.Namespace)
+                            )
+                        );
 
-                serviceContractAttr.Arguments.Add(
-                    new CodeAttributeArgument(
-                        "ConfigurationName",
-                        new CodePrimitiveExpression(
-                            NamespaceHelper
-                                .GetCodeTypeReference(context.Namespace, context.ContractType)
-                                .BaseType
-                        )
-                    )
-                );
-
-                if (context.Contract.HasProtectionLevel)
-                {
-                    serviceContractAttr.Arguments.Add(
+                serviceContractAttr
+                    .Arguments
+                    .Add(
                         new CodeAttributeArgument(
-                            "ProtectionLevel",
-                            new CodeFieldReferenceExpression(
-                                new CodeTypeReferenceExpression(typeof(ProtectionLevel)),
-                                context.Contract.ProtectionLevel.ToString()
+                            "ConfigurationName",
+                            new CodePrimitiveExpression(
+                                NamespaceHelper
+                                    .GetCodeTypeReference(context.Namespace, context.ContractType)
+                                    .BaseType
                             )
                         )
                     );
+
+                if (context.Contract.HasProtectionLevel)
+                {
+                    serviceContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "ProtectionLevel",
+                                new CodeFieldReferenceExpression(
+                                    new CodeTypeReferenceExpression(typeof(ProtectionLevel)),
+                                    context.Contract.ProtectionLevel.ToString()
+                                )
+                            )
+                        );
                 }
 
                 if (context.DuplexCallbackType != null)
                 {
-                    serviceContractAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "CallbackContract",
-                            new CodeTypeOfExpression(context.DuplexCallbackTypeReference)
-                        )
-                    );
+                    serviceContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "CallbackContract",
+                                new CodeTypeOfExpression(context.DuplexCallbackTypeReference)
+                            )
+                        );
                 }
 
                 if (context.Contract.SessionMode != SessionMode.Allowed)
                 {
-                    serviceContractAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "SessionMode",
-                            new CodeFieldReferenceExpression(
-                                new CodeTypeReferenceExpression(typeof(SessionMode)),
-                                context.Contract.SessionMode.ToString()
+                    serviceContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "SessionMode",
+                                new CodeFieldReferenceExpression(
+                                    new CodeTypeReferenceExpression(typeof(SessionMode)),
+                                    context.Contract.SessionMode.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 context.ContractType.CustomAttributes.Add(serviceContractAttr);
@@ -626,21 +651,24 @@ namespace System.ServiceModel.Description
             {
                 if (context.SyncMethod != null)
                 {
-                    context.SyncMethod.CustomAttributes.Add(
-                        CreateOperationContractAttributeDeclaration(context.Operation, false)
-                    );
+                    context
+                        .SyncMethod
+                        .CustomAttributes
+                        .Add(CreateOperationContractAttributeDeclaration(context.Operation, false));
                 }
                 if (context.BeginMethod != null)
                 {
-                    context.BeginMethod.CustomAttributes.Add(
-                        CreateOperationContractAttributeDeclaration(context.Operation, true)
-                    );
+                    context
+                        .BeginMethod
+                        .CustomAttributes
+                        .Add(CreateOperationContractAttributeDeclaration(context.Operation, true));
                 }
                 if (context.TaskMethod != null)
                 {
-                    context.TaskMethod.CustomAttributes.Add(
-                        CreateOperationContractAttributeDeclaration(context.Operation, false)
-                    );
+                    context
+                        .TaskMethod
+                        .CustomAttributes
+                        .Add(CreateOperationContractAttributeDeclaration(context.Operation, false));
                 }
             }
 
@@ -650,57 +678,70 @@ namespace System.ServiceModel.Description
             )
             {
                 CodeAttributeDeclaration serviceOperationAttr = new CodeAttributeDeclaration(
-                    context.ServiceContractGenerator.GetCodeTypeReference(
-                        typeof(OperationContractAttribute)
-                    )
+                    context
+                        .ServiceContractGenerator
+                        .GetCodeTypeReference(typeof(OperationContractAttribute))
                 );
                 if (operationDescription.IsOneWay)
                 {
-                    serviceOperationAttr.Arguments.Add(
-                        new CodeAttributeArgument("IsOneWay", new CodePrimitiveExpression(true))
-                    );
+                    serviceOperationAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument("IsOneWay", new CodePrimitiveExpression(true))
+                        );
                 }
                 if (
                     (operationDescription.DeclaringContract.SessionMode == SessionMode.Required)
                     && operationDescription.IsTerminating
                 )
                 {
-                    serviceOperationAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "IsTerminating",
-                            new CodePrimitiveExpression(true)
-                        )
-                    );
+                    serviceOperationAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "IsTerminating",
+                                new CodePrimitiveExpression(true)
+                            )
+                        );
                 }
                 if (
                     (operationDescription.DeclaringContract.SessionMode == SessionMode.Required)
                     && !operationDescription.IsInitiating
                 )
                 {
-                    serviceOperationAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "IsInitiating",
-                            new CodePrimitiveExpression(false)
-                        )
-                    );
+                    serviceOperationAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "IsInitiating",
+                                new CodePrimitiveExpression(false)
+                            )
+                        );
                 }
                 if (asyncPattern)
                 {
-                    serviceOperationAttr.Arguments.Add(
-                        new CodeAttributeArgument("AsyncPattern", new CodePrimitiveExpression(true))
-                    );
+                    serviceOperationAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "AsyncPattern",
+                                new CodePrimitiveExpression(true)
+                            )
+                        );
                 }
                 if (operationDescription.HasProtectionLevel)
                 {
-                    serviceOperationAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "ProtectionLevel",
-                            new CodeFieldReferenceExpression(
-                                new CodeTypeReferenceExpression(typeof(ProtectionLevel)),
-                                operationDescription.ProtectionLevel.ToString()
+                    serviceOperationAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "ProtectionLevel",
+                                new CodeFieldReferenceExpression(
+                                    new CodeTypeReferenceExpression(typeof(ProtectionLevel)),
+                                    operationDescription.ProtectionLevel.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return serviceOperationAttr;
             }
@@ -723,9 +764,13 @@ namespace System.ServiceModel.Description
             {
                 CodeTypeDeclaration channelType = context.TypeFactory.CreateInterfaceType();
                 channelType.BaseTypes.Add(context.ContractTypeReference);
-                channelType.BaseTypes.Add(
-                    context.ServiceContractGenerator.GetCodeTypeReference(typeof(IClientChannel))
-                );
+                channelType
+                    .BaseTypes
+                    .Add(
+                        context
+                            .ServiceContractGenerator
+                            .GetCodeTypeReference(typeof(IClientChannel))
+                    );
 
                 new UniqueCodeNamespaceScope(context.Namespace).AddUnique(
                     channelType,
@@ -781,11 +826,13 @@ namespace System.ServiceModel.Description
             {
                 if (codeType.IsClass)
                 {
-                    codeType.CustomAttributes.Add(
-                        new CodeAttributeDeclaration(
-                            parent.GetCodeTypeReference(typeof(DebuggerStepThroughAttribute))
-                        )
-                    );
+                    codeType
+                        .CustomAttributes
+                        .Add(
+                            new CodeAttributeDeclaration(
+                                parent.GetCodeTypeReference(typeof(DebuggerStepThroughAttribute))
+                            )
+                        );
                 }
             }
 
@@ -796,14 +843,16 @@ namespace System.ServiceModel.Description
                 );
 
                 AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetName();
-                generatedCodeAttribute.Arguments.Add(
-                    new CodeAttributeArgument(new CodePrimitiveExpression(assemblyName.Name))
-                );
-                generatedCodeAttribute.Arguments.Add(
-                    new CodeAttributeArgument(
-                        new CodePrimitiveExpression(assemblyName.Version.ToString())
-                    )
-                );
+                generatedCodeAttribute
+                    .Arguments
+                    .Add(new CodeAttributeArgument(new CodePrimitiveExpression(assemblyName.Name)));
+                generatedCodeAttribute
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            new CodePrimitiveExpression(assemblyName.Version.ToString())
+                        )
+                    );
 
                 codeType.CustomAttributes.Add(generatedCodeAttribute);
             }
@@ -929,55 +978,66 @@ namespace System.ServiceModel.Description
             {
                 CodeTypeReference exceptionTypeReference =
                     fault.DetailType != null
-                        ? context.Contract.ServiceContractGenerator.GetCodeTypeReference(
-                            fault.DetailType
-                        )
+                        ? context
+                            .Contract
+                            .ServiceContractGenerator
+                            .GetCodeTypeReference(fault.DetailType)
                         : fault.DetailTypeReference;
                 if (exceptionTypeReference == null || exceptionTypeReference == voidTypeReference)
                     return null;
                 CodeAttributeDeclaration faultContractAttr = new CodeAttributeDeclaration(
-                    context.ServiceContractGenerator.GetCodeTypeReference(
-                        typeof(FaultContractAttribute)
-                    )
+                    context
+                        .ServiceContractGenerator
+                        .GetCodeTypeReference(typeof(FaultContractAttribute))
                 );
-                faultContractAttr.Arguments.Add(
-                    new CodeAttributeArgument(new CodeTypeOfExpression(exceptionTypeReference))
-                );
-                if (fault.Action != null)
-                    faultContractAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "Action",
-                            new CodePrimitiveExpression(fault.Action)
-                        )
+                faultContractAttr
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(new CodeTypeOfExpression(exceptionTypeReference))
                     );
+                if (fault.Action != null)
+                    faultContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "Action",
+                                new CodePrimitiveExpression(fault.Action)
+                            )
+                        );
                 if (fault.HasProtectionLevel)
                 {
-                    faultContractAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "ProtectionLevel",
-                            new CodeFieldReferenceExpression(
-                                new CodeTypeReferenceExpression(typeof(ProtectionLevel)),
-                                fault.ProtectionLevel.ToString()
+                    faultContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "ProtectionLevel",
+                                new CodeFieldReferenceExpression(
+                                    new CodeTypeReferenceExpression(typeof(ProtectionLevel)),
+                                    fault.ProtectionLevel.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 // override name with encoded value specified in wsdl; this only works beacuse
                 // our Encoding algorithm will leave alredy encoded names untouched
                 if (!XmlName.IsNullOrEmpty(fault.ElementName))
-                    faultContractAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "Name",
-                            new CodePrimitiveExpression(fault.ElementName.EncodedName)
-                        )
-                    );
+                    faultContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "Name",
+                                new CodePrimitiveExpression(fault.ElementName.EncodedName)
+                            )
+                        );
                 if (fault.Namespace != context.Contract.Contract.Namespace)
-                    faultContractAttr.Arguments.Add(
-                        new CodeAttributeArgument(
-                            "Namespace",
-                            new CodePrimitiveExpression(fault.Namespace)
-                        )
-                    );
+                    faultContractAttr
+                        .Arguments
+                        .Add(
+                            new CodeAttributeArgument(
+                                "Namespace",
+                                new CodePrimitiveExpression(fault.Namespace)
+                            )
+                        );
                 return faultContractAttr;
             }
         }
@@ -1193,8 +1253,10 @@ namespace System.ServiceModel.Description
                 OperationContractGenerationContext context
             )
             {
-                System.ServiceModel.TransactionFlowAttribute attr =
-                    context.Operation.Behaviors.Find<System.ServiceModel.TransactionFlowAttribute>();
+                System.ServiceModel.TransactionFlowAttribute attr = context
+                    .Operation
+                    .Behaviors
+                    .Find<System.ServiceModel.TransactionFlowAttribute>();
                 if (attr != null && attr.Transactions != TransactionFlowOption.NotAllowed)
                 {
                     CodeMemberMethod methodDecl = context.SyncMethod ?? context.BeginMethod;
@@ -1208,17 +1270,20 @@ namespace System.ServiceModel.Description
             )
             {
                 CodeAttributeDeclaration attrDecl = new CodeAttributeDeclaration(
-                    context.Contract.ServiceContractGenerator.GetCodeTypeReference(
-                        typeof(TransactionFlowAttribute)
-                    )
+                    context
+                        .Contract
+                        .ServiceContractGenerator
+                        .GetCodeTypeReference(typeof(TransactionFlowAttribute))
                 );
-                attrDecl.Arguments.Add(
-                    new CodeAttributeArgument(
-                        ServiceContractGenerator.GetEnumReference<TransactionFlowOption>(
-                            attr.Transactions
+                attrDecl
+                    .Arguments
+                    .Add(
+                        new CodeAttributeArgument(
+                            ServiceContractGenerator.GetEnumReference<TransactionFlowOption>(
+                                attr.Transactions
+                            )
                         )
-                    )
-                );
+                    );
                 return attrDecl;
             }
         }

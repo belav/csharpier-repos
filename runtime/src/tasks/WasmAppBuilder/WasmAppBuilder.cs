@@ -367,13 +367,13 @@ public class WasmAppBuilder : Task
         }
 
         if (!InvariantGlobalization)
-            config.Assets.Add(
-                new IcuData(IcuDataFileName!) { LoadRemote = RemoteSources?.Length > 0 }
-            );
+            config
+                .Assets
+                .Add(new IcuData(IcuDataFileName!) { LoadRemote = RemoteSources?.Length > 0 });
 
-        config.Assets.Add(
-            new VfsEntry("dotnet.timezones.blat") { VirtualPath = "/usr/share/zoneinfo/" }
-        );
+        config
+            .Assets
+            .Add(new VfsEntry("dotnet.timezones.blat") { VirtualPath = "/usr/share/zoneinfo/" });
         config.Assets.Add(new WasmEntry("dotnet.wasm"));
         if (IncludeThreadsWorker)
             config.Assets.Add(new ThreadsWorkerEntry("dotnet.worker.js"));

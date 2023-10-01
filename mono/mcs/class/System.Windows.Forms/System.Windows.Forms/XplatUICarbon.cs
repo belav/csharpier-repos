@@ -234,9 +234,11 @@ namespace System.Windows.Forms
         {
             if (Marshal.SizeOf<IntPtr>() == 8)
             {
-                Console.Error.WriteLine(
-                    "WARNING: The Carbon driver has not been ported to 64bits, and very few parts of Windows.Forms will work properly, or at all"
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "WARNING: The Carbon driver has not been ported to 64bits, and very few parts of Windows.Forms will work properly, or at all"
+                    );
             }
             // Initialize the event handlers
             Carbon.EventHandler.Driver = this;
@@ -1442,14 +1444,9 @@ namespace System.Windows.Forms
             int yHotSpot
         )
         {
-            return Carbon.Cursor.DefineCursor(
-                bitmap,
-                mask,
-                cursor_pixel,
-                mask_pixel,
-                xHotSpot,
-                yHotSpot
-            );
+            return Carbon
+                .Cursor
+                .DefineCursor(bitmap, mask, cursor_pixel, mask_pixel, xHotSpot, yHotSpot);
         }
 
         internal override IntPtr DefineStdCursor(StdCursor id)

@@ -49,7 +49,8 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             this.parent = parent;
 
             RawLayer = CodeLayerFactory.Create(
-                this.parent.SubroutineFacade
+                this.parent
+                    .SubroutineFacade
                     .GetControlFlowGraph(method)
                     .GetDecoder(parent.MetaDataProvider),
                 parent.MetaDataProvider,
@@ -61,12 +62,12 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             if (DebugOptions.Debug)
             {
                 Console.WriteLine("-----APC based CFG-----");
-                RawLayer.ILDecoder.ContextProvider.MethodContext.CFG.Print(
-                    Console.Out,
-                    RawLayer.Printer,
-                    null,
-                    null
-                );
+                RawLayer
+                    .ILDecoder
+                    .ContextProvider
+                    .MethodContext
+                    .CFG
+                    .Print(Console.Out, RawLayer.Printer, null, null);
             }
 
             StackLayer = CodeLayerFactory.Create(
@@ -80,12 +81,12 @@ namespace Mono.CodeContracts.Static.Analysis.Drivers
             if (DebugOptions.Debug)
             {
                 Console.WriteLine("-----Stack based CFG-----");
-                StackLayer.ILDecoder.ContextProvider.MethodContext.CFG.Print(
-                    Console.Out,
-                    StackLayer.Printer,
-                    null,
-                    null
-                );
+                StackLayer
+                    .ILDecoder
+                    .ContextProvider
+                    .MethodContext
+                    .CFG
+                    .Print(Console.Out, StackLayer.Printer, null, null);
             }
         }
 

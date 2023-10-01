@@ -21,13 +21,15 @@ public sealed class DocumentOptionSetTests
     public void GetOption()
     {
         var underlyingSet = new TestOptionSet(
-            ImmutableDictionary<OptionKey, object?>.Empty.Add(
-                new OptionKey(
-                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
-                    LanguageNames.CSharp
-                ),
-                new CodeStyleOption2<bool>(true, NotificationOption2.Error)
-            )
+            ImmutableDictionary<OptionKey, object?>
+                .Empty
+                .Add(
+                    new OptionKey(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        LanguageNames.CSharp
+                    ),
+                    new CodeStyleOption2<bool>(true, NotificationOption2.Error)
+                )
         );
 
         var configOptions = StructuredAnalyzerConfigOptions.Create(
@@ -79,13 +81,15 @@ public sealed class DocumentOptionSetTests
     public void GetOption_NoConfigOptions()
     {
         var underlyingSet = new TestOptionSet(
-            ImmutableDictionary<OptionKey, object?>.Empty.Add(
-                new OptionKey(
-                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
-                    LanguageNames.CSharp
-                ),
-                new CodeStyleOption2<bool>(true, NotificationOption2.Error)
-            )
+            ImmutableDictionary<OptionKey, object?>
+                .Empty
+                .Add(
+                    new OptionKey(
+                        CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                        LanguageNames.CSharp
+                    ),
+                    new CodeStyleOption2<bool>(true, NotificationOption2.Error)
+                )
         );
 
         var set = new DocumentOptionSet(configOptions: null, underlyingSet, LanguageNames.CSharp);
@@ -209,7 +213,8 @@ public sealed class DocumentOptionSetTests
     public void InternalStorageMapping_NewLineBeforeOpenBrace_Config()
     {
         var underlyingSet = new TestOptionSet(
-            ImmutableDictionary<OptionKey, object?>.Empty
+            ImmutableDictionary<OptionKey, object?>
+                .Empty
                 .Add(new OptionKey(CSharpFormattingOptions.NewLinesForBracesInTypes), false)
                 .Add(new OptionKey(CSharpFormattingOptions.NewLinesForBracesInAccessors), true)
                 .Add(

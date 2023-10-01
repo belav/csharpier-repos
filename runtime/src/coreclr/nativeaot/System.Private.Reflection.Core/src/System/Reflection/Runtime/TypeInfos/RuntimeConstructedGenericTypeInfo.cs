@@ -240,9 +240,9 @@ namespace System.Reflection.Runtime.TypeInfos
                         is RuntimeNamedTypeInfo genericTypeDefinitionNamedTypeInfo
                     )
                 )
-                    throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(
-                        genericTypeDefinition
-                    );
+                    throw ReflectionCoreExecution
+                        .ExecutionDomain
+                        .CreateMissingMetadataException(genericTypeDefinition);
                 return genericTypeDefinitionNamedTypeInfo;
             }
         }

@@ -207,22 +207,24 @@ internal static class RoutePatternUsageDetector
         // IEndpointRouteBuilder may be removed from symbol because the method is called as an extension method.
         // ReducedFrom includes the original IEndpointRouteBuilder parameter.
         if (
-            !(method.ReducedFrom ?? method).Parameters.Any(
-                a =>
-                    SymbolEqualityComparer.Default.Equals(
-                        a.Type,
-                        wellKnownTypes.IEndpointRouteBuilder
-                    ) || a.Type.Implements(wellKnownTypes.IEndpointRouteBuilder)
-            )
+            !(method.ReducedFrom ?? method)
+                .Parameters
+                .Any(
+                    a =>
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(a.Type, wellKnownTypes.IEndpointRouteBuilder)
+                        || a.Type.Implements(wellKnownTypes.IEndpointRouteBuilder)
+                )
         )
         {
             return null;
         }
 
         var delegateSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_Delegate);
-        var delegateParameter = method.Parameters.FirstOrDefault(
-            p => SymbolEqualityComparer.Default.Equals(delegateSymbol, p.Type)
-        );
+        var delegateParameter = method
+            .Parameters
+            .FirstOrDefault(p => SymbolEqualityComparer.Default.Equals(delegateSymbol, p.Type));
         if (delegateParameter == null)
         {
             return null;
@@ -235,12 +237,17 @@ internal static class RoutePatternUsageDetector
         }
 
         var stringSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_String);
-        var routeStringParameter = method.Parameters.FirstOrDefault(
-            p =>
-                SymbolEqualityComparer.Default.Equals(stringSymbol, p.Type)
-                && RouteStringSyntaxDetector.HasMatchingStringSyntaxAttribute(p, out var identifer)
-                && identifer == "Route"
-        );
+        var routeStringParameter = method
+            .Parameters
+            .FirstOrDefault(
+                p =>
+                    SymbolEqualityComparer.Default.Equals(stringSymbol, p.Type)
+                    && RouteStringSyntaxDetector.HasMatchingStringSyntaxAttribute(
+                        p,
+                        out var identifer
+                    )
+                    && identifer == "Route"
+            );
         if (routeStringParameter == null)
         {
             return null;

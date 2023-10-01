@@ -267,7 +267,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // documents, attempt to locate a matching source generated document in the project.
                     if (
                         document is null
-                        && project.Solution.Services
+                        && project
+                            .Solution
+                            .Services
                             .GetService<ISolutionCrawlerOptionsService>()
                             ?.EnableDiagnosticsInSourceGeneratedFiles == true
                     )

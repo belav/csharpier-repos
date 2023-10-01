@@ -135,9 +135,11 @@ namespace System.Activities.Hosting
             {
                 if (!this.isInitialized)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.ControllerInvalidBeforeInitialize)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(SR.ControllerInvalidBeforeInitialize)
+                        );
                 }
 
                 return this.controller;
@@ -203,10 +205,9 @@ namespace System.Activities.Hosting
             ActivityExecutor executor = deserializedRuntimeState as ActivityExecutor;
             if (executor == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "deserializedRuntimeState",
-                    SR.InvalidRuntimeState
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("deserializedRuntimeState", SR.InvalidRuntimeState);
             }
             if (updateMap == null)
             {
@@ -260,10 +261,9 @@ namespace System.Activities.Hosting
 
             if (this.executor == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "deserializedRuntimeState",
-                    SR.InvalidRuntimeState
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("deserializedRuntimeState", SR.InvalidRuntimeState);
             }
             this.executor.ThrowIfNonSerializable();
 
@@ -287,9 +287,13 @@ namespace System.Activities.Hosting
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InstanceUpdateException(SR.InvalidImplementationAsWorkflowRoot)
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InstanceUpdateException(
+                                        SR.InvalidImplementationAsWorkflowRoot
+                                    )
+                                );
                         }
                     }
 
@@ -390,8 +394,9 @@ namespace System.Activities.Hosting
                     LocationReferenceEnvironment parentEnvironment = null;
                     if (extensionManager != null && extensionManager.SymbolResolver != null)
                     {
-                        parentEnvironment =
-                            extensionManager.SymbolResolver.AsLocationReferenceEnvironment();
+                        parentEnvironment = extensionManager
+                            .SymbolResolver
+                            .AsLocationReferenceEnvironment();
                     }
                     localEnvironment = new ActivityLocationReferenceEnvironment(parentEnvironment);
                 }
@@ -507,9 +512,9 @@ namespace System.Activities.Hosting
         {
             if (this.isInitialized)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.WorkflowInstanceIsReadOnly(this.Id))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.WorkflowInstanceIsReadOnly(this.Id)));
             }
         }
 
@@ -688,9 +693,9 @@ namespace System.Activities.Hosting
 
             if (wasPerformingOperation)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.RuntimeOperationInProgress)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.RuntimeOperationInProgress));
             }
         }
 
@@ -758,9 +763,13 @@ namespace System.Activities.Hosting
             ThrowIfAborted();
             if (!this.Controller.IsPersistable)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.PrepareForSerializationRequiresPersistability)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.PrepareForSerializationRequiresPersistability
+                        )
+                    );
             }
         }
 
@@ -785,9 +794,11 @@ namespace System.Activities.Hosting
             ThrowIfAborted();
             if (this.Controller.IsPersistable)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.PauseWhenPersistableInvalidIfPersistable)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.PauseWhenPersistableInvalidIfPersistable)
+                    );
             }
         }
 
@@ -938,9 +949,9 @@ namespace System.Activities.Hosting
         {
             if (this.isAborted || (this.executor != null && this.executor.IsAbortPending))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.WorkflowInstanceAborted(this.Id))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.WorkflowInstanceAborted(this.Id)));
             }
         }
 
@@ -948,9 +959,9 @@ namespace System.Activities.Hosting
         {
             if (!this.executor.IsIdle)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BookmarksOnlyResumableWhileIdle)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.BookmarksOnlyResumableWhileIdle));
             }
         }
 
@@ -1101,8 +1112,9 @@ namespace System.Activities.Hosting
 
                     this.instance.ValidateGetMappedVariables();
 
-                    IDictionary<string, LocationInfo> mappedLocations =
-                        this.instance.executor.GatherMappableVariables();
+                    IDictionary<string, LocationInfo> mappedLocations = this.instance
+                        .executor
+                        .GatherMappableVariables();
                     if (mappedLocations != null)
                     {
                         mappedLocations = new ReadOnlyDictionaryInternal<string, LocationInfo>(

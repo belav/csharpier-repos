@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             // See if the current snapshot we're pointing at is the same one the host wants us to sync to.  If so, we
             // don't need to do anything.
-            var currentSolutionChecksum = await this.CurrentSolution.State
+            var currentSolutionChecksum = await this.CurrentSolution
+                .State
                 .GetChecksumAsync(cancellationToken)
                 .ConfigureAwait(false);
             if (currentSolutionChecksum == solutionChecksum)

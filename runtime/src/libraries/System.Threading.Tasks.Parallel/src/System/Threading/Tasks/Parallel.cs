@@ -217,13 +217,15 @@ namespace System.Threading.Tasks
             if (ParallelEtwProvider.Log.IsEnabled())
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
-                ParallelEtwProvider.Log.ParallelInvokeBegin(
-                    TaskScheduler.Current.Id,
-                    Task.CurrentId ?? 0,
-                    forkJoinContextID,
-                    ParallelEtwProvider.ForkJoinOperationType.ParallelInvoke,
-                    actionsCopy.Length
-                );
+                ParallelEtwProvider
+                    .Log
+                    .ParallelInvokeBegin(
+                        TaskScheduler.Current.Id,
+                        Task.CurrentId ?? 0,
+                        forkJoinContextID,
+                        ParallelEtwProvider.ForkJoinOperationType.ParallelInvoke,
+                        actionsCopy.Length
+                    );
             }
 
 #if DEBUG
@@ -301,7 +303,9 @@ namespace System.Threading.Tasks
                                     }
 
                                     // Check for cancellation.  If it is encountered, then exit the delegate.
-                                    parallelOptions.CancellationToken.ThrowIfCancellationRequested();
+                                    parallelOptions
+                                        .CancellationToken
+                                        .ThrowIfCancellationRequested();
 
                                     // You're still in the game.  Grab your next action index.
                                     myIndex = Interlocked.Increment(ref actionIndex);
@@ -404,11 +408,13 @@ namespace System.Threading.Tasks
                 // ETW event for Parallel Invoke End
                 if (ParallelEtwProvider.Log.IsEnabled())
                 {
-                    ParallelEtwProvider.Log.ParallelInvokeEnd(
-                        TaskScheduler.Current.Id,
-                        Task.CurrentId ?? 0,
-                        forkJoinContextID
-                    );
+                    ParallelEtwProvider
+                        .Log
+                        .ParallelInvokeEnd(
+                            TaskScheduler.Current.Id,
+                            Task.CurrentId ?? 0,
+                            forkJoinContextID
+                        );
                 }
             }
         }
@@ -1158,30 +1164,36 @@ namespace System.Threading.Tasks
             CancellationTokenRegistration ctr =
                 (!parallelOptions.CancellationToken.CanBeCanceled)
                     ? default(CancellationTokenRegistration)
-                    : parallelOptions.CancellationToken.UnsafeRegister(
-                        (o) =>
-                        {
-                            // Record our cancellation before stopping processing
-                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
-                            // Cause processing to stop
-                            sharedPStateFlags.Cancel();
-                        },
-                        state: null
-                    );
+                    : parallelOptions
+                        .CancellationToken
+                        .UnsafeRegister(
+                            (o) =>
+                            {
+                                // Record our cancellation before stopping processing
+                                oce = new OperationCanceledException(
+                                    parallelOptions.CancellationToken
+                                );
+                                // Cause processing to stop
+                                sharedPStateFlags.Cancel();
+                            },
+                            state: null
+                        );
 
             // ETW event for Parallel For begin
             int forkJoinContextID = 0;
             if (ParallelEtwProvider.Log.IsEnabled())
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
-                ParallelEtwProvider.Log.ParallelLoopBegin(
-                    TaskScheduler.Current.Id,
-                    Task.CurrentId ?? 0,
-                    forkJoinContextID,
-                    ParallelEtwProvider.ForkJoinOperationType.ParallelFor,
-                    fromInclusive,
-                    toExclusive
-                );
+                ParallelEtwProvider
+                    .Log
+                    .ParallelLoopBegin(
+                        TaskScheduler.Current.Id,
+                        Task.CurrentId ?? 0,
+                        forkJoinContextID,
+                        ParallelEtwProvider.ForkJoinOperationType.ParallelFor,
+                        fromInclusive,
+                        toExclusive
+                    );
             }
 
             try
@@ -1224,11 +1236,13 @@ namespace System.Threading.Tasks
                             // ETW event for ParallelFor Worker Fork
                             if (ParallelEtwProvider.Log.IsEnabled())
                             {
-                                ParallelEtwProvider.Log.ParallelFork(
-                                    TaskScheduler.Current.Id,
-                                    Task.CurrentId ?? 0,
-                                    forkJoinContextID
-                                );
+                                ParallelEtwProvider
+                                    .Log
+                                    .ParallelFork(
+                                        TaskScheduler.Current.Id,
+                                        Task.CurrentId ?? 0,
+                                        forkJoinContextID
+                                    );
                             }
 
                             TLocal localValue = default!;
@@ -1353,11 +1367,13 @@ namespace System.Threading.Tasks
                                 // ETW event for ParallelFor Worker Join
                                 if (ParallelEtwProvider.Log.IsEnabled())
                                 {
-                                    ParallelEtwProvider.Log.ParallelJoin(
-                                        TaskScheduler.Current.Id,
-                                        Task.CurrentId ?? 0,
-                                        forkJoinContextID
-                                    );
+                                    ParallelEtwProvider
+                                        .Log
+                                        .ParallelJoin(
+                                            TaskScheduler.Current.Id,
+                                            Task.CurrentId ?? 0,
+                                            forkJoinContextID
+                                        );
                                 }
                             }
                         },
@@ -1408,12 +1424,14 @@ namespace System.Threading.Tasks
                     else
                         nTotalIterations = -1; //ParallelLoopStateStopped! We can't determine this if we were stopped..
 
-                    ParallelEtwProvider.Log.ParallelLoopEnd(
-                        TaskScheduler.Current.Id,
-                        Task.CurrentId ?? 0,
-                        forkJoinContextID,
-                        nTotalIterations
-                    );
+                    ParallelEtwProvider
+                        .Log
+                        .ParallelLoopEnd(
+                            TaskScheduler.Current.Id,
+                            Task.CurrentId ?? 0,
+                            forkJoinContextID,
+                            nTotalIterations
+                        );
                 }
             }
 
@@ -1500,30 +1518,36 @@ namespace System.Threading.Tasks
             CancellationTokenRegistration ctr =
                 (!parallelOptions.CancellationToken.CanBeCanceled)
                     ? default(CancellationTokenRegistration)
-                    : parallelOptions.CancellationToken.UnsafeRegister(
-                        (o) =>
-                        {
-                            // Record our cancellation before stopping processing
-                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
-                            // Cause processing to stop
-                            sharedPStateFlags.Cancel();
-                        },
-                        state: null
-                    );
+                    : parallelOptions
+                        .CancellationToken
+                        .UnsafeRegister(
+                            (o) =>
+                            {
+                                // Record our cancellation before stopping processing
+                                oce = new OperationCanceledException(
+                                    parallelOptions.CancellationToken
+                                );
+                                // Cause processing to stop
+                                sharedPStateFlags.Cancel();
+                            },
+                            state: null
+                        );
 
             // ETW event for Parallel For begin
             int forkJoinContextID = 0;
             if (ParallelEtwProvider.Log.IsEnabled())
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
-                ParallelEtwProvider.Log.ParallelLoopBegin(
-                    TaskScheduler.Current.Id,
-                    Task.CurrentId ?? 0,
-                    forkJoinContextID,
-                    ParallelEtwProvider.ForkJoinOperationType.ParallelFor,
-                    fromInclusive,
-                    toExclusive
-                );
+                ParallelEtwProvider
+                    .Log
+                    .ParallelLoopBegin(
+                        TaskScheduler.Current.Id,
+                        Task.CurrentId ?? 0,
+                        forkJoinContextID,
+                        ParallelEtwProvider.ForkJoinOperationType.ParallelFor,
+                        fromInclusive,
+                        toExclusive
+                    );
             }
 
             try
@@ -1565,11 +1589,13 @@ namespace System.Threading.Tasks
                             // ETW event for ParallelFor Worker Fork
                             if (ParallelEtwProvider.Log.IsEnabled())
                             {
-                                ParallelEtwProvider.Log.ParallelFork(
-                                    TaskScheduler.Current.Id,
-                                    Task.CurrentId ?? 0,
-                                    forkJoinContextID
-                                );
+                                ParallelEtwProvider
+                                    .Log
+                                    .ParallelFork(
+                                        TaskScheduler.Current.Id,
+                                        Task.CurrentId ?? 0,
+                                        forkJoinContextID
+                                    );
                             }
 
                             TLocal localValue = default!;
@@ -1696,11 +1722,13 @@ namespace System.Threading.Tasks
                                 // ETW event for ParallelFor Worker Join
                                 if (ParallelEtwProvider.Log.IsEnabled())
                                 {
-                                    ParallelEtwProvider.Log.ParallelJoin(
-                                        TaskScheduler.Current.Id,
-                                        Task.CurrentId ?? 0,
-                                        forkJoinContextID
-                                    );
+                                    ParallelEtwProvider
+                                        .Log
+                                        .ParallelJoin(
+                                            TaskScheduler.Current.Id,
+                                            Task.CurrentId ?? 0,
+                                            forkJoinContextID
+                                        );
                                 }
                             }
                         },
@@ -1751,12 +1779,14 @@ namespace System.Threading.Tasks
                     else
                         nTotalIterations = -1; //ParallelLoopStateStopped! We can't determine this if we were stopped..
 
-                    ParallelEtwProvider.Log.ParallelLoopEnd(
-                        TaskScheduler.Current.Id,
-                        Task.CurrentId ?? 0,
-                        forkJoinContextID,
-                        nTotalIterations
-                    );
+                    ParallelEtwProvider
+                        .Log
+                        .ParallelLoopEnd(
+                            TaskScheduler.Current.Id,
+                            Task.CurrentId ?? 0,
+                            forkJoinContextID,
+                            nTotalIterations
+                        );
                 }
             }
 
@@ -3520,14 +3550,16 @@ namespace System.Threading.Tasks
             if (ParallelEtwProvider.Log.IsEnabled())
             {
                 forkJoinContextID = Interlocked.Increment(ref s_forkJoinContextID);
-                ParallelEtwProvider.Log.ParallelLoopBegin(
-                    TaskScheduler.Current.Id,
-                    Task.CurrentId ?? 0,
-                    forkJoinContextID,
-                    ParallelEtwProvider.ForkJoinOperationType.ParallelForEach,
-                    0,
-                    0
-                );
+                ParallelEtwProvider
+                    .Log
+                    .ParallelLoopBegin(
+                        TaskScheduler.Current.Id,
+                        Task.CurrentId ?? 0,
+                        forkJoinContextID,
+                        ParallelEtwProvider.ForkJoinOperationType.ParallelForEach,
+                        0,
+                        0
+                    );
             }
 
             // For all loops we need a shared flag even though we don't have a body with state,
@@ -3545,16 +3577,20 @@ namespace System.Threading.Tasks
             CancellationTokenRegistration ctr =
                 (!parallelOptions.CancellationToken.CanBeCanceled)
                     ? default(CancellationTokenRegistration)
-                    : parallelOptions.CancellationToken.UnsafeRegister(
-                        (o) =>
-                        {
-                            // Record our cancellation before stopping processing
-                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
-                            // Cause processing to stop
-                            sharedPStateFlags.Cancel();
-                        },
-                        state: null
-                    );
+                    : parallelOptions
+                        .CancellationToken
+                        .UnsafeRegister(
+                            (o) =>
+                            {
+                                // Record our cancellation before stopping processing
+                                oce = new OperationCanceledException(
+                                    parallelOptions.CancellationToken
+                                );
+                                // Cause processing to stop
+                                sharedPStateFlags.Cancel();
+                            },
+                            state: null
+                        );
 
             // Get our dynamic partitioner -- depends on whether source is castable to OrderablePartitioner
             // Also, do some error checking.
@@ -3598,11 +3634,13 @@ namespace System.Threading.Tasks
                             // ETW event for ParallelForEach Worker Fork
                             if (ParallelEtwProvider.Log.IsEnabled())
                             {
-                                ParallelEtwProvider.Log.ParallelFork(
-                                    TaskScheduler.Current.Id,
-                                    Task.CurrentId ?? 0,
-                                    forkJoinContextID
-                                );
+                                ParallelEtwProvider
+                                    .Log
+                                    .ParallelFork(
+                                        TaskScheduler.Current.Id,
+                                        Task.CurrentId ?? 0,
+                                        forkJoinContextID
+                                    );
                             }
 
                             TLocal localValue = default!;
@@ -3777,11 +3815,13 @@ namespace System.Threading.Tasks
                                 // ETW event for ParallelFor Worker Join
                                 if (ParallelEtwProvider.Log.IsEnabled())
                                 {
-                                    ParallelEtwProvider.Log.ParallelJoin(
-                                        TaskScheduler.Current.Id,
-                                        Task.CurrentId ?? 0,
-                                        forkJoinContextID
-                                    );
+                                    ParallelEtwProvider
+                                        .Log
+                                        .ParallelJoin(
+                                            TaskScheduler.Current.Id,
+                                            Task.CurrentId ?? 0,
+                                            forkJoinContextID
+                                        );
                                 }
                             }
                         },
@@ -3835,12 +3875,14 @@ namespace System.Threading.Tasks
                 // ETW event for Parallel For End
                 if (ParallelEtwProvider.Log.IsEnabled())
                 {
-                    ParallelEtwProvider.Log.ParallelLoopEnd(
-                        TaskScheduler.Current.Id,
-                        Task.CurrentId ?? 0,
-                        forkJoinContextID,
-                        0
-                    );
+                    ParallelEtwProvider
+                        .Log
+                        .ParallelLoopEnd(
+                            TaskScheduler.Current.Id,
+                            Task.CurrentId ?? 0,
+                            forkJoinContextID,
+                            0
+                        );
                 }
             }
 

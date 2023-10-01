@@ -76,9 +76,9 @@ public class InternalServiceCollectionMapTest
 
     private static FakeService Can_patch_transient_service(ServiceCollectionMap serviceMap)
     {
-        var serviceProvider = serviceMap.ServiceCollection.BuildServiceProvider(
-            validateScopes: true
-        );
+        var serviceProvider = serviceMap
+            .ServiceCollection
+            .BuildServiceProvider(validateScopes: true);
 
         FakeService service;
 
@@ -166,9 +166,9 @@ public class InternalServiceCollectionMapTest
 
     private static FakeService Can_patch_scoped_service(ServiceCollectionMap serviceMap)
     {
-        var serviceProvider = serviceMap.ServiceCollection.BuildServiceProvider(
-            validateScopes: true
-        );
+        var serviceProvider = serviceMap
+            .ServiceCollection
+            .BuildServiceProvider(validateScopes: true);
 
         FakeService service;
 
@@ -287,9 +287,9 @@ public class InternalServiceCollectionMapTest
 
     private static FakeSingletonService Can_patch_singleton_service(ServiceCollectionMap serviceMap)
     {
-        var serviceProvider = serviceMap.ServiceCollection.BuildServiceProvider(
-            validateScopes: true
-        );
+        var serviceProvider = serviceMap
+            .ServiceCollection
+            .BuildServiceProvider(validateScopes: true);
 
         FakeSingletonService singletonService;
 

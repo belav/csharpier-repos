@@ -109,9 +109,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             if (accessor == null)
                 throw new ArgumentException(
-                    System.Environment.GetResourceString(
-                        getValue ? "Arg_GetMethNotFnd" : "Arg_SetMethNotFnd"
-                    )
+                    System
+                        .Environment
+                        .GetResourceString(getValue ? "Arg_GetMethNotFnd" : "Arg_SetMethNotFnd")
                 );
 
             if (!accessor.IsPublic)

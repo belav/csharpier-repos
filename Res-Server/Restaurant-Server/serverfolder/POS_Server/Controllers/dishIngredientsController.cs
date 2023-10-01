@@ -173,7 +173,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var bank = entity.dishIngredients
+                    var bank = entity
+                        .dishIngredients
                         .Where(S => S.dishIngredId == dishIngredId)
                         .Select(
                             S =>

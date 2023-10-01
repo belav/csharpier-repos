@@ -258,7 +258,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                         // Now any visible documents
                         foreach (
-                            var visibleDocumentId in Processor._documentTracker.GetVisibleDocuments()
+                            var visibleDocumentId in Processor
+                                ._documentTracker
+                                .GetVisibleDocuments()
                         )
                         {
                             yield return visibleDocumentId;
@@ -527,9 +529,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         {
 #if DEBUG
                             Debug.Assert(
-                                !workItem.InvocationReasons.Contains(
-                                    UnitTestingPredefinedInvocationReasons.Reanalyze
-                                )
+                                !workItem
+                                    .InvocationReasons
+                                    .Contains(UnitTestingPredefinedInvocationReasons.Reanalyze)
                                     || workItem.SpecificAnalyzers.Count > 0
                             );
 #endif
@@ -539,9 +541,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                                 workItem.MustRefresh ||
 #endif
-                                !workItem.InvocationReasons.Contains(
-                                    UnitTestingPredefinedInvocationReasons.Reanalyze
-                                )
+                                !workItem
+                                    .InvocationReasons
+                                    .Contains(UnitTestingPredefinedInvocationReasons.Reanalyze)
                             )
                             {
                                 return;
@@ -566,9 +568,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             // Note: Semantic analysis is not supported for non-source documents.
                             if (
                                 document is Document sourceDocument
-                                && !workItem.InvocationReasons.Contains(
-                                    UnitTestingPredefinedInvocationReasons.SemanticChanged
-                                )
+                                && !workItem
+                                    .InvocationReasons
+                                    .Contains(
+                                        UnitTestingPredefinedInvocationReasons.SemanticChanged
+                                    )
                             )
                             {
                                 await Processor

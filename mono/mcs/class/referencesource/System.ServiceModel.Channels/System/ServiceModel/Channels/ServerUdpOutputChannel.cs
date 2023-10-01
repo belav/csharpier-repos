@@ -348,25 +348,29 @@ namespace System.ServiceModel.Channels
             {
                 if (isVia)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.ViaUriIsNotValid(
-                                destination,
-                                SR.UriSchemeNotSupported(destination.Scheme)
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ViaUriIsNotValid(
+                                    destination,
+                                    SR.UriSchemeNotSupported(destination.Scheme)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.ToAddressIsNotValid(
-                                destination,
-                                SR.UriSchemeNotSupported(destination.Scheme)
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ToAddressIsNotValid(
+                                    destination,
+                                    SR.UriSchemeNotSupported(destination.Scheme)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -374,25 +378,29 @@ namespace System.ServiceModel.Channels
             {
                 if (isVia)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.ViaUriIsNotValid(
-                                destination,
-                                SR.PortNumberInvalid(1, IPEndPoint.MaxPort)
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ViaUriIsNotValid(
+                                    destination,
+                                    SR.PortNumberInvalid(1, IPEndPoint.MaxPort)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.ToAddressIsNotValid(
-                                destination,
-                                SR.PortNumberInvalid(1, IPEndPoint.MaxPort)
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ToAddressIsNotValid(
+                                    destination,
+                                    SR.PortNumberInvalid(1, IPEndPoint.MaxPort)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }

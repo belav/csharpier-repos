@@ -63,9 +63,11 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         [Fact]
         public static void TripleDesCreate()
         {
-            byte[] inputBytes = Encoding.ASCII.GetBytes(
-                "This is a secret message and is a sentence that is longer than a block, it ensures that multi-block functions work."
-            );
+            byte[] inputBytes = Encoding
+                .ASCII
+                .GetBytes(
+                    "This is a secret message and is a sentence that is longer than a block, it ensures that multi-block functions work."
+                );
             TripleDES tripleDes = TripleDES.Create();
 
             byte[] encryptedBytes;

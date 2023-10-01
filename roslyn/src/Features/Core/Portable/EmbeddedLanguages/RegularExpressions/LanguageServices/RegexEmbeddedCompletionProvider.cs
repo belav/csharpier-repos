@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
         private const string DescriptionKey = nameof(DescriptionKey);
 
         // Always soft-select these completion items.  Also, never filter down.
-        private static readonly CompletionItemRules s_rules = CompletionItemRules.Default
+        private static readonly CompletionItemRules s_rules = CompletionItemRules
+            .Default
             .WithSelectionBehavior(CompletionItemSelectionBehavior.SoftSelection)
             .WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(

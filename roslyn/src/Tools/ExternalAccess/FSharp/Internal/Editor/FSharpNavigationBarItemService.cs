@@ -90,8 +90,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             // Spans.First() is safe here as we filtered down to only items that have spans in ConvertItems.
             var span = item.GetCurrentItemSpan(textVersion, item.Spans.First());
             var workspace = document.Project.Solution.Workspace;
-            var navigationService =
-                workspace.Services.GetRequiredService<IFSharpDocumentNavigationService>();
+            var navigationService = workspace
+                .Services
+                .GetRequiredService<IFSharpDocumentNavigationService>();
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -115,8 +116,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
             }
             else
             {
-                var notificationService =
-                    workspace.Services.GetRequiredService<INotificationService>();
+                var notificationService = workspace
+                    .Services
+                    .GetRequiredService<INotificationService>();
                 notificationService.SendNotification(
                     EditorFeaturesResources.The_definition_of_the_object_is_hidden,
                     severity: NotificationSeverity.Error

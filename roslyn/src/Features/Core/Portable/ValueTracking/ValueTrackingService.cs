@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     return ImmutableArray<ValueTrackedItem>.Empty;
                 }
 
-                return await result.Value
+                return await result
+                    .Value
                     .SelectAsArrayAsync(
                         (item, cancellationToken) =>
                             item.RehydrateAsync(solution, cancellationToken),
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     return ImmutableArray<ValueTrackedItem>.Empty;
                 }
 
-                return await result.Value
+                return await result
+                    .Value
                     .SelectAsArrayAsync(
                         (item, cancellationToken) =>
                             item.RehydrateAsync(solution, cancellationToken),

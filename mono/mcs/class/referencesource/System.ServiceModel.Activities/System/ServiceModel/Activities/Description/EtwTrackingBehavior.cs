@@ -40,8 +40,9 @@ namespace System.ServiceModel.Activities.Description
 
                 if (AspNetEnvironment.Enabled)
                 {
-                    VirtualPathExtension virtualPathExtension =
-                        serviceHostBase.Extensions.Find<VirtualPathExtension>();
+                    VirtualPathExtension virtualPathExtension = serviceHostBase
+                        .Extensions
+                        .Find<VirtualPathExtension>();
                     if (virtualPathExtension != null && virtualPathExtension.VirtualPath != null)
                     {
                         //Format Website name\Application Virtual Path|\relative service virtual path|serviceName
@@ -50,10 +51,9 @@ namespace System.ServiceModel.Activities.Description
                         string application = virtualPathExtension.ApplicationVirtualPath;
 
                         //If the application is the root, do not include it in servicePath
-                        string servicePath = virtualPathExtension.VirtualPath.Replace(
-                            "~",
-                            application + "|"
-                        );
+                        string servicePath = virtualPathExtension
+                            .VirtualPath
+                            .Replace("~", application + "|");
                         hostReference = string.Format(
                             CultureInfo.InvariantCulture,
                             "{0}{1}|{2}",
@@ -68,14 +68,16 @@ namespace System.ServiceModel.Activities.Description
                     this.ProfileName,
                     workflowDisplayName
                 );
-                workflowServiceHost.WorkflowExtensions.Add(
-                    () =>
-                        new EtwTrackingParticipant
-                        {
-                            ApplicationReference = hostReference,
-                            TrackingProfile = trackingProfile
-                        }
-                );
+                workflowServiceHost
+                    .WorkflowExtensions
+                    .Add(
+                        () =>
+                            new EtwTrackingParticipant
+                            {
+                                ApplicationReference = hostReference,
+                                TrackingProfile = trackingProfile
+                            }
+                    );
             }
         }
 

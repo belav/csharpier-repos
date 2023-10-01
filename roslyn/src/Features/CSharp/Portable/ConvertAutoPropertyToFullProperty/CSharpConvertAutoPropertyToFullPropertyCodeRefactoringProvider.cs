@@ -106,14 +106,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
             AccessorDeclarationSyntax setAccessor
         ) GetExistingAccessors(AccessorListSyntax accessorListSyntax) =>
             (
-                accessorListSyntax.Accessors.FirstOrDefault(
-                    a => a.IsKind(SyntaxKind.GetAccessorDeclaration)
-                ),
-                accessorListSyntax.Accessors.FirstOrDefault(
-                    a =>
-                        a.IsKind(SyntaxKind.SetAccessorDeclaration)
-                        || a.IsKind(SyntaxKind.InitAccessorDeclaration)
-                )
+                accessorListSyntax
+                    .Accessors
+                    .FirstOrDefault(a => a.IsKind(SyntaxKind.GetAccessorDeclaration)),
+                accessorListSyntax
+                    .Accessors
+                    .FirstOrDefault(
+                        a =>
+                            a.IsKind(SyntaxKind.SetAccessorDeclaration)
+                            || a.IsKind(SyntaxKind.InitAccessorDeclaration)
+                    )
             );
 
         private static SyntaxNode GetUpdatedAccessor(
@@ -132,13 +134,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
             }
 
             if (
-                !accessorDeclarationSyntax.Body.TryConvertToArrowExpressionBody(
-                    accessorDeclarationSyntax.Kind(),
-                    info.LanguageVersion,
-                    preference,
-                    out var arrowExpression,
-                    out _
-                )
+                !accessorDeclarationSyntax
+                    .Body
+                    .TryConvertToArrowExpressionBody(
+                        accessorDeclarationSyntax.Kind(),
+                        info.LanguageVersion,
+                        preference,
+                        out var arrowExpression,
+                        out _
+                    )
             )
             {
                 return accessorDeclarationSyntax.WithSemicolonToken(default);

@@ -84,7 +84,9 @@ namespace System.Data.Services.Client
             {
                 lambdaFunc = new Func<Expression, ParameterExpression[], Expression<Action>>(
                     Expression.Lambda<Action>
-                ).Method.GetGenericMethodDefinition();
+                )
+                    .Method
+                    .GetGenericMethodDefinition();
             }
 
             return lambdaFunc.MakeGenericMethod(delegateType);

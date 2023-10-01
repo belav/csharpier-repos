@@ -307,7 +307,10 @@ namespace System.Web.Http.ModelBinding
 
         public ValueProviderResult GetValue(string key)
         {
-            string result = _actionContext.ControllerContext.Request.Headers
+            string result = _actionContext
+                .ControllerContext
+                .Request
+                .Headers
                 .GetValues(key)
                 .FirstOrDefault();
             return result == null

@@ -227,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Snippets
             CancellationToken cancellationToken
         )
         {
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var symbol = compilation.GetBestTypeByMetadataName(typeof(Console).FullName!);

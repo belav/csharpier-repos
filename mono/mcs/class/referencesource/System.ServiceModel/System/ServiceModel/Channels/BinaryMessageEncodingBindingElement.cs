@@ -69,9 +69,9 @@ namespace System.ServiceModel.Channels
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("value"));
                 }
                 this.binaryVersion = value;
             }
@@ -94,9 +94,9 @@ namespace System.ServiceModel.Channels
                         BinaryEncoderDefaults.EnvelopeVersion,
                         value.Envelope
                     );
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(errorMsg)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new InvalidOperationException(errorMsg));
                 }
 
                 this.messageVersion = MessageVersion.CreateVersion(
@@ -114,13 +114,15 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
                 this.maxReadPoolSize = value;
             }
@@ -134,13 +136,15 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBePositive)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBePositive)
+                            )
+                        );
                 }
                 this.maxWritePoolSize = value;
             }
@@ -165,13 +169,15 @@ namespace System.ServiceModel.Channels
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value,
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value,
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
 
                 this.maxSessionSize = value;
@@ -189,24 +195,28 @@ namespace System.ServiceModel.Channels
                     || !compressionSupport.IsCompressionFormatSupported(this.compressionFormat)
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.TransportDoesNotSupportCompression,
-                                this.compressionFormat.ToString(),
-                                this.GetType().Name,
-                                CompressionFormat.None.ToString()
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.TransportDoesNotSupportCompression,
+                                    this.compressionFormat.ToString(),
+                                    this.GetType().Name,
+                                    CompressionFormat.None.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
 
         void SetMaxReceivedMessageSizeFromTransport(BindingContext context)
         {
-            TransportBindingElement transport =
-                context.Binding.Elements.Find<TransportBindingElement>();
+            TransportBindingElement transport = context
+                .Binding
+                .Elements
+                .Find<TransportBindingElement>();
             if (transport != null)
             {
                 // We are guaranteed that a transport exists when building a binding;

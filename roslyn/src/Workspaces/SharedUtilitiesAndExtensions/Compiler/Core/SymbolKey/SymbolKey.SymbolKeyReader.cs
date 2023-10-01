@@ -568,10 +568,9 @@ namespace Microsoft.CodeAnalysis
                         => ModuleSymbolKey.Instance.Resolve(this, out failureReason),
                     SymbolKeyType.Event => EventSymbolKey.Instance.Resolve(this, out failureReason),
                     SymbolKeyType.ReducedExtensionMethod
-                        => ReducedExtensionMethodSymbolKey.Instance.Resolve(
-                            this,
-                            out failureReason
-                        ),
+                        => ReducedExtensionMethodSymbolKey
+                            .Instance
+                            .Resolve(this, out failureReason),
                     SymbolKeyType.TypeParameter
                         => TypeParameterSymbolKey.Instance.Resolve(this, out failureReason),
                     SymbolKeyType.AnonymousType
@@ -608,9 +607,9 @@ namespace Microsoft.CodeAnalysis
                     var nextContextualSymbol = contextualSymbol is null
                         ? null
                         : getContextualSymbol?.Invoke(contextualSymbol, i);
-                    builder.Builder.Add(
-                        ReadSymbolKey(nextContextualSymbol, out var elementFailureReason)
-                    );
+                    builder
+                        .Builder
+                        .Add(ReadSymbolKey(nextContextualSymbol, out var elementFailureReason));
 
                     if (elementFailureReason != null)
                     {

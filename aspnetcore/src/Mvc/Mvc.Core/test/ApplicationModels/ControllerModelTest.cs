@@ -23,12 +23,14 @@ public class ControllerModelTest
         controller.Actions.Add(action);
         action.Controller = controller;
 
-        controller.ControllerProperties.Add(
-            new PropertyModel(
-                controller.ControllerType.AsType().GetProperty("TestProperty"),
-                new List<object>() { }
-            )
-        );
+        controller
+            .ControllerProperties
+            .Add(
+                new PropertyModel(
+                    controller.ControllerType.AsType().GetProperty("TestProperty"),
+                    new List<object>() { }
+                )
+            );
 
         var route = new AttributeRouteModel(new HttpGetAttribute("api/Products"));
         controller.Selectors.Add(new SelectorModel() { AttributeRouteModel = route });
@@ -81,12 +83,14 @@ public class ControllerModelTest
         controller.Filters.Add(new MyFilterAttribute());
         controller.RouteValues.Add("key", "value");
         controller.Properties.Add(new KeyValuePair<object, object>("test key", "test value"));
-        controller.ControllerProperties.Add(
-            new PropertyModel(
-                typeof(TestController).GetProperty("TestProperty"),
-                new List<object>()
-            )
-        );
+        controller
+            .ControllerProperties
+            .Add(
+                new PropertyModel(
+                    typeof(TestController).GetProperty("TestProperty"),
+                    new List<object>()
+                )
+            );
 
         // Act
         var controller2 = new ControllerModel(controller);

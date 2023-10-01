@@ -280,7 +280,8 @@ new object[] { new[] { a, c }, new[] { b, d } }
         [Fact]
         public void Dynamic_Expando()
         {
-            var options = ScriptOptions.Default
+            var options = ScriptOptions
+                .Default
                 .AddReferences(
                     typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
                         .GetTypeInfo()
@@ -1211,9 +1212,9 @@ static List<int> result = new List<int>();"
         [Fact]
         public void ExtensionMethods()
         {
-            var options = ScriptOptions.Default.AddReferences(
-                typeof(Enumerable).GetTypeInfo().Assembly
-            );
+            var options = ScriptOptions
+                .Default
+                .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
             var result = CSharpScript
                 .EvaluateAsync<int>(
@@ -1350,7 +1351,8 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact]
         public void AwaitChain1()
         {
-            var options = ScriptOptions.Default
+            var options = ScriptOptions
+                .Default
                 .AddReferences(typeof(Task).GetTypeInfo().Assembly)
                 .AddImports("System.Threading.Tasks");
 
@@ -1368,7 +1370,8 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact]
         public void AwaitChain2()
         {
-            var options = ScriptOptions.Default
+            var options = ScriptOptions
+                .Default
                 .AddReferences(typeof(Task).GetTypeInfo().Assembly)
                 .AddImports("System.Threading.Tasks");
 
@@ -1395,9 +1398,9 @@ static T G<T>(T t, Func<T, Task<T>> f)
         [Fact, WorkItem(42368, "https://github.com/dotnet/roslyn/issues/42368")]
         public async Task CSharp9PatternForms()
         {
-            var options = ScriptOptions.Default.WithLanguageVersion(
-                MessageID.IDS_FeatureAndPattern.RequiredVersion()
-            );
+            var options = ScriptOptions
+                .Default
+                .WithLanguageVersion(MessageID.IDS_FeatureAndPattern.RequiredVersion());
             var state = await CSharpScript.RunAsync("object x = 1;", options: options);
             state = await state.ContinueWithAsync("x is long or int", options: options);
             Assert.Equal(true, state.ReturnValue);
@@ -1646,7 +1649,8 @@ public class E { }
 
             var script = CSharpScript.Create(
                 @"new C()",
-                ScriptOptions.Default
+                ScriptOptions
+                    .Default
                     .WithReferences(libRef.WithAliases(new[] { "Hidden" }))
                     .WithImports("Hidden::N")
             );
@@ -1677,7 +1681,8 @@ d
         [Fact, WorkItem(9229, "DevDiv_Projects/Roslyn")]
         public void Usings1()
         {
-            var options = ScriptOptions.Default
+            var options = ScriptOptions
+                .Default
                 .AddImports("System", "System.Linq")
                 .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
@@ -1690,7 +1695,8 @@ d
         [Fact, WorkItem(9229, "DevDiv_Projects/Roslyn")]
         public void Usings2()
         {
-            var options = ScriptOptions.Default
+            var options = ScriptOptions
+                .Default
                 .AddImports("System", "System.Linq")
                 .AddReferences(typeof(Enumerable).GetTypeInfo().Assembly);
 
@@ -2004,9 +2010,9 @@ new List<ArgumentException>()
             var scriptCompilation = CSharpScript
                 .Create(
                     "nameof(Microsoft.CodeAnalysis.Scripting)",
-                    ScriptOptions.Default.WithMetadataResolver(
-                        TestRuntimeMetadataReferenceResolver.Instance
-                    ),
+                    ScriptOptions
+                        .Default
+                        .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance),
                     globalsType: typeof(CommandLineScriptGlobals)
                 )
                 .GetCompilation();
@@ -2020,7 +2026,9 @@ new List<ArgumentException>()
             );
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
+            string hostObjectAssemblyName = scriptCompilation
+                .ScriptCompilationInfo
+                .GlobalsType
                 .GetTypeInfo()
                 .Assembly
                 .GetName()
@@ -2077,7 +2085,8 @@ new List<ArgumentException>()
             var scriptCompilation = CSharpScript
                 .Create(
                     "typeof(Microsoft.CodeAnalysis.Scripting.Script)",
-                    options: ScriptOptions.Default
+                    options: ScriptOptions
+                        .Default
                         .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance)
                         .WithReferences(typeof(CSharpScript).GetTypeInfo().Assembly),
                     globalsType: typeof(CommandLineScriptGlobals)
@@ -2087,7 +2096,9 @@ new List<ArgumentException>()
             scriptCompilation.VerifyDiagnostics();
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
+            string hostObjectAssemblyName = scriptCompilation
+                .ScriptCompilationInfo
+                .GlobalsType
                 .GetTypeInfo()
                 .Assembly
                 .GetName()
@@ -2157,9 +2168,9 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
             var scriptCompilation = CSharpScript
                 .Create(
                     source,
-                    ScriptOptions.Default.WithMetadataResolver(
-                        TestRuntimeMetadataReferenceResolver.Instance
-                    ),
+                    ScriptOptions
+                        .Default
+                        .WithMetadataResolver(TestRuntimeMetadataReferenceResolver.Instance),
                     globalsType: typeof(CommandLineScriptGlobals)
                 )
                 .GetCompilation();
@@ -2167,7 +2178,9 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
             scriptCompilation.VerifyDiagnostics();
 
             string corAssemblyName = typeof(object).GetTypeInfo().Assembly.GetName().Name;
-            string hostObjectAssemblyName = scriptCompilation.ScriptCompilationInfo.GlobalsType
+            string hostObjectAssemblyName = scriptCompilation
+                .ScriptCompilationInfo
+                .GlobalsType
                 .GetTypeInfo()
                 .Assembly
                 .GetName()

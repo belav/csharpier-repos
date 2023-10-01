@@ -35,10 +35,12 @@ public class HttpConnectionTests
 
         httpConnection.Initialize(http1Connection);
         http1Connection.Reset();
-        http1Connection.RequestAborted.Register(() =>
-        {
-            aborted.SetResult();
-        });
+        http1Connection
+            .RequestAborted
+            .Register(() =>
+            {
+                aborted.SetResult();
+            });
 
         httpConnection.OnTimeout(TimeoutReason.WriteDataRate);
 

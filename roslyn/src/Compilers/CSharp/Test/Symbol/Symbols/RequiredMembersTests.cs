@@ -145,15 +145,17 @@ End Namespace";
             {
                 var peMethod = (PEMethodSymbol)ctor;
                 var decoder = new MetadataDecoder(peModule, peMethod);
-                var obsoleteAttribute =
-                    peModule.Module.TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
+                var obsoleteAttribute = peModule
+                    .Module
+                    .TryGetDeprecatedOrExperimentalOrObsoleteAttribute(
                         peMethod.Handle,
                         decoder,
                         ignoreByRefLikeMarker: false,
                         ignoreRequiredMemberMarker: false
                     );
-                string? unsupportedCompilerFeatureToken =
-                    peModule.Module.GetFirstUnsupportedCompilerFeatureFromToken(
+                string? unsupportedCompilerFeatureToken = peModule
+                    .Module
+                    .GetFirstUnsupportedCompilerFeatureFromToken(
                         peMethod.Handle,
                         decoder,
                         CompilerFeatureRequiredFeatures.None
@@ -181,11 +183,13 @@ End Namespace";
                         unsupportedCompilerFeatureToken
                     );
                     Assert.Null(
-                        peModule.Module.GetFirstUnsupportedCompilerFeatureFromToken(
-                            peMethod.Handle,
-                            decoder,
-                            CompilerFeatureRequiredFeatures.RequiredMembers
-                        )
+                        peModule
+                            .Module
+                            .GetFirstUnsupportedCompilerFeatureFromToken(
+                                peMethod.Handle,
+                                decoder,
+                                CompilerFeatureRequiredFeatures.RequiredMembers
+                            )
                     );
                 }
             }

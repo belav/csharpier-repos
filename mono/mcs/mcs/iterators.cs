@@ -599,11 +599,11 @@ namespace Mono.CSharp
 
                 if (Module.PredefinedTypes.IEnumerableGeneric.Define())
                 {
-                    generic_enumerable_type =
-                        Module.PredefinedTypes.IEnumerableGeneric.TypeSpec.MakeGenericType(
-                            Module,
-                            new[] { mtype }
-                        );
+                    generic_enumerable_type = Module
+                        .PredefinedTypes
+                        .IEnumerableGeneric
+                        .TypeSpec
+                        .MakeGenericType(Module, new[] { mtype });
                     ifaces.Add(generic_enumerable_type);
                 }
             }
@@ -614,10 +614,9 @@ namespace Mono.CSharp
             var ienumerator_generic = Module.PredefinedTypes.IEnumeratorGeneric;
             if (ienumerator_generic.Define())
             {
-                generic_enumerator_type = ienumerator_generic.TypeSpec.MakeGenericType(
-                    Module,
-                    new[] { mtype }
-                );
+                generic_enumerator_type = ienumerator_generic
+                    .TypeSpec
+                    .MakeGenericType(Module, new[] { mtype });
                 ifaces.Add(generic_enumerator_type);
             }
 
@@ -796,9 +795,14 @@ namespace Mono.CSharp
             if (ex_type == null)
                 return;
 
-            reset.Block.AddStatement(
-                new Throw(new New(new TypeExpression(ex_type, Location), null, Location), Location)
-            );
+            reset
+                .Block
+                .AddStatement(
+                    new Throw(
+                        new New(new TypeExpression(ex_type, Location), null, Location),
+                        Location
+                    )
+                );
         }
 
         protected override void EmitHoistedParameters(
@@ -1434,22 +1438,28 @@ namespace Mono.CSharp
             {
                 if (ret.Kind == MemberKind.ByRef)
                 {
-                    parent.Compiler.Report.Error(
-                        8154,
-                        method.Location,
-                        "The body of `{0}' cannot be an iterator block because the method returns by reference",
-                        method.GetSignatureForError()
-                    );
+                    parent
+                        .Compiler
+                        .Report
+                        .Error(
+                            8154,
+                            method.Location,
+                            "The body of `{0}' cannot be an iterator block because the method returns by reference",
+                            method.GetSignatureForError()
+                        );
                 }
                 else
                 {
-                    parent.Compiler.Report.Error(
-                        1624,
-                        method.Location,
-                        "The body of `{0}' cannot be an iterator block because `{1}' is not an iterator interface type",
-                        method.GetSignatureForError(),
-                        ret.GetSignatureForError()
-                    );
+                    parent
+                        .Compiler
+                        .Report
+                        .Error(
+                            1624,
+                            method.Location,
+                            "The body of `{0}' cannot be an iterator block because `{1}' is not an iterator interface type",
+                            method.GetSignatureForError(),
+                            ret.GetSignatureForError()
+                        );
                 }
                 return;
             }
@@ -1461,31 +1471,36 @@ namespace Mono.CSharp
                 Parameter.Modifier mod = p.ModFlags;
                 if ((mod & Parameter.Modifier.RefOutMask) != 0)
                 {
-                    parent.Compiler.Report.Error(
-                        1623,
-                        p.Location,
-                        "Iterators cannot have ref or out parameters"
-                    );
+                    parent
+                        .Compiler
+                        .Report
+                        .Error(1623, p.Location, "Iterators cannot have ref or out parameters");
                     return;
                 }
 
                 if (p is ArglistParameter)
                 {
-                    parent.Compiler.Report.Error(
-                        1636,
-                        method.Location,
-                        "__arglist is not allowed in parameter list of iterators"
-                    );
+                    parent
+                        .Compiler
+                        .Report
+                        .Error(
+                            1636,
+                            method.Location,
+                            "__arglist is not allowed in parameter list of iterators"
+                        );
                     return;
                 }
 
                 if (parameters.Types[i].IsPointer)
                 {
-                    parent.Compiler.Report.Error(
-                        1637,
-                        p.Location,
-                        "Iterators cannot have unsafe parameters or yield types"
-                    );
+                    parent
+                        .Compiler
+                        .Report
+                        .Error(
+                            1637,
+                            p.Location,
+                            "Iterators cannot have unsafe parameters or yield types"
+                        );
                     return;
                 }
             }
@@ -1495,12 +1510,9 @@ namespace Mono.CSharp
                 Expression.UnsafeInsideIteratorError(parent.Compiler.Report, method.Location);
             }
 
-            method.Block = method.Block.ConvertToIterator(
-                method,
-                parent,
-                iterator_type,
-                is_enumerable
-            );
+            method.Block = method
+                .Block
+                .ConvertToIterator(method, parent, iterator_type, is_enumerable);
         }
 
         static bool CheckType(

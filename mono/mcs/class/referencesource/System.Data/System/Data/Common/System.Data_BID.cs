@@ -556,8 +556,11 @@ internal static partial class Bid
             && modID != NoData
         )
         {
-            System.Data.Common.ActivityCorrelator.ActivityId actId =
-                System.Data.Common.ActivityCorrelator.Next();
+            System.Data.Common.ActivityCorrelator.ActivityId actId = System
+                .Data
+                .Common
+                .ActivityCorrelator
+                .Next();
             NativeMethods.Trace(
                 modID,
                 UIntPtr.Zero,
@@ -579,8 +582,11 @@ internal static partial class Bid
             && modID != NoData
         )
         {
-            System.Data.Common.ActivityCorrelator.ActivityId actId =
-                System.Data.Common.ActivityCorrelator.Next();
+            System.Data.Common.ActivityCorrelator.ActivityId actId = System
+                .Data
+                .Common
+                .ActivityCorrelator
+                .Next();
             NativeMethods.Trace(modID, UIntPtr.Zero, UIntPtr.Zero, fmtPrintfW, actId.ToString());
         }
     }
@@ -595,8 +601,11 @@ internal static partial class Bid
             && modID != NoData
         )
         {
-            System.Data.Common.ActivityCorrelator.ActivityId actId =
-                System.Data.Common.ActivityCorrelator.Next();
+            System.Data.Common.ActivityCorrelator.ActivityId actId = System
+                .Data
+                .Common
+                .ActivityCorrelator
+                .Next();
             NativeMethods.Trace(
                 modID,
                 UIntPtr.Zero,

@@ -415,12 +415,10 @@ namespace System
 
         int StringIndexOf(string s, string pattern, int idx)
         {
-            return CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                s,
-                pattern,
-                idx,
-                CompareOptions.OrdinalIgnoreCase
-            );
+            return CultureInfo
+                .InvariantCulture
+                .CompareInfo
+                .IndexOf(s, pattern, idx, CompareOptions.OrdinalIgnoreCase);
         }
 
         // Helpers

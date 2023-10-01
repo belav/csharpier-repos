@@ -210,7 +210,8 @@ public class ChangeTracker : IResettableService
     {
         TryDetectChanges();
 
-        return StateManager.Entries
+        return StateManager
+            .Entries
             .Where(e => e.Entity is TEntity)
             .Select(e => new EntityEntry<TEntity>(e));
     }

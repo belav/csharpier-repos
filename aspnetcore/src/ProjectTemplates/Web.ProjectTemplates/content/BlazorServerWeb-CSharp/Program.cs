@@ -44,23 +44,25 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options =>
+builder
+    .Services
+    .AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
-        options.UseSqlServer(connectionString)
-);
+            options.UseSqlServer(connectionString));
 #else
         options.UseSqlite(connectionString));
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services
+builder
+    .Services
     .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 #endif
-builder.Services
+builder
+    .Services
     .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
@@ -79,7 +81,8 @@ builder.Services
 #if (GenerateApi)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 #endif
-builder.Services
+builder
+    .Services
     .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"))
@@ -93,19 +96,23 @@ builder.Services
 #if (OrganizationalAuth || IndividualB2CAuth)
 builder.Services.AddControllersWithViews().AddMicrosoftIdentityUI();
 
-builder.Services.AddAuthorization(options =>
-{
-    // By default, all incoming requests will be authorized according to the default policy
-    options.FallbackPolicy = options.DefaultPolicy;
-});
+builder
+    .Services
+    .AddAuthorization(options =>
+    {
+        // By default, all incoming requests will be authorized according to the default policy
+        options.FallbackPolicy = options.DefaultPolicy;
+    });
 #elif (WindowsAuth)
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-builder.Services.AddAuthorization(options =>
-{
-    // By default, all incoming requests will be authorized according to the default policy.
-    options.FallbackPolicy = options.DefaultPolicy;
-});
+builder
+    .Services
+    .AddAuthorization(options =>
+    {
+        // By default, all incoming requests will be authorized according to the default policy.
+        options.FallbackPolicy = options.DefaultPolicy;
+    });
 #endif
 builder.Services.AddRazorPages();
 #if (OrganizationalAuth || IndividualB2CAuth)
@@ -114,10 +121,12 @@ builder.Services.AddServerSideBlazor().AddMicrosoftIdentityConsentHandler();
 builder.Services.AddServerSideBlazor();
 #endif
 #if (IndividualLocalAuth)
-builder.Services.AddScoped<
-    AuthenticationStateProvider,
-    RevalidatingIdentityAuthenticationStateProvider<IdentityUser>
->();
+builder
+    .Services
+    .AddScoped<
+        AuthenticationStateProvider,
+        RevalidatingIdentityAuthenticationStateProvider<IdentityUser>
+    >();
 #endif
 builder.Services.AddSingleton<WeatherForecastService>();
 

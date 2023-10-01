@@ -61,9 +61,10 @@ public class PhysicalFileResult : FileResult
             throw new ArgumentNullException(nameof(context));
         }
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<
-            IActionResultExecutor<PhysicalFileResult>
-        >();
+        var executor = context
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<IActionResultExecutor<PhysicalFileResult>>();
         return executor.ExecuteAsync(context, this);
     }
 }

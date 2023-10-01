@@ -142,7 +142,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var couponsInvoices = entity.couponsInvoices
+                    var couponsInvoices = entity
+                        .couponsInvoices
                         .Where(c => c.id == id)
                         .Select(
                             c =>
@@ -237,7 +238,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var oldList = entity.couponsInvoices
+                        var oldList = entity
+                            .couponsInvoices
                             .Where(x => x.InvoiceId == invoiceId)
                             .Select(x => new { x.couponId, x.id })
                             .ToList();
@@ -247,7 +249,8 @@ namespace POS_Server.Controllers
                             coupons c = entity.coupons.Find(oldList[i].couponId);
 
                             int couponId = (int)oldList[i].couponId;
-                            var tci = entity.couponsInvoices
+                            var tci = entity
+                                .couponsInvoices
                                 .Where(x => x.couponId == couponId && x.InvoiceId == invoiceId)
                                 .FirstOrDefault();
                             couponsInvoices ci = entity.couponsInvoices.Find(tci.id);

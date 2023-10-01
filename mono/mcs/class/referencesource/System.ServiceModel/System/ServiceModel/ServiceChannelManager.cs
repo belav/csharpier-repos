@@ -119,9 +119,9 @@ namespace System.ServiceModel
             if (!added)
             {
                 channel.Abort();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().ToString())
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
             }
         }
 
@@ -201,15 +201,19 @@ namespace System.ServiceModel
                 switch (result)
                 {
                     case CommunicationWaitResult.Expired:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(
-                                SR.GetString(SR.SfxCloseTimedOutWaitingForDispatchToComplete)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new TimeoutException(
+                                    SR.GetString(SR.SfxCloseTimedOutWaitingForDispatchToComplete)
+                                )
+                            );
                     case CommunicationWaitResult.Aborted:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ObjectDisposedException(this.GetType().ToString())
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ObjectDisposedException(this.GetType().ToString())
+                            );
                 }
             }
         }
@@ -290,9 +294,9 @@ namespace System.ServiceModel
             lock (this.ThisLock)
             {
                 if (this.State == LifetimeState.Closed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(this.GetType().ToString())
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
                 this.activityCount++;
             }
         }
@@ -471,9 +475,9 @@ namespace System.ServiceModel
             public ChannelCollection(ServiceChannelManager channelManager, object syncRoot)
             {
                 if (syncRoot == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("syncRoot")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("syncRoot"));
 
                 this.channelManager = channelManager;
                 this.syncRoot = syncRoot;

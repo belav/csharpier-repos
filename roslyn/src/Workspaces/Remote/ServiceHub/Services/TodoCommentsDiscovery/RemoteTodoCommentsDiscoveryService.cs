@@ -48,8 +48,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 cancellationToken =>
                 {
                     var workspace = GetWorkspace();
-                    var registrationService =
-                        workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+                    var registrationService = workspace
+                        .Services
+                        .GetRequiredService<ISolutionCrawlerRegistrationService>();
 
                     // This method should only be called once.
                     Contract.ThrowIfFalse(
@@ -86,8 +87,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     }
 
                     var workspace = GetWorkspace();
-                    var registrationService =
-                        workspace.Services.GetRequiredService<ISolutionCrawlerService>();
+                    var registrationService = workspace
+                        .Services
+                        .GetRequiredService<ISolutionCrawlerService>();
                     registrationService.Reanalyze(
                         workspace,
                         _lazyAnalyzer,

@@ -39,10 +39,9 @@ public sealed class KeyComparer : IEqualityComparer<IReadOnlyKey>, IComparer<IRe
         var result = PropertyListComparer.Instance.Compare(x?.Properties, y?.Properties);
         return result != 0
             ? result
-            : EntityTypeFullNameComparer.Instance.Compare(
-                x?.DeclaringEntityType,
-                y?.DeclaringEntityType
-            );
+            : EntityTypeFullNameComparer
+                .Instance
+                .Compare(x?.DeclaringEntityType, y?.DeclaringEntityType);
     }
 
     /// <summary>

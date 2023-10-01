@@ -41,12 +41,14 @@ namespace System.Workflow.Runtime
         {
             this.executor = executor;
             this.instanceId = instanceId;
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "TimerEventSubscriptionQueue: {0} Created",
-                instanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "TimerEventSubscriptionQueue: {0} Created",
+                    instanceId
+                );
             this.queue.FirstElementChanged += OnFirstElementChanged;
         }
 
@@ -54,14 +56,16 @@ namespace System.Workflow.Runtime
         {
             lock (locker)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "TimerEventSubscriptionQueue: {0} Enqueue Timer {1} for {2} ",
-                    instanceId,
-                    timerEventSubscription.SubscriptionId,
-                    timerEventSubscription.ExpiresAt
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "TimerEventSubscriptionQueue: {0} Enqueue Timer {1} for {2} ",
+                        instanceId,
+                        timerEventSubscription.SubscriptionId,
+                        timerEventSubscription.ExpiresAt
+                    );
                 queue.Enqueue(
                     timerEventSubscription.SubscriptionId,
                     timerEventSubscription,
@@ -90,14 +94,16 @@ namespace System.Workflow.Runtime
             {
                 TimerEventSubscription retval = queue.Dequeue();
                 if (retval != null)
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "TimerEventSubscriptionQueue: {0} Dequeue Timer {1} for {2} ",
-                        instanceId,
-                        retval.SubscriptionId,
-                        retval.ExpiresAt
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "TimerEventSubscriptionQueue: {0} Dequeue Timer {1} for {2} ",
+                            instanceId,
+                            retval.SubscriptionId,
+                            retval.ExpiresAt
+                        );
                 return retval;
             }
         }
@@ -106,13 +112,15 @@ namespace System.Workflow.Runtime
         {
             lock (locker)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "TimerEventSubscriptionQueue: {0} Remove Timer {1}",
-                    instanceId,
-                    timerSubscriptionId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "TimerEventSubscriptionQueue: {0} Remove Timer {1}",
+                        instanceId,
+                        timerSubscriptionId
+                    );
                 queue.Remove(timerSubscriptionId);
             }
         }
@@ -128,14 +136,16 @@ namespace System.Workflow.Runtime
                     this.executor.GetService(typeof(ITimerService)) as ITimerService;
                 if (e.NewFirstElement != null && executor != null)
                 {
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "TimerEventSubscriptionQueue: {0} Schedule Timer {1} for {2} ",
-                        instanceId,
-                        e.NewFirstElement.SubscriptionId,
-                        e.NewFirstElement.ExpiresAt
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "TimerEventSubscriptionQueue: {0} Schedule Timer {1} for {2} ",
+                            instanceId,
+                            e.NewFirstElement.SubscriptionId,
+                            e.NewFirstElement.ExpiresAt
+                        );
                     timerService.ScheduleTimer(
                         executor.ProcessTimersCallback,
                         e.NewFirstElement.WorkflowInstanceId,
@@ -145,14 +155,16 @@ namespace System.Workflow.Runtime
                 }
                 if (e.OldFirstElement != null)
                 {
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "TimerEventSubscriptionQueue: {0} Unschedule Timer {1} for {2} ",
-                        instanceId,
-                        e.OldFirstElement.SubscriptionId,
-                        e.OldFirstElement.ExpiresAt
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "TimerEventSubscriptionQueue: {0} Unschedule Timer {1} for {2} ",
+                            instanceId,
+                            e.OldFirstElement.SubscriptionId,
+                            e.OldFirstElement.ExpiresAt
+                        );
                     timerService.CancelTimer(e.OldFirstElement.SubscriptionId);
                 }
             }
@@ -162,12 +174,14 @@ namespace System.Workflow.Runtime
         {
             lock (locker)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "TimerEventSubscriptionQueue: {0} Suspend",
-                    instanceId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "TimerEventSubscriptionQueue: {0} Suspend",
+                        instanceId
+                    );
                 WorkflowSchedulerService schedulerService =
                     this.executor.GetService(typeof(WorkflowSchedulerService))
                     as WorkflowSchedulerService;
@@ -183,12 +197,14 @@ namespace System.Workflow.Runtime
         {
             lock (locker)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "TimerEventSubscriptionQueue: {0} Resume",
-                    instanceId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "TimerEventSubscriptionQueue: {0} Resume",
+                        instanceId
+                    );
                 WorkflowSchedulerService schedulerService =
                     this.executor.GetService(typeof(WorkflowSchedulerService))
                     as WorkflowSchedulerService;

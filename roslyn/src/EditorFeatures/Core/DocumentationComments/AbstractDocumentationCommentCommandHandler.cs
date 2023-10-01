@@ -140,8 +140,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return false;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             );
 
             // Apply snippet in reverse order so that the first applied snippet doesn't affect span of next snippets.
-            var snapshots = textView.Selection
+            var snapshots = textView
+                .Selection
                 .GetSnapshotSpansOnBuffer(subjectBuffer)
                 .OrderByDescending(s => s.Span.Start);
             var returnValue = false;
@@ -234,7 +236,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             if (args.TextView.Selection.SelectedSpans.Count > 0)
             {
-                var selectedSpan = args.TextView.Selection
+                var selectedSpan = args.TextView
+                    .Selection
                     .GetSnapshotSpansOnBuffer(args.SubjectBuffer)
                     .FirstOrNull();
 
@@ -297,8 +300,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return CommandState.Unavailable;
             }
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return CommandState.Unavailable;
@@ -334,10 +338,12 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         public bool ExecuteCommand(InsertCommentCommandArgs args, CommandExecutionContext context)
         {
             using (
-                context.OperationContext.AddScope(
-                    allowCancellation: true,
-                    EditorFeaturesResources.Inserting_documentation_comment
-                )
+                context
+                    .OperationContext
+                    .AddScope(
+                        allowCancellation: true,
+                        EditorFeaturesResources.Inserting_documentation_comment
+                    )
             )
             {
                 return CompleteComment(
@@ -386,8 +392,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             // Allow nextHandler() to run and then insert exterior trivia if necessary.
             nextHandler();
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -438,8 +445,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -472,8 +480,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 return;
             }
 
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return;
@@ -522,8 +531,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             CancellationToken cancellationToken
         )
         {
-            var document =
-                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = subjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
             {
                 return false;

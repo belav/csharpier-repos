@@ -79,10 +79,12 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     {
         var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(), JsonOptions);
         var calls = 0;
-        builder.Services.AddApiAuthorization(options =>
-        {
-            calls++;
-        });
+        builder
+            .Services
+            .AddApiAuthorization(options =>
+            {
+                calls++;
+            });
 
         var host = builder.Build();
 
@@ -183,9 +185,9 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     {
         var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(), JsonOptions);
         var calls = 0;
-        builder.Services.AddApiAuthorization<TestAuthenticationState, TestAccount>(
-            options => calls++
-        );
+        builder
+            .Services
+            .AddApiAuthorization<TestAuthenticationState, TestAccount>(options => calls++);
 
         var host = builder.Build();
 
@@ -255,25 +257,27 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     public void ApiAuthorizationOptions_DefaultsCanBeOverriden()
     {
         var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(), JsonOptions);
-        builder.Services.AddApiAuthorization(options =>
-        {
-            options.AuthenticationPaths.LogInPath = "a";
-            options.AuthenticationPaths.LogInCallbackPath = "b";
-            options.AuthenticationPaths.LogInFailedPath = "c";
-            options.AuthenticationPaths.RegisterPath = "d";
-            options.AuthenticationPaths.ProfilePath = "e";
-            options.AuthenticationPaths.RemoteRegisterPath = "f";
-            options.AuthenticationPaths.RemoteProfilePath = "g";
-            options.AuthenticationPaths.LogOutPath = "h";
-            options.AuthenticationPaths.LogOutCallbackPath = "i";
-            options.AuthenticationPaths.LogOutFailedPath = "j";
-            options.AuthenticationPaths.LogOutSucceededPath = "k";
-            options.UserOptions.AuthenticationType = "l";
-            options.UserOptions.ScopeClaim = "m";
-            options.UserOptions.RoleClaim = "n";
-            options.UserOptions.NameClaim = "o";
-            options.ProviderOptions.ConfigurationEndpoint = "p";
-        });
+        builder
+            .Services
+            .AddApiAuthorization(options =>
+            {
+                options.AuthenticationPaths.LogInPath = "a";
+                options.AuthenticationPaths.LogInCallbackPath = "b";
+                options.AuthenticationPaths.LogInFailedPath = "c";
+                options.AuthenticationPaths.RegisterPath = "d";
+                options.AuthenticationPaths.ProfilePath = "e";
+                options.AuthenticationPaths.RemoteRegisterPath = "f";
+                options.AuthenticationPaths.RemoteProfilePath = "g";
+                options.AuthenticationPaths.LogOutPath = "h";
+                options.AuthenticationPaths.LogOutCallbackPath = "i";
+                options.AuthenticationPaths.LogOutFailedPath = "j";
+                options.AuthenticationPaths.LogOutSucceededPath = "k";
+                options.UserOptions.AuthenticationType = "l";
+                options.UserOptions.ScopeClaim = "m";
+                options.UserOptions.RoleClaim = "n";
+                options.UserOptions.NameClaim = "o";
+                options.ProviderOptions.ConfigurationEndpoint = "p";
+            });
 
         var host = builder.Build();
 
@@ -308,9 +312,9 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     public void OidcOptions_ConfigurationDefaultsGetApplied()
     {
         var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(), JsonOptions);
-        builder.Services.Replace(
-            ServiceDescriptor.Singleton<NavigationManager, TestNavigationManager>()
-        );
+        builder
+            .Services
+            .Replace(ServiceDescriptor.Singleton<NavigationManager, TestNavigationManager>());
         builder.Services.AddOidcAuthentication(options => { });
         var host = builder.Build();
 
@@ -357,31 +361,33 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
     public void OidcOptions_DefaultsCanBeOverriden()
     {
         var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(), JsonOptions);
-        builder.Services.AddOidcAuthentication(options =>
-        {
-            options.AuthenticationPaths.LogInPath = "a";
-            options.AuthenticationPaths.LogInCallbackPath = "b";
-            options.AuthenticationPaths.LogInFailedPath = "c";
-            options.AuthenticationPaths.RegisterPath = "d";
-            options.AuthenticationPaths.ProfilePath = "e";
-            options.AuthenticationPaths.RemoteRegisterPath = "f";
-            options.AuthenticationPaths.RemoteProfilePath = "g";
-            options.AuthenticationPaths.LogOutPath = "h";
-            options.AuthenticationPaths.LogOutCallbackPath = "i";
-            options.AuthenticationPaths.LogOutFailedPath = "j";
-            options.AuthenticationPaths.LogOutSucceededPath = "k";
-            options.UserOptions.AuthenticationType = "l";
-            options.UserOptions.ScopeClaim = "m";
-            options.UserOptions.RoleClaim = "n";
-            options.UserOptions.NameClaim = "o";
-            options.ProviderOptions.Authority = "p";
-            options.ProviderOptions.ClientId = "q";
-            options.ProviderOptions.DefaultScopes.Clear();
-            options.ProviderOptions.AdditionalProviderParameters.Add("r", "s");
-            options.ProviderOptions.RedirectUri = "https://www.example.com/base/custom-login";
-            options.ProviderOptions.PostLogoutRedirectUri =
-                "https://www.example.com/base/custom-logout";
-        });
+        builder
+            .Services
+            .AddOidcAuthentication(options =>
+            {
+                options.AuthenticationPaths.LogInPath = "a";
+                options.AuthenticationPaths.LogInCallbackPath = "b";
+                options.AuthenticationPaths.LogInFailedPath = "c";
+                options.AuthenticationPaths.RegisterPath = "d";
+                options.AuthenticationPaths.ProfilePath = "e";
+                options.AuthenticationPaths.RemoteRegisterPath = "f";
+                options.AuthenticationPaths.RemoteProfilePath = "g";
+                options.AuthenticationPaths.LogOutPath = "h";
+                options.AuthenticationPaths.LogOutCallbackPath = "i";
+                options.AuthenticationPaths.LogOutFailedPath = "j";
+                options.AuthenticationPaths.LogOutSucceededPath = "k";
+                options.UserOptions.AuthenticationType = "l";
+                options.UserOptions.ScopeClaim = "m";
+                options.UserOptions.RoleClaim = "n";
+                options.UserOptions.NameClaim = "o";
+                options.ProviderOptions.Authority = "p";
+                options.ProviderOptions.ClientId = "q";
+                options.ProviderOptions.DefaultScopes.Clear();
+                options.ProviderOptions.AdditionalProviderParameters.Add("r", "s");
+                options.ProviderOptions.RedirectUri = "https://www.example.com/base/custom-login";
+                options.ProviderOptions.PostLogoutRedirectUri =
+                    "https://www.example.com/base/custom-logout";
+            });
 
         var host = builder.Build();
 
@@ -428,9 +434,11 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         var calls = 0;
 
         builder.Services.AddOidcAuthentication(options => calls++);
-        builder.Services.Replace(
-            ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
-        );
+        builder
+            .Services
+            .Replace(
+                ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
+            );
 
         var host = builder.Build();
 
@@ -448,13 +456,19 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(), JsonOptions);
         var calls = 0;
 
-        builder.Services.AddOidcAuthentication<TestAuthenticationState>(
-            options =>
-                options.ProviderOptions.Authority = (++calls).ToString(CultureInfo.InvariantCulture)
-        );
-        builder.Services.Replace(
-            ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
-        );
+        builder
+            .Services
+            .AddOidcAuthentication<TestAuthenticationState>(
+                options =>
+                    options.ProviderOptions.Authority = (++calls).ToString(
+                        CultureInfo.InvariantCulture
+                    )
+            );
+        builder
+            .Services
+            .Replace(
+                ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
+            );
 
         var host = builder.Build();
 
@@ -485,13 +499,19 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(), JsonOptions);
         var calls = 0;
 
-        builder.Services.AddOidcAuthentication<TestAuthenticationState, TestAccount>(
-            options =>
-                options.ProviderOptions.Authority = (++calls).ToString(CultureInfo.InvariantCulture)
-        );
-        builder.Services.Replace(
-            ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
-        );
+        builder
+            .Services
+            .AddOidcAuthentication<TestAuthenticationState, TestAccount>(
+                options =>
+                    options.ProviderOptions.Authority = (++calls).ToString(
+                        CultureInfo.InvariantCulture
+                    )
+            );
+        builder
+            .Services
+            .Replace(
+                ServiceDescriptor.Singleton(typeof(NavigationManager), new TestNavigationManager())
+            );
 
         var host = builder.Build();
 
@@ -519,18 +539,21 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
 
         var calls = 0;
 
-        builder.Services.AddOidcAuthentication<TestAuthenticationState, TestAccount>(options =>
-        { });
-        builder.Services.Replace(
-            ServiceDescriptor.Scoped(
-                typeof(NavigationManager),
-                _ =>
-                {
-                    calls++;
-                    return new TestNavigationManager();
-                }
-            )
-        );
+        builder
+            .Services
+            .AddOidcAuthentication<TestAuthenticationState, TestAccount>(options => { });
+        builder
+            .Services
+            .Replace(
+                ServiceDescriptor.Scoped(
+                    typeof(NavigationManager),
+                    _ =>
+                    {
+                        calls++;
+                        return new TestNavigationManager();
+                    }
+                )
+            );
 
         var host = builder.Build();
 
@@ -542,9 +565,11 @@ public class WebAssemblyAuthenticationServiceCollectionExtensionsTests
         >();
 
         // from the created scope
-        var scopedOptions = scope.ServiceProvider.GetRequiredService<
-            IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
-        >();
+        var scopedOptions = scope
+            .ServiceProvider
+            .GetRequiredService<
+                IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>>
+            >();
 
         // we should have 2 navigation managers. One in the root scope, and one in the created scope.
         Assert.Equal(2, calls);

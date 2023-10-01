@@ -188,18 +188,22 @@ namespace System.Web.UI.WebControls.WebParts
                 typeof(PartChromeState)
             );
             _chromeState = new DropDownList();
-            _chromeState.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.PartChromeState_Normal),
-                    chromeStateConverter.ConvertToString(PartChromeState.Normal)
-                )
-            );
-            _chromeState.Items.Add(
-                new ListItem(
-                    SR.GetString(SR.PartChromeState_Minimized),
-                    chromeStateConverter.ConvertToString(PartChromeState.Minimized)
-                )
-            );
+            _chromeState
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.PartChromeState_Normal),
+                        chromeStateConverter.ConvertToString(PartChromeState.Normal)
+                    )
+                );
+            _chromeState
+                .Items
+                .Add(
+                    new ListItem(
+                        SR.GetString(SR.PartChromeState_Minimized),
+                        chromeStateConverter.ConvertToString(PartChromeState.Minimized)
+                    )
+                );
             controls.Add(_chromeState);
 
             // Add all zones to dropdown in CreateChildControls.  Items will be selected and/or disabled

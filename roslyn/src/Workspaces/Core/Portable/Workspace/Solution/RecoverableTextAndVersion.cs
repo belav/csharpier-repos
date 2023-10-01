@@ -173,7 +173,8 @@ namespace Microsoft.CodeAnalysis
                     ref _initialSourceOrRecoverableText,
                     new RecoverableText(
                         recoverableText.InitialSource,
-                        await recoverableText.InitialSource
+                        await recoverableText
+                            .InitialSource
                             .GetValueAsync(options, cancellationToken)
                             .ConfigureAwait(false),
                         options,

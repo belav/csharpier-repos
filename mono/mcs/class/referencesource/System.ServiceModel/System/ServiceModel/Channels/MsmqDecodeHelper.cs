@@ -152,9 +152,10 @@ namespace System.ServiceModel.Channels
                 }
 
                 if (
-                    !listener.MessageEncoderFactory.Encoder.IsContentTypeSupported(
-                        decoder.ContentType
-                    )
+                    !listener
+                        .MessageEncoderFactory
+                        .Encoder
+                        .IsContentTypeSupported(decoder.ContentType)
                 )
                 {
                     receiver.FinalDisposition(messageProperty);
@@ -173,10 +174,13 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        message = listener.MessageEncoderFactory.Encoder.ReadMessage(
-                            new ArraySegment<byte>(envelopeBuffer, 0, size),
-                            listener.BufferManager
-                        );
+                        message = listener
+                            .MessageEncoderFactory
+                            .Encoder
+                            .ReadMessage(
+                                new ArraySegment<byte>(envelopeBuffer, 0, size),
+                                listener.BufferManager
+                            );
                     }
                     catch (XmlException e)
                     {

@@ -235,15 +235,17 @@ namespace Internal.Runtime.TypeLoader
                     TypeDesc[] parameters;
                     bool[] paramsByRefForced;
                     if (
-                        !TypeLoaderEnvironment.Instance.GetCallingConverterDataFromMethodSignature(
-                            context,
-                            _methodSignature,
-                            typeInstantiation,
-                            methodInstantiation,
-                            out hasThis,
-                            out parameters,
-                            out paramsByRefForced
-                        )
+                        !TypeLoaderEnvironment
+                            .Instance
+                            .GetCallingConverterDataFromMethodSignature(
+                                context,
+                                _methodSignature,
+                                typeInstantiation,
+                                methodInstantiation,
+                                out hasThis,
+                                out parameters,
+                                out paramsByRefForced
+                            )
                     )
                     {
                         Debug.Assert(false);
@@ -261,7 +263,9 @@ namespace Internal.Runtime.TypeLoader
                         ByRefType parameterAsByRefType = parameters[j] as ByRefType;
                         if (parameterAsByRefType != null)
                         {
-                            parameterAsByRefType.ParameterType.RetrieveRuntimeTypeHandleIfPossible();
+                            parameterAsByRefType
+                                .ParameterType
+                                .RetrieveRuntimeTypeHandleIfPossible();
                             parameterHandles[j] = parameterAsByRefType
                                 .ParameterType
                                 .RuntimeTypeHandle;

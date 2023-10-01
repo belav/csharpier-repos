@@ -172,8 +172,10 @@ namespace System.Activities.Core.Presentation
             if (e != null && !this.Disabled && this.scope != null)
             {
                 ModelItem stateContainerModelItem = this.ParentStateContainerEditor.ModelItem;
-                ViewStateService viewStateService =
-                    this.ParentStateContainerEditor.Context.Services.GetService<ViewStateService>();
+                ViewStateService viewStateService = this.ParentStateContainerEditor
+                    .Context
+                    .Services
+                    .GetService<ViewStateService>();
                 viewStateService.StoreViewStateWithUndo(
                     stateContainerModelItem,
                     StateContainerEditor.StateContainerWidthViewStateKey,

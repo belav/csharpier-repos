@@ -86,9 +86,10 @@ namespace Mono.Linker.Tests.TestCases
 
             for (int i = 0; i < expectedAssemblies.Length; i++)
             {
-                var outputPath = result.OutputAssemblyPath.Parent.Combine(
-                    $"{expectedAssemblies[i]}.WarningSuppressions.cs"
-                );
+                var outputPath = result
+                    .OutputAssemblyPath
+                    .Parent
+                    .Combine($"{expectedAssemblies[i]}.WarningSuppressions.cs");
                 if (!outputPath.Exists())
                     Assert.Fail(
                         $"A cs file with a list of UnconditionalSuppressMessage attributes was expected to exist at {outputPath}"
@@ -112,9 +113,10 @@ namespace Mono.Linker.Tests.TestCases
         {
             var testcase = CreateIndividualCase(typeof(CanGenerateWarningSuppressionFileXml));
             var result = Run(testcase);
-            var outputPath = result.OutputAssemblyPath.Parent.Combine(
-                "library.WarningSuppressions.xml"
-            );
+            var outputPath = result
+                .OutputAssemblyPath
+                .Parent
+                .Combine("library.WarningSuppressions.xml");
             if (!outputPath.Exists())
                 Assert.Fail(
                     $"An XML file with a list of UnconditionalSuppressMessage attributes was expected to exist at {outputPath}"
@@ -137,7 +139,8 @@ namespace Mono.Linker.Tests.TestCases
         {
             var testcase = CreateIndividualCase(typeof(WarningsAreSorted));
             var result = Run(testcase);
-            var loggedMessages = result.Logger
+            var loggedMessages = result
+                .Logger
                 .GetLoggedMessages()
                 .Where(
                     lm =>
@@ -181,9 +184,10 @@ namespace Mono.Linker.Tests.TestCases
             var testcase = CreateIndividualCase(typeof(CanEnableDependenciesDump));
             var result = Run(testcase);
 
-            var outputPath = result.OutputAssemblyPath.Parent.Combine(
-                XmlDependencyRecorder.DefaultDependenciesFileName
-            );
+            var outputPath = result
+                .OutputAssemblyPath
+                .Parent
+                .Combine(XmlDependencyRecorder.DefaultDependenciesFileName);
             if (!outputPath.Exists())
                 Assert.Fail(
                     $"The dependency dump file is missing.  Expected it to exist at {outputPath}"

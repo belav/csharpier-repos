@@ -24,7 +24,8 @@ public class DataAnnotationInMemoryTest
         using var context = CreateContext();
         Assert.Equal(
             10,
-            context.Model
+            context
+                .Model
                 .FindEntityType(typeof(One))
                 .FindProperty("MaxLengthProperty")
                 .GetMaxLength()
@@ -35,7 +36,8 @@ public class DataAnnotationInMemoryTest
     {
         using var context = CreateContext();
         Assert.True(
-            context.Model
+            context
+                .Model
                 .FindEntityType(typeof(BookDetails))
                 .FindNavigation(nameof(BookDetails.AnotherBook))
                 .ForeignKey

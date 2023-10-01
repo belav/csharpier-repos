@@ -370,9 +370,9 @@ namespace System.ServiceModel.Channels
             {
                 if (innerSession == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "innerSession"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("innerSession");
                 }
                 this.innerSession = innerSession;
             }
@@ -394,10 +394,12 @@ namespace System.ServiceModel.Channels
         {
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             if (
@@ -424,10 +426,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
         }
 

@@ -79,11 +79,13 @@ namespace System.ServiceModel.Configuration
             {
                 if (element.Name.Equals(extension.Name, StringComparison.Ordinal))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigDuplicateExtensionName, element.Name)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(SR.ConfigDuplicateExtensionName, element.Name)
+                            )
+                        );
                 }
 
                 bool foundDuplicateType = false;
@@ -107,11 +109,13 @@ namespace System.ServiceModel.Configuration
 
                 if (foundDuplicateType)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(SR.ConfigDuplicateExtensionType, element.Type)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(SR.ConfigDuplicateExtensionType, element.Type)
+                            )
+                        );
                 }
             }
         }

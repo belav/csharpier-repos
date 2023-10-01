@@ -87,11 +87,13 @@ namespace System.ServiceModel.Channels
                 ) || (existingFactory != channelListener)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.ListenerFactoryNotRegistered, channelListener.Uri)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ListenerFactoryNotRegistered, channelListener.Uri)
+                        )
+                    );
             }
         }
 
@@ -183,9 +185,11 @@ namespace System.ServiceModel.Channels
         {
             if (openCount > 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.TransportManagerOpen))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.TransportManagerOpen))
+                    );
             }
         }
 
@@ -340,12 +344,14 @@ namespace System.ServiceModel.Channels
 
                 if (timeoutException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TimeoutException(
-                            SR.GetString(SR.TimeoutOnClose, timeout),
-                            timeoutException
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new TimeoutException(
+                                SR.GetString(SR.TimeoutOnClose, timeout),
+                                timeoutException
+                            )
+                        );
                 }
             }
         }

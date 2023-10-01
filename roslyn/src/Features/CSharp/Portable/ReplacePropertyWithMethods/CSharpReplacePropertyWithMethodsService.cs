@@ -356,13 +356,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             )
             {
                 if (
-                    methodDeclaration.Body.TryConvertToArrowExpressionBody(
-                        methodDeclaration.Kind(),
-                        languageVersion,
-                        expressionBodyPreference,
-                        out var arrowExpression,
-                        out var semicolonToken
-                    )
+                    methodDeclaration
+                        .Body
+                        .TryConvertToArrowExpressionBody(
+                            methodDeclaration.Kind(),
+                            languageVersion,
+                            expressionBodyPreference,
+                            out var arrowExpression,
+                            out var semicolonToken
+                        )
                 )
                 {
                     return methodDeclaration
@@ -378,11 +380,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             )
             {
                 if (
-                    methodDeclaration.ExpressionBody.TryConvertToBlock(
-                        methodDeclaration.SemicolonToken,
-                        createReturnStatementForExpression,
-                        out var block
-                    )
+                    methodDeclaration
+                        .ExpressionBody
+                        .TryConvertToBlock(
+                            methodDeclaration.SemicolonToken,
+                            createReturnStatementForExpression,
+                            out var block
+                        )
                 )
                 {
                     return methodDeclaration

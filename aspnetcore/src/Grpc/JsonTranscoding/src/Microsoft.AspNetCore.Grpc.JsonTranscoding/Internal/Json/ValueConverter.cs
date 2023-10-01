@@ -49,10 +49,9 @@ internal sealed class ValueConverter<TMessage> : SettingsConverterBase<TMessage>
             case JsonTokenType.Comment:
                 break;
             case JsonTokenType.String:
-                fields[Value.StringValueFieldNumber].Accessor.SetValue(
-                    message,
-                    reader.GetString()!
-                );
+                fields[Value.StringValueFieldNumber]
+                    .Accessor
+                    .SetValue(message, reader.GetString()!);
                 break;
             case JsonTokenType.Number:
                 fields[Value.NumberValueFieldNumber].Accessor.SetValue(message, reader.GetDouble());

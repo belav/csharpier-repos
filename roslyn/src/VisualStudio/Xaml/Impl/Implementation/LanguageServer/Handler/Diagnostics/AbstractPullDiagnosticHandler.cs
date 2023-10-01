@@ -153,7 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             }
 
             var project = document.Project;
-            return xamlDiagnostics.Value
+            return xamlDiagnostics
+                .Value
                 .Select(
                     d =>
                         new VSDiagnostic()

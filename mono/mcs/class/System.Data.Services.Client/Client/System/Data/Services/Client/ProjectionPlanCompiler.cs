@@ -117,10 +117,9 @@ namespace System.Data.Services.Client
                 return this.Visit(original);
             }
 
-            var nullCheck = ResourceBinder.PatternRules.MatchNullCheck(
-                this.pathBuilder.LambdaParameterInScope,
-                conditional
-            );
+            var nullCheck = ResourceBinder
+                .PatternRules
+                .MatchNullCheck(this.pathBuilder.LambdaParameterInScope, conditional);
             if (
                 !nullCheck.Match
                 || !ClientType.CheckElementTypeIsEntity(nullCheck.AssignExpression.Type)

@@ -357,15 +357,17 @@ namespace System.Runtime.InteropServices.JavaScript
             out IntPtr promiseJSHandle
         )
         {
-            Interop.Runtime.WebSocketOpenRef(
-                uri,
-                subProtocols,
-                onClosed,
-                out IntPtr webSocketJSHandle,
-                out promiseJSHandle,
-                out int exception,
-                out object res
-            );
+            Interop
+                .Runtime
+                .WebSocketOpenRef(
+                    uri,
+                    subProtocols,
+                    onClosed,
+                    out IntPtr webSocketJSHandle,
+                    out promiseJSHandle,
+                    out int exception,
+                    out object res
+                );
             if (exception != 0)
                 throw new JSException((string)res);
             webSocket = new JSObject((IntPtr)webSocketJSHandle);
@@ -383,17 +385,19 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             fixed (byte* messagePtr = buffer.Array)
             {
-                Interop.Runtime.WebSocketSend(
-                    webSocket.JSHandle,
-                    (IntPtr)messagePtr,
-                    buffer.Offset,
-                    buffer.Count,
-                    messageType,
-                    endOfMessage,
-                    out promiseJSHandle,
-                    out int exception,
-                    out object res
-                );
+                Interop
+                    .Runtime
+                    .WebSocketSend(
+                        webSocket.JSHandle,
+                        (IntPtr)messagePtr,
+                        buffer.Offset,
+                        buffer.Count,
+                        messageType,
+                        endOfMessage,
+                        out promiseJSHandle,
+                        out int exception,
+                        out object res
+                    );
                 if (exception != 0)
                     throw new JSException((string)res);
 
@@ -416,16 +420,18 @@ namespace System.Runtime.InteropServices.JavaScript
             fixed (int* responsePtr = response)
             fixed (byte* bufferPtr = buffer.Array)
             {
-                Interop.Runtime.WebSocketReceive(
-                    webSocket.JSHandle,
-                    (IntPtr)bufferPtr,
-                    buffer.Offset,
-                    buffer.Count,
-                    (IntPtr)responsePtr,
-                    out promiseJSHandle,
-                    out int exception,
-                    out object res
-                );
+                Interop
+                    .Runtime
+                    .WebSocketReceive(
+                        webSocket.JSHandle,
+                        (IntPtr)bufferPtr,
+                        buffer.Offset,
+                        buffer.Count,
+                        (IntPtr)responsePtr,
+                        out promiseJSHandle,
+                        out int exception,
+                        out object res
+                    );
                 if (exception != 0)
                     throw new JSException((string)res);
                 if (res == null)
@@ -444,15 +450,17 @@ namespace System.Runtime.InteropServices.JavaScript
             out IntPtr promiseJSHandle
         )
         {
-            Interop.Runtime.WebSocketCloseRef(
-                webSocket.JSHandle,
-                code,
-                reason,
-                waitForCloseReceived,
-                out promiseJSHandle,
-                out int exception,
-                out object res
-            );
+            Interop
+                .Runtime
+                .WebSocketCloseRef(
+                    webSocket.JSHandle,
+                    code,
+                    reason,
+                    waitForCloseReceived,
+                    out promiseJSHandle,
+                    out int exception,
+                    out object res
+                );
             if (exception != 0)
                 throw new JSException((string)res);
 

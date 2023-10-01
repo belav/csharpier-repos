@@ -23,10 +23,9 @@ namespace System.ServiceModel.Channels
 
             if (!address.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "address",
-                    SR.GetString(SR.UriMustBeAbsolute)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("address", SR.GetString(SR.UriMustBeAbsolute));
             }
 
             //Xml schema anyUri can be either relative or absolute...

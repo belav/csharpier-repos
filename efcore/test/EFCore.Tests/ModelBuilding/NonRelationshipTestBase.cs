@@ -2189,7 +2189,8 @@ public abstract partial class ModelBuilderTest
 
             Assert.DoesNotContain(
                 nameof(IEntityBase.Target),
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(EntityBase))
                     .GetProperties()
                     .Select(p => p.Name)
@@ -2199,7 +2200,8 @@ public abstract partial class ModelBuilderTest
 
             Assert.Contains(
                 nameof(IEntityBase.Target),
-                modelBuilder.Model
+                modelBuilder
+                    .Model
                     .FindEntityType(typeof(EntityBase))
                     .GetProperties()
                     .Select(p => p.Name)

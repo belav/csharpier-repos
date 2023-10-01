@@ -28,10 +28,12 @@ public class RouteTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}!" });
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHelloComplex")
-        );
+        var method = Fixture
+            .DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHelloComplex")
+            );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -56,14 +58,18 @@ public class RouteTests : IntegrationTestBase
         {
             return Task.FromResult(new HelloReply { Message = $"Two - Hello {request.Name}!" });
         }
-        var method1 = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod1,
-            Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll1")
-        );
-        var method2 = Fixture.DynamicGrpc.AddUnaryMethod<HelloRequest, HelloReply>(
-            UnaryMethod2,
-            Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll2")
-        );
+        var method1 = Fixture
+            .DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod1,
+                Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll1")
+            );
+        var method2 = Fixture
+            .DynamicGrpc
+            .AddUnaryMethod<HelloRequest, HelloReply>(
+                UnaryMethod2,
+                Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll2")
+            );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 
@@ -103,10 +109,12 @@ public class RouteTests : IntegrationTestBase
                 }
             );
         }
-        var method = Fixture.DynamicGrpc.AddUnaryMethod<ComplextHelloRequest, HelloReply>(
-            UnaryMethod,
-            Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll3")
-        );
+        var method = Fixture
+            .DynamicGrpc
+            .AddUnaryMethod<ComplextHelloRequest, HelloReply>(
+                UnaryMethod,
+                Greeter.Descriptor.FindMethodByName("SayHelloComplexCatchAll3")
+            );
 
         var client = new HttpClient(Fixture.Handler) { BaseAddress = new Uri("http://localhost") };
 

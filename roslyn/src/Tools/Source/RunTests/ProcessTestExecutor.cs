@@ -68,7 +68,9 @@ namespace RunTests
 
             // Build the filter string
             var filterStringBuilder = new StringBuilder();
-            var filters = workItem.Filters.Values
+            var filters = workItem
+                .Filters
+                .Values
                 .SelectMany(filter => filter)
                 .Where(filter => !string.IsNullOrEmpty(filter.FullyQualifiedName))
                 .ToImmutableArray();
@@ -161,11 +163,14 @@ namespace RunTests
             static bool HasBuiltInRetry(WorkItemInfo workItemInfo)
             {
                 // vs-extension-testing handles test retry internally.
-                return workItemInfo.Filters.Keys.Any(
-                    key =>
-                        key.AssemblyName
-                        == "Microsoft.VisualStudio.LanguageServices.New.IntegrationTests.dll"
-                );
+                return workItemInfo
+                    .Filters
+                    .Keys
+                    .Any(
+                        key =>
+                            key.AssemblyName
+                            == "Microsoft.VisualStudio.LanguageServices.New.IntegrationTests.dll"
+                    );
             }
         }
 

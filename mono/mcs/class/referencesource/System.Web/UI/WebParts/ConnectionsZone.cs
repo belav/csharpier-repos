@@ -980,9 +980,9 @@ namespace System.Web.UI.WebControls.WebParts
                             Debug.Assert(
                                 providerInfo != null
                                     && providerInfo.TransformerType != null
-                                    && providerInfo.TransformerType.IsSubclassOf(
-                                        typeof(WebPartTransformer)
-                                    )
+                                    && providerInfo
+                                        .TransformerType
+                                        .IsSubclassOf(typeof(WebPartTransformer))
                             );
                             _pendingTransformer = (WebPartTransformer)
                                 WebPartUtil.CreateObjectFromType(providerInfo.TransformerType);
@@ -1022,9 +1022,9 @@ namespace System.Web.UI.WebControls.WebParts
                         Debug.Assert(
                             consumerInfo != null
                                 && consumerInfo.TransformerType != null
-                                && consumerInfo.TransformerType.IsSubclassOf(
-                                    typeof(WebPartTransformer)
-                                )
+                                && consumerInfo
+                                    .TransformerType
+                                    .IsSubclassOf(typeof(WebPartTransformer))
                         );
                         _pendingTransformer = (WebPartTransformer)
                             WebPartUtil.CreateObjectFromType(consumerInfo.TransformerType);

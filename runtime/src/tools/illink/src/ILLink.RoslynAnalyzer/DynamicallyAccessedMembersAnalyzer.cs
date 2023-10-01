@@ -151,10 +151,12 @@ namespace ILLink.RoslynAnalyzer
             context.RegisterCompilationStartAction(context =>
             {
                 if (
-                    !context.Options.IsMSBuildPropertyValueTrue(
-                        MSBuildPropertyOptionNames.EnableTrimAnalyzer,
-                        context.Compilation
-                    )
+                    !context
+                        .Options
+                        .IsMSBuildPropertyValueTrue(
+                            MSBuildPropertyOptionNames.EnableTrimAnalyzer,
+                            context.Compilation
+                        )
                 )
                     return;
 
@@ -168,7 +170,9 @@ namespace ILLink.RoslynAnalyzer
                         TrimDataFlowAnalysis trimDataFlowAnalysis = new(context, operationBlock);
                         trimDataFlowAnalysis.InterproceduralAnalyze();
                         foreach (
-                            var diagnostic in trimDataFlowAnalysis.TrimAnalysisPatterns.CollectDiagnostics()
+                            var diagnostic in trimDataFlowAnalysis
+                                .TrimAnalysisPatterns
+                                .CollectDiagnostics()
                         )
                             context.ReportDiagnostic(diagnostic);
                     }
@@ -510,14 +514,18 @@ namespace ILLink.RoslynAnalyzer
                         (
                             !attributableSymbolLocation.IsInSource
                             || (
-                                overrideParam.ParameterSymbol!.TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
-                                && baseParam.ParameterSymbol!.TryGetAttribute(
-                                    DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
-                                    out var _
-                                )
+                                overrideParam
+                                    .ParameterSymbol!
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
+                                && baseParam
+                                    .ParameterSymbol!
+                                    .TryGetAttribute(
+                                        DynamicallyAccessedMembersAnalyzer.DynamicallyAccessedMembersAttribute,
+                                        out var _
+                                    )
                             )
                         )
                             ? (null, null)

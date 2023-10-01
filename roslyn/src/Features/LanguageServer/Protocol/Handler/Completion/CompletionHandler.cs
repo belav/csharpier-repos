@@ -132,9 +132,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 clientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport
                 ?? false;
             var itemDefaultsSupported =
-                clientCapabilities.TextDocument?.Completion?.CompletionListSetting?.ItemDefaults?.Contains(
-                    EditRangeSetting
-                ) == true;
+                clientCapabilities
+                    .TextDocument
+                    ?.Completion
+                    ?.CompletionListSetting
+                    ?.ItemDefaults
+                    ?.Contains(EditRangeSetting) == true;
 
             // We use the first item in the completion list as our comparison point for span
             // and range for optimization when generating the TextEdits later on.
@@ -204,8 +207,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             async Task<LSP.CompletionItem> CreateLSPCompletionItemAsync(CompletionItem item)
             {
-                var creationService =
-                    document.Project.Solution.Services.GetRequiredService<ILspCompletionResultCreationService>();
+                var creationService = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<ILspCompletionResultCreationService>();
 
                 // Defer to host to create the actual completion item (including potential subclasses), and add any
                 // custom information.
@@ -246,10 +252,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 foreach (var tag in tags)
                 {
                     if (
-                        ProtocolConversions.RoslynTagToCompletionItemKind.TryGetValue(
-                            tag,
-                            out var completionItemKind
-                        )
+                        ProtocolConversions
+                            .RoslynTagToCompletionItemKind
+                            .TryGetValue(tag, out var completionItemKind)
                     )
                         return completionItemKind;
                 }
@@ -323,7 +328,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     return;
                 }
 
-                var defaultCommitCharacters = CompletionRules.Default.DefaultCommitCharacters
+                var defaultCommitCharacters = CompletionRules
+                    .Default
+                    .DefaultCommitCharacters
                     .Select(c => c.ToString())
                     .ToArray();
                 var commitCharacterReferences = new Dictionary<object, int>();

@@ -112,7 +112,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var medal = entity.medalAgent
+                    var medal = entity
+                        .medalAgent
                         .Where(c => c.medalId == cId)
                         .Select(
                             c =>
@@ -180,7 +181,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpmedal = entity.medalAgent
+                            var tmpmedal = entity
+                                .medalAgent
                                 .Where(p => p.medalId == Object.medalId)
                                 .FirstOrDefault();
 

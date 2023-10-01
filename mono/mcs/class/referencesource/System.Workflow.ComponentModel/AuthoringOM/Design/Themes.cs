@@ -754,14 +754,15 @@ namespace System.Workflow.ComponentModel.Design
                     if (themeAttrib.Xml.Length > 0)
                     {
                         //First check if the theme initializer is obtained from resource as a manifest
-                        Stream stream = designerType.Assembly.GetManifestResourceStream(
-                            designerType,
-                            themeAttrib.Xml
-                        );
+                        Stream stream = designerType
+                            .Assembly
+                            .GetManifestResourceStream(designerType, themeAttrib.Xml);
                         if (stream == null)
-                            stream = designerType.Assembly.GetManifestResourceStream(
-                                WorkflowTheme.ThemeResourceNS + themeAttrib.Xml
-                            );
+                            stream = designerType
+                                .Assembly
+                                .GetManifestResourceStream(
+                                    WorkflowTheme.ThemeResourceNS + themeAttrib.Xml
+                                );
 
                         //Check if the theme initializer is obtained from file
                         XmlReader textReader = (stream != null) ? XmlReader.Create(stream) : null;
@@ -782,9 +783,9 @@ namespace System.Workflow.ComponentModel.Design
                                     (
                                         (IDesignerSerializationManager)serializationManager
                                     ).AddSerializationProvider(themeSerializationProvider);
-                                    (
-                                        (IDesignerSerializationManager)serializationManager
-                                    ).Context.Push(this);
+                                    ((IDesignerSerializationManager)serializationManager)
+                                        .Context
+                                        .Push(this);
                                     WorkflowMarkupSerializer xomlSerializer =
                                         new WorkflowMarkupSerializer();
                                     designerTheme =
@@ -793,9 +794,9 @@ namespace System.Workflow.ComponentModel.Design
 
                                     if (
                                         designerTheme != null
-                                        && !themeAttrib.DesignerThemeType.IsAssignableFrom(
-                                            designerTheme.GetType()
-                                        )
+                                        && !themeAttrib
+                                            .DesignerThemeType
+                                            .IsAssignableFrom(designerTheme.GetType())
                                     )
                                     {
                                         (

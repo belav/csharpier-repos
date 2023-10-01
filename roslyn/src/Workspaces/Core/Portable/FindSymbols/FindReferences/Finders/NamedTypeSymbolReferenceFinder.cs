@@ -297,7 +297,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             if (predefinedType == PredefinedType.None)
                 return new(ImmutableArray<FinderLocation>.Empty);
 
-            var tokens = state.Root
+            var tokens = state
+                .Root
                 .DescendantTokens(descendIntoTrivia: true)
                 .WhereAsArray(
                     static (token, tuple) =>

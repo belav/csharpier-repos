@@ -45,9 +45,11 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"Vector64UInt32ToString: Vector64<UInt32>.ToString() returned an unexpected result."
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"Vector64UInt32ToString: Vector64<UInt32>.ToString() returned an unexpected result."
+                    );
                 TestLibrary.TestFramework.LogInformation($"Expected: {expected}");
                 TestLibrary.TestFramework.LogInformation($"Actual: {actual}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

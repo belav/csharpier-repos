@@ -1275,10 +1275,10 @@ namespace System.Web.UI.WebControls
                         // is the default value of VisibleDate property, so we add a day to keep
                         // showing the first supported month.
                         // We assume the first supported month has more than one day.
-                        VisibleDate = DateTimeFormatInfo.CurrentInfo.Calendar.AddDays(
-                            VisibleDate,
-                            1
-                        );
+                        VisibleDate = DateTimeFormatInfo
+                            .CurrentInfo
+                            .Calendar
+                            .AddDays(VisibleDate, 1);
                     }
                     OnVisibleMonthChanged(VisibleDate, oldDate);
                 }
@@ -2000,9 +2000,9 @@ namespace System.Web.UI.WebControls
 
                     string prevMonthKey =
                         NAVIGATE_MONTH_COMMAND
-                        + (prevMonthDate.Subtract(baseDate)).Days.ToString(
-                            CultureInfo.InvariantCulture
-                        );
+                        + (prevMonthDate.Subtract(baseDate))
+                            .Days
+                            .ToString(CultureInfo.InvariantCulture);
 
                     string previousMonthTitle = null;
                     if (useAccessibleHeader)
@@ -2090,9 +2090,9 @@ namespace System.Web.UI.WebControls
                     DateTime nextMonthDate = threadCalendar.AddMonths(visibleDate, 1);
                     string nextMonthKey =
                         NAVIGATE_MONTH_COMMAND
-                        + (nextMonthDate.Subtract(baseDate)).Days.ToString(
-                            CultureInfo.InvariantCulture
-                        );
+                        + (nextMonthDate.Subtract(baseDate))
+                            .Days
+                            .ToString(CultureInfo.InvariantCulture);
 
                     string nextMonthTitle = null;
                     if (useAccessibleHeader)

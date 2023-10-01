@@ -40,11 +40,13 @@ namespace ILCompiler.DependencyAnalysis
         {
             DependencyList dependencies = null;
 
-            context.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
-                ref dependencies,
-                context,
-                _method
-            );
+            context
+                .MetadataManager
+                .GetDependenciesDueToVirtualMethodReflectability(
+                    ref dependencies,
+                    context,
+                    _method
+                );
 
             if (!_method.IsAbstract)
             {
@@ -235,10 +237,9 @@ namespace ILCompiler.DependencyAnalysis
                                     )
                                 );
 
-                                factory.MetadataManager.NoteOverridingMethod(
-                                    _method,
-                                    implementingMethodInstantiation
-                                );
+                                factory
+                                    .MetadataManager
+                                    .NoteOverridingMethod(_method, implementingMethodInstantiation);
                             }
                         }
                     }
@@ -301,10 +302,9 @@ namespace ILCompiler.DependencyAnalysis
                             )
                         );
 
-                        factory.MetadataManager.NoteOverridingMethod(
-                            _method,
-                            instantiatedTargetMethod
-                        );
+                        factory
+                            .MetadataManager
+                            .NoteOverridingMethod(_method, instantiatedTargetMethod);
                     }
                 }
             }

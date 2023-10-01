@@ -715,7 +715,8 @@ namespace System.Text.RegularExpressions.Generator.Tests
                 );
             }
 
-            return generatorResults.Diagnostics
+            return generatorResults
+                .Diagnostics
                 .Concat(results.Diagnostics)
                 .Where(d => d.Severity != DiagnosticSeverity.Hidden)
                 .ToArray();

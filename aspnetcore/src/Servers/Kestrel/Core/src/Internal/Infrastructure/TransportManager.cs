@@ -118,15 +118,17 @@ internal sealed class TransportManager
                     },
                     OnConnection = (context, cancellationToken) =>
                     {
-                        return listenOptions.HttpsCallbackOptions.OnConnection(
-                            new TlsHandshakeCallbackContext
-                            {
-                                ClientHelloInfo = context.ClientHelloInfo,
-                                CancellationToken = cancellationToken,
-                                State = context.State,
-                                Connection = new ConnectionContextAdapter(context.Connection),
-                            }
-                        );
+                        return listenOptions
+                            .HttpsCallbackOptions
+                            .OnConnection(
+                                new TlsHandshakeCallbackContext
+                                {
+                                    ClientHelloInfo = context.ClientHelloInfo,
+                                    CancellationToken = cancellationToken,
+                                    State = context.State,
+                                    Connection = new ConnectionContextAdapter(context.Connection),
+                                }
+                            );
                     },
                     OnConnectionState = listenOptions.HttpsCallbackOptions.OnConnectionState,
                 }
@@ -269,7 +271,8 @@ internal sealed class TransportManager
         async Task StopTransportConnection(ActiveTransport transport)
         {
             if (
-                !await transport.TransportConnectionManager
+                !await transport
+                    .TransportConnectionManager
                     .CloseAllConnectionsAsync(cancellationToken)
                     .ConfigureAwait(false)
             )
@@ -277,7 +280,8 @@ internal sealed class TransportManager
                 Trace.NotAllConnectionsClosedGracefully();
 
                 if (
-                    !await transport.TransportConnectionManager
+                    !await transport
+                        .TransportConnectionManager
                         .AbortAllConnectionsAsync()
                         .ConfigureAwait(false)
                 )

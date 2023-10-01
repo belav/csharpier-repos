@@ -26,8 +26,10 @@ public class SqlServerTypeAliasTest : IClassFixture<SqlServerFixture>
 
         using (var context = new TypeAliasContext(options))
         {
-            context.Database.ExecuteSqlRaw(
-                @"
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"
 CREATE TYPE datetimeAlias FROM datetime2(6);
 CREATE TYPE datetimeoffsetAlias FROM datetimeoffset(6);
 CREATE TYPE decimalAlias FROM decimal(10, 6);
@@ -35,7 +37,7 @@ CREATE TYPE doubleAlias FROM float(26);
 CREATE TYPE floatAlias FROM real;
 CREATE TYPE binaryAlias FROM varbinary(50);
 CREATE TYPE stringAlias FROM nvarchar(50);"
-            );
+                );
 
             var model = context.Model;
 

@@ -74,10 +74,12 @@ namespace System.IdentityModel
 
             if (completedResult == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "result",
-                    SR.GetString(SR.ID2004, typeof(TypedAsyncResult<T>), result.GetType())
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "result",
+                        SR.GetString(SR.ID2004, typeof(TypedAsyncResult<T>), result.GetType())
+                    );
             }
 
             AsyncResult.End(completedResult);

@@ -26,9 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             ParseAndRoundTripping(
                 text,
-                TestOptions.RegularWithDocumentationComments.WithLanguageVersion(
-                    LanguageVersion.Preview
-                ),
+                TestOptions
+                    .RegularWithDocumentationComments
+                    .WithLanguageVersion(LanguageVersion.Preview),
                 errorCount,
                 memberCount
             );

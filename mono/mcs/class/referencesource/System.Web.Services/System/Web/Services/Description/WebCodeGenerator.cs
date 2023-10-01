@@ -425,9 +425,9 @@ namespace System.Web.Services.Description
             eventCompleted.Attributes =
                 (eventCompleted.Attributes & ~MemberAttributes.AccessMask)
                 | MemberAttributes.Public;
-            eventCompleted.Comments.Add(
-                new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true)
-            );
+            eventCompleted
+                .Comments
+                .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
             members.Add(eventCompleted);
         }
 
@@ -440,9 +440,9 @@ namespace System.Web.Services.Description
         {
             CodeTypeDelegate handler = new CodeTypeDelegate(handlerType);
             handler.CustomAttributes.Add(GeneratedCodeAttribute);
-            handler.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(object), "sender")
-            );
+            handler
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(object), "sender"));
             handler.Parameters.Add(new CodeParameterDeclarationExpression(handlerArgs, "e"));
             handler.Comments.Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
             codeClasses.Add(handler);
@@ -526,9 +526,9 @@ namespace System.Web.Services.Description
                 )
             );
 
-            asyncCompleted.Statements.Add(
-                new CodeConditionStatement(checkIfNull, trueStatements, new CodeStatement[0])
-            );
+            asyncCompleted
+                .Statements
+                .Add(new CodeConditionStatement(checkIfNull, trueStatements, new CodeStatement[0]));
         }
 
         internal static CodeMemberMethod AddAsyncMethod(
@@ -552,9 +552,9 @@ namespace System.Web.Services.Description
                 CodeFlags.IsPublic
             );
 
-            asyncCodeMethod.Comments.Add(
-                new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true)
-            );
+            asyncCodeMethod
+                .Comments
+                .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
             CodeMethodInvokeExpression invoke = new CodeMethodInvokeExpression(
                 new CodeThisReferenceExpression(),
                 methodName
@@ -578,13 +578,13 @@ namespace System.Web.Services.Description
                 CodeFlags.IsPublic
             );
 
-            asyncCodeMethod.Comments.Add(
-                new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true)
-            );
+            asyncCodeMethod
+                .Comments
+                .Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));
 
-            asyncCodeMethod.Parameters.Add(
-                new CodeParameterDeclarationExpression(typeof(object), userState)
-            );
+            asyncCodeMethod
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(typeof(object), userState));
 
             CodeFieldReferenceExpression member = new CodeFieldReferenceExpression(
                 new CodeThisReferenceExpression(),
@@ -604,9 +604,9 @@ namespace System.Web.Services.Description
             {
                 new CodeAssignStatement(member, createDelegate)
             };
-            asyncCodeMethod.Statements.Add(
-                new CodeConditionStatement(checkIfNull, trueStatements, new CodeStatement[0])
-            );
+            asyncCodeMethod
+                .Statements
+                .Add(new CodeConditionStatement(checkIfNull, trueStatements, new CodeStatement[0]));
 
             return asyncCodeMethod;
         }
@@ -622,19 +622,21 @@ namespace System.Web.Services.Description
             codeClass.CustomAttributes.Add(GeneratedCodeAttribute);
 
             // Add [DebuggerStepThrough]
-            codeClass.CustomAttributes.Add(
-                new CodeAttributeDeclaration(typeof(DebuggerStepThroughAttribute).FullName)
-            );
+            codeClass
+                .CustomAttributes
+                .Add(new CodeAttributeDeclaration(typeof(DebuggerStepThroughAttribute).FullName));
             // Add [DesignerCategory("code")]
-            codeClass.CustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    typeof(DesignerCategoryAttribute).FullName,
-                    new CodeAttributeArgument[]
-                    {
-                        new CodeAttributeArgument(new CodePrimitiveExpression("code"))
-                    }
-                )
-            );
+            codeClass
+                .CustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        typeof(DesignerCategoryAttribute).FullName,
+                        new CodeAttributeArgument[]
+                        {
+                            new CodeAttributeArgument(new CodePrimitiveExpression("code"))
+                        }
+                    )
+                );
 
             codeClass.IsPartial = isPartial;
             codeClass.BaseTypes.Add(new CodeTypeReference(typeof(AsyncCompletedEventArgs)));
@@ -690,9 +692,11 @@ namespace System.Web.Services.Description
             {
                 if (paramNames[i] != null)
                 {
-                    codeClass.Members.Add(
-                        CreatePropertyDeclaration(data, paramNames[i], paramTypes[i], index++)
-                    );
+                    codeClass
+                        .Members
+                        .Add(
+                            CreatePropertyDeclaration(data, paramNames[i], paramTypes[i], index++)
+                        );
                 }
             }
             codeClass.Comments.Add(new CodeCommentStatement(Res.GetString(Res.CodeRemarks), true));

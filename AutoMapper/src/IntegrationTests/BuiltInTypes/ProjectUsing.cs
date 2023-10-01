@@ -46,13 +46,15 @@ public class ProjectUsingWithNullables : AutoMapperSpecBase, IAsyncLifetime
     {
         protected override void Seed(TestContext context)
         {
-            context.MyTable.AddRange(
-                new[]
-                {
-                    new MyTable { EnumValue = (int)MyEnum.Value2 },
-                    new MyTable { EnumValueNullable = (int?)MyEnum.Value1 },
-                }
-            );
+            context
+                .MyTable
+                .AddRange(
+                    new[]
+                    {
+                        new MyTable { EnumValue = (int)MyEnum.Value2 },
+                        new MyTable { EnumValueNullable = (int?)MyEnum.Value1 },
+                    }
+                );
             base.Seed(context);
         }
     }

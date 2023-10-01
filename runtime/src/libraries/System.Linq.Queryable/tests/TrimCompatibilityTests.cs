@@ -79,9 +79,9 @@ namespace System.Linq.Tests
 
                 // The generic type should not have a 'where new()' constraint since that will tell the trimmer to keep the ctor
                 Assert.False(
-                    genericType.GenericParameterAttributes.HasFlag(
-                        GenericParameterAttributes.DefaultConstructorConstraint
-                    )
+                    genericType
+                        .GenericParameterAttributes
+                        .HasFlag(GenericParameterAttributes.DefaultConstructorConstraint)
                 );
             }
         }

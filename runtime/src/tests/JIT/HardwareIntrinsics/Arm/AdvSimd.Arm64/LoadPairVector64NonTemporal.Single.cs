@@ -125,9 +125,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario(LoadPairVector64NonTemporal_Single testClass)
             {
-                _fld = AdvSimd.Arm64.LoadPairVector64NonTemporal(
-                    (Single*)(testClass._dataTable.inArrayPtr)
-                );
+                _fld = AdvSimd
+                    .Arm64
+                    .LoadPairVector64NonTemporal((Single*)(testClass._dataTable.inArrayPtr));
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, _fld);
                 testClass.ValidateResult(
@@ -169,9 +169,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario));
 
-            var result = AdvSimd.Arm64.LoadPairVector64NonTemporal(
-                (Single*)(_dataTable.inArrayPtr)
-            );
+            var result = AdvSimd
+                .Arm64
+                .LoadPairVector64NonTemporal((Single*)(_dataTable.inArrayPtr));
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
         }
@@ -292,12 +292,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.LoadPairVector64NonTemporal)}<Single>(Vector64<Single>): {method} failed:"
-                );
-                TestLibrary.TestFramework.LogInformation(
-                    $"  firstOp: ({string.Join(", ", firstOp)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.LoadPairVector64NonTemporal)}<Single>(Vector64<Single>): {method} failed:"
+                    );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
                 TestLibrary.TestFramework.LogInformation($" result: ({string.Join(", ", result)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

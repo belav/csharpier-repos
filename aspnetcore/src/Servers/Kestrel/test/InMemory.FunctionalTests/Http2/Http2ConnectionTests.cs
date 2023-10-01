@@ -1693,10 +1693,10 @@ public class Http2ConnectionTests : Http2TestBase
             var readResult = await context.Request.BodyReader.ReadAsync();
             while (readResult.Buffer.Length != _maxData.Length * 4)
             {
-                context.Request.BodyReader.AdvanceTo(
-                    readResult.Buffer.Start,
-                    readResult.Buffer.End
-                );
+                context
+                    .Request
+                    .BodyReader
+                    .AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
                 readResult = await context.Request.BodyReader.ReadAsync();
             }
 
@@ -3726,14 +3726,16 @@ public class Http2ConnectionTests : Http2TestBase
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamId);
-                    abortedTcs.SetResult();
-                }
-            });
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamId);
+                        abortedTcs.SetResult();
+                    }
+                });
 
             try
             {
@@ -3747,11 +3749,10 @@ public class Http2ConnectionTests : Http2TestBase
                     await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
                 }
 
-                await context.Response.Body.WriteAsync(
-                    _maxData,
-                    0,
-                    remainingBytesBeforeBackpressure + 1
-                );
+                await context
+                    .Response
+                    .Body
+                    .WriteAsync(_maxData, 0, remainingBytesBeforeBackpressure + 1);
 
                 writeTcs.SetResult();
 
@@ -3864,23 +3865,24 @@ public class Http2ConnectionTests : Http2TestBase
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamId);
-                    abortedTcs.SetResult();
-                }
-            });
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamId);
+                        abortedTcs.SetResult();
+                    }
+                });
 
             try
             {
                 writeTasks[streamId] = writeTcs.Task;
-                await context.Response.Body.WriteAsync(
-                    _helloWorldBytes,
-                    0,
-                    _helloWorldBytes.Length
-                );
+                await context
+                    .Response
+                    .Body
+                    .WriteAsync(_helloWorldBytes, 0, _helloWorldBytes.Length);
                 writeTcs.SetResult();
 
                 await abortedTcs.Task;
@@ -4594,11 +4596,10 @@ public class Http2ConnectionTests : Http2TestBase
         await InitializeConnectionAsync(
             context =>
             {
-                return context.Response.Body.WriteAsync(
-                    new byte[clientMaxFrame],
-                    0,
-                    clientMaxFrame
-                );
+                return context
+                    .Response
+                    .Body
+                    .WriteAsync(new byte[clientMaxFrame], 0, clientMaxFrame);
             },
             expectedSettingsCount: 5
         );
@@ -4920,14 +4921,16 @@ public class Http2ConnectionTests : Http2TestBase
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamId);
-                    abortedTcs.SetResult();
-                }
-            });
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamId);
+                        abortedTcs.SetResult();
+                    }
+                });
 
             try
             {
@@ -4941,11 +4944,10 @@ public class Http2ConnectionTests : Http2TestBase
                     await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
                 }
 
-                await context.Response.Body.WriteAsync(
-                    _maxData,
-                    0,
-                    remainingBytesBeforeBackpressure + 1
-                );
+                await context
+                    .Response
+                    .Body
+                    .WriteAsync(_maxData, 0, remainingBytesBeforeBackpressure + 1);
 
                 writeTcs.SetResult();
 
@@ -5040,23 +5042,24 @@ public class Http2ConnectionTests : Http2TestBase
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
 
-            context.RequestAborted.Register(() =>
-            {
-                lock (_abortedStreamIdsLock)
+            context
+                .RequestAborted
+                .Register(() =>
                 {
-                    _abortedStreamIds.Add(streamId);
-                    abortedTcs.SetResult();
-                }
-            });
+                    lock (_abortedStreamIdsLock)
+                    {
+                        _abortedStreamIds.Add(streamId);
+                        abortedTcs.SetResult();
+                    }
+                });
 
             try
             {
                 writeTasks[streamId] = writeTcs.Task;
-                await context.Response.Body.WriteAsync(
-                    _helloWorldBytes,
-                    0,
-                    _helloWorldBytes.Length
-                );
+                await context
+                    .Response
+                    .Body
+                    .WriteAsync(_helloWorldBytes, 0, _helloWorldBytes.Length);
                 writeTcs.SetResult();
 
                 await abortedTcs.Task;
@@ -6759,9 +6762,11 @@ public class Http2ConnectionTests : Http2TestBase
         InitializeConnectionWithoutPreface(_noopApplication);
 
         await SendAsync(
-            Encoding.ASCII.GetBytes(
-                $"GET /{new string('a', _connection.Limits.MaxRequestLineSize)} HTTP/1.1\r\n"
-            )
+            Encoding
+                .ASCII
+                .GetBytes(
+                    $"GET /{new string('a', _connection.Limits.MaxRequestLineSize)} HTTP/1.1\r\n"
+                )
         );
 
         await WaitForConnectionErrorAsync<Http2ConnectionErrorException>(

@@ -51,10 +51,9 @@ namespace POS_Server.Areas.HelpPage.Controllers
                     Configuration.GetModelDescriptionGenerator();
                 ModelDescription modelDescription;
                 if (
-                    modelDescriptionGenerator.GeneratedModels.TryGetValue(
-                        modelName,
-                        out modelDescription
-                    )
+                    modelDescriptionGenerator
+                        .GeneratedModels
+                        .TryGetValue(modelName, out modelDescription)
                 )
                 {
                     return View(modelDescription);

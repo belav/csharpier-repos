@@ -249,12 +249,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         var id = call.AsyncHandle;
         await Client.ExpectRenderBatch(async () =>
         {
-            await Client.HubConnection.InvokeAsync(
-                "EndInvokeJSFromDotNet",
-                id,
-                true,
-                $"[{id}, true, \"{{\"]"
-            );
+            await Client
+                .HubConnection
+                .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, \"{{\"]");
         });
 
         var text = Assert.Single(
@@ -281,12 +278,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         var id = call.AsyncHandle;
         await Client.ExpectRenderBatch(async () =>
         {
-            await Client.HubConnection.InvokeAsync(
-                "EndInvokeJSFromDotNet",
-                id,
-                true,
-                $"[{id}, true, null]"
-            );
+            await Client
+                .HubConnection
+                .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, null]");
         });
 
         Assert.Single(
@@ -314,12 +308,14 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         var id = call.AsyncHandle;
         await Client.ExpectRenderBatch(async () =>
         {
-            await Client.HubConnection.InvokeAsync(
-                "EndInvokeJSFromDotNet",
-                id,
-                false,
-                $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
-            );
+            await Client
+                .HubConnection
+                .InvokeAsync(
+                    "EndInvokeJSFromDotNet",
+                    id,
+                    false,
+                    $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
+                );
         });
 
         Assert.Single(
@@ -351,12 +347,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         var id = call.AsyncHandle;
         await Client.ExpectCircuitError(async () =>
         {
-            await Client.HubConnection.InvokeAsync(
-                "EndInvokeJSFromDotNet",
-                id,
-                true,
-                $"[{id}, true, }}"
-            );
+            await Client
+                .HubConnection
+                .InvokeAsync("EndInvokeJSFromDotNet", id, true, $"[{id}, true, }}");
         });
 
         // A completely malformed payload like the one above never gets to the application.
@@ -456,11 +449,9 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Act
         await Client.ExpectCircuitError(async () =>
         {
-            await Client.HubConnection.InvokeAsync(
-                "DispatchBrowserEvent",
-                "{Invalid:{\"payload}",
-                "{}"
-            );
+            await Client
+                .HubConnection
+                .InvokeAsync("DispatchBrowserEvent", "{Invalid:{\"payload}", "{}");
         });
 
         var entry = Assert.Single(
@@ -492,14 +483,16 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
 
         await Client.ExpectCircuitError(async () =>
         {
-            await Client.HubConnection.InvokeAsync(
-                "DispatchBrowserEvent",
-                JsonSerializer.Serialize(
-                    browserDescriptor,
-                    TestJsonSerializerOptionsProvider.Options
-                ),
-                "{Invalid:{\"payload}"
-            );
+            await Client
+                .HubConnection
+                .InvokeAsync(
+                    "DispatchBrowserEvent",
+                    JsonSerializer.Serialize(
+                        browserDescriptor,
+                        TestJsonSerializerOptionsProvider.Options
+                    ),
+                    "{Invalid:{\"payload}"
+                );
         });
 
         Assert.Contains(

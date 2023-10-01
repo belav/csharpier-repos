@@ -43,9 +43,9 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var List = (
-                        from c in entity.inventoryItemLocation.Where(
-                            c => c.inventoryId == inventoryId
-                        )
+                        from c in entity
+                            .inventoryItemLocation
+                            .Where(c => c.inventoryId == inventoryId)
                         join l in entity.itemsLocations on c.itemLocationId equals l.itemsLocId
                         join u in entity.itemsUnits on l.itemUnitId equals u.itemUnitId
                         join un in entity.units on u.unitId equals un.unitId
@@ -108,14 +108,16 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var List = (
-                        from c in entity.inventoryItemLocation.Where(
-                            c =>
-                                c.amountDestroyed > 0
-                                && c.isDestroyed == false
-                                && c.Inventory.branchId == branchId
-                                && c.Inventory.inventoryType == "n"
-                                && c.Inventory.isActive == 1
-                        )
+                        from c in entity
+                            .inventoryItemLocation
+                            .Where(
+                                c =>
+                                    c.amountDestroyed > 0
+                                    && c.isDestroyed == false
+                                    && c.Inventory.branchId == branchId
+                                    && c.Inventory.inventoryType == "n"
+                                    && c.Inventory.isActive == 1
+                            )
                         join l in entity.itemsLocations on c.itemLocationId equals l.itemsLocId
                         join u in entity.itemsUnits on l.itemUnitId equals u.itemUnitId
                         join un in entity.units on u.unitId equals un.unitId
@@ -179,14 +181,16 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var List = (
-                        from c in entity.inventoryItemLocation.Where(
-                            c =>
-                                c.realAmount - c.amount > 0
-                                && c.Inventory.branchId == branchId
-                                && c.isFalls == false
-                                && c.Inventory.inventoryType == "n"
-                                && c.Inventory.isActive == 1
-                        )
+                        from c in entity
+                            .inventoryItemLocation
+                            .Where(
+                                c =>
+                                    c.realAmount - c.amount > 0
+                                    && c.Inventory.branchId == branchId
+                                    && c.isFalls == false
+                                    && c.Inventory.inventoryType == "n"
+                                    && c.Inventory.isActive == 1
+                            )
                         join l in entity.itemsLocations on c.itemLocationId equals l.itemsLocId
                         join u in entity.itemsUnits on l.itemUnitId equals u.itemUnitId
                         join un in entity.units on u.unitId equals un.unitId
@@ -242,7 +246,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var list = entity.inventoryItemLocation
+                    var list = entity
+                        .inventoryItemLocation
                         .Where(c => c.id == cId)
                         .Select(
                             c =>
@@ -310,7 +315,8 @@ namespace POS_Server.Controllers
 
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    List<inventoryItemLocation> items = entity.inventoryItemLocation
+                    List<inventoryItemLocation> items = entity
+                        .inventoryItemLocation
                         .Where(x => x.inventoryId == inventoryId)
                         .ToList();
                     if (items == null || items.Count == 0) // add first time
@@ -347,9 +353,9 @@ namespace POS_Server.Controllers
                     {
                         foreach (InventoryItemLocationModel il in Object)
                         {
-                            inventoryItemLocation invItem = entity.inventoryItemLocation.Find(
-                                il.id
-                            );
+                            inventoryItemLocation invItem = entity
+                                .inventoryItemLocation
+                                .Find(il.id);
                             invItem.amount = il.amount;
                             invItem.isDestroyed = il.isDestroyed;
                             invItem.isFalls = il.isFalls;
@@ -376,7 +382,8 @@ namespace POS_Server.Controllers
             {
                 var unitEntity = entity.Set<pos>();
 
-                var tmpItem = entity.inventoryItemLocation
+                var tmpItem = entity
+                    .inventoryItemLocation
                     .Where(p => p.id == Object.id)
                     .FirstOrDefault();
                 tmpItem.notes = Object.notes;
@@ -453,7 +460,8 @@ namespace POS_Server.Controllers
             {
                 var unitEntity = entity.Set<pos>();
 
-                var tmpItem = entity.inventoryItemLocation
+                var tmpItem = entity
+                    .inventoryItemLocation
                     .Where(p => p.id == Object.id)
                     .FirstOrDefault();
                 tmpItem.notes = Object.notes;

@@ -226,12 +226,9 @@ namespace System.Data.SqlClient
 
                 if (SqlDbType.Variant == _metaData.SqlDbType)
                 {
-                    _stateObj.Parser.WriteSqlVariantHeader(
-                        4 + length,
-                        TdsEnums.SQLBIGVARBINARY,
-                        2,
-                        _stateObj
-                    );
+                    _stateObj
+                        .Parser
+                        .WriteSqlVariantHeader(4 + length, TdsEnums.SQLBIGVARBINARY, 2, _stateObj);
                 }
                 _stateObj.Parser.WriteShort(length, _stateObj);
                 _stateObj.WriteByteArray(buffer, length, bufferOffset);
@@ -269,12 +266,9 @@ namespace System.Data.SqlClient
 
                     if (SqlDbType.Variant == _metaData.SqlDbType)
                     {
-                        _stateObj.Parser.WriteSqlVariantHeader(
-                            4,
-                            TdsEnums.SQLBIGVARBINARY,
-                            2,
-                            _stateObj
-                        );
+                        _stateObj
+                            .Parser
+                            .WriteSqlVariantHeader(4, TdsEnums.SQLBIGVARBINARY, 2, _stateObj);
                     }
                     _stateObj.Parser.WriteShort(0, _stateObj);
                 }
@@ -342,12 +336,14 @@ namespace System.Data.SqlClient
 
                     if (SqlDbType.Variant == _metaData.SqlDbType)
                     {
-                        _stateObj.Parser.WriteSqlVariantValue(
-                            new String(buffer, bufferOffset, length),
-                            length,
-                            0,
-                            _stateObj
-                        );
+                        _stateObj
+                            .Parser
+                            .WriteSqlVariantValue(
+                                new String(buffer, bufferOffset, length),
+                                length,
+                                0,
+                                _stateObj
+                            );
                     }
                     else
                     {
@@ -463,16 +459,19 @@ namespace System.Data.SqlClient
                     }
                     else
                     {
-                        bytes = _stateObj.Parser._defaultEncoding.GetBytes(
-                            value.ToCharArray(offset, length)
-                        );
+                        bytes = _stateObj
+                            .Parser
+                            ._defaultEncoding
+                            .GetBytes(value.ToCharArray(offset, length));
                     }
-                    _stateObj.Parser.WriteSqlVariantHeader(
-                        9 + bytes.Length,
-                        TdsEnums.SQLBIGVARCHAR,
-                        7,
-                        _stateObj
-                    );
+                    _stateObj
+                        .Parser
+                        .WriteSqlVariantHeader(
+                            9 + bytes.Length,
+                            TdsEnums.SQLBIGVARCHAR,
+                            7,
+                            _stateObj
+                        );
                     _stateObj.Parser.WriteUnsignedInt(collation.info, _stateObj); // propbytes: collation.Info
                     _stateObj.WriteByte(collation.sortId); // propbytes: collation.SortId
                     _stateObj.Parser.WriteShort(bytes.Length, _stateObj); // propbyte: varlen
@@ -480,12 +479,14 @@ namespace System.Data.SqlClient
                 }
                 else
                 {
-                    _stateObj.Parser.WriteSqlVariantHeader(
-                        9 + length * ADP.CharSize,
-                        TdsEnums.SQLNVARCHAR,
-                        7,
-                        _stateObj
-                    );
+                    _stateObj
+                        .Parser
+                        .WriteSqlVariantHeader(
+                            9 + length * ADP.CharSize,
+                            TdsEnums.SQLNVARCHAR,
+                            7,
+                            _stateObj
+                        );
                     _stateObj.Parser.WriteUnsignedInt(collation.info, _stateObj); // propbytes: collation.Info
                     _stateObj.WriteByte(collation.sortId); // propbytes: collation.SortId
                     _stateObj.Parser.WriteShort(length * ADP.CharSize, _stateObj); // propbyte: varlen
@@ -638,10 +639,12 @@ namespace System.Data.SqlClient
             else
             {
                 _stateObj.WriteByte(checked((byte)MetaType.MetaDecimal.FixedLength)); // SmiMetaData's length and actual wire format's length are different
-                _stateObj.Parser.WriteSqlDecimal(
-                    SqlDecimal.ConvertToPrecScale(value, _metaData.Precision, _metaData.Scale),
-                    _stateObj
-                );
+                _stateObj
+                    .Parser
+                    .WriteSqlDecimal(
+                        SqlDecimal.ConvertToPrecScale(value, _metaData.Precision, _metaData.Scale),
+                        _stateObj
+                    );
             }
         }
 
@@ -783,12 +786,9 @@ namespace System.Data.SqlClient
                 MSS.SmiMetaData dateTimeOffsetMetaData = MSS.SmiMetaData.DefaultDateTimeOffset;
                 scale = MetaType.MetaDateTimeOffset.Scale;
                 length = (byte)dateTimeOffsetMetaData.MaxLength;
-                _stateObj.Parser.WriteSqlVariantHeader(
-                    13,
-                    TdsEnums.SQLDATETIMEOFFSET,
-                    1,
-                    _stateObj
-                );
+                _stateObj
+                    .Parser
+                    .WriteSqlVariantHeader(13, TdsEnums.SQLDATETIMEOFFSET, 1, _stateObj);
                 _stateObj.WriteByte(scale); //propbytes: scale
             }
             else

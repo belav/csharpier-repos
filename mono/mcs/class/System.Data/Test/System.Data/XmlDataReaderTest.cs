@@ -225,23 +225,23 @@ namespace MonoTests.System.Data
                 {
                     try
                     {
-                        doc.DocumentElement.Attributes.Remove(
-                            doc.DocumentElement.Attributes["ReturnType"]
-                        );
+                        doc.DocumentElement
+                            .Attributes
+                            .Remove(doc.DocumentElement.Attributes["ReturnType"]);
                     }
                     catch { }
                     try
                     {
-                        doc.DocumentElement.Attributes.Remove(
-                            doc.DocumentElement.Attributes["ReturnTId"]
-                        );
+                        doc.DocumentElement
+                            .Attributes
+                            .Remove(doc.DocumentElement.Attributes["ReturnTId"]);
                     }
                     catch { }
                     try
                     {
-                        doc.DocumentElement.Attributes.Remove(
-                            doc.DocumentElement.Attributes["CSharpType"]
-                        );
+                        doc.DocumentElement
+                            .Attributes
+                            .Remove(doc.DocumentElement.Attributes["CSharpType"]);
                     }
                     catch { }
                 }

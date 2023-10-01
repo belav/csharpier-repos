@@ -405,9 +405,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     // Now we add the domain of oneConst into this
                     //Isnull=true and Isnull=false conditions should not contribute to a member's domain
                     cDomain.AddRange(
-                        restriction.Domain.Values.Where(
-                            c => !(c.Equals(Constant.Null) || c.Equals(Constant.NotNull))
-                        )
+                        restriction
+                            .Domain
+                            .Values
+                            .Where(c => !(c.Equals(Constant.Null) || c.Equals(Constant.NotNull)))
                     );
                     CellConstantSet values;
                     bool found = cDomainMap.TryGetValue(slot.MemberPath, out values);
@@ -556,10 +557,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 .GetConjunctsFromWhereClause()
                 .Where(
                     restriction =>
-                        MemberPath.EqualityComparer.Equals(
-                            restriction.RestrictedMemberSlot.MemberPath,
-                            slot.MemberPath
-                        )
+                        MemberPath
+                            .EqualityComparer
+                            .Equals(restriction.RestrictedMemberSlot.MemberPath, slot.MemberPath)
                 )
                 .Select(
                     restriction =>

@@ -126,9 +126,9 @@ namespace System.Runtime.Serialization
                 ReadClass(classContract);
             bool isFactoryType = InvokeFactoryMethod(classContract, objectId);
             if (
-                Globals.TypeOfIDeserializationCallback.IsAssignableFrom(
-                    classContract.UnderlyingType
-                )
+                Globals
+                    .TypeOfIDeserializationCallback
+                    .IsAssignableFrom(classContract.UnderlyingType)
             )
                 ((IDeserializationCallback)objectLocal).OnDeserialization(null);
             InvokeOnDeserialized(classContract);
@@ -225,10 +225,9 @@ namespace System.Runtime.Serialization
             if (classContract.BaseContract != null)
                 InvokeOnDeserializing(classContract.BaseContract);
             if (classContract.OnDeserializing != null)
-                classContract.OnDeserializing.Invoke(
-                    objectLocal,
-                    new object[] { context.GetStreamingContext() }
-                );
+                classContract
+                    .OnDeserializing
+                    .Invoke(objectLocal, new object[] { context.GetStreamingContext() });
         }
 
         void InvokeOnDeserialized(ClassDataContract classContract)
@@ -236,10 +235,9 @@ namespace System.Runtime.Serialization
             if (classContract.BaseContract != null)
                 InvokeOnDeserialized(classContract.BaseContract);
             if (classContract.OnDeserialized != null)
-                classContract.OnDeserialized.Invoke(
-                    objectLocal,
-                    new object[] { context.GetStreamingContext() }
-                );
+                classContract
+                    .OnDeserialized
+                    .Invoke(objectLocal, new object[] { context.GetStreamingContext() });
         }
 
         bool HasFactoryMethod(ClassDataContract classContract)
@@ -488,10 +486,9 @@ namespace System.Runtime.Serialization
                         && primitiveContract.UnderlyingType != Globals.TypeOfObject
                     )
                     {
-                        value = primitiveContract.XmlFormatReaderMethod.Invoke(
-                            xmlReader,
-                            new object[0]
-                        );
+                        value = primitiveContract
+                            .XmlFormatReaderMethod
+                            .Invoke(xmlReader, new object[0]);
                         if (!type.IsValueType)
                             context.AddNewObject(value);
                     }
@@ -571,9 +568,9 @@ namespace System.Runtime.Serialization
                 switch (collectionContract.Kind)
                 {
                     case CollectionKind.GenericDictionary:
-                        type = Globals.TypeOfDictionaryGeneric.MakeGenericType(
-                            itemType.GetGenericArguments()
-                        );
+                        type = Globals
+                            .TypeOfDictionaryGeneric
+                            .MakeGenericType(itemType.GetGenericArguments());
                         constructor = type.GetConstructor(
                             BindingFlags.Instance | BindingFlags.Public,
                             null,
@@ -643,10 +640,9 @@ namespace System.Runtime.Serialization
                             );
                             if (isArray)
                             {
-                                MethodInfo ensureArraySizeMethod =
-                                    XmlFormatGeneratorStatics.EnsureArraySizeMethod.MakeGenericMethod(
-                                        itemType
-                                    );
+                                MethodInfo ensureArraySizeMethod = XmlFormatGeneratorStatics
+                                    .EnsureArraySizeMethod
+                                    .MakeGenericMethod(itemType);
                                 growingCollection = ensureArraySizeMethod.Invoke(
                                     null,
                                     new object[] { growingCollection, i }
@@ -671,10 +667,9 @@ namespace System.Runtime.Serialization
 
                     if (isArray)
                     {
-                        MethodInfo trimArraySizeMethod =
-                            XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(
-                                itemType
-                            );
+                        MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics
+                            .TrimArraySizeMethod
+                            .MakeGenericMethod(itemType);
                         objectLocal = trimArraySizeMethod.Invoke(
                             null,
                             new object[] { growingCollection, i }

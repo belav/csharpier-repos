@@ -115,11 +115,9 @@ internal static class PublicOptionFactory
             option.LanguageName,
             publicOptionFactory: internalOption =>
                 new Option<TPublicValue>(
-                    option.Definition.ToPublicOptionDefinition(
-                        internalOption,
-                        toPublicValue,
-                        toInternalValue
-                    ),
+                    option
+                        .Definition
+                        .ToPublicOptionDefinition(internalOption, toPublicValue, toInternalValue),
                     feature,
                     name,
                     ImmutableArray<OptionStorageLocation>.Empty
@@ -137,11 +135,9 @@ internal static class PublicOptionFactory
             option.Definition,
             publicOptionFactory: internalOption =>
                 new PerLanguageOption<TPublicValue>(
-                    option.Definition.ToPublicOptionDefinition(
-                        internalOption,
-                        toPublicValue,
-                        toInternalValue
-                    ),
+                    option
+                        .Definition
+                        .ToPublicOptionDefinition(internalOption, toPublicValue, toInternalValue),
                     feature,
                     name,
                     ImmutableArray<OptionStorageLocation>.Empty

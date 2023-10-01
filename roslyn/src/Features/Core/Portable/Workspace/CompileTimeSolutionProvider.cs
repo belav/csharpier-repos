@@ -90,10 +90,9 @@ namespace Microsoft.CodeAnalysis.Host
 
         private static bool IsRazorAnalyzerConfig(TextDocumentState documentState) =>
             documentState.FilePath != null
-            && documentState.FilePath.EndsWith(
-                RazorEncConfigFileName,
-                StringComparison.OrdinalIgnoreCase
-            );
+            && documentState
+                .FilePath
+                .EndsWith(RazorEncConfigFileName, StringComparison.OrdinalIgnoreCase);
 
         public Solution GetCompileTimeSolution(Solution designTimeSolution)
         {

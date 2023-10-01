@@ -60,38 +60,38 @@ namespace System.ServiceModel.Administration
 
         void IWmiProvider.EnumInstances(IWmiInstances instances)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new WbemNotSupportedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new WbemNotSupportedException());
         }
 
         bool IWmiProvider.GetInstance(IWmiInstance contract)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new WbemNotSupportedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new WbemNotSupportedException());
         }
 
         bool IWmiProvider.PutInstance(IWmiInstance instance)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new WbemNotSupportedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new WbemNotSupportedException());
         }
 
         bool IWmiProvider.DeleteInstance(IWmiInstance instance)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new WbemNotSupportedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new WbemNotSupportedException());
         }
 
         bool IWmiProvider.InvokeMethod(IWmiMethodContext method)
         {
             method.ReturnParameter = 0;
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new WbemNotSupportedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new WbemNotSupportedException());
         }
     }
 }

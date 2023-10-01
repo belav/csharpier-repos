@@ -277,10 +277,11 @@ namespace System.Globalization
             {
                 // Open in read-only mode.
                 // Use InternalOpenSubKey so that we avoid the security check.
-                key = Microsoft.Win32.Registry.CurrentUser.InternalOpenSubKey(
-                    InternationalRegKey,
-                    false
-                );
+                key = Microsoft
+                    .Win32
+                    .Registry
+                    .CurrentUser
+                    .InternalOpenSubKey(InternationalRegKey, false);
             }
             //If this fails for any reason, we'll just return 0.
             catch (ObjectDisposedException)

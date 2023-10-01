@@ -90,16 +90,12 @@ public class DbContextServices : IDbContextServices
             return
                 modelFromOptions == null
                 || (designTime && modelFromOptions is not Metadata.Internal.Model)
-                ? dependencies.ModelSource.GetModel(
-                    _currentContext!.Context,
-                    dependencies,
-                    designTime
-                )
-                : dependencies.ModelRuntimeInitializer.Initialize(
-                    modelFromOptions,
-                    designTime,
-                    dependencies.ValidationLogger
-                );
+                ? dependencies
+                    .ModelSource
+                    .GetModel(_currentContext!.Context, dependencies, designTime)
+                : dependencies
+                    .ModelRuntimeInitializer
+                    .Initialize(modelFromOptions, designTime, dependencies.ValidationLogger);
         }
         finally
         {

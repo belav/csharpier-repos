@@ -184,9 +184,9 @@ namespace Internal.Runtime.TypeLoader
                 switch (DataKind)
                 {
                     case StaticDataKind.NonGc:
-                        return TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(
-                            typeHandle
-                        );
+                        return TypeLoaderEnvironment
+                            .Instance
+                            .TryGetNonGcStaticFieldData(typeHandle);
 
                     case StaticDataKind.Gc:
                         return TypeLoaderEnvironment.Instance.TryGetGcStaticFieldData(typeHandle);
@@ -223,9 +223,9 @@ namespace Internal.Runtime.TypeLoader
 
             internal override unsafe IntPtr Create(TypeBuilder builder)
             {
-                return TypeLoaderEnvironment.Instance.TryGetThreadStaticFieldData(
-                    builder.GetRuntimeTypeHandle(Type)
-                );
+                return TypeLoaderEnvironment
+                    .Instance
+                    .TryGetThreadStaticFieldData(builder.GetRuntimeTypeHandle(Type));
             }
         }
 
@@ -266,8 +266,9 @@ namespace Internal.Runtime.TypeLoader
 
             internal override unsafe IntPtr Create(TypeBuilder builder)
             {
-                RuntimeFieldHandle handle =
-                    TypeLoaderEnvironment.Instance.GetRuntimeFieldHandleForComponents(
+                RuntimeFieldHandle handle = TypeLoaderEnvironment
+                    .Instance
+                    .GetRuntimeFieldHandleForComponents(
                         builder.GetRuntimeTypeHandle(ContainingType),
                         FieldName
                     );
@@ -304,8 +305,9 @@ namespace Internal.Runtime.TypeLoader
                         ? builder.GetRuntimeTypeHandles(Method.Instantiation)
                         : null;
 
-                RuntimeMethodHandle handle =
-                    TypeLoaderEnvironment.Instance.GetRuntimeMethodHandleForComponents(
+                RuntimeMethodHandle handle = TypeLoaderEnvironment
+                    .Instance
+                    .GetRuntimeMethodHandleForComponents(
                         builder.GetRuntimeTypeHandle(Method.OwningType),
                         MethodName,
                         MethodSignature,
@@ -509,9 +511,9 @@ namespace Internal.Runtime.TypeLoader
                         NativeParser ldtokenSigParser = parser.GetParserFromRelativeOffset();
 
                         var type = nativeLayoutInfoLoadContext.GetType(ref ldtokenSigParser);
-                        IntPtr fieldNameSig = ldtokenSigParser.Reader.OffsetToAddress(
-                            ldtokenSigParser.Offset
-                        );
+                        IntPtr fieldNameSig = ldtokenSigParser
+                            .Reader
+                            .OffsetToAddress(ldtokenSigParser.Offset);
                         TypeLoaderLogger.WriteLine(
                             "LdToken on: " + type.ToString() + "." + ldtokenSigParser.GetString()
                         );

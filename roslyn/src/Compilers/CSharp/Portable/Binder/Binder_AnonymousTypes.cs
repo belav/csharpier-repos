@@ -23,11 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureAnonymousTypes.CheckFeatureAvailability(
-                diagnostics,
-                node,
-                node.NewKeyword.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureAnonymousTypes
+                .CheckFeatureAvailability(diagnostics, node, node.NewKeyword.GetLocation());
 
             //  prepare
             var initializers = node.Initializers;

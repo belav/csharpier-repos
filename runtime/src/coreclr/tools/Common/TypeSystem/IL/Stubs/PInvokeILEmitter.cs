@@ -212,7 +212,8 @@ namespace Internal.IL.Stubs
                 fnptrLoadStream.Emit(
                     ILOpcode.call,
                     emitter.NewToken(
-                        delegateMethod.Context
+                        delegateMethod
+                            .Context
                             .GetHelperType("InteropHelpers")
                             .GetKnownMethod(
                                 "GetCurrentCalleeOpenStaticDelegateFunctionPointer",
@@ -236,22 +237,24 @@ namespace Internal.IL.Stubs
                 //     InteropHelpers.GetCurrentCalleeDelegate<Delegate>
                 // which returns the delegate. Do a CallVirt on the invoke method.
                 //
-                MethodDesc instantiatedHelper = delegateMethod.Context.GetInstantiatedMethod(
-                    delegateMethod.Context
-                        .GetHelperType("InteropHelpers")
-                        .GetKnownMethod("GetCurrentCalleeDelegate", null),
-                    new Instantiation((delegateMethod.DelegateType))
-                );
+                MethodDesc instantiatedHelper = delegateMethod
+                    .Context
+                    .GetInstantiatedMethod(
+                        delegateMethod
+                            .Context
+                            .GetHelperType("InteropHelpers")
+                            .GetKnownMethod("GetCurrentCalleeDelegate", null),
+                        new Instantiation((delegateMethod.DelegateType))
+                    );
 
                 fnptrLoadStream.Emit(ILOpcode.call, emitter.NewToken(instantiatedHelper));
 
                 ILLocalVariable vDelegateStub = emitter.NewLocal(delegateMethod.DelegateType);
                 fnptrLoadStream.EmitStLoc(vDelegateStub);
                 marshallingCodeStream.EmitLdLoc(vDelegateStub);
-                MethodDesc invokeMethod = delegateMethod.DelegateType.GetKnownMethod(
-                    "Invoke",
-                    null
-                );
+                MethodDesc invokeMethod = delegateMethod
+                    .DelegateType
+                    .GetKnownMethod("Invoke", null);
                 callsiteSetupCodeStream.Emit(ILOpcode.callvirt, emitter.NewToken(invokeMethod));
             }
             else if (
@@ -456,10 +459,9 @@ namespace Internal.IL.Stubs
 
             if (MarshalHelpers.ShouldCheckForPendingException(context.Target, _pInvokeMetadata))
             {
-                MetadataType lazyHelperType = context.SystemModule.GetKnownType(
-                    "System.Runtime.InteropServices.ObjectiveC",
-                    "ObjectiveCMarshal"
-                );
+                MetadataType lazyHelperType = context
+                    .SystemModule
+                    .GetKnownType("System.Runtime.InteropServices.ObjectiveC", "ObjectiveCMarshal");
                 callsiteSetupCodeStream.Emit(
                     ILOpcode.call,
                     emitter.NewToken(

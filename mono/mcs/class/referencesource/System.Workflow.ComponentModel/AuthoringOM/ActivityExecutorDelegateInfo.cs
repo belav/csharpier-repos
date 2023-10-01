@@ -146,8 +146,9 @@ namespace System.Workflow.ComponentModel
             bool transacted
         )
         {
-            Activity targetContextActivity =
-                currentContextActivity.WorkflowCoreRuntime.GetContextActivityForId(this.contextId);
+            Activity targetContextActivity = currentContextActivity
+                .WorkflowCoreRuntime
+                .GetContextActivityForId(this.contextId);
             if (targetContextActivity == null)
             {
                 targetContextActivity = FindExecutorForActivityUp(
@@ -226,12 +227,14 @@ namespace System.Workflow.ComponentModel
                 Activity targetActivity = targetContextActivity.GetActivityByName(
                     this.activityQualifiedName
                 );
-                currentContextActivity.WorkflowCoreRuntime.ScheduleItem(
-                    delegateOperation,
-                    ActivityExecutionContext.IsInAtomicTransaction(targetActivity),
-                    transacted,
-                    !mayInvokeDelegateNow
-                );
+                currentContextActivity
+                    .WorkflowCoreRuntime
+                    .ScheduleItem(
+                        delegateOperation,
+                        ActivityExecutionContext.IsInAtomicTransaction(targetActivity),
+                        transacted,
+                        !mayInvokeDelegateNow
+                    );
             }
         }
 
@@ -252,8 +255,9 @@ namespace System.Workflow.ComponentModel
 
             // Has not started executing yet, queue it up for now
             // Not letting it leak out for recv case any more
-            Activity targetContextActivity =
-                currentContextActivity.WorkflowCoreRuntime.GetContextActivityForId(this.contextId);
+            Activity targetContextActivity = currentContextActivity
+                .WorkflowCoreRuntime
+                .GetContextActivityForId(this.contextId);
             if (targetContextActivity == null)
                 return false;
 
@@ -469,20 +473,30 @@ namespace System.Workflow.ComponentModel
                 catch (Exception e)
                 {
                     if (activity != null)
-                        System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                            TraceEventType.Error,
-                            1,
-                            "Subscription handler of Activity {0} threw {1}",
-                            activity.QualifiedName,
-                            e.ToString()
-                        );
+                        System
+                            .Workflow
+                            .Runtime
+                            .WorkflowTrace
+                            .Runtime
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                1,
+                                "Subscription handler of Activity {0} threw {1}",
+                                activity.QualifiedName,
+                                e.ToString()
+                            );
                     else
-                        System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
-                            TraceEventType.Error,
-                            1,
-                            "Subscription handler threw {0}",
-                            e.ToString()
-                        );
+                        System
+                            .Workflow
+                            .Runtime
+                            .WorkflowTrace
+                            .Runtime
+                            .TraceEvent(
+                                TraceEventType.Error,
+                                1,
+                                "Subscription handler threw {0}",
+                                e.ToString()
+                            );
                     throw;
                 }
                 finally

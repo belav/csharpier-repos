@@ -276,9 +276,11 @@ namespace System.Data.Mapping.Update.Internal
             if (null == projection)
             {
                 throw EntityUtil.NotSupported(
-                    System.Data.Entity.Strings.Update_UnsupportedProjection(
-                        node.Projection.ExpressionKind
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Update_UnsupportedProjection(node.Projection.ExpressionKind)
                 );
             }
 

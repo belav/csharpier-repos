@@ -106,10 +106,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         var targetAssembly = context.Items.GetTargetAssembly();
         if (
             targetAssembly is not null
-            && !SymbolEqualityComparer.Default.Equals(
-                targetAssembly,
-                bindMethods.ContainingAssembly
-            )
+            && !SymbolEqualityComparer
+                .Default
+                .Equals(targetAssembly, bindMethods.ContainingAssembly)
         )
         {
             return;
@@ -146,10 +145,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
         builder.CaseSensitive = true;
         builder.Documentation = ComponentResources.BindTagHelper_Fallback_Documentation;
 
-        builder.Metadata.Add(
-            ComponentMetadata.SpecialKindKey,
-            ComponentMetadata.Bind.TagHelperKind
-        );
+        builder
+            .Metadata
+            .Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.Bind.TagHelperKind);
         builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
         builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata.Bind.RuntimeName;
         builder.Metadata[ComponentMetadata.Bind.FallbackKey] = bool.TrueString;
@@ -286,10 +284,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                     );
                 }
                 else if (
-                    SymbolEqualityComparer.Default.Equals(
-                        attribute.AttributeClass,
-                        bindInputElement
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(attribute.AttributeClass, bindInputElement)
                     && attribute.ConstructorArguments.Length == 4
                 )
                 {
@@ -306,10 +303,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                     );
                 }
                 else if (
-                    SymbolEqualityComparer.Default.Equals(
-                        attribute.AttributeClass,
-                        bindInputElement
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(attribute.AttributeClass, bindInputElement)
                     && attribute.ConstructorArguments.Length == 6
                 )
                 {
@@ -365,10 +361,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                 entry.ChangeAttribute
             );
 
-            builder.Metadata.Add(
-                ComponentMetadata.SpecialKindKey,
-                ComponentMetadata.Bind.TagHelperKind
-            );
+            builder
+                .Metadata
+                .Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.Bind.TagHelperKind);
             builder.Metadata.Add(TagHelperMetadata.Common.ClassifyAttributesOnly, bool.TrueString);
             builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata.Bind.RuntimeName;
             builder.Metadata[ComponentMetadata.Bind.ValueAttribute] = entry.ValueAttribute;
@@ -539,10 +534,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
 
                 BoundAttributeDescriptor valueAttribute = null;
                 BoundAttributeDescriptor expressionAttribute = null;
-                var valueAttributeName = changeAttribute.Name.Substring(
-                    0,
-                    changeAttribute.Name.Length - "Changed".Length
-                );
+                var valueAttributeName = changeAttribute
+                    .Name
+                    .Substring(0, changeAttribute.Name.Length - "Changed".Length);
                 var expressionAttributeName = valueAttributeName + "Expression";
                 for (var j = 0; j < tagHelper.BoundAttributes.Count; j++)
                 {
@@ -583,10 +577,9 @@ internal class BindTagHelperDescriptorProvider : ITagHelperDescriptorProvider
                     changeAttribute.Name
                 );
 
-                builder.Metadata.Add(
-                    ComponentMetadata.SpecialKindKey,
-                    ComponentMetadata.Bind.TagHelperKind
-                );
+                builder
+                    .Metadata
+                    .Add(ComponentMetadata.SpecialKindKey, ComponentMetadata.Bind.TagHelperKind);
                 builder.Metadata[TagHelperMetadata.Runtime.Name] = ComponentMetadata
                     .Bind
                     .RuntimeName;

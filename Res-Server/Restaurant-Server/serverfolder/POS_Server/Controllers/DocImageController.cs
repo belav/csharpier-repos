@@ -56,7 +56,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var docImageList = entity.docImages
+                        var docImageList = entity
+                            .docImages
                             .Where(x => x.tableName == tableName && x.tableId == tableId)
                             .Select(
                                 b =>
@@ -162,7 +163,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var docImageCount = entity.docImages
+                        var docImageCount = entity
+                            .docImages
                             .Where(x => x.tableName == tableName && x.tableId == tableId)
                             .Select(
                                 b =>
@@ -260,9 +262,9 @@ namespace POS_Server.Controllers
                             ".tiff",
                             ".jfif"
                         };
-                        var ext = postedFile.FileName.Substring(
-                            postedFile.FileName.LastIndexOf('.')
-                        );
+                        var ext = postedFile
+                            .FileName
+                            .Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
@@ -282,27 +284,35 @@ namespace POS_Server.Controllers
                         {
                             if (
                                 !Directory.Exists(
-                                    System.Web.Hosting.HostingEnvironment.MapPath(
-                                        "~\\images\\docImage"
-                                    )
+                                    System
+                                        .Web
+                                        .Hosting
+                                        .HostingEnvironment
+                                        .MapPath("~\\images\\docImage")
                                 )
                             )
                                 Directory.CreateDirectory(
-                                    System.Web.Hosting.HostingEnvironment.MapPath(
-                                        "~\\images\\docImage"
-                                    )
+                                    System
+                                        .Web
+                                        .Hosting
+                                        .HostingEnvironment
+                                        .MapPath("~\\images\\docImage")
                                 );
                             //  check if image exist
                             var pathCheck = Path.Combine(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\docImage"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\docImage"),
                                 imageWithNoExt
                             );
                             var files = Directory.GetFiles(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\docImage"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\docImage"),
                                 imageWithNoExt + ".*"
                             );
                             if (files.Length > 0)
@@ -312,9 +322,11 @@ namespace POS_Server.Controllers
 
                             //Userimage myfolder name where i want to save my image
                             var filePath = Path.Combine(
-                                System.Web.Hosting.HostingEnvironment.MapPath(
-                                    "~\\images\\docImage"
-                                ),
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\docImage"),
                                 imageName
                             );
                             postedFile.SaveAs(filePath);
@@ -440,7 +452,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                docImage = entity.docImages
+                                docImage = entity
+                                    .docImages
                                     .Where(p => p.id == newObject.id)
                                     .FirstOrDefault();
                                 docImage.docName = newObject.docName;
@@ -684,10 +697,17 @@ namespace POS_Server.Controllers
 
                         // delete image from folder
                         //var files = Directory.GetFiles(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"), docImageObj.image);
-                        string tmpPath = System.IO.Path.Combine(
-                            System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\docImage"),
-                            docImageObj.image
-                        );
+                        string tmpPath = System
+                            .IO
+                            .Path
+                            .Combine(
+                                System
+                                    .Web
+                                    .Hosting
+                                    .HostingEnvironment
+                                    .MapPath("~\\images\\docImage"),
+                                docImageObj.image
+                            );
                         if (File.Exists(tmpPath))
                         {
                             File.Delete(tmpPath);

@@ -60,14 +60,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         return;
                     }
 
-                    var document = project.Documents.FirstOrDefault(
-                        d =>
-                            string.Equals(
-                                d.FilePath,
-                                sourceLocation.FileName.LocalPath,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                    );
+                    var document = project
+                        .Documents
+                        .FirstOrDefault(
+                            d =>
+                                string.Equals(
+                                    d.FilePath,
+                                    sourceLocation.FileName.LocalPath,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                        );
 
                     if (document == null)
                     {
@@ -95,7 +97,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         Task.Factory.SafeStartNewFromAsync(
                             async () =>
                             {
-                                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                                await ThreadingContext
+                                    .JoinableTaskFactory
+                                    .SwitchToMainThreadAsync();
                                 NavigateOnForegroundThread(
                                     sourceLocation,
                                     symbolId,
@@ -125,9 +129,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             // Notify of navigation so third parties can intercept the navigation
             if (symbolId != null)
             {
-                var symbolNavigationService =
-                    _workspace.Services.GetService<ISymbolNavigationService>();
-                var symbol = symbolId.Value
+                var symbolNavigationService = _workspace
+                    .Services
+                    .GetService<ISymbolNavigationService>();
+                var symbol = symbolId
+                    .Value
                     .Resolve(
                         project
                             .GetCompilationAsync(cancellationToken)
@@ -159,8 +165,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 if (document != null)
                 {
                     var editorWorkspace = document.Project.Solution.Workspace;
-                    var navigationService =
-                        editorWorkspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService = editorWorkspace
+                        .Services
+                        .GetService<IDocumentNavigationService>();
 
                     // TODO: Get the platform to use and pass us an operation context, or create one ourselves.
                     navigationService.TryNavigateToLineAndOffset(

@@ -372,12 +372,14 @@ namespace System.Data.Metadata.Edm
             // assemblies are also loaded
             KnownAssemblyEntry entry;
             if (
-                objectItemCollection._knownAssemblies.TryGetKnownAssembly(
-                    assembly,
-                    objectItemCollection._loaderCookie,
-                    edmItemCollection,
-                    out entry
-                )
+                objectItemCollection
+                    ._knownAssemblies
+                    .TryGetKnownAssembly(
+                        assembly,
+                        objectItemCollection._loaderCookie,
+                        edmItemCollection,
+                        out entry
+                    )
             )
             {
                 // Proceed if only we need to load the referenced assemblies and they are not loaded
@@ -398,12 +400,14 @@ namespace System.Data.Metadata.Edm
                 // Check after acquiring the lock, since the known assemblies might have got modified
                 // Check if the assembly is already loaded. The reason we need to check if the assembly is already loaded, is that
                 if (
-                    objectItemCollection._knownAssemblies.TryGetKnownAssembly(
-                        assembly,
-                        objectItemCollection._loaderCookie,
-                        edmItemCollection,
-                        out entry
-                    )
+                    objectItemCollection
+                        ._knownAssemblies
+                        .TryGetKnownAssembly(
+                            assembly,
+                            objectItemCollection._loaderCookie,
+                            edmItemCollection,
+                            out entry
+                        )
                 )
                 {
                     // Proceed if only we need to load the referenced assemblies and they are not loaded

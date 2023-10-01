@@ -41,37 +41,41 @@ namespace System.ServiceModel.Syndication
         {
             if (inlineDocumentType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "inlineDocumentType"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("inlineDocumentType");
             }
             if (!typeof(InlineCategoriesDocument).IsAssignableFrom(inlineDocumentType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "inlineDocumentType",
-                    SR.GetString(
-                        SR.InvalidObjectTypePassed,
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
                         "inlineDocumentType",
-                        "InlineCategoriesDocument"
-                    )
-                );
+                        SR.GetString(
+                            SR.InvalidObjectTypePassed,
+                            "inlineDocumentType",
+                            "InlineCategoriesDocument"
+                        )
+                    );
             }
             if (referencedDocumentType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "referencedDocumentType"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("referencedDocumentType");
             }
             if (!typeof(ReferencedCategoriesDocument).IsAssignableFrom(referencedDocumentType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "referencedDocumentType",
-                    SR.GetString(
-                        SR.InvalidObjectTypePassed,
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
                         "referencedDocumentType",
-                        "ReferencedCategoriesDocument"
-                    )
-                );
+                        SR.GetString(
+                            SR.InvalidObjectTypePassed,
+                            "referencedDocumentType",
+                            "ReferencedCategoriesDocument"
+                        )
+                    );
             }
             this.maxExtensionSize = int.MaxValue;
             this.preserveAttributeExtensions = true;
@@ -152,11 +156,13 @@ namespace System.ServiceModel.Syndication
             }
             if (this.Document == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.DocumentFormatterDoesNotHaveDocument)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.DocumentFormatterDoesNotHaveDocument)
+                        )
+                    );
             }
             TraceCategoriesDocumentWriteBegin();
             WriteDocument(writer);
@@ -171,11 +177,17 @@ namespace System.ServiceModel.Syndication
             }
             if (!CanRead(reader))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(SR.UnknownDocumentXml, reader.LocalName, reader.NamespaceURI)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.UnknownDocumentXml,
+                                reader.LocalName,
+                                reader.NamespaceURI
+                            )
+                        )
+                    );
             }
             TraceCategoriesDocumentReadBegin();
             ReadDocument(reader);
@@ -190,11 +202,13 @@ namespace System.ServiceModel.Syndication
             }
             if (this.Document == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.DocumentFormatterDoesNotHaveDocument)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.DocumentFormatterDoesNotHaveDocument)
+                        )
+                    );
             }
             TraceCategoriesDocumentWriteBegin();
             writer.WriteStartElement(
@@ -306,15 +320,19 @@ namespace System.ServiceModel.Syndication
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDocument), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDocument), e)
+                    );
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDocument), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDocument), e)
+                    );
             }
         }
 

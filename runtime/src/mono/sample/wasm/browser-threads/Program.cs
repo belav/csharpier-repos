@@ -87,9 +87,9 @@ public class ExpensiveComputation
 
     public void Run()
     {
-        Sample.Test.ConsoleLog(
-            "Hello from ManagedThreadId " + Thread.CurrentThread.ManagedThreadId
-        );
+        Sample
+            .Test
+            .ConsoleLog("Hello from ManagedThreadId " + Thread.CurrentThread.ManagedThreadId);
         long result = Fib(UpTo);
         if (result < (long)int.MaxValue)
             _tcs.SetResult((int)result);

@@ -210,19 +210,17 @@ namespace System.Reflection.Runtime.FieldInfos
                             throw new BadImageFormatException(); // Field marked literal but has no default value.
                         }
 
-                        _lazyFieldAccessor = fieldAccessor =
-                            ReflectionCoreExecution.ExecutionEnvironment.CreateLiteralFieldAccessor(
-                                defaultValue,
-                                FieldType.TypeHandle
-                            );
+                        _lazyFieldAccessor = fieldAccessor = ReflectionCoreExecution
+                            .ExecutionEnvironment
+                            .CreateLiteralFieldAccessor(defaultValue, FieldType.TypeHandle);
                     }
                     else
                     {
                         _lazyFieldAccessor = fieldAccessor = TryGetFieldAccessor();
                         if (fieldAccessor == null)
-                            throw ReflectionCoreExecution.ExecutionDomain.CreateNonInvokabilityException(
-                                this
-                            );
+                            throw ReflectionCoreExecution
+                                .ExecutionDomain
+                                .CreateNonInvokabilityException(this);
                     }
                 }
                 return fieldAccessor;

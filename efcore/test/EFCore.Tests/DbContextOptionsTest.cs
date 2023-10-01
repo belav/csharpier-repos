@@ -16,7 +16,8 @@ public class DbContextOptionsTest
             c => c.Default(WarningBehavior.Throw)
         );
 
-        var warningConfiguration = optionsBuilder.Options
+        var warningConfiguration = optionsBuilder
+            .Options
             .FindExtension<CoreOptionsExtension>()
             .WarningsConfiguration;
 
@@ -44,7 +45,8 @@ public class DbContextOptionsTest
 
         Assert.Same(model, optionsBuilder.Options.FindExtension<CoreOptionsExtension>().Model);
         Assert.True(
-            optionsBuilder.Options
+            optionsBuilder
+                .Options
                 .FindExtension<CoreOptionsExtension>()
                 .IsSensitiveDataLoggingEnabled
         );
@@ -321,7 +323,8 @@ public class DbContextOptionsTest
             )
         );
 
-        var warningConfiguration = optionsBuilder.Options
+        var warningConfiguration = optionsBuilder
+            .Options
             .FindExtension<CoreOptionsExtension>()
             .WarningsConfiguration;
 

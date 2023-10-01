@@ -22,10 +22,9 @@ namespace System.Runtime.InteropServices.JavaScript
             lock (JSHostImplementation.s_csOwnedObjects)
             {
                 if (
-                    JSHostImplementation.s_csOwnedObjects.TryGetValue(
-                        (int)jsHandle,
-                        out WeakReference<JSObject>? reference
-                    )
+                    JSHostImplementation
+                        .s_csOwnedObjects
+                        .TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference)
                 )
                 {
                     reference.TryGetTarget(out JSObject? jsObject);
@@ -76,10 +75,9 @@ namespace System.Runtime.InteropServices.JavaScript
             lock (JSHostImplementation.s_csOwnedObjects)
             {
                 if (
-                    !JSHostImplementation.s_csOwnedObjects.TryGetValue(
-                        (int)jsHandle,
-                        out WeakReference<JSObject>? reference
-                    )
+                    !JSHostImplementation
+                        .s_csOwnedObjects
+                        .TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference)
                     || !reference.TryGetTarget(out res)
                     || res.IsDisposed
                 )

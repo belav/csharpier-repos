@@ -653,7 +653,8 @@ namespace System.Runtime.Remoting.Proxies
                 }
                 // Merge the call context back into the thread that
                 // called EndInvoke
-                Thread.CurrentThread
+                Thread
+                    .CurrentThread
                     .GetMutableExecutionContext()
                     .LogicalCallContext
                     .Merge(mrm.LogicalCallContext);
@@ -849,7 +850,8 @@ namespace System.Runtime.Remoting.Proxies
                 ReturnCallContextToThread(currentThread, retMsg, msgFlags, cctx);
 
                 // Pull response "Header"'s out of the message
-                Thread.CurrentThread
+                Thread
+                    .CurrentThread
                     .GetMutableExecutionContext()
                     .LogicalCallContext
                     .PropagateIncomingHeadersToCallContext(retMsg);

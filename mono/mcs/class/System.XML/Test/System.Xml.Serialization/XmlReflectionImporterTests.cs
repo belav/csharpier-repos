@@ -1279,9 +1279,10 @@ namespace MonoTests.System.XmlSerialization
                 );
                 Assert.IsNotNull(ex.InnerException.InnerException.Message, "#C11");
                 Assert.IsTrue(
-                    ex.InnerException.InnerException.Message.IndexOf(
-                        typeof(EnumDefaultValueNF).FullName
-                    ) != -1,
+                    ex.InnerException
+                        .InnerException
+                        .Message
+                        .IndexOf(typeof(EnumDefaultValueNF).FullName) != -1,
                     "#C12"
                 );
                 Assert.IsTrue(
@@ -1379,9 +1380,10 @@ namespace MonoTests.System.XmlSerialization
                 // namespace ''.
                 Assert.IsNotNull(ex.InnerException.InnerException.Message, "#8");
                 Assert.IsTrue(
-                    ex.InnerException.InnerException.Message.IndexOf(
-                        typeof(ItemChoiceType).FullName
-                    ) != -1,
+                    ex.InnerException
+                        .InnerException
+                        .Message
+                        .IndexOf(typeof(ItemChoiceType).FullName) != -1,
                     "#9"
                 );
                 Assert.IsTrue(

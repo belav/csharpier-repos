@@ -171,10 +171,9 @@ public class InternalNavigationBuilder
                 && (
                     Metadata.IsOnDependent
                         ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
-                        : foreignKey.Builder.CanSetIsRequiredDependent(
-                            required,
-                            configurationSource
-                        )
+                        : foreignKey
+                            .Builder
+                            .CanSetIsRequiredDependent(required, configurationSource)
                 )
             : Metadata.IsOnDependent
                 && foreignKey.Builder.CanSetIsRequired(required, configurationSource);
@@ -211,12 +210,14 @@ public class InternalNavigationBuilder
                 }
 
                 return Metadata.IsOnDependent
-                    ? foreignKey.Builder
+                    ? foreignKey
+                        .Builder
                         .IsRequired(required, configurationSource)!
                         .Metadata
                         .DependentToPrincipal!
                         .Builder
-                    : foreignKey.Builder
+                    : foreignKey
+                        .Builder
                         .IsRequiredDependent(required, configurationSource)!
                         .Metadata
                         .PrincipalToDependent!
@@ -225,7 +226,8 @@ public class InternalNavigationBuilder
 
             if (Metadata.IsOnDependent)
             {
-                return foreignKey.Builder
+                return foreignKey
+                    .Builder
                     .IsRequired(required, configurationSource)!
                     .Metadata
                     .DependentToPrincipal!

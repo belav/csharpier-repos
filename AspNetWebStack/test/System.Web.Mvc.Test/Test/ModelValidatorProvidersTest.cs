@@ -20,7 +20,8 @@ namespace System.Web.Mvc.Test
             };
 
             // Act
-            Type[] actualTypes = ModelValidatorProviders.Providers
+            Type[] actualTypes = ModelValidatorProviders
+                .Providers
                 .Select(p => p.GetType())
                 .ToArray();
 

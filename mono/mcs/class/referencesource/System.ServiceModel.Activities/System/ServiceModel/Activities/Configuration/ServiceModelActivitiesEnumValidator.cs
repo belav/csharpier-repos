@@ -37,13 +37,15 @@ namespace System.ServiceModel.Activities.Configuration
             if (!retVal)
             {
                 ParameterInfo[] isDefinedParameters = this.isDefined.GetParameters();
-                throw FxTrace.Exception.AsError(
-                    new InvalidEnumArgumentException(
-                        "value",
-                        (int)value,
-                        isDefinedParameters[0].ParameterType
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            isDefinedParameters[0].ParameterType
+                        )
+                    );
             }
         }
     }

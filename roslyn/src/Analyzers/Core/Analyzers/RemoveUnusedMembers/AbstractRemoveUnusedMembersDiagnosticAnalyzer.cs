@@ -461,10 +461,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 // Workaround for https://github.com/dotnet/roslyn/issues/19965
                 // IOperation API does not expose potential references to methods/properties within
                 // a bound method group/property group.
-                var symbolInfo = nameofArgument.SemanticModel.GetSymbolInfo(
-                    nameofArgument.Syntax,
-                    operationContext.CancellationToken
-                );
+                var symbolInfo = nameofArgument
+                    .SemanticModel
+                    .GetSymbolInfo(nameofArgument.Syntax, operationContext.CancellationToken);
                 foreach (var symbol in symbolInfo.GetAllSymbols())
                 {
                     switch (symbol.Kind)
@@ -501,7 +500,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 }
 
                 if (
-                    symbolEndContext.Symbol
+                    symbolEndContext
+                        .Symbol
                         .GetAttributes()
                         .Any(
                             static (a, self) => a.AttributeClass == self._structLayoutAttributeType,
@@ -520,9 +520,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                 ArrayBuilder<string> debuggerDisplayAttributeArguments = null;
                 try
                 {
-                    var entryPoint = symbolEndContext.Compilation.GetEntryPoint(
-                        symbolEndContext.CancellationToken
-                    );
+                    var entryPoint = symbolEndContext
+                        .Compilation
+                        .GetEntryPoint(symbolEndContext.CancellationToken);
 
                     var namedType = (INamedTypeSymbol)symbolEndContext.Symbol;
                     foreach (var member in namedType.GetMembers())
@@ -689,9 +689,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             {
                 var builder = PooledHashSet<ISymbol>.GetInstance();
                 foreach (
-                    var root in namedTypeSymbol.Locations.Select(
-                        l => l.SourceTree.GetRoot(cancellationToken)
-                    )
+                    var root in namedTypeSymbol
+                        .Locations
+                        .Select(l => l.SourceTree.GetRoot(cancellationToken))
                 )
                 {
                     SemanticModel lazyModel = null;
@@ -933,7 +933,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                     {
                         var suffix = methodSymbol.Name[prefix.Length..];
                         return suffix.Length > 0
-                            && methodSymbol.ContainingType
+                            && methodSymbol
+                                .ContainingType
                                 .GetMembers(suffix)
                                 .Any(static m => m is IPropertySymbol);
                     }

@@ -627,9 +627,9 @@ namespace System.ServiceModel.Channels
             set
             {
                 // until the public setter is removed, throw
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException());
             }
         }
 

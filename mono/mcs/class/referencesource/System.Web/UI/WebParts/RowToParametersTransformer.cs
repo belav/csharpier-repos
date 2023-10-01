@@ -380,11 +380,13 @@ namespace System.Web.UI.WebControls.WebParts
                         }
                         else
                         {
-                            consumerFieldName.Items.Add(
-                                new ListItem(
-                                    SR.GetString(SR.RowToParametersTransformer_NoConsumerSchema)
-                                )
-                            );
+                            consumerFieldName
+                                .Items
+                                .Add(
+                                    new ListItem(
+                                        SR.GetString(SR.RowToParametersTransformer_NoConsumerSchema)
+                                    )
+                                );
                             consumerFieldName.Enabled = false;
                         }
                         _consumerFieldNames[i] = consumerFieldName;

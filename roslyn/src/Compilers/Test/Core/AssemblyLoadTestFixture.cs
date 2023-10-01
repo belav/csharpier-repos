@@ -496,7 +496,8 @@ public class Class1
             var fakeCompilerAssembly = GenerateDll(
                 "Microsoft.CodeAnalysis",
                 analyzerWithFakeCompilerDependencyDirectory,
-                publicKeyOpt: typeof(SyntaxNode).Assembly
+                publicKeyOpt: typeof(SyntaxNode)
+                    .Assembly
                     .GetName()
                     .GetPublicKey()
                     ?.ToImmutableArray() ?? default,
@@ -539,7 +540,8 @@ public class Analyzer : DiagnosticAnalyzer
             var laterFakeCompilerAssembly = GenerateDll(
                 "Microsoft.CodeAnalysis",
                 analyzerWithLaterFakeCompileDirectory,
-                publicKeyOpt: typeof(SyntaxNode).Assembly
+                publicKeyOpt: typeof(SyntaxNode)
+                    .Assembly
                     .GetName()
                     .GetPublicKey()
                     ?.ToImmutableArray() ?? default,

@@ -86,9 +86,9 @@ namespace JIT.HardwareIntrinsics.General
             if (!succeeded)
             {
                 TestLibrary.TestFramework.LogInformation($"Vector256.Zero(Byte): {method} failed:");
-                TestLibrary.TestFramework.LogInformation(
-                    $"  result: ({string.Join(", ", resultElements)})"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation($"  result: ({string.Join(", ", resultElements)})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

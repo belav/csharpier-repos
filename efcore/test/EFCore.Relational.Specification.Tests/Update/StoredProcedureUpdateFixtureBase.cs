@@ -324,25 +324,25 @@ public abstract class StoredProcedureUpdateFixtureBase
         context.WithOutputParameter.RemoveRange(context.WithOutputParameter);
         context.WithResultColumn.RemoveRange(context.WithResultColumn);
         context.WithTwoResultColumns.RemoveRange(context.WithTwoResultColumns);
-        context.WithOutputParameterAndResultColumn.RemoveRange(
-            context.WithOutputParameterAndResultColumn
-        );
+        context
+            .WithOutputParameterAndResultColumn
+            .RemoveRange(context.WithOutputParameterAndResultColumn);
         context.WithTwoInputParameters.RemoveRange(context.WithTwoInputParameters);
         context.WithRowsAffectedParameter.RemoveRange(context.WithRowsAffectedParameter);
         context.WithRowsAffectedResultColumn.RemoveRange(context.WithRowsAffectedResultColumn);
         context.WithRowsAffectedReturnValue.RemoveRange(context.WithRowsAffectedReturnValue);
-        context.WithStoreGeneratedConcurrencyTokenAsInOutParameter.RemoveRange(
-            context.WithStoreGeneratedConcurrencyTokenAsInOutParameter
-        );
-        context.WithStoreGeneratedConcurrencyTokenAsTwoParameters.RemoveRange(
-            context.WithStoreGeneratedConcurrencyTokenAsTwoParameters
-        );
-        context.WithUserManagedConcurrencyToken.RemoveRange(
-            context.WithUserManagedConcurrencyToken
-        );
-        context.WithOriginalAndCurrentValueOnNonConcurrencyToken.RemoveRange(
-            context.WithOriginalAndCurrentValueOnNonConcurrencyToken
-        );
+        context
+            .WithStoreGeneratedConcurrencyTokenAsInOutParameter
+            .RemoveRange(context.WithStoreGeneratedConcurrencyTokenAsInOutParameter);
+        context
+            .WithStoreGeneratedConcurrencyTokenAsTwoParameters
+            .RemoveRange(context.WithStoreGeneratedConcurrencyTokenAsTwoParameters);
+        context
+            .WithUserManagedConcurrencyToken
+            .RemoveRange(context.WithUserManagedConcurrencyToken);
+        context
+            .WithOriginalAndCurrentValueOnNonConcurrencyToken
+            .RemoveRange(context.WithOriginalAndCurrentValueOnNonConcurrencyToken);
         context.WithInputOrOutputParameter.RemoveRange(context.WithInputOrOutputParameter);
         context.TphParent.RemoveRange(context.TphParent);
         context.TphChild.RemoveRange(context.TphChild);

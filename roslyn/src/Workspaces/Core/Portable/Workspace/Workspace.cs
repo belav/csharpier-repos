@@ -249,7 +249,8 @@ namespace Microsoft.CodeAnalysis
                     var newSolution = data.transformation(oldSolution);
 
                     // Attempt to unify the syntax trees in the new solution (unless the option is set disabling that).
-                    var options = oldSolution.Services
+                    var options = oldSolution
+                        .Services
                         .GetRequiredService<IWorkspaceConfigurationService>()
                         .Options;
                     if (options.DisableSharedSyntaxTrees)
@@ -1318,7 +1319,8 @@ namespace Microsoft.CodeAnalysis
                             // instance data that the initial document points at.  This way things like tree data can be
                             // shared across docs.
 
-                            var options = oldSolution.Services
+                            var options = oldSolution
+                                .Services
                                 .GetRequiredService<IWorkspaceConfigurationService>()
                                 .Options;
                             var shareSyntaxTrees = !options.DisableSharedSyntaxTrees;
@@ -1685,9 +1687,9 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 if (
-                    !CurrentSolution.AnalyzerReferences.SequenceEqual(
-                        newSolution.AnalyzerReferences
-                    )
+                    !CurrentSolution
+                        .AnalyzerReferences
+                        .SequenceEqual(newSolution.AnalyzerReferences)
                 )
                 {
                     foreach (
@@ -1785,8 +1787,10 @@ namespace Microsoft.CodeAnalysis
                 // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
                 // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
                 // document edits, which the host is expected to actually apply directly.
-                var newOptionsWithoutSyntaxTreeOptionsChange =
-                    projectChanges.NewProject.CompilationOptions.WithSyntaxTreeOptionsProvider(
+                var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges
+                    .NewProject
+                    .CompilationOptions
+                    .WithSyntaxTreeOptionsProvider(
                         projectChanges.OldProject.CompilationOptions.SyntaxTreeOptionsProvider
                     );
 
@@ -1855,7 +1859,8 @@ namespace Microsoft.CodeAnalysis
                     .GetChangedDocuments()
                     .Any(
                         id =>
-                            projectChanges.NewProject
+                            projectChanges
+                                .NewProject
                                 .GetDocument(id)!
                                 .HasInfoChanged(projectChanges.OldProject.GetDocument(id)!)
                     )
@@ -2066,8 +2071,10 @@ namespace Microsoft.CodeAnalysis
             // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
             // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
             // document edits, which the host is expected to actually apply directly.
-            var newOptionsWithoutSyntaxTreeOptionsChange =
-                projectChanges.NewProject.CompilationOptions?.WithSyntaxTreeOptionsProvider(
+            var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges
+                .NewProject
+                .CompilationOptions
+                ?.WithSyntaxTreeOptionsProvider(
                     projectChanges.OldProject.CompilationOptions!.SyntaxTreeOptionsProvider
                 );
             if (
@@ -2273,9 +2280,9 @@ namespace Microsoft.CodeAnalysis
                 project.MetadataReferences,
                 project.AnalyzerReferences,
                 additionalDocuments: project.AdditionalDocuments.Select(CreateDocumentInfoWithText),
-                analyzerConfigDocuments: project.AnalyzerConfigDocuments.Select(
-                    CreateDocumentInfoWithText
-                ),
+                analyzerConfigDocuments: project
+                    .AnalyzerConfigDocuments
+                    .Select(CreateDocumentInfoWithText),
                 hostObjectType: project.State.HostObjectType
             );
         }

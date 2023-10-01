@@ -339,9 +339,9 @@ WHERE [b].[Id] = 1
     )
     {
         using var context = CreateContext();
-        var query = context.Database.SqlQueryRaw<HoldingEnum>(
-            "SELECT [HoldingEnum] FROM [HolderClass]"
-        );
+        var query = context
+            .Database
+            .SqlQueryRaw<HoldingEnum>("SELECT [HoldingEnum] FROM [HolderClass]");
 
         var result = async ? await query.ToListAsync() : query.ToList();
 

@@ -153,10 +153,9 @@ namespace System.Xml
                 XmlElement ownerElement = OwnerElement;
                 if (ownerElement != null)
                 {
-                    return ownerElement.Attributes.PrepareParentInElementIdAttrMap(
-                        Prefix,
-                        LocalName
-                    );
+                    return ownerElement
+                        .Attributes
+                        .PrepareParentInElementIdAttrMap(Prefix, LocalName);
                 }
             }
             return false;

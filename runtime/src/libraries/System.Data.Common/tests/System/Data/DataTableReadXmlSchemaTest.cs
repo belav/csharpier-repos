@@ -671,14 +671,16 @@ namespace System.Data.Tests
         {
             var serializer = new BinaryFormatter();
             var table = new DataTable();
-            table.Columns.Add(
-                new DataColumn("RowID", typeof(int))
-                {
-                    AutoIncrement = true,
-                    AutoIncrementSeed = -1, // These lines produce attributes within the schema portion of the underlying XML representation of the DataTable with the values "-1" and "-2".
-                    AutoIncrementStep = -2,
-                }
-            );
+            table
+                .Columns
+                .Add(
+                    new DataColumn("RowID", typeof(int))
+                    {
+                        AutoIncrement = true,
+                        AutoIncrementSeed = -1, // These lines produce attributes within the schema portion of the underlying XML representation of the DataTable with the values "-1" and "-2".
+                        AutoIncrementStep = -2,
+                    }
+                );
             table.Columns.Add("Value", typeof(string));
             table.Rows.Add(1, "Test");
             table.Rows.Add(2, "Data");

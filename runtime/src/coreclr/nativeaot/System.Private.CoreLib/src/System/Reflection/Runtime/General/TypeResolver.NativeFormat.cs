@@ -239,11 +239,13 @@ namespace System.Reflection.Runtime.General
         {
             RuntimeTypeHandle resolvedRuntimeTypeHandle;
             if (
-                ReflectionCoreExecution.ExecutionEnvironment.TryGetNamedTypeForTypeReference(
-                    reader,
-                    typeReferenceHandle,
-                    out resolvedRuntimeTypeHandle
-                )
+                ReflectionCoreExecution
+                    .ExecutionEnvironment
+                    .TryGetNamedTypeForTypeReference(
+                        reader,
+                        typeReferenceHandle,
+                        out resolvedRuntimeTypeHandle
+                    )
             )
                 return resolvedRuntimeTypeHandle.GetTypeForRuntimeTypeHandle();
 

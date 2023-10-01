@@ -299,43 +299,51 @@ namespace MonoTests.System.Net.Http
             headers.Add("pragma", "nocache,R=1,g");
 
             Assert.IsTrue(
-                headers.Accept.SequenceEqual(
-                    new[]
-                    {
-                        new MediaTypeWithQualityHeaderValue("audio/x"),
-                        new MediaTypeWithQualityHeaderValue("audio/y")
-                    }
-                )
+                headers
+                    .Accept
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new MediaTypeWithQualityHeaderValue("audio/x"),
+                            new MediaTypeWithQualityHeaderValue("audio/y")
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.AcceptCharset.SequenceEqual(
-                    new[]
-                    {
-                        new StringWithQualityHeaderValue("str-v", 0.002),
-                        new StringWithQualityHeaderValue("achs")
-                    }
-                )
+                headers
+                    .AcceptCharset
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new StringWithQualityHeaderValue("str-v", 0.002),
+                            new StringWithQualityHeaderValue("achs")
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.AcceptEncoding.SequenceEqual(
-                    new[]
-                    {
-                        new StringWithQualityHeaderValue("str-enc", 0.44),
-                        new StringWithQualityHeaderValue("aenc")
-                    }
-                )
+                headers
+                    .AcceptEncoding
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new StringWithQualityHeaderValue("str-enc", 0.44),
+                            new StringWithQualityHeaderValue("aenc")
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.AcceptLanguage.SequenceEqual(
-                    new[]
-                    {
-                        new StringWithQualityHeaderValue("str-lang", 0.41),
-                        new StringWithQualityHeaderValue("alan")
-                    }
-                )
+                headers
+                    .AcceptLanguage
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new StringWithQualityHeaderValue("str-lang", 0.41),
+                            new StringWithQualityHeaderValue("alan")
+                        }
+                    )
             );
 
             Assert.AreEqual(new AuthenticationHeaderValue("sh-aut", "par"), headers.Authorization);
@@ -349,37 +357,43 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual(headers.Date, new DateTimeOffset(DateTime.Today));
 
             Assert.IsTrue(
-                headers.Expect.SequenceEqual(
-                    new[]
-                    {
-                        new NameValueWithParametersHeaderValue("en", "ev"),
-                        new NameValueWithParametersHeaderValue("100-continue"),
-                        new NameValueWithParametersHeaderValue("exp")
-                    }
-                )
+                headers
+                    .Expect
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new NameValueWithParametersHeaderValue("en", "ev"),
+                            new NameValueWithParametersHeaderValue("100-continue"),
+                            new NameValueWithParametersHeaderValue("exp")
+                        }
+                    )
             );
 
             Assert.AreEqual(headers.From, "webmaster@w3.org");
 
             Assert.IsTrue(
-                headers.IfMatch.SequenceEqual(
-                    new EntityTagHeaderValue[]
-                    {
-                        new EntityTagHeaderValue("\"tag\"", true),
-                        new EntityTagHeaderValue("\"v\"", false)
-                    }
-                )
+                headers
+                    .IfMatch
+                    .SequenceEqual(
+                        new EntityTagHeaderValue[]
+                        {
+                            new EntityTagHeaderValue("\"tag\"", true),
+                            new EntityTagHeaderValue("\"v\"", false)
+                        }
+                    )
             );
 
             Assert.AreEqual(headers.IfModifiedSince, new DateTimeOffset(DateTime.Today));
             Assert.IsTrue(
-                headers.IfNoneMatch.SequenceEqual(
-                    new EntityTagHeaderValue[]
-                    {
-                        new EntityTagHeaderValue("\"tag2\"", true),
-                        new EntityTagHeaderValue("\"v2\"", false)
-                    }
-                )
+                headers
+                    .IfNoneMatch
+                    .SequenceEqual(
+                        new EntityTagHeaderValue[]
+                        {
+                            new EntityTagHeaderValue("\"tag2\"", true),
+                            new EntityTagHeaderValue("\"v2\"", false)
+                        }
+                    )
             );
             Assert.AreEqual(new DateTimeOffset(DateTime.Today), headers.IfRange.Date);
             Assert.AreEqual(headers.MaxForwards, 0x15b3);
@@ -390,74 +404,92 @@ namespace MonoTests.System.Net.Http
             Assert.AreEqual("bytes", headers.Range.Unit);
             Assert.AreEqual(headers.Referrer, new Uri("http://xamarin.com"));
             Assert.IsTrue(
-                headers.TE.SequenceEqual(
-                    new TransferCodingWithQualityHeaderValue[]
-                    {
-                        new TransferCodingWithQualityHeaderValue("TE", 0.3),
-                        new TransferCodingWithQualityHeaderValue("0.8")
-                    }
-                ),
+                headers
+                    .TE
+                    .SequenceEqual(
+                        new TransferCodingWithQualityHeaderValue[]
+                        {
+                            new TransferCodingWithQualityHeaderValue("TE", 0.3),
+                            new TransferCodingWithQualityHeaderValue("0.8")
+                        }
+                    ),
                 "29"
             );
             Assert.IsTrue(headers.Trailer.SequenceEqual(new string[] { "value", "value2" }), "30");
 
             Assert.IsTrue(
-                headers.TransferEncoding.SequenceEqual(
-                    new[]
-                    {
-                        new TransferCodingHeaderValue("tchv"),
-                        new TransferCodingHeaderValue("chunked"),
-                        new TransferCodingHeaderValue("ttt")
-                    }
-                )
+                headers
+                    .TransferEncoding
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new TransferCodingHeaderValue("tchv"),
+                            new TransferCodingHeaderValue("chunked"),
+                            new TransferCodingHeaderValue("ttt")
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.Upgrade.SequenceEqual(
-                    new[] { new ProductHeaderValue("prod", "ver"), new ProductHeaderValue("uuu") }
-                )
+                headers
+                    .Upgrade
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ProductHeaderValue("prod", "ver"),
+                            new ProductHeaderValue("uuu")
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.UserAgent.SequenceEqual(
-                    new[]
-                    {
-                        new ProductInfoHeaderValue("(comment)"),
-                        new ProductInfoHeaderValue("uaua", null)
-                    }
-                )
+                headers
+                    .UserAgent
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ProductInfoHeaderValue("(comment)"),
+                            new ProductInfoHeaderValue("uaua", null)
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.Via.SequenceEqual(
-                    new[]
-                    {
-                        new ViaHeaderValue("protocol", "rec-by"),
-                        new ViaHeaderValue("prot", "v")
-                    }
-                )
+                headers
+                    .Via
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ViaHeaderValue("protocol", "rec-by"),
+                            new ViaHeaderValue("prot", "v")
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.Warning.SequenceEqual(
-                    new[]
-                    {
-                        new WarningHeaderValue(5, "agent", "\"txt\""),
-                        new WarningHeaderValue(4, "ww", "\"t\"")
-                    }
-                )
+                headers
+                    .Warning
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new WarningHeaderValue(5, "agent", "\"txt\""),
+                            new WarningHeaderValue(4, "ww", "\"t\"")
+                        }
+                    )
             );
 
             Assert.IsTrue(
-                headers.Pragma.SequenceEqual(
-                    new[]
-                    {
-                        new NameValueHeaderValue("name", "value"),
-                        new NameValueHeaderValue("nocache", null),
-                        new NameValueHeaderValue("R", "1"),
-                        new NameValueHeaderValue("g", null)
-                    }
-                )
+                headers
+                    .Pragma
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new NameValueHeaderValue("name", "value"),
+                            new NameValueHeaderValue("nocache", null),
+                            new NameValueHeaderValue("R", "1"),
+                            new NameValueHeaderValue("g", null)
+                        }
+                    )
             );
         }
 
@@ -481,29 +513,33 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(2, headers.Accept.Count, "#1a");
             Assert.IsTrue(
-                headers.Accept.SequenceEqual(
-                    new[]
-                    {
-                        new MediaTypeWithQualityHeaderValue(
-                            "application/vnd.citrix.requesttokenresponse+xml"
-                        ),
-                        new MediaTypeWithQualityHeaderValue(
-                            "application/vnd.citrix.requesttokenchoices+xml"
-                        ),
-                    }
-                ),
+                headers
+                    .Accept
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new MediaTypeWithQualityHeaderValue(
+                                "application/vnd.citrix.requesttokenresponse+xml"
+                            ),
+                            new MediaTypeWithQualityHeaderValue(
+                                "application/vnd.citrix.requesttokenchoices+xml"
+                            ),
+                        }
+                    ),
                 "#1b"
             );
 
             Assert.AreEqual(2, headers.AcceptCharset.Count, "#2a");
             Assert.IsTrue(
-                headers.AcceptCharset.SequenceEqual(
-                    new[]
-                    {
-                        new StringWithQualityHeaderValue("aa", 0),
-                        new StringWithQualityHeaderValue("bb", 1),
-                    }
-                ),
+                headers
+                    .AcceptCharset
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new StringWithQualityHeaderValue("aa", 0),
+                            new StringWithQualityHeaderValue("bb", 1),
+                        }
+                    ),
                 "#2b"
             );
 
@@ -518,32 +554,36 @@ namespace MonoTests.System.Net.Http
 
             Assert.AreEqual(4, headers.IfMatch.Count, "#4a");
             Assert.IsTrue(
-                headers.IfMatch.SequenceEqual(
-                    new[]
-                    {
-                        new EntityTagHeaderValue("\"a\""),
-                        EntityTagHeaderValue.Any,
-                        new EntityTagHeaderValue("\"b\""),
-                        EntityTagHeaderValue.Any
-                    }
-                ),
+                headers
+                    .IfMatch
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new EntityTagHeaderValue("\"a\""),
+                            EntityTagHeaderValue.Any,
+                            new EntityTagHeaderValue("\"b\""),
+                            EntityTagHeaderValue.Any
+                        }
+                    ),
                 "#4b"
             );
 
             Assert.AreEqual(6, headers.UserAgent.Count, "#10a");
 
             Assert.IsTrue(
-                headers.UserAgent.SequenceEqual(
-                    new[]
-                    {
-                        new ProductInfoHeaderValue("Mozilla", "5.0"),
-                        new ProductInfoHeaderValue("(Macintosh; Intel Mac OS X 10_8_4)"),
-                        new ProductInfoHeaderValue("AppleWebKit", "537.36"),
-                        new ProductInfoHeaderValue("(KHTML, like Gecko)"),
-                        new ProductInfoHeaderValue("Chrome", "29.0.1547.62"),
-                        new ProductInfoHeaderValue("Safari", "537.36")
-                    }
-                ),
+                headers
+                    .UserAgent
+                    .SequenceEqual(
+                        new[]
+                        {
+                            new ProductInfoHeaderValue("Mozilla", "5.0"),
+                            new ProductInfoHeaderValue("(Macintosh; Intel Mac OS X 10_8_4)"),
+                            new ProductInfoHeaderValue("AppleWebKit", "537.36"),
+                            new ProductInfoHeaderValue("(KHTML, like Gecko)"),
+                            new ProductInfoHeaderValue("Chrome", "29.0.1547.62"),
+                            new ProductInfoHeaderValue("Safari", "537.36")
+                        }
+                    ),
                 "#10b"
             );
         }
@@ -556,13 +596,15 @@ namespace MonoTests.System.Net.Http
 
             headers.Add("User-Agent", "MonoDevelop (Unix 3.13.0; amd64; en-US; Octokit 0.3.4)");
 
-            var se = headers.UserAgent.SequenceEqual(
-                new[]
-                {
-                    new ProductInfoHeaderValue("MonoDevelop", null),
-                    new ProductInfoHeaderValue("(Unix 3.13.0; amd64; en-US; Octokit 0.3.4)")
-                }
-            );
+            var se = headers
+                .UserAgent
+                .SequenceEqual(
+                    new[]
+                    {
+                        new ProductInfoHeaderValue("MonoDevelop", null),
+                        new ProductInfoHeaderValue("(Unix 3.13.0; amd64; en-US; Octokit 0.3.4)")
+                    }
+                );
 
             Assert.IsTrue(se, "#1");
             Assert.AreEqual(
@@ -580,13 +622,15 @@ namespace MonoTests.System.Net.Http
 
             headers.Add("User-Agent", "A \t  \t B");
 
-            var se = headers.UserAgent.SequenceEqual(
-                new[]
-                {
-                    new ProductInfoHeaderValue("A", null),
-                    new ProductInfoHeaderValue("B", null)
-                }
-            );
+            var se = headers
+                .UserAgent
+                .SequenceEqual(
+                    new[]
+                    {
+                        new ProductInfoHeaderValue("A", null),
+                        new ProductInfoHeaderValue("B", null)
+                    }
+                );
 
             Assert.IsTrue(se, "#1");
             Assert.AreEqual("A B", headers.UserAgent.ToString(), "#2");
@@ -617,16 +661,21 @@ namespace MonoTests.System.Net.Http
                 "application/vnd.github.moondragon+json; charset=utf-8,application/vnd.github.v3+json; charset=utf-8"
             );
 
-            var se = headers.Accept.SequenceEqual(
-                new[]
-                {
-                    new MediaTypeHeaderValue("application/vnd.github.moondragon+json")
+            var se = headers
+                .Accept
+                .SequenceEqual(
+                    new[]
                     {
-                        CharSet = "utf-8"
-                    },
-                    new MediaTypeHeaderValue("application/vnd.github.v3+json") { CharSet = "utf-8" }
-                }
-            );
+                        new MediaTypeHeaderValue("application/vnd.github.moondragon+json")
+                        {
+                            CharSet = "utf-8"
+                        },
+                        new MediaTypeHeaderValue("application/vnd.github.v3+json")
+                        {
+                            CharSet = "utf-8"
+                        }
+                    }
+                );
 
             Assert.IsTrue(se, "#1");
             Assert.AreEqual(

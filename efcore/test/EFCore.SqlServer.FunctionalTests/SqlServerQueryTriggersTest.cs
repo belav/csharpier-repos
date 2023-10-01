@@ -115,8 +115,10 @@ public class SqlServerQueryTriggersTest
         {
             context.Database.EnsureCreatedResiliently();
 
-            context.Database.ExecuteSqlRaw(
-                @"
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"
 CREATE TRIGGER TRG_InsertUpdateProduct
 ON UpdatedProducts
 AFTER INSERT, UPDATE AS
@@ -128,7 +130,7 @@ BEGIN
     UPDATE UpdatedProducts set StoreUpdated = StoreUpdated + 1
     WHERE Id IN(SELECT INSERTED.Id FROM INSERTED);
 END"
-            );
+                );
         }
     }
 }

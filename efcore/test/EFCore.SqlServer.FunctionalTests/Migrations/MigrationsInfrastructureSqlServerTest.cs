@@ -526,7 +526,8 @@ GO
         public async Task Empty_Migration_Creates_Database()
         {
             using var context = new BloggingContext(
-                Fixture.TestStore
+                Fixture
+                    .TestStore
                     .AddProviderOptions(
                         new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
                     )

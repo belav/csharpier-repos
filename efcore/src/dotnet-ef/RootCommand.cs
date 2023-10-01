@@ -345,7 +345,8 @@ internal class RootCommand : CommandBase
     }
 
     private static string GetVersion() =>
-        typeof(RootCommand).Assembly
+        typeof(RootCommand)
+            .Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
             .InformationalVersion;
 

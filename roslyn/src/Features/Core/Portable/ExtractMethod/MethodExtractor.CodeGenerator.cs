@@ -125,8 +125,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
                 var newCallSiteRoot = callSiteDocument.Root;
 
-                var codeGenerationService =
-                    SemanticDocument.Document.GetLanguageService<ICodeGenerationService>();
+                var codeGenerationService = SemanticDocument
+                    .Document
+                    .GetLanguageService<ICodeGenerationService>();
                 var result = GenerateMethodDefinition(LocalFunction, cancellationToken);
 
                 SyntaxNode destination,
@@ -231,14 +232,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 }
 
                 if (
-                    methodDefinition.SyntaxTree.IsHiddenPosition(
-                        methodDefinition.AsNode().SpanStart,
-                        cancellationToken
-                    )
-                    || methodDefinition.SyntaxTree.IsHiddenPosition(
-                        methodDefinition.AsNode().Span.End,
-                        cancellationToken
-                    )
+                    methodDefinition
+                        .SyntaxTree
+                        .IsHiddenPosition(methodDefinition.AsNode().SpanStart, cancellationToken)
+                    || methodDefinition
+                        .SyntaxTree
+                        .IsHiddenPosition(methodDefinition.AsNode().Span.End, cancellationToken)
                 )
                 {
                     return await CreateGeneratedCodeAsync(

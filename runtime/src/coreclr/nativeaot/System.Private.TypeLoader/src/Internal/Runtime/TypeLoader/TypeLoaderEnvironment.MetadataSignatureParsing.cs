@@ -29,13 +29,15 @@ namespace Internal.Runtime.TypeLoader
             RuntimeTypeHandle typeHandle;
 
             parser.Offset = offset;
-            TypeLoaderEnvironment.Instance.GetTypeFromSignatureAndContext(
-                ref parser,
-                moduleHandle,
-                null,
-                null,
-                out typeHandle
-            );
+            TypeLoaderEnvironment
+                .Instance
+                .GetTypeFromSignatureAndContext(
+                    ref parser,
+                    moduleHandle,
+                    null,
+                    null,
+                    out typeHandle
+                );
 
             return typeHandle;
         }
@@ -187,9 +189,9 @@ namespace Internal.Runtime.TypeLoader
         internal static NativeParser GetNativeParserForSignature(RuntimeSignature signature)
         {
             Debug.Assert(signature.IsNativeLayoutSignature);
-            NativeFormatModuleInfo module = ModuleList.Instance.GetModuleInfoByHandle(
-                new TypeManagerHandle(signature.ModuleHandle)
-            );
+            NativeFormatModuleInfo module = ModuleList
+                .Instance
+                .GetModuleInfoByHandle(new TypeManagerHandle(signature.ModuleHandle));
 
             NativeReader reader = TypeLoaderEnvironment.GetNativeReaderForBlob(
                 module,
@@ -405,13 +407,15 @@ namespace Internal.Runtime.TypeLoader
                     {
                         case HandleType.TypeDefinition:
                             if (
-                                !TypeLoaderEnvironment.Instance.TryGetNamedTypeForMetadata(
-                                    new QTypeDefinition(
-                                        _metadataReader,
-                                        typeHandle.ToTypeDefinitionHandle(_metadataReader)
-                                    ),
-                                    out type2
-                                )
+                                !TypeLoaderEnvironment
+                                    .Instance
+                                    .TryGetNamedTypeForMetadata(
+                                        new QTypeDefinition(
+                                            _metadataReader,
+                                            typeHandle.ToTypeDefinitionHandle(_metadataReader)
+                                        ),
+                                        out type2
+                                    )
                             )
                             {
                                 return false;

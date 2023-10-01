@@ -547,13 +547,15 @@ namespace Internal.Runtime
             {
                 Debug.Assert(IsGeneric);
                 if (IsDynamicType || !SupportsRelativePointers)
-                    return GetField<Pointer<GenericComposition>>(
-                        EETypeField.ETF_GenericComposition
-                    ).Value->Arity;
+                    return GetField<Pointer<GenericComposition>>(EETypeField.ETF_GenericComposition)
+                        .Value
+                        ->Arity;
 
                 return GetField<RelativePointer<GenericComposition>>(
                     EETypeField.ETF_GenericComposition
-                ).Value->Arity;
+                )
+                    .Value
+                    ->Arity;
             }
 #if TYPE_LOADER_IMPLEMENTATION
             set
@@ -577,13 +579,15 @@ namespace Internal.Runtime
             {
                 Debug.Assert(IsGeneric);
                 if (IsDynamicType || !SupportsRelativePointers)
-                    return GetField<Pointer<GenericComposition>>(
-                        EETypeField.ETF_GenericComposition
-                    ).Value->GenericArguments;
+                    return GetField<Pointer<GenericComposition>>(EETypeField.ETF_GenericComposition)
+                        .Value
+                        ->GenericArguments;
 
                 return GetField<RelativePointer<GenericComposition>>(
                     EETypeField.ETF_GenericComposition
-                ).Value->GenericArguments;
+                )
+                    .Value
+                    ->GenericArguments;
             }
         }
 
@@ -597,13 +601,15 @@ namespace Internal.Runtime
                     return null;
 
                 if (IsDynamicType || !SupportsRelativePointers)
-                    return GetField<Pointer<GenericComposition>>(
-                        EETypeField.ETF_GenericComposition
-                    ).Value->GenericVariance;
+                    return GetField<Pointer<GenericComposition>>(EETypeField.ETF_GenericComposition)
+                        .Value
+                        ->GenericVariance;
 
                 return GetField<RelativePointer<GenericComposition>>(
                     EETypeField.ETF_GenericComposition
-                ).Value->GenericVariance;
+                )
+                    .Value
+                    ->GenericVariance;
             }
         }
 

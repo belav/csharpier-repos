@@ -161,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Host
                 root.SerializeTo(stream, cancellationToken);
                 stream.Position = 0;
 
-                _storage = _service.SolutionServices
+                _storage = _service
+                    .SolutionServices
                     .GetRequiredService<ITemporaryStorageServiceInternal>()
                     .CreateTemporaryStreamStorage();
                 await _storage.WriteStreamAsync(stream, cancellationToken).ConfigureAwait(false);

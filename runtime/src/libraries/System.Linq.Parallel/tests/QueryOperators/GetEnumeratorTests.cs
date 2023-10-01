@@ -176,7 +176,8 @@ namespace System.Linq.Parallel.Tests
         )
         {
             _ = count;
-            ParallelQuery<int> query = labeled.Item
+            ParallelQuery<int> query = labeled
+                .Item
                 .Select<int, int>(x =>
                 {
                     throw new DeliberateTestException();

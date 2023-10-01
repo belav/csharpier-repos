@@ -285,14 +285,16 @@ namespace Internal.Runtime.TypeLoader
                     {
                         if (definingMetadataType.BaseType.RetrieveRuntimeTypeHandleIfPossible())
                         {
-                            baseTypeSlotCount = definingMetadataType.BaseType
+                            baseTypeSlotCount = definingMetadataType
+                                .BaseType
                                 .GetRuntimeTypeHandle()
                                 .ToEETypePtr()
                                 ->NumVtableSlots;
                         }
                         else
                         {
-                            baseTypeSlotCount = definingMetadataType.BaseType
+                            baseTypeSlotCount = definingMetadataType
+                                .BaseType
                                 .GetOrCreateTypeBuilderState()
                                 .NumVTableSlots;
                         }
@@ -434,7 +436,8 @@ namespace Internal.Runtime.TypeLoader
                 int baseTypeSlotCount = 0;
 
                 if (definingMetadataType.BaseType != null)
-                    baseTypeSlotCount = definingMetadataType.BaseType
+                    baseTypeSlotCount = definingMetadataType
+                        .BaseType
                         .GetRuntimeTypeHandle()
                         .ToEETypePtr()
                         ->NumVtableSlots;

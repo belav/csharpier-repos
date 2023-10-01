@@ -39,16 +39,17 @@ namespace System.Drawing
                 {
                     // Use UniqueInstance here because we never want to cache the wrapper. It only gets used once and then disposed.
                     using DrawingCom.IPicture picture = (DrawingCom.IPicture)
-                        DrawingCom.Instance.GetOrCreateObjectForComInstance(
-                            lpPicture,
-                            CreateObjectFlags.UniqueInstance
-                        );
+                        DrawingCom
+                            .Instance
+                            .GetOrCreateObjectForComInstance(
+                                lpPicture,
+                                CreateObjectFlags.UniqueInstance
+                            );
 
                     var gpStream = new GPStream(outputStream, makeSeekable: false);
-                    streamPtr = DrawingCom.Instance.GetOrCreateComInterfaceForObject(
-                        gpStream,
-                        CreateComInterfaceFlags.None
-                    );
+                    streamPtr = DrawingCom
+                        .Instance
+                        .GetOrCreateComInterfaceForObject(gpStream, CreateComInterfaceFlags.None);
 
                     DrawingCom.ThrowExceptionForHR(picture.SaveAsFile(streamPtr, -1, null));
                 }

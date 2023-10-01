@@ -207,13 +207,15 @@ namespace System.CommandLine.Tests
             var originOption = new Option<string>("--origin");
             var cloneOption = new Option<string>("--clone");
 
-            cloneOption.CompletionSources.Add(ctx =>
-            {
-                var opt1Value = ctx.ParseResult.GetValue(originOption);
-                return !string.IsNullOrWhiteSpace(opt1Value)
-                    ? new[] { opt1Value }
-                    : Array.Empty<string>();
-            });
+            cloneOption
+                .CompletionSources
+                .Add(ctx =>
+                {
+                    var opt1Value = ctx.ParseResult.GetValue(originOption);
+                    return !string.IsNullOrWhiteSpace(opt1Value)
+                        ? new[] { opt1Value }
+                        : Array.Empty<string>();
+                });
 
             var parser = new Parser(new RootCommand { originOption, cloneOption });
 
@@ -808,9 +810,9 @@ namespace System.CommandLine.Tests
         {
             var argument = new Argument<DayOfWeek>();
             argument.CompletionSources.Clear();
-            argument.CompletionSources.Add(
-                new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" }
-            );
+            argument
+                .CompletionSources
+                .Add(new[] { "mon", "tues", "wed", "thur", "fri", "sat", "sun" });
             var command = new Command("the-command") { argument };
 
             var completions = command.Parse("the-command s").GetCompletions();
@@ -877,7 +879,8 @@ namespace System.CommandLine.Tests
 
             var result = option.Parse("--day SleepyDay");
 
-            result.Errors
+            result
+                .Errors
                 .Should()
                 .ContainSingle()
                 .Which

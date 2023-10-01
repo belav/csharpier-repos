@@ -35,9 +35,9 @@ namespace System.ServiceModel
             {
                 if (!MessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 }
                 this.clientCredentialType = value;
             }
@@ -82,11 +82,13 @@ namespace System.ServiceModel
         {
             if (isReliableSession && !this.IsSecureConversationEnabled())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SecureConversationRequiredByReliableSession)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecureConversationRequiredByReliableSession)
+                        )
+                    );
             }
 
             SecurityBindingElement result;
@@ -99,11 +101,13 @@ namespace System.ServiceModel
                 switch (this.clientCredentialType)
                 {
                     case MessageCredentialType.None:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.ClientCredentialTypeMustBeSpecifiedForMixedMode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.ClientCredentialTypeMustBeSpecifiedForMixedMode)
+                                )
+                            );
                     case MessageCredentialType.UserName:
                         oneShotSecurity =
                             SecurityBindingElement.CreateUserNameOverTransportBindingElement();
@@ -131,9 +135,9 @@ namespace System.ServiceModel
                         break;
                     default:
                         Fx.Assert("unknown ClientCredentialType");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new NotSupportedException());
                 }
                 if (this.IsSecureConversationEnabled())
                 {
@@ -189,9 +193,9 @@ namespace System.ServiceModel
                             break;
                         default:
                             Fx.Assert("unknown ClientCredentialType");
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new NotSupportedException()
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(new NotSupportedException());
                     }
                 }
                 else
@@ -227,9 +231,9 @@ namespace System.ServiceModel
                             break;
                         default:
                             Fx.Assert("unknown ClientCredentialType");
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new NotSupportedException()
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(new NotSupportedException());
                     }
                 }
                 if (this.IsSecureConversationEnabled())

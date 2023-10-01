@@ -544,7 +544,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         location,
                                         hasAssociatedProperty ? associatedPropertyOrEvent : field,
                                         new CSharpRequiredLanguageVersion(
-                                            MessageID.IDS_FeatureAutoDefaultStructs.RequiredVersion()
+                                            MessageID
+                                                .IDS_FeatureAutoDefaultStructs
+                                                .RequiredVersion()
                                         )
                                     );
                                 }

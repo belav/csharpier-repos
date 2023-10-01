@@ -34,10 +34,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                         ",",
                         "("
                     },
-                    AllCommitCharacters =
-                        RoslynCompletion.CompletionRules.Default.DefaultCommitCharacters
-                            .Select(c => c.ToString())
-                            .ToArray()
+                    AllCommitCharacters = RoslynCompletion
+                        .CompletionRules
+                        .Default
+                        .DefaultCommitCharacters
+                        .Select(c => c.ToString())
+                        .ToArray()
                 },
                 HoverProvider = true,
                 FoldingRangeProvider = new FoldingRangeOptions { },

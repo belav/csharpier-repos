@@ -244,9 +244,9 @@ namespace System.Data.Objects.ELinq
                     );
 
                     // invoke lambda with variable from the first projection
-                    DbProjectExpression composed = first.Input.Project(
-                        secondLambda.Invoke(first.Projection)
-                    );
+                    DbProjectExpression composed = first
+                        .Input
+                        .Project(secondLambda.Invoke(first.Projection));
 
                     return RebindProject(input, composed);
                 }
@@ -266,9 +266,9 @@ namespace System.Data.Objects.ELinq
                     );
 
                     // invoke lambda with variable from the project
-                    DbFilterExpression composed = first.Input.Filter(
-                        secondLambda.Invoke(first.Projection)
-                    );
+                    DbFilterExpression composed = first
+                        .Input
+                        .Filter(secondLambda.Invoke(first.Projection));
 
                     return RebindFilter(input, composed);
                 }

@@ -39,9 +39,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 // Workaround for deadlock loading ExtensionManagerPackage prior to
                 // https://devdiv.visualstudio.com/DevDiv/_git/VSExtensibility/pullrequest/381506
-                await AsyncServiceProvider.GlobalProvider.GetServiceAsync(
-                    typeof(SVsExtensionManager)
-                );
+                await AsyncServiceProvider
+                    .GlobalProvider
+                    .GetServiceAsync(typeof(SVsExtensionManager));
             });
         }
 
@@ -56,10 +56,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 #pragma warning disable RS0030 // Do not used banned APIs (this code only runs in integration tests)
                     Interlocked.CompareExchange(
                         ref _joinableTaskFactory,
-                        ThreadHelper.JoinableTaskFactory.WithPriority(
-                            CurrentApplicationDispatcher,
-                            DispatcherPriority.Background
-                        ),
+                        ThreadHelper
+                            .JoinableTaskFactory
+                            .WithPriority(
+                                CurrentApplicationDispatcher,
+                                DispatcherPriority.Background
+                            ),
                         null
                     );
 #pragma warning restore RS0030 // Do not used banned APIs
@@ -114,7 +116,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         protected static TestWaitingService GetWaitingService() =>
             new(
-                GetComponentModel().DefaultExportProvider
+                GetComponentModel()
+                    .DefaultExportProvider
                     .GetExport<AsynchronousOperationListenerProvider>()
                     .Value
             );

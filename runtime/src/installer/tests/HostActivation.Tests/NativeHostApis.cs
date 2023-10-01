@@ -307,7 +307,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             var fixture = sharedTestState.HostApiInvokerAppFixture.Copy();
 
-            fixture.BuiltDotnet
+            fixture
+                .BuiltDotnet
                 .Exec(fixture.TestProject.AppDll, "Test_hostfxr_set_error_writer")
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -607,7 +608,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             var fixture = sharedTestState.HostApiInvokerAppFixture.Copy();
 
-            fixture.BuiltDotnet
+            fixture
+                .BuiltDotnet
                 .Exec(fixture.TestProject.AppDll, "Test_corehost_set_error_writer")
                 .CaptureStdOut()
                 .CaptureStdErr()
@@ -621,7 +623,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             var fixture = sharedTestState.HostApiInvokerAppFixture;
 
-            fixture.BuiltDotnet
+            fixture
+                .BuiltDotnet
                 .Exec(
                     fixture.TestProject.AppDll,
                     "host_runtime_contract.get_runtime_property",

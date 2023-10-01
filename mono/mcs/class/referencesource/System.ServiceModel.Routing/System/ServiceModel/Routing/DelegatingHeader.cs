@@ -33,11 +33,13 @@ namespace System.ServiceModel.Routing
                 this.index = this.originalHeaders.FindHeader(this.info.Name, this.info.Namespace);
                 if (this.index < 0)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.SourceHeaderNotFound(this.info.Name, this.info.Namespace)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.SourceHeaderNotFound(this.info.Name, this.info.Namespace)
+                            )
+                        );
                 }
             }
         }

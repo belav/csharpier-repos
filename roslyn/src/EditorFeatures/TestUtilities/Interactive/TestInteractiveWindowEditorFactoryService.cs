@@ -57,10 +57,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
         )
         {
             if (
-                !window.Properties.TryGetProperty(
-                    typeof(IContentType),
-                    out IContentType contentType
-                )
+                !window
+                    .Properties
+                    .TryGetProperty(typeof(IContentType), out IContentType contentType)
             )
             {
                 contentType = _contentTypeRegistry.GetContentType(ContentType);

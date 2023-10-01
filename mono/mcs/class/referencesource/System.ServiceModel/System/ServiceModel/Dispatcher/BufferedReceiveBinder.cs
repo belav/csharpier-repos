@@ -214,10 +214,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (binder.channelBinder.TryReceive(TimeSpan.MaxValue, out requestContext))
                 {
-                    requiresDispatch = binder.inputQueue.EnqueueWithoutDispatch(
-                        new RequestContextWrapper(requestContext),
-                        null
-                    );
+                    requiresDispatch = binder
+                        .inputQueue
+                        .EnqueueWithoutDispatch(new RequestContextWrapper(requestContext), null);
                 }
             }
             catch (Exception exception)
@@ -259,10 +258,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (binder.channelBinder.EndTryReceive(result, out requestContext))
                 {
-                    requiresDispatch = binder.inputQueue.EnqueueWithoutDispatch(
-                        new RequestContextWrapper(requestContext),
-                        null
-                    );
+                    requiresDispatch = binder
+                        .inputQueue
+                        .EnqueueWithoutDispatch(new RequestContextWrapper(requestContext), null);
                 }
             }
             catch (Exception exception)

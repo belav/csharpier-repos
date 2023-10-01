@@ -396,14 +396,16 @@ namespace System.ServiceModel.Dispatcher
             else if (var is LocalBuilder)
                 Stloc((LocalBuilder)var);
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxCodeGenCanOnlyStoreIntoArgOrLocGot0,
-                            var.GetType().FullName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxCodeGenCanOnlyStoreIntoArgOrLocGot0,
+                                var.GetType().FullName
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         internal void LoadAddress(object obj)
@@ -527,11 +529,16 @@ namespace System.ServiceModel.Dispatcher
                     case TypeCode.Empty:
                     case TypeCode.DBNull:
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxCodeGenUnknownConstantType, valueType.FullName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxCodeGenUnknownConstantType,
+                                        valueType.FullName
+                                    )
+                                )
+                            );
                 }
             }
         }
@@ -778,14 +785,16 @@ namespace System.ServiceModel.Dispatcher
             {
                 OpCode opCode = GetLdelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxCodeGenArrayTypeIsNotSupported,
-                                arrayElementType.FullName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxCodeGenArrayTypeIsNotSupported,
+                                    arrayElementType.FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 if (codeGenTrace != CodeGenTrace.None)
                     EmitSourceInstruction(opCode.ToString());
                 ilGen.Emit(opCode);
@@ -811,14 +820,16 @@ namespace System.ServiceModel.Dispatcher
             {
                 OpCode opCode = GetStelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxCodeGenArrayTypeIsNotSupported,
-                                arrayElementType.FullName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxCodeGenArrayTypeIsNotSupported,
+                                    arrayElementType.FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 if (codeGenTrace != CodeGenTrace.None)
                     EmitSourceInstruction(opCode.ToString());
                 EmitStackTop(arrayElementType);
@@ -902,11 +913,16 @@ namespace System.ServiceModel.Dispatcher
                 {
                     OpCode opCode = GetConvOpCode(Type.GetTypeCode(target));
                     if (opCode.Equals(OpCodes.Nop))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.SFxCodeGenNoConversionPossibleTo, target.FullName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxCodeGenNoConversionPossibleTo,
+                                        target.FullName
+                                    )
+                                )
+                            );
                     else
                     {
                         if (codeGenTrace != CodeGenTrace.None)
@@ -921,15 +937,17 @@ namespace System.ServiceModel.Dispatcher
                         Ldobj(target);
                 }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxCodeGenIsNotAssignableFrom,
-                                target.FullName,
-                                source.FullName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxCodeGenIsNotAssignableFrom,
+                                    target.FullName,
+                                    source.FullName
+                                )
                             )
-                        )
-                    );
+                        );
             }
             else if (target.IsPointer)
             {
@@ -959,15 +977,17 @@ namespace System.ServiceModel.Dispatcher
                 Castclass(target);
             }
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxCodeGenIsNotAssignableFrom,
-                            target.FullName,
-                            source.FullName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxCodeGenIsNotAssignableFrom,
+                                target.FullName,
+                                source.FullName
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         IfState PopIfState()
@@ -992,10 +1012,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (saveAssembly)
             {
-                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.RunAndSave
-                );
+                assemblyBuilder = AppDomain
+                    .CurrentDomain
+                    .DefineDynamicAssembly(name, AssemblyBuilderAccess.RunAndSave);
                 moduleBuilder = assemblyBuilder.DefineDynamicModule(
                     name.Name,
                     name.Name + ".dll",
@@ -1004,10 +1023,9 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    name,
-                    AssemblyBuilderAccess.Run
-                );
+                assemblyBuilder = AppDomain
+                    .CurrentDomain
+                    .DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
                 moduleBuilder = assemblyBuilder.DefineDynamicModule(name.Name, false);
             }
             //}
@@ -1016,11 +1034,13 @@ namespace System.ServiceModel.Dispatcher
 
         void ThrowMismatchException(object expected)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.SFxCodeGenExpectingEnd, expected.ToString())
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxCodeGenExpectingEnd, expected.ToString())
+                    )
+                );
         }
 
         Hashtable LocalNames

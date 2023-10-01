@@ -29,7 +29,8 @@ namespace Internal.Runtime.InteropServices
 
 sealed class ClassFactoryWrapper
 {
-    private static readonly MethodInfo IClassFactory_Create = typeof(object).Assembly
+    private static readonly MethodInfo IClassFactory_Create = typeof(object)
+        .Assembly
         .GetType("Internal.Runtime.InteropServices.IClassFactory")
         .GetMethod("CreateInstance");
     private readonly object _obj;
@@ -60,7 +61,8 @@ namespace Activator
     {
         private static delegate* <ComActivationContext, object> GetClassFactoryForTypeMethod =
             (delegate* <ComActivationContext, object>)
-                typeof(object).Assembly
+                typeof(object)
+                    .Assembly
                     .GetType("Internal.Runtime.InteropServices.ComActivator", throwOnError: true)
                     .GetMethod(
                         "GetClassFactoryForType",
@@ -72,7 +74,8 @@ namespace Activator
             ComActivationContext,
             bool,
             void> ClassRegistrationScenarioForType = (delegate* <ComActivationContext, bool, void>)
-            typeof(object).Assembly
+            typeof(object)
+                .Assembly
                 .GetType("Internal.Runtime.InteropServices.ComActivator", throwOnError: true)
                 .GetMethod(
                     "ClassRegistrationScenarioForType",

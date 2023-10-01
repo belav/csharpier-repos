@@ -33,13 +33,15 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
             out Exception exception
         )
         {
-            return ReflectionCoreExecution.ExecutionEnvironment.GetMethodInvoker(
-                DeclaringType,
-                new QMethodDefinition(Reader, MethodHandle),
-                methodArguments,
-                exceptionPertainant,
-                out exception
-            );
+            return ReflectionCoreExecution
+                .ExecutionEnvironment
+                .GetMethodInvoker(
+                    DeclaringType,
+                    new QMethodDefinition(Reader, MethodHandle),
+                    methodArguments,
+                    exceptionPertainant,
+                    out exception
+                );
         }
 
         public QSignatureTypeHandle[] QualifiedMethodSignature
@@ -218,15 +220,19 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
                 genericArgHandles = null;
             }
 
-            TypeManagerHandle typeManager =
-                TypeLoaderEnvironment.Instance.ModuleList.GetModuleForMetadataReader(Reader);
+            TypeManagerHandle typeManager = TypeLoaderEnvironment
+                .Instance
+                .ModuleList
+                .GetModuleForMetadataReader(Reader);
 
-            return TypeLoaderEnvironment.Instance.GetRuntimeMethodHandleForComponents(
-                DeclaringType.TypeHandle,
-                Name,
-                RuntimeSignature.CreateFromMethodHandle(typeManager, MethodHandle.AsInt()),
-                genericArgHandles
-            );
+            return TypeLoaderEnvironment
+                .Instance
+                .GetRuntimeMethodHandleForComponents(
+                    DeclaringType.TypeHandle,
+                    Name,
+                    RuntimeSignature.CreateFromMethodHandle(typeManager, MethodHandle.AsInt()),
+                    genericArgHandles
+                );
         }
 
         //
@@ -246,7 +252,8 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
         )
         {
             MetadataReader reader = _reader;
-            TypeContext typeContext = contextMethod.DeclaringType
+            TypeContext typeContext = contextMethod
+                .DeclaringType
                 .CastToRuntimeTypeInfo()
                 .TypeContext;
             typeContext = new TypeContext(typeContext.GenericTypeArguments, methodTypeArguments);

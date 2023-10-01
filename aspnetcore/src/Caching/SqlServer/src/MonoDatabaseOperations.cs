@@ -39,7 +39,8 @@ internal class MonoDatabaseOperations : DatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         {
             var command = new SqlCommand(query, connection);
-            command.Parameters
+            command
+                .Parameters
                 .AddCacheItemId(key)
                 .AddWithValue("UtcNow", SqlDbType.DateTime, utcNow.UtcDateTime);
 
@@ -89,7 +90,8 @@ internal class MonoDatabaseOperations : DatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         {
             var command = new SqlCommand(query, connection);
-            command.Parameters
+            command
+                .Parameters
                 .AddCacheItemId(key)
                 .AddWithValue("UtcNow", SqlDbType.DateTime, utcNow.UtcDateTime);
 
@@ -129,7 +131,8 @@ internal class MonoDatabaseOperations : DatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         {
             var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection);
-            upsertCommand.Parameters
+            upsertCommand
+                .Parameters
                 .AddCacheItemId(key)
                 .AddCacheItemValue(value)
                 .AddSlidingExpirationInSeconds(options.SlidingExpiration)
@@ -174,7 +177,8 @@ internal class MonoDatabaseOperations : DatabaseOperations
         using (var connection = new SqlConnection(ConnectionString))
         {
             var upsertCommand = new SqlCommand(SqlQueries.SetCacheItem, connection);
-            upsertCommand.Parameters
+            upsertCommand
+                .Parameters
                 .AddCacheItemId(key)
                 .AddCacheItemValue(value)
                 .AddSlidingExpirationInSeconds(options.SlidingExpiration)

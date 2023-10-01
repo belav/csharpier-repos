@@ -67,9 +67,10 @@ namespace System.CommandLine
                         var token = _unmatchedTokens[i];
                         (errors ??= new()).Add(
                             new ParseError(
-                                parser.Configuration.LocalizationResources.UnrecognizedCommandOrArgument(
-                                    token.Value
-                                ),
+                                parser
+                                    .Configuration
+                                    .LocalizationResources
+                                    .UnrecognizedCommandOrArgument(token.Value),
                                 rootCommandResult
                             )
                         );
@@ -235,7 +236,8 @@ namespace System.CommandLine
             return completions;
 
             static IEnumerable<string> OptionsWithArgumentLimitReached(SymbolResult symbolResult) =>
-                symbolResult.Children
+                symbolResult
+                    .Children
                     .Where(c => c.IsArgumentLimitReached)
                     .OfType<OptionResult>()
                     .Select(o => o.Symbol)
@@ -300,9 +302,9 @@ namespace System.CommandLine
 
                     if (textCompletionContext.WordToComplete.Length > 0)
                     {
-                        var tokenToComplete = parseResult.Tokens.Last(
-                            t => t.Value == textCompletionContext.WordToComplete
-                        );
+                        var tokenToComplete = parseResult
+                            .Tokens
+                            .Last(t => t.Value == textCompletionContext.WordToComplete);
 
                         return optionResult.Tokens.Contains(tokenToComplete);
                     }

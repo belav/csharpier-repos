@@ -40,9 +40,9 @@ namespace System.ServiceModel.Channels
             }
             if (!ListenUriModeHelper.IsDefined(listenUriMode))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("listenUriMode")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("listenUriMode"));
             }
 
             Initialize(
@@ -180,15 +180,17 @@ namespace System.ServiceModel.Channels
             BindingElement element = this.remainingBindingElements.Remove<BindingElement>();
             if (element != null)
                 return element;
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(
-                        SR.NoChannelBuilderAvailable,
-                        this.binding.Name,
-                        this.binding.Namespace
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.NoChannelBuilderAvailable,
+                            this.binding.Name,
+                            this.binding.Namespace
+                        )
                     )
-                )
-            );
+                );
         }
 
         internal void ValidateBindingElementsConsumed()
@@ -206,11 +208,13 @@ namespace System.ServiceModel.Channels
                     string typeString = bindingElement.GetType().ToString();
                     builder.Append(typeString.Substring(typeString.LastIndexOf('.') + 1));
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.NotAllBindingElementsBuilt, builder.ToString())
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.NotAllBindingElementsBuilt, builder.ToString())
+                        )
+                    );
             }
         }
     }

@@ -125,10 +125,11 @@ namespace Mono.CSharp.Nullable
 
         public static TypeSpec MakeType(ModuleContainer module, TypeSpec underlyingType)
         {
-            return module.PredefinedTypes.Nullable.TypeSpec.MakeGenericType(
-                module,
-                new[] { underlyingType }
-            );
+            return module
+                .PredefinedTypes
+                .Nullable
+                .TypeSpec
+                .MakeGenericType(module, new[] { underlyingType });
         }
     }
 

@@ -144,27 +144,33 @@ using System.Reflection;
             test.ExpectedDiagnostics.Add(diagnostic);
             if (propertiesFile is not null)
             {
-                test.TestState.Sources.Add(
-                    (
-                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
-                        propertiesFile
-                    )
-                );
+                test.TestState
+                    .Sources
+                    .Add(
+                        (
+                            $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                            propertiesFile
+                        )
+                    );
             }
             if (expectedPropertiesFile is not null)
             {
-                test.FixedState.Sources.Add(
-                    (
-                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
-                        expectedPropertiesFile
-                    )
-                );
-                test.BatchFixedState.Sources.Add(
-                    (
-                        $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
-                        expectedPropertiesFile
-                    )
-                );
+                test.FixedState
+                    .Sources
+                    .Add(
+                        (
+                            $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                            expectedPropertiesFile
+                        )
+                    );
+                test.BatchFixedState
+                    .Sources
+                    .Add(
+                        (
+                            $"{Test.FilePathPrefix}Properties{Path.DirectorySeparatorChar}AssemblyInfo.cs",
+                            expectedPropertiesFile
+                        )
+                    );
             }
             await test.RunAsync();
         }
@@ -201,7 +207,9 @@ using System.Reflection;
                         var symbol = (IParameterSymbol)context.Symbol;
 
                         if (
-                            context.Symbol.ContainingAssembly
+                            context
+                                .Symbol
+                                .ContainingAssembly
                                 .GetAttributes()
                                 .Any(
                                     attr =>
@@ -222,15 +230,19 @@ using System.Reflection;
                         )
                         {
                             context.ReportDiagnostic(
-                                context.Symbol.CreateDiagnostic(
-                                    AddDisableRuntimeMarshallingAttributeRule,
-                                    ImmutableDictionary<string, string>.Empty.Add(
-                                        GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute,
-                                        GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
-                                    ),
-                                    symbol.Type.ToDisplayString(),
-                                    symbol.Name
-                                )
+                                context
+                                    .Symbol
+                                    .CreateDiagnostic(
+                                        AddDisableRuntimeMarshallingAttributeRule,
+                                        ImmutableDictionary<string, string>
+                                            .Empty
+                                            .Add(
+                                                GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute,
+                                                GeneratorDiagnosticProperties.AddDisableRuntimeMarshallingAttribute
+                                            ),
+                                        symbol.Type.ToDisplayString(),
+                                        symbol.Name
+                                    )
                             );
                         }
                     },

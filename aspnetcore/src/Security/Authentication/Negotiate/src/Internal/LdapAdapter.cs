@@ -44,7 +44,8 @@ internal static class LdapAdapter
             return;
         }
 
-        var distinguishedName = settings.Domain
+        var distinguishedName = settings
+            .Domain
             .Split('.')
             .Select(name => $"dc={name}")
             .Aggregate((a, b) => $"{a},{b}");
@@ -55,13 +56,15 @@ internal static class LdapAdapter
 
         Debug.Assert(settings.LdapConnection != null);
         var searchResponse = (SearchResponse)
-            await Task<DirectoryResponse>.Factory.FromAsync(
-                settings.LdapConnection.BeginSendRequest!,
-                settings.LdapConnection.EndSendRequest,
-                searchRequest,
-                PartialResultProcessing.NoPartialResultSupport,
-                null
-            );
+            await Task<DirectoryResponse>
+                .Factory
+                .FromAsync(
+                    settings.LdapConnection.BeginSendRequest!,
+                    settings.LdapConnection.EndSendRequest,
+                    searchRequest,
+                    PartialResultProcessing.NoPartialResultSupport,
+                    null
+                );
 
         if (searchResponse.Entries.Count > 0)
         {
@@ -106,14 +109,16 @@ internal static class LdapAdapter
                 entrySize += claim.Length * 2; //Approximate the size of stored value in memory cache.
             }
 
-            settings.ClaimsCache.Set(
-                user,
-                retrievedClaims,
-                new MemoryCacheEntryOptions()
-                    .SetSize(entrySize)
-                    .SetSlidingExpiration(settings.ClaimsCacheSlidingExpiration)
-                    .SetAbsoluteExpiration(settings.ClaimsCacheAbsoluteExpiration)
-            );
+            settings
+                .ClaimsCache
+                .Set(
+                    user,
+                    retrievedClaims,
+                    new MemoryCacheEntryOptions()
+                        .SetSize(entrySize)
+                        .SetSlidingExpiration(settings.ClaimsCacheSlidingExpiration)
+                        .SetAbsoluteExpiration(settings.ClaimsCacheAbsoluteExpiration)
+                );
         }
         else
         {

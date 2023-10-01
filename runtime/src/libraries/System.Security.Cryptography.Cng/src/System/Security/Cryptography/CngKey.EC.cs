@@ -88,13 +88,11 @@ namespace System.Security.Cryptography
             unsafe
             {
                 byte[] curveNameBytes = new byte[(curveName.Length + 1) * sizeof(char)]; // +1 to add trailing null
-                System.Text.Encoding.Unicode.GetBytes(
-                    curveName,
-                    0,
-                    curveName.Length,
-                    curveNameBytes,
-                    0
-                );
+                System
+                    .Text
+                    .Encoding
+                    .Unicode
+                    .GetBytes(curveName, 0, curveName.Length, curveNameBytes, 0);
                 return new CngProperty(
                     KeyPropertyName.ECCCurveName,
                     curveNameBytes,

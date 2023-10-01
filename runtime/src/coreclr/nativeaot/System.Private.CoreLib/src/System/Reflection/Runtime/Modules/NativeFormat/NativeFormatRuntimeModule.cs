@@ -65,7 +65,9 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
         {
             QScopeDefinition scope = _assembly.Scope;
             MetadataReader reader = scope.Reader;
-            return scope.ScopeDefinition.GlobalModuleType
+            return scope
+                .ScopeDefinition
+                .GlobalModuleType
                 .GetNamedType(reader)
                 .GetField(name, bindingAttr);
         }
@@ -75,7 +77,9 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
         {
             QScopeDefinition scope = _assembly.Scope;
             MetadataReader reader = scope.Reader;
-            return scope.ScopeDefinition.GlobalModuleType
+            return scope
+                .ScopeDefinition
+                .GlobalModuleType
                 .GetNamedType(reader)
                 .GetFields(bindingFlags);
         }
@@ -92,8 +96,10 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
         {
             QScopeDefinition scope = _assembly.Scope;
             MetadataReader reader = scope.Reader;
-            TypeInfos.RuntimeTypeDefinitionTypeInfo runtimeType =
-                scope.ScopeDefinition.GlobalModuleType.GetNamedType(reader);
+            TypeInfos.RuntimeTypeDefinitionTypeInfo runtimeType = scope
+                .ScopeDefinition
+                .GlobalModuleType
+                .GetNamedType(reader);
 
             if (types == null)
             {
@@ -117,7 +123,9 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
         {
             QScopeDefinition scope = _assembly.Scope;
             MetadataReader reader = scope.Reader;
-            return scope.ScopeDefinition.GlobalModuleType
+            return scope
+                .ScopeDefinition
+                .GlobalModuleType
                 .GetNamedType(reader)
                 .GetMethods(bindingFlags);
         }

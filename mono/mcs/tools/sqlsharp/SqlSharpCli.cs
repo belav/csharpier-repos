@@ -1063,15 +1063,17 @@ namespace Mono.Data.SqlSharp
                 }
                 catch (ConfigurationException)
                 {
-                    Console.Error.WriteLine(
-                        "*** Error: Unable to load provider factory: "
-                            + factoryName
-                            + "\n"
-                            + "*** Check your machine.config to see if the provider is "
-                            + "listed under section system.data and DbProviderFactories "
-                            + "and that your provider assembly is in the GAC.  Your provider "
-                            + "may not support ADO.NET 2.0 factory and other features yet."
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            "*** Error: Unable to load provider factory: "
+                                + factoryName
+                                + "\n"
+                                + "*** Check your machine.config to see if the provider is "
+                                + "listed under section system.data and DbProviderFactories "
+                                + "and that your provider assembly is in the GAC.  Your provider "
+                                + "may not support ADO.NET 2.0 factory and other features yet."
+                        );
                     factoryName = null;
                     ChangeProviderBackwardsCompat(parms);
                     return;
@@ -1877,9 +1879,9 @@ namespace Mono.Data.SqlSharp
                         }
                         catch (Exception e)
                         {
-                            Console.Error.WriteLine(
-                                "Error: unable to set key.  Reason: " + e.Message
-                            );
+                            Console
+                                .Error
+                                .WriteLine("Error: unable to set key.  Reason: " + e.Message);
                             return;
                         }
                     }
@@ -1888,9 +1890,11 @@ namespace Mono.Data.SqlSharp
             }
             if (!found)
             {
-                Console.Error.WriteLine(
-                    "Warning: your provider does not subclass DbConnectionStringBuilder fully."
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "Warning: your provider does not subclass DbConnectionStringBuilder fully."
+                    );
                 return;
             }
 

@@ -27,9 +27,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 {
                     if (c.IsVisible || ((c as ColumnState2)?.GroupingPriority > 0))
                     {
-                        var definition = control.ColumnDefinitionManager.GetColumnDefinition(
-                            c.Name
-                        );
+                        var definition = control
+                            .ColumnDefinitionManager
+                            .GetColumnDefinition(c.Name);
                         if (definition != null)
                         {
                             newVisibleColumns.Add(definition);

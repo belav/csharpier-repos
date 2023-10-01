@@ -40,12 +40,14 @@ namespace System.ServiceModel.Channels
 
             if (!TransactionProtocol.IsDefined(transactionProtocol))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.ConfigInvalidTransactionFlowProtocolValue,
-                        transactionProtocol.ToString()
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.ConfigInvalidTransactionFlowProtocolValue,
+                            transactionProtocol.ToString()
+                        )
+                    );
             }
 
             this.transactionProtocol = transactionProtocol;
@@ -59,12 +61,14 @@ namespace System.ServiceModel.Channels
 
             if (!TransactionProtocol.IsDefined(elementToBeCloned.transactionProtocol))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.ConfigInvalidTransactionFlowProtocolValue,
-                        elementToBeCloned.transactionProtocol.ToString()
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.ConfigInvalidTransactionFlowProtocolValue,
+                            elementToBeCloned.transactionProtocol.ToString()
+                        )
+                    );
             }
 
             this.transactionProtocol = elementToBeCloned.transactionProtocol;
@@ -135,8 +139,9 @@ namespace System.ServiceModel.Channels
 
             foreach (OperationDescription operation in contract.Operations)
             {
-                TransactionFlowAttribute parameter =
-                    operation.Behaviors.Find<TransactionFlowAttribute>();
+                TransactionFlowAttribute parameter = operation
+                    .Behaviors
+                    .Find<TransactionFlowAttribute>();
                 if (parameter != null)
                 {
                     if (parameter.Transactions != TransactionFlowOption.NotAllowed)
@@ -155,9 +160,9 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (!TransactionProtocol.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.transactionProtocol = value;
             }
         }
@@ -168,9 +173,11 @@ namespace System.ServiceModel.Channels
         internal static void ValidateOption(TransactionFlowOption opt)
         {
             if (!TransactionFlowOptionHelper.IsDefined(opt))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.TransactionFlowBadOption))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.TransactionFlowBadOption))
+                    );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -183,9 +190,9 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
             }
 
             if (
@@ -218,10 +225,12 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             Dictionary<DirectionalAction, TransactionFlowOption> dictionary = GetDictionary(
@@ -235,11 +244,13 @@ namespace System.ServiceModel.Channels
 
             if (this.issuedTokens == TransactionFlowOption.NotAllowed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.TransactionFlowRequiredIssuedTokens)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.TransactionFlowRequiredIssuedTokens)
+                        )
+                    );
             }
 
             TransactionChannelFactory<TChannel> channelFactory =
@@ -261,17 +272,19 @@ namespace System.ServiceModel.Channels
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("context")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("context"));
             }
 
             if (!context.CanBuildInnerChannelListener<TChannel>())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "TChannel",
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                    );
             }
 
             Dictionary<DirectionalAction, TransactionFlowOption> dictionary = GetDictionary(
@@ -285,11 +298,13 @@ namespace System.ServiceModel.Channels
 
             if (this.issuedTokens == TransactionFlowOption.NotAllowed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.TransactionFlowRequiredIssuedTokens)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.TransactionFlowRequiredIssuedTokens)
+                        )
+                    );
             }
 
             IChannelListener<TChannel> innerListener =
@@ -324,10 +339,9 @@ namespace System.ServiceModel.Channels
 
         Dictionary<DirectionalAction, TransactionFlowOption> GetDictionary(BindingContext context)
         {
-            Dictionary<DirectionalAction, TransactionFlowOption> dictionary =
-                context.BindingParameters.Find<
-                    Dictionary<DirectionalAction, TransactionFlowOption>
-                >();
+            Dictionary<DirectionalAction, TransactionFlowOption> dictionary = context
+                .BindingParameters
+                .Find<Dictionary<DirectionalAction, TransactionFlowOption>>();
             if (dictionary == null)
                 dictionary = new Dictionary<DirectionalAction, TransactionFlowOption>();
             return dictionary;
@@ -348,11 +362,13 @@ namespace System.ServiceModel.Channels
                 );
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.TrustDriverVersionDoesNotSupportIssuedTokens)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.TrustDriverVersionDoesNotSupportIssuedTokens)
+                        )
+                    );
             }
 
             return result;
@@ -423,14 +439,12 @@ namespace System.ServiceModel.Channels
 
                 MessagePartSpecification body = new MessagePartSpecification(true);
                 body.MakeReadOnly();
-                requirements.OutgoingSignatureParts.AddParts(
-                    body,
-                    FaultCodeConstants.Actions.Transactions
-                );
-                requirements.OutgoingEncryptionParts.AddParts(
-                    body,
-                    FaultCodeConstants.Actions.Transactions
-                );
+                requirements
+                    .OutgoingSignatureParts
+                    .AddParts(body, FaultCodeConstants.Actions.Transactions);
+                requirements
+                    .OutgoingEncryptionParts
+                    .AddParts(body, FaultCodeConstants.Actions.Transactions);
                 return requirements;
             }
             else
@@ -508,8 +522,9 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            TransactionFlowBindingElement bindingElement =
-                context.BindingElements.Find<TransactionFlowBindingElement>();
+            TransactionFlowBindingElement bindingElement = context
+                .BindingElements
+                .Find<TransactionFlowBindingElement>();
             if (bindingElement == null || !bindingElement.Transactions)
                 return;
 
@@ -518,8 +533,9 @@ namespace System.ServiceModel.Channels
 
             foreach (OperationDescription operation in context.Contract.Operations)
             {
-                TransactionFlowAttribute contextParam =
-                    operation.Behaviors.Find<TransactionFlowAttribute>();
+                TransactionFlowAttribute contextParam = operation
+                    .Behaviors
+                    .Find<TransactionFlowAttribute>();
                 TransactionFlowOption txFlowOption =
                     contextParam == null
                         ? TransactionFlowOption.NotAllowed

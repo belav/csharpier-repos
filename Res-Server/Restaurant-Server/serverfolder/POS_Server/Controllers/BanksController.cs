@@ -34,7 +34,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var banksList = entity.banks
+                    var banksList = entity
+                        .banks
                         .Select(
                             b =>
                                 new BankModel
@@ -63,7 +64,8 @@ namespace POS_Server.Controllers
                             if (banksList[i].isActive == 1)
                             {
                                 long bankId = (long)banksList[i].bankId;
-                                var operationsL = entity.cashTransfer
+                                var operationsL = entity
+                                    .cashTransfer
                                     .Where(x => x.bankId == bankId)
                                     .Select(b => new { b.cashTransId })
                                     .FirstOrDefault();
@@ -103,7 +105,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var bank = entity.banks
+                    var bank = entity
+                        .banks
                         .Where(b => b.bankId == bankId)
                         .Select(
                             b =>
@@ -186,7 +189,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpBank = entity.banks
+                            tmpBank = entity
+                                .banks
                                 .Where(p => p.bankId == newObject.bankId)
                                 .FirstOrDefault();
                             tmpBank.name = newObject.name;

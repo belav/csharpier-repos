@@ -1523,20 +1523,16 @@ public class C
             if (language == LanguageNames.CSharp)
             {
                 var tree = CSharp.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return CSharp.CSharpCompilation.Create(
-                    "Test",
-                    syntaxTrees: new[] { tree },
-                    references: references
-                );
+                return CSharp
+                    .CSharpCompilation
+                    .Create("Test", syntaxTrees: new[] { tree }, references: references);
             }
             else if (language == LanguageNames.VisualBasic)
             {
                 var tree = VisualBasic.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return VisualBasic.VisualBasicCompilation.Create(
-                    "Test",
-                    syntaxTrees: new[] { tree },
-                    references: references
-                );
+                return VisualBasic
+                    .VisualBasicCompilation
+                    .Create("Test", syntaxTrees: new[] { tree }, references: references);
             }
 
             throw new NotSupportedException();

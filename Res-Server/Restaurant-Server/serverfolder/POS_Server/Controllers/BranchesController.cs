@@ -43,7 +43,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var branchesList = entity.branches
+                    var branchesList = entity
+                        .branches
                         .Where(b => b.type == type)
                         .Select(
                             b =>
@@ -76,11 +77,13 @@ namespace POS_Server.Controllers
                             if (branchesList[i].isActive == 1)
                             {
                                 long branchId = (long)branchesList[i].branchId;
-                                var parentBrancheL = entity.branches
+                                var parentBrancheL = entity
+                                    .branches
                                     .Where(x => x.parentId == branchId)
                                     .Select(x => new { x.branchId })
                                     .FirstOrDefault();
-                                var posL = entity.pos
+                                var posL = entity
+                                    .pos
                                     .Where(x => x.branchId == branchId)
                                     .Select(b => new { b.posId })
                                     .FirstOrDefault();
@@ -111,7 +114,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var branchesList = entity.branches
+                    var branchesList = entity
+                        .branches
                         .Select(
                             b =>
                                 new BranchModel
@@ -164,7 +168,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var branchesList = entity.branches
+                        var branchesList = entity
+                            .branches
                             .Where(b => b.type == type && b.isActive == 1)
                             .Select(
                                 b =>
@@ -195,7 +200,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var branchesList = entity.branches
+                        var branchesList = entity
+                            .branches
                             .Select(
                                 b =>
                                     new BranchModel
@@ -248,7 +254,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var branch = entity.branches
+                    var branch = entity
+                        .branches
                         .Where(b => b.branchId == branchId)
                         .Select(
                             b =>
@@ -305,7 +312,8 @@ namespace POS_Server.Controllers
                     while (parentid > 0)
                     {
                         branches tempbranch = new branches();
-                        var branch = entity.branches
+                        var branch = entity
+                            .branches
                             .Where(c => c.branchId == parentid)
                             .Select(
                                 p =>
@@ -381,7 +389,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var branchesList = entity.branches
+                    var branchesList = entity
+                        .branches
                         .Where(b => (type == "all" ? true : b.type == type) && b.branchId != 1)
                         .Select(
                             b =>
@@ -413,16 +422,19 @@ namespace POS_Server.Controllers
                             if (branchesList[i].isActive == 1)
                             {
                                 long branchId = (long)branchesList[i].branchId;
-                                var parentBrancheL = entity.branches
+                                var parentBrancheL = entity
+                                    .branches
                                     .Where(x => x.parentId == branchId)
                                     .Select(x => new { x.branchId })
                                     .FirstOrDefault();
-                                var posL = entity.pos
+                                var posL = entity
+                                    .pos
                                     .Where(x => x.branchId == branchId)
                                     .Select(b => new { b.posId })
                                     .FirstOrDefault();
                                 // var locationsL = entity.locations.Where(x => x.branchId == branchId).Select(x => new { x.locationId }).FirstOrDefault();
-                                var usersL = entity.branchesUsers
+                                var usersL = entity
+                                    .branchesUsers
                                     .Where(x => x.branchId == branchId)
                                     .Select(x => new { x.branchsUsersId })
                                     .FirstOrDefault();
@@ -1039,7 +1051,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpBranch = entity.branches
+                            var tmpBranch = entity
+                                .branches
                                 .Where(p => p.branchId == newObject.branchId)
                                 .First();
                             tmpBranch.address = newObject.address;
@@ -1106,7 +1119,8 @@ namespace POS_Server.Controllers
                     {
                         try
                         {
-                            var tmpBranch = entity.branches
+                            var tmpBranch = entity
+                                .branches
                                 .Where(p => p.branchId == branchId)
                                 .First();
                             tmpBranch.isActive = 0;
@@ -1126,7 +1140,8 @@ namespace POS_Server.Controllers
                         long dbbranchId = 0;
                         bool isdel = true;
 
-                        var res = entity.branches
+                        var res = entity
+                            .branches
                             .Where(x => x.parentId == branchId)
                             .Select(x => new { x.branchId })
                             .FirstOrDefault();
@@ -1136,7 +1151,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var res1 = entity.Inventory
+                            var res1 = entity
+                                .Inventory
                                 .Where(x => x.branchId == branchId)
                                 .Select(x => new { x.branchId })
                                 .FirstOrDefault();
@@ -1147,7 +1163,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                res1 = entity.invoices
+                                res1 = entity
+                                    .invoices
                                     .Where(x => x.branchId == branchId)
                                     .Select(x => new { x.branchId })
                                     .FirstOrDefault();
@@ -1158,7 +1175,8 @@ namespace POS_Server.Controllers
                                 }
                                 else
                                 {
-                                    var res3 = entity.invoices
+                                    var res3 = entity
+                                        .invoices
                                         .Where(x => x.branchCreatorId == branchId)
                                         .Select(x => new { x.branchCreatorId })
                                         .FirstOrDefault();
@@ -1168,7 +1186,8 @@ namespace POS_Server.Controllers
                                     }
                                     else
                                     {
-                                        res1 = entity.pos
+                                        res1 = entity
+                                            .pos
                                             .Where(x => x.branchId == branchId)
                                             .Select(x => new { x.branchId })
                                             .FirstOrDefault();
@@ -1217,47 +1236,47 @@ namespace POS_Server.Controllers
                                                     // res1 = entity.sysEmails.Where
 
 
-                                                    var tmploc = entity.locations.Where(
-                                                        p => p.branchId == branchId
-                                                    );
+                                                    var tmploc = entity
+                                                        .locations
+                                                        .Where(p => p.branchId == branchId);
                                                     entity.locations.RemoveRange(tmploc);
                                                     message = entity.SaveChanges().ToString();
 
-                                                    var tmpsections = entity.sections.Where(
-                                                        p => p.branchId == branchId
-                                                    );
+                                                    var tmpsections = entity
+                                                        .sections
+                                                        .Where(p => p.branchId == branchId);
 
                                                     entity.sections.RemoveRange(tmpsections);
                                                     message = entity.SaveChanges().ToString();
 
-                                                    var tmpbranchesUsers =
-                                                        entity.branchesUsers.Where(
-                                                            p => p.branchId == branchId
-                                                        );
-                                                    entity.branchesUsers.RemoveRange(
-                                                        tmpbranchesUsers
-                                                    );
+                                                    var tmpbranchesUsers = entity
+                                                        .branchesUsers
+                                                        .Where(p => p.branchId == branchId);
+                                                    entity
+                                                        .branchesUsers
+                                                        .RemoveRange(tmpbranchesUsers);
                                                     message = entity.SaveChanges().ToString();
 
-                                                    var tmpbranchStore = entity.branchStore.Where(
-                                                        p => p.branchId == branchId
-                                                    );
+                                                    var tmpbranchStore = entity
+                                                        .branchStore
+                                                        .Where(p => p.branchId == branchId);
                                                     entity.branchStore.RemoveRange(tmpbranchStore);
                                                     message = entity.SaveChanges().ToString();
 
-                                                    var tmpbranchStore1 = entity.branchStore.Where(
-                                                        p => p.storeId == branchId
-                                                    );
+                                                    var tmpbranchStore1 = entity
+                                                        .branchStore
+                                                        .Where(p => p.storeId == branchId);
                                                     entity.branchStore.RemoveRange(tmpbranchStore1);
                                                     message = entity.SaveChanges().ToString();
 
-                                                    var tmpsysEmails = entity.sysEmails.Where(
-                                                        p => p.branchId == branchId
-                                                    );
+                                                    var tmpsysEmails = entity
+                                                        .sysEmails
+                                                        .Where(p => p.branchId == branchId);
                                                     entity.sysEmails.RemoveRange(tmpsysEmails);
                                                     message = entity.SaveChanges().ToString();
 
-                                                    var tmpBranch = entity.branches
+                                                    var tmpBranch = entity
+                                                        .branches
                                                         .Where(p => p.branchId == branchId)
                                                         .First();
                                                     entity.branches.Remove(tmpBranch);
@@ -1279,7 +1298,8 @@ namespace POS_Server.Controllers
                         {
                             try
                             {
-                                var tmpBranch = entity.branches
+                                var tmpBranch = entity
+                                    .branches
                                     .Where(p => p.branchId == branchId)
                                     .First();
                                 tmpBranch.isActive = 0;
@@ -1321,7 +1341,8 @@ namespace POS_Server.Controllers
         {
             using (incposdbEntities entity = new incposdbEntities())
             { // get all sub categories of categoryId
-                List<branches> branchList = entity.branches
+                List<branches> branchList = entity
+                    .branches
                     .ToList()
                     .Select(
                         p =>
@@ -1345,7 +1366,8 @@ namespace POS_Server.Controllers
                     catIdlist.Add(r.branchId);
                 }
 
-                List<branches> branchListR = entity.branches
+                List<branches> branchListR = entity
+                    .branches
                     .Where(U => catIdlist.Contains(U.branchId))
                     .ToList();
                 List<BranchModel> branchListreturn = branchListR
@@ -1414,7 +1436,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var tmpSection = entity.sections
+                        var tmpSection = entity
+                            .sections
                             .Where(p => p.sectionId == newObject.sectionId)
                             .FirstOrDefault();
                         tmpSection.name = newObject.name;
@@ -1517,7 +1540,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var tmpLocation = entity.locations
+                        var tmpLocation = entity
+                            .locations
                             .Where(p => p.locationId == newObject.locationId)
                             .FirstOrDefault();
                         tmpLocation.x = newObject.x;
@@ -1619,7 +1643,8 @@ namespace POS_Server.Controllers
                     long dbbranchId = 0;
                     bool isdel = true;
 
-                    var res = entity.branches
+                    var res = entity
+                        .branches
                         .Where(x => x.parentId == branchId)
                         .Select(x => new { x.branchId })
                         .FirstOrDefault();
@@ -1629,7 +1654,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var res1 = entity.Inventory
+                        var res1 = entity
+                            .Inventory
                             .Where(x => x.branchId == branchId)
                             .Select(x => new { x.branchId })
                             .FirstOrDefault();
@@ -1640,7 +1666,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            res1 = entity.invoices
+                            res1 = entity
+                                .invoices
                                 .Where(x => x.branchId == branchId)
                                 .Select(x => new { x.branchId })
                                 .FirstOrDefault();
@@ -1651,7 +1678,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var res3 = entity.invoices
+                                var res3 = entity
+                                    .invoices
                                     .Where(x => x.branchCreatorId == branchId)
                                     .Select(x => new { x.branchCreatorId })
                                     .FirstOrDefault();
@@ -1661,7 +1689,8 @@ namespace POS_Server.Controllers
                                 }
                                 else
                                 {
-                                    res1 = entity.pos
+                                    res1 = entity
+                                        .pos
                                         .Where(x => x.branchId == branchId)
                                         .Select(x => new { x.branchId })
                                         .FirstOrDefault();
@@ -1694,44 +1723,45 @@ namespace POS_Server.Controllers
                                             // delete
                                             try
                                             {
-                                                var tmploc = entity.locations.Where(
-                                                    p => p.branchId == branchId
-                                                );
+                                                var tmploc = entity
+                                                    .locations
+                                                    .Where(p => p.branchId == branchId);
                                                 entity.locations.RemoveRange(tmploc);
                                                 message = entity.SaveChanges();
 
-                                                var tmpsections = entity.sections.Where(
-                                                    p => p.branchId == branchId
-                                                );
+                                                var tmpsections = entity
+                                                    .sections
+                                                    .Where(p => p.branchId == branchId);
 
                                                 entity.sections.RemoveRange(tmpsections);
                                                 message = entity.SaveChanges();
 
-                                                var tmpbranchesUsers = entity.branchesUsers.Where(
-                                                    p => p.branchId == branchId
-                                                );
+                                                var tmpbranchesUsers = entity
+                                                    .branchesUsers
+                                                    .Where(p => p.branchId == branchId);
                                                 entity.branchesUsers.RemoveRange(tmpbranchesUsers);
                                                 message = entity.SaveChanges();
 
-                                                var tmpbranchStore = entity.branchStore.Where(
-                                                    p => p.branchId == branchId
-                                                );
+                                                var tmpbranchStore = entity
+                                                    .branchStore
+                                                    .Where(p => p.branchId == branchId);
                                                 entity.branchStore.RemoveRange(tmpbranchStore);
                                                 message = entity.SaveChanges();
 
-                                                var tmpbranchStore1 = entity.branchStore.Where(
-                                                    p => p.storeId == branchId
-                                                );
+                                                var tmpbranchStore1 = entity
+                                                    .branchStore
+                                                    .Where(p => p.storeId == branchId);
                                                 entity.branchStore.RemoveRange(tmpbranchStore1);
                                                 message = entity.SaveChanges();
 
-                                                var tmpsysEmails = entity.sysEmails.Where(
-                                                    p => p.branchId == branchId
-                                                );
+                                                var tmpsysEmails = entity
+                                                    .sysEmails
+                                                    .Where(p => p.branchId == branchId);
                                                 entity.sysEmails.RemoveRange(tmpsysEmails);
                                                 message = entity.SaveChanges();
 
-                                                var tmpBranch = entity.branches
+                                                var tmpBranch = entity
+                                                    .branches
                                                     .Where(p => p.branchId == branchId)
                                                     .First();
                                                 entity.branches.Remove(tmpBranch);

@@ -288,7 +288,8 @@ namespace ILLink.RoslynAnalyzer.Tests
                 string argName;
                 if (argument.NameEquals != null)
                 {
-                    argName = argument.NameEquals
+                    argName = argument
+                        .NameEquals
                         .ChildNodes()
                         .OfType<IdentifierNameSyntax>()
                         .First()

@@ -342,13 +342,15 @@ public class HardwareEh
         long misAlignedField = 0;
         MyStruct m;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest"
-                + id
-                + ": "
-                + (getter ? "Get" : "Set")
-                + " misaligned field expect DataMisalignment Exception (IA64 only)"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario(
+                "PosTest"
+                    + id
+                    + ": "
+                    + (getter ? "Get" : "Set")
+                    + " misaligned field expect DataMisalignment Exception (IA64 only)"
+            );
 
         try
         {
@@ -375,10 +377,12 @@ public class HardwareEh
 
             if (c_VALUE != misAlignedField)
             {
-                TestLibrary.TestFramework.LogError(
-                    "001",
-                    "Incorrect value: Expected(" + c_VALUE + ") Actual(" + misAlignedField + ")"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogError(
+                        "001",
+                        "Incorrect value: Expected(" + c_VALUE + ") Actual(" + misAlignedField + ")"
+                    );
                 retVal = false;
             }
         }
@@ -387,9 +391,9 @@ public class HardwareEh
             // expected on IA64
             if (IsIA64())
             {
-                TestLibrary.TestFramework.LogInformation(
-                    "Catch DataMisalignedException as expected"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation("Catch DataMisalignedException as expected");
             }
             else
             {

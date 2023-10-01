@@ -132,9 +132,11 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                    );
             }
             if (null == from)
             {
@@ -195,15 +197,17 @@ namespace System.ServiceModel.Configuration
                 Type type = System.Type.GetType(this.CustomCertificateValidatorType, true);
                 if (!typeof(X509CertificateValidator).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidCertificateValidatorType,
-                                this.CustomCertificateValidatorType,
-                                typeof(X509CertificateValidator).ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidCertificateValidatorType,
+                                    this.CustomCertificateValidatorType,
+                                    typeof(X509CertificateValidator).ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 issuedToken.CustomCertificateValidator = (X509CertificateValidator)
                     Activator.CreateInstance(type);
@@ -213,15 +217,17 @@ namespace System.ServiceModel.Configuration
                 Type type = System.Type.GetType(this.SamlSerializerType, true);
                 if (!typeof(SamlSerializer).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidSamlSerializerType,
-                                this.SamlSerializerType,
-                                typeof(SamlSerializer).ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidSamlSerializerType,
+                                    this.SamlSerializerType,
+                                    typeof(SamlSerializer).ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 issuedToken.SamlSerializer = (SamlSerializer)Activator.CreateInstance(type);
             }
@@ -233,15 +239,17 @@ namespace System.ServiceModel.Configuration
             {
                 foreach (X509CertificateTrustedIssuerElement src in this.KnownCertificates)
                 {
-                    issuedToken.KnownCertificates.Add(
-                        SecurityUtils.GetCertificateFromStore(
-                            src.StoreName,
-                            src.StoreLocation,
-                            src.X509FindType,
-                            src.FindValue,
-                            null
-                        )
-                    );
+                    issuedToken
+                        .KnownCertificates
+                        .Add(
+                            SecurityUtils.GetCertificateFromStore(
+                                src.StoreName,
+                                src.StoreLocation,
+                                src.X509FindType,
+                                src.FindValue,
+                                null
+                            )
+                        );
                 }
             }
 

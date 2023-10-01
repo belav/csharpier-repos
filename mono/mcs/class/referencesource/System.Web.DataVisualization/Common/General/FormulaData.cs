@@ -392,7 +392,8 @@ namespace System.Web.UI.DataVisualization.Charting
             for (int module = 0; module < Common.FormulaRegistry.Count; module++)
             {
                 moduleName = Common.FormulaRegistry.GetModuleName(module);
-                Common.FormulaRegistry
+                Common
+                    .FormulaRegistry
                     .GetFormulaModule(moduleName)
                     .Formula(
                         formulaName,
@@ -449,15 +450,18 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         // get the last xValue: the formula processing is
                         double topXValue = series.Points[series.Points.Count - 1].XValue;
-                        this.Common.Chart.DataManipulator.InsertEmptyPoints(
-                            1,
-                            IntervalType.Number,
-                            0,
-                            IntervalType.Number,
-                            1,
-                            topXValue,
-                            series
-                        );
+                        this.Common
+                            .Chart
+                            .DataManipulator
+                            .InsertEmptyPoints(
+                                1,
+                                IntervalType.Number,
+                                0,
+                                IntervalType.Number,
+                                1,
+                                topXValue,
+                                series
+                            );
                         foreach (DataPoint point in series.Points)
                         {
                             point.XValue = 0;

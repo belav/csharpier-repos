@@ -185,9 +185,9 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             // options if the type is a ref struct.
             if (!containingType.IsRefLikeType)
             {
-                var equatableTypeOpt = semanticModel.Compilation.GetTypeByMetadataName(
-                    typeof(IEquatable<>).FullName!
-                );
+                var equatableTypeOpt = semanticModel
+                    .Compilation
+                    .GetTypeByMetadataName(typeof(IEquatable<>).FullName!);
                 if (equatableTypeOpt != null)
                 {
                     constructedType = equatableTypeOpt.Construct(containingType);
@@ -424,8 +424,11 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
             if (CanImplementIEquatable(semanticModel, containingType, out var equatableTypeOpt))
             {
-                var globalOptions =
-                    document.Project.Solution.Services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
+                var globalOptions = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
                 var value =
                     globalOptions.GetGenerateEqualsAndGetHashCodeFromMembersImplementIEquatable(
                         document.Project.Language
@@ -449,8 +452,11 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
             if (!HasOperators(containingType))
             {
-                var globalOptions =
-                    document.Project.Solution.Services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
+                var globalOptions = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
                 var value =
                     globalOptions.GetGenerateEqualsAndGetHashCodeFromMembersGenerateOperators(
                         document.Project.Language

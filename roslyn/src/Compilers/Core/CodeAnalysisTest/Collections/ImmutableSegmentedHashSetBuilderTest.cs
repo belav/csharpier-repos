@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableSegmentedHashSet<int>.Empty
+            var builder = ImmutableSegmentedHashSet<int>
+                .Empty
                 .Union(Enumerable.Range(1, 10))
                 .ToBuilder();
             CollectionAssertAreEquivalent(Enumerable.Range(1, 10).ToArray(), builder.ToArray());

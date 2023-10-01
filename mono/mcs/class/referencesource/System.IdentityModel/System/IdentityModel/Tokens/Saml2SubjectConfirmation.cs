@@ -40,10 +40,9 @@ namespace System.IdentityModel.Tokens
 
             if (!method.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "method",
-                    SR.GetString(SR.ID0013)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("method", SR.GetString(SR.ID0013));
             }
 
             this.method = method;
@@ -66,10 +65,9 @@ namespace System.IdentityModel.Tokens
 
                 if (!value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        "value",
-                        SR.GetString(SR.ID0013)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument("value", SR.GetString(SR.ID0013));
                 }
 
                 this.method = value;

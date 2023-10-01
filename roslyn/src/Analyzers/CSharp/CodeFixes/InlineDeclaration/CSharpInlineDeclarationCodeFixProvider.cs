@@ -482,10 +482,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 );
 
                 if (
-                    !SymbolEquivalenceComparer.Instance.Equals(
-                        previousSymbol,
-                        updatedSymbolInfo.Symbol
-                    )
+                    !SymbolEquivalenceComparer
+                        .Instance
+                        .Equals(previousSymbol, updatedSymbolInfo.Symbol)
                 )
                 {
                     // We're pointing at a new symbol now.  Semantic have changed.

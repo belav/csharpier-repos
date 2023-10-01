@@ -43,8 +43,10 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SearchQuery searchQuery
             )
             {
-                var service =
-                    _project.Solution.Services.GetRequiredService<ISymbolTreeInfoCacheService>();
+                var service = _project
+                    .Solution
+                    .Services
+                    .GetRequiredService<ISymbolTreeInfoCacheService>();
                 var info = await service
                     .TryGetPotentiallyStaleSourceSymbolTreeInfoAsync(_project, CancellationToken)
                     .ConfigureAwait(false);

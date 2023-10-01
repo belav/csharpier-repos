@@ -84,10 +84,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
 </Workspace>";
 
             using var workspace = TestWorkspace.Create(workspaceXml);
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
             var spans = (
                 await TestDiagnosticTagProducer<
@@ -131,16 +130,17 @@ class Program
             );
             var language = workspace.Projects.Single().Language;
 
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
-            workspace.GlobalOptions.SetGlobalOption(
-                CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
-                language,
-                new CodeStyleOption2<bool>(value: true, notification: NotificationOption2.Error)
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    language,
+                    new CodeStyleOption2<bool>(value: true, notification: NotificationOption2.Error)
+                );
 
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
             {
@@ -159,7 +159,8 @@ class Program
                 IErrorTag
             >.GetDiagnosticsAndErrorSpans(workspace, analyzerMap);
 
-            var spans = diagnosticsAndSpans.Item1
+            var spans = diagnosticsAndSpans
+                .Item1
                 .Zip(diagnosticsAndSpans.Item2, (diagnostic, span) => (diagnostic, span))
                 .OrderBy(s => s.span.Span.Span.Start)
                 .ToImmutableArray();
@@ -176,12 +177,14 @@ class Program
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0005",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri(
-                                "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
-                                UriKind.Absolute
-                            )
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri(
+                                    "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
+                                    UriKind.Absolute
+                                )
+                            ),
                         "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -204,12 +207,14 @@ class Program
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0005",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri(
-                                "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
-                                UriKind.Absolute
-                            )
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri(
+                                    "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
+                                    UriKind.Absolute
+                                )
+                            ),
                         "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -232,9 +237,11 @@ class Program
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "id",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri("https://github.com/dotnet/roslyn", UriKind.Absolute)
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri("https://github.com/dotnet/roslyn", UriKind.Absolute)
+                            ),
                         "https://github.com/dotnet/roslyn"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -254,12 +261,14 @@ class Program
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "IDE0049",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri(
-                                "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049",
-                                UriKind.Absolute
-                            )
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri(
+                                    "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049",
+                                    UriKind.Absolute
+                                )
+                            ),
                         "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -292,10 +301,9 @@ class Program
                 composition: SquiggleUtilities.CompositionWithSolutionCrawler
             );
 
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
             var spans = await TestDiagnosticTagProducer<
                 DiagnosticsSquiggleTaggerProvider,
@@ -314,12 +322,14 @@ class Program
                     new ClassifiedTextRun(
                         ClassificationTypeNames.Text,
                         "CS0246",
-                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
-                            new Uri(
-                                "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)",
-                                UriKind.Absolute
-                            )
-                        ),
+                        QuickInfoHyperLink
+                            .TestAccessor
+                            .CreateNavigationAction(
+                                new Uri(
+                                    "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)",
+                                    UriKind.Absolute
+                                )
+                            ),
                         "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)"
                     ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
@@ -335,10 +345,9 @@ class Program
         public async Task TestNoErrorsAfterDocumentRemoved(bool pull)
         {
             using var workspace = TestWorkspace.CreateCSharp("class");
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
             using var wrapper = new DiagnosticTaggerWrapper<
                 DiagnosticsSquiggleTaggerProvider,
@@ -346,9 +355,9 @@ class Program
             >(workspace);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
-                firstDocument.GetTextBuffer()
-            );
+            var tagger = wrapper
+                .TaggerProvider
+                .CreateTagger<IErrorTag>(firstDocument.GetTextBuffer());
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
 
@@ -373,10 +382,9 @@ class Program
         public async Task TestNoErrorsAfterProjectRemoved(bool pull)
         {
             using var workspace = TestWorkspace.CreateCSharp("class");
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
             using var wrapper = new DiagnosticTaggerWrapper<
                 DiagnosticsSquiggleTaggerProvider,
@@ -384,9 +392,9 @@ class Program
             >(workspace);
 
             var firstDocument = workspace.Documents.First();
-            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
-                firstDocument.GetTextBuffer()
-            );
+            var tagger = wrapper
+                .TaggerProvider
+                .CreateTagger<IErrorTag>(firstDocument.GetTextBuffer());
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
 
@@ -408,10 +416,10 @@ class Program
             Assert.True(spans.Count == 0);
         }
 
-        private static readonly TestComposition s_mockComposition =
-            EditorTestCompositions.EditorFeatures
-                .AddExcludedPartTypes(typeof(IDiagnosticAnalyzerService))
-                .AddParts(typeof(MockDiagnosticAnalyzerService));
+        private static readonly TestComposition s_mockComposition = EditorTestCompositions
+            .EditorFeatures
+            .AddExcludedPartTypes(typeof(IDiagnosticAnalyzerService))
+            .AddParts(typeof(MockDiagnosticAnalyzerService));
 
         [WpfTheory, CombinatorialData]
         public async Task BuildErrorZeroLengthSpan(bool pull)
@@ -431,10 +439,9 @@ class Program
                 workspaceXml,
                 composition: s_mockComposition
             );
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
             var document = workspace.Documents.First();
 
@@ -496,10 +503,9 @@ class Program
                 workspaceXml,
                 composition: s_mockComposition
             );
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
             var document = workspace.Documents.First();
 
@@ -568,10 +574,9 @@ class Program
             bool pull
         )
         {
-            workspace.GlobalOptions.SetGlobalOption(
-                DiagnosticTaggingOptions.PullDiagnosticTagging,
-                pull
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticTaggingOptions.PullDiagnosticTagging, pull);
 
             return (
                 await TestDiagnosticTagProducer<

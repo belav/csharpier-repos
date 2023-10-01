@@ -169,7 +169,9 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                 entry.SharedIdentityEntry == null
                     ? entry.EntityState
                     : entry.SharedIdentityEntry.EntityType == entry.EntityType
-                    || entry.SharedIdentityEntry.EntityType
+                    || entry
+                        .SharedIdentityEntry
+                        .EntityType
                         .GetTableMappings()
                         .Any(m => m.Table.Name == TableName && m.Table.Schema == Schema)
                         ? EntityState.Modified
@@ -361,18 +363,21 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                 var finalUpdatePathElement = updateInfo.Path.Last();
                 var navigation = finalUpdatePathElement.Navigation;
 
-                var jsonColumnTypeMapping =
-                    navigation.TargetEntityType.GetContainerColumnTypeMapping()!;
-                var navigationValue = finalUpdatePathElement.ParentEntry.GetCurrentValue(
-                    navigation
-                );
+                var jsonColumnTypeMapping = navigation
+                    .TargetEntityType
+                    .GetContainerColumnTypeMapping()!;
+                var navigationValue = finalUpdatePathElement
+                    .ParentEntry
+                    .GetCurrentValue(navigation);
 
                 var json = default(JsonNode?);
                 var jsonPathString = string.Join(
                     ".",
-                    updateInfo.Path.Select(
-                        x => x.PropertyName + (x.Ordinal != null ? "[" + x.Ordinal + "]" : "")
-                    )
+                    updateInfo
+                        .Path
+                        .Select(
+                            x => x.PropertyName + (x.Ordinal != null ? "[" + x.Ordinal + "]" : "")
+                        )
                 );
 
                 if (updateInfo.Property != null)
@@ -667,9 +672,9 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                     {
                         if (columnPropagator.ColumnModification != null)
                         {
-                            columnPropagator.ColumnModification.AddSharedColumnModification(
-                                columnModification
-                            );
+                            columnPropagator
+                                .ColumnModification
+                                .AddSharedColumnModification(columnModification);
 
                             return;
                         }
@@ -718,10 +723,9 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                 currentOwnership = currentEntry.EntityType.FindOwnership()!;
                 var previousEntry = currentEntry;
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                currentEntry = ((InternalEntityEntry)currentEntry).StateManager.FindPrincipal(
-                    (InternalEntityEntry)currentEntry,
-                    currentOwnership
-                )!;
+                currentEntry = ((InternalEntityEntry)currentEntry)
+                    .StateManager
+                    .FindPrincipal((InternalEntityEntry)currentEntry, currentOwnership)!;
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
                 if (processedEntries.Contains(currentEntry))
@@ -736,7 +740,8 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                     && previousEntry.EntityState != EntityState.Deleted
                 )
                 {
-                    var ordinalProperty = previousEntry.EntityType
+                    var ordinalProperty = previousEntry
+                        .EntityType
                         .FindPrimaryKey()!
                         .Properties
                         .Last();
@@ -852,10 +857,9 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
 
 #pragma warning disable EF1001 // Internal EF Core API usage.
         var entry = (IUpdateEntry)
-            ((InternalEntityEntry)parentEntry).StateManager.TryGetEntry(
-                navigationValue,
-                entityType
-            )!;
+            ((InternalEntityEntry)parentEntry)
+                .StateManager
+                .TryGetEntry(navigationValue, entityType)!;
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         var jsonNode = new JsonObject();
@@ -1034,11 +1038,9 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                 "No property when propagating results to a readable column modification"
             );
 
-            columnModification.Value = columnModification.Property.GetReaderFieldValue(
-                relationalReader,
-                readerIndex,
-                _detailedErrorsEnabled
-            );
+            columnModification.Value = columnModification
+                .Property
+                .GetReaderFieldValue(relationalReader, readerIndex, _detailedErrorsEnabled);
         }
     }
 
@@ -1121,10 +1123,10 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                     break;
                 case EntityState.Added:
                     _currentValue = entry.GetCurrentProviderValue(property);
-                    _write = !mapping.Column.ProviderValueComparer.Equals(
-                        _originalValue,
-                        _currentValue
-                    );
+                    _write = !mapping
+                        .Column
+                        .ProviderValueComparer
+                        .Equals(_originalValue, _currentValue);
 
                     break;
                 case EntityState.Deleted:
@@ -1149,10 +1151,10 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
                     || (entry.EntityState == EntityState.Modified && !entry.IsModified(property))
                     || (
                         entry.EntityState == EntityState.Added
-                        && mapping.Column.ProviderValueComparer.Equals(
-                            _originalValue,
-                            entry.GetCurrentProviderValue(property)
-                        )
+                        && mapping
+                            .Column
+                            .ProviderValueComparer
+                            .Equals(_originalValue, entry.GetCurrentProviderValue(property))
                     )
                 )
             )

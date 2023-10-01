@@ -33,9 +33,9 @@ namespace System.Net.WebSockets.Client.Tests
             {
                 yield return Throw(
                     options =>
-                        options.ClientCertificates.Add(
-                            Test.Common.Configuration.Certificates.GetClientCertificate()
-                        )
+                        options
+                            .ClientCertificates
+                            .Add(Test.Common.Configuration.Certificates.GetClientCertificate())
                 );
             }
 
@@ -425,10 +425,12 @@ namespace System.Net.WebSockets.Client.Tests
                     using (var clientSocket = new ClientWebSocket())
                     using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
                     {
-                        clientSocket.Options.SetRequestHeader(
-                            "Authorization",
-                            "AWS4-HMAC-SHA256 Credential=PLACEHOLDER /20190301/us-east-2/neptune-db/aws4_request, SignedHeaders=host;x-amz-date, Signature=b8155de54d9faab00000000000000000000000000a07e0d7dda49902e4d9202"
-                        );
+                        clientSocket
+                            .Options
+                            .SetRequestHeader(
+                                "Authorization",
+                                "AWS4-HMAC-SHA256 Credential=PLACEHOLDER /20190301/us-east-2/neptune-db/aws4_request, SignedHeaders=host;x-amz-date, Signature=b8155de54d9faab00000000000000000000000000a07e0d7dda49902e4d9202"
+                            );
                         await ConnectAsync(clientSocket, uri, cts.Token);
                     }
                 },

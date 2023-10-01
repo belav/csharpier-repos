@@ -1414,10 +1414,9 @@ class Program
 
         private static bool HaveMatchingSignatures(IMethodSymbol methodA, IMethodSymbol methodB)
         {
-            return MemberSignatureComparer.MethodGroupSignatureComparer.Equals(
-                methodA.GetSymbol<MethodSymbol>(),
-                methodB.GetSymbol<MethodSymbol>()
-            );
+            return MemberSignatureComparer
+                .MethodGroupSignatureComparer
+                .Equals(methodA.GetSymbol<MethodSymbol>(), methodB.GetSymbol<MethodSymbol>());
         }
 
         public static IEnumerable<object?[]> GetExpressionData()

@@ -263,9 +263,9 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state.segments.Add(
-                            state.inputMemory.Slice(state.prevat, match.Index - state.prevat)
-                        );
+                        state
+                            .segments
+                            .Add(state.inputMemory.Slice(state.prevat, match.Index - state.prevat));
                         state.prevat = match.Index + match.Length;
                         state.thisRef.ReplacementImpl(ref state.segments, match);
                         return --state.count != 0;
@@ -302,12 +302,16 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state.segments.Add(
-                            state.inputMemory.Slice(
-                                match.Index + match.Length,
-                                state.prevat - match.Index - match.Length
-                            )
-                        );
+                        state
+                            .segments
+                            .Add(
+                                state
+                                    .inputMemory
+                                    .Slice(
+                                        match.Index + match.Length,
+                                        state.prevat - match.Index - match.Length
+                                    )
+                            );
                         state.prevat = match.Index;
                         state.thisRef.ReplacementImplRTL(ref state.segments, match);
                         return --state.count != 0;

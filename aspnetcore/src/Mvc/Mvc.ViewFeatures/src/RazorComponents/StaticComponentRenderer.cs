@@ -35,9 +35,9 @@ internal sealed class StaticComponentRenderer
         ComponentRenderedText result = default;
         try
         {
-            result = await _renderer.Dispatcher.InvokeAsync(
-                () => _renderer.RenderComponentAsync(componentType, parameters)
-            );
+            result = await _renderer
+                .Dispatcher
+                .InvokeAsync(() => _renderer.RenderComponentAsync(componentType, parameters));
         }
         catch (NavigationException navigationException)
         {
@@ -98,8 +98,9 @@ internal sealed class StaticComponentRenderer
 
             // It's important that this is initialized since a component might try to restore state during prerendering
             // (which will obviously not work, but should not fail)
-            var componentApplicationLifetime =
-                httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+            var componentApplicationLifetime = httpContext
+                .RequestServices
+                .GetRequiredService<ComponentStatePersistenceManager>();
             await componentApplicationLifetime.RestoreStateAsync(
                 new PrerenderComponentApplicationStore()
             );

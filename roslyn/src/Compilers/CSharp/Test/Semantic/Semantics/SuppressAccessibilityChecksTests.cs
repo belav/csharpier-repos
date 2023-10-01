@@ -56,7 +56,8 @@ class B
         public void TestAccessPrivateMemberOfInternalType()
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
-            var invocation = semanticModel.SyntaxTree
+            var invocation = semanticModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -84,7 +85,8 @@ class B
         public void TestAccessChecksInSpeculativeExpression()
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
-            var invocation = semanticModel.SyntaxTree
+            var invocation = semanticModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -121,7 +123,8 @@ class B
         public void TestAccessChecksInSpeculativeSemanticModel()
         {
             var semanticModel = GetSemanticModelWithIgnoreAccessibility();
-            var invocation = semanticModel.SyntaxTree
+            var invocation = semanticModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
@@ -321,7 +324,8 @@ class C : R
             Assert.True(success);
             Assert.NotNull(speculativeModel);
 
-            var p = speculativeModel.SyntaxTree
+            var p = speculativeModel
+                .SyntaxTree
                 .GetRoot()
                 .DescendantNodes()
                 .OfType<IdentifierNameSyntax>()

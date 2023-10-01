@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var (title, key) = context.Diagnostics
+            var (title, key) = context
+                .Diagnostics
                 .First()
                 .Properties
                 .ContainsKey(UseConditionalExpressionHelpers.CanSimplifyName)

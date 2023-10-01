@@ -147,11 +147,11 @@ namespace MonoTests.System.Data.OleDb
                 {
 #if DAAB
 
-                    rdr =
-                        Microsoft.ApplicationBlocks.Data.PostgresOleDbHelper.OLEDB4ODBCExecuteReader(
-                            cmd,
-                            true
-                        );
+                    rdr = Microsoft
+                        .ApplicationBlocks
+                        .Data
+                        .PostgresOleDbHelper
+                        .OLEDB4ODBCExecuteReader(cmd, true);
 #endif
                 }
                 else

@@ -128,11 +128,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 FeaturesResources.Introduce_constant
                 + '|'
                 + string.Format(FeaturesResources.Introduce_constant_for_0, "1");
-            var introduceConstant = topLevelAction.Children.FirstOrDefault(
-                r =>
-                    ((JObject)r.Data).ToObject<CodeActionResolveData>().UniqueIdentifier
-                    == expectedChildActionTitle
-            );
+            var introduceConstant = topLevelAction
+                .Children
+                .FirstOrDefault(
+                    r =>
+                        ((JObject)r.Data).ToObject<CodeActionResolveData>().UniqueIdentifier
+                        == expectedChildActionTitle
+                );
 
             AssertJsonEquals(expected, introduceConstant);
         }
@@ -213,9 +215,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             var changedSourceText = currentDocText.WithChanges(
                 new TextChange(new TextSpan(0, 0), "class D { } \n")
             );
-            testLspServer.TestWorkspace.TryApplyChanges(
-                document.WithText(changedSourceText).Project.Solution
-            );
+            testLspServer
+                .TestWorkspace
+                .TryApplyChanges(document.WithText(changedSourceText).Project.Solution);
 
             var docId = testLspServer.TestWorkspace.Documents.First().Id;
             await testLspServer.TestWorkspace.ChangeDocumentAsync(docId, changedSourceText);

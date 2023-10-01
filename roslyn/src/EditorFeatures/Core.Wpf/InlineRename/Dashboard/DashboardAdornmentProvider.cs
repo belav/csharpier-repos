@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         {
             // Do we still have any buffers alive?
             if (
-                textView.BufferGraph
+                textView
+                    .BufferGraph
                     .GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType))
                     .Any()
             )
@@ -87,10 +88,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
 
             if (
-                textView.Properties.TryGetProperty(
-                    typeof(DashboardAdornmentManager),
-                    out DashboardAdornmentManager manager
-                )
+                textView
+                    .Properties
+                    .TryGetProperty(
+                        typeof(DashboardAdornmentManager),
+                        out DashboardAdornmentManager manager
+                    )
             )
             {
                 manager.Dispose();

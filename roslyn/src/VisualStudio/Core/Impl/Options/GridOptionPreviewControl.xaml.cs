@@ -117,7 +117,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         {
             this.ViewModel = _createViewModel(OptionStore, _serviceProvider);
 
-            var firstItem = this.ViewModel.CodeStyleItems
+            var firstItem = this.ViewModel
+                .CodeStyleItems
                 .OfType<AbstractCodeStyleOptionViewModel>()
                 .First();
             this.ViewModel.SetOptionAndUpdatePreview(

@@ -31,7 +31,8 @@ public class SqliteAnnotationProvider : RelationalAnnotationProvider
     public override IEnumerable<IAnnotation> For(IRelationalModel model, bool designTime)
     {
         if (
-            model.Tables
+            model
+                .Tables
                 .SelectMany(t => t.Columns)
                 .Any(c => SqliteTypeMappingSource.IsSpatialiteType(c.StoreType))
         )

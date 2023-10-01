@@ -388,9 +388,9 @@ namespace System.Windows.Forms
                 : ToolStripRenderer.CreateDisabledImage(draw_image);
 
             // Draw our background
-            this.Owner.Renderer.DrawMenuItemBackground(
-                new ToolStripItemRenderEventArgs(e.Graphics, this)
-            );
+            this.Owner
+                .Renderer
+                .DrawMenuItemBackground(new ToolStripItemRenderEventArgs(e.Graphics, this));
 
             // Figure out where our text and image go
             Rectangle text_layout_rect;
@@ -424,26 +424,30 @@ namespace System.Windows.Forms
                 }
 
                 if (this.Checked && this.ShowMargin)
-                    this.Owner.Renderer.DrawItemCheck(
-                        new ToolStripItemImageRenderEventArgs(
-                            e.Graphics,
-                            this,
-                            new Rectangle(2, 1, 19, 19)
-                        )
-                    );
+                    this.Owner
+                        .Renderer
+                        .DrawItemCheck(
+                            new ToolStripItemImageRenderEventArgs(
+                                e.Graphics,
+                                this,
+                                new Rectangle(2, 1, 19, 19)
+                            )
+                        );
             }
             if (text_layout_rect != Rectangle.Empty)
-                this.Owner.Renderer.DrawItemText(
-                    new ToolStripItemTextRenderEventArgs(
-                        e.Graphics,
-                        this,
-                        this.Text,
-                        text_layout_rect,
-                        font_color,
-                        this.Font,
-                        this.TextAlign
-                    )
-                );
+                this.Owner
+                    .Renderer
+                    .DrawItemText(
+                        new ToolStripItemTextRenderEventArgs(
+                            e.Graphics,
+                            this,
+                            this.Text,
+                            text_layout_rect,
+                            font_color,
+                            this.Font,
+                            this.TextAlign
+                        )
+                    );
 
             string key_string = GetShortcutDisplayString();
 
@@ -457,39 +461,45 @@ namespace System.Windows.Forms
                     key_string_size.Width,
                     text_layout_rect.Height
                 );
-                this.Owner.Renderer.DrawItemText(
-                    new ToolStripItemTextRenderEventArgs(
-                        e.Graphics,
-                        this,
-                        key_string,
-                        key_string_rect,
-                        font_color,
-                        this.Font,
-                        this.TextAlign
-                    )
-                );
+                this.Owner
+                    .Renderer
+                    .DrawItemText(
+                        new ToolStripItemTextRenderEventArgs(
+                            e.Graphics,
+                            this,
+                            key_string,
+                            key_string_rect,
+                            font_color,
+                            this.Font,
+                            this.TextAlign
+                        )
+                    );
             }
 
             if (image_layout_rect != Rectangle.Empty)
-                this.Owner.Renderer.DrawItemImage(
-                    new ToolStripItemImageRenderEventArgs(
-                        e.Graphics,
-                        this,
-                        draw_image,
-                        image_layout_rect
-                    )
-                );
+                this.Owner
+                    .Renderer
+                    .DrawItemImage(
+                        new ToolStripItemImageRenderEventArgs(
+                            e.Graphics,
+                            this,
+                            draw_image,
+                            image_layout_rect
+                        )
+                    );
 
             if (this.IsOnDropDown && this.HasDropDownItems && this.Parent is ToolStripDropDownMenu)
-                this.Owner.Renderer.DrawArrow(
-                    new ToolStripArrowRenderEventArgs(
-                        e.Graphics,
-                        this,
-                        new Rectangle(this.Bounds.Width - 17, 2, 10, 20),
-                        Color.Black,
-                        ArrowDirection.Right
-                    )
-                );
+                this.Owner
+                    .Renderer
+                    .DrawArrow(
+                        new ToolStripArrowRenderEventArgs(
+                            e.Graphics,
+                            this,
+                            new Rectangle(this.Bounds.Width - 17, 2, 10, 20),
+                            Color.Black,
+                            ArrowDirection.Right
+                        )
+                    );
 
             return;
         }

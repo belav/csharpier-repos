@@ -3378,9 +3378,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     switch (namedArg.Key)
                     {
                         case "WrapNonExceptionThrows":
-                            wrapNonExceptionThrows = namedArg.Value.DecodeValue<bool>(
-                                SpecialType.System_Boolean
-                            );
+                            wrapNonExceptionThrows = namedArg
+                                .Value
+                                .DecodeValue<bool>(SpecialType.System_Boolean);
                             break;
                     }
                 }
@@ -3745,9 +3745,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
 
                         string fullEmittedName = MetadataHelpers.BuildQualifiedName(
-                            originalDefinition.ContainingSymbol.ToDisplayString(
-                                SymbolDisplayFormat.QualifiedNameOnlyFormat
-                            ),
+                            originalDefinition
+                                .ContainingSymbol
+                                .ToDisplayString(SymbolDisplayFormat.QualifiedNameOnlyFormat),
                             originalDefinition.MetadataName
                         );
                         // Since we need to allow multiple constructions of the same generic type at the source

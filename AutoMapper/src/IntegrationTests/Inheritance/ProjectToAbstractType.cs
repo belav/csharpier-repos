@@ -28,14 +28,16 @@ public class ProjectToAbstractType : IntegrationTest<ProjectToAbstractType.Datab
     {
         protected override void Seed(Context context)
         {
-            context.EntityA.AddRange(
-                new[]
-                {
-                    new DbEntityA { Name = "Alain Brito" },
-                    new DbEntityA { Name = "Jimmy Bogard" },
-                    new DbEntityA { Name = "Bill Gates" }
-                }
-            );
+            context
+                .EntityA
+                .AddRange(
+                    new[]
+                    {
+                        new DbEntityA { Name = "Alain Brito" },
+                        new DbEntityA { Name = "Jimmy Bogard" },
+                        new DbEntityA { Name = "Bill Gates" }
+                    }
+                );
             base.Seed(context);
         }
     }

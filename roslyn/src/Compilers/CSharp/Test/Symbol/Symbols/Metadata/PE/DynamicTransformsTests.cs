@@ -556,7 +556,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var field = structType.GetMember<FieldSymbol>("nullableField");
             Assert.True(field.Type.ContainsDynamic());
 
-            var nullableStruct = _assembly.CorLibrary
+            var nullableStruct = _assembly
+                .CorLibrary
                 .GetSpecialType(SpecialType.System_Nullable_T)
                 .Construct(structType);
             // Outer<dynamic>

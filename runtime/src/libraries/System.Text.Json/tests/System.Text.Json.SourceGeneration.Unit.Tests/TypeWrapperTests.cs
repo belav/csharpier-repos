@@ -381,9 +381,11 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             );
 
             // Check for nested generic class.
-            foundType = types.Values.Single(
-                t => t.FullName.Contains("MyClass") && t.FullName.Contains("NestedGenericClass")
-            );
+            foundType = types
+                .Values
+                .Single(
+                    t => t.FullName.Contains("MyClass") && t.FullName.Contains("NestedGenericClass")
+                );
             Assert.Equal("NestedGenericClass`1", foundType.Name);
             Assert.Equal(
                 $"HelloWorld.MyClass+NestedGenericClass`1[[{typeof(string).AssemblyQualifiedName}]]",
@@ -403,9 +405,11 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             Assert.False(foundType.IsGenericType);
 
             // Check for class nested in generic class.
-            foundType = types.Values.Single(
-                t => t.FullName.Contains("MyGenericClass") && t.FullName.Contains("NestedClass")
-            );
+            foundType = types
+                .Values
+                .Single(
+                    t => t.FullName.Contains("MyGenericClass") && t.FullName.Contains("NestedClass")
+                );
             Assert.Equal("NestedClass", foundType.Name);
             Assert.Equal(
                 $"HelloWorld.MyGenericClass`1+NestedClass[[{typeof(string).AssemblyQualifiedName}]]",
@@ -419,11 +423,13 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             );
 
             // Check for generic class nested in generic class.
-            foundType = types.Values.Single(
-                t =>
-                    t.FullName.Contains("MyGenericClass")
-                    && t.FullName.Contains("NestedGenericClass")
-            );
+            foundType = types
+                .Values
+                .Single(
+                    t =>
+                        t.FullName.Contains("MyGenericClass")
+                        && t.FullName.Contains("NestedGenericClass")
+                );
             Assert.Equal("NestedGenericClass`1", foundType.Name);
             Assert.Equal(
                 $"HelloWorld.MyGenericClass`1+NestedGenericClass`1[[{typeof(string).AssemblyQualifiedName}],[{typeof(int).AssemblyQualifiedName}]]",

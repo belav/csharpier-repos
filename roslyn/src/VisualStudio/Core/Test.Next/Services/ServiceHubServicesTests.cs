@@ -36,7 +36,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
     {
         private static TestWorkspace CreateWorkspace(Type[] additionalParts = null) =>
             new TestWorkspace(
-                composition: FeaturesTestCompositions.Features
+                composition: FeaturesTestCompositions
+                    .Features
                     .WithTestHostParts(TestHost.OutOfProcess)
                     .AddParts(additionalParts)
             );
@@ -120,10 +121,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // check that text already exist in remote side
             Assert.True(
-                client.TestData.WorkspaceManager.SolutionAssetCache.TryGetAsset<SerializableSourceText>(
-                    newState.Text,
-                    out var serializableRemoteText
-                )
+                client
+                    .TestData
+                    .WorkspaceManager
+                    .SolutionAssetCache
+                    .TryGetAsset<SerializableSourceText>(
+                        newState.Text,
+                        out var serializableRemoteText
+                    )
             );
             Assert.Equal(
                 newText.ToString(),
@@ -252,7 +257,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         public async Task TestUnknownProject()
         {
             var workspace = CreateWorkspace(new[] { typeof(NoCompilationLanguageService) });
-            var solution = workspace.CurrentSolution
+            var solution = workspace
+                .CurrentSolution
                 .AddProject("unknown", "unknown", NoCompilationConstants.LanguageName)
                 .Solution;
 
@@ -640,12 +646,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             string documentName
         )
         {
-            var project = solution.Projects.First(
-                p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
-            );
-            var document = project.Documents.First(
-                d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
-            );
+            var project = solution
+                .Projects
+                .First(p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase));
+            var document = project
+                .Documents
+                .First(
+                    d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
+                );
 
             return (project, document);
         }
@@ -656,14 +664,21 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             ImmutableArray<string> documentNames
         )
         {
-            var project = solution.Projects.First(
-                p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase)
-            );
+            var project = solution
+                .Projects
+                .First(p => string.Equals(p.Name, projectName, StringComparison.OrdinalIgnoreCase));
             var documents = documentNames.SelectAsArray(
                 documentName =>
-                    project.Documents.First(
-                        d => string.Equals(d.Name, documentName, StringComparison.OrdinalIgnoreCase)
-                    )
+                    project
+                        .Documents
+                        .First(
+                            d =>
+                                string.Equals(
+                                    d.Name,
+                                    documentName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                        )
             );
 
             return (project, documents);

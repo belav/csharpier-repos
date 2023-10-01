@@ -25,19 +25,24 @@ namespace System.Security.Cryptography.X509Certificates
                         (uint)rawData.Length
                     );
                     if (
-                        !Interop.Crypt32.CryptQueryObject(
-                            Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
-                            &certBlob,
-                            Interop.Crypt32.ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_ALL,
-                            Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
-                            0,
-                            IntPtr.Zero,
-                            out contentType,
-                            IntPtr.Zero,
-                            IntPtr.Zero,
-                            IntPtr.Zero,
-                            IntPtr.Zero
-                        )
+                        !Interop
+                            .Crypt32
+                            .CryptQueryObject(
+                                Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
+                                &certBlob,
+                                Interop
+                                    .Crypt32
+                                    .ExpectedContentTypeFlags
+                                    .CERT_QUERY_CONTENT_FLAG_ALL,
+                                Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
+                                0,
+                                IntPtr.Zero,
+                                out contentType,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                IntPtr.Zero
+                            )
                     )
                     {
                         throw Marshal.GetLastPInvokeError().ToCryptographicException();
@@ -57,19 +62,24 @@ namespace System.Security.Cryptography.X509Certificates
                 fixed (char* pFileName = fileName)
                 {
                     if (
-                        !Interop.Crypt32.CryptQueryObject(
-                            Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE,
-                            pFileName,
-                            Interop.Crypt32.ExpectedContentTypeFlags.CERT_QUERY_CONTENT_FLAG_ALL,
-                            Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
-                            0,
-                            IntPtr.Zero,
-                            out contentType,
-                            IntPtr.Zero,
-                            IntPtr.Zero,
-                            IntPtr.Zero,
-                            IntPtr.Zero
-                        )
+                        !Interop
+                            .Crypt32
+                            .CryptQueryObject(
+                                Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE,
+                                pFileName,
+                                Interop
+                                    .Crypt32
+                                    .ExpectedContentTypeFlags
+                                    .CERT_QUERY_CONTENT_FLAG_ALL,
+                                Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,
+                                0,
+                                IntPtr.Zero,
+                                out contentType,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                IntPtr.Zero
+                            )
                     )
                     {
                         throw Marshal.GetLastPInvokeError().ToCryptographicException();

@@ -305,11 +305,16 @@ namespace Microsoft.VisualBasic.Activities
                             {
                                 errorMessage += ":" + extraErrorMessage;
                             }
-                            throw FxTrace.Exception.AsError(
-                                new SourceExpressionException(
-                                    SR.CompilerErrorSpecificExpression(expressionText, errorMessage)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new SourceExpressionException(
+                                        SR.CompilerErrorSpecificExpression(
+                                            expressionText,
+                                            errorMessage
+                                        )
+                                    )
+                                );
                         }
                         returnType = lambda.ReturnType;
                     }
@@ -343,11 +348,13 @@ namespace Microsoft.VisualBasic.Activities
                         {
                             errorMessage += ":" + extraErrorMessage;
                         }
-                        throw FxTrace.Exception.AsError(
-                            new SourceExpressionException(
-                                SR.CompilerErrorSpecificExpression(expressionText, errorMessage)
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new SourceExpressionException(
+                                    SR.CompilerErrorSpecificExpression(expressionText, errorMessage)
+                                )
+                            );
                     }
                     returnType = targetType;
                 }

@@ -2918,9 +2918,9 @@ End Class
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(
-                i => CompareItems(i.DisplayText, "Bar[int bay]")
-            );
+            var completionItem = completionList
+                .ItemsList
+                .First(i => CompareItems(i.DisplayText, "Bar[int bay]"));
 
             if (
                 service.GetProvider(completionItem, document.Project)
@@ -3242,9 +3242,9 @@ int bar;
                 position,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(
-                i => CompareItems(i.DisplayText, "Equals(object obj)")
-            );
+            var completionItem = completionList
+                .ItemsList
+                .First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
 
             if (
                 service.GetProvider(completionItem, document.Project)
@@ -3329,9 +3329,9 @@ int bar;
                 cursorPosition,
                 triggerInfo
             );
-            var completionItem = completionList.ItemsList.First(
-                i => CompareItems(i.DisplayText, "Equals(object obj)")
-            );
+            var completionItem = completionList
+                .ItemsList
+                .First(i => CompareItems(i.DisplayText, "Equals(object obj)"));
 
             if (
                 service.GetProvider(completionItem, document.Project)
@@ -3405,7 +3405,7 @@ int bar;
         {
             var markupBeforeCommit =
                 $@"<Workspace>
-    <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""{TestOptions.Regular11.LanguageVersion.ToDisplayString()}"">
+    <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""{TestOptions .Regular11 .LanguageVersion .ToDisplayString()}"">
         <Document>class Base
 {{
     public virtual required int Prop {{ get; }}
@@ -3449,7 +3449,7 @@ class Derived : Base
         {
             var markupBeforeCommit =
                 $@"<Workspace>
-    <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""{TestOptions.Regular11.LanguageVersion.ToDisplayString()}"">
+    <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" LanguageVersion=""{TestOptions .Regular11 .LanguageVersion .ToDisplayString()}"">
         <Document>class Base
 {{
     public virtual int Prop {{ get; }}
@@ -3809,7 +3809,9 @@ namespace ClassLibrary7
             // reference to P2. If we try to override Goo, the missing "Missing" type will
             // prevent round tripping the symbolkey.
             using var workspace = TestWorkspace.Create(text, composition: GetComposition());
-            var compilation = await workspace.CurrentSolution.Projects
+            var compilation = await workspace
+                .CurrentSolution
+                .Projects
                 .First(p => p.Name == "P3")
                 .GetCompilationAsync();
 
@@ -3874,7 +3876,9 @@ public class SomeClass : Base
 }
 ";
 
-            var origComp = await workspace.CurrentSolution.Projects
+            var origComp = await workspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .GetRequiredCompilationAsync(CancellationToken.None);
             var options = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest);
@@ -3900,7 +3904,8 @@ public class SomeClass : Base
                 testDocument.CursorPosition.Value,
                 CompletionTrigger.Invoke
             );
-            var completionItem = completionList.ItemsList
+            var completionItem = completionList
+                .ItemsList
                 .Where(c => c.DisplayText == "M(in int x)")
                 .Single();
 

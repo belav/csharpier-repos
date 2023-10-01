@@ -82,13 +82,15 @@ namespace System.Security.Principal
 
             if (m_roles != null && m_roles.Length > 0 && firstNonNullIdentity != null)
             {
-                firstNonNullIdentity.ExternalClaims.Add(
-                    new RoleClaimProvider(
-                        ClaimsIdentity.DefaultIssuer,
-                        m_roles,
-                        firstNonNullIdentity
-                    ).Claims
-                );
+                firstNonNullIdentity
+                    .ExternalClaims
+                    .Add(
+                        new RoleClaimProvider(
+                            ClaimsIdentity.DefaultIssuer,
+                            m_roles,
+                            firstNonNullIdentity
+                        ).Claims
+                    );
             }
             else if (firstNonNullIdentity == null)
             {
@@ -116,13 +118,15 @@ namespace System.Security.Principal
             // if roles are not null then we need to add a provider
             if (roles != null && roles.Length > 0)
             {
-                claimsIdentity.ExternalClaims.Add(
-                    new RoleClaimProvider(
-                        ClaimsIdentity.DefaultIssuer,
-                        roles,
-                        claimsIdentity
-                    ).Claims
-                );
+                claimsIdentity
+                    .ExternalClaims
+                    .Add(
+                        new RoleClaimProvider(
+                            ClaimsIdentity.DefaultIssuer,
+                            roles,
+                            claimsIdentity
+                        ).Claims
+                    );
             }
 
             base.AddIdentity(claimsIdentity);

@@ -173,16 +173,16 @@ namespace System.IdentityModel.Tokens
             {
                 if ((tmp &= 0x7f) > (length - 1))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SystemException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new SystemException());
                 }
 
                 if (tmp > 4)
                 { // 4 == sizeof(int)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SystemException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new SystemException());
                 }
 
                 for (; tmp != 0; tmp--)

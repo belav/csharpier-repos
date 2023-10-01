@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExternalAccess.Pythia
                 return ImmutableArray<(string, Glyph)>.Empty;
 
             var context = new PythiaDeclarationNameContext(syntaxContext);
-            var result = await _lazyImplementation.Value
+            var result = await _lazyImplementation
+                .Value
                 .ProvideRecommendationsAsync(context, cancellationToken)
                 .ConfigureAwait(false);
 

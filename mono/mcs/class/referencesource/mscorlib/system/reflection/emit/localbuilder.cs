@@ -123,13 +123,9 @@ namespace System.Reflection.Emit
             if (index == -1)
             {
                 // top level scope information is kept with methodBuilder
-                methodBuilder.m_localSymInfo.AddLocalSymInfo(
-                    name,
-                    mungedSig,
-                    m_localIndex,
-                    startOffset,
-                    endOffset
-                );
+                methodBuilder
+                    .m_localSymInfo
+                    .AddLocalSymInfo(name, mungedSig, m_localIndex, startOffset, endOffset);
             }
             else
             {

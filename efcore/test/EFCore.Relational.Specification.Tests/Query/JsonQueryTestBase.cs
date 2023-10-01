@@ -2289,9 +2289,9 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>()).FromSqlRaw(
-                    Fixture.TestStore.NormalizeDelimitersInRawString(
-                        "SELECT * FROM [JsonEntitiesBasic] AS j"
-                    )
+                    Fixture
+                        .TestStore
+                        .NormalizeDelimitersInRawString("SELECT * FROM [JsonEntitiesBasic] AS j")
                 ),
             ss => ss.Set<JsonEntityBasic>(),
             entryCount: 40
@@ -2305,9 +2305,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>())
                     .FromSqlRaw(
-                        Fixture.TestStore.NormalizeDelimitersInRawString(
-                            "SELECT * FROM [JsonEntitiesBasic] AS j"
-                        )
+                        Fixture
+                            .TestStore
+                            .NormalizeDelimitersInRawString(
+                                "SELECT * FROM [JsonEntitiesBasic] AS j"
+                            )
                     )
                     .AsNoTracking()
                     .Select(x => x.OwnedReferenceRoot.OwnedReferenceBranch),
@@ -2322,9 +2324,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ((DbSet<JsonEntityBasic>)ss.Set<JsonEntityBasic>())
                     .FromSqlRaw(
-                        Fixture.TestStore.NormalizeDelimitersInRawString(
-                            "SELECT * FROM [JsonEntitiesBasic] AS j"
-                        )
+                        Fixture
+                            .TestStore
+                            .NormalizeDelimitersInRawString(
+                                "SELECT * FROM [JsonEntitiesBasic] AS j"
+                            )
                     )
                     .AsNoTracking()
                     .Select(x => x.OwnedReferenceRoot.OwnedCollectionBranch),
@@ -2340,9 +2344,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             async,
             ss =>
                 ((DbSet<JsonEntityInheritanceBase>)ss.Set<JsonEntityInheritanceBase>()).FromSqlRaw(
-                    Fixture.TestStore.NormalizeDelimitersInRawString(
-                        "SELECT * FROM [JsonEntitiesInheritance] AS j"
-                    )
+                    Fixture
+                        .TestStore
+                        .NormalizeDelimitersInRawString(
+                            "SELECT * FROM [JsonEntitiesInheritance] AS j"
+                        )
                 ),
             ss => ss.Set<JsonEntityInheritanceBase>(),
             entryCount: 38
@@ -2357,9 +2363,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 (
                     (DbSet<JsonEntityInheritanceDerived>)ss.Set<JsonEntityInheritanceDerived>()
                 ).FromSqlRaw(
-                    Fixture.TestStore.NormalizeDelimitersInRawString(
-                        "SELECT * FROM [JsonEntitiesInheritance] AS j"
-                    )
+                    Fixture
+                        .TestStore
+                        .NormalizeDelimitersInRawString(
+                            "SELECT * FROM [JsonEntitiesInheritance] AS j"
+                        )
                 ),
             ss => ss.Set<JsonEntityInheritanceDerived>(),
             entryCount: 25
@@ -2375,9 +2383,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ((DbSet<JsonEntityInheritanceBase>)ss.Set<JsonEntityInheritanceBase>())
                     .FromSqlRaw(
-                        Fixture.TestStore.NormalizeDelimitersInRawString(
-                            "SELECT * FROM [JsonEntitiesInheritance] AS j"
-                        )
+                        Fixture
+                            .TestStore
+                            .NormalizeDelimitersInRawString(
+                                "SELECT * FROM [JsonEntitiesInheritance] AS j"
+                            )
                     )
                     .AsNoTracking()
                     .OrderBy(x => x.Id)
@@ -2399,9 +2409,11 @@ public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
             ss =>
                 ((DbSet<JsonEntityInheritanceDerived>)ss.Set<JsonEntityInheritanceDerived>())
                     .FromSqlRaw(
-                        Fixture.TestStore.NormalizeDelimitersInRawString(
-                            "SELECT * FROM [JsonEntitiesInheritance] AS j"
-                        )
+                        Fixture
+                            .TestStore
+                            .NormalizeDelimitersInRawString(
+                                "SELECT * FROM [JsonEntitiesInheritance] AS j"
+                            )
                     )
                     .AsNoTracking()
                     .OrderBy(x => x.Id)

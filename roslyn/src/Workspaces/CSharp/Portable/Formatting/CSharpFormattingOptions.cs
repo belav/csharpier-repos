@@ -22,9 +22,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 feature: PublicFeatureName,
                 name: publicName,
                 group: CSharpFormattingOptionGroups.NewLine,
-                defaultValue: CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue.HasFlag(
-                    flag
-                ),
+                defaultValue: CSharpFormattingOptions2
+                    .NewLineBeforeOpenBrace
+                    .DefaultValue
+                    .HasFlag(flag),
                 storageLocations: ImmutableArray<OptionStorageLocation>.Empty,
                 storageMapping: new NewLineForBracesInternalStorageMapping(
                     CSharpFormattingOptions2.NewLineBeforeOpenBrace,
@@ -41,9 +42,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 feature: PublicFeatureName,
                 name: publicName,
                 group: CSharpFormattingOptionGroups.Spacing,
-                defaultValue: CSharpFormattingOptions2.SpaceBetweenParentheses.DefaultValue.HasFlag(
-                    flag
-                ),
+                defaultValue: CSharpFormattingOptions2
+                    .SpaceBetweenParentheses
+                    .DefaultValue
+                    .HasFlag(flag),
                 storageLocations: ImmutableArray<OptionStorageLocation>.Empty,
                 storageMapping: new SpacePlacementInternalStorageMapping(
                     CSharpFormattingOptions2.SpaceBetweenParentheses,

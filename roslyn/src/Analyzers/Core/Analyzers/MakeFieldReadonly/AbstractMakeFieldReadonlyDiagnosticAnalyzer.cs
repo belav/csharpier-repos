@@ -193,10 +193,9 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                         .GetAttributes()
                         .Any(
                             static (a, threadStaticAttribute) =>
-                                SymbolEqualityComparer.Default.Equals(
-                                    a.AttributeClass,
-                                    threadStaticAttribute
-                                ),
+                                SymbolEqualityComparer
+                                    .Default
+                                    .Equals(a.AttributeClass, threadStaticAttribute),
                             threadStaticAttribute
                         )
                     && !IsDataContractSerializable(
@@ -218,20 +217,19 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                             .GetAttributes()
                             .Any(
                                 static (x, dataMemberAttribute) =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        x.AttributeClass,
-                                        dataMemberAttribute
-                                    ),
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(x.AttributeClass, dataMemberAttribute),
                                 dataMemberAttribute
                             )
-                        && symbol.ContainingType
+                        && symbol
+                            .ContainingType
                             .GetAttributes()
                             .Any(
                                 static (x, dataContractAttribute) =>
-                                    SymbolEqualityComparer.Default.Equals(
-                                        x.AttributeClass,
-                                        dataContractAttribute
-                                    ),
+                                    SymbolEqualityComparer
+                                        .Default
+                                        .Equals(x.AttributeClass, dataContractAttribute),
                                 dataContractAttribute
                             );
                 }

@@ -149,10 +149,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
         )
         {
             var converted = ConvertNamespaceDeclaration(namespaceDeclaration);
-            var updatedRoot = document.Root.ReplaceNode(
-                namespaceDeclaration,
-                converted.WithAdditionalAnnotations(annotation)
-            );
+            var updatedRoot = document
+                .Root
+                .ReplaceNode(namespaceDeclaration, converted.WithAdditionalAnnotations(annotation));
             var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntax)
                 updatedRoot.GetAnnotatedNodes(annotation).Single();
             return (updatedRoot, fileScopedNamespace.SemicolonToken.Span);
@@ -165,10 +164,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             CancellationToken cancellationToken
         )
         {
-            var openBraceLine = document.Text.Lines
+            var openBraceLine = document
+                .Text
+                .Lines
                 .GetLineFromPosition(namespaceDeclaration.OpenBraceToken.SpanStart)
                 .LineNumber;
-            var closeBraceLine = document.Text.Lines
+            var closeBraceLine = document
+                .Text
+                .Lines
                 .GetLineFromPosition(namespaceDeclaration.CloseBraceToken.SpanStart)
                 .LineNumber;
             if (openBraceLine == closeBraceLine)
@@ -177,8 +180,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             // Auto-formatting options are not relevant since they only control behavior on typing.
             var indentationOptions = new IndentationOptions(options);
 
-            var indentationService =
-                document.LanguageServices.GetRequiredService<IIndentationService>();
+            var indentationService = document
+                .LanguageServices
+                .GetRequiredService<IIndentationService>();
             var indentation = indentationService.GetIndentation(
                 document,
                 openBraceLine + 1,
@@ -307,9 +311,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 .WithAppendedTrailingTrivia(namespaceDeclaration.OpenBraceToken.LeadingTrivia);
 
             if (
-                !namespaceDeclaration.OpenBraceToken.TrailingTrivia.All(
-                    static t => t.IsWhitespace()
-                )
+                !namespaceDeclaration
+                    .OpenBraceToken
+                    .TrailingTrivia
+                    .All(static t => t.IsWhitespace())
             )
                 semiColon = semiColon.WithAppendedTrailingTrivia(
                     namespaceDeclaration.OpenBraceToken.TrailingTrivia

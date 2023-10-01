@@ -78,11 +78,9 @@ namespace Internal.Reflection.Execution
             uint cbBlob;
 
             if (
-                !resourceInfo.Module.TryFindBlob(
-                    (int)ReflectionMapBlob.BlobIdResourceData,
-                    out pBlob,
-                    out cbBlob
-                )
+                !resourceInfo
+                    .Module
+                    .TryFindBlob((int)ReflectionMapBlob.BlobIdResourceData, out pBlob, out cbBlob)
             )
             {
                 throw new BadImageFormatException();

@@ -110,7 +110,8 @@ public partial class ModelBindingCommandHandlerTests
 
             await handler.InvokeAsync(new InvocationContext(command.Parse(commandLine), console));
 
-            console.Out
+            console
+                .Out
                 .ToString()
                 .Should()
                 .Be($"ClassWithCtorParameter<{type.Name}>: {expectedValue}");

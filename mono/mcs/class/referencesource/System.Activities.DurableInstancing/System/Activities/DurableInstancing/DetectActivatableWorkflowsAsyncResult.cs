@@ -47,14 +47,16 @@ namespace System.Activities.DurableInstancing
 
         protected override void GenerateSqlCommand(SqlCommand sqlCommand)
         {
-            sqlCommand.Parameters.Add(
-                new SqlParameter
-                {
-                    ParameterName = "@machineName",
-                    SqlDbType = SqlDbType.NVarChar,
-                    Value = SqlWorkflowInstanceStoreConstants.MachineName
-                }
-            );
+            sqlCommand
+                .Parameters
+                .Add(
+                    new SqlParameter
+                    {
+                        ParameterName = "@machineName",
+                        SqlDbType = SqlDbType.NVarChar,
+                        Value = SqlWorkflowInstanceStoreConstants.MachineName
+                    }
+                );
         }
 
         protected override string GetSqlCommandText()

@@ -76,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 
             // We need to inherit most of the projects options, mainly for VB (RootNamespace, GlobalImports etc.), but we need to override about some specific things surrounding the output
             compilation = compilation.WithOptions(
-                compilation.Options
+                compilation
+                    .Options
                     // copied from the old TempPE compiler used by legacy, for parity.
                     // See: https://github.com/dotnet/roslyn/blob/fab7134296816fc80019c60b0f5bef7400cf23ea/src/VisualStudio/CSharp/Impl/ProjectSystemShim/TempPECompilerService.cs#L58
                     .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)

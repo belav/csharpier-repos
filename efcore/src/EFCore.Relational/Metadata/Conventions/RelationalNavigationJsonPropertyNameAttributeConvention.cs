@@ -44,10 +44,11 @@ public class RelationalNavigationJsonPropertyNameAttributeConvention
     {
         if (!string.IsNullOrWhiteSpace(attribute.Name))
         {
-            navigationBuilder.Metadata.TargetEntityType.Builder.HasJsonPropertyName(
-                attribute.Name,
-                fromDataAnnotation: true
-            );
+            navigationBuilder
+                .Metadata
+                .TargetEntityType
+                .Builder
+                .HasJsonPropertyName(attribute.Name, fromDataAnnotation: true);
         }
     }
 }

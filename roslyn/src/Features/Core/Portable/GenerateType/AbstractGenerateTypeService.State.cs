@@ -106,8 +106,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 }
 
                 SimpleName = (TSimpleNameSyntax)node;
-                var syntaxFacts =
-                    semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISyntaxFactsService>();
                 syntaxFacts.GetNameAndArityOfSimpleName(SimpleName, out var name, out _);
 
                 Name = name;
@@ -156,8 +157,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     return false;
                 }
 
-                var semanticFacts =
-                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+                var semanticFacts = semanticDocument
+                    .Document
+                    .GetLanguageService<ISemanticFactsService>();
                 if (
                     !semanticFacts.IsTypeContext(
                         semanticModel,
@@ -287,8 +289,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     var expr = ObjectCreationExpressionOpt ?? NameOrMemberAccessExpression;
                     if (expr != null)
                     {
-                        var typeInference =
-                            document.Document.GetLanguageService<ITypeInferenceService>();
+                        var typeInference = document
+                            .Document
+                            .GetLanguageService<ITypeInferenceService>();
                         var baseType =
                             typeInference.InferType(
                                 document.SemanticModel,
@@ -392,12 +395,14 @@ namespace Microsoft.CodeAnalysis.GenerateType
                             return;
                         }
 
-                        var sourceTreeToBeGeneratedIn = symbol.Locations
+                        var sourceTreeToBeGeneratedIn = symbol
+                            .Locations
                             .First(loc => loc.IsInSource)
                             .SourceTree;
-                        var documentToBeGeneratedIn = document.Project.Solution.GetDocument(
-                            sourceTreeToBeGeneratedIn
-                        );
+                        var documentToBeGeneratedIn = document
+                            .Project
+                            .Solution
+                            .GetDocument(sourceTreeToBeGeneratedIn);
 
                         if (documentToBeGeneratedIn == null)
                         {
@@ -456,9 +461,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     //
                     // TODO(cyrusn): We need to make this logic work if the type is in the
                     // base/interface list of a type.
-                    var format = SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                        SymbolDisplayGlobalNamespaceStyle.Omitted
-                    );
+                    var format = SymbolDisplayFormat
+                        .FullyQualifiedFormat
+                        .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted);
                     TypeToGenerateInOpt = service.DetermineTypeToGenerateIn(
                         semanticModel,
                         SimpleName,
@@ -466,8 +471,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     );
                     if (TypeToGenerateInOpt != null)
                     {
-                        NamespaceToGenerateInOpt =
-                            TypeToGenerateInOpt.ContainingNamespace.ToDisplayString(format);
+                        NamespaceToGenerateInOpt = TypeToGenerateInOpt
+                            .ContainingNamespace
+                            .ToDisplayString(format);
                     }
                     else
                     {

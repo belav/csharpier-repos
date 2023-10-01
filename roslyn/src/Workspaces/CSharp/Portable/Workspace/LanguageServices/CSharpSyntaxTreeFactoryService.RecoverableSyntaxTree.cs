@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 public override Encoding Encoding => _info.Encoding;
 
                 private CSharpSyntaxNode CacheRootNode(CSharpSyntaxNode node) =>
-                    _service.SolutionServices
+                    _service
+                        .SolutionServices
                         .GetRequiredService<IProjectCacheHostService>()
                         .CacheObjectIfCachingEnabledForKey(_cacheKey, this, node);
 

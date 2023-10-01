@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 
         public UseExpressionBodyForLambdaDiagnosticAnalyzer()
             : base(
-                ImmutableDictionary<DiagnosticDescriptor, Options.IOption2>.Empty
+                ImmutableDictionary<DiagnosticDescriptor, Options.IOption2>
+                    .Empty
                     .Add(
                         s_useExpressionBodyForLambda,
                         CSharpCodeStyleOptions.PreferExpressionBodiedLambdas

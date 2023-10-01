@@ -178,7 +178,8 @@ namespace MonoTests.System.ServiceModel.Channels
             bindingS.OpenTimeout = TimeSpan.FromSeconds(20);
             int port = NetworkHelpers.FindFreePort();
             host.AddServiceEndpoint(typeof(IFoo), bindingS, new Uri("net.tcp://localhost:" + port));
-            host.Description.Behaviors
+            host.Description
+                .Behaviors
                 .Find<ServiceBehaviorAttribute>()
                 .IncludeExceptionDetailInFaults = true;
             host.Open();
@@ -231,7 +232,8 @@ namespace MonoTests.System.ServiceModel.Channels
             bindingS.OpenTimeout = TimeSpan.FromSeconds(20);
             int port = NetworkHelpers.FindFreePort();
             host.AddServiceEndpoint(typeof(IFoo), bindingS, new Uri("net.tcp://localhost:" + port));
-            host.Description.Behaviors
+            host.Description
+                .Behaviors
                 .Find<ServiceBehaviorAttribute>()
                 .IncludeExceptionDetailInFaults = true;
             host.Open();

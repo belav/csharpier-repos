@@ -1970,8 +1970,11 @@ namespace ILCompiler
                         && fieldHandle.Field is Internal.TypeSystem.Ecma.EcmaField ecmaField
                     )
                     {
-                        byte[] rvaData =
-                            Internal.TypeSystem.Ecma.EcmaFieldExtensions.GetFieldRvaData(ecmaField);
+                        byte[] rvaData = Internal
+                            .TypeSystem
+                            .Ecma
+                            .EcmaFieldExtensions
+                            .GetFieldRvaData(ecmaField);
                         return array.TryInitialize(rvaData);
                     }
                     return false;

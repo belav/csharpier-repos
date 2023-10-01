@@ -212,9 +212,11 @@ namespace System.Activities
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(
-                            new NotSupportedException("Lvalues of member type " + memberType)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new NotSupportedException("Lvalues of member type " + memberType)
+                            );
                     }
 
                 case ExpressionType.Call:
@@ -261,18 +263,22 @@ namespace System.Activities
                         }
                     }
 
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.InvalidExpressionForLocation(body.NodeType)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.InvalidExpressionForLocation(body.NodeType)
+                            )
+                        );
 
                 default:
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.InvalidExpressionForLocation(body.NodeType)
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.InvalidExpressionForLocation(body.NodeType)
+                            )
+                        );
             }
         }
 
@@ -515,11 +521,13 @@ namespace System.Activities
                     {
                         if (this.owner == null && !this.fieldInfo.IsStatic)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new NullReferenceException(
-                                    SR.CannotDereferenceNull(this.fieldInfo.Name)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new NullReferenceException(
+                                        SR.CannotDereferenceNull(this.fieldInfo.Name)
+                                    )
+                                );
                         }
 
                         return (T)this.fieldInfo.GetValue(this.owner);
@@ -528,11 +536,13 @@ namespace System.Activities
                     {
                         if (this.owner == null && !this.fieldInfo.IsStatic)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new NullReferenceException(
-                                    SR.CannotDereferenceNull(this.fieldInfo.Name)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new NullReferenceException(
+                                        SR.CannotDereferenceNull(this.fieldInfo.Name)
+                                    )
+                                );
                         }
 
                         this.fieldInfo.SetValue(this.owner, value);
@@ -650,13 +660,15 @@ namespace System.Activities
                 }
                 setItemParameterTypes[getItemParameters.Length] = this.getItemMethod.ReturnType;
 
-                this.setItemMethod = this.getItemMethod.DeclaringType.GetMethod(
-                    setItemName,
-                    BindingFlags.Public | BindingFlags.Instance,
-                    null,
-                    setItemParameterTypes,
-                    null
-                );
+                this.setItemMethod = this.getItemMethod
+                    .DeclaringType
+                    .GetMethod(
+                        setItemName,
+                        BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        setItemParameterTypes,
+                        null
+                    );
 
                 if (this.setItemMethod != null)
                 {
@@ -752,11 +764,13 @@ namespace System.Activities
                     {
                         if (this.targetObject == null && !this.getItemMethod.IsStatic)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new NullReferenceException(
-                                    SR.CannotDereferenceNull(this.getItemMethod.Name)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new NullReferenceException(
+                                        SR.CannotDereferenceNull(this.getItemMethod.Name)
+                                    )
+                                );
                         }
 
                         return (T)
@@ -767,23 +781,27 @@ namespace System.Activities
                         if (this.setItemMethod == null)
                         {
                             string targetObjectTypeName = this.targetObject.GetType().Name;
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.MissingSetAccessorForIndexer(
-                                        this.indexerName,
-                                        targetObjectTypeName
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.MissingSetAccessorForIndexer(
+                                            this.indexerName,
+                                            targetObjectTypeName
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         if (this.targetObject == null && !this.setItemMethod.IsStatic)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new NullReferenceException(
-                                    SR.CannotDereferenceNull(this.setItemMethod.Name)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new NullReferenceException(
+                                        SR.CannotDereferenceNull(this.setItemMethod.Name)
+                                    )
+                                );
                         }
 
                         object[] localSetItemArguments = new object[
@@ -1013,14 +1031,16 @@ namespace System.Activities
                             )
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.WriteonlyPropertyCannotBeRead(
-                                        this.propertyInfo.DeclaringType,
-                                        this.propertyInfo.Name
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.WriteonlyPropertyCannotBeRead(
+                                            this.propertyInfo.DeclaringType,
+                                            this.propertyInfo.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         if (
@@ -1028,11 +1048,13 @@ namespace System.Activities
                             && (getMethodInfo == null || !getMethodInfo.IsStatic)
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new NullReferenceException(
-                                    SR.CannotDereferenceNull(this.propertyInfo.Name)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new NullReferenceException(
+                                        SR.CannotDereferenceNull(this.propertyInfo.Name)
+                                    )
+                                );
                         }
 
                         // Okay, it's public
@@ -1053,14 +1075,16 @@ namespace System.Activities
                             )
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.ReadonlyPropertyCannotBeSet(
-                                        this.propertyInfo.DeclaringType,
-                                        this.propertyInfo.Name
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.ReadonlyPropertyCannotBeSet(
+                                            this.propertyInfo.DeclaringType,
+                                            this.propertyInfo.Name
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
 
                         if (
@@ -1068,11 +1092,13 @@ namespace System.Activities
                             && (setMethodInfo == null || !setMethodInfo.IsStatic)
                         )
                         {
-                            throw FxTrace.Exception.AsError(
-                                new NullReferenceException(
-                                    SR.CannotDereferenceNull(this.propertyInfo.Name)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new NullReferenceException(
+                                        SR.CannotDereferenceNull(this.propertyInfo.Name)
+                                    )
+                                );
                         }
 
                         // Okay, it's public
@@ -1793,13 +1819,15 @@ namespace System.Activities
                         throw;
                     }
 
-                    publicAccessor.ActivityMetadata.AddValidationError(
-                        SR.ErrorExtractingValuesForLambdaRewrite(
-                            argumentExpression.Type,
-                            originalExpression,
-                            e
-                        )
-                    );
+                    publicAccessor
+                        .ActivityMetadata
+                        .AddValidationError(
+                            SR.ErrorExtractingValuesForLambdaRewrite(
+                                argumentExpression.Type,
+                                originalExpression,
+                                e
+                            )
+                        );
                     return false;
                 }
             }
@@ -1831,13 +1859,15 @@ namespace System.Activities
                     }
                 }
 
-                publicAccessor.ActivityMetadata.AddValidationError(
-                    SR.ErrorExtractingValuesForLambdaRewrite(
-                        argumentExpression.Type,
-                        originalExpression,
-                        SR.SubexpressionResultWasNull(argumentExpression.Type)
-                    )
-                );
+                publicAccessor
+                    .ActivityMetadata
+                    .AddValidationError(
+                        SR.ErrorExtractingValuesForLambdaRewrite(
+                            argumentExpression.Type,
+                            originalExpression,
+                            SR.SubexpressionResultWasNull(argumentExpression.Type)
+                        )
+                    );
                 return false;
             }
             else
@@ -1852,13 +1882,15 @@ namespace System.Activities
                     )
                 )
                 {
-                    publicAccessor.ActivityMetadata.AddValidationError(
-                        SR.ErrorExtractingValuesForLambdaRewrite(
-                            argumentExpression.Type,
-                            originalExpression,
-                            SR.SubexpressionResultWasNotVisible(argumentExpression.Type)
-                        )
-                    );
+                    publicAccessor
+                        .ActivityMetadata
+                        .AddValidationError(
+                            SR.ErrorExtractingValuesForLambdaRewrite(
+                                argumentExpression.Type,
+                                originalExpression,
+                                SR.SubexpressionResultWasNotVisible(argumentExpression.Type)
+                            )
+                        );
                     return false;
                 }
                 else
@@ -2160,26 +2192,30 @@ namespace System.Activities
                         throw;
                     }
 
-                    publicAccessor.ActivityMetadata.AddValidationError(
-                        SR.ErrorExtractingValuesForLambdaRewrite(
-                            locationReferenceExpression.Type,
-                            originalExpression,
-                            e
-                        )
-                    );
+                    publicAccessor
+                        .ActivityMetadata
+                        .AddValidationError(
+                            SR.ErrorExtractingValuesForLambdaRewrite(
+                                locationReferenceExpression.Type,
+                                originalExpression,
+                                e
+                            )
+                        );
                     return false;
                 }
             }
 
             if (locationReference == null)
             {
-                publicAccessor.ActivityMetadata.AddValidationError(
-                    SR.ErrorExtractingValuesForLambdaRewrite(
-                        locationReferenceExpression.Type,
-                        originalExpression,
-                        SR.SubexpressionResultWasNull(locationReferenceExpression.Type)
-                    )
-                );
+                publicAccessor
+                    .ActivityMetadata
+                    .AddValidationError(
+                        SR.ErrorExtractingValuesForLambdaRewrite(
+                            locationReferenceExpression.Type,
+                            originalExpression,
+                            SR.SubexpressionResultWasNull(locationReferenceExpression.Type)
+                        )
+                    );
                 return false;
             }
             else if (
@@ -2191,13 +2227,15 @@ namespace System.Activities
                 )
             )
             {
-                publicAccessor.ActivityMetadata.AddValidationError(
-                    SR.ErrorExtractingValuesForLambdaRewrite(
-                        locationReferenceExpression.Type,
-                        originalExpression,
-                        SR.SubexpressionResultWasNotVisible(locationReferenceExpression.Type)
-                    )
-                );
+                publicAccessor
+                    .ActivityMetadata
+                    .AddValidationError(
+                        SR.ErrorExtractingValuesForLambdaRewrite(
+                            locationReferenceExpression.Type,
+                            originalExpression,
+                            SR.SubexpressionResultWasNotVisible(locationReferenceExpression.Type)
+                        )
+                    );
                 return false;
             }
             else
@@ -2239,13 +2277,15 @@ namespace System.Activities
                         )
                     )
                     {
-                        publicAccessor.ActivityMetadata.AddValidationError(
-                            SR.ErrorExtractingValuesForLambdaRewrite(
-                                parameterExpression.Type,
-                                originalExpression,
-                                SR.SubexpressionResultWasNotVisible(parameterExpression.Type)
-                            )
-                        );
+                        publicAccessor
+                            .ActivityMetadata
+                            .AddValidationError(
+                                SR.ErrorExtractingValuesForLambdaRewrite(
+                                    parameterExpression.Type,
+                                    originalExpression,
+                                    SR.SubexpressionResultWasNotVisible(parameterExpression.Type)
+                                )
+                            );
                         return false;
                     }
                 }
@@ -2266,13 +2306,15 @@ namespace System.Activities
                         )
                     )
                     {
-                        publicAccessor.ActivityMetadata.AddValidationError(
-                            SR.ErrorExtractingValuesForLambdaRewrite(
-                                parameterExpression.Type,
-                                originalExpression,
-                                SR.SubexpressionResultWasNotVisible(parameterExpression.Type)
-                            )
-                        );
+                        publicAccessor
+                            .ActivityMetadata
+                            .AddValidationError(
+                                SR.ErrorExtractingValuesForLambdaRewrite(
+                                    parameterExpression.Type,
+                                    originalExpression,
+                                    SR.SubexpressionResultWasNotVisible(parameterExpression.Type)
+                                )
+                            );
                         return false;
                     }
                 }

@@ -136,9 +136,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 clientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport
                 ?? false;
             var itemDefaultsSupported =
-                clientCapabilities.TextDocument?.Completion?.CompletionListSetting?.ItemDefaults?.Contains(
-                    EditRangeSetting
-                ) == true;
+                clientCapabilities
+                    .TextDocument
+                    ?.Completion
+                    ?.CompletionListSetting
+                    ?.ItemDefaults
+                    ?.Contains(EditRangeSetting) == true;
             var commitCharactersRuleCache = new Dictionary<
                 ImmutableArray<CharacterSetModificationRule>,
                 string[]
@@ -420,7 +423,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     return;
                 }
 
-                var defaultCommitCharacters = CompletionRules.Default.DefaultCommitCharacters
+                var defaultCommitCharacters = CompletionRules
+                    .Default
+                    .DefaultCommitCharacters
                     .Select(c => c.ToString())
                     .ToArray();
                 var commitCharacterReferences = new Dictionary<object, int>();
@@ -696,10 +701,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             foreach (var tag in tags)
             {
                 if (
-                    ProtocolConversions.RoslynTagToCompletionItemKind.TryGetValue(
-                        tag,
-                        out var completionItemKind
-                    )
+                    ProtocolConversions
+                        .RoslynTagToCompletionItemKind
+                        .TryGetValue(tag, out var completionItemKind)
                 )
                 {
                     return completionItemKind;

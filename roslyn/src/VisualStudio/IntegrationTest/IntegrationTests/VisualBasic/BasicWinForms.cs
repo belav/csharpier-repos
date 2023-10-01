@@ -80,11 +80,13 @@ End Class"
             VisualStudio.Editor.AddWinFormButton("SomeButton");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.vb");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.resx");
-            VisualStudio.Editor.EditWinFormButtonProperty(
-                buttonName: "SomeButton",
-                propertyName: "Text",
-                propertyValue: "NewButtonText"
-            );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonProperty(
+                    buttonName: "SomeButton",
+                    propertyName: "Text",
+                    propertyValue: "NewButtonText"
+                );
             VisualStudio.SolutionExplorer.CloseDesignerFile(project, "Form1.vb", saveFile: true);
             VisualStudio.SolutionExplorer.OpenFile(project, "Form1.Designer.vb");
             var actualText = VisualStudio.Editor.GetText();
@@ -99,16 +101,17 @@ End Class"
             VisualStudio.Editor.AddWinFormButton("SomeButton");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.vb");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.resx");
-            VisualStudio.Editor.EditWinFormButtonProperty(
-                buttonName: "SomeButton",
-                propertyName: "Text",
-                propertyValue: "ButtonTextGoesHere"
-            );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonProperty(
+                    buttonName: "SomeButton",
+                    propertyName: "Text",
+                    propertyValue: "ButtonTextGoesHere"
+                );
             var expectedPropertyValue = "ButtonTextGoesHere";
-            var actualPropertyValue = VisualStudio.Editor.GetWinFormButtonPropertyValue(
-                buttonName: "SomeButton",
-                propertyName: "Text"
-            );
+            var actualPropertyValue = VisualStudio
+                .Editor
+                .GetWinFormButtonPropertyValue(buttonName: "SomeButton", propertyName: "Text");
             Assert.Equal(expectedPropertyValue, actualPropertyValue);
             VisualStudio.SolutionExplorer.CloseDesignerFile(project, "Form1.vb", saveFile: true);
             //  Change the control's text in designer.vb code
@@ -117,22 +120,19 @@ End Class"
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(@"Me.SomeButton.Text = ""ButtonTextGoesHere""", actualText);
             //  Replace text property with something else
-            VisualStudio.Editor.SelectTextInCurrentDocument(
-                @"Me.SomeButton.Text = ""ButtonTextGoesHere"""
-            );
+            VisualStudio
+                .Editor
+                .SelectTextInCurrentDocument(@"Me.SomeButton.Text = ""ButtonTextGoesHere""");
             VisualStudio.Editor.SendKeys(@"Me.SomeButton.Text = ""GibberishText""");
-            VisualStudio.SolutionExplorer.CloseCodeFile(
-                project,
-                "Form1.Designer.vb",
-                saveFile: true
-            );
+            VisualStudio
+                .SolutionExplorer
+                .CloseCodeFile(project, "Form1.Designer.vb", saveFile: true);
             //  Verify that the control text has changed in the designer
             VisualStudio.SolutionExplorer.OpenFileWithDesigner(project, "Form1.vb");
             expectedPropertyValue = "GibberishText";
-            actualPropertyValue = VisualStudio.Editor.GetWinFormButtonPropertyValue(
-                buttonName: "SomeButton",
-                propertyName: "Text"
-            );
+            actualPropertyValue = VisualStudio
+                .Editor
+                .GetWinFormButtonPropertyValue(buttonName: "SomeButton", propertyName: "Text");
             Assert.Equal(expectedPropertyValue, actualPropertyValue);
         }
 
@@ -144,11 +144,13 @@ End Class"
             VisualStudio.Editor.AddWinFormButton("SomeButton");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.vb");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.resx");
-            VisualStudio.Editor.EditWinFormButtonEvent(
-                buttonName: "SomeButton",
-                eventName: "Click",
-                eventHandlerName: "ExecuteWhenButtonClicked"
-            );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonEvent(
+                    buttonName: "SomeButton",
+                    eventName: "Click",
+                    eventHandlerName: "ExecuteWhenButtonClicked"
+                );
             VisualStudio.SolutionExplorer.OpenFile(project, "Form1.vb");
             var actualText = VisualStudio.Editor.GetText();
             Assert.Contains(
@@ -167,22 +169,28 @@ End Class"
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.vb");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.resx");
             // Add some control properties and events
-            VisualStudio.Editor.EditWinFormButtonProperty(
-                buttonName: "SomeButton",
-                propertyName: "Text",
-                propertyValue: "ButtonTextValue"
-            );
-            VisualStudio.Editor.EditWinFormButtonEvent(
-                buttonName: "SomeButton",
-                eventName: "Click",
-                eventHandlerName: "SomeButtonHandler"
-            );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonProperty(
+                    buttonName: "SomeButton",
+                    propertyName: "Text",
+                    propertyValue: "ButtonTextValue"
+                );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonEvent(
+                    buttonName: "SomeButton",
+                    eventName: "Click",
+                    eventHandlerName: "SomeButtonHandler"
+                );
             // Rename the control
-            VisualStudio.Editor.EditWinFormButtonProperty(
-                buttonName: "SomeButton",
-                propertyName: "Name",
-                propertyValue: "SomeNewButton"
-            );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonProperty(
+                    buttonName: "SomeButton",
+                    propertyName: "Name",
+                    propertyValue: "SomeNewButton"
+                );
             VisualStudio.ErrorList.Verify.NoBuildErrors();
             // Verify that the rename propagated in designer code
             VisualStudio.SolutionExplorer.OpenFile(project, "Form1.Designer.vb");
@@ -218,17 +226,21 @@ End Class"
             VisualStudio.Editor.AddWinFormButton("SomeButton");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.vb");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.resx");
-            VisualStudio.Editor.EditWinFormButtonEvent(
-                buttonName: "SomeButton",
-                eventName: "Click",
-                eventHandlerName: "GooHandler"
-            );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonEvent(
+                    buttonName: "SomeButton",
+                    eventName: "Click",
+                    eventHandlerName: "GooHandler"
+                );
             //  Remove the event handler
-            VisualStudio.Editor.EditWinFormButtonEvent(
-                buttonName: "SomeButton",
-                eventName: "Click",
-                eventHandlerName: ""
-            );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonEvent(
+                    buttonName: "SomeButton",
+                    eventName: "Click",
+                    eventHandlerName: ""
+                );
             VisualStudio.ErrorList.Verify.NoBuildErrors();
             //  Verify that the handler is removed
             VisualStudio.SolutionExplorer.OpenFile(project, "Form1.Designer.vb");
@@ -247,12 +259,14 @@ End Class"
             VisualStudio.Editor.AddWinFormButton("SomeButton");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.vb");
             VisualStudio.SolutionExplorer.SaveFile(project, "Form1.resx");
-            VisualStudio.Editor.EditWinFormButtonProperty(
-                buttonName: "SomeButton",
-                propertyName: "Modifiers",
-                propertyTypeName: "System.CodeDom.MemberAttributes",
-                propertyValue: "Public"
-            );
+            VisualStudio
+                .Editor
+                .EditWinFormButtonProperty(
+                    buttonName: "SomeButton",
+                    propertyName: "Modifiers",
+                    propertyTypeName: "System.CodeDom.MemberAttributes",
+                    propertyValue: "Public"
+                );
             VisualStudio.ErrorList.Verify.NoBuildErrors();
             VisualStudio.SolutionExplorer.OpenFile(project, "Form1.Designer.vb");
             var actualText = VisualStudio.Editor.GetText();

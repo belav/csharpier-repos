@@ -45,10 +45,9 @@ namespace System.ServiceModel.Configuration
             bool hasFlags = value.GetCustomAttributes(typeof(FlagsAttribute), true).Length > 0;
             if (!value.IsEnum || !hasFlags)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "EnumType",
-                    SR.GetString(SR.FlagEnumTypeExpected, value)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("EnumType", SR.GetString(SR.FlagEnumTypeExpected, value));
             }
 
             int[] values = (int[])Enum.GetValues(value);
@@ -67,10 +66,12 @@ namespace System.ServiceModel.Configuration
                             )
                         )
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                "EnumType",
-                                SR.GetString(SR.InvalidFlagEnumType)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperArgument(
+                                    "EnumType",
+                                    SR.GetString(SR.InvalidFlagEnumType)
+                                );
                         }
                     }
                 }

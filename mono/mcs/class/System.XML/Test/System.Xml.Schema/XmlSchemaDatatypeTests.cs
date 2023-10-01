@@ -242,9 +242,9 @@ namespace MonoTests.System.Xml
                 if (deriv.IsDerivedFrom(strType))
                     results.Add(name);
                 else
-                    Console.Error.WriteLine(
-                        deriv.GetType() + " is not derived from " + strType.GetType()
-                    );
+                    Console
+                        .Error
+                        .WriteLine(deriv.GetType() + " is not derived from " + strType.GetType());
             }
             return results.ToArray();
         }

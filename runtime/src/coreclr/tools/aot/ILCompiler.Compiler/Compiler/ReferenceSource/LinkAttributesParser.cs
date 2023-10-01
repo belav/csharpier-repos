@@ -245,7 +245,8 @@ namespace Mono.Linker.Steps
                     continue;
                 }
 
-                PropertyDefinition? property = attributeType.Properties
+                PropertyDefinition? property = attributeType
+                    .Properties
                     .Where(prop => prop.Name == propertyName)
                     .FirstOrDefault();
                 if (property == null)
@@ -258,9 +259,9 @@ namespace Mono.Linker.Steps
                 if (caa is null)
                     continue;
 
-                customAttribute.Properties.Add(
-                    new CustomAttributeNamedArgument(property.Name, caa.Value)
-                );
+                customAttribute
+                    .Properties
+                    .Add(new CustomAttributeNamedArgument(property.Name, caa.Value));
             }
         }
 
@@ -349,7 +350,8 @@ namespace Mono.Linker.Steps
                     if (enumType?.IsEnum != true)
                         goto default;
 
-                    var enumField = enumType.Fields
+                    var enumField = enumType
+                        .Fields
                         .Where(f => f.IsStatic && f.Name == svalue)
                         .FirstOrDefault();
                     object evalue = enumField?.Constant ?? svalue;
@@ -365,12 +367,14 @@ namespace Mono.Linker.Steps
                         goto default;
 
                     if (
-                        !_context.TypeNameResolver.TryResolveTypeName(
-                            svalue,
-                            memberWithAttribute,
-                            out TypeReference? type,
-                            out _
-                        )
+                        !_context
+                            .TypeNameResolver
+                            .TryResolveTypeName(
+                                svalue,
+                                memberWithAttribute,
+                                out TypeReference? type,
+                                out _
+                            )
                     )
                     {
                         _context.LogError(
@@ -402,12 +406,14 @@ namespace Mono.Linker.Steps
                     typeName = "System.String";
 
                 if (
-                    !_context.TypeNameResolver.TryResolveTypeName(
-                        typeName,
-                        memberWithAttribute,
-                        out TypeReference? typeref,
-                        out _
-                    )
+                    !_context
+                        .TypeNameResolver
+                        .TryResolveTypeName(
+                            typeName,
+                            memberWithAttribute,
+                            out TypeReference? typeref,
+                            out _
+                        )
                 )
                 {
                     _context.LogError(

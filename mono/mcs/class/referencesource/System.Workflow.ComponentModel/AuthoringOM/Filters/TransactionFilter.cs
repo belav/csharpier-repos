@@ -89,10 +89,12 @@ namespace System.Workflow.ComponentModel
                     {
                         // release locks
                         context.ReleaseLocks(false);
-                        context.Activity.UnregisterForStatusChange(
-                            Activity.LockCountOnStatusChangeChangedEvent,
-                            this
-                        );
+                        context
+                            .Activity
+                            .UnregisterForStatusChange(
+                                Activity.LockCountOnStatusChangeChangedEvent,
+                                this
+                            );
                         context.Activity.ReleaseLockOnStatusChange(this);
                     }
                 }
@@ -103,20 +105,24 @@ namespace System.Workflow.ComponentModel
                         // 1st param is for transactional, means if the release lock on status change will try to persist the workflow instace
                         // if that fails, then locks will be reacquired, otherwise they will be released.
                         context.ReleaseLocks(true);
-                        context.Activity.UnregisterForStatusChange(
-                            Activity.LockCountOnStatusChangeChangedEvent,
-                            this
-                        );
+                        context
+                            .Activity
+                            .UnregisterForStatusChange(
+                                Activity.LockCountOnStatusChangeChangedEvent,
+                                this
+                            );
                         context.Activity.ReleaseLockOnStatusChange(this);
                         context.DisposeCheckpointState();
                     }
                     catch
                     {
                         // re-subscribe
-                        context.Activity.RegisterForStatusChange(
-                            Activity.LockCountOnStatusChangeChangedEvent,
-                            this
-                        );
+                        context
+                            .Activity
+                            .RegisterForStatusChange(
+                                Activity.LockCountOnStatusChangeChangedEvent,
+                                this
+                            );
                         throw;
                     }
                 }
@@ -137,19 +143,20 @@ namespace System.Workflow.ComponentModel
             StateRevertedEventArgs args = e as StateRevertedEventArgs;
 
             // stash exception
-            context.Activity.SetValueCommon(
-                ActivityExecutionContext.CurrentExceptionProperty,
-                args.Exception,
-                ActivityExecutionContext.CurrentExceptionProperty.DefaultMetadata,
-                false
-            );
+            context
+                .Activity
+                .SetValueCommon(
+                    ActivityExecutionContext.CurrentExceptionProperty,
+                    args.Exception,
+                    ActivityExecutionContext.CurrentExceptionProperty.DefaultMetadata,
+                    false
+                );
 
             // cancel the activity
             context.ReleaseLocks(false);
-            context.Activity.UnregisterForStatusChange(
-                Activity.LockCountOnStatusChangeChangedEvent,
-                this
-            );
+            context
+                .Activity
+                .UnregisterForStatusChange(Activity.LockCountOnStatusChangeChangedEvent, this);
             context.Activity.ReleaseLockOnStatusChange(this);
         }
 

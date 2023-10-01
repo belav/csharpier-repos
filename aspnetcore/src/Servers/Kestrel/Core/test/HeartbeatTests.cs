@@ -70,7 +70,8 @@ public class HeartbeatTests : LoggedTest
 
         heartbeatHandler.Verify(h => h.OnHeartbeat(now), Times.Once());
 
-        var warningMessage = TestSink.Writes
+        var warningMessage = TestSink
+            .Writes
             .Single(message => message.LogLevel == LogLevel.Warning)
             .Message;
         Assert.Equal(

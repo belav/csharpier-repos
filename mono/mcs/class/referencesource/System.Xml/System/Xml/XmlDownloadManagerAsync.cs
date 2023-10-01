@@ -64,7 +64,8 @@ namespace System.Xml
                 req.CachePolicy = cachePolicy;
             }
 
-            WebResponse resp = await Task<WebResponse>.Factory
+            WebResponse resp = await Task<WebResponse>
+                .Factory
                 .FromAsync(req.BeginGetResponse, req.EndGetResponse, null)
                 .ConfigureAwait(false);
             HttpWebRequest webReq = req as HttpWebRequest;

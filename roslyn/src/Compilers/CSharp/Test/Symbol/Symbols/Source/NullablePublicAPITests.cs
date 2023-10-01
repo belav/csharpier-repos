@@ -1070,7 +1070,9 @@ public interface I
                     ITypeParameterSymbol typeParameterSymbol = (
                         (INamedTypeSymbol)
                             ((INamedTypeSymbol)method.ReturnType).GetMembers("B").Single()
-                    ).TypeParameters.Single();
+                    )
+                        .TypeParameters
+                        .Single();
                     var result = typeParameterSymbol.ConstraintTypes.Single().NullableAnnotation;
                     Assert.Equal(
                         result,
@@ -1155,14 +1157,15 @@ public interface IB<T, U, V>
                         .ToArray(),
                 method =>
                 {
-                    var result = ((INamedTypeSymbol)method.ReturnType).TypeArguments
+                    var result = ((INamedTypeSymbol)method.ReturnType)
+                        .TypeArguments
                         .Single()
                         .NullableAnnotation;
                     Assert.Equal(
                         result,
-                        (
-                            (INamedTypeSymbol)method.ReturnType
-                        ).TypeArgumentNullableAnnotations.Single()
+                        ((INamedTypeSymbol)method.ReturnType)
+                            .TypeArgumentNullableAnnotations
+                            .Single()
                     );
                     Assert.Equal(
                         result,
@@ -1517,26 +1520,30 @@ class C
                     {
                         if (syntaxContext.Node.ToString() != "o")
                             return;
-                        var info = syntaxContext.SemanticModel.GetTypeInfoAndVerifyIOperation(
-                            syntaxContext.Node
-                        );
+                        var info = syntaxContext
+                            .SemanticModel
+                            .GetTypeInfoAndVerifyIOperation(syntaxContext.Node);
                         Assert.True(
-                            syntaxContext.SemanticModel.TryGetSpeculativeSemanticModel(
-                                syntaxContext.Node.SpanStart,
-                                newSource,
-                                out var specModel
-                            )
+                            syntaxContext
+                                .SemanticModel
+                                .TryGetSpeculativeSemanticModel(
+                                    syntaxContext.Node.SpanStart,
+                                    newSource,
+                                    out var specModel
+                                )
                         );
                         var specInfo = specModel.GetTypeInfoAndVerifyIOperation(oReference);
                         syntaxContext.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                s_descriptor1,
-                                syntaxContext.Node.GetLocation(),
-                                syntaxContext.Node,
-                                info.Nullability.FlowState,
-                                info.Nullability.Annotation,
-                                specInfo.Nullability.FlowState
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    s_descriptor1,
+                                    syntaxContext.Node.GetLocation(),
+                                    syntaxContext.Node,
+                                    info.Nullability.FlowState,
+                                    info.Nullability.Annotation,
+                                    specInfo.Nullability.FlowState
+                                )
                         );
                     },
                     SyntaxKind.IdentifierName
@@ -1553,12 +1560,14 @@ class C
                             declaredSymbol.NullableAnnotation
                         );
                         context.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                s_descriptor2,
-                                declarator.GetLocation(),
-                                declaredSymbol.Name,
-                                declaredSymbol.NullableAnnotation
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    s_descriptor2,
+                                    declarator.GetLocation(),
+                                    declaredSymbol.Name,
+                                    declaredSymbol.NullableAnnotation
+                                )
                         );
                     },
                     SyntaxKind.VariableDeclarator
@@ -2537,9 +2546,9 @@ class C
                 );
                 Assert.Equal(
                     expectedAnnotation,
-                    (
-                        (INamedTypeSymbol)methodSymbol.ReturnType
-                    ).TypeArgumentNullableAnnotations.Single()
+                    ((INamedTypeSymbol)methodSymbol.ReturnType)
+                        .TypeArgumentNullableAnnotations
+                        .Single()
                 );
                 Assert.Equal(
                     expectedAnnotation,
@@ -6736,9 +6745,9 @@ M();"
         {
             var comp = CreateCompilation(
                 code,
-                options: TestOptions.ReleaseExe.WithNullableContextOptions(
-                    NullableContextOptions.Enable
-                )
+                options: TestOptions
+                    .ReleaseExe
+                    .WithNullableContextOptions(NullableContextOptions.Enable)
             );
 
             var tree = comp.SyntaxTrees[0];

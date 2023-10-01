@@ -11,9 +11,15 @@ namespace System.ServiceModel.Channels
         {
             if (!IsDefined(value))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidEnumArgumentException("value", (int)value, typeof(CompressionFormat))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(CompressionFormat)
+                        )
+                    );
             }
         }
 

@@ -174,10 +174,9 @@ namespace Internal.TypeSystem.Ecma
                     }
                     else if (
                         metadataReader.StringComparer.Equals(nameHandle, "IntrinsicAttribute")
-                        && metadataReader.StringComparer.Equals(
-                            namespaceHandle,
-                            "System.Runtime.CompilerServices"
-                        )
+                        && metadataReader
+                            .StringComparer
+                            .Equals(namespaceHandle, "System.Runtime.CompilerServices")
                     )
                     {
                         flags |= FieldFlags.Intrinsic;
@@ -322,7 +321,8 @@ namespace Internal.TypeSystem.Ecma
         public static int GetFieldRvaValue(this EcmaField field)
         {
             Debug.Assert(field.HasRva);
-            return field.MetadataReader
+            return field
+                .MetadataReader
                 .GetFieldDefinition(field.Handle)
                 .GetRelativeVirtualAddress();
         }
@@ -333,7 +333,8 @@ namespace Internal.TypeSystem.Ecma
         public static byte[] GetFieldRvaData(this EcmaField field)
         {
             Debug.Assert(field.HasRva);
-            int addr = field.MetadataReader
+            int addr = field
+                .MetadataReader
                 .GetFieldDefinition(field.Handle)
                 .GetRelativeVirtualAddress();
             var memBlock = field.Module.PEReader.GetSectionData(addr).GetContent();

@@ -197,9 +197,11 @@ namespace System.Web.UI.Design.MobileControls
             _lvAvailableStyles.HideSelection = false;
             _lvAvailableStyles.FullRowSelect = true;
             _lvAvailableStyles.View = System.Windows.Forms.View.Details;
-            _lvAvailableStyles.Columns.AddRange(
-                new System.Windows.Forms.ColumnHeader[2] { chStyleType, chStyleNamespace }
-            );
+            _lvAvailableStyles
+                .Columns
+                .AddRange(
+                    new System.Windows.Forms.ColumnHeader[2] { chStyleType, chStyleNamespace }
+                );
             _lvAvailableStyles.SelectedIndexChanged += new EventHandler(this.OnNewStyleTypeChanged);
             _lvAvailableStyles.DoubleClick += new EventHandler(this.OnDoubleClick);
             _lvAvailableStyles.Sorting = SortOrder.Ascending;
@@ -893,12 +895,12 @@ namespace System.Web.UI.Design.MobileControls
             String caption = SR.GetString(SR.StylesEditorDialog_DeleteStyleCaption);
 
             if (
-                System.Windows.Forms.MessageBox.Show(
-                    message,
-                    caption,
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Exclamation
-                ) == DialogResult.No
+                System
+                    .Windows
+                    .Forms
+                    .MessageBox
+                    .Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+                == DialogResult.No
             )
             {
                 return;

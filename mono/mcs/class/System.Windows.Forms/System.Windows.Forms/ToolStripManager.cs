@@ -311,10 +311,12 @@ namespace System.Windows.Forms
                         else if (tsi.MergeIndex >= CountRealToolStripItems(targetToolStrip))
                             targetToolStrip.Items.AddNoOwnerOrLayout(tsi);
                         else
-                            targetToolStrip.Items.InsertNoOwnerOrLayout(
-                                AdjustItemMergeIndex(targetToolStrip, tsi),
-                                tsi
-                            );
+                            targetToolStrip
+                                .Items
+                                .InsertNoOwnerOrLayout(
+                                    AdjustItemMergeIndex(targetToolStrip, tsi),
+                                    tsi
+                                );
 
                         tsi.Parent = targetToolStrip;
 
@@ -328,10 +330,12 @@ namespace System.Windows.Forms
                                 RemoveItemFromParentToolStrip(tsi);
 
                                 // Insert where the old one is, then remove the old one
-                                targetToolStrip.Items.InsertNoOwnerOrLayout(
-                                    targetToolStrip.Items.IndexOf(target_tsi),
-                                    tsi
-                                );
+                                targetToolStrip
+                                    .Items
+                                    .InsertNoOwnerOrLayout(
+                                        targetToolStrip.Items.IndexOf(target_tsi),
+                                        tsi
+                                    );
                                 targetToolStrip.Items.RemoveNoOwnerOrLayout(target_tsi);
 
                                 // Store the replaced one so we can get it back in unmerge
@@ -706,9 +710,10 @@ namespace System.Windows.Forms
                 tsi.Owner.Items.RemoveNoOwnerOrLayout(tsi);
 
                 if (tsi.Owner is ToolStripOverflow)
-                    (tsi.Owner as ToolStripOverflow).ParentToolStrip.Items.RemoveNoOwnerOrLayout(
-                        tsi
-                    );
+                    (tsi.Owner as ToolStripOverflow)
+                        .ParentToolStrip
+                        .Items
+                        .RemoveNoOwnerOrLayout(tsi);
             }
         }
 

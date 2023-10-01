@@ -147,9 +147,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             return async cancellationToken =>
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
                 var openDocumentService = _serviceProvider.GetService<
                     SVsUIShellOpenDocument,
                     IVsUIShellOpenDocument
@@ -218,9 +218,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     );
                     _openFiles.Add(moniker, openFile);
 
-                    _threadingContext.JoinableTaskFactory.Run(
-                        () => openFile.RefreshFileAsync(CancellationToken.None).AsTask()
-                    );
+                    _threadingContext
+                        .JoinableTaskFactory
+                        .Run(() => openFile.RefreshFileAsync(CancellationToken.None).AsTask());
 
                     // Update the RDT flags to ensure the file can't be saved or appears in any MRUs as it's a temporary generated file name.
                     var cookie = (
@@ -315,8 +315,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _textBuffer = textBuffer;
                 _workspace = workspace;
                 _documentIdentity = documentIdentity;
-                _workspaceConfigurationService =
-                    _workspace.Services.GetService<IWorkspaceConfigurationService>();
+                _workspaceConfigurationService = _workspace
+                    .Services
+                    .GetService<IWorkspaceConfigurationService>();
 
                 // We'll create a read-only region for the file, but it'll be a dynamic region we can temporarily suspend
                 // while we're doing edits.
@@ -380,9 +381,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 SourceGeneratedDocument? generatedDocument = null;
                 SourceText? generatedSource = null;
-                var project = _workspace.CurrentSolution.GetProject(
-                    _documentIdentity.DocumentId.ProjectId
-                );
+                var project = _workspace
+                    .CurrentSolution
+                    .GetProject(_documentIdentity.DocumentId.ProjectId);
 
                 // Locals correspond to the equivalently-named fields; we'll assign these and then assign to the fields while on the
                 // UI thread to avoid any potential race where we update the InfoBar while this is running.
@@ -417,9 +418,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     {
                         // The file isn't there anymore; do we still have the generator at all?
                         if (
-                            project.AnalyzerReferences.Any(
-                                a => a.FullPath == _documentIdentity.Generator.AssemblyPath
-                            )
+                            project
+                                .AnalyzerReferences
+                                .Any(a => a.FullPath == _documentIdentity.Generator.AssemblyPath)
                         )
                         {
                             windowFrameMessageToShow = string.Format(
@@ -439,9 +440,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     }
                 }
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 _windowFrameMessageToShow = windowFrameMessageToShow;
                 _windowFrameImageMonikerToShow = windowFrameImageMonikerToShow;
@@ -458,10 +459,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                         // Ensure the encoding matches; this is necessary for debugger checksums to match what is in the PDB.
                         if (
-                            _fileManager._textDocumentFactoryService.TryGetTextDocument(
-                                _textBuffer,
-                                out var textDocument
-                            )
+                            _fileManager
+                                ._textDocumentFactoryService
+                                .TryGetTextDocument(_textBuffer, out var textDocument)
                         )
                         {
                             textDocument.Encoding = generatedSource.Encoding;
@@ -534,9 +534,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     // We'll start this work asynchronously to figure out if we need to change; if the file is closed the cancellationToken
                     // is triggered and this will no-op.
-                    var asyncToken = _fileManager._listener.BeginAsyncOperation(
-                        nameof(OpenSourceGeneratedFile) + "." + nameof(OnWorkspaceChanged)
-                    );
+                    var asyncToken = _fileManager
+                        ._listener
+                        .BeginAsyncOperation(
+                            nameof(OpenSourceGeneratedFile) + "." + nameof(OnWorkspaceChanged)
+                        );
 
                     Task.Run(
                             async () =>
@@ -647,11 +649,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             )
             {
                 var sourceText = _textBuffer.CurrentSnapshot.AsText();
-                return _fileManager._visualStudioDocumentNavigationService.NavigateToTextBufferAsync(
-                    _textBuffer,
-                    sourceText.GetVsTextSpanForSpan(sourceSpan),
-                    cancellationToken
-                );
+                return _fileManager
+                    ._visualStudioDocumentNavigationService
+                    .NavigateToTextBufferAsync(
+                        _textBuffer,
+                        sourceText.GetVsTextSpanForSpan(sourceSpan),
+                        cancellationToken
+                    );
             }
         }
     }

@@ -225,12 +225,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             Contract.ThrowIfNull(semanticModel);
 
             if (
-                CSharpSemanticFacts.Instance.IsInExpressionTree(
-                    semanticModel,
-                    instance.Syntax,
-                    infoCache.ExpressionOfTType,
-                    cancellationToken
-                )
+                CSharpSemanticFacts
+                    .Instance
+                    .IsInExpressionTree(
+                        semanticModel,
+                        instance.Syntax,
+                        infoCache.ExpressionOfTType,
+                        cancellationToken
+                    )
             )
                 return;
 

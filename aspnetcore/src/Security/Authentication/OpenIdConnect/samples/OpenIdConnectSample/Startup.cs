@@ -282,9 +282,9 @@ public class Startup
                 }
 
                 var options = optionsMonitor.Get(OpenIdConnectDefaults.AuthenticationScheme);
-                var metadata = await options.ConfigurationManager.GetConfigurationAsync(
-                    context.RequestAborted
-                );
+                var metadata = await options
+                    .ConfigurationManager
+                    .GetConfigurationAsync(context.RequestAborted);
 
                 var pairs = new Dictionary<string, string>()
                 {
@@ -294,11 +294,9 @@ public class Startup
                     { "refresh_token", refreshToken }
                 };
                 var content = new FormUrlEncodedContent(pairs);
-                var tokenResponse = await options.Backchannel.PostAsync(
-                    metadata.TokenEndpoint,
-                    content,
-                    context.RequestAborted
-                );
+                var tokenResponse = await options
+                    .Backchannel
+                    .PostAsync(metadata.TokenEndpoint, content, context.RequestAborted);
                 tokenResponse.EnsureSuccessStatusCode();
 
                 using (

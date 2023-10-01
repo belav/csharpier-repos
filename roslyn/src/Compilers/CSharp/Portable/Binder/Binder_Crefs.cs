@@ -1199,7 +1199,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Should be in a WithCrefTypeParametersBinder.
                     Debug.Assert(
                         typeArgumentSyntax.ContainsDiagnostics
-                            || !typeArgumentSyntax.SyntaxTree.ReportDocumentationCommentDiagnostics()
+                            || !typeArgumentSyntax
+                                .SyntaxTree
+                                .ReportDocumentationCommentDiagnostics()
                             || (
                                 !unusedDiagnostics.HasAnyErrors()
                                 && typeArgument.Type is CrefTypeParameterSymbol

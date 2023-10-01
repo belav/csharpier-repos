@@ -316,9 +316,9 @@ namespace System.Windows.Forms
             {
                 strArgs[i] = parameter.ToString();
             }
-            return this.element.Owner.InvokeScript(
-                "eval ('" + methodName + "(" + String.Join(",", strArgs) + ")');"
-            );
+            return this.element
+                .Owner
+                .InvokeScript("eval ('" + methodName + "(" + String.Join(",", strArgs) + ")');");
         }
 
         public void RaiseEvent(string eventName)

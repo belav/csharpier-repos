@@ -503,7 +503,8 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             UseTransaction,
             async context =>
             {
-                var query = await context.JsonEntitiesInheritance
+                var query = await context
+                    .JsonEntitiesInheritance
                     .OfType<JsonEntityInheritanceDerived>()
                     .ToListAsync();
                 var entity = query.Single();
@@ -527,7 +528,8 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
             },
             async context =>
             {
-                var result = await context.JsonEntitiesInheritance
+                var result = await context
+                    .JsonEntitiesInheritance
                     .OfType<JsonEntityInheritanceDerived>()
                     .SingleAsync();
                 var updatedCollection = result.CollectionOnDerived;
@@ -618,15 +620,18 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                 var query = await context.JsonEntitiesBasic.ToListAsync();
                 var entity = query.Single();
                 entity.OwnedReferenceRoot.OwnedCollectionBranch[0].Fraction = 4321.3m;
-                entity.OwnedReferenceRoot.OwnedCollectionBranch.Add(
-                    new JsonOwnedBranch
-                    {
-                        Date = new DateTime(2222, 11, 11),
-                        Enum = JsonEnum.Three,
-                        Fraction = 45.32m,
-                        OwnedReferenceLeaf = new JsonOwnedLeaf { SomethingSomething = "cc" },
-                    }
-                );
+                entity
+                    .OwnedReferenceRoot
+                    .OwnedCollectionBranch
+                    .Add(
+                        new JsonOwnedBranch
+                        {
+                            Date = new DateTime(2222, 11, 11),
+                            Enum = JsonEnum.Three,
+                            Fraction = 45.32m,
+                            OwnedReferenceLeaf = new JsonOwnedLeaf { SomethingSomething = "cc" },
+                        }
+                    );
 
                 ClearLog();
                 await context.SaveChangesAsync();

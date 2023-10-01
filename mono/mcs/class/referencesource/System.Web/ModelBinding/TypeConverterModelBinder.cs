@@ -23,10 +23,12 @@
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult vpResult = bindingContext.UnvalidatedValueProvider.GetValue(
-                bindingContext.ModelName,
-                skipValidation: !bindingContext.ValidateRequest
-            );
+            ValueProviderResult vpResult = bindingContext
+                .UnvalidatedValueProvider
+                .GetValue(
+                    bindingContext.ModelName,
+                    skipValidation: !bindingContext.ValidateRequest
+                );
             if (vpResult == null)
             {
                 return false; // no entry
@@ -51,10 +53,9 @@
                         );
                     if (errorString != null)
                     {
-                        bindingContext.ModelState.AddModelError(
-                            bindingContext.ModelName,
-                            errorString
-                        );
+                        bindingContext
+                            .ModelState
+                            .AddModelError(bindingContext.ModelName, errorString);
                     }
                 }
                 else

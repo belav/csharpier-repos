@@ -194,12 +194,14 @@ namespace System.ServiceModel.Channels
 
                 if (shouldReply)
                 {
-                    IAsyncResult result = this.context.innerContext.BeginReply(
-                        this.message,
-                        this.timeoutHelper.RemainingTime(),
-                        onReply,
-                        this
-                    );
+                    IAsyncResult result = this.context
+                        .innerContext
+                        .BeginReply(
+                            this.message,
+                            this.timeoutHelper.RemainingTime(),
+                            onReply,
+                            this
+                        );
                     if (result.CompletedSynchronously)
                     {
                         OnReplyCompleted(result);
@@ -280,12 +282,14 @@ namespace System.ServiceModel.Channels
                 IAsyncResult replyResult;
                 try
                 {
-                    replyResult = this.context.innerContext.BeginReply(
-                        this.replyMessage,
-                        this.timeoutHelper.RemainingTime(),
-                        onReply,
-                        this
-                    );
+                    replyResult = this.context
+                        .innerContext
+                        .BeginReply(
+                            this.replyMessage,
+                            this.timeoutHelper.RemainingTime(),
+                            onReply,
+                            this
+                        );
                     throwing = false;
                 }
                 finally

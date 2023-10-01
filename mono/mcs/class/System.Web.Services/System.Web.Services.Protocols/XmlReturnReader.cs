@@ -50,10 +50,9 @@ namespace System.Web.Services.Protocols
         public override object GetInitializer(LogicalMethodInfo methodInfo)
         {
             LogicalTypeInfo sti = TypeStubManager.GetLogicalTypeInfo(methodInfo.DeclaringType);
-            object[] ats = methodInfo.ReturnTypeCustomAttributeProvider.GetCustomAttributes(
-                typeof(XmlRootAttribute),
-                true
-            );
+            object[] ats = methodInfo
+                .ReturnTypeCustomAttributeProvider
+                .GetCustomAttributes(typeof(XmlRootAttribute), true);
             XmlRootAttribute root = ats.Length > 0 ? ats[0] as XmlRootAttribute : null;
             return new XmlSerializer(
                 methodInfo.ReturnType,
@@ -76,12 +75,9 @@ namespace System.Web.Services.Protocols
                 else
                 {
                     LogicalTypeInfo sti = TypeStubManager.GetLogicalTypeInfo(metinfo.DeclaringType);
-                    object[] ats = methodInfos[
-                        n
-                    ].ReturnTypeCustomAttributeProvider.GetCustomAttributes(
-                        typeof(XmlRootAttribute),
-                        true
-                    );
+                    object[] ats = methodInfos[n]
+                        .ReturnTypeCustomAttributeProvider
+                        .GetCustomAttributes(typeof(XmlRootAttribute), true);
                     XmlRootAttribute root = ats.Length > 0 ? ats[0] as XmlRootAttribute : null;
                     sers[n] = importer.ImportTypeMapping(
                         methodInfos[n].ReturnType,

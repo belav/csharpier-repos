@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             const string DiffOverviewMarginName = "deltadifferenceViewerOverview";
             if (mode == DifferenceViewMode.RightViewOnly)
             {
-                diffViewer.RightHost
+                diffViewer
+                    .RightHost
                     .GetTextViewMargin(DiffOverviewMarginName)
                     .VisualElement
                     .Hidden = true;
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             else
             {
                 Contract.ThrowIfFalse(mode == DifferenceViewMode.Inline);
-                diffViewer.InlineHost
+                diffViewer
+                    .InlineHost
                     .GetTextViewMargin(DiffOverviewMarginName)
                     .VisualElement
                     .Hidden = true;

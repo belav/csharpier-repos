@@ -16,7 +16,8 @@ public class ModelDescriptorTests
     {
         var descriptor = ModelDescriptor.FromType<ClassWithMultiLetterSetters>();
 
-        descriptor.PropertyDescriptors
+        descriptor
+            .PropertyDescriptors
             .Select(p => p.ValueName)
             .Should()
             .BeEquivalentTo(
@@ -32,7 +33,8 @@ public class ModelDescriptorTests
         var descriptor =
             ModelDescriptor.FromType<ClassWithSettersAndCtorParametersWithDifferentNames>();
 
-        descriptor.ConstructorDescriptors
+        descriptor
+            .ConstructorDescriptors
             .SelectMany(p => p.ParameterDescriptors)
             .Select(p => p.ValueName)
             .Should()

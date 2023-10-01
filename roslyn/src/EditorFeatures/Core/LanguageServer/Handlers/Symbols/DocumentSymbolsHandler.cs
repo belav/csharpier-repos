@@ -48,8 +48,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var document = context.GetRequiredDocument();
             var clientCapabilities = context.GetRequiredClientCapabilities();
 
-            var navBarService =
-                document.Project.Services.GetRequiredService<INavigationBarItemService>();
+            var navBarService = document
+                .Project
+                .Services
+                .GetRequiredService<INavigationBarItemService>();
             var navBarItems = await navBarService
                 .GetItemsAsync(
                     document,

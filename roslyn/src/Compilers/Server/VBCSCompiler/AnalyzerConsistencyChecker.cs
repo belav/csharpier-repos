@@ -127,10 +127,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 // binding redirects taking over. For example it's moving from an older version of System.Memory
                 // to the one shipping in the compiler. This is not a consistency issue.
                 if (
-                    PathUtilities.Comparer.Equals(
-                        compilerDirectory,
-                        Path.GetDirectoryName(loadedAssembly.CodeBase)
-                    )
+                    PathUtilities
+                        .Comparer
+                        .Equals(compilerDirectory, Path.GetDirectoryName(loadedAssembly.CodeBase))
                 )
                 {
                     continue;

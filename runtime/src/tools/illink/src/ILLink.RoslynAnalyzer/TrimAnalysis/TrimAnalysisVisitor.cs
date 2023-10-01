@@ -154,10 +154,9 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                 case "EmptyTypes" when field.ContainingType.IsTypeOf("System", "Type"):
 #if DEBUG
                 case "ArrayField"
-                    when field.ContainingType.IsTypeOf(
-                        "Mono.Linker.Tests.Cases.DataFlow",
-                        "WriteArrayField"
-                    ):
+                    when field
+                        .ContainingType
+                        .IsTypeOf("Mono.Linker.Tests.Cases.DataFlow", "WriteArrayField"):
 #endif
                 {
                     return ArrayValue.Create(0);

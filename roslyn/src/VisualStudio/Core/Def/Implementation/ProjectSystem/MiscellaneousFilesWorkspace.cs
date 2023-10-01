@@ -154,10 +154,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             if (
                 ErrorHandler.Succeeded(
-                    _lazyTextManager.Value.MapFilenameToLanguageSID(
-                        filename,
-                        out var fileLanguageGuid
-                    )
+                    _lazyTextManager
+                        .Value
+                        .MapFilenameToLanguageSID(filename, out var fileLanguageGuid)
                 )
             )
             {

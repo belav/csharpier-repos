@@ -176,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var getSymbolsTime = stopwatch.Elapsed;
             stopwatch = SharedStopwatch.StartNew();
 
-            var compilation = await document.Project
+            var compilation = await document
+                .Project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var items = ConvertSymbolsToCompletionItems(

@@ -34,7 +34,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ThrowHelper.ThrowIfNull(optionsBuilder);
 
             optionsBuilder.Services.AddHostedService<ValidationHostedService>();
-            optionsBuilder.Services
+            optionsBuilder
+                .Services
                 .AddOptions<ValidatorOptions>()
                 .Configure<IOptionsMonitor<TOptions>>(
                     (vo, options) =>

@@ -632,12 +632,14 @@ class C
             );
 
         public static IEnumerable<object[]> ClassificationTypeNamesToMatch =>
-            ClassificationTypeNames.AllTypeNames
+            ClassificationTypeNames
+                .AllTypeNames
                 .Where(
                     type =>
-                        !SemanticTokensHelpers.ClassificationTypeToSemanticTokenTypeMap.ContainsKey(
-                            type
-                        ) && !ClassificationTypeNames.AdditiveTypeNames.Contains(type)
+                        !SemanticTokensHelpers
+                            .ClassificationTypeToSemanticTokenTypeMap
+                            .ContainsKey(type)
+                        && !ClassificationTypeNames.AdditiveTypeNames.Contains(type)
                 )
                 .Select(field => new object[] { field });
     }

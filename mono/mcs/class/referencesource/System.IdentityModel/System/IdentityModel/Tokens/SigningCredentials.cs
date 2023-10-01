@@ -29,22 +29,22 @@ namespace System.IdentityModel.Tokens
         {
             if (signingKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("signingKey")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("signingKey"));
             }
 
             if (signatureAlgorithm == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("signatureAlgorithm")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("signatureAlgorithm"));
             }
             if (digestAlgorithm == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("digestAlgorithm")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("digestAlgorithm"));
             }
             this.signingKey = signingKey;
             this.signatureAlgorithm = signatureAlgorithm;

@@ -224,26 +224,32 @@ namespace System.ServiceModel.Dispatcher
             if (HasStream(messageDescription))
             {
                 if (messageDescription.IsTypedMessage)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxInvalidStreamInTypedMessage,
-                                messageDescription.MessageName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxInvalidStreamInTypedMessage,
+                                    messageDescription.MessageName
+                                )
                             )
-                        )
-                    );
+                        );
                 else if (isRequest)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxInvalidStreamInRequest, operationName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxInvalidStreamInRequest, operationName)
+                            )
+                        );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxInvalidStreamInResponse, operationName)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxInvalidStreamInResponse, operationName)
+                            )
+                        );
             }
             return null;
         }
@@ -383,24 +389,28 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (Fx.IsFatal(ex))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new IOException(SR.GetString(SR.SFxStreamIOException), ex)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new IOException(SR.GetString(SR.SFxStreamIOException), ex)
+                        );
                 }
             }
 
             private void EnsureStreamIsOpen()
             {
                 if (message.State == MessageState.Closed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(
-                            SR.GetString(
-                                isRequest
-                                    ? SR.SFxStreamRequestMessageClosed
-                                    : SR.SFxStreamResponseMessageClosed
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ObjectDisposedException(
+                                SR.GetString(
+                                    isRequest
+                                        ? SR.SFxStreamRequestMessageClosed
+                                        : SR.SFxStreamResponseMessageClosed
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             static void Exhaust(XmlDictionaryReader reader)

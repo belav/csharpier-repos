@@ -62,7 +62,8 @@ namespace POS_Server.Controllers
                             if (sectionList[i].isActive == 1)
                             {
                                 long sectionId = (long)sectionList[i].sectionId;
-                                var LocationL = entity.locations
+                                var LocationL = entity
+                                    .locations
                                     .Where(x => x.sectionId == sectionId)
                                     .Select(b => new { b.locationId })
                                     .FirstOrDefault();
@@ -133,7 +134,8 @@ namespace POS_Server.Controllers
                             if (sectionList[i].isActive == 1)
                             {
                                 long sectionId = (long)sectionList[i].sectionId;
-                                var LocationL = entity.locations
+                                var LocationL = entity
+                                    .locations
                                     .Where(x => x.sectionId == sectionId)
                                     .Select(b => new { b.locationId })
                                     .FirstOrDefault();
@@ -175,7 +177,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var location = entity.sections
+                    var location = entity
+                        .sections
                         .Where(u => u.sectionId == sectionId)
                         .Select(
                             L =>
@@ -262,7 +265,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var tmpSection = entity.sections
+                            var tmpSection = entity
+                                .sections
                                 .Where(p => p.sectionId == newObject.sectionId)
                                 .FirstOrDefault();
                             tmpSection.name = newObject.name;

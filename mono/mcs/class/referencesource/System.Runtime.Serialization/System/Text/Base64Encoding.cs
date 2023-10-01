@@ -219,21 +219,31 @@ namespace System.Text
         public override int GetMaxByteCount(int charCount)
         {
             if (charCount < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charCount",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
-            if ((charCount % 4) != 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(
-                        SR.GetString(
-                            SR.XmlInvalidBase64Length,
-                            charCount.ToString(NumberFormatInfo.CurrentInfo)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charCount",
+                            SR.GetString(SR.ValueMustBeNonNegative)
                         )
-                    )
-                );
+                    );
+            if ((charCount % 4) != 0)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(
+                                SR.XmlInvalidBase64Length,
+                                charCount.ToString(NumberFormatInfo.CurrentInfo)
+                            )
+                        )
+                    );
             return charCount / 4 * 3;
         }
 
@@ -257,49 +267,77 @@ namespace System.Text
         public override unsafe int GetByteCount(char[] chars, int index, int count)
         {
             if (chars == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("chars")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("chars"));
             if (index < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "index",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "index",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (index > chars.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "index",
-                        SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "index",
+                            SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
+                        )
+                    );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "count",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "count",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (count > chars.Length - index)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "count",
-                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, chars.Length - index)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "count",
+                            SR.GetString(SR.SizeExceedsRemainingBufferSpace, chars.Length - index)
+                        )
+                    );
 
             if (count == 0)
                 return 0;
             if ((count % 4) != 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(
-                        SR.GetString(
-                            SR.XmlInvalidBase64Length,
-                            count.ToString(NumberFormatInfo.CurrentInfo)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(
+                                SR.XmlInvalidBase64Length,
+                                count.ToString(NumberFormatInfo.CurrentInfo)
+                            )
                         )
-                    )
-                );
+                    );
             fixed (byte* _char2val = char2val)
             {
                 fixed (char* _chars = &chars[index])
@@ -316,15 +354,20 @@ namespace System.Text
                         char pch3 = pch[3];
 
                         if ((pch0 | pch1 | pch2 | pch3) >= 128)
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new FormatException(
-                                    SR.GetString(
-                                        SR.XmlInvalidBase64Sequence,
-                                        new string(pch, 0, 4),
-                                        index + (int)(pch - _chars)
+                            throw System
+                                .Runtime
+                                .Serialization
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new FormatException(
+                                        SR.GetString(
+                                            SR.XmlInvalidBase64Sequence,
+                                            new string(pch, 0, 4),
+                                            index + (int)(pch - _chars)
+                                        )
                                     )
-                                )
-                            );
+                                );
 
                         // xx765432 xx107654 xx321076 xx543210
                         // 76543210 76543210 76543210
@@ -334,15 +377,20 @@ namespace System.Text
                         int v4 = _char2val[pch3];
 
                         if (!IsValidLeadBytes(v1, v2, v3, v4) || !IsValidTailBytes(v3, v4))
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new FormatException(
-                                    SR.GetString(
-                                        SR.XmlInvalidBase64Sequence,
-                                        new string(pch, 0, 4),
-                                        index + (int)(pch - _chars)
+                            throw System
+                                .Runtime
+                                .Serialization
+                                .DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new FormatException(
+                                        SR.GetString(
+                                            SR.XmlInvalidBase64Sequence,
+                                            new string(pch, 0, 4),
+                                            index + (int)(pch - _chars)
+                                        )
                                     )
-                                )
-                            );
+                                );
 
                         int byteCount = (v4 != 64 ? 3 : (v3 != 64 ? 2 : 1));
                         totalCount += byteCount;
@@ -367,70 +415,114 @@ namespace System.Text
         )
         {
             if (chars == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("chars")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("chars"));
 
             if (charIndex < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charIndex",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charIndex",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (charIndex > chars.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charIndex",
-                        SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charIndex",
+                            SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
+                        )
+                    );
 
             if (charCount < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charCount",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charCount",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (charCount > chars.Length - charIndex)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charCount",
-                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, chars.Length - charIndex)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charCount",
+                            SR.GetString(
+                                SR.SizeExceedsRemainingBufferSpace,
+                                chars.Length - charIndex
+                            )
+                        )
+                    );
 
             if (bytes == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("bytes")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("bytes"));
             if (byteIndex < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteIndex",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteIndex",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (byteIndex > bytes.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteIndex",
-                        SR.GetString(SR.OffsetExceedsBufferSize, bytes.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteIndex",
+                            SR.GetString(SR.OffsetExceedsBufferSize, bytes.Length)
+                        )
+                    );
 
             if (charCount == 0)
                 return 0;
             if ((charCount % 4) != 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(
-                        SR.GetString(
-                            SR.XmlInvalidBase64Length,
-                            charCount.ToString(NumberFormatInfo.CurrentInfo)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(
+                                SR.XmlInvalidBase64Length,
+                                charCount.ToString(NumberFormatInfo.CurrentInfo)
+                            )
                         )
-                    )
-                );
+                    );
             fixed (byte* _char2val = char2val)
             {
                 fixed (char* _chars = &chars[charIndex])
@@ -450,15 +542,20 @@ namespace System.Text
                             char pch3 = pch[3];
 
                             if ((pch0 | pch1 | pch2 | pch3) >= 128)
-                                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new FormatException(
-                                        SR.GetString(
-                                            SR.XmlInvalidBase64Sequence,
-                                            new string(pch, 0, 4),
-                                            charIndex + (int)(pch - _chars)
+                                throw System
+                                    .Runtime
+                                    .Serialization
+                                    .DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new FormatException(
+                                            SR.GetString(
+                                                SR.XmlInvalidBase64Sequence,
+                                                new string(pch, 0, 4),
+                                                charIndex + (int)(pch - _chars)
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             // xx765432 xx107654 xx321076 xx543210
                             // 76543210 76543210 76543210
 
@@ -468,24 +565,34 @@ namespace System.Text
                             int v4 = _char2val[pch3];
 
                             if (!IsValidLeadBytes(v1, v2, v3, v4) || !IsValidTailBytes(v3, v4))
-                                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new FormatException(
-                                        SR.GetString(
-                                            SR.XmlInvalidBase64Sequence,
-                                            new string(pch, 0, 4),
-                                            charIndex + (int)(pch - _chars)
+                                throw System
+                                    .Runtime
+                                    .Serialization
+                                    .DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new FormatException(
+                                            SR.GetString(
+                                                SR.XmlInvalidBase64Sequence,
+                                                new string(pch, 0, 4),
+                                                charIndex + (int)(pch - _chars)
+                                            )
                                         )
-                                    )
-                                );
+                                    );
 
                             int byteCount = (v4 != 64 ? 3 : (v3 != 64 ? 2 : 1));
                             if (pb + byteCount > pbMax)
-                                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new ArgumentException(
-                                        SR.GetString(SR.XmlArrayTooSmall),
-                                        "bytes"
-                                    )
-                                );
+                                throw System
+                                    .Runtime
+                                    .Serialization
+                                    .DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new ArgumentException(
+                                            SR.GetString(SR.XmlArrayTooSmall),
+                                            "bytes"
+                                        )
+                                    );
 
                             pb[0] = (byte)((v1 << 2) | ((v2 >> 4) & 0x03));
                             if (byteCount > 1)
@@ -519,69 +626,113 @@ namespace System.Text
         )
         {
             if (chars == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("chars")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("chars"));
             if (charIndex < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charIndex",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charIndex",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (charIndex > chars.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charIndex",
-                        SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charIndex",
+                            SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
+                        )
+                    );
 
             if (charCount < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charCount",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charCount",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (charCount > chars.Length - charIndex)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charCount",
-                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, chars.Length - charIndex)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charCount",
+                            SR.GetString(
+                                SR.SizeExceedsRemainingBufferSpace,
+                                chars.Length - charIndex
+                            )
+                        )
+                    );
 
             if (bytes == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("bytes")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("bytes"));
             if (byteIndex < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteIndex",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteIndex",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (byteIndex > bytes.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteIndex",
-                        SR.GetString(SR.OffsetExceedsBufferSize, bytes.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteIndex",
+                            SR.GetString(SR.OffsetExceedsBufferSize, bytes.Length)
+                        )
+                    );
 
             if (charCount == 0)
                 return 0;
             if ((charCount % 4) != 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(
-                        SR.GetString(
-                            SR.XmlInvalidBase64Length,
-                            charCount.ToString(NumberFormatInfo.CurrentInfo)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(
+                                SR.XmlInvalidBase64Length,
+                                charCount.ToString(NumberFormatInfo.CurrentInfo)
+                            )
                         )
-                    )
-                );
+                    );
             fixed (byte* _char2val = char2val)
             {
                 fixed (byte* _chars = &chars[charIndex])
@@ -600,15 +751,20 @@ namespace System.Text
                             byte pch2 = pch[2];
                             byte pch3 = pch[3];
                             if ((pch0 | pch1 | pch2 | pch3) >= 128)
-                                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new FormatException(
-                                        SR.GetString(
-                                            SR.XmlInvalidBase64Sequence,
-                                            new string((sbyte*)pch, 0, 4),
-                                            charIndex + (int)(pch - _chars)
+                                throw System
+                                    .Runtime
+                                    .Serialization
+                                    .DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new FormatException(
+                                            SR.GetString(
+                                                SR.XmlInvalidBase64Sequence,
+                                                new string((sbyte*)pch, 0, 4),
+                                                charIndex + (int)(pch - _chars)
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             // xx765432 xx107654 xx321076 xx543210
                             // 76543210 76543210 76543210
 
@@ -618,24 +774,34 @@ namespace System.Text
                             int v4 = _char2val[pch3];
 
                             if (!IsValidLeadBytes(v1, v2, v3, v4) || !IsValidTailBytes(v3, v4))
-                                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new FormatException(
-                                        SR.GetString(
-                                            SR.XmlInvalidBase64Sequence,
-                                            new string((sbyte*)pch, 0, 4),
-                                            charIndex + (int)(pch - _chars)
+                                throw System
+                                    .Runtime
+                                    .Serialization
+                                    .DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new FormatException(
+                                            SR.GetString(
+                                                SR.XmlInvalidBase64Sequence,
+                                                new string((sbyte*)pch, 0, 4),
+                                                charIndex + (int)(pch - _chars)
+                                            )
                                         )
-                                    )
-                                );
+                                    );
 
                             int byteCount = (v4 != 64 ? 3 : (v3 != 64 ? 2 : 1));
                             if (pb + byteCount > pbMax)
-                                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new ArgumentException(
-                                        SR.GetString(SR.XmlArrayTooSmall),
-                                        "bytes"
-                                    )
-                                );
+                                throw System
+                                    .Runtime
+                                    .Serialization
+                                    .DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new ArgumentException(
+                                            SR.GetString(SR.XmlArrayTooSmall),
+                                            "bytes"
+                                        )
+                                    );
 
                             pb[0] = (byte)((v1 << 2) | ((v2 >> 4) & 0x03));
                             if (byteCount > 1)
@@ -670,12 +836,17 @@ namespace System.Text
         public override int GetMaxCharCount(int byteCount)
         {
             if (byteCount < 0 || byteCount > int.MaxValue / 4 * 3 - 2)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteCount",
-                        SR.GetString(SR.ValueMustBeInRange, 0, int.MaxValue / 4 * 3 - 2)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteCount",
+                            SR.GetString(SR.ValueMustBeInRange, 0, int.MaxValue / 4 * 3 - 2)
+                        )
+                    );
             return ((byteCount + 2) / 3) * 4;
         }
 
@@ -698,61 +869,105 @@ namespace System.Text
         )
         {
             if (bytes == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("bytes")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("bytes"));
             if (byteIndex < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteIndex",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteIndex",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (byteIndex > bytes.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteIndex",
-                        SR.GetString(SR.OffsetExceedsBufferSize, bytes.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteIndex",
+                            SR.GetString(SR.OffsetExceedsBufferSize, bytes.Length)
+                        )
+                    );
             if (byteCount < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteCount",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteCount",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (byteCount > bytes.Length - byteIndex)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteCount",
-                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, bytes.Length - byteIndex)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteCount",
+                            SR.GetString(
+                                SR.SizeExceedsRemainingBufferSpace,
+                                bytes.Length - byteIndex
+                            )
+                        )
+                    );
 
             int charCount = GetCharCount(bytes, byteIndex, byteCount);
             if (chars == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("chars")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("chars"));
             if (charIndex < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charIndex",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charIndex",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (charIndex > chars.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charIndex",
-                        SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charIndex",
+                            SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
+                        )
+                    );
             if (charCount < 0 || charCount > chars.Length - charIndex)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.XmlArrayTooSmall), "chars")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.XmlArrayTooSmall), "chars")
+                    );
 
             // We've computed exactly how many chars there are and verified that
             // there's enough space in the char buffer, so we can proceed without
@@ -834,62 +1049,106 @@ namespace System.Text
         )
         {
             if (bytes == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("bytes")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("bytes"));
             if (byteIndex < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteIndex",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteIndex",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (byteIndex > bytes.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteIndex",
-                        SR.GetString(SR.OffsetExceedsBufferSize, bytes.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteIndex",
+                            SR.GetString(SR.OffsetExceedsBufferSize, bytes.Length)
+                        )
+                    );
             if (byteCount < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteCount",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteCount",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (byteCount > bytes.Length - byteIndex)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "byteCount",
-                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, bytes.Length - byteIndex)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "byteCount",
+                            SR.GetString(
+                                SR.SizeExceedsRemainingBufferSpace,
+                                bytes.Length - byteIndex
+                            )
+                        )
+                    );
 
             int charCount = GetCharCount(bytes, byteIndex, byteCount);
             if (chars == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("chars")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("chars"));
             if (charIndex < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charIndex",
-                        SR.GetString(SR.ValueMustBeNonNegative)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charIndex",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
             if (charIndex > chars.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "charIndex",
-                        SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
-                    )
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "charIndex",
+                            SR.GetString(SR.OffsetExceedsBufferSize, chars.Length)
+                        )
+                    );
 
             if (charCount < 0 || charCount > chars.Length - charIndex)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.XmlArrayTooSmall), "chars")
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.XmlArrayTooSmall), "chars")
+                    );
 
             // We've computed exactly how many chars there are and verified that
             // there's enough space in the char buffer, so we can proceed without

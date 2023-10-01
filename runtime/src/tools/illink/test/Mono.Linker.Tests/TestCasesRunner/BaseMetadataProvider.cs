@@ -21,9 +21,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             _testCase = testCase;
             // The test case types are never nested so we don't need to worry about that
-            _testCaseTypeDefinition = fullTestCaseAssemblyDefinition.MainModule.GetType(
-                _testCase.ReconstructedFullTypeName
-            );
+            _testCaseTypeDefinition = fullTestCaseAssemblyDefinition
+                .MainModule
+                .GetType(_testCase.ReconstructedFullTypeName);
 
             if (_testCaseTypeDefinition == null)
                 throw new InvalidOperationException(
@@ -33,9 +33,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         protected T GetOptionAttributeValue<T>(string attributeName, T defaultValue)
         {
-            var attribute = _testCaseTypeDefinition.CustomAttributes.FirstOrDefault(
-                attr => attr.AttributeType.Name == attributeName
-            );
+            var attribute = _testCaseTypeDefinition
+                .CustomAttributes
+                .FirstOrDefault(attr => attr.AttributeType.Name == attributeName);
             if (attribute != null)
                 return (T)attribute.ConstructorArguments.First().Value;
 
@@ -74,7 +74,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     $"{parentType.FullName.Substring(parentType.Module.Name.Length - 3).Replace('.', '/')}.cs".ToNPath();
                 var pathElements = pathRelativeToAssembly.Elements.ToArray();
                 var topMostDirectoryName = pathElements[0];
-                var topMostDirectory = _testCase.SourceFile.RecursiveParents
+                var topMostDirectory = _testCase
+                    .SourceFile
+                    .RecursiveParents
                     .Reverse()
                     .FirstOrDefault(d => !d.IsRoot && d.FileName == topMostDirectoryName);
 
@@ -87,7 +89,9 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     if (pathElements.Length >= 3)
                     {
                         topMostDirectoryName = $"{pathElements[0]}.{pathElements[1]}";
-                        topMostDirectory = _testCase.SourceFile.RecursiveParents
+                        topMostDirectory = _testCase
+                            .SourceFile
+                            .RecursiveParents
                             .Reverse()
                             .FirstOrDefault(d => !d.IsRoot && d.FileName == topMostDirectoryName);
                         pathRelativeToAssembly = topMostDirectoryName

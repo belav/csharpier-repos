@@ -2725,10 +2725,9 @@ namespace System
         )
         {
             RuntimePropertyInfo property = null;
-            RuntimePropertyInfo[] candidates = reflectedType.Cache.GetPropertyList(
-                MemberListType.All,
-                null
-            );
+            RuntimePropertyInfo[] candidates = reflectedType
+                .Cache
+                .GetPropertyList(MemberListType.All, null);
 
             for (int i = 0; i < candidates.Length; i++)
             {
@@ -4144,10 +4143,10 @@ namespace System
                     }
 
                     // All the methods have the exact same name and sig so return the most derived one.
-                    return System.DefaultBinder.FindMostDerivedNewSlotMeth(
-                            candidates.ToArray(),
-                            candidates.Count
-                        ) as MethodInfo;
+                    return System
+                            .DefaultBinder
+                            .FindMostDerivedNewSlotMeth(candidates.ToArray(), candidates.Count)
+                        as MethodInfo;
                 }
             }
 
@@ -4268,12 +4267,9 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System.DefaultBinder.ExactPropertyBinding(
-                    candidates.ToArray(),
-                    returnType,
-                    types,
-                    modifiers
-                );
+                return System
+                    .DefaultBinder
+                    .ExactPropertyBinding(candidates.ToArray(), returnType, types, modifiers);
 
             if (binder == null)
                 binder = DefaultBinder;

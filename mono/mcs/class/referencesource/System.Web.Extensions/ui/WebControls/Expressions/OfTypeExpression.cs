@@ -103,9 +103,9 @@ namespace System.Web.UI.WebControls.Expressions
 
         public override IQueryable GetQueryable(IQueryable query)
         {
-            return query.Provider.CreateQuery(
-                Expression.Call(null, OfTypeMethod, query.Expression)
-            );
+            return query
+                .Provider
+                .CreateQuery(Expression.Call(null, OfTypeMethod, query.Expression));
         }
     }
 }

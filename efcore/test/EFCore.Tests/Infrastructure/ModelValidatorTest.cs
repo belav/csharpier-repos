@@ -1665,7 +1665,8 @@ public partial class ModelValidatorTest : ModelValidatorTestBase
 
         Assert.Equal(
             ValueGenerated.OnAdd,
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(NonSignedIntegerKeyEntity))
                 .FindProperty(nameof(NonSignedIntegerKeyEntity.Id))
                 .ValueGenerated

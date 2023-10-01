@@ -265,8 +265,9 @@ namespace System.Xml.Xsl.Xslt
 #endif // !FEATURE_PAL
 
             CodeCompileUnit[] codeUnits = new CodeCompileUnit[scriptsForLang.Count];
-            CompilerParameters compilParams =
-                lastScript.compilerInfo.CreateDefaultCompilerParameters();
+            CompilerParameters compilParams = lastScript
+                .compilerInfo
+                .CreateDefaultCompilerParameters();
 
             //
 
@@ -398,13 +399,15 @@ namespace System.Xml.Xsl.Xslt
             {
                 // Compiler might have created temporary files
                 results = new CompilerResults(compilParams.TempFiles);
-                results.Errors.Add(
-                    compiler.CreateError(
-                        lastScript.EndLineInfo, /*[XT_041]*/
-                        Res.Xslt_ScriptCompileException,
-                        e.Message
-                    )
-                );
+                results
+                    .Errors
+                    .Add(
+                        compiler.CreateError(
+                            lastScript.EndLineInfo, /*[XT_041]*/
+                            Res.Xslt_ScriptCompileException,
+                            e.Message
+                        )
+                    );
             }
 
             if (!settings.CheckOnly)

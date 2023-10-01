@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             var selectedSpans = args.TextView.Selection.IsEmpty
                 ? GetExpandedLine(editorOptions, args, cancellationToken)
-                : args.TextView.Selection
+                : args.TextView
+                    .Selection
                     .GetSnapshotSpansOnBuffer(args.SubjectBuffer)
                     .Where(ss => ss.Length > 0);
 
@@ -70,8 +71,12 @@ namespace Microsoft.CodeAnalysis.Interactive
         /// <summary>Returns the span for the currently selected line.</summary>
         private static IEnumerable<SnapshotSpan> GetSelectedLine(ITextView textView)
         {
-            var snapshotLine =
-                textView.Caret.Position.VirtualBufferPosition.Position.GetContainingLine();
+            var snapshotLine = textView
+                .Caret
+                .Position
+                .VirtualBufferPosition
+                .Position
+                .GetContainingLine();
             var span = new SnapshotSpan(snapshotLine.Start, snapshotLine.LengthIncludingLineBreak);
             return new NormalizedSnapshotSpanCollection(span);
         }
@@ -86,8 +91,9 @@ namespace Microsoft.CodeAnalysis.Interactive
             var selectedSpansEnd = selectedSpans.Max(span => span.End);
             var snapshot = args.TextView.TextSnapshot;
 
-            var document =
-                args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document = args.SubjectBuffer
+                .CurrentSnapshot
+                .GetOpenDocumentInCurrentContextWithChanges();
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
 
             var newSpans = GetExecutableSyntaxTreeNodeSelection(

@@ -169,13 +169,9 @@ namespace Mono.Globalization.Unicode
 
         void Compare(string s1, string s2, CompareOptions opt)
         {
-            Console.Error.WriteLine(
-                "compare ({3}): {0} {1} / {2}",
-                coll.Compare(s1, s2, opt),
-                s1,
-                s2,
-                opt
-            );
+            Console
+                .Error
+                .WriteLine("compare ({3}): {0} {1} / {2}", coll.Compare(s1, s2, opt), s1, s2, opt);
         }
 
         void Compare(
@@ -188,17 +184,19 @@ namespace Mono.Globalization.Unicode
             CompareOptions opt
         )
         {
-            Console.Error.WriteLine(
-                "compare ({3} {4} {5} {6} {7}): {0} {1} / {2}",
-                coll.Compare(s1, idx1, len1, s2, idx2, len2, opt),
-                s1,
-                s2,
-                opt,
-                idx1,
-                len1,
-                idx2,
-                len2
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "compare ({3} {4} {5} {6} {7}): {0} {1} / {2}",
+                    coll.Compare(s1, idx1, len1, s2, idx2, len2, opt),
+                    s1,
+                    s2,
+                    opt,
+                    idx1,
+                    len1,
+                    idx2,
+                    len2
+                );
         }
 
         void IndexOf(string s, char c, CompareOptions opt)
@@ -208,15 +206,17 @@ namespace Mono.Globalization.Unicode
 
         void IndexOf(string s, char c, int idx, int len, CompareOptions opt)
         {
-            Console.Error.WriteLine(
-                "cIndex ({3} {4} {5}): {0} {1} / {2}",
-                coll.IndexOf(s, c, idx, len, opt),
-                s,
-                c,
-                opt,
-                idx,
-                len
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "cIndex ({3} {4} {5}): {0} {1} / {2}",
+                    coll.IndexOf(s, c, idx, len, opt),
+                    s,
+                    c,
+                    opt,
+                    idx,
+                    len
+                );
         }
 
         void IndexOf(string s1, string s2, CompareOptions opt)
@@ -226,72 +226,66 @@ namespace Mono.Globalization.Unicode
 
         void IndexOf(string s1, string s2, int idx, int len, CompareOptions opt)
         {
-            Console.Error.WriteLine(
-                "sIndex ({3} {4} {5}): {0} {1} / {2}",
-                coll.IndexOf(s1, s2, idx, len, opt),
-                s1,
-                s2,
-                opt,
-                idx,
-                len
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "sIndex ({3} {4} {5}): {0} {1} / {2}",
+                    coll.IndexOf(s1, s2, idx, len, opt),
+                    s1,
+                    s2,
+                    opt,
+                    idx,
+                    len
+                );
         }
 
         void IsPrefix(string s1, string s2, CompareOptions opt)
         {
-            Console.Error.WriteLine(
-                "prefix ({3}): {0} {1} / {2}",
-                coll.IsPrefix(s1, s2, opt),
-                s1,
-                s2,
-                opt
-            );
+            Console
+                .Error
+                .WriteLine("prefix ({3}): {0} {1} / {2}", coll.IsPrefix(s1, s2, opt), s1, s2, opt);
         }
 
         void LastIndexOf(string s, char c, CompareOptions opt)
         {
-            Console.Error.WriteLine(
-                "cLast ({3}): {0} {1} / {2}",
-                coll.LastIndexOf(s, c, opt),
-                s,
-                c,
-                opt
-            );
+            Console
+                .Error
+                .WriteLine("cLast ({3}): {0} {1} / {2}", coll.LastIndexOf(s, c, opt), s, c, opt);
         }
 
         void LastIndexOf(string s1, string s2, CompareOptions opt)
         {
-            Console.Error.WriteLine(
-                "sLast ({3}): {0} {1} / {2}",
-                coll.LastIndexOf(s1, s2, opt),
-                s1,
-                s2,
-                opt
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "sLast ({3}): {0} {1} / {2}",
+                    coll.LastIndexOf(s1, s2, opt),
+                    s1,
+                    s2,
+                    opt
+                );
         }
 
         void LastIndexOf(string s1, string s2, int idx, int len, CompareOptions opt)
         {
-            Console.Error.WriteLine(
-                "sLast ({3},{4},{5}): {0} {1} / {2}",
-                coll.LastIndexOf(s1, s2, idx, len, opt),
-                s1,
-                s2,
-                opt,
-                idx,
-                len
-            );
+            Console
+                .Error
+                .WriteLine(
+                    "sLast ({3},{4},{5}): {0} {1} / {2}",
+                    coll.LastIndexOf(s1, s2, idx, len, opt),
+                    s1,
+                    s2,
+                    opt,
+                    idx,
+                    len
+                );
         }
 
         void IsSuffix(string s1, string s2, CompareOptions opt)
         {
-            Console.Error.WriteLine(
-                "suffix ({3}): {0} {1} / {2}",
-                coll.IsSuffix(s1, s2, opt),
-                s1,
-                s2,
-                opt
-            );
+            Console
+                .Error
+                .WriteLine("suffix ({3}): {0} {1} / {2}", coll.IsSuffix(s1, s2, opt), s1, s2, opt);
         }
 
         void DumpSortKey(string s)

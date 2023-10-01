@@ -274,7 +274,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var item = entity.usersLogs
+                        var item = entity
+                            .usersLogs
                             .Where(u => u.logId == logId)
                             .Select(
                                 S =>
@@ -368,7 +369,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        List<usersLogs> List = entity.usersLogs
+                        List<usersLogs> List = entity
+                            .usersLogs
                             .Where(S => S.userId == userId && S.sOutDate == null)
                             .ToList();
                         if (List != null)
@@ -524,7 +526,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             { //signOut
-                                tmpObject = entity.usersLogs
+                                tmpObject = entity
+                                    .usersLogs
                                     .Where(p => p.logId == newObject.logId)
                                     .FirstOrDefault();
 
@@ -838,7 +841,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         { //signOut
-                            tmpObject = entity.usersLogs
+                            tmpObject = entity
+                                .usersLogs
                                 .Where(p => p.logId == newObject.logId)
                                 .FirstOrDefault();
 
@@ -969,7 +973,8 @@ namespace POS_Server.Controllers
                         .ToList();
                     foreach (UsersRequest urout in soutlist)
                     {
-                        usersLogs userlogobj = entity.usersLogs
+                        usersLogs userlogobj = entity
+                            .usersLogs
                             .Where(u => u.userId == urout.userId && u.sOutDate == null)
                             .ToList()
                             .LastOrDefault();
@@ -1011,7 +1016,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         { //signOut
-                            tmpObject = entity.UsersRequest
+                            tmpObject = entity
+                                .UsersRequest
                                 .Where(p => p.userId == newObject.userId)
                                 .FirstOrDefault();
                             tmpObject.sInDate = newObject.sInDate;

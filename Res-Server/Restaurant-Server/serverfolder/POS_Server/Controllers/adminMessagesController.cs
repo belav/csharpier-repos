@@ -36,7 +36,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var itemList = entity.adminMessages
+                    var itemList = entity
+                        .adminMessages
                         .Select(
                             S =>
                                 new adminMessagesModel()
@@ -64,7 +65,8 @@ namespace POS_Server.Controllers
                             canDelete = false;
 
                             int Id = (int)item.msgId;
-                            var rowitem = entity.messagesPos
+                            var rowitem = entity
+                                .messagesPos
                                 .Where(x => x.msgId == Id && x.isReaded == true)
                                 .Select(x => new { x.msgId })
                                 .FirstOrDefault();
@@ -104,7 +106,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var item = entity.adminMessages
+                    var item = entity
+                        .adminMessages
                         .Where(S => S.msgId == Id)
                         .Select(
                             S =>
@@ -133,7 +136,8 @@ namespace POS_Server.Controllers
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                adminMessagesModel item = entity.adminMessages
+                adminMessagesModel item = entity
+                    .adminMessages
                     .Where(S => S.msgId == msgId)
                     .Select(
                         S =>
@@ -290,7 +294,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.adminMessages
+                            tmpObject = entity
+                                .adminMessages
                                 .Where(p => p.msgId == newObject.msgId)
                                 .FirstOrDefault();
                             tmpObject.msgId = newObject.msgId;
@@ -363,14 +368,16 @@ namespace POS_Server.Controllers
                         {
                             adminMessages Obj = entity.adminMessages.Find(msgId);
                             //check
-                            var rowitem = entity.messagesPos
+                            var rowitem = entity
+                                .messagesPos
                                 .Where(x => x.msgId == msgId && x.isReaded == true)
                                 .Select(x => new { x.msgId })
                                 .FirstOrDefault();
                             if ((rowitem is null))
                             {
                                 //delete related rows
-                                var Listitem = entity.messagesPos
+                                var Listitem = entity
+                                    .messagesPos
                                     .Where(x => x.msgId == msgId)
                                     .ToList();
                                 entity.messagesPos.RemoveRange(Listitem);
@@ -684,7 +691,8 @@ branchId
                             canDelete = false;
 
                             int Id = (int)item.msgId;
-                            var rowitem = entity.messagesPos
+                            var rowitem = entity
+                                .messagesPos
                                 .Where(x => x.msgId == Id && x.isReaded == true)
                                 .Select(x => new { x.msgId })
                                 .FirstOrDefault();

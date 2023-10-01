@@ -501,11 +501,13 @@ public class ComponentMarkupBlockPassTest
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        Engine.Features
+        Engine
+            .Features
             .OfType<ComponentDocumentClassifierPass>()
             .Single()
             .Execute(codeDocument, document);
-        Engine.Features
+        Engine
+            .Features
             .OfType<ComponentMarkupDiagnosticPass>()
             .Single()
             .Execute(codeDocument, document);

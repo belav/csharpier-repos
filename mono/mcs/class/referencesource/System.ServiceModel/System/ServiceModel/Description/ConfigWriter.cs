@@ -85,12 +85,14 @@ namespace System.ServiceModel.Description
                 string bindingSectionName;
 
                 if (!BindingsSection.TryAdd(bindingName, binding, config, out bindingSectionName))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.ConfigBindingCannotBeConfigured),
-                            "endpoint.Binding"
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(SR.ConfigBindingCannotBeConfigured),
+                                "endpoint.Binding"
+                            )
+                        );
 
                 bindingDV = new BindingDictionaryValue(bindingName, bindingSectionName);
                 bindingTable.Add(binding, bindingDV);

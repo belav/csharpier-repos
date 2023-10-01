@@ -392,19 +392,19 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     return false;
                 }
                 // Both are non-null at this point
-                bool whereClauseEqual = BoolExpression.EqualityComparer.Equals(
-                    left.RightCellQuery.WhereClause,
-                    right.RightCellQuery.WhereClause
-                );
+                bool whereClauseEqual = BoolExpression
+                    .EqualityComparer
+                    .Equals(left.RightCellQuery.WhereClause, right.RightCellQuery.WhereClause);
 
                 return left.RightExtent.Equals(right.RightExtent) && whereClauseEqual;
             }
 
             public int GetHashCode(LeftCellWrapper wrapper)
             {
-                return BoolExpression.EqualityComparer.GetHashCode(
-                        wrapper.RightCellQuery.WhereClause
-                    ) ^ wrapper.RightExtent.GetHashCode();
+                return BoolExpression
+                        .EqualityComparer
+                        .GetHashCode(wrapper.RightCellQuery.WhereClause)
+                    ^ wrapper.RightExtent.GetHashCode();
             }
         }
         #endregion
@@ -446,10 +446,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         {
             public int Compare(LeftCellWrapper x, LeftCellWrapper y)
             {
-                return StringComparer.Ordinal.Compare(
-                    x.OriginalCellNumberString,
-                    y.OriginalCellNumberString
-                );
+                return StringComparer
+                    .Ordinal
+                    .Compare(x.OriginalCellNumberString, y.OriginalCellNumberString);
             }
         }
 

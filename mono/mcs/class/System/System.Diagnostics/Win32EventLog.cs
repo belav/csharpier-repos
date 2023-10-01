@@ -563,10 +563,9 @@ namespace System.Diagnostics
         [MonoTODO("Support remote machines")]
         private static RegistryKey GetEventLogKey(string machineName, bool writable)
         {
-            return Registry.LocalMachine.OpenSubKey(
-                @"SYSTEM\CurrentControlSet\Services\EventLog",
-                writable
-            );
+            return Registry
+                .LocalMachine
+                .OpenSubKey(@"SYSTEM\CurrentControlSet\Services\EventLog", writable);
         }
 
         private static RegistryKey FindSourceKeyByName(

@@ -396,16 +396,16 @@ namespace System.IO
 
             if (
                 FrameworkEventSource.IsInitialized
-                && FrameworkEventSource.Log.IsEnabled(
-                    EventLevel.Informational,
-                    FrameworkEventSource.Keywords.ThreadTransfer
-                )
+                && FrameworkEventSource
+                    .Log
+                    .IsEnabled(
+                        EventLevel.Informational,
+                        FrameworkEventSource.Keywords.ThreadTransfer
+                    )
             )
-                FrameworkEventSource.Log.ThreadTransferReceive(
-                    (long)(asyncResult.OverLapped),
-                    2,
-                    string.Empty
-                );
+                FrameworkEventSource
+                    .Log
+                    .ThreadTransferReceive((long)(asyncResult.OverLapped), 2, string.Empty);
 
             // Handle reading from & writing to closed pipes.  While I'm not sure
             // this is entirely necessary anymore, maybe it's possible for
@@ -535,8 +535,10 @@ namespace System.IO
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly =
-                    System.Reflection.Assembly.GetCallingAssembly();
+                System.Reflection.Assembly callingAssembly = System
+                    .Reflection
+                    .Assembly
+                    .GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
                 {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
@@ -574,8 +576,10 @@ namespace System.IO
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly =
-                    System.Reflection.Assembly.GetCallingAssembly();
+                System.Reflection.Assembly callingAssembly = System
+                    .Reflection
+                    .Assembly
+                    .GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
                 {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
@@ -613,8 +617,10 @@ namespace System.IO
 #if FEATURE_LEGACYNETCF
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly =
-                    System.Reflection.Assembly.GetCallingAssembly();
+                System.Reflection.Assembly callingAssembly = System
+                    .Reflection
+                    .Assembly
+                    .GetCallingAssembly();
                 if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
                 {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
@@ -2861,17 +2867,16 @@ namespace System.IO
 
             if (
                 FrameworkEventSource.IsInitialized
-                && FrameworkEventSource.Log.IsEnabled(
-                    EventLevel.Informational,
-                    FrameworkEventSource.Keywords.ThreadTransfer
-                )
+                && FrameworkEventSource
+                    .Log
+                    .IsEnabled(
+                        EventLevel.Informational,
+                        FrameworkEventSource.Keywords.ThreadTransfer
+                    )
             )
-                FrameworkEventSource.Log.ThreadTransferSend(
-                    (long)(asyncResult.OverLapped),
-                    2,
-                    string.Empty,
-                    false
-                );
+                FrameworkEventSource
+                    .Log
+                    .ThreadTransferSend((long)(asyncResult.OverLapped), 2, string.Empty, false);
 
             // queue an async ReadFile operation and pass in a packed overlapped
             int hr = 0;
@@ -3194,17 +3199,16 @@ namespace System.IO
 
             if (
                 FrameworkEventSource.IsInitialized
-                && FrameworkEventSource.Log.IsEnabled(
-                    EventLevel.Informational,
-                    FrameworkEventSource.Keywords.ThreadTransfer
-                )
+                && FrameworkEventSource
+                    .Log
+                    .IsEnabled(
+                        EventLevel.Informational,
+                        FrameworkEventSource.Keywords.ThreadTransfer
+                    )
             )
-                FrameworkEventSource.Log.ThreadTransferSend(
-                    (long)(asyncResult.OverLapped),
-                    2,
-                    string.Empty,
-                    false
-                );
+                FrameworkEventSource
+                    .Log
+                    .ThreadTransferSend((long)(asyncResult.OverLapped), 2, string.Empty, false);
 
             int hr = 0;
             // queue an async WriteFile operation and pass in a packed overlapped

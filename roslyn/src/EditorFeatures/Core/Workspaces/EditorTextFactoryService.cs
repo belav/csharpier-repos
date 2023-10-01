@@ -104,11 +104,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             var buffer = CreateTextBuffer(reader);
 
             // use the given encoding as it is.
-            return buffer.CurrentSnapshot.AsRoslynText(
-                _textBufferCloneService,
-                encoding,
-                checksumAlgorithm
-            );
+            return buffer
+                .CurrentSnapshot
+                .AsRoslynText(_textBufferCloneService, encoding, checksumAlgorithm);
         }
 
         private ITextBuffer CreateTextBuffer(TextReader reader) =>
@@ -133,11 +131,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
             );
 
             var buffer = CreateTextBuffer(reader);
-            return buffer.CurrentSnapshot.AsRoslynText(
-                _textBufferCloneService,
-                reader.CurrentEncoding ?? Encoding.UTF8,
-                checksumAlgorithm
-            );
+            return buffer
+                .CurrentSnapshot
+                .AsRoslynText(
+                    _textBufferCloneService,
+                    reader.CurrentEncoding ?? Encoding.UTF8,
+                    checksumAlgorithm
+                );
         }
     }
 }

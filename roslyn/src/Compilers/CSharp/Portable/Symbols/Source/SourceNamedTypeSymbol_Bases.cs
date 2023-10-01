@@ -133,11 +133,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && this.DeclaringCompilation.IsAttributeType(localBase)
             )
             {
-                MessageID.IDS_FeatureGenericAttributes.CheckFeatureAvailability(
-                    diagnostics,
-                    this.DeclaringCompilation,
-                    baseLocation
-                );
+                MessageID
+                    .IDS_FeatureGenericAttributes
+                    .CheckFeatureAvailability(diagnostics, this.DeclaringCompilation, baseLocation);
             }
 
             // Check constraints on the first declaration with explicit bases.

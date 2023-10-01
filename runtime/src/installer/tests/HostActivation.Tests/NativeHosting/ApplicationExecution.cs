@@ -117,14 +117,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             var constraint = assertion.ExecuteApplication(hostPath, appPath);
             if (OperatingSystem.IsWindows())
             {
-                return constraint.And.HaveStdOutContaining(
-                    $"hostfxr_run_app threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
-                );
+                return constraint
+                    .And
+                    .HaveStdOutContaining(
+                        $"hostfxr_run_app threw exception: 0x{Constants.ErrorCode.COMPlusException.ToString("x")}"
+                    );
             }
             else
             {
                 // Exception is unhandled by native host on non-Windows systems
-                return constraint.And
+                return constraint
+                    .And
                     .ExitWith(Constants.ErrorCode.SIGABRT)
                     .And
                     .HaveStdErrContaining("Unhandled exception. System.Exception: Goodbye World!");

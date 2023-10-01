@@ -52,9 +52,11 @@ namespace System.Activities
             // This is valid to be called while aborting or while canceling
             if (!this.CurrentInstance.IsCancellationRequested && !this.asyncContext.IsAborting)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.MarkCanceledOnlyCallableIfCancelRequested)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.MarkCanceledOnlyCallableIfCancelRequested)
+                    );
             }
 
             this.CurrentInstance.MarkCanceled();

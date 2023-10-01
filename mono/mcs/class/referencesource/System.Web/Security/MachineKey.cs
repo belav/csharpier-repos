@@ -228,9 +228,9 @@ namespace System.Web.Security
             // If the user is calling this method, we want to use the ICryptoServiceProvider
             // regardless of whether or not it's the default provider.
 
-            Purpose derivedPurpose = Purpose.User_MachineKey_Protect.AppendSpecificPurposes(
-                purposes
-            );
+            Purpose derivedPurpose = Purpose
+                .User_MachineKey_Protect
+                .AppendSpecificPurposes(purposes);
             ICryptoService cryptoService = cryptoServiceProvider.GetCryptoService(derivedPurpose);
             return cryptoService.Protect(userData);
         }
@@ -272,9 +272,9 @@ namespace System.Web.Security
             // If the user is calling this method, we want to use the ICryptoServiceProvider
             // regardless of whether or not it's the default provider.
 
-            Purpose derivedPurpose = Purpose.User_MachineKey_Protect.AppendSpecificPurposes(
-                purposes
-            );
+            Purpose derivedPurpose = Purpose
+                .User_MachineKey_Protect
+                .AppendSpecificPurposes(purposes);
             ICryptoService cryptoService = cryptoServiceProvider.GetCryptoService(derivedPurpose);
             return cryptoService.Unprotect(protectedData);
         }

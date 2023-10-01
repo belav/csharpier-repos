@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             };
 
         public static readonly ImmutableArray<string> RoslynCustomTokenTypes =
-            ClassificationTypeNames.AllTypeNames
+            ClassificationTypeNames
+                .AllTypeNames
                 .Where(
                     type =>
                         !ClassificationTypeToSemanticTokenTypeMap.ContainsKey(type)
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 .Order()
                 .ToImmutableArray();
 
-        public static readonly ImmutableArray<string> AllTokenTypes = SemanticTokenTypes.AllTypes
+        public static readonly ImmutableArray<string> AllTokenTypes = SemanticTokenTypes
+            .AllTypes
             .Concat(RoslynCustomTokenTypes)
             .ToImmutableArray();
 
@@ -287,9 +289,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     // The check below ensures we correctly return the spans in the correct order, i.e. 'one', '""', 'two'.
                     while (
                         updatedSpanIndex + 1 < originalClassifiedSpans.Length
-                        && textSpan.Value.Contains(
-                            originalClassifiedSpans[updatedSpanIndex + 1].TextSpan
-                        )
+                        && textSpan
+                            .Value
+                            .Contains(originalClassifiedSpans[updatedSpanIndex + 1].TextSpan)
                     )
                     {
                         updatedClassifiedSpans.Add(originalClassifiedSpans[updatedSpanIndex + 1]);

@@ -75,7 +75,10 @@ public class UniqueConstraint : Annotatable, IPrimaryKeyConstraint
             ref _rowKeyValueFactory,
             this,
             static constraint =>
-                constraint.Table.Model.Model
+                constraint
+                    .Table
+                    .Model
+                    .Model
                     .GetRelationalDependencies()
                     .RowKeyValueFactoryFactory
                     .Create(constraint)

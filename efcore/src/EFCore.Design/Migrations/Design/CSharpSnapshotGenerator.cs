@@ -49,7 +49,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(model.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -149,10 +150,9 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
             ownerNavigation != null
             && entityType.HasSharedClrType
             && entityTypeName
-                == ownership!.PrincipalEntityType.GetOwnedName(
-                    entityType.ClrType.ShortDisplayName(),
-                    ownerNavigation
-                )
+                == ownership!
+                    .PrincipalEntityType
+                    .GetOwnedName(entityType.ClrType.ShortDisplayName(), ownerNavigation)
         )
         {
             entityTypeName = entityType.ClrType.DisplayName();
@@ -462,7 +462,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(sequence.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -557,7 +558,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(property.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -684,7 +686,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(key.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -768,7 +771,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(index.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -813,7 +817,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
             }
         }
 
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(entityType.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -882,9 +887,10 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
                     (string)discriminatorPropertyAnnotation.Value
                 )!;
                 var propertyClrType =
-                    FindValueConverter(discriminatorProperty)?.ProviderClrType.MakeNullable(
-                        discriminatorProperty.IsNullable
-                    ) ?? discriminatorProperty.ClrType;
+                    FindValueConverter(discriminatorProperty)
+                        ?.ProviderClrType
+                        .MakeNullable(discriminatorProperty.IsNullable)
+                    ?? discriminatorProperty.ClrType;
                 stringBuilder
                     .Append("<")
                     .Append(Code.Reference(propertyClrType))
@@ -1233,7 +1239,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(fragment.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -1308,7 +1315,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
             checkConstraint.Name != null
             && checkConstraint.Name
                 != (checkConstraint.GetDefaultName() ?? checkConstraint.ModelName);
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(checkConstraint.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -1402,7 +1410,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(trigger.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -1501,7 +1510,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(overrides.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -1677,7 +1687,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(foreignKey.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -1791,7 +1802,8 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         IndentedStringBuilder stringBuilder
     )
     {
-        var annotations = Dependencies.AnnotationCodeGenerator
+        var annotations = Dependencies
+            .AnnotationCodeGenerator
             .FilterIgnoredAnnotations(navigation.GetAnnotations())
             .ToDictionary(a => a.Name, a => a);
 
@@ -1951,10 +1963,9 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         bool leadingNewline = true
     )
     {
-        var fluentApiCalls = Dependencies.AnnotationCodeGenerator.GenerateFluentApiCalls(
-            annotatable,
-            annotations
-        );
+        var fluentApiCalls = Dependencies
+            .AnnotationCodeGenerator
+            .GenerateFluentApiCalls(annotatable, annotations);
 
         MethodCallCodeFragment? chainedCall = null;
         var typeQualifiedCalls = new List<MethodCallCodeFragment>();
@@ -2052,10 +2063,12 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
         if (
             entityType.HasSharedClrType
             && entityTypeName
-                == ownership!.PrincipalEntityType.GetOwnedName(
-                    entityType.ClrType.ShortDisplayName(),
-                    ownership.PrincipalToDependent!.Name
-                )
+                == ownership!
+                    .PrincipalEntityType
+                    .GetOwnedName(
+                        entityType.ClrType.ShortDisplayName(),
+                        ownership.PrincipalToDependent!.Name
+                    )
         )
         {
             entityTypeName = entityType.ClrType.DisplayName();

@@ -16,7 +16,8 @@ public static class ProductInfo
     /// </summary>
     /// <returns>The EF Core version being used.</returns>
     public static string GetVersion() =>
-        typeof(ProductInfo).Assembly
+        typeof(ProductInfo)
+            .Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
             .InformationalVersion;
 }

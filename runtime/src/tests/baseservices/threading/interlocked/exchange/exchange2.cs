@@ -47,9 +47,9 @@ public class InterlockedExchange2
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario(
-            "PosTest1: object Interlocked.Exchange(objct&,object)"
-        );
+        TestLibrary
+            .TestFramework
+            .BeginScenario("PosTest1: object Interlocked.Exchange(objct&,object)");
 
         try
         {
@@ -138,27 +138,31 @@ public class InterlockedExchange2
 
         if (!location.Equals(value))
         {
-            TestLibrary.TestFramework.LogError(
-                "003",
-                "Interlocked.Exchange() did not do the exchange correctly: Expected("
-                    + value
-                    + ") Actual("
-                    + location
-                    + ")"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError(
+                    "003",
+                    "Interlocked.Exchange() did not do the exchange correctly: Expected("
+                        + value
+                        + ") Actual("
+                        + location
+                        + ")"
+                );
             retVal = false;
         }
 
         if (!oldLocation.Equals(prevLocation))
         {
-            TestLibrary.TestFramework.LogError(
-                "004",
-                "Interlocked.Exchange() did not return the expected value: Expected("
-                    + prevLocation
-                    + ") Actual("
-                    + oldLocation
-                    + ")"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError(
+                    "004",
+                    "Interlocked.Exchange() did not return the expected value: Expected("
+                        + prevLocation
+                        + ") Actual("
+                        + oldLocation
+                        + ")"
+                );
             retVal = false;
         }
 

@@ -60,8 +60,11 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
                 if (navigableLocation == null)
                     return null;
 
-                var indicatorFactory =
-                    document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+                var indicatorFactory = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<IBackgroundWorkIndicatorFactory>();
 
                 return new NavigableSymbol(
                     _service,

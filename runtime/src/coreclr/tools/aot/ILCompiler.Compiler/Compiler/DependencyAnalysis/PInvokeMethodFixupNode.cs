@@ -209,10 +209,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public int CompareTo(PInvokeMethodData other, CompilerComparer comparer)
         {
-            var entryPointCompare = StringComparer.Ordinal.Compare(
-                EntryPointName,
-                other.EntryPointName
-            );
+            var entryPointCompare = StringComparer
+                .Ordinal
+                .Compare(EntryPointName, other.EntryPointName);
             if (entryPointCompare != 0)
                 return entryPointCompare;
 

@@ -38,9 +38,11 @@ namespace System.Activities.XamlIntegration
             ivsExpr = value as IValueSerializableExpression;
             if (ivsExpr == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.CannotSerializeExpression(value.GetType()))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.CannotSerializeExpression(value.GetType()))
+                    );
             }
             return ivsExpr.ConvertToString(context);
         }

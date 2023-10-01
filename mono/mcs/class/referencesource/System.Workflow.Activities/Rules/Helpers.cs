@@ -241,10 +241,10 @@ namespace System.Workflow.Activities.Rules
             else
             {
                 string resourceName = workflowType.Name + ".rules";
-                Stream stream = workflowType.Module.Assembly.GetManifestResourceStream(
-                    workflowType,
-                    resourceName
-                );
+                Stream stream = workflowType
+                    .Module
+                    .Assembly
+                    .GetManifestResourceStream(workflowType, resourceName);
 
                 // Try just the .rules file name. This is needed for wfc.exe compilation scenarios.
                 if (stream == null)

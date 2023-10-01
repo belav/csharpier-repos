@@ -614,29 +614,37 @@ namespace System.Data.Services.Client
             {
                 IAsyncResult asyncResult = beginCall(
                     ar =>
-                        System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                        {
-                            try
+                        System
+                            .Windows
+                            .Deployment
+                            .Current
+                            .Dispatcher
+                            .BeginInvoke(() =>
                             {
-                                QueryOperationResponse result = endCall(ar);
-                                this.asyncOperationInProgress = false;
-                                if (this.LoadCompleted != null)
+                                try
                                 {
-                                    this.LoadCompleted(
-                                        this,
-                                        new LoadCompletedEventArgs(result, null)
-                                    );
+                                    QueryOperationResponse result = endCall(ar);
+                                    this.asyncOperationInProgress = false;
+                                    if (this.LoadCompleted != null)
+                                    {
+                                        this.LoadCompleted(
+                                            this,
+                                            new LoadCompletedEventArgs(result, null)
+                                        );
+                                    }
                                 }
-                            }
-                            catch (Exception ex)
-                            {
-                                this.asyncOperationInProgress = false;
-                                if (this.LoadCompleted != null)
+                                catch (Exception ex)
                                 {
-                                    this.LoadCompleted(this, new LoadCompletedEventArgs(null, ex));
+                                    this.asyncOperationInProgress = false;
+                                    if (this.LoadCompleted != null)
+                                    {
+                                        this.LoadCompleted(
+                                            this,
+                                            new LoadCompletedEventArgs(null, ex)
+                                        );
+                                    }
                                 }
-                            }
-                        })
+                            })
                 );
             }
             catch (Exception)

@@ -565,12 +565,15 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Response.Headers.Vary = new StringValues(
             new[] { "headerA", "HEADERB", "HEADERc" }
         );
-        context.HttpContext.Features.Set<IResponseCachingFeature>(
-            new ResponseCachingFeature()
-            {
-                VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
-            }
-        );
+        context
+            .HttpContext
+            .Features
+            .Set<IResponseCachingFeature>(
+                new ResponseCachingFeature()
+                {
+                    VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
+                }
+            );
         var cachedVaryByRules = new CachedVaryByRules()
         {
             Headers = new StringValues(new[] { "HeaderA", "HeaderB" }),
@@ -596,12 +599,15 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Response.Headers.Vary = new StringValues(
             new[] { "headerA", "HEADERB" }
         );
-        context.HttpContext.Features.Set<IResponseCachingFeature>(
-            new ResponseCachingFeature()
-            {
-                VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
-            }
-        );
+        context
+            .HttpContext
+            .Features
+            .Set<IResponseCachingFeature>(
+                new ResponseCachingFeature()
+                {
+                    VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
+                }
+            );
         var cachedVaryByRules = new CachedVaryByRules()
         {
             VaryByKeyPrefix = FastGuid.NewGuid().IdString,
@@ -648,9 +654,10 @@ public class ResponseCachingMiddlewareTests
         var context = TestUtils.CreateTestContext();
 
         context.HttpContext.Response.Headers.Vary = vary;
-        context.HttpContext.Features.Set<IResponseCachingFeature>(
-            new ResponseCachingFeature() { VaryByQueryKeys = vary }
-        );
+        context
+            .HttpContext
+            .Features
+            .Set<IResponseCachingFeature>(new ResponseCachingFeature() { VaryByQueryKeys = vary });
 
         middleware.FinalizeCacheHeaders(context);
 

@@ -33,9 +33,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public static CompletionSessionData GetOrCreateSessionData(
             IAsyncCompletionSession session
         ) =>
-            session.Properties.GetOrCreateSingletonProperty(
-                RoslynCompletionSessionData,
-                static () => new CompletionSessionData()
-            );
+            session
+                .Properties
+                .GetOrCreateSingletonProperty(
+                    RoslynCompletionSessionData,
+                    static () => new CompletionSessionData()
+                );
     }
 }

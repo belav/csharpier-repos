@@ -26,10 +26,12 @@ namespace System.ServiceModel.Configuration
 
             if (!(value is int))
             {
-                throw FxTrace.Exception.Argument(
-                    "value",
-                    InternalSR.IncompatibleArgumentType(typeof(int), value.GetType())
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "value",
+                        InternalSR.IncompatibleArgumentType(typeof(int), value.GetType())
+                    );
             }
 
             if ((int)value == 0)

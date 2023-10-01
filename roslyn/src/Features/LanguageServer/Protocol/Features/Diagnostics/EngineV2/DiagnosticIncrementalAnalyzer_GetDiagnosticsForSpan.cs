@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             )
             {
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                var stateSets = owner._stateManager
+                var stateSets = owner
+                    ._stateManager
                     .GetOrCreateStateSets(document.Project)
                     .Where(
                         s =>
@@ -146,16 +147,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             )
                     );
 
-                var ideOptions = owner.AnalyzerService.GlobalOptions.GetIdeAnalyzerOptions(
-                    document.Project
-                );
+                var ideOptions = owner
+                    .AnalyzerService
+                    .GlobalOptions
+                    .GetIdeAnalyzerOptions(document.Project);
 
                 // We want to cache computed full document diagnostics in LatestDiagnosticsForSpanGetter
                 // only in LSP pull diagnostics mode. In LSP push diagnostics mode,
                 // the background analysis from solution crawler handles caching these diagnostics and
                 // updating the error list simultaneously.
-                var cacheFullDocumentDiagnostics =
-                    owner.AnalyzerService.GlobalOptions.IsLspPullDiagnostics();
+                var cacheFullDocumentDiagnostics = owner
+                    .AnalyzerService
+                    .GlobalOptions
+                    .IsLspPullDiagnostics();
 
                 // We log performance info when we are computing diagnostics for a span
                 // and also blocking for data, i.e. for lightbulb code path for "Ctrl + Dot" user command.
@@ -404,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // Skip analyzer if none of its reported diagnostics should be included.
                     if (
                         shouldIncludeDiagnostic != null
-                        && !owner.DiagnosticAnalyzerInfoCache
+                        && !owner
+                            .DiagnosticAnalyzerInfoCache
                             .GetDiagnosticDescriptors(analyzer)
                             .Any(
                                 static (a, shouldIncludeDiagnostic) =>
@@ -514,7 +519,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 > diagnosticsMap;
                 if (incrementalAnalysis)
                 {
-                    diagnosticsMap = await _owner._incrementalMemberEditAnalyzer
+                    diagnosticsMap = await _owner
+                        ._incrementalMemberEditAnalyzer
                         .ComputeDiagnosticsAsync(
                             executor,
                             stateSets,
@@ -549,9 +555,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 if (incrementalAnalysis)
-                    _owner._incrementalMemberEditAnalyzer.UpdateDocumentWithCachedDiagnostics(
-                        (Document)_document
-                    );
+                    _owner
+                        ._incrementalMemberEditAnalyzer
+                        .UpdateDocumentWithCachedDiagnostics((Document)_document);
             }
 
             private async Task<
@@ -639,16 +645,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return diagnostic.DocumentId == _document.Id
                     && (
                         _range == null
-                        || _range.Value.IntersectsWith(
-                            diagnostic.DataLocation.UnmappedFileSpan.GetClampedTextSpan(_text)
-                        )
+                        || _range
+                            .Value
+                            .IntersectsWith(
+                                diagnostic.DataLocation.UnmappedFileSpan.GetClampedTextSpan(_text)
+                            )
                     )
                     && (_includeSuppressedDiagnostics || !diagnostic.IsSuppressed)
                     && (
                         _includeCompilerDiagnostics
-                        || !diagnostic.CustomTags.Any(
-                            static t => t is WellKnownDiagnosticTags.Compiler
-                        )
+                        || !diagnostic
+                            .CustomTags
+                            .Any(static t => t is WellKnownDiagnosticTags.Compiler)
                     )
                     && (
                         _shouldIncludeDiagnostic == null || _shouldIncludeDiagnostic(diagnostic.Id)

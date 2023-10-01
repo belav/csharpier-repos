@@ -19,7 +19,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Browse_ReturnsViewWithGenre()
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -43,7 +44,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Index_CreatesViewWithGenres()
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -64,7 +66,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Details_ReturnsAlbumDetail()
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -124,7 +127,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Index_GetsSixTopAlbums()
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -183,7 +187,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task GenreMenuComponent_Returns_NineGenres()
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -216,7 +221,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         };
 
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -242,7 +248,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const string cartId = "CartId_A";
 
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -277,7 +284,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Complete_ReturnsOrderIdIfValid()
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -299,7 +307,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Complete_ReturnsErrorIfInvalidOrder()
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -322,7 +331,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const int itemCount = 10;
 
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -363,7 +373,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async void Music_store_project_to_mapped_entity()
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -409,7 +420,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const int unitPrice = 10;
 
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -447,7 +459,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
     public virtual async Task Cart_is_empty_when_no_items_have_been_added(string cartId)
     {
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -468,7 +481,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const string cartId = "CartId_A";
 
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -495,7 +509,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         const string cartId = "CartId_A";
 
         using var context = CreateContext();
-        await context.Database
+        await context
+            .Database
             .CreateExecutionStrategy()
             .ExecuteAsync(async () =>
             {
@@ -529,16 +544,18 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
         var shoppingCartId = "CartId_A";
         var id = 1;
-        var query = context.CartItems.Select(
-            ci =>
-                new CartItem
-                {
-                    CartId = ci.CartId,
-                    CartItemId = ci.CartItemId,
-                    Count = ci.Count,
-                    Album = new Album { Title = ci.Album.Title }
-                }
-        );
+        var query = context
+            .CartItems
+            .Select(
+                ci =>
+                    new CartItem
+                    {
+                        CartId = ci.CartId,
+                        CartItemId = ci.CartItemId,
+                        Count = ci.Count,
+                        Album = new Album { Title = ci.Album.Title }
+                    }
+            );
 
         var cartItem = async
             ? await query.FirstOrDefaultAsync(
@@ -638,7 +655,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         {
             var cart = ShoppingCart.GetCart(_context, _cartId);
 
-            var cartItem = await _context.CartItems
+            var cartItem = await _context
+                .CartItems
                 .Where(item => item.CartItemId == cartItemId)
                 .Include(c => c.Album)
                 .SingleOrDefaultAsync();
@@ -748,9 +766,9 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
         {
             var userName = "RainbowDash";
 
-            var isValid = await context.Orders.AnyAsync(
-                o => o.OrderId == id && o.Username == userName
-            );
+            var isValid = await context
+                .Orders
+                .AnyAsync(o => o.OrderId == id && o.Username == userName);
 
             if (isValid)
             {
@@ -772,7 +790,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         public async Task<List<string>> InvokeAsync()
         {
-            var genres = await _context.Genres
+            var genres = await _context
+                .Genres
                 .OrderBy(e => e.GenreId)
                 .Select(g => g.Name)
                 .Take(9)
@@ -816,7 +835,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         public async Task<Genre> Browse(string genre)
         {
-            var genreModel = await _context.Genres
+            var genreModel = await _context
+                .Genres
                 .Include(g => g.Albums)
                 .Where(g => g.Name == genre)
                 .FirstOrDefaultAsync();
@@ -826,7 +846,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
 
         public async Task<Album> Details(int id)
         {
-            var album = await _context.Albums
+            var album = await _context
+                .Albums
                 .Where(a => a.AlbumId == id)
                 .Include(a => a.Artist)
                 .Include(a => a.Genre)

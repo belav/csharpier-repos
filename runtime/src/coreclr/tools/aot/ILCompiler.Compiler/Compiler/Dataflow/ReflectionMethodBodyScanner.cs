@@ -365,12 +365,12 @@ namespace ILCompiler.Dataflow
             var callingMethodDefinition = callingMethodBody.OwningMethod;
             Debug.Assert(callingMethodDefinition == diagnosticContext.Origin.MemberDefinition);
 
-            bool requiresDataFlowAnalysis = reflectionMarker.Annotations.RequiresDataflowAnalysis(
-                calledMethod
-            );
-            var annotatedMethodReturnValue = reflectionMarker.Annotations.GetMethodReturnValue(
-                calledMethod
-            );
+            bool requiresDataFlowAnalysis = reflectionMarker
+                .Annotations
+                .RequiresDataflowAnalysis(calledMethod);
+            var annotatedMethodReturnValue = reflectionMarker
+                .Annotations
+                .GetMethodReturnValue(calledMethod);
             Debug.Assert(
                 requiresDataFlowAnalysis
                     || annotatedMethodReturnValue.DynamicallyAccessedMemberTypes
@@ -546,19 +546,29 @@ namespace ILCompiler.Dataflow
                             if (
                                 value is SystemTypeValue systemTypeValue
                                 && !systemTypeValue.RepresentedType.Type.IsGenericDefinition
-                                && !systemTypeValue.RepresentedType.Type.ContainsSignatureVariables(
-                                    treatGenericParameterLikeSignatureVariable: true
-                                )
+                                && !systemTypeValue
+                                    .RepresentedType
+                                    .Type
+                                    .ContainsSignatureVariables(
+                                        treatGenericParameterLikeSignatureVariable: true
+                                    )
                             )
                             {
                                 if (systemTypeValue.RepresentedType.Type.IsEnum)
                                 {
-                                    reflectionMarker.Dependencies.Add(
-                                        reflectionMarker.Factory.ConstructedTypeSymbol(
-                                            systemTypeValue.RepresentedType.Type.MakeArrayType()
-                                        ),
-                                        "Enum.GetValues"
-                                    );
+                                    reflectionMarker
+                                        .Dependencies
+                                        .Add(
+                                            reflectionMarker
+                                                .Factory
+                                                .ConstructedTypeSymbol(
+                                                    systemTypeValue
+                                                        .RepresentedType
+                                                        .Type
+                                                        .MakeArrayType()
+                                                ),
+                                            "Enum.GetValues"
+                                        );
                                 }
                             }
                             else
@@ -597,32 +607,47 @@ namespace ILCompiler.Dataflow
                             if (
                                 value is SystemTypeValue systemTypeValue
                                 && !systemTypeValue.RepresentedType.Type.IsGenericDefinition
-                                && !systemTypeValue.RepresentedType.Type.ContainsSignatureVariables(
-                                    treatGenericParameterLikeSignatureVariable: true
-                                )
+                                && !systemTypeValue
+                                    .RepresentedType
+                                    .Type
+                                    .ContainsSignatureVariables(
+                                        treatGenericParameterLikeSignatureVariable: true
+                                    )
                             )
                             {
                                 if (systemTypeValue.RepresentedType.Type.IsDefType)
                                 {
-                                    reflectionMarker.Dependencies.Add(
-                                        reflectionMarker.Factory.StructMarshallingData(
-                                            (DefType)systemTypeValue.RepresentedType.Type
-                                        ),
-                                        "Marshal API"
-                                    );
-                                    if (
-                                        intrinsicId == IntrinsicId.Marshal_PtrToStructure
-                                        && systemTypeValue.RepresentedType.Type.GetParameterlessConstructor()
-                                            is MethodDesc ctorMethod
-                                        && !reflectionMarker.Factory.MetadataManager.IsReflectionBlocked(
-                                            ctorMethod
-                                        )
-                                    )
-                                    {
-                                        reflectionMarker.Dependencies.Add(
-                                            reflectionMarker.Factory.ReflectableMethod(ctorMethod),
+                                    reflectionMarker
+                                        .Dependencies
+                                        .Add(
+                                            reflectionMarker
+                                                .Factory
+                                                .StructMarshallingData(
+                                                    (DefType)systemTypeValue.RepresentedType.Type
+                                                ),
                                             "Marshal API"
                                         );
+                                    if (
+                                        intrinsicId == IntrinsicId.Marshal_PtrToStructure
+                                        && systemTypeValue
+                                            .RepresentedType
+                                            .Type
+                                            .GetParameterlessConstructor()
+                                            is MethodDesc ctorMethod
+                                        && !reflectionMarker
+                                            .Factory
+                                            .MetadataManager
+                                            .IsReflectionBlocked(ctorMethod)
+                                    )
+                                    {
+                                        reflectionMarker
+                                            .Dependencies
+                                            .Add(
+                                                reflectionMarker
+                                                    .Factory
+                                                    .ReflectableMethod(ctorMethod),
+                                                "Marshal API"
+                                            );
                                     }
                                 }
                             }
@@ -650,19 +675,26 @@ namespace ILCompiler.Dataflow
                             if (
                                 value is SystemTypeValue systemTypeValue
                                 && !systemTypeValue.RepresentedType.Type.IsGenericDefinition
-                                && !systemTypeValue.RepresentedType.Type.ContainsSignatureVariables(
-                                    treatGenericParameterLikeSignatureVariable: true
-                                )
+                                && !systemTypeValue
+                                    .RepresentedType
+                                    .Type
+                                    .ContainsSignatureVariables(
+                                        treatGenericParameterLikeSignatureVariable: true
+                                    )
                             )
                             {
                                 if (systemTypeValue.RepresentedType.Type.IsDelegate)
                                 {
-                                    reflectionMarker.Dependencies.Add(
-                                        reflectionMarker.Factory.DelegateMarshallingData(
-                                            (DefType)systemTypeValue.RepresentedType.Type
-                                        ),
-                                        "Marshal API"
-                                    );
+                                    reflectionMarker
+                                        .Dependencies
+                                        .Add(
+                                            reflectionMarker
+                                                .Factory
+                                                .DelegateMarshallingData(
+                                                    (DefType)systemTypeValue.RepresentedType.Type
+                                                ),
+                                            "Marshal API"
+                                        );
                                 }
                             }
                             else
@@ -736,32 +768,36 @@ namespace ILCompiler.Dataflow
                                 MetadataType closestMetadataType = staticType is MetadataType mdType
                                     ? mdType
                                     : (MetadataType)
-                                        reflectionMarker.Factory.TypeSystemContext.GetWellKnownType(
-                                            Internal.TypeSystem.WellKnownType.Array
-                                        );
+                                        reflectionMarker
+                                            .Factory
+                                            .TypeSystemContext
+                                            .GetWellKnownType(
+                                                Internal.TypeSystem.WellKnownType.Array
+                                            );
 
-                                var annotation = reflectionMarker.Annotations.GetTypeAnnotation(
-                                    staticType
-                                );
+                                var annotation = reflectionMarker
+                                    .Annotations
+                                    .GetTypeAnnotation(staticType);
 
                                 if (annotation != default)
                                 {
-                                    reflectionMarker.Dependencies.Add(
-                                        reflectionMarker.Factory.ObjectGetTypeFlowDependencies(
-                                            closestMetadataType
-                                        ),
-                                        "GetType called on this type"
-                                    );
+                                    reflectionMarker
+                                        .Dependencies
+                                        .Add(
+                                            reflectionMarker
+                                                .Factory
+                                                .ObjectGetTypeFlowDependencies(closestMetadataType),
+                                            "GetType called on this type"
+                                        );
                                 }
 
                                 // Return a value which is "unknown type" with annotation. For now we'll use the return value node
                                 // for the method, which means we're loosing the information about which staticType this
                                 // started with. For now we don't need it, but we can add it later on.
                                 AddReturnValue(
-                                    reflectionMarker.Annotations.GetMethodReturnValue(
-                                        calledMethod,
-                                        annotation
-                                    )
+                                    reflectionMarker
+                                        .Annotations
+                                        .GetMethodReturnValue(calledMethod, annotation)
                                 );
                             }
                         }
@@ -791,9 +827,9 @@ namespace ILCompiler.Dataflow
                     )
                     {
                         if (
-                            !methodReturnValueWithMemberTypes.DynamicallyAccessedMemberTypes.HasFlag(
-                                annotatedMethodReturnValue.DynamicallyAccessedMemberTypes
-                            )
+                            !methodReturnValueWithMemberTypes
+                                .DynamicallyAccessedMemberTypes
+                                .HasFlag(annotatedMethodReturnValue.DynamicallyAccessedMemberTypes)
                         )
                             throw new InvalidOperationException(
                                 $"Internal linker error: processing of call from {callingMethodDefinition.GetDisplayName()} to {calledMethod.GetDisplayName()} returned value which is not correctly annotated with the expected dynamic member access kinds."

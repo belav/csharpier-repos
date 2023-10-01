@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var sourceText = @"public class C { void M() { } }";
 
-            var sol = new AdhocWorkspace().CurrentSolution
+            var sol = new AdhocWorkspace()
+                .CurrentSolution
                 .AddProject(pid, "proj", "proj", LanguageNames.CSharp)
                 .AddDocument(did, "doc", sourceText);
 

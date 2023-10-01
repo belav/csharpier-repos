@@ -909,7 +909,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                     .ThenInclude(e => e.ThreeSkipPayloadFull)
                         )
                 )
-            ).Message
+            )
+                .Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -940,7 +941,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                     .ThenInclude(e => e.ThreeSkipPayloadFull)
                         )
                 )
-            ).Message
+            )
+                .Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -1115,7 +1117,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                     .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
                         )
                 )
-            ).Message
+            )
+                .Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );
@@ -1682,7 +1685,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                                     )
                         )
                 )
-            ).Message
+            )
+                .Message
                 .Replace("\r", "")
                 .Replace("\n", "")
         );

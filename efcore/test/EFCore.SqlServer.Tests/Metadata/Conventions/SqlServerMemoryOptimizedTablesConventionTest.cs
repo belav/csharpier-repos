@@ -13,13 +13,15 @@ public class SqlServerMemoryOptimizedTablesConventionTest
         modelBuilder.Entity<Order>();
 
         Assert.True(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetKeys()
                 .All(k => k.IsClustered() == null)
         );
         Assert.True(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetIndexes()
                 .All(k => k.IsClustered() == null)
@@ -31,13 +33,15 @@ public class SqlServerMemoryOptimizedTablesConventionTest
         modelBuilder.Entity<Order>().HasIndex(o => o.CustomerId);
 
         Assert.True(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetKeys()
                 .All(k => k.IsClustered() == false)
         );
         Assert.True(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetIndexes()
                 .All(k => k.IsClustered() == false)
@@ -46,13 +50,15 @@ public class SqlServerMemoryOptimizedTablesConventionTest
         modelBuilder.Entity<Order>().ToTable(tb => tb.IsMemoryOptimized(false));
 
         Assert.True(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetKeys()
                 .All(k => k.IsClustered() == null)
         );
         Assert.True(
-            modelBuilder.Model
+            modelBuilder
+                .Model
                 .FindEntityType(typeof(Order))
                 .GetIndexes()
                 .All(k => k.IsClustered() == null)

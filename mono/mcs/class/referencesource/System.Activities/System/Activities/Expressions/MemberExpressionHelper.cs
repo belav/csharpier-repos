@@ -111,9 +111,13 @@ namespace System.Activities.Expressions
             }
             if (result == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new ValidationException(SR.MemberNotFound(memberName, typeof(TOperand).Name))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ValidationException(
+                            SR.MemberNotFound(memberName, typeof(TOperand).Name)
+                        )
+                    );
             }
             return result;
         }

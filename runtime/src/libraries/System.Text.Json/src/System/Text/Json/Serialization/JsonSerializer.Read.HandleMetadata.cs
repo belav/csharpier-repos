@@ -18,12 +18,12 @@ namespace System.Text.Json
 
         internal static readonly byte[] s_idPropertyName = Encoding.UTF8.GetBytes(IdPropertyName);
         internal static readonly byte[] s_refPropertyName = Encoding.UTF8.GetBytes(RefPropertyName);
-        internal static readonly byte[] s_typePropertyName = Encoding.UTF8.GetBytes(
-            TypePropertyName
-        );
-        internal static readonly byte[] s_valuesPropertyName = Encoding.UTF8.GetBytes(
-            ValuesPropertyName
-        );
+        internal static readonly byte[] s_typePropertyName = Encoding
+            .UTF8
+            .GetBytes(TypePropertyName);
+        internal static readonly byte[] s_valuesPropertyName = Encoding
+            .UTF8
+            .GetBytes(ValuesPropertyName);
 
         internal static bool TryReadMetadata(
             JsonConverter converter,
@@ -296,7 +296,8 @@ namespace System.Text.Json
             return (propertyName.Length > 0 && propertyName[0] == '$')
                 || (
                     resolver
-                        ?.TypeDiscriminatorPropertyNameUtf8?.AsSpan()
+                        ?.TypeDiscriminatorPropertyNameUtf8
+                        ?.AsSpan()
                         .SequenceEqual(propertyName) == true
                 );
         }
@@ -407,10 +408,9 @@ namespace System.Text.Json
                         }
 
                         object boxedElement = element;
-                        state.ReferenceResolver.AddReference(
-                            property.Value.GetString()!,
-                            boxedElement
-                        );
+                        state
+                            .ReferenceResolver
+                            .AddReference(property.Value.GetString()!, boxedElement);
                         referenceValue = boxedElement;
                         return true;
                     }
@@ -438,9 +438,9 @@ namespace System.Text.Json
                             );
                         }
 
-                        referenceValue = state.ReferenceResolver.ResolveReference(
-                            property.Value.GetString()!
-                        );
+                        referenceValue = state
+                            .ReferenceResolver
+                            .ResolveReference(property.Value.GetString()!);
                         refMetadataFound = true;
                     }
                 }

@@ -142,9 +142,9 @@ namespace Mono.Net.Security
             if (settings != null)
             {
                 certValidationCallback = GetValidationCallback(settings);
-                certSelectionCallback = Private.CallbackHelpers.MonoToInternal(
-                    settings.ClientCertificateSelectionCallback
-                );
+                certSelectionCallback = Private
+                    .CallbackHelpers
+                    .MonoToInternal(settings.ClientCertificateSelectionCallback);
                 fallbackToSPM = settings.UseServicePointManagerCallback ?? stream != null;
             }
 

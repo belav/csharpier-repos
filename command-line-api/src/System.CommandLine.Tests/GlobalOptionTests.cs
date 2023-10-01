@@ -35,7 +35,8 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("child");
 
-            result.Errors
+            result
+                .Errors
                 .Should()
                 .ContainSingle()
                 .Which
@@ -56,7 +57,8 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("");
 
-            result.Errors
+            result
+                .Errors
                 .Should()
                 .ContainSingle()
                 .Which

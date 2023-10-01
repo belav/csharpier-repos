@@ -431,20 +431,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var referenced = PooledHashSet<TypeParameterSymbol>.GetInstance();
             foreach (var field in typeDescr.Fields)
             {
-                field.TypeWithAnnotations.VisitType(
-                    type: null,
-                    typeWithAnnotationsPredicate: null,
-                    typePredicate: static (type, referenced, _) =>
-                    {
-                        if (type is TypeParameterSymbol typeParameter)
+                field
+                    .TypeWithAnnotations
+                    .VisitType(
+                        type: null,
+                        typeWithAnnotationsPredicate: null,
+                        typePredicate: static (type, referenced, _) =>
                         {
-                            referenced.Add(typeParameter);
-                        }
-                        return false;
-                    },
-                    arg: referenced,
-                    visitCustomModifiers: true
-                );
+                            if (type is TypeParameterSymbol typeParameter)
+                            {
+                                referenced.Add(typeParameter);
+                            }
+                            return false;
+                        },
+                        arg: referenced,
+                        visitCustomModifiers: true
+                    );
             }
 
             ImmutableArray<TypeParameterSymbol> typeParameters;

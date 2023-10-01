@@ -290,8 +290,9 @@ namespace T
             int position
         )
         {
-            var sharedGlobalCache =
-                workspace.ExportProvider.GetExportedValue<DiagnosticAnalyzerInfoCache.SharedGlobalCache>();
+            var sharedGlobalCache = workspace
+                .ExportProvider
+                .GetExportedValue<DiagnosticAnalyzerInfoCache.SharedGlobalCache>();
             var provider = new CSharpDiagnosticAnalyzerQuickInfoProvider(sharedGlobalCache);
             var info = await provider.GetQuickInfoAsync(
                 new QuickInfoContext(

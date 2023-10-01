@@ -23,8 +23,9 @@ namespace System.Text.Json.Serialization.Metadata
             PopulatePolymorphismMetadata();
             MapInterfaceTypesToCallbacks();
 
-            Func<object>? createObject =
-                JsonSerializerOptions.MemberAccessorStrategy.CreateConstructor(typeof(T));
+            Func<object>? createObject = JsonSerializerOptions
+                .MemberAccessorStrategy
+                .CreateConstructor(typeof(T));
             SetCreateObjectIfCompatible(createObject);
             CreateObjectForExtensionDataProperty = createObject;
 

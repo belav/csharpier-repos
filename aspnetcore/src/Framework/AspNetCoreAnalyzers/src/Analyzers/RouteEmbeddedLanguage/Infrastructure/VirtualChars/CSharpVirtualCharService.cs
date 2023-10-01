@@ -253,7 +253,8 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
         // Use the parent multi-line expression to determine what whitespace to remove from the start of each line.
         var parentSourceText = parentExpression.SyntaxTree.GetText();
         var indentationLength =
-            parentSourceText.Lines
+            parentSourceText
+                .Lines
                 .GetLineFromPosition(parentExpression.Span.End)
                 .GetFirstNonWhitespaceOffset() ?? 0;
 

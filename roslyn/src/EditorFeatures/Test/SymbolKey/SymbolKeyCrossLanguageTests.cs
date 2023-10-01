@@ -40,7 +40,8 @@ public class C
             );
 
             var solution = workspace.CurrentSolution;
-            var csDocument = solution.Projects
+            var csDocument = solution
+                .Projects
                 .Single(p => p.Language == LanguageNames.CSharp)
                 .Documents
                 .Single();

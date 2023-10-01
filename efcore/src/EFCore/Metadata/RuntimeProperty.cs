@@ -172,7 +172,9 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
                 ref _typeMapping,
                 (IProperty)this,
                 static property =>
-                    property.DeclaringEntityType.Model
+                    property
+                        .DeclaringEntityType
+                        .Model
                         .GetModelDependencies()
                         .TypeMappingSource
                         .FindMapping(property)!

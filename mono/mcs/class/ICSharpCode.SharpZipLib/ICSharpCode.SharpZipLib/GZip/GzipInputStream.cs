@@ -348,13 +348,15 @@ namespace ICSharpCode.SharpZipLib.GZip
                 avail = 8;
             }
 
-            System.Array.Copy(
-                inputBuffer.RawData,
-                inputBuffer.RawLength - inf.RemainingInput,
-                footer,
-                0,
-                avail
-            );
+            System
+                .Array
+                .Copy(
+                    inputBuffer.RawData,
+                    inputBuffer.RawLength - inf.RemainingInput,
+                    footer,
+                    0,
+                    avail
+                );
             int needed = 8 - avail;
 
             while (needed > 0)

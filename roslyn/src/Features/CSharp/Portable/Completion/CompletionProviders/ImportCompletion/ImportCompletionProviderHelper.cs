@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // indicates the beginning of the document (i.e. no parent).
             var location =
                 context.LeftToken.Parent ?? context.SyntaxTree.GetRoot(cancellationToken);
-            var usingsFromCurrentDocument = context.SemanticModel
+            var usingsFromCurrentDocument = context
+                .SemanticModel
                 .GetUsingNamespacesInScope(location)
                 .SelectAsArray(GetNamespaceName);
 
@@ -92,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
 
                 // We only checksum off of the contents of the file.
-                var checksum = await globalUsingDocument.State
+                var checksum = await globalUsingDocument
+                    .State
                     .GetChecksumAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (checksum == cacheEntry.GlobalUsingsDocumentChecksum)

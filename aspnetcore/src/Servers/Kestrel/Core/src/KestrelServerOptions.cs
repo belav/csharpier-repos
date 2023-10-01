@@ -321,7 +321,8 @@ public class KestrelServerOptions
             var logger = ApplicationServices!.GetRequiredService<ILogger<KestrelServer>>();
             try
             {
-                DefaultCertificate = CertificateManager.Instance
+                DefaultCertificate = CertificateManager
+                    .Instance
                     .ListCertificates(
                         StoreName.My,
                         StoreLocation.CurrentUser,
@@ -332,10 +333,9 @@ public class KestrelServerOptions
 
                 if (DefaultCertificate != null)
                 {
-                    var status = CertificateManager.Instance.CheckCertificateState(
-                        DefaultCertificate,
-                        interactive: false
-                    );
+                    var status = CertificateManager
+                        .Instance
+                        .CheckCertificateState(DefaultCertificate, interactive: false);
                     if (!status.Success)
                     {
                         // Display a warning indicating to the user that a prompt might appear and provide instructions on what to do in that

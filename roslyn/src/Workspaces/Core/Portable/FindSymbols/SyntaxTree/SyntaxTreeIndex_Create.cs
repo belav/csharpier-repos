@@ -265,10 +265,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var identifierName = identifier.ValueText;
 
             return syntaxFacts.StringComparer.Equals(identifierName, "SuppressMessage")
-                || syntaxFacts.StringComparer.Equals(
-                    identifierName,
-                    nameof(SuppressMessageAttribute)
-                );
+                || syntaxFacts
+                    .StringComparer
+                    .Equals(identifierName, nameof(SuppressMessageAttribute));
         }
 
         private static void TryAddGlobalAliasInfo(

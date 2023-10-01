@@ -35,9 +35,9 @@ namespace System.ServiceModel.Security
         public ChannelProtectionRequirements(ChannelProtectionRequirements other)
         {
             if (other == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("other")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("other"));
 
             this.incomingSignatureParts = new ScopedMessagePartSpecification(
                 other.incomingSignatureParts
@@ -59,9 +59,9 @@ namespace System.ServiceModel.Security
         )
         {
             if (other == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("other")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("other"));
 
             this.incomingSignatureParts = new ScopedMessagePartSpecification(
                 other.incomingSignatureParts,
@@ -109,9 +109,9 @@ namespace System.ServiceModel.Security
         public void Add(ChannelProtectionRequirements protectionRequirements, bool channelScopeOnly)
         {
             if (protectionRequirements == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("protectionRequirements")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("protectionRequirements"));
 
             if (protectionRequirements.incomingSignatureParts != null)
                 this.incomingSignatureParts.AddParts(
@@ -260,14 +260,18 @@ namespace System.ServiceModel.Security
             //}
             //else
             //{
-            result.OutgoingEncryptionParts.AddParts(
-                UnionMessagePartSpecifications(contractRequirements.OutgoingEncryptionParts),
-                MessageHeaders.WildcardAction
-            );
-            result.OutgoingSignatureParts.AddParts(
-                UnionMessagePartSpecifications(contractRequirements.OutgoingSignatureParts),
-                MessageHeaders.WildcardAction
-            );
+            result
+                .OutgoingEncryptionParts
+                .AddParts(
+                    UnionMessagePartSpecifications(contractRequirements.OutgoingEncryptionParts),
+                    MessageHeaders.WildcardAction
+                );
+            result
+                .OutgoingSignatureParts
+                .AddParts(
+                    UnionMessagePartSpecifications(contractRequirements.OutgoingSignatureParts),
+                    MessageHeaders.WildcardAction
+                );
             contractRequirements.IncomingEncryptionParts.CopyTo(result.IncomingEncryptionParts);
             contractRequirements.IncomingSignatureParts.CopyTo(result.IncomingSignatureParts);
             //}
@@ -282,9 +286,9 @@ namespace System.ServiceModel.Security
         )
         {
             if (contract == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("contract")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("contract"));
 
             ChannelProtectionRequirements requirements = new ChannelProtectionRequirements();
 
@@ -361,18 +365,22 @@ namespace System.ServiceModel.Security
                     {
                         if (
                             !(
-                                message.Body.ReturnValue
+                                message
+                                    .Body
+                                    .ReturnValue
                                     .GetType()
                                     .Equals(typeof(MessagePartDescription))
                             )
                         )
                         {
                             Fx.Assert("Only body return values are supported currently");
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.OnlyBodyReturnValuesSupported)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.OnlyBodyReturnValuesSupported)
+                                    )
+                                );
                         }
                         MessagePartDescription desc = message.Body.ReturnValue;
                         bodyProtectionLevel = desc.HasProtectionLevel
@@ -411,18 +419,16 @@ namespace System.ServiceModel.Security
                     if (message.Direction == MessageDirection.Input)
                     {
                         requirements.IncomingSignatureParts.AddParts(signedParts, message.Action);
-                        requirements.IncomingEncryptionParts.AddParts(
-                            encryptedParts,
-                            message.Action
-                        );
+                        requirements
+                            .IncomingEncryptionParts
+                            .AddParts(encryptedParts, message.Action);
                     }
                     else
                     {
                         requirements.OutgoingSignatureParts.AddParts(signedParts, message.Action);
-                        requirements.OutgoingEncryptionParts.AddParts(
-                            encryptedParts,
-                            message.Action
-                        );
+                        requirements
+                            .OutgoingEncryptionParts
+                            .AddParts(encryptedParts, message.Action);
                     }
                 }
                 if (operation.Faults != null)
@@ -478,13 +484,13 @@ namespace System.ServiceModel.Security
         )
         {
             if (faults == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("faults")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("faults"));
             if (requirements == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("requirements")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("requirements"));
 
             foreach (FaultDescription fault in faults)
             {

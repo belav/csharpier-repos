@@ -98,8 +98,9 @@ namespace System.Net.Http
                         CultureInfo.InvariantCulture,
                         $"{authority.IdnHost}:{authority.Port}"
                     );
-                _altUsedEncodedHeader =
-                    QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
+                _altUsedEncodedHeader = QPack
+                    .QPackEncoder
+                    .EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
                         KnownHeaders.AltUsed.Name,
                         altUsedValue
                     );
@@ -252,9 +253,11 @@ namespace System.Net.Http
                 {
                     if (HttpTelemetry.Log.IsEnabled() && queueStartingTimestamp != 0)
                     {
-                        HttpTelemetry.Log.Http30RequestLeftQueue(
-                            Stopwatch.GetElapsedTime(queueStartingTimestamp).TotalMilliseconds
-                        );
+                        HttpTelemetry
+                            .Log
+                            .Http30RequestLeftQueue(
+                                Stopwatch.GetElapsedTime(queueStartingTimestamp).TotalMilliseconds
+                            );
                     }
                 }
 
@@ -441,13 +444,15 @@ namespace System.Net.Http
             string message,
             [CallerMemberName] string? memberName = null
         ) =>
-            NetEventSource.Log.HandlerMessage(
-                _pool?.GetHashCode() ?? 0, // pool ID
-                GetHashCode(), // connection ID
-                (int)streamId, // stream ID
-                memberName, // method name
-                message
-            ); // message
+            NetEventSource
+                .Log
+                .HandlerMessage(
+                    _pool?.GetHashCode() ?? 0, // pool ID
+                    GetHashCode(), // connection ID
+                    (int)streamId, // stream ID
+                    memberName, // method name
+                    message
+                ); // message
 
         private async Task SendSettingsAsync()
         {
@@ -458,25 +463,27 @@ namespace System.Net.Http
                     .ConfigureAwait(false);
 
                 // Server MUST NOT abort our control stream, setup a continuation which will react accordingly
-                _ = _clientControl.WritesClosed.ContinueWith(
-                    t =>
-                    {
-                        if (
-                            t.Exception?.InnerException is QuicException ex
-                            && ex.QuicError == QuicError.StreamAborted
-                        )
+                _ = _clientControl
+                    .WritesClosed
+                    .ContinueWith(
+                        t =>
                         {
-                            Abort(
-                                HttpProtocolException.CreateHttp3ConnectionException(
-                                    Http3ErrorCode.ClosedCriticalStream
-                                )
-                            );
-                        }
-                    },
-                    CancellationToken.None,
-                    TaskContinuationOptions.ExecuteSynchronously,
-                    TaskScheduler.Current
-                );
+                            if (
+                                t.Exception?.InnerException is QuicException ex
+                                && ex.QuicError == QuicError.StreamAborted
+                            )
+                            {
+                                Abort(
+                                    HttpProtocolException.CreateHttp3ConnectionException(
+                                        Http3ErrorCode.ClosedCriticalStream
+                                    )
+                                );
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Current
+                    );
 
                 await _clientControl
                     .WriteAsync(_pool.Settings.Http3SettingsFrame, CancellationToken.None)

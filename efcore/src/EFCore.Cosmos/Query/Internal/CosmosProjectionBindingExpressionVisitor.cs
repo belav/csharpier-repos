@@ -120,10 +120,12 @@ public class CosmosProjectionBindingExpressionVisitor : ExpressionVisitor
                     }
 
                     if (
-                        parameterExpression.Name?.StartsWith(
-                            QueryCompilationContext.QueryParameterPrefix,
-                            StringComparison.Ordinal
-                        ) == true
+                        parameterExpression
+                            .Name
+                            ?.StartsWith(
+                                QueryCompilationContext.QueryParameterPrefix,
+                                StringComparison.Ordinal
+                            ) == true
                     )
                     {
                         return Expression.Call(
@@ -690,9 +692,9 @@ public class CosmosProjectionBindingExpressionVisitor : ExpressionVisitor
 
                         lambda = Expression.Lambda(Visit(lambda.Body), lambda.Parameters);
                         return Expression.Call(
-                            EnumerableMethods.Select.MakeGenericMethod(
-                                method.GetGenericArguments()
-                            ),
+                            EnumerableMethods
+                                .Select
+                                .MakeGenericMethod(method.GetGenericArguments()),
                             shaper,
                             lambda
                         );

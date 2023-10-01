@@ -152,31 +152,34 @@ namespace Microsoft.CodeAnalysis.Classification
                         document.Project.Language
                     );
 
-                    _owner._threadingContext.JoinableTaskFactory.Run(async () =>
-                    {
-                        var snapshotSpan = new DocumentSnapshotSpan(document, spanToTag);
+                    _owner
+                        ._threadingContext
+                        .JoinableTaskFactory
+                        .Run(async () =>
+                        {
+                            var snapshotSpan = new DocumentSnapshotSpan(document, spanToTag);
 
-                        // When copying/pasting, ensure we have classifications fully computed for the requested spans
-                        // for both semantic classifications and embedded lang classifications.
-                        await ProduceTagsAsync(
-                                context,
-                                snapshotSpan,
-                                classificationService,
-                                options,
-                                ClassificationType.Semantic,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
-                        await ProduceTagsAsync(
-                                context,
-                                snapshotSpan,
-                                classificationService,
-                                options,
-                                ClassificationType.EmbeddedLanguage,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
-                    });
+                            // When copying/pasting, ensure we have classifications fully computed for the requested spans
+                            // for both semantic classifications and embedded lang classifications.
+                            await ProduceTagsAsync(
+                                    context,
+                                    snapshotSpan,
+                                    classificationService,
+                                    options,
+                                    ClassificationType.Semantic,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
+                            await ProduceTagsAsync(
+                                    context,
+                                    snapshotSpan,
+                                    classificationService,
+                                    options,
+                                    ClassificationType.EmbeddedLanguage,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
+                        });
 
                     cachedTaggedSpan = spanToTag;
                     cachedTags = new TagSpanIntervalTree<IClassificationTag>(

@@ -94,14 +94,19 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                    DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return dataContract;
             }
@@ -127,14 +132,19 @@ namespace System.Runtime.Serialization
             {
                 if (this.IsGetOnlyCollection && dataContract is SurrogateDataContract)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                                DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                    DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return dataContract;
             }
@@ -270,17 +280,21 @@ namespace System.Runtime.Serialization
                 if (dataContract == null)
                 {
                     if (assembly == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.GetString(SR.AssemblyNotFound, assemblyName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                XmlObjectSerializer.CreateSerializationException(
+                                    SR.GetString(SR.AssemblyNotFound, assemblyName)
+                                )
+                            );
                     if (type == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.GetString(SR.ClrTypeNotFound, assembly.FullName, typeName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                XmlObjectSerializer.CreateSerializationException(
+                                    SR.GetString(SR.ClrTypeNotFound, assembly.FullName, typeName)
+                                )
+                            );
                 }
                 //Array covariance is not supported in XSD. If declared type is array, data is sent in format of base array
                 if (declaredType != null && declaredType.IsArray)
@@ -292,53 +306,59 @@ namespace System.Runtime.Serialization
             else
             {
                 if (assemblyName != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            XmlObjectSerializer.TryAddLineInfo(
-                                xmlReader,
-                                SR.GetString(
-                                    SR.AttributeNotFound,
-                                    Globals.SerializationNamespace,
-                                    Globals.ClrTypeLocalName,
-                                    xmlReader.NodeType,
-                                    xmlReader.NamespaceURI,
-                                    xmlReader.LocalName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                XmlObjectSerializer.TryAddLineInfo(
+                                    xmlReader,
+                                    SR.GetString(
+                                        SR.AttributeNotFound,
+                                        Globals.SerializationNamespace,
+                                        Globals.ClrTypeLocalName,
+                                        xmlReader.NodeType,
+                                        xmlReader.NamespaceURI,
+                                        xmlReader.LocalName
+                                    )
                                 )
                             )
-                        )
-                    );
+                        );
                 else if (typeName != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            XmlObjectSerializer.TryAddLineInfo(
-                                xmlReader,
-                                SR.GetString(
-                                    SR.AttributeNotFound,
-                                    Globals.SerializationNamespace,
-                                    Globals.ClrAssemblyLocalName,
-                                    xmlReader.NodeType,
-                                    xmlReader.NamespaceURI,
-                                    xmlReader.LocalName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                XmlObjectSerializer.TryAddLineInfo(
+                                    xmlReader,
+                                    SR.GetString(
+                                        SR.AttributeNotFound,
+                                        Globals.SerializationNamespace,
+                                        Globals.ClrAssemblyLocalName,
+                                        xmlReader.NodeType,
+                                        xmlReader.NamespaceURI,
+                                        xmlReader.LocalName
+                                    )
                                 )
                             )
-                        )
-                    );
+                        );
                 else if (declaredType == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            XmlObjectSerializer.TryAddLineInfo(
-                                xmlReader,
-                                SR.GetString(
-                                    SR.AttributeNotFound,
-                                    Globals.SerializationNamespace,
-                                    Globals.ClrTypeLocalName,
-                                    xmlReader.NodeType,
-                                    xmlReader.NamespaceURI,
-                                    xmlReader.LocalName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                XmlObjectSerializer.TryAddLineInfo(
+                                    xmlReader,
+                                    SR.GetString(
+                                        SR.AttributeNotFound,
+                                        Globals.SerializationNamespace,
+                                        Globals.ClrTypeLocalName,
+                                        xmlReader.NodeType,
+                                        xmlReader.NamespaceURI,
+                                        xmlReader.LocalName
+                                    )
                                 )
                             )
-                        )
-                    );
+                        );
                 dataContract =
                     (declaredTypeID < 0)
                         ? GetDataContract(declaredType)
@@ -370,14 +390,19 @@ namespace System.Runtime.Serialization
                 );
             if (this.IsGetOnlyCollection && dataContract.UnderlyingType != declaredType)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.GetString(
-                            SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                            DataContract.GetClrTypeFullName(declaredType)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(
+                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                DataContract.GetClrTypeFullName(declaredType)
+                            )
                         )
-                    )
-                );
+                    );
             }
             ReadAttributes(xmlReader);
             string objectId = GetObjectId();
@@ -578,11 +603,16 @@ namespace System.Runtime.Serialization
                         memberType
                     );
                     if (!DataContract.IsTypeSerializable(memberType))
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidDataContractException(
-                                SR.GetString(SR.TypeNotSerializable, memberType)
-                            )
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(SR.TypeNotSerializable, memberType)
+                                )
+                            );
                     return;
                 }
             }
@@ -605,14 +635,19 @@ namespace System.Runtime.Serialization
                 );
                 if (this.IsGetOnlyCollection && surrogateType != type)
                 {
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidDataContractException(
-                            SR.GetString(
-                                SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
-                                DataContract.GetClrTypeFullName(type)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidDataContractException(
+                                SR.GetString(
+                                    SR.SurrogatesWithGetOnlyCollectionsNotSupportedSerDeser,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
@@ -695,14 +730,16 @@ namespace System.Runtime.Serialization
                             return;
                         }
                     }
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(
-                                SR.CannotDeserializeForwardedType,
-                                DataContract.GetClrTypeFullName(resolvedType)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(
+                                    SR.CannotDeserializeForwardedType,
+                                    DataContract.GetClrTypeFullName(resolvedType)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 #endif
             }

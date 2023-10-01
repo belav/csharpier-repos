@@ -241,10 +241,10 @@ namespace Microsoft.CodeAnalysis
                     {
                         // We're in either scenario 2 or 3. Do we have an existing tree to try replacing? Note: the file path here corresponds to Document.FilePath.
                         // If a document's file path is null, we then substitute Document.Name, so we usually expect there to be a unique string regardless.
-                        var oldTree =
-                            compilationPair.CompilationWithoutGeneratedDocuments.SyntaxTrees.FirstOrDefault(
-                                t => t.FilePath == tree.FilePath
-                            );
+                        var oldTree = compilationPair
+                            .CompilationWithoutGeneratedDocuments
+                            .SyntaxTrees
+                            .FirstOrDefault(t => t.FilePath == tree.FilePath);
                         if (oldTree == null)
                         {
                             // Scenario 2.
@@ -334,9 +334,9 @@ namespace Microsoft.CodeAnalysis
                 if (
                     inProgressState != null
                     && compilationWithoutGeneratedDocuments != null
-                    && inProgressState.IntermediateProjects.All(
-                        t => IsTouchDocumentActionForDocument(t.action, id)
-                    )
+                    && inProgressState
+                        .IntermediateProjects
+                        .All(t => IsTouchDocumentActionForDocument(t.action, id))
                 )
                 {
                     // We'll add in whatever generated documents we do have; these may be from a prior run prior to some changes
@@ -344,9 +344,11 @@ namespace Microsoft.CodeAnalysis
                     compilations = new CompilationPair(
                         compilationWithoutGeneratedDocuments,
                         compilationWithoutGeneratedDocuments.AddSyntaxTrees(
-                            generatorInfo.Documents.States.Values.Select(
-                                state => state.GetSyntaxTree(cancellationToken)
-                            )
+                            generatorInfo
+                                .Documents
+                                .States
+                                .Values
+                                .Select(state => state.GetSyntaxTree(cancellationToken))
                         )
                     );
 
@@ -392,9 +394,11 @@ namespace Microsoft.CodeAnalysis
                 compilations = new CompilationPair(
                     compilationWithoutGeneratedDocuments,
                     compilationWithoutGeneratedDocuments.AddSyntaxTrees(
-                        generatorInfo.Documents.States.Values.Select(
-                            state => state.GetSyntaxTree(cancellationToken)
-                        )
+                        generatorInfo
+                            .Documents
+                            .States
+                            .Values
+                            .Select(state => state.GetSyntaxTree(cancellationToken))
                     )
                 );
 
@@ -439,8 +443,9 @@ namespace Microsoft.CodeAnalysis
                                 // if we failed to get the metadata, check to see if we previously had existing metadata and reuse it instead.
                                 var inProgressCompilationNotRef =
                                     compilations.CompilationWithGeneratedDocuments;
-                                metadata =
-                                    inProgressCompilationNotRef.ExternalReferences.FirstOrDefault(
+                                metadata = inProgressCompilationNotRef
+                                    .ExternalReferences
+                                    .FirstOrDefault(
                                         r =>
                                             solution
                                                 .GetProjectState(
@@ -719,7 +724,9 @@ namespace Microsoft.CodeAnalysis
                         out var trees
                     );
                     foreach (
-                        var documentState in ProjectState.DocumentStates.GetStatesInCompilationOrder()
+                        var documentState in ProjectState
+                            .DocumentStates
+                            .GetStatesInCompilationOrder()
                     )
                     {
                         cancellationToken.ThrowIfCancellationRequested();
@@ -749,8 +756,9 @@ namespace Microsoft.CodeAnalysis
 
             private Compilation CreateEmptyCompilation()
             {
-                var compilationFactory =
-                    this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>();
+                var compilationFactory = this.ProjectState
+                    .LanguageServices
+                    .GetRequiredService<ICompilationFactoryService>();
 
                 if (this.ProjectState.IsSubmission)
                 {
@@ -835,7 +843,8 @@ namespace Microsoft.CodeAnalysis
                         // We have a list of transformations to get to our final compilation; take the first transformation and apply it.
                         var intermediateProject = intermediateProjects[0];
 
-                        compilationWithoutGenerators = await intermediateProject.action
+                        compilationWithoutGenerators = await intermediateProject
+                            .action
                             .TransformCompilationAsync(
                                 compilationWithoutGenerators,
                                 cancellationToken
@@ -853,7 +862,8 @@ namespace Microsoft.CodeAnalysis
                                 && intermediateProject.oldState.SourceGenerators.Any()
                             )
                             {
-                                compilationWithGenerators = await intermediateProject.action
+                                compilationWithGenerators = await intermediateProject
+                                    .action
                                     .TransformCompilationAsync(
                                         compilationWithGenerators,
                                         cancellationToken
@@ -868,9 +878,9 @@ namespace Microsoft.CodeAnalysis
 
                         if (generatorDriver != null)
                         {
-                            generatorDriver = intermediateProject.action.TransformGeneratorDriver(
-                                generatorDriver
-                            );
+                            generatorDriver = intermediateProject
+                                .action
+                                .TransformGeneratorDriver(generatorDriver);
                         }
 
                         // We have updated state, so store this new result; this allows us to drop the intermediate state we already processed
@@ -986,16 +996,20 @@ namespace Microsoft.CodeAnalysis
                                 {
                                     compilationWithoutGenerators =
                                         compilationWithoutGenerators.WithScriptCompilationInfo(
-                                            compilationWithoutGenerators.ScriptCompilationInfo!.WithPreviousScriptCompilation(
-                                                previousSubmissionCompilation!
-                                            )
+                                            compilationWithoutGenerators
+                                                .ScriptCompilationInfo!
+                                                .WithPreviousScriptCompilation(
+                                                    previousSubmissionCompilation!
+                                                )
                                         );
 
                                     compilationWithStaleGeneratedTrees =
                                         compilationWithStaleGeneratedTrees?.WithScriptCompilationInfo(
-                                            compilationWithStaleGeneratedTrees.ScriptCompilationInfo!.WithPreviousScriptCompilation(
-                                                previousSubmissionCompilation!
-                                            )
+                                            compilationWithStaleGeneratedTrees
+                                                .ScriptCompilationInfo!
+                                                .WithPreviousScriptCompilation(
+                                                    previousSubmissionCompilation!
+                                                )
                                         );
                                 }
                             }
@@ -1055,7 +1069,10 @@ namespace Microsoft.CodeAnalysis
                         // Just add in the trees we already have. We don't want to rerun since the consumer of this Solution
                         // snapshot has already seen the trees and thus needs to ensure identity of them.
                         compilationWithGenerators = compilationWithoutGenerators.AddSyntaxTrees(
-                            await generatorInfo.Documents.States.Values
+                            await generatorInfo
+                                .Documents
+                                .States
+                                .Values
                                 .SelectAsArrayAsync(
                                     state => state.GetSyntaxTreeAsync(cancellationToken)
                                 )
@@ -1077,12 +1094,14 @@ namespace Microsoft.CodeAnalysis
                             // If we don't already have a generator driver, we'll have to create one from scratch
                             if (generatorInfo.Driver == null)
                             {
-                                var additionalTexts =
-                                    this.ProjectState.AdditionalDocumentStates.SelectAsArray(
+                                var additionalTexts = this.ProjectState
+                                    .AdditionalDocumentStates
+                                    .SelectAsArray(
                                         static documentState => documentState.AdditionalText
                                     );
-                                var compilationFactory =
-                                    this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>();
+                                var compilationFactory = this.ProjectState
+                                    .LanguageServices
+                                    .GetRequiredService<ICompilationFactoryService>();
 
                                 generatorInfo = generatorInfo.WithDriver(
                                     compilationFactory.CreateGeneratorDriver(
@@ -1108,11 +1127,13 @@ namespace Microsoft.CodeAnalysis
                                         | System.Reflection.BindingFlags.Instance
                                 );
                                 Contract.ThrowIfNull(stateMember);
-                                var additionalTextsMember = stateMember.FieldType.GetField(
-                                    "AdditionalTexts",
-                                    System.Reflection.BindingFlags.NonPublic
-                                        | System.Reflection.BindingFlags.Instance
-                                );
+                                var additionalTextsMember = stateMember
+                                    .FieldType
+                                    .GetField(
+                                        "AdditionalTexts",
+                                        System.Reflection.BindingFlags.NonPublic
+                                            | System.Reflection.BindingFlags.Instance
+                                    );
                                 Contract.ThrowIfNull(additionalTextsMember);
                                 var state = stateMember.GetValue(generatorInfo.Driver);
                                 var additionalTexts =
@@ -1144,7 +1165,8 @@ namespace Microsoft.CodeAnalysis
                                 if (documentState.Value.Attributes.DesignTimeOnly)
                                 {
                                     treesToRemove.Add(
-                                        await documentState.Value
+                                        await documentState
+                                            .Value
                                             .GetSyntaxTreeAsync(cancellationToken)
                                             .ConfigureAwait(false)
                                     );
@@ -1156,13 +1178,13 @@ namespace Microsoft.CodeAnalysis
                             // END HACK HACK HACK HACK.
 
                             generatorInfo = generatorInfo.WithDriver(
-                                generatorInfo.Driver!.RunGenerators(
-                                    compilationToRunGeneratorsOn,
-                                    cancellationToken
-                                )
+                                generatorInfo
+                                    .Driver!
+                                    .RunGenerators(compilationToRunGeneratorsOn, cancellationToken)
                             );
 
-                            solution.Services
+                            solution
+                                .Services
                                 .GetService<ISourceGeneratorTelemetryCollectorWorkspaceService>()
                                 ?.CollectRunResult(
                                     generatorInfo.Driver!.GetRunResult(),
@@ -1179,12 +1201,14 @@ namespace Microsoft.CodeAnalysis
                             // and the prior generated trees are identical.
                             if (compilationWithStaleGeneratedTrees != null)
                             {
-                                var generatedTreeCount = runResult.Results.Sum(
-                                    r =>
-                                        IsGeneratorRunResultToIgnore(r)
-                                            ? 0
-                                            : r.GeneratedSources.Length
-                                );
+                                var generatedTreeCount = runResult
+                                    .Results
+                                    .Sum(
+                                        r =>
+                                            IsGeneratorRunResultToIgnore(r)
+                                                ? 0
+                                                : r.GeneratedSources.Length
+                                    );
 
                                 if (generatorInfo.Documents.Count != generatedTreeCount)
                                 {
@@ -1270,7 +1294,9 @@ namespace Microsoft.CodeAnalysis
                                     generatedDocumentsBuilder.ToImmutableAndClear()
                                 );
                             compilationWithGenerators = compilationWithoutGenerators.AddSyntaxTrees(
-                                await generatedDocuments.States.Values
+                                await generatedDocuments
+                                    .States
+                                    .Values
                                     .SelectAsArrayAsync(
                                         state => state.GetSyntaxTreeAsync(cancellationToken)
                                     )

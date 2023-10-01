@@ -1305,12 +1305,9 @@ namespace System.Net
                 HttpWebRequest httpWebRequest = m_Request as HttpWebRequest;
                 if (httpWebRequest != null && httpWebRequest.ServerCertValidationCallback != null)
                 {
-                    return httpWebRequest.ServerCertValidationCallback.Invoke(
-                        m_Request,
-                        certificate,
-                        chain,
-                        sslPolicyErrors
-                    );
+                    return httpWebRequest
+                        .ServerCertValidationCallback
+                        .Invoke(m_Request, certificate, chain, sslPolicyErrors);
                 }
 
                 // If a policy is set, call the user callback inside the ExecutionContext.
@@ -1321,14 +1318,16 @@ namespace System.Net
                 {
                     useDefault = false;
 
-                    bool checkResult = ServicePointManager.CertPolicyValidationCallback.Invoke(
-                        hostName,
-                        m_ServicePoint,
-                        certificate,
-                        (WebRequest)m_Request,
-                        chain,
-                        sslPolicyErrors
-                    );
+                    bool checkResult = ServicePointManager
+                        .CertPolicyValidationCallback
+                        .Invoke(
+                            hostName,
+                            m_ServicePoint,
+                            certificate,
+                            (WebRequest)m_Request,
+                            chain,
+                            sslPolicyErrors
+                        );
 
                     if (checkResult == false)
                     {
@@ -1343,12 +1342,9 @@ namespace System.Net
                 if (ServicePointManager.ServerCertificateValidationCallback != null)
                 {
                     useDefault = false;
-                    return ServicePointManager.ServerCertValidationCallback.Invoke(
-                        m_Request,
-                        certificate,
-                        chain,
-                        sslPolicyErrors
-                    );
+                    return ServicePointManager
+                        .ServerCertValidationCallback
+                        .Invoke(m_Request, certificate, chain, sslPolicyErrors);
                 }
 
                 if (useDefault)
@@ -1509,16 +1505,18 @@ namespace System.Net
 
             try
             {
-                ws = state.servicePoint.ConnectSocketInternal(
-                    state.connectFailure,
-                    state.s4,
-                    state.s6,
-                    ref socket,
-                    ref address,
-                    state,
-                    asyncResult,
-                    out innerException
-                );
+                ws = state
+                    .servicePoint
+                    .ConnectSocketInternal(
+                        state.connectFailure,
+                        state.s4,
+                        state.s6,
+                        ref socket,
+                        ref address,
+                        state,
+                        asyncResult,
+                        out innerException
+                    );
             }
             catch (SocketException socketException)
             {

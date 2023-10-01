@@ -66,10 +66,9 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
                     out long value
                 )
                 {
-                    var type = context_provider.ValueContext.GetType(
-                        context_provider.MethodContext.CFG.Post(pc),
-                        dest
-                    );
+                    var type = context_provider
+                        .ValueContext
+                        .GetType(context_provider.MethodContext.CFG.Post(pc), dest);
                     long l;
                     long r;
 

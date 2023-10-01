@@ -141,11 +141,13 @@ namespace Microsoft.VisualBasic.Activities
 
                         if (validationError != null)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new InvalidOperationException(
-                                    SR.VBExpressionTamperedSinceLastCompiled(validationError)
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new InvalidOperationException(
+                                        SR.VBExpressionTamperedSinceLastCompiled(validationError)
+                                    )
+                                );
                         }
                     }
                     finally
@@ -164,9 +166,9 @@ namespace Microsoft.VisualBasic.Activities
             }
             else
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ActivityIsUncached)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.ActivityIsUncached));
             }
         }
 

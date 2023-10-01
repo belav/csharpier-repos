@@ -144,11 +144,13 @@ namespace System.ServiceModel.Discovery
             {
                 if (value <= 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "value",
-                        value,
-                        SR2.DiscoveryFindMaxResultsLessThanZero
-                    );
+                    throw FxTrace
+                        .Exception
+                        .ArgumentOutOfRange(
+                            "value",
+                            value,
+                            SR2.DiscoveryFindMaxResultsLessThanZero
+                        );
                 }
                 this.maxResults = value;
             }
@@ -161,11 +163,13 @@ namespace System.ServiceModel.Discovery
             {
                 if (value.CompareTo(TimeSpan.Zero) <= 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "duration",
-                        value,
-                        SR2.DiscoveryFindDurationLessThanZero
-                    );
+                    throw FxTrace
+                        .Exception
+                        .ArgumentOutOfRange(
+                            "duration",
+                            value,
+                            SR2.DiscoveryFindDurationLessThanZero
+                        );
                 }
                 this.duration = value;
             }
@@ -375,10 +379,9 @@ namespace System.ServiceModel.Discovery
                 Uri scopeMatchBy = SerializationUtility.ReadScopes(this.scopes, reader);
                 if (scopeMatchBy != null)
                 {
-                    this.scopeMatchBy =
-                        discoveryVersion.Implementation.ToVersionIndependentScopeMatchBy(
-                            scopeMatchBy
-                        );
+                    this.scopeMatchBy = discoveryVersion
+                        .Implementation
+                        .ToVersionIndependentScopeMatchBy(scopeMatchBy);
                 }
             }
 
@@ -503,9 +506,9 @@ namespace System.ServiceModel.Discovery
 
             foreach (XmlQualifiedName contractTypeName in this.ContractTypeNames)
             {
-                findCriteriaClone.ContractTypeNames.Add(
-                    new XmlQualifiedName(contractTypeName.Name, contractTypeName.Namespace)
-                );
+                findCriteriaClone
+                    .ContractTypeNames
+                    .Add(new XmlQualifiedName(contractTypeName.Name, contractTypeName.Namespace));
             }
 
             foreach (XElement extension in this.Extensions)

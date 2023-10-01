@@ -81,11 +81,16 @@ namespace System.ServiceModel.Security
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(
-                                    SR.GetString(SR.UnableToResolveReferenceUriForSignature, uri)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new MessageSecurityException(
+                                        SR.GetString(
+                                            SR.UnableToResolveReferenceUriForSignature,
+                                            uri
+                                        )
+                                    )
+                                );
                         }
                         for (int j = 0; j < elementManager.Count; j++)
                         {
@@ -115,13 +120,15 @@ namespace System.ServiceModel.Security
                     {
                         if (primarySignatureFound)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(
-                                    SR.GetString(
-                                        SR.AtMostOnePrimarySignatureInReceiveSecurityHeader
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new MessageSecurityException(
+                                        SR.GetString(
+                                            SR.AtMostOnePrimarySignatureInReceiveSecurityHeader
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         primarySignatureFound = true;
                         elementManager.SetBindingMode(

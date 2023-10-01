@@ -144,12 +144,14 @@ namespace System.IdentityModel.Selectors
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
                 this.Properties[KeySizeProperty] = value;
             }
@@ -174,14 +176,16 @@ namespace System.IdentityModel.Selectors
             TValue result;
             if (!TryGetProperty<TValue>(propertyName, out result))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(
-                            SR.SecurityTokenRequirementDoesNotContainProperty,
-                            propertyName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.SecurityTokenRequirementDoesNotContainProperty,
+                                propertyName
+                            )
                         )
-                    )
-                );
+                    );
             }
             return result;
         }
@@ -199,16 +203,18 @@ namespace System.IdentityModel.Selectors
                 && !typeof(TValue).IsAssignableFrom(dictionaryValue.GetType())
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(
-                            SR.SecurityTokenRequirementHasInvalidTypeForProperty,
-                            propertyName,
-                            dictionaryValue.GetType(),
-                            typeof(TValue)
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(
+                                SR.SecurityTokenRequirementHasInvalidTypeForProperty,
+                                propertyName,
+                                dictionaryValue.GetType(),
+                                typeof(TValue)
+                            )
                         )
-                    )
-                );
+                    );
             }
             result = (TValue)dictionaryValue;
             return true;

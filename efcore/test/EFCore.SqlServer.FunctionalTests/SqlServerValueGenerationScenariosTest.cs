@@ -692,8 +692,9 @@ public class SqlServerValueGenerationScenariosTest
         }
     }
 
-    private static readonly GeometryFactory GeometryFactory =
-        NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+    private static readonly GeometryFactory GeometryFactory = NtsGeometryServices
+        .Instance
+        .CreateGeometryFactory(srid: 4326);
 
     public class BlogContextNonKeyDefaultValue : ContextBase
     {
@@ -856,11 +857,13 @@ public class SqlServerValueGenerationScenariosTest
         using var testStore = SqlServerTestStore.CreateInitialized(DatabaseName);
         using (var context = new BlogContextComputedColumnWithFunction(testStore.Name))
         {
-            context.Database.ExecuteSqlRaw(
-                @"CREATE FUNCTION
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"CREATE FUNCTION
 [dbo].[GetFullName](@First NVARCHAR(MAX), @Second NVARCHAR(MAX))
 RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
-            );
+                );
 
             context.GetService<IRelationalDatabaseCreator>().CreateTables();
         }
@@ -919,19 +922,23 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
 
             context.Database.ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
 
-            context.Database.ExecuteSqlRaw(
-                @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
 RETURNS nvarchar(max) WITH SCHEMABINDING AS
 BEGIN
     DECLARE @FullName nvarchar(max);
     SELECT @FullName = [FirstName] + [LastName] FROM [dbo].[FullNameBlogs] WHERE [Id] = @Id;
     RETURN @FullName
 END"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
-            );
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
+                );
         }
 
         try
@@ -996,19 +1003,23 @@ END"
 
             context.Database.ExecuteSqlRaw("ALTER TABLE dbo.FullNameBlogs DROP COLUMN FullName;");
 
-            context.Database.ExecuteSqlRaw(
-                @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"CREATE FUNCTION [dbo].[GetFullName](@Id int)
 RETURNS nvarchar(max) WITH SCHEMABINDING AS
 BEGIN
     DECLARE @FullName nvarchar(max);
     SELECT @FullName = [FirstName] + [LastName] FROM [dbo].[FullNameBlogs] WHERE [Id] = @Id;
     RETURN @FullName
 END"
-            );
+                );
 
-            context.Database.ExecuteSqlRaw(
-                "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
-            );
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    "ALTER TABLE dbo.FullNameBlogs ADD FullName AS [dbo].[GetFullName]([Id]); "
+                );
         }
 
         try
@@ -1049,15 +1060,17 @@ END"
         {
             context.GetService<IRelationalDatabaseCreator>().CreateTables();
 
-            context.Database.ExecuteSqlRaw(
-                @"CREATE OR ALTER TRIGGER [FullNameBlogs_Trigger]
+            context
+                .Database
+                .ExecuteSqlRaw(
+                    @"CREATE OR ALTER TRIGGER [FullNameBlogs_Trigger]
 ON [FullNameBlogs]
 FOR INSERT, UPDATE, DELETE AS
 BEGIN
 	IF @@ROWCOUNT = 0
 		return
 END"
-            );
+                );
         }
 
         try
@@ -1233,7 +1246,8 @@ END"
         // inner exception for details.
         // SqlException : Cannot insert explicit value for identity column in table
         // 'Blog' when IDENTITY_INSERT is set to OFF.
-        context.Database
+        context
+            .Database
             .CreateExecutionStrategy()
             .Execute(context, c => Assert.Throws<DbUpdateException>(() => c.SaveChanges()));
     }

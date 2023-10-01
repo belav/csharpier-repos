@@ -61,7 +61,8 @@ namespace POS_Server.Controllers
                             if (List[i].isActive == 1)
                             {
                                 long subscriptionFeesId = (long)List[i].subscriptionFeesId;
-                                var items5 = entity.agentMembershipCash
+                                var items5 = entity
+                                    .agentMembershipCash
                                     .Where(x => x.subscriptionFeesId == subscriptionFeesId)
                                     .Select(b => new { b.agentMembershipCashId })
                                     .FirstOrDefault();
@@ -112,7 +113,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var bank = entity.subscriptionFees
+                    var bank = entity
+                        .subscriptionFees
                         .Where(S => S.subscriptionFeesId == subscriptionFeesId)
                         .Select(
                             S =>
@@ -193,7 +195,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.subscriptionFees
+                            tmpObject = entity
+                                .subscriptionFees
                                 .Where(p => p.subscriptionFeesId == newObject.subscriptionFeesId)
                                 .FirstOrDefault();
 
@@ -262,9 +265,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            subscriptionFees objDelete = entity.subscriptionFees.Find(
-                                subscriptionFeesId
-                            );
+                            subscriptionFees objDelete = entity
+                                .subscriptionFees
+                                .Find(subscriptionFeesId);
                             entity.subscriptionFees.Remove(objDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -281,9 +284,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                            subscriptionFees objDelete = entity.subscriptionFees.Find(
-                                subscriptionFeesId
-                            );
+                            subscriptionFees objDelete = entity
+                                .subscriptionFees
+                                .Find(subscriptionFeesId);
                             objDelete.isActive = 0;
                             objDelete.updateUserId = userId;
                             objDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
@@ -335,7 +338,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        tmpObject = entity.subscriptionFees
+                        tmpObject = entity
+                            .subscriptionFees
                             .Where(p => p.subscriptionFeesId == newObject.subscriptionFeesId)
                             .FirstOrDefault();
 
@@ -374,7 +378,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    items = entity.subscriptionFees
+                    items = entity
+                        .subscriptionFees
                         .Where(x => x.membershipId == membershipId)
                         .ToList();
                     if (items != null)

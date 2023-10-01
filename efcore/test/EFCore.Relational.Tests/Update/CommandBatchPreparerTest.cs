@@ -369,13 +369,15 @@ public class CommandBatchPreparerTest
     [ConditionalFact]
     public void BatchCommands_creates_batches_lazily()
     {
-        var configuration = FakeRelationalTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection().AddScoped<
-                IModificationCommandBatchFactory,
-                TestModificationCommandBatchFactory
-            >(),
-            CreateFKOneToManyModelWithGeneratedIds()
-        );
+        var configuration = FakeRelationalTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection().AddScoped<
+                    IModificationCommandBatchFactory,
+                    TestModificationCommandBatchFactory
+                >(),
+                CreateFKOneToManyModelWithGeneratedIds()
+            );
 
         var stateManager = configuration.GetRequiredService<IStateManager>();
 
@@ -1218,7 +1220,8 @@ FakeEntity [Deleted]" + CoreStrings.SensitiveDataDisabled;
         bool sensitiveLogging = false
     )
     {
-        modificationCommandBatchFactory ??= FakeRelationalTestHelpers.Instance
+        modificationCommandBatchFactory ??= FakeRelationalTestHelpers
+            .Instance
             .CreateContextServices()
             .GetRequiredService<IModificationCommandBatchFactory>();
 

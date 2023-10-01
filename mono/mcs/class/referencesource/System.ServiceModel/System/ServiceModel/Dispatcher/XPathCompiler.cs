@@ -300,9 +300,11 @@ namespace System.ServiceModel.Dispatcher
                     this.compiler.nestingLevel++;
                     if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
+                            );
                     }
                     for (int i = 1; i < expr.SubExprCount; ++i)
                     {
@@ -369,9 +371,13 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (function.ParamTypes[index] == ValueDataType.Sequence)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new QueryCompileException(QueryCompileError.InvalidTypeConversion)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new QueryCompileException(
+                                        QueryCompileError.InvalidTypeConversion
+                                    )
+                                );
                         }
 
                         this.CompileTypecast(function.ParamTypes[index]);
@@ -642,9 +648,11 @@ namespace System.ServiceModel.Dispatcher
 
                     if (!step.SelectDesc.Axis.IsSupported())
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new QueryCompileException(QueryCompileError.UnsupportedAxis)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.UnsupportedAxis)
+                            );
                     }
 
                     this.codeBlock.Append(new SelectOpcode(step.SelectDesc));
@@ -655,9 +663,13 @@ namespace System.ServiceModel.Dispatcher
                         this.compiler.nestingLevel++;
                         if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new QueryCompileException(
+                                        QueryCompileError.PredicateNestingTooDeep
+                                    )
+                                );
                         }
                         this.CompilePredicates(step.SubExpr);
                         this.compiler.nestingLevel--;
@@ -782,9 +794,11 @@ namespace System.ServiceModel.Dispatcher
                     XPathStepExpr step = (XPathStepExpr)steps[i];
                     if (!step.SelectDesc.Axis.IsSupported())
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new QueryCompileException(QueryCompileError.UnsupportedAxis)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.UnsupportedAxis)
+                            );
                     }
                     Opcode stepOpcode = null;
                     if (start && 0 == i)
@@ -812,9 +826,13 @@ namespace System.ServiceModel.Dispatcher
                         this.compiler.nestingLevel++;
                         if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new QueryCompileException(
+                                        QueryCompileError.PredicateNestingTooDeep
+                                    )
+                                );
                         }
                         this.CompilePredicates(step.SubExpr);
                         this.compiler.nestingLevel--;
@@ -946,9 +964,9 @@ namespace System.ServiceModel.Dispatcher
 
             void ThrowError(QueryCompileError error)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new QueryCompileException(error)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new QueryCompileException(error));
             }
         }
     }

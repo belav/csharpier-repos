@@ -150,9 +150,9 @@ public class ServerStreamingServerCallHandlerTests : LoggedTest
         );
         Assert.Equal(2, responseJson2.RootElement.GetProperty("code").GetInt32());
 
-        var exceptionWrite = TestSink.Writes.Single(
-            w => w.EventId.Name == "ErrorExecutingServiceMethod"
-        );
+        var exceptionWrite = TestSink
+            .Writes
+            .Single(w => w.EventId.Name == "ErrorExecutingServiceMethod");
         Assert.Equal(
             "Error when executing service method 'TestMethodName'.",
             exceptionWrite.Message
@@ -276,9 +276,9 @@ public class ServerStreamingServerCallHandlerTests : LoggedTest
         );
         Assert.Equal(2, responseJson.RootElement.GetProperty("code").GetInt32());
 
-        var exceptionWrite = TestSink.Writes.Single(
-            w => w.EventId.Name == "ErrorExecutingServiceMethod"
-        );
+        var exceptionWrite = TestSink
+            .Writes
+            .Single(w => w.EventId.Name == "ErrorExecutingServiceMethod");
         Assert.Equal(
             "Error when executing service method 'TestMethodName'.",
             exceptionWrite.Message
@@ -451,10 +451,9 @@ public class ServerStreamingServerCallHandlerTests : LoggedTest
         {
             foreach (var interceptor in interceptors)
             {
-                serviceOptions.Interceptors.Add(
-                    interceptor.Type,
-                    interceptor.Args ?? Array.Empty<object>()
-                );
+                serviceOptions
+                    .Interceptors
+                    .Add(interceptor.Type, interceptor.Args ?? Array.Empty<object>());
             }
         }
 

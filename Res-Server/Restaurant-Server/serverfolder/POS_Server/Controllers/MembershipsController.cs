@@ -33,7 +33,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = entity.memberships
+                    var List = entity
+                        .memberships
                         .Select(
                             S =>
                                 new MembershipsModel
@@ -90,19 +91,23 @@ namespace POS_Server.Controllers
                             {
                                 long membershipId = (long)List[i].membershipId;
                                 //var itemsI = entity.agentMemberships.Where(x => x.membershipId == membershipId).Select(b => new { b.agentMembershipsId }).FirstOrDefault();
-                                var items2 = entity.subscriptionFees
+                                var items2 = entity
+                                    .subscriptionFees
                                     .Where(x => x.membershipId == membershipId)
                                     .Select(b => new { b.subscriptionFeesId })
                                     .FirstOrDefault();
-                                var items3 = entity.couponsMemberships
+                                var items3 = entity
+                                    .couponsMemberships
                                     .Where(x => x.membershipId == membershipId)
                                     .Select(b => new { b.couponMembershipId })
                                     .FirstOrDefault();
-                                var items4 = entity.membershipsOffers
+                                var items4 = entity
+                                    .membershipsOffers
                                     .Where(x => x.membershipId == membershipId)
                                     .Select(b => new { b.membershipOfferId })
                                     .FirstOrDefault();
-                                var items5 = entity.invoicesClassMemberships
+                                var items5 = entity
+                                    .invoicesClassMemberships
                                     .Where(x => x.membershipId == membershipId)
                                     .Select(b => new { b.invClassMemberId })
                                     .FirstOrDefault();
@@ -151,7 +156,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var bank = entity.memberships
+                    var bank = entity
+                        .memberships
                         .Where(S => S.membershipId == membershipId)
                         .Select(
                             S =>
@@ -234,7 +240,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpObject = entity.memberships
+                            tmpObject = entity
+                                .memberships
                                 .Where(p => p.membershipId == newObject.membershipId)
                                 .FirstOrDefault();
 
@@ -370,7 +377,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        tmpObject = entity.memberships
+                        tmpObject = entity
+                            .memberships
                             .Where(p => p.membershipId == newObject.membershipId)
                             .FirstOrDefault();
 
@@ -528,10 +536,12 @@ namespace POS_Server.Controllers
                             List<subscriptionFees> tmpsubListdb = new List<subscriptionFees>();
                             subscriptionFees tmpSubObjdb = new subscriptionFees();
 
-                            tmpObjectdb = entity.memberships
+                            tmpObjectdb = entity
+                                .memberships
                                 .Where(p => p.membershipId == newObjectModel.membershipId)
                                 .FirstOrDefault();
-                            tmpsubListdb = entity.subscriptionFees
+                            tmpsubListdb = entity
+                                .subscriptionFees
                                 .Where(p => p.membershipId == newObjectModel.membershipId)
                                 .ToList();
                             tmpSubObjdb = tmpsubListdb.OrderBy(S => S.updateDate).LastOrDefault();
@@ -1019,7 +1029,8 @@ namespace POS_Server.Controllers
                             //}
 
 
-                            row.couponsCount = entity.couponsMemberships
+                            row.couponsCount = entity
+                                .couponsMemberships
                                 .Where(x => x.membershipId == row.membershipId)
                                 .Count();
                         }

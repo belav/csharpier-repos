@@ -100,7 +100,8 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
         var bindingFailures = new List<IEnumerable<ParameterInfo>>();
 
         foreach (
-            var constructor in entityType.ClrType
+            var constructor in entityType
+                .ClrType
                 .GetTypeInfo()
                 .DeclaredConstructors
                 .Where(c => !c.IsStatic)
@@ -112,7 +113,8 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
                 TryBindConstructor(entityType, constructor, bind, out var binding, out var failures)
             )
             {
-                var serviceParamCount = binding.ParameterBindings
+                var serviceParamCount = binding
+                    .ParameterBindings
                     .OfType<ServiceParameterBinding>()
                     .Count();
                 var propertyParamCount = binding.ParameterBindings.Count - serviceParamCount;
@@ -179,7 +181,8 @@ public class ConstructorBindingFactory : IConstructorBindingFactory
             IEnumerable<string> ConstructConstructor(
                 IGrouping<ConstructorInfo, ParameterInfo> parameters
             ) =>
-                parameters.Key
+                parameters
+                    .Key
                     .GetParameters()
                     .Select(y => $"{y.ParameterType.ShortDisplayName()} {y.Name}");
 

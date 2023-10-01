@@ -31,9 +31,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (taskMethod == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("taskMethod")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("taskMethod"));
             }
 
             this.taskMethod = taskMethod;
@@ -66,9 +66,9 @@ namespace System.ServiceModel.Dispatcher
 
         public object Invoke(object instance, object[] inputs, out object[] outputs)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public IAsyncResult InvokeBegin(
@@ -85,9 +85,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (instance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
+                    );
             }
 
             object returnVal = null;
@@ -104,9 +106,9 @@ namespace System.ServiceModel.Dispatcher
 
                 if (invokeTask == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.SFxInvalidCallbackIAsyncResult)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentException(SR.SFxInvalidCallbackIAsyncResult));
                 }
 
                 AggregateException ae = null;
@@ -160,9 +162,11 @@ namespace System.ServiceModel.Dispatcher
                             ae.InnerException,
                             TraceEventType.Warning
                         );
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            AuthorizationBehavior.CreateAccessDeniedFaultException()
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                AuthorizationBehavior.CreateAccessDeniedFaultException()
+                            );
                     }
 
                     invokeTask.GetAwaiter().GetResult();
@@ -174,9 +178,9 @@ namespace System.ServiceModel.Dispatcher
                 // we detect and throw here.
                 if (task.IsCanceled)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TaskCanceledException(task)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new TaskCanceledException(task));
                 }
 
                 outputs = tuple.Item2;
@@ -215,36 +219,42 @@ namespace System.ServiceModel.Dispatcher
 
             if (instance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
+                    );
             }
 
             if (inputs == null)
             {
                 if (this.inputParameterCount > 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxInputParametersToServiceNull,
-                                this.inputParameterCount
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxInputParametersToServiceNull,
+                                    this.inputParameterCount
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             else if (inputs.Length != this.inputParameterCount)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxInputParametersToServiceInvalid,
-                            this.inputParameterCount,
-                            inputs.Length
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxInputParametersToServiceInvalid,
+                                this.inputParameterCount,
+                                inputs.Length
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             object[] outputs = EmptyArray.Allocate(this.outputParameterCount);
@@ -296,9 +306,9 @@ namespace System.ServiceModel.Dispatcher
             catch (SecurityException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    AuthorizationBehavior.CreateAccessDeniedFaultException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
             }
             catch (Exception e)
             {

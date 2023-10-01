@@ -120,9 +120,9 @@ namespace System.ServiceModel.Channels
             {
                 if (writeEncoding == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "writeEncoding"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("writeEncoding");
                 }
 
                 thisLock = new object();
@@ -206,9 +206,9 @@ namespace System.ServiceModel.Channels
             {
                 if (bufferManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("bufferManager")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("bufferManager"));
                 }
 
                 if (WebTD.JsonMessageDecodingStartIsEnabled())
@@ -258,9 +258,9 @@ namespace System.ServiceModel.Channels
             {
                 if (stream == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("stream")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("stream"));
                 }
 
                 if (WebTD.JsonMessageDecodingStartIsEnabled())
@@ -305,9 +305,9 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (bufferManager == null)
                 {
@@ -352,10 +352,12 @@ namespace System.ServiceModel.Channels
 
                 JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty;
                 if (
-                    message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                        JavascriptCallbackResponseMessageProperty.Name,
-                        out javascriptResponseMessageProperty
-                    )
+                    message
+                        .Properties
+                        .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                            JavascriptCallbackResponseMessageProperty.Name,
+                            out javascriptResponseMessageProperty
+                        )
                     && javascriptResponseMessageProperty != null
                 )
                 {
@@ -416,9 +418,9 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("message")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("message"));
                 }
                 if (stream == null)
                 {
@@ -440,10 +442,12 @@ namespace System.ServiceModel.Channels
                 XmlDictionaryWriter xmlWriter = TakeStreamedWriter(stream);
                 JavascriptCallbackResponseMessageProperty javascriptResponseMessageProperty;
                 if (
-                    message.Properties.TryGetValue<JavascriptCallbackResponseMessageProperty>(
-                        JavascriptCallbackResponseMessageProperty.Name,
-                        out javascriptResponseMessageProperty
-                    )
+                    message
+                        .Properties
+                        .TryGetValue<JavascriptCallbackResponseMessageProperty>(
+                            JavascriptCallbackResponseMessageProperty.Name,
+                            out javascriptResponseMessageProperty
+                        )
                     && javascriptResponseMessageProperty != null
                     && !String.IsNullOrEmpty(javascriptResponseMessageProperty.CallbackFunctionName)
                 )

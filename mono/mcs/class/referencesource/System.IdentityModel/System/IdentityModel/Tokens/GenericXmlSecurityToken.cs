@@ -191,9 +191,11 @@ namespace System.IdentityModel.Tokens
             )
                 return (T)this.externalTokenReference;
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new SecurityTokenException(SR.GetString(SR.UnableToCreateTokenReference))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.UnableToCreateTokenReference))
+                );
         }
 
         public override bool MatchesKeyIdentifierClause(

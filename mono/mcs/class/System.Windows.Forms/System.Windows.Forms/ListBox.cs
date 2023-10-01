@@ -860,11 +860,10 @@ namespace System.Windows.Forms
             {
                 string text = GetItemText(Items[i]);
                 if (
-                    CultureInfo.CurrentCulture.CompareInfo.IsPrefix(
-                        text,
-                        s,
-                        CompareOptions.IgnoreCase
-                    )
+                    CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .IsPrefix(text, s, CompareOptions.IgnoreCase)
                 )
                     return i;
 

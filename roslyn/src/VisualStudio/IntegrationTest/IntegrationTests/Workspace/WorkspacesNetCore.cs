@@ -25,10 +25,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
         public override void OpenCSharpThenVBSolution()
         {
             // The CSharpNetCoreClassLibrary template does not open a file automatically.
-            VisualStudio.SolutionExplorer.OpenFile(
-                new ProjectUtils.Project(ProjectName),
-                WellKnownProjectTemplates.CSharpNetCoreClassLibraryClassFileName
-            );
+            VisualStudio
+                .SolutionExplorer
+                .OpenFile(
+                    new ProjectUtils.Project(ProjectName),
+                    WellKnownProjectTemplates.CSharpNetCoreClassLibraryClassFileName
+                );
             base.OpenCSharpThenVBSolution();
         }
 
@@ -39,13 +41,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
         {
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.EditProjectFile(project);
-            VisualStudio.Editor.SetText(
-                @"<Project Sdk=""Microsoft.NET.Sdk"">
+            VisualStudio
+                .Editor
+                .SetText(
+                    @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
   </PropertyGroup>
 </Project>"
-            );
+                );
             VisualStudio.SolutionExplorer.SaveAll();
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(project);
             // ?? This should only need WaitForAsyncOperations for FeatureAttribute.Workspace
@@ -69,11 +73,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
         {
             VisualStudio.SolutionExplorer.CreateSolution(nameof(WorkspacesDesktop));
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddProject(
-                project,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.VisualBasic
-            );
+            VisualStudio
+                .SolutionExplorer
+                .AddProject(
+                    project,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.VisualBasic
+                );
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(project);
             base.ProjectProperties();
         }

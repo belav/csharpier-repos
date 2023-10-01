@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             {
                 return IsConstructorInitializerContext(context)
                     || IsInstanceExpressionOrStatement(context)
-                    || context.LeftToken.IsInCastExpressionTypeWhereExpressionIsMissingOrInNextLine();
+                    || context
+                        .LeftToken
+                        .IsInCastExpressionTypeWhereExpressionIsMissingOrInNextLine();
             }
 
             return false;

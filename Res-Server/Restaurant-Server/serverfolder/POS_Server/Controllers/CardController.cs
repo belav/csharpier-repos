@@ -36,7 +36,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var cardsList = entity.cards
+                    var cardsList = entity
+                        .cards
                         .Select(
                             c =>
                                 new CardModel()
@@ -66,7 +67,8 @@ namespace POS_Server.Controllers
                             if (carditem.isActive == 1)
                             {
                                 long cId = (int)carditem.cardId;
-                                var casht = entity.cashTransfer
+                                var casht = entity
+                                    .cashTransfer
                                     .Where(x => x.cardId == cId)
                                     .Select(x => new { x.cardId })
                                     .FirstOrDefault();
@@ -106,7 +108,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var card = entity.cards
+                    var card = entity
+                        .cards
                         .Where(c => c.cardId == cId)
                         .Select(
                             c =>
@@ -156,7 +159,8 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var card = entity.cards
+                    var card = entity
+                        .cards
                         .Where(c => c.isActive == isActive)
                         .Select(
                             c =>
@@ -229,7 +233,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpcard = entity.cards
+                            tmpcard = entity
+                                .cards
                                 .Where(p => p.cardId == Object.cardId)
                                 .FirstOrDefault();
                             tmpcard.cardId = Object.cardId;
@@ -456,9 +461,9 @@ namespace POS_Server.Controllers
                             ".tiff",
                             ".jfif"
                         };
-                        var ext = postedFile.FileName.Substring(
-                            postedFile.FileName.LastIndexOf('.')
-                        );
+                        var ext = postedFile
+                            .FileName
+                            .Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))

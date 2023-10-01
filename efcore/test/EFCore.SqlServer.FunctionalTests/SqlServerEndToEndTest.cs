@@ -833,7 +833,8 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
 
         using (var context = new GameDbContext(options))
         {
-            var character = context.Characters
+            var character = context
+                .Characters
                 .Include(c => c.Level.Game)
                 .OrderBy(c => c.Id)
                 .First();
@@ -862,7 +863,8 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
         var expectedCId = 0;
         using (var context = new SomeDbContext(options))
         {
-            var entityA = context.EntitiesA
+            var entityA = context
+                .EntitiesA
                 .Include(x => x.EntityB)
                 .ThenInclude(x => x.EntitiesC)
                 .OrderBy(x => x.Id)
@@ -877,7 +879,8 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
 
         using (var context = new SomeDbContext(options))
         {
-            var entityA = context.EntitiesA
+            var entityA = context
+                .EntitiesA
                 .Include(x => x.EntityB)
                 .ThenInclude(x => x.EntitiesC)
                 .OrderBy(x => x.Id)

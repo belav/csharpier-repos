@@ -157,8 +157,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             CancellationToken cancellation
         )
         {
-            var registrationService =
-                _workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService = _workspace
+                .Services
+                .GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new InProcDesignerAttributeIncrementalAnalyzerProvider(this);
 
             registrationService.AddAnalyzerProvider(
@@ -243,10 +244,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         )
         {
             // legacy project system can only be talked to on the UI thread.
-            await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                alwaysYield: true,
-                cancellationToken
-            );
+            await ThreadingContext
+                .JoinableTaskFactory
+                .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
 
             AssertIsForeground();
 
@@ -378,10 +378,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
         {
             if (!_cpsProjects.TryGetValue(projectId, out var updateService))
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    alwaysYield: true,
-                    cancellationToken
-                );
+                await ThreadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(alwaysYield: true, cancellationToken);
                 this.AssertIsForeground();
 
                 updateService = ComputeUpdateService();

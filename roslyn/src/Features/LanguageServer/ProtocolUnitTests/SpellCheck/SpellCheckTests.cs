@@ -400,7 +400,10 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer.TestWorkspace.CurrentSolution.Projects
+            var document = testLspServer
+                .TestWorkspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .Documents
                 .First();
@@ -483,7 +486,10 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer.TestWorkspace.CurrentSolution.Projects
+            var document = testLspServer
+                .TestWorkspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .Documents
                 .First();
@@ -502,9 +508,9 @@ class {|Identifier:A|}
             );
             Assert.Empty(results[1].Ranges);
 
-            testLspServer.TestWorkspace.OnDocumentRemoved(
-                testLspServer.TestWorkspace.Documents.First().Id
-            );
+            testLspServer
+                .TestWorkspace
+                .OnDocumentRemoved(testLspServer.TestWorkspace.Documents.First().Id);
 
             var results2 = await RunGetWorkspaceSpellCheckSpansAsync(
                 testLspServer,
@@ -537,7 +543,10 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer.TestWorkspace.CurrentSolution.Projects
+            var document = testLspServer
+                .TestWorkspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .Documents
                 .First();
@@ -587,7 +596,10 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer.TestWorkspace.CurrentSolution.Projects
+            var document = testLspServer
+                .TestWorkspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .Documents
                 .First();
@@ -663,7 +675,10 @@ class {|Identifier:A|}
 
             Assert.Equal(2, results.Length);
 
-            var document = testLspServer.TestWorkspace.CurrentSolution.Projects
+            var document = testLspServer
+                .TestWorkspace
+                .CurrentSolution
+                .Projects
                 .Single()
                 .Documents
                 .First();

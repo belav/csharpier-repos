@@ -109,9 +109,11 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = ArmBase.Arm64.LeadingZeroCount(
-                Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data))
-            );
+            var result = ArmBase
+                .Arm64
+                .LeadingZeroCount(
+                    Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data))
+                );
 
             ValidateResult(_data, result);
         }
@@ -226,9 +228,11 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation(
-                    $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.LeadingZeroCount)}<Int32>(UInt64): LeadingZeroCount failed:"
-                );
+                TestLibrary
+                    .TestFramework
+                    .LogInformation(
+                        $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.LeadingZeroCount)}<Int32>(UInt64): LeadingZeroCount failed:"
+                    );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

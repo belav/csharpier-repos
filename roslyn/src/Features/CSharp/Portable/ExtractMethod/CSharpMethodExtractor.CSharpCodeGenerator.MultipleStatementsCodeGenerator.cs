@@ -48,10 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         var firstUnderContainer = result.GetFirstStatementUnderContainer();
                         var lastUnderContainer = result.GetLastStatementUnderContainer();
                         Contract.ThrowIfFalse(
-                            CSharpSyntaxFacts.Instance.AreStatementsInSameContainer(
-                                firstUnderContainer,
-                                lastUnderContainer
-                            )
+                            CSharpSyntaxFacts
+                                .Instance
+                                .AreStatementsInSameContainer(
+                                    firstUnderContainer,
+                                    lastUnderContainer
+                                )
                         );
                         return true;
                     }
@@ -136,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         BlockSyntax blockNode => blockNode.Statements,
                         SwitchSectionSyntax switchSectionNode => switchSectionNode.Statements,
                         GlobalStatementSyntax globalStatement
-                            => ((CompilationUnitSyntax)globalStatement.Parent).Members
+                            => ((CompilationUnitSyntax)globalStatement.Parent)
+                                .Members
                                 .OfType<GlobalStatementSyntax>()
                                 .Select(globalStatement => globalStatement.Statement),
                         _ => throw ExceptionUtilities.UnexpectedValue(node),

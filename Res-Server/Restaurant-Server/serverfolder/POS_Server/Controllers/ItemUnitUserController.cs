@@ -173,7 +173,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var row = entity.itemUnitUser
+                        var row = entity
+                            .itemUnitUser
                             .Where(u => u.userId == userId)
                             .Select(
                                 S =>
@@ -509,7 +510,8 @@ namespace POS_Server.Controllers
                     }
                     else
                     {
-                        var tmpObject = entity.itemUnitUser
+                        var tmpObject = entity
+                            .itemUnitUser
                             .Where(p => p.id == newObject.id)
                             .FirstOrDefault();
 

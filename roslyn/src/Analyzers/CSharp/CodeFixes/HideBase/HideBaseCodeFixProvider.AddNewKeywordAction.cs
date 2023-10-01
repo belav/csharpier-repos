@@ -61,10 +61,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
                 var newModifiers = modifiers.Add(SyntaxFactory.Token(SyntaxKind.NewKeyword));
 
                 if (
-                    !CSharpOrderModifiersHelper.Instance.TryGetOrComputePreferredOrder(
-                        preferredModifierOrder,
-                        out var preferredOrder
-                    ) || !AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers)
+                    !CSharpOrderModifiersHelper
+                        .Instance
+                        .TryGetOrComputePreferredOrder(
+                            preferredModifierOrder,
+                            out var preferredOrder
+                        ) || !AbstractOrderModifiersHelpers.IsOrdered(preferredOrder, modifiers)
                 )
                 {
                     return syntaxFacts.WithModifiers(node, newModifiers);

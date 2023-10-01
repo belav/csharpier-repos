@@ -19,10 +19,9 @@ public class SqlExpressionFactory : ISqlExpressionFactory
     public SqlExpressionFactory(SqlExpressionFactoryDependencies dependencies)
     {
         Dependencies = dependencies;
-        _boolTypeMapping = dependencies.TypeMappingSource.FindMapping(
-            typeof(bool),
-            dependencies.Model
-        )!;
+        _boolTypeMapping = dependencies
+            .TypeMappingSource
+            .FindMapping(typeof(bool), dependencies.Model)!;
     }
 
     /// <summary>
@@ -41,10 +40,9 @@ public class SqlExpressionFactory : ISqlExpressionFactory
                 ? sqlUnaryExpression.Operand
                 : ApplyTypeMapping(
                     sqlExpression,
-                    Dependencies.TypeMappingSource.FindMapping(
-                        sqlExpression.Type,
-                        Dependencies.Model
-                    )
+                    Dependencies
+                        .TypeMappingSource
+                        .FindMapping(sqlExpression.Type, Dependencies.Model)
                 );
 
     /// <inheritdoc />
@@ -106,10 +104,9 @@ public class SqlExpressionFactory : ISqlExpressionFactory
                         likeExpression.EscapeChar
                     )
             )
-            ?? Dependencies.TypeMappingSource.FindMapping(
-                likeExpression.Match.Type,
-                Dependencies.Model
-            );
+            ?? Dependencies
+                .TypeMappingSource
+                .FindMapping(likeExpression.Match.Type, Dependencies.Model);
 
         return new LikeExpression(
             ApplyTypeMapping(likeExpression.Match, inferredTypeMapping),
@@ -227,14 +224,12 @@ public class SqlExpressionFactory : ISqlExpressionFactory
                     // We avoid object here since the result does not get typeMapping from outside.
                     ?? (
                         left.Type != typeof(object)
-                            ? Dependencies.TypeMappingSource.FindMapping(
-                                left.Type,
-                                Dependencies.Model
-                            )
-                            : Dependencies.TypeMappingSource.FindMapping(
-                                right.Type,
-                                Dependencies.Model
-                            )
+                            ? Dependencies
+                                .TypeMappingSource
+                                .FindMapping(left.Type, Dependencies.Model)
+                            : Dependencies
+                                .TypeMappingSource
+                                .FindMapping(right.Type, Dependencies.Model)
                     );
                 resultType = typeof(bool);
                 resultTypeMapping = _boolTypeMapping;
@@ -296,10 +291,9 @@ public class SqlExpressionFactory : ISqlExpressionFactory
                         )
                         : inExpression.Item.TypeMapping
             )
-            ?? Dependencies.TypeMappingSource.FindMapping(
-                inExpression.Item.Type,
-                Dependencies.Model
-            );
+            ?? Dependencies
+                .TypeMappingSource
+                .FindMapping(inExpression.Item.Type, Dependencies.Model);
 
         var item = ApplyTypeMapping(inExpression.Item, itemTypeMapping);
         if (inExpression.Values != null)

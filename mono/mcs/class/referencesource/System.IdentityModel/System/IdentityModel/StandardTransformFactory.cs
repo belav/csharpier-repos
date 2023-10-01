@@ -34,9 +34,11 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CryptographicException(SR.GetString(SR.UnsupportedTransformAlgorithm))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new CryptographicException(SR.GetString(SR.UnsupportedTransformAlgorithm))
+                    );
             }
         }
     }

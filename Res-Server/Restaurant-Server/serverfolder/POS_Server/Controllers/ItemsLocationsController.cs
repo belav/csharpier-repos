@@ -513,7 +513,8 @@ namespace POS_Server.Controllers
                 {
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                        var docImageList = entity.itemsLocations
+                        var docImageList = entity
+                            .itemsLocations
                             .Where(
                                 b =>
                                     b.itemUnitId == itemUnitId
@@ -748,15 +749,16 @@ namespace POS_Server.Controllers
             using (incposdbEntities entity = new incposdbEntities())
             {
                 var freeZoneLocation = (
-                    from s in entity.sections.Where(
-                        x => x.branchId == branchId && x.isFreeZone == 1 && x.isKitchen != 1
-                    )
+                    from s in entity
+                        .sections
+                        .Where(x => x.branchId == branchId && x.isFreeZone == 1 && x.isKitchen != 1)
                     join l in entity.locations on s.sectionId equals l.sectionId
                     select l.locationId
                 ).SingleOrDefault();
                 foreach (itemsTransfer item in newObject)
                 {
-                    var itemId = entity.itemsUnits
+                    var itemId = entity
+                        .itemsUnits
                         .Where(x => x.itemUnitId == item.itemUnitId)
                         .Select(x => x.itemId)
                         .Single();
@@ -775,7 +777,8 @@ namespace POS_Server.Controllers
                     {
                         long offerId = (long)item.offerId;
                         long itemUnitId = (long)item.itemUnitId;
-                        var offer = entity.itemsOffers
+                        var offer = entity
+                            .itemsOffers
                             .Where(x => x.iuId == itemUnitId && x.offerId == offerId)
                             .FirstOrDefault();
                         offer.used -= (int)item.quantity;
@@ -802,7 +805,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var itemId = entity.itemsUnits
+                    var itemId = entity
+                        .itemsUnits
                         .Where(x => x.itemUnitId == itemUnitId)
                         .Select(x => x.itemId)
                         .Single();
@@ -811,7 +815,8 @@ namespace POS_Server.Controllers
                     int maxQuantity = (int)item.max;
                     if (maxQuantity == 0)
                         return false;
-                    var maxUnit = entity.itemsUnits
+                    var maxUnit = entity
+                        .itemsUnits
                         .Where(x => x.itemId == itemId && x.unitId == maxUnitId)
                         .FirstOrDefault();
                     if (maxUnit == null)
@@ -825,7 +830,8 @@ namespace POS_Server.Controllers
                         }
                         if (isExcedded == false)
                         {
-                            long smallestItemUnit = entity.itemsUnits
+                            long smallestItemUnit = entity
+                                .itemsUnits
                                 .Where(x => x.itemId == itemId && x.subUnitId == x.unitId)
                                 .Select(x => x.itemUnitId)
                                 .Single();
@@ -1046,7 +1052,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var locations = entity.locations
+                            var locations = entity
+                                .locations
                                 .Where(x => x.branchId == branchId && x.isActive == 1)
                                 .Select(x => new { x.locationId })
                                 .OrderBy(x => x.locationId)
@@ -1090,7 +1097,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var locations = entity.locations
+                                var locations = entity
+                                    .locations
                                     .Where(x => x.branchId == branchId && x.isActive == 1)
                                     .Select(x => new { x.locationId })
                                     .OrderBy(x => x.locationId)
@@ -1269,9 +1277,9 @@ namespace POS_Server.Controllers
             using (incposdbEntities entity = new incposdbEntities())
             {
                 var freeZoneLocation = (
-                    from s in entity.sections.Where(
-                        x => x.branchId == toBranch && x.isFreeZone == 1 && x.isKitchen != 1
-                    )
+                    from s in entity
+                        .sections
+                        .Where(x => x.branchId == toBranch && x.isFreeZone == 1 && x.isKitchen != 1)
                     join l in entity.locations on s.sectionId equals l.sectionId
                     select l.locationId
                 ).SingleOrDefault();
@@ -1285,7 +1293,8 @@ namespace POS_Server.Controllers
                     itemL.updateUserId = userId;
                     entity.SaveChanges();
 
-                    var itemId = entity.itemsUnits
+                    var itemId = entity
+                        .itemsUnits
                         .Where(x => x.itemUnitId == item.itemUnitId)
                         .Select(x => x.itemId)
                         .Single();
@@ -1492,7 +1501,8 @@ namespace POS_Server.Controllers
                     itemL.updateUserId = userId;
                     entity.SaveChanges();
 
-                    var itemId = entity.itemsUnits
+                    var itemId = entity
+                        .itemsUnits
                         .Where(x => x.itemUnitId == item.itemUnitId)
                         .Select(x => x.itemId)
                         .Single();
@@ -1818,11 +1828,13 @@ namespace POS_Server.Controllers
                         {
                             dic = checkUpperUnit(itemUnitId, branchId, requiredAmount, userId);
 
-                            var unit = entity.itemsUnits
+                            var unit = entity
+                                .itemsUnits
                                 .Where(x => x.itemUnitId == itemUnitId)
                                 .Select(x => new { x.unitId, x.itemId })
                                 .FirstOrDefault();
-                            var upperUnit = entity.itemsUnits
+                            var upperUnit = entity
+                                .itemsUnits
                                 .Where(
                                     x =>
                                         x.subUnitId == unit.unitId
@@ -1854,7 +1866,8 @@ namespace POS_Server.Controllers
                                 }
                                 else
                                 {
-                                    var locations = entity.locations
+                                    var locations = entity
+                                        .locations
                                         .Where(x => x.branchId == branchId && x.isActive == 1)
                                         .Select(x => new { x.locationId })
                                         .OrderBy(x => x.locationId)
@@ -1952,11 +1965,13 @@ namespace POS_Server.Controllers
                 {
                     dic = checkUpperUnit(itemUnitId, branchId, requiredAmount, userId, isKitchen);
 
-                    var unit = entity.itemsUnits
+                    var unit = entity
+                        .itemsUnits
                         .Where(x => x.itemUnitId == itemUnitId)
                         .Select(x => new { x.unitId, x.itemId })
                         .FirstOrDefault();
-                    var upperUnit = entity.itemsUnits
+                    var upperUnit = entity
+                        .itemsUnits
                         .Where(
                             x =>
                                 x.subUnitId == unit.unitId
@@ -1986,7 +2001,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var locations = entity.locations
+                            var locations = entity
+                                .locations
                                 .Where(
                                     x =>
                                         x.branchId == branchId
@@ -2050,11 +2066,13 @@ namespace POS_Server.Controllers
                 var searchPredicate = PredicateBuilder.New<sections>();
                 searchPredicate = searchPredicate.And(x => x.isKitchen == isKitchen);
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -2096,7 +2114,8 @@ namespace POS_Server.Controllers
                     {
                         dic["isConsumed"] = 1;
                         var itemL = entity.itemsLocations.Find(itemInLocs[i].itemsLocId);
-                        var smallUnitLocId = entity.itemsLocations
+                        var smallUnitLocId = entity
+                            .itemsLocations
                             .Where(
                                 x =>
                                     x.itemUnitId == itemUnitId
@@ -2159,7 +2178,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var locations = entity.locations
+                            var locations = entity
+                                .locations
                                 .Where(
                                     x =>
                                         x.branchId == branchId
@@ -2228,7 +2248,8 @@ namespace POS_Server.Controllers
             decimal newQuant = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(
                         x =>
@@ -2241,7 +2262,8 @@ namespace POS_Server.Controllers
                             }
                     )
                     .FirstOrDefault();
-                var lowerUnit = entity.itemsUnits
+                var lowerUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.unitId == unit.subUnitId && x.itemId == unit.itemId && x.isActive == 1
@@ -2279,7 +2301,8 @@ namespace POS_Server.Controllers
                     for (int i = 0; i < itemInLocs.Count; i++)
                     {
                         var itemL = entity.itemsLocations.Find(itemInLocs[i].itemsLocId);
-                        var smallUnitLocId = entity.itemsLocations
+                        var smallUnitLocId = entity
+                            .itemsLocations
                             .Where(
                                 x =>
                                     x.itemUnitId == itemUnitId
@@ -2434,11 +2457,13 @@ namespace POS_Server.Controllers
                     amount += (int)itemInLocs[i].quantity;
                 }
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -2466,7 +2491,8 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(
                         x =>
@@ -2480,7 +2506,8 @@ namespace POS_Server.Controllers
                     )
                     .FirstOrDefault();
 
-                var smallUnit = entity.itemsUnits
+                var smallUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.unitId == unit.subUnitId && x.itemId == unit.itemId && x.isActive == 1
@@ -2560,11 +2587,13 @@ namespace POS_Server.Controllers
                     amount += (int)itemInLocs[i].quantity;
                 }
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -2616,11 +2645,13 @@ namespace POS_Server.Controllers
                     amount += (int)itemInLocs[i].quantity;
                 }
 
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(x => new { x.unitId, x.itemId })
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -2814,12 +2845,14 @@ namespace POS_Server.Controllers
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             var freeZoneLocation = (
-                                from s in entity.sections.Where(
-                                    x =>
-                                        x.branchId == branchId
-                                        && x.isFreeZone == 1
-                                        && x.isKitchen != 1
-                                )
+                                from s in entity
+                                    .sections
+                                    .Where(
+                                        x =>
+                                            x.branchId == branchId
+                                            && x.isFreeZone == 1
+                                            && x.isKitchen != 1
+                                    )
                                 join l in entity.locations on s.sectionId equals l.sectionId
                                 select l.locationId
                             ).SingleOrDefault();
@@ -2923,18 +2956,21 @@ namespace POS_Server.Controllers
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             var freeZoneLocation = (
-                                from s in entity.sections.Where(
-                                    x =>
-                                        x.branchId == branchId
-                                        && x.isFreeZone == 1
-                                        && x.isKitchen != 1
-                                )
+                                from s in entity
+                                    .sections
+                                    .Where(
+                                        x =>
+                                            x.branchId == branchId
+                                            && x.isFreeZone == 1
+                                            && x.isKitchen != 1
+                                    )
                                 join l in entity.locations on s.sectionId equals l.sectionId
                                 select l.locationId
                             ).SingleOrDefault();
                             foreach (itemsTransfer item in newObject)
                             {
-                                var itemL = entity.itemsLocations
+                                var itemL = entity
+                                    .itemsLocations
                                     .Where(
                                         x =>
                                             x.itemUnitId == item.itemUnitId
@@ -2948,7 +2984,8 @@ namespace POS_Server.Controllers
                                     itemL.updateUserId = userId;
                                     entity.SaveChanges();
 
-                                    var itemId = entity.itemsUnits
+                                    var itemId = entity
+                                        .itemsUnits
                                         .Where(x => x.itemUnitId == item.itemUnitId)
                                         .Select(x => x.itemId)
                                         .Single();
@@ -3121,7 +3158,8 @@ namespace POS_Server.Controllers
                             );
                             if (isExcedded == true) //add notification
                             {
-                                var itemId = entity.itemsUnits
+                                var itemId = entity
+                                    .itemsUnits
                                     .Where(x => x.itemUnitId == itemL.itemUnitId)
                                     .Select(x => x.itemId)
                                     .Single();
@@ -3176,7 +3214,8 @@ namespace POS_Server.Controllers
                     );
                     if (isExcedded == true) //add notification
                     {
-                        var itemId = entity.itemsUnits
+                        var itemId = entity
+                            .itemsUnits
                             .Where(x => x.itemUnitId == itemL.itemUnitId)
                             .Select(x => x.itemId)
                             .Single();
@@ -3199,7 +3238,8 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var itemId = entity.itemsUnits
+                    var itemId = entity
+                        .itemsUnits
                         .Where(x => x.itemUnitId == itemUnitId)
                         .Select(x => x.itemId)
                         .Single();
@@ -3208,7 +3248,8 @@ namespace POS_Server.Controllers
                     int minQuantity = (int)item.min;
                     if (minQuantity == 0)
                         return false;
-                    var minUnit = entity.itemsUnits
+                    var minUnit = entity
+                        .itemsUnits
                         .Where(x => x.itemId == itemId && x.unitId == minUnitId)
                         .FirstOrDefault();
                     if (minUnit == null)
@@ -3222,7 +3263,8 @@ namespace POS_Server.Controllers
                         }
                         if (isExcedded == false)
                         {
-                            long smallestItemUnit = entity.itemsUnits
+                            long smallestItemUnit = entity
+                                .itemsUnits
                                 .Where(x => x.itemId == itemId && x.subUnitId == x.unitId)
                                 .Select(x => x.itemUnitId)
                                 .Single();
@@ -3325,7 +3367,8 @@ namespace POS_Server.Controllers
                                 );
                                 if (isExcedded == true) //add notification
                                 {
-                                    var itemId = entity.itemsUnits
+                                    var itemId = entity
+                                        .itemsUnits
                                         .Where(x => x.itemUnitId == item.itemUnitId)
                                         .Select(x => x.itemId)
                                         .Single();
@@ -3747,7 +3790,8 @@ namespace POS_Server.Controllers
                                 }
                                 else
                                 {
-                                    var locations = entity.locations
+                                    var locations = entity
+                                        .locations
                                         .Where(x => x.branchId == branchId && x.isActive == 1)
                                         .Select(x => new { x.locationId })
                                         .OrderBy(x => x.locationId)
@@ -3794,7 +3838,8 @@ namespace POS_Server.Controllers
                                 }
                                 else
                                 {
-                                    var locations = entity.locations
+                                    var locations = entity
+                                        .locations
                                         .Where(x => x.branchId == branchId && x.isActive == 1)
                                         .Select(x => new { x.locationId })
                                         .OrderBy(x => x.locationId)
@@ -3841,7 +3886,8 @@ namespace POS_Server.Controllers
                                     }
                                     else
                                     {
-                                        var locations = entity.locations
+                                        var locations = entity
+                                            .locations
                                             .Where(x => x.branchId == branchId && x.isActive == 1)
                                             .Select(x => new { x.locationId })
                                             .OrderBy(x => x.locationId)
@@ -3961,7 +4007,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var locations = entity.locations
+                            var locations = entity
+                                .locations
                                 .Where(x => x.branchId == branchId && x.isActive == 1)
                                 .Select(x => new { x.locationId })
                                 .OrderBy(x => x.locationId)
@@ -4004,7 +4051,8 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            var locations = entity.locations
+                            var locations = entity
+                                .locations
                                 .Where(x => x.branchId == branchId && x.isActive == 1)
                                 .Select(x => new { x.locationId })
                                 .OrderBy(x => x.locationId)
@@ -4045,7 +4093,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                var locations = entity.locations
+                                var locations = entity
+                                    .locations
                                     .Where(x => x.branchId == branchId && x.isActive == 1)
                                     .Select(x => new { x.locationId })
                                     .OrderBy(x => x.locationId)
@@ -4086,7 +4135,8 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(
                         x =>
@@ -4099,7 +4149,8 @@ namespace POS_Server.Controllers
                             }
                     )
                     .FirstOrDefault();
-                var lowerUnit = entity.itemsUnits
+                var lowerUnit = entity
+                    .itemsUnits
                     .Where(x => x.unitId == unit.subUnitId && x.itemId == unit.itemId)
                     .Select(x => new { x.unitValue, x.itemUnitId })
                     .FirstOrDefault();
@@ -4202,7 +4253,8 @@ namespace POS_Server.Controllers
 
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemUnitId)
                     .Select(
                         x =>
@@ -4214,7 +4266,8 @@ namespace POS_Server.Controllers
                             }
                     )
                     .FirstOrDefault();
-                var upperUnit = entity.itemsUnits
+                var upperUnit = entity
+                    .itemsUnits
                     .Where(
                         x =>
                             x.subUnitId == unit.unitId
@@ -4296,7 +4349,8 @@ namespace POS_Server.Controllers
                         long locationId = dic["locationId"];
                         if (locationId == 0)
                         {
-                            var locations = entity.locations
+                            var locations = entity
+                                .locations
                                 .Where(x => x.branchId == branchId && x.isActive == 1)
                                 .Select(x => new { x.locationId })
                                 .OrderBy(x => x.locationId)
@@ -4513,9 +4567,9 @@ namespace POS_Server.Controllers
                                 {
                                     int toQuant = 0;
                                     int availableAmount = (int)itemInLocs[i].quantity;
-                                    var itemL = entity.itemsLocations.Find(
-                                        itemInLocs[i].itemsLocId
-                                    );
+                                    var itemL = entity
+                                        .itemsLocations
+                                        .Find(itemInLocs[i].itemsLocId);
                                     itemL.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                     if (availableAmount >= fromQuantity)
                                     {
@@ -4580,9 +4634,9 @@ namespace POS_Server.Controllers
                                 for (i = 0; i < itemInLocs.Count; i++)
                                 {
                                     int availableAmount = (int)itemInLocs[i].quantity;
-                                    var itemL = entity.itemsLocations.Find(
-                                        itemInLocs[i].itemsLocId
-                                    );
+                                    var itemL = entity
+                                        .itemsLocations
+                                        .Find(itemInLocs[i].itemsLocId);
                                     itemL.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                     if (availableAmount >= fromQuantity)
                                     {
@@ -4631,7 +4685,8 @@ namespace POS_Server.Controllers
             int unitValue = 0;
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var unit = entity.itemsUnits
+                var unit = entity
+                    .itemsUnits
                     .Where(x => x.itemUnitId == itemunitId)
                     .Select(
                         x =>
@@ -4644,7 +4699,8 @@ namespace POS_Server.Controllers
                             }
                     )
                     .FirstOrDefault();
-                long smallUnitId = entity.itemsUnits
+                long smallUnitId = entity
+                    .itemsUnits
                     .Where(x => x.unitId == unit.subUnitId && x.itemId == unit.itemId)
                     .Select(x => x.itemUnitId)
                     .Single();
@@ -4789,12 +4845,14 @@ namespace POS_Server.Controllers
                         List<ItemTransferModel> requiredTransfers = new List<ItemTransferModel>();
                         foreach (InvoiceModel invoice in orders)
                         {
-                            var itemsTransfer = entity.itemsTransfer
+                            var itemsTransfer = entity
+                                .itemsTransfer
                                 .Where(x => x.invoiceId == invoice.invoiceId)
                                 .ToList();
                             foreach (itemsTransfer tr in itemsTransfer)
                             {
-                                var lockedQuantity = entity.itemsLocations
+                                var lockedQuantity = entity
+                                    .itemsLocations
                                     .Where(
                                         x =>
                                             x.invoiceId == invoice.invoiceId
@@ -4957,13 +5015,15 @@ namespace POS_Server.Controllers
                 DateTime datenow = coctrlr.AddOffsetTodate(DateTime.Now);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var itemLoc = entity.itemsLocations
+                    var itemLoc = entity
+                        .itemsLocations
                         .Where(b => b.invoiceId == invoiceId && b.itemUnitId == itemUnitId)
                         .FirstOrDefault();
                     itemLoc.quantity -= quantity;
                     if (itemLoc.quantity == 0)
                         entity.itemsLocations.Remove(itemLoc);
-                    var location = entity.itemsLocations
+                    var location = entity
+                        .itemsLocations
                         .Where(
                             x =>
                                 x.invoiceId == null

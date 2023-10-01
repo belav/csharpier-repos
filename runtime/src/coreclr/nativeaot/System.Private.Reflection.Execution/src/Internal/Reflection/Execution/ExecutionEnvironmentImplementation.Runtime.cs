@@ -114,10 +114,9 @@ namespace Internal.Reflection.Execution
                     goto notFound;
                 }
 
-                MethodBase methodBase =
-                    RuntimeAugments.Callbacks.GetMethodBaseFromStartAddressIfAvailable(
-                        classRtMethodHandle
-                    );
+                MethodBase methodBase = RuntimeAugments
+                    .Callbacks
+                    .GetMethodBaseFromStartAddressIfAvailable(classRtMethodHandle);
                 if (methodBase == null)
                 {
                     goto notFound;
@@ -187,15 +186,14 @@ namespace Internal.Reflection.Execution
 
             QTypeDefinition qTypeDefinition;
             if (
-                !ReflectionExecution.ExecutionEnvironment.TryGetMetadataForNamedType(
-                    typeDefHandle,
-                    out qTypeDefinition
-                )
+                !ReflectionExecution
+                    .ExecutionEnvironment
+                    .TryGetMetadataForNamedType(typeDefHandle, out qTypeDefinition)
             )
             {
-                throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(
-                    Type.GetTypeFromHandle(typeDefHandle)
-                );
+                throw ReflectionCoreExecution
+                    .ExecutionDomain
+                    .CreateMissingMetadataException(Type.GetTypeFromHandle(typeDefHandle));
             }
 
             if (qTypeDefinition.IsNativeFormatMetadataBased)

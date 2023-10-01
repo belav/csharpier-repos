@@ -76,10 +76,10 @@ namespace System.Net.Http
                 var requestObject = new JSObject();
 
                 if (
-                    request.Properties.TryGetValue(
-                        "WebAssemblyFetchOptions",
-                        out var fetchOoptionsValue
-                    ) && fetchOoptionsValue is IDictionary<string, object> fetchOptions
+                    request
+                        .Properties
+                        .TryGetValue("WebAssemblyFetchOptions", out var fetchOoptionsValue)
+                    && fetchOoptionsValue is IDictionary<string, object> fetchOptions
                 )
                 {
                     foreach (var item in fetchOptions)
@@ -151,19 +151,21 @@ namespace System.Net.Http
                 CancellationTokenSource abortCts = CancellationTokenSource.CreateLinkedTokenSource(
                     cancellationToken
                 );
-                CancellationTokenRegistration abortRegistration = abortCts.Token.Register(
-                    (Action)(
-                        () =>
-                        {
-                            if (abortController.JSHandle != -1)
+                CancellationTokenRegistration abortRegistration = abortCts
+                    .Token
+                    .Register(
+                        (Action)(
+                            () =>
                             {
-                                abortController.Invoke("abort");
-                                abortController?.Dispose();
+                                if (abortController.JSHandle != -1)
+                                {
+                                    abortController.Invoke("abort");
+                                    abortController?.Dispose();
+                                }
+                                wasmHttpReadStream?.Dispose();
                             }
-                            wasmHttpReadStream?.Dispose();
-                        }
-                    )
-                );
+                        )
+                    );
 
                 var args = new WebAssembly.Core.Array();
                 args.Push(request.RequestUri.ToString());
@@ -200,10 +202,12 @@ namespace System.Net.Http
                 );
 
                 var streamingEnabled =
-                    request.Properties.TryGetValue(
-                        "WebAssemblyEnableStreamingResponse",
-                        out var streamingEnabledValue
-                    ) && (bool)streamingEnabledValue;
+                    request
+                        .Properties
+                        .TryGetValue(
+                            "WebAssemblyEnableStreamingResponse",
+                            out var streamingEnabledValue
+                        ) && (bool)streamingEnabledValue;
 
                 httpresponse.Content =
                     StreamingSupported && streamingEnabled
@@ -238,17 +242,16 @@ namespace System.Net.Http
                                         var name = (string)resultValue[0];
                                         var value = (string)resultValue[1];
                                         if (
-                                            !httpresponse.Headers.TryAddWithoutValidation(
-                                                name,
-                                                value
-                                            )
+                                            !httpresponse
+                                                .Headers
+                                                .TryAddWithoutValidation(name, value)
                                         )
                                             if (httpresponse.Content != null)
                                                 if (
-                                                    !httpresponse.Content.Headers.TryAddWithoutValidation(
-                                                        name,
-                                                        value
-                                                    )
+                                                    !httpresponse
+                                                        .Content
+                                                        .Headers
+                                                        .TryAddWithoutValidation(name, value)
                                                 )
                                                     Console.WriteLine(
                                                         $"Warning: Can not add response header for name: {name} value: {value}"

@@ -187,7 +187,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                tmpObject = entity.paperSize
+                                tmpObject = entity
+                                    .paperSize
                                     .Where(p => p.sizeId == newObj.sizeId)
                                     .FirstOrDefault();
 

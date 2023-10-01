@@ -25,15 +25,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeActions
             {
                 CleanupOptions = defaultOptions.CleanupOptions with
                 {
-                    FormattingOptions = defaultOptions.CleanupOptions.FormattingOptions.With(
-                        new LineFormattingOptions
-                        {
-                            IndentationSize = LineFormattingOptions.IndentationSize,
-                            TabSize = LineFormattingOptions.TabSize,
-                            UseTabs = LineFormattingOptions.UseTabs,
-                            NewLine = LineFormattingOptions.NewLine,
-                        }
-                    )
+                    FormattingOptions = defaultOptions
+                        .CleanupOptions
+                        .FormattingOptions
+                        .With(
+                            new LineFormattingOptions
+                            {
+                                IndentationSize = LineFormattingOptions.IndentationSize,
+                                TabSize = LineFormattingOptions.TabSize,
+                                UseTabs = LineFormattingOptions.UseTabs,
+                                NewLine = LineFormattingOptions.NewLine,
+                            }
+                        )
                 },
                 ImplementTypeOptions = new()
                 {

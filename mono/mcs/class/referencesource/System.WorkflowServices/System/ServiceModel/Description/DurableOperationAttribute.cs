@@ -71,36 +71,40 @@ namespace System.ServiceModel.Description
         {
             if (dispatchOperation == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "dispatchOperation"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("dispatchOperation");
             }
 
             if (dispatchOperation.Invoker == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.ExistingIOperationInvokerRequired,
-                            typeof(DurableOperationAttribute).Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.ExistingIOperationInvokerRequired,
+                                typeof(DurableOperationAttribute).Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (operationDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "operationDescription"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("operationDescription");
             }
 
             if (operationDescription.DeclaringContract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "operationDescription",
-                    SR2.GetString(SR2.OperationDescriptionNeedsDeclaringContract)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "operationDescription",
+                        SR2.GetString(SR2.OperationDescriptionNeedsDeclaringContract)
+                    );
             }
 
             bool canCreate = CanCreateInstanceForOperation(dispatchOperation.IsOneWay);

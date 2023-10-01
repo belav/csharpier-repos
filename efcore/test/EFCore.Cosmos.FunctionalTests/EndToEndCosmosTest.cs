@@ -831,12 +831,14 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         await Can_add_update_delete_with_collection<
             IReadOnlyDictionary<string, Dictionary<string, short?>>
         >(
-            ImmutableDictionary<string, Dictionary<string, short?>>.Empty
+            ImmutableDictionary<string, Dictionary<string, short?>>
+                .Empty
                 .Add("2", new Dictionary<string, short?> { { "value", 2 } })
                 .Add("1", new Dictionary<string, short?> { { "value", 1 } }),
             c =>
             {
-                c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>.Empty
+                c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>
+                    .Empty
                     .Add("1", new Dictionary<string, short?> { { "value", 1 } })
                     .Add("2", null);
             },
@@ -955,7 +957,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             await context.Database.EnsureCreatedAsync();
 
             Assert.Null(
-                context.Model
+                context
+                    .Model
                     .FindEntityType(typeof(CustomerWithResourceId))
                     .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
             );
